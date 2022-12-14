@@ -1,15 +1,15 @@
-package vn.sapo.customer.versions;
+package vn.sapo.versions;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import vn.fx.qh.sapo.entities.Application;
+import vn.sapo.entities.Application;
 
 import java.util.Optional;
 
 @Component
-public class VersionService  implements InitializingBean {
+public class VersionService implements InitializingBean {
     @Autowired
     VersionRepository applicationRepository;
     @Value("${web.app.version-code}")

@@ -5,9 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.fx.qh.sapo.entities.employee.Employee;
-import vn.fx.qh.sapo.entities.order.purchase.PurchaseOrder;
-import vn.fx.qh.sapo.entities.payment.PaymentMethod;
+import vn.sapo.entities.*;
+import vn.sapo.entities.order.purchase.*;
+import vn.sapo.entities.payment.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -85,10 +85,11 @@ public class PaymentPurchaseOrder {
 
     @PrePersist
     public void prePersist() {
-        createdAt =Instant.now();
+        createdAt = Instant.now();
     }
+
     @PreUpdate
     public void preUpdate() {
-        updatedAt =Instant.now();
+        updatedAt = Instant.now();
     }
 }

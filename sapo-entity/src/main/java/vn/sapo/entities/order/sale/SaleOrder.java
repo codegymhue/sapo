@@ -5,11 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.fx.qh.sapo.entities.customer.Customer;
-import vn.fx.qh.sapo.entities.employee.Employee;
-import vn.fx.qh.sapo.entities.order.OrderStatus;
-import vn.fx.qh.sapo.entities.order.OrderStatusCode;
-import vn.fx.qh.sapo.entities.payment.sale.PaymentSaleOrder;
+import vn.sapo.entities.*;
+import vn.sapo.entities.customer.*;
+import vn.sapo.entities.order.*;
+import vn.sapo.entities.payment.sale.PaymentSaleOrder;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -85,7 +84,7 @@ public class SaleOrder {
     private OrderStatus orderStatus;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "payment_status_code",  nullable = false)
+    @JoinColumn(name = "payment_status_code", nullable = false)
     private OrderStatus paymentStatus;
 
     @Enumerated(EnumType.STRING)
@@ -144,10 +143,11 @@ public class SaleOrder {
 
     @PrePersist
     public void prePersist() {
-        createdAt =Instant.now();
+        createdAt = Instant.now();
     }
+
     @PreUpdate
     public void preUpdate() {
-        updatedAt =Instant.now();
+        updatedAt = Instant.now();
     }
 }

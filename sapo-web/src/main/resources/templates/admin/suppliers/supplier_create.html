@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="vi-VN" class="sapo-menu-toggle-active sapo-menu-expand" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <th:block th:replace="/layout/header :: header"/>
+    <title>Thêm mới nhà cung cấp</title>
+
+</head>
+
+<body>
+
+<div>
+    <th:block th:replace="/layout/menu :: menu"/>
+
+    <div class="col-right">
+        <div class="col-right_content">
+            <div class="ui-title-top-bar">
+                <div class="ui-title-top-bar_action flex">
+                    <div class="w-50" style="padding-top: 5px;"></div>
+                    <div class="w-50" style="position: relative;">
+                        <a class="btn sapo-btn-default right btn-create-supplier">Lưu</a>
+                        <a href="/admin/suppliers" class="btn sapo-btn-blank right mr-3">Huỷ</a>
+                    </div>
+                </div>
+            </div>
+            <header class="ui-title-bar-container" style="margin-top: 55px;">
+                <div class="ui-title-bar">
+                    <div class="ui-title-bar__navigation">
+                        <div class="ui-breadcrumbs">
+                            <a href="/admin/suppliers">
+                                <svg class="next-icon next-icon--size-20 next-icon--no-nudge">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#chevron-left-thinner"></use>
+                                </svg>
+                                <span class="ui-breadcrumb__item" style="position: relative; top: 7px;">Danh sách nhà cung cấp</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ui-title-bar__main-group">
+                        <div class="ui-title-bar__heading-group">
+                            <h1 class="ui-title-bar__title">Thêm mới nhà cung cấp</h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="customer-container container">
+                <div class="customer-create--left">
+                    <div class="page-info">
+                        <div class="page-info-title">Thông tin cá nhân</div>
+                        <div class="page-info-body">
+                            <div class="col-6 field pl-0">
+                                <label for="name" class="label-required mb-2">Tên nhà cung cấp</label>
+                                <input id="name" class="sapo-textbox w100" placeholder="Nhập tên nhà cung cấp" title="Nhập tên nhà cung cấp" required/>
+                            </div>
+                            <div class="col-6 field pr-0">
+                                <label for="code" class="label-required mb-2">Mã nhà cung cấp</label>
+                                <input id="code" class="sapo-textbox w100" placeholder="Nhập mã nhà cung cấp" title="Nhập mã nhà cung cấp" required/>
+                            </div>
+                            <div class="col-6 field pl-0">
+                                <label for="phone" class="label-required mb-2">Số điện thoại</label>
+                                <input id="phone" class="sapo-textbox w100" placeholder="Nhập số điện thoại" title="Nhập số điện thoại" required/>
+                            </div>
+                            <div class="col-6 field pr-0">
+                                <label for="email" class="label-required mb-2">Email</label>
+                                <input id="email" class="sapo-textbox w100" placeholder="Nhập email" title="Nhập email" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-info">
+                        <div class="page-info-title">Thông tin địa chỉ</div>
+                        <div class="page-info-body">
+                            <div class="col-6 field pl-0">
+                                <label for="address" class="label-required mb-2">Địa chỉ</label>
+                                <input id="address" class="sapo-textbox w100" placeholder="Nhập địa chỉ" title="Nhập địa chỉ" required/>
+                            </div>
+                            <div class="col-6 field pr-0">
+                                <label for="province" class="label-required mb-2">Tỉnh thành phố</label>
+                                <select id="province" class="w100 input-dropdown sapo-btn-blank select-padding" title="Tỉnh thành phố" required>
+                                    <option value="" disabled selected>Chọn tỉnh thành phố</option>
+                                </select>
+                            </div>
+                            <div class="col-6 field pl-0">
+                                <label for="district" class="label-required mb-2">Quận huyện</label>
+                                <select id="district" class="w100 input-dropdown sapo-btn-blank select-padding" title="Chọn quận huyện" required>
+                                    <option value="" disabled selected>Chọn quận huyện</option>
+                                </select>
+                            </div>
+                            <div class="col-6 field pr-0">
+                                <label for="ward" class="label-required mb-2">Phường xã</label>
+                                <select id="ward" class="w100 input-dropdown sapo-btn-blank select-padding" title="Chọn phường xã" required>
+                                    <option value="" disabled selected>Chọn phường xã</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="customer-create--right">
+                    <div class="page-info">
+                        <div class="page-info-title">Thông tin khác</div>
+                        <div class="page-info-body">
+                            <div class="col-12 field p-0">
+                                <label for="employee" class="label-required mb-2">Nhân viên phụ trách</label>
+                                <select id="employee" class="w100 input-dropdown sapo-btn-blank select-padding" title="Chọn nhân viên" required>
+                                    <option value="disabled selected" >Chọn nhân viên</option>
+                                </select>
+                            </div>
+                            <div class="page-info-item col-12 no-padding mb-4">
+                                <label for="description" class="label-required mb-2">Mô tả</label>
+                                <textarea id="description" class="sapo-textbox" title="Nhập mô tả" style="height: 119px;" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page-info">
+                        <div class="page-info-title">Cài đặt nâng cao</div>
+                        <div class="page-info-body">
+                            <div id="config-customer" style="width: 100%;">
+                                <div class="col-12 field p-0">
+                                    <label for="payment_method" class="label-required mb-2">Hình thức thanh toán</label>
+                                    <select id="payment_method" class="w100 input-dropdown sapo-btn-blank select-padding" title="Chọn hình thức" required>
+                                        <option value="" disabled selected>Chọn hình thức</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-title-bottom-bar">
+                    <a class="btn sapo-btn-default right btn-create-supplier">Lưu</a>
+                    <a href="/admin/suppliers" class="btn sapo-btn-blank right mr-3">Huỷ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="/layout/script :: script"/>
+
+<script src="../../../static/assets/admin/js/suppliers/supplier_create.js"></script>
+<script>Page();</script>
+
+</body>
+
+</html>

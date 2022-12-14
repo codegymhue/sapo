@@ -5,9 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.fx.qh.sapo.entities.product.tax.ProductTax;
-import vn.fx.qh.sapo.entities.product.tax.Tax;
-import vn.fx.qh.sapo.entities.product.tax.TaxType;
+import vn.sapo.entities.tax.ProductTax;
+import vn.sapo.entities.tax.Tax;
+import vn.sapo.entities.tax.TaxType;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

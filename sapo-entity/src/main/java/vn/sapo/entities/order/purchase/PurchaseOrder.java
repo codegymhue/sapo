@@ -6,10 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.fx.qh.sapo.entities.employee.Employee;
-import vn.fx.qh.sapo.entities.order.OrderStatus;
-import vn.fx.qh.sapo.entities.order.OrderStatusCode;
-import vn.fx.qh.sapo.entities.product.supplier.Supplier;
+import vn.sapo.entities.*;
+import vn.sapo.entities.order.*;
+import vn.sapo.entities.supplier.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

@@ -3,8 +3,7 @@ package vn.sapo.entities.order.purchase;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import vn.fx.qh.sapo.entities.product.Item;
-import vn.fx.qh.sapo.entities.product.Product;
+import vn.sapo.entities.product.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

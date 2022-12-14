@@ -3,9 +3,9 @@ package vn.sapo.entities.product;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import vn.fx.qh.sapo.entities.employee.Employee;
-import vn.fx.qh.sapo.entities.order.purchase.PurchaseOrder;
-import vn.fx.qh.sapo.entities.product.supplier.Supplier;
+import vn.sapo.entities.Employee;
+import vn.sapo.entities.order.purchase.PurchaseOrder;
+import vn.sapo.entities.supplier.Supplier;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

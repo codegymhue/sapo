@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.fx.qh.sapo.entities.employee.Employee;
-import vn.fx.qh.sapo.entities.payment.PaymentMethod;
+import vn.sapo.entities.*;
+import vn.sapo.entities.payment.*;
 
 import javax.persistence.*;
 

@@ -2,7 +2,7 @@ package vn.sapo.entities.customer;
 
 import lombok.*;
 import lombok.experimental.Accessors;
-import vn.fx.qh.sapo.entities.employee.Employee;
+import vn.sapo.entities.*;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -65,19 +65,19 @@ public class Customer {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    @OneToMany(targetEntity = ShippingAddress.class, mappedBy = "customer")
-    private Set<ShippingAddress> shippingAddressSet;
+    @OneToMany(targetEntity = Address.class, mappedBy = "customer")
+    private Set<Address> addressSet;
 
-    public ShippingAddress getShippingAddress() {
-        Optional<ShippingAddress> opt = shippingAddressSet.stream()
-                .filter(ShippingAddress::isShippingAddress)
+    public Address getShippingAddress() {
+        Optional<Address> opt = addressSet.stream()
+                .filter(Address::isShippingAddress)
                 .findFirst();
         return opt.orElse(null);
     }
 
-    public ShippingAddress getReceiveBillAddress() {
-        Optional<ShippingAddress> opt = shippingAddressSet.stream()
-                .filter(ShippingAddress::isReceiveBill)
+    public Address getReceiveBillAddress() {
+        Optional<Address> opt = addressSet.stream()
+                .filter(Address::isReceiveBill)
                 .findFirst();
         return opt.orElse(null);
     }

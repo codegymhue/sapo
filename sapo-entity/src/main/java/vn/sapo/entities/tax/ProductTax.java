@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import vn.sapo.entities.product.Product;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -19,14 +20,21 @@ public class ProductTax {
     private ProductTaxId id;
     @Column(name = "product_id", insertable = false, updatable = false)
     private Integer productId;
+
     @Column(name = "tax_id", insertable = false, updatable = false)
     private Integer taxId;
+
+
     @Enumerated(EnumType.STRING)
-    @Column(name = "tax_type")
+    @Column(name = "tax_type", insertable = false, updatable = false)
     private TaxType taxType;
 
     public Tax getTax() {
         return id.getTax();
+    }
+
+    public Product getProduct() {
+        return id.getProduct();
     }
 
 

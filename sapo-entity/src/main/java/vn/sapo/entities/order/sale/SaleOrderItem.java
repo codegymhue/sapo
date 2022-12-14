@@ -5,8 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.fx.qh.sapo.entities.product.Item;
-import vn.fx.qh.sapo.entities.product.Product;
+import vn.sapo.entities.product.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

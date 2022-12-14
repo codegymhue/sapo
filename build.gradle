@@ -6,8 +6,11 @@ plugins {
 
 group 'vn.sapo'
 version '1.0'
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+allprojects { proj ->
 
-allprojects {
+
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'java'
@@ -20,10 +23,26 @@ allprojects {
             mavenBom("org.springframework.boot:spring-boot-dependencies:2.1.7.RELEASE")
         }
     }
-    dependencies {
-        implementation project(':sapo-entity')
-        implementation project(':sapo-customer')
 
+
+    dependencies {
+        switch (proj.name) {
+            case 'sapo-shared': break
+            case 'sapo-entity': break
+            case 'sapo-address': {
+                implementation project(':sapo-entity')
+                implementation project(':sapo-shared')
+                break
+            }
+            case 'sapo-web':
+            default: {
+                if (proj.name != 'sapo-web')
+                    implementation project(':sapo-entity')
+                implementation project(':sapo-shared')
+                implementation project(':sapo-address')
+                break
+            }
+        }
 
 
         implementation "org.springframework.boot:spring-boot-starter-web"
@@ -34,12 +53,18 @@ allprojects {
         compileOnly "org.projectlombok:lombok"
         annotationProcessor "org.projectlombok:lombok"
 
-        implementation 'com.googlecode.jmapper-framework:jmapper-core:1.6.0.1'
+//        implementation 'com.googlecode.jmapper-framework:jmapper-core:1.6.1.CR2'
+        implementation 'org.modelmapper:modelmapper:3.1.1'
+
 
         // implementation "com.vladmihalcea:hibernate-types-52:${hibernate_types_version}"
 
         runtimeOnly 'mysql:mysql-connector-java'
 
 
+    }
+    ext {
+        jjwt_version = "0.11.5"
+        hibernate_types_version = "2.20.0"
     }
 }
