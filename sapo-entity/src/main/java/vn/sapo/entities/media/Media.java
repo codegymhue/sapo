@@ -36,13 +36,6 @@ public class Media {
     @Column(name = "is_main")
     private Boolean isMain;
 
-    @Setter(AccessLevel.NONE)
-    @Column(name = "created_at", nullable = false)
-    private Instant createdAt;
-
-    @Setter(AccessLevel.NONE)
-    @Column(name = "updated_at", nullable = false)
-    private Instant updatedAt;
 
     @Column(name = "created_by")
     private Integer creattedBy;
@@ -61,12 +54,4 @@ public class Media {
         setProduct(product);
     }
 
-    @PrePersist
-    public void prePersist() {
-        createdAt =Instant.now();
-    }
-    @PreUpdate
-    public void preUpdate() {
-        updatedAt =Instant.now();
-    }
 }

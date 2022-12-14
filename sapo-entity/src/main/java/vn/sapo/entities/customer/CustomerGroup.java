@@ -20,8 +20,8 @@ public enum CustomerGroup {
     @JsonCreator
     public static CustomerGroup parseCustomerGroup(String value) {
         CustomerGroup[] values = values();
-        for (CustomerGroup customerGroup : values) {
-            if (customerGroup.value.equals(value)) return customerGroup;
+        for (CustomerGroup group : values) {
+            if (group.value.equals(value)) return group;
         }
         throw new IllegalArgumentException(value + "invalid");
     }

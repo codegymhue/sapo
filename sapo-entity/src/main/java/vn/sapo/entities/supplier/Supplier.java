@@ -15,7 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name = "supplier")
 @Accessors(chain = true)
-public class Supplier {
+public class Supplier extends BaseEntity {
 
     @Id
     @Column(name = "id", unique = true, nullable = false)

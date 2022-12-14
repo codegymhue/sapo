@@ -21,7 +21,7 @@ import java.time.Instant;
 @Accessors(chain = true)
 @Entity
 @Table(name = "payment_sale_order")
-public class PaymentSaleOrder {
+public class PaymentSaleOrder extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,14 +33,6 @@ public class PaymentSaleOrder {
 
     @Column(name = "description", nullable = false, length = 200)
     private String description;
-
-    @Setter(AccessLevel.NONE)
-    @Column(name = "created_at", nullable = false)
-    private Instant createdAt;
-
-    @Setter(AccessLevel.NONE)
-    @Column(name = "updated_at", nullable = false)
-    private Instant updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")
@@ -97,12 +89,5 @@ public class PaymentSaleOrder {
         setCustomerId(customerId);
     }
 
-    @PrePersist
-    public void prePersist() {
-        createdAt =Instant.now();
-    }
-    @PreUpdate
-    public void preUpdate() {
-        updatedAt =Instant.now();
-    }
+
 }

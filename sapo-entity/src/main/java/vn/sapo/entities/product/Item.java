@@ -3,6 +3,7 @@ package vn.sapo.entities.product;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import vn.sapo.entities.BaseEntity;
 import vn.sapo.entities.Employee;
 import vn.sapo.entities.order.purchase.PurchaseOrder;
 import vn.sapo.entities.supplier.Supplier;
@@ -16,7 +17,7 @@ import java.time.Instant;
 @Accessors(chain = true)
 @Entity
 @Table(name = "item")
-public class Item {
+public class Item extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,10 +30,10 @@ public class Item {
     @Column(name = "price")
     private BigDecimal price;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at", nullable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private Instant createdAt;
 
-    @Column(name = "updated_at", length = 20)
+    @Column(name = "updated_at")
     private Instant updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -106,13 +107,4 @@ public class Item {
         return this;
     }
 
-    @PrePersist
-    public void prePersist() {
-        createdAt = Instant.now();
-    }
-
-    @PreUpdate
-    public void preUpdate() {
-        updatedAt = Instant.now();
-    }
 }

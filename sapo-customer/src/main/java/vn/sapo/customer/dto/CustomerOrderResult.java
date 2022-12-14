@@ -1,11 +1,12 @@
 package vn.sapo.customer.dto;
 
-import com.phpn.employee.dto.EmployeeResult;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import vn.fx.qh.sapo.entities.customer.ShippingAddress;
+import vn.sapo.address.dto.AddressResult;
 
-import java.util.Set;
+import java.util.List;
 
 
 @NoArgsConstructor
@@ -16,17 +17,17 @@ public class CustomerOrderResult {
 
     private Integer id;
 
-    private String customerCode;
+    private String code;
 
     private String name;
 
     private String phone;
 
-    private Set<ShippingAddress> shippingAddressSet;
+    private List<AddressResult> addressList;
 
     private Integer employeeId;
 
-    private EmployeeResult employee;
+    private CusEmployeeResult employee;
 
     private Boolean deleted;
 

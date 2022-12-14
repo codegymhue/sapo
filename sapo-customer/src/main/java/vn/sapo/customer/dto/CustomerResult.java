@@ -19,32 +19,31 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 public class CustomerResult {
-
     private Integer id;
 
-    private String customerCode;
+    private String code;
 
-    private String name;
+    private String fullName;
 
-    private String phone;
-
-    private CustomerGroup customerGroup;
+    private String phoneNumber;
 
     private String email;
 
-    private String birthday;
+    private Instant birthday;
+
+    private CustomerGroup group;
+
+    private CustomerGender gender;
 
     private BigDecimal debtTotal;
 
     private BigDecimal spendTotal;
 
-    private CustomerStatus customerStatus;
+    private CustomerStatus status;
 
     private Instant createdAt;
 
     private Instant updatedAt;
-
-    private Integer employeeId;
 
     private CusEmployeeResult employee;
 
@@ -52,16 +51,12 @@ public class CustomerResult {
 
     private AddressResult billAddress;
 
-    private List<AddressResult> addressList;
+    private List<AddressResult> addresses;
 
-    private CustomerGender customerGender;
+    private int quantityProductOrder;
 
-
-    private Integer quantityProductOrder;
-
-    private Integer quantityItemOrder;
+    private int quantityItemOrder;
 
     private Instant lastDayOrder;
-
 }
 

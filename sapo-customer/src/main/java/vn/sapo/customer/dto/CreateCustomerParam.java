@@ -1,43 +1,38 @@
 package vn.sapo.customer.dto;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.fx.qh.sapo.entities.customer.*;
 import vn.sapo.address.dto.CreateAddressParam;
+import vn.sapo.entities.customer.CustomerGender;
+import vn.sapo.entities.customer.CustomerGroup;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
+import java.time.Instant;
+
+
+@Getter
+@Setter
 @Accessors(chain = true)
 public class CreateCustomerParam {
-
-
     private Integer id;
 
-    private String customerCode;
+    private String code;
 
-    private String name;
+    private String fullName;
 
     private String phone;
 
-    private CustomerGroup customerGroup;
+    private CustomerGroup group;
 
     private String email;
 
-    private String birthday;
+    private Instant birthday;
 
-    private CustomerGender customerGender;
-
-    private CustomerStatus customerStatus;
+    private CustomerGender gender;
 
     private Integer employeeId;
 
-
     private CreateAddressParam createAddressParam;
-
-
 
 }

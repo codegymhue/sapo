@@ -10,10 +10,11 @@ import org.springframework.context.annotation.Scope;
 public class MapperConfigure {
 
     @Bean
-//    @Scope("prototype")
     public ModelMapper getModelMapper() {
         ModelMapper mapper = new ModelMapper();
-        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        mapper.getConfiguration()
+                .setSkipNullEnabled(true)
+                .setMatchingStrategy(MatchingStrategies.STRICT);
         return mapper;
     }
 

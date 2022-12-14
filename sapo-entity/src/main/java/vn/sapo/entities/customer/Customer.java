@@ -1,8 +1,13 @@
 package vn.sapo.entities.customer;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.sapo.entities.*;
+import vn.sapo.entities.Address;
+import vn.sapo.entities.BaseEntity;
+import vn.sapo.entities.Employee;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -15,15 +20,9 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "customer")
 @Accessors(chain = true)
-public class Customer {
-
+public class Customer extends BaseEntity {
     public Customer(Integer id) {
         this.id = id;
-    }
-
-    public Customer setEmployeeId(Integer employeeId) {
-        this.employee = new Employee(this.employeeId = employeeId);
-        return this;
     }
 
     @Id
@@ -31,72 +30,62 @@ public class Customer {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "customer_code", nullable = false, length = 50)
-    private String customerCode;
+    @Column(name = "code")
+    private String code;
 
-    @Column(name = "name", nullable = false, length = 50)
-    private String name;
+    @Column(name = "full_name", nullable = false)
+    private String fullName;
 
-    @Column(name = "phone", nullable = false, length = 50)
-    private String phone;
-
-    @Column(name = "customer_group", nullable = false)
+    @Column(name = "phone_number", length = 15)
+    private String phoneNumber;
+    @Column(name = "\"group\"")
     @Enumerated(EnumType.STRING)
-    private CustomerGroup customerGroup;
+    private CustomerGroup group;
 
-    @Column(name = "email", nullable = false, length = 50)
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "birthday", nullable = false, length = 50)
-    private String birthday;
+    @Column(name = "birthday")
+    private Instant birthday;
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private CustomerStatus customerStatus;
+    private CustomerStatus status;
 
-    @Column(name = "gender", nullable = false)
+    @Column(name = "gender")
     @Enumerated(EnumType.STRING)
-    private CustomerGender customerGender;
+    private CustomerGender gender;
 
-    @Setter(AccessLevel.NONE)
-    @Column(name = "created_at", nullable = false)
-    private Instant createdAt;
-    @Setter(AccessLevel.NONE)
-    @Column(name = "updated_at", nullable = false)
-    private Instant updatedAt;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "employee_id", nullable = false)
+    private Employee employee;
+    @Column(name = "employee_id", insertable = false, updatable = false)
+    private Integer employeeId;
+
+    public Customer setEmployeeId(Integer employeeId) {
+        this.employee = new Employee(this.employeeId = employeeId);
+        return this;
+    }
 
     @OneToMany(targetEntity = Address.class, mappedBy = "customer")
-    private Set<Address> addressSet;
+    private Set<Address> addresses;
 
     public Address getShippingAddress() {
-        Optional<Address> opt = addressSet.stream()
+        if (addresses == null)
+            return null;
+        Optional<Address> opt = addresses.stream()
                 .filter(Address::isShippingAddress)
                 .findFirst();
         return opt.orElse(null);
     }
 
-    public Address getReceiveBillAddress() {
-        Optional<Address> opt = addressSet.stream()
+    public Address getBillAddress() {
+        if (addresses == null)
+            return null;
+        Optional<Address> opt = addresses.stream()
                 .filter(Address::isReceiveBill)
                 .findFirst();
         return opt.orElse(null);
-    }
-
-    @Column(name = "employee_id", insertable = false, updatable = false)
-    private Integer employeeId;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "employee_id", nullable = false)
-    private Employee employee;
-
-
-    @PrePersist
-    public void prePersist() {
-        createdAt =Instant.now();
-    }
-    @PreUpdate
-    public void preUpdate() {
-        updatedAt =Instant.now();
     }
 
 }

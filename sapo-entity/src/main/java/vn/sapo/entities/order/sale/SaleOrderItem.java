@@ -50,12 +50,6 @@ public class SaleOrderItem {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @Column(name = "created_at")
-    private Instant createdAt;
-
-    @Column(name = "updated_at")
-    private Instant updatedAt;
-
     @Column(name = "tax", nullable = false)
     private Float tax;
 

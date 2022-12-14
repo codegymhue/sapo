@@ -21,7 +21,7 @@ import java.util.Set;
 @Accessors(chain = true)
 @Entity
 @Table(name = "sale_order")
-public class SaleOrder {
+public class SaleOrder extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -54,13 +54,6 @@ public class SaleOrder {
     @Column(name = "description")
     private String description;
 
-    @Setter(AccessLevel.NONE)
-    @Column(name = "created_at", nullable = false)
-    private Instant createdAt;
-
-    @Setter(AccessLevel.NONE)
-    @Column(name = "updated_at", nullable = false)
-    private Instant updatedAt;
 
     @Column(name = "total", nullable = false, precision = 10, scale = 2)
     private BigDecimal total;
@@ -139,15 +132,5 @@ public class SaleOrder {
     public SaleOrder setEmployeeId(Integer employeeId) {
         this.employee = new Employee(this.employeeId = employeeId);
         return this;
-    }
-
-    @PrePersist
-    public void prePersist() {
-        createdAt = Instant.now();
-    }
-
-    @PreUpdate
-    public void preUpdate() {
-        updatedAt = Instant.now();
     }
 }

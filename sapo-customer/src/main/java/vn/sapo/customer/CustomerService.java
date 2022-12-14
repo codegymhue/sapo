@@ -1,11 +1,9 @@
 package vn.sapo.customer;
 
-import com.phpn.customer.customerDebt.CustomerDebt;
-import com.phpn.customer.customerDebt.CustomerDebtImpl;
-import com.phpn.customer.dto.CustomerResult;
-import com.phpn.customer.dto.UpdateCustomerParam;
-import com.phpn.customer.dto.CreateCustomerParam;
-import com.phpn.order.sale.dto.SaleOrderResult;
+import vn.sapo.customer.dto.CreateCustomerParam;
+import vn.sapo.customer.dto.CustomerDebtImpl;
+import vn.sapo.customer.dto.CustomerResult;
+import vn.sapo.customer.dto.UpdateCustomerParam;
 
 import java.util.List;
 
@@ -15,16 +13,14 @@ public interface CustomerService {
 
     List<CustomerResult> findAll();
 
-    List<CustomerResult> findCustomerByStatus();
-
     CustomerResult create(CreateCustomerParam customerCreate);
-
+//
     CustomerResult update(UpdateCustomerParam updateCustomer);
 
-    List<SaleOrderResult> findHistoryCustomerOrder(Integer id);
+//    List<SaleOrderResult> findHistoryCustomerOrder(Integer id);
 
-    List<CustomerDebtImpl> findCustomerDebtsByCustomerId(Integer customerId);
+//    List<CustomerDebtImpl> findCustomerDebtsByCustomerId(Integer customerId);
 
-    void delete(Integer customerId);
+    void deleteById(Integer id);
 
 }

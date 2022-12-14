@@ -6,9 +6,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.sapo.entities.*;
-import vn.sapo.entities.order.*;
-import vn.sapo.entities.supplier.*;
+import vn.sapo.entities.BaseEntity;
+import vn.sapo.entities.Employee;
+import vn.sapo.entities.order.OrderStatus;
+import vn.sapo.entities.order.OrderStatusCode;
+import vn.sapo.entities.supplier.Supplier;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -20,7 +22,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @Accessors(chain = true)
 @Table(name = "purchase_order")
-public class PurchaseOrder {
+public class PurchaseOrder extends BaseEntity {
     @Id
     @Column(name = "id", nullable = false)
     private Integer id;
@@ -62,13 +64,6 @@ public class PurchaseOrder {
     @Column(name = "payment_status_code", insertable = false, updatable = false)
     private OrderStatusCode paymentStatusCode;
 
-    @Setter(AccessLevel.NONE)
-    @Column(name = "created_at", nullable = false)
-    private Instant createdAt;
-
-    @Setter(AccessLevel.NONE)
-    @Column(name = "updated_at", nullable = false)
-    private Instant updatedAt;
 
     @Column(name = "total", nullable = false, precision = 10, scale = 2)
     private BigDecimal total;
@@ -97,14 +92,4 @@ public class PurchaseOrder {
         this.employee = new Employee(this.employeeId = employeeId);
         return this;
     }
-
-    @PrePersist
-    public void prePersist() {
-        createdAt =Instant.now();
-    }
-    @PreUpdate
-    public void preUpdate() {
-        updatedAt =Instant.now();
-    }
-
 }

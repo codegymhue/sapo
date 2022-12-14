@@ -1,17 +1,16 @@
 package vn.sapo.entities.product;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import vn.sapo.entities.BaseEntity;
 import vn.sapo.entities.tax.ProductTax;
 import vn.sapo.entities.tax.Tax;
 import vn.sapo.entities.tax.TaxType;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -23,7 +22,7 @@ import java.util.stream.Collectors;
 @Entity
 @Accessors(chain = true)
 @Table(name = "product")
-public class   Product {
+public class Product extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,14 +38,6 @@ public class   Product {
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private ProductStatus status;
-
-    @Setter(AccessLevel.NONE)
-    @Column(name = "created_at", nullable = false)
-    private Instant createdAt;
-
-    @Setter(AccessLevel.NONE)
-    @Column(name = "updated_at", nullable = false)
-    private Instant updatedAt;
 
     @Column(name = "description")
     private String description;
@@ -130,12 +121,4 @@ public class   Product {
         return Objects.hash(id);
     }
 
-    @PrePersist
-    public void prePersist() {
-        createdAt =Instant.now();
-    }
-    @PreUpdate
-    public void preUpdate() {
-        updatedAt =Instant.now();
-    }
 }

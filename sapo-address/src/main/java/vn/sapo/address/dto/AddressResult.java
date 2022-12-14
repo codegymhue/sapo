@@ -12,6 +12,10 @@ public class AddressResult {
 
     private Integer id;
 
+    private String phoneNumber;
+
+    private String email;
+
     private Integer customerId;
 
     private Integer supplierId;
@@ -32,9 +36,6 @@ public class AddressResult {
 
     private String provinceName;
 
-    private String mobile;
-
-    private String email;
 
     private String zipCode;
 

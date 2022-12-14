@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import vn.fx.qh.sapo.entities.customer.CustomerGender;
-import vn.fx.qh.sapo.entities.customer.CustomerGroup;
-import vn.fx.qh.sapo.entities.customer.CustomerStatus;
+import vn.sapo.entities.customer.*;
+
+import java.time.Instant;
 
 
 @NoArgsConstructor
@@ -16,21 +16,17 @@ import vn.fx.qh.sapo.entities.customer.CustomerStatus;
 public class UpdateCustomerParam {
     private Integer id;
 
-    private String customerCode;
+    private String code;
 
-    private String name;
+    private String fullName;
 
-    private String phone;
+    private String phoneNumber;
 
-    private CustomerGroup customerGroup;
+    private CustomerGroup group;
 
     private String email;
 
-    private String birthday;
+    private Instant birthday;
 
-    private CustomerGender customerGender;
-
-    private CustomerStatus customerStatus;
-
-    private Integer employeeId;
+    private CustomerGender gender;
 }
