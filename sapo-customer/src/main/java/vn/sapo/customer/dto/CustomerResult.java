@@ -15,7 +15,6 @@ import java.time.Instant;
 import java.util.List;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
 @Accessors(chain = true)
 public class CustomerResult {

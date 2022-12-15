@@ -8,9 +8,6 @@ import vn.sapo.entities.customer.*;
 
 import java.time.Instant;
 
-
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
 @Accessors(chain = true)
 public class UpdateCustomerParam {

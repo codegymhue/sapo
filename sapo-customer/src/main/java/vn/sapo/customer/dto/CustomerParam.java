@@ -8,8 +8,6 @@ import lombok.experimental.Accessors;
 
 import java.time.Instant;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
 @Accessors(chain = true)
 public class CustomerParam {
@@ -27,6 +25,4 @@ public class CustomerParam {
 
 
     private Integer employeeId;
-
-
 }

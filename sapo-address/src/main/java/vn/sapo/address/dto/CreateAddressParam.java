@@ -11,8 +11,6 @@ import javax.validation.constraints.*;
 @Getter
 @Setter
 @Accessors(chain = true)
-@AllArgsConstructor
-@NoArgsConstructor
 public class CreateAddressParam {
 
 

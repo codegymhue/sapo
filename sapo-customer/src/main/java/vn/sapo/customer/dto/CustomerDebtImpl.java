@@ -10,7 +10,6 @@ import java.time.Instant;
 
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
 @Accessors(chain = true)
 public class CustomerDebtImpl {
