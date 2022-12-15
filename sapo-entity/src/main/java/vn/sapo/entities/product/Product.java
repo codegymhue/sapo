@@ -29,11 +29,9 @@ public class Product extends BaseEntity {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "title", nullable = false, length = 50)
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "image", nullable = false, length = 50)
-    private String image;
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -45,14 +43,11 @@ public class Product extends BaseEntity {
     @Column(name = "mass")
     private Float mass;
 
-    @Column(name = "unit", nullable = false, length = 50)
+    @Column(name = "unit", length = 50)
     private String unit;
 
-    @Column(name = "sku", nullable = false, length = 50)
+    @Column(name = "sku", length = 50)
     private String sku;
-
-    @Column(name = "bar_code", nullable = false, length = 50)
-    private String barCode;
 
     @Column(name = "retail_price", nullable = false, precision = 10, scale = 2)
     private BigDecimal retailPrice;
