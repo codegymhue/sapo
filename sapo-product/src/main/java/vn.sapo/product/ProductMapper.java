@@ -1,23 +1,17 @@
 package vn.sapo.product;
 
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import vn.sapo.address.dto.AddressResult;
 import vn.sapo.brand.BrandMapper;
 import vn.sapo.category.CategoryMapper;
-import vn.sapo.entities.Address;
 import vn.sapo.entities.product.Product;
 import vn.sapo.media.MediaMapper;
 import vn.sapo.product.dto.*;
 import vn.sapo.tax.TaxMapper;
-import vn.sapo.tax.dto.TaxResult;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class ProductMapper implements InitializingBean {
@@ -55,28 +49,7 @@ public class ProductMapper implements InitializingBean {
     }
 
     public ProductResult toDTO(Product product) {
-
-        ProductResult dto = modelMapper.map(product, ProductResult.class);
-//        ProductResult dto = new ProductResult()
-//                .setId(product.getId())
-//                .setTitle(product.getTitle())
-//                .setStatus(product.getStatus())
-//                .setSku(product.getSku())
-//                .setBrandId(product.getBrandId())
-//                .setCategoryId(product.getCategoryId())
-//                .setDescription(product.getDescription())
-//                .setUnit(product.getUnit())
-//                .setImportPrice(product.getImportPrice())
-//                .setWholesalePrice(product.getWholesalePrice())
-//                .setRetailPrice(product.getRetailPrice())
-//                .setApplyTax(product.getApplyTax())
-//                .setCategory(categoryMapper.toDTO(product.getCategory()))
-//                .setBrand(brandMapper.toDTO(product.getBrand()));
-//        List<TaxResult> taxSaleList = product.getSaleTaxList().stream().map(taxMapper::toDTO).collect(Collectors.toList());
-//        dto.setTaxSaleList(taxSaleList);
-//        List<TaxResult> taxPurchaseList = product.getPurchaseTaxList().stream().map(taxMapper::toDTO).collect(Collectors.toList());
-//        dto.setTaxPurchaseList(taxPurchaseList);
-        return dto;
+        return modelMapper.map(product, ProductResult.class);
     }
 
     public ProductDetailResult toDTODetail(Product product) {
