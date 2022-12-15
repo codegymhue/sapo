@@ -6,7 +6,6 @@ import vn.sapo.entities.tax.ProductTax;
 import vn.sapo.entities.tax.ProductTaxId;
 import vn.sapo.entities.tax.TaxType;
 
-
 import java.util.List;
 
 @Repository

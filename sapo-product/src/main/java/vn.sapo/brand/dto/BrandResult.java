@@ -7,8 +7,6 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 public class BrandResult {
-
     private Integer id;
-    private String name;
-
+    private String title;
 }

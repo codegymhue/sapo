@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import vn.sapo.brand.BrandService;
-import vn.sapo.brand.dto.BrandParam;
+import vn.sapo.brand.dto.CreateBrandParam;
 import vn.sapo.brand.dto.BrandResult;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public class BrandAPI {
         return new ResponseEntity<>(brands, HttpStatus.OK);
     }
     @PostMapping("/create")
-    public ResponseEntity<?> createBrand(@RequestBody BrandParam brandParam){
+    public ResponseEntity<?> createBrand(@RequestBody CreateBrandParam brandParam){
         BrandResult brand = brandService.create(brandParam);
         return new ResponseEntity<>(brand, HttpStatus.OK);
     }

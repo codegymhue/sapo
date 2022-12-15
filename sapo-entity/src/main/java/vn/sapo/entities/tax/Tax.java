@@ -15,6 +15,9 @@ import java.util.Objects;
 @Accessors(chain = true)
 @Table(name = "tax")
 public class Tax {
+    public Tax(Integer id) {
+        this.id = id;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

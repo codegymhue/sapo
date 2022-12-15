@@ -28,6 +28,12 @@ public class ProductTaxId implements Serializable {
     @Column(name = "tax_type")
     private TaxType taxType;
 
+    public ProductTaxId(Integer productId, Integer taxId, TaxType taxType) {
+        product = new Product(productId);
+        tax = new Tax(taxId);
+        this.taxType = taxType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

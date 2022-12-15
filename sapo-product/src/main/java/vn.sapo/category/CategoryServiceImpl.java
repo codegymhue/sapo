@@ -8,11 +8,11 @@ import vn.sapo.entities.product.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
 public class CategoryServiceImpl implements CategoryService {
-
     @Autowired
     private CategoryMapper categoryMapper;
 
@@ -21,38 +21,26 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryResult> findAll() {
-        List<Category> categories = categoryRepository.findAll();
-        List<CategoryResult> categoryResults = new ArrayList<>();
-        for(Category category : categories){
-            categoryResults.add(categoryMapper.toDTO(category));
-        }
-        return categoryResults;
+        return categoryRepository.findAll()
+                .stream()
+                .map(categoryMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Category findById(Integer id) {
-        return categoryRepository.findById(id).get();
-    }
-
-
-
-    @Override
-    public Category save(Category category) {
-        category.setId(0);
-        return categoryRepository.save(category);
+    public CategoryResult findById(Integer id) {
+        Category category = categoryRepository.findById(id).get();
+        return categoryMapper.toDTO(category);
     }
 
     @Override
-    public void remove(Integer id) {
-
+    public void deleteById(Integer id) {
+        categoryRepository.deleteById(id);
     }
 
-//    @Override
-//    public CategoryResult createCategoryResult(CategoryCreateParam categoryCreateParam) {
-//        return categoryMapper.toDTO(categoryRepository.save(categoryMapper.toModel(categoryCreateParam)));
-//    }
     @Override
-    public CategoryResult create(CategoryParam categoryParam) {
-        return categoryMapper.toDTO(categoryRepository.save(categoryMapper.toModel(categoryParam)));
+    public CategoryResult create(CreateCategoryParam createCategoryParam) {
+        Category category = categoryRepository.save(categoryMapper.toModel(createCategoryParam));
+        return categoryMapper.toDTO(category);
     }
 }

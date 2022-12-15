@@ -31,11 +31,11 @@ public class ItemMapper {
                 .setTrading(0);
     }
 
-    public CreateItemParam toDTO(CreateProductParam createProductParam, ProductResult productResult) {
+    public CreateItemParam toDTO(CreateProductParam createProductParam, Integer productId, Integer employeeId) {
         return new CreateItemParam()
                 .setQuantity(createProductParam.getQuantity())
-                .setProductId(productResult.getId())
-                .setEmployeeId(1)
+                .setProductId(productId)
+                .setEmployeeId(employeeId)
                 .setPrice(createProductParam.getCostPrice())
                 .setAvailable(createProductParam.getQuantity());
     }
@@ -53,11 +53,5 @@ public class ItemMapper {
                 .setTrading(item.getTrading());
 
     }
-//    public  ItemResult toItemInfo(Item item){
-//        return  new ItemResult()
-//                .setId(item.getId())
-//                .setQuantity(item.getQuantity())
-//                .setAvailable(item.getAvailable());
-////                .setProductResult(productMapper.toItemDTO(item.getProduct()));
-//    }
+
 }

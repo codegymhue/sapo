@@ -7,24 +7,31 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import vn.sapo.brand.*;
-import vn.sapo.category.*;
-import vn.sapo.entities.product.*;
+import vn.sapo.brand.BrandMapper;
+import vn.sapo.brand.BrandRepository;
+import vn.sapo.category.CategoryMapper;
+import vn.sapo.category.CategoryRepository;
+import vn.sapo.entities.product.Item;
+import vn.sapo.entities.product.Product;
+import vn.sapo.entities.product.ProductStatus;
 import vn.sapo.entities.tax.ProductTax;
 import vn.sapo.entities.tax.TaxType;
-import vn.sapo.item.*;
-import vn.sapo.item.dto.ItemResult;
-import vn.sapo.media.*;
-import vn.sapo.media.dto.MediaResult;
+import vn.sapo.exceptions.NotFoundException;
+import vn.sapo.item.ItemMapper;
+import vn.sapo.item.ItemService;
+import vn.sapo.media.MediaMapper;
+import vn.sapo.media.MediaService;
 import vn.sapo.product.dto.*;
-import vn.sapo.product_tax.*;
+import vn.sapo.product_tax.ProductTaxRepository;
+import vn.sapo.product_tax.ProductTaxService;
 import vn.sapo.product_tax.dto.ProductTaxResult;
+import vn.sapo.tax.TaxMapper;
 import vn.sapo.tax.TaxService;
-import vn.sapo.tax.dto.TaxMapper;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -79,8 +86,6 @@ public class ProductServiceImpl implements ProductService {
                 .map(product -> {
                     Integer productId = product.getId();
                     ProductResult dto = productMapper.toDTO(product);
-                    List<ProductTax> productTaxSaleList = productTaxRepository.findAllByProductIdAndTaxType(productId, TaxType.TAX_SALE);
-                    List<ProductTax> productTaxPurchaseList = productTaxRepository.findAllByProductIdAndTaxType(productId, TaxType.TAX_PURCHASE);
                     dto.setTotalInventory(itemService.getTotalInventoryQuantityByProductId(productId));
                     dto.setAvailableInventory(itemService.getAvailableInventoryQuantityByProductId(productId));
                     return dto;
@@ -92,12 +97,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional(readOnly = true)
     public ProductResult findById(Integer id) {
-        Optional<Product> productOptional = productRepository.findById(id);
-        if (productOptional.isPresent()) {
-            return productMapper.toDTO(productOptional.get());
-        } else {
-            return null;
-        }
+        Product product = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product not found"));
+        return productMapper.toDTO(product);
     }
 
     @Override
@@ -127,22 +128,17 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public ProductResult create(CreateProductParam createProductParam) {
-        try {
-            Product product = productMapper.toModel(createProductParam);
-            product.setStatus(
-                    createProductParam.getEnableSell() == true ? ProductStatus.AVAILABLE :
-                            ProductStatus.UNAVAILABLE);
-
-            Product productSaved = productRepository.save(product);
-            ProductResult dto = productMapper.toDTO(productSaved);
-            ItemResult itemResult = itemService.create(itemMapper.toDTO(createProductParam, dto));
-            List<MediaResult> mediaResults = mediaService.save(createProductParam.getMediaList(), productSaved);
-            List<ProductTaxResult> productTaxResult = productTaxService.create(createProductParam.getTaxList(), productSaved);
-            return dto;
-        } catch (Exception e) {
-            return null;
-        }
-
+        Product product = productMapper.toModel(createProductParam);
+        product.setStatus(
+                createProductParam.isEnableSell() ? ProductStatus.AVAILABLE :
+                        ProductStatus.UNAVAILABLE);
+        product = productRepository.save(product);
+        Integer productId = product.getId();
+        productTaxService.create(createProductParam.getTaxList(), productId);
+        mediaService.save(createProductParam.getMediaList(), productId);
+        if (createProductParam.getQuantity() != null)
+            itemService.create(itemMapper.toDTO(createProductParam, productId, 1));
+        return productMapper.toDTO(product);
     }
 
 

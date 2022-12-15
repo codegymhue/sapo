@@ -20,7 +20,7 @@ public interface ProductService {
 
     Product createProduct(ProductCreate productCreate);
 
-    ProductResult create(CreateProductParam productWithImageParam);
+    ProductResult create(CreateProductParam createProductParam);
 
     ProductResult createShortProduct(ProductShortParam productShortParam);
 

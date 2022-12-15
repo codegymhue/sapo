@@ -16,10 +16,9 @@ import java.util.List;
 public class CreateProductParam implements Serializable {
     private Integer id;
     private String title;
-    private Boolean enableSell;
-    private String description;
     private String unit;
     private String sku;
+    private String description;
     private String barCode;
     private Integer quantity;
     private Float mass;
@@ -29,8 +28,9 @@ public class CreateProductParam implements Serializable {
     private BigDecimal wholesalePrice;
     private Integer categoryId;
     private Integer brandId;
-    private Boolean applyTax;
-    private Boolean isTaxInclusive;
+    private boolean enableSell;
+    private boolean applyTax;
+    private boolean isTaxInclusive;
     private List<ProductTaxParam> taxList;
     private List<MediaParam> mediaList;
 }

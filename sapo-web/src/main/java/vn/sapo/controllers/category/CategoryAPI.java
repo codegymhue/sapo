@@ -23,14 +23,14 @@ public class CategoryAPI {
 
     @GetMapping("")
     @Transactional(readOnly = true)
-    public ResponseEntity<?> showAllCategory(){
+    public ResponseEntity<?> showAllCategory() {
         List<CategoryResult> categories = categoryService.findAll();
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createCategory(@RequestBody CategoryParam categoryParam){
-        CategoryResult category = categoryService.create(categoryParam);
-        return  new ResponseEntity<>(category, HttpStatus.OK);
-   }
+    public ResponseEntity<?> createCategory(@RequestBody CreateCategoryParam createCategoryParam) {
+        CategoryResult category = categoryService.create(createCategoryParam);
+        return new ResponseEntity<>(category, HttpStatus.OK);
+    }
 }

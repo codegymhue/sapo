@@ -1,26 +1,21 @@
 package vn.sapo.brand;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import vn.sapo.brand.dto.*;
-import vn.sapo.entities.product.*;
+import vn.sapo.entities.product.Brand;
 
 @Component
 public class BrandMapper {
+    @Autowired
+    private ModelMapper modelMapper;
 
     public BrandResult toDTO(Brand brand) {
-        return new BrandResult()
-        .setId(brand.getId())
-        .setName(brand.getName());
+        return modelMapper.map(brand, BrandResult.class);
     }
 
-    public Brand toModel(BrandParam brandParam) {
-        return new Brand()
-        .setId(brandParam.getId())
-        .setName(brandParam.getName());
+    public Brand toModel(CreateBrandParam createBrandParam) {
+        return modelMapper.map(createBrandParam, Brand.class);
     }
-
-    public Brand toModel(BrandCreateParam brandCreateParam) {
-        return new Brand().setName(brandCreateParam.getName());
-    }
-
 }

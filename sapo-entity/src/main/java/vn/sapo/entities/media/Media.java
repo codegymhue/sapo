@@ -18,7 +18,7 @@ import java.time.Instant;
 @Accessors(chain = true)
 public class Media {
     @Id
-    @Column(name = "cloud_id")
+    @Column(name = "cloud_id", nullable = false)
     private String cloudId;
 
     @Column(name = "file_name")
@@ -27,30 +27,23 @@ public class Media {
     @Column(name = "file_folder")
     private String fileFolder;
 
-    @Column(name = "file_url")
+    @Column(name = "file_url", nullable = false)
     private String fileUrl;
 
     @Column(name = "file_type")
     private String fileType;
 
-    @Column(name = "is_main")
+    @Column(name = "is_main", nullable = false)
     private Boolean isMain;
-
-    @Column(name = "created_by")
-    private Integer creattedBy;
-
-    @Column(name = "updated_by")
-    private Integer updatedBy;
-
     @Column(name = "product_id", insertable = false, updatable = false)
     private Integer productId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    public Media(Product product) {
-        setProduct(product);
+    public Media(Integer productId) {
+        this.product = new Product(this.productId = productId);
     }
 
 }

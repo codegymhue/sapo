@@ -19,7 +19,7 @@ public class BrandServiceImpl implements BrandService {
     private BrandRepository brandRepository;
 
     @Override
-    public BrandResult create(BrandParam brandParam) {
+    public BrandResult create(CreateBrandParam brandParam) {
         Brand brand = brandRepository.save(brandMapper.toModel(brandParam));
         return brandMapper.toDTO(brand);
     }

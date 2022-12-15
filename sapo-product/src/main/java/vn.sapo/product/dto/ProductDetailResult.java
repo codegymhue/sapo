@@ -26,8 +26,8 @@ public class ProductDetailResult {
     private Integer id;
     private String title;
     private ProductStatus status;
-    private Instant createAt;
-    private Instant updateAt;
+    private Instant createdAt;
+    private Instant updatedAt;
     private String description;
     private String unit;
     private String sku;
@@ -38,8 +38,8 @@ public class ProductDetailResult {
     private CategoryResult category;
     private BrandResult brand;
     private Boolean applyTax;
-    private Boolean isTaxInclusive;
-//    private List<ProductTaxResult> taxList;
+    private Boolean taxInclusive;
+    private List<TaxResult> taxSaleList;
     private List<MediaResult> mediaResults;
     private ItemResult itemResult;
     private List<TaxResult> taxResults;

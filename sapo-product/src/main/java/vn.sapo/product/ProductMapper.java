@@ -1,19 +1,33 @@
 package vn.sapo.product;
 
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import vn.sapo.address.dto.AddressResult;
 import vn.sapo.brand.BrandMapper;
 import vn.sapo.category.CategoryMapper;
+import vn.sapo.entities.Address;
 import vn.sapo.entities.product.Product;
 import vn.sapo.media.MediaMapper;
 import vn.sapo.product.dto.*;
-import vn.sapo.tax.dto.TaxMapper;
+import vn.sapo.tax.TaxMapper;
+import vn.sapo.tax.dto.TaxResult;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
-public class ProductMapper {
+public class ProductMapper implements InitializingBean {
+    @Autowired
+    private ModelMapper modelMapper;
 
+    @Override
+    public void afterPropertiesSet() throws Exception {
+//        TypeMap<Product, ProductResult> model2Dto = modelMapper.createTypeMap(Product.class, ProductResult.class);
+    }
 
     @Autowired
     BrandMapper brandMapper;
@@ -26,21 +40,6 @@ public class ProductMapper {
 
     @Autowired
     MediaMapper mediaMapper;
-
-
-    public Product toModel(ProductParam productParam) {
-        return new Product(productParam.getCategoryId(), productParam.getBrandId())
-                .setTitle(productParam.getTitle())
-                .setStatus(productParam.getStatus())
-                .setDescription(productParam.getDescription())
-                .setUnit(productParam.getUnit())
-                .setSku(productParam.getSku())
-                .setImportPrice(productParam.getImportPrice())
-                .setRetailPrice(productParam.getRetailPrice())
-                .setWholesalePrice(productParam.getWholesalePrice())
-                .setBrandId(productParam.getBrandId())
-                .setCategoryId(productParam.getCategoryId());
-    }
 
     public Product toModel(CreateProductParam productWithImageParam) {
         return new Product(productWithImageParam.getCategoryId(), productWithImageParam.getBrandId())
@@ -56,31 +55,28 @@ public class ProductMapper {
     }
 
     public ProductResult toDTO(Product product) {
-        return new ProductResult()
-                .setId(product.getId())
-                .setTitle(product.getTitle())
-                .setStatus(product.getStatus())
-                .setSku(product.getSku())
-                .setBrandId(product.getBrandId())
-                .setCategoryId(product.getCategoryId())
-                .setCategory(categoryMapper.toDTO(product.getCategory()))
-                .setBrandId(product.getBrandId())
-                .setBrand(brandMapper.toDTO(product.getBrand()))
-                .setDescription(product.getDescription())
-                .setUnit(product.getUnit())
-                .setImportPrice(product.getImportPrice())
-                .setWholesalePrice(product.getWholesalePrice())
-                .setRetailPrice(product.getRetailPrice())
-                .setApplyTax(product.getApplyTax())
-                .setCategory(categoryMapper.toDTO(product.getCategory()))
-                .setBrand(brandMapper.toDTO(product.getBrand()));
-//        List<TaxResult> taxSaleList = product.getTaxSale().stream().map(taxMapper::toDTO).collect(Collectors.toList());
-//        result.setTaxSaleList(taxSaleList);
-//        List<TaxResult> taxPurchaseList = product.getTaxPurchase().stream().map(taxMapper::toDTO).collect(Collectors.toList());
-//        result.setTaxPurchaseList(taxPurchaseList);
-//        result.setBrand(brandMapper.toDTO(product.getBrand()))
-//                .setCategory(categoryMapper.toDTO(product.getCategory()));
-//        return result;
+
+        ProductResult dto = modelMapper.map(product, ProductResult.class);
+//        ProductResult dto = new ProductResult()
+//                .setId(product.getId())
+//                .setTitle(product.getTitle())
+//                .setStatus(product.getStatus())
+//                .setSku(product.getSku())
+//                .setBrandId(product.getBrandId())
+//                .setCategoryId(product.getCategoryId())
+//                .setDescription(product.getDescription())
+//                .setUnit(product.getUnit())
+//                .setImportPrice(product.getImportPrice())
+//                .setWholesalePrice(product.getWholesalePrice())
+//                .setRetailPrice(product.getRetailPrice())
+//                .setApplyTax(product.getApplyTax())
+//                .setCategory(categoryMapper.toDTO(product.getCategory()))
+//                .setBrand(brandMapper.toDTO(product.getBrand()));
+//        List<TaxResult> taxSaleList = product.getSaleTaxList().stream().map(taxMapper::toDTO).collect(Collectors.toList());
+//        dto.setTaxSaleList(taxSaleList);
+//        List<TaxResult> taxPurchaseList = product.getPurchaseTaxList().stream().map(taxMapper::toDTO).collect(Collectors.toList());
+//        dto.setTaxPurchaseList(taxPurchaseList);
+        return dto;
     }
 
     public ProductDetailResult toDTODetail(Product product) {
@@ -91,13 +87,13 @@ public class ProductMapper {
                 .setSku(product.getSku())
                 .setDescription(product.getDescription())
                 .setUnit(product.getUnit())
-                .setCreateAt(product.getCreatedAt())
-                .setUpdateAt(product.getUpdatedAt())
+                .setCreatedAt(product.getCreatedAt())
+                .setUpdatedAt(product.getUpdatedAt())
                 .setImportPrice(product.getImportPrice())
                 .setWholesalePrice(product.getWholesalePrice())
                 .setRetailPrice(product.getRetailPrice())
                 .setApplyTax(product.getApplyTax())
-                .setIsTaxInclusive(product.getIsTaxInclusive());
+                .setTaxInclusive(product.getTaxInclusive());
     }
 
     public ProductItemResult toDTOPage(Product product) {

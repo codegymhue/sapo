@@ -10,6 +10,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class CategoryResult {
     private Integer id;
-    private String name;
+    private String title;
 
 }

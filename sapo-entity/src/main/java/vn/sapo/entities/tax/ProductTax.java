@@ -7,6 +7,7 @@ import lombok.experimental.Accessors;
 import vn.sapo.entities.product.Product;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @NoArgsConstructor
@@ -15,7 +16,7 @@ import java.util.Objects;
 @Entity
 @Accessors(chain = true)
 @Table(name = "product_tax")
-public class ProductTax {
+public class ProductTax implements Serializable {
     @EmbeddedId
     private ProductTaxId id;
     @Column(name = "product_id", insertable = false, updatable = false)
@@ -24,10 +25,13 @@ public class ProductTax {
     @Column(name = "tax_id", insertable = false, updatable = false)
     private Integer taxId;
 
-
     @Enumerated(EnumType.STRING)
     @Column(name = "tax_type", insertable = false, updatable = false)
     private TaxType taxType;
+
+    public ProductTax(Integer productId, Integer taxId, TaxType taxType) {
+        id = new ProductTaxId(this.productId = productId, this.taxId = taxId, this.taxType = taxType);
+    }
 
     public Tax getTax() {
         return id.getTax();

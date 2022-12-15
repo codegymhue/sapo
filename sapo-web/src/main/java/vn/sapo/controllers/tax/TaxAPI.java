@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vn.sapo.tax.TaxService;
-import vn.sapo.tax.dto.TaxParam;
+import vn.sapo.tax.dto.CreateTaxParam;
 import vn.sapo.tax.dto.TaxResult;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class TaxAPI {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createTax(@RequestBody TaxParam taxParam){
+    public ResponseEntity<?> createTax(@RequestBody CreateTaxParam taxParam){
         TaxResult taxResult = taxService.create(taxParam);
         return new ResponseEntity<>(taxResult, HttpStatus.OK);
     }

@@ -5,6 +5,6 @@ import vn.sapo.brand.dto.*;
 import java.util.List;
 
 public interface BrandService {
-    BrandResult create (BrandParam brandParam);
+    BrandResult create (CreateBrandParam brandParam);
     List<BrandResult>findAll();
 }

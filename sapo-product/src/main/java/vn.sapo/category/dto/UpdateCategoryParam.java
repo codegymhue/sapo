@@ -5,9 +5,10 @@ import lombok.experimental.Accessors;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Accessors(chain = true)
-public class CategoryCreateParam {
-
-    private String name;
-
+public class UpdateCategoryParam {
+    private Integer id;
+    private String title;
 }

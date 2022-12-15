@@ -1,4 +1,4 @@
-package vn.sapo.brand.dto;
+package vn.sapo.category.dto;
 
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -6,7 +6,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class BrandCreateParam {
-    private String name;
+public class CreateCategoryParam {
+    private String title;
 
 }

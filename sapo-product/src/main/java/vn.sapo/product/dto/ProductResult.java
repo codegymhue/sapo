@@ -8,9 +8,12 @@ import lombok.experimental.Accessors;
 import vn.sapo.brand.dto.BrandResult;
 import vn.sapo.category.dto.CategoryResult;
 import vn.sapo.entities.product.ProductStatus;
+import vn.sapo.media.dto.MediaResult;
+import vn.sapo.tax.dto.TaxResult;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,25 +21,25 @@ import java.time.Instant;
 @AllArgsConstructor
 @Accessors(chain = true)
 public class ProductResult {
-
     private Integer id;
     private String title;
     private ProductStatus status;
-    private Instant createdAt;
-    private Instant updatedAt;
-    private String description;
     private String unit;
     private String sku;
-    private String barCode;
-    private Integer quantity;
     private BigDecimal retailPrice;
     private BigDecimal importPrice;
     private BigDecimal wholesalePrice;
+    private String description;
     private Integer categoryId;
     private Integer brandId;
     private CategoryResult category;
     private BrandResult brand;
     private Boolean applyTax;
+    private Instant createdAt;
+    private Instant updatedAt;
     private int totalInventory;
     private int availableInventory;
+    private List<TaxResult> saleTaxList;
+    private List<TaxResult> purchaseTaxList;
+    private List<MediaResult> mediaList;
 }

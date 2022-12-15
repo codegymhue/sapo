@@ -3,10 +3,9 @@ package vn.sapo.tax;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.sapo.entities.tax.Tax;
+import vn.sapo.exceptions.NotFoundException;
 import vn.sapo.product_tax.dto.ProductTaxResult;
-import vn.sapo.tax.dto.TaxMapper;
-import vn.sapo.tax.dto.TaxParam;
-import vn.sapo.tax.dto.TaxResult;
+import vn.sapo.tax.dto.*;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -31,13 +30,19 @@ public class TaxServiceImpl implements TaxService {
     }
 
     @Override
-    public Tax findById(Integer id) {
-        return taxRepository.findById(id).get();
+    public TaxResult findById(Integer id) {
+        Tax tax = taxRepository.findById(id).orElseThrow(() -> new NotFoundException("Tax not found"));
+        return taxMapper.toDTO(tax);
+    }
+
+    @Override
+    public boolean existsById(Integer id) {
+        return taxRepository.existsById(id);
     }
 
     @Override
     @Transactional
-    public TaxResult create(TaxParam taxParam) {
+    public TaxResult create(CreateTaxParam taxParam) {
         return taxMapper.toDTO(taxRepository.save(taxMapper.toModel(taxParam)));
     }
 

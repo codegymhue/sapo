@@ -70,9 +70,8 @@ public class ProductAPI {
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CreateProductParam productWithImageParam) {
-        ProductResult productResult = productService.create(productWithImageParam);
-        System.out.println(productResult);
-        return new ResponseEntity<>(productResult, HttpStatus.CREATED);
+        ProductResult p = productService.create(productWithImageParam);
+        return new ResponseEntity<>(productService.findById(p.getId()), HttpStatus.CREATED);
     }
 
     @PostMapping("/create-short")

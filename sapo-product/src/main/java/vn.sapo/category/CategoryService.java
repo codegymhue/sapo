@@ -7,15 +7,10 @@ import java.util.*;
 
 public interface CategoryService {
 
-//    public CategoryResult createCategoryResult(CategoryCreateParam categoryCreateParam);
-
     List<CategoryResult> findAll();
 
-    Category findById(Integer id);
+    CategoryResult findById(Integer id);
+    void deleteById(Integer id);
 
-    Category save(Category category);
-
-    void remove(Integer id);
-
-    CategoryResult create(CategoryParam categoryParam);
+    CategoryResult create(CreateCategoryParam createCategoryParam);
 }
