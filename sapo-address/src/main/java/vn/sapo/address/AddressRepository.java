@@ -8,7 +8,8 @@ import java.util.List;
 
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Integer> {
-    void deleteByCustomerId(Integer customerId);
+
+    public void deleteByCustomerId(Integer customerId);
 
     List<Address> findByCustomerId(Integer customerId);
 

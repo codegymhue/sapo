@@ -42,6 +42,9 @@ public class Product extends BaseEntity {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "mass")
+    private Float mass;
+
     @Column(name = "unit", nullable = false, length = 50)
     private String unit;
 

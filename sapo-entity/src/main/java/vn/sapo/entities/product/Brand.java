@@ -10,6 +10,7 @@ import lombok.experimental.Accessors;
 @Data
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Accessors(chain = true)
 @Table(name = "brand")
 public class Brand {

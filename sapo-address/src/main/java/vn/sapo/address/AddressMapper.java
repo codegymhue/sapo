@@ -14,16 +14,17 @@ import vn.sapo.entities.Address;
 public class AddressMapper implements InitializingBean {
     @Autowired
     private ModelMapper modelMapper;
+    private TypeMap<Address, AddressResult> model2Dto;
+//    private TypeMap<AddressResult, Address> dto2Model;
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        TypeMap<Address, AddressResult> model2Dto = modelMapper.createTypeMap(Address.class, AddressResult.class);
-        model2Dto.addMapping(Address::isShippingAddress, AddressResult::setShipping);
-        TypeMap<CreateAddressParam, Address> dto2Model = modelMapper.createTypeMap(CreateAddressParam.class, Address.class);
-        dto2Model.addMapping(CreateAddressParam::isShipping, Address::setShippingAddress);
+        model2Dto = modelMapper.createTypeMap(Address.class, AddressResult.class);
+//        dto2Model = modelMapper.createTypeMap(AddressResult.class, Address.class);
     }
 
     public AddressResult toDTO(Address address) {
+        model2Dto.addMapping(Address::isShippingAddress, AddressResult::setShipping);
         return modelMapper.map(address, AddressResult.class);
     }
 

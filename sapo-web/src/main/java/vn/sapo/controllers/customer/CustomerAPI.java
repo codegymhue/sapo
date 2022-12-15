@@ -56,8 +56,6 @@ public class CustomerAPI {
         if (createAddressParam == null)
             return new ResponseEntity<>(dto, HttpStatus.OK);
         createAddressParam.setCustomerId(dto.getId());
-        createAddressParam.setShipping(true);
-        createAddressParam.setReceiveBill(true);
         addressService.create(createAddressParam);
         dto = customerService.findById(dto.getId());
         return new ResponseEntity<>(dto, HttpStatus.OK);

@@ -36,7 +36,6 @@ public class Media {
     @Column(name = "is_main")
     private Boolean isMain;
 
-
     @Column(name = "created_by")
     private Integer creattedBy;
 

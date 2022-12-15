@@ -37,7 +37,6 @@ public class ProductTax {
         return id.getProduct();
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
