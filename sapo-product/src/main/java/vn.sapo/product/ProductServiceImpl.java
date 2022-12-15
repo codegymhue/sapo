@@ -126,22 +126,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public ProductResult create(CreateProductParam productWithImageParam) {
+    public ProductResult create(CreateProductParam createProductParam) {
         try {
-            Product product = productMapper.toModel(productWithImageParam);
-            product.setId(0);
-            if (productWithImageParam.getEnableSell() == true) {
-                product.setStatus(ProductStatus.parseProductStatus("AVAILABLE"));
-            } else {
-                product.setStatus(ProductStatus.parseProductStatus("UNAVAILABLE"));
-            }
+            Product product = productMapper.toModel(createProductParam);
+            product.setStatus(
+                    createProductParam.getEnableSell() == true ? ProductStatus.AVAILABLE :
+                            ProductStatus.UNAVAILABLE);
+
             Product productSaved = productRepository.save(product);
-            ProductResult productResult = productMapper.toDTO(productSaved);
-            ItemResult itemResult = itemService.create(itemMapper.toDTO(productWithImageParam, productResult));
-            List<MediaResult> mediaResults = mediaService.save(productWithImageParam.getMediaList(), productSaved);
-            List<ProductTaxResult> productTaxResult = productTaxService.create(productWithImageParam.getTaxList(), productSaved);
-            System.out.println(productTaxResult);
-            return productResult;
+            ProductResult dto = productMapper.toDTO(productSaved);
+            ItemResult itemResult = itemService.create(itemMapper.toDTO(createProductParam, dto));
+            List<MediaResult> mediaResults = mediaService.save(createProductParam.getMediaList(), productSaved);
+            List<ProductTaxResult> productTaxResult = productTaxService.create(createProductParam.getTaxList(), productSaved);
+            return dto;
         } catch (Exception e) {
             return null;
         }
@@ -153,11 +150,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public ProductResult createShortProduct(ProductShortParam productShortParam) {
         Product product = productMapper.toModel(productShortParam);
-        product.setImage("");
         product.setStatus(ProductStatus.AVAILABLE);
-        product.setDescription("");
-        product.setUnit("");
-        product.setBarCode("");
         product.setWholesalePrice(new BigDecimal(Integer.parseInt(productShortParam.getRetailPrice())));
         product.setBrandId(1);
         product.setApplyTax(false);
@@ -181,7 +174,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public Map<String, Object> getAllProductItemPage(Integer pageNo, Integer pageSize, String title, Integer categoryId, Integer brandId, String status) {
         pageNo = pageNo - 1;
         Pageable pageable = PageRequest.of(pageNo, pageSize);
@@ -208,17 +201,16 @@ public class ProductServiceImpl implements ProductService {
                 products = productRepository.findAllByTitleContainingAndStatus(ProductStatus.parseProductStatus(status), title, pageable);
             }
 
-            List<Product> productList = products.getContent();
-            List<ProductItemResult> productItemResults = new ArrayList<>();
-            for (Product product : productList) {
-                ProductItemResult productItemResult = productMapper.toDTOPage(product);
-                productItemResult.setImage(mediaService.getLinkMediaByProductIdIsMain(product.getId()));
-                productItemResult.setInventory(itemService.getTotalInventoryQuantityByProductId(product.getId()));
-                productItemResult.setAvailable(itemService.getAvailableInventoryQuantityByProductId(product.getId()));
-                productItemResults.add(productItemResult);
-            }
+            List<ProductItemResult> dtoList = products.getContent().stream().map(product -> {
+                ProductItemResult dto = productMapper.toDTOPage(product);
+                dto.setImage(mediaService.getLinkMediaByProductIdIsMain(product.getId()));
+                dto.setInventory(itemService.getTotalInventoryQuantityByProductId(product.getId()));
+                dto.setAvailable(itemService.getAvailableInventoryQuantityByProductId(product.getId()));
+                return dto;
+            }).collect(Collectors.toList());
+
             Map<String, Object> response = new HashMap<>();
-            response.put("products", productItemResults);
+            response.put("products", dtoList);
             response.put("totalItem", products.getTotalElements());
             response.put("totalPage", products.getTotalPages());
             return response;
