@@ -41,7 +41,9 @@ public class ProductAPI {
                 hashMap.get("search"),
                 Integer.valueOf(hashMap.get("categoryId")),
                 Integer.valueOf(hashMap.get("brandId")),
-                hashMap.get("status")),
+                hashMap.get("status"),
+                hashMap.get("sortPage[type]"),
+                hashMap.get("sortPage[value]")),
                 HttpStatus.OK
         );
     }
