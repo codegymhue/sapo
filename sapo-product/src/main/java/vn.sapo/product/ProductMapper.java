@@ -73,6 +73,7 @@ public class ProductMapper implements InitializingBean {
         return new ProductItemResult()
                 .setId(product.getId())
                 .setTitle(product.getTitle())
+                .setImage("")
                 .setStatus(product.getStatus())
                 .setAvailable(0)
                 .setInventory(0)

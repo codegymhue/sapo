@@ -44,8 +44,8 @@ class App {
                 <td class="align-middle"><input class="selectCheckbox"  name="options[]" type="checkbox" value="${item.id}"></td>
                 <td class="align-middle"><img width="50px" height="40px" src=${item.image} alt="image"></td>
                 <td class="align-middle"><a href="/admin/product/${item.id}" style="text-decoration: none">${item.title}</a></td>
-                <td class="align-middle">${item.category.name}</td>
-                <td class="align-middle">${item.brand.name}</td>
+                <td class="align-middle">${item.category.title}</td>
+                <td class="align-middle">${item.brand.title}</td>
                 <td class="align-middle text-center ">${item.available}</td>
                 <td class="align-middle text-center">${item.inventory}</td>
                 <td class="align-middle">
