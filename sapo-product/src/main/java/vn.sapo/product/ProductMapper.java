@@ -40,12 +40,16 @@ public class ProductMapper implements InitializingBean {
                 .setTitle(productWithImageParam.getTitle())
                 .setDescription(productWithImageParam.getDescription())
                 .setUnit(productWithImageParam.getUnit())
+                .setApplyTax(productWithImageParam.getApplyTax())
+                .setTaxInclusive(productWithImageParam.getTaxInclusive())
                 .setSku(productWithImageParam.getSku())
+                .setBarCode(productWithImageParam.getBarCode())
                 .setImportPrice(productWithImageParam.getImportPrice())
                 .setRetailPrice(productWithImageParam.getRetailPrice())
                 .setWholesalePrice(productWithImageParam.getWholesalePrice())
                 .setBrandId(productWithImageParam.getBrandId())
                 .setCategoryId(productWithImageParam.getCategoryId());
+
     }
 
     public ProductResult toDTO(Product product) {

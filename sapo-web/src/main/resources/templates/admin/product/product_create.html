@@ -930,7 +930,8 @@
         product.categoryId = $("#catProType").data("id");
         product.brandId = $('#brandProType').data("id");
         product.applyTax = $("#applyTax").is(":checked") ? true : false;
-        product.isTaxInclusive = $("#priceDepsTax").val() === 2 ? true : false;
+        product.taxInclusive = $("#priceDepsTax").val() === 2 ? true : false;
+        console.log( $("#priceDepsTax").val() === 2 ? true : false);
         product.costPrice = $("#costPrice").val();
         product.quantity = $("#initialInventory").val();
         product.taxList = taxs;

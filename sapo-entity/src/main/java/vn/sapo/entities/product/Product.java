@@ -53,6 +53,9 @@ public class Product extends BaseEntity {
     @Column(name = "sku", length = 50)
     private String sku;
 
+    @Column(name = "bar_code", length = 50)
+    private String barCode;
+
     @Column(name = "retail_price", nullable = false, precision = 10, scale = 2)
     private BigDecimal retailPrice;
 
@@ -75,10 +78,11 @@ public class Product extends BaseEntity {
     private Integer brandId;
 
     @Column(name = "apply_tax", nullable = false, columnDefinition = "boolean default false")
-    private Boolean applyTax = false;
-    @Column(name = "tax_inclusive", nullable = false, columnDefinition = "boolean default false")
-    private Boolean taxInclusive = false;
-    @OneToMany(mappedBy = "product")
+    private Boolean applyTax;
+
+    @Column(name = "tax_inclusive", nullable = false)
+    private Boolean taxInclusive;
+    @OneToMany(mappedBy = "id.product")
     private Set<Media> mediaSet;
 
     @OneToMany(mappedBy = "id.product")

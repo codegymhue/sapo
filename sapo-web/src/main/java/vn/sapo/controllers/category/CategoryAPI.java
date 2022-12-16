@@ -22,7 +22,6 @@ public class CategoryAPI {
     CategoryMapper categoryMapper;
 
     @GetMapping("")
-    @Transactional(readOnly = true)
     public ResponseEntity<?> showAllCategory() {
         List<CategoryResult> categories = categoryService.findAll();
         return new ResponseEntity<>(categories, HttpStatus.OK);

@@ -81,7 +81,7 @@ class Product {
                 retailPrice, importPrice,
                 wholesalePrice, categoryId,
                 brandId, applyTax, image,
-                isTaxInclusive, taxList,
+                taxInclusive, taxList,
                 costPrice) {
         this.id = id;
         this.title = title;
@@ -97,7 +97,7 @@ class Product {
         this.categoryId = categoryId;
         this.brandId = brandId;
         this.applyTax = applyTax;
-        this.isTaxInclusive = isTaxInclusive;
+        this.taxInclusive = taxInclusive;
         this.taxList = taxList;
         this.mediaList = image;
         this.quantity = quantity;

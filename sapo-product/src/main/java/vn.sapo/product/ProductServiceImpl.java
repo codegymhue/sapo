@@ -129,7 +129,7 @@ public class ProductServiceImpl implements ProductService {
     public ProductResult create(CreateProductParam createProductParam) {
         Product product = productMapper.toModel(createProductParam);
         product.setStatus(
-                createProductParam.isEnableSell() ? ProductStatus.AVAILABLE :
+                createProductParam.getEnableSell() ? ProductStatus.AVAILABLE :
                         ProductStatus.UNAVAILABLE);
         product = productRepository.save(product);
         Integer productId = product.getId();
