@@ -39,7 +39,5 @@ public class ProductResult {
     private Instant updatedAt;
     private int totalInventory;
     private int availableInventory;
-    private List<TaxResult> saleTaxList;
-    private List<TaxResult> purchaseTaxList;
     private List<MediaResult> mediaList;
 }

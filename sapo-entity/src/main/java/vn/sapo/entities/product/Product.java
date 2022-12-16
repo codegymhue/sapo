@@ -79,6 +79,7 @@ public class Product extends BaseEntity {
 
     @Column(name = "apply_tax", nullable = false, columnDefinition = "boolean default false")
     private Boolean applyTax;
+
     @Column(name = "tax_inclusive", nullable = false, columnDefinition = "boolean default false")
     private Boolean taxInclusive;
     @OneToMany(mappedBy = "product")
