@@ -3,6 +3,7 @@ package vn.sapo.entities.product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Value;
 import lombok.experimental.Accessors;
 import vn.sapo.entities.BaseEntity;
 import vn.sapo.entities.media.Media;
@@ -33,6 +34,8 @@ public class Product extends BaseEntity {
     @Column(name = "title", nullable = false)
     private String title;
 
+    @Column(name = "deleted", columnDefinition = "boolean default false")
+    private Boolean deleted;
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -79,7 +82,8 @@ public class Product extends BaseEntity {
     private Set<Media> mediaSet;
 
     @OneToMany(mappedBy = "id.product")
-    @OrderBy("tax_id")
+//    @OrderBy("tax_id")
+    @OrderBy("taxId")
     private Set<ProductTax> productTaxSet;
 
     public Set<Media> getMediaList() {
