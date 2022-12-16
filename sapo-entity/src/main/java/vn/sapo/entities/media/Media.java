@@ -35,6 +35,7 @@ public class Media {
 
     @Column(name = "is_main", nullable = false)
     private Boolean isMain;
+
     @Column(name = "product_id", insertable = false, updatable = false)
     private Integer productId;
 
