@@ -180,7 +180,7 @@
                                                          style="display: flex; align-items: flex-end;">
                                                         <div class="MuiFormControl-root jss27089 MuiFormControl-fullWidth">
                                                             <label class="MuiFormLabel-root MuiInputLabel-root jss27090 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-                                                                   data-shrink="true">Khối lượng
+                                                                   data-shrink="true">Khối lượng (g)
                                                             </label>
                                                             <div class="MuiFormControl-root MuiTextField-root jss27091 MuiFormControl-fullWidth"
                                                                  inputmode="numeric"
@@ -192,7 +192,8 @@
                                                                            aria-label="Without label"
                                                                            id="massUpdate"
                                                                            class="MuiInputBase-input MuiOutlinedInput-input"
-                                                                           style="width: 100%; text-align: right;">
+                                                                           style="width: 100%; text-align: right;"
+                                                                    th:field="*{mass}">
                                                                     <fieldset aria-hidden="true"
                                                                               class="jss26952 MuiOutlinedInput-notchedOutline"
                                                                               style="padding-left: 8px;">
@@ -765,7 +766,7 @@
                                                                 justify-content: space-between;
                                                                 align-items: center; ">
                                                                     <span id="taxProType"
-
+                                                                    th:text="${product.taxResults.get(0).title}"
                                                                     >Chọn thuế đầu vào</span>
                                                                 </div>
                                                                 <ul class="dropdown-menu w-100  showAllTax">
@@ -799,7 +800,8 @@
                                                                 display: flex;
                                                                 justify-content: space-between;
                                                                 align-items: center; ">
-                                                                    <span id="taxProTypeOut">Chọn thuế đầu ra </span>
+                                                                    <span id="taxProTypeOut"
+                                                                    th:text="${product.taxResults.get(1).title}">Chọn thuế đầu ra </span>
                                                                 </div>
                                                                 <ul class="dropdown-menu w-100  showAllTaxOut">
                                                                     <li class="text-primary dropdown-item">
@@ -1055,7 +1057,7 @@
         taxs.push(taxOut);
         // product.id = 0;
         product.title = page.dialogs.elements.titleUpdate.val();
-        // product.enableSell = page.dialogs.elements.enableSell.is(":checked") ? true : false;
+        product.enableSell = page.dialogs.elements.enableSell.is(":checked") ? true : false;
         product.description = page.dialogs.elements.descriptionUpdate.val();
         product.unit = page.dialogs.elements.unitUpdate.val();
         product.sku = page.dialogs.elements.skuUpdate.val();
