@@ -4,8 +4,8 @@
 <head>
     <th:block th:replace="/layout/header :: header"/>
     <title>Tạo đơn hàng</title>
-    <link rel="stylesheet" href="/static/assets/admin/css/order/create_order.css">
-    <link rel="stylesheet" href="/static/assets/admin/css/order/discount.css">
+    <link rel="stylesheet" href="/assets/admin/css/order/create_order.css">
+    <link rel="stylesheet" href="/assets/admin/css/order/discount.css">
 
 </head>
 <body class="" data-new-gr-c-s-check-loaded="14.1085.0" data-gr-ext-installed="" cz-shortcut-listen="true">
@@ -1987,85 +1987,6 @@
 
 <th:block th:replace="/layout/script :: script"/>
 
-<script type="text/javascript" src="/static/assets/admin/js/order/app.js"></script>
-<script type="text/javascript" src="/static/assets/admin/js/order/order.js"></script>
-<script>
-    class Product {
-        constructor(id, title, sku, categoryId, retailPrice, quantity, mass, importPrice) {
-            this.id = id;
-            this.title = title;
-            this.sku = sku;
-            this.quantity = quantity;
-            this.retailPrice = retailPrice;
-            this.importPrice = importPrice;
-            this.categoryId = categoryId;
-            this.mass = mass;
-        }
-    }
-
-    let product = new Product();
-
-    function showAllCategory() {
-        return $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "GET",
-            url: "http://localhost:8080/api/categories"
-        })
-            .done((data) => {
-                $("#categoryCreate").empty();
-
-                $.each(data, (i, item) => {
-                    let str = `<option value="${item.id}">${item.name}</option>`;
-                    $(".showAllCategory").append(str);
-                });
-
-            })
-            .fail((jqXHR) => {
-                console.log("Error");
-            })
-    }
-
-    function doCreateProductShort() {
-
-        product.id = 0;
-        product.title = $('#titleCreate').val();
-        product.sku = $('#skuCreate').val();
-        product.quantity = $('#inventoryCreate').val();
-        product.retailPrice = $('#retailPriceCreate').val();
-        product.importPrice = $('#importPriceCreate').val();
-        product.categoryId = $('#categoryCreate').val();
-        product.mass = $('#massCreate').val();
-
-        $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json",
-            },
-            type: "POST",
-            url: "http://localhost:8080/api/products/create-short",
-            data: JSON.stringify(product),
-        })
-            .done((data) => {
-
-                $('#create_order_product').modal("hide");
-
-                $('#modalProductShort')[0].reset();
-                App.SweetAlert.showSuccessAlert("Thêm thành công sản phẩm!");
-            })
-            .fail((jqXHR) => {
-                console.log(jqXHR.message)
-                App.SweetAlert.showErrorAlert("Thêm không được");
-            })
-    }
-
-    $("#btnCreateProductShort").on("click", function () {
-        doCreateProductShort();
-    })
-
-    showAllCategory();
-
-</script>
+<script type="text/javascript" src="/assets/admin/js/order/app.js"></script>
+<script type="text/javascript" src="/assets/admin/js/order/order.js"></script>
 </html>

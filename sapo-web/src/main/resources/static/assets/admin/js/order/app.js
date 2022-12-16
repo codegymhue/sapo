@@ -148,6 +148,19 @@ class ItemResult {
         this.available = available;
     }
 }
+
+class Product {
+    constructor(id, title, sku, categoryId, retailPrice, quantity, mass, importPrice) {
+        this.id = id;
+        this.title = title;
+        this.sku = sku;
+        this.quantity = quantity;
+        this.retailPrice = retailPrice;
+        this.importPrice = importPrice;
+        this.categoryId = categoryId;
+        this.mass = mass;
+    }
+}
 class App {
     static SweetAlert = class {
         static showSuccessAlert(t) {

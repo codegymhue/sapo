@@ -2,7 +2,7 @@
 <html lang="vi-VN" class="sapo-menu-toggle-active sapo-menu-expand" xmlns:th="http://www.thymeleaf.org" th:object="${product}">
 
 <head>
-    <link rel="stylesheet" href="../../../static/assets/admin/css/product/product_detail.css"/>
+    <link rel="stylesheet" href="/assets/admin/css/product/product_detail.css"/>
     <th:block th:replace="/layout/header :: header"/>
     <title>Chi tiết sản phẩm</title>
 </head>
@@ -30,20 +30,20 @@
                         <button id="Sapo-Button-ff6cf318-574c-4f0f-b947-9111a7dc90d4"
                                 class="sc-jqUVSM ldZiUT"><span class="sc-papXJ jcEYKF">Thoát</span></button>
                     </a>
-                    <!--                    <button id="Sapo-Button-ff6cf318-574c-4f0f-b947-9111a7dc90d4"-->
-                    <!--                            class="sc-jqUVSM ldZiUT" ><span class="sc-papXJ jcEYKF">Thoát</span></button>-->
                     <button
                             id="Sapo-Button-3ec18966-82fb-4f50-a58e-5a530543ec49" class="sc-jqUVSM dTfcYQ"><span
                             class="sc-papXJ jcEYKF">Xoá</span></button>
+                    <a th:value="*{id}" th:href="@{/admin/product/edit/__${product.getId()}__}">
                     <button id="Sapo-Button-aa711eaa-4998-4eac-9ad2-db058d567cd2"
                             class="sc-jqUVSM cHdopB"><span class="sc-papXJ jcEYKF">Sửa sản phẩm</span></button>
+                    </a>
                 </div>
             </div>
         </div>
         <div class="MuiBox-root jss4514 jss4501">
             <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
                 <div class="MuiGrid-root title MuiGrid-item MuiGrid-grid-xs-12">
-                    <h4 class="MuiTypography-root MuiTypography-h4" th:value="*{id}" th:text="*{title}"></h4>
+                    <h2 th:value="*{id}" th:text="*{title}"></h2>
                 </div>
             </div>
             <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
@@ -52,9 +52,6 @@
                         <div class="MuiBox-root jss4666 jss4637 borderBottom">
                             <div class="MuiBox-root jss5093 jss4618">
                                 <h6 class="MuiTypography-root MuiTypography-subtitle1">Thông tin sản phẩm</h6>
-<!--                                <div class="sc-jSMfEi PGrDd">-->
-<!--                                    <span class="sc-eCYdqJ gIZkwA">Đang giao dịch</span>-->
-<!--                                </div>-->
                                 <div th:class="*{status == status.AVAILABLE} ? 'PGrDd' : 'PGrDf'">
                                     <span th:text="*{status == status.AVAILABLE} ? 'Đang giao dịch' : 'Ngừng giao dịch'" th:class="*{status == status.AVAILABLE} ? 'gIZkwA' : 'gIZkwB'"></span>
                                 </div>
@@ -219,13 +216,13 @@
                                         <div class="MuiBox-root jss4698">
                                             <div class="MuiBox-root jss4699"
                                                  style="width: 100%; display: flex; justify-content: center;">
-                                                <div class="MuiGrid-container">
-                                                    <th:block th:each="media : *{mediaResults}">
-                                                        <div class="MuiGrid-item">
-                                                            <img class="image-item" style="width: 90px; height: 90px; margin: 5px" th:src="${media.fileUrl}">
-                                                        </div>
-                                                    </th:block>
-                                                </div>
+<!--                                                <div class="MuiGrid-container">-->
+<!--                                                    <th:block th:each="media : *{mediaResults}">-->
+<!--                                                        <div class="MuiGrid-item">-->
+<!--                                                            <img class="image-item" style="width: 90px; height: 90px; margin: 5px" th:src="${media.fileUrl}">-->
+<!--                                                        </div>-->
+<!--                                                    </th:block>-->
+<!--                                                </div>-->
                                             </div>
                                         </div>
                                     </div>
@@ -349,7 +346,7 @@
                                             <div id="scroller" class="sc-cHPgQl hYUFnd">
                                                 <div class="sc-gHLcSH ieIWRo">
                                                     <button id="0" class="sc-KfMfS hXNAQt">Tồn kho</button>
-                                                    <button id="1" class="sc-KfMfS eMTKDV">Lịch sử kho</button>
+<!--                                                    <button id="1" class="sc-KfMfS eMTKDV">Lịch sử kho</button>-->
                                                 </div>
                                             </div>
                                         </div>

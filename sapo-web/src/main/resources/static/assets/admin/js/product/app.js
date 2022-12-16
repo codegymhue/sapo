@@ -46,21 +46,13 @@ class App {
                 <td class="align-middle"><a href="/admin/product/${item.id}" style="text-decoration: none">${item.title}</a></td>
                 <td class="align-middle">${item.category.name}</td>
                 <td class="align-middle">${item.brand.name}</td>
-<<<<<<< HEAD
-                <td class="align-middle">${item.availableInventory}</td>
-                <td class="align-middle">${item.totalInventory}</td>
-                <td class="align-middle">${item.status}</td>
-                <td class="align-middle">${moment(item.createdAt).format("DD/MM/yyyy")}</td>
-                <td class="align-middle">${moment(item.updatedAt).format("DD/MM/yyyy")}</td>
-=======
-                <td class="align-middle text-end ">${item.available}</td>
-                <td class="align-middle text-end">${item.inventory}</td>
+                <td class="align-middle text-center ">${item.available}</td>
+                <td class="align-middle text-center">${item.inventory}</td>
                 <td class="align-middle">
                     <span id="showStatus" class="${showStatus}">${item.status === "AVAILABLE" ? "Đang giao dịch" : "Ngừng giao dịch"}</span> 
                 </td>
                 <td class="align-middle">${ item.createAt === null ? "" : new Date(item.createAt).toLocaleDateString('en-GB')}</td>
                 <td class="align-middle">${item.updateAt === null ? "" : new Date(item.updateAt).toLocaleDateString('en-GB')}</td>
->>>>>>> dev_c5
             </tr>
         `;
         return str;

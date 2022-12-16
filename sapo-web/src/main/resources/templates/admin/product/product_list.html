@@ -4,7 +4,7 @@
 <head>
 
     <th:block th:replace="/layout/header :: header"/>
-    <link rel="stylesheet" href="/static/assets/admin/css/product/product_list.css"/>
+    <link rel="stylesheet" href="/assets/admin/css/product/product_list.css"/>
     <title>Danh sách sản phẩm</title>
 
 </head>
@@ -82,6 +82,7 @@
         <div class="MuiBox-root jss6754 jss6732">
             <div class="MuiBox-root jss6755 jss6733">
                 <div class="MuiBox-root jss6756 jss6741">
+                    <a  th:href="@{/admin/products/export/excel}">
                     <button class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
                             tabindex="0"
                             type="button">
@@ -103,6 +104,7 @@
                       <span class="MuiTouchRipple-root">
                       </span>
                     </button>
+                    </a>
                     <div class="MuiBox-root jss6793"
                          style="width: 1px; height: 20px; border-left: 1px solid rgb(211, 213, 215); margin: 0 8px;">
                     </div>
@@ -249,8 +251,8 @@
                 <div style="font-size:small" id="tableCheckbox">
                     <table id="tbProduct" class="table table-hover">
                         <thead style="background-color: #f4f6f8; height: 55px">
-                            <tr>
-                                <th class="align-middle"><input id="selectAllCheckboxes" type="checkbox" value=""></th>
+                            <tr >
+                                <th class="align-middle"><input id="checkAll" type="checkbox" value="" ></th>
                                 <th class="align-middle" scope="col">Ảnh</th>
                                 <th class="align-middle" scope="col">Sản phẩm</th>
                                 <th class="align-middle" scope="col">Loại</th>
@@ -260,6 +262,26 @@
                                 <th class="align-middle" scope="col">Trạng thái</th>
                                 <th class="align-middle" scope="col">Ngày khởi tạo</th>
                                 <th class="align-middle" scope="col">Cập nhập cuối</th>
+                            </tr>
+                            <tr class="hidden">
+                                <td class="align-middle">
+                                    <input type="checkbox" value="" >
+                                </td>
+                                <td colspan="2" class="align-middle">
+                                    <span>Đã chọn 7 sản phẩm trên trang này</span>
+                                </td>
+                                <td colspan="7" class="align-middle">
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Chọn thao tác
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                            <li><a class="dropdown-item" href="#">Đang giao dịch</a></li>
+                                            <li><a class="dropdown-item" href="#">Ngừng giao dịch</a></li>
+                                            <li><a class="dropdown-item" href="#">Xóa sản phẩm</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
                             </tr>
                         </thead>
                         <tbody >
@@ -311,7 +333,7 @@
 
 <th:block th:replace="/layout/script :: script"/>
     <script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="/static/assets/admin/js/product/app.js"></script>
+    <script src="/assets/admin/js/product/app.js"></script>
 
     <script>
         let page = {
@@ -344,8 +366,7 @@
         page.elements.pageNo = $("#pageNo");
         page.elements.pageSize = $("#pageSize");
         page.elements.search = $("#Sapo-TextField-1de6d6a6-f13f-4275-b1b2-a8487207509a");
-        page.elements.selectAllCheckboxes =$("#selectAllCheckboxes");
-        // page.elements.selectCheckbox = $(".selectCheckbox");
+        page.elements.checkAll =$("#checkAll");
 
         page.dialogs.elements.category = $("#category");
         page.dialogs.elements.brand = $("#brand");
@@ -398,6 +419,7 @@
                             page.elements.tbProduct.append(App.renderRowProduct(item, 'unavailable'))
                         }
                     });
+                    page.commands.isCheckbox();
                     page.elements.totalPage.append(
                         `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
                     )
@@ -500,29 +522,47 @@
                 })
         }
 
-        //nhat-dev check box
-        page.elements.selectAllCheckboxes.click(function(){
-            $('input:checkbox').not(this).prop('checked', this.checked);
-        });
+        let selected = [];
 
-        let checked = []
-        $("input[name='options[]']:checked").each(function ()
-        {
-            checked.push(parseInt($(this).val()));
-        });
-        console.log(checked)
+        page.elements.checkAll.on("change", function (){
+            selected = [];
+            if(this.checked){
+                $("#tbProduct > tbody input").each(function (){
+                    $(this).prop("checked", true);
+                    selected.push($(this).val());
+                })
+            } else {
+                $("#tbProduct > tbody input").each(function (){
+                    $(this).prop("checked", false);
+                })
+            }
+        })
 
-        // let checkboxes = document.querySelectorAll(".selectCheckbox");
-        // for (let checkbox of  checkboxes){
-        //    checkbox.click(function(){
-        //        if (checkbox.is(":checked")){
-        //            console.log("con heo")
-        //        }
-        //        else {
-        //            console.log("con ga")
-        //        }
-        //    });
-        // }
+        page.commands.isCheckbox = () =>{
+            $(".selectCheckbox").on("change", function (){
+                if(this.checked){
+                    $(this).prop("checked", true);
+                    selected.push($(this).val());
+                } else {
+                    $(this).prop("checked", false);
+                   selected = page.commands.deleteArrayId($(this).val());
+                }
+            })
+
+        }
+
+        page.commands.deleteArrayId = (item) =>{
+            if(selected.length <= 0){
+                return [];
+            } else {
+                for(let i=0; i< selected.length; i++){
+                    if(selected[i] === item ){
+                       selected.splice(i,1);
+                    }
+                }
+                return selected;
+            }
+        }
 
         page.loadData = () => {
             page.commands.getAllProducts();

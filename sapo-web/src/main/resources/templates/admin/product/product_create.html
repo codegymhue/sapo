@@ -4,7 +4,7 @@
 
 <head>
     <th:block th:replace="/layout/header :: header"/>
-    <link rel="stylesheet" href="../../../static/assets/admin/css/product/product_create.css"/>
+    <link rel="stylesheet" href="/assets/admin/css/product/product_create.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
           integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
@@ -14,7 +14,7 @@
           rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
-    <link rel="stylesheet" href="../../../static/assets/admin/css/product/selectMenu.css">
+    <link rel="stylesheet" href="/assets/admin/css/product/selectMenu.css">
 </head>
 
 <body>
@@ -370,11 +370,11 @@
                                                         <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl">
                                                             <input aria-invalid="false"
                                                                    autocomplete="off"
-                                                                   id="importPriceCreate 50a30b49-8f95-4c1c-b0ec-1683c8f22fb1"
+                                                                   id="wholesalePriceCreate 50a30b49-8f95-4c1c-b0ec-1683c8f22fb1"
                                                                    name="prices.price_sales.1.value"
                                                                    type="text"
                                                                    aria-label="Without label"
-                                                                   class="importPriceCreate MuiInputBase-input MuiOutlinedInput-input"
+                                                                   class="wholesalePriceCreate MuiInputBase-input MuiOutlinedInput-input"
                                                                    value="0"
                                                                    style="width: 100%; text-align: right;">
                                                             <fieldset aria-hidden="true"
@@ -420,11 +420,11 @@
                                                         <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl">
                                                             <input aria-invalid="false"
                                                                    autocomplete="off"
-                                                                   id="wholesalePriceCreate 1901e214-820f-4ed4-b224-4509d7f7ff3c"
+                                                                   id="importPriceCreate 1901e214-820f-4ed4-b224-4509d7f7ff3c"
                                                                    name="prices.price_imports.0.value"
                                                                    type="text"
                                                                    aria-label="Without label"
-                                                                   class="wholesalePriceCreate MuiInputBase-input MuiOutlinedInput-input"
+                                                                   class="importPriceCreate MuiInputBase-input MuiOutlinedInput-input"
                                                                    value="0"
                                                                    style="width: 100%; text-align: right;">
                                                             <fieldset aria-hidden="true"
@@ -1056,8 +1056,6 @@
             .done((data) => {
                 console.log(": Tạo sản phẩm thành công")
                 showAllCategories();
-                searchCat();
-                updateNameCat();
                 $('#modalAddCategory').modal('hide');
                 $('#frmCreateCat')[0].reset();
 
@@ -1143,12 +1141,12 @@
     });
 
     //nhat-dev onchange input import price and cost price
-    $('.wholesalePriceCreate ').keyup(function(){
+    $('.importPriceCreate ').keyup(function(){
         $('#costPrice').val($(this).val());
     });
 
     $('#costPrice').keyup(function(){
-        $(".wholesalePriceCreate").val($(this).val());
+        $(".importPriceCreate").val($(this).val());
     });
 
 
