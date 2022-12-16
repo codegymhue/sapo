@@ -35,6 +35,7 @@ public class ProductDetailResult {
     private BigDecimal retailPrice;
     private BigDecimal importPrice;
     private BigDecimal wholesalePrice;
+    private Float mass;
     private CategoryResult category;
     private BrandResult brand;
     private Boolean applyTax;

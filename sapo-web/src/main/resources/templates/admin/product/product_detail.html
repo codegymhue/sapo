@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="vi-VN" class="sapo-menu-toggle-active sapo-menu-expand" xmlns:th="http://www.thymeleaf.org" th:object="${product}">
+<html lang="vi-VN" class="sapo-menu-toggle-active sapo-menu-expand" xmlns:th="http://www.thymeleaf.org"
+      th:object="${product}">
 
 <head>
     <link rel="stylesheet" href="/assets/admin/css/product/product_detail.css"/>
@@ -34,8 +35,8 @@
                             id="Sapo-Button-3ec18966-82fb-4f50-a58e-5a530543ec49" class="sc-jqUVSM dTfcYQ"><span
                             class="sc-papXJ jcEYKF">Xoá</span></button>
                     <a th:value="*{id}" th:href="@{/admin/product/edit/__${product.getId()}__}">
-                    <button id="Sapo-Button-aa711eaa-4998-4eac-9ad2-db058d567cd2"
-                            class="sc-jqUVSM cHdopB"><span class="sc-papXJ jcEYKF">Sửa sản phẩm</span></button>
+                        <button id="Sapo-Button-aa711eaa-4998-4eac-9ad2-db058d567cd2"
+                                class="sc-jqUVSM cHdopB"><span class="sc-papXJ jcEYKF">Sửa sản phẩm</span></button>
                     </a>
                 </div>
             </div>
@@ -53,7 +54,8 @@
                             <div class="MuiBox-root jss5093 jss4618">
                                 <h6 class="MuiTypography-root MuiTypography-subtitle1">Thông tin sản phẩm</h6>
                                 <div th:class="*{status == status.AVAILABLE} ? 'PGrDd' : 'PGrDf'">
-                                    <span th:text="*{status == status.AVAILABLE} ? 'Đang giao dịch' : 'Ngừng giao dịch'" th:class="*{status == status.AVAILABLE} ? 'gIZkwA' : 'gIZkwB'"></span>
+                                    <span th:text="*{status == status.AVAILABLE} ? 'Đang giao dịch' : 'Ngừng giao dịch'"
+                                          th:class="*{status == status.AVAILABLE} ? 'gIZkwA' : 'gIZkwB'"></span>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +72,7 @@
                                                     class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap"
                                                     itemid="display_product_variant_sku"
                                                     style="line-height: 16px; margin-left: 5px;" th:text="*{sku}">
-                                                </p>
+                                            </p>
                                             </div>
                                         </div>
                                     </div>
@@ -83,22 +85,24 @@
                                             <div class="MuiBox-root jss4688 jss4674">: <p
                                                     class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap"
                                                     itemid="display_product_variant_barcode"
-                                                    style="line-height: 16px; margin-left: 5px;" th:text="*{barCode}?: '---'">
-                                               </p>
+                                                    style="line-height: 16px; margin-left: 5px;"
+                                                    th:text="*{barCode}?: '---'">
+                                            </p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-5">
                                             <p class="MuiTypography-root jss4673 MuiTypography-body2"
-                                               itemid="title_display_product_variant_weight">Khối lượng</p>
+                                               itemid="title_display_product_variant_weight">Khối lượng (g)</p>
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7">
                                             <div class="MuiBox-root jss4689 jss4674">: <p
                                                     class="MuiTypography-root MuiTypography-body2"
                                                     itemid="display_product_variant_weight"
-                                                    style="line-height: 16px; margin-left: 5px;">
-                                                0g</p>
+                                                    style="line-height: 16px; margin-left: 5px;"
+                                                    th:text="${#numbers.formatDecimal(product.mass, 0, 'COMMA',0 , 'POINT')}?: '0'">
+                                            </p>
                                             </div>
                                         </div>
                                     </div>
@@ -111,8 +115,9 @@
                                             <div class="MuiBox-root jss4690 jss4674">: <p
                                                     class="MuiTypography-root MuiTypography-body2"
                                                     itemid="display_product_variant_unit"
-                                                    style="line-height: 16px; margin-left: 5px;" th:text="*{unit}?: '---'">
-                                                </p>
+                                                    style="line-height: 16px; margin-left: 5px;"
+                                                    th:text="*{unit}?: '---'">
+                                            </p>
                                             </div>
                                         </div>
                                     </div>
@@ -152,7 +157,8 @@
                                             <div class="MuiBox-root jss4692 jss4674">: <p
                                                     class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap"
                                                     itemid="display_product_variant_category" title="Bánh kẹo"
-                                                    style="line-height: 16px; margin-left: 5px;" th:text="*{category.title}?: '---'"></p>
+                                                    style="line-height: 16px; margin-left: 5px;"
+                                                    th:text="*{category.title}?: '---'"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -165,8 +171,9 @@
                                             <div class="MuiBox-root jss4693 jss4674">: <p
                                                     class="MuiTypography-root MuiTypography-body2"
                                                     itemid="display_product_variant_brand"
-                                                    style="line-height: 16px; margin-left: 5px;" th:text="*{brand.title}?: '---'">
-                                                </p>
+                                                    style="line-height: 16px; margin-left: 5px;"
+                                                    th:text="*{brand.title}?: '---'">
+                                            </p>
                                             </div>
                                         </div>
                                     </div>
@@ -191,8 +198,9 @@
                                             <div class="MuiBox-root jss4695 jss4674">: <p
                                                     class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap"
                                                     itemid="display_product_variant_createOn"
-                                                    style="line-height: 16px; margin-left: 5px;" th:text="${#dates.format(product.createdAt, 'dd-mm-yyyy HH:mm')}">
-                                               </p>
+                                                    style="line-height: 16px; margin-left: 5px;"
+                                                    th:text="${#dates.format(product.createdAt, 'dd-mm-yyyy HH:mm')}">
+                                            </p>
                                             </div>
                                         </div>
                                     </div>
@@ -205,8 +213,9 @@
                                             <div class="MuiBox-root jss4696 jss4674">: <p
                                                     class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap"
                                                     itemid="display_product_variant_modified_on"
-                                                    style="line-height: 16px; margin-left: 5px;" th:text="${#dates.format(product.updatedAt, 'dd-mm-yyyy HH:mm')}?: '---'">
-                                                </p>
+                                                    style="line-height: 16px; margin-left: 5px;"
+                                                    th:text="${#dates.format(product.updatedAt, 'dd-mm-yyyy HH:mm')}?: '---'">
+                                            </p>
                                             </div>
                                         </div>
                                     </div>
@@ -251,7 +260,8 @@
                                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4">
                                     <p class="MuiTypography-root MuiTypography-body2"
                                        itemid="variant_detail_price_sell_1_value"
-                                       style="line-height: 16px;" th:text="': ' + ${#numbers.formatDecimal(product.retailPrice, 0, 'COMMA',0 , 'POINT')}"></p>
+                                       style="line-height: 16px;"
+                                       th:text="': ' + ${#numbers.formatDecimal(product.retailPrice, 0, 'COMMA',0 , 'POINT')}"></p>
                                 </div>
                                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-2">
                                     <div class="MuiBox-root jss5053" style="display: flex;">
@@ -263,7 +273,8 @@
                                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4">
                                     <p class="MuiTypography-root MuiTypography-body2"
                                        itemid="variant_detail_price_sell_2_value"
-                                       style="line-height: 16px;" th:text="': ' + ${#numbers.formatDecimal(product.wholesalePrice, 0, 'COMMA',0 , 'POINT')}"></p>
+                                       style="line-height: 16px;"
+                                       th:text="': ' + ${#numbers.formatDecimal(product.wholesalePrice, 0, 'COMMA',0 , 'POINT')}"></p>
                                 </div>
                             </div>
                             <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1"
@@ -278,7 +289,8 @@
                                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4">
                                     <p class="MuiTypography-root MuiTypography-body2"
                                        itemid="variant_detail_price_import_1_value"
-                                       style="line-height: 16px;" th:text="': ' + ${#numbers.formatDecimal(product.importPrice, 0, 'COMMA',0 , 'POINT')}"></p>
+                                       style="line-height: 16px;"
+                                       th:text="': ' + ${#numbers.formatDecimal(product.importPrice, 0, 'COMMA',0 , 'POINT')}"></p>
                                 </div>
                             </div>
                         </div>
@@ -297,8 +309,9 @@
                                             class="MuiButtonBase-root MuiIconButton-root jss922 MuiCheckbox-root MuiCheckbox-colorPrimary jss912 jss923 Mui-checked jss924 Mui-disabled MuiIconButton-colorPrimary Mui-disabled Mui-disabled"
                                             tabindex="-1" aria-disabled="true"><span class="MuiIconButton-label"><input
                                             class="jss925" disabled="" type="checkbox" data-indeterminate="false"
-                                            value="" th:checked="*{status == status.AVAILABLE} ? true : false" ><span class="jss913 jss914"
-                                                                      font-size="small"></span></span></span>Cho phép
+                                            value="" th:checked="*{status == status.AVAILABLE} ? true : false"><span
+                                            class="jss913 jss914"
+                                            font-size="small"></span></span></span>Cho phép
                                         bán<span class="MuiTypography-root MuiTypography-caption"
                                                  title="Cho phép tìm kiếm sản phẩm và tạo đơn hàng"><svg
                                                 viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -315,9 +328,10 @@
                                             tabindex="-1" aria-disabled="true"><span class="MuiIconButton-label">
 
                                         <input class="jss925" disabled="" type="checkbox" data-indeterminate="false"
-                                            value="" th:checked="*{applyTax}"><span class="jss913" font-size="small"></span></span></span>
+                                               value="" th:checked="*{applyTax}"><span class="jss913"
+                                                                                       font-size="small"></span></span></span>
                                         <div class="MuiBox-root jss932" style="width: 100%;">
-                                            <p class="MuiTypography-root MuiTypography-body1">Áp dụng thuế<span
+                                            <p class="MuiTypography-root MuiTypography-body1" style="padding-bottom: 24px;">Áp dụng thuế<span
                                                     class="MuiTypography-root MuiTypography-caption"
                                                     title="Sản phẩm có tính thuế, hệ thống sẽ tự động gợi ý giá trị thuế  cho sản phẩm theo chính sách thuế của cửa hàng"><svg
                                                     viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -327,6 +341,31 @@
                                                     fill="#0088FF"></path><path fill-rule="evenodd" clip-rule="evenodd"
                                                                                 d="M8 2C4.688 2 2 4.688 2 8s2.688 6 6 6 6-2.688 6-6-2.688-6-6-6ZM3.2 8c0 2.646 2.154 4.8 4.8 4.8s4.8-2.154 4.8-4.8S10.646 3.2 8 3.2A4.806 4.806 0 0 0 3.2 8Z"
                                                                                 fill="#0088FF"></path></svg></span></p>
+                                            <div class="MuiBox-root jss15500"
+                                                 th:style="*{applyTax} ? ('display : block') : ('display : none')">
+                                                <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
+                                                    <div class="MuiGrid-root jss15470 MuiGrid-item MuiGrid-grid-xs-5" style="padding-right: 0">
+                                                        Giá áp dụng thuế
+                                                    </div>
+                                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7"
+                                                         th:text="*{taxInclusive} ? ': Giá đã bao gồm thuế' : ': Giá chưa bao gồm thuế'">
+                                                    </div>
+                                                </div>
+                                                <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
+                                                    <div class="MuiGrid-root jss15470 MuiGrid-item MuiGrid-grid-xs-5">
+                                                        Thuế đầu vào
+                                                    </div>
+                                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7"
+                                                         th:text=" ': ' + ${#numbers.formatDecimal(product.taxResults.get(0).tax, 0, 'COMMA', 0, 'POINT') + '%'}"></div>
+                                                </div>
+                                                <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
+                                                    <div class="MuiGrid-root jss15470 MuiGrid-item MuiGrid-grid-xs-5">
+                                                        Thuế đầu ra
+                                                    </div>
+                                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7"
+                                                         th:text=" ': ' + ${#numbers.formatDecimal(product.taxResults.get(1).tax, 0, 'COMMA', 0, 'POINT') + '%'}"></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -346,7 +385,7 @@
                                             <div id="scroller" class="sc-cHPgQl hYUFnd">
                                                 <div class="sc-gHLcSH ieIWRo">
                                                     <button id="0" class="sc-KfMfS hXNAQt">Tồn kho</button>
-<!--                                                    <button id="1" class="sc-KfMfS eMTKDV">Lịch sử kho</button>-->
+                                                    <!--                                                    <button id="1" class="sc-KfMfS eMTKDV">Lịch sử kho</button>-->
                                                 </div>
                                             </div>
                                         </div>
@@ -371,7 +410,8 @@
                                                             kho</h6>
                                                             <p class="MuiTypography-root MuiTypography-body1"
                                                                style="margin-left: 5px; margin-top: 1px;"><span
-                                                                    class="MuiTypography-root MuiTypography-caption" title="Tổng số lượng hàng hóa có trong kho(Tồn kho = Có thể bán + Đang giao dịch)"><svg
+                                                                    class="MuiTypography-root MuiTypography-caption"
+                                                                    title="Tổng số lượng hàng hóa có trong kho(Tồn kho = Có thể bán + Đang giao dịch)"><svg
                                                                     viewBox="0 0 16 16" fill="none"
                                                                     xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" font-size="16"
@@ -391,7 +431,8 @@
                                                             vốn</h6>
                                                             <p class="MuiTypography-root MuiTypography-body1"
                                                                style="margin-left: 5px; margin-top: 1px;"><span
-                                                                    class="MuiTypography-root MuiTypography-caption" title="Là tất cả chi phí bạn bỏ ra để sở hữu 1 sản phẩm (thường bao gồm giá mua sản phẩm, phí giao hàng,...)"><svg
+                                                                    class="MuiTypography-root MuiTypography-caption"
+                                                                    title="Là tất cả chi phí bạn bỏ ra để sở hữu 1 sản phẩm (thường bao gồm giá mua sản phẩm, phí giao hàng,...)"><svg
                                                                     viewBox="0 0 16 16" fill="none"
                                                                     xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" font-size="16"
@@ -411,7 +452,8 @@
                                                             thể bán</h6>
                                                             <p class="MuiTypography-root MuiTypography-body1"
                                                                style="margin-left: 5px; margin-top: 1px;"><span
-                                                                    class="MuiTypography-root MuiTypography-caption" title="Tổng số lượng hàng hóa có trong kho và đang chưa có giao dịch"><svg
+                                                                    class="MuiTypography-root MuiTypography-caption"
+                                                                    title="Tổng số lượng hàng hóa có trong kho và đang chưa có giao dịch"><svg
                                                                     viewBox="0 0 16 16" fill="none"
                                                                     xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" font-size="16"
@@ -431,7 +473,8 @@
                                                             giao dịch</h6>
                                                             <p class="MuiTypography-root MuiTypography-body1"
                                                                style="margin-left: 5px; margin-top: 1px;"><span
-                                                                    class="MuiTypography-root MuiTypography-caption" title="Tổng số lượng hàng hóa có trong kho và đang có giao dịch liên quan"><svg
+                                                                    class="MuiTypography-root MuiTypography-caption"
+                                                                    title="Tổng số lượng hàng hóa có trong kho và đang có giao dịch liên quan"><svg
                                                                     viewBox="0 0 16 16" fill="none"
                                                                     xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" font-size="16"
@@ -451,7 +494,8 @@
                                                             đang về</h6>
                                                             <p class="MuiTypography-root MuiTypography-body1"
                                                                style="margin-left: 5px; margin-top: 1px;"><span
-                                                                    class="MuiTypography-root MuiTypography-caption" title="Tổng số lượng hàng hóa đang chuẩn bị về kho"><svg
+                                                                    class="MuiTypography-root MuiTypography-caption"
+                                                                    title="Tổng số lượng hàng hóa đang chuẩn bị về kho"><svg
                                                                     viewBox="0 0 16 16" fill="none"
                                                                     xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" font-size="16"
@@ -471,7 +515,8 @@
                                                             đang giao</h6>
                                                             <p class="MuiTypography-root MuiTypography-body1"
                                                                style="margin-left: 5px; margin-top: 1px;"><span
-                                                                    class="MuiTypography-root MuiTypography-caption" title="Tổng số lượng hàng đang được đưa từ kho đi, chưa đến điểm nhận"><svg
+                                                                    class="MuiTypography-root MuiTypography-caption"
+                                                                    title="Tổng số lượng hàng đang được đưa từ kho đi, chưa đến điểm nhận"><svg
                                                                     viewBox="0 0 16 16" fill="none"
                                                                     xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" font-size="16"
@@ -491,7 +536,8 @@
                                                             tối thiểu</h6>
                                                             <p class="MuiTypography-root MuiTypography-body1"
                                                                style="margin-left: 5px; margin-top: 1px;"><span
-                                                                    class="MuiTypography-root MuiTypography-caption" title="Định mức tồn tối thiểu của sản phẩm theo kho"><svg
+                                                                    class="MuiTypography-root MuiTypography-caption"
+                                                                    title="Định mức tồn tối thiểu của sản phẩm theo kho"><svg
                                                                     viewBox="0 0 16 16" fill="none"
                                                                     xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" font-size="16"
@@ -511,7 +557,8 @@
                                                             tối đa</h6>
                                                             <p class="MuiTypography-root MuiTypography-body1"
                                                                style="margin-left: 5px; margin-top: 1px;"><span
-                                                                    class="MuiTypography-root MuiTypography-caption" title="Định mức tồn tối đa của sản phẩm theo kho"><svg
+                                                                    class="MuiTypography-root MuiTypography-caption"
+                                                                    title="Định mức tồn tối đa của sản phẩm theo kho"><svg
                                                                     viewBox="0 0 16 16" fill="none"
                                                                     xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" font-size="16"
@@ -531,7 +578,8 @@
                                                             lưu kho</h6>
                                                             <p class="MuiTypography-root MuiTypography-body1"
                                                                style="margin-left: 5px; margin-top: 1px;"><span
-                                                                    class="MuiTypography-root MuiTypography-caption" title="Kho của bạn có thể đượ bố trí theo khu, hàng, kệ khác nhau. Ví dụ: Khu A, khu B, hàng trái, hàng phải, kệ 12...v..v"><svg
+                                                                    class="MuiTypography-root MuiTypography-caption"
+                                                                    title="Kho của bạn có thể đượ bố trí theo khu, hàng, kệ khác nhau. Ví dụ: Khu A, khu B, hàng trái, hàng phải, kệ 12...v..v"><svg
                                                                     viewBox="0 0 16 16" fill="none"
                                                                     xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" font-size="16"

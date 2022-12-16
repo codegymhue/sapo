@@ -70,7 +70,8 @@ public class ProductMapper implements InitializingBean {
                 .setWholesalePrice(product.getWholesalePrice())
                 .setRetailPrice(product.getRetailPrice())
                 .setApplyTax(product.getApplyTax())
-                .setTaxInclusive(product.getTaxInclusive());
+                .setTaxInclusive(product.getTaxInclusive())
+                .setMass(product.getMass());
     }
 
     public ProductItemResult toDTOPage(Product product) {
