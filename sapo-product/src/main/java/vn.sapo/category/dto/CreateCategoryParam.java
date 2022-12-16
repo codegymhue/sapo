@@ -8,5 +8,4 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class CreateCategoryParam {
     private String title;
-
 }
