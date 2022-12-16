@@ -82,7 +82,7 @@ public class Product extends BaseEntity {
 
     @Column(name = "tax_inclusive", nullable = false)
     private Boolean taxInclusive;
-    @OneToMany(mappedBy = "id.product")
+    @OneToMany(mappedBy = "product")
     private Set<Media> mediaSet;
 
     @OneToMany(mappedBy = "id.product")
