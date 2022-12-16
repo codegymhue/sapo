@@ -20,7 +20,6 @@ public class BrandAPI {
     BrandService brandService;
 
     @GetMapping("")
-    @Transactional(readOnly = true)
     public ResponseEntity<?> showAllBrand(){
         List<BrandResult> brands =  brandService.findAll();
         return new ResponseEntity<>(brands, HttpStatus.OK);
