@@ -25,4 +25,7 @@ public interface ProductService {
     ProductResult createShortProduct(ProductShortParam productShortParam);
 
     Map<String, Object> getAllProductItemPage(Integer pageNo, Integer pageSize, String title, Integer categoryId, Integer brandId, String status);
+
+    void saveChangeStatusToAvailable (List<String> list);
+    void saveChangeStatusToUnavailable(List<String> list);
 }

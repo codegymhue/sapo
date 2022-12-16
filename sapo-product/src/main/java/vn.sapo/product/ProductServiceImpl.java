@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.brand.BrandMapper;
@@ -29,9 +30,7 @@ import vn.sapo.tax.TaxMapper;
 import vn.sapo.tax.TaxService;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -170,48 +169,65 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public Map<String, Object> getAllProductItemPage(Integer pageNo, Integer pageSize, String title, Integer categoryId, Integer brandId, String status) {
         pageNo = pageNo - 1;
-        Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<Product> products = productRepository.findAll(pageable);
-        if (products.hasContent()) {
-            if (title.equals("-1") && categoryId == -1 && brandId == -1 && status.equals("-1")) {
-                products = productRepository.findAll(pageable);
-            } else if (categoryId == -1 && brandId == -1 && status.equals("-1")) {
-                products = productRepository.findAllByTitleContaining(title, pageable);
-            } else if (brandId == -1 && status.equals("-1")) {
-                if (title.equals("-1")) {
-                    title = "";
-                }
-                products = productRepository.findAllByTitleContainingAndCategoryId(categoryId, title, pageable);
-            } else if (status.equals("-1")) {
-                if (title.equals("-1")) {
-                    title = "";
-                }
-                products = productRepository.findAllByTitleContainingAndBrandId(brandId, title, pageable);
-            } else {
-                if (title.equals("-1")) {
-                    title = "";
-                }
-                products = productRepository.findAllByTitleContainingAndStatus(ProductStatus.parseProductStatus(status), title, pageable);
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by("id").descending());
+        Page<Product> products;
+        if(title.equals("") && categoryId == -1 && brandId == -1 && status.equals("")){
+            products = productRepository.findAll(pageable);
+        } else if(categoryId == -1 && brandId == -1 && status.equals("")) {
+            products = productRepository.findAllByTitleContaining(title, pageable);
+        } else if (brandId == -1 && status.equals("")) {
+            products = productRepository.findAllByTitleContainingAndCategoryId(categoryId, title, pageable);
+        } else if (status.equals("")) {
+            products = productRepository.findAllByTitleContainingAndBrandId(brandId, title, pageable);
+        } else {
+            products = productRepository.findAllByTitleContainingAndStatus(ProductStatus.parseProductStatus(status), title, pageable);
+        }
+        if(products.hasContent()){
+            List<Product> productList = products.getContent();
+            List<ProductItemResult> productItemResults = new ArrayList<>();
+            for(Product product : productList){
+                ProductItemResult productItemResult = productMapper.toDTOPage(product);
+                productItemResult.setImage(mediaService.getLinkMediaByProductIdIsMain(product.getId()));
+                productItemResult.setInventory(itemService.getTotalInventoryQuantityByProductId(product.getId()));
+                productItemResult.setAvailable(itemService.getAvailableInventoryQuantityByProductId(product.getId()));
+                productItemResults.add(productItemResult);
             }
-
-            List<ProductItemResult> dtoList = products.getContent().stream().map(product -> {
-                ProductItemResult dto = productMapper.toDTOPage(product);
-                dto.setImage(mediaService.getLinkMediaByProductIdIsMain(product.getId()));
-                dto.setInventory(itemService.getTotalInventoryQuantityByProductId(product.getId()));
-                dto.setAvailable(itemService.getAvailableInventoryQuantityByProductId(product.getId()));
-                return dto;
-            }).collect(Collectors.toList());
-
             Map<String, Object> response = new HashMap<>();
-            response.put("products", dtoList);
+            response.put("products", productItemResults);
             response.put("totalItem", products.getTotalElements());
             response.put("totalPage", products.getTotalPages());
             return response;
         } else {
             return new HashMap<>();
+        }
+    }
+
+    @Override
+    @Transactional
+    public void saveChangeStatusToAvailable(List<String> list) {
+        for(String item : list){
+            Optional<Product> product = productRepository.findById(Integer.valueOf(item));
+            if(product.isPresent()){
+                Product newProduct = product.get();
+                newProduct.setStatus(ProductStatus.parseProductStatus("AVAILABLE"));
+                productRepository.save(newProduct);
+            }
+        }
+    }
+
+    @Override
+    @Transactional
+    public void saveChangeStatusToUnavailable(List<String> list) {
+        for(String item : list){
+            Optional<Product> product = productRepository.findById(Integer.valueOf(item));
+            if(product.isPresent()){
+                Product newProduct = product.get();
+                newProduct.setStatus(ProductStatus.parseProductStatus("UNAVAILABLE"));
+                productRepository.save(newProduct);
+            }
         }
     }
 

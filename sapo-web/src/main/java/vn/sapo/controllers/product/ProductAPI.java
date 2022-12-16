@@ -11,6 +11,9 @@ import vn.sapo.product.dto.CreateProductParam;
 import vn.sapo.product.dto.ProductResult;
 import vn.sapo.product.dto.ProductShortParam;
 
+import java.util.HashMap;
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/products")
@@ -29,27 +32,18 @@ public class ProductAPI {
         return new ResponseEntity<>(productService.findAll(), HttpStatus.OK);
     }
 
-
-    // kien dang chinh
-    @GetMapping("getAllProductPage")
-    public ResponseEntity<?> getAllProductPage(@RequestParam(defaultValue = "0") Integer pageNo,
-                                               @RequestParam(defaultValue = "10") Integer pageSize) {
-        //Lan sau de nghi anh khong comment code ham dang chay___ CCCCCUUUUUU
-        // return new ResponseEntity<>(productService.getAllProductItemPage(pageNo, pageSize), HttpStatus.OK);
-        return null;
-    }
-
-
-    //TODO:ANh Doi Path thanh parameter dum em
-    @GetMapping("/{pageNo}/{pageSize}/{search}/{categoryId}/{brandId}/{status}")
-    public ResponseEntity<?> getAllProductPageNoCategory(@PathVariable Integer pageNo,
-                                                         @PathVariable Integer pageSize,
-                                                         @PathVariable String search,
-                                                         @PathVariable Integer categoryId,
-                                                         @PathVariable Integer brandId,
-                                                         @PathVariable String status
-    ) {
-        return new ResponseEntity<>(productService.getAllProductItemPage(pageNo, pageSize, search, categoryId, brandId, status), HttpStatus.OK);
+    @GetMapping("/page")
+    public ResponseEntity<?> getAllProductPageNoCategory(@RequestParam HashMap<String, String> hashMap)
+    {
+        return new ResponseEntity<>(productService.getAllProductItemPage(
+                Integer.valueOf(hashMap.get("pageNo")),
+                Integer.valueOf(hashMap.get("pageSize")),
+                hashMap.get("search"),
+                Integer.valueOf(hashMap.get("categoryId")),
+                Integer.valueOf(hashMap.get("brandId")),
+                hashMap.get("status")),
+                HttpStatus.OK
+        );
     }
 
     @GetMapping("/categories")
@@ -77,6 +71,18 @@ public class ProductAPI {
     @PostMapping("/create-short")
     public ResponseEntity<?> create(@RequestBody ProductShortParam productShortParam) {
         productService.createShortProduct(productShortParam);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/updateStatusAvailable")
+    public ResponseEntity<?> updateStatusAvailable(@RequestBody List<String> arrayIdProduct) {
+        productService.saveChangeStatusToAvailable(arrayIdProduct);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/updateStatusUnavailable")
+    public ResponseEntity<?> updateStatusUnavailable(@RequestBody List<String> arrayIdProduct) {
+        productService.saveChangeStatusToUnavailable(arrayIdProduct);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
