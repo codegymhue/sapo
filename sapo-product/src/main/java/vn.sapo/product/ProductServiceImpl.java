@@ -175,7 +175,7 @@ public class ProductServiceImpl implements ProductService {
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by("id").descending());
         Page<Product> products;
         if(title.equals("") && categoryId == -1 && brandId == -1 && status.equals("")){
-            products = productRepository.findAll(pageable);
+            products = productRepository.findAllByDeletedIsFalse(pageable);
         } else if(categoryId == -1 && brandId == -1 && status.equals("")) {
             products = productRepository.findAllByTitleContaining(title, pageable);
         } else if (brandId == -1 && status.equals("")) {
@@ -226,6 +226,19 @@ public class ProductServiceImpl implements ProductService {
             if(product.isPresent()){
                 Product newProduct = product.get();
                 newProduct.setStatus(ProductStatus.parseProductStatus("UNAVAILABLE"));
+                productRepository.save(newProduct);
+            }
+        }
+    }
+
+    @Override
+    @Transactional
+    public void deleteSoftProduct(List<String> list) {
+        for(String item : list){
+            Optional<Product> product = productRepository.findById(Integer.valueOf(item));
+            if(product.isPresent()){
+                Product newProduct = product.get();
+                newProduct.setDeleted(true);
                 productRepository.save(newProduct);
             }
         }

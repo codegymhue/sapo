@@ -349,7 +349,7 @@
     <div class="modal-dialog">
         <div class="modal-content" style="width: max-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="staticBackdropLabel">Cập nhật trạng thái</h4>
+                <h4 class="modal-title" id="staticBackdropLabel">Cập nhật trạng thái !</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="statusChange">
@@ -379,6 +379,22 @@
     </div>
 </div>
 
+<div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: max-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Xóa sản phẩm?</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="statusChangeDelete">
+            </div>
+            <div class="modal-footer d-flex align-items-center">
+                <button class="btn  btn-outline-danger btn-exit-delete" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn btn-danger btn-save-delete" id="btnSubmitDelete" type="button">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <th:block th:replace="/layout/script :: script"/>
 <script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -392,7 +408,9 @@
             getAllCategory: App.BASE_URL_PRODUCT + "/categories",
             getAllBrand: App.BASE_URL_PRODUCT + "/brands",
             getAllStatus: App.BASE_URL_PRODUCT + "/status",
-            updateStatus: App.BASE_URL_PRODUCT
+            updateStatusAvailable: App.BASE_URL_PRODUCT + "/updateStatusAvailable",
+            updateStatusUnavailable: App.BASE_URL_PRODUCT + "/updateStatusUnavailable",
+            deleteProduct: App.BASE_URL_PRODUCT + "/delete"
 
         },
         elements: {},
@@ -417,6 +435,7 @@
     page.elements.btnDelete = $("#btnDelete");
     page.elements.btnAvailableSave = $("#btnAvailableSave");
     page.elements.btnUnavailableSave = $("#btnUnavailableSave");
+    page.elements.btnSubmitDelete = $("#btnSubmitDelete");
 
     page.elements.totalPage = $("#totalPage");
     page.elements.pageNo = $("#pageNo");
@@ -430,10 +449,12 @@
     page.elements.theadList = $("#theadList");
     page.elements.numberSelectProductList = $("#numberSelectProductList");
     page.elements.statusChangeForNumberProductList = $("#statusChange");
-    page.elements.statusChangeForNumberToUnavailable =$("#statusChangeUnavailable");
+    page.elements.statusChangeForNumberToUnavailable = $("#statusChangeUnavailable");
+    page.elements.statusChangeForNumberDelete = $("#statusChangeDelete");
 
     page.elements.modalAvailable = $("#modalAvailable");
     page.elements.modalUnavailable =$("#modalUnavailable");
+    page.elements.modalDelete =$("#modalDelete");
 
     page.dialogs.elements.category = $("#category");
     page.dialogs.elements.brand = $("#brand");
@@ -640,11 +661,14 @@
         page.elements.numberSelectProductList.empty();
         page.elements.statusChangeForNumberProductList.empty();
         page.elements.statusChangeForNumberToUnavailable.empty();
+        page.elements.statusChangeForNumberDelete.empty();
+
         if(arrayIdProduct.length > 0){
             page.elements.theadList.removeClass("show").addClass("hide");
             page.elements.numberSelectProductList.append(`<span>Đã chọn ${arrayIdProduct.length} sản phẩm trên trang này</span>`)
             page.elements.statusChangeForNumberProductList.append(`<span style="font-size: medium">Thao tác này sẽ cập nhật trạng thái giao dịch cho ${arrayIdProduct.length} sản phẩm bạn đã chọn.</span>`);
-            page.elements.statusChangeForNumberToUnavailable.append(`<span style="font-size: medium">Thao tác này sẽ ngừng giao dịch ${arrayIdProduct.length} sản phẩm bạn đã chọn.</span>`)
+            page.elements.statusChangeForNumberToUnavailable.append(`<span style="font-size: medium">Thao tác này sẽ ngừng giao dịch ${arrayIdProduct.length} sản phẩm bạn đã chọn.</span>`);
+            page.elements.statusChangeForNumberDelete.append(`<span style="font-size: medium">Thao tác này sẽ xóa ${arrayIdProduct.length} sản phẩm bạn đã chọn. Thao tác này không thể khôi phục.</span>`);
             page.elements.selectActionThead.removeClass("hide").addClass("show");
         } else {
             page.elements.theadList.removeClass("hide").addClass("show");
@@ -674,6 +698,9 @@
     page.elements.btnUnavailable.on("click", () =>{
         page.elements.modalUnavailable.modal("show");
     })
+    page.elements.btnDelete.on("click", () => {
+        page.elements.modalDelete.modal("show");
+    })
 
     page.commands.updateStatusToAvailable = () => {
         $.ajax({
@@ -682,7 +709,7 @@
                 "content-type": "application/json"
             },
             type: "PUT",
-            url: page.urls.updateStatus + "/updateStatusAvailable",
+            url: page.urls.updateStatusAvailable,
             data: JSON.stringify(arrayIdProduct)
         })
             .done(() => {
@@ -700,11 +727,29 @@
                 "content-type": "application/json"
             },
             type: "PUT",
-            url: page.urls.updateStatus + "/updateStatusUnavailable",
+            url: page.urls.updateStatusUnavailable,
             data: JSON.stringify(arrayIdProduct)
         })
             .done(() => {
                 App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED)
+            })
+            .fail((jqXHR) => {
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_403)
+            })
+    }
+
+    page.commands.deleteProductSelect = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "DELETE",
+            url: page.urls.deleteProduct,
+            data: JSON.stringify(arrayIdProduct)
+        })
+            .done(() => {
+                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_DELETE)
             })
             .fail((jqXHR) => {
                 App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_403)
@@ -720,6 +765,12 @@
     page.elements.btnUnavailableSave.on("click", () =>{
         page.commands.updateStatusToUnavailable();
         page.elements.modalUnavailable.modal("hide");
+        page.commands.getAllProducts();
+        page.commands.resetInputCheckBox();
+    })
+    page.elements.btnSubmitDelete.on("click", () => {
+        page.commands.deleteProductSelect();
+        page.elements.modalDelete.modal("hide");
         page.commands.getAllProducts();
         page.commands.resetInputCheckBox();
     })

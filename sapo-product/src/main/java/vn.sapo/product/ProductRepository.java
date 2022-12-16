@@ -13,12 +13,14 @@ import vn.sapo.entities.product.ProductStatus;
 @EnableJpaRepositories
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    Page<Product> findAllByTitleContaining(String title, Pageable pageable);
-    @Query("SELECT p FROM Product AS p WHERE p.categoryId = :categoryId AND p.title LIKE %:title%")
+    Page<Product> findAllByDeletedIsFalse(Pageable pageable);
+    @Query("SELECT p FROM Product AS p WHERE p.title LIKE %:title% AND p.deleted = false ")
+    Page<Product> findAllByTitleContaining(@Param("title") String title, Pageable pageable);
+    @Query("SELECT p FROM Product AS p WHERE p.categoryId = :categoryId AND p.title LIKE %:title% AND p.deleted = false ")
     Page<Product> findAllByTitleContainingAndCategoryId(@Param("categoryId") Integer categoryId, @Param("title") String title, Pageable pageable);
-    @Query("SELECT p FROM Product AS p WHERE p.brandId = :brandId AND p.title LIKE %:title%")
+    @Query("SELECT p FROM Product AS p WHERE p.brandId = :brandId AND p.title LIKE %:title% AND p.deleted = false")
     Page<Product> findAllByTitleContainingAndBrandId(@Param("brandId") Integer brandId, @Param("title") String title, Pageable pageable);
-    @Query("SELECT p FROM Product AS p WHERE p.status = :status AND p.title LIKE %:title%")
+    @Query("SELECT p FROM Product AS p WHERE p.status = :status AND p.title LIKE %:title% AND p.deleted = false")
     Page<Product> findAllByTitleContainingAndStatus(@Param("status") ProductStatus status, @Param("title") String title, Pageable pageable);
 
 }

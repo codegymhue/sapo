@@ -28,4 +28,5 @@ public interface ProductService {
 
     void saveChangeStatusToAvailable (List<String> list);
     void saveChangeStatusToUnavailable(List<String> list);
+    void deleteSoftProduct(List<String> list);
 }
