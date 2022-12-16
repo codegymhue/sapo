@@ -34,8 +34,8 @@ public class Product extends BaseEntity {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "deleted", nullable = false, columnDefinition = "boolean default false")
-    private Boolean deleted;
+    @Column(name = "deleted", nullable = false)
+    private Boolean deleted = false;
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)

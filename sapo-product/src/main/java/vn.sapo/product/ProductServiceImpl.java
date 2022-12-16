@@ -134,7 +134,7 @@ public class ProductServiceImpl implements ProductService {
         product = productRepository.save(product);
         Integer productId = product.getId();
         productTaxService.create(createProductParam.getTaxList(), productId);
-        mediaService.save(createProductParam.getMediaList(), productId);
+        mediaService.save(createProductParam.getMediaList(), product);
         if (createProductParam.getQuantity() != null)
             itemService.create(itemMapper.toDTO(createProductParam, productId, 1));
         return productMapper.toDTO(product);
