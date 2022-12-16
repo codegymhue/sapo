@@ -1042,7 +1042,7 @@
     //----->>>Nhat-dev OnClick button to create Category
     $('#btnAddCategory').on('click', () => {
         category.id = 0;
-        category.name = $('#inputCategory').val();
+        category.title = $('#inputCategory').val();
         console.log(category)
         $.ajax({
             "headers": {
@@ -1054,14 +1054,14 @@
             "data": JSON.stringify(category)
         })
             .done((data) => {
-                console.log(": Tạo sản phẩm thành công")
+                App.IziToast.showSuccessAlert("Tạo loại sản phẩm mới thành công!");
                 showAllCategories();
                 $('#modalAddCategory').modal('hide');
                 $('#frmCreateCat')[0].reset();
 
             })
             .fail((jqXHR) => {
-                console.log("Loi nha may ba")
+                App.IziToast.showErrorAlert("Tạo loại sản phẩm mới không thành công!");
             })
     })
     //<<<--------nhat-dev end onclick create category
@@ -1070,7 +1070,7 @@
     //----->>>Nhat-dev OnClick button to create brand
     $('#btnAddBrand').on('click', () => {
         brand.id = 0;
-        brand.name = $('#inputBrand').val();
+        brand.title = $('#inputBrand').val();
         console.log(brand)
         $.ajax({
             "headers": {
@@ -1082,14 +1082,14 @@
             "data": JSON.stringify(brand)
         })
             .done((data) => {
-                console.log(": Tạo sản phẩm thành công")
-                showAllBrands()
+                App.IziToast.showSuccessAlert("Tạo nhãn hiệu mới thành công!");
+                showAllBrands();
                 $('#modalAddBrand').modal('hide');
                 $('#frmCreateBrand')[0].reset();
 
             })
             .fail((jqXHR) => {
-                console.log("Loi nha may ba")
+                App.IziToast.showErrorAlert("Tạo nhãn hiệu mới không thành công!");
             })
     })
     //<<<--------nhat-dev end onclick create brand
@@ -1150,16 +1150,16 @@
     });
 
 
-    //nhat_dev called function categories and brands
-    showAllCategories();
-    searchCat();
-    showAllBrands();
-    searchBrand();
-    showAllTaxes();
+
 
 
     page.loadData = () => {
-
+        //nhat_dev called function categories and brands
+        showAllCategories();
+        searchCat();
+        showAllBrands();
+        searchBrand();
+        showAllTaxes();
     }
 
     $(() => {

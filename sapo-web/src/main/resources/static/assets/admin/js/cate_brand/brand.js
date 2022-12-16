@@ -25,10 +25,11 @@ function showAllBrands(selectedBrand) {
         url: "http://localhost:8080/api/brands"
     })
         .done((data) => {
+            console.log(data)
             brands = data;
             brands.forEach(item => {
                 let isSelected = item === selectedBrand ? "selected" : "";
-                let str = `<li id="${item.id}" data-id="${item.id}" onclick="updateNameBrand(${item.id})" class="${isSelected} brandItem dropdown-item">${item.name}</li>`;
+                let str = `<li id="${item.id}" data-id="${item.id}" onclick="updateNameBrand(${item.id})" class="${isSelected} brandItem dropdown-item">${item.title}</li>`;
                 // options.insertAdjacentHTML("beforeend", li);
                 $(".showAllBrand").append(str);
 
@@ -43,7 +44,7 @@ function showAllBrands(selectedBrand) {
 //update name cat
 function updateNameBrand(id ) {
     const  arrayBrand = brands.filter(item => item.id === id)
-    const val = arrayBrand[0].name;
+    const val = arrayBrand[0].title;
 
     console.log("is", id , val)
 
@@ -66,7 +67,7 @@ const  searchBrand = () => {
             let arr = [];
             brands.forEach(item => {
                 console.log("item", item)
-                if ((item.name).toLowerCase().includes(searchWord.toLowerCase())){
+                if ((item.title).toLowerCase().includes(searchWord.toLowerCase())){
 
                     arr.push(item)
                 }
@@ -79,7 +80,7 @@ const  searchBrand = () => {
             $.each(arr, (i, item) => {
                 console.log(item)
                 let isSelected = item === selectBtnBrand.firstElementChild.innerText ? "selected" : "";
-                let result =  `<li id="${item.id}" data-id="${item.id}" onclick="updateNameBrand(${item.id})" class="${isSelected} brandItem dropdown-item">${item.name}</li>`;
+                let result =  `<li id="${item.id}" data-id="${item.id}" onclick="updateNameBrand(${item.id})" class="${isSelected} brandItem dropdown-item">${item.title}</li>`;
                 console.log("result", result, brands)
 
                 $(".showAllBrand").append(result);
@@ -89,7 +90,7 @@ const  searchBrand = () => {
             $.each(brands, (i, item) => {
                 console.log(item)
                 let isSelected = item === selectBtnBrand.firstElementChild.innerText ? "selected" : "";
-                let result =  `<li id="${item.id}" data-id="${item.id}" onclick="updateNameBrand(${item.id})" class="${isSelected} brandItem dropdown-item">${item.name}</li>`;
+                let result =  `<li id="${item.id}" data-id="${item.id}" onclick="updateNameBrand(${item.id})" class="${isSelected} brandItem dropdown-item">${item.title}</li>`;
 
                 console.log("result", result, brands)
 

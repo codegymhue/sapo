@@ -27,7 +27,7 @@ function showAllCategories(selectedCategory) {
             categories.forEach(item => {
                 //nhat-dev select item and get it value
                 let isSelected = item === selectedCategory ? "selected" : "";
-                let str = `<li id="${item.id}" data-id="${item.id}" onclick="updateNameCat(${item.id})" class="${isSelected} catItem dropdown-item">${item.name}</li>`;
+                let str = `<li id="${item.id}" data-id="${item.id}" onclick="updateNameCat(${item.id})" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
                 // options.insertAdjacentHTML("beforeend", li);
                 $(".showAllCategory").append(str);
 
@@ -43,7 +43,7 @@ function showAllCategories(selectedCategory) {
 //nhat-dev update name cat after selected
 function updateNameCat(id ) {
    const  arrayCat = categories.filter(item => item.id === id)
-    const val = arrayCat[0].name;
+    const val = arrayCat[0].title;
 
     console.log("is", id , val)
 
@@ -72,7 +72,7 @@ const  searchCat = () => {
             let arr = [];
             categories.forEach(item => {
                 // console.log("item", item)
-                if ((item.name).toLowerCase().includes(searchWord.toLowerCase())){
+                if ((item.title).toLowerCase().includes(searchWord.toLowerCase())){
 
                     arr.push(item)
                 }
@@ -92,7 +92,7 @@ const  searchCat = () => {
             $.each(arr, (i, item) => {
                 // console.log(item)
                 let isSelected = item === selectBtnCat.firstElementChild.innerText ? "selected" : "";
-                let result =  `<li id="${item.id}" data-id="${item.id}" onclick="updateNameCat(${item.id})" class="${isSelected} catItem dropdown-item">${item.name}</li>`;
+                let result =  `<li id="${item.id}" data-id="${item.id}" onclick="updateNameCat(${item.id})" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
                 // console.log("result", result, categories)
                 $(".showAllCategory").append(result);
             })
@@ -102,7 +102,7 @@ const  searchCat = () => {
             $.each(categories, (i, item) => {
                 // console.log(item)
                 let isSelected = item === selectBtnCat.firstElementChild.innerText ? "selected" : "";
-                let result =  `<li id="${item.id}" data-id="${item.id}" onclick="updateNameCat(${item.id})" class="${isSelected} catItem dropdown-item">${item.name}</li>`;
+                let result =  `<li id="${item.id}" data-id="${item.id}" onclick="updateNameCat(${item.id})" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
 
                 // console.log("result", result, categories)
 
