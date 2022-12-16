@@ -37,7 +37,7 @@ public class Media {
     private Boolean isMain;
 
     @Column(name = "created_by")
-    private Integer creattedBy;
+    private Integer createdBy;
 
     @Column(name = "updated_by")
     private Integer updatedBy;
