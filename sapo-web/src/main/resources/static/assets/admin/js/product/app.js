@@ -9,6 +9,7 @@ class App {
     static AlertMessageVi = class {
         static SUCCESS_CREATED = "Tạo dữ liệu thành công !";
         static SUCCESS_UPDATED = "Cập nhật dữ liệu thành công !";
+        static SUCCESS_DELETE = "Xóa dữ liệu thành công";
 
         static ERROR_400 = "Thao tác không thành công, vui lòng kiểm tra lại dữ liệu.";
         static ERROR_401 = "Unauthorized - Access Token của bạn hết hạn hoặc không hợp lệ.";
