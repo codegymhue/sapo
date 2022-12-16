@@ -534,7 +534,7 @@
                                                                 display: flex;
                                                                 justify-content: space-between;
                                                                 align-items: center; ">
-                                                        <span id="catProType" th:text="*{category.name}"></span>
+                                                        <span id="catProType" th:text="*{category.title}"></span>
                                                     </div>
                                                     <ul class="dropdown-menu w-100 categoryIdUpdate showAllCategory">
 
@@ -573,7 +573,7 @@
                                                                 display: flex;
                                                                 justify-content: space-between;
                                                                 align-items: center; ">
-                                                        <span id="brandProType" th:text="*{brand.name}"></span>
+                                                        <span id="brandProType" th:text="*{brand.title}"></span>
                                                     </div>
                                                     <ul class="dropdown-menu w-100 brandIdUpdate showAllBrand">
                                                         <li>
@@ -739,10 +739,11 @@
                                                                     phẩm</label></div>
                                                                 <select class="form-select"
                                                                         aria-label="Default select example"
-                                                                        id="priceDepsTax">
-                                                                    <option value="1">Giá chưa bao gồm thuế
+                                                                        id="priceDepsTax"
+                                                                >
+                                                                    <option value="1" >Giá chưa bao gồm thuế
                                                                     </option>
-                                                                    <option value="2">Giá đã bao gồm thuế</option>
+                                                                    <option value="2" th:selected="*{taxInclusive} ? true : false">Giá đã bao gồm thuế</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -764,6 +765,7 @@
                                                                 justify-content: space-between;
                                                                 align-items: center; ">
                                                                     <span id="taxProType"
+
                                                                     >Chọn thuế đầu vào</span>
                                                                 </div>
                                                                 <ul class="dropdown-menu w-100  showAllTax">
