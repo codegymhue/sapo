@@ -152,7 +152,7 @@
                                             <div class="MuiBox-root jss4692 jss4674">: <p
                                                     class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap"
                                                     itemid="display_product_variant_category" title="Bánh kẹo"
-                                                    style="line-height: 16px; margin-left: 5px;" th:text="*{category.name}"></p>
+                                                    style="line-height: 16px; margin-left: 5px;" th:text="*{category.title}?: '---'"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -165,7 +165,7 @@
                                             <div class="MuiBox-root jss4693 jss4674">: <p
                                                     class="MuiTypography-root MuiTypography-body2"
                                                     itemid="display_product_variant_brand"
-                                                    style="line-height: 16px; margin-left: 5px;" th:text="*{brand.name}">
+                                                    style="line-height: 16px; margin-left: 5px;" th:text="*{brand.title}?: '---'">
                                                 </p>
                                             </div>
                                         </div>
@@ -191,7 +191,7 @@
                                             <div class="MuiBox-root jss4695 jss4674">: <p
                                                     class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap"
                                                     itemid="display_product_variant_createOn"
-                                                    style="line-height: 16px; margin-left: 5px;" th:text="${#dates.format(product.createAt, 'dd-mm-yyyy HH:mm')}">
+                                                    style="line-height: 16px; margin-left: 5px;" th:text="${#dates.format(product.createdAt, 'dd-mm-yyyy HH:mm')}">
                                                </p>
                                             </div>
                                         </div>
@@ -205,7 +205,7 @@
                                             <div class="MuiBox-root jss4696 jss4674">: <p
                                                     class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap"
                                                     itemid="display_product_variant_modified_on"
-                                                    style="line-height: 16px; margin-left: 5px;" th:text="${#dates.format(product.updateAt, 'dd-mm-yyyy HH:mm')}?: '---'">
+                                                    style="line-height: 16px; margin-left: 5px;" th:text="${#dates.format(product.updatedAt, 'dd-mm-yyyy HH:mm')}?: '---'">
                                                 </p>
                                             </div>
                                         </div>
