@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface AddressService {
 
-    List<AddressResult> findByCustomerId(Integer id);
+    List<AddressResult> findByCustomerId(Integer customerId);
 
     AddressResult create(CreateAddressParam createShippingAddressParam);
 
