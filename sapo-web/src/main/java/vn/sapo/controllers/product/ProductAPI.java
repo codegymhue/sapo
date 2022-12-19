@@ -16,7 +16,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/api")
 public class ProductAPI {
 
     @Autowired
@@ -27,12 +27,12 @@ public class ProductAPI {
     @Autowired
     private BrandService brandService;
 
-    @GetMapping
+    @GetMapping("/products")
     public ResponseEntity<?> findAll() {
         return new ResponseEntity<>(productService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/page")
+    @GetMapping("/products/page")
     public ResponseEntity<?> getAllProductPageNoCategory(@RequestParam HashMap<String, String> hashMap)
     {
         return new ResponseEntity<>(productService.getAllProductItemPage(
@@ -48,48 +48,53 @@ public class ProductAPI {
         );
     }
 
-    @GetMapping("/categories")
+    @GetMapping("/variants")
+    public ResponseEntity<?> getAllProductVariantsPage(@RequestParam HashMap<String, String> hashMap){
+        return new ResponseEntity<>(null);
+    }
+
+    @GetMapping("/products/categories")
     public ResponseEntity<?> getAllCategories() {
         return new ResponseEntity<>(categoryService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/brands")
+    @GetMapping("/products/brands")
     public ResponseEntity<?> getAllBrands() {
         return new ResponseEntity<>(brandService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/products/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
         ProductResult productResult = productService.findById(id);
         return new ResponseEntity<>(productResult, HttpStatus.OK);
     }
 
-    @PostMapping("/create")
+    @PostMapping("/products/create")
     public ResponseEntity<?> create(@RequestBody CreateProductParam productWithImageParam) {
         System.out.println(productWithImageParam);
         ProductResult p = productService.create(productWithImageParam);
         return new ResponseEntity<>(productService.findById(p.getId()), HttpStatus.CREATED);
     }
 
-    @PostMapping("/create-short")
+    @PostMapping("/products/create-short")
     public ResponseEntity<?> create(@RequestBody ProductShortParam productShortParam) {
         productService.createShortProduct(productShortParam);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/updateStatusAvailable")
+    @PutMapping("/products/updateStatusAvailable")
     public ResponseEntity<?> updateStatusAvailable(@RequestBody List<String> arrayIdProduct) {
         productService.saveChangeStatusToAvailable(arrayIdProduct);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/updateStatusUnavailable")
+    @PutMapping("/products/updateStatusUnavailable")
     public ResponseEntity<?> updateStatusUnavailable(@RequestBody List<String> arrayIdProduct) {
         productService.saveChangeStatusToUnavailable(arrayIdProduct);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/products/delete")
     public ResponseEntity<?> deleteProduct(@RequestBody List<String> arrayIdProduct){
         productService.deleteSoftProduct(arrayIdProduct);
         return new ResponseEntity<>(HttpStatus.OK);

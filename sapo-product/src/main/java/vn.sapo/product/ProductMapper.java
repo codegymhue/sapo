@@ -87,6 +87,29 @@ public class ProductMapper implements InitializingBean {
                 .setCategory(categoryMapper.toDTO(product.getCategory()))
                 .setBrand(brandMapper.toDTO(product.getBrand()));
     }
+
+    public ProductVariantsResult toDTOVariants(Product product){
+        return new ProductVariantsResult()
+                .setId(product.getId())
+                .setImage("")
+                .setTitle(product.getTitle())
+                .setSku(product.getSku())
+                .setBarCode(product.getBarCode())
+                .setCategory(categoryMapper.toDTO(product.getCategory()))
+                .setBrand(brandMapper.toDTO(product.getBrand()))
+                .setStatus(product.getStatus())
+                .setCreateAt(product.getCreatedAt())
+                .setUpdateAt(product.getUpdatedAt())
+                .setApplyTax(product.getApplyTax())
+                .setRetailPrice(product.getRetailPrice())
+                .setImportPrice(product.getImportPrice())
+                .setWholesalePrice(product.getWholesalePrice())
+                .setAvailable(0)
+                .setInventory(0)
+                .setTrading(0)
+                .setInTransit(0)
+                .setShipping(0);
+    }
 // TODO Nay khong biet o dau
 //    public ProductSaleResult toDTOProductSale(Product product) {
 //        return new ProductSaleResult()

@@ -218,6 +218,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Map<String, Object> getAllProductVariantPage(Integer pageNo, Integer pageSize, String title,
+                                                        Integer categoryId, Integer brandId, String status,
+                                                        String typeSort, String nameFieldSort) {
+        return null;
+    }
+
+    @Override
     @Transactional
     public void saveChangeStatusToAvailable(List<String> list) {
         for(String item : list){
