@@ -4,7 +4,7 @@
 <head>
 
     <th:block th:replace="/layout/header :: header"/>
-    <link rel="stylesheet" href="/assets/admin/css/product/product_list.css"/>
+    <link rel="stylesheet" href="/assets/admin/css/product/variants.css"/>
     <title>Danh sách sản phẩm</title>
 
 </head>
@@ -162,9 +162,8 @@
                                         <input id="Sapo-TextField-1de6d6a6-f13f-4275-b1b2-a8487207509a"
                                                placeholder="Tìm kiếm theo tên sản phẩm"
                                                type="text"
-                                               class="sc-ikZpkk iYDwCJ form-control "
+                                               class="sc-ikZpkk iYDwCJ form-control searchTitle "
                                                value=""
-                                               style="border: solid; height: 35px ; border-color: lightgrey"
                                         >
                                     </label>
                                     <fieldset class="sc-iIPllB iUBRZb"></fieldset>
@@ -173,144 +172,62 @@
                         </div>
                         <div role="group"
                              class="MuiButtonGroup-root jss6803">
-                            <button class="MuiButtonBase-root MuiButton-root jss6828 MuiButton-text MuiButton-outlined MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal"
-                                    tabindex="0"
-                                    type="button">
-                            <span class="MuiButton-label">Loại sản phẩm
-                                <span class="MuiButton-endIcon MuiButton-iconSizeMedium">
-                                    <svg class="MuiSvgIcon-root"
-                                         focusable="false"
-                                         viewBox="0 0 24 24"
-                                         aria-hidden="true">
-                                        <path d="M7 10l5 5 5-5z"></path>
-                                    </svg>
-                                </span>
-                            </span>
-                                <span class="MuiTouchRipple-root"></span>
-                            </button>
-                            <button class="MuiButtonBase-root MuiButton-root jss6828 MuiButton-text MuiButton-outlined MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal"
-                                    tabindex="0"
-                                    type="button">
-                            <span class="MuiButton-label">Ngày tạo
-                                <span class="MuiButton-endIcon MuiButton-iconSizeMedium">
-                                    <svg class="MuiSvgIcon-root"
-                                         focusable="false"
-                                         viewBox="0 0 24 24"
-                                         aria-hidden="true">
-                                        <path d="M7 10l5 5 5-5z"></path>
-                                    </svg>
-                                </span>
-                            </span>
-                                <span class="MuiTouchRipple-root"></span>
-                            </button>
-                            <button class="MuiButtonBase-root MuiButton-root jss6828 MuiButton-text MuiButton-outlined MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal"
-                                    tabindex="0"
-                                    type="button">
-                            <span class="MuiButton-label">Nhãn hiệu
-                                <span class="MuiButton-endIcon MuiButton-iconSizeMedium">
-                                    <svg class="MuiSvgIcon-root"
-                                         focusable="false"
-                                         viewBox="0 0 24 24"
-                                         aria-hidden="true">
-                                        <path d="M7 10l5 5 5-5z"></path>
-                                    </svg>
-                                </span>
-                            </span>
-                                <span class="MuiTouchRipple-root"></span>
-                            </button>
-                            <button class="MuiButtonBase-root MuiButton-root jss6828 MuiButton-outlined MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal"
-                                    tabindex="0"
-                                    type="button">
-                            <span class="MuiButton-label">Bộ lọc khác
-                                <span class="MuiButton-endIcon MuiButton-iconSizeMedium">
-                                    <svg class="MuiSvgIcon-root"
-                                         focusable="false"
-                                         viewBox="0 0 24 24"
-                                         aria-hidden="true"
-                                         fill="none"
-                                         style="color: rgb(163, 168, 175);">
-                                        <path d="M21.6625 2H3V3.55518H21.6625V2Z"
-                                              fill="currentColor">
-                                        </path>
-                                        <path d="M3.37329 4.48828L10.5584 11.7667C10.6517 11.8599 10.7761 11.9844 10.7761 12.1088V21.9999L13.8865 20.3203V12.1088C13.8865 11.9844 14.0109 11.8599 14.1042 11.7667L21.2893 4.48828H3.37329Z"
-                                              fill="currentColor">
-                                        </path>
-                                    </svg>
-                                </span>
-                            </span>
-                                <span class="MuiTouchRipple-root"></span>
-                            </button>
+                            <select id="category" class="form-select" aria-label="Default select example" style="width: 180px">
+                                <option selected value="-1">Loại sản phẩm</option>
+                            </select>
+                            <select id="brand" class="form-select" aria-label="Default select example" style="width: 180px">
+                                <option selected value="-1">Nhãn hiệu</option>
+                            </select>
+                            <select id="status" class="form-select" aria-label="Default select example" style="width: 180px">
+                                <option selected value="">Trạng thái</option>
+                                <option value="AVAILABLE">Đang giao dịch</option>
+                                <option value="UNAVAILABLE">Ngừng giao dịch</option>
+                            </select>
                         </div>
-                        <button disabled=""
-                                id="btn-save-search"
-                                class="sc-jqUVSM PGFzi">
-                            <span class="sc-papXJ jcEYKF">Lưu bộ lọc</span>
-                        </button>
                     </div>
                     <div class="MuiBox-root jss6842"></div>
                 </div>
 
-                <div style="font-size:small">
-                    <table id="tbProduct" class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th><button class="rounded-circle border-0"><i class="fa-solid fa-gear"></i></button></th>
-                            <th><input type="checkbox" value=""></th>
-                            <th >Ảnh</th>
-                            <th >Tên phiên bản sản phẩm</th>
-                            <th >Mã vạch</th>
-                            <th >Loại</th>
-                            <th >Nhãn hiệu</th>
-                            <th >Có thể bán</th>
-                            <th >Tồn kho</th>
-                            <th >Hàng đang về</th>
-                            <th >Hàng đang giao</th>
-                            <th >Đang giao dịch</th>
-                            <th >Trạng thái</th>
-                            <th >Ngày khởi tạo</th>
-                            <th >Cập nhật cuối</th>
-                            <th >Cho phép bán</th>
-                            <th >Áp dụng thuế</th>
-                            <th >Giá bán lẻ</th>
-                            <th >Giá nhập</th>
-                            <th >Giá bán buôn</th>
-
-                        </tr>
-                        </thead>
-                        <tbody >
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td> Ảnh</td>
-                            <td >Tên phiên bản sản phẩm</td>
-                            <td >Mã vạch</td>
-                            <td >Loại</td>
-                            <td >Nhãn hiệu</td>
-                            <td >Có thể bán</td>
-                            <td >Tồn kho</td>
-                            <td >Hàng đang về</td>
-                            <td >Hàng đang giao</td>
-                            <td >Đang giao dịch</td>
-                            <td >Trạng thái</td>
-                            <td >Ngày khởi tạo</td>
-                            <td >Cập nhật cuối</td>
-                            <td >Cho phép bán</td>
-                            <td >Áp dụng thuế</td>
-                            <td >Giá bán lẻ</td>
-                            <td >Giá nhập</td>
-                            <td >Giá bán buôn</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div class="center-scroll">
+                    <div style="font-size:small; width: 150rem" >
+                        <table id="tbProduct" class="table table-hover" >
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" value=""></th>
+                                    <th>Ảnh</th>
+                                    <th>Tên phiên bản sản phẩm</th>
+                                    <th>Mã vạch</th>
+                                    <th>Loại</th>
+                                    <th>Nhãn hiệu</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngày khởi tạo</th>
+                                    <th>Cập nhật cuối</th>
+                                    <th>Áp dụng thuế</th>
+                                    <th>Giá bán lẻ</th>
+                                    <th>Giá nhập</th>
+                                    <th>Giá bán buôn</th>
+                                    <th>Có thể bán</th>
+                                    <th>Tồn kho</th>
+                                    <th>Hàng đang về</th>
+                                    <th>Hàng đang giao</th>
+                                    <th>Đang giao dịch</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+
+
                 <div class="container-fluid " style="height: 50px">
                     <div class="row col-md-12 d-flex align-items-center" style="font-size: small">
                         <div class="col-md-4"></div>
                         <div class="col-md-3 text-end">
                             <label class="me-2">Hiển thị</label>
                             <select class="me-2 " id="pageSize">
-                                <option value="5">5</option>
-                                <option value="10">10</option>
+                                <option value="7">7</option>
+                                <option value="14">14</option>
                                 <option value="20">20</option>
                             </select>
                             <span>Kết quả</span>
@@ -349,3 +266,423 @@
 <th:block th:replace="/layout/script :: script"/>
 <script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="/assets/admin/js/product/app.js"></script>
+<script>
+    let page = {
+        urls: {
+            getAllProductVariant: App.BASE_URL_VARIANT,
+            getAllProducts: App.BASE_URL_PRODUCT,
+            getProductById: App.BASE_URL_PRODUCT,
+            getAllCategory: App.BASE_URL_PRODUCT + "/categories",
+            getAllBrand: App.BASE_URL_PRODUCT + "/brands",
+            getAllStatus: App.BASE_URL_PRODUCT + "/status",
+            updateStatusAvailable: App.BASE_URL_PRODUCT + "/updateStatusAvailable",
+            updateStatusUnavailable: App.BASE_URL_PRODUCT + "/updateStatusUnavailable",
+            deleteProduct: App.BASE_URL_PRODUCT + "/delete"
+        },
+        elements: {},
+        loadData: {},
+        commands: {},
+        dialogs: {
+            elements: {},
+            loadData: {},
+            commands: {},
+        },
+        initializeEventControl: {}
+    }
+
+    let productVariant = new ProductVariant();
+    let category = new Category();
+    let brand = new Brand();
+    let totalPage;
+    let sortPage = {"type": "des", "value": "id"};
+    let arrayIdProduct = [];
+
+    page.elements.tbProduct = $("#tbProduct tbody");
+    page.elements.btnAvailable = $("#btnAvailable");
+    page.elements.btnUnavailable = $("#btnUnavailable");
+    page.elements.btnDelete = $("#btnDelete");
+    page.elements.btnAvailableSave = $("#btnAvailableSave");
+    page.elements.btnUnavailableSave = $("#btnUnavailableSave");
+    page.elements.btnSubmitDelete = $("#btnSubmitDelete");
+
+    page.elements.btnTitleSort = $("#btnTitleSort");
+    page.elements.btnCreatAtSort = $("#btnCreatAtSort");
+    page.elements.btnUpdateAtSort = $("#btnUpdateAtSort");
+
+    page.elements.totalPage = $("#totalPage");
+    page.elements.pageNo = $("#pageNo");
+    page.elements.pageSize = $("#pageSize");
+    page.elements.search = $(".searchTitle");
+
+    page.elements.checkAll =$("#checkAll");
+    page.elements.selectAction = $("#selectAction");
+
+    page.elements.selectActionThead = $("#selectActionThead");
+    page.elements.theadList = $("#theadList");
+    page.elements.numberSelectProductList = $("#numberSelectProductList");
+    page.elements.statusChangeForNumberProductList = $("#statusChange");
+    page.elements.statusChangeForNumberToUnavailable = $("#statusChangeUnavailable");
+    page.elements.statusChangeForNumberDelete = $("#statusChangeDelete");
+
+    page.elements.modalAvailable = $("#modalAvailable");
+    page.elements.modalUnavailable =$("#modalUnavailable");
+    page.elements.modalDelete =$("#modalDelete");
+
+    page.dialogs.elements.category = $("#category");
+    page.dialogs.elements.brand = $("#brand");
+    page.dialogs.elements.status = $("#status");
+
+    page.dialogs.elements.nextPage = $("#nextPage");
+    page.dialogs.elements.previousPage = $("#previousPage");
+
+    page.commands.getAllProducts = () => {
+        let pageNo = Number(page.elements.pageNo.text());
+        let pageSize =Number(page.elements.pageSize.val());
+        let search = page.elements.search.val().trim();
+
+        let categoryId = Number(page.dialogs.elements.category.val());
+        let brandId = Number(page.dialogs.elements.brand.val());
+        let status = page.dialogs.elements.status.val();
+        page.commands.getAllProductsItemOnPageNo(pageNo, pageSize, search, categoryId, brandId, status);
+    }
+
+    page.commands.getAllProductsItemOnPageNo = (pageNo, pageSize, search, categoryId, brandId, status) => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getAllProductVariant,
+            data:({
+                "pageNo": pageNo,
+                "pageSize": pageSize,
+                "search": search,
+                "categoryId": categoryId,
+                "brandId": brandId,
+                "status": status,
+                sortPage
+            })
+        })
+            .done((data) => {
+                page.elements.tbProduct.empty();
+                page.elements.totalPage.empty();
+                totalPage = data.totalPage;
+                data.products.map(item => {
+                    if(item.status == "AVAILABLE"){
+                        page.elements.tbProduct.append(App.renderRowProductVariant(item, 'available'))
+                    } else {
+                        page.elements.tbProduct.append(App.renderRowProductVariant(item, 'unavailable'))
+                    }
+                });
+                page.commands.resetInputCheckBox();
+                page.commands.isCheckbox();
+                page.elements.totalPage.append(
+                    `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
+                )
+            })
+            .fail((jqXHR) => {
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404)
+            })
+    }
+
+    page.elements.search.on("change", () => {
+        page.elements.pageNo.text(1);
+        page.commands.getAllProducts();
+    })
+
+    page.dialogs.elements.category.on("change", () => {
+        page.elements.pageNo.text(1);
+        page.dialogs.elements.brand.val("-1");
+        page.dialogs.elements.status.val("");
+        page.commands.getAllProducts();
+    })
+
+    page.dialogs.elements.brand.on("change", () => {
+        page.elements.pageNo.text(1);
+        page.dialogs.elements.category.val("-1");
+        page.dialogs.elements.status.val("");
+        page.commands.getAllProducts();
+    })
+
+    page.dialogs.elements.status.on("change", () =>{
+        page.elements.pageNo.text(1);
+        page.dialogs.elements.category.val("-1");
+        page.dialogs.elements.brand.val("-1");
+        page.commands.getAllProducts();
+    })
+
+
+    page.dialogs.elements.nextPage.on("click", () => {
+        let pageNo = page.elements.pageNo.text();
+        if(Number(pageNo) < Number(totalPage)) {
+            let pageNext = Number(pageNo) + 1;
+            page.elements.pageNo.text(pageNext);
+            page.commands.getAllProducts();
+        }
+
+    })
+
+    page.dialogs.elements.previousPage.on("click", () => {
+        let pageNo = page.elements.pageNo.text();
+        if(Number(pageNo) > 1) {
+            let previousPage = Number(pageNo) - 1;
+            page.elements.pageNo.text(previousPage);
+            page.commands.getAllProducts();
+        }
+
+    })
+
+    page.elements.pageSize.on("change", () => {
+        page.elements.pageNo.text(1);
+        page.commands.getAllProducts();
+    })
+
+    page.commands.getAllCategory = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getAllCategory
+        })
+            .done((data) => {
+                data.map(item => {
+                    let str = `<option value="${item.id}">${item.title}</option>`;
+                    page.dialogs.elements.category.append(str);
+                })
+            })
+            .fail((jqXHR) => {
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404)
+            })
+
+    }
+
+    page.commands.getAllBrand = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getAllBrand
+        })
+            .done((data) => {
+                data.map(item => {
+                    let str = `<option value="${item.id}">${item.title}</option>`;
+                    page.dialogs.elements.brand.append(str);
+                })
+            })
+            .fail((jqXHR) => {
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404)
+            })
+    }
+
+
+    page.elements.checkAll.on("change", function (){
+        page.elements.selectAction.prop("checked", true);
+        arrayIdProduct = [];
+        if(this.checked){
+            $("#tbProduct > tbody input").each(function (){
+                $(this).prop("checked", true);
+                arrayIdProduct.push($(this).val());
+            })
+        } else {
+            $("#tbProduct > tbody input").each(function (){
+                $(this).prop("checked", false);
+            })
+        }
+        page.commands.showAction();
+    })
+
+    page.commands.isCheckbox = () =>{
+        $(".selectCheckbox").on("change", function (){
+            if(this.checked){
+                $(this).prop("checked", true);
+                arrayIdProduct.push($(this).val());
+            } else {
+                $(this).prop("checked", false);
+                arrayIdProduct = page.commands.deleteArrayId($(this).val());
+            }
+            page.commands.showAction();
+            let pageSize = page.elements.pageSize.val()
+            if(arrayIdProduct.length == pageSize){
+                page.elements.checkAll.prop("checked", true);
+                page.elements.selectAction.prop("checked", true);
+            } else {
+                page.elements.checkAll.prop("checked", false);
+                page.elements.selectAction.prop("checked", false);
+            }
+        })
+    }
+
+    page.commands.deleteArrayId = (item) =>{
+        if(arrayIdProduct.length <= 0){
+            return [];
+        } else {
+            for(let i=0; i < arrayIdProduct.length; i++){
+                if(arrayIdProduct[i] === item ){
+                    arrayIdProduct.splice(i,1);
+                }
+            }
+            return arrayIdProduct;
+        }
+    }
+
+    page.commands.showAction = () => {
+        page.elements.numberSelectProductList.empty();
+        page.elements.statusChangeForNumberProductList.empty();
+        page.elements.statusChangeForNumberToUnavailable.empty();
+        page.elements.statusChangeForNumberDelete.empty();
+
+        if(arrayIdProduct.length > 0){
+            page.elements.theadList.removeClass("show").addClass("hide");
+            page.elements.numberSelectProductList.append(`<span>Đã chọn ${arrayIdProduct.length} sản phẩm trên trang này</span>`)
+            page.elements.statusChangeForNumberProductList.append(`<span style="font-size: medium">Thao tác này sẽ cập nhật trạng thái giao dịch cho ${arrayIdProduct.length} sản phẩm bạn đã chọn.</span>`);
+            page.elements.statusChangeForNumberToUnavailable.append(`<span style="font-size: medium">Thao tác này sẽ ngừng giao dịch ${arrayIdProduct.length} sản phẩm bạn đã chọn.</span>`);
+            page.elements.statusChangeForNumberDelete.append(`<span style="font-size: medium">Thao tác này sẽ xóa ${arrayIdProduct.length} sản phẩm bạn đã chọn. Thao tác này không thể khôi phục.</span>`);
+            page.elements.selectActionThead.removeClass("hide").addClass("show");
+        } else {
+            page.elements.theadList.removeClass("hide").addClass("show");
+            page.elements.selectActionThead.removeClass("show").addClass("hide");
+        }
+    }
+
+    page.elements.selectAction.on("change", function () {
+        page.elements.checkAll.prop("checked", false);
+        arrayIdProduct = [];
+        if(this.checked){
+            $("#tbProduct > tbody input").each(function (){
+                $(this).prop("checked", true);
+                arrayIdProduct.push($(this).val());
+            })
+        } else {
+            $("#tbProduct > tbody input").each(function (){
+                $(this).prop("checked", false);
+            })
+        }
+        page.commands.showAction();
+    })
+
+    page.elements.btnAvailable.on("click", () => {
+        page.elements.modalAvailable.modal("show");
+    })
+    page.elements.btnUnavailable.on("click", () =>{
+        page.elements.modalUnavailable.modal("show");
+    })
+    page.elements.btnDelete.on("click", () => {
+        page.elements.modalDelete.modal("show");
+    })
+
+    page.commands.updateStatusToAvailable = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "PUT",
+            url: page.urls.updateStatusAvailable,
+            data: JSON.stringify(arrayIdProduct)
+        })
+            .done(() => {
+                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED)
+            })
+            .fail((jqXHR) => {
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_403)
+            })
+    }
+
+    page.commands.updateStatusToUnavailable = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "PUT",
+            url: page.urls.updateStatusUnavailable,
+            data: JSON.stringify(arrayIdProduct)
+        })
+            .done(() => {
+                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED)
+            })
+            .fail((jqXHR) => {
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_403)
+            })
+    }
+
+    page.commands.deleteProductSelect = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "DELETE",
+            url: page.urls.deleteProduct,
+            data: JSON.stringify(arrayIdProduct)
+        })
+            .done(() => {
+                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_DELETE)
+            })
+            .fail((jqXHR) => {
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_403)
+            })
+    }
+
+    page.elements.btnAvailableSave.on("click", () => {
+        page.commands.updateStatusToAvailable();
+        page.elements.modalAvailable.modal("hide");
+        page.commands.getAllProducts();
+        page.commands.resetInputCheckBox();
+    })
+    page.elements.btnUnavailableSave.on("click", () =>{
+        page.commands.updateStatusToUnavailable();
+        page.elements.modalUnavailable.modal("hide");
+        page.commands.getAllProducts();
+        page.commands.resetInputCheckBox();
+    })
+    page.elements.btnSubmitDelete.on("click", () => {
+        page.commands.deleteProductSelect();
+        page.elements.modalDelete.modal("hide");
+        page.commands.getAllProducts();
+        page.commands.resetInputCheckBox();
+    })
+
+    page.commands.resetInputCheckBox = () =>{
+        $("#tbProduct input").each(function (){
+            $(this).prop("checked", false);
+        })
+        arrayIdProduct = [];
+        page.commands.showAction();
+    }
+
+    page.elements.btnTitleSort.on("click", () => {
+        sortPage.type==="des" ?
+            sortPage = {"type": "asc","value": "title"} :
+            sortPage = {"type": "des","value": "title"};
+        page.commands.getAllProducts();
+    })
+    page.elements.btnCreatAtSort.on("click", () => {
+        sortPage.type==="des" ?
+            sortPage = {"type": "asc","value": "createdAt"} :
+            sortPage = {"type": "des","value": "createdAt"};
+        page.commands.getAllProducts();
+    })
+    page.elements.btnUpdateAtSort.on("click", () => {
+        sortPage.type==="des" ?
+            sortPage = {"type": "asc","value": "createdAt"} :
+            sortPage = {"type": "des","value": "createdAt"};
+        page.commands.getAllProducts();
+    })
+
+    page.loadData = () => {
+        page.commands.getAllProducts();
+        page.commands.getAllCategory();
+        page.commands.getAllBrand();
+    }
+
+    $(() => {
+        page.loadData()
+
+    })
+</script>

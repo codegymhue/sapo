@@ -15,7 +15,9 @@ public enum OrderStatusCode {
     DELIVERED("DELIVERED"),
     RETURNED("RETURNED"),
     COMPLETE("COMPLETE"),
-    CANCELED("CANCELED");
+    CANCELED("CANCELED"),
+    INTRANSIT("INTRANSIT");
+
     private final String value;
 
     OrderStatusCode(String value) {
