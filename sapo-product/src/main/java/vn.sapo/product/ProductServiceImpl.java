@@ -132,12 +132,12 @@ public class ProductServiceImpl implements ProductService {
     public ProductResult create(CreateProductParam createProductParam) {
         Product product = productMapper.toModel(createProductParam);
         product.setStatus(
-                createProductParam.isEnableSell() ? ProductStatus.AVAILABLE :
+                createProductParam.getEnableSell() ? ProductStatus.AVAILABLE :
                         ProductStatus.UNAVAILABLE);
         product = productRepository.save(product);
         Integer productId = product.getId();
         productTaxService.create(createProductParam.getTaxList(), productId);
-        mediaService.save(createProductParam.getMediaList(), productId);
+        mediaService.save(createProductParam.getMediaList(), product);
         if (createProductParam.getQuantity() != null)
             itemService.create(itemMapper.toDTO(createProductParam, productId, 1));
         return productMapper.toDTO(product);
@@ -184,9 +184,18 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public Map<String, Object> getAllProductItemPage(Integer pageNo, Integer pageSize, String title, Integer categoryId, Integer brandId, String status) {
+    public Map<String, Object> getAllProductItemPage(Integer pageNo, Integer pageSize, String title,
+                                                     Integer categoryId, Integer brandId, String status,
+                                                     String typeSort, String nameFieldSort ) {
         pageNo = pageNo - 1;
-        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by("id").descending());
+
+        Pageable pageable;
+        if(typeSort.equals("asc")){
+            pageable = PageRequest.of(pageNo, pageSize, Sort.by(nameFieldSort).ascending());
+        } else {
+            pageable = PageRequest.of(pageNo, pageSize, Sort.by(nameFieldSort).descending());
+        }
+
         Page<Product> products;
         if (title.equals("") && categoryId == -1 && brandId == -1 && status.equals("")) {
             products = productRepository.findAllByDeletedIsFalse(pageable);
@@ -199,16 +208,26 @@ public class ProductServiceImpl implements ProductService {
         } else {
             products = productRepository.findAllByTitleContainingAndStatus(ProductStatus.parseProductStatus(status), title, pageable);
         }
+<<<<<<< HEAD
         if (products.hasContent()) {
             List<Product> productList = products.getContent();
             List<ProductItemResult> productItemResults = new ArrayList<>();
             for (Product product : productList) {
+=======
+
+        if(products.hasContent()){
+            List<Product> productList = products.getContent();
+            List<ProductItemResult> productItemResults = new ArrayList<>();
+
+            for(Product product : productList){
+>>>>>>> 71133113a87c0cd826217fd441ec1cfd2f070308
                 ProductItemResult productItemResult = productMapper.toDTOPage(product);
                 productItemResult.setImage(mediaService.getLinkMediaByProductIdIsMain(product.getId()));
                 productItemResult.setInventory(itemService.getTotalInventoryQuantityByProductId(product.getId()));
                 productItemResult.setAvailable(itemService.getAvailableInventoryQuantityByProductId(product.getId()));
                 productItemResults.add(productItemResult);
             }
+
             Map<String, Object> response = new HashMap<>();
             response.put("products", productItemResults);
             response.put("totalItem", products.getTotalElements());

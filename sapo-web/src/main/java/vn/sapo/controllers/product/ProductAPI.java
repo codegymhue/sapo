@@ -42,7 +42,9 @@ public class ProductAPI {
                 hashMap.get("search"),
                 Integer.valueOf(hashMap.get("categoryId")),
                 Integer.valueOf(hashMap.get("brandId")),
-                hashMap.get("status")),
+                hashMap.get("status"),
+                hashMap.get("sortPage[type]"),
+                hashMap.get("sortPage[value]")),
                 HttpStatus.OK
         );
     }
@@ -65,6 +67,7 @@ public class ProductAPI {
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CreateProductParam productWithImageParam) {
+        System.out.println(productWithImageParam);
         ProductResult p = productService.create(productWithImageParam);
         return new ResponseEntity<>(productService.findById(p.getId()), HttpStatus.CREATED);
     }

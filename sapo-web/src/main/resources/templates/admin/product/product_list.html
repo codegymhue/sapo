@@ -130,37 +130,6 @@
                     <div class="MuiBox-root jss6793"
                          style="width: 1px; height: 20px; border-left: 1px solid rgb(211, 213, 215); margin: 0 8px;">
                     </div>
-                    <div class="MuiBox-root jss6794 jss6746">
-                        <a class="jss6750"
-                           href="#">
-                            <button id="Sapo-Button-ba11a07a-f11d-475b-9638-2e9af46ee60d"
-                                    class="sc-jqUVSM eUKSRG">
-                                <span class="sc-papXJ jcEYKF">Loại sản phẩm
-                                </span>
-                            </button>
-                        </a>
-                        <div class="MuiBox-root jss6796 jss6747">
-                        </div>
-                        <a class="jss6750"
-                           href="#">
-                            <button id="Sapo-Button-99086ae8-8fc4-4ac6-8782-c93192bd428a"
-                                    class="sc-jqUVSM eUKSRG">
-                                <span class="sc-papXJ jcEYKF">Combo
-                                </span>
-                            </button>
-                        </a>
-                        <div class="MuiBox-root jss6797 jss6747">
-                        </div>
-                        <a class="jss6750"
-                           href="#">
-                            <button id="Sapo-Button-11fd2583-c4a9-4e66-b299-d42b1e69a5a3"
-                                    class="sc-jqUVSM eUKSRG">
-                                <span class="sc-papXJ jcEYKF">Sản phẩm quy đổi
-                                </span>
-                            </button>
-                        </a>
-                        <div class="MuiBox-root jss6798 jss6747"></div>
-                    </div>
                 </div>
                 <div class="MuiBox-root jss6799 jss6741">
                     <div class="sc-kDDrLX cKOfva">
@@ -250,25 +219,21 @@
                     <table id="tbProduct" class="table table-hover">
                         <thead style="background-color: #f4f6f8; height: 55px">
                         <tr id="theadList" class="show" >
-                            <th class="align-middle"><input id="checkAll" type="checkbox" value="" ></th>
+                            <th class="align-middle"><input id="checkAll" type="checkbox" value="" data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả"></th>
                             <th class="align-middle" scope="col">Ảnh</th>
-                            <th class="align-middle" scope="col">Sản phẩm
-                                <button class="sort"><i class="fa-solid fa-sort"></i></button>
+                            <th class="align-middle" scope="col">
+                                <button class="sort" id="btnTitleSort">Sản phẩm <i class="fa-solid fa-sort"></i></button>
                             </th>
                             <th class="align-middle" scope="col">Loại</th>
                             <th class="align-middle" scope="col">Nhãn hiệu</th>
-                            <th class="align-middle" scope="col">Có thể bán
-                                <button class="sort"><i class="fa-solid fa-sort"></i></button>
-                            </th>
-                            <th class="align-middle" scope="col">Tồn kho
-                                <button class="sort"><i class="fa-solid fa-sort"></i></button>
-                            </th>
+                            <th class="align-middle" scope="col">Có thể bán</th>
+                            <th class="align-middle" scope="col">Tồn kho</th>
                             <th class="align-middle" scope="col">Trạng thái</th>
-                            <th class="align-middle" scope="col">Ngày khởi tạo
-                                <button class="sort"><i class="fa-solid fa-sort"></i></button>
+                            <th class="align-middle" scope="col">
+                                <button class="sort" id="btnCreatAtSort">Ngày khởi tạo <i class="fa-solid fa-sort"></i></button>
                             </th>
-                            <th class="align-middle" scope="col">Cập nhập cuối
-                                <button class="sort"><i class="fa-solid fa-sort"></i></button>
+                            <th class="align-middle" scope="col">
+                                <button class="sort" id="btnUpdateAtSort">Cập nhập cuối <i class="fa-solid fa-sort"></i></button>
                             </th>
                         </tr>
                         <tr class="hide" id="selectActionThead" style="border: snow">
@@ -389,7 +354,7 @@
             <div class="modal-body" id="statusChangeDelete">
             </div>
             <div class="modal-footer d-flex align-items-center">
-                <button class="btn  btn-outline-danger btn-exit-delete" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn  btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
                 <button class="btn btn-danger btn-save-delete" id="btnSubmitDelete" type="button">Xóa</button>
             </div>
         </div>
@@ -399,6 +364,12 @@
 <th:block th:replace="/layout/script :: script"/>
 <script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="/assets/admin/js/product/app.js"></script>
+<script>
+    let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>
 
 <script>
     let page = {
@@ -428,6 +399,8 @@
     let category = new Category();
     let brand = new Brand();
     let totalPage;
+    let sortPage = {"type": "des", "value": "id"};
+    let arrayIdProduct = [];
 
     page.elements.tbProduct = $("#tbProduct tbody");
     page.elements.btnAvailable = $("#btnAvailable");
@@ -436,6 +409,10 @@
     page.elements.btnAvailableSave = $("#btnAvailableSave");
     page.elements.btnUnavailableSave = $("#btnUnavailableSave");
     page.elements.btnSubmitDelete = $("#btnSubmitDelete");
+
+    page.elements.btnTitleSort = $("#btnTitleSort");
+    page.elements.btnCreatAtSort = $("#btnCreatAtSort");
+    page.elements.btnUpdateAtSort = $("#btnUpdateAtSort");
 
     page.elements.totalPage = $("#totalPage");
     page.elements.pageNo = $("#pageNo");
@@ -488,7 +465,8 @@
                 "search": search,
                 "categoryId": categoryId,
                 "brandId": brandId,
-                "status": status
+                "status": status,
+                sortPage
             })
         })
             .done((data) => {
@@ -606,7 +584,7 @@
             })
     }
 
-    let arrayIdProduct = [];
+
     page.elements.checkAll.on("change", function (){
         page.elements.selectAction.prop("checked", true);
         arrayIdProduct = [];
@@ -782,6 +760,25 @@
         arrayIdProduct = [];
         page.commands.showAction();
     }
+
+    page.elements.btnTitleSort.on("click", () => {
+        sortPage.type==="des" ?
+            sortPage = {"type": "asc","value": "title"} :
+            sortPage = {"type": "des","value": "title"};
+        page.commands.getAllProducts();
+    })
+    page.elements.btnCreatAtSort.on("click", () => {
+        sortPage.type==="des" ?
+            sortPage = {"type": "asc","value": "createdAt"} :
+            sortPage = {"type": "des","value": "createdAt"};
+        page.commands.getAllProducts();
+    })
+    page.elements.btnUpdateAtSort.on("click", () => {
+        sortPage.type==="des" ?
+            sortPage = {"type": "asc","value": "createdAt"} :
+            sortPage = {"type": "des","value": "createdAt"};
+        page.commands.getAllProducts();
+    })
 
     page.loadData = () => {
         page.commands.getAllProducts();

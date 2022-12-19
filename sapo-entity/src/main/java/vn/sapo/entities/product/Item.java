@@ -30,12 +30,6 @@ public class Item extends BaseEntity {
     @Column(name = "price")
     private BigDecimal price;
 
-    @Column(name = "created_at", nullable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
-    private Instant createdAt;
-
-    @Column(name = "updated_at")
-    private Instant updatedAt;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;

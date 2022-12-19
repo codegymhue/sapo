@@ -28,9 +28,9 @@ public class CreateProductParam implements Serializable {
     private BigDecimal wholesalePrice;
     private Integer categoryId;
     private Integer brandId;
-    private boolean enableSell;
-    private boolean applyTax;
-    private boolean isTaxInclusive;
+    private Boolean enableSell;
+    private Boolean applyTax;
+    private Boolean taxInclusive;
     private List<ProductTaxParam> taxList;
     private List<MediaParam> mediaList;
 }
