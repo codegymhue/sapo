@@ -31,6 +31,7 @@ public class CreateProductParam implements Serializable {
     private Boolean enableSell;
     private Boolean applyTax;
     private Boolean taxInclusive;
+    private Boolean enableVariant;
     private List<ProductTaxParam> taxList;
     private List<MediaParam> mediaList;
 }

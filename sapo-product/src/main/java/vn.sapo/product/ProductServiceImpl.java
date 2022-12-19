@@ -133,10 +133,16 @@ public class ProductServiceImpl implements ProductService {
                         ProductStatus.UNAVAILABLE);
         product = productRepository.save(product);
         Integer productId = product.getId();
-        productTaxService.create(createProductParam.getTaxList(), productId);
-        mediaService.save(createProductParam.getMediaList(), product);
-        if (createProductParam.getQuantity() != null)
+        if (createProductParam.getApplyTax() == true) {
+            productTaxService.create(createProductParam.getTaxList(), productId);
+        }
+        System.out.println(createProductParam.getMediaList().size());
+        if (createProductParam.getMediaList().size() != 0) {
+            mediaService.save(createProductParam.getMediaList(), product);
+        }
+        if (createProductParam.getEnableVariant() == true) {
             itemService.create(itemMapper.toDTO(createProductParam, productId, 1));
+        }
         return productMapper.toDTO(product);
     }
 
