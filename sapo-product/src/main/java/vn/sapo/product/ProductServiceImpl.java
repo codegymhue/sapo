@@ -15,8 +15,6 @@ import vn.sapo.category.CategoryRepository;
 import vn.sapo.entities.product.Item;
 import vn.sapo.entities.product.Product;
 import vn.sapo.entities.product.ProductStatus;
-import vn.sapo.entities.tax.ProductTax;
-import vn.sapo.entities.tax.TaxType;
 import vn.sapo.exceptions.NotFoundException;
 import vn.sapo.item.ItemMapper;
 import vn.sapo.item.ItemService;

@@ -8,35 +8,35 @@ import lombok.experimental.Accessors;
 import vn.sapo.brand.dto.BrandResult;
 import vn.sapo.category.dto.CategoryResult;
 import vn.sapo.entities.product.ProductStatus;
+import vn.sapo.media.dto.MediaResult;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class ProductVariantsResult {
+public class ProductResult {
     private Integer id;
-    private String image;
     private String title;
-    private String sku;
-    private String barCode;
-    private CategoryResult category;
-    private BrandResult brand;
     private ProductStatus status;
-    private Instant createAt;
-    private Instant updateAt;
-    private Boolean applyTax;
+    private String unit;
+    private String sku;
     private BigDecimal retailPrice;
     private BigDecimal importPrice;
     private BigDecimal wholesalePrice;
-    private Integer available;
-    private Integer inventory;
-    private Integer trading;
-    private Integer inTransit;
-    private Integer shipping;
-
-
+    private String description;
+    private Integer categoryId;
+    private Integer brandId;
+    private CategoryResult category;
+    private BrandResult brand;
+    private Boolean applyTax;
+    private Instant createdAt;
+    private Instant updatedAt;
+    private int totalInventory;
+    private int availableInventory;
+    private List<MediaResult> mediaList;
 }

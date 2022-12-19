@@ -1,7 +1,6 @@
 package vn.sapo.category;
 
 import vn.sapo.category.dto.*;
-import vn.sapo.entities.product.*;
 
 import java.util.*;
 

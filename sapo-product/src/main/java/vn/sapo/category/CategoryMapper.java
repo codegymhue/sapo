@@ -3,7 +3,6 @@ package vn.sapo.category;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import vn.sapo.brand.dto.BrandResult;
 import vn.sapo.category.dto.*;
 import vn.sapo.entities.product.*;
 
