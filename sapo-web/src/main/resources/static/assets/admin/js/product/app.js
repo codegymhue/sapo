@@ -5,6 +5,7 @@ class App {
     static BASE_URL_Brands = this.DOMAIN_API + "/api/brands";
     static BASE_URL_PRODUCT = this.DOMAIN_API + "/api/products";
     static URL_CREATE_PRODUCT = this.BASE_URL_Product + "/create";
+    static URL_UPDATE_PRODUCT = this.BASE_URL_Product + "/update";
 
     static AlertMessageVi = class {
         static SUCCESS_CREATED = "Tạo dữ liệu thành công !";

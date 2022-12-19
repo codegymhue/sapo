@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.brand.BrandMapper;
@@ -77,6 +79,7 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductTaxService productTaxService;
 
+
     @Override
     @Transactional(readOnly = true)
     public List<ProductResult> findAll() {
@@ -140,6 +143,17 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.toDTO(product);
     }
 
+    @Override
+    @Transactional
+    public ProductResult update(ProductUpdateParam productUpdateParam) {
+        Integer productId = productUpdateParam.getId();
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new NotFoundException("Product not found"));
+        productMapper.transferFields(productUpdateParam, product);
+
+        return productMapper.toDTO(product);
+    }
+
 
     @Override
     @Transactional
@@ -174,9 +188,9 @@ public class ProductServiceImpl implements ProductService {
         pageNo = pageNo - 1;
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by("id").descending());
         Page<Product> products;
-        if(title.equals("") && categoryId == -1 && brandId == -1 && status.equals("")){
+        if (title.equals("") && categoryId == -1 && brandId == -1 && status.equals("")) {
             products = productRepository.findAllByDeletedIsFalse(pageable);
-        } else if(categoryId == -1 && brandId == -1 && status.equals("")) {
+        } else if (categoryId == -1 && brandId == -1 && status.equals("")) {
             products = productRepository.findAllByTitleContaining(title, pageable);
         } else if (brandId == -1 && status.equals("")) {
             products = productRepository.findAllByTitleContainingAndCategoryId(categoryId, title, pageable);
@@ -185,10 +199,10 @@ public class ProductServiceImpl implements ProductService {
         } else {
             products = productRepository.findAllByTitleContainingAndStatus(ProductStatus.parseProductStatus(status), title, pageable);
         }
-        if(products.hasContent()){
+        if (products.hasContent()) {
             List<Product> productList = products.getContent();
             List<ProductItemResult> productItemResults = new ArrayList<>();
-            for(Product product : productList){
+            for (Product product : productList) {
                 ProductItemResult productItemResult = productMapper.toDTOPage(product);
                 productItemResult.setImage(mediaService.getLinkMediaByProductIdIsMain(product.getId()));
                 productItemResult.setInventory(itemService.getTotalInventoryQuantityByProductId(product.getId()));
@@ -208,9 +222,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public void saveChangeStatusToAvailable(List<String> list) {
-        for(String item : list){
+        for (String item : list) {
             Optional<Product> product = productRepository.findById(Integer.valueOf(item));
-            if(product.isPresent()){
+            if (product.isPresent()) {
                 Product newProduct = product.get();
                 newProduct.setStatus(ProductStatus.parseProductStatus("AVAILABLE"));
                 productRepository.save(newProduct);
@@ -221,9 +235,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public void saveChangeStatusToUnavailable(List<String> list) {
-        for(String item : list){
+        for (String item : list) {
             Optional<Product> product = productRepository.findById(Integer.valueOf(item));
-            if(product.isPresent()){
+            if (product.isPresent()) {
                 Product newProduct = product.get();
                 newProduct.setStatus(ProductStatus.parseProductStatus("UNAVAILABLE"));
                 productRepository.save(newProduct);
@@ -234,9 +248,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public void deleteSoftProduct(List<String> list) {
-        for(String item : list){
+        for (String item : list) {
             Optional<Product> product = productRepository.findById(Integer.valueOf(item));
-            if(product.isPresent()){
+            if (product.isPresent()) {
                 Product newProduct = product.get();
                 newProduct.setDeleted(true);
                 productRepository.save(newProduct);

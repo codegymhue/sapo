@@ -10,6 +10,7 @@ import vn.sapo.product.ProductService;
 import vn.sapo.product.dto.CreateProductParam;
 import vn.sapo.product.dto.ProductResult;
 import vn.sapo.product.dto.ProductShortParam;
+import vn.sapo.product.dto.ProductUpdateParam;
 
 import java.util.HashMap;
 import java.util.List;
@@ -66,6 +67,12 @@ public class ProductAPI {
     public ResponseEntity<?> create(@RequestBody CreateProductParam productWithImageParam) {
         ProductResult p = productService.create(productWithImageParam);
         return new ResponseEntity<>(productService.findById(p.getId()), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> update(@RequestBody ProductUpdateParam productUpdateParam){
+       productService.update(productUpdateParam);
+       return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/create-short")

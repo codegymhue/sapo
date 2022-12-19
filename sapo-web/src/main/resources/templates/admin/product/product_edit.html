@@ -43,6 +43,7 @@
                             </svg>
                             <h6 class="MuiTypography-root MuiTypography-subtitle1">Quay lại chi tiết sản phẩm</h6>
                         </a>
+                        <span hidden id="productId" th:text="${product.getId()}"></span>
                     </div>
                     <div class="MuiBox-root jss26590">
                         <div class="MuiBox-root jss26591 jss26558" style="align-items: center;">
@@ -117,7 +118,7 @@
                                                                                name="name"
                                                                                placeholder="Nhập tên sản phẩm"
                                                                                type="text"
-                                                                               class="titleCreate MuiInputBase-input MuiOutlinedInput-input"
+                                                                               class="titleUpdate MuiInputBase-input MuiOutlinedInput-input"
                                                                                th:field="*{title}">
                                                                     </label>
                                                                     <fieldset aria-hidden="true"
@@ -239,7 +240,7 @@
                                                                        placeholder="Nhập tay hoặc sử dụng máy quét mã vạch"
                                                                        type="text"
                                                                        aria-label="Without label"
-                                                                       class="barCodeCreate MuiInputBase-input MuiOutlinedInput-input"
+                                                                       class="barCodeUpdate MuiInputBase-input MuiOutlinedInput-input"
                                                                        th:field="*{barCode}">
                                                                 <fieldset aria-hidden="true"
                                                                           class="jss26952 MuiOutlinedInput-notchedOutline"
@@ -332,14 +333,14 @@
                                                             <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl">
                                                                 <input aria-invalid="false"
                                                                        autocomplete="off"
-                                                                       id="retailPriceCreate 731b40ed-6bd4-451f-979e-e4957c2c84a0"
+                                                                       id="retailPriceUpdate 731b40ed-6bd4-451f-979e-e4957c2c84a0"
                                                                        name="prices.price_sales.0.value"
                                                                        type="text"
                                                                        aria-label="Without label"
                                                                        class="retailPriceUpdate MuiInputBase-input MuiOutlinedInput-input"
                                                                        value="0"
                                                                        style="width: 100%; text-align: right;"
-                                                                       th:field="*{retailPrice}">
+                                                                       th:value="${#numbers.formatDecimal(product.retailPrice, 0, 'COMMA', 0, 'POINT')}">
                                                                 <fieldset aria-hidden="true"
                                                                           class="jss26952 MuiOutlinedInput-notchedOutline"
                                                                           style="padding-left: 8px;">
@@ -387,10 +388,10 @@
                                                                        name="prices.price_sales.1.value"
                                                                        type="text"
                                                                        aria-label="Without label"
-                                                                       class="importPriceCreate MuiInputBase-input MuiOutlinedInput-input"
+                                                                       class="wholesalePriceUpdate MuiInputBase-input MuiOutlinedInput-input"
                                                                        value="0"
                                                                        style="width: 100%; text-align: right;"
-                                                                       th:field="*{wholesalePrice}">
+                                                                       th:value="${#numbers.formatDecimal(product.wholesalePrice, 0, 'COMMA', 0, 'POINT')}">
                                                                 <fieldset aria-hidden="true"
                                                                           class="jss26952 MuiOutlinedInput-notchedOutline"
                                                                           style="padding-left: 8px;">
@@ -435,14 +436,15 @@
                                                             <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl">
                                                                 <input aria-invalid="false"
                                                                        autocomplete="off"
-                                                                       id="wholesalePriceCreate 1901e214-820f-4ed4-b224-4509d7f7ff3c"
+                                                                       id="importPriceUpdate 1901e214-820f-4ed4-b224-4509d7f7ff3c"
                                                                        name="prices.price_imports.0.value"
                                                                        type="text"
                                                                        aria-label="Without label"
                                                                        class="importPriceUpdate MuiInputBase-input MuiOutlinedInput-input"
                                                                        value="0"
                                                                        style="width: 100%; text-align: right;"
-                                                                       th:field="*{importPrice}">
+                                                                       th:value="${#numbers.formatDecimal(product.importPrice, 0, 'COMMA', 0, 'POINT')}"
+                                                                >
                                                                 <fieldset aria-hidden="true"
                                                                           class="jss26952 MuiOutlinedInput-notchedOutline"
                                                                           style="padding-left: 8px;">
@@ -1019,11 +1021,13 @@
 
     page.elements.showAllCategory = $(".showAllCategory");
     page.elements.showAllBrand = $(".showAllBrand");
-    page.elements.btnUpdateProduct = $(".btnUpdateProduct");
+    page.elements.btnUpdateProduct = $("#btnUpdateProduct");
+
+    page.elements.productId = $("#productId");
 
     // Sửa sản phẩm
     page.dialogs.elements.titleUpdate = $('.titleUpdate');
-    // page.dialogs.elements.enableSell = $("#enableSell");
+    page.dialogs.elements.enableSell = $("#enableSell");
     page.dialogs.elements.descriptionUpdate = $('.descriptionUpdate');
     page.dialogs.elements.unitUpdate = $('.unitUpdate');
     page.dialogs.elements.skuUpdate = $('.skuUpdate');
@@ -1055,23 +1059,21 @@
         taxOut.taxType = "TAX_SALE";
         taxs.push(taxIn);
         taxs.push(taxOut);
-        // product.id = 0;
+        product.id =  page.elements.productId.text();
         product.title = page.dialogs.elements.titleUpdate.val();
         product.enableSell = page.dialogs.elements.enableSell.is(":checked") ? true : false;
-        product.description = page.dialogs.elements.descriptionUpdate.val();
+        // product.description = page.dialogs.elements.descriptionUpdate.val();
         product.unit = page.dialogs.elements.unitUpdate.val();
         product.sku = page.dialogs.elements.skuUpdate.val();
         product.barCode = page.dialogs.elements.barCodeUpdate.val();
         product.mass = page.dialogs.elements.massUpdate.val();
         product.retailPrice = page.dialogs.elements.retailPriceUpdate.val();
         product.importPrice = page.dialogs.elements.importPriceUpdate.val();
-        product.wholesalePrice = page.dialogs.elements.wholesalePriceCreate.val();
+        product.wholesalePrice = page.dialogs.elements.wholesalePriceUpdate.val();
         product.categoryId = $("#catProType").data("id");
         product.brandId = $('#brandProType').data("id");
         product.applyTax = $("#applyTax").is(":checked") ? true : false;
         product.isTaxInclusive = $("#priceDepsTax").val() === 2 ? true : false;
-        product.costPrice = $("#costPrice").val();
-        product.quantity = $("#initialInventory").val();
         product.taxList = taxs;
         product.mediaList = imgs;
 
@@ -1086,7 +1088,10 @@
             "data": JSON.stringify(product)
         })
             .done((data) => {
-                console.log(": Cập nhập sản phẩm thành công")
+                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED);
+            })
+            .fail((jqXHR) => {
+                console.log(": Cập nhập thất bại")
             })
     })
 
@@ -1177,7 +1182,7 @@
     //----->>>Nhat-dev OnClick button to create Category
     $('#btnAddCategory').on('click', () => {
         category.id = 0;
-        category.name = $('#inputCategory').val();
+        category.title = $('#inputCategory').val();
         console.log(category)
         $.ajax({
             "headers": {
@@ -1207,7 +1212,7 @@
     //----->>>Nhat-dev OnClick button to create brand
     $('#btnAddBrand').on('click', () => {
         brand.id = 0;
-        brand.name = $('#inputBrand').val();
+        brand.title = $('#inputBrand').val();
         console.log(brand)
         $.ajax({
             "headers": {

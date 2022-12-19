@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import vn.sapo.brand.BrandMapper;
 import vn.sapo.category.CategoryMapper;
+import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.product.Product;
 import vn.sapo.media.MediaMapper;
 import vn.sapo.product.dto.*;
@@ -46,6 +47,10 @@ public class ProductMapper implements InitializingBean {
                 .setWholesalePrice(productWithImageParam.getWholesalePrice())
                 .setBrandId(productWithImageParam.getBrandId())
                 .setCategoryId(productWithImageParam.getCategoryId());
+    }
+    
+    public void transferFields(ProductUpdateParam updateCustomerParam, Product product) {
+        modelMapper.map(updateCustomerParam, product);
     }
 
     public ProductResult toDTO(Product product) {

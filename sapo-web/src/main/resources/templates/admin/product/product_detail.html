@@ -199,7 +199,7 @@
                                                     class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap"
                                                     itemid="display_product_variant_createOn"
                                                     style="line-height: 16px; margin-left: 5px;"
-                                                    th:text="${#dates.format(product.createdAt, 'dd-mm-yyyy HH:mm')}">
+                                                    th:text="${#dates.format(product.createdAt, 'dd-mm-yyyy hh:mm')}">
                                             </p>
                                             </div>
                                         </div>
@@ -214,7 +214,7 @@
                                                     class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap"
                                                     itemid="display_product_variant_modified_on"
                                                     style="line-height: 16px; margin-left: 5px;"
-                                                    th:text="${#dates.format(product.updatedAt, 'dd-mm-yyyy HH:mm')}?: '---'">
+                                                    th:text="${#dates.format(product.updatedAt, 'dd-mm-yyyy hh:mm')}?: '---'">
                                             </p>
                                             </div>
                                         </div>
@@ -225,13 +225,15 @@
                                         <div class="MuiBox-root jss4698">
                                             <div class="MuiBox-root jss4699"
                                                  style="width: 100%; display: flex; justify-content: center;">
-                                                                                                <div class="MuiGrid-container">
-                                                                                                    <th:block th:each="media : *{mediaResults}">
-                                                                                                        <div class="MuiGrid-item">
-                                                                                                            <img class="image-item" style="width: 90px; height: 90px; margin: 5px" th:src="${media.fileUrl}">
-                                                                                                        </div>
-                                                                                                    </th:block>
-                                                                                                </div>
+                                                <div class="MuiGrid-container">
+                                                    <th:block th:each="media : *{mediaResults}">
+                                                        <div class="MuiGrid-item">
+                                                            <img class="image-item"
+                                                                 style="width: 90px; height: 90px; margin: 5px"
+                                                                 th:src="${media.fileUrl}">
+                                                        </div>
+                                                    </th:block>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -331,7 +333,8 @@
                                                value="" th:checked="*{applyTax}"><span class="jss913"
                                                                                        font-size="small"></span></span></span>
                                         <div class="MuiBox-root jss932" style="width: 100%;">
-                                            <p class="MuiTypography-root MuiTypography-body1" style="padding-bottom: 24px;">Áp dụng thuế<span
+                                            <p class="MuiTypography-root MuiTypography-body1"
+                                               style="padding-bottom: 24px;">Áp dụng thuế<span
                                                     class="MuiTypography-root MuiTypography-caption"
                                                     title="Sản phẩm có tính thuế, hệ thống sẽ tự động gợi ý giá trị thuế  cho sản phẩm theo chính sách thuế của cửa hàng"><svg
                                                     viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -344,7 +347,8 @@
                                             <div class="MuiBox-root jss15500"
                                                  th:style="*{applyTax} ? ('display : block') : ('display : none')">
                                                 <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
-                                                    <div class="MuiGrid-root jss15470 MuiGrid-item MuiGrid-grid-xs-5" style="padding-right: 0">
+                                                    <div class="MuiGrid-root jss15470 MuiGrid-item MuiGrid-grid-xs-5"
+                                                         style="padding-right: 0">
                                                         Giá áp dụng thuế
                                                     </div>
                                                     <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7"

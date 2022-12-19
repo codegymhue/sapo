@@ -22,6 +22,8 @@ public interface ProductService {
 
     ProductResult create(CreateProductParam createProductParam);
 
+    ProductResult update(ProductUpdateParam productUpdateParam);
+
     ProductResult createShortProduct(ProductShortParam productShortParam);
 
     Map<String, Object> getAllProductItemPage(Integer pageNo, Integer pageSize, String title, Integer categoryId, Integer brandId, String status);
