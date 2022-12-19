@@ -212,19 +212,10 @@ public class ProductServiceImpl implements ProductService {
         } else {
             products = productRepository.findAllByTitleContainingAndStatus(ProductStatus.parseProductStatus(status), title, pageable);
         }
-<<<<<<< HEAD
         if (products.hasContent()) {
             List<Product> productList = products.getContent();
             List<ProductItemResult> productItemResults = new ArrayList<>();
             for (Product product : productList) {
-=======
-
-        if(products.hasContent()){
-            List<Product> productList = products.getContent();
-            List<ProductItemResult> productItemResults = new ArrayList<>();
-
-            for(Product product : productList){
->>>>>>> 71133113a87c0cd826217fd441ec1cfd2f070308
                 ProductItemResult productItemResult = productMapper.toDTOPage(product);
                 productItemResult.setImage(mediaService.getLinkMediaByProductIdIsMain(product.getId()));
                 productItemResult.setInventory(itemService.getTotalInventoryQuantityByProductId(product.getId()));
