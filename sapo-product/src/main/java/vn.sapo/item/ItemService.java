@@ -11,6 +11,8 @@ public interface ItemService {
 
     int getAvailableInventoryQuantityByProductId(Integer productId);
 
+    int getTradingQuantityByProductId(Integer productId);
+
     ItemResult create(CreateItemParam CreateItemParam);
 
     ItemResult findAllByProductId(Integer productId);

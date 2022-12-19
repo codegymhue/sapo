@@ -22,6 +22,11 @@ public class ProductController {
         return new ModelAndView("/admin/product/product_list");
     }
 
+    @GetMapping("/variants")
+    public ModelAndView showVariantsListPage(){
+        return new ModelAndView("/admin/variants/variants");
+    }
+
     @GetMapping("/products/create")
     public ModelAndView showProductCreatePage() {
         return new ModelAndView("/admin/product/product_create");

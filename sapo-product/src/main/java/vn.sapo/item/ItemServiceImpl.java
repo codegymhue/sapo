@@ -50,6 +50,12 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public int getTradingQuantityByProductId(Integer productId) {
+        return itemRepository.getTradingQuantityByProductId(productId).orElse(0);
+    }
+
+    @Override
     public ItemResult create(CreateItemParam createItemParam) {
         return itemMapper.toDTO(itemRepository.save(itemMapper.toModel(createItemParam)));
     }
