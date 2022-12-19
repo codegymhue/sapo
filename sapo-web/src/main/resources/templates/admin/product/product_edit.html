@@ -194,7 +194,7 @@
                                                                            id="massUpdate"
                                                                            class="MuiInputBase-input MuiOutlinedInput-input"
                                                                            style="width: 100%; text-align: right;"
-                                                                    th:field="*{mass}">
+                                                                           th:value="${#numbers.formatDecimal(product.mass, 0, 'COMMA', 0, 'POINT')}">
                                                                     <fieldset aria-hidden="true"
                                                                               class="jss26952 MuiOutlinedInput-notchedOutline"
                                                                               style="padding-left: 8px;">
