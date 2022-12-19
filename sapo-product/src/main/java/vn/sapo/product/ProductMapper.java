@@ -76,6 +76,7 @@ public class ProductMapper implements InitializingBean {
                 .setRetailPrice(product.getRetailPrice())
                 .setApplyTax(product.getApplyTax())
                 .setTaxInclusive(product.getTaxInclusive())
+                .setBarCode(product.getBarCode())
                 .setMass(product.getMass());
     }
 

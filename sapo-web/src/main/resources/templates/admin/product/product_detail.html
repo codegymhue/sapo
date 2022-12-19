@@ -199,7 +199,7 @@
                                                     class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap"
                                                     itemid="display_product_variant_createOn"
                                                     style="line-height: 16px; margin-left: 5px;"
-                                                    th:text="${#dates.format(product.createdAt, 'dd-mm-yyyy hh:mm')}">
+                                                    th:text="${#dates.format(product.createdAt, 'dd-MM-yyyy HH:mm')}">
                                             </p>
                                             </div>
                                         </div>
@@ -214,7 +214,7 @@
                                                     class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap"
                                                     itemid="display_product_variant_modified_on"
                                                     style="line-height: 16px; margin-left: 5px;"
-                                                    th:text="${#dates.format(product.updatedAt, 'dd-mm-yyyy hh:mm')}?: '---'">
+                                                    th:text="${#dates.format(product.updatedAt, 'dd-MM-yyyy HH:mm')}?: '---'">
                                             </p>
                                             </div>
                                         </div>
@@ -228,13 +228,9 @@
                                                 <div class="MuiGrid-container">
                                                     <th:block th:each="media : *{mediaResults}">
                                                         <div class="MuiGrid-item">
-<<<<<<< HEAD
                                                             <img class="image-item"
                                                                  style="width: 90px; height: 90px; margin: 5px"
                                                                  th:src="${media.fileUrl}">
-=======
-                                                            <img class="image-item" style="width: 90px; height: 90px; margin: 5px" th:src="${media.fileUrl}">
->>>>>>> 71133113a87c0cd826217fd441ec1cfd2f070308
                                                         </div>
                                                     </th:block>
                                                 </div>
