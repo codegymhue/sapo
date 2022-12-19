@@ -9,7 +9,6 @@ import vn.sapo.brand.dto.BrandResult;
 import vn.sapo.category.dto.CategoryResult;
 import vn.sapo.entities.product.ProductStatus;
 import vn.sapo.media.dto.MediaResult;
-import vn.sapo.tax.dto.TaxResult;
 
 import java.math.BigDecimal;
 import java.time.Instant;

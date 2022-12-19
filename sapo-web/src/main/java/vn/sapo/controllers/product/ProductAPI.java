@@ -27,6 +27,8 @@ public class ProductAPI {
     @Autowired
     private BrandService brandService;
 
+
+
     @GetMapping
     public ResponseEntity<?> findAll() {
         return new ResponseEntity<>(productService.findAll(), HttpStatus.OK);
@@ -94,5 +96,8 @@ public class ProductAPI {
         productService.deleteSoftProduct(arrayIdProduct);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
+
 
 }
