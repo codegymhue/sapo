@@ -11,6 +11,7 @@ class App {
         static SUCCESS_UPDATED = "Cập nhật dữ liệu thành công !";
         static SUCCESS_DELETE = "Xóa dữ liệu thành công";
 
+        static ERROR_TITLE = "Thao tác không thành công, Tên sản phẩm không được để trống.";
         static ERROR_400 = "Thao tác không thành công, vui lòng kiểm tra lại dữ liệu.";
         static ERROR_401 = "Unauthorized - Access Token của bạn hết hạn hoặc không hợp lệ.";
         static ERROR_403 = "Forbidden - Bạn không được quyền truy cập tài nguyên này.";
@@ -82,7 +83,7 @@ class Product {
                 wholesalePrice, categoryId,
                 brandId, applyTax, image,
                 taxInclusive, taxList,
-                costPrice) {
+                costPrice, enableVariant) {
         this.id = id;
         this.title = title;
         this.enableSell = enableSell;
@@ -102,6 +103,7 @@ class Product {
         this.mediaList = image;
         this.quantity = quantity;
         this.costPrice = costPrice;
+        this.enableVariant = enableVariant;
     }
 }
 
