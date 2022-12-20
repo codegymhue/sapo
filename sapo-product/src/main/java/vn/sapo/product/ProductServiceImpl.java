@@ -14,14 +14,14 @@ import vn.sapo.brand.BrandMapper;
 import vn.sapo.brand.BrandRepository;
 import vn.sapo.category.CategoryMapper;
 import vn.sapo.category.CategoryRepository;
-import vn.sapo.entities.product.Item;
-import vn.sapo.entities.product.Product;
-import vn.sapo.entities.product.ProductStatus;
+import vn.sapo.convert.Characters;
+import vn.sapo.entities.product.*;
 import vn.sapo.exceptions.NotFoundException;
 import vn.sapo.item.ItemMapper;
 import vn.sapo.item.ItemService;
 import vn.sapo.media.MediaMapper;
 import vn.sapo.media.MediaService;
+import vn.sapo.media.dto.MediaResult;
 import vn.sapo.product.dto.*;
 import vn.sapo.product_tax.ProductTaxRepository;
 import vn.sapo.product_tax.ProductTaxService;
@@ -81,6 +81,9 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductTaxService productTaxService;
 
+    @Autowired
+    Characters characters;
+
 
     @Override
     @Transactional(readOnly = true)
@@ -109,11 +112,20 @@ public class ProductServiceImpl implements ProductService {
     public ProductDetailResult findDetailById(Integer id) {
         Product product = productRepository.findById(id).get();
         ProductDetailResult productDetailResult = productMapper.toDTODetail(product);
+        Optional<Category> optCategory = categoryRepository.findById(product.getCategoryId());
+        Optional<Brand> optBrand = brandRepository.findById(product.getBrandId());
+        Optional<Item> optItem = itemService.findByProductId(product.getId());
+        if (optCategory.isPresent()) {
+            productDetailResult.setCategory(categoryMapper.toDTO(optCategory.get()));
+        }
+        if (optBrand.isPresent()) {
+            productDetailResult.setBrand(brandMapper.toDTO(optBrand.get()));
+        }
 
-        productDetailResult.setCategory(categoryMapper.toDTO(categoryRepository.findById(product.getCategoryId()).get()));
-        productDetailResult.setBrand(brandMapper.toDTO(brandRepository.findById(product.getBrandId()).get()));
         productDetailResult.setMediaResults(mediaService.findAllById(product.getId()));
-        productDetailResult.setItemResult(itemService.findAllByProductId(product.getId()));
+        if (optItem.isPresent()) {
+            productDetailResult.setItemResult(itemMapper.toDTO(optItem.get()));
+        }
         List<ProductTaxResult> productTaxResults = productTaxService.findAllByProductId(product.getId());
         productDetailResult.setTaxResults(taxService.findAllByProductId(productTaxResults));
         return productDetailResult;
@@ -134,18 +146,31 @@ public class ProductServiceImpl implements ProductService {
     public ProductResult create(CreateProductParam createProductParam) {
         Product product = productMapper.toModel(createProductParam);
         product.setStatus(
-                createProductParam.getEnableSell() ? ProductStatus.AVAILABLE :
+                createProductParam.isEnableSell() ? ProductStatus.AVAILABLE :
                         ProductStatus.UNAVAILABLE);
+        if(createProductParam.getCategoryId() != null) {
+            product.setCategoryId(createProductParam.getCategoryId());
+        }
+        if(createProductParam.getBrandId() != null) {
+            product.setBrandId(createProductParam.getBrandId());
+        }
+        if (product.getSku().trim().equals("")) {
+            product.setSku(characters.covertToString(createProductParam.getTitle()));
+        }
+        if (product.getBarCode().trim().equals("")) {
+            Random random = new Random();
+            product.setBarCode(String.valueOf(random.nextInt(99999999) + 1));
+        }
         product = productRepository.save(product);
         Integer productId = product.getId();
-        if (createProductParam.getApplyTax() == true) {
+        if (createProductParam.isApplyTax()) {
             productTaxService.create(createProductParam.getTaxList(), productId);
         }
         System.out.println(createProductParam.getMediaList().size());
         if (createProductParam.getMediaList().size() != 0) {
             mediaService.save(createProductParam.getMediaList(), product);
         }
-        if (createProductParam.getEnableVariant() == true) {
+        if (createProductParam.isEnableVariant()) {
             itemService.create(itemMapper.toDTO(createProductParam, productId, 1));
         }
         return productMapper.toDTO(product);

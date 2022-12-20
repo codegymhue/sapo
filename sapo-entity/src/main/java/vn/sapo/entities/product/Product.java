@@ -34,8 +34,8 @@ public class Product extends BaseEntity {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "deleted", nullable = false)
-    private Boolean deleted = false;
+    @Column(name = "deleted")
+    private boolean deleted = false;
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -45,7 +45,7 @@ public class Product extends BaseEntity {
     private String description;
 
     @Column(name = "mass")
-    private Float mass;
+    private float mass;
 
     @Column(name = "unit", length = 50)
     private String unit;
@@ -56,13 +56,13 @@ public class Product extends BaseEntity {
     @Column(name = "bar_code", length = 50)
     private String barCode;
 
-    @Column(name = "retail_price", nullable = false, precision = 10, scale = 2)
+    @Column(name = "retail_price", precision = 10, scale = 2)
     private BigDecimal retailPrice;
 
-    @Column(name = "import_price", nullable = false, precision = 10, scale = 2)
+    @Column(name = "import_price", precision = 10, scale = 2)
     private BigDecimal importPrice;
 
-    @Column(name = "wholesale_price", nullable = false, precision = 10, scale = 2)
+    @Column(name = "wholesale_price", precision = 10, scale = 2)
     private BigDecimal wholesalePrice;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -78,10 +78,10 @@ public class Product extends BaseEntity {
     private Integer brandId;
 
     @Column(name = "apply_tax", nullable = false, columnDefinition = "boolean default false")
-    private Boolean applyTax;
+    private boolean applyTax;
 
     @Column(name = "tax_inclusive", nullable = false, columnDefinition = "boolean default false")
-    private Boolean taxInclusive;
+    private boolean taxInclusive;
     @OneToMany(mappedBy = "product")
     private Set<Media> mediaSet;
 

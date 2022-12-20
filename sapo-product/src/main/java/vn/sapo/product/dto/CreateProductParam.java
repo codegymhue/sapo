@@ -21,17 +21,17 @@ public class CreateProductParam implements Serializable {
     private String description;
     private String barCode;
     private Integer quantity;
-    private Float mass;
+    private float mass;
     private BigDecimal costPrice;
     private BigDecimal retailPrice;
     private BigDecimal importPrice;
     private BigDecimal wholesalePrice;
     private Integer categoryId;
     private Integer brandId;
-    private Boolean enableSell;
-    private Boolean applyTax;
-    private Boolean taxInclusive;
-    private Boolean enableVariant;
+    private boolean enableSell;
+    private boolean applyTax;
+    private boolean taxInclusive;
+    private boolean enableVariant;
     private List<ProductTaxParam> taxList;
     private List<MediaParam> mediaList;
 }

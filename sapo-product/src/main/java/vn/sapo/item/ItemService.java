@@ -1,5 +1,6 @@
 package vn.sapo.item;
 
+import vn.sapo.entities.product.Item;
 import vn.sapo.item.dto.*;
 
 import java.util.*;
@@ -15,6 +16,6 @@ public interface ItemService {
 
     ItemResult create(CreateItemParam CreateItemParam);
 
-    ItemResult findAllByProductId(Integer productId);
+    Optional <Item> findByProductId(Integer productId);
 
 }

@@ -39,19 +39,17 @@ public class ProductMapper implements InitializingBean {
     MediaMapper mediaMapper;
 
     public Product toModel(CreateProductParam productWithImageParam) {
-        return new Product(productWithImageParam.getCategoryId(), productWithImageParam.getBrandId())
+        return new Product()
                 .setTitle(productWithImageParam.getTitle())
                 .setDescription(productWithImageParam.getDescription())
                 .setUnit(productWithImageParam.getUnit())
-                .setApplyTax(productWithImageParam.getApplyTax())
-                .setTaxInclusive(productWithImageParam.getTaxInclusive())
+                .setApplyTax(productWithImageParam.isApplyTax())
+                .setTaxInclusive(productWithImageParam.isTaxInclusive())
                 .setSku(productWithImageParam.getSku())
                 .setBarCode(productWithImageParam.getBarCode())
                 .setImportPrice(productWithImageParam.getImportPrice())
                 .setRetailPrice(productWithImageParam.getRetailPrice())
-                .setWholesalePrice(productWithImageParam.getWholesalePrice())
-                .setBrandId(productWithImageParam.getBrandId())
-                .setCategoryId(productWithImageParam.getCategoryId());
+                .setWholesalePrice(productWithImageParam.getWholesalePrice());
 
     }
     
@@ -76,8 +74,8 @@ public class ProductMapper implements InitializingBean {
                 .setImportPrice(product.getImportPrice())
                 .setWholesalePrice(product.getWholesalePrice())
                 .setRetailPrice(product.getRetailPrice())
-                .setApplyTax(product.getApplyTax())
-                .setTaxInclusive(product.getTaxInclusive())
+                .setApplyTax(product.isApplyTax())
+                .setTaxInclusive(product.isTaxInclusive())
                 .setBarCode(product.getBarCode())
                 .setMass(product.getMass());
     }
@@ -108,7 +106,7 @@ public class ProductMapper implements InitializingBean {
                 .setStatus(product.getStatus())
                 .setCreateAt(product.getCreatedAt())
                 .setUpdateAt(product.getUpdatedAt())
-                .setApplyTax(product.getApplyTax())
+                .setApplyTax(product.isApplyTax())
                 .setRetailPrice(product.getRetailPrice())
                 .setImportPrice(product.getImportPrice())
                 .setWholesalePrice(product.getWholesalePrice())

@@ -28,7 +28,7 @@ public class ProductVariantsResult {
     private ProductStatus status;
     private Instant createAt;
     private Instant updateAt;
-    private Boolean applyTax;
+    private boolean applyTax;
     private BigDecimal retailPrice;
     private BigDecimal importPrice;
     private BigDecimal wholesalePrice;

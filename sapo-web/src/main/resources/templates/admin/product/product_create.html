@@ -16,8 +16,8 @@
           crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/admin/css/product/selectMenu.css">
     <style>
-        #titleCreate-error {
-            color: red;
+        .error {
+            color: #991b1b !important;
         }
     </style>
 </head>
@@ -119,16 +119,8 @@
                                                                                name="titleCreate"
                                                                                placeholder="Nhập tên sản phẩm"
                                                                                type="text"
-                                                                        class="form-control">
-<!--                                                                               class="titleCreate MuiInputBase-input MuiOutlinedInput-input">-->
+                                                                        class="form-control titleCreate">
                                                                     </label>
-<!--                                                                    <fieldset aria-hidden="true"-->
-<!--                                                                              class="jss26952 MuiOutlinedInput-notchedOutline"-->
-<!--                                                                              style="padding-left: 8px;">-->
-<!--                                                                        <legend class="jss26953"-->
-<!--                                                                                style="width: 0.01px;">-->
-<!--                                                                        </legend>-->
-<!--                                                                    </fieldset>-->
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -166,15 +158,8 @@
                                                                            type="text"
                                                                            name="skuCreate"
                                                                            id="skuCreate"
-                                                                           class="MuiInputBase-input MuiOutlinedInput-input">
+                                                                           class="form-control">
                                                                 </label>
-                                                                <fieldset aria-hidden="true"
-                                                                          class="jss26952 MuiOutlinedInput-notchedOutline"
-                                                                          style="padding-left: 8px;">
-                                                                    <legend class="jss26953"
-                                                                            style="width: 0.01px;">
-                                                                    </legend>
-                                                                </fieldset>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -911,11 +896,11 @@
 
     // Thêm sản phẩm
     page.dialogs.elements.frmCreateProduct = $("#frmCreateProduct");
-    page.dialogs.elements.titleCreate = $('.titleCreate');
+    page.dialogs.elements.titleCreate = $('#titleCreate');
     page.dialogs.elements.enableSell = $("#enableSell");
     page.dialogs.elements.descriptionCreate = $('.descriptionCreate');
     page.dialogs.elements.unitCreate = $('.unitCreate');
-    page.dialogs.elements.skuCreate = $('.skuCreate');
+    page.dialogs.elements.skuCreate = $('#skuCreate');
     page.dialogs.elements.barCodeCreate = $('.barCodeCreate');
     page.dialogs.elements.massCreate = $('#massCreate');
     page.dialogs.elements.retailPriceCreate = $('.retailPriceCreate');
@@ -944,11 +929,59 @@
         rules: {
             titleCreate: {
                 required: true
+            },
+            retailPriceCreate: {
+                min: 0,
+                required: true
+            },
+            wholesalePriceCreate: {
+                min: 0,
+                required: true
+            },
+            importPriceCreate: {
+                min: 0,
+                required: true
+            },
+            massCreate: {
+                min: 0,
+                required: true
+            },
+            initialInventory: {
+                min: 0,
+                required: true
+            },
+            costPrice: {
+                min: 0,
+                required: true
             }
         },
         messages: {
             titleCreate: {
-                required: "Vui lòng nhập tên sản phẩm (ví dụ: Bánh Cosy)"
+                required: "Vui lòng nhập tên sản phẩm (ví dụ: Bánh Cosy)",
+            },
+            retailPriceCreate: {
+                min: "Giá bán lẻ không được phép nhỏ hơn 0",
+                required: "Giá bản lẻ không được để trống"
+            },
+            wholesalePriceCreate: {
+                min: "Giá bán buôn không được phép nhỏ hơn 0",
+                required: "Giá bán buôn không được để trống"
+            },
+            importPriceCreate: {
+                min: "Giá nhập không được phép nhỏ hơn 0",
+                required: "Giá nhập không được để trống"
+            },
+            massCreate: {
+                min: "Khối lượng không được phép nhỏ hơn 0",
+                required: "Khối lượng không được để trống"
+            },
+            initialInventory: {
+                min: "Số lượng không được phép nhỏ hơn 0",
+                required: "Số lượng không được để trống"
+            },
+            costPrice: {
+                min: "Giá vốn không được phép nhỏ hơn 0",
+                required: "Giá vốn không được để trống"
             }
         },
         submitHandler: function () {
@@ -956,7 +989,7 @@
             console.log("page.dialogs.elements.frmCreateProduct.validate");
         },
         invalidHandler: () => {
-            App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_TITLE);
+            App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400);
         }
     })
 

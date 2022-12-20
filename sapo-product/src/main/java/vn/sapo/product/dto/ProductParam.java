@@ -29,6 +29,6 @@ public class ProductParam {
     private BigDecimal wholesalePrice;
     private Integer categoryId;
     private Integer brandId;
-    private Boolean applyTax;
-    private Boolean deleted;
+    private boolean applyTax;
+    private boolean deleted;
 }

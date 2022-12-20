@@ -1,5 +1,6 @@
 package vn.sapo.item;
 
+import vn.sapo.entities.product.Item;
 import vn.sapo.item.dto.*;
 import vn.sapo.product.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,9 +62,9 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemResult findAllByProductId(Integer productId) {
-//        Chưa xong cần sửa
-        return itemMapper.toDTO(itemRepository.findAllByProductId(productId));
+    public Optional <Item> findByProductId(Integer productId) {
+//        cần thêm
+        return itemRepository.findByProductId(productId);
     }
 
 }
