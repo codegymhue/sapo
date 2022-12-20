@@ -101,11 +101,8 @@ public class ProductController {
         String headerKey = "Content-Disposition";
         String headerValue = "attachment; filename=products_" + currentDateTime + ".xlsx";
         response.setHeader(headerKey, headerValue);
-
         List<ProductResult> listProducts = productService.findAll();
-
         ProductExcelExporter excelExporter = new ProductExcelExporter(listProducts);
-
         excelExporter.export(response);
     }
 

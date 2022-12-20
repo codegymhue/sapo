@@ -4,15 +4,14 @@
 <head>
 
     <th:block th:replace="/layout/header :: header"/>
-    <link rel="stylesheet" href="/assets/admin/css/product/product_list.css"/>
     <title>Danh sách sản phẩm</title>
-
+    <link rel="stylesheet" href="/assets/admin/css/product/product_list.css"/>
 </head>
 
 <body style="font-size: 12px">
 <div>
     <th:block th:replace="/layout/menu :: menu"/>
-
+    <th:block th:replace="/layout/modalImportFile :: #modalImportFile"/>
     <div class="col-right  MuiBox-root jss64 jss40">
         <div class="MuiBox-root jss6915 jss440 "
              id="header">
@@ -362,7 +361,6 @@
         </div>
     </div>
 </div>
-
 <th:block th:replace="/layout/script :: script"/>
 <script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="/assets/admin/js/product/app.js"></script>
@@ -444,6 +442,10 @@
 
     //nhat-dev import file
     page.elements.importFile = $("#importFile");
+
+    page.elements.importFile.on("click", function (){
+            $("#modalImportFile").modal("show");
+    })
 
     page.commands.getAllProducts = () => {
         let pageNo = Number(page.elements.pageNo.text());
@@ -791,6 +793,25 @@
         page.commands.getAllCategory();
         page.commands.getAllBrand();
     }
+    $('#btnImportFile').click(function () {
+        let data = new FormData();
+        let file = $('#formFile')[0].files[0];
+        data.append('file',file);
+        $.ajax({
+            url: 'http://localhost:8080/api/upload',
+            processData: false,
+            contentType: false,
+            data: data,
+            type: 'POST'
+        }).done(function(result) {
+            $("#modalImportFile").modal("hide");
+            $("#frmFile")[0].reset();
+            page.commands.getAllProducts();
+            App.IziToast.showSuccessAlert("Tải file lên thành công!")
+        }).fail((jqXHR) => {
+            App.IziToast.showErrorAlert("Tải file lên không thành công!")
+        })
+    });
 
     $(() => {
         page.loadData()

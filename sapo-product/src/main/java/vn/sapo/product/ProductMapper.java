@@ -58,7 +58,10 @@ public class ProductMapper implements InitializingBean {
     }
 
     public ProductResult toDTO(Product product) {
-        return modelMapper.map(product, ProductResult.class);
+        return modelMapper.map(product, ProductResult.class)
+                .setCategory(product.getCategoryId() != null ? categoryMapper.toDTO(product.getCategory()) : new CategoryResult())
+                .setBrand(product.getBrandId() != null ? brandMapper.toDTO(product.getBrand()) : new BrandResult())
+                ;
     }
 
     public ProductDetailResult toDTODetail(Product product) {
