@@ -71,7 +71,7 @@
                                             <div class="MuiBox-root jss4687 jss4674">: <p
                                                     class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap"
                                                     itemid="display_product_variant_sku"
-                                                    style="line-height: 16px; margin-left: 5px;" th:text="*{sku}">
+                                                    style="line-height: 16px; margin-left: 5px;" th:text="*{sku}?: '---'">
                                             </p>
                                             </div>
                                         </div>
@@ -357,15 +357,18 @@
                                                     <div class="MuiGrid-root jss15470 MuiGrid-item MuiGrid-grid-xs-5">
                                                         Thuế đầu vào
                                                     </div>
-                                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7"
-                                                         th:text=" ': ' + ${#numbers.formatDecimal(product.taxResults.get(0).tax, 0, 'COMMA', 0, 'POINT') + '%'}"></div>
+                                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7">
+<!--                                                         th:text="': ' + ${#numbers.formatDecimal(product.taxResults.get(0).tax, 0, 'COMMA', 0, 'POINT') + '%'}"-->
+                                                    </div>
                                                 </div>
                                                 <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
                                                     <div class="MuiGrid-root jss15470 MuiGrid-item MuiGrid-grid-xs-5">
                                                         Thuế đầu ra
                                                     </div>
-                                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7"
-                                                         th:text=" ': ' + ${#numbers.formatDecimal(product.taxResults.get(1).tax, 0, 'COMMA', 0, 'POINT') + '%'}"></div>
+                                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7">
+<!--                                                         th:text=" ': ' + ${#numbers.formatDecimal(product.taxResults.get(1).tax, 0, 'COMMA', 0, 'POINT') + '%'}"-->
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
