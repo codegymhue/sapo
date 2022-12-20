@@ -33,7 +33,7 @@ public class ProductResult {
     private Integer brandId;
     private CategoryResult category;
     private BrandResult brand;
-    private Boolean applyTax;
+    private boolean applyTax;
     private Instant createdAt;
     private Instant updatedAt;
     private int totalInventory;

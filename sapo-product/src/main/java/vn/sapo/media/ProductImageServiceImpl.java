@@ -23,7 +23,8 @@ public class ProductImageServiceImpl implements MediaService {
 
     @Override
     public List<MediaResult> findAllById(Integer productId) {
-        List<MediaResult> mediaResults = mediaRepository.findAllById(productId).stream().map(mediaMapper::toDTO).collect(Collectors.toList());
+        List<MediaResult> mediaResults;
+        mediaResults = mediaRepository.findAllById(productId).stream().map(mediaMapper::toDTO).collect(Collectors.toList());
         return mediaResults;
     }
 

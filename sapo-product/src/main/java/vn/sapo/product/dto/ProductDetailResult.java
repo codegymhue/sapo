@@ -38,8 +38,8 @@ public class ProductDetailResult {
     private Float mass;
     private CategoryResult category;
     private BrandResult brand;
-    private Boolean applyTax;
-    private Boolean taxInclusive;
+    private boolean applyTax;
+    private boolean taxInclusive;
     private List<TaxResult> taxSaleList;
     private List<MediaResult> mediaResults;
     private ItemResult itemResult;
