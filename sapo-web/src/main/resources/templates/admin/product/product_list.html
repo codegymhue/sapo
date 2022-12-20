@@ -383,7 +383,7 @@
             getAllStatus: App.BASE_URL_PRODUCT + "/status",
             updateStatusAvailable: App.BASE_URL_PRODUCT + "/updateStatusAvailable",
             updateStatusUnavailable: App.BASE_URL_PRODUCT + "/updateStatusUnavailable",
-            deleteProduct: App.BASE_URL_PRODUCT + "/delete"
+            deleteProduct: App.BASE_URL_PRODUCT + "/delete",
 
         },
         elements: {},
@@ -441,6 +441,9 @@
 
     page.dialogs.elements.nextPage = $("#nextPage");
     page.dialogs.elements.previousPage = $("#previousPage");
+
+    //nhat-dev import file
+    page.elements.importFile = $("#importFile");
 
     page.commands.getAllProducts = () => {
         let pageNo = Number(page.elements.pageNo.text());

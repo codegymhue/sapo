@@ -20,7 +20,7 @@ import vn.sapo.entities.product.ProductStatus;
 public class ExcelHelper {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
-    static String[] HEADERs = { "Title", "SKU", "Mass", "BarCode", "Unit", "Retail Price", "Wholesale Price", "Import Price", "Brand", "Category", "Status", "Apply Tax", "Tax Inclusive"};
+    static String[] HEADERs = { "Id","Title", "SKU", "Mass", "BarCode", "Unit", "Retail Price", "Wholesale Price", "Import Price", "Brand", "Category", "Status", "Apply Tax", "Tax Inclusive"};
     static String SHEET = "Products";
 
     public static boolean hasExcelFormat(MultipartFile file) {
@@ -63,11 +63,9 @@ public class ExcelHelper {
                         case 0:
                             product.setId((int) currentCell.getNumericCellValue());
                             break;
-
                         case 1:
                             product.setTitle(currentCell.getStringCellValue());
                             break;
-
                         case 2:
                             product.setSku(currentCell.getStringCellValue());
                             break;
