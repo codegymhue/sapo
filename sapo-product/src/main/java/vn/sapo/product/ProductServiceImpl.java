@@ -109,7 +109,7 @@ public class ProductServiceImpl implements ProductService {
         productDetailResult.setCategory(categoryMapper.toDTO(categoryRepository.findById(product.getCategoryId()).get()));
         productDetailResult.setBrand(brandMapper.toDTO(brandRepository.findById(product.getBrandId()).get()));
         productDetailResult.setMediaResults(mediaService.findAllById(product.getId()));
-        productDetailResult.setItemResult(itemService.findAllByProductId(product.getId()));
+//        productDetailResult.setItemResult(itemService.findAllByProductId(product.getId()));
         List<ProductTaxResult> productTaxResults = productTaxService.findAllByProductId(product.getId());
         productDetailResult.setTaxResults(taxService.findAllByProductId(productTaxResults));
         return productDetailResult;

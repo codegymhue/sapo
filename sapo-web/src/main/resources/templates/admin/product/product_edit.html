@@ -1091,7 +1091,7 @@
                 App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED);
             })
             .fail((jqXHR) => {
-                console.log(": Cập nhập thất bại")
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400);
             })
     })
 

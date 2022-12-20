@@ -77,7 +77,7 @@ public class ProductAPI {
         return new ResponseEntity<>(productService.findById(p.getId()), HttpStatus.CREATED);
     }
 
-    @PutMapping("/update")
+    @PutMapping ("/products/update")
     public ResponseEntity<?> update(@RequestBody ProductUpdateParam productUpdateParam){
        productService.update(productUpdateParam);
        return new ResponseEntity<>(HttpStatus.CREATED);
