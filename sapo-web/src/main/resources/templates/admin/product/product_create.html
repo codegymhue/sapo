@@ -822,10 +822,10 @@
         })
             .done((data) => {
                 let productId = data.id
-                // App.IziToast.showSuccessAlert("Tạo sản phẩm thành công!");
-                // setTimeout(() => {
-                //     window.location.href = "/admin/product/" + productId;
-                // }, 1500)
+                App.IziToast.showSuccessAlert("Tạo sản phẩm thành công!");
+                setTimeout(() => {
+                    window.location.href = "/admin/product/" + productId;
+                }, 1500)
             })
     }
 
