@@ -229,15 +229,17 @@
                                     <td class="align-middle">
                                         <input id="selectAction" type="checkbox" value="" >
                                     </td>
-                                    <td colspan="2" class="align-middle" id="numberSelectProductList">
-                                    </td>
-                                    <td colspan="7" class="align-middle">
+                                    <td colspan="2" class="align-middle" id="numberSelectProductList"></td>
+                                    <td class="align-middle">
                                         <div class="btn-group">
                                             <button class="btn dropdown-toggle btnDropdown me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 Chọn thao tác
                                                 <i class="fa-solid fa-sort-down" style="padding-left: 2.3rem"></i>
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                                <li>
+                                                    <button class="dropdown-item btnDropdown" id="btnApplyTax">Áp dụng thuế</button>
+                                                </li>
                                                 <li>
                                                     <button class="dropdown-item btnDropdown" id="btnAvailable">Đang giao dịch</button>
                                                 </li>
@@ -250,6 +252,7 @@
                                             </ul>
                                         </div>
                                     </td>
+                                    <td colspan="14"></td>
                                 </tr>
                             </thead>
                             <tbody >
@@ -257,7 +260,6 @@
                         </table>
                     </div>
                 </div>
-
 
                 <div class="container-fluid " style="height: 50px">
                     <div class="row col-md-12 d-flex align-items-center" style="font-size: small">
@@ -297,6 +299,57 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalAvailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: max-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="staticBackdropLabel">Cập nhật trạng thái !</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="statusChange">
+            </div>
+            <div class="modal-footer d-flex align-items-center">
+                <button class="btn btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn btn-primary btn-save" id="btnAvailableSave" type="button">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalUnavailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: max-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Ngừng giao dịch!</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="statusChangeUnavailable">
+            </div>
+            <div class="modal-footer d-flex align-items-center">
+                <button class="btn btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn btn-primary btn-save" id="btnUnavailableSave" type="button">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: max-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Xóa sản phẩm?</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="statusChangeDelete">
+            </div>
+            <div class="modal-footer d-flex align-items-center">
+                <button class="btn  btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn btn-danger btn-save-delete" id="btnSubmitDelete" type="button">Xóa</button>
             </div>
         </div>
     </div>

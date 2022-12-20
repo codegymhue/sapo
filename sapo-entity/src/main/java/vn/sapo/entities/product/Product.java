@@ -3,7 +3,6 @@ package vn.sapo.entities.product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.Value;
 import lombok.experimental.Accessors;
 import vn.sapo.entities.BaseEntity;
 import vn.sapo.entities.media.Media;

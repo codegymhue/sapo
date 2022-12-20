@@ -56,7 +56,7 @@ class App {
                 <td class="align-middle">
                     <span id="showStatus" class="${showStatus}">${item.status === "AVAILABLE" ? "Đang giao dịch" : "Ngừng giao dịch"}</span> 
                 </td>
-                <td class="align-middle">${ item.createAt === null ? "" : new Date(item.createAt).toLocaleDateString('en-GB')}</td>
+                <td class="align-middle">${item.createAt === null ? "" : new Date(item.createAt).toLocaleDateString('en-GB')}</td>
                 <td class="align-middle">${item.updateAt === null ? "" : new Date(item.updateAt).toLocaleDateString('en-GB')}</td>
             </tr>
         `;
@@ -86,7 +86,7 @@ class App {
                 <td class="align-middle text-end">${item.importPrice}</td>
                 <td class="align-middle text-end">${item.wholesalePrice}</td>
                 <td class="align-middle text-end ">${item.available}</td>
-                <td class="align-middle text-endr">${item.inventory}</td>
+                <td class="align-middle text-end">${item.inventory}</td>
                 <td class="align-middle text-end">${item.inTransit}</td>
                 <td class="align-middle text-end">${item.shipping}</td>
                 <td class="align-middle text-end">${item.trading}</td>
