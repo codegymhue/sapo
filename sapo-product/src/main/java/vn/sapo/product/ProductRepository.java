@@ -22,16 +22,4 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     Page<Product> findAllByTitleContainingAndBrandId(@Param("brandId") Integer brandId, @Param("title") String title, Pageable pageable);
     @Query("SELECT p FROM Product AS p WHERE p.status = :status AND p.title LIKE %:title% AND p.deleted = false")
     Page<Product> findAllByTitleContainingAndStatus(@Param("status") ProductStatus status, @Param("title") String title, Pageable pageable);
-
-    @Query(value = "SELECT p FROM Product AS p WHERE p.title LIKE %:title% " +
-            "AND p.categoryId LIKE %:categoryId% " +
-            "AND p.brandId LIKE %:brandId% " +
-            "AND p.status LIKE %:status% " +
-            "AND p.deleted = false", nativeQuery = true)
-    Page<Product> findAllByTitleContainingAndCategoryIdAndBrandIdAndStatus(@Param("title") String title,
-                                                                           @Param("categoryId") Integer categoryId,
-                                                                           @Param("brandId") Integer brandId,
-                                                                           @Param("status") ProductStatus status,
-                                                                           Pageable pageable);
-
 }

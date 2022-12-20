@@ -49,10 +49,10 @@ class App {
                 <td class="align-middle"><input class="selectCheckbox"  name="options[]" type="checkbox" value="${item.id}"></td>
                 <td class="align-middle"><img width="50px" height="40px" src=${item.image} alt="image"></td>
                 <td class="align-middle"><a href="/admin/product/${item.id}" style="text-decoration: none">${item.title}</a></td>
-                <td class="align-middle">${item.category.title}</td>
-                <td class="align-middle">${item.brand.title}</td>
-                <td class="align-middle text-center ">${item.available}</td>
-                <td class="align-middle text-center">${item.inventory}</td>
+                <td class="align-middle">${item.category.title || ""}</td>
+                <td class="align-middle">${item.brand.title || ""}</td>
+                <td class="align-middle text-end ">${item.available}</td>
+                <td class="align-middle text-end">${item.inventory}</td>
                 <td class="align-middle">
                     <span id="showStatus" class="${showStatus}">${item.status === "AVAILABLE" ? "Đang giao dịch" : "Ngừng giao dịch"}</span> 
                 </td>
@@ -70,25 +70,26 @@ class App {
                 <td class="align-middle"><img width="50px" height="40px" src=${item.image} alt="image"></td>
                 <td class="align-middle">
                     <a href="/admin/product/${item.id}" style="text-decoration: none">${item.title}</a>
+                    <br>
                     <span>${item.sku}</span>
                 </td>
                 <td class="align-middle">${item.barCode}</td>
-                <td class="align-middle">${item.category.title}</td>
-                <td class="align-middle">${item.brand.title}</td>
+                <td class="align-middle">${item.category.title || ""}</td>
+                <td class="align-middle">${item.brand.title || ""}</td>
                 <td class="align-middle">
                     <span id="showStatus" class="${showStatus}">${item.status === "AVAILABLE" ? "Đang giao dịch" : "Ngừng giao dịch"}</span> 
                 </td>
                 <td class="align-middle">${ item.createAt === null ? "" : new Date(item.createAt).toLocaleDateString('en-GB')}</td>
                 <td class="align-middle">${item.updateAt === null ? "" : new Date(item.updateAt).toLocaleDateString('en-GB')}</td>
-                <td class="align-middle">${item.applyTax}</td>
-                <td class="align-middle">${item.retailPrice}</td>
-                <td class="align-middle">${item.importPrice}</td>
-                <td class="align-middle">${item.wholesalePrice}</td>
-                <td class="align-middle text-center ">${item.available}</td>
-                <td class="align-middle text-center">${item.inventory}</td>
-                <td class="align-middle">${item.inTransit}</td>
-                <td class="align-middle">${item.shipping}</td>
-                <td class="align-middle">${item.trading}</td>
+                <td class="align-middle">${item.applyTax === true ? "Có" : "Không"}</td>
+                <td class="align-middle text-end">${item.retailPrice}</td>
+                <td class="align-middle text-end">${item.importPrice}</td>
+                <td class="align-middle text-end">${item.wholesalePrice}</td>
+                <td class="align-middle text-end ">${item.available}</td>
+                <td class="align-middle text-endr">${item.inventory}</td>
+                <td class="align-middle text-end">${item.inTransit}</td>
+                <td class="align-middle text-end">${item.shipping}</td>
+                <td class="align-middle text-end">${item.trading}</td>
             </tr>
         `;
         return str;

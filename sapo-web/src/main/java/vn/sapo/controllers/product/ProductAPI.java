@@ -51,7 +51,17 @@ public class ProductAPI {
 
     @GetMapping("/variants")
     public ResponseEntity<?> getAllProductVariantsPage(@RequestParam HashMap<String, String> hashMap){
-        return new ResponseEntity<>(null);
+        return new ResponseEntity<>(productService.getAllProductVariantPage(
+                Integer.valueOf(hashMap.get("pageNo")),
+                Integer.valueOf(hashMap.get("pageSize")),
+                hashMap.get("search"),
+                Integer.valueOf(hashMap.get("categoryId")),
+                Integer.valueOf(hashMap.get("brandId")),
+                hashMap.get("status"),
+                hashMap.get("sortPage[type]"),
+                hashMap.get("sortPage[value]")),
+                HttpStatus.OK
+        );
     }
 
     @GetMapping("/products/categories")
