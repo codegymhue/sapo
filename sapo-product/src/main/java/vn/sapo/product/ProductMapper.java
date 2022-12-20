@@ -5,7 +5,9 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import vn.sapo.brand.BrandMapper;
+import vn.sapo.brand.dto.BrandResult;
 import vn.sapo.category.CategoryMapper;
+import vn.sapo.category.dto.CategoryResult;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.product.Product;
 import vn.sapo.media.MediaMapper;
@@ -90,8 +92,8 @@ public class ProductMapper implements InitializingBean {
                 .setInventory(0)
                 .setCreateAt(product.getCreatedAt())
                 .setUpdateAt(product.getUpdatedAt())
-                .setCategory(categoryMapper.toDTO(product.getCategory()))
-                .setBrand(brandMapper.toDTO(product.getBrand()));
+                .setCategory(product.getCategoryId() != null ? categoryMapper.toDTO(product.getCategory()) : new CategoryResult())
+                .setBrand(product.getBrandId() != null ? brandMapper.toDTO(product.getBrand()) : new BrandResult());
     }
 
     public ProductVariantsResult toDTOVariants(Product product){
@@ -101,8 +103,8 @@ public class ProductMapper implements InitializingBean {
                 .setTitle(product.getTitle())
                 .setSku(product.getSku())
                 .setBarCode(product.getBarCode())
-                .setCategory(categoryMapper.toDTO(product.getCategory()))
-                .setBrand(brandMapper.toDTO(product.getBrand()))
+                .setCategory(product.getCategoryId() != null ? categoryMapper.toDTO(product.getCategory()) : new CategoryResult())
+                .setBrand(product.getBrandId() != null ? brandMapper.toDTO(product.getBrand()) : new BrandResult())
                 .setStatus(product.getStatus())
                 .setCreateAt(product.getCreatedAt())
                 .setUpdateAt(product.getUpdatedAt())

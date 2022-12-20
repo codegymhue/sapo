@@ -271,7 +271,7 @@
                 </div>
                 <div class="container-fluid " style="height: 50px">
                     <div class="row col-md-12 d-flex align-items-center" style="font-size: small">
-                        <div class="col-md-4"></div>
+                        <div class="col-md-5"></div>
                         <div class="col-md-3 text-end">
                             <label class="me-2">Hiển thị</label>
                             <select class="me-2 " id="pageSize">
@@ -281,10 +281,10 @@
                             </select>
                             <span>Kết quả</span>
                         </div>
-                        <div class="col-md-3" id="totalPage">
+                        <div class="col-md-3 text-center" id="totalPage" style="padding: initial">
 
                         </div>
-                        <div class="col-md-2 ">
+                        <div class="col-md-1">
                             <nav aria-label="Page navigation example ">
                                 <ul class="pagination" >
                                     <li class="page-item">
@@ -475,6 +475,7 @@
                 page.elements.tbProduct.empty();
                 page.elements.totalPage.empty();
                 totalPage = data.totalPage;
+                console.log(data);
                 data.products.map(item => {
                     if(item.status == "AVAILABLE"){
                         page.elements.tbProduct.append(App.renderRowProduct(item, 'available'))

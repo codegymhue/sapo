@@ -191,26 +191,65 @@
                 <div class="center-scroll">
                     <div style="font-size:small; width: 150rem" >
                         <table id="tbProduct" class="table table-hover" >
-                            <thead>
-                                <tr>
-                                    <th><input type="checkbox" value=""></th>
-                                    <th>Ảnh</th>
-                                    <th>Tên phiên bản sản phẩm</th>
-                                    <th>Mã vạch</th>
-                                    <th>Loại</th>
-                                    <th>Nhãn hiệu</th>
-                                    <th>Trạng thái</th>
-                                    <th>Ngày khởi tạo</th>
-                                    <th>Cập nhật cuối</th>
-                                    <th>Áp dụng thuế</th>
-                                    <th>Giá bán lẻ</th>
-                                    <th>Giá nhập</th>
-                                    <th>Giá bán buôn</th>
-                                    <th>Có thể bán</th>
-                                    <th>Tồn kho</th>
-                                    <th>Hàng đang về</th>
-                                    <th>Hàng đang giao</th>
-                                    <th>Đang giao dịch</th>
+                            <thead style="background-color: #f4f6f8; height: 55px">
+                                <tr id="theadList" class="show">
+                                    <th class="align-middle"><input id="checkAll" type="checkbox" value="" data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả"></th>
+                                    <th class="align-middle" scope="col">Ảnh</th>
+                                    <th class="align-middle" scope="col">
+                                        <button class="sort" id="btnTitleSort">Tên phiên bản sản phẩm <i class="fa-solid fa-sort"></i></button>
+                                    </th>
+                                    <th class="align-middle" scope="col">Mã vạch</th>
+                                    <th class="align-middle" scope="col">Loại</th>
+                                    <th class="align-middle" scope="col">Nhãn hiệu</th>
+                                    <th class="align-middle" scope="col">Trạng thái</th>
+                                    <th class="align-middle" scope="col">
+                                        <button class="sort" id="btnCreatAtSort">Ngày khởi tạo <i class="fa-solid fa-sort"></i></button>
+                                    </th>
+                                    <th class="align-middle" scope="col">
+                                        <button class="sort" id="btnUpdateAtSort">Cập nhập cuối <i class="fa-solid fa-sort"></i></button>
+                                    </th>
+                                    <th class="align-middle" scope="col">Áp dụng thuế</th>
+                                    <th class="align-middle" scope="col">
+                                        <button class="sort" id="btnRetailPriceSort">Giá bán lẻ <i class="fa-solid fa-sort"></i></button>
+                                    </th>
+                                    <th class="align-middle" scope="col">
+                                        <button class="sort" id="btnImportPriceSort">Giá nhập <i class="fa-solid fa-sort"></i></button>
+                                    </th>
+                                    <th class="align-middle" scope="col">
+                                        <button class="sort" id="btnWholesalePriceSort">Giá bán buôn <i class="fa-solid fa-sort"></i></button>
+                                    </th>
+                                    <th class="align-middle" scope="col">Có thể bán</th>
+                                    <th class="align-middle" scope="col">Tồn kho</th>
+                                    <th class="align-middle" scope="col">Hàng đang về</th>
+                                    <th class="align-middle" scope="col">Hàng đang giao</th>
+                                    <th class="align-middle" scope="col">Đang giao dịch</th>
+                                </tr>
+
+                                <tr class="hide" id="selectActionThead" style="border: snow">
+                                    <td class="align-middle">
+                                        <input id="selectAction" type="checkbox" value="" >
+                                    </td>
+                                    <td colspan="2" class="align-middle" id="numberSelectProductList">
+                                    </td>
+                                    <td colspan="7" class="align-middle">
+                                        <div class="btn-group">
+                                            <button class="btn dropdown-toggle btnDropdown me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Chọn thao tác
+                                                <i class="fa-solid fa-sort-down" style="padding-left: 2.3rem"></i>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                                <li>
+                                                    <button class="dropdown-item btnDropdown" id="btnAvailable">Đang giao dịch</button>
+                                                </li>
+                                                <li>
+                                                    <button class="dropdown-item btnDropdown" id="btnUnavailable">Ngừng giao dịch</button>
+                                                </li>
+                                                <li>
+                                                    <button class="dropdown-item btnDropdown" id="btnDelete">Xóa sản phẩm</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
                                 </tr>
                             </thead>
                             <tbody >
@@ -222,7 +261,7 @@
 
                 <div class="container-fluid " style="height: 50px">
                     <div class="row col-md-12 d-flex align-items-center" style="font-size: small">
-                        <div class="col-md-4"></div>
+                        <div class="col-md-5"></div>
                         <div class="col-md-3 text-end">
                             <label class="me-2">Hiển thị</label>
                             <select class="me-2 " id="pageSize">
@@ -232,10 +271,10 @@
                             </select>
                             <span>Kết quả</span>
                         </div>
-                        <div class="col-md-3" id="totalPage">
+                        <div class="col-md-3 text-center" id="totalPage" style="padding: initial">
 
                         </div>
-                        <div class="col-md-2 ">
+                        <div class="col-md-1 ">
                             <nav aria-label="Page navigation example ">
                                 <ul class="pagination" >
                                     <li class="page-item">
@@ -308,6 +347,9 @@
     page.elements.btnTitleSort = $("#btnTitleSort");
     page.elements.btnCreatAtSort = $("#btnCreatAtSort");
     page.elements.btnUpdateAtSort = $("#btnUpdateAtSort");
+    page.elements.btnRetailPriceSort = $("#btnRetailPriceSort");
+    page.elements.btnImportPriceSort = $("#btnImportPriceSort");
+    page.elements.btnWholesalePriceSort = $("#btnWholesalePriceSort");
 
     page.elements.totalPage = $("#totalPage");
     page.elements.pageNo = $("#pageNo");
@@ -672,6 +714,27 @@
         sortPage.type==="des" ?
             sortPage = {"type": "asc","value": "createdAt"} :
             sortPage = {"type": "des","value": "createdAt"};
+        page.commands.getAllProducts();
+    })
+
+    page.elements.btnRetailPriceSort.on("click", () => {
+        sortPage.type==="des" ?
+            sortPage = {"type": "asc","value": "retailPrice"} :
+            sortPage = {"type": "des","value": "retailPrice"};
+        page.commands.getAllProducts();
+    })
+
+    page.elements.btnImportPriceSort.on("click", () => {
+        sortPage.type==="des" ?
+            sortPage = {"type": "asc","value": "importPrice"} :
+            sortPage = {"type": "des","value": "importPrice"};
+        page.commands.getAllProducts();
+    })
+
+    page.elements.btnWholesalePriceSort.on("click", () => {
+        sortPage.type==="des" ?
+            sortPage = {"type": "asc","value": "wholesalePrice"} :
+            sortPage = {"type": "des","value": "wholesalePrice"};
         page.commands.getAllProducts();
     })
 

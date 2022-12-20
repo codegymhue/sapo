@@ -26,6 +26,7 @@ import vn.sapo.product.dto.*;
 import vn.sapo.product_tax.ProductTaxRepository;
 import vn.sapo.product_tax.ProductTaxService;
 import vn.sapo.product_tax.dto.ProductTaxResult;
+import vn.sapo.purchaseOrderItem.PurchaseOrderItemService;
 import vn.sapo.tax.TaxMapper;
 import vn.sapo.tax.TaxService;
 
@@ -67,6 +68,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     ItemService itemService;
+
+    @Autowired
+    PurchaseOrderItemService purchaseOrderItemService;
 
     @Autowired
     MediaService mediaService;
@@ -234,10 +238,53 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public Map<String, Object> getAllProductVariantPage(Integer pageNo, Integer pageSize, String title,
                                                         Integer categoryId, Integer brandId, String status,
                                                         String typeSort, String nameFieldSort) {
-        return null;
+        pageNo = pageNo - 1;
+
+        Pageable pageable;
+        if(typeSort.equals("asc")){
+            pageable = PageRequest.of(pageNo, pageSize, Sort.by(nameFieldSort).ascending());
+        } else {
+            pageable = PageRequest.of(pageNo, pageSize, Sort.by(nameFieldSort).descending());
+        }
+
+        Page<Product> products;
+        if (title.equals("") && categoryId == -1 && brandId == -1 && status.equals("")) {
+            products = productRepository.findAllByDeletedIsFalse(pageable);
+        } else if (categoryId == -1 && brandId == -1 && status.equals("")) {
+            products = productRepository.findAllByTitleContaining(title, pageable);
+        } else if (brandId == -1 && status.equals("")) {
+            products = productRepository.findAllByTitleContainingAndCategoryId(categoryId, title, pageable);
+        } else if (status.equals("")) {
+            products = productRepository.findAllByTitleContainingAndBrandId(brandId, title, pageable);
+        } else {
+            products = productRepository.findAllByTitleContainingAndStatus(ProductStatus.parseProductStatus(status), title, pageable);
+        }
+        if (products.hasContent()) {
+            List<Product> productList = products.getContent();
+            List<ProductVariantsResult> productVariantsResults = new ArrayList<>();
+            for (Product product : productList) {
+                ProductVariantsResult productVariantsResult = productMapper.toDTOVariants(product);
+                productVariantsResult.setImage(mediaService.getLinkMediaByProductIdIsMain(product.getId()));
+                productVariantsResult.setInventory(itemService.getTotalInventoryQuantityByProductId(product.getId()));
+                productVariantsResult.setAvailable(itemService.getAvailableInventoryQuantityByProductId(product.getId()));
+                productVariantsResult.setTrading(itemService.getTradingQuantityByProductId(product.getId()));
+                productVariantsResult.setInTransit(purchaseOrderItemService.getQuantityPurchaseByProductIdAndOrderStatusCode(product.getId(),"INTRANSIT"));
+                productVariantsResult.setShipping(purchaseOrderItemService.getQuantityPurchaseByProductIdAndOrderStatusCode(product.getId(),"SHIPPING"));
+                productVariantsResults.add(productVariantsResult);
+            }
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("products", productVariantsResults);
+            response.put("totalItem", products.getTotalElements());
+            response.put("totalPage", products.getTotalPages());
+            return response;
+        } else {
+            return new HashMap<>();
+        }
     }
 
     @Override
