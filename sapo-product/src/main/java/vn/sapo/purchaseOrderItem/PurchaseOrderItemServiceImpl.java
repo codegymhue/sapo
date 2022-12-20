@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class PurchaseOrderItemServiceImpl implements PurchaseOrderItemService{
     @Autowired
     private PurchaseOrderItemRepository purchaseOrderItemRepository;
+
     @Override
     @Transactional(readOnly = true)
     public int getQuantityPurchaseByProductIdAndOrderStatusCode(Integer productId, String orderStatusCode) {

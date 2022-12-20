@@ -57,6 +57,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     ProductRepository productRepository;
+
     @Autowired
     ProductTaxRepository productTaxRepository;
 
