@@ -7,10 +7,14 @@ import vn.sapo.entities.tax.Tax;
 import vn.sapo.tax.dto.CreateTaxParam;
 import vn.sapo.tax.dto.TaxResult;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class TaxMapper {
     @Autowired
     private ModelMapper modelMapper;
+
     public TaxResult toDTO(Tax tax) {
         return modelMapper.map(tax, TaxResult.class);
     }

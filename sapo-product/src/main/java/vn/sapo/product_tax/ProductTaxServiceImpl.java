@@ -42,4 +42,14 @@ public class ProductTaxServiceImpl implements ProductTaxService {
                 .stream().map(productTaxMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void createAll(List<ProductTaxParam> taxListParam) {
+        
+    }
+
+    @Override
+    public void deleteAllByProductId(Integer productId) {
+
+    }
 }

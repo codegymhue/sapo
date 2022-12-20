@@ -15,5 +15,9 @@ public interface TaxService {
 
     TaxResult create(CreateTaxParam taxParam);
 
+
+
     List<TaxResult> findAllByProductId(List<ProductTaxResult> productTaxResults);
+
+    void deleteAllByProductId(Integer productId);
 }

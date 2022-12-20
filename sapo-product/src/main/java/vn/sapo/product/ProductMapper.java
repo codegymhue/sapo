@@ -8,7 +8,6 @@ import vn.sapo.brand.BrandMapper;
 import vn.sapo.brand.dto.BrandResult;
 import vn.sapo.category.CategoryMapper;
 import vn.sapo.category.dto.CategoryResult;
-import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.product.Product;
 import vn.sapo.media.MediaMapper;
 import vn.sapo.product.dto.*;
@@ -53,7 +52,7 @@ public class ProductMapper implements InitializingBean {
 
     }
     
-    public void transferFields(ProductUpdateParam updateCustomerParam, Product product) {
+    public void transferFields(UpdateProductParam updateCustomerParam, Product product) {
         modelMapper.map(updateCustomerParam, product);
     }
 

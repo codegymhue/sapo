@@ -14,4 +14,6 @@ public interface ProductTaxRepository extends JpaRepository<ProductTax, ProductT
 
     List<ProductTax> findAllByProductId(Integer productId);
 
+    void deleteAllByProductId(Integer productId);
+
 }

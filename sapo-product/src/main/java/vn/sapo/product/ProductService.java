@@ -22,19 +22,22 @@ public interface ProductService {
 
     ProductResult create(CreateProductParam createProductParam);
 
-    ProductResult update(ProductUpdateParam productUpdateParam);
+    void update(UpdateProductParam updateProductParam);
 
     ProductResult createShortProduct(ProductShortParam productShortParam);
 
     Map<String, Object> getAllProductItemPage(Integer pageNo, Integer pageSize, String title,
                                               Integer categoryId, Integer brandId, String status,
                                               String typeSort, String nameFieldSort);
+
     Map<String, Object> getAllProductVariantPage(Integer pageNo, Integer pageSize, String title,
-                                              Integer categoryId, Integer brandId, String status,
-                                              String typeSort, String nameFieldSort);
+                                                 Integer categoryId, Integer brandId, String status,
+                                                 String typeSort, String nameFieldSort);
 
 
-    void saveChangeStatusToAvailable (List<String> list);
+    void saveChangeStatusToAvailable(List<String> list);
+
     void saveChangeStatusToUnavailable(List<String> list);
+
     void deleteSoftProduct(List<String> list);
 }

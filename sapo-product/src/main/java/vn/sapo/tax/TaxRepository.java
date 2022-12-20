@@ -6,5 +6,4 @@ import vn.sapo.entities.tax.Tax;
 
 @Repository
 public interface TaxRepository extends JpaRepository<Tax, Integer> {
-
 }

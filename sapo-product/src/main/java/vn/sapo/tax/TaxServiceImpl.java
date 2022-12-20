@@ -47,11 +47,24 @@ public class TaxServiceImpl implements TaxService {
     }
 
     @Override
+    public void createAll(List<CreateTaxParam> taxListParam) {
+        List<Tax> taxList = taxMapper.toModelList(taxListParam);
+        taxRepository.saveAll(taxList);
+    }
+
+    @Override
+    @Transactional
     public List<TaxResult> findAllByProductId(List<ProductTaxResult> productTaxResults) {
         List<TaxResult> result = new ArrayList<>();
         for (ProductTaxResult productTaxResult : productTaxResults) {
             result.add(taxMapper.toDTO(taxRepository.findById(productTaxResult.getTaxId()).get()));
         }
         return result;
+    }
+
+    @Override
+    @Transactional
+    public void deleteAllByProductId(Integer productId) {
+        taxRepository.deleteAllByProductId(productId);
     }
 }

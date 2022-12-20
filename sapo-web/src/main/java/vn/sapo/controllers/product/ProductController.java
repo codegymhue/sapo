@@ -1,12 +1,15 @@
 package vn.sapo.controllers.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import vn.sapo.product.ProductExcelExporter;
 import vn.sapo.product.ProductService;
-import vn.sapo.product.dto.ProductDetailResult;
 import vn.sapo.product.dto.ProductResult;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -21,15 +24,13 @@ public class ProductController {
     ProductService productService;
 
 
-
-
     @GetMapping("/products")
     public ModelAndView showProductListPage() {
         return new ModelAndView("/admin/product/product_list");
     }
 
     @GetMapping("/variants")
-    public ModelAndView showVariantsListPage(){
+    public ModelAndView showVariantsListPage() {
         return new ModelAndView("/admin/variants/variants");
     }
 
@@ -37,7 +38,7 @@ public class ProductController {
     public ModelAndView showProductCreatePage() {
         return new ModelAndView("/admin/product/product_create");
     }
-    
+
     @GetMapping("/product/edit/{id}")
     public ModelAndView showProductEditPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView();
@@ -54,12 +55,11 @@ public class ProductController {
     @GetMapping("/product/{id}")
     public ModelAndView showDetailProduct(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView();
-        ProductResult product = productService.findById(id);
-        if (product == null) {
-            modelAndView.addObject("errors", "errors");
-        } else {
-            ProductDetailResult productResult =productService.findDetailById(product.getId());
-            modelAndView.addObject("product", productResult);
+        try {
+            ProductResult product = productService.findById(id);
+            modelAndView.addObject("product", product);
+        } catch (Exception ex) {
+            modelAndView.addObject("errors", ex.getMessage());
         }
         modelAndView.setViewName("/admin/product/product_detail");
         return modelAndView;
