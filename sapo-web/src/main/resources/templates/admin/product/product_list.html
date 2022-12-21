@@ -238,18 +238,21 @@
                             </th>
                         </tr>
                         <tr class="hide" id="selectActionThead" style="border: snow">
-                            <td class="align-middle">
+                            <td class="align-middle" style="width: 20px">
                                 <input id="selectAction" type="checkbox" value="" >
                             </td>
-                            <td colspan="2" class="align-middle" id="numberSelectProductList">
+                            <td colspan="2" class="align-middle" id="numberSelectProductList" style="width: 24%">
                             </td>
-                            <td colspan="7" class="align-middle">
+                            <td class="align-middle" colspan="2">
                                 <div class="btn-group">
                                     <button class="btn dropdown-toggle btnDropdown me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Chọn thao tác
                                         <i class="fa-solid fa-sort-down" style="padding-left: 2.3rem"></i>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                        <li>
+                                            <button class="dropdown-item btnDropdown" id="btnCheckInventory">Kiểm tra tồn kho</button>
+                                        </li>
                                         <li>
                                             <button class="dropdown-item btnDropdown" id="btnAvailable">Đang giao dịch</button>
                                         </li>
@@ -262,6 +265,7 @@
                                     </ul>
                                 </div>
                             </td>
+                            <td colspan="5"></td>
                         </tr>
                         </thead>
                         <tbody >
@@ -361,6 +365,44 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modalCheckInventory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content " style="width:max-content">
+            <div class="modal-header">
+                <h4 class="modal-title" >Kiểm tra thông tin tồn kho</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" >
+                <table class="table table-hover table-bordered" id="tbInventoryProduct" style="font-size: small">
+                    <thead>
+                    <tr>
+                        <th scope="col " rowspan="2" class="align-middle">Mã SKU</th>
+                        <th scope="col" rowspan="2" class="align-middle ">Tên sản phẩm</th>
+                        <th scope="col">Chính sách giá</th>
+                        <th scope="col" colspan="5" class="text-center">Tổng</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Giá bán lẻ</th>
+                        <th scope="col">Tồn kho</th>
+                        <th scope="col">Có thể bán</th>
+                        <th scope="col">Đang giao dịch</th>
+                        <th scope="col">Hàng đang về</th>
+                        <th scope="col">Hàng đang giao</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer d-flex align-items-center">
+                <button class="btn btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <th:block th:replace="/layout/script :: script"/>
 <script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="/assets/admin/js/product/app.js"></script>
@@ -382,6 +424,7 @@
             updateStatusAvailable: App.BASE_URL_PRODUCT + "/updateStatusAvailable",
             updateStatusUnavailable: App.BASE_URL_PRODUCT + "/updateStatusUnavailable",
             deleteProduct: App.BASE_URL_PRODUCT + "/delete",
+            getAllCheckInventory: App.BASE_URL_PRODUCT + "/checkInventory"
 
         },
         elements: {},
@@ -395,6 +438,7 @@
         initializeEventControl: {}
     }
 
+    let productVariant = new ProductVariant();
     let product = new ProductItemPage();
     let category = new Category();
     let brand = new Brand();
@@ -403,12 +447,15 @@
     let arrayIdProduct = [];
 
     page.elements.tbProduct = $("#tbProduct tbody");
+    page.elements.tbinventoryProduct = $("#tbInventoryProduct tbody");
     page.elements.btnAvailable = $("#btnAvailable");
     page.elements.btnUnavailable = $("#btnUnavailable");
     page.elements.btnDelete = $("#btnDelete");
     page.elements.btnAvailableSave = $("#btnAvailableSave");
     page.elements.btnUnavailableSave = $("#btnUnavailableSave");
     page.elements.btnSubmitDelete = $("#btnSubmitDelete");
+    page.elements.btnCheckInventory = $("#btnCheckInventory");
+
 
     page.elements.btnTitleSort = $("#btnTitleSort");
     page.elements.btnCreatAtSort = $("#btnCreatAtSort");
@@ -432,6 +479,7 @@
     page.elements.modalAvailable = $("#modalAvailable");
     page.elements.modalUnavailable =$("#modalUnavailable");
     page.elements.modalDelete =$("#modalDelete");
+    page.elements.modalCheckInventory = $("#modalCheckInventory");
 
     page.dialogs.elements.category = $("#category");
     page.dialogs.elements.brand = $("#brand");
@@ -480,7 +528,6 @@
                 page.elements.tbProduct.empty();
                 page.elements.totalPage.empty();
                 totalPage = data.totalPage;
-                console.log(data);
                 data.products.map(item => {
                     if(item.status == "AVAILABLE"){
                         page.elements.tbProduct.append(App.renderRowProduct(item, 'available'))
@@ -687,6 +734,9 @@
     page.elements.btnDelete.on("click", () => {
         page.elements.modalDelete.modal("show");
     })
+    page.elements.btnCheckInventory.on("click", () => {
+        page.commands.getAllCheckInventoryProduct();
+    })
 
     page.commands.updateStatusToAvailable = () => {
         $.ajax({
@@ -748,6 +798,28 @@
             })
             .fail((jqXHR) => {
                 App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_403)
+            })
+    }
+
+    page.commands.getAllCheckInventoryProduct = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "POST",
+            url: page.urls.getAllCheckInventory,
+            data: JSON.stringify(arrayIdProduct)
+        })
+            .done((data) => {
+                page.elements.tbinventoryProduct.empty();
+                data.map(item => {
+                    page.elements.tbinventoryProduct.append(App.renderRowProductInventory(item));
+                });
+                page.elements.modalCheckInventory.modal("show");
+            })
+            .fail((jqXHR) => {
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404);
             })
     }
 
