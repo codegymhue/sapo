@@ -15,7 +15,7 @@ public interface TaxService {
 
     TaxResult create(CreateTaxParam taxParam);
 
-
+    public void createAll(List<CreateTaxParam> taxListParam);
 
     List<TaxResult> findAllByProductId(List<ProductTaxResult> productTaxResults);
 

@@ -65,6 +65,6 @@ public class TaxServiceImpl implements TaxService {
     @Override
     @Transactional
     public void deleteAllByProductId(Integer productId) {
-        taxRepository.deleteAllByProductId(productId);
+//        taxRepository.deleteAllByProductId(productId);
     }
 }

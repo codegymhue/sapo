@@ -22,4 +22,8 @@ public class TaxMapper {
     public Tax toModel(CreateTaxParam taxParam) {
         return modelMapper.map(taxParam, Tax.class);
     }
+
+    public List<Tax> toModelList(List<CreateTaxParam> taxListParam) {
+        return null;
+    }
 }
