@@ -338,27 +338,32 @@
                                                         <span id="catProType">Chọn loại sản phẩm</span>
                                                     </div>
                                                     <ul class="dropdown-menu w-100 categoryIdCreate showAllCategory">
-
-                                                        <li>
-                                                            <div class="d-flex align-items-center">
-                                                                <i class="fa-solid fa-magnifying-glass" style="margin-left: 16px;
+                                                        <div>
+                                                            <li>
+                                                                <div class="d-flex align-items-center">
+                                                                    <i class="fa-solid fa-magnifying-glass" style="margin-left: 16px;
                                                                    margin-right: 4px;
                                                                    color: #828282"></i>
-                                                                <input id="inputSearchCat" style="margin: 2px"
-                                                                       class="w-100 form-control border border-0"
-                                                                       placeholder="Tìm kiếm hoặc nhập mới"/>
-                                                            </div>
-                                                        </li>
-                                                        <li class="text-primary dropdown-item">
-                                                            <button id="btnCreateCat" style="border: none; color: #2d9dff;padding: 10px;text-align: start;
+                                                                    <input id="inputSearchCat" style="margin: 2px"
+                                                                           class="w-100 form-control border border-0"
+                                                                           placeholder="Tìm kiếm hoặc nhập mới"/>
+                                                                </div>
+                                                            </li>
+                                                            <li class="text-primary dropdown-item">
+                                                                <button id="btnCreateCat" style="border: none; color: #2d9dff;padding: 10px;text-align: start;
                                                                      font-weight: 500;
                                                                      font-size: 14px" type="button"
-                                                                    class="bg-white w-100">
-                                                                <i class="fa-solid fa-circle-plus"
-                                                                   style="margin: 0 9px"></i>Thêm mới
-                                                                loại sản phẩm
-                                                            </button>
-                                                        </li>
+                                                                        class="bg-white w-100">
+                                                                    <i class="fa-solid fa-circle-plus"
+                                                                       style="margin: 0 9px"></i>Thêm mới
+                                                                    loại sản phẩm
+                                                                </button>
+                                                            </li>
+                                                        </div>
+                                                        <div id="showAllCAt">
+
+                                                        </div>
+
                                                     </ul>
                                                 </div>
                                             </div>
@@ -378,28 +383,34 @@
                                                         <span id="brandProType">Chọn loại nhãn hiệu</span>
                                                     </div>
                                                     <ul class="dropdown-menu w-100 brandIdCreate showAllBrand">
-                                                        <li>
-                                                            <div class="d-flex align-items-center">
-                                                                <i class="fa-solid fa-magnifying-glass" style="margin-left: 16px;
+                                                        <div>
+                                                            <li>
+                                                                <div class="d-flex align-items-center">
+                                                                    <i class="fa-solid fa-magnifying-glass" style="margin-left: 16px;
                                                                    margin-right: 4px;
                                                                    color: #828282"></i>
-                                                                <input id="inputSearchBrand" style="margin: 2px"
-                                                                       class="w-100 form-control border border-0"
-                                                                       placeholder="Tìm kiếm hoặc nhập mới"/>
-                                                            </div>
-                                                        </li>
-                                                        <li class="text-primary dropdown-item">
-                                                            <button id="btnCreateBrand" style="border: none; color: #2d9dff;padding: 10px;text-align: start;
+                                                                    <input id="inputSearchBrand" style="margin: 2px"
+                                                                           class="w-100 form-control border border-0"
+                                                                           placeholder="Tìm kiếm hoặc nhập mới"/>
+                                                                </div>
+                                                            </li>
+                                                            <li class="text-primary dropdown-item">
+                                                                <button id="btnCreateBrand" style="border: none; color: #2d9dff;padding: 10px;text-align: start;
                                                                      font-weight: 500;
                                                                      font-size: 14px" type="button"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#modalAddBrand"
-                                                                    class="bg-white w-100">
-                                                                <i class="fa-solid fa-circle-plus"
-                                                                   style="margin: 0 9px"></i>Thêm mới
-                                                                nhãn hiệu
-                                                            </button>
-                                                        </li>
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#modalAddBrand"
+                                                                        class="bg-white w-100">
+                                                                    <i class="fa-solid fa-circle-plus"
+                                                                       style="margin: 0 9px"></i>Thêm mới
+                                                                    nhãn hiệu
+                                                                </button>
+                                                            </li>
+                                                        </div>
+                                                        <div id="showAllBrand">
+
+                                                        </div>
+
                                                     </ul>
                                                 </div>
                                             </div>
@@ -556,18 +567,23 @@
                                                                 align-items: center; ">
                                                                     <span id="taxProType">Chọn thuế đầu vào</span>
                                                                 </div>
-                                                                <ul class="dropdown-menu w-100  showAllTax">
-                                                                    <li class="text-primary dropdown-item">
-                                                                        <button style="border: none; color: #2d9dff;padding: 10px;text-align: start;
+                                                                <ul class="dropdown-menu w-100 showAllTax">
+                                                                    <div>
+                                                                        <li class="text-primary dropdown-item">
+                                                                            <button style="border: none; color: #2d9dff;padding: 10px;text-align: start;
                                                                      font-weight: 500;
                                                                      font-size: 14px"
-                                                                                type="button"
-                                                                                class="bg-white w-100 btnCreateTax">
-                                                                            <i class="fa-solid fa-circle-plus"
-                                                                               style="margin: 0 9px"></i>Thêm mới thuế
-                                                                            đầu vào
-                                                                        </button>
-                                                                    </li>
+                                                                                    type="button"
+                                                                                    class="bg-white w-100 btnCreateTax">
+                                                                                <i class="fa-solid fa-circle-plus"
+                                                                                   style="margin: 0 9px"></i>Thêm mới thuế
+                                                                                đầu vào
+                                                                            </button>
+                                                                        </li>
+                                                                    </div>
+                                                                    <div id="showALlTax">
+
+                                                                    </div>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -590,17 +606,21 @@
                                                                     <span id="taxProTypeOut">Chọn thuế đầu ra </span>
                                                                 </div>
                                                                 <ul class="dropdown-menu w-100  showAllTaxOut">
-                                                                    <li class="text-primary dropdown-item">
-                                                                        <button style="border: none; color: #2d9dff;padding: 10px;text-align: start;
+                                                                    <div>
+                                                                        <li class="text-primary dropdown-item">
+                                                                            <button type="button" style="border: none; color: #2d9dff;padding: 10px;text-align: start;
                                                                      font-weight: 500;
                                                                      font-size: 14px"
-                                                                                class="bg-white w-100 btnCreateTax">
-                                                                            <i class="fa-solid fa-circle-plus"
-                                                                               type="button"
-                                                                               style="margin: 0 9px"></i>Thêm mới thuế
-                                                                            đầu ra
-                                                                        </button>
-                                                                    </li>
+                                                                                    class="bg-white w-100 btnCreateTax">
+                                                                                <i class="fa-solid fa-circle-plus"
+                                                                                   style="margin: 0 9px"></i>Thêm mới thuế
+                                                                                đầu ra
+                                                                            </button>
+                                                                        </li>
+                                                                    </div>
+                                                                    <div id="showALlTaxOut">
+
+                                                                    </div>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -940,6 +960,7 @@
         })
             .done((data) => {
                 App.IziToast.showSuccessAlert("Tạo loại sản phẩm mới thành công!");
+                $(".showAllCategory #showAllCAt").empty();
                 showAllCategories();
                 $('#modalAddCategory').modal('hide');
                 $('#frmCreateCat')[0].reset();
@@ -968,6 +989,7 @@
         })
             .done((data) => {
                 App.IziToast.showSuccessAlert("Tạo nhãn hiệu mới thành công!");
+                $(".showAllBrand #showAllBrand").empty();
                 showAllBrands();
                 $('#modalAddBrand').modal('hide');
                 $('#frmCreateBrand')[0].reset();
@@ -997,6 +1019,8 @@
         })
             .done((data) => {
                 console.log(": Tạo thuế thành công")
+                $(".showAllTax #showALlTax").empty();
+                $(".showAllTaxOut #showALlTaxOut").empty();
                 showAllTaxes()
                 $('#modalAddTax').modal('hide');
                 $('#frmCreateTax')[0].reset();

@@ -43,9 +43,9 @@ public class ProductExcelExporter {
         createCell(row, 2, " Loại", style);
         createCell(row, 3, "Nhãn hiệu", style);
         createCell(row, 4, "Trạng thái", style);
-        createCell(row, 5, "Giá bán lẻ", style);
-        createCell(row, 6, "Giá bán buôn", style);
-        createCell(row, 7, "Giá nhập", style);
+//        createCell(row, 5, "Giá bán lẻ", style);
+//        createCell(row, 6, "Giá bán buôn", style);
+//        createCell(row, 7, "Giá nhập", style);
 
     }
 
@@ -82,9 +82,9 @@ public class ProductExcelExporter {
             createCell(row, columnCount++, product.getCategory().toString(), style);
             createCell(row, columnCount++, product.getBrand().toString(), style);
             createCell(row, columnCount++, product.getStatus().toString() == "AVAILABLE" ? "Đang giao dịch" : "Ngừng giao dịch", style);
-            createCell(row, columnCount++, product.getRetailPrice().toString(), style);
-            createCell(row, columnCount++, product.getWholesalePrice().toString(), style);
-            createCell(row, columnCount++, product.getImportPrice().toString(), style);
+//            createCell(row, columnCount++, product.getRetailPrice().toString(), style);
+//            createCell(row, columnCount++, product.getWholesalePrice().toString(), style);
+//            createCell(row, columnCount++, product.getImportPrice().toString(), style);
         }
     }
 
