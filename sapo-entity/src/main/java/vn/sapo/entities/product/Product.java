@@ -12,10 +12,7 @@ import vn.sapo.entities.tax.TaxType;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor
@@ -50,7 +47,7 @@ public class Product extends BaseEntity {
     @Column(name = "unit", length = 50)
     private String unit;
 
-    @Column(name = "sku", length = 50)
+    @Column(name = "sku", length = 50, unique = true)
     private String sku;
 
     @Column(name = "bar_code", length = 50)
@@ -88,25 +85,42 @@ public class Product extends BaseEntity {
     @OneToMany(mappedBy = "id.product")
 //    @OrderBy("tax_id")
     @OrderBy("taxId")
-    private Set<ProductTax> productTaxSet = new HashSet<>();
+    private Set<ProductTax> productTaxSet;
+
 
     public Set<Media> getMediaList() {
         return mediaSet;
     }
 
+    public String getMainImageUrl() {
+        if (mediaSet == null)
+            return null;
+        return mediaSet.stream()
+                .filter(Media::isMain)
+                .map(Media::getFileUrl)
+                .findAny()
+                .orElse(null);
+    }
+
     public List<Tax> getTaxList() {
+        if (productTaxSet == null)
+            return new ArrayList<>();
         return productTaxSet.stream()
                 .map(ProductTax::getTax)
                 .collect(Collectors.toList());
     }
 
     public List<Tax> getSaleTaxList() {
+        if (productTaxSet == null)
+            return new ArrayList<>();
         return productTaxSet.stream()
                 .filter(productTax -> productTax.getTaxType() == TaxType.TAX_SALE)
                 .map(ProductTax::getTax).collect(Collectors.toList());
     }
 
     public List<Tax> getPurchaseTaxList() {
+        if (productTaxSet == null)
+            return new ArrayList<>();
         return productTaxSet.stream()
                 .filter(productTax -> productTax.getTaxType() == TaxType.TAX_PURCHASE)
                 .map(ProductTax::getTax).collect(Collectors.toList());

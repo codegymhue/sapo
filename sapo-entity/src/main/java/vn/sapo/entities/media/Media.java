@@ -34,7 +34,7 @@ public class Media {
     private String fileType;
 
     @Column(name = "is_main", nullable = false)
-    private Boolean isMain;
+    private boolean isMain;
 
     @Column(name = "product_id", insertable = false, updatable = false)
     private Integer productId;

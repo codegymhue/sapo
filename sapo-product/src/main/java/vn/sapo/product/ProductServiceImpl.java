@@ -179,15 +179,13 @@ public class ProductServiceImpl implements ProductService {
         if (createProductParam.isApplyTax()) {
             productTaxService.create(createProductParam.getTaxList(), productId);
         }
-        System.out.println(createProductParam.getMediaList().size());
         if (createProductParam.getMediaList().size() != 0) {
             mediaService.save(createProductParam.getMediaList(), product);
         }
         if (createProductParam.isEnableVariant()) {
             itemService.create(itemMapper.toDTO(createProductParam, productId, 1));
         }
-        ProductResult productResult = productMapper.toDTO(product);
-        return productResult;
+        return productMapper.toDTO(product);
     }
 
     @Override
