@@ -340,7 +340,7 @@
                                                                        class="retailPriceUpdate MuiInputBase-input MuiOutlinedInput-input"
                                                                        value="0"
                                                                        style="width: 100%; text-align: right;"
-                                                                       th:value="${#numbers.formatDecimal(product.retailPrice, 0, 'COMMA', 0, 'POINT')}">
+                                                                       th:value="${#numbers.formatDecimal(product.retailPrice, 0, 0, 'POINT')}">
                                                                 <fieldset aria-hidden="true"
                                                                           class="jss26952 MuiOutlinedInput-notchedOutline"
                                                                           style="padding-left: 8px;">
@@ -391,7 +391,7 @@
                                                                        class="wholesalePriceUpdate MuiInputBase-input MuiOutlinedInput-input"
                                                                        value="0"
                                                                        style="width: 100%; text-align: right;"
-                                                                       th:value="${#numbers.formatDecimal(product.wholesalePrice, 0, 'COMMA', 0, 'POINT')}">
+                                                                       th:value="${#numbers.formatDecimal(product.wholesalePrice, 0, 0, 'POINT')}">
                                                                 <fieldset aria-hidden="true"
                                                                           class="jss26952 MuiOutlinedInput-notchedOutline"
                                                                           style="padding-left: 8px;">
@@ -443,7 +443,7 @@
                                                                        class="importPriceUpdate MuiInputBase-input MuiOutlinedInput-input"
                                                                        value="0"
                                                                        style="width: 100%; text-align: right;"
-                                                                       th:value="${#numbers.formatDecimal(product.importPrice, 0, 'COMMA', 0, 'POINT')}"
+                                                                       th:value="${#numbers.formatDecimal(product.importPrice, 0, 0, 'POINT')}"
                                                                 >
                                                                 <fieldset aria-hidden="true"
                                                                           class="jss26952 MuiOutlinedInput-notchedOutline"
@@ -537,7 +537,7 @@
                                                                 display: flex;
                                                                 justify-content: space-between;
                                                                 align-items: center; ">
-                                                        <span id="catProType" th:text="*{category.title}"></span>
+                                                        <span id="catProType" th:text="*{categoryId != null} ? *{category.title} : 'Chọn loại sản phẩm' "></span>
                                                     </div>
                                                     <ul class="dropdown-menu w-100 categoryIdUpdate showAllCategory">
 
@@ -576,7 +576,7 @@
                                                                 display: flex;
                                                                 justify-content: space-between;
                                                                 align-items: center; ">
-                                                        <span id="brandProType" th:text="*{brand.title}"></span>
+                                                        <span id="brandProType" th:text="*{brandId != null} ? *{brand.title} : 'Chọn loại nhãn hiệu'"></span>
                                                     </div>
                                                     <ul class="dropdown-menu w-100 brandIdUpdate showAllBrand">
                                                         <li>
@@ -721,7 +721,7 @@
                                                             <input class="form-check-input" type="checkbox"
                                                                    role="switch"
                                                                    id="applyTax"
-                                                                   th:checked="*{applyTax}">
+                                                                   th:checked="*{applyTax}?: 'checked'">
                                                         </div>
                                                         <span class="sc-eEOqmf gWbFII"></span>
                                                     </div>
@@ -768,7 +768,7 @@
                                                                 justify-content: space-between;
                                                                 align-items: center; ">
                                                                     <span id="taxProType"
-                                                                    th:text="${product.taxResults.get(0).title}"
+                                                                    th:text="${product.purchaseTaxList.size() > 0} ? ${product.purchaseTaxList.get(0).title} : 'Chọn thuế đầu vào' "
                                                                     >Chọn thuế đầu vào</span>
                                                                 </div>
                                                                 <ul class="dropdown-menu w-100  showAllTax">
@@ -803,7 +803,10 @@
                                                                 justify-content: space-between;
                                                                 align-items: center; ">
                                                                     <span id="taxProTypeOut"
-                                                                    th:text="${product.taxResults.get(1).title}">Chọn thuế đầu ra </span>
+                                                                    th:text="${product.saleTaxList.size() > 0} ? ${product.saleTaxList.get(0).title} : 'Chọn thuế đầu ra'"
+                                                                    >
+
+                                                                    </span>
                                                                 </div>
                                                                 <ul class="dropdown-menu w-100  showAllTaxOut">
                                                                     <li class="text-primary dropdown-item">

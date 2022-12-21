@@ -195,6 +195,11 @@ public class ProductServiceImpl implements ProductService {
         Integer productId = updateProductParam.getId();
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new NotFoundException("Product not found"));
+        product.setStatus(updateProductParam.isEnableSell() ? ProductStatus.AVAILABLE :
+                        ProductStatus.UNAVAILABLE);
+        if (updateProductParam.isApplyTax()) {
+            productTaxService.create(updateProductParam.getTaxList(), productId);
+        }
         productMapper.transferFields(updateProductParam, product);
         productTaxService.deleteAllByProductId(productId);
         productTaxService.createAll(updateProductParam.getTaxList());
