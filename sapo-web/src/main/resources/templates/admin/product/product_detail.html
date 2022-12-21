@@ -71,7 +71,8 @@
                                             <div class="MuiBox-root jss4687 jss4674">: <p
                                                     class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap"
                                                     itemid="display_product_variant_sku"
-                                                    style="line-height: 16px; margin-left: 5px;" th:text="*{sku}?: '---'">
+                                                    style="line-height: 16px; margin-left: 5px;"
+                                                    th:text="*{sku}?: '---'">
                                             </p>
                                             </div>
                                         </div>
@@ -158,7 +159,7 @@
                                                     class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap"
                                                     itemid="display_product_variant_category" title="Bánh kẹo"
                                                     style="line-height: 16px; margin-left: 5px;"
-                                                    th:text="*{category.title}?: '---'"></p>
+                                                    th:text="*{category!=null} ? *{category.title} :  '---'"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -172,7 +173,7 @@
                                                     class="MuiTypography-root MuiTypography-body2"
                                                     itemid="display_product_variant_brand"
                                                     style="line-height: 16px; margin-left: 5px;"
-                                                    th:text="*{brand.title}?: '---'">
+                                                    th:text="*{brand!=null} ? *{brand.title} : '---'">
                                             </p>
                                             </div>
                                         </div>
@@ -226,9 +227,11 @@
                                             <div class="MuiBox-root jss4699"
                                                  style="width: 100%; display: flex; justify-content: center;">
                                                 <div class="MuiGrid-container">
-                                                    <th:block th:each="media : *{mediaResults}">
+                                                    <th:block th:each="media : *{mediaList}">
                                                         <div class="MuiGrid-item">
-                                                            <img class="image-item" style="width: 90px; height: 90px; margin: 5px" th:src="${media.fileUrl}">
+                                                            <img class="image-item"
+                                                                 style="width: 90px; height: 90px; margin: 5px"
+                                                                 th:src="${media.fileUrl}">
                                                         </div>
                                                     </th:block>
                                                 </div>
@@ -343,7 +346,9 @@
                                                                                 d="M8 2C4.688 2 2 4.688 2 8s2.688 6 6 6 6-2.688 6-6-2.688-6-6-6ZM3.2 8c0 2.646 2.154 4.8 4.8 4.8s4.8-2.154 4.8-4.8S10.646 3.2 8 3.2A4.806 4.806 0 0 0 3.2 8Z"
                                                                                 fill="#0088FF"></path></svg></span></p>
                                             <div class="MuiBox-root jss15500"
-                                                 th:style="*{applyTax} ? ('display : block') : ('display : none')">
+                                                 th:style="*{applyTax} ? ('display : block') : ('display : none')"
+                                                 th:if="*{applyTax}"
+                                            >
                                                 <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
                                                     <div class="MuiGrid-root jss15470 MuiGrid-item MuiGrid-grid-xs-5"
                                                          style="padding-right: 0">
@@ -357,17 +362,18 @@
                                                     <div class="MuiGrid-root jss15470 MuiGrid-item MuiGrid-grid-xs-5">
                                                         Thuế đầu vào
                                                     </div>
-                                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7">
-<!--                                                         th:text="': ' + ${#numbers.formatDecimal(product.taxResults.get(0).tax, 0, 'COMMA', 0, 'POINT') + '%'}"-->
+                                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7"
+                                                         th:text=" ': ' + ${#numbers.formatDecimal(product.purchaseTaxList.get(0).tax , 0, 'COMMA', 0, 'POINT') + '%'}"
+                                                    >
                                                     </div>
                                                 </div>
                                                 <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
                                                     <div class="MuiGrid-root jss15470 MuiGrid-item MuiGrid-grid-xs-5">
                                                         Thuế đầu ra
                                                     </div>
-                                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7">
-<!--                                                         th:text=" ': ' + ${#numbers.formatDecimal(product.taxResults.get(1).tax, 0, 'COMMA', 0, 'POINT') + '%'}"-->
-
+                                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7"
+                                                         th:text=" ': ' + ${#numbers.formatDecimal(product.saleTaxList.get(0).tax, 0, 'COMMA', 0, 'POINT') + '%'}"
+                                                    >
                                                     </div>
                                                 </div>
                                             </div>

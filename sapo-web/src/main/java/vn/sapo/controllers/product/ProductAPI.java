@@ -14,7 +14,7 @@ import vn.sapo.product.ProductService;
 import vn.sapo.product.dto.CreateProductParam;
 import vn.sapo.product.dto.ProductResult;
 import vn.sapo.product.dto.ProductShortParam;
-import vn.sapo.product.dto.ProductUpdateParam;
+import vn.sapo.product.dto.UpdateProductParam;
 
 import java.util.HashMap;
 import java.util.List;
@@ -40,8 +40,7 @@ public class ProductAPI {
     }
 
     @GetMapping("/products/page")
-    public ResponseEntity<?> getAllProductPageNoCategory(@RequestParam HashMap<String, String> hashMap)
-    {
+    public ResponseEntity<?> getAllProductPageNoCategory(@RequestParam HashMap<String, String> hashMap) {
         return new ResponseEntity<>(productService.getAllProductItemPage(
                 Integer.valueOf(hashMap.get("pageNo")),
                 Integer.valueOf(hashMap.get("pageSize")),
@@ -56,7 +55,7 @@ public class ProductAPI {
     }
 
     @GetMapping("/variants")
-    public ResponseEntity<?> getAllProductVariantsPage(@RequestParam HashMap<String, String> hashMap){
+    public ResponseEntity<?> getAllProductVariantsPage(@RequestParam HashMap<String, String> hashMap) {
         return new ResponseEntity<>(productService.getAllProductVariantPage(
                 Integer.valueOf(hashMap.get("pageNo")),
                 Integer.valueOf(hashMap.get("pageSize")),
@@ -93,10 +92,10 @@ public class ProductAPI {
         return new ResponseEntity<>(productService.findById(p.getId()), HttpStatus.CREATED);
     }
 
-    @PutMapping ("/products/update")
-    public ResponseEntity<?> update(@RequestBody ProductUpdateParam productUpdateParam){
-       productService.update(productUpdateParam);
-       return new ResponseEntity<>(HttpStatus.CREATED);
+    @PutMapping("/products/update")
+    public ResponseEntity<?> update(@RequestBody UpdateProductParam updateProductParam) {
+        productService.update(updateProductParam);
+        return new ResponseEntity<>(productService.findById(updateProductParam.getId()), HttpStatus.CREATED);
     }
 
 
@@ -119,7 +118,7 @@ public class ProductAPI {
     }
 
     @DeleteMapping("/products/delete")
-    public ResponseEntity<?> deleteProduct(@RequestBody List<String> arrayIdProduct){
+    public ResponseEntity<?> deleteProduct(@RequestBody List<String> arrayIdProduct) {
         productService.deleteSoftProduct(arrayIdProduct);
         return new ResponseEntity<>(HttpStatus.OK);
     }

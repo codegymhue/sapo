@@ -2,7 +2,6 @@ package vn.sapo.product.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.List;
 
 import lombok.Getter;
@@ -18,21 +17,7 @@ import vn.sapo.product_tax.dto.ProductTaxParam;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class ProductUpdateParam implements Serializable {
-
-//    private String title;
-//    private String image;
-//    private String description;
-//    private String unit;
-//    private String sku;
-//    private String barCode;
-//    private Integer quantity;
-//    private BigDecimal retailPrice;
-//    private BigDecimal importPrice;
-//    private BigDecimal wholesalePrice;
-//    private Integer categoryId;
-//    private Integer brandId;
-
+public class UpdateProductParam implements Serializable {
     private Integer id;
     private String title;
     private String unit;
@@ -47,8 +32,9 @@ public class ProductUpdateParam implements Serializable {
     private Integer brandId;
     private boolean enableSell;
     private boolean applyTax;
-    private boolean isTaxInclusive;
+    private boolean taxInclusive;
     private List<ProductTaxParam> taxList;
     private List<MediaParam> mediaList;
+
 
 }

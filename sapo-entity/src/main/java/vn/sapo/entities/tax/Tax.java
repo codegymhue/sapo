@@ -18,6 +18,7 @@ public class Tax {
     public Tax(Integer id) {
         this.id = id;
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -28,6 +29,8 @@ public class Tax {
     private String title;
     @Column(name = "tax", nullable = false)
     private float tax;
+    @Column(name = "is_default", nullable = false)
+    private boolean isDefault;
 
     @Override
     public boolean equals(Object o) {

@@ -6,14 +6,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.brand.BrandMapper;
 import vn.sapo.brand.BrandRepository;
+import vn.sapo.brand.dto.BrandResult;
 import vn.sapo.category.CategoryMapper;
 import vn.sapo.category.CategoryRepository;
+import vn.sapo.category.dto.CategoryResult;
 import vn.sapo.convert.Characters;
 import vn.sapo.entities.product.*;
 import vn.sapo.exceptions.NotFoundException;
@@ -21,7 +21,6 @@ import vn.sapo.item.ItemMapper;
 import vn.sapo.item.ItemService;
 import vn.sapo.media.MediaMapper;
 import vn.sapo.media.MediaService;
-import vn.sapo.media.dto.MediaResult;
 import vn.sapo.product.dto.*;
 import vn.sapo.product_tax.ProductTaxRepository;
 import vn.sapo.product_tax.ProductTaxService;
@@ -106,23 +105,36 @@ public class ProductServiceImpl implements ProductService {
     @Transactional(readOnly = true)
     public ProductResult findById(Integer id) {
         Product product = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product not found"));
-        return productMapper.toDTO(product);
+        Integer productId = product.getId();
+        ProductResult dto = productMapper.toDTO(product);
+        dto.setTotalInventory(itemService.getTotalInventoryQuantityByProductId(productId));
+        dto.setAvailableInventory(itemService.getAvailableInventoryQuantityByProductId(productId));
+        return dto;
     }
 
     @Override
     public ProductDetailResult findDetailById(Integer id) {
         Product product = productRepository.findById(id).get();
         ProductDetailResult productDetailResult = productMapper.toDTODetail(product);
-        Optional<Category> optCategory = categoryRepository.findById(product.getCategoryId());
-        Optional<Brand> optBrand = brandRepository.findById(product.getBrandId());
-        Optional<Item> optItem = itemService.findByProductId(product.getId());
-        if (optCategory.isPresent()) {
-            productDetailResult.setCategory(categoryMapper.toDTO(optCategory.get()));
-        }
-        if (optBrand.isPresent()) {
-            productDetailResult.setBrand(brandMapper.toDTO(optBrand.get()));
+        try {
+            Optional<Category> optCategory = categoryRepository.findById(product.getCategoryId());
+            if (optCategory.isPresent()) {
+                productDetailResult.setCategory(categoryMapper.toDTO(optCategory.get()));
+            }
+        } catch (Exception e) {
+            productDetailResult.setCategory(new CategoryResult());
         }
 
+        try {
+            Optional<Brand> optBrand = brandRepository.findById(product.getBrandId());
+            if (optBrand.isPresent()) {
+                productDetailResult.setBrand(brandMapper.toDTO(optBrand.get()));
+            }
+        } catch (Exception e) {
+            productDetailResult.setBrand(new BrandResult());
+        }
+
+        Optional<Item> optItem = itemService.findByProductId(product.getId());
         productDetailResult.setMediaResults(mediaService.findAllById(product.getId()));
         if (optItem.isPresent()) {
             productDetailResult.setItemResult(itemMapper.toDTO(optItem.get()));
@@ -149,10 +161,10 @@ public class ProductServiceImpl implements ProductService {
         product.setStatus(
                 createProductParam.isEnableSell() ? ProductStatus.AVAILABLE :
                         ProductStatus.UNAVAILABLE);
-        if(createProductParam.getCategoryId() != null) {
+        if (createProductParam.getCategoryId() != null) {
             product.setCategoryId(createProductParam.getCategoryId());
         }
-        if(createProductParam.getBrandId() != null) {
+        if (createProductParam.getBrandId() != null) {
             product.setBrandId(createProductParam.getBrandId());
         }
         if (product.getSku().trim().equals("")) {
@@ -179,13 +191,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public ProductResult update(ProductUpdateParam productUpdateParam) {
-        Integer productId = productUpdateParam.getId();
+    public void update(UpdateProductParam updateProductParam) {
+        Integer productId = updateProductParam.getId();
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new NotFoundException("Product not found"));
-        productMapper.transferFields(productUpdateParam, product);
-
-        return productMapper.toDTO(product);
+        productMapper.transferFields(updateProductParam, product);
+        productTaxService.deleteAllByProductId(productId);
+        productTaxService.createAll(updateProductParam.getTaxList());
     }
 
 
@@ -220,11 +232,11 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public Map<String, Object> getAllProductItemPage(Integer pageNo, Integer pageSize, String title,
                                                      Integer categoryId, Integer brandId, String status,
-                                                     String typeSort, String nameFieldSort ) {
+                                                     String typeSort, String nameFieldSort) {
         pageNo = pageNo - 1;
 
         Pageable pageable;
-        if(typeSort.equals("asc")){
+        if (typeSort.equals("asc")) {
             pageable = PageRequest.of(pageNo, pageSize, Sort.by(nameFieldSort).ascending());
         } else {
             pageable = PageRequest.of(pageNo, pageSize, Sort.by(nameFieldSort).descending());
@@ -271,7 +283,7 @@ public class ProductServiceImpl implements ProductService {
         pageNo = pageNo - 1;
 
         Pageable pageable;
-        if(typeSort.equals("asc")){
+        if (typeSort.equals("asc")) {
             pageable = PageRequest.of(pageNo, pageSize, Sort.by(nameFieldSort).ascending());
         } else {
             pageable = PageRequest.of(pageNo, pageSize, Sort.by(nameFieldSort).descending());
@@ -298,8 +310,8 @@ public class ProductServiceImpl implements ProductService {
                 productVariantsResult.setInventory(itemService.getTotalInventoryQuantityByProductId(product.getId()));
                 productVariantsResult.setAvailable(itemService.getAvailableInventoryQuantityByProductId(product.getId()));
                 productVariantsResult.setTrading(itemService.getTradingQuantityByProductId(product.getId()));
-                productVariantsResult.setInTransit(purchaseOrderItemService.getQuantityPurchaseByProductIdAndOrderStatusCode(product.getId(),"INTRANSIT"));
-                productVariantsResult.setShipping(purchaseOrderItemService.getQuantityPurchaseByProductIdAndOrderStatusCode(product.getId(),"SHIPPING"));
+                productVariantsResult.setInTransit(purchaseOrderItemService.getQuantityPurchaseByProductIdAndOrderStatusCode(product.getId(), "INTRANSIT"));
+                productVariantsResult.setShipping(purchaseOrderItemService.getQuantityPurchaseByProductIdAndOrderStatusCode(product.getId(), "SHIPPING"));
                 productVariantsResults.add(productVariantsResult);
             }
 
