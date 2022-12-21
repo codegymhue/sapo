@@ -20,8 +20,9 @@ function showAllTaxes(selectedTax) {
                 let strOut = `<li id="ul2_${item.id}" data-id="${item.id}" onclick="updateNameTaxOut(${item.id})" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
 
                 // options.insertAdjacentHTML("beforeend", li);
-                $(".showAllTax").append(str);
-                $(".showAllTaxOut").append(strOut);
+                $(".showAllTax #showALlTax").append(str);
+
+                $(".showAllTaxOut #showALlTaxOut").append(strOut);
 
             });
 

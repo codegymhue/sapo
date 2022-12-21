@@ -25,13 +25,12 @@ function showAllBrands(selectedBrand) {
         url: "http://localhost:8080/api/brands"
     })
         .done((data) => {
-            console.log(data)
             brands = data;
             brands.forEach(item => {
                 let isSelected = item === selectedBrand ? "selected" : "";
                 let str = `<li id="${item.id}" data-id="${item.id}" onclick="updateNameBrand(${item.id})" class="${isSelected} brandItem dropdown-item">${item.title}</li>`;
                 // options.insertAdjacentHTML("beforeend", li);
-                $(".showAllBrand").append(str);
+                $(".showAllBrand #showAllBrand").append(str);
 
             });
 
