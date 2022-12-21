@@ -40,6 +40,7 @@ public class ProductMapper implements InitializingBean {
     public Product toModel(CreateProductParam productWithImageParam) {
         return new Product()
                 .setTitle(productWithImageParam.getTitle())
+                .setMass(productWithImageParam.getMass())
                 .setDescription(productWithImageParam.getDescription())
                 .setUnit(productWithImageParam.getUnit())
                 .setApplyTax(productWithImageParam.isApplyTax())

@@ -12,6 +12,7 @@ import vn.sapo.entities.tax.TaxType;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -87,7 +88,7 @@ public class Product extends BaseEntity {
     @OneToMany(mappedBy = "id.product")
 //    @OrderBy("tax_id")
     @OrderBy("taxId")
-    private Set<ProductTax> productTaxSet;
+    private Set<ProductTax> productTaxSet = new HashSet<>();
 
     public Set<Media> getMediaList() {
         return mediaSet;

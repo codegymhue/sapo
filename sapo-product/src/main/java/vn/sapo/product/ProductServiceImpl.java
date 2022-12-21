@@ -186,7 +186,8 @@ public class ProductServiceImpl implements ProductService {
         if (createProductParam.isEnableVariant()) {
             itemService.create(itemMapper.toDTO(createProductParam, productId, 1));
         }
-        return productMapper.toDTO(product);
+        ProductResult productResult = productMapper.toDTO(product);
+        return productResult;
     }
 
     @Override
