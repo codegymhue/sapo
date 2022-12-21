@@ -365,4 +365,21 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
+    @Override
+    @Transactional
+    public void saveChangeApplyTax(Integer applyTax, List<String> list) {
+        for(String item : list){
+            Optional<Product> product = productRepository.findById(Integer.valueOf(item));
+            if(product.isPresent()) {
+                Product newProduct = product.get();
+                if(applyTax == 1) {
+                    newProduct.setApplyTax(true);
+                } else {
+                    newProduct.setApplyTax(false);
+                }
+                productRepository.save(newProduct);
+            }
+        }
+    }
+
 }

@@ -40,4 +40,6 @@ public interface ProductService {
     void saveChangeStatusToUnavailable(List<String> list);
 
     void deleteSoftProduct(List<String> list);
+
+    void saveChangeApplyTax(Integer applyTax, List<String> list);
 }
