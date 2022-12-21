@@ -304,6 +304,31 @@
     </div>
 </div>
 
+<div class="modal fade" id="modalApplyTax" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 45rem">
+            <div class="modal-header">
+                <h4 class="modal-title">Cập nhật tình trạng áp dụng thuế</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="changeApplyTax">
+            </div>
+            <div class="d-flex align-items-center" style="font-size: medium; padding-left: 2rem">
+                Chọn trạng thái muốn cập nhật:
+                <select class="form-select ms-2" id="selectApplyTax" aria-label="Default select example" style="width: 45%; font-size: medium">
+                    <option selected value="">Chọn trạng thái</option>
+                    <option value="1">Áp dụng thuế</option>
+                    <option value="0">Không áp dụng thuế</option>
+                </select>
+            </div>
+            <div class="modal-footer d-flex align-items-center">
+                <button class="btn btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn btn-primary btn-save" id="btnApplyTaxSave" type="button">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="modalAvailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content" style="width: max-content">
@@ -369,7 +394,8 @@
             getAllStatus: App.BASE_URL_PRODUCT + "/status",
             updateStatusAvailable: App.BASE_URL_PRODUCT + "/updateStatusAvailable",
             updateStatusUnavailable: App.BASE_URL_PRODUCT + "/updateStatusUnavailable",
-            deleteProduct: App.BASE_URL_PRODUCT + "/delete"
+            deleteProduct: App.BASE_URL_PRODUCT + "/delete",
+            updateChangeApplyTax: App.BASE_URL_PRODUCT + "/updateApplyTax"
         },
         elements: {},
         loadData: {},
@@ -396,6 +422,8 @@
     page.elements.btnAvailableSave = $("#btnAvailableSave");
     page.elements.btnUnavailableSave = $("#btnUnavailableSave");
     page.elements.btnSubmitDelete = $("#btnSubmitDelete");
+    page.elements.btnApplyTax = $("#btnApplyTax");
+    page.elements.btnApplyTaxSave = $("#btnApplyTaxSave");
 
     page.elements.btnTitleSort = $("#btnTitleSort");
     page.elements.btnCreatAtSort = $("#btnCreatAtSort");
@@ -411,6 +439,7 @@
 
     page.elements.checkAll =$("#checkAll");
     page.elements.selectAction = $("#selectAction");
+    page.elements.selectApplyTax = $("#selectApplyTax");
 
     page.elements.selectActionThead = $("#selectActionThead");
     page.elements.theadList = $("#theadList");
@@ -418,10 +447,12 @@
     page.elements.statusChangeForNumberProductList = $("#statusChange");
     page.elements.statusChangeForNumberToUnavailable = $("#statusChangeUnavailable");
     page.elements.statusChangeForNumberDelete = $("#statusChangeDelete");
+    page.elements.statusChangeForNumberToApplyTax = $("#changeApplyTax");
 
     page.elements.modalAvailable = $("#modalAvailable");
-    page.elements.modalUnavailable =$("#modalUnavailable");
-    page.elements.modalDelete =$("#modalDelete");
+    page.elements.modalUnavailable = $("#modalUnavailable");
+    page.elements.modalDelete = $("#modalDelete");
+    page.elements.modalApplyTax = $("#modalApplyTax");
 
     page.dialogs.elements.category = $("#category");
     page.dialogs.elements.brand = $("#brand");
@@ -630,6 +661,7 @@
         page.elements.statusChangeForNumberProductList.empty();
         page.elements.statusChangeForNumberToUnavailable.empty();
         page.elements.statusChangeForNumberDelete.empty();
+        page.elements.statusChangeForNumberToApplyTax.empty();
 
         if(arrayIdProduct.length > 0){
             page.elements.theadList.removeClass("show").addClass("hide");
@@ -637,6 +669,7 @@
             page.elements.statusChangeForNumberProductList.append(`<span style="font-size: medium">Thao tác này sẽ cập nhật trạng thái giao dịch cho ${arrayIdProduct.length} sản phẩm bạn đã chọn.</span>`);
             page.elements.statusChangeForNumberToUnavailable.append(`<span style="font-size: medium">Thao tác này sẽ ngừng giao dịch ${arrayIdProduct.length} sản phẩm bạn đã chọn.</span>`);
             page.elements.statusChangeForNumberDelete.append(`<span style="font-size: medium">Thao tác này sẽ xóa ${arrayIdProduct.length} sản phẩm bạn đã chọn. Thao tác này không thể khôi phục.</span>`);
+            page.elements.statusChangeForNumberToApplyTax.append(`<span style="font-size: medium">Thao tác này sẽ cập nhật áp dụng thuế cho ${arrayIdProduct.length} phiên bản sản phẩm</span>`)
             page.elements.selectActionThead.removeClass("hide").addClass("show");
         } else {
             page.elements.theadList.removeClass("hide").addClass("show");
@@ -668,6 +701,10 @@
     })
     page.elements.btnDelete.on("click", () => {
         page.elements.modalDelete.modal("show");
+    })
+
+    page.elements.btnApplyTax.on("click", () => {
+        page.elements.modalApplyTax.modal("show");
     })
 
     page.commands.updateStatusToAvailable = () => {
@@ -724,6 +761,29 @@
             })
     }
 
+    page.commands.updateChangeApplyTax = () => {
+        let applyTax = page.elements.selectApplyTax.val();
+        alert(applyTax)
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "PUT",
+            url: page.urls.updateChangeApplyTax,
+            data:JSON.stringify({
+                "applyTax" : applyTax,
+                arrayIdProduct
+            })
+        })
+            .done(() => {
+                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED)
+            })
+            .fail((jqXHR) => {
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_403)
+            })
+    }
+
     page.elements.btnAvailableSave.on("click", () => {
         page.commands.updateStatusToAvailable();
         page.elements.modalAvailable.modal("hide");
@@ -741,6 +801,9 @@
         page.elements.modalDelete.modal("hide");
         page.commands.getAllProducts();
         page.commands.resetInputCheckBox();
+    })
+    page.elements.btnApplyTaxSave.on("click",() =>{
+        page.commands.updateChangeApplyTax();
     })
 
     page.commands.resetInputCheckBox = () =>{

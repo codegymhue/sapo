@@ -16,8 +16,7 @@ import vn.sapo.product.dto.ProductResult;
 import vn.sapo.product.dto.ProductShortParam;
 import vn.sapo.product.dto.UpdateProductParam;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 
 @RestController
@@ -120,6 +119,14 @@ public class ProductAPI {
     @DeleteMapping("/products/delete")
     public ResponseEntity<?> deleteProduct(@RequestBody List<String> arrayIdProduct) {
         productService.deleteSoftProduct(arrayIdProduct);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/products/updateApplyTax")
+    public ResponseEntity<?> updateChangeApplytax(@RequestBody LinkedHashMap<String,?> linkedHashMap) {
+        int applyTax = Integer.parseInt(linkedHashMap.get("applyTax").toString());
+        List<String> list = Collections.singletonList(linkedHashMap.get("arrayIdProduct").toString());
+        productService.saveChangeApplyTax(applyTax, list);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
