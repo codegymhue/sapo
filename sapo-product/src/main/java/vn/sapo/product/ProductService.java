@@ -42,4 +42,6 @@ public interface ProductService {
     void deleteSoftProduct(List<String> list);
 
     void saveChangeApplyTax(Integer applyTax, List<String> list);
+
+    List<ProductVariantsResult> getAllCheckInventoryProduct(List<String> list);
 }

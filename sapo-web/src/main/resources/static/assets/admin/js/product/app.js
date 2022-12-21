@@ -51,8 +51,8 @@ class App {
                 <td class="align-middle"><a href="/admin/product/${item.id}" style="text-decoration: none">${item.title}</a></td>
                 <td class="align-middle">${item.category.title || ""}</td>
                 <td class="align-middle">${item.brand.title || ""}</td>
-                <td class="align-middle text-end ">${item.available}</td>
-                <td class="align-middle text-end">${item.inventory}</td>
+                <td class="align-middle text-end ">${new Intl.NumberFormat('de-DE').format(item.available)}</td>
+                <td class="align-middle text-end">${new Intl.NumberFormat('de-DE').format(item.inventory)}</td>
                 <td class="align-middle">
                     <span id="showStatus" class="${showStatus}">${item.status === "AVAILABLE" ? "Đang giao dịch" : "Ngừng giao dịch"}</span> 
                 </td>
@@ -82,23 +82,38 @@ class App {
                 <td class="align-middle">${ item.createAt === null ? "" : new Date(item.createAt).toLocaleDateString('en-GB')}</td>
                 <td class="align-middle">${item.updateAt === null ? "" : new Date(item.updateAt).toLocaleDateString('en-GB')}</td>
                 <td class="align-middle">${item.applyTax === true ? "Có" : "Không"}</td>
-                <td class="align-middle text-end">${item.retailPrice}</td>
-                <td class="align-middle text-end">${item.importPrice}</td>
-                <td class="align-middle text-end">${item.wholesalePrice}</td>
-                <td class="align-middle text-end ">${item.available}</td>
-                <td class="align-middle text-end">${item.inventory}</td>
-                <td class="align-middle text-end">${item.inTransit}</td>
-                <td class="align-middle text-end">${item.shipping}</td>
-                <td class="align-middle text-end">${item.trading}</td>
+                <td class="align-middle text-end">${new Intl.NumberFormat('de-DE').format(item.retailPrice)}</td>
+                <td class="align-middle text-end">${new Intl.NumberFormat('de-DE').format(item.importPrice)}</td>
+                <td class="align-middle text-end">${new Intl.NumberFormat('de-DE').format(item.wholesalePrice)}</td>
+                <td class="align-middle text-end ">${new Intl.NumberFormat('de-DE').format(item.available)}</td>
+                <td class="align-middle text-end">${new Intl.NumberFormat('de-DE').format(item.inventory)}</td>
+                <td class="align-middle text-end">${new Intl.NumberFormat('de-DE').format(item.inTransit)}</td>
+                <td class="align-middle text-end">${new Intl.NumberFormat('de-DE').format(item.shipping)}</td>
+                <td class="align-middle text-end">${new Intl.NumberFormat('de-DE').format(item.trading)}</td>
             </tr>
         `;
         return str;
     }
 
-
+    static renderRowProductInventory(item) {
+        let str = `
+        <tr>
+            <td>${item.sku}</td>
+            <td>
+                <a href="/admin/product/${item.id}" style="text-decoration: none">${item.title}</a>
+            </td>
+            <td class="align-middle text-end">${new Intl.NumberFormat('de-DE').format(item.retailPrice)}</td>
+            <td class="align-middle text-end">${new Intl.NumberFormat('de-DE').format(item.inventory)}</td>
+            <td class="align-middle text-end ">${new Intl.NumberFormat('de-DE').format(item.available)}</td>
+            <td class="align-middle text-end">${new Intl.NumberFormat('de-DE').format(item.trading)}</td>
+            <td class="align-middle text-end">${new Intl.NumberFormat('de-DE').format(item.trading)}</td>
+            <td class="align-middle text-end">${new Intl.NumberFormat('de-DE').format(item.shipping)}</td>
+        </tr>
+        `;
+        return str;
+    }
 
 }
-
 
 class Image {
     constructor(cloudId, fileName, fileFolder, fileUrl, fileType) {

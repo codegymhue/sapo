@@ -339,7 +339,6 @@ public class ProductServiceImpl implements ProductService {
             if (product.isPresent()) {
                 Product newProduct = product.get();
                 newProduct.setStatus(ProductStatus.parseProductStatus("AVAILABLE"));
-                productRepository.save(newProduct);
             }
         }
     }
@@ -352,7 +351,6 @@ public class ProductServiceImpl implements ProductService {
             if (product.isPresent()) {
                 Product newProduct = product.get();
                 newProduct.setStatus(ProductStatus.parseProductStatus("UNAVAILABLE"));
-                productRepository.save(newProduct);
             }
         }
     }
@@ -365,7 +363,6 @@ public class ProductServiceImpl implements ProductService {
             if (product.isPresent()) {
                 Product newProduct = product.get();
                 newProduct.setDeleted(true);
-                productRepository.save(newProduct);
             }
         }
     }
@@ -382,9 +379,28 @@ public class ProductServiceImpl implements ProductService {
                 } else {
                     newProduct.setApplyTax(false);
                 }
-                productRepository.save(newProduct);
             }
         }
+    }
+
+    @Override
+    @Transactional
+    public List<ProductVariantsResult> getAllCheckInventoryProduct(List<String> list) {
+        List<ProductVariantsResult> productVariantsResults = new ArrayList<>();
+        for (String item : list) {
+            Optional<Product> productOptional = productRepository.findById(Integer.valueOf(item));
+            if (productOptional.isPresent()) {
+                Product product = productOptional.get();
+                ProductVariantsResult productVariantsResult = productMapper.toDTOVariants(product);
+                productVariantsResult.setInventory(itemService.getTotalInventoryQuantityByProductId(product.getId()));
+                productVariantsResult.setAvailable(itemService.getAvailableInventoryQuantityByProductId(product.getId()));
+                productVariantsResult.setTrading(itemService.getTradingQuantityByProductId(product.getId()));
+                productVariantsResult.setInTransit(purchaseOrderItemService.getQuantityPurchaseByProductIdAndOrderStatusCode(product.getId(), "INTRANSIT"));
+                productVariantsResult.setShipping(purchaseOrderItemService.getQuantityPurchaseByProductIdAndOrderStatusCode(product.getId(), "SHIPPING"));
+                productVariantsResults.add(productVariantsResult);
+            }
+        }
+        return productVariantsResults;
     }
 
 }

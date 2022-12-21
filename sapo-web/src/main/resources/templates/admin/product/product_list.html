@@ -699,7 +699,10 @@
             data: JSON.stringify(arrayIdProduct)
         })
             .done(() => {
-                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED)
+                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED);
+                page.elements.modalAvailable.modal("hide");
+                page.commands.getAllProducts();
+                page.commands.resetInputCheckBox();
             })
             .fail((jqXHR) => {
                 App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_403)
@@ -717,7 +720,10 @@
             data: JSON.stringify(arrayIdProduct)
         })
             .done(() => {
-                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED)
+                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED);
+                page.elements.modalUnavailable.modal("hide");
+                page.commands.getAllProducts();
+                page.commands.resetInputCheckBox();
             })
             .fail((jqXHR) => {
                 App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_403)
@@ -735,7 +741,10 @@
             data: JSON.stringify(arrayIdProduct)
         })
             .done(() => {
-                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_DELETE)
+                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_DELETE);
+                page.elements.modalDelete.modal("hide");
+                page.commands.getAllProducts();
+                page.commands.resetInputCheckBox();
             })
             .fail((jqXHR) => {
                 App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_403)
@@ -744,21 +753,12 @@
 
     page.elements.btnAvailableSave.on("click", () => {
         page.commands.updateStatusToAvailable();
-        page.elements.modalAvailable.modal("hide");
-        page.commands.getAllProducts();
-        page.commands.resetInputCheckBox();
     })
     page.elements.btnUnavailableSave.on("click", () =>{
         page.commands.updateStatusToUnavailable();
-        page.elements.modalUnavailable.modal("hide");
-        page.commands.getAllProducts();
-        page.commands.resetInputCheckBox();
     })
     page.elements.btnSubmitDelete.on("click", () => {
         page.commands.deleteProductSelect();
-        page.elements.modalDelete.modal("hide");
-        page.commands.getAllProducts();
-        page.commands.resetInputCheckBox();
     })
 
     page.commands.resetInputCheckBox = () =>{
@@ -788,11 +788,6 @@
         page.commands.getAllProducts();
     })
 
-    page.loadData = () => {
-        page.commands.getAllProducts();
-        page.commands.getAllCategory();
-        page.commands.getAllBrand();
-    }
     $('#btnImportFile').click(function () {
         let data = new FormData();
         let file = $('#formFile')[0].files[0];
@@ -812,6 +807,12 @@
             App.IziToast.showErrorAlert("Tải file lên không thành công!")
         })
     });
+
+    page.loadData = () => {
+        page.commands.getAllProducts();
+        page.commands.getAllCategory();
+        page.commands.getAllBrand();
+    }
 
     $(() => {
         page.loadData()
