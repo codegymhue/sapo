@@ -42,7 +42,7 @@ public class ProductDetailResult {
     private boolean applyTax;
     private boolean taxInclusive;
     private List<TaxResult> taxSaleList;
+    private List<TaxResult> taxResults;
     private List<MediaResult> mediaResults;
     private ItemResult itemResult;
-    private List<TaxResult> taxResults;
 }
