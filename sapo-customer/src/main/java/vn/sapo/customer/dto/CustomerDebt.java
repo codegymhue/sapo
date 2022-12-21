@@ -10,20 +10,19 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 
-
 public interface CustomerDebt {
 
-      String getOrderCode();
+    String getOrderCode();
 
-      String getEmployeeName();
+    String getEmployeeName();
 
-      String getDescription();
+    String getDescription();
 
-     Instant getCreateAt();
+    Instant getCreateAt();
 
 
-     BigDecimal getTotalDebt();
+    BigDecimal getTotalDebt();
 
-     BigDecimal getTransaction();
+    BigDecimal getTransaction();
 
 }
