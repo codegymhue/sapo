@@ -418,7 +418,7 @@
                                                 <div class="MuiAutocomplete-root jss26862 MuiAutocomplete-hasClearIcon"
                                                      role="combobox" aria-expanded="false">
                                                     <label class="MuiFormLabel-root MuiInputLabel-root jss26866 MuiInputLabel-animated MuiInputLabel-shrink"
-                                                           data-shrink="true">Tags
+                                                           data-shrink="true">Mô tả
                                                         <span class="MuiTypography-root MuiTypography-caption"
                                                               title="Chọn hoặc thêm các thẻ cho sản phẩm, thẻ này phục vụ cho việc lọc các sản phẩm"
                                                               style="order: 1;">
@@ -1018,7 +1018,7 @@
             "data": JSON.stringify(tax)
         })
             .done((data) => {
-                console.log(": Tạo thuế thành công")
+                App.IziToast.showSuccessAlert("Tạo thuế thành công!")
                 $(".showAllTax #showALlTax").empty();
                 $(".showAllTaxOut #showALlTaxOut").empty();
                 showAllTaxes()
@@ -1027,7 +1027,7 @@
 
             })
             .fail((jqXHR) => {
-                console.log("Loi nha may ba")
+                App.IziToast.showErrorAlert("Tạo thuế không thành công!")
             })
     })
     //<<<--------nhat-dev end onclick create brand
