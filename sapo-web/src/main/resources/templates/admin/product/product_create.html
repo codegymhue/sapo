@@ -30,46 +30,49 @@
     <th:block th:replace="/layout/modalCreateTax :: createTaxModal"/>
 
     <div class="col-right MuiBox-root jss64 jss40">
-        <div class="MuiBox-root jss26581">
-            <div class="MuiBox-root jss26586 jss26582 ">
-                <div class="MuiBox-root jss26587 jss26585"
-                     style="max-width: 1366px;">
-                    <div class="MuiBox-root jss26588">
-                        <a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss26584 MuiTypography-colorSecondary"
-                           href="/admin/products">
-                            <svg class="MuiSvgIcon-root jss26589"
-                                 focusable="false"
-                                 viewBox="0 0 8 13"
-                                 aria-hidden="true">
-                                <path d="M6.01041 0L0 6.01041L6.01041 12.0208L7.42462 10.6066L2.82843 6.01041L7.42462 1.41421L6.01041 0Z"
-                                      fill="currentColor">
-                                </path>
-                            </svg>
-                            <h6 class="MuiTypography-root MuiTypography-subtitle1">Quay lại danh sách sản phẩm</h6>
-                        </a>
-                    </div>
-                    <div class="MuiBox-root jss26590">
-                        <div class="MuiBox-root jss26591 jss26558" style="align-items: center;">
-                            <a id="Sapo-Button-086af533-fa8f-465a-a170-65223a6254cb"
-                               class="sc-jqUVSM dgJIMY"
+        <form id="frmCreateProduct" method="post">
+            <div class="MuiBox-root jss26581">
+                <div class="MuiBox-root jss26586 jss26582 ">
+                    <div class="MuiBox-root jss26587 jss26585"
+                         style="max-width: 1366px;">
+                        <div class="MuiBox-root jss26588">
+                            <a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss26584 MuiTypography-colorSecondary"
                                href="/admin/products">
+                                <svg class="MuiSvgIcon-root jss26589"
+                                     focusable="false"
+                                     viewBox="0 0 8 13"
+                                     aria-hidden="true">
+                                    <path d="M6.01041 0L0 6.01041L6.01041 12.0208L7.42462 10.6066L2.82843 6.01041L7.42462 1.41421L6.01041 0Z"
+                                          fill="currentColor">
+                                    </path>
+                                </svg>
+                                <h6 class="MuiTypography-root MuiTypography-subtitle1">Quay lại danh sách sản phẩm</h6>
+                            </a>
+                        </div>
+                        <div class="MuiBox-root jss26590">
+                            <div class="MuiBox-root jss26591 jss26558" style="align-items: center;">
+                                <a id="Sapo-Button-086af533-fa8f-465a-a170-65223a6254cb"
+                                   style="text-decoration: none"
+                                   class="sc-jqUVSM dgJIMY"
+                                   href="/admin/products">
                                     <span class="sc-papXJ jcEYKF">Thoát
                                     </span>
-                            </a>
-                            <button id="btnCreateProduct"
-                                    class="btnCreateProduct sc-jqUVSM cHdopB">
+                                </a>
+                                <button id="btnCreateProduct"
+                                        class="btnCreateProduct sc-jqUVSM cHdopB"
+                                        type="submit">
                                     <span class="sc-papXJ jcEYKF">
                                         Lưu
                                     </span>
-                            </button>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="MuiBox-root jss26592 jss26547">
-                <div class="MuiBox-root jss26593 jss26549">
-                    <div class="MuiBox-root jss26594 jss26550">
-                        <form id="frmCreateProduct" method="post">
+                <div class="MuiBox-root jss26592 jss26547">
+                    <div class="MuiBox-root jss26593 jss26549">
+                        <div class="MuiBox-root jss26594 jss26550">
+
                             <div class="MuiGrid-root MuiGrid-container">
                                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-8"
                                      style="padding: 0;">
@@ -83,7 +86,8 @@
                                         </div>
                                         <div class="MuiBox-root jss27087 product-content-infor">
                                             <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
-                                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 mb-20" style="margin-bottom: 24px">
+                                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 mb-20"
+                                                     style="margin-bottom: 24px">
                                                     <div class="MuiFormControl-root MuiTextField-root jss27091 MuiFormControl-fullWidth">
                                                         <div class="row">
                                                             <div class="col">
@@ -98,7 +102,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 mb-20" style="margin-bottom: 24px">
+                                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 mb-20"
+                                                     style="margin-bottom: 24px">
                                                     <div class="MuiFormControl-root MuiTextField-root jss27091 MuiFormControl-fullWidth">
                                                         <div class="row">
                                                             <div class="col-6">
@@ -124,7 +129,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 " style="padding-bottom: 26px">
+                                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 "
+                                                     style="padding-bottom: 26px">
                                                     <div class="MuiFormControl-root MuiTextField-root jss27091 MuiFormControl-fullWidth">
                                                         <div class="row">
                                                             <div class="col-6">
@@ -164,7 +170,8 @@
                                             <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3"
                                                  style="border-bottom: 1px solid rgb(232, 234, 235); padding-bottom: 12px;">
                                                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
-                                                    <div class="MuiFormControl-root MuiTextField-root jss27091 MuiFormControl-fullWidth" style="margin-bottom: 20px">
+                                                    <div class="MuiFormControl-root MuiTextField-root jss27091 MuiFormControl-fullWidth"
+                                                         style="margin-bottom: 20px">
                                                         <div class="row">
                                                             <div class="col-6">
                                                                 <span style="font-weight: 500">Giá bán lẻ</span>
@@ -345,7 +352,8 @@
                                                         <li class="text-primary dropdown-item">
                                                             <button id="btnCreateCat" style="border: none; color: #2d9dff;padding: 10px;text-align: start;
                                                                      font-weight: 500;
-                                                                     font-size: 14px" class="bg-white w-100">
+                                                                     font-size: 14px" type="button"
+                                                                    class="bg-white w-100">
                                                                 <i class="fa-solid fa-circle-plus"
                                                                    style="margin: 0 9px"></i>Thêm mới
                                                                 loại sản phẩm
@@ -383,10 +391,13 @@
                                                         <li class="text-primary dropdown-item">
                                                             <button id="btnCreateBrand" style="border: none; color: #2d9dff;padding: 10px;text-align: start;
                                                                      font-weight: 500;
-                                                                     font-size: 14px" class="bg-white w-100">
+                                                                     font-size: 14px" type="button"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#modalAddBrand"
+                                                                    class="bg-white w-100">
                                                                 <i class="fa-solid fa-circle-plus"
                                                                    style="margin: 0 9px"></i>Thêm mới
-                                                                loại sản phẩm
+                                                                nhãn hiệu
                                                             </button>
                                                         </li>
                                                     </ul>
@@ -550,6 +561,7 @@
                                                                         <button style="border: none; color: #2d9dff;padding: 10px;text-align: start;
                                                                      font-weight: 500;
                                                                      font-size: 14px"
+                                                                                type="button"
                                                                                 class="bg-white w-100 btnCreateTax">
                                                                             <i class="fa-solid fa-circle-plus"
                                                                                style="margin: 0 9px"></i>Thêm mới thuế
@@ -584,6 +596,7 @@
                                                                      font-size: 14px"
                                                                                 class="bg-white w-100 btnCreateTax">
                                                                             <i class="fa-solid fa-circle-plus"
+                                                                               type="button"
                                                                                style="margin: 0 9px"></i>Thêm mới thuế
                                                                             đầu ra
                                                                         </button>
@@ -599,25 +612,23 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                        <div class="MuiBox-root jss27079 jss26558">
-                            <button id="Sapo-Button-c52ac442-b7f8-4822-aad4-18529e18f2cc"
-                                    class="sc-jqUVSM dgJIMY">
-                                <span class="sc-papXJ jcEYKF">Thoát</span>
-                            </button>
-                            <button id="Sapo-Button-799072bd-d483-478b-b3aa-db75b8a33fa5"
-                                    class="sc-jqUVSM dgJIMY">
-                                <span class="sc-papXJ jcEYKF">Lưu và in mã vạch</span>
-                            </button>
-                            <button id="Sapo-Button-100b961d-3f0b-41d3-a24f-c6eb4340327a"
-                                    class="btnCreateProduct  sc-jqUVSM cHdopB">
-                                <span class="sc-papXJ jcEYKF">Lưu</span>
-                            </button>
+
+                            <div class="MuiBox-root jss27079 jss26558" style="align-items: center">
+                                <a id="Sapo-Button-c52ac442-b7f8-4822-aad4-18529e18f2cc" href="/admin/products"
+                                   class="sc-jqUVSM dgJIMY" style="text-decoration: none">
+                                    <span class="sc-papXJ jcEYKF text-primary">Thoát</span>
+                                </a>
+                                <button id="Sapo-Button-100b961d-3f0b-41d3-a24f-c6eb4340327a"
+                                        class="btnCreateProduct  sc-jqUVSM cHdopB"
+                                        type="submit">
+                                    <span class="sc-papXJ jcEYKF">Lưu</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 <th:block th:replace="/layout/script :: script"/>
@@ -703,7 +714,7 @@
     page.dialogs.elements.progress = $('.progress');
     page.dialogs.elements.progressBar = $(".progress-bar");
 
-    page.elements.btnCreateProduct.on("click", function () {
+    page.elements.btnCreateProduct.on("submit", function () {
         page.dialogs.elements.frmCreateProduct.trigger("submit");
         console.log("page.elements.btnCreateProduct.onClick");
     })
@@ -891,7 +902,7 @@
 
     page.commands.renderImg = () => {
         let str = `<div class="profile-pic loading jss26799 MuiGrid-item MuiGrid-grid-md-2" style="width: 100%; height: 120px; margin: 0 24px 24px 0; padding: 0">
-                        <div class="progress"  style="margin:0 0; background-color: #0db473; height: 8px">
+                        <div class="progress progress-bar-success bg-success"  style="margin:0 0; height: 8px">
                             <div class="progress-bar progress-bar-striped" hidden role="progressbar"
                                  style="width: 0" aria-valuenow="0"
                                  aria-valuemin="0" aria-valuemax="100">
