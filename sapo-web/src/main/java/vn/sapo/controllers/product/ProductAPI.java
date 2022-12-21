@@ -86,9 +86,8 @@ public class ProductAPI {
 
     @PostMapping("/products/create")
     public ResponseEntity<?> create(@RequestBody CreateProductParam productWithImageParam) {
-        System.out.println(productWithImageParam);
-        ProductResult p = productService.create(productWithImageParam);
-        return new ResponseEntity<>(productService.findById(p.getId()), HttpStatus.CREATED);
+        int id = productService.create(productWithImageParam).getId();
+        return new ResponseEntity<>(id, HttpStatus.CREATED);
     }
 
     @PutMapping("/products/update")
@@ -123,7 +122,7 @@ public class ProductAPI {
     }
 
     @PutMapping("/products/updateApplyTax")
-    public ResponseEntity<?> updateChangeApplytax(@RequestBody LinkedHashMap<String,?> linkedHashMap) {
+    public ResponseEntity<?> updateChangeApplytax(@RequestBody LinkedHashMap<String, ?> linkedHashMap) {
         int applyTax = Integer.parseInt(linkedHashMap.get("applyTax").toString());
         List<String> list = Collections.singletonList(linkedHashMap.get("arrayIdProduct").toString());
         productService.saveChangeApplyTax(applyTax, list);

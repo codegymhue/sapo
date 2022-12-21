@@ -817,8 +817,12 @@
         taxIn.taxType = "TAX_PURCHASE";
         taxOut.taxId = $("#taxProTypeOut").data("id");
         taxOut.taxType = "TAX_SALE";
-        taxs.push(taxIn);
-        taxs.push(taxOut);
+        if (taxIn.taxId != undefined) {
+            taxs.push(taxIn);
+        }
+        if (taxOut.taxId != undefined) {
+            taxs.push(taxOut);
+        }
         product.id = 0;
         product.title = page.dialogs.elements.titleCreate.val();
         product.enableSell = page.dialogs.elements.enableSell.is(":checked") ? true : false;
@@ -855,7 +859,7 @@
                 let productId = data.id
                 App.IziToast.showSuccessAlert("Tạo sản phẩm thành công!");
                 setTimeout(() => {
-                    window.location.href = "/admin/product/" + productId;
+                    window.location.href = "/admin/product/" + data;
                 }, 1500)
             })
     }
