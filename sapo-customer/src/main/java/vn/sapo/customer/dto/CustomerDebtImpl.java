@@ -22,9 +22,9 @@ public class CustomerDebtImpl {
     private BigDecimal transaction;
 
 
-    private  BigDecimal totalDebt;
+    private BigDecimal totalDebt;
 
-    private  String description;
+    private String description;
 
 
     public void setFromICustomerOwer(CustomerDebt customerDebt) {

@@ -15,6 +15,7 @@ import java.time.Instant;
 @Setter
 @Accessors(chain = true)
 public class CreateCustomerParam {
+
     private Integer id;
 
     private String code;

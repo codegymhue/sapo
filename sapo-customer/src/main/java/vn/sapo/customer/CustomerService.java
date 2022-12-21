@@ -1,7 +1,6 @@
 package vn.sapo.customer;
 
 import vn.sapo.customer.dto.CreateCustomerParam;
-import vn.sapo.customer.dto.CustomerDebtImpl;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
 
