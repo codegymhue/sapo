@@ -21,9 +21,8 @@ public class ProductTaxServiceImpl implements ProductTaxService {
     @Autowired
     ProductTaxMapper productTaxMapper;
 
-    @Override
     @Transactional
-    public List<ProductTaxResult> create(List<ProductTaxParam> productTaxParams, Integer productId) {
+    public List<ProductTaxResult> createAll(List<ProductTaxParam> productTaxParams, Integer productId) {
         List<ProductTax> entities = productTaxParams.stream()
                 .map(param -> {
                     if (!taxService.existsById(param.getTaxId()))
@@ -43,13 +42,9 @@ public class ProductTaxServiceImpl implements ProductTaxService {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public void createAll(List<ProductTaxParam> taxListParam) {
-        
-    }
 
     @Override
     public void deleteAllByProductId(Integer productId) {
-
+        productTaxRepository.deleteAllByProductId(productId);
     }
 }

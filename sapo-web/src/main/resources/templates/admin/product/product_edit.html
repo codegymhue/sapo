@@ -280,17 +280,17 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"
-                                                     style="padding: 0 10px;">
-                                                    <button id="Sapo-Button-439884e3-ac6f-4fd5-bb67-ef5151e7d1db"
-                                                            class="sc-jqUVSM eAvhdO">
-                                                        <span class="sc-papXJ jcEYKF">
-                                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorPrimary"
-                                                               style="cursor: pointer; display: inline;">Mô tả sản phẩm
-                                                            </p>
-                                                        </span>
-                                                    </button>
-                                                </div>
+<!--                                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"-->
+<!--                                                     style="padding: 0 10px;">-->
+<!--                                                    <button id="Sapo-Button-439884e3-ac6f-4fd5-bb67-ef5151e7d1db"-->
+<!--                                                            class="sc-jqUVSM eAvhdO">-->
+<!--                                                        <span class="sc-papXJ jcEYKF">-->
+<!--                                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorPrimary"-->
+<!--                                                               style="cursor: pointer; display: inline;">Mô tả sản phẩm-->
+<!--                                                            </p>-->
+<!--                                                        </span>-->
+<!--                                                    </button>-->
+<!--                                                </div>-->
                                             </div>
                                         </div>
                                     </div>
@@ -529,7 +529,8 @@
                                                  style="border-top: 0; padding-top: 0;">
                                                 <h6 class="MuiTypography-root title MuiTypography-subtitle1">
                                                     Loại sản phẩm</h6>
-                                                <div class="dropdown">
+                                                <div class="dropdown"
+                                                >
                                                     <!--                                                <input id="getIdValueCat" type="hidden"/>-->
                                                     <div class="btn bg-secondary dropdown-toggle select-btn-cat"
                                                          type="button" data-bs-toggle="dropdown"
@@ -537,29 +538,34 @@
                                                                 display: flex;
                                                                 justify-content: space-between;
                                                                 align-items: center; ">
-                                                        <span id="catProType" th:text="*{categoryId != null} ? *{category.title} : 'Chọn loại sản phẩm' "></span>
+                                                        <span id="catProType"
+                                                              th:text="*{categoryId != null} ? *{category.title} : 'Chọn loại sản phẩm' "></span>
                                                     </div>
                                                     <ul class="dropdown-menu w-100 categoryIdUpdate showAllCategory">
-
-                                                        <li>
-                                                            <div class="d-flex align-items-center">
-                                                                <i class="fa-solid fa-magnifying-glass" style="margin-left: 16px;
+                                                        <div>
+                                                            <li>
+                                                                <div class="d-flex align-items-center">
+                                                                    <i class="fa-solid fa-magnifying-glass" style="margin-left: 16px;
                                                                    margin-right: 4px;
                                                                    color: #828282"></i>
-                                                                <input id="inputSearchCat" style="margin: 2px"
-                                                                       class="w-100 form-control border border-0"
-                                                                       placeholder="Tìm kiếm hoặc nhập mới"/>
-                                                            </div>
-                                                        </li>
-                                                        <li class="text-primary dropdown-item">
-                                                            <button id="btnCreateCat" style="border: none; color: #2d9dff;padding: 10px;text-align: start;
+                                                                    <input id="inputSearchCat" style="margin: 2px"
+                                                                           class="w-100 form-control border border-0"
+                                                                           placeholder="Tìm kiếm hoặc nhập mới"/>
+                                                                </div>
+                                                            </li>
+                                                            <li class="text-primary dropdown-item">
+                                                                <button id="btnCreateCat" style="border: none; color: #2d9dff;padding: 10px;text-align: start;
                                                                      font-weight: 500;
                                                                      font-size: 14px" class="bg-white w-100">
-                                                                <i class="fa-solid fa-circle-plus"
-                                                                   style="margin: 0 9px"></i>Thêm mới
-                                                                loại sản phẩm
-                                                            </button>
-                                                        </li>
+                                                                    <i class="fa-solid fa-circle-plus"
+                                                                       style="margin: 0 9px"></i>Thêm mới
+                                                                    loại sản phẩm
+                                                                </button>
+                                                            </li>
+                                                            <div id="showAllCAt">
+
+                                                            </div>
+                                                        </div>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -579,25 +585,29 @@
                                                         <span id="brandProType" th:text="*{brandId != null} ? *{brand.title} : 'Chọn loại nhãn hiệu'"></span>
                                                     </div>
                                                     <ul class="dropdown-menu w-100 brandIdUpdate showAllBrand">
-                                                        <li>
-                                                            <div class="d-flex align-items-center">
-                                                                <i class="fa-solid fa-magnifying-glass" style="margin-left: 16px;
+                                                        <div>
+                                                            <li>
+                                                                <div class="d-flex align-items-center">
+                                                                    <i class="fa-solid fa-magnifying-glass" style="margin-left: 16px;
                                                                    margin-right: 4px;
                                                                    color: #828282"></i>
-                                                                <input id="inputSearchBrand" style="margin: 2px"
-                                                                       class="w-100 form-control border border-0"
-                                                                       placeholder="Tìm kiếm hoặc nhập mới"/>
-                                                            </div>
-                                                        </li>
-                                                        <li class="text-primary dropdown-item">
-                                                            <button id="btnCreateBrand" style="border: none; color: #2d9dff;padding: 10px;text-align: start;
+                                                                    <input id="inputSearchBrand" style="margin: 2px"
+                                                                           class="w-100 form-control border border-0"
+                                                                           placeholder="Tìm kiếm hoặc nhập mới"/>
+                                                                </div>
+                                                            </li>
+                                                            <li class="text-primary dropdown-item">
+                                                                <button id="btnCreateBrand" style="border: none; color: #2d9dff;padding: 10px;text-align: start;
                                                                      font-weight: 500;
                                                                      font-size: 14px" class="bg-white w-100">
-                                                                <i class="fa-solid fa-circle-plus"
-                                                                   style="margin: 0 9px"></i>Thêm mới
-                                                                loại sản phẩm
-                                                            </button>
-                                                        </li>
+                                                                    <i class="fa-solid fa-circle-plus"
+                                                                       style="margin: 0 9px"></i>Thêm mới nhãn hiệu
+                                                                </button>
+                                                            </li>
+                                                        </div>
+                                                        <div id="showAllBrand">
+
+                                                        </div>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -605,9 +615,9 @@
                                                 <div class="MuiAutocomplete-root jss26862 MuiAutocomplete-hasClearIcon"
                                                      role="combobox" aria-expanded="false">
                                                     <label class="MuiFormLabel-root MuiInputLabel-root jss26866 MuiInputLabel-animated MuiInputLabel-shrink"
-                                                           data-shrink="true">Tags
+                                                           data-shrink="true">Mô tả sản phẩm
                                                         <span class="MuiTypography-root MuiTypography-caption"
-                                                              title="Chọn hoặc thêm các thẻ cho sản phẩm, thẻ này phục vụ cho việc lọc các sản phẩm"
+                                                              title="Thêm mô tả về sản phẩm"
                                                               style="order: 1;">
                                                         <svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary"
                                                              focusable="false" viewBox="0 0 12 12"
@@ -626,23 +636,14 @@
                                                     </span>
                                                     </label>
                                                     <div class="MuiFormControl-root MuiTextField-root jss26865 MuiFormControl-fullWidth">
-                                                        <div
-                                                                class="MuiInputBase-root MuiOutlinedInput-root MuiAutocomplete-inputRoot MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd">
-                                                            <label>
-                                                                <input aria-invalid="false" autocomplete="off"
-                                                                       type="text"
-                                                                       class="descriptionCreate MuiInputBase-input MuiOutlinedInput-input MuiAutocomplete-input MuiAutocomplete-inputFocused MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd"
-                                                                       aria-autocomplete="list"
-                                                                       id="descriptionCreate mui-autocomplete-22578">
-                                                            </label>
-                                                            <div class="MuiAutocomplete-endAdornment">
-                                                                <button class="MuiButtonBase-root MuiIconButton-root MuiAutocomplete-clearIndicator"
-                                                                        tabindex="-1" type="button" aria-label="Xóa"
-                                                                        title="Xóa">
-                                                                    <span class="MuiIconButton-label"></span>
-                                                                    <span class="MuiTouchRipple-root"></span>
-                                                                </button>
-                                                            </div>
+                                                        <div class="MuiInputBase-root MuiOutlinedInput-root MuiAutocomplete-inputRoot MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd">
+                                                            <input aria-invalid="false" autocomplete="off" cols="100000"
+                                                                   rows="50"
+                                                                   name="descriptionUpdate"
+                                                                   class="descriptionUpdate MuiInputBase-input MuiOutlinedInput-input MuiAutocomplete-input MuiAutocomplete-inputFocused MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd"
+                                                                   aria-autocomplete="list"
+                                                                   id="descriptionUpdate mui-autocomplete-22578"
+                                                            th:field="*{description}"/>
                                                             <fieldset aria-hidden="true"
                                                                       class="jss26952 MuiOutlinedInput-notchedOutline"
                                                                       style="padding-left: 8px;">
@@ -728,7 +729,8 @@
                                                 </div>
                                             </div>
                                             <div class="MuiCollapse-wrapper" id="showTaxModal"
-                                                 th:style="*{applyTax} ? ('display: block') : ('display: none')">
+                                                 th:style="*{applyTax} ? ('display: block') : ('display: none')"
+                                            th:if="*{applyTax}">
                                                 <div class="MuiCollapse-wrapperInner">
                                                     <div class="MuiBox-root jss21906" style="padding-top: 24px;">
                                                         <div class="MuiBox-root jss21907" style="width: 100%;">
@@ -769,20 +771,26 @@
                                                                 align-items: center; ">
                                                                     <span id="taxProType"
                                                                     th:text="${product.purchaseTaxList.size() > 0} ? ${product.purchaseTaxList.get(0).title} : 'Chọn thuế đầu vào' "
+                                                                          th:attr="data-id=${product.purchaseTaxList.get(0).id}"
                                                                     >Chọn thuế đầu vào</span>
                                                                 </div>
                                                                 <ul class="dropdown-menu w-100  showAllTax">
-                                                                    <li class="text-primary dropdown-item">
-                                                                        <button style="border: none; color: #2d9dff;padding: 10px;text-align: start;
+                                                                    <div>
+                                                                        <li class="text-primary dropdown-item">
+                                                                            <button style="border: none; color: #2d9dff;padding: 10px;text-align: start;
                                                                      font-weight: 500;
                                                                      font-size: 14px"
-                                                                                class="bg-white w-100 btnCreateTax">
-                                                                            <i class="fa-solid fa-circle-plus"
-                                                                               style="margin: 0 9px"></i>Thêm mới thuế
-                                                                            đầu
-                                                                            vào
-                                                                        </button>
-                                                                    </li>
+                                                                                    class="bg-white w-100 btnCreateTax">
+                                                                                <i class="fa-solid fa-circle-plus"
+                                                                                   style="margin: 0 9px"></i>Thêm mới thuế
+                                                                                đầu
+                                                                                vào
+                                                                            </button>
+                                                                        </li>
+                                                                    </div>
+                                                                    <div id="showALlTax">
+
+                                                                    </div>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -804,22 +812,28 @@
                                                                 align-items: center; ">
                                                                     <span id="taxProTypeOut"
                                                                     th:text="${product.saleTaxList.size() > 0} ? ${product.saleTaxList.get(0).title} : 'Chọn thuế đầu ra'"
+                                                                          th:attr="data-id=${product.saleTaxList.get(0).id}"
                                                                     >
 
                                                                     </span>
                                                                 </div>
                                                                 <ul class="dropdown-menu w-100  showAllTaxOut">
-                                                                    <li class="text-primary dropdown-item">
-                                                                        <button style="border: none; color: #2d9dff;padding: 10px;text-align: start;
+                                                                    <div>
+                                                                        <li class="text-primary dropdown-item">
+                                                                            <button style="border: none; color: #2d9dff;padding: 10px;text-align: start;
                                                                      font-weight: 500;
                                                                      font-size: 14px"
-                                                                                class="bg-white w-100 btnCreateTax">
-                                                                            <i class="fa-solid fa-circle-plus"
-                                                                               style="margin: 0 9px"></i>Thêm mới thuế
-                                                                            đầu
-                                                                            ra
-                                                                        </button>
-                                                                    </li>
+                                                                                    class="bg-white w-100 btnCreateTax">
+                                                                                <i class="fa-solid fa-circle-plus"
+                                                                                   style="margin: 0 9px"></i>Thêm mới thuế
+                                                                                đầu
+                                                                                ra
+                                                                            </button>
+                                                                        </li>
+                                                                    </div>
+                                                                    <div id="showALlTaxOut">
+
+                                                                    </div>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -1065,7 +1079,7 @@
         product.id =  page.elements.productId.text();
         product.title = page.dialogs.elements.titleUpdate.val();
         product.enableSell = page.dialogs.elements.enableSell.is(":checked") ? true : false;
-        // product.description = page.dialogs.elements.descriptionUpdate.val();
+        product.description = page.dialogs.elements.descriptionUpdate.val();
         product.unit = page.dialogs.elements.unitUpdate.val();
         product.sku = page.dialogs.elements.skuUpdate.val();
         product.barCode = page.dialogs.elements.barCodeUpdate.val();
@@ -1076,7 +1090,7 @@
         product.categoryId = $("#catProType").data("id");
         product.brandId = $('#brandProType').data("id");
         product.applyTax = $("#applyTax").is(":checked") ? true : false;
-        product.isTaxInclusive = $("#priceDepsTax").val() === 2 ? true : false;
+        product.taxInclusive = $("#priceDepsTax").val() == 2 ? true : false;
         product.taxList = taxs;
         product.mediaList = imgs;
 
@@ -1091,7 +1105,12 @@
             "data": JSON.stringify(product)
         })
             .done((data) => {
+                let productId = data.id;
                 App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED);
+
+                setTimeout(() => {
+                    window.location.href = "/admin/product/" + productId;
+                }, 1000)
             })
             .fail((jqXHR) => {
                 App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400);
@@ -1198,6 +1217,7 @@
         })
             .done((data) => {
                 console.log(": Tạo sản phẩm thành công")
+                $(".showAllCategory #showAllCAt").empty();
                 showAllCategories();
                 searchCat();
                 updateNameCat();
@@ -1228,6 +1248,7 @@
         })
             .done((data) => {
                 console.log(": Tạo sản phẩm thành công")
+                $(".showAllBrand #showAllBrand").empty();
                 showAllBrands()
                 $('#modalAddBrand').modal('hide');
                 $('#frmCreateBrand')[0].reset();
@@ -1257,6 +1278,8 @@
         })
             .done((data) => {
                 console.log(": Tạo thuế thành công")
+                $(".showAllTax #showALlTax").empty();
+                $(".showAllTaxOut #showALlTaxOut").empty();
                 showAllTaxes()
                 $('#modalAddTax').modal('hide');
                 $('#frmCreateTax')[0].reset();

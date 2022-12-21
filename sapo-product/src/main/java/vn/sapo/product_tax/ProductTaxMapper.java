@@ -1,16 +1,15 @@
 package vn.sapo.product_tax;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import vn.sapo.entities.tax.ProductTax;
-import vn.sapo.entities.tax.Tax;
+import vn.sapo.product_tax.dto.CreateProductTaxParam;
 import vn.sapo.product_tax.dto.ProductTaxParam;
 import vn.sapo.product_tax.dto.ProductTaxResult;
-import vn.sapo.tax.dto.CreateTaxParam;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class ProductTaxMapper {
@@ -19,6 +18,10 @@ public class ProductTaxMapper {
 
     public ProductTaxResult toDTO(ProductTax productTax) {
         return modelMapper.map(productTax, ProductTaxResult.class);
+    }
+
+    public CreateProductTaxParam dto2Dto(ProductTaxParam productTaxParam) {
+        return (CreateProductTaxParam) new CreateProductTaxParam().setTaxId(productTaxParam.getTaxId()).setTaxType(productTaxParam.getTaxType());
     }
 
 //    public ProductTax toModel(ProductTaxParam productTax) {
