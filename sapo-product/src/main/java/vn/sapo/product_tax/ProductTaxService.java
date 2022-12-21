@@ -1,17 +1,15 @@
 package vn.sapo.product_tax;
 
+import vn.sapo.product_tax.dto.CreateProductTaxParam;
 import vn.sapo.product_tax.dto.ProductTaxParam;
 import vn.sapo.product_tax.dto.ProductTaxResult;
-import vn.sapo.tax.dto.CreateTaxParam;
 
 import java.util.List;
 
 public interface ProductTaxService {
-    List<ProductTaxResult> create(List<ProductTaxParam> productTaxParams, Integer productId);
+    List<ProductTaxResult> createAll(List<ProductTaxParam> productTaxParams, Integer productId);
 
     List<ProductTaxResult> findAllByProductId(Integer productId);
-
-    void createAll(List<ProductTaxParam> taxListParam);
 
     void deleteAllByProductId(Integer productId);
 }

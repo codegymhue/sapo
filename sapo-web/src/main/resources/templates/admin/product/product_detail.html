@@ -117,36 +117,36 @@
                                                     class="MuiTypography-root MuiTypography-body2"
                                                     itemid="display_product_variant_unit"
                                                     style="line-height: 16px; margin-left: 5px;"
-                                                    th:text="*{unit}?: '---'">
+                                                    th:text="*{unit != ''} ? ${product.unit} : '---' ">
                                             </p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
-                                        <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-5">
-                                            <p class="MuiTypography-root jss4673 MuiTypography-body2"
-                                               itemid="title_display_product_variant_type_product">Phân loại</p>
-                                        </div>
-                                        <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7">
-                                            <div class="MuiBox-root jss4691 jss4674">: <p
-                                                    class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap"
-                                                    itemid="display_product_variant_type_product"
-                                                    style="line-height: 16px; margin-left: 5px;">
-                                                Sản phẩm thường</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
-                                        <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6"
-                                             style="padding: 0px 12px 0px 0px;">
-                                            <button id="Sapo-Button-a0f83825-7855-45e0-bb34-51013f879638"
-                                                    class="sc-jqUVSM gFwmPR"><span
-                                                    class="sc-papXJ jcEYKF">
-                            <p class="MuiTypography-root jss4622 MuiTypography-body1"
-                               style="color: rgb(0, 136, 255); cursor: pointer;">Xem mô tả</p>
-                          </span></button>
-                                        </div>
-                                    </div>
+<!--                                    <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">-->
+<!--                                        <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-5">-->
+<!--                                            <p class="MuiTypography-root jss4673 MuiTypography-body2"-->
+<!--                                               itemid="title_display_product_variant_type_product">Phân loại</p>-->
+<!--                                        </div>-->
+<!--                                        <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7">-->
+<!--                                            <div class="MuiBox-root jss4691 jss4674">: <p-->
+<!--                                                    class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap"-->
+<!--                                                    itemid="display_product_variant_type_product"-->
+<!--                                                    style="line-height: 16px; margin-left: 5px;">-->
+<!--                                                Sản phẩm thường</p>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">-->
+<!--                                        <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6"-->
+<!--                                             style="padding: 0px 12px 0px 0px;">-->
+<!--                                            <button id="Sapo-Button-a0f83825-7855-45e0-bb34-51013f879638"-->
+<!--                                                    class="sc-jqUVSM gFwmPR"><span-->
+<!--                                                    class="sc-papXJ jcEYKF">-->
+<!--                            <p class="MuiTypography-root jss4622 MuiTypography-body1"-->
+<!--                               style="color: rgb(0, 136, 255); cursor: pointer;">Xem mô tả</p>-->
+<!--                          </span></button>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
                                 </div>
                                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4">
                                     <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
@@ -181,12 +181,13 @@
                                     <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-5">
                                             <p class="MuiTypography-root jss4673 MuiTypography-body2"
-                                               itemid="title_display_product_variant_tags">Tags</p>
+                                               itemid="title_display_product_variant_tags">Mô tả sản phẩm</p>
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7">
                                             <div class="MuiBox-root jss4694 jss4674">: <p
                                                     class="MuiTypography-root MuiTypography-body1"
-                                                    style="margin-left: 5px;"><span>---</span></p>
+                                                    style="margin-left: 5px;"><span
+                                            th:text="*{description != ''} ? *{description} : '---'"></span></p>
                                             </div>
                                         </div>
                                     </div>

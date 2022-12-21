@@ -22,8 +22,11 @@ import vn.sapo.item.ItemService;
 import vn.sapo.media.MediaMapper;
 import vn.sapo.media.MediaService;
 import vn.sapo.product.dto.*;
+import vn.sapo.product_tax.ProductTaxMapper;
 import vn.sapo.product_tax.ProductTaxRepository;
 import vn.sapo.product_tax.ProductTaxService;
+import vn.sapo.product_tax.dto.CreateProductTaxParam;
+import vn.sapo.product_tax.dto.ProductTaxParam;
 import vn.sapo.product_tax.dto.ProductTaxResult;
 import vn.sapo.purchaseOrderItem.PurchaseOrderItemService;
 import vn.sapo.tax.TaxMapper;
@@ -50,6 +53,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     BrandMapper brandMapper;
+    @Autowired
+    ProductTaxMapper productTaxMapper;
 
     @Autowired
     CategoryMapper categoryMapper;
@@ -177,7 +182,7 @@ public class ProductServiceImpl implements ProductService {
         product = productRepository.save(product);
         Integer productId = product.getId();
         if (createProductParam.isApplyTax()) {
-            productTaxService.create(createProductParam.getTaxList(), productId);
+            productTaxService.createAll(createProductParam.getTaxList(), productId);
         }
         System.out.println(createProductParam.getMediaList().size());
         if (createProductParam.getMediaList().size() != 0) {
@@ -197,13 +202,15 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new NotFoundException("Product not found"));
         product.setStatus(updateProductParam.isEnableSell() ? ProductStatus.AVAILABLE :
-                        ProductStatus.UNAVAILABLE);
-        if (updateProductParam.isApplyTax()) {
-            productTaxService.create(updateProductParam.getTaxList(), productId);
-        }
+                ProductStatus.UNAVAILABLE);
         productMapper.transferFields(updateProductParam, product);
-        productTaxService.deleteAllByProductId(productId);
-        productTaxService.createAll(updateProductParam.getTaxList());
+        if (updateProductParam.isApplyTax()) {
+            productTaxService.deleteAllByProductId(productId);
+            productTaxService.createAll(updateProductParam.getTaxList(), productId);
+        } else {
+            productTaxService.deleteAllByProductId(productId);
+        }
+
     }
 
 
@@ -373,11 +380,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public void saveChangeApplyTax(Integer applyTax, List<String> list) {
-        for(String item : list){
+        for (String item : list) {
             Optional<Product> product = productRepository.findById(Integer.valueOf(item));
-            if(product.isPresent()) {
+            if (product.isPresent()) {
                 Product newProduct = product.get();
-                if(applyTax == 1) {
+                if (applyTax == 1) {
                     newProduct.setApplyTax(true);
                 } else {
                     newProduct.setApplyTax(false);
