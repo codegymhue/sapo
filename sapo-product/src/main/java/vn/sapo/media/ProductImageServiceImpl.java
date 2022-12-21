@@ -32,21 +32,16 @@ public class ProductImageServiceImpl implements MediaService {
     @Transactional
     public List<MediaResult> save(List<MediaParam> mediaParam, Product productSaved) {
         List<Media> medias = mediaParam.stream().map(mediaMapper::toModel).collect(Collectors.toList());
-        List<MediaResult> mediaResults = new ArrayList<>();
+        List<MediaResult> dtoList = new ArrayList<>();
         for (int i = 0; i < medias.size(); i++) {
-            Media media = new Media();
-            media = medias.get(i);
-            if (i == 0) {
-                media.setIsMain(true);
-            } else {
-                media.setIsMain(false);
-            }
+            Media media = medias.get(i);
+            media.setMain(i == 0);
             media.setProductId(productSaved.getId());
             media.setProduct(productSaved);
             Media mediaSaved = mediaRepository.save(media);
-            mediaResults.add(mediaMapper.toDTO(mediaSaved));
+            dtoList.add(mediaMapper.toDTO(mediaSaved));
         }
-        return mediaResults;
+        return dtoList;
     }
 
     @Override

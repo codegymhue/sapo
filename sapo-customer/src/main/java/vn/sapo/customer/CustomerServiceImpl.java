@@ -104,6 +104,11 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepository.deleteById(id);
     }
 
+    @Override
+    public boolean existsById(Integer id) {
+        return customerRepository.existsById(id);
+    }
+
 
 //    @Override
 //    @Transactional(readOnly = true)
