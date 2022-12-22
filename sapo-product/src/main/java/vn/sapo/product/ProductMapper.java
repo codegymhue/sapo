@@ -5,8 +5,9 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import vn.sapo.brand.BrandMapper;
+import vn.sapo.brand.dto.BrandResult;
 import vn.sapo.category.CategoryMapper;
-import vn.sapo.entities.customer.Customer;
+import vn.sapo.category.dto.CategoryResult;
 import vn.sapo.entities.product.Product;
 import vn.sapo.media.MediaMapper;
 import vn.sapo.product.dto.*;
@@ -37,28 +38,30 @@ public class ProductMapper implements InitializingBean {
     MediaMapper mediaMapper;
 
     public Product toModel(CreateProductParam productWithImageParam) {
-        return new Product(productWithImageParam.getCategoryId(), productWithImageParam.getBrandId())
+        return new Product()
                 .setTitle(productWithImageParam.getTitle())
+                .setMass(productWithImageParam.getMass())
                 .setDescription(productWithImageParam.getDescription())
                 .setUnit(productWithImageParam.getUnit())
-                .setApplyTax(productWithImageParam.getApplyTax())
-                .setTaxInclusive(productWithImageParam.getTaxInclusive())
+                .setApplyTax(productWithImageParam.isApplyTax())
+                .setTaxInclusive(productWithImageParam.isTaxInclusive())
                 .setSku(productWithImageParam.getSku())
                 .setBarCode(productWithImageParam.getBarCode())
                 .setImportPrice(productWithImageParam.getImportPrice())
                 .setRetailPrice(productWithImageParam.getRetailPrice())
-                .setWholesalePrice(productWithImageParam.getWholesalePrice())
-                .setBrandId(productWithImageParam.getBrandId())
-                .setCategoryId(productWithImageParam.getCategoryId());
+                .setWholesalePrice(productWithImageParam.getWholesalePrice());
 
     }
     
-    public void transferFields(ProductUpdateParam updateCustomerParam, Product product) {
+    public void transferFields(UpdateProductParam updateCustomerParam, Product product) {
         modelMapper.map(updateCustomerParam, product);
     }
 
     public ProductResult toDTO(Product product) {
-        return modelMapper.map(product, ProductResult.class);
+        return modelMapper.map(product, ProductResult.class)
+                .setCategory(product.getCategoryId() != null ? categoryMapper.toDTO(product.getCategory()) : new CategoryResult())
+                .setBrand(product.getBrandId() != null ? brandMapper.toDTO(product.getBrand()) : new BrandResult())
+                ;
     }
 
     public ProductDetailResult toDTODetail(Product product) {
@@ -74,8 +77,8 @@ public class ProductMapper implements InitializingBean {
                 .setImportPrice(product.getImportPrice())
                 .setWholesalePrice(product.getWholesalePrice())
                 .setRetailPrice(product.getRetailPrice())
-                .setApplyTax(product.getApplyTax())
-                .setTaxInclusive(product.getTaxInclusive())
+                .setApplyTax(product.isApplyTax())
+                .setTaxInclusive(product.isTaxInclusive())
                 .setBarCode(product.getBarCode())
                 .setMass(product.getMass());
     }
@@ -90,8 +93,8 @@ public class ProductMapper implements InitializingBean {
                 .setInventory(0)
                 .setCreateAt(product.getCreatedAt())
                 .setUpdateAt(product.getUpdatedAt())
-                .setCategory(categoryMapper.toDTO(product.getCategory()))
-                .setBrand(brandMapper.toDTO(product.getBrand()));
+                .setCategory(product.getCategoryId() != null ? categoryMapper.toDTO(product.getCategory()) : new CategoryResult())
+                .setBrand(product.getBrandId() != null ? brandMapper.toDTO(product.getBrand()) : new BrandResult());
     }
 
     public ProductVariantsResult toDTOVariants(Product product){
@@ -101,12 +104,12 @@ public class ProductMapper implements InitializingBean {
                 .setTitle(product.getTitle())
                 .setSku(product.getSku())
                 .setBarCode(product.getBarCode())
-                .setCategory(categoryMapper.toDTO(product.getCategory()))
-                .setBrand(brandMapper.toDTO(product.getBrand()))
+                .setCategory(product.getCategoryId() != null ? categoryMapper.toDTO(product.getCategory()) : new CategoryResult())
+                .setBrand(product.getBrandId() != null ? brandMapper.toDTO(product.getBrand()) : new BrandResult())
                 .setStatus(product.getStatus())
                 .setCreateAt(product.getCreatedAt())
                 .setUpdateAt(product.getUpdatedAt())
-                .setApplyTax(product.getApplyTax())
+                .setApplyTax(product.isApplyTax())
                 .setRetailPrice(product.getRetailPrice())
                 .setImportPrice(product.getImportPrice())
                 .setWholesalePrice(product.getWholesalePrice())

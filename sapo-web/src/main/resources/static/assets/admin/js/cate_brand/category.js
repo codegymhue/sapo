@@ -29,7 +29,7 @@ function showAllCategories(selectedCategory) {
                 let isSelected = item === selectedCategory ? "selected" : "";
                 let str = `<li id="${item.id}" data-id="${item.id}" onclick="updateNameCat(${item.id})" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
                 // options.insertAdjacentHTML("beforeend", li);
-                $(".showAllCategory").append(str);
+                $(".showAllCategory #showAllCAt").append(str);
 
             });
 

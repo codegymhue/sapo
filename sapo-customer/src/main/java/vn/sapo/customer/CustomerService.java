@@ -1,7 +1,6 @@
 package vn.sapo.customer;
 
 import vn.sapo.customer.dto.CreateCustomerParam;
-import vn.sapo.customer.dto.CustomerDebtImpl;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
 
@@ -14,7 +13,8 @@ public interface CustomerService {
     List<CustomerResult> findAll();
 
     CustomerResult create(CreateCustomerParam customerCreate);
-//
+
+    //
     CustomerResult update(UpdateCustomerParam updateCustomer);
 
 //    List<SaleOrderResult> findHistoryCustomerOrder(Integer id);
@@ -23,4 +23,5 @@ public interface CustomerService {
 
     void deleteById(Integer id);
 
+    boolean existsById(Integer id);
 }

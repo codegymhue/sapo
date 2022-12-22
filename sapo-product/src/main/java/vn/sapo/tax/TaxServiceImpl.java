@@ -3,6 +3,7 @@ package vn.sapo.tax;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.sapo.entities.tax.Tax;
+import vn.sapo.exceptions.DataInputException;
 import vn.sapo.exceptions.NotFoundException;
 import vn.sapo.product_tax.dto.ProductTaxResult;
 import vn.sapo.tax.dto.*;
@@ -43,15 +44,31 @@ public class TaxServiceImpl implements TaxService {
     @Override
     @Transactional
     public TaxResult create(CreateTaxParam taxParam) {
+        if (taxRepository.findByTitle(taxParam.getTitle().trim()).isPresent()) {
+            throw new DataInputException("Tên loại thuế đã tồn tại. Vui lòng kiểm tra!!!");
+        }
         return taxMapper.toDTO(taxRepository.save(taxMapper.toModel(taxParam)));
     }
 
     @Override
+    public void createAll(List<CreateTaxParam> taxListParam) {
+        List<Tax> taxList = taxMapper.toModelList(taxListParam);
+        taxRepository.saveAll(taxList);
+    }
+
+    @Override
+    @Transactional
     public List<TaxResult> findAllByProductId(List<ProductTaxResult> productTaxResults) {
         List<TaxResult> result = new ArrayList<>();
         for (ProductTaxResult productTaxResult : productTaxResults) {
             result.add(taxMapper.toDTO(taxRepository.findById(productTaxResult.getTaxId()).get()));
         }
         return result;
+    }
+
+    @Override
+    @Transactional
+    public void deleteAllByProductId(Integer productId) {
+//        taxRepository.deleteAllByProductId(productId);
     }
 }

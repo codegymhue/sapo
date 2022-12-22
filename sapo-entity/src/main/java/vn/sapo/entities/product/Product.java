@@ -3,7 +3,6 @@ package vn.sapo.entities.product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.Value;
 import lombok.experimental.Accessors;
 import vn.sapo.entities.BaseEntity;
 import vn.sapo.entities.media.Media;
@@ -13,9 +12,7 @@ import vn.sapo.entities.tax.TaxType;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor
@@ -34,8 +31,8 @@ public class Product extends BaseEntity {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "deleted", nullable = false)
-    private Boolean deleted = false;
+    @Column(name = "deleted")
+    private boolean deleted = false;
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -45,24 +42,24 @@ public class Product extends BaseEntity {
     private String description;
 
     @Column(name = "mass")
-    private Float mass;
+    private float mass;
 
     @Column(name = "unit", length = 50)
     private String unit;
 
-    @Column(name = "sku", length = 50)
+    @Column(name = "sku", length = 50, unique = true)
     private String sku;
 
-    @Column(name = "bar_code", length = 50)
+    @Column(name = "bar_code", length = 50, unique = true)
     private String barCode;
 
-    @Column(name = "retail_price", nullable = false, precision = 10, scale = 2)
+    @Column(name = "retail_price", precision = 10, scale = 2)
     private BigDecimal retailPrice;
 
-    @Column(name = "import_price", nullable = false, precision = 10, scale = 2)
+    @Column(name = "import_price", precision = 10, scale = 2)
     private BigDecimal importPrice;
 
-    @Column(name = "wholesale_price", nullable = false, precision = 10, scale = 2)
+    @Column(name = "wholesale_price", precision = 10, scale = 2)
     private BigDecimal wholesalePrice;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -78,10 +75,10 @@ public class Product extends BaseEntity {
     private Integer brandId;
 
     @Column(name = "apply_tax", nullable = false, columnDefinition = "boolean default false")
-    private Boolean applyTax;
+    private boolean applyTax;
 
     @Column(name = "tax_inclusive", nullable = false, columnDefinition = "boolean default false")
-    private Boolean taxInclusive;
+    private boolean taxInclusive;
     @OneToMany(mappedBy = "product")
     private Set<Media> mediaSet;
 
@@ -90,23 +87,40 @@ public class Product extends BaseEntity {
     @OrderBy("taxId")
     private Set<ProductTax> productTaxSet;
 
+
     public Set<Media> getMediaList() {
         return mediaSet;
     }
 
+    public String getMainImageUrl() {
+        if (mediaSet == null)
+            return null;
+        return mediaSet.stream()
+                .filter(Media::isMain)
+                .map(Media::getFileUrl)
+                .findAny()
+                .orElse(null);
+    }
+
     public List<Tax> getTaxList() {
+        if (productTaxSet == null)
+            return new ArrayList<>();
         return productTaxSet.stream()
                 .map(ProductTax::getTax)
                 .collect(Collectors.toList());
     }
 
     public List<Tax> getSaleTaxList() {
+        if (productTaxSet == null)
+            return new ArrayList<>();
         return productTaxSet.stream()
                 .filter(productTax -> productTax.getTaxType() == TaxType.TAX_SALE)
                 .map(ProductTax::getTax).collect(Collectors.toList());
     }
 
     public List<Tax> getPurchaseTaxList() {
+        if (productTaxSet == null)
+            return new ArrayList<>();
         return productTaxSet.stream()
                 .filter(productTax -> productTax.getTaxType() == TaxType.TAX_PURCHASE)
                 .map(ProductTax::getTax).collect(Collectors.toList());

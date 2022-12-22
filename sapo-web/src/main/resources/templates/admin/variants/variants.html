@@ -82,40 +82,40 @@
         <div class="MuiBox-root jss6754 jss6732">
             <div class="MuiBox-root jss6755 jss6733">
                 <div class="MuiBox-root jss6756 jss6741">
-                    <button class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
-                            tabindex="0"
-                            type="button">
-                      <span class="MuiButton-label">
-                        <span class="MuiButton-startIcon MuiButton-iconSizeSmall">
-                            <i class="fa-solid fa-print"></i>
-                        </span>In tem mã
-                      </span>
-                        <span class="MuiTouchRipple-root">
-                      </span>
-                    </button>
+<!--                    <button class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"-->
+<!--                            tabindex="0"-->
+<!--                            type="button">-->
+<!--                      <span class="MuiButton-label">-->
+<!--                        <span class="MuiButton-startIcon MuiButton-iconSizeSmall">-->
+<!--                            <i class="fa-solid fa-print"></i>-->
+<!--                        </span>In tem mã-->
+<!--                      </span>-->
+<!--                        <span class="MuiTouchRipple-root">-->
+<!--                      </span>-->
+<!--                    </button>-->
                     <div class="MuiBox-root jss6793"
                          style="width: 1px; height: 20px; border-left: 1px solid rgb(211, 213, 215); margin: 0 8px;">
                     </div>
 
                     <div class="MuiBox-root jss6794 jss6746">
-                        <a class="jss6750"
-                           href="#">
-                            <button id="Sapo-Button-ba11a07a-f11d-475b-9638-2e9af46ee60d"
-                                    class="sc-jqUVSM eUKSRG">
-                                <span class="sc-papXJ jcEYKF">Loại sản phẩm
-                                </span>
-                            </button>
-                        </a>
+<!--                        <a class="jss6750"-->
+<!--                           href="#">-->
+<!--                            <button id="Sapo-Button-ba11a07a-f11d-475b-9638-2e9af46ee60d"-->
+<!--                                    class="sc-jqUVSM eUKSRG">-->
+<!--                                <span class="sc-papXJ jcEYKF">Loại sản phẩm-->
+<!--                                </span>-->
+<!--                            </button>-->
+<!--                        </a>-->
                         <div class="MuiBox-root jss6796 jss6747">
                         </div>
-                        <a class="jss6750"
-                           href="#">
-                            <button id="Sapo-Button-99086ae8-8fc4-4ac6-8782-c93192bd428a"
-                                    class="sc-jqUVSM eUKSRG">
-                                <span class="sc-papXJ jcEYKF">Quản lý khác
-                                </span>
-                            </button>
-                        </a>
+<!--                        <a class="jss6750"-->
+<!--                           href="#">-->
+<!--                            <button id="Sapo-Button-99086ae8-8fc4-4ac6-8782-c93192bd428a"-->
+<!--                                    class="sc-jqUVSM eUKSRG">-->
+<!--                                <span class="sc-papXJ jcEYKF">Quản lý khác-->
+<!--                                </span>-->
+<!--                            </button>-->
+<!--                        </a>-->
 
                     </div>
                 </div>
@@ -191,26 +191,76 @@
                 <div class="center-scroll">
                     <div style="font-size:small; width: 150rem" >
                         <table id="tbProduct" class="table table-hover" >
-                            <thead>
-                                <tr>
-                                    <th><input type="checkbox" value=""></th>
-                                    <th>Ảnh</th>
-                                    <th>Tên phiên bản sản phẩm</th>
-                                    <th>Mã vạch</th>
-                                    <th>Loại</th>
-                                    <th>Nhãn hiệu</th>
-                                    <th>Trạng thái</th>
-                                    <th>Ngày khởi tạo</th>
-                                    <th>Cập nhật cuối</th>
-                                    <th>Áp dụng thuế</th>
-                                    <th>Giá bán lẻ</th>
-                                    <th>Giá nhập</th>
-                                    <th>Giá bán buôn</th>
-                                    <th>Có thể bán</th>
-                                    <th>Tồn kho</th>
-                                    <th>Hàng đang về</th>
-                                    <th>Hàng đang giao</th>
-                                    <th>Đang giao dịch</th>
+                            <thead style="background-color: #f4f6f8; height: 55px">
+                                <tr id="theadList" class="show">
+                                    <th class="align-middle"><input id="checkAll" type="checkbox" value="" data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả"></th>
+                                    <th class="align-middle" scope="col">Ảnh</th>
+                                    <th class="align-middle" scope="col">
+                                        <button class="sort" id="btnTitleSort">Tên phiên bản sản phẩm <i class="fa-solid fa-sort"></i></button>
+                                    </th>
+                                    <th class="align-middle" scope="col">Mã vạch</th>
+                                    <th class="align-middle" scope="col">Loại</th>
+                                    <th class="align-middle" scope="col">Nhãn hiệu</th>
+                                    <th class="align-middle" scope="col">Trạng thái</th>
+                                    <th class="align-middle" scope="col">
+                                        <button class="sort" id="btnCreatAtSort">Ngày khởi tạo <i class="fa-solid fa-sort"></i></button>
+                                    </th>
+                                    <th class="align-middle" scope="col">
+                                        <button class="sort" id="btnUpdateAtSort">Cập nhập cuối <i class="fa-solid fa-sort"></i></button>
+                                    </th>
+                                    <th class="align-middle" scope="col">Áp dụng thuế</th>
+                                    <th class="align-middle" scope="col">
+                                        <button class="sort" id="btnRetailPriceSort">Giá bán lẻ <i class="fa-solid fa-sort"></i></button>
+                                    </th>
+                                    <th class="align-middle" scope="col">
+                                        <button class="sort" id="btnImportPriceSort">Giá nhập <i class="fa-solid fa-sort"></i></button>
+                                    </th>
+                                    <th class="align-middle" scope="col">
+                                        <button class="sort" id="btnWholesalePriceSort">Giá bán buôn <i class="fa-solid fa-sort"></i></button>
+                                    </th>
+                                    <th class="align-middle" scope="col">Có thể bán</th>
+                                    <th class="align-middle" scope="col">Tồn kho</th>
+                                    <th class="align-middle" scope="col">Hàng đang về</th>
+                                    <th class="align-middle" scope="col">Hàng đang giao</th>
+                                    <th class="align-middle" scope="col">Đang giao dịch</th>
+                                </tr>
+
+                                <tr class="hide" id="selectActionThead" style="border: snow">
+                                    <td class="align-middle" style="width: 20px">
+                                        <input id="selectAction" type="checkbox" value="" >
+                                    </td>
+                                    <td colspan="2" class="align-middle" id="numberSelectProductList" style="width: 12%"></td>
+                                    <td class="align-middle" style="width: 150px">
+                                        <div class="btn-group">
+                                            <button class="btn dropdown-toggle btnDropdown me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Chọn thao tác
+                                                <i class="fa-solid fa-sort-down" style="padding-left: 2.3rem"></i>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                                <li>
+                                                    <button class="dropdown-item btnDropdown" id="btnCheckInventory">Kiểm tra tồn kho</button>
+                                                </li>
+                                                <li>
+                                                    <button class="dropdown-item btnDropdown" id="btnApplyTax">Áp dụng thuế</button>
+                                                </li>
+                                                <li>
+                                                    <button class="dropdown-item btnDropdown" id="btnAvailable">Đang giao dịch</button>
+                                                </li>
+                                                <li>
+                                                    <button class="dropdown-item btnDropdown" id="btnUnavailable">Ngừng giao dịch</button>
+                                                </li>
+                                                <li>
+                                                    <button class="dropdown-item btnDropdown" id="btnDelete">Xóa sản phẩm</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td style="width: 100px"></td>
+                                    <td style="width: 100px"></td>
+                                    <td style="width: 160px"></td>
+                                    <td style="width: 110px"></td>
+                                    <td style="width: 110px"></td>
+                                    <td colspan="9"></td>
                                 </tr>
                             </thead>
                             <tbody >
@@ -219,10 +269,9 @@
                     </div>
                 </div>
 
-
                 <div class="container-fluid " style="height: 50px">
                     <div class="row col-md-12 d-flex align-items-center" style="font-size: small">
-                        <div class="col-md-4"></div>
+                        <div class="col-md-5"></div>
                         <div class="col-md-3 text-end">
                             <label class="me-2">Hiển thị</label>
                             <select class="me-2 " id="pageSize">
@@ -232,10 +281,10 @@
                             </select>
                             <span>Kết quả</span>
                         </div>
-                        <div class="col-md-3" id="totalPage">
+                        <div class="col-md-3 text-center" id="totalPage" style="padding: initial">
 
                         </div>
-                        <div class="col-md-2 ">
+                        <div class="col-md-1 ">
                             <nav aria-label="Page navigation example ">
                                 <ul class="pagination" >
                                     <li class="page-item">
@@ -263,6 +312,119 @@
     </div>
 </div>
 
+<div class="modal fade" id="modalApplyTax" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 45rem">
+            <div class="modal-header">
+                <h4 class="modal-title">Cập nhật tình trạng áp dụng thuế</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="changeApplyTax">
+            </div>
+            <div class="d-flex align-items-center" style="font-size: medium; padding-left: 2rem">
+                Chọn trạng thái muốn cập nhật:
+                <select class="form-select ms-2" id="selectApplyTax" aria-label="Default select example" style="width: 45%; font-size: medium">
+                    <option selected value="">Chọn trạng thái</option>
+                    <option value="1">Áp dụng thuế</option>
+                    <option value="0">Không áp dụng thuế</option>
+                </select>
+            </div>
+            <div class="modal-footer d-flex align-items-center">
+                <button class="btn btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn btn-primary btn-save" id="btnApplyTaxSave" type="button">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalAvailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: max-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="staticBackdropLabel">Cập nhật trạng thái !</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="statusChange">
+            </div>
+            <div class="modal-footer d-flex align-items-center">
+                <button class="btn btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn btn-primary btn-save" id="btnAvailableSave" type="button">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalUnavailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: max-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Ngừng giao dịch!</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="statusChangeUnavailable">
+            </div>
+            <div class="modal-footer d-flex align-items-center">
+                <button class="btn btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn btn-primary btn-save" id="btnUnavailableSave" type="button">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: max-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Xóa sản phẩm?</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="statusChangeDelete">
+            </div>
+            <div class="modal-footer d-flex align-items-center">
+                <button class="btn  btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn btn-danger btn-save-delete" id="btnSubmitDelete" type="button">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalCheckInventory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content " style="width:max-content">
+            <div class="modal-header">
+                <h4 class="modal-title" >Kiểm tra thông tin tồn kho</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" >
+                <table class="table table-hover table-bordered" id="tbInventoryProduct" style="font-size: small">
+                    <thead style="background-color: #f4f6f8">
+                    <tr>
+                        <th scope="col " rowspan="2" class="align-middle">Mã SKU</th>
+                        <th scope="col" rowspan="2" class="align-middle ">Tên sản phẩm</th>
+                        <th scope="col">Chính sách giá</th>
+                        <th scope="col" colspan="5" class="text-center">Tổng</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Giá bán lẻ</th>
+                        <th scope="col">Tồn kho</th>
+                        <th scope="col">Có thể bán</th>
+                        <th scope="col">Đang giao dịch</th>
+                        <th scope="col">Hàng đang về</th>
+                        <th scope="col">Hàng đang giao</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer d-flex align-items-center">
+                <button class="btn btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <th:block th:replace="/layout/script :: script"/>
 <script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="/assets/admin/js/product/app.js"></script>
@@ -277,7 +439,9 @@
             getAllStatus: App.BASE_URL_PRODUCT + "/status",
             updateStatusAvailable: App.BASE_URL_PRODUCT + "/updateStatusAvailable",
             updateStatusUnavailable: App.BASE_URL_PRODUCT + "/updateStatusUnavailable",
-            deleteProduct: App.BASE_URL_PRODUCT + "/delete"
+            deleteProduct: App.BASE_URL_PRODUCT + "/delete",
+            updateChangeApplyTax: App.BASE_URL_PRODUCT + "/updateApplyTax",
+            getAllCheckInventory: App.BASE_URL_PRODUCT + "/checkInventory"
         },
         elements: {},
         loadData: {},
@@ -298,16 +462,24 @@
     let arrayIdProduct = [];
 
     page.elements.tbProduct = $("#tbProduct tbody");
+    page.elements.tbinventoryProduct = $("#tbInventoryProduct tbody");
     page.elements.btnAvailable = $("#btnAvailable");
     page.elements.btnUnavailable = $("#btnUnavailable");
     page.elements.btnDelete = $("#btnDelete");
+    page.elements.btnApplyTax = $("#btnApplyTax");
+    page.elements.btnCheckInventory = $("#btnCheckInventory");
+
     page.elements.btnAvailableSave = $("#btnAvailableSave");
     page.elements.btnUnavailableSave = $("#btnUnavailableSave");
     page.elements.btnSubmitDelete = $("#btnSubmitDelete");
+    page.elements.btnApplyTaxSave = $("#btnApplyTaxSave");
 
     page.elements.btnTitleSort = $("#btnTitleSort");
     page.elements.btnCreatAtSort = $("#btnCreatAtSort");
     page.elements.btnUpdateAtSort = $("#btnUpdateAtSort");
+    page.elements.btnRetailPriceSort = $("#btnRetailPriceSort");
+    page.elements.btnImportPriceSort = $("#btnImportPriceSort");
+    page.elements.btnWholesalePriceSort = $("#btnWholesalePriceSort");
 
     page.elements.totalPage = $("#totalPage");
     page.elements.pageNo = $("#pageNo");
@@ -316,6 +488,7 @@
 
     page.elements.checkAll =$("#checkAll");
     page.elements.selectAction = $("#selectAction");
+    page.elements.selectApplyTax = $("#selectApplyTax");
 
     page.elements.selectActionThead = $("#selectActionThead");
     page.elements.theadList = $("#theadList");
@@ -323,10 +496,13 @@
     page.elements.statusChangeForNumberProductList = $("#statusChange");
     page.elements.statusChangeForNumberToUnavailable = $("#statusChangeUnavailable");
     page.elements.statusChangeForNumberDelete = $("#statusChangeDelete");
+    page.elements.statusChangeForNumberToApplyTax = $("#changeApplyTax");
 
     page.elements.modalAvailable = $("#modalAvailable");
-    page.elements.modalUnavailable =$("#modalUnavailable");
-    page.elements.modalDelete =$("#modalDelete");
+    page.elements.modalUnavailable = $("#modalUnavailable");
+    page.elements.modalDelete = $("#modalDelete");
+    page.elements.modalApplyTax = $("#modalApplyTax");
+    page.elements.modalCheckInventory = $("#modalCheckInventory");
 
     page.dialogs.elements.category = $("#category");
     page.dialogs.elements.brand = $("#brand");
@@ -535,6 +711,7 @@
         page.elements.statusChangeForNumberProductList.empty();
         page.elements.statusChangeForNumberToUnavailable.empty();
         page.elements.statusChangeForNumberDelete.empty();
+        page.elements.statusChangeForNumberToApplyTax.empty();
 
         if(arrayIdProduct.length > 0){
             page.elements.theadList.removeClass("show").addClass("hide");
@@ -542,6 +719,7 @@
             page.elements.statusChangeForNumberProductList.append(`<span style="font-size: medium">Thao tác này sẽ cập nhật trạng thái giao dịch cho ${arrayIdProduct.length} sản phẩm bạn đã chọn.</span>`);
             page.elements.statusChangeForNumberToUnavailable.append(`<span style="font-size: medium">Thao tác này sẽ ngừng giao dịch ${arrayIdProduct.length} sản phẩm bạn đã chọn.</span>`);
             page.elements.statusChangeForNumberDelete.append(`<span style="font-size: medium">Thao tác này sẽ xóa ${arrayIdProduct.length} sản phẩm bạn đã chọn. Thao tác này không thể khôi phục.</span>`);
+            page.elements.statusChangeForNumberToApplyTax.append(`<span style="font-size: medium">Thao tác này sẽ cập nhật áp dụng thuế cho ${arrayIdProduct.length} phiên bản sản phẩm</span>`)
             page.elements.selectActionThead.removeClass("hide").addClass("show");
         } else {
             page.elements.theadList.removeClass("hide").addClass("show");
@@ -574,6 +752,12 @@
     page.elements.btnDelete.on("click", () => {
         page.elements.modalDelete.modal("show");
     })
+    page.elements.btnApplyTax.on("click", () => {
+        page.elements.modalApplyTax.modal("show");
+    })
+    page.elements.btnCheckInventory.on("click", () => {
+        page.commands.getAllCheckInventoryProduct();
+    })
 
     page.commands.updateStatusToAvailable = () => {
         $.ajax({
@@ -586,10 +770,13 @@
             data: JSON.stringify(arrayIdProduct)
         })
             .done(() => {
-                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED)
+                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED);
+                page.elements.modalAvailable.modal("hide");
+                page.commands.getAllProducts();
+                page.commands.resetInputCheckBox();
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_403)
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404);
             })
     }
 
@@ -604,10 +791,13 @@
             data: JSON.stringify(arrayIdProduct)
         })
             .done(() => {
-                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED)
+                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED);
+                page.elements.modalUnavailable.modal("hide");
+                page.commands.getAllProducts();
+                page.commands.resetInputCheckBox();
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_403)
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404);
             })
     }
 
@@ -622,30 +812,76 @@
             data: JSON.stringify(arrayIdProduct)
         })
             .done(() => {
-                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_DELETE)
+                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_DELETE);
+                page.elements.modalDelete.modal("hide");
+                page.commands.getAllProducts();
+                page.commands.resetInputCheckBox();
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_403)
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404);
+            })
+    }
+
+    page.commands.updateChangeApplyTax = () => {
+        let applyTax = page.elements.selectApplyTax.val();
+        if(applyTax != "") {
+            $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "PUT",
+                url: page.urls.updateChangeApplyTax + "/" + applyTax,
+                data: JSON.stringify(arrayIdProduct)
+            })
+                .done(() => {
+                    App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED);
+                    page.elements.modalApplyTax.modal("hide");
+                    page.elements.selectApplyTax.val("")
+                    page.commands.getAllProducts();
+                    page.commands.resetInputCheckBox();
+                })
+                .fail((jqXHR) => {
+                    App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404)
+                })
+        } else {
+            App.IziToast.showErrorAlert("Vui lòng chọn trạng thái áp dụng thuế")
+        }
+    }
+
+    page.commands.getAllCheckInventoryProduct = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "POST",
+            url: page.urls.getAllCheckInventory,
+            data: JSON.stringify(arrayIdProduct)
+        })
+            .done((data) => {
+                page.elements.tbinventoryProduct.empty();
+                data.map(item => {
+                    page.elements.tbinventoryProduct.append(App.renderRowProductInventory(item));
+                });
+                page.elements.modalCheckInventory.modal("show");
+            })
+            .fail((jqXHR) => {
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404);
             })
     }
 
     page.elements.btnAvailableSave.on("click", () => {
         page.commands.updateStatusToAvailable();
-        page.elements.modalAvailable.modal("hide");
-        page.commands.getAllProducts();
-        page.commands.resetInputCheckBox();
     })
-    page.elements.btnUnavailableSave.on("click", () =>{
+    page.elements.btnUnavailableSave.on("click", () => {
         page.commands.updateStatusToUnavailable();
-        page.elements.modalUnavailable.modal("hide");
-        page.commands.getAllProducts();
-        page.commands.resetInputCheckBox();
     })
     page.elements.btnSubmitDelete.on("click", () => {
         page.commands.deleteProductSelect();
-        page.elements.modalDelete.modal("hide");
-        page.commands.getAllProducts();
-        page.commands.resetInputCheckBox();
+    })
+    page.elements.btnApplyTaxSave.on("click", () => {
+        page.commands.updateChangeApplyTax();
     })
 
     page.commands.resetInputCheckBox = () =>{
@@ -672,6 +908,27 @@
         sortPage.type==="des" ?
             sortPage = {"type": "asc","value": "createdAt"} :
             sortPage = {"type": "des","value": "createdAt"};
+        page.commands.getAllProducts();
+    })
+
+    page.elements.btnRetailPriceSort.on("click", () => {
+        sortPage.type==="des" ?
+            sortPage = {"type": "asc","value": "retailPrice"} :
+            sortPage = {"type": "des","value": "retailPrice"};
+        page.commands.getAllProducts();
+    })
+
+    page.elements.btnImportPriceSort.on("click", () => {
+        sortPage.type==="des" ?
+            sortPage = {"type": "asc","value": "importPrice"} :
+            sortPage = {"type": "des","value": "importPrice"};
+        page.commands.getAllProducts();
+    })
+
+    page.elements.btnWholesalePriceSort.on("click", () => {
+        sortPage.type==="des" ?
+            sortPage = {"type": "asc","value": "wholesalePrice"} :
+            sortPage = {"type": "des","value": "wholesalePrice"};
         page.commands.getAllProducts();
     })
 

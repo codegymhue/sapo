@@ -24,7 +24,7 @@ public class MediaMapper {
                 .setFileFolder(media.getFileFolder())
                 .setFileUrl(media.getFileUrl())
                 .setFileType(media.getFileType())
-                .setIsMain(media.getIsMain())
+                .setIsMain(media.isMain())
                 .setProductId(media.getProductId());
     }
 }

@@ -9,6 +9,7 @@ import vn.sapo.brand.dto.BrandResult;
 import vn.sapo.category.dto.CategoryResult;
 import vn.sapo.entities.product.ProductStatus;
 import vn.sapo.media.dto.MediaResult;
+import vn.sapo.tax.dto.TaxResult;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -25,6 +26,8 @@ public class ProductResult {
     private ProductStatus status;
     private String unit;
     private String sku;
+    private String barCode;
+    private Float mass;
     private BigDecimal retailPrice;
     private BigDecimal importPrice;
     private BigDecimal wholesalePrice;
@@ -33,10 +36,16 @@ public class ProductResult {
     private Integer brandId;
     private CategoryResult category;
     private BrandResult brand;
-    private Boolean applyTax;
     private Instant createdAt;
     private Instant updatedAt;
+    private boolean applyTax;
+    private boolean taxInclusive;
+    private List<TaxResult> saleTaxList;
+    private List<TaxResult> purchaseTaxList;
+    private List<MediaResult> mediaList;
     private int totalInventory;
     private int availableInventory;
-    private List<MediaResult> mediaList;
+    private int trading;
+    private int inTransit;
+    private int shipping;
 }
