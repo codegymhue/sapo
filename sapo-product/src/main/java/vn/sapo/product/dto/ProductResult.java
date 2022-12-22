@@ -45,4 +45,7 @@ public class ProductResult {
     private List<MediaResult> mediaList;
     private int totalInventory;
     private int availableInventory;
+    private int trading;
+    private int inTransit;
+    private int shipping;
 }

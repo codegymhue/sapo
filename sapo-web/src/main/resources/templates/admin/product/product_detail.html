@@ -615,26 +615,29 @@
                                                             Chi nhánh mặc định</p></div>
                                                     </td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter">
-                                                        <p class="MuiTypography-root MuiTypography-body1">100</p></td>
+                                                        <p class="MuiTypography-root MuiTypography-body1" th:text="*{totalInventory}"></p></td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter">
-                                                        <p class="MuiTypography-root MuiTypography-body1">200,000</p>
+                                                        <p class="MuiTypography-root MuiTypography-body1" th:text="${#numbers.formatDecimal(product.importPrice, 0, 'COMMA',0 , 'POINT')}?: '0'"></p>
                                                     </td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter">
-                                                        <p class="MuiTypography-root MuiTypography-body1">100</p></td>
+                                                        <p class="MuiTypography-root MuiTypography-body1" th:text="*{availableInventory}"></p></td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter">
                                                         <div class="MuiBox-root jss1059" style="cursor: pointer;"><p
-                                                                class="MuiTypography-root MuiTypography-body1 MuiTypography-colorInherit">
-                                                            0</p></div>
+                                                                class="MuiTypography-root MuiTypography-body1 MuiTypography-colorInherit"
+                                                        th:text="*{trading}">
+                                                            </p></div>
                                                     </td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter">
                                                         <div class="MuiBox-root jss1060" style="cursor: pointer;"><p
-                                                                class="MuiTypography-root MuiTypography-body1 MuiTypography-colorInherit">
-                                                            0</p></div>
+                                                                class="MuiTypography-root MuiTypography-body1 MuiTypography-colorInherit"
+                                                        th:text="*{inTransit}">
+                                                            </p></div>
                                                     </td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter">
                                                         <div class="MuiBox-root jss1061" style="cursor: pointer;"><p
-                                                                class="MuiTypography-root MuiTypography-body1 MuiTypography-colorInherit">
-                                                            0</p></div>
+                                                                class="MuiTypography-root MuiTypography-body1 MuiTypography-colorInherit"
+                                                        th:text="*{shipping}">
+                                                            </p></div>
                                                     </td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter">
                                                         <p class="MuiTypography-root MuiTypography-body1"
