@@ -493,66 +493,66 @@
     }
 
 
-    function getAllCustomerInfoByStatus() {
-        $(document).ready(function () {
-            console.log("show all customer")
-            $("#showAllCustomerTable").DataTable({
-                ajax: {
-                    contentType: 'application/json',
-                    url: "http://localhost:8080/api/customers/findCustomerByStatus",
-                    type: "GET",
-                    dataSrc: ''
-                },
-                destroy: true,
-                lengthMenu: [
-                    [5, 10, 20, -1],
-                    ["5", "10", "20", "All"]
-                ],
-                searching: true,
-
-                columns: [
-                    {data: 'customerCode'},
-                    {data: 'name'},
-                    {data: 'phone'},
-                    {data: 'customerGroup'},
-                    {data: 'debtTotal'},
-                    {data: "spendTotal"}],
-                columnDefs: [
-                    {
-                        targets: 0,
-                        render: function (data, type, row, meta) {
-                            return `<a href="/admin/customers/customerInfo/${row.id}">${row.customerCode}</a>`;
-                        }
-                    },
-                    {
-                        targets: 4,
-                        render: function (data, type, row, meta) {
-                            return `
-                                <p class="text-end"
-                                           style="padding-right: 6px;">${row.debtTotal != null ? (new Intl.NumberFormat('vi-VN', {
-                                style: 'currency',
-                                currency: 'VND'
-                            }).format(row.debtTotal)) : "0"}</p>
-
-                            `
-                        }
-                    },
-                    {
-                        targets: 5,
-                        render: function (data, type, row, meta) {
-                            return `
-                                <p class="text-end"
-                                           style="padding-right: 6px;">${row.spendTotal != null ? (new Intl.NumberFormat('vi-VN', {
-                                style: 'currency',
-                                currency: 'VND'
-                            }).format(row.spendTotal)) : "0"}</p>
-                       `
-                        }
-                    },
-                ],
-            })
-        })
-    }
+    // function getAllCustomerInfoByStatus() {
+    //     $(document).ready(function () {
+    //         console.log("show all customer")
+    //         $("#showAllCustomerTable").DataTable({
+    //             ajax: {
+    //                 contentType: 'application/json',
+    //                 url: "http://localhost:8080/api/customers/findCustomerByStatus",
+    //                 type: "GET",
+    //                 dataSrc: ''
+    //             },
+    //             destroy: true,
+    //             lengthMenu: [
+    //                 [5, 10, 20, -1],
+    //                 ["5", "10", "20", "All"]
+    //             ],
+    //             searching: true,
+    //
+    //             columns: [
+    //                 {data: 'customerCode'},
+    //                 {data: 'name'},
+    //                 {data: 'phone'},
+    //                 {data: 'customerGroup'},
+    //                 {data: 'debtTotal'},
+    //                 {data: "spendTotal"}],
+    //             columnDefs: [
+    //                 {
+    //                     targets: 0,
+    //                     render: function (data, type, row, meta) {
+    //                         return `<a href="/admin/customers/customerInfo/${row.id}">${row.customerCode}</a>`;
+    //                     }
+    //                 },
+    //                 {
+    //                     targets: 4,
+    //                     render: function (data, type, row, meta) {
+    //                         return `
+    //                             <p class="text-end"
+    //                                        style="padding-right: 6px;">${row.debtTotal != null ? (new Intl.NumberFormat('vi-VN', {
+    //                             style: 'currency',
+    //                             currency: 'VND'
+    //                         }).format(row.debtTotal)) : "0"}</p>
+    //
+    //                         `
+    //                     }
+    //                 },
+    //                 {
+    //                     targets: 5,
+    //                     render: function (data, type, row, meta) {
+    //                         return `
+    //                             <p class="text-end"
+    //                                        style="padding-right: 6px;">${row.spendTotal != null ? (new Intl.NumberFormat('vi-VN', {
+    //                             style: 'currency',
+    //                             currency: 'VND'
+    //                         }).format(row.spendTotal)) : "0"}</p>
+    //                    `
+    //                     }
+    //                 },
+    //             ],
+    //         })
+    //     })
+    // }
 
     function deleteEventButtonModelShow() {
         $('.btnShowTableCustomerByStatus').css({
@@ -566,24 +566,24 @@
         $('.showAllCustomerInfo').html("");
     }
 
-    $('.btnShowTableCustomerByStatus').on('click', () => {
-        deleteEventButtonModelShow();
-        console.log("ok")
-        $('.btnShowTableCustomerByStatus').css({
-            'color': '#1190ff',
-            'border-bottom': '2px solid rgb(0, 136, 255)'
-        })
-        getAllCustomerInfoByStatus();
-    })
-    $('.btnShowTableCustomer').on('click', () => {
-        deleteEventButtonModelShow();
-        console.log("ok")
-        $('.btnShowTableCustomer').css({
-            'color': '#1190ff',
-            'border-bottom': '2px solid rgb(0, 136, 255)'
-        })
-        getAllCustomerInfo();
-    })
+    // $('.btnShowTableCustomerByStatus').on('click', () => {
+    //     deleteEventButtonModelShow();
+    //     console.log("ok")
+    //     $('.btnShowTableCustomerByStatus').css({
+    //         'color': '#1190ff',
+    //         'border-bottom': '2px solid rgb(0, 136, 255)'
+    //     })
+    //     getAllCustomerInfoByStatus();
+    // })
+    // $('.btnShowTableCustomer').on('click', () => {
+    //     deleteEventButtonModelShow();
+    //     console.log("ok")
+    //     $('.btnShowTableCustomer').css({
+    //         'color': '#1190ff',
+    //         'border-bottom': '2px solid rgb(0, 136, 255)'
+    //     })
+    //     getAllCustomerInfo();
+    // })
 
 
 </script>
