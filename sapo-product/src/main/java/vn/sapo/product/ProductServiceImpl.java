@@ -38,6 +38,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+    private static final String BAR_CODE = "PVN";
 
     @Autowired
     ProductMapper productMapper;
@@ -172,18 +173,27 @@ public class ProductServiceImpl implements ProductService {
         if (createProductParam.getBrandId() != null) {
             product.setBrandId(createProductParam.getBrandId());
         }
-        if (product.getSku().trim().equals("")) {
-            product.setSku(characters.covertToString(createProductParam.getTitle()));
+
+//        Optional<Product> optProSku = productRepository.findBySku(product.getSku());
+//        Optional<Product> optProCode = productRepository.findByBarCode(product.getBarCode());
+
+        if (productRepository.findBySku(product.getSku().trim()).isPresent()) {
+            throw new NotFoundException("Mã SKU đã tồn tại");
         }
-        if (product.getBarCode().trim().equals("")) {
-            Random random = new Random();
-            product.setBarCode(String.valueOf(random.nextInt(99999999) + 1));
+        if (productRepository.findByBarCode(product.getBarCode().trim()).isPresent()) {
+            throw new NotFoundException("Mã BarCode đã tồn tại");
         }
         product = productRepository.save(product);
-        Integer productId = product.getId();
-        if (createProductParam.isApplyTax()) {
-            productTaxService.createAll(createProductParam.getTaxList(), productId);
+        if (product.getSku().trim().equals("")) {
+            Random generator = new Random();
+            int value = generator.nextInt(9999) + 1;
+            product.setSku(BAR_CODE + value);
         }
+        if (product.getBarCode().trim().equals("")) {
+            product.setBarCode(product.getSku());
+        }
+        Integer productId = product.getId();
+        productTaxService.createAll(createProductParam.getTaxList(), product);
         if (createProductParam.getMediaList().size() != 0) {
             mediaService.save(createProductParam.getMediaList(), product);
         }
@@ -204,7 +214,7 @@ public class ProductServiceImpl implements ProductService {
         productMapper.transferFields(updateProductParam, product);
         if (updateProductParam.isApplyTax()) {
             productTaxService.deleteAllByProductId(productId);
-            productTaxService.createAll(updateProductParam.getTaxList(), productId);
+            productTaxService.createAll(updateProductParam.getTaxList(), product);
         } else {
             productTaxService.deleteAllByProductId(productId);
         }
@@ -220,7 +230,6 @@ public class ProductServiceImpl implements ProductService {
         product.setWholesalePrice(new BigDecimal(Integer.parseInt(productShortParam.getRetailPrice())));
         product.setBrandId(1);
         product.setApplyTax(false);
-
 
         Product p = productRepository.save(product);
 
