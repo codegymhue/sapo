@@ -47,7 +47,7 @@ public class Product extends BaseEntity {
     @Column(name = "sku", length = 50, unique = true)
     private String sku;
 
-    @Column(name = "bar_code", length = 50)
+    @Column(name = "bar_code", length = 50, unique = true)
     private String barCode;
 
     @Column(name = "retail_price", precision = 10, scale = 2)

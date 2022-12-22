@@ -16,6 +16,7 @@ import vn.sapo.product.dto.ProductResult;
 import vn.sapo.product.dto.ProductShortParam;
 import vn.sapo.product.dto.UpdateProductParam;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 
@@ -84,11 +85,37 @@ public class ProductAPI {
         return new ResponseEntity<>(productResult, HttpStatus.OK);
     }
 
+    @PostMapping ("/products/checkInventory")
+    public ResponseEntity<?> getAllProductCheckInventory(@RequestBody List<String> arrayIdProduct){
+        return new ResponseEntity<>(productService.getAllCheckInventoryProduct(arrayIdProduct), HttpStatus.OK);
+    }
+
     @PostMapping("/products/create")
     public ResponseEntity<?> create(@RequestBody CreateProductParam productWithImageParam) {
         int id = productService.create(productWithImageParam).getId();
         return new ResponseEntity<>(id, HttpStatus.CREATED);
     }
+
+    @PostMapping("/upload")
+    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
+        String message = "";
+
+        if (ExcelHelper.hasExcelFormat(file)) {
+            try {
+                excelService.save(file);
+
+                message = "Uploaded the file successfully: " + file.getOriginalFilename();
+                return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+            } catch (Exception e) {
+                message = "Could not upload the file: " + file.getOriginalFilename() + "!";
+                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+            }
+        }
+
+        message = "Please upload an excel file!";
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
+    }
+
 
     @PutMapping("/products/update")
     public ResponseEntity<?> update(@RequestBody UpdateProductParam updateProductParam) {
@@ -115,11 +142,24 @@ public class ProductAPI {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PutMapping("/products/updateApplyTax/{applyTax}")
+    public ResponseEntity<?> updateChangeApplytax(@PathVariable Integer applyTax, @RequestBody List<String> arrayIdProduct) {
+        productService.saveChangeApplyTax(applyTax, arrayIdProduct);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @DeleteMapping("/products/delete")
-    public ResponseEntity<?> deleteProduct(@RequestBody List<String> arrayIdProduct) {
+    public ResponseEntity<?> deleteProducts(@RequestBody List<String> arrayIdProduct) {
         productService.deleteSoftProduct(arrayIdProduct);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @DeleteMapping("/product/{productId}")
+    public ResponseEntity<?> deleteProduct(@PathVariable Integer productId){
+        productService.deleteProduct(productId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
     @PutMapping("/products/updateApplyTax")
     public ResponseEntity<?> updateChangeApplytax(@RequestBody LinkedHashMap<String, ?> linkedHashMap) {
@@ -128,27 +168,5 @@ public class ProductAPI {
         productService.saveChangeApplyTax(applyTax, list);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-    //upload excel file
-    @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
-        String message = "";
-
-        if (ExcelHelper.hasExcelFormat(file)) {
-            try {
-                excelService.save(file);
-
-                message = "Uploaded the file successfully: " + file.getOriginalFilename();
-                return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
-            } catch (Exception e) {
-                message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
-            }
-        }
-
-        message = "Please upload an excel file!";
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
-    }
-
 
 }

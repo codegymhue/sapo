@@ -22,8 +22,11 @@ import vn.sapo.item.ItemService;
 import vn.sapo.media.MediaMapper;
 import vn.sapo.media.MediaService;
 import vn.sapo.product.dto.*;
+import vn.sapo.product_tax.ProductTaxMapper;
 import vn.sapo.product_tax.ProductTaxRepository;
 import vn.sapo.product_tax.ProductTaxService;
+import vn.sapo.product_tax.dto.CreateProductTaxParam;
+import vn.sapo.product_tax.dto.ProductTaxParam;
 import vn.sapo.product_tax.dto.ProductTaxResult;
 import vn.sapo.purchaseOrderItem.PurchaseOrderItemService;
 import vn.sapo.tax.TaxMapper;
@@ -35,6 +38,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+    private static final String BAR_CODE = "PVN";
 
     @Autowired
     ProductMapper productMapper;
@@ -50,6 +54,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     BrandMapper brandMapper;
+    @Autowired
+    ProductTaxMapper productTaxMapper;
 
     @Autowired
     CategoryMapper categoryMapper;
@@ -95,6 +101,9 @@ public class ProductServiceImpl implements ProductService {
                     ProductResult dto = productMapper.toDTO(product);
                     dto.setTotalInventory(itemService.getTotalInventoryQuantityByProductId(productId));
                     dto.setAvailableInventory(itemService.getAvailableInventoryQuantityByProductId(productId));
+                    dto.setTrading(itemService.getTradingQuantityByProductId(productId));
+                    dto.setShipping(purchaseOrderItemService.getQuantityPurchaseByProductIdAndOrderStatusCode(product.getId(), "SHIPPING"));
+                    dto.setInTransit(purchaseOrderItemService.getQuantityPurchaseByProductIdAndOrderStatusCode(product.getId(), "INTRANSIT"));
                     return dto;
                 })
                 .collect(Collectors.toList());
@@ -167,18 +176,23 @@ public class ProductServiceImpl implements ProductService {
         if (createProductParam.getBrandId() != null) {
             product.setBrandId(createProductParam.getBrandId());
         }
-        if (product.getSku().trim().equals("")) {
-            product.setSku(characters.covertToString(createProductParam.getTitle()));
+        if (productRepository.findBySku(product.getSku().trim()).isPresent()) {
+            throw new NotFoundException("Mã SKU đã tồn tại");
         }
-        if (product.getBarCode().trim().equals("")) {
-            Random random = new Random();
-            product.setBarCode(String.valueOf(random.nextInt(99999999) + 1));
+        if (productRepository.findByBarCode(product.getBarCode().trim()).isPresent()) {
+            throw new NotFoundException("Mã BarCode đã tồn tại");
         }
         product = productRepository.save(product);
-        Integer productId = product.getId();
-        if (createProductParam.isApplyTax()) {
-            productTaxService.create(createProductParam.getTaxList(), productId);
+        if (product.getSku().trim().equals("")) {
+            Random generator = new Random();
+            int value = generator.nextInt(9999) + 1;
+            product.setSku(BAR_CODE + value);
         }
+        if (product.getBarCode().trim().equals("")) {
+            product.setBarCode(product.getSku());
+        }
+        Integer productId = product.getId();
+        productTaxService.createAll(createProductParam.getTaxList(), product);
         if (createProductParam.getMediaList().size() != 0) {
             mediaService.save(createProductParam.getMediaList(), product);
         }
@@ -195,13 +209,15 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new NotFoundException("Product not found"));
         product.setStatus(updateProductParam.isEnableSell() ? ProductStatus.AVAILABLE :
-                        ProductStatus.UNAVAILABLE);
-        if (updateProductParam.isApplyTax()) {
-            productTaxService.create(updateProductParam.getTaxList(), productId);
-        }
+                ProductStatus.UNAVAILABLE);
         productMapper.transferFields(updateProductParam, product);
-        productTaxService.deleteAllByProductId(productId);
-        productTaxService.createAll(updateProductParam.getTaxList());
+        if (updateProductParam.isApplyTax()) {
+            productTaxService.deleteAllByProductId(productId);
+            productTaxService.createAll(updateProductParam.getTaxList(), product);
+        } else {
+            productTaxService.deleteAllByProductId(productId);
+        }
+
     }
 
 
@@ -213,7 +229,6 @@ public class ProductServiceImpl implements ProductService {
         product.setWholesalePrice(new BigDecimal(Integer.parseInt(productShortParam.getRetailPrice())));
         product.setBrandId(1);
         product.setApplyTax(false);
-
 
         Product p = productRepository.save(product);
 
@@ -337,7 +352,6 @@ public class ProductServiceImpl implements ProductService {
             if (product.isPresent()) {
                 Product newProduct = product.get();
                 newProduct.setStatus(ProductStatus.parseProductStatus("AVAILABLE"));
-                productRepository.save(newProduct);
             }
         }
     }
@@ -350,7 +364,6 @@ public class ProductServiceImpl implements ProductService {
             if (product.isPresent()) {
                 Product newProduct = product.get();
                 newProduct.setStatus(ProductStatus.parseProductStatus("UNAVAILABLE"));
-                productRepository.save(newProduct);
             }
         }
     }
@@ -363,26 +376,54 @@ public class ProductServiceImpl implements ProductService {
             if (product.isPresent()) {
                 Product newProduct = product.get();
                 newProduct.setDeleted(true);
-                productRepository.save(newProduct);
             }
         }
     }
 
     @Override
     @Transactional
+    public void deleteProduct(Integer productId){
+        Optional<Product> product = productRepository.findById(productId);
+        if (product.isPresent()) {
+            Product newProduct = product.get();
+            newProduct.setDeleted(true);
+        }
+    }
+
+    @Override
+    @Transactional
     public void saveChangeApplyTax(Integer applyTax, List<String> list) {
-        for(String item : list){
+        for (String item : list) {
             Optional<Product> product = productRepository.findById(Integer.valueOf(item));
-            if(product.isPresent()) {
+            if (product.isPresent()) {
                 Product newProduct = product.get();
-                if(applyTax == 1) {
+                if (applyTax == 1) {
                     newProduct.setApplyTax(true);
                 } else {
                     newProduct.setApplyTax(false);
                 }
-                productRepository.save(newProduct);
             }
         }
+    }
+
+    @Override
+    @Transactional
+    public List<ProductVariantsResult> getAllCheckInventoryProduct(List<String> list) {
+        List<ProductVariantsResult> productVariantsResults = new ArrayList<>();
+        for (String item : list) {
+            Optional<Product> productOptional = productRepository.findById(Integer.valueOf(item));
+            if (productOptional.isPresent()) {
+                Product product = productOptional.get();
+                ProductVariantsResult productVariantsResult = productMapper.toDTOVariants(product);
+                productVariantsResult.setInventory(itemService.getTotalInventoryQuantityByProductId(product.getId()));
+                productVariantsResult.setAvailable(itemService.getAvailableInventoryQuantityByProductId(product.getId()));
+                productVariantsResult.setTrading(itemService.getTradingQuantityByProductId(product.getId()));
+                productVariantsResult.setInTransit(purchaseOrderItemService.getQuantityPurchaseByProductIdAndOrderStatusCode(product.getId(), "INTRANSIT"));
+                productVariantsResult.setShipping(purchaseOrderItemService.getQuantityPurchaseByProductIdAndOrderStatusCode(product.getId(), "SHIPPING"));
+                productVariantsResults.add(productVariantsResult);
+            }
+        }
+        return productVariantsResults;
     }
 
 }

@@ -26,13 +26,14 @@
                     </svg>
                     <h6 class="MuiTypography-root MuiTypography-subtitle1">Quay lại danh sách sản phẩm</h6>
                 </a></div>
+                <span hidden id="productId" th:text="${product.getId()}"></span>
                 <div class="MuiBox-root jss4513">
                     <a href="/admin/products">
                         <button id="Sapo-Button-ff6cf318-574c-4f0f-b947-9111a7dc90d4"
                                 class="sc-jqUVSM ldZiUT"><span class="sc-papXJ jcEYKF">Thoát</span></button>
                     </a>
                     <button
-                            id="Sapo-Button-3ec18966-82fb-4f50-a58e-5a530543ec49" class="sc-jqUVSM dTfcYQ"><span
+                            id="Sapo-Button-3ec18966-82fb-4f50-a58e-5a530543ec49 " class="sc-jqUVSM dTfcYQ btnDelete"><span
                             class="sc-papXJ jcEYKF">Xoá</span></button>
                     <a th:value="*{id}" th:href="@{/admin/product/edit/__${product.getId()}__}">
                         <button id="Sapo-Button-aa711eaa-4998-4eac-9ad2-db058d567cd2"
@@ -117,36 +118,36 @@
                                                     class="MuiTypography-root MuiTypography-body2"
                                                     itemid="display_product_variant_unit"
                                                     style="line-height: 16px; margin-left: 5px;"
-                                                    th:text="*{unit}?: '---'">
+                                                    th:text="*{unit != ''} ? ${product.unit} : '---' ">
                                             </p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
-                                        <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-5">
-                                            <p class="MuiTypography-root jss4673 MuiTypography-body2"
-                                               itemid="title_display_product_variant_type_product">Phân loại</p>
-                                        </div>
-                                        <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7">
-                                            <div class="MuiBox-root jss4691 jss4674">: <p
-                                                    class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap"
-                                                    itemid="display_product_variant_type_product"
-                                                    style="line-height: 16px; margin-left: 5px;">
-                                                Sản phẩm thường</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
-                                        <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6"
-                                             style="padding: 0px 12px 0px 0px;">
-                                            <button id="Sapo-Button-a0f83825-7855-45e0-bb34-51013f879638"
-                                                    class="sc-jqUVSM gFwmPR"><span
-                                                    class="sc-papXJ jcEYKF">
-                            <p class="MuiTypography-root jss4622 MuiTypography-body1"
-                               style="color: rgb(0, 136, 255); cursor: pointer;">Xem mô tả</p>
-                          </span></button>
-                                        </div>
-                                    </div>
+<!--                                    <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">-->
+<!--                                        <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-5">-->
+<!--                                            <p class="MuiTypography-root jss4673 MuiTypography-body2"-->
+<!--                                               itemid="title_display_product_variant_type_product">Phân loại</p>-->
+<!--                                        </div>-->
+<!--                                        <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7">-->
+<!--                                            <div class="MuiBox-root jss4691 jss4674">: <p-->
+<!--                                                    class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap"-->
+<!--                                                    itemid="display_product_variant_type_product"-->
+<!--                                                    style="line-height: 16px; margin-left: 5px;">-->
+<!--                                                Sản phẩm thường</p>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">-->
+<!--                                        <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6"-->
+<!--                                             style="padding: 0px 12px 0px 0px;">-->
+<!--                                            <button id="Sapo-Button-a0f83825-7855-45e0-bb34-51013f879638"-->
+<!--                                                    class="sc-jqUVSM gFwmPR"><span-->
+<!--                                                    class="sc-papXJ jcEYKF">-->
+<!--                            <p class="MuiTypography-root jss4622 MuiTypography-body1"-->
+<!--                               style="color: rgb(0, 136, 255); cursor: pointer;">Xem mô tả</p>-->
+<!--                          </span></button>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
                                 </div>
                                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4">
                                     <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
@@ -181,12 +182,13 @@
                                     <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-5">
                                             <p class="MuiTypography-root jss4673 MuiTypography-body2"
-                                               itemid="title_display_product_variant_tags">Tags</p>
+                                               itemid="title_display_product_variant_tags">Mô tả sản phẩm</p>
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7">
                                             <div class="MuiBox-root jss4694 jss4674">: <p
                                                     class="MuiTypography-root MuiTypography-body1"
-                                                    style="margin-left: 5px;"><span>---</span></p>
+                                                    style="margin-left: 5px;"><span
+                                            th:text="*{description != ''} ? *{description} : '---'"></span></p>
                                             </div>
                                         </div>
                                     </div>
@@ -613,26 +615,29 @@
                                                             Chi nhánh mặc định</p></div>
                                                     </td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter">
-                                                        <p class="MuiTypography-root MuiTypography-body1">100</p></td>
+                                                        <p class="MuiTypography-root MuiTypography-body1" th:text="*{totalInventory}"></p></td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter">
-                                                        <p class="MuiTypography-root MuiTypography-body1">200,000</p>
+                                                        <p class="MuiTypography-root MuiTypography-body1" th:text="${#numbers.formatDecimal(product.importPrice, 0, 'COMMA',0 , 'POINT')}?: '0'"></p>
                                                     </td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter">
-                                                        <p class="MuiTypography-root MuiTypography-body1">100</p></td>
+                                                        <p class="MuiTypography-root MuiTypography-body1" th:text="*{availableInventory}"></p></td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter">
                                                         <div class="MuiBox-root jss1059" style="cursor: pointer;"><p
-                                                                class="MuiTypography-root MuiTypography-body1 MuiTypography-colorInherit">
-                                                            0</p></div>
+                                                                class="MuiTypography-root MuiTypography-body1 MuiTypography-colorInherit"
+                                                        th:text="*{trading}">
+                                                            </p></div>
                                                     </td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter">
                                                         <div class="MuiBox-root jss1060" style="cursor: pointer;"><p
-                                                                class="MuiTypography-root MuiTypography-body1 MuiTypography-colorInherit">
-                                                            0</p></div>
+                                                                class="MuiTypography-root MuiTypography-body1 MuiTypography-colorInherit"
+                                                        th:text="*{inTransit}">
+                                                            </p></div>
                                                     </td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter">
                                                         <div class="MuiBox-root jss1061" style="cursor: pointer;"><p
-                                                                class="MuiTypography-root MuiTypography-body1 MuiTypography-colorInherit">
-                                                            0</p></div>
+                                                                class="MuiTypography-root MuiTypography-body1 MuiTypography-colorInherit"
+                                                        th:text="*{shipping}">
+                                                            </p></div>
                                                     </td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter">
                                                         <p class="MuiTypography-root MuiTypography-body1"
@@ -658,11 +663,59 @@
     </div>
 </div>
 
+<div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: max-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Bạn chắc chắn muốn xóa sản phẩm này?</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" >
+                Thao tác này sẽ xóa các sản phẩm bạn đã chọn. Thao tác này không thể khôi phục.
+            </div>
+            <div class="modal-footer d-flex align-items-center">
+                <button class="btn  btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" style="background-color: #081ee3; color: #1410ed; font-weight: 500">Thoát</button>
+                <button class="btn btn-danger btn-save-delete" id="btnSubmitDelete" type="button" style="background: #f12e2e; width: 7rem">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <th:block th:replace="/layout/script :: script"/>
+<script src="/assets/admin/js/product/app.js"></script>
 <script>Page();</script>
 <script>
+    function doDeleteProduct ()  {
+        let productId = $("#productId").text();
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "DELETE",
+            url: "http://localhost:8080/api/product/" + productId
+        })
+            .done(() => {
+                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_DELETE);
+                $("#modalDelete").modal("hide");
 
+                setTimeout(() => {
+                    window.location.href = "/admin/products";
+                }, 500)
 
+            })
+            .fail((jqXHR) => {
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_403)
+            })
+    }
+
+    $(".btnDelete").on("click", () => {
+        $("#modalDelete").modal("show");
+    })
+
+    $("#btnSubmitDelete").on("click", () => {
+        doDeleteProduct();
+    })
 </script>
 
 </body>

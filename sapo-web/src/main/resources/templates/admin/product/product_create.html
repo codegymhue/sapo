@@ -418,7 +418,7 @@
                                                 <div class="MuiAutocomplete-root jss26862 MuiAutocomplete-hasClearIcon"
                                                      role="combobox" aria-expanded="false">
                                                     <label class="MuiFormLabel-root MuiInputLabel-root jss26866 MuiInputLabel-animated MuiInputLabel-shrink"
-                                                           data-shrink="true">Tags
+                                                           data-shrink="true">Mô tả
                                                         <span class="MuiTypography-root MuiTypography-caption"
                                                               title="Chọn hoặc thêm các thẻ cho sản phẩm, thẻ này phục vụ cho việc lọc các sản phẩm"
                                                               style="order: 1;">
@@ -440,12 +440,14 @@
                                                     </label>
                                                     <div class="MuiFormControl-root MuiTextField-root jss26865 MuiFormControl-fullWidth">
                                                         <div class="MuiInputBase-root MuiOutlinedInput-root MuiAutocomplete-inputRoot MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd">
-                                                            <input aria-invalid="false" autocomplete="off" cols="100000"
-                                                                   rows="50"
-                                                                   name="descriptionCreate"
-                                                                   class="descriptionCreate MuiInputBase-input MuiOutlinedInput-input MuiAutocomplete-input MuiAutocomplete-inputFocused MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd"
-                                                                   aria-autocomplete="list"
-                                                                   id="descriptionCreate mui-autocomplete-22578"/>
+                                                            <label style="width : 100%">
+                                                                <input aria-invalid="false" autocomplete="off"
+                                                                       name="descriptionCreate"
+                                                                       class="descriptionCreate MuiInputBase-input MuiOutlinedInput-input MuiAutocomplete-input MuiAutocomplete-inputFocused MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd"
+                                                                       aria-autocomplete="list"
+                                                                       style="width : 100%"
+                                                                       id="descriptionCreate mui-autocomplete-22578"/>
+                                                            </label>
                                                             <fieldset aria-hidden="true"
                                                                       class="jss26952 MuiOutlinedInput-notchedOutline"
                                                                       style="padding-left: 8px;">
@@ -743,22 +745,39 @@
     page.dialogs.elements.frmCreateProduct.validate({
         rules: {
             titleCreate: {
-                required: true
+                required: true,
+                maxlength: 255,
+            },
+            barCodeCreate: {
+                maxlength: 50,
+            },
+            skuCreate: {
+                maxlength: 50,
+            },
+            unitCreate: {
+                maxlength: 50,
+            },
+            descriptionCreate: {
+                maxlength: 255
             },
             retailPriceCreate: {
                 min: 0,
+                max: 100000000,
                 required: true
             },
             wholesalePriceCreate: {
                 min: 0,
+                max: 100000000,
                 required: true
             },
             importPriceCreate: {
                 min: 0,
+                max: 100000000,
                 required: true
             },
             massCreate: {
                 min: 0,
+                max: 10000,
                 required: true
             },
             initialInventory: {
@@ -767,27 +786,45 @@
             },
             costPrice: {
                 min: 0,
+                max: 100000000,
                 required: true
             }
         },
         messages: {
             titleCreate: {
                 required: "Vui lòng nhập tên sản phẩm (ví dụ: Bánh Cosy)",
+                maxlength: "Tên sản phẩm không quá 255 ký tự."
+            },
+            barCodeCreate: {
+                maxlength: "BarCode không quá 50 ký tự",
+            },
+            skuCreate: {
+                maxlength: "Mã SKU không quá 50 ký tự",
+            },
+            unitCreate: {
+                maxlength: "Đơn vị tính không quá 50 ký tự",
+            },
+            descriptionCreate: {
+                maxlength: "Mô tả không quá 255 ký tự"
             },
             retailPriceCreate: {
                 min: "Giá bán lẻ không được phép nhỏ hơn 0",
+                max: "Giá bán lẻ không quá 100.000.000đ",
                 required: "Giá bản lẻ không được để trống"
             },
             wholesalePriceCreate: {
                 min: "Giá bán buôn không được phép nhỏ hơn 0",
+                max: "Giá bán lẻ không quá 100.000.000đ",
                 required: "Giá bán buôn không được để trống"
             },
             importPriceCreate: {
                 min: "Giá nhập không được phép nhỏ hơn 0",
+                max: "Giá bán lẻ không quá 100.000.000đ",
                 required: "Giá nhập không được để trống"
             },
             massCreate: {
                 min: "Khối lượng không được phép nhỏ hơn 0",
+                max: "Khối lượng không được quá 10kg",
                 required: "Khối lượng không được để trống"
             },
             initialInventory: {
@@ -796,6 +833,7 @@
             },
             costPrice: {
                 min: "Giá vốn không được phép nhỏ hơn 0",
+                max: "Giá bán lẻ không quá 100.000.000đ",
                 required: "Giá vốn không được để trống"
             }
         },
@@ -817,12 +855,8 @@
         taxIn.taxType = "TAX_PURCHASE";
         taxOut.taxId = $("#taxProTypeOut").data("id");
         taxOut.taxType = "TAX_SALE";
-        if (taxIn.taxId != undefined) {
-            taxs.push(taxIn);
-        }
-        if (taxOut.taxId != undefined) {
-            taxs.push(taxOut);
-        }
+        taxs.push(taxIn);
+        taxs.push(taxOut);
         product.id = 0;
         product.title = page.dialogs.elements.titleCreate.val();
         product.enableSell = page.dialogs.elements.enableSell.is(":checked") ? true : false;
@@ -861,6 +895,10 @@
                 setTimeout(() => {
                     window.location.href = "/admin/product/" + data;
                 }, 1500)
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+                App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
     }
 
@@ -947,9 +985,14 @@
             page.dialogs.elements.showImgSmall.attr("hidden", true);
         }
     }
-
+    //inputBrand
     //----->>>Nhat-dev OnClick button to create Category
-    $('#btnAddCategory').on('click', () => {
+    $('#btnAddCategory').on("click", function () {
+        createCategory();
+        console.log("page.elements.btnCreateCategory.onClick");
+    })
+
+    function createCategory() {
         category.id = 0;
         category.title = $('#inputCategory').val();
         console.log(category)
@@ -971,9 +1014,9 @@
 
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert("Tạo loại sản phẩm mới không thành công!");
+                App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
-    })
+    }
     //<<<--------nhat-dev end onclick create category
 
 
@@ -1000,7 +1043,7 @@
 
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert("Tạo nhãn hiệu mới không thành công!");
+                App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
     })
     //<<<--------nhat-dev end onclick create brand
@@ -1022,7 +1065,7 @@
             "data": JSON.stringify(tax)
         })
             .done((data) => {
-                console.log(": Tạo thuế thành công")
+                App.IziToast.showSuccessAlert("Tạo thuế thành công!")
                 $(".showAllTax #showALlTax").empty();
                 $(".showAllTaxOut #showALlTaxOut").empty();
                 showAllTaxes()
@@ -1031,7 +1074,7 @@
 
             })
             .fail((jqXHR) => {
-                console.log("Loi nha may ba")
+                App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
     })
     //<<<--------nhat-dev end onclick create brand
