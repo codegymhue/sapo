@@ -9,14 +9,11 @@ import java.util.regex.Pattern;
 
 @Service
 public class Characters {
-    public String covertToString(String value) {
+    public String covertToSKU(String value, int idProduct) {
         try {
             String temp = Normalizer.normalize(value, Normalizer.Form.NFD);
             Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
-            Random generator = new Random();
-            int ramdom = generator.nextInt(100) + 1;
-
-            return (pattern.matcher(temp).replaceAll("").toUpperCase().replaceAll(" ", "")) + ramdom;
+            return (pattern.matcher(temp).replaceAll("").toUpperCase().replaceAll(" ", "")) + idProduct;
         } catch (Exception ex) {
             ex.printStackTrace();
         }

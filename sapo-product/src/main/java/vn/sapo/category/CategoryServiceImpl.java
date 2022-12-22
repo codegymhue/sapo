@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.category.dto.*;
 import vn.sapo.entities.product.*;
+import vn.sapo.exceptions.DataInputException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,6 +40,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryResult create(CreateCategoryParam createCategoryParam) {
+        if (categoryRepository.findByTitle(createCategoryParam.getTitle().trim()).isPresent()) {
+            throw new DataInputException("Loại sản phẩm đã tồn tại. Vui lòng kiểm tra!!!");
+        }
         Category category = categoryRepository.save(categoryMapper.toModel(createCategoryParam));
         return categoryMapper.toDTO(category);
     }
