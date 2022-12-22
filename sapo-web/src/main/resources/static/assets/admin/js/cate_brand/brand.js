@@ -100,7 +100,9 @@ const  searchBrand = () => {
 
     })
 }
-// Nhat-dev show create brand modal
+
+//Nhat-dev show create brand modal
+
 $('#btnCreateBrand').on('click', () => {
     $('#modalAddBrand').modal('show');
 })

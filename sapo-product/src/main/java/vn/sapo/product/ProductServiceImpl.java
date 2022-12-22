@@ -214,8 +214,6 @@ public class ProductServiceImpl implements ProductService {
         if (updateProductParam.isApplyTax()) {
             productTaxService.deleteAllByProductId(productId);
             productTaxService.createAll(updateProductParam.getTaxList(), product);
-        } else {
-            productTaxService.deleteAllByProductId(productId);
         }
 
     }
@@ -346,72 +344,62 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public void saveChangeStatusToAvailable(List<String> list) {
-        for (String item : list) {
-            Optional<Product> product = productRepository.findById(Integer.valueOf(item));
-            if (product.isPresent()) {
-                Product newProduct = product.get();
-                newProduct.setStatus(ProductStatus.parseProductStatus("AVAILABLE"));
-            }
+    public void changeStatusToAvailable(List<Integer> productIds, boolean status) {
+        for (Integer productId : productIds) {
+            Product product = productRepository.findById(productId).orElseThrow(() -> new NotFoundException("Product not found"));
+            product.setStatus(status ? ProductStatus.AVAILABLE : ProductStatus.UNAVAILABLE);
         }
     }
-
     @Override
     @Transactional
-    public void saveChangeStatusToUnavailable(List<String> list) {
-        for (String item : list) {
-            Optional<Product> product = productRepository.findById(Integer.valueOf(item));
-            if (product.isPresent()) {
-                Product newProduct = product.get();
-                newProduct.setStatus(ProductStatus.parseProductStatus("UNAVAILABLE"));
-            }
-        }
-    }
-
-    @Override
-    @Transactional
-    public void deleteSoftProduct(List<String> list) {
-        for (String item : list) {
-            Optional<Product> product = productRepository.findById(Integer.valueOf(item));
+    public void deleteSoftProduct(List<Integer> productIds) {
+        for (Integer productId : productIds) {
+            Optional<Product> product = productRepository.findById(productId);
             if (product.isPresent()) {
                 Product newProduct = product.get();
                 newProduct.setDeleted(true);
+            } else {
+                throw new NotFoundException("Product not found");
             }
         }
     }
 
     @Override
     @Transactional
-    public void deleteProduct(Integer productId){
+    public void deleteProduct(Integer productId) {
         Optional<Product> product = productRepository.findById(productId);
         if (product.isPresent()) {
             Product newProduct = product.get();
             newProduct.setDeleted(true);
+        } else {
+            throw new NotFoundException("Product not found");
         }
     }
 
     @Override
     @Transactional
-    public void saveChangeApplyTax(Integer applyTax, List<String> list) {
-        for (String item : list) {
-            Optional<Product> product = productRepository.findById(Integer.valueOf(item));
+    public void saveChangeApplyTax(Integer applyTax, List<Integer> productIds) {
+        for (Integer productId : productIds) {
+            Optional<Product> product = productRepository.findById(productId);
             if (product.isPresent()) {
                 Product newProduct = product.get();
-                if (applyTax == 1) {
+                if (applyTax == 1 && product.get().isApplyTax() == false) {
                     newProduct.setApplyTax(true);
-                } else {
+                } else if (applyTax == 0 && product.get().isApplyTax() == true) {
                     newProduct.setApplyTax(false);
                 }
+            } else {
+                throw new NotFoundException("Product not found");
             }
         }
     }
 
     @Override
     @Transactional
-    public List<ProductVariantsResult> getAllCheckInventoryProduct(List<String> list) {
+    public List<ProductVariantsResult> getAllCheckInventoryProduct(List<Integer> productIds) {
         List<ProductVariantsResult> productVariantsResults = new ArrayList<>();
-        for (String item : list) {
-            Optional<Product> productOptional = productRepository.findById(Integer.valueOf(item));
+        for (Integer item : productIds) {
+            Optional<Product> productOptional = productRepository.findById(item);
             if (productOptional.isPresent()) {
                 Product product = productOptional.get();
                 ProductVariantsResult productVariantsResult = productMapper.toDTOVariants(product);
@@ -421,6 +409,8 @@ public class ProductServiceImpl implements ProductService {
                 productVariantsResult.setInTransit(purchaseOrderItemService.getQuantityPurchaseByProductIdAndOrderStatusCode(product.getId(), "INTRANSIT"));
                 productVariantsResult.setShipping(purchaseOrderItemService.getQuantityPurchaseByProductIdAndOrderStatusCode(product.getId(), "SHIPPING"));
                 productVariantsResults.add(productVariantsResult);
+            } else {
+                throw new NotFoundException("Product not found");
             }
         }
         return productVariantsResults;

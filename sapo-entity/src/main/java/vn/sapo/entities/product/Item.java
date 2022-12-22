@@ -27,7 +27,7 @@ public class Item extends BaseEntity {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @Column(name = "price")
+    @Column(name = "price", precision = 10, scale = 2)
     private BigDecimal price;
 
     @ManyToOne(fetch = FetchType.LAZY)

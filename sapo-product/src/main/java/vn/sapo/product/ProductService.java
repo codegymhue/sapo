@@ -36,15 +36,14 @@ public interface ProductService {
                                                  String typeSort, String nameFieldSort);
 
 
-    void saveChangeStatusToAvailable(List<String> list);
 
-    void saveChangeStatusToUnavailable(List<String> list);
+    void changeStatusToAvailable(List<Integer> productIds,boolean status);
 
-    void deleteSoftProduct(List<String> list);
+    void deleteSoftProduct(List<Integer> productIds);
 
-    void saveChangeApplyTax(Integer applyTax, List<String> list);
+    void saveChangeApplyTax(Integer applyTax, List<Integer> productIds);
 
-    List<ProductVariantsResult> getAllCheckInventoryProduct(List<String> list);
+    List<ProductVariantsResult> getAllCheckInventoryProduct(List<Integer> productIds);
 
     void deleteProduct(Integer productId);
 }
