@@ -1,14 +1,13 @@
 package vn.sapo.entities.media;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import vn.sapo.entities.product.*;
+import vn.sapo.entities.product.variation.ProductVariation;
 
 import javax.persistence.*;
-import java.time.Instant;
 
 @Getter
 @Setter
@@ -39,9 +38,16 @@ public class Media {
     @Column(name = "product_id", insertable = false, updatable = false)
     private Integer productId;
 
+    @Column(name = "variation_id", insertable = false, updatable = false)
+    private Integer variationId;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "variation_id", nullable = false)
+    private ProductVariation productVariation;
 
     public Media(Integer productId) {
         this.product = new Product(this.productId = productId);

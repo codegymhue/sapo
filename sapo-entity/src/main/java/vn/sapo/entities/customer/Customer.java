@@ -1,6 +1,5 @@
 package vn.sapo.entities.customer;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,7 +29,7 @@ public class Customer extends BaseEntity {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "code")
+    @Column(name = "customer_code", unique = true)
     private String code;
 
     @Column(name = "full_name", nullable = false)
