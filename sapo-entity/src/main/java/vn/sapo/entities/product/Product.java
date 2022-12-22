@@ -31,9 +31,6 @@ public class Product extends BaseEntity {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "deleted")
-    private boolean deleted = false;
-
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private ProductStatus status;
