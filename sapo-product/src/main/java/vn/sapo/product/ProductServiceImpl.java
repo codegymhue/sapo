@@ -214,8 +214,6 @@ public class ProductServiceImpl implements ProductService {
         if (updateProductParam.isApplyTax()) {
             productTaxService.deleteAllByProductId(productId);
             productTaxService.createAll(updateProductParam.getTaxList(), product);
-        } else {
-            productTaxService.deleteAllByProductId(productId);
         }
 
     }
