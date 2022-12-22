@@ -777,7 +777,7 @@
             },
             massCreate: {
                 min: 0,
-                mass: 10000,
+                max: 10000,
                 required: true
             },
             initialInventory: {
@@ -987,26 +987,9 @@
     }
     //inputBrand
     //----->>>Nhat-dev OnClick button to create Category
-    $('#btnAddCategory').on("submit", function () {
-        $("#frmCreateCat").trigger("submit");
+    $('#btnAddCategory').on("click", function () {
+        createCategory();
         console.log("page.elements.btnCreateCategory.onClick");
-    })
-
-    $("#frmCreateCat").validate({
-        rules: {
-            inputCategory: {
-                required: true,
-            }
-        },
-        messages: {
-            inputCategory: {
-                required: "Vui lòng nhập tên loại sản phẩm."
-            }
-        },
-        submitHandler: function () {
-            createCategory();
-            console.log("page.dialogs.elements.frmCreateCategory.validate");
-        },
     })
 
     function createCategory() {

@@ -173,10 +173,6 @@ public class ProductServiceImpl implements ProductService {
         if (createProductParam.getBrandId() != null) {
             product.setBrandId(createProductParam.getBrandId());
         }
-
-//        Optional<Product> optProSku = productRepository.findBySku(product.getSku());
-//        Optional<Product> optProCode = productRepository.findByBarCode(product.getBarCode());
-
         if (productRepository.findBySku(product.getSku().trim()).isPresent()) {
             throw new NotFoundException("Mã SKU đã tồn tại");
         }
