@@ -85,8 +85,8 @@ public class ProductAPI {
         return new ResponseEntity<>(productResult, HttpStatus.OK);
     }
 
-    @GetMapping("/products/checkInventory")
-    public ResponseEntity<?> getAllProductCheckInventory(@RequestParam List<String> arrayIdProduct){
+    @PostMapping ("/products/checkInventory")
+    public ResponseEntity<?> getAllProductCheckInventory(@RequestBody List<String> arrayIdProduct){
         return new ResponseEntity<>(productService.getAllCheckInventoryProduct(arrayIdProduct), HttpStatus.OK);
     }
 

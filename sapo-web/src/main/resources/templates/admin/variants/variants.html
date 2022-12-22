@@ -399,8 +399,8 @@
                 <table class="table table-hover table-bordered" id="tbInventoryProduct" style="font-size: small">
                     <thead>
                     <tr>
-                        <th scope="col " rowspan="2" class="align-middle text-center">Mã SKU</th>
-                        <th scope="col" rowspan="2" class="align-middle text-center">Tên sản phẩm</th>
+                        <th scope="col " rowspan="2" class="align-middle">Mã SKU</th>
+                        <th scope="col" rowspan="2" class="align-middle ">Tên sản phẩm</th>
                         <th scope="col">Chính sách giá</th>
                         <th scope="col" colspan="5" class="text-center">Tổng</th>
                     </tr>
@@ -462,7 +462,7 @@
     let arrayIdProduct = [];
 
     page.elements.tbProduct = $("#tbProduct tbody");
-    page.elements.tbinventoryProduct = $("#tbInventoryProduct");
+    page.elements.tbinventoryProduct = $("#tbInventoryProduct tbody");
     page.elements.btnAvailable = $("#btnAvailable");
     page.elements.btnUnavailable = $("#btnUnavailable");
     page.elements.btnDelete = $("#btnDelete");
@@ -502,7 +502,7 @@
     page.elements.modalUnavailable = $("#modalUnavailable");
     page.elements.modalDelete = $("#modalDelete");
     page.elements.modalApplyTax = $("#modalApplyTax");
-    page.elements.modalCheckInventory = $("#modalCheckInventory")
+    page.elements.modalCheckInventory = $("#modalCheckInventory");
 
     page.dialogs.elements.category = $("#category");
     page.dialogs.elements.brand = $("#brand");
@@ -757,7 +757,6 @@
     })
     page.elements.btnCheckInventory.on("click", () => {
         page.commands.getAllCheckInventoryProduct();
-        page.elements.modalCheckInventory.modal("show");
     })
 
     page.commands.updateStatusToAvailable = () => {
@@ -856,7 +855,7 @@
                 "accept": "application/json",
                 "content-type": "application/json"
             },
-            type: "GET",
+            type: "POST",
             url: page.urls.getAllCheckInventory,
             data: JSON.stringify(arrayIdProduct)
         })
@@ -865,6 +864,7 @@
                 data.map(item => {
                     page.elements.tbinventoryProduct.append(App.renderRowProductInventory(item));
                 });
+                page.elements.modalCheckInventory.modal("show");
             })
             .fail((jqXHR) => {
                 App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404);
