@@ -149,8 +149,14 @@ public class ProductAPI {
     }
 
     @DeleteMapping("/products/delete")
-    public ResponseEntity<?> deleteProduct(@RequestBody List<String> arrayIdProduct) {
+    public ResponseEntity<?> deleteProducts(@RequestBody List<String> arrayIdProduct) {
         productService.deleteSoftProduct(arrayIdProduct);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/product/{productId}")
+    public ResponseEntity<?> deleteProduct(@PathVariable Integer productId){
+        productService.deleteProduct(productId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

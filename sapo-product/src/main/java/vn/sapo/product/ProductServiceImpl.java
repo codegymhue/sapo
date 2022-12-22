@@ -101,6 +101,9 @@ public class ProductServiceImpl implements ProductService {
                     ProductResult dto = productMapper.toDTO(product);
                     dto.setTotalInventory(itemService.getTotalInventoryQuantityByProductId(productId));
                     dto.setAvailableInventory(itemService.getAvailableInventoryQuantityByProductId(productId));
+                    dto.setTrading(itemService.getTradingQuantityByProductId(productId));
+                    dto.setShipping(purchaseOrderItemService.getQuantityPurchaseByProductIdAndOrderStatusCode(product.getId(), "SHIPPING"));
+                    dto.setInTransit(purchaseOrderItemService.getQuantityPurchaseByProductIdAndOrderStatusCode(product.getId(), "INTRANSIT"));
                     return dto;
                 })
                 .collect(Collectors.toList());
@@ -374,6 +377,16 @@ public class ProductServiceImpl implements ProductService {
                 Product newProduct = product.get();
                 newProduct.setDeleted(true);
             }
+        }
+    }
+
+    @Override
+    @Transactional
+    public void deleteProduct(Integer productId){
+        Optional<Product> product = productRepository.findById(productId);
+        if (product.isPresent()) {
+            Product newProduct = product.get();
+            newProduct.setDeleted(true);
         }
     }
 
