@@ -729,8 +729,7 @@
                                                 </div>
                                             </div>
                                             <div class="MuiCollapse-wrapper" id="showTaxModal"
-                                                 th:style="*{applyTax} ? ('display: block') : ('display: none')"
-                                            th:if="*{applyTax}">
+                                                 th:style="*{applyTax} ? ('display: block') : ('display: none')">
                                                 <div class="MuiCollapse-wrapperInner">
                                                     <div class="MuiBox-root jss21906" style="padding-top: 24px;">
                                                         <div class="MuiBox-root jss21907" style="width: 100%;">
@@ -1295,6 +1294,7 @@
         if ($("#applyTax").is(':checked')) {
             $("#showTaxModal").css("display", "block");
         } else {
+
             $("#showTaxModal").css("display", "none");
         }
     });

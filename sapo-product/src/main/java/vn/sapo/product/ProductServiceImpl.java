@@ -374,6 +374,16 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
+    public void deleteProduct(Integer productId){
+        Optional<Product> product = productRepository.findById(productId);
+        if (product.isPresent()) {
+            Product newProduct = product.get();
+            newProduct.setDeleted(true);
+        }
+    }
+
+    @Override
+    @Transactional
     public void saveChangeApplyTax(Integer applyTax, List<String> list) {
         for (String item : list) {
             Optional<Product> product = productRepository.findById(Integer.valueOf(item));
