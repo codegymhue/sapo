@@ -199,7 +199,7 @@
                                                                            aria-label="Without label"
                                                                            class="retailPriceUpdate form-control"
                                                                            style="width: 100%; text-align: right;"
-                                                                    th:value="${#numbers.formatDecimal(product.retailPrice, 0, 'COMMA', 0, 'POINT')}">
+                                                                           th:value="${#numbers.formatDecimal(product.retailPrice, 0, 0, 'POINT')}">
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <span style="font-weight: 500">Giá bán buôn</span>
@@ -212,7 +212,7 @@
                                                                            class="wholesalePriceUpdate form-control"
                                                                            value="0"
                                                                            style="width: 100%; text-align: right;"
-                                                                           th:value="${#numbers.formatDecimal(product.wholesalePrice, 0, 'COMMA', 0, 'POINT')}">
+                                                                           th:value="${#numbers.formatDecimal(product.wholesalePrice, 0, 0, 'POINT')}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -234,7 +234,7 @@
                                                                            class="importPriceUpdate form-control"
                                                                            value="0"
                                                                            style="width: 49%; text-align: right;"
-                                                                           th:value="${#numbers.formatDecimal(product.importPrice, 0, 'COMMA', 0, 'POINT')}">
+                                                                           th:value="${#numbers.formatDecimal(product.importPrice, 0, 0, 'POINT')}">
                                                                 </div>
                                                             </div>
                                                         </div>
