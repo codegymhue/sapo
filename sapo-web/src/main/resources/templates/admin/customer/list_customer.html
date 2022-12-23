@@ -450,11 +450,7 @@
                 columns: [
                     {data: 'code'},
                     {data: 'fullName'},
-<<<<<<< HEAD
                     {data: 'phoneNumber'},
-=======
-                    {data: 'phone'},
->>>>>>> main
                     {data: 'customerGroup'},
                     {data: 'debtTotal'},
                     {data: "spendTotal"}],
@@ -462,10 +458,6 @@
                     {
                         targets: 0,
                         render: function (data, type, row, meta) {
-<<<<<<< HEAD
-                            console.log(row);
-=======
->>>>>>> main
                             return `<a href="/admin/customers/customerInfo/${row.id}">${row.code}</a>`;
                         }
                     },
@@ -517,7 +509,6 @@
     }
 
 
-<<<<<<< HEAD
     // function getAllCustomerInfoByStatus() {
     //     $(document).ready(function () {
     //         console.log("show all customer")
@@ -578,7 +569,7 @@
     //         })
     //     })
     // }
-=======
+
     function getAllCustomerInfoByStatus() {
         $(document).ready(function () {
             console.log("show all customer")
@@ -639,7 +630,6 @@
             })
         })
     }
->>>>>>> main
 
     function deleteEventButtonModelShow() {
         $('.btnShowTableCustomerByStatus').css({
