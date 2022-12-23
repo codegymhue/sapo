@@ -205,17 +205,34 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public void update(UpdateProductParam updateProductParam) {
+
         Integer productId = updateProductParam.getId();
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new NotFoundException("Product not found"));
         product.setStatus(updateProductParam.isEnableSell() ? ProductStatus.AVAILABLE :
                 ProductStatus.UNAVAILABLE);
+
+        if(updateProductParam.getSku().equals("")){
+            updateProductParam.setSku(product.getSku());
+        }
+
+        if(!product.getSku().equals(updateProductParam.getSku())){
+            if (productRepository.findBySku(updateProductParam.getSku()).isPresent()) {
+                throw new NotFoundException("Mã SKU đã tồn tại");
+            }
+        }
+
+        if(!product.getBarCode().equals(updateProductParam.getBarCode())){
+            if (productRepository.findByBarCode(updateProductParam.getBarCode()).isPresent()) {
+                throw new NotFoundException("Mã BarCode đã tồn tại");
+            }
+        }
+
         productMapper.transferFields(updateProductParam, product);
         if (updateProductParam.isApplyTax()) {
             productTaxService.deleteAllByProductId(productId);
             productTaxService.createAll(updateProductParam.getTaxList(), product);
         }
-
     }
 
 

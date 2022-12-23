@@ -875,8 +875,8 @@
         product.enableSell = page.dialogs.elements.enableSell.is(":checked") ? true : false;
         product.description = page.dialogs.elements.descriptionUpdate.val();
         product.unit = page.dialogs.elements.unitUpdate.val();
-        product.sku = page.dialogs.elements.skuUpdate.val();
-        product.barCode = page.dialogs.elements.barCodeUpdate.val();
+        product.sku = page.dialogs.elements.skuUpdate.val().trim();
+        product.barCode = page.dialogs.elements.barCodeUpdate.val().trim();
         product.mass = page.dialogs.elements.massUpdate.val();
         product.retailPrice = page.dialogs.elements.retailPriceUpdate.val();
         product.importPrice = page.dialogs.elements.importPriceUpdate.val();
@@ -907,7 +907,7 @@
                 }, 1000)
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400);
+                App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
     }
 
