@@ -37,6 +37,7 @@ function showListCustomer() {
         $(".searchCustomer").removeClass('d-none');
         $(".contentCustomer div").remove();
         $.each(data, (i, customer) => {
+
             let result = `
                 <div class="MuiBox-root jss4978 InfiniteScroll-MenuItem focus-key-event showInfo" onclick="showCustomerInfo(${customer.id})"
                      data-id="${customer.id}" tabindex="0">
@@ -47,7 +48,7 @@ function showListCustomer() {
                         </svg>
                         <div class="MuiBox-root jss4983"><p
                                 class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap">${customer.name}</p>
-                                <h6 class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-noWrap">${customer.phone}</h6></div>
+                                <h6 class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-noWrap">${customer.phoneNumber}</h6></div>
                         <span class="MuiTouchRipple-root"></span>
                     </li>
                 </div>
@@ -70,7 +71,7 @@ const searchCustomer = () => {
         let search = $(this).val();
         let results = [];
         customers.forEach((item) => {
-            if (((item.name).toLowerCase()).includes(search.toLowerCase()) || ((item.phone).toLowerCase()).includes(search.toLowerCase())) {
+            if (((item.name).toLowerCase()).includes(search.toLowerCase()) || ((item.phoneNumber).toLowerCase()).includes(search.toLowerCase())) {
                 results.push(item);
             }
         })
@@ -87,7 +88,7 @@ const searchCustomer = () => {
                         </svg>
                         <div class="MuiBox-root jss4983"><p
                                 class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap">${customer.name}</p>
-                                <h6 class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-noWrap">${customer.phone}</h6></div>
+                                <h6 class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-noWrap">${customer.phoneNumber}</h6></div>
                         <span class="MuiTouchRipple-root"></span>
                     </li>
                 </div>
@@ -102,7 +103,7 @@ const searchProduct = () => {
         let search = $(this).val();
         let results = [];
         products.forEach((item) => {
-            console.log(item)
+            // console.log(item)
             if (((item.title).toLowerCase()).includes(search.toLowerCase()) || ((item.sku).toLowerCase()).includes(search.toLowerCase())
                 || ((item.barCode).toLowerCase()).includes(search.toLowerCase())) {
                 results.push(item);
@@ -208,7 +209,7 @@ function showCustomerInfo(idCustomer) {
                             <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorPrimary"
                                 title="Denise Zimmerman">${result.name}</h6>
                             <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorTextPrimary">
-                                &nbsp;-&nbsp;${result.phone}</h6>
+                                &nbsp;-&nbsp;${result.phoneNumber}</h6>
                         </a>
                         <button
                             class="MuiButtonBase-root MuiIconButton-root jss948 MuiIconButton-colorSecondary MuiIconButton-sizeSmall"
@@ -242,7 +243,7 @@ function showCustomerInfo(idCustomer) {
                                 </button>
                             </div>
                             <div class="MuiBox-root jss3900">
-                                <p class="MuiTypography-root MuiTypography-body2">${result.phone}</p>
+                                <p class="MuiTypography-root MuiTypography-body2">${result.phoneNumber}</p>
                                 <p class="MuiTypography-root MuiTypography-body2">${fullShippingAddress}</p>
                             </div>
                         </div>
@@ -314,7 +315,7 @@ function showCustomerInfo(idCustomer) {
                                 </button>
                             </div>
                             <div class="MuiBox-root jss4278">
-                                <p class="MuiTypography-root MuiTypography-body2">${result.phone}</p>
+                                <p class="MuiTypography-root MuiTypography-body2">${result.phoneNumber}</p>
                                 <p class="MuiTypography-root MuiTypography-body2">${fullBillAddress}</p>
                             </div>
                         </div>

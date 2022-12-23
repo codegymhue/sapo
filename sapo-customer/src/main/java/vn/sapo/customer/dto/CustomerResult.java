@@ -1,8 +1,7 @@
 package vn.sapo.customer.dto;
 
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 import vn.sapo.address.dto.AddressResult;
 import vn.sapo.entities.customer.CustomerGender;
@@ -14,7 +13,9 @@ import java.time.Instant;
 import java.util.List;
 
 @NoArgsConstructor
-@Data
+@AllArgsConstructor
+@Getter
+@Setter
 @Accessors(chain = true)
 public class CustomerResult {
 
@@ -22,7 +23,7 @@ public class CustomerResult {
 
     private String code;
 
-    private String fullName;
+    private String name;
 
     private String phoneNumber;
 

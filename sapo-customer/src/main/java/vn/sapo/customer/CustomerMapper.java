@@ -5,6 +5,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import vn.sapo.customer.dto.CreateCustomerParam;
+import vn.sapo.customer.dto.CustomerOrderResult;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.entities.customer.Customer;
@@ -23,7 +24,16 @@ public class CustomerMapper implements InitializingBean {
 
 
     public CustomerResult toDTO(Customer customer) {
-        return modelMapper.map(customer, CustomerResult.class);
+        System.out.println(customer);
+        return modelMapper.map(customer, CustomerResult.class)
+                .setName(customer.getFullName())
+                .setPhoneNumber(customer.getPhoneNumber());
+    }
+
+    public CustomerOrderResult toOrderDTO(Customer customer) {
+        return modelMapper.map(customer, CustomerOrderResult.class)
+                .setName(customer.getFullName())
+                .setPhone(customer.getPhoneNumber());
     }
 
     public Customer toModel(CreateCustomerParam createCustomerParam) {

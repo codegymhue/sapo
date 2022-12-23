@@ -12,6 +12,7 @@ import vn.sapo.entities.customer.Customer;
 import vn.sapo.exceptions.NotFoundException;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -72,7 +73,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional(readOnly = true)
     public List<CustomerResult> findAll() {
-        return customerRepository.findAll()
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAll()
                 .stream()
                 .map(customer -> {
                     CustomerResult dto = customerMapper.toDTO(customer);
@@ -83,6 +85,7 @@ public class CustomerServiceImpl implements CustomerService {
                     dto.setDebtTotal(spendTotal.subtract(paidTotal));
                     return dto;
                 }).collect(Collectors.toList());
+        return customerResults;
     }
 
     public BigDecimal getSpendTotalByCustomerId(Integer customerId) {
