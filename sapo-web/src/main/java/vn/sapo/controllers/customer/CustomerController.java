@@ -1,7 +1,5 @@
 package vn.sapo.controllers.customer;
 
-
-//import com.phpn.customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,13 +12,13 @@ import vn.sapo.customer.dto.CustomerResult;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/customers")
 public class CustomerController {
 
     @Autowired
     CustomerService customerService;
 
-    @GetMapping("/customers")
+    @GetMapping("")
     public String showListCustomerPage() {
         return "/admin/customer/list_customer";
     }
@@ -30,14 +28,15 @@ public class CustomerController {
         return "/admin/customer/customer_group";
     }
 
-    @GetMapping("customers/create")
+    @GetMapping("/create")
     public String showCustomerCreatePage() {
         return "/admin/customer/create_customer";
     }
 
 
 
-    @GetMapping("/customers/history")
+
+    @GetMapping("/history")
     public String showCustomerHistoryPage() {
         return "/admin/customer/history_customer";
     }
@@ -51,7 +50,8 @@ public class CustomerController {
         return modelAndView;
     }
 
-    @GetMapping("/customers/edit/{id}")
+
+    @GetMapping("/edit/{id}")
     public ModelAndView showCustomerEditPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         Optional<CustomerResult> customerOptional = Optional.ofNullable(customerService.findById(id));

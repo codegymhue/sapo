@@ -193,7 +193,11 @@
                         <table id="tbProduct" class="table table-hover" >
                             <thead style="background-color: #f4f6f8; height: 55px">
                                 <tr id="theadList" class="show">
-                                    <th class="align-middle"><input id="checkAll" type="checkbox" value="" data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả"></th>
+                                    <th class="align-middle">
+                                        <label for="checkAll" style="padding: 0.5rem; cursor:pointer">
+                                            <input style="cursor:pointer" id="checkAll" type="checkbox" value="" data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả">
+                                        </label>
+                                    </th>
                                     <th class="align-middle" scope="col">Ảnh</th>
                                     <th class="align-middle" scope="col">
                                         <button class="sort" id="btnTitleSort">Tên phiên bản sản phẩm <i class="fa-solid fa-sort"></i></button>
@@ -227,7 +231,9 @@
 
                                 <tr class="hide" id="selectActionThead" style="border: snow">
                                     <td class="align-middle" style="width: 20px">
-                                        <input id="selectAction" type="checkbox" value="" >
+                                        <label for="selectAction" style="padding: 0.5rem; cursor:pointer">
+                                            <input style="cursor:pointer" id="selectAction" type="checkbox" value="" >
+                                        </label>
                                     </td>
                                     <td colspan="2" class="align-middle" id="numberSelectProductList" style="width: 12%"></td>
                                     <td class="align-middle" style="width: 150px">
@@ -428,6 +434,14 @@
 <th:block th:replace="/layout/script :: script"/>
 <script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="/assets/admin/js/product/app.js"></script>
+
+<script>
+    let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>
+
 <script>
     let page = {
         urls: {
