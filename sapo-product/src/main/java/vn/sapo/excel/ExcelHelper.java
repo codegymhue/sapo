@@ -137,7 +137,6 @@ public class ExcelHelper {
                         default:
                             break;
                     }
-
                     cellIdx++;
                 }
                 List<MediaParam> mediaParams = new ArrayList<>();
