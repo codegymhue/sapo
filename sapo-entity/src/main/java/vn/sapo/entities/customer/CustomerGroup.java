@@ -2,27 +2,33 @@ package vn.sapo.entities.customer;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-public enum CustomerGroup {
-    VIP("VIP"), LE("LE"), CHAN("CHAN");
+import javax.persistence.*;
 
-    private final String value;
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@Table(name = "customer_group")
+@Accessors(chain = true)
+public class CustomerGroup {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
 
-    CustomerGroup(String value) {
-        this.value = value;
+    @Column(name = "title", nullable = false, length = 50)
+    private String title;
+    @Column(name = "cus_grp_code", nullable = false, length = 50)
+    private String cusGrpCode;
+
+    public CustomerGroup(Integer id) {
+        this.id = id;
     }
 
-    @JsonValue
-    public String getValue() {
-        return value;
-    }
 
-    @JsonCreator
-    public static CustomerGroup parseCustomerGroup(String value) {
-        CustomerGroup[] values = values();
-        for (CustomerGroup group : values) {
-            if (group.value.equals(value)) return group;
-        }
-        throw new IllegalArgumentException(value + "invalid");
-    }
 }
