@@ -86,7 +86,7 @@ public class ProductAPI {
     }
 
     @PostMapping ("/products/checkInventory")
-    public ResponseEntity<?> getAllProductCheckInventory(@RequestBody List<String> arrayIdProduct){
+    public ResponseEntity<?> getAllProductCheckInventory(@RequestBody List<Integer> arrayIdProduct){
         return new ResponseEntity<>(productService.getAllCheckInventoryProduct(arrayIdProduct), HttpStatus.OK);
     }
 
@@ -131,25 +131,25 @@ public class ProductAPI {
     }
 
     @PutMapping("/products/updateStatusAvailable")
-    public ResponseEntity<?> updateStatusAvailable(@RequestBody List<String> arrayIdProduct) {
-        productService.saveChangeStatusToAvailable(arrayIdProduct);
+    public ResponseEntity<?> updateStatusAvailable(@RequestBody List<Integer> arrayIdProduct) {
+        productService.changeStatusToAvailable(arrayIdProduct,true);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/products/updateStatusUnavailable")
-    public ResponseEntity<?> updateStatusUnavailable(@RequestBody List<String> arrayIdProduct) {
-        productService.saveChangeStatusToUnavailable(arrayIdProduct);
+    public ResponseEntity<?> updateStatusUnavailable(@RequestBody List<Integer> arrayIdProduct) {
+        productService.changeStatusToAvailable(arrayIdProduct,false);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/products/updateApplyTax/{applyTax}")
-    public ResponseEntity<?> updateChangeApplytax(@PathVariable Integer applyTax, @RequestBody List<String> arrayIdProduct) {
+    public ResponseEntity<?> updateChangeApplytax(@PathVariable Integer applyTax, @RequestBody List<Integer> arrayIdProduct) {
         productService.saveChangeApplyTax(applyTax, arrayIdProduct);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/products/delete")
-    public ResponseEntity<?> deleteProducts(@RequestBody List<String> arrayIdProduct) {
+    public ResponseEntity<?> deleteProducts(@RequestBody List<Integer> arrayIdProduct) {
         productService.deleteSoftProduct(arrayIdProduct);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -157,15 +157,6 @@ public class ProductAPI {
     @DeleteMapping("/product/{productId}")
     public ResponseEntity<?> deleteProduct(@PathVariable Integer productId){
         productService.deleteProduct(productId);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-
-    @PutMapping("/products/updateApplyTax")
-    public ResponseEntity<?> updateChangeApplytax(@RequestBody LinkedHashMap<String, ?> linkedHashMap) {
-        int applyTax = Integer.parseInt(linkedHashMap.get("applyTax").toString());
-        List<String> list = Collections.singletonList(linkedHashMap.get("arrayIdProduct").toString());
-        productService.saveChangeApplyTax(applyTax, list);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

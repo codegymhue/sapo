@@ -31,9 +31,6 @@ public class Product extends BaseEntity {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "deleted")
-    private boolean deleted = false;
-
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private ProductStatus status;
@@ -81,6 +78,9 @@ public class Product extends BaseEntity {
     private boolean taxInclusive;
     @OneToMany(mappedBy = "product")
     private Set<Media> mediaSet;
+
+    @Column(name = "deleted", nullable = false, columnDefinition = "boolean default false")
+    private boolean deleted = false;
 
     @OneToMany(mappedBy = "id.product")
 //    @OrderBy("tax_id")

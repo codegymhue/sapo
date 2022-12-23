@@ -91,7 +91,7 @@
                                                     <div class="MuiFormControl-root MuiTextField-root jss27091 MuiFormControl-fullWidth">
                                                         <div class="row">
                                                             <div class="col">
-                                                                <span style="font-weight: 500">Tên sản phẩm</span>
+                                                                <span style="font-weight: 500">Tên sản phẩm <span style="color: red">*</span></span>
                                                                 <input id="titleCreate"
                                                                        style="width: 100%"
                                                                        name="titleCreate"
@@ -398,8 +398,6 @@
                                                                 <button id="btnCreateBrand" style="border: none; color: #2d9dff;padding: 10px;text-align: start;
                                                                      font-weight: 500;
                                                                      font-size: 14px" type="button"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#modalAddBrand"
                                                                         class="bg-white w-100">
                                                                     <i class="fa-solid fa-circle-plus"
                                                                        style="margin: 0 9px"></i>Thêm mới
@@ -846,6 +844,49 @@
         }
     })
 
+    $('#btnAddCategory').on("click", function () {
+        $("#frmCreateCat").trigger("submit");
+    })
+
+    $("#frmCreateCat").validate({
+            rules: {
+                inputCat: {
+                    required: true,
+                    maxlength: 50
+                }
+            },
+            messages: {
+                inputCat: {
+                    required: "Tên loại sản phẩm không được để trống",
+                    maxlength: "Loại sản phẩm tối đa 50 kí tự"
+                }
+            },
+            submitHandler: function (){
+                createCategory();
+            }
+        });
+
+    $('#btnAddBrand').on("click", function () {
+        $("#frmCreateBrand").trigger("submit");
+    })
+    $("#frmCreateBrand").validate({
+        rules: {
+            inputBrand: {
+                required: true,
+                maxlength: 50
+            }
+        },
+        messages: {
+            inputBrand: {
+                required: "Tên nhãn hiệu không được để trống",
+                maxlength: "Nhãn hiệu tối đa 50 kí tự"
+            }
+        },
+        submitHandler: function (){
+            createBrand()
+        }
+    });
+
     //Thêm sản phẩm
     page.commands.createProduct = () => {
         let taxs = [];
@@ -987,10 +1028,7 @@
     }
     //inputBrand
     //----->>>Nhat-dev OnClick button to create Category
-    $('#btnAddCategory').on("click", function () {
-        createCategory();
-        console.log("page.elements.btnCreateCategory.onClick");
-    })
+
 
     function createCategory() {
         category.id = 0;
@@ -1021,7 +1059,7 @@
 
 
     //----->>>Nhat-dev OnClick button to create brand
-    $('#btnAddBrand').on('click', () => {
+    function createBrand() {
         brand.id = 0;
         brand.title = $('#inputBrand').val();
         console.log(brand)
@@ -1045,10 +1083,50 @@
             .fail((jqXHR) => {
                 App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
-    })
+    }
     //<<<--------nhat-dev end onclick create brand
     //----->>>Nhat-dev OnClick button to create tax
-    $('#btnAddTax').on('click', () => {
+
+    $('#btnAddTax').on("click", function () {
+        $("#frmCreateTax").trigger("submit");
+    })
+    $("#frmCreateTax").validate({
+        rules: {
+            taxTitle: {
+                required: true,
+                maxlength: 50
+            },
+            taxCode: {
+                required: true,
+                maxlength: 50
+            },
+            tax: {
+                required: true,
+                min: 0,
+                max: 100
+            }
+        },
+        messages: {
+            taxTitle: {
+                required: "Tên thuế không được để trống",
+                maxlength: "Thuế tối đa 50 kí tự"
+            },
+            taxCode: {
+                required: "Mã thuế không được để trống",
+                maxlength: "Mã thuế tối đa 50 kí tự"
+            },
+            tax: {
+                required: "Thuế suất không được để trống",
+                min: "Thuế suất tối thiếu 0%",
+                max: "Thuế suất tối đa 100%"
+            }
+        },
+        submitHandler: function (){
+            createTax();
+        }
+    });
+
+        function createTax() {
         tax.id = 0;
         tax.title = $('#inputTaxTitle').val();
         tax.code = $('#inputTaxCode').val();
@@ -1076,7 +1154,7 @@
             .fail((jqXHR) => {
                 App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
-    })
+    }
     //<<<--------nhat-dev end onclick create brand
     //checkbox event apply tax
     $('#applyTax').click(function () {

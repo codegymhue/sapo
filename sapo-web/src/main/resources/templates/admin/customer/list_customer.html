@@ -410,7 +410,7 @@
                                     "search": "Tìm kiếm cột",
                                     "visible": "Khả năng hiển thị cột"
                                 },
-                                "name": "Tên:",
+                                "fullName": "Tên:",
                                 "order": "Sắp xếp",
                                 "paging": "Phân trang",
                                 "scroller": "Cuộn vị trí",
@@ -437,7 +437,7 @@
                     } ,
                 ajax: {
                     contentType: 'application/json',
-                    url: "http://localhost:8080/api/customers",
+                    url: "/api/customers",
                     type: "GET",
                     dataSrc: ''
                 },
@@ -450,7 +450,11 @@
                 columns: [
                     {data: 'code'},
                     {data: 'fullName'},
+<<<<<<< HEAD
                     {data: 'phoneNumber'},
+=======
+                    {data: 'phone'},
+>>>>>>> main
                     {data: 'customerGroup'},
                     {data: 'debtTotal'},
                     {data: "spendTotal"}],
@@ -458,7 +462,10 @@
                     {
                         targets: 0,
                         render: function (data, type, row, meta) {
+<<<<<<< HEAD
                             console.log(row);
+=======
+>>>>>>> main
                             return `<a href="/admin/customers/customerInfo/${row.id}">${row.code}</a>`;
                         }
                     },
@@ -510,6 +517,7 @@
     }
 
 
+<<<<<<< HEAD
     // function getAllCustomerInfoByStatus() {
     //     $(document).ready(function () {
     //         console.log("show all customer")
@@ -570,6 +578,68 @@
     //         })
     //     })
     // }
+=======
+    function getAllCustomerInfoByStatus() {
+        $(document).ready(function () {
+            console.log("show all customer")
+            $("#showAllCustomerTable").DataTable({
+                ajax: {
+                    contentType: 'application/json',
+                    url: "/api/customers/findCustomerByStatus",
+                    type: "GET",
+                    dataSrc: ''
+                },
+                destroy: true,
+                lengthMenu: [
+                    [5, 10, 20, -1],
+                    ["5", "10", "20", "All"]
+                ],
+                searching: true,
+
+                columns: [
+                    {data: 'code'},
+                    {data: 'fullName'},
+                    {data: 'phone'},
+                    {data: 'customerGroup'},
+                    {data: 'debtTotal'},
+                    {data: "spendTotal"}],
+                columnDefs: [
+                    {
+                        targets: 0,
+                        render: function (data, type, row, meta) {
+                            return `<a href="/admin/customers/customerInfo/${row.id}">${row.code}</a>`;
+                        }
+                    },
+                    {
+                        targets: 4,
+                        render: function (data, type, row, meta) {
+                            return `
+                                <p class="text-end"
+                                           style="padding-right: 6px;">${row.debtTotal != null ? (new Intl.NumberFormat('vi-VN', {
+                                style: 'currency',
+                                currency: 'VND'
+                            }).format(row.debtTotal)) : "0"}</p>
+
+                            `
+                        }
+                    },
+                    {
+                        targets: 5,
+                        render: function (data, type, row, meta) {
+                            return `
+                                <p class="text-end"
+                                           style="padding-right: 6px;">${row.spendTotal != null ? (new Intl.NumberFormat('vi-VN', {
+                                style: 'currency',
+                                currency: 'VND'
+                            }).format(row.spendTotal)) : "0"}</p>
+                       `
+                        }
+                    },
+                ],
+            })
+        })
+    }
+>>>>>>> main
 
     function deleteEventButtonModelShow() {
         $('.btnShowTableCustomerByStatus').css({
