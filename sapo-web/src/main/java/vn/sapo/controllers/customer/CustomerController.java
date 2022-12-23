@@ -40,7 +40,7 @@ public class CustomerController {
         return "/admin/customer/history_customer";
     }
 
-    @GetMapping("/customerInfo/{id}")
+    @GetMapping("/customers/customerInfo/{id}")
     public ModelAndView showCustomerInfoPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         CustomerResult iCustomer = customerService.findById(id);

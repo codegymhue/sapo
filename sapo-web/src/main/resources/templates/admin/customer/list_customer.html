@@ -448,9 +448,9 @@
                 searching: true,
                 destroy: true,
                 columns: [
-                    {data: 'customerCode'},
-                    {data: 'name'},
-                    {data: 'phone'},
+                    {data: 'code'},
+                    {data: 'fullName'},
+                    {data: 'phoneNumber'},
                     {data: 'customerGroup'},
                     {data: 'debtTotal'},
                     {data: "spendTotal"}],
@@ -458,10 +458,29 @@
                     {
                         targets: 0,
                         render: function (data, type, row, meta) {
-                            return `<a href="/admin/customers/customerInfo/${row.id}">${row.customerCode}</a>`;
+                            console.log(row);
+                            return `<a href="/admin/customers/customerInfo/${row.id}">${row.code}</a>`;
                         }
                     },
                     {
+                        targets: 1,
+                        render: function (data, type, row, meta) {
+                            console.log(row);
+                            return `<a href="/admin/customers/customerInfo/${row.id}">${row.fullName}</a>`;
+                        }
+                    },{
+                        targets: 2,
+                        render: function (data, type, row, meta) {
+                            console.log(row);
+                            return `<a href="/admin/customers/customerInfo/${row.id}">${row.phoneNumber}</a>`;
+                        }
+                    }, {
+                        targets: 3,
+                        render: function (data, type, row, meta) {
+                            console.log(row);
+                            return `<a href="/admin/customers/customerInfo/${row.id}">${row.group}</a>`;
+                        }
+                    }, {
                         targets: 4,
                         render: function (data, type, row, meta) {
                             return `
@@ -473,8 +492,7 @@
 
                             `
                         }
-                    },
-                    {
+                    }, {
                         targets: 5,
                         render: function (data, type, row, meta) {
                             return `
@@ -483,7 +501,6 @@
                                                                     style: 'currency',
                                                                     currency: 'VND'
                             }).format(row.spendTotal)) : "0"}</p>
-
                             `
                         }
                     },
@@ -566,24 +583,24 @@
         $('.showAllCustomerInfo').html("");
     }
 
-    // $('.btnShowTableCustomerByStatus').on('click', () => {
-    //     deleteEventButtonModelShow();
-    //     console.log("ok")
-    //     $('.btnShowTableCustomerByStatus').css({
-    //         'color': '#1190ff',
-    //         'border-bottom': '2px solid rgb(0, 136, 255)'
-    //     })
-    //     getAllCustomerInfoByStatus();
-    // })
-    // $('.btnShowTableCustomer').on('click', () => {
-    //     deleteEventButtonModelShow();
-    //     console.log("ok")
-    //     $('.btnShowTableCustomer').css({
-    //         'color': '#1190ff',
-    //         'border-bottom': '2px solid rgb(0, 136, 255)'
-    //     })
-    //     getAllCustomerInfo();
-    // })
+    $('.btnShowTableCustomerByStatus').on('click', () => {
+        deleteEventButtonModelShow();
+        console.log("ok")
+        $('.btnShowTableCustomerByStatus').css({
+            'color': '#1190ff',
+            'border-bottom': '2px solid rgb(0, 136, 255)'
+        })
+        getAllCustomerInfoByStatus();
+    })
+    $('.btnShowTableCustomer').on('click', () => {
+        deleteEventButtonModelShow();
+        console.log("ok")
+        $('.btnShowTableCustomer').css({
+            'color': '#1190ff',
+            'border-bottom': '2px solid rgb(0, 136, 255)'
+        })
+        getAllCustomerInfo();
+    })
 
 
 </script>
