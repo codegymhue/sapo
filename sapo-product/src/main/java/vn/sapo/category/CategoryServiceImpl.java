@@ -7,6 +7,7 @@ import vn.sapo.category.dto.*;
 import vn.sapo.entities.product.*;
 import vn.sapo.exceptions.DataInputException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,10 +22,12 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryResult> findAll() {
-        return categoryRepository.findAll()
+        List<CategoryResult> result = new ArrayList<>();
+         result = categoryRepository.findAll()
                 .stream()
                 .map(categoryMapper::toDTO)
                 .collect(Collectors.toList());
+        return result;
     }
 
     @Override
