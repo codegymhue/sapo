@@ -16,6 +16,7 @@ import vn.sapo.category.CategoryRepository;
 import vn.sapo.category.dto.CategoryResult;
 import vn.sapo.convert.Characters;
 import vn.sapo.entities.product.*;
+import vn.sapo.entities.tax.TaxType;
 import vn.sapo.exceptions.NotFoundException;
 import vn.sapo.item.ItemMapper;
 import vn.sapo.item.ItemService;
@@ -89,7 +90,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     Characters characters;
-
 
     @Override
     @Transactional(readOnly = true)
@@ -232,6 +232,12 @@ public class ProductServiceImpl implements ProductService {
         if (updateProductParam.isApplyTax()) {
             productTaxService.deleteAllByProductId(productId);
             productTaxService.createAll(updateProductParam.getTaxList(), product);
+        } else {
+            productTaxService.deleteAllByProductId(productId);
+            List<ProductTaxParam> productTaxParams = new ArrayList<>();
+            productTaxParams.add(0, new ProductTaxParam(1, TaxType.TAX_PURCHASE));
+            productTaxParams.add(1, new ProductTaxParam(1, TaxType.TAX_SALE));
+            productTaxService.createAll(productTaxParams, product);
         }
     }
 
