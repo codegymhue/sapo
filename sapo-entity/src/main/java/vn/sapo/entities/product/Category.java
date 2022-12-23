@@ -1,14 +1,20 @@
 package vn.sapo.entities.product;
 
+import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor
 @Accessors(chain = true)
 @Table(name = "category")
+
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

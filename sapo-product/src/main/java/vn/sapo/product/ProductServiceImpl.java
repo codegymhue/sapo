@@ -197,6 +197,7 @@ public class ProductServiceImpl implements ProductService {
             mediaService.save(createProductParam.getMediaList(), product);
         }
         if (createProductParam.isEnableVariant()) {
+            System.out.println(createProductParam);
             itemService.create(itemMapper.toDTO(createProductParam, productId, 1));
         }
         return productMapper.toDTO(product);
