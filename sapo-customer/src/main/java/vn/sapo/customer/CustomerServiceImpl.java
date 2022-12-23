@@ -19,11 +19,11 @@ import java.util.stream.Collectors;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-    @Autowired
-    OrderItemService orderItemService;
-
-    @Autowired
-    PaymentSaleOrderService paymentSaleOrderService;
+//    @Autowired
+//    OrderItemService orderItemService;
+//
+//    @Autowired
+//    PaymentSaleOrderService paymentSaleOrderService;
 
     @Autowired
     private CustomerMapper customerMapper;

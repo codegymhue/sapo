@@ -79,6 +79,9 @@ public class Product extends BaseEntity {
     @OneToMany(mappedBy = "product")
     private Set<Media> mediaSet;
 
+    @Column(name = "deleted", nullable = false, columnDefinition = "boolean default false")
+    private boolean deleted = false;
+
     @OneToMany(mappedBy = "id.product")
 //    @OrderBy("tax_id")
     @OrderBy("taxId")
