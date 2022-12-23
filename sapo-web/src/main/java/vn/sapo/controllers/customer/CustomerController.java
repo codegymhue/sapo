@@ -12,36 +12,34 @@ import vn.sapo.customer.dto.CustomerResult;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/admin/customers")
+@RequestMapping("/admin")
 public class CustomerController {
 
     @Autowired
     CustomerService customerService;
 
-    @GetMapping("")
+
+    @GetMapping("/customers")
     public String showListCustomerPage() {
         return "/admin/customer/list_customer";
     }
-
-    @GetMapping("/customer_group")
+    @GetMapping("/customer_groups")
     public String showCustomerGroupPage() {
         return "/admin/customer/customer_group";
     }
 
-    @GetMapping("/create")
+    @GetMapping("customers/create")
     public String showCustomerCreatePage() {
         return "/admin/customer/create_customer";
     }
-
-
-
 
     @GetMapping("/history")
     public String showCustomerHistoryPage() {
         return "/admin/customer/history_customer";
     }
 
-    @GetMapping("/customerInfo/{id}")
+
+    @GetMapping("/customers/customerInfo/{id}")
     public ModelAndView showCustomerInfoPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         CustomerResult iCustomer = customerService.findById(id);
@@ -49,7 +47,6 @@ public class CustomerController {
         modelAndView.setViewName("/admin/customer/history_customer");
         return modelAndView;
     }
-
 
     @GetMapping("/edit/{id}")
     public ModelAndView showCustomerEditPage(@PathVariable Integer id) {

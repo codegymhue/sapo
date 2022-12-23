@@ -37,9 +37,7 @@ public class Customer extends BaseEntity {
 
     @Column(name = "phone_number", length = 15)
     private String phoneNumber;
-    @Column(name = "\"group\"")
-    @Enumerated(EnumType.STRING)
-    private CustomerGroup group;
+
 
     @Column(name = "email")
     private String email;
@@ -56,6 +54,12 @@ public class Customer extends BaseEntity {
     private CustomerGender gender;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "cus_group_id", nullable = false)
+    private CustomerGroup group;
+
+    @Column(name = "cus_group_id", insertable = false, updatable = false)
+    private Integer groupId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
     @Column(name = "employee_id", insertable = false, updatable = false)
@@ -64,6 +68,10 @@ public class Customer extends BaseEntity {
     public Customer setEmployeeId(Integer employeeId) {
         this.employee = new Employee(this.employeeId = employeeId);
         return this;
+    }
+
+    public void setGroupId(Integer groupId) {
+        this.group = new CustomerGroup(this.groupId = groupId);
     }
 
     @OneToMany(targetEntity = Address.class, mappedBy = "customer")
