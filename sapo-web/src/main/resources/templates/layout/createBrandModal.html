@@ -6,13 +6,14 @@
                     <h1 class="modal-title fs-5">Thêm nhãn hiệu</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <form id="frmCreateBrand" method="post">
                 <div class="modal-body">
-                    <form id="frmCreateBrand" method="post">
+
                         <div>
-                            <label class="mb-3">Tên nhãn hiệu</label>
-                            <input type="text" id="inputBrand" name="inputBrand" class="form-control"/>
+                            <label for="inputBrand" class="mb-3">Tên nhãn hiệu <span style="color: red">*</span></label>
+                            <input placeholder="VD: Kinh đô" type="text" id="inputBrand" name="inputBrand" class="form-control"/>
                         </div>
-                    </form>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="sc-jqUVSM dgJIMY" data-bs-dismiss="modal">Thoát</button>
@@ -20,6 +21,7 @@
                         Thêm nhãn hiệu
                     </button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
