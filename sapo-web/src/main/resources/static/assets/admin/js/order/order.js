@@ -378,12 +378,13 @@ function showListProducts() {
         $(".searchProduct").removeClass('hide').addClass('show');
 
         $(".contentProduct div").remove();
+        console.log("data: ", data);
         $.each(data, (i, product) => {
             let result = `             
                     <div class="MuiBox-root jss3941 InfiniteScroll-MenuItem focus-key-event"
                     onclick="showProductInfo(${product.id})" data-id="${product.id}" tabindex="0">
                     <li class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root jss1259 MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button" tabindex="-1" role="menuitem" aria-disabled="false">
-                        <img class="jss1260" src="${product.image}" alt="">
+                        <img class="jss1260" src="${product.fileUrl}" alt="">
                             <div class="MuiBox-root jss3946">
                                 <div class="MuiBox-root jss3947">
                                     <p class="MuiTypography-root MuiTypography-body1" style="white-space: break-spaces;">${product.title} - ${product.barCode} </p>

@@ -40,14 +40,19 @@ class EmployeeResult {
     }
 }
 class ProductResult {
-    constructor(id, title, image, unit, sku, retailPrice, wholesalePrice) {
+    constructor(id, title, fileUrl, unit, sku, retailPrice, wholesalePrice) {
             this.id = id;
             this.title = title;
-            this.image = image;
+            this.fileUrl = fileUrl;
             this.unit = unit;
             this.sku = sku;
             this.retailPrice = retailPrice;
             this.wholesalePrice = wholesalePrice;
+    }
+}
+class ImageList{
+    constructor(fileUrl) {
+        this.fileUrl = fileUrl;
     }
 }
 
