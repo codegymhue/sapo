@@ -1,6 +1,5 @@
 package vn.sapo.controllers.customer;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +35,7 @@ public class CustomerController {
 
 
 
+
     @GetMapping("/history")
     public String showCustomerHistoryPage() {
         return "/admin/customer/history_customer";
@@ -49,6 +49,7 @@ public class CustomerController {
         modelAndView.setViewName("/admin/customer/history_customer");
         return modelAndView;
     }
+
 
     @GetMapping("/edit/{id}")
     public ModelAndView showCustomerEditPage(@PathVariable Integer id) {

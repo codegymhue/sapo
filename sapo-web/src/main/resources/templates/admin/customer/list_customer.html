@@ -122,7 +122,8 @@
                 <div class="MuiPaper-root jss2056 sapo-grid MuiPaper-elevation1 MuiPaper-rounded MuiPaper-overflow">
                     <div class="MuiTableContainer-root jss2057 sapo-grid-header-wrapper stickyHeader"
                          style="top: 52px;">
-                        <table id="showAllCustomerTable" class="table table-hover MuiTable-root jss2058 sapo-grid-header"
+                        <table id="showAllCustomerTable"
+                               class="table table-hover MuiTable-root jss2058 sapo-grid-header"
                                aria-labelledby="tableTitle"
                                aria-label="enhanced table">
                             <thead class="MuiTableHead-root jss2071">
@@ -185,6 +186,7 @@
         </div>
     </div>
 </div>
+
 </body>
 <th:block th:replace="/layout/script.html"/>
 <script>
@@ -434,7 +436,7 @@
                         },
                         "infoThousands": ".",
                         "thousands": "."
-                    } ,
+                    },
                 ajax: {
                     contentType: 'application/json',
                     url: "/api/customers",
@@ -480,14 +482,14 @@
                             return `
                                 <p class="text-end"
                                            style="padding-right: 6px;">${row.spendTotal != null ? (new Intl.NumberFormat('vi-VN', {
-                                                                    style: 'currency',
-                                                                    currency: 'VND'
+                                style: 'currency',
+                                currency: 'VND'
                             }).format(row.spendTotal)) : "0"}</p>
 
                             `
                         }
                     },
-                    ],
+                ],
             })
         })
     }
@@ -588,35 +590,42 @@
 
 </script>
 <style>
-    #showAllCustomerTable_length{
+    #showAllCustomerTable_length {
         float: right;
     }
-    #showAllCustomerInfo{
+
+    #showAllCustomerInfo {
         font-size: 14px;
     }
+
     .dataTables_wrapper .dataTables_filter {
         float: left;
         text-align: left;
     }
-    .jss2075{
+
+    .jss2075 {
         font-size: 16px;
     }
+
     /*#showAllCustomerTable_filter{*/
     /*    margin-top: -30px;*/
     /*}*/
-    .dataTables_info{
+    .dataTables_info {
         font-size: 15px;
     }
-    .showAllCustomerTable_paginate{
+
+    .showAllCustomerTable_paginate {
         font-size: 15px;
     }
+
     /*.showAllCustomerTable_length{*/
     /*    font-size: 15px;*/
     /*}*/
-    .dataTables_paginate paging_simple_numbers{
+    .dataTables_paginate paging_simple_numbers {
         font-size: 15px;
 
     }
+
     body {
         font-weight: 400;
         text-transform: none;
@@ -628,13 +637,15 @@
         line-height: 1.42857143;
         background-color: #fff;
     }
+
     .jss2450 {
         display: flex;
         min-height: 59px;
         flex-direction: column;
         background-color: white;
     }
-    .dataTables_info{
+
+    .dataTables_info {
         margin-left: 1044px;
     }
 </style>
