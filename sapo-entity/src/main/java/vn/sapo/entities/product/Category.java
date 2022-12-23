@@ -1,9 +1,7 @@
 package vn.sapo.entities.product;
 
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
