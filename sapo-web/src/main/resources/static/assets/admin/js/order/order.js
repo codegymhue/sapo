@@ -375,11 +375,12 @@ function getAllItem() {
 
 function showListProducts() {
     let renderProducts = (data) => {
+        console.log("data: ", data);
         $(".searchProduct").removeClass('d-none');
         $(".searchProduct").removeClass('hide').addClass('show');
 
         $(".contentProduct div").remove();
-        console.log("data: ", data);
+
         $.each(data, (i, product) => {
             let result = `             
                     <div class="MuiBox-root jss3941 InfiniteScroll-MenuItem focus-key-event"
