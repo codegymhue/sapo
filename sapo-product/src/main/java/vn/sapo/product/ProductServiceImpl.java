@@ -22,6 +22,7 @@ import vn.sapo.item.ItemMapper;
 import vn.sapo.item.ItemService;
 import vn.sapo.media.MediaMapper;
 import vn.sapo.media.MediaService;
+import vn.sapo.media.dto.MediaParam;
 import vn.sapo.product.dto.*;
 import vn.sapo.product_tax.ProductTaxMapper;
 import vn.sapo.product_tax.ProductTaxRepository;
@@ -212,7 +213,6 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new NotFoundException("Product not found"));
         product.setStatus(updateProductParam.isEnableSell() ? ProductStatus.AVAILABLE :
                 ProductStatus.UNAVAILABLE);
-
         if(updateProductParam.getSku().equals("")){
             updateProductParam.setSku(product.getSku());
         }
@@ -239,6 +239,13 @@ public class ProductServiceImpl implements ProductService {
             productTaxParams.add(0, new ProductTaxParam(1, TaxType.TAX_PURCHASE));
             productTaxParams.add(1, new ProductTaxParam(1, TaxType.TAX_SALE));
             productTaxService.createAll(productTaxParams, product);
+        }
+        if (updateProductParam.getMediaList().size() == 0) {
+            mediaService.deleteAllByProductId(productId);
+        }
+        if (updateProductParam.getMediaList().size() != 0) {
+            mediaService.deleteAllByProductId(productId);
+            mediaService.save(updateProductParam.getMediaList(), product);
         }
     }
 

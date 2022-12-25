@@ -15,6 +15,7 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/admin/css/product/selectMenu.css">
+    <link rel="stylesheet" href="/assets/admin/css/w3school/w3.css">
     <style>
         .error {
             color: #991b1b !important;
@@ -776,6 +777,24 @@
         </form>
     </div>
 </div>
+<div class="modal fade" id="previewImg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen-lg-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Chi Tiết Ảnh</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="w3-content">
+                    <div class="row bigImg" style="height: 400px; ">
+                    </div>
+                    <div class="w3-row-padding w3-section smallImg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <th:block th:replace="/layout/script :: script"/>
 
 <script src="/assets/admin/js/cate_brand/category.js"></script>
@@ -798,7 +817,18 @@
 
 </body>
 
-<script>
+
+
+<script th:inline="javascript">
+
+    /*<![CDATA[*/
+
+    var medias = /*[[${medias}]]*/ 'default';
+
+
+    /*]]>*/
+
+    let media = JSON.parse(medias);
     let page = {
         cloudinary: {},
         urls: {
@@ -822,8 +852,7 @@
     let category = new Category();
     let brand = new Brand();
     let tax = new Tax();
-    let imgs = [];
-
+    var imgs = [];
 
     page.cloudinary.api_key = 142768397813839;
     page.cloudinary.api_secret = "8JitSG_omu6CkELDwlpNH-uqAaE";
@@ -886,6 +915,7 @@
         product.taxInclusive = $("#priceDepsTax").val() == 2 ? true : false;
         product.taxList = taxs;
         product.mediaList = imgs;
+        console.log(imgs);
 
         $.ajax({
             "headers": {
@@ -1042,22 +1072,46 @@
             img.fileType = infoImg.resource_type;
             img.fileFolder = infoImg.folder;
             img.fileName = infoImg.original_filename;
-            console.log(img);
             imgs.push(img);
-            let str = `<div id="div_${img.fileName}" class="profile-pic jss26799 MuiGrid-item MuiGrid-grid-md-2" style="width: 100%; height: 50%; margin: 0 24px 24px 0; padding: 0">
-                            <img id="img." src="${img.fileUrl}" width="100%" height="120px" style="float: left"/>
-                            <div class="edit" id="${img.fileName}" onclick="removeImg(this)">
-                                <i class="fa-solid fa-circle-xmark" style="color: red"></i>
-                            </div>
-                       </div>`
-            page.dialogs.elements.showImg.append(str);
+            page.commands.pushImage(img);
+            console.log(imgs)
             $(".progress").attr('hidden', true);
             $(".loading").remove();
-            // console.log(imgs)
         })
         .on('fileuploadprogress', function (e, data) {
             return $(".progress").removeAttr('hidden').css("width", `${data.loaded / data.total * 100}%`);
         });
+
+    page.commands.pushImage = (img) => {
+        let str = `<div id="div_${img.cloudId}" class="profile-pic jss26799 MuiGrid-item MuiGrid-grid-md-2" style="width: 100%; height: 50%; margin: 0 24px 24px 0; padding: 0">
+                            <img id="img." src="${img.fileUrl}" onclick="showPreviewImg()" width="100%" height="120px" style="float: left"/>
+                            <div class="edit" id="${img.cloudId}" onclick="removeImg(this)">
+                                <i class="fa-solid fa-circle-xmark" style="color: red"></i>
+                            </div>
+                       </div>`
+        page.dialogs.elements.showImg.append(str);
+        if (imgs.length !== 0) {
+            page.dialogs.elements.showImgSmall.removeAttr("hidden");
+            page.dialogs.elements.showImgBig.attr("hidden", true);
+        }
+        return;
+    }
+
+    if (media.length !== 0) {
+        console.log("hahah")
+        console.log(media)
+        for (let i = 0; i < media.length; i++) {
+            let imgres = new Image();
+            imgres.cloudId = media[i].cloudId
+            imgres.fileFolder = media[i].fileFolder
+            imgres.fileName =media[i].fileName
+            imgres.fileType = media[i].fileType
+            imgres.fileUrl = media[i].fileUrl
+            imgs.push(imgres);
+            page.commands.pushImage(imgres);
+            console.log("imgres",imgs)
+        }
+    }
 
     page.commands.renderImg = () => {
         let str = `<div class="profile-pic loading jss26799 MuiGrid-item MuiGrid-grid-md-2" style="width: 100%; height: 120px; margin: 0 24px 24px 0; padding: 0">
@@ -1071,12 +1125,59 @@
         return page.dialogs.elements.showImg.append(str);
     }
 
-    function removeImg(imgRemove) {
-        let idImg = (imgRemove.id);
-        if (imgRemove) {
-            imgs.splice(imgs.indexOf(idImg), 1);
+    function showPreviewImg() {
+        $(".bigImg").empty();
+        $(".smallImg").empty();
+
+        for (let i = 0; i < imgs.length; i++) {
+            let str1 = "";
+            let str2 = "";
+            if (i == 0) {
+                str1 = `<img class="mySlides" src="${imgs[i].fileUrl}" style="width: 400px; height: 300px; text-align: center">`
+                str2 = `<div class="w3-col s4">
+                            <img class="demo w3-opacity w3-hover-opacity-off" src="${imgs[i].fileUrl}" style="width:100%; cursor:pointer" onclick="currentDiv(${i + 1})">
+                        </div>`
+            }
+            else {
+                str1 = `<img class="mySlides" src="${imgs[i].fileUrl}" style="width: 400px; height: 300px; display:none; text-align: center">`
+                str2 = `<div class="w3-col s4">
+                            <img class="demo w3-opacity w3-hover-opacity-off" src="${imgs[i].fileUrl}" style="width:100%;cursor:pointer" onclick="currentDiv(${i + 1})">
+                        </div>`
+            }
+            $(".bigImg").append(str1);
+            $(".smallImg").append(str2);
         }
-        $("#div_" + idImg).remove();
+        $("#previewImg").modal('show');
+    }
+    function currentDiv(n) {
+        showDivs(slideIndex = n);
+    }
+
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        if (n > x.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = x.length}
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+        }
+        x[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " w3-opacity-off";
+    }
+
+    function removeImg(imgRemove) {
+        if (imgRemove) {
+            for (let i = 0; i < imgs.length; i++) {
+                if (imgs[i].cloudId === imgRemove.id) {
+                    imgs.splice(i, 1);
+                }
+            }
+        }
+        $("#div_" + imgRemove.id).remove();
         if (imgs.length < 1) {
             page.dialogs.elements.showImgBig.removeAttr("hidden");
             page.dialogs.elements.showImgSmall.attr("hidden", true);
