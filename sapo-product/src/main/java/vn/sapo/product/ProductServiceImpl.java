@@ -277,10 +277,11 @@ public class ProductServiceImpl implements ProductService {
         pageNo = pageNo - 1;
 
         Pageable pageable;
+        Sort statusSort = Sort.by("status").ascending();
         if (typeSort.equals("asc")) {
-            pageable = PageRequest.of(pageNo, pageSize, Sort.by(nameFieldSort).ascending());
+            pageable = PageRequest.of(pageNo, pageSize, statusSort.and(Sort.by(nameFieldSort).ascending()));
         } else {
-            pageable = PageRequest.of(pageNo, pageSize, Sort.by(nameFieldSort).descending());
+            pageable = PageRequest.of(pageNo, pageSize, statusSort.and(Sort.by(nameFieldSort).descending()));
         }
 
         Page<Product> products;
@@ -324,10 +325,11 @@ public class ProductServiceImpl implements ProductService {
         pageNo = pageNo - 1;
 
         Pageable pageable;
+        Sort statusSort = Sort.by("status").ascending();
         if (typeSort.equals("asc")) {
-            pageable = PageRequest.of(pageNo, pageSize, Sort.by(nameFieldSort).ascending());
+            pageable = PageRequest.of(pageNo, pageSize, statusSort.and(Sort.by(nameFieldSort).ascending()));
         } else {
-            pageable = PageRequest.of(pageNo, pageSize, Sort.by(nameFieldSort).descending());
+            pageable = PageRequest.of(pageNo, pageSize, statusSort.and(Sort.by(nameFieldSort).descending()));
         }
 
         Page<Product> products;
