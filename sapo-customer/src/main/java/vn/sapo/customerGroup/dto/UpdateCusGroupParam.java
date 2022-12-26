@@ -1,21 +1,14 @@
 package vn.sapo.customerGroup.dto;
 
-
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.time.Instant;
-
-@Getter
-@Setter
+@Data
 @Accessors(chain = true)
-public class CustomerGroupResult {
+public class UpdateCusGroupParam {
     private Integer id;
 
     private String title;
 
     private String cusGrpCode;
-
-    private Instant createdAt;
 }
