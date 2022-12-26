@@ -1,11 +1,16 @@
 package vn.sapo.controllers.product;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import vn.sapo.media.MediaService;
 import vn.sapo.product.ProductExcelExporter;
 import vn.sapo.product.ProductService;
 import vn.sapo.product.dto.ProductResult;
@@ -23,6 +28,8 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
+    @Autowired
+    MediaService mediaService;
 
     @GetMapping("/products")
     public ModelAndView showProductListPage() {
@@ -46,6 +53,15 @@ public class ProductController {
         if (product == null) {
             modelAndView.addObject("errors", "errors");
         } else {
+            String medias;
+            ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+            try {
+                medias = ow.writeValueAsString(mediaService.findAllById(product.getId()));
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+
+            modelAndView.addObject("medias", medias);
             modelAndView.addObject("product", productService.findById(product.getId()));
         }
         modelAndView.setViewName("/admin/product/product_edit");
