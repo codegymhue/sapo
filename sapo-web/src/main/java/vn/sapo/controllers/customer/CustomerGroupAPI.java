@@ -30,6 +30,11 @@ public class CustomerGroupAPI {
         return new ResponseEntity<>(customerGroupService.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/customer_groups/sortGroup")
+    public ResponseEntity<?> sortByGroup (){
+        return new ResponseEntity<>(customerGroupService.sortByGroup(),HttpStatus.OK);
+    }
+
     @GetMapping("/customer_groups/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
         CustomerGroupResult customerGroupResult = customerGroupService.findById(id);
@@ -51,5 +56,6 @@ public class CustomerGroupAPI {
     public void deleteCusGroupById(@PathVariable Integer id) {
         customerGroupService.deleteById(id);
     }
+
 
 }

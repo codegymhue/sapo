@@ -421,6 +421,24 @@
 
             })
     }
+
+    function  getCustomerGroupByGroup(){
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "http://localhost:8080/api/customer_groups/sortGroup"
+        })
+            .done((date)=>{
+                console.log(data);
+            })
+            .fail((jqXHR) => {
+
+            })
+    }
+    getCustomerGroupByGroup();
     getAllCustomerGroup();
 </script>
 
