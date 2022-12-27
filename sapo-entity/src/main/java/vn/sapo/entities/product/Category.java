@@ -9,8 +9,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @Accessors(chain = true)
 @Table(name = "category")
