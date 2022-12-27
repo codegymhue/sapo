@@ -1,0 +1,66 @@
+@charset "utf-8";
+
+body {
+    overflow: unset !important;
+}
+
+input::-ms-reveal {
+    display: none !important;
+}
+
+.btn-login:hover {
+    opacity: 0.6 !important;
+}
+
+.btn-login:active {
+    opacity: 0.4 !important;
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
+.prevent-select {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.input-inline-button {
+    cursor: text !important;
+}
+
+.login-icon-eye {
+    top: 12px;
+    right: 14px;
+    position: absolute;
+}
+
+.login-background {
+    min-width: 100vh;
+    min-height: 100vh;
+    background: url("../../images/background-bottom-pos-app.svg") no-repeat fixed bottom;
+    background-size: 131%;
+}
+
+.register-now {
+    font-size: 15px;
+}
+
+.register-background {
+    min-width: 100vh;
+    min-height: 100vh;
+    background: url("../../images/bg-register.jpg") no-repeat fixed bottom;
+    background-size: 114%;
+}
+
+.select-form-input {
+    width: 100%;
+    height: 48px;
+    padding: 0 20px;
+    font-size: .895rem;
+    border: thin solid #d3d5d7;
+    border-radius: 40px;
+    color: #363636;
+    outline: none;
+}

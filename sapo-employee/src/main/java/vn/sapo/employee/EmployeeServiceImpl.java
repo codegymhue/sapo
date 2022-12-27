@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 
 @Service
-@Transactional
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired

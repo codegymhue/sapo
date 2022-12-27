@@ -53,7 +53,7 @@ public class Customer extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private CustomerGender gender;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cus_group_id", nullable = false)
     private CustomerGroup group;
 
