@@ -1,10 +1,13 @@
 package vn.sapo.entities.product;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
-
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @Accessors(chain = true)
