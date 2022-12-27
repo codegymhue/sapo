@@ -67,10 +67,10 @@ public class CustomerAPI {
         return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.OK);
     }
 
-    @GetMapping("/customerGroup")
-    public ResponseEntity<?> getAllCustomerGroup(){
-      return new ResponseEntity<>(customerService.findAll(),HttpStatus.OK);
-    }
+//    @GetMapping("/customerGroup")
+//    public ResponseEntity<?> getAllCustomerGroup(){
+//      return new ResponseEntity<>(customerService.findAll(),HttpStatus.OK);
+//    }
 
 
 //    @GetMapping("/customerGroup")
