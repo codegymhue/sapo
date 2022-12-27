@@ -15,6 +15,7 @@ import vn.sapo.category.CategoryMapper;
 import vn.sapo.category.CategoryRepository;
 import vn.sapo.category.dto.CategoryResult;
 import vn.sapo.convert.Characters;
+import vn.sapo.entities.Employee;
 import vn.sapo.entities.product.*;
 import vn.sapo.entities.tax.TaxType;
 import vn.sapo.exceptions.NotFoundException;
@@ -92,6 +93,7 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     Characters characters;
 
+ 
     @Override
     @Transactional(readOnly = true)
     public List<ProductResult> findAll() {

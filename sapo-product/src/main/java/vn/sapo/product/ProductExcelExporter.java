@@ -56,7 +56,7 @@ public class ProductExcelExporter {
         createCell(row, 14, "Ngày cập nhật", style);
         createCell(row, 15, "Có thể bán", style);
         createCell(row, 16, "Tồn kho", style);
-        
+
     }
 
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
