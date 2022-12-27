@@ -6,5 +6,6 @@ import vn.sapo.entities.customer.CustomerGroup;
 import java.util.Optional;
 
 public interface CustomerGroupRepository  extends JpaRepository<CustomerGroup, Integer> {
+    
 
 }
