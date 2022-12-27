@@ -23,4 +23,6 @@ public class CustomerGroupResult {
 
     private Instant createdAt;
 
+    private Long countCus;
+
 }

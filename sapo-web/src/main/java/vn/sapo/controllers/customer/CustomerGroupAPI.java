@@ -12,6 +12,8 @@ import vn.sapo.customerGroup.dto.CreateCusGroupParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.customerGroup.dto.UpdateCusGroupParam;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api")
@@ -32,7 +34,8 @@ public class CustomerGroupAPI {
 
     @GetMapping("/customer_groups/sortGroup")
     public ResponseEntity<?> sortByGroup (){
-        return new ResponseEntity<>(customerGroupService.sortByGroup(),HttpStatus.OK);
+        List<CustomerGroupResult> list = customerGroupService.sortByGroup();
+        return new ResponseEntity<>(list,HttpStatus.OK);
     }
 
     @GetMapping("/customer_groups/{id}")
