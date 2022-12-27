@@ -7,13 +7,6 @@
     <th:block th:replace="/layout/header :: header"/>
     <link rel="stylesheet" href="/assets/admin/css/w3school/w3.css">
     <title>Chi tiết sản phẩm</title>
-    <style>
-        .image-item:hover {
-            width: 100%;
-            transition: transform 1s;
-            transform: scale(2);
-        }
-    </style>
 </head>
 
 <body>
@@ -97,7 +90,7 @@
                                                     class="MuiTypography-root MuiTypography-body2 MuiTypography-noWrap"
                                                     itemid="display_product_variant_barcode"
                                                     style="line-height: 16px; margin-left: 5px;"
-                                                    th:text="*{barCode}?: '---'">
+                                                    th:text="*{barCode != ''} ? ${product.barCode} : '---'">
                                             </p>
                                             </div>
                                         </div>
@@ -634,14 +627,14 @@
                                                     </td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter">
                                                         <p class="MuiTypography-root MuiTypography-body1"
-                                                           th:text="*{totalInventory}"></p></td>
+                                                           th:text="${#numbers.formatDecimal(product.totalInventory, 0, 'COMMA',0 , 'POINT')}"></p></td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter">
                                                         <p class="MuiTypography-root MuiTypography-body1"
                                                            th:text="${#numbers.formatDecimal(product.importPrice, 0, 'COMMA',0 , 'POINT')}?: '0'"></p>
                                                     </td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter">
                                                         <p class="MuiTypography-root MuiTypography-body1"
-                                                           th:text="*{availableInventory}"></p></td>
+                                                           th:text="${#numbers.formatDecimal(product.availableInventory, 0, 'COMMA',0 , 'POINT')}"></p></td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter">
                                                         <div class="MuiBox-root jss1059" style="cursor: pointer;"><p
                                                                 class="MuiTypography-root MuiTypography-body1 MuiTypography-colorInherit"
@@ -684,6 +677,7 @@
     </div>
 </div>
 
+<!--Modal show delete product-->
 <div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -693,10 +687,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Thao tác này sẽ xóa các sản phẩm bạn đã chọn. Thao tác này không thể khôi phục.
+                Thao tác này sẽ xóa sản phẩm bạn đã chọn. Thao tác này không thể khôi phục.
             </div>
             <div class="modal-footer d-flex align-items-center">
-                <button class="btn  btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal"
+                <button class="btn  btn-outline-primary btn-exit" type="button" data-bs-dismiss="modal"
                         style="background-color: #081ee3; color: #1410ed; font-weight: 500">Thoát
                 </button>
                 <button class="btn btn-danger btn-save-delete" id="btnSubmitDelete" type="button"
@@ -706,6 +700,8 @@
         </div>
     </div>
 </div>
+
+<!--Modal show image product-->
 <div class="modal fade" id="previewImg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen-lg-down">
         <div class="modal-content">
