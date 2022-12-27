@@ -6,28 +6,62 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vn.sapo.address.AddressService;
 import vn.sapo.address.dto.CreateAddressParam;
+import vn.sapo.customer.CustomerMapper;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
+import vn.sapo.exceptions.NotFoundException;
+import vn.sapo.order.sale.SaleOrderService;
+import vn.sapo.order.sale.item.OrderItemService;
+import vn.sapo.payment.sale.PaymentSaleOrderService;
 
+import java.math.BigDecimal;
+import java.time.Instant;
+import java.util.HashMap;
 import java.util.List;
+import java.util.function.Consumer;
 
 @RestController
 @RequestMapping("/api/customers")
 public class CustomerAPI {
-
     @Autowired
     private CustomerService customerService;
-
-
     @Autowired
     private AddressService addressService;
+    @Autowired
+    OrderItemService orderItemService;
+    @Autowired
+    PaymentSaleOrderService paymentSaleOrderService;
 
-    @GetMapping
+    @Autowired
+    SaleOrderService saleOrderService;
+
+    @GetMapping("/customers")
     public ResponseEntity<?> findAll() {
         List<CustomerResult> customers = customerService.findAll();
-        return new ResponseEntity<>(customers, HttpStatus.OK);
+        customers.forEach(customer -> {
+            BigDecimal spendTotal = getSpendTotalByCustomerId(customer.getId());
+            BigDecimal paidTotal = getPaidTotalByCustomerId(customer.getId());
+            customer.setSpendTotal(spendTotal);
+            customer.setDebtTotal(spendTotal.subtract(paidTotal));
+
+        });
+        return new ResponseEntity<>(customerService.findAll(), HttpStatus.OK);
+    }
+
+    public BigDecimal getSpendTotalByCustomerId(Integer customerId) {
+        BigDecimal spendTotal = saleOrderService.getSpendTotalByCustomerId(customerId);
+        if (spendTotal == null)
+            spendTotal = BigDecimal.valueOf(0);
+        return spendTotal;
+    }
+
+    public BigDecimal getPaidTotalByCustomerId(Integer customerId) {
+        BigDecimal paidTotal = paymentSaleOrderService.getPaidTotalByCustomerId(customerId);
+        if (paidTotal == null)
+            paidTotal = BigDecimal.valueOf(0);
+        return paidTotal;
     }
 
 
@@ -38,19 +72,39 @@ public class CustomerAPI {
 //    }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/customers/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
-        CustomerResult customerResult = customerService.findById(id);
-        return new ResponseEntity<>(customerResult, HttpStatus.OK);
+        CustomerResult dto = customerService.findById(id);
+
+        Integer quantityProductOrder = saleOrderService.getQuantityProductOrder(dto.getId());
+        if (quantityProductOrder == null) {
+            quantityProductOrder = 0;
+        }
+        dto.setQuantityProductOrder(quantityProductOrder);
+        Integer quantityItemOrder = orderItemService.getQuantityItemCustomerOrderById(dto.getId());
+        if (quantityItemOrder == null) {
+            quantityItemOrder = 0;
+        }
+        dto.setQuantityItemOrder(quantityItemOrder);
+
+        Instant lastDayOrder = saleOrderService.getLastDayOrderByCustomerId(dto.getId());
+
+        dto.setLastDayOrder(lastDayOrder);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
 
+//@GetMapping("/customers/page")
+//public ResponseEntity <?> getAllCustomerPage(){
+//        return ;
+//}
     @DeleteMapping("/{id}")
     public void deleteCustomerById(@PathVariable Integer id) {
         customerService.deleteById(id);
     }
 
-    @PostMapping
+
+    @PostMapping("/customers/create")
     public ResponseEntity<?> create(@RequestBody CreateCustomerParam createCustomerParam) {
         CustomerResult dto = customerService.create(createCustomerParam);
         CreateAddressParam createAddressParam = createCustomerParam.getCreateAddressParam();
@@ -59,18 +113,30 @@ public class CustomerAPI {
         createAddressParam.setCustomerId(dto.getId());
         addressService.create(createAddressParam);
         dto = customerService.findById(dto.getId());
-        return new ResponseEntity<>(dto, HttpStatus.OK);
+        return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/customers/update")
     public ResponseEntity<?> updateCustomer(@RequestBody UpdateCustomerParam updateCustomer) {
         return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.OK);
     }
 
-//    @GetMapping("/customerGroup")
-//    public ResponseEntity<?> getAllCustomerGroup(){
-//      return new ResponseEntity<>(customerService.findAll(),HttpStatus.OK);
-//    }
+    @GetMapping("/customerGroup")
+    public ResponseEntity<?> getAllCustomerGroup() {
+        return new ResponseEntity<>(customerService.findAll(), HttpStatus.OK);
+    }
+
+    @PutMapping("customers/updateStatusAvailable")
+    public ResponseEntity<?> updateStatusAvailable(@RequestBody List<Integer> arrayIdCustomer) {
+        customerService.changeStatusToAvailable(arrayIdCustomer, true);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/customers/updateStatusUnavailable")
+    public ResponseEntity<?> updateStatusUnavailable(@RequestBody List<Integer> arrayIdCustomer) {
+        customerService.changeStatusToAvailable(arrayIdCustomer, false);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 
 //    @GetMapping("/customerGroup")
