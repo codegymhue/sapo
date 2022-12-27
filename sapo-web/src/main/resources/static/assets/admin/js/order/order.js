@@ -374,7 +374,6 @@ function getAllItem() {
 }
 
 function showListProducts() {
-    console.log("data: ", data);
     let renderProducts = (data) => {
         console.log("data: ", data);
         $(".searchProduct").removeClass('d-none');
