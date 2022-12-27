@@ -13,4 +13,9 @@ public class TaxResult {
     private String title;
     private float tax;
     private boolean isDefault;
+
+    @Override
+    public String toString() {
+        return  title ;
+    }
 }

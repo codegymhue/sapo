@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import vn.sapo.media.MediaService;
 import vn.sapo.product.ProductExcelExporter;
+import vn.sapo.product.ProductExcelExporterInventory;
 import vn.sapo.product.ProductService;
 import vn.sapo.product.dto.ProductResult;
 
@@ -119,6 +120,19 @@ public class ProductController {
         response.setHeader(headerKey, headerValue);
         List<ProductResult> listProducts = productService.findAll();
         ProductExcelExporter excelExporter = new ProductExcelExporter(listProducts);
+        excelExporter.export(response);
+    }
+    @GetMapping("/products/excel")
+    public void exportItemToExcel(HttpServletResponse response) throws IOException {
+        response.setContentType("application/octet-stream");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=products_" + currentDateTime + ".xlsx";
+        response.setHeader(headerKey, headerValue);
+        List<ProductResult> listProducts = productService.findAll();
+        ProductExcelExporterInventory excelExporter = new ProductExcelExporterInventory(listProducts);
         excelExporter.export(response);
     }
 
