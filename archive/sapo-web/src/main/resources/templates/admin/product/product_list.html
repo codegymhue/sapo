@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="vi-VN" class="sapo-menu-toggle-active sapo-menu-expand" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <th:block th:replace="/layout/header :: header"/>
+    <title>Danh sách sản phẩm</title>
+    <link rel="stylesheet" href="/assets/admin/css/product/product_list.css"/>
+</head>
+
+<body style="font-size: 12px">
+<div>
+    <th:block th:replace="/layout/menu :: menu"/>
+    <th:block th:replace="/layout/modalImportFile :: #modalImportFile"/>
+    <div class="col-right  MuiBox-root jss64 jss40">
+        <div class="MuiBox-root jss6915 jss440 "
+             id="header">
+            <h3 class="MuiTypography-root MuiTypography-h3">Danh sách sản phẩm</h3>
+            <div class="MuiBox-root jss6916 jss441">
+                <div class="MuiBox-root jss6917 jss442">
+                    <svg class="MuiSvgIcon-root jss443"
+                         focusable="false"
+                         viewBox="0 0 24 24"
+                         color="#A2A8AF"
+                         aria-hidden="true">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z">
+                        </path>
+                    </svg>
+                    <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">Vay vốn kinh doanh</p>
+                </div>
+                <div class="MuiBox-root jss6932 jss442">
+                    <svg class="MuiSvgIcon-root jss443"
+                         focusable="false"
+                         viewBox="0 0 20 20"
+                         color="#A2A8AF"
+                         aria-hidden="true">
+                        <path fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M9.99992 0.833374C4.93992 0.833374 0.833252 4.94004 0.833252 10C0.833252 15.06 4.93992 19.1667 9.99992 19.1667C15.0599 19.1667 19.1666 15.06 19.1666 10C19.1666 4.94004 15.0599 0.833374 9.99992 0.833374ZM9.08325 16.4167V14.5834H10.9166V16.4167H9.08325ZM11.9891 10.1559L12.8141 9.31254C13.3366 8.79004 13.6666 8.05671 13.6666 7.25004C13.6666 5.22421 12.0258 3.58337 9.99992 3.58337C7.97409 3.58337 6.33325 5.22421 6.33325 7.25004H8.16659C8.16659 6.24171 8.99158 5.41671 9.99992 5.41671C11.0083 5.41671 11.8333 6.24171 11.8333 7.25004C11.8333 7.75421 11.6316 8.21254 11.2924 8.54254L10.1558 9.69754C9.49575 10.3667 9.08325 11.2834 9.08325 12.2917V12.75H10.9166C10.9166 11.375 11.3291 10.825 11.9891 10.1559Z"
+                              fill="currentColor">
+                        </path>
+                    </svg>
+                    <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">Trợ giúp</p>
+                </div>
+                <div class="MuiBox-root jss6933 jss442">
+                    <svg class="MuiSvgIcon-root jss443"
+                         focusable="false"
+                         viewBox="0 0 16 14"
+                         color="#A2A8AF"
+                         aria-hidden="true">
+                        <path d="M8 14C5.10929 11.4904 0 8.36868 0 4.19619C0 1.84632 1.936 0 4.4 0C5.792 0 7.128 0.578989 8 1.55556C8.872 0.578989 10.208 0 11.6 0C14.064 0 16 1.84632 16 4.19619C16 8.36185 10.8971 11.5039 8 14Z"
+                              fill="currentColor">
+                        </path>
+                    </svg>
+                    <p class="MuiTypography-root MuiTypography-body1"
+                       style="color: rgb(24, 37, 55);">Góp ý</p>
+                </div>
+                <div class="MuiBox-root jss6934  jss442 jss446">
+                    <div class=" sb-avatar sb-avatar--text"
+                         style="display: inline-block; vertical-align: middle; width: 30px; height: 30px; border-radius: 20px; font-family: Helvetica, Arial, sans-serif;">
+                        <div class=" sb-avatar__text"
+                             title="Phú Nguyễn"
+                             style="width: 30px; height: 30px; line-height: initial; text-align: center; color: rgb(255, 255, 255); border-radius: 20px; background: rgb(215, 61, 50);">
+                            <div style="display: table; table-layout: fixed; width: 100%; height: 100%; font-size: 10px;">
+                                <span style="display: table-cell; vertical-align: middle; white-space: nowrap;">
+                                    <span>P</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="MuiTypography-root jss445 MuiTypography-body1 MuiTypography-colorTextPrimary">Phú Nguyễn</p>
+                    <svg class="MuiSvgIcon-root arrow-avatar"
+                         focusable="false"
+                         viewBox="0 0 24 24"
+                         aria-hidden="true">
+                        <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="MuiBox-root jss6754 jss6732">
+            <div class="MuiBox-root jss6755 jss6733">
+                <div class="MuiBox-root jss6756 jss6741">
+                    <a th:href="@{/admin/products/export/excel}">
+                    <button class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
+                            tabindex="0"
+                            type="button">
+                      <span class="MuiButton-label">
+                        <span class="MuiButton-startIcon MuiButton-iconSizeSmall">
+                          <svg class="MuiSvgIcon-root jss6758"
+                               focusable="false"
+                               viewBox="0 0 14 20"
+                               aria-hidden="true">
+                              <path d="M6 8.74228e-08L6 12.17L2.41 8.59L1 10L7 16L13 10L11.59 8.59L8 12.17L8 0L6 8.74228e-08Z"
+                                    fill="currentColor">
+                              </path>
+                              <path d="M0 18H14V20H0V18Z"
+                                    fill="currentColor">
+                              </path>
+                            </svg>
+                        </span>Xuất file
+                      </span>
+                        <span class="MuiTouchRipple-root">
+                      </span>
+                    </button>
+                    </a>
+                    <div class="MuiBox-root jss6793"
+                         style="width: 1px; height: 20px; border-left: 1px solid rgb(211, 213, 215); margin: 0 8px;">
+                    </div>
+                    <button id="importFile" class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
+                            tabindex="0"
+                            type="button">
+                      <span class="MuiButton-label">
+                        <span class="MuiButton-startIcon MuiButton-iconSizeSmall">
+                          <svg class="MuiSvgIcon-root jss6758"
+                               focusable="false"
+                               viewBox="0 0 14 20"
+                               aria-hidden="true">
+                            <path d="M8.00003 16L8.00003 3.83001L11.59 7.41001L13 6.00001L7.00003 1.29539e-06L1.00002 6.00001L2.41002 7.41001L6.00002 3.83001L6.00002 9.91501L6.00002 16L8.00003 16Z"
+                                  fill="currentColor">
+                            </path>
+                            <path d="M14 20L1.90735e-06 20L2.08219e-06 18L14 18L14 20Z"
+                                  fill="currentColor">
+                            </path>
+                          </svg>
+                        </span>Nhập file
+                      </span>
+                        <span class="MuiTouchRipple-root">
+                      </span>
+                    </button>
+                    <div class="MuiBox-root jss6793"
+                         style="width: 1px; height: 20px; border-left: 1px solid rgb(211, 213, 215); margin: 0 8px;">
+                    </div>
+                </div>
+                <div class="MuiBox-root jss6799 jss6741">
+                    <div class="sc-kDDrLX cKOfva">
+                        <a id="Sapo-Button-4967a07b-9f63-4c0e-bfd9-3ad94f06186c"
+                           class="sc-jqUVSM fEHNKi"
+                           href="/admin/products/create"
+                           style="color: white">
+                            <svg class="MuiSvgIcon-root"
+                                 focusable="false"
+                                 viewBox="0 0 24 24"
+                                 aria-hidden="true">
+                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+                            </svg>Thêm sản phẩm
+                        </a>
+                        <button id="btn-create-product"
+                                class="sc-jqUVSM dfbErd">
+                            <span class="sc-papXJ jcEYKF">
+                                <svg class="MuiSvgIcon-root"
+                                     focusable="false"
+                                     viewBox="0 0 24 24"
+                                     aria-hidden="true">
+                                    <path d="M7 10l5 5 5-5z"></path>
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="MuiBox-root jss6800 jss6734">
+                <div class="MuiBox-root jss6801 jss6735">
+                    <div class="sc-hZFzCs cTUhMx">
+                        <div id="scroller"
+                             class="sc-cHPgQl hYUFnd">
+                            <div class="sc-gHLcSH ieIWRo">
+                                <button class="sc-KfMfS dvtKJo">Tất cả sản phẩm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="MuiBox-root jss6802 jss6736">
+                        <div class="sc-hjriPb elNOYP">
+                            <div class="sc-himrzO gTRFtW sc-gUAEMC dYvjic">
+                                <div class="sc-jIZahH hISLMV Sapo-InputRoot input-group">
+                                    <div class="sc-gicCDI sc-ezWOiH bqqjdk kZUaKd">
+                                        <svg viewBox="0 0 24 24"
+                                             fill="none"
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             class="sc-hsOonA echsof">
+                                            <path fill-rule="evenodd"
+                                                  clip-rule="evenodd"
+                                                  d="M14.891 13.477a6.002 6.002 0 0 0-9.134-7.72 6 6 0 0 0 7.72 9.134l5.715 5.716 1.415-1.415-5.716-5.715Zm-2.063-6.305a4 4 0 1 1-5.656 5.656 4 4 0 0 1 5.657-5.656Z"
+                                                  fill="currentColor">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <label style="width: 100%" >
+                                        <input id="Sapo-TextField-1de6d6a6-f13f-4275-b1b2-a8487207509a"
+                                               placeholder="Tìm kiếm theo tên sản phẩm"
+                                               type="text"
+                                               class="sc-ikZpkk iYDwCJ form-control searchTitle "
+                                               value=""
+                                        >
+                                    </label>
+                                    <fieldset class="sc-iIPllB iUBRZb"></fieldset>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="group"
+                             class="MuiButtonGroup-root jss6803">
+                            <select id="category" class="form-select" aria-label="Default select example" style="width: 180px">
+                                <option selected value="-1">Loại sản phẩm</option>
+                            </select>
+                            <select id="brand" class="form-select" aria-label="Default select example" style="width: 180px">
+                                <option selected value="-1">Nhãn hiệu</option>
+                            </select>
+                            <select id="status" class="form-select" aria-label="Default select example" style="width: 180px">
+                                <option selected value="">Trạng thái</option>
+                                <option value="AVAILABLE">Đang giao dịch</option>
+                                <option value="UNAVAILABLE">Ngừng giao dịch</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="MuiBox-root jss6842"></div>
+                </div>
+
+                <div style="font-size:small" id="tableCheckbox">
+                    <table id="tbProduct" class="table table-hover">
+                        <thead style="background-color: #f4f6f8; height: 55px">
+                        <tr id="theadList" class="show" >
+                            <th class="align-middle" >
+                                <label for="checkAll" style="padding: 0.5rem; cursor:pointer">
+                                    <input  style="cursor:pointer" id="checkAll" type="checkbox" value="" data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả">
+                                </label>
+                            </th>
+                            <th class="align-middle" scope="col">Ảnh</th>
+                            <th class="align-middle" scope="col">
+                                <button class="sort" id="btnTitleSort">Sản phẩm <i class="fa-solid fa-sort"></i></button>
+                            </th>
+                            <th class="align-middle" scope="col">Loại</th>
+                            <th class="align-middle" scope="col">Nhãn hiệu</th>
+                            <th class="align-middle" scope="col">Có thể bán</th>
+                            <th class="align-middle" scope="col">Tồn kho</th>
+                            <th class="align-middle" scope="col">Trạng thái</th>
+                            <th class="align-middle" scope="col">
+                                <button class="sort" id="btnCreatAtSort">Ngày khởi tạo <i class="fa-solid fa-sort"></i></button>
+                            </th>
+                            <th class="align-middle" scope="col">
+                                <button class="sort" id="btnUpdateAtSort">Cập nhập cuối <i class="fa-solid fa-sort"></i></button>
+                            </th>
+                        </tr>
+                        <tr class="hide" id="selectActionThead" style="border: snow">
+                            <td class="align-middle" style="width: 20px">
+                                <label for="selectAction" style="padding: 0.5rem; cursor:pointer">
+                                    <input style="cursor:pointer" id="selectAction" type="checkbox" value="" >
+                                </label>
+                            </td>
+                            <td colspan="2" class="align-middle" id="numberSelectProductList" style="width: 24%">
+                            </td>
+                            <td class="align-middle" colspan="2">
+                                <div class="btn-group">
+                                    <button class="btn dropdown-toggle btnDropdown me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Chọn thao tác
+                                        <i class="fa-solid fa-sort-down" style="padding-left: 2.3rem"></i>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                        <li>
+                                            <button class="dropdown-item btnDropdown" id="btnCheckInventory">Kiểm tra tồn kho</button>
+                                        </li>
+                                        <li>
+                                            <button class="dropdown-item btnDropdown" id="btnAvailable">Đang giao dịch</button>
+                                        </li>
+                                        <li>
+                                            <button class="dropdown-item btnDropdown" id="btnUnavailable">Ngừng giao dịch</button>
+                                        </li>
+                                        <li>
+                                            <button class="dropdown-item btnDropdown" id="btnDelete">Xóa sản phẩm</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td colspan="5"></td>
+                        </tr>
+                        </thead>
+                        <tbody >
+                        </tbody>
+                    </table>
+                </div>
+                <div class="container-fluid " style="height: 50px">
+                    <div class="row col-md-12 d-flex align-items-center" style="font-size: small">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-3 text-end">
+                            <label class="me-2">Hiển thị</label>
+                            <select class="me-2 " id="pageSize">
+                                <option value="7">7</option>
+                                <option value="14">14</option>
+                                <option value="20">20</option>
+                            </select>
+                            <span>Kết quả</span>
+                        </div>
+                        <div class="col-md-3 text-center" id="totalPage" style="padding: initial">
+
+                        </div>
+                        <div class="col-md-1">
+                            <nav aria-label="Page navigation example ">
+                                <ul class="pagination" >
+                                    <li class="page-item">
+                                        <button class=" btn-outline-primary btn-sm me-2" id="previousPage" style="border: none">
+                                            <i class="fa-solid fa-angle-left"></i>
+                                        </button>
+                                    </li>
+                                    <li class="page-item">
+                                        <button class="pageNumber btn-primary btn-sm me-2">
+                                            <span id="pageNo">1</span>
+                                        </button>
+                                    </li>
+                                    <li class="page-item">
+                                        <button class=" btn-outline-primary btn-sm " id="nextPage" style="border: none">
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalAvailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: max-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="staticBackdropLabel">Cập nhật trạng thái !</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="statusChange">
+            </div>
+            <div class="modal-footer d-flex align-items-center">
+                <button class="btn btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn btn-primary btn-save" id="btnAvailableSave" type="button">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalUnavailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: max-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Ngừng giao dịch!</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="statusChangeUnavailable">
+            </div>
+            <div class="modal-footer d-flex align-items-center">
+                <button class="btn btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn btn-primary btn-save" id="btnUnavailableSave" type="button">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: max-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Xóa sản phẩm?</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="statusChangeDelete">
+            </div>
+            <div class="modal-footer d-flex align-items-center">
+                <button class="btn  btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn btn-danger btn-save-delete" id="btnSubmitDelete" type="button">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalCheckInventory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content " style="width:max-content">
+            <div class="modal-header">
+                <h4 class="modal-title" >Kiểm tra thông tin tồn kho</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" >
+                <table class="table table-hover table-bordered" id="tbInventoryProduct" style="font-size: small">
+                    <thead style="background-color: #f4f6f8">
+                    <tr>
+                        <th scope="col " rowspan="2" class="align-middle">Mã SKU</th>
+                        <th scope="col" rowspan="2" class="align-middle ">Tên sản phẩm</th>
+                        <th scope="col">Chính sách giá</th>
+                        <th scope="col" colspan="5" class="text-center">Tổng</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Giá bán lẻ</th>
+                        <th scope="col">Tồn kho</th>
+                        <th scope="col">Có thể bán</th>
+                        <th scope="col">Đang giao dịch</th>
+                        <th scope="col">Hàng đang về</th>
+                        <th scope="col">Hàng đang giao</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer d-flex align-items-center">
+                <button class="btn btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="/layout/script :: script"/>
+<script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="/assets/admin/js/product/app.js"></script>
+<script>
+    let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>
+
+<script>
+    let page = {
+        urls: {
+            getAllProducts: App.BASE_URL_PRODUCT,
+            getProductById: App.BASE_URL_PRODUCT,
+            getAllCategory: App.BASE_URL_PRODUCT + "/categories",
+            getAllBrand: App.BASE_URL_PRODUCT + "/brands",
+            getAllStatus: App.BASE_URL_PRODUCT + "/status",
+            updateStatusAvailable: App.BASE_URL_PRODUCT + "/updateStatusAvailable",
+            updateStatusUnavailable: App.BASE_URL_PRODUCT + "/updateStatusUnavailable",
+            deleteProduct: App.BASE_URL_PRODUCT + "/delete",
+            getAllCheckInventory: App.BASE_URL_PRODUCT + "/checkInventory"
+
+        },
+        elements: {},
+        loadData: {},
+        commands: {},
+        dialogs: {
+            elements: {},
+            loadData: {},
+            commands: {},
+        },
+        initializeEventControl: {}
+    }
+
+    let productVariant = new ProductVariant();
+    let product = new ProductItemPage();
+    let category = new Category();
+    let brand = new Brand();
+    let totalPage;
+    let sortPage = {"type": "des", "value": "id"};
+    let arrayIdProduct = [];
+
+    page.elements.tbProduct = $("#tbProduct tbody");
+    page.elements.tbinventoryProduct = $("#tbInventoryProduct tbody");
+    page.elements.btnAvailable = $("#btnAvailable");
+    page.elements.btnUnavailable = $("#btnUnavailable");
+    page.elements.btnDelete = $("#btnDelete");
+    page.elements.btnAvailableSave = $("#btnAvailableSave");
+    page.elements.btnUnavailableSave = $("#btnUnavailableSave");
+    page.elements.btnSubmitDelete = $("#btnSubmitDelete");
+    page.elements.btnCheckInventory = $("#btnCheckInventory");
+
+
+    page.elements.btnTitleSort = $("#btnTitleSort");
+    page.elements.btnCreatAtSort = $("#btnCreatAtSort");
+    page.elements.btnUpdateAtSort = $("#btnUpdateAtSort");
+
+    page.elements.totalPage = $("#totalPage");
+    page.elements.pageNo = $("#pageNo");
+    page.elements.pageSize = $("#pageSize");
+    page.elements.search = $(".searchTitle");
+
+    page.elements.checkAll =$("#checkAll");
+    page.elements.selectAction = $("#selectAction");
+
+    page.elements.selectActionThead = $("#selectActionThead");
+    page.elements.theadList = $("#theadList");
+    page.elements.numberSelectProductList = $("#numberSelectProductList");
+    page.elements.statusChangeForNumberProductList = $("#statusChange");
+    page.elements.statusChangeForNumberToUnavailable = $("#statusChangeUnavailable");
+    page.elements.statusChangeForNumberDelete = $("#statusChangeDelete");
+
+    page.elements.modalAvailable = $("#modalAvailable");
+    page.elements.modalUnavailable =$("#modalUnavailable");
+    page.elements.modalDelete =$("#modalDelete");
+    page.elements.modalCheckInventory = $("#modalCheckInventory");
+
+    page.dialogs.elements.category = $("#category");
+    page.dialogs.elements.brand = $("#brand");
+    page.dialogs.elements.status = $("#status");
+
+    page.dialogs.elements.nextPage = $("#nextPage");
+    page.dialogs.elements.previousPage = $("#previousPage");
+
+    //nhat-dev import file
+    page.elements.importFile = $("#importFile");
+
+    page.elements.importFile.on("click", function (){
+            $("#modalImportFile").modal("show");
+    })
+
+    page.commands.getAllProducts = () => {
+        let pageNo = Number(page.elements.pageNo.text());
+        let pageSize =Number(page.elements.pageSize.val());
+        let search = page.elements.search.val().trim();
+
+        let categoryId = Number(page.dialogs.elements.category.val());
+        let brandId = Number(page.dialogs.elements.brand.val());
+        let status = page.dialogs.elements.status.val();
+        page.commands.getAllProductsItemOnPageNo(pageNo, pageSize, search, categoryId, brandId, status);
+    }
+
+    page.commands.getAllProductsItemOnPageNo = (pageNo, pageSize, search, categoryId, brandId, status) => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getAllProducts + "/page",
+            data:({
+                "pageNo": pageNo,
+                "pageSize": pageSize,
+                "search": search,
+                "categoryId": categoryId,
+                "brandId": brandId,
+                "status": status,
+                sortPage
+            })
+        })
+            .done((data) => {
+                page.elements.tbProduct.empty();
+                page.elements.totalPage.empty();
+                totalPage = data.totalPage;
+                data.products.map(item => {
+                    if(item.status == "AVAILABLE"){
+                        page.elements.tbProduct.append(App.renderRowProduct(item, 'available'))
+                    } else {
+                        page.elements.tbProduct.append(App.renderRowProduct(item, 'unavailable'))
+                    }
+                });
+                page.commands.resetInputCheckBox();
+                page.commands.isCheckbox();
+                page.elements.totalPage.append(
+                    `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
+                )
+            })
+            .fail((jqXHR) => {
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404)
+            })
+    }
+
+    page.elements.search.on("change", () => {
+        page.elements.pageNo.text(1);
+        page.commands.getAllProducts();
+    })
+
+    page.dialogs.elements.category.on("change", () => {
+        page.elements.pageNo.text(1);
+        page.dialogs.elements.brand.val("-1");
+        page.dialogs.elements.status.val("");
+        page.commands.getAllProducts();
+    })
+
+    page.dialogs.elements.brand.on("change", () => {
+        page.elements.pageNo.text(1);
+        page.dialogs.elements.category.val("-1");
+        page.dialogs.elements.status.val("");
+        page.commands.getAllProducts();
+    })
+
+    page.dialogs.elements.status.on("change", () =>{
+        page.elements.pageNo.text(1);
+        page.dialogs.elements.category.val("-1");
+        page.dialogs.elements.brand.val("-1");
+        page.commands.getAllProducts();
+    })
+
+
+    page.dialogs.elements.nextPage.on("click", () => {
+        let pageNo = page.elements.pageNo.text();
+        if(Number(pageNo) < Number(totalPage)) {
+            let pageNext = Number(pageNo) + 1;
+            page.elements.pageNo.text(pageNext);
+            page.commands.getAllProducts();
+        }
+
+    })
+
+    page.dialogs.elements.previousPage.on("click", () => {
+        let pageNo = page.elements.pageNo.text();
+        if(Number(pageNo) > 1) {
+            let previousPage = Number(pageNo) - 1;
+            page.elements.pageNo.text(previousPage);
+            page.commands.getAllProducts();
+        }
+
+    })
+
+    page.elements.pageSize.on("change", () => {
+        page.elements.pageNo.text(1);
+        page.commands.getAllProducts();
+    })
+
+    page.commands.getAllCategory = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getAllCategory
+        })
+            .done((data) => {
+                data.map(item => {
+                    let str = `<option value="${item.id}">${item.title}</option>`;
+                    page.dialogs.elements.category.append(str);
+                })
+            })
+            .fail((jqXHR) => {
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404)
+            })
+
+    }
+
+    page.commands.getAllBrand = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getAllBrand
+        })
+            .done((data) => {
+                data.map(item => {
+                    let str = `<option value="${item.id}">${item.title}</option>`;
+                    page.dialogs.elements.brand.append(str);
+                })
+            })
+            .fail((jqXHR) => {
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404)
+            })
+    }
+
+
+    page.elements.checkAll.on("change", function (){
+        page.elements.selectAction.prop("checked", true);
+        arrayIdProduct = [];
+        if(this.checked){
+            $("#tbProduct > tbody input").each(function (){
+                $(this).prop("checked", true);
+                arrayIdProduct.push($(this).val());
+            })
+        } else {
+            $("#tbProduct > tbody input").each(function (){
+                $(this).prop("checked", false);
+            })
+        }
+        page.commands.showAction();
+    })
+
+    page.commands.isCheckbox = () =>{
+        $(".selectCheckbox").on("change", function (){
+            if(this.checked){
+                $(this).prop("checked", true);
+                arrayIdProduct.push($(this).val());
+            } else {
+                $(this).prop("checked", false);
+                arrayIdProduct = page.commands.deleteArrayId($(this).val());
+            }
+            page.commands.showAction();
+            let pageSize = page.elements.pageSize.val()
+            if(arrayIdProduct.length == pageSize){
+                page.elements.checkAll.prop("checked", true);
+                page.elements.selectAction.prop("checked", true);
+            } else {
+                page.elements.checkAll.prop("checked", false);
+                page.elements.selectAction.prop("checked", false);
+            }
+        })
+    }
+
+    page.commands.deleteArrayId = (item) =>{
+        if(arrayIdProduct.length <= 0){
+            return [];
+        } else {
+            for(let i=0; i < arrayIdProduct.length; i++){
+                if(arrayIdProduct[i] === item ){
+                    arrayIdProduct.splice(i,1);
+                }
+            }
+            return arrayIdProduct;
+        }
+    }
+
+    page.commands.showAction = () => {
+        page.elements.numberSelectProductList.empty();
+        page.elements.statusChangeForNumberProductList.empty();
+        page.elements.statusChangeForNumberToUnavailable.empty();
+        page.elements.statusChangeForNumberDelete.empty();
+
+        if(arrayIdProduct.length > 0){
+            page.elements.theadList.removeClass("show").addClass("hide");
+            page.elements.numberSelectProductList.append(`<span>Đã chọn ${arrayIdProduct.length} sản phẩm trên trang này</span>`)
+            page.elements.statusChangeForNumberProductList.append(`<span style="font-size: medium">Thao tác này sẽ cập nhật trạng thái giao dịch cho ${arrayIdProduct.length} sản phẩm bạn đã chọn.</span>`);
+            page.elements.statusChangeForNumberToUnavailable.append(`<span style="font-size: medium">Thao tác này sẽ ngừng giao dịch ${arrayIdProduct.length} sản phẩm bạn đã chọn.</span>`);
+            page.elements.statusChangeForNumberDelete.append(`<span style="font-size: medium">Thao tác này sẽ xóa ${arrayIdProduct.length} sản phẩm bạn đã chọn. Thao tác này không thể khôi phục.</span>`);
+            page.elements.selectActionThead.removeClass("hide").addClass("show");
+        } else {
+            page.elements.theadList.removeClass("hide").addClass("show");
+            page.elements.selectActionThead.removeClass("show").addClass("hide");
+        }
+    }
+
+    page.elements.selectAction.on("change", function () {
+        page.elements.checkAll.prop("checked", false);
+        arrayIdProduct = [];
+        if(this.checked){
+            $("#tbProduct > tbody input").each(function (){
+                $(this).prop("checked", true);
+                arrayIdProduct.push($(this).val());
+            })
+        } else {
+            $("#tbProduct > tbody input").each(function (){
+                $(this).prop("checked", false);
+            })
+        }
+        page.commands.showAction();
+    })
+
+    page.elements.btnAvailable.on("click", () => {
+        page.elements.modalAvailable.modal("show");
+    })
+    page.elements.btnUnavailable.on("click", () =>{
+        page.elements.modalUnavailable.modal("show");
+    })
+    page.elements.btnDelete.on("click", () => {
+        page.elements.modalDelete.modal("show");
+    })
+    page.elements.btnCheckInventory.on("click", () => {
+        page.commands.getAllCheckInventoryProduct();
+    })
+
+    page.commands.updateStatusToAvailable = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "PUT",
+            url: page.urls.updateStatusAvailable,
+            data: JSON.stringify(arrayIdProduct)
+        })
+            .done(() => {
+                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED);
+                page.elements.modalAvailable.modal("hide");
+                page.commands.getAllProducts();
+                page.commands.resetInputCheckBox();
+            })
+            .fail((jqXHR) => {
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_403)
+            })
+    }
+
+    page.commands.updateStatusToUnavailable = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "PUT",
+            url: page.urls.updateStatusUnavailable,
+            data: JSON.stringify(arrayIdProduct)
+        })
+            .done(() => {
+                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED);
+                page.elements.modalUnavailable.modal("hide");
+                page.commands.getAllProducts();
+                page.commands.resetInputCheckBox();
+            })
+            .fail((jqXHR) => {
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_403)
+            })
+    }
+
+    page.commands.deleteProductSelect = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "DELETE",
+            url: page.urls.deleteProduct,
+            data: JSON.stringify(arrayIdProduct)
+        })
+            .done(() => {
+                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_DELETE);
+                page.elements.modalDelete.modal("hide");
+                page.commands.getAllProducts();
+                page.commands.resetInputCheckBox();
+            })
+            .fail((jqXHR) => {
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_403)
+            })
+    }
+
+    page.commands.getAllCheckInventoryProduct = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "POST",
+            url: page.urls.getAllCheckInventory,
+            data: JSON.stringify(arrayIdProduct)
+        })
+            .done((data) => {
+                page.elements.tbinventoryProduct.empty();
+                data.map(item => {
+                    page.elements.tbinventoryProduct.append(App.renderRowProductInventory(item));
+                });
+                page.elements.modalCheckInventory.modal("show");
+            })
+            .fail((jqXHR) => {
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404);
+            })
+    }
+
+    page.elements.btnAvailableSave.on("click", () => {
+        page.commands.updateStatusToAvailable();
+    })
+    page.elements.btnUnavailableSave.on("click", () =>{
+        page.commands.updateStatusToUnavailable();
+    })
+    page.elements.btnSubmitDelete.on("click", () => {
+        page.commands.deleteProductSelect();
+    })
+
+    page.commands.resetInputCheckBox = () =>{
+        $("#tbProduct input").each(function (){
+            $(this).prop("checked", false);
+        })
+        arrayIdProduct = [];
+        page.commands.showAction();
+    }
+
+    page.elements.btnTitleSort.on("click", () => {
+        sortPage.type==="des" ?
+            sortPage = {"type": "asc","value": "title"} :
+            sortPage = {"type": "des","value": "title"};
+        page.commands.getAllProducts();
+    })
+    page.elements.btnCreatAtSort.on("click", () => {
+        sortPage.type==="des" ?
+            sortPage = {"type": "asc","value": "createdAt"} :
+            sortPage = {"type": "des","value": "createdAt"};
+        page.commands.getAllProducts();
+    })
+    page.elements.btnUpdateAtSort.on("click", () => {
+        sortPage.type==="des" ?
+            sortPage = {"type": "asc","value": "createdAt"} :
+            sortPage = {"type": "des","value": "createdAt"};
+        page.commands.getAllProducts();
+    })
+
+    $('#btnImportFile').click(function () {
+        let data = new FormData();
+        let file = $('#formFile')[0].files[0];
+        data.append('file',file);
+        $.ajax({
+            url: 'http://localhost:8080/api/upload',
+            processData: false,
+            contentType: false,
+            data: data,
+            type: 'POST'
+        }).done(function(result) {
+            $("#modalImportFile").modal("hide");
+            $("#frmFile")[0].reset();
+            page.commands.getAllProducts();
+            App.IziToast.showSuccessAlert("Tải file lên thành công!")
+        }).fail((jqXHR) => {
+            App.IziToast.showErrorAlert("Tải file lên không thành công!")
+        })
+    });
+
+    page.loadData = () => {
+        page.commands.getAllProducts();
+        page.commands.getAllCategory();
+        page.commands.getAllBrand();
+    }
+
+    $(() => {
+        page.loadData()
+
+    })
+</script>
+</body>
+
+</html>

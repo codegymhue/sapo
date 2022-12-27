@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="vi-VN" class="sapo-menu-expand sapo-menu-toggle-active" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="/layout/header :: header"/>
+    <title>Chi tiết nhà cung cấp</title>
+</head>
+
+<body>
+    <th:block th:replace="/layout/menu :: menu" />
+    <div class="col-right" th:object="${suppliers}">
+        <div class="col-right_content">
+            <header class="ui-title-bar-container">
+                <div class="ui-title-bar">
+                    <div class="ui-title-bar__navigation w-50 left">
+                        <div class="ui-breadcrumbs">
+                            <a href="/admin/suppliers" id="link-index-shipper">
+                                <svg class="next-icon next-icon--size-20 next-icon--no-nudge">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#chevron-left-thinner"/>
+                                </svg>
+                                <span class="ui-breadcrumb__item" style="position: relative; top: 7px;">Danh sách nhà cung cấp</span>
+                            </a>
+                            <h1 class="text-overflow-hiden text-dark mt-3" th:title="*{name}" th:text="*{name}"></h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="detail-supplier-container container mt-0">
+                <div class="page-info page-info-order-detail w100">
+                    <div class="page-info-title">
+                        <span>Thông tin cá nhân</span>
+                        <span th:class="*{supplierStatus.value != 'Đang giao dịch'} ? 'badge sapo-badge badge--flamingo position-absolute' : 'badge sapo-badge badge--sushi position-absolute'" style="left: calc(100%/3); font-size: 12px;" th:text="*{supplierStatus.value}"></span>
+                        <div class="order-sources">
+                            <a href="#" data-toggle="dropdown" aria-expanded="false" style="color:#212b35">
+                                Thao tác khác
+                                <i class="fa fa-caret-down ml-2" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu newscroll" style="font-size:13px">
+                                <li>
+                                    <a th:href="@{'/admin/suppliers/' + *{id} + '/histories'}">Cập nhật thông
+                                        tin</a>
+                                </li>
+                                <li>
+                                    <a data-bs-toggle="modal" data-bs-target="#supplier-delete-modal">Xoá nhà cung
+                                        cấp</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="page-info-body" id="supplier-info">
+                        <div class="page-info-body--sub flex pb-0">
+                            <div class="col-4 p-0">
+                                <div class="line-info flex">
+                                    <label>
+                                        Mã
+                                        <span class="right">:</span>
+                                    </label>
+                                    <div class="content" th:title="*{supplierCode}" th:text="*{supplierCode}"></div>
+                                </div>
+                                <div class="line-info flex">
+                                    <label>Số điện thoại
+                                        <span class="right">:</span>
+                                    </label>
+                                    <div class="content text-overflow-hiden div-pd-r-10" th:title="*{phone}"
+                                        th:text="*{phone}"></div>
+                                </div>
+                            </div>
+                            <div class="col-4 p-0">
+                                <div class="line-info flex">
+                                    <label>
+                                        Mô tả
+                                        <span class="right">:</span>
+                                    </label>
+                                    <div class="content text-overflow-hiden div-pd-r-10" th:title="*{description}"
+                                        th:text="*{description}"></div>
+                                </div>
+                                <div class="line-info flex">
+                                    <label>
+                                        Email
+                                        <span class="right">:</span>
+                                    </label>
+                                    <div class="content text-overflow-hiden div-pd-r-10" th:title="*{email}"
+                                        th:text="*{email}"></div>
+                                </div>
+                            </div>
+                            <div class="col-4 p-0">
+                                <div class="line-info flex">
+                                    <label>
+                                        Người phụ trách
+                                        <span class="right">:</span>
+                                    </label>
+                                    <div class="content text-overflow-hiden div-pd-r-10">
+                                        <span th:title="*{employeeResult.name}" th:text="*{employeeResult.name}"></span>
+                                    </div>
+                                </div>
+                                <div class="line-info flex">
+                                    <label>
+                                        Hình thức thanh toán
+                                        <span class="right">:</span>
+                                    </label>
+                                    <div class="content text-overflow-hiden div-pd-r-10">
+                                        <span th:title="*{paymentMethodResult.title}"
+                                            th:text="*{paymentMethodResult.title}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-info page-info-order-detail w100">
+                    <div class="page-info-title">
+                        <span>Thông tin địa chỉ</span>
+                    </div>
+                    <div class="page-info-body">
+                        <div class="page-info-body--sub flex pb-0">
+                            <div class="col-4 p-0">
+                                <div class="line-info flex">
+                                    <label>
+                                        Tỉnh thành phố
+                                        <span class="right">:</span>
+                                    </label>
+                                    <div class="content" th:title="*{locationRegionResult.provinceName}"
+                                        th:text="*{locationRegionResult.provinceName}"></div>
+                                </div>
+                            </div>
+                            <div class="col-4 p-0">
+                                <div class="line-info flex">
+                                    <label>
+                                        Quận huyện
+                                        <span class="right">:</span>
+                                    </label>
+                                    <div class="content text-overflow-hiden div-pd-r-10"
+                                        th:title="*{locationRegionResult.districtName}"
+                                        th:text="*{locationRegionResult.districtName}"></div>
+                                </div>
+                            </div>
+                            <div class="col-4 p-0">
+                                <div class="line-info flex">
+                                    <label>
+                                        Phường xã
+                                        <span class="right">:</span>
+                                    </label>
+                                    <div class="content text-overflow-hiden div-pd-r-10">
+                                        <span th:title="*{locationRegionResult.wardName}"
+                                            th:text="*{locationRegionResult.wardName}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <th:block th:replace="/admin/suppliers/modals/supplier_modal_delete"/>
+    </div>
+</body>
+
+<th:block th:replace="/layout/script :: script" />
+<script src="/assets/admin/js/suppliers/supplier_delete.js" type="text/javascript"></script>
+
+</html>

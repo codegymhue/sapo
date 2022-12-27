@@ -6,8 +6,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
-@Getter
-@Setter
+
 @Entity
 @Getter
 @Setter

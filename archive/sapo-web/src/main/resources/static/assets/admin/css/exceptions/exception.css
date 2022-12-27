@@ -1,0 +1,42 @@
+@charset "utf-8";
+
+body {
+    font-family: "Segoe UI", "sans-serif";
+}
+
+.exception-background {
+    background: url("/static/assets/admin/images/404-background-15042020.jpg") no-repeat fixed center;
+    background-size: 100%;
+}
+
+.exception-prevent-select {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.exception-title {
+    color: #0089ff;
+    text-align: center;
+    margin-top: 60px;
+    font-size: 35px;
+    font-weight: lighter;
+}
+
+.exception-alert {
+    color: #545454;
+    text-align: center;
+    margin-top: 550px;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.exception-redirect {
+    color: #0089ff;
+    text-decoration: none;
+}
+
+.exception-redirect:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+}
