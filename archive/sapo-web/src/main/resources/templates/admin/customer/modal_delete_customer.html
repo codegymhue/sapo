@@ -1,0 +1,27 @@
+<th:block th:fragment="modal_delete_customer">
+  <div class="modal fade" id="modal_delete_customer" tabindex="-1" aria-labelledby="exampleModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Xoá khách hàng</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="showCustomerDelete">
+              <span>Bạn có chắc chắn muốn xóa khách hàng nay không ? Thao tác này không thể khôi phục.</span>
+        </div>
+        <div class=" cGcePZ mt-4 my-4 me-4 d-flex justify-content-end">
+          <div class="me-2">
+            <button type="button" data-bs-dismiss="modal"
+                    class="sc-jqUVSM TJspa btn-secondary btn-sm"><span
+                    class="sc-papXJ jcEYKF">Thoát</span></button>
+          </div>
+          <div>
+            <button class=" btn-outline-danger sm" id="btn_deleteCustomer">Xoá</button>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</th:block>

@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 @RestController
-@RequestMapping("/api/customers")
+@RequestMapping("/api")
 public class CustomerAPI {
     @Autowired
     private CustomerService customerService;
