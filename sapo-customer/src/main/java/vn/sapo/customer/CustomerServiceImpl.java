@@ -9,6 +9,7 @@ import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.entities.customer.Customer;
+import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.exceptions.NotFoundException;
 
 import java.math.BigDecimal;
@@ -20,11 +21,6 @@ import java.util.stream.Collectors;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-//    @Autowired
-//    OrderItemService orderItemService;
-//
-//    @Autowired
-//    PaymentSaleOrderService paymentSaleOrderService;
 
     @Autowired
     private CustomerMapper customerMapper;
@@ -34,8 +30,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private AddressService addressService;
-//    @Autowired
-//    SaleOrderService saleOrderService;
 
 
     @Override
@@ -45,12 +39,8 @@ public class CustomerServiceImpl implements CustomerService {
                 .orElseThrow(() -> new NotFoundException("Cutomer not found"));
         Integer customerId = customer.getId();
         CustomerResult dto = customerMapper.toDTO(customer);
-        BigDecimal spendTotal = getSpendTotalByCustomerId(customerId);
-
-        BigDecimal paidTotal = getPaidTotalByCustomerId(customerId);
-
-        dto.setSpendTotal(spendTotal);
-        dto.setDebtTotal(spendTotal.subtract(paidTotal));
+//        dto.setSpendTotal(spendTotal);
+//        dto.setDebtTotal(spendTotal.subtract(paidTotal));
 
 //        Integer quantityProductOrder = saleOrderService.getQuantityProductOrder(customerResult.getId());
 //        if (quantityProductOrder == null) {
@@ -76,31 +66,10 @@ public class CustomerServiceImpl implements CustomerService {
         List<CustomerResult> customerResults = new ArrayList<>();
         customerResults = customerRepository.findAll()
                 .stream()
-                .map(customer -> {
-                    CustomerResult dto = customerMapper.toDTO(customer);
-                    Integer customerId = customer.getId();
-                    BigDecimal spendTotal = getSpendTotalByCustomerId(customerId);
-                    BigDecimal paidTotal = getPaidTotalByCustomerId(customerId);//paymentSaleOrderService.getPaidTotalByCustomerId(customer.getId());
-                    dto.setSpendTotal(spendTotal);
-                    dto.setDebtTotal(spendTotal.subtract(paidTotal));
-                    return dto;
-                }).collect(Collectors.toList());
+                .map(customerMapper::toDTO).collect(Collectors.toList());
         return customerResults;
     }
 
-    public BigDecimal getSpendTotalByCustomerId(Integer customerId) {
-        BigDecimal spendTotal = null;// saleOrderService.getSpendTotalByCustomerId(customer.getId());
-        if (spendTotal == null)
-            spendTotal = BigDecimal.valueOf(0);
-        return spendTotal;
-    }
-
-    public BigDecimal getPaidTotalByCustomerId(Integer customerId) {
-        BigDecimal paidTotal = null;//paymentSaleOrderService.getPaidTotalByCustomerId(customer.getId());
-        if (paidTotal == null)
-            paidTotal = BigDecimal.valueOf(0);
-        return paidTotal;
-    }
 
     @Override
     @Transactional
@@ -151,7 +120,8 @@ public class CustomerServiceImpl implements CustomerService {
         customerMapper.transferFields(updateCustomerParam, customer);
         return customerMapper.toDTO(customer);
     }
-//
+
+    //
 //    @Override
 //    @Transactional(readOnly = true)
 //    public List<SaleOrderResult> findHistoryCustomerOrder(Integer id) {
@@ -189,5 +159,12 @@ public class CustomerServiceImpl implements CustomerService {
 //        }
 //
 //    }
-
+    @Override
+    @Transactional
+    public void changeStatusToAvailable(List<Integer> customerIds, boolean status) {
+        for (Integer customerId : customerIds) {
+            Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new NotFoundException("Product not found"));
+            customer.setStatus(status ? CustomerStatus.AVAILABLE : CustomerStatus.UNAVAILABLE);
+        }
+    }
 }
