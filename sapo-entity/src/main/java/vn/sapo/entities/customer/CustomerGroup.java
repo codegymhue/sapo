@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import vn.sapo.entities.BaseEntity;
 
 import javax.persistence.*;
 
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name = "customer_group")
 @Accessors(chain = true)
-public class CustomerGroup {
+public class CustomerGroup extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

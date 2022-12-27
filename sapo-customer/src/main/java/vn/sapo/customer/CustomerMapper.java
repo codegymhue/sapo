@@ -26,8 +26,13 @@ public class CustomerMapper implements InitializingBean {
     public CustomerResult toDTO(Customer customer) {
         System.out.println(customer);
         return modelMapper.map(customer, CustomerResult.class)
+                .setCode(customer.getCode())
                 .setName(customer.getFullName())
-                .setPhoneNumber(customer.getPhoneNumber());
+                .setPhoneNumber(customer.getPhoneNumber())
+                .setGroup(customer.getGroup());
+
+
+
     }
 
 //    public CustomerOrderResult toOrderDTO(Customer customer) {

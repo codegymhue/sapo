@@ -37,6 +37,11 @@ public class CustomerController {
         return "/admin/customer/customer_group";
     }
 
+    @GetMapping("/customer_groups/create")
+    public String showCustomerGroupCreatePage() {
+        return "/admin/customer/model_create_cus_group";
+    }
+
     @GetMapping("customers/create")
     public String showCustomerCreatePage() {
         return "/admin/customer/create_customer";

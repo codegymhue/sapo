@@ -374,7 +374,27 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" >
+<!--                <table class="table table-hover table-bordered" id="tbInventoryProduct" style="font-size: small">-->
+<!--                    <thead style="background-color: #f4f6f8">-->
+<!--                    <tr>-->
+<!--                        <th scope="col " rowspan="2" class="align-middle">Mã SKU</th>-->
+<!--                        <th scope="col" rowspan="2" class="align-middle ">Tên sản phẩm</th>-->
+<!--                        <th scope="col">Chính sách giá</th>-->
+<!--                        <th scope="col" colspan="5" class="text-center">Tổng</th>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <th scope="col">Giá bán lẻ</th>-->
+<!--                        <th scope="col">Tồn kho</th>-->
+<!--                        <th scope="col">Có thể bán</th>-->
+<!--                        <th scope="col">Đang giao dịch</th>-->
+<!--                        <th scope="col">Hàng đang về</th>-->
+<!--                        <th scope="col">Hàng đang giao</th>-->
+<!--                    </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody>-->
 
+<!--                    </tbody>-->
+<!--                </table>-->
             </div>
             <div class="modal-footer d-flex align-items-center">
                 <button class="btn btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
@@ -430,7 +450,6 @@
     page.elements.btnAvailableSave = $("#btnAvailableSave");
     page.elements.btnUnavailableSave = $("#btnUnavailableSave");
     page.elements.btnSubmitDelete = $("#btnSubmitDelete");
-    // page.elements.btnCheckInventory = $("#btnCheckInventory");
 
 
     page.elements.btnTitleSort = $("#btnTitleSort");
@@ -469,50 +488,50 @@
         let pageSize =Number(page.elements.pageSize.val());
 
         let search = page.elements.search.val().trim();
-        let groupCustomerId = page.dialogs.elements.groupCustomer.val();
+        let groupCustomer = page.dialogs.elements.groupCustomer.val();
         let status = page.dialogs.elements.status.val();
 
 
        // let debtsTotal = Number(page.dialogs.elements.debtsTotal.toString());
         //let spendTotal = Number(page.dialogs.elements.spendTotal.toString());
 
-        page.commands.getAllCustomersItemOnPageNo(pageNo, pageSize, search, groupCustomerId, status);
+        page.commands.getAllCustomersItemOnPageNo(pageNo, pageSize, search, groupCustomer, status);
     }
 
-    page.commands.getAllCustomersItemOnPageNo = (pageNo, pageSize, search, groupCustomerId, status) => {
-        // let arrCustomer = [];
-        // for(let i = 0; i < 8; i++){
-        //     arrCustomer.push({
-        //         "id" : i,
-        //         "code": i,
-        //         "name": i,
-        //         "phoneNumber": i,
-        //         "groupCustomerId": "Vip",
-        //         "debtsTotal": 12032940,
-        //         "spendTotal": 25123124,
-        //         "orderTotal": 2
-        //     });
-        // }
-        //
-        // arrCustomer.map(item => {
-        //     page.elements.tbCustomer.append(App.renderRowCustomer(item));
-        // });
-
-
-        $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "GET",
-            url: page.urls.getAllCustomers,
-        }).done((data) => {
-            data.map(item => {
-                page.elements.tbCustomer.append(App.renderRowCustomer(item));
+    page.commands.getAllCustomersItemOnPageNo = (pageNo, pageSize, search, groupCustomer, status) => {
+        let arrCustomer = [];
+        for(let i = 0; i < 14; i++){
+            arrCustomer.push({
+                "id" : i,
+                "code": i,
+                "name": "fake ",
+                "phoneNumber": "0542578531",
+                "groupCustomer": "Vip",
+                "debtsTotal": 12032940,
+                "spendTotal": 25123124,
+                "quantityItemOrder": 2
             });
-        }).fail((jqXHR) => {
-            App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404)
-        })
+        }
+
+        arrCustomer.map(item => {
+            page.elements.tbCustomer.append(App.renderRowCustomer(item));
+        });
+
+
+        // $.ajax({
+        //     headers: {
+        //         "accept": "application/json",
+        //         "content-type": "application/json"
+        //     },
+        //     type: "GET",
+        //     url: page.urls.getAllCustomers,
+        // }).done((data) => {
+        //     data.map(item => {
+        //         page.elements.tbCustomer.append(App.renderRowCustomer(item));
+        //     });
+        // }).fail((jqXHR) => {
+        //     App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404)
+        // })
     }
     page.elements.checkAll.on("change", function (){
         page.elements.selectAction.prop("checked", true);
@@ -527,7 +546,7 @@
                 $(this).prop("checked", false);
             })
         }
-        //page.commands.showAction();
+
     })
 
 
@@ -537,7 +556,7 @@
     }
 
     $(() => {
-        // console.log("start");
+
         page.loadData()
 
     });
