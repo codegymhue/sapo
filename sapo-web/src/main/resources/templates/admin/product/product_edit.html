@@ -199,7 +199,7 @@
                                                                            aria-label="Without label"
                                                                            class="retailPriceUpdate form-control"
                                                                            style="width: 100%; text-align: right;"
-                                                                    th:value="${#numbers.formatDecimal(product.retailPrice, 0, 'COMMA', 0, 'POINT')}">
+                                                                           th:value="${#numbers.formatDecimal(product.retailPrice, 0, 0, 'POINT')}">
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <span style="font-weight: 500">Giá bán buôn</span>
@@ -212,7 +212,7 @@
                                                                            class="wholesalePriceUpdate form-control"
                                                                            value="0"
                                                                            style="width: 100%; text-align: right;"
-                                                                           th:value="${#numbers.formatDecimal(product.wholesalePrice, 0, 'COMMA', 0, 'POINT')}">
+                                                                           th:value="${#numbers.formatDecimal(product.wholesalePrice, 0, 0, 'POINT')}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -234,7 +234,7 @@
                                                                            class="importPriceUpdate form-control"
                                                                            value="0"
                                                                            style="width: 49%; text-align: right;"
-                                                                           th:value="${#numbers.formatDecimal(product.importPrice, 0, 'COMMA', 0, 'POINT')}">
+                                                                           th:value="${#numbers.formatDecimal(product.importPrice, 0, 0, 'POINT')}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -858,12 +858,11 @@
     page.dialogs.elements.showImgSmall = $("#showImgSmall");
     page.dialogs.elements.progress = $('.progress');
     page.dialogs.elements.progressBar = $(".progress-bar");
-
     //Sửa sản phẩm
     page.commands.updateProduct = () => {
-        let taxs = [];
         let taxIn = new ProductTaxParam();
         let taxOut = new ProductTaxParam();
+        let taxs = [];
         taxIn.taxId = $("#taxProType").data("id");
         taxIn.taxType = "TAX_PURCHASE";
         taxOut.taxId = $("#taxProTypeOut").data("id");
@@ -875,8 +874,8 @@
         product.enableSell = page.dialogs.elements.enableSell.is(":checked") ? true : false;
         product.description = page.dialogs.elements.descriptionUpdate.val();
         product.unit = page.dialogs.elements.unitUpdate.val();
-        product.sku = page.dialogs.elements.skuUpdate.val();
-        product.barCode = page.dialogs.elements.barCodeUpdate.val();
+        product.sku = page.dialogs.elements.skuUpdate.val().trim();
+        product.barCode = page.dialogs.elements.barCodeUpdate.val().trim();
         product.mass = page.dialogs.elements.massUpdate.val();
         product.retailPrice = page.dialogs.elements.retailPriceUpdate.val();
         product.importPrice = page.dialogs.elements.importPriceUpdate.val();
@@ -888,7 +887,6 @@
         product.taxList = taxs;
         product.mediaList = imgs;
 
-        console.log(product)
         $.ajax({
             "headers": {
                 "accept": "application/json",
@@ -907,7 +905,7 @@
                 }, 1000)
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400);
+                App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
     }
 

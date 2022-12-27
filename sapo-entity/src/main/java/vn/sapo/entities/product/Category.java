@@ -1,14 +1,17 @@
 package vn.sapo.entities.product;
 
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
+@Data
 @Entity
 @NoArgsConstructor
 @Accessors(chain = true)
 @Table(name = "category")
+
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

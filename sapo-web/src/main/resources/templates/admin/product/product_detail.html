@@ -6,6 +6,13 @@
     <link rel="stylesheet" href="/assets/admin/css/product/product_detail.css"/>
     <th:block th:replace="/layout/header :: header"/>
     <title>Chi tiết sản phẩm</title>
+    <style>
+        .image-item:hover {
+            width: 100%;
+            transition: transform 1s;
+            transform: scale(2);
+        }
+    </style>
 </head>
 
 <body>
@@ -229,13 +236,18 @@
                                             <div class="MuiBox-root jss4699"
                                                  style="width: 100%; display: flex; justify-content: center;">
                                                 <div class="MuiGrid-container">
-                                                    <th:block th:each="media : *{mediaList}">
+                                                    <th:block th:each="media : ${product.mediaList}">
                                                         <div class="MuiGrid-item">
                                                             <img class="image-item"
                                                                  style="width: 90px; height: 90px; margin: 5px"
                                                                  th:src="${media.fileUrl}">
                                                         </div>
                                                     </th:block>
+                                                    <div class="MuiGrid-item" th:if="${product.mediaList.size() == 0}">
+                                                        <img class="image-item"
+                                                             style="width: 90px; height: 90px; margin: 5px"
+                                                             th:src="@{/assets/admin/images/no-image.jpg}">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
