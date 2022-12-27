@@ -13,7 +13,7 @@ public interface CustomerService {
 
     List<CustomerResult> findAll();
 
-    @Transactional(readOnly = true)
+    //@Transactional(readOnly = true)
 //    List<CustomerResult> findCustomerByStatus();
 
     CustomerResult create(CreateCustomerParam customerCreate);
