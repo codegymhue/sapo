@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CustomerGroupRepository  extends JpaRepository<CustomerGroup, Integer> {
-
     @Query("select new vn.sapo.customerGroup.dto.CustomerGroupResult(g.id,g.cusGrpCode," +
             "g.title," +
             "g.createdAt, count(c.groupId))" +
@@ -19,4 +18,3 @@ public interface CustomerGroupRepository  extends JpaRepository<CustomerGroup, I
             "group by g.id")
     List<CustomerGroupResult> sortByGroup();
 }
-

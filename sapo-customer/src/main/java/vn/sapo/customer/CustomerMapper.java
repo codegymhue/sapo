@@ -62,17 +62,18 @@ public class CustomerMapper implements InitializingBean {
 //    }
 //
 
-    public Customer toCustomer(CreateCustomerParam customerCreate) {
-       return new Customer()
-               .setCode(customerCreate.getCode())
-               .setFullName(customerCreate.getFullName())
-               .setPhoneNumber(customerCreate.getPhone())
-               .setGroup(customerCreate.getGroup())
-               .setGender(customerCreate.getGender())
-               .setEmail(customerCreate.getEmail())
-                .setBirthday(customerCreate.getBirthday())
-                .setEmployeeId(customerCreate.getEmployeeId());
-    }
+//    public Customer toCustomer(CreateCustomerParam customerCreate) {
+//        return new Customer()
+//                .setName(customerCreate.getName())
+//                .setPhone(customerCreate.getPhone())
+//                .setCustomerGroup(customerCreate.getCustomerGroup())
+//                .setCustomerGender(customerCreate.getCustomerGender())
+//                .setEmail(customerCreate.getEmail())
+//                .setBirthday(customerCreate.getBirthday())
+//                .setCustomerGender(customerCreate.getCustomerGender())
+//                .setCustomerStatus(customerCreate.getCustomerStatus())
+//                .setEmployeeId(customerCreate.getEmployeeId());
+//    }
 //
 //    public Customer toCustomer(UpdateCustomerParam updateCustomerParam, Customer customer) {
 //        return customer
