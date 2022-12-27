@@ -17,6 +17,10 @@
     <link rel="stylesheet" href="/assets/admin/css/product/selectMenu.css">
     <link rel="stylesheet" href="/assets/admin/css/w3school/w3.css">
     <style>
+        body{
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        }
+
         .error {
             color: #991b1b !important;
         }
@@ -81,7 +85,7 @@
                                         <div class="MuiBox-root jss27085 jss26699 borderBottom">
                                             <div class="MuiBox-root jss29133">
                                                 <h6 class="MuiTypography-root MuiTypography-h6"
-                                                    style="padding: 16px 24px;">Thông tin chung
+                                                    style="padding: 16px 24px;font-size: 16px;">Thông tin chung
                                                 </h6>
                                             </div>
                                         </div>
@@ -92,7 +96,7 @@
                                                     <div class="MuiFormControl-root MuiTextField-root jss27091 MuiFormControl-fullWidth">
                                                         <div class="row">
                                                             <div class="col">
-                                                                <span style="font-weight: 500">Tên sản phẩm <span style="color: red">*</span></span>
+                                                                <span>Tên sản phẩm <span style="color: red">*</span></span>
                                                                 <input id="titleCreate"
                                                                        style="width: 100%"
                                                                        name="titleCreate"
@@ -108,7 +112,7 @@
                                                     <div class="MuiFormControl-root MuiTextField-root jss27091 MuiFormControl-fullWidth">
                                                         <div class="row">
                                                             <div class="col-6">
-                                                                <span style="font-weight: 500">Mã sản phẩm/SKU</span>
+                                                                <span>Mã sản phẩm/SKU</span>
                                                                 <input aria-invalid="false"
                                                                        placeholder="Ví dụ: BANHCOSY"
                                                                        type="text"
@@ -117,7 +121,7 @@
                                                                        class="form-control skuCreate">
                                                             </div>
                                                             <div class="col-6">
-                                                                <span style="font-weight: 500">Khối lượng (g)</span>
+                                                                <span>Khối lượng (g)</span>
                                                                 <input aria-invalid="false"
                                                                        value="0"
                                                                        name="massCreate"
@@ -135,7 +139,7 @@
                                                     <div class="MuiFormControl-root MuiTextField-root jss27091 MuiFormControl-fullWidth">
                                                         <div class="row">
                                                             <div class="col-6">
-                                                                <span style="font-weight: 500">Mã vạch/Barcode</span>
+                                                                <span>Mã vạch/Barcode</span>
                                                                 <input aria-invalid="false"
                                                                        id="barCodeCreate 9744ef65-28ce-426a-a13d-040b33005036"
                                                                        name="barCodeCreate"
@@ -145,7 +149,7 @@
                                                                        class="barCodeCreate form-control">
                                                             </div>
                                                             <div class="col-6">
-                                                                <span style="font-weight: 500">Đơn vị tính</span>
+                                                                <span>Đơn vị tính</span>
                                                                 <input aria-invalid="false"
                                                                        placeholder="chiếc, hộp, lon"
                                                                        id="4528f21c-afcc-4ef9-a5e2-d3189a8c66a0"
@@ -164,7 +168,7 @@
                                     <div class="MuiPaper-root jss26552 MuiPaper-elevation1 MuiPaper-rounded">
                                         <div class="MuiBox-root jss26764 jss26699 borderBottom">
                                             <div class="MuiBox-root jss29282 jss26559">
-                                                <h6 class="MuiTypography-root MuiTypography-h6">Giá sản phẩm</h6>
+                                                <h6 class="MuiTypography-root MuiTypography-h6"style="font-size: 16px;">Giá sản phẩm</h6>
                                             </div>
                                         </div>
                                         <div class="MuiBox-root jss26767 product-content-infor">
@@ -175,7 +179,7 @@
                                                          style="margin-bottom: 20px">
                                                         <div class="row">
                                                             <div class="col-6">
-                                                                <span style="font-weight: 500">Giá bán lẻ</span>
+                                                                <span>Giá bán lẻ</span>
                                                                 <input aria-invalid="false"
                                                                        autocomplete="off"
                                                                        id="retailPriceCreate 731b40ed-6bd4-451f-979e-e4957c2c84a0"
@@ -187,7 +191,7 @@
                                                                        style="width: 100%; text-align: right;">
                                                             </div>
                                                             <div class="col-6">
-                                                                <span style="font-weight: 500">Giá bán buôn</span>
+                                                                <span>Giá bán buôn</span>
                                                                 <input aria-invalid="false"
                                                                        autocomplete="off"
                                                                        id="wholesalePriceCreate 50a30b49-8f95-4c1c-b0ec-1683c8f22fb1"
@@ -208,7 +212,7 @@
                                                     <div class="MuiFormControl-root MuiTextField-root jss27091 MuiFormControl-fullWidth">
                                                         <div class="row">
                                                             <div class="col">
-                                                                <span style="font-weight: 500">Giá nhập</span>
+                                                                <span>Giá nhập</span>
                                                                 <input aria-invalid="false"
                                                                        autocomplete="off"
                                                                        id="importPriceCreate 1901e214-820f-4ed4-b224-4509d7f7ff3c"
@@ -217,7 +221,7 @@
                                                                        aria-label="Without label"
                                                                        class="importPriceCreate form-control"
                                                                        value="0"
-                                                                       style="width: 100%; text-align: right;">
+                                                                       style="width: 49%; text-align: right;">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -299,13 +303,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-4">
-                                                    <span style="font-weight: 500">Tồn kho ban đầu</span>
+                                                    <span>Tồn kho ban đầu</span>
                                                     <input id="initialInventory" name="initialInventory"
                                                            class="form-control mt-4" type="number"
                                                            style="text-align: right" min="0" value="0"/>
                                                 </div>
                                                 <div class="col-4">
-                                                    <span style="font-weight: 500">Giá vốn</span>
+                                                    <span>Giá vốn</span>
                                                     <input id="costPrice" name="costPrice" class="form-control mt-4"
                                                            type="number"
                                                            style="text-align: right" min="0" value="0"/>
@@ -381,7 +385,7 @@
                                                                 display: flex;
                                                                 justify-content: space-between;
                                                                 align-items: center; ">
-                                                        <span id="brandProType">Chọn loại nhãn hiệu</span>
+                                                        <span id="brandProType">Chọn nhãn hiệu</span>
                                                     </div>
                                                     <ul class="dropdown-menu w-100 brandIdCreate showAllBrand">
                                                         <div style="border-bottom: 1px solid #e3e3e3;">
