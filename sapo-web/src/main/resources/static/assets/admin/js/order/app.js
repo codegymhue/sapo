@@ -150,7 +150,7 @@ class ItemResult {
 }
 
 class Product {
-    constructor(id, title, sku, categoryId, retailPrice, quantity, mass, importPrice) {
+    constructor(id, title, sku, categoryId, retailPrice, quantity, mass, importPrice,mediaList) {
         this.id = id;
         this.title = title;
         this.sku = sku;
@@ -159,8 +159,10 @@ class Product {
         this.importPrice = importPrice;
         this.categoryId = categoryId;
         this.mass = mass;
+        this.mediaList = mediaList;
     }
 }
+
 class App {
     static SweetAlert = class {
         static showSuccessAlert(t) {
