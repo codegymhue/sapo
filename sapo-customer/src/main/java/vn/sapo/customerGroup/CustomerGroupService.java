@@ -16,6 +16,8 @@ public interface CustomerGroupService {
 
     List<CustomerGroupResult> findAll();
 
+    List<CustomerGroupResult> sortByGroup();
+
     CustomerGroupResult findById(Integer id);
 
     void deleteById(Integer id);
