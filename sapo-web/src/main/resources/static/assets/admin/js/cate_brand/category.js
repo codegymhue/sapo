@@ -30,7 +30,6 @@ function showAllCategories(selectedCategory) {
                 let str = `<li id="${item.id}" data-id="${item.id}" onclick="updateNameCat(${item.id})" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
                 // options.insertAdjacentHTML("beforeend", li);
                 $(".showAllCategory #showAllCAt").append(str);
-
             });
 
         })

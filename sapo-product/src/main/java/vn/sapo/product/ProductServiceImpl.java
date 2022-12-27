@@ -16,6 +16,7 @@ import vn.sapo.category.CategoryRepository;
 import vn.sapo.category.dto.CategoryResult;
 import vn.sapo.convert.Characters;
 import vn.sapo.entities.product.*;
+import vn.sapo.entities.tax.TaxType;
 import vn.sapo.exceptions.NotFoundException;
 import vn.sapo.item.ItemMapper;
 import vn.sapo.item.ItemService;
@@ -89,7 +90,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     Characters characters;
-
 
     @Override
     @Transactional(readOnly = true)
@@ -197,6 +197,7 @@ public class ProductServiceImpl implements ProductService {
             mediaService.save(createProductParam.getMediaList(), product);
         }
         if (createProductParam.isEnableVariant()) {
+            System.out.println(createProductParam);
             itemService.create(itemMapper.toDTO(createProductParam, productId, 1));
         }
         return productMapper.toDTO(product);
@@ -205,17 +206,40 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public void update(UpdateProductParam updateProductParam) {
+
         Integer productId = updateProductParam.getId();
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new NotFoundException("Product not found"));
         product.setStatus(updateProductParam.isEnableSell() ? ProductStatus.AVAILABLE :
                 ProductStatus.UNAVAILABLE);
+
+        if(updateProductParam.getSku().equals("")){
+            updateProductParam.setSku(product.getSku());
+        }
+
+        if(!product.getSku().equals(updateProductParam.getSku())){
+            if (productRepository.findBySku(updateProductParam.getSku()).isPresent()) {
+                throw new NotFoundException("Mã SKU đã tồn tại");
+            }
+        }
+
+        if(!product.getBarCode().equals(updateProductParam.getBarCode())){
+            if (productRepository.findByBarCode(updateProductParam.getBarCode()).isPresent()) {
+                throw new NotFoundException("Mã BarCode đã tồn tại");
+            }
+        }
+
         productMapper.transferFields(updateProductParam, product);
         if (updateProductParam.isApplyTax()) {
             productTaxService.deleteAllByProductId(productId);
             productTaxService.createAll(updateProductParam.getTaxList(), product);
+        } else {
+            productTaxService.deleteAllByProductId(productId);
+            List<ProductTaxParam> productTaxParams = new ArrayList<>();
+            productTaxParams.add(0, new ProductTaxParam(1, TaxType.TAX_PURCHASE));
+            productTaxParams.add(1, new ProductTaxParam(1, TaxType.TAX_SALE));
+            productTaxService.createAll(productTaxParams, product);
         }
-
     }
 
 
