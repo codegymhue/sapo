@@ -49,6 +49,11 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     }
 
     @Override
+    public List<CustomerGroupResult> sortByGroup() {
+        return customerGroupRepository.sortByGroup();
+    }
+
+    @Override
     public CustomerGroupResult findById(Integer id) {
         CustomerGroup customerGroup = customerGroupRepository.findById(id).get();
         return customerGroupMapper.toDTO(customerGroup);

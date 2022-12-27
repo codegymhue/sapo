@@ -1,12 +1,16 @@
 package vn.sapo.customerGroup.dto;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.time.Instant;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Accessors(chain = true)
@@ -18,4 +22,7 @@ public class CustomerGroupResult {
     private String cusGrpCode;
 
     private Instant createdAt;
+
+    private Long countCus;
+
 }

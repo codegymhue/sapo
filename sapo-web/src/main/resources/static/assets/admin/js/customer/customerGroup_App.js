@@ -58,10 +58,11 @@ class CustomerGroup_App {
     }
 }
 class CustomerGroup{
-    constructor(id,title,cusGrpCode,createdAt) {
+    constructor(id,title,cusGrpCode,createdAt,countCus) {
         this.id = id;
         this.title = title;
         this.cusGrpCode = cusGrpCode;
         this.createdAt = createdAt;
+        this.countCus = countCus;
     }
 }
