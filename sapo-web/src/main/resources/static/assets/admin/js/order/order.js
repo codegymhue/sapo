@@ -604,9 +604,9 @@ function getEmployeeById(id) {
 
 function doCreateCustomer() {
     $('#btnCreateCustomer').on('click', () => {
-        customer.name = $('#nameCreate').val();
-        customer.customerCode = $('#codeCreate').val();
-        customer.phone = $('#phoneCreate').val();
+        customer.fullName = $('#nameCreate').val();
+        customer.code = $('#codeCreate').val();
+        customer.phoneNumber = $('#phoneCreate').val();
 
         customer.createShippingAddressParam = shippingAddress;
         shippingAddress.line1 = $("#addressCreate").val();
@@ -1248,6 +1248,28 @@ function showAllCategory() {
             console.log("Error");
         })
 }
+function showAllEmployee(){
+    return $.ajax({
+        headers: {
+            "accept": "application/json",
+            "content-type": "application/json"
+        },
+        type: "GET",
+        url: "http://localhost:8080/api/employees"
+    })
+        .done((data) => {
+            $("#employeeCreate").empty();
+
+            $.each(data, (i, item) => {
+                let str = `<option value="${item.id}">${item.fullName}</option>`;
+                $(".showAllEmployee").append(str);
+            });
+
+        })
+        .fail((jqXHR) => {
+            console.log("Error");
+        })
+}
 
 function doCreateProductShort() {
     product.id = 0;
@@ -1319,6 +1341,7 @@ $(() => {
     handleCloseListProducts();
     searchProduct();
     showAllCategory();
+    showAllEmployee();
 })
 
 
