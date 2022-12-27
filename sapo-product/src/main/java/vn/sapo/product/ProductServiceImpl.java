@@ -217,6 +217,10 @@ public class ProductServiceImpl implements ProductService {
             updateProductParam.setSku(product.getSku());
         }
 
+        if(updateProductParam.getBarCode().equals("")){
+            updateProductParam.setBarCode(product.getBarCode());
+        }
+
         if(!product.getSku().equals(updateProductParam.getSku())){
             if (productRepository.findBySku(updateProductParam.getSku()).isPresent()) {
                 throw new NotFoundException("Mã SKU đã tồn tại");
