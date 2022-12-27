@@ -7,17 +7,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.entities.product.Product;
 import vn.sapo.product.ProductRepository;
+import vn.sapo.product.ProductService;
+import vn.sapo.product.dto.CreateProductParam;
 
 
 @Service
 public class ExcelService {
     @Autowired
-    ProductRepository repository;
+    ProductService productService;
 
     public void save(MultipartFile file) {
         try {
-            List<Product> products = ExcelHelper.excelToProducts(file.getInputStream());
-            repository.saveAll(products);
+            List<CreateProductParam> products = ExcelHelper.excelToProducts(file.getInputStream());
+            for (CreateProductParam p : products) {
+                productService.create(p);
+            }
+
         } catch (IOException e) {
             throw new RuntimeException("fail to store excel data: " + e.getMessage());
         }
