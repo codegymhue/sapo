@@ -237,10 +237,7 @@ function showCustomerInfo(idCustomer) {
                         <div class="MuiBox-root jss3898 jss944">
                             <div class="MuiBox-root jss3899">
                                 <p class="MuiTypography-root jss941 MuiTypography-body2">Địa chỉ giao hàng</p>
-                                <button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary" 
-                                onclick="editCustomer()"
-                                 id="showEditModal"
-                                tabindex="0" type="button" style="margin: 0px 4px; height: 15px; min-width: unset;">
+                                <button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary" tabindex="0" type="button" style="margin: 0px 4px; height: 15px; min-width: unset;">
                                 <span class="MuiButton-label">Thay đổi</span>
                                 <span class="MuiTouchRipple-root"></span>
                                 </button>
@@ -310,7 +307,6 @@ function showCustomerInfo(idCustomer) {
                                 <button
                                     class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
                                     tabindex="0"
-                                    id="showEditModal"
                                     onclick="editCustomer()"
                                      type="button"
                                     style="margin: 0 4px; height: 15px; min-width: unset;"><span
@@ -378,7 +374,6 @@ function getAllItem() {
 }
 
 function showListProducts() {
-    // console.log("data: ", data);
     let renderProducts = (data) => {
         console.log("data: ", data);
         $(".searchProduct").removeClass('d-none');
@@ -391,7 +386,7 @@ function showListProducts() {
                     <div class="MuiBox-root jss3941 InfiniteScroll-MenuItem focus-key-event"
                     onclick="showProductInfo(${product.id})" data-id="${product.id}" tabindex="0">
                     <li class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root jss1259 MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button" tabindex="-1" role="menuitem" aria-disabled="false">
-                        <img class="jss1260" src="${product.mediaList[0].fileUrl}" alt="">
+                        <img class="jss1260" src="${product.fileUrl}" alt="">
                             <div class="MuiBox-root jss3946">
                                 <div class="MuiBox-root jss3947">
                                     <p class="MuiTypography-root MuiTypography-body1" style="white-space: break-spaces;">${product.title} - ${product.barCode} </p>
@@ -726,14 +721,13 @@ function editCustomer() {
     let id = $("#idCustomer").val();
     $('#idCustomerUpdate').val(customer.id);
     $("#nameUpdate").val(customer.name)
-    $('#phoneUpdate').val(customer.phoneNumber);
-    console.log(customer)
-    $('#addressUpdate').val(customer.addresses[0].line1);
-    $('#provinceUpdate').val(customer.addresses[0].provinceId);
-    getAllDistrictsByProvinceId(customer.addresses[0].provinceId).then(() => {
-        $("#districtUpdate").val(customer.addresses[0].districtId);
-        getAllWardsByDistrictId(customer.addresses[0].districtId).then(() => {
-            $("#wardUpdate").val(customer.addresses[0].wardId);
+    $('#phoneUpdate').val(customer.phone);
+    $('#addressUpdate').val(customer.locationRegionResult.address);
+    $('#provinceUpdate').val(customer.locationRegionResult.provinceId);
+    getAllDistrictsByProvinceId(customer.locationRegionResult.provinceId).then(() => {
+        $("#districtUpdate").val(customer.locationRegionResult.districtId);
+        getAllWardsByDistrictId(customer.locationRegionResult.districtId).then(() => {
+            $("#wardUpdate").val(customer.locationRegionResult.wardId);
 
 
         })
@@ -916,7 +910,7 @@ function renderSaleOrderItem(productId, operator) {
             <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter align-items-center"><a
                     class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary align-items-center"
                     target="_blank" href="/admin/products/118801409/variants/185370765"><img class="jss3898"
-                        src=${result.mediaList[0].fileUrl} alt="Sản phẩm"></a></td>
+                        src=${result.image} alt="Sản phẩm"></a></td>
             <td class="MuiTableCell-root MuiTableCell-body align-items-center">
                 <div class="MuiBox-root jss4053 jss3895 ">
                     <div class="MuiBox-root jss4054">
@@ -1218,7 +1212,7 @@ function showAllCategory() {
             $("#categoryCreate").empty();
 
             $.each(data, (i, item) => {
-                let str = `<option value="${item.id}">${item.title}</option>`;
+                let str = `<option value="${item.id}">${item.name}</option>`;
                 $(".showAllCategory").append(str);
             });
 
