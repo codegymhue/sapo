@@ -1,11 +1,11 @@
 <!--<html lang="vi-VN" xmlns:th="http://www.thymeleaf.org">-->
-<th:block th:fragment="modal_create_customer">
-    <div class="modal fade" id="create_order_customer" tabindex="-1" aria-labelledby="exampleModalLabel"
+<th:block th:fragment="modal_create_address">
+    <div class="modal fade" id="create_order_address" tabindex="-1" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Thêm mới khách hàng</h5>
+                    <h5 class="modal-title">Thêm địa chỉ giao hàng</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="" id="myModal">
@@ -153,7 +153,7 @@
                                     <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
                                         <div width="100%" class="sc-cCsOjp gKHUxf"><label
                                                 for="codeCreate"
-                                                class="sc-ksZaOG ftuIiY">Mã khách hàng<span
+                                                class="sc-ksZaOG ftuIiY">Email<span
                                                 class="sc-hAZoDl eHshpr">&nbsp</span></label>
                                             <div class="sc-gXmSlM PBwdZ Sapo-InputRoot">
                                                 <input id="codeCreate" type="text"
@@ -166,17 +166,12 @@
                                         <div class="MuiBox-root jss5491 jss5544">
                                             <div class="MuiBox-root jss5492 jss5554"><p
                                                     class="MuiTypography-root MuiTypography-body1"
-                                                    style="color: rgb(70, 81, 95);">Nhân viên phụ trách</p>
+                                                    style="color: rgb(70, 81, 95);">Mã Bưu Điện</p>
                                             </div>
                                             <div class="MuiBox-root jss5493 jss5553" tabindex="0">
+                                                <input id="zipcode" type="text"
+                                                       class="sc-himrzO iRSKAB" value="">
 
-                                                <select id="employeeCreate" class="form-select showAllEmployee"
-                                                        style="height:40px;">
-                                                    <option value="0">
-                                                        <p class="MuiTypography-root label-select MuiTypography-body1 MuiTypography-colorTextPrimary employee">Chọn nhân viên <br />
-                                                        </p>
-                                                    </option>
-                                                </select>
 
                                             </div>
                                         </div>

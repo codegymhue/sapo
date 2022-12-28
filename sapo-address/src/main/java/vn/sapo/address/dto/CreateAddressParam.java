@@ -45,10 +45,6 @@ public class CreateAddressParam {
     @NotBlank(message = "Không được để trống trường  province")
     private String provinceName;
 
-
-    @NotBlank(message = "Không được để trống email")
-    @Email(message = "Email : đây ko  phải là 1 email")
-    @Size(min = 2, max = 30, message = "Dữ liệu email không được ngắn hơn 2 kí tự và nhiều hơn 30 kí tự")
     private String email;
     private String zipCode;
 
