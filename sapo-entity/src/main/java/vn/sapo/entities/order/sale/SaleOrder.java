@@ -1,18 +1,18 @@
 package vn.sapo.entities.order.sale;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.sapo.entities.*;
-import vn.sapo.entities.customer.*;
-import vn.sapo.entities.order.*;
+import vn.sapo.entities.BaseEntity;
+import vn.sapo.entities.Employee;
+import vn.sapo.entities.customer.Customer;
+import vn.sapo.entities.order.OrderStatus;
+import vn.sapo.entities.order.OrderStatusCode;
 import vn.sapo.entities.payment.sale.PaymentSaleOrder;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.Set;
 
 @Setter

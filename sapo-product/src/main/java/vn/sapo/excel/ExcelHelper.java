@@ -15,12 +15,17 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.entities.product.Product;
 import vn.sapo.entities.product.ProductStatus;
+import vn.sapo.entities.tax.TaxType;
+import vn.sapo.media.dto.MediaParam;
+import vn.sapo.product.dto.CreateProductParam;
+import vn.sapo.product_tax.dto.ProductTaxParam;
+import vn.sapo.tax.dto.CreateTaxParam;
 
 
 public class ExcelHelper {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
-    static String[] HEADERs = { "Id","Title", "SKU", "Mass", "BarCode", "Unit", "Retail Price", "Wholesale Price", "Import Price", "Brand", "Category", "Status", "Apply Tax", "Tax Inclusive"};
+    static String[] HEADERs = { "Id","Title", "SKU", "Mass", "BarCode", "Unit", "Retail Price", "Wholesale Price", "Import Price", "Brand", "Category", "Apply Tax", "Tax Inclusive", "TaxIn Id", "TaxOut Id", "TaxIn Type", "TaxOut Type", "Description", "Enable Sell", "Enable Variant", "Cost Price", "Quantity"};
     static String SHEET = "Products";
 
     public static boolean hasExcelFormat(MultipartFile file) {
@@ -32,14 +37,14 @@ public class ExcelHelper {
         return true;
     }
 
-    public static List<Product> excelToProducts(InputStream is) {
+    public static List<CreateProductParam> excelToProducts(InputStream is) {
         try {
             Workbook workbook = new XSSFWorkbook(is);
 
             Sheet sheet = workbook.getSheet(SHEET);
             Iterator<Row> rows = sheet.iterator();
 
-            List<Product> products = new ArrayList<Product>();
+            List<CreateProductParam> products = new ArrayList<CreateProductParam>();
 
             int rowNumber = 0;
             while (rows.hasNext()) {
@@ -53,7 +58,10 @@ public class ExcelHelper {
 
                 Iterator<Cell> cellsInRow = currentRow.iterator();
 
-                Product product = new Product();
+                CreateProductParam product = new CreateProductParam();
+                List<ProductTaxParam> taxParams = new ArrayList<>();
+                ProductTaxParam taxIn = new ProductTaxParam();
+                ProductTaxParam taxOut = new ProductTaxParam();
 
                 int cellIdx = 0;
                 while (cellsInRow.hasNext()) {
@@ -82,7 +90,6 @@ public class ExcelHelper {
                             product.setRetailPrice(BigDecimal.valueOf(currentCell.getNumericCellValue()));
                             break;
                         case 7:
-
                             product.setWholesalePrice(BigDecimal.valueOf(currentCell.getNumericCellValue()));
                             break;
                         case 8:
@@ -95,21 +102,48 @@ public class ExcelHelper {
                             product.setCategoryId((int) currentCell.getNumericCellValue());
                             break;
                         case 11:
-                            product.setStatus(ProductStatus.parseProductStatus(currentCell.getStringCellValue()));
-                            break;
-                        case 12:
                             product.setApplyTax(currentCell.getBooleanCellValue());
                             break;
-                        case 13:
+                        case 12:
                             product.setTaxInclusive(currentCell.getBooleanCellValue());
+                            break;
+                        case 13:
+                            taxIn.setTaxId((int) currentCell.getNumericCellValue());
+                            break;
+                        case 14:
+                            taxOut.setTaxId((int) currentCell.getNumericCellValue());
+                            break;
+                        case 15:
+                            taxIn.setTaxType(TaxType.parseTypeTax(currentCell.getStringCellValue()));
+                            break;
+                        case 16:
+                            taxOut.setTaxType(TaxType.parseTypeTax(currentCell.getStringCellValue()));
+                            break;
+                        case 17:
+                            product.setDescription(currentCell.getStringCellValue());
+                            break;
+                        case 18:
+                            product.setEnableSell(currentCell.getBooleanCellValue());
+                            break;
+                        case 19:
+                            product.setEnableVariant(currentCell.getBooleanCellValue());
+                            break;
+                        case 20:
+                            product.setCostPrice(BigDecimal.valueOf(currentCell.getNumericCellValue()));
+                            break;
+                        case 21:
+                            product.setQuantity((int) currentCell.getNumericCellValue());
                             break;
                         default:
                             break;
                     }
-
                     cellIdx++;
                 }
-
+                List<MediaParam> mediaParams = new ArrayList<>();
+                product.setMediaList(mediaParams);
+                taxParams.add(taxIn);
+                taxParams.add(taxOut);
+                product.setTaxList(taxParams);
                 products.add(product);
             }
 

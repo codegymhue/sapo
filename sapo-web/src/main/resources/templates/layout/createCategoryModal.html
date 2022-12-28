@@ -6,13 +6,12 @@
                     <h1 class="modal-title fs-5">Thêm loại sản phẩm</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <form id="frmCreateCat" method="post">
                 <div class="modal-body">
-                    <form id="frmCreateCat" method="post">
                         <div >
-                            <label class="mb-3">Tên loại sản phẩm</label>
-                            <input type="text" id="inputCategory" name="" class="form-control"/>
+                            <label for="inputCategory" class="mb-3">Tên loại sản phẩm <span style="color: red">*</span></label>
+                            <input placeholder="VD: Bánh kẹo" type="text" id="inputCategory" name="inputCat" class="form-control"/>
                         </div>
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="sc-jqUVSM dgJIMY" data-bs-dismiss="modal">Thoát</button>
@@ -20,6 +19,7 @@
                         Thêm loại sản phẩm
                     </button>
                 </div>
+                </form>
             </div>
         </div>
     </div>

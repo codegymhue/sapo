@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.address.AddressService;
+import vn.sapo.configurations.CodePrefix;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
@@ -135,7 +136,7 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = customerMapper.toModel(createCustomerParam);
         customer = customerRepository.save(customer);
         if (customer.getCode() == null)
-            customer.setCode("CUZN" + customer.getId());
+            customer.setCode(CodePrefix.CUSTOMER + CodePrefix.format(customer.getId()));
         return customerMapper.toDTO(customer);
     }
 
