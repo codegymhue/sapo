@@ -815,12 +815,19 @@ function discountProduct(event) {
 }
 
 const addQuantity = (productId) => {
-    renderSaleOrderItem(productId, "plus");
+    renderSaleOrderItem(productId, "plus",0);
     renderSaleOrder();
 }
 
+const editQuantity = (id) =>{
+    let valueNumber = document.querySelector(`#quantity_product_${id}`).value;
+    renderSaleOrderItem(id, "change",valueNumber);
+    renderSaleOrder();
+}
+
+
 function minusQuantity(productId) {
-    renderSaleOrderItem(productId, "minus");
+    renderSaleOrderItem(productId, "minus",0);
     renderSaleOrder();
     let saleOrderItem = saleOrderItems.find(saleOrderItem => saleOrderItem.productId === productId);
     if (saleOrderItem.quantity === 0) {
@@ -917,14 +924,17 @@ function renderAmountOrderItem(productId) {
     $(`#amount_product_${productId}`).text(amount.formatVND());
 }
 
-function renderSaleOrderItem(productId, operator) {
+function renderSaleOrderItem(productId, operator, valueNumber) {
     productId = parseInt(productId);
     let saleOrderItem = saleOrderItems.find(saleOrderItem => saleOrderItem.productId === productId);
     if (saleOrderItem !== undefined) {
+        if (valueNumber !== 0)
+            saleOrderItem.quantity = valueNumber;
         if (operator === "minus")
             saleOrderItem.quantity -= 1;
         if (operator === "plus")
-            saleOrderItem.quantity += 1;
+            saleOrderItem.quantity++;
+
         $(`#quantity_product_${productId}`).val(saleOrderItem.quantity);
         renderAmountOrderItem(productId);
     } else {
@@ -993,8 +1003,9 @@ function renderSaleOrderItem(productId, operator) {
                             <div
                                 class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl">
                                 <input aria-invalid="false" autocomplete="off"
+                                    oninput='editQuantity(${result.id})'
                                     name="" type="text"
-                                    class="MuiInputBase-input MuiInput-input" value="1"
+                                    class="MuiInputBase-input MuiInput-input" value="1" min="1"
                                     style="text-align: center; width: 100%;"
                                     id="quantity_product_${result.id}">
                                 </div>
