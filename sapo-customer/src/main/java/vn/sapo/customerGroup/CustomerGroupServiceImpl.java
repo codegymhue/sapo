@@ -22,6 +22,7 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     private CustomerGroupRepository customerGroupRepository;
 
     @Override
+    @Transactional
     public CustomerGroupResult create(CreateCusGroupParam createCusGroupParam) {
         CustomerGroup customerGroup = customerGroupMapper.toModel(createCusGroupParam);
         customerGroup = customerGroupRepository.save(customerGroup);

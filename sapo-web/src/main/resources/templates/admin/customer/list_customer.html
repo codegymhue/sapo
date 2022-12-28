@@ -8,7 +8,7 @@
 <body style="font-size: 12px">
 <div>
     <th:block th:replace="/layout/menu :: menu"/>
-<!--    <th:block th:replace="/layout/modalImportFile :: #modalImportFile"/>-->
+    <!--    <th:block th:replace="/layout/modalImportFile :: #modalImportFile"/>-->
     <div class="col-right  MuiBox-root jss64 jss40">
         <div class="MuiBox-root jss6915 jss440 "
              id="header">
@@ -23,7 +23,8 @@
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z">
                         </path>
                     </svg>
-                    <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">Vay vốn kinh doanh</p>
+                    <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">Vay vốn kinh
+                        doanh</p>
                 </div>
                 <div class="MuiBox-root jss6932 jss442">
                     <svg class="MuiSvgIcon-root jss443"
@@ -65,7 +66,8 @@
                             </div>
                         </div>
                     </div>
-                    <p class="MuiTypography-root jss445 MuiTypography-body1 MuiTypography-colorTextPrimary">Phú Nguyễn</p>
+                    <p class="MuiTypography-root jss445 MuiTypography-body1 MuiTypography-colorTextPrimary">Phú
+                        Nguyễn</p>
                     <svg class="MuiSvgIcon-root arrow-avatar"
                          focusable="false"
                          viewBox="0 0 24 24"
@@ -78,10 +80,10 @@
         <div class="MuiBox-root jss6754 jss6732">
             <div class="MuiBox-root jss6755 jss6733">
                 <div class="MuiBox-root jss6756 jss6741">
-<!--                    <a th:href="@{/admin/products/export/excel}">-->
-                        <button class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
-                                tabindex="0"
-                                type="button">
+                    <!--                    <a th:href="@{/admin/products/export/excel}">-->
+                    <button class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
+                            tabindex="0"
+                            type="button">
                       <span class="MuiButton-label">
                         <span class="MuiButton-startIcon MuiButton-iconSizeSmall">
                           <svg class="MuiSvgIcon-root jss6758"
@@ -97,14 +99,15 @@
                             </svg>
                         </span>Xuất file
                       </span>
-                            <span class="MuiTouchRipple-root">
+                        <span class="MuiTouchRipple-root">
                       </span>
-                        </button>
+                    </button>
                     </a>
                     <div class="MuiBox-root jss6793"
                          style="width: 1px; height: 20px; border-left: 1px solid rgb(211, 213, 215); margin: 0 8px;">
                     </div>
-                    <button id="importFile" class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
+                    <button id="importFile"
+                            class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
                             tabindex="0"
                             type="button">
                       <span class="MuiButton-label">
@@ -140,7 +143,8 @@
                                  viewBox="0 0 24 24"
                                  aria-hidden="true">
                                 <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
-                            </svg>Thêm khách hàng
+                            </svg>
+                            Thêm khách hàng
                         </a>
                         <button id="btn-create-product"
                                 class="sc-jqUVSM dfbErd">
@@ -183,7 +187,7 @@
                                             </path>
                                         </svg>
                                     </div>
-                                    <label style="width: 100%" >
+                                    <label style="width: 100%">
                                         <input id="inp-search"
                                                placeholder="Tìm kiếm theo tên, SĐT khách hàng..."
                                                type="text"
@@ -196,13 +200,16 @@
                         </div>
                         <div role="group"
                              class="MuiButtonGroup-root jss6803">
-                            <select id="ddl-group-customer" class="form-select" aria-label="Default select example" style="width: 180px">
-                                <option selected value="-1">Nhóm khách hàng</option>
+                            <select id="ddl-group-customer" class="form-select" aria-label="Default select example"
+                                    style="width: 180px">
+                                <option selected value="-1" id="showAllCustomerGroup">Nhóm khách hàng</option>
+
                             </select>
-<!--                            <select id="brand" class="form-select" aria-label="Default select example" style="width: 180px">-->
-<!--                                <option selected value="-1">Nhãn hiệu</option>-->
-<!--                            </select>-->
-                            <select id="ddl-status" class="form-select" aria-label="Default select example" style="width: 180px">
+                            <!--                            <select id="brand" class="form-select" aria-label="Default select example" style="width: 180px">-->
+                            <!--                                <option selected value="-1">Nhãn hiệu</option>-->
+                            <!--                            </select>-->
+                            <select id="ddl-status" class="form-select" aria-label="Default select example"
+                                    style="width: 180px">
                                 <option selected value="">Trạng thái</option>
                                 <option value="AVAILABLE">Đang giao dịch</option>
                                 <option value="UNAVAILABLE">Ngừng giao dịch</option>
@@ -213,54 +220,65 @@
                 </div>
 
                 <div style="font-size:small" id="tableCheckbox">
-                    <table id="tbCustomer" class="table table-hover">
+                    <table id="tbCustomer" class="table table-hover" style="    width: 100%;">
                         <thead style="background-color: #f4f6f8; height: 55px">
-                        <tr id="theadList" class="show" >
-                            <th class="align-middle" >
+                        <tr id="theadList" class="show">
+                            <th class="align-middle">
                                 <label for="checkAll" style="padding: 0.5rem; cursor:pointer">
-                                    <input  style="cursor:pointer" id="checkAll" type="checkbox" value="" data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả">
+                                    <input style="cursor:pointer" id="checkAll" type="checkbox" value=""
+                                           data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả">
                                 </label>
                             </th>
                             <th class="align-middle" scope="col">Mã khách hàng</th>
                             <th class="align-middle" scope="col">
-                                <button class="sort" id="btnTitleSort">Tên khách hàng<i class="fa-solid fa-sort"></i></button>
+                                <button class="sort" id="btnTitleSort">Tên khách hàng<i class="fa-solid fa-sort"></i>
+                                </button>
                             </th>
                             <th class="align-middle" scope="col">Số điện thoại</th>
                             <th class="align-middle" scope="col">Nhóm khách hàng</th>
                             <th class="align-middle" scope="col">
-                                <button class="sort" id="btnCreatAtSort">Công nợ hiện tại<i class="fa-solid fa-sort"></i></button>
+                                <button class="sort" id="btnCreatAtSort">Công nợ hiện tại<i
+                                        class="fa-solid fa-sort"></i></button>
                             </th>
                             <th class="align-middle" scope="col">
-                                <button class="sort" id="btnUpdateAtSort">Tổng chi tiêu <i class="fa-solid fa-sort"></i></button>
+                                <button class="sort" id="btnUpdateAtSort">Tổng chi tiêu <i class="fa-solid fa-sort"></i>
+                                </button>
                             </th>
                             <th class="align-middle" scope="col">Tổng SL đơn hàng</th>
                         </tr>
                         <tr class="hide" id="selectActionThead" style="border: snow">
                             <td class="align-middle" style="width: 20px">
                                 <label for="selectAction" style="padding: 0.5rem; cursor:pointer">
-                                    <input style="cursor:pointer" id="selectAction" type="checkbox" value="" >
+                                    <input style="cursor:pointer" id="selectAction" type="checkbox" value="">
                                 </label>
                             </td>
                             <td colspan="2" class="align-middle" id="numberSelectProductList" style="width: 24%">
                             </td>
                             <td class="align-middle" colspan="2">
                                 <div class="btn-group">
-                                    <button class="btn dropdown-toggle btnDropdown me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="btn dropdown-toggle btnDropdown me-2" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
                                         Chọn thao tác
                                         <i class="fa-solid fa-sort-down" style="padding-left: 2.3rem"></i>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                                         <li>
-                                            <button class="dropdown-item btnDropdown" id="btnCheckInventory">Kiểm tra tồn kho</button>
+                                            <button class="dropdown-item btnDropdown" id="btnCheckInventory">Kiểm tra
+                                                tồn kho
+                                            </button>
                                         </li>
                                         <li>
-                                            <button class="dropdown-item btnDropdown" id="btnAvailable">Đang giao dịch</button>
+                                            <button class="dropdown-item btnDropdown" id="btnAvailable">Đang giao dịch
+                                            </button>
                                         </li>
                                         <li>
-                                            <button class="dropdown-item btnDropdown" id="btnUnavailable">Ngừng giao dịch</button>
+                                            <button class="dropdown-item btnDropdown" id="btnUnavailable">Ngừng giao
+                                                dịch
+                                            </button>
                                         </li>
                                         <li>
-                                            <button class="dropdown-item btnDropdown" id="btnDelete">Xóa sản phẩm</button>
+                                            <button class="dropdown-item btnDropdown" id="btnDelete">Xóa sản phẩm
+                                            </button>
                                         </li>
                                     </ul>
                                 </div>
@@ -268,7 +286,7 @@
                             <td colspan="5"></td>
                         </tr>
                         </thead>
-                        <tbody >
+                        <tbody>
                         </tbody>
                     </table>
                 </div>
@@ -288,25 +306,26 @@
 
                         </div>
                         <div class="col-md-1">
-                            <nav aria-label="Page navigation example ">
-                                <ul class="pagination" >
-                                    <li class="page-item">
-                                        <button class=" btn-outline-primary btn-sm me-2" id="previousPage" style="border: none">
-                                            <i class="fa-solid fa-angle-left"></i>
-                                        </button>
-                                    </li>
-                                    <li class="page-item">
-                                        <button class="pageNumber btn-primary btn-sm me-2">
-                                            <span id="pageNo">1</span>
-                                        </button>
-                                    </li>
-                                    <li class="page-item">
-                                        <button class=" btn-outline-primary btn-sm " id="nextPage" style="border: none">
-                                            <i class="fa-solid fa-angle-right"></i>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </nav>
+                            <!--                            <nav aria-label="Page navigation example ">-->
+                            <!--                                <ul class="pagination">-->
+                            <!--                                    <li class="page-item">-->
+                            <!--                                        <button class=" btn-outline-primary btn-sm me-2" id="previousPage"-->
+                            <!--                                                style="border: none">-->
+                            <!--                                            <i class="fa-solid fa-angle-left"></i>-->
+                            <!--                                        </button>-->
+                            <!--                                    </li>-->
+                            <!--&lt;!&ndash;                                    <li class="page-item">&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                        <button class="pageNumber btn-primary btn-sm me-2">&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                            <span id="pageNo">1</span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                        </button>&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                    </li>&ndash;&gt;-->
+                            <!--                                    <li class="page-item">-->
+                            <!--                                        <button class=" btn-outline-primary btn-sm " id="nextPage" style="border: none">-->
+                            <!--                                            <i class="fa-solid fa-angle-right"></i>-->
+                            <!--                                        </button>-->
+                            <!--                                    </li>-->
+                            <!--                                </ul>-->
+                            <!--                            </nav>-->
                         </div>
                     </div>
                 </div>
@@ -315,7 +334,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="modalAvailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modalAvailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content" style="width: max-content">
             <div class="modal-header">
@@ -325,14 +345,15 @@
             <div class="modal-body" id="statusChange">
             </div>
             <div class="modal-footer d-flex align-items-center">
-                <button class="btn btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
                 <button class="btn btn-primary btn-save" id="btnAvailableSave" type="button">Lưu</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="modalUnavailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modalUnavailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content" style="width: max-content">
             <div class="modal-header">
@@ -342,14 +363,15 @@
             <div class="modal-body" id="statusChangeUnavailable">
             </div>
             <div class="modal-footer d-flex align-items-center">
-                <button class="btn btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
                 <button class="btn btn-primary btn-save" id="btnUnavailableSave" type="button">Lưu</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content" style="width: max-content">
             <div class="modal-header">
@@ -359,25 +381,46 @@
             <div class="modal-body" id="statusChangeDelete">
             </div>
             <div class="modal-footer d-flex align-items-center">
-                <button class="btn  btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn  btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
                 <button class="btn btn-danger btn-save-delete" id="btnSubmitDelete" type="button">Xóa</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="modalCheckInventory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modalCheckInventory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content " style="width:max-content">
             <div class="modal-header">
-                <h4 class="modal-title" >Kiểm tra thông tin tồn kho</h4>
+                <h4 class="modal-title">Kiểm tra thông tin tồn kho</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" >
+            <div class="modal-body">
+                <!--                <table class="table table-hover table-bordered" id="tbInventoryProduct" style="font-size: small">-->
+                <!--                    <thead style="background-color: #f4f6f8">-->
+                <!--                    <tr>-->
+                <!--                        <th scope="col " rowspan="2" class="align-middle">Mã SKU</th>-->
+                <!--                        <th scope="col" rowspan="2" class="align-middle ">Tên sản phẩm</th>-->
+                <!--                        <th scope="col">Chính sách giá</th>-->
+                <!--                        <th scope="col" colspan="5" class="text-center">Tổng</th>-->
+                <!--                    </tr>-->
+                <!--                    <tr>-->
+                <!--                        <th scope="col">Giá bán lẻ</th>-->
+                <!--                        <th scope="col">Tồn kho</th>-->
+                <!--                        <th scope="col">Có thể bán</th>-->
+                <!--                        <th scope="col">Đang giao dịch</th>-->
+                <!--                        <th scope="col">Hàng đang về</th>-->
+                <!--                        <th scope="col">Hàng đang giao</th>-->
+                <!--                    </tr>-->
+                <!--                    </thead>-->
+                <!--                    <tbody>-->
 
+                <!--                    </tbody>-->
+                <!--                </table>-->
             </div>
             <div class="modal-footer d-flex align-items-center">
-                <button class="btn btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
             </div>
         </div>
     </div>
@@ -394,6 +437,29 @@
 </script>
 
 <script>
+    function showAllCustomerGroup() {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            // url: page.urls.getAllCustomerGroup,
+            "url": "http://localhost:8080/api/customer_groups",
+        })
+            .done((data) => {
+                console.log(data)
+                $.each(data, (i, item) => {
+                    console.log(item)
+                    let str = `<option value="${item.id}">${item.title}</option>`;
+                    page.dialogs.elements.groupCustomer.append(str);
+                });
+            })
+            .fail((jqXHR) => {
+
+            })
+    }
+
     let page = {
         urls: {
             getAllCustomers: App.BASE_URL_CUSTOMER,
@@ -402,6 +468,7 @@
             updateStatusAvailable: App.BASE_URL_CUSTOMER + "/updateStatusAvailable",
             updateStatusUnavailable: App.BASE_URL_CUSTOMER + "/updateStatusUnavailable",
             deleteProduct: App.BASE_URL_CUSTOMER + "/delete",
+            getAllCustomerGroup: App.BASE_URL_CUSTOMER_GROUP,
 
 
         },
@@ -416,6 +483,7 @@
         initializeEventControl: {}
     }
 
+    showAllCustomerGroup()
 
     let customer = new Customer();
     let totalPage;
@@ -430,7 +498,6 @@
     page.elements.btnAvailableSave = $("#btnAvailableSave");
     page.elements.btnUnavailableSave = $("#btnUnavailableSave");
     page.elements.btnSubmitDelete = $("#btnSubmitDelete");
-    // page.elements.btnCheckInventory = $("#btnCheckInventory");
 
 
     page.elements.btnTitleSort = $("#btnTitleSort");
@@ -442,7 +509,7 @@
     page.elements.pageSize = $("#pageSize");
     page.elements.search = $("#inp-search");
 
-    page.elements.checkAll =$("#checkAll");
+    page.elements.checkAll = $("#checkAll");
     page.elements.selectAction = $("#selectAction");
 
     page.elements.selectActionThead = $("#selectActionThead");
@@ -453,8 +520,8 @@
     page.elements.statusChangeForNumberDelete = $("#statusChangeDelete");
 
     page.elements.modalAvailable = $("#modalAvailable");
-    page.elements.modalUnavailable =$("#modalUnavailable");
-    page.elements.modalDelete =$("#modalDelete");
+    page.elements.modalUnavailable = $("#modalUnavailable");
+    page.elements.modalDelete = $("#modalDelete");
 
     page.dialogs.elements.status = $("#status");
     page.dialogs.elements.groupCustomer = $("#ddl-group-customer");
@@ -463,71 +530,414 @@
     page.dialogs.elements.previousPage = $("#previousPage");
 
 
-
+    // function checkall(class_name, obj) {
+    //     //Duyệt qua các checkbox có class = class_name (item)
+    //     //Trả về các phần tử ở dạng mảng, bắt dầu từ vị trí 0;
+    //     var items = document.getElementsByClassName(class_name);
+    //     if (obj.checked == true) //Đã được chọn
+    //     {
+    //         for (i = 0; i < items.length; i++)
+    //             items[i].checked = true;
+    //     }
+    //     else { //Checkbox chưa được chọn
+    //         for (i = 0; i < items.length; i++)
+    //             items[i].checked = false;
+    //     }
+    // }
+    //post man bật lên vs
+    //layout mô ta
+    //2 cái này ah
+    //cãi cũ có ah
+    //để xí cop cho
     page.commands.getAllCustomers = () => {
-        let pageNo = Number(page.elements.pageNo.text());
-        let pageSize =Number(page.elements.pageSize.val());
+        $(document).ready(function () {
+            console.log("show all customer")
+            $("#tbCustomer").DataTable({
+                // chuyển tiếng việt cho datatable
+                language:
+                    {
+                        "processing": "Đang xử lý...",
+                        "aria": {
+                            "sortAscending": ": Sắp xếp thứ tự tăng dần",
+                            "sortDescending": ": Sắp xếp thứ tự giảm dần"
+                        },
+                        "autoFill": {
+                            "cancel": "Hủy",
+                            "fill": "Điền tất cả ô với <i>%d<\/i>",
+                            "fillHorizontal": "Điền theo hàng ngang",
+                            "fillVertical": "Điền theo hàng dọc"
+                        },
+                        "buttons": {
+                            "collection": "Chọn lọc <span class=\"ui-button-icon-primary ui-icon ui-icon-triangle-1-s\"><\/span>",
+                            "colvis": "Hiển thị theo cột",
+                            "colvisRestore": "Khôi phục hiển thị",
+                            "copy": "Sao chép",
+                            "copyKeys": "Nhấn Ctrl hoặc u2318 + C để sao chép bảng dữ liệu vào clipboard.<br \/><br \/>Để hủy, click vào thông báo này hoặc nhấn ESC",
+                            "copySuccess": {
+                                "1": "Đã sao chép 1 dòng dữ liệu vào clipboard",
+                                "_": "Đã sao chép %d dòng vào clipboard"
+                            },
+                            "copyTitle": "Sao chép vào clipboard",
+                            "pageLength": {
+                                "-1": "Xem tất cả các dòng",
+                                "_": "Hiển thị %d dòng",
+                                "1": "Hiển thị 1 dòng"
+                            },
+                            "print": "In ấn",
+                            "createState": "Tạo trạng thái",
+                            "csv": "CSV",
+                            "excel": "Excel",
+                            "pdf": "PDF",
+                            "removeAllStates": "Xóa hết trạng thái",
+                            "removeState": "Xóa",
+                            "renameState": "Đổi tên",
+                            "savedStates": "Trạng thái đã lưu",
+                            "stateRestore": "Trạng thái %d",
+                            "updateState": "Cập nhật"
+                        },
+                        "select": {
+                            "cells": {
+                                "1": "1 ô đang được chọn",
+                                "_": "%d ô đang được chọn"
+                            },
+                            "columns": {
+                                "1": "1 cột đang được chọn",
+                                "_": "%d cột đang được được chọn"
+                            },
+                            "rows": {
+                                "1": "1 dòng đang được chọn",
+                                "_": "%d dòng đang được chọn"
+                            }
+                        },
+                        "searchBuilder": {
+                            "title": {
+                                "_": "Thiết lập tìm kiếm (%d)",
+                                "0": "Thiết lập tìm kiếm"
+                            },
+                            "button": {
+                                "0": "Thiết lập tìm kiếm",
+                                "_": "Thiết lập tìm kiếm (%d)"
+                            },
+                            "value": "Giá trị",
+                            "clearAll": "Xóa hết",
+                            "condition": "Điều kiện",
+                            "conditions": {
+                                "date": {
+                                    "after": "Sau",
+                                    "before": "Trước",
+                                    "between": "Nằm giữa",
+                                    "empty": "Rỗng",
+                                    "equals": "Bằng với",
+                                    "not": "Không phải",
+                                    "notBetween": "Không nằm giữa",
+                                    "notEmpty": "Không rỗng"
+                                },
+                                "number": {
+                                    "between": "Nằm giữa",
+                                    "empty": "Rỗng",
+                                    "equals": "Bằng với",
+                                    "gt": "Lớn hơn",
+                                    "gte": "Lớn hơn hoặc bằng",
+                                    "lt": "Nhỏ hơn",
+                                    "lte": "Nhỏ hơn hoặc bằng",
+                                    "not": "Không phải",
+                                    "notBetween": "Không nằm giữa",
+                                    "notEmpty": "Không rỗng"
+                                },
+                                "string": {
+                                    "contains": "Chứa",
+                                    "empty": "Rỗng",
+                                    "endsWith": "Kết thúc bằng",
+                                    "equals": "Bằng",
+                                    "not": "Không phải",
+                                    "notEmpty": "Không rỗng",
+                                    "startsWith": "Bắt đầu với",
+                                    "notContains": "Không chứa",
+                                    "notEndsWith": "Không kết thúc với",
+                                    "notStartsWith": "Không bắt đầu với"
+                                },
+                                "array": {
+                                    "equals": "Bằng",
+                                    "empty": "Trống",
+                                    "contains": "Chứa",
+                                    "not": "Không",
+                                    "notEmpty": "Không được rỗng",
+                                    "without": "không chứa"
+                                }
+                            },
+                            "logicAnd": "Và",
+                            "logicOr": "Hoặc",
+                            "add": "Thêm điều kiện",
+                            "data": "Dữ liệu",
+                            "deleteTitle": "Xóa quy tắc lọc",
+                            "leftTitle": "Giảm thụt lề",
+                            "rightTitle": "Tăng thụt lề"
+                        },
+                        "searchPanes": {
+                            "countFiltered": "{shown} ({total})",
+                            "emptyPanes": "Không có phần tìm kiếm",
+                            "clearMessage": "Xóa hết",
+                            "loadMessage": "Đang load phần tìm kiếm",
+                            "collapse": {
+                                "0": "Phần tìm kiếm",
+                                "_": "Phần tìm kiếm (%d)"
+                            },
+                            "title": "Bộ lọc đang hoạt động - %d",
+                            "count": "{total}",
+                            "collapseMessage": "Thu gọn tất cả",
+                            "showMessage": "Hiện tất cả"
+                        },
+                        "datetime": {
+                            "hours": "Giờ",
+                            "minutes": "Phút",
+                            "next": "Sau",
+                            "previous": "Trước",
+                            "seconds": "Giây",
+                            "amPm": [
+                                "am",
+                                "pm"
+                            ],
+                            "unknown": "-",
+                            "weekdays": [
+                                "Chủ nhật"
+                            ],
+                            "months": [
+                                "Tháng Một",
+                                "Tháng Hai",
+                                "Tháng Ba",
+                                "Tháng Tư",
+                                "Tháng Năm",
+                                "Tháng Sáu",
+                                "Tháng Bảy",
+                                "Tháng Tám",
+                                "Tháng Chín",
+                                "Tháng Mười",
+                                "Tháng Mười Một",
+                                "Tháng Mười Hai"
+                            ]
+                        },
+                        "emptyTable": "Không có dữ liệu",
+                        "info": "Hiển thị _START_ tới _END_ của _TOTAL_ dữ liệu",
+                        "infoEmpty": "Hiển thị 0 tới 0 của 0 dữ liệu",
+                        "lengthMenu": "Hiển thị _MENU_ dữ liệu",
+                        "loadingRecords": "Đang tải...",
+                        "paginate": {
+                            "first": "Đầu tiên",
+                            "last": "Cuối cùng",
+                            "next": "Sau",
+                            "previous": "Trước"
+                        },
+                        "search": "Tìm kiếm:",
+                        "zeroRecords": "Không tìm thấy kết quả",
+                        "decimal": ",",
+                        "editor": {
+                            "close": "Đóng",
+                            "create": {
+                                "button": "Thêm",
+                                "submit": "Thêm",
+                                "title": "Thêm mục mới"
+                            },
+                            "edit": {
+                                "button": "Sửa",
+                                "submit": "Cập nhật",
+                                "title": "Sửa mục"
+                            },
+                            "error": {
+                                "system": "Đã xảy ra lỗi hệ thống (&lt;a target=\"\\\" rel=\"nofollow\" href=\"\\\"&gt;Thêm thông tin&lt;\/a&gt;)."
+                            },
+                            "multi": {
+                                "info": "Các mục đã chọn chứa các giá trị khác nhau cho đầu vào này. Để chỉnh sửa và đặt tất cả các mục cho đầu vào này thành cùng một giá trị, hãy nhấp hoặc nhấn vào đây, nếu không chúng sẽ giữ lại các giá trị riêng lẻ của chúng.",
+                                "noMulti": "Đầu vào này có thể được chỉnh sửa riêng lẻ, nhưng không phải là một phần của một nhóm.",
+                                "restore": "Hoàn tác thay đổi",
+                                "title": "Nhiều giá trị"
+                            },
+                            "remove": {
+                                "button": "Xóa",
+                                "confirm": {
+                                    "_": "Bạn có chắc chắn muốn xóa %d hàng không?",
+                                    "1": "Bạn có chắc chắn muốn xóa 1 hàng không?"
+                                },
+                                "submit": "Xóa",
+                                "title": "Xóa"
+                            }
+                        },
+                        "infoFiltered": "(được lọc từ _MAX_ dữ liệu)",
+                        "searchPlaceholder": "Nhập tìm kiếm...",
+                        "stateRestore": {
+                            "creationModal": {
+                                "button": "Thêm",
+                                "columns": {
+                                    "search": "Tìm kiếm cột",
+                                    "visible": "Khả năng hiển thị cột"
+                                },
+                                "name": "Tên:",
+                                "order": "Sắp xếp",
+                                "paging": "Phân trang",
+                                "scroller": "Cuộn vị trí",
+                                "search": "Tìm kiếm",
+                                "searchBuilder": "Trình tạo tìm kiếm",
+                                "select": "Chọn",
+                                "title": "Thêm trạng thái",
+                                "toggleLabel": "Bao gồm:"
+                            },
+                            "duplicateError": "Trạng thái có tên này đã tồn tại.",
+                            "emptyError": "Tên không được để trống.",
+                            "emptyStates": "Không có trạng thái đã lưu",
+                            "removeConfirm": "Bạn có chắc chắn muốn xóa %s không?",
+                            "removeError": "Không xóa được trạng thái.",
+                            "removeJoiner": "và",
+                            "removeSubmit": "Xóa",
+                            "removeTitle": "Xóa trạng thái",
+                            "renameButton": "Đổi tên",
+                            "renameLabel": "Tên mới cho %s:",
+                            "renameTitle": "Đổi tên trạng thái"
+                        },
+                        "infoThousands": ".",
+                        "thousands": "."
+                    } ,
+                ajax: {
+                    contentType: 'application/json',
+                    url: "http://localhost:8080/api/customers",
+                    type: "GET",
+                    dataSrc: ''
+                },
+                lengthMenu: [
+                    [5, 10, 20, -1],
+                    ["5", "10", "20", "All"]
+                ],
+                searching: false,
+                destroy: true,
+                columns: [
+                    {data: 'id'},
+                    {data: 'code'},
+                    {data: 'name'},
+                    {data: 'phoneNumber'},
+                    {data: 'group.title'},
+                    {data: 'debtTotal'},
+                    {data: 'spendTotal'},
+                    {data: "quantityItemOrder"}],
+                columnDefs: [
+                    {
+                        targets: 0,
+                        render: function (data, type, row, meta) {
+                            return `
+                               <input type="checkbox" value="check_none" />
+                            `
+                        }
+                    },
+                    {
+                        targets: 1,
+                        render: function (data, type, row, meta) {
+                            return `<a href="/admin/customers/${row.id}">${row.code}</a>`;
+                        }
+                    },
+                    // {
+                    //     targets: 2,
+                    //     render: function (data, type, row, meta) {
+                    //         return `<a href="/admin/customers/${row.id}">${row.name}</a>`;
+                    //     }
+                    // },
+                    // {
+                    //     targets: 3,
+                    //     render: function (data, type, row, meta) {
+                    //         return `<a href="/admin/customers/${row.id}">${row.phoneNumber}</a>`;
+                    //     }
+                    // },
+                    // {
+                    //     targets: 4,
+                    //     render: function (data, type, row, meta) {
+                    //         return `<a href="/admin/customers/${row.id}">${row.groupId}</a>`;
+                    //     }
+                    // },
+                    // {
+                    //     targets: 5,
+                    //     render: function (data, type, row, meta) {
+                    //         return `<a href="/admin/customers/${row.id}">${row.debtsTotal}</a>`;
+                    //     }
+                    // },
+                    // {
+                    //     targets: 6,
+                    //     render: function (data, type, row, meta) {
+                    //         return `<a href="/admin/customers/${row.id}">${row.spendTotal}</a>`;
+                    //     }
+                    // },
+                    // {
+                    //     targets: 7,
+                    //     render: function (data, type, row, meta) {
+                    //         return `<a href="/admin/customers/${row.id}">${row.quantityItemOrder}</a>`;
+                    //     }
+                    // },
 
-        let search = page.elements.search.val().trim();
-        let groupCustomerId = page.dialogs.elements.groupCustomer.val();
-        let status = page.dialogs.elements.status.val();
-
-
-       // let debtsTotal = Number(page.dialogs.elements.debtsTotal.toString());
-        //let spendTotal = Number(page.dialogs.elements.spendTotal.toString());
-
-        page.commands.getAllCustomersItemOnPageNo(pageNo, pageSize, search, groupCustomerId, status);
-    }
-
-    page.commands.getAllCustomersItemOnPageNo = (pageNo, pageSize, search, groupCustomerId, status) => {
-        // let arrCustomer = [];
-        // for(let i = 0; i < 8; i++){
-        //     arrCustomer.push({
-        //         "id" : i,
-        //         "code": i,
-        //         "name": i,
-        //         "phoneNumber": i,
-        //         "groupCustomerId": "Vip",
-        //         "debtsTotal": 12032940,
-        //         "spendTotal": 25123124,
-        //         "orderTotal": 2
-        //     });
-        // }
-        //
-        // arrCustomer.map(item => {
-        //     page.elements.tbCustomer.append(App.renderRowCustomer(item));
-        // });
-
-
-        $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "GET",
-            url: page.urls.getAllCustomers,
-        }).done((data) => {
-            data.map(item => {
-                page.elements.tbCustomer.append(App.renderRowCustomer(item));
-            });
-        }).fail((jqXHR) => {
-            App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404)
+                ],
+            })
         })
+
+
+
+        // let pageNo = Number(page.elements.pageNo.text());
+        // let pageSize = Number(page.elements.pageSize.val());
+        //
+        // let search = page.elements.search.val().trim();
+        // let groupCustomer = page.dialogs.elements.groupCustomer.val();
+        // let status = page.dialogs.elements.status.val();
+        //
+        //
+        // // let debtsTotal = Number(page.dialogs.elements.debtsTotal.toString());
+        // //let spendTotal = Number(page.dialogs.elements.spendTotal.toString());
+        //
+        // page.commands.getAllCustomersItemOnPageNo(pageNo, pageSize, search, groupCustomer, status);
     }
-    page.elements.checkAll.on("change", function (){
+
+    // page.commands.getAllCustomersItemOnPageNo = () => {
+
+    // let arrCustomer = [];
+    // for (let i = 0; i < 14; i++) {
+    //     arrCustomer.push({
+    //         "id": i,
+    //         "code": i,
+    //         "name": "fake ",
+    //         "phoneNumber": "0542578531",
+    //         "groupCustomer": "Vip",
+    //         "debtsTotal": 12032940,
+    //         "spendTotal": 25123124,
+    //         "quantityItemOrder": 2
+    //     });
+    // }
+    //
+    // arrCustomer.map(item => {
+    //     page.elements.tbCustomer.append(App.renderRowCustomer(item));
+    // });
+
+
+    // $.ajax({
+    //     headers: {
+    //         "accept": "application/json",
+    //         "content-type": "application/json"
+    //     },
+    //     type: "GET",
+    //     url: page.urls.getAllCustomers,
+    // }).done((data) => {
+    //     data.map(item => {
+    //         page.elements.tbCustomer.append(App.renderRowCustomer(item));
+    //     });
+    // }).fail((jqXHR) => {
+    //     App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404)
+    // })
+    // }
+    page.elements.checkAll.on("change", function () {
         page.elements.selectAction.prop("checked", true);
         arrayIdCustomer = [];
-        if(this.checked){
-            $("#tbCustomer > tbody input").each(function (){
+        if (this.checked) {
+            $("#tbCustomer > tbody input").each(function () {
                 $(this).prop("checked", true);
                 arrayIdCustomer.push($(this).val());
             })
         } else {
-            $("#tbCustomer > tbody input").each(function (){
+            $("#tbCustomer > tbody input").each(function () {
                 $(this).prop("checked", false);
             })
         }
-        //page.commands.showAction();
+
     })
 
 
@@ -537,7 +947,7 @@
     }
 
     $(() => {
-        // console.log("start");
+
         page.loadData()
 
     });

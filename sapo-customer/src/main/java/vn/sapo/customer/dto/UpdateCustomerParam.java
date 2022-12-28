@@ -13,13 +13,13 @@ public class UpdateCustomerParam {
 
     private Integer id;
 
-    private String code;
+    private String customerCode;
 
     private String fullName;
 
     private String phoneNumber;
 
-    private CustomerGroup group;
+    private Integer groupId;
 
     private String email;
 

@@ -8,7 +8,9 @@ import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerOrderResult;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
+import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.entities.customer.Customer;
+import vn.sapo.entities.customer.CustomerGroup;
 import vn.sapo.entities.customer.CustomerStatus;
 
 @Component
@@ -16,18 +18,21 @@ public class CustomerMapper implements InitializingBean {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private CustomerGroupService customerGroupService;
+
     @Override
     public void afterPropertiesSet() throws Exception {
-//        modelMapper.createTypeMap(Customer.class, CustomerResult.class);
-//        modelMapper.createTypeMap(CreateCustomerParam.class, Address.class);
     }
 
 
     public CustomerResult toDTO(Customer customer) {
         System.out.println(customer);
         return modelMapper.map(customer, CustomerResult.class)
+                .setCode(customer.getCode())
                 .setName(customer.getFullName())
-                .setPhoneNumber(customer.getPhoneNumber());
+                .setPhoneNumber(customer.getPhoneNumber())
+                .setGroup(customerGroupService.findById(customer.getGroupId()));
     }
 
 //    public CustomerOrderResult toOrderDTO(Customer customer) {

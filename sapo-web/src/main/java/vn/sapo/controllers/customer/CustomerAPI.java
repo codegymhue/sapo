@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/customers")
 public class CustomerAPI {
     @Autowired
     private CustomerService customerService;
@@ -36,18 +36,23 @@ public class CustomerAPI {
 
     @Autowired
     SaleOrderService saleOrderService;
-
-    @GetMapping("/customers")
+    @GetMapping("")
     public ResponseEntity<?> findAll() {
         List<CustomerResult> customers = customerService.findAll();
         customers.forEach(customer -> {
             BigDecimal spendTotal = getSpendTotalByCustomerId(customer.getId());
             BigDecimal paidTotal = getPaidTotalByCustomerId(customer.getId());
-            customer.setSpendTotal(spendTotal);
+            customer.setSpendTotal( spendTotal);
             customer.setDebtTotal(spendTotal.subtract(paidTotal));
+            customer.setQuantityProductOrder(saleOrderService.getQuantityProductOrder(customer.getId()));
 
+            customer.setQuantityItemOrder(orderItemService.getQuantityItemCustomerOrderById(customer.getId()));
+            customer.setLastDayOrder(saleOrderService.getLastDayOrderByCustomerId(customer.getId()));
         });
-        return new ResponseEntity<>(customerService.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+
+
+
     }
 
     public BigDecimal getSpendTotalByCustomerId(Integer customerId) {
@@ -65,16 +70,36 @@ public class CustomerAPI {
     }
 
 
+    public Integer getQuantityProductOrderByCustomerId(Integer customerId) {
+        Integer quantityProductOrder = saleOrderService.getQuantityProductOrder(customerId);
+        if (quantityProductOrder == null)
+            quantityProductOrder = 0;
+        return quantityProductOrder;
+    }
+
+    public Integer getQuantityItemCustomerOrderById(Integer customerId) {
+        Integer quantityItemOrder = orderItemService.getQuantityItemCustomerOrderById(customerId);
+        if (quantityItemOrder == null)
+            quantityItemOrder = 0;
+        return quantityItemOrder;
+
+    }
+
+    public Instant getLastDayOrderByCustomerId(Integer customerId) {
+        Instant lastDayOrder = saleOrderService.getLastDayOrderByCustomerId(customerId);
+        return lastDayOrder;
+    }
+
 //    @GetMapping("/findAllByStatus")
 //    public ResponseEntity<?> findAllByStatus() {
 //        List<CustomerResult> customers = customerService.findCustomerByStatus();
 //        return new ResponseEntity<>(customers, HttpStatus.OK);
-//    }
 
 
-    @GetMapping("/customers/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
         CustomerResult dto = customerService.findById(id);
+
 
         Integer quantityProductOrder = saleOrderService.getQuantityProductOrder(dto.getId());
         if (quantityProductOrder == null) {
@@ -89,22 +114,55 @@ public class CustomerAPI {
 
         Instant lastDayOrder = saleOrderService.getLastDayOrderByCustomerId(dto.getId());
 
+
+        BigDecimal paidTotal = getPaidTotalByCustomerId(dto.getId());
+        BigDecimal spendTotal =getSpendTotalByCustomerId(dto.getId());
+        dto.setDebtTotal(spendTotal.subtract(paidTotal));
+        dto.setSpendTotal(spendTotal);
+        dto.setQuantityProductOrder(quantityProductOrder);
+        dto.setQuantityItemOrder(quantityItemOrder);
+
         dto.setLastDayOrder(lastDayOrder);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
+
 
 
 //@GetMapping("/customers/page")
 //public ResponseEntity <?> getAllCustomerPage(){
 //        return ;
 //}
+
+//@GetMapping("/page")
+//public ResponseEntity<?> getAllCustomerPage(@RequestParam HashMap<String, String> hashMap) {
+//    return new ResponseEntity<>(customerService.getAllCustomerItemPage(
+//            Integer.valueOf(hashMap.get("pageNo")),
+//            Integer.valueOf(hashMap.get("pageSize")),
+//            hashMap.get("code"),
+//            hashMap.get("name"),
+//            hashMap.get("phoneNumber"),
+//            hashMap.get("group"),
+//            BigDecimal.valueOf(Long.parseLong(hashMap.get("debtsTotal"))),
+//
+//
+//
+//
+//    );
+
+
+    //}
+
     @DeleteMapping("/{id}")
     public void deleteCustomerById(@PathVariable Integer id) {
         customerService.deleteById(id);
     }
 
 
-    @PostMapping("/customers/create")
+
+
+
+    @PostMapping("/create")
+
     public ResponseEntity<?> create(@RequestBody CreateCustomerParam createCustomerParam) {
         CustomerResult dto = customerService.create(createCustomerParam);
         CreateAddressParam createAddressParam = createCustomerParam.getCreateAddressParam();
@@ -116,27 +174,43 @@ public class CustomerAPI {
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
-    @PutMapping("/customers/update")
+
+
+
+    @PutMapping("/update")
+
     public ResponseEntity<?> updateCustomer(@RequestBody UpdateCustomerParam updateCustomer) {
         return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.OK);
     }
+
+
+
+
+
+
 
     @GetMapping("/customerGroup")
     public ResponseEntity<?> getAllCustomerGroup() {
         return new ResponseEntity<>(customerService.findAll(), HttpStatus.OK);
     }
 
-    @PutMapping("customers/updateStatusAvailable")
+
+    @PutMapping("/updateStatusAvailable")
+
     public ResponseEntity<?> updateStatusAvailable(@RequestBody List<Integer> arrayIdCustomer) {
         customerService.changeStatusToAvailable(arrayIdCustomer, true);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/customers/updateStatusUnavailable")
+
+
+    @PutMapping("/updateStatusUnavailable")
+
     public ResponseEntity<?> updateStatusUnavailable(@RequestBody List<Integer> arrayIdCustomer) {
         customerService.changeStatusToAvailable(arrayIdCustomer, false);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 
 
 //    @GetMapping("/customerGroup")
