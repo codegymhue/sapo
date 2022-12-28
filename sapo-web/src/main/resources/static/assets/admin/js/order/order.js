@@ -244,7 +244,7 @@ function showCustomerInfo(idCustomer) {
                       <ul class="dropdown-menu" aria-labelledby="defaultDropdown" style="width: 450px">
                         <li>
                         <p class="dropdown-item" href="#" style="font-weight: bold">Thay Đổi Địa Chỉ 
-                        <button style="float: right;height: 10px" data-bs-toggle="modal" data-bs-target="#create_order_customer"
+                        <button style="float: right;height: 10px" data-bs-toggle="modal" data-bs-target="#create_order_address"
                          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary ">Thêm Mới</button>
                         </li></p>
                         <li>
@@ -748,7 +748,6 @@ function editCustomer() {
     $('#idCustomerUpdate').val(customer.id);
     $("#nameUpdate").val(customer.name)
     $('#phoneUpdate').val(customer.phoneNumber);
-    // console.log(customer)
     $('#addressUpdate').val(customer.addresses[0].line1);
     $('#provinceUpdate').val(customer.addresses[0].provinceId);
     getAllDistrictsByProvinceId(customer.addresses[0].provinceId).then(() => {
