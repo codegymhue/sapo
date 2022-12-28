@@ -26,7 +26,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     @Transactional(readOnly = true)
     public List<AddressResult> findByCustomerId(Integer customerId) {
-        return addressRepository.findAllByCustomerId(customerId)
+        return addressRepository.findByCustomerId(customerId)
                 .stream()
                 .map(addressMapper::toDTO)
                 .collect(Collectors.toList());
