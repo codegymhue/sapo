@@ -544,7 +544,11 @@
     //             items[i].checked = false;
     //     }
     // }
-
+    //post man bật lên vs
+    //layout mô ta
+    //2 cái này ah
+    //cãi cũ có ah
+    //để xí cop cho
     page.commands.getAllCustomers = () => {
         $(document).ready(function () {
             console.log("show all customer")
@@ -817,7 +821,7 @@
                         targets: 0,
                         render: function (data, type, row, meta) {
                             return `
-                               <input type="checkbox" title="Chọn hết" value="check_none" />
+                               <input type="checkbox" value="check_none" />
                             `
                         }
                     },
@@ -827,6 +831,42 @@
                             return `<a href="/admin/customers/${row.id}">${row.code}</a>`;
                         }
                     },
+                    // {
+                    //     targets: 2,
+                    //     render: function (data, type, row, meta) {
+                    //         return `<a href="/admin/customers/${row.id}">${row.name}</a>`;
+                    //     }
+                    // },
+                    // {
+                    //     targets: 3,
+                    //     render: function (data, type, row, meta) {
+                    //         return `<a href="/admin/customers/${row.id}">${row.phoneNumber}</a>`;
+                    //     }
+                    // },
+                    // {
+                    //     targets: 4,
+                    //     render: function (data, type, row, meta) {
+                    //         return `<a href="/admin/customers/${row.id}">${row.groupId}</a>`;
+                    //     }
+                    // },
+                    // {
+                    //     targets: 5,
+                    //     render: function (data, type, row, meta) {
+                    //         return `<a href="/admin/customers/${row.id}">${row.debtsTotal}</a>`;
+                    //     }
+                    // },
+                    // {
+                    //     targets: 6,
+                    //     render: function (data, type, row, meta) {
+                    //         return `<a href="/admin/customers/${row.id}">${row.spendTotal}</a>`;
+                    //     }
+                    // },
+                    // {
+                    //     targets: 7,
+                    //     render: function (data, type, row, meta) {
+                    //         return `<a href="/admin/customers/${row.id}">${row.quantityItemOrder}</a>`;
+                    //     }
+                    // },
 
                 ],
             })

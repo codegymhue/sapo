@@ -36,7 +36,7 @@ public class CustomerAPI {
 
     @Autowired
     SaleOrderService saleOrderService;
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<?> findAll() {
         List<CustomerResult> customers = customerService.findAll();
         customers.forEach(customer -> {
@@ -45,6 +45,7 @@ public class CustomerAPI {
             customer.setSpendTotal( spendTotal);
             customer.setDebtTotal(spendTotal.subtract(paidTotal));
             customer.setQuantityProductOrder(saleOrderService.getQuantityProductOrder(customer.getId()));
+
             customer.setQuantityItemOrder(orderItemService.getQuantityItemCustomerOrderById(customer.getId()));
             customer.setLastDayOrder(saleOrderService.getLastDayOrderByCustomerId(customer.getId()));
         });
@@ -95,7 +96,7 @@ public class CustomerAPI {
 //        return new ResponseEntity<>(customers, HttpStatus.OK);
 
 
-    @GetMapping("/customers/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
         CustomerResult dto = customerService.findById(id);
 
