@@ -5,6 +5,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import vn.sapo.customer.dto.CreateCustomerParam;
+import vn.sapo.customer.dto.CustomerOrderResult;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.entities.customer.Customer;
@@ -23,8 +24,17 @@ public class CustomerMapper implements InitializingBean {
 
 
     public CustomerResult toDTO(Customer customer) {
-        return modelMapper.map(customer, CustomerResult.class);
+        System.out.println(customer);
+        return modelMapper.map(customer, CustomerResult.class)
+                .setName(customer.getFullName())
+                .setPhoneNumber(customer.getPhoneNumber());
     }
+
+//    public CustomerOrderResult toOrderDTO(Customer customer) {
+//        return modelMapper.map(customer, CustomerOrderResult.class)
+//                .setName(customer.getFullName())
+//                .setPhone(customer.getPhoneNumber());
+//    }
 
     public Customer toModel(CreateCustomerParam createCustomerParam) {
         return modelMapper.map(createCustomerParam, Customer.class)
@@ -52,18 +62,17 @@ public class CustomerMapper implements InitializingBean {
 //    }
 //
 
-//    public Customer toCustomer(CreateCustomerParam customerCreate) {
-//        return new Customer()
-//                .setName(customerCreate.getName())
-//                .setPhone(customerCreate.getPhone())
-//                .setCustomerGroup(customerCreate.getCustomerGroup())
-//                .setCustomerGender(customerCreate.getCustomerGender())
-//                .setEmail(customerCreate.getEmail())
-//                .setBirthday(customerCreate.getBirthday())
-//                .setCustomerGender(customerCreate.getCustomerGender())
-//                .setCustomerStatus(customerCreate.getCustomerStatus())
-//                .setEmployeeId(customerCreate.getEmployeeId());
-//    }
+    public Customer toCustomer(CreateCustomerParam customerCreate) {
+       return new Customer()
+               .setCode(customerCreate.getCode())
+               .setFullName(customerCreate.getFullName())
+               .setPhoneNumber(customerCreate.getPhone())
+               .setGroup(customerCreate.getGroup())
+               .setGender(customerCreate.getGender())
+               .setEmail(customerCreate.getEmail())
+                .setBirthday(customerCreate.getBirthday())
+                .setEmployeeId(customerCreate.getEmployeeId());
+    }
 //
 //    public Customer toCustomer(UpdateCustomerParam updateCustomerParam, Customer customer) {
 //        return customer

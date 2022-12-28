@@ -1,0 +1,102 @@
+<th:block th:fragment="modal_create_shippingAddress">
+    <div class="modal fade" id="modal_create_shippingAddress" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm mới khách hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <div class="modal-body">
+                        <div class="sc-iqcoie iZrCvq sc-gITdmR cFtstx">
+                            <div class="sc-dFdIVH bPLSPb">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="exampleFormControlInput1 fullNameCreate" class="form-label">Họ tên</label>
+                                        <input type="text" class="form-control fullNameCreate" id="exampleFormControlInput1 fullNameCreate"
+                                               placeholder="First name" aria-label="First name">
+                                    </div>
+                                    <div class="col">
+                                        <label for="mobileCreate exampleFormControlInput2" class="form-label">Số điện thoaại</label>
+                                        <input type="text" class="form-control mobileCreate"  id="mobileCreate exampleFormControlInput2"
+                                               placeholder="Last name" aria-label="Last name">
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <label for="addressCreate exampleFormControlInput3" class="form-label">Địa chỉ cụ thể</label>
+                                    <div class="col">
+                                        <input type="text" class="form-control addressCreate" id="addressCreate exampleFormControlInput3"
+                                               placeholder="First name" aria-label="First name">
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+
+                                    <div class="col">
+                                        <label  class="form-label">Tỉnh/ Thành phố</label>
+<!--                                        <input type="text" class="form-control" id="exampleFormControlInput4"-->
+<!--                                               placeholder="First name" aria-label="First name">-->
+                                        <select class="form-select jss87874" name="province" id="province">
+                                            <option selected value="0">
+                                                <p class="MuiTypography-root label-select MuiTypography-body1 MuiTypography-colorTextPrimary">
+                                                    Chọn Tỉnh/Thành phố</p>
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label  class="form-label">Quân/ Huyện</label>
+<!--                                        <input type="text" class="form-control" id="exampleFormControlInput5"-->
+<!--                                               placeholder="Last name" aria-label="Last name">-->
+                                        <select class="form-select jss87874" name="district" id="district">
+                                            <option value="0">
+                                                <p class="MuiTypography-root label-select MuiTypography-body1 MuiTypography-colorTextPrimary">
+                                                    Chọn Quận/Huyện</p>
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label  class="form-label">Phường/Xã</label>
+<!--                                        <input type="text" class="form-control" id="exampleFormControlInput6"-->
+<!--                                               placeholder="Last name" aria-label="Last name">-->
+                                        <select class="form-select jss87874" name="ward" id="ward">
+                                            <option value="0">
+                                                <p class="MuiTypography-root label-select MuiTypography-body1 MuiTypography-colorTextPrimary">
+                                                    Chọn Phường/Xã</p>
+                                            </option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+
+
+                                    <div class="col">
+                                        <label for="exampleFormControlInput7" class="form-label">Email</label>
+                                        <input type="text" class="form-control emailCreate " id="exampleFormControlInput7"
+                                               placeholder="First name" aria-label="First name">
+                                    </div>
+                                    <div class="col">
+                                        <label for="zipCodeCreate exampleFormControlInput8" class="form-label">Mã bưu điện</label>
+                                        <input type="text" class="form-control zipCodeCreate" id="zipCodeCreate exampleFormControlInput8"
+                                               placeholder="Last name" aria-label="Last name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" cGcePZ mt-4 d-flex justify-content-end">
+                                <div class="me-2">
+                                    <button type="button" data-bs-dismiss="modal"
+                                            class="sc-jqUVSM TJspa btn-secondary btn-sm"><span
+                                            class="sc-papXJ jcEYKF">Thoát</span></button>
+                                </div>
+                                <div>
+                                    <button class=" btn-outline-primary btn-sm" id="btn_createCustomerShippingAddress">Thêm</button>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>
