@@ -35,6 +35,11 @@ public class CustomerMapper implements InitializingBean {
                 .setGroup(customerGroupService.findById(customer.getGroupId()));
     }
 
+//    public CustomerOrderResult toOrderDTO(Customer customer) {
+//        return modelMapper.map(customer, CustomerOrderResult.class)
+//                .setName(customer.getFullName())
+//                .setPhone(customer.getPhoneNumber());
+//    }
 
     public Customer toModel(CreateCustomerParam createCustomerParam) {
         return modelMapper.map(createCustomerParam, Customer.class)
