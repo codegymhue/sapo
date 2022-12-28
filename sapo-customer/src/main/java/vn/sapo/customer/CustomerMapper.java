@@ -28,8 +28,9 @@ public class CustomerMapper implements InitializingBean {
         return modelMapper.map(customer, CustomerResult.class)
                 .setCode(customer.getCode())
                 .setName(customer.getFullName())
-                .setPhoneNumber(customer.getPhoneNumber())
-                .setGroup(customer.getGroup());
+                .setPhoneNumber(customer.getPhoneNumber());
+//                .setGroup(customer.getGroup() != null ? customer);
+
 
 
 

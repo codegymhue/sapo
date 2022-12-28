@@ -4,6 +4,7 @@ package vn.sapo.customer.dto;
 import lombok.*;
 import lombok.experimental.Accessors;
 import vn.sapo.address.dto.AddressResult;
+import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.entities.customer.CustomerGender;
 import vn.sapo.entities.customer.CustomerGroup;
 import vn.sapo.entities.customer.CustomerStatus;
@@ -31,7 +32,7 @@ public class CustomerResult {
 
     private Instant birthday;
 
-    private CustomerGroup group;
+    private CustomerGroupResult group;
 
     private CustomerGender gender;
 

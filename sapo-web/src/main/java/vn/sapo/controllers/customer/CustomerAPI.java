@@ -24,8 +24,9 @@ import java.util.List;
 import java.util.function.Consumer;
 
 @RestController
-@RequestMapping("/api/customers")
+@RequestMapping("/api")
 public class CustomerAPI {
+
     @Autowired
     private CustomerService customerService;
 
@@ -100,17 +101,17 @@ public class CustomerAPI {
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
         CustomerResult dto = customerService.findById(id);
-//        BigDecimal paidTotal = getPaidTotalByCustomerId(dto.getId());
-//        BigDecimal spendTotal =getSpendTotalByCustomerId(dto.getId());
-//        Integer  quantityProductOrder = getQuantityProductOrderByCustomerId(dto.getId());
-//        Integer quantityItemOrder = getQuantityItemCustomerOrderById(dto.getId());
-//        Instant lastDayOrder = getLastDayOrderByCustomerId(dto.getId());
-//        dto.setDebtTotal(spendTotal.subtract(paidTotal));
-//        dto.setSpendTotal(spendTotal);
-//        dto.setQuantityProductOrder(quantityProductOrder);
-//        dto.setQuantityItemOrder(quantityItemOrder);
-//        dto.setLastDayOrder(lastDayOrder);
-        return new ResponseEntity<>(customerService.findAll(), HttpStatus.OK);
+        BigDecimal paidTotal = getPaidTotalByCustomerId(dto.getId());
+        BigDecimal spendTotal =getSpendTotalByCustomerId(dto.getId());
+        Integer  quantityProductOrder = getQuantityProductOrderByCustomerId(dto.getId());
+        Integer quantityItemOrder = getQuantityItemCustomerOrderById(dto.getId());
+        Instant lastDayOrder = getLastDayOrderByCustomerId(dto.getId());
+        dto.setDebtTotal(spendTotal.subtract(paidTotal));
+        dto.setSpendTotal(spendTotal);
+        dto.setQuantityProductOrder(quantityProductOrder);
+        dto.setQuantityItemOrder(quantityItemOrder);
+        dto.setLastDayOrder(lastDayOrder);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
 
@@ -156,6 +157,9 @@ public class CustomerAPI {
     }
 
 
+
+
+
     @GetMapping("/customerGroup")
     public ResponseEntity<?> getAllCustomerGroup() {
         return new ResponseEntity<>(customerService.findAll(), HttpStatus.OK);
@@ -173,10 +177,12 @@ public class CustomerAPI {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+
 //    @GetMapping("/customerGroup")
 //    public ResponseEntity<?> getAllCustomerGroup(){
 //      return new ResponseEntity<>(customerService.findAll(),HttpStatus.OK);
 //    }
+
 
 
 //    @GetMapping("/customerGroup")

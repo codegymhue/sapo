@@ -1,0 +1,89 @@
+.MuiSelect-root {
+    color: #0F1824;
+  }
+
+  .MuiSelect-select {
+    cursor: pointer;
+    min-width: 16px;
+    user-select: none;
+    border-radius: 0;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .MuiSelect-select:focus {
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .MuiSelect-select::-ms-expand {
+    display: none;
+  }
+
+  .MuiSelect-select.Mui-disabled {
+    cursor: default;
+  }
+
+  .MuiSelect-select[multiple] {
+    height: auto;
+  }
+
+  .MuiSelect-select:not([multiple]) option,
+  .MuiSelect-select:not([multiple]) optgroup {
+    background-color: #fff;
+  }
+
+  .MuiSelect-select.MuiSelect-select {
+    padding-right: 24px;
+  }
+
+  .MuiSelect-filled.MuiSelect-filled {
+    padding-right: 32px;
+  }
+
+  .MuiSelect-outlined {
+    border-radius: 4px;
+  }
+
+  .MuiSelect-outlined.MuiSelect-outlined {
+    padding-right: 32px;
+  }
+
+  .MuiSelect-selectMenu {
+    height: auto;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .MuiSelect-icon {
+    top: calc(50% - 12px);
+    color: rgba(0, 0, 0, 0.54);
+    right: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .MuiSelect-icon.Mui-disabled {
+    color: rgba(0, 0, 0, 0.26);
+  }
+
+  .MuiSelect-icon.MuiSelect-icon {
+    color: #A3A8AF;
+  }
+
+  .MuiSelect-icon.MuiSelect-iconOpen {
+    color: #0088FF;
+  }
+
+  .MuiSelect-iconOpen {
+    transform: rotate(180deg);
+  }
+
+  .MuiSelect-iconFilled {
+    right: 7px;
+  }
+
+  .MuiSelect-iconOutlined {
+    right: 7px;
+  }

@@ -1,0 +1,224 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi-VN" class="sapo-menu-expand sapo-menu-toggle-active">
+<head>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
+    <th:block th:replace="/layout/header.html"/>
+    <title>Danh hàng</title>
+    <link rel="stylesheet" href="/assets/admin/css/customer/customer_create.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body data-new-gr-c-s-check-loaded="14.1085.0" cz-shortcut-listen="true">
+<div id="root" style="overflow: auto;">
+    <th:block th:replace="/layout/menu.html"/>
+    <div class="col-right  MuiBox-root jss64 jss40">
+        <div class="col-right_content" id="content">
+            <div class="first-screen first-screen-price-adjustment"
+                 define="{importAndExportPriceAdjustment:new Components.PriceAdjustment.ImportAndExportPriceAdjustment(this, {})}"
+                 context="importAndExportPriceAdjustment">
+                <header class="ui-title-bar-container">
+                    <div class="ui-title-bar ui-title-bar--separator">
+                        <div class="ui-title-bar__main-group">
+                            <div class="ui-title-bar__heading-group">
+                                <h1 class="ui-title-bar__title">Phiếu điều chỉnh</h1>
+                            </div>
+                        </div>
+                        <div class="action-bar">
+                            <div class="action-bar__top-links">
+                                <button class="btn sapo-btn-transparent action-bar__link import_price_adjustment"
+                                        bind-event-click="openFileImport()" data-popover-index="1" type="button"
+                                        name="button">
+                                    <svg
+                                            class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             xlink:href="#next-import-minor"></use>
+                                    </svg>
+                                    Nhập file
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <div class="first-screen-body">
+                    <div class="w-100 text-center display-4 text-color-price-adjustment">Cửa hàng của bạn chưa có
+                        phiếu điều chỉnh nào
+                    </div>
+                    <div class="w-100 text-center text-color-price-adjustment mt-4">Quản lý mọi thông tin chi tiết
+                        của từng lần điều chỉnh giá vốn
+                    </div>
+                    <div class="w-100 text-center first-screen-img-box">
+                        <img style="width: 404px;opacity: 0.5"
+                             src="/admin/css/product/images/icon_fs_receipt_vouchers.svg">
+                    </div>
+                    <div class="w-100 text-center mt-4"><a class="btn sapo-btn-default"
+                                                           href="/admin/price_adjustments/create">Tạo phiếu điều chỉnh
+                        đầu tiên</a></div>
+                </div>
+                <div class="grid-footer-help">
+                    <div class="grid-footer-help__content grid-footer-price-adjustment-help__content">
+                        <div class="grid-footer-help__icon">
+                            <svg class="next-icon next-icon--size-24 next-icon--no-nudge" role="img"
+                                 aria-labelledby="next-help-circle-title">
+                                <title id="next-help-circle-title">Help</title>
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-help-circle">
+                                </use>
+                            </svg>
+                        </div>
+                        <div>
+                            Bạn có thể xem thêm hướng dẫn về quản lý phiếu điều chỉnh <a target="_blank"
+                                                                                         style="color:#0088ff"
+                                                                                         title="Hướng dẫn"
+                                                                                         href="https://support.sapo.vn/tao-phieu-dieu-chinh-gia-von?utm_campaign=cpn%3Asupport-plm%3Adashboard&amp;utm_source=admin_pos_cau_hinh_cua_hang&amp;utm_medium=internal&amp;utm_content=fm%3Atext_link-km%3Adieu_chinh_gia_von&amp;campaign=support_admin_pos_cau_hinh_cua_hang">tại
+                            đây</a>
+                        </div>
+                    </div>
+                </div>
+                <script class="modal_source" define="{importPriceAdjustmentModal: new Components.Modal(this)}"
+                        type="text/html">
+                    <div class="modal-dialog modal-dialog-new" style="width:600px;max-width:unset">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span class="ui-dialog-title ">
+                                Nhập dữ liệu điều chỉnh
+                                </span>
+                                <span class="modal-close-wrapper1" bind-event-click="closePopup('priceAdjustment')">
+                                        <svg class="ui-icon-x ui-icon-x-20">
+                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                 xlink:href="#cancel-small-minor"></use>
+                                        </svg>
+                                    </span>
+                            </div>
+                            <div class="modal-body">
+                                <form id="form-import-price-adjustment" action="/admin/price_adjustments/import"
+                                      method="post" enctype="multipart/form-data">
+                                    <div>
+                                        <div id="load-status-import"></div>
+                                        <div id="empty-success" style="padding-top:25px;">
+                                            <div>
+                                                <table id="tblImport" class="tblImportPriceAdjustment"
+                                                       style="width:100%">
+                                                    <tr>
+                                                        <td valign="middle" width="115">Chọn chi nhánh</td>
+                                                        <td valign="middle">
+                                                            <select
+                                                                    style="width:200px;margin-left:0px;vertical-align:middle"
+                                                                    id="locationId" name="locationId"
+                                                                    class="sapo-select hide"
+                                                                    placeholder="Chọn chi nhánh chuyển">
+                                                                <option value="641083">Chi nh&#xE1;nh m&#x1EB7;c
+                                                                    &#x111;&#x1ECB;nh
+                                                                </option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <br/>
+                                            <div>
+                                                Chú ý:
+                                            </div>
+                                            <div class="empty-success__text">
+                                                - Thời gian cập nhật mẫu file: 19/10/2020.
+                                            </div>
+                                            <div class="empty-success__text">
+                                                - Mã sản phẩm phải là duy nhất đối với các sản phẩm độc lập và các
+                                                phiên bản sản phẩm.
+                                            </div>
+                                            <div class="empty-success__text">
+                                                - Chuyển đổi file nhập dưới dạng .XLS trước khi tải dữ liệu.
+                                            </div>
+                                            <div class="empty-success__text">
+                                                - Tải file mẫu nhập phiếu điều chỉnh <a
+                                                    href="/v2/file/sapo_mau_nhap_dieu_chinh_gia_19102020.xlsx"
+                                                    style="color:#0088ff">tại đây</a>
+                                            </div>
+                                            <div class="empty-success__text">
+                                                - File nhập có dung lượng tối đa là 3MB và 500 bản ghi.
+                                            </div>
+                                        </div>
+
+                                        <div id="chose-file">
+                                            <div class="chose-file-import">
+                                                <a class="btn-upload" bind-event-click="showImportPriceAdjustment()"
+                                                   href="javascript:void(0)" data-original-title="" title=""><i
+                                                        style="padding-right: 4px;" class="fa fa-cloud-download"
+                                                        aria-hidden="true"></i><span>Kéo thả file vào đây hoặc tải
+                                                            lên từ thiết bị</span></a>
+                                                <input name="importProductsFile" type="file" size="30" class="hide"
+                                                       id="importProductsFileUpload"
+                                                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                                       bind-event-change="enableButtonImportPriceAdjustment()"/>
+
+                                                <input id="overrideExistProducts" name="overrideExistProducts"
+                                                       type="hidden" value="false">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="action-btn clearfix">
+                                    <button
+                                            class="btn sapo-btn-default margin-left-5 pull-right btn-import-price-adjustment"
+                                            id="importPriceAdjustment" bind-event-click="importPriceAdjustment()">Nhập
+                                        file
+                                    </button>
+                                    <button class="btn btn-blank pull-right"
+                                            bind-event-click="closePopup('priceAdjustment')"
+                                            type="button">Thoát
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </script>
+                <script class="modal_source" define="{showMessagePopup: new Components.Modal(this)}"
+                        type="text/html">
+                    <div class="modal-dialog modal-dialog-new">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                    <span class="ui-dialog-title" id="ui-dialog-title-empty">
+                                    </span>
+                                <span class="modal-close-wrapper">
+                                        <svg class="ui-icon-x ui-icon-x-20">
+                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                 xlink:href="#cancel-small-minor"></use>
+                                        </svg>
+                                    </span>
+                            </div>
+
+                            <div id="modal-body-empty" class="modal-body product-option-edit pull-center w100"
+                                 style="padding:0px;">
+
+                            </div>
+                            <div class="modal-footer">
+                                <div class="action-btn clearfix" id="modal-footer-empty">
+                                    <button class="close-modal btn btn-blank pull-right"
+                                            type="button">Thoát
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </script>
+            </div>
+
+        </div>
+        <div class="popup-box">
+            <iframe scrolling="no" src="about:blank" name="myIframe" id="popupPrint"
+                    style="border:0;position:absolute;width:0px;height:0px;left:0px;top:0px;"></iframe>
+        </div>
+    </div>
+</div>
+<th:block th:replace="/layout/script :: script"/>
+<script>
+    Page();
+
+</script>

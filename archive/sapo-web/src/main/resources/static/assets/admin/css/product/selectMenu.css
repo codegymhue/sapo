@@ -1,0 +1,106 @@
+
+/*::selection{*/
+/*    color: #fff;*/
+/*    background: #4285f4;*/
+/*}*/
+/*.wrapper{*/
+/*}*/
+.dropdown-menu li {
+    padding: 8px;
+}
+.select-btn, .brandItem{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.select-btn{
+    width: 100%;
+    border: 1px solid #D3D5D7;
+    cursor: pointer;
+    height: 40px;
+    display: flex;
+    padding: 0 12px;
+    align-items: center;
+    border-color: #D3D5D7;
+    border-radius: 3px;
+    justify-content: space-between;
+    background-color: #fff;
+}
+
+.select-btn i{
+    font-size: 12px;
+    transition: transform 0.3s linear;
+}
+.wrapper.active .select-btn i{
+    transform: rotate(-180deg);
+}
+.content{
+    display: none;
+    padding: 20px;
+    margin-top: 15px;
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+}
+.wrapper.active .content{
+    display: block;
+}
+.content .search{
+    position: relative;
+}
+.search i{
+    top: 50%;
+    left: 15px;
+    color: #999;
+    font-size: 20px;
+    pointer-events: none;
+    transform: translateY(-50%);
+    position: absolute;
+}
+.search input{
+    height: 50px;
+    width: 100%;
+    outline: none;
+    font-size: 17px;
+    border-radius: 5px;
+    padding: 0 20px 0 43px;
+    border: 1px solid #B3B3B3;
+}
+.search input:focus{
+    padding-left: 42px;
+    border: 2px solid #4285f4;
+}
+.search input::placeholder{
+    color: #bfbfbf;
+}
+.content .options{
+    margin-top: 10px;
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: 7px;
+    padding-left: 0;
+}
+.options::-webkit-scrollbar{
+    width: 7px;
+}
+.options::-webkit-scrollbar-track{
+    background: #f1f1f1;
+    border-radius: 25px;
+}
+.options::-webkit-scrollbar-thumb{
+    background: #ccc;
+    border-radius: 25px;
+}
+.options::-webkit-scrollbar-thumb:hover{
+    background: #b3b3b3;
+}
+.options li{
+    height: 50px;
+    padding: 0 13px;
+    font-size: 21px;
+    border-bottom: 1px solid #E8EAEB;
+}
+.options li:hover, li.selected{
+    border-radius: 5px;
+    background: #f2f2f2;
+}

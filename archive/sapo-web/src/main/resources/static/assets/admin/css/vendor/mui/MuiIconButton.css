@@ -1,0 +1,85 @@
+.MuiIconButton-root {
+    flex: 0 0 auto;
+    color: #0F1824;
+    padding: 12px;
+    overflow: visible;
+    font-size: 1rem;
+    text-align: center;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-radius: 50%;
+  }
+
+  .MuiIconButton-root:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  .MuiIconButton-root.Mui-disabled {
+    color: rgba(0, 0, 0, 0.26);
+    background-color: transparent;
+  }
+
+  @media (hover: none) {
+    .MuiIconButton-root:hover {
+      background-color: transparent;
+    }
+  }
+
+  .MuiIconButton-edgeStart {
+    margin-left: -12px;
+  }
+
+  .MuiIconButton-sizeSmall.MuiIconButton-edgeStart {
+    margin-left: -3px;
+  }
+
+  .MuiIconButton-edgeEnd {
+    margin-right: -12px;
+  }
+
+  .MuiIconButton-sizeSmall.MuiIconButton-edgeEnd {
+    margin-right: -3px;
+  }
+
+  .MuiIconButton-colorInherit {
+    color: inherit;
+  }
+
+  .MuiIconButton-colorPrimary {
+    color: #0088FF;
+  }
+
+  .MuiIconButton-colorPrimary:hover {
+    background-color: rgba(0, 136, 255, 0.04);
+  }
+
+  @media (hover: none) {
+    .MuiIconButton-colorPrimary:hover {
+      background-color: transparent;
+    }
+  }
+
+  .MuiIconButton-colorSecondary {
+    color: #747C87;
+  }
+
+  .MuiIconButton-colorSecondary:hover {
+    background-color: rgba(116, 124, 135, 0.04);
+  }
+
+  @media (hover: none) {
+    .MuiIconButton-colorSecondary:hover {
+      background-color: transparent;
+    }
+  }
+
+  .MuiIconButton-sizeSmall {
+    padding: 3px;
+    font-size: 1.125rem;
+  }
+
+  .MuiIconButton-label {
+    width: 100%;
+    display: flex;
+    align-items: inherit;
+    justify-content: inherit;
+  }

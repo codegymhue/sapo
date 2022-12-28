@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="sapo-menu-expand sapo-menu-toggle-active" lang="vi-VN">
+<head>
+    <title>Danh sách đơn trả hàng</title>
+    <th:block th:replace="/layout/header :: header" />
+    <link rel="stylesheet" href="/assets/admin/css/order/order_return.css">
+</head>
+<body class="" data-new-gr-c-s-check-loaded="14.1085.0" data-gr-ext-installed="" cz-shortcut-listen="true">
+<div id="root" style="overflow: auto">
+    <div class="hidden" context="tenantInfo"
+         define="{tenantInfo: new Components.TenantInfo(this,{&quot;countries&quot;:{&quot;countryId&quot;:201}})}">
+    </div>
+    <div class="header-mobile">
+        <a href="javascript:" class="icon-menu visible-xs visible-sm" onclick="showMenu()">
+            <svg class="next-icon next-icon--size-20">
+                <use xlink:href="#icon-menu" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+            </svg>
+        </a>
+    </div>
+    <th:block th:replace="/layout/menu :: menu"/>
+    <div class="col-right MuiBox-root jss64 jss40">
+        <div class="MuiBox-root jss3878 jss409 " id="header">
+            <h3 class="MuiTypography-root MuiTypography-h3">Danh sách đơn trả hàng</h3>
+            <div class="MuiBox-root jss3879 jss410">
+                <div class="MuiBox-root jss3880 jss411"><svg class="MuiSvgIcon-root jss412" focusable="false"
+                                                             viewBox="0 0 24 24" color="#A2A8AF" aria-hidden="true">
+                    <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z">
+                    </path>
+                </svg>
+                    <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">Vay vốn kinh doanh</p>
+                </div>
+                <div class="MuiBox-root jss3895 jss411"><svg class="MuiSvgIcon-root jss412" focusable="false"
+                                                             viewBox="0 0 20 20" color="#A2A8AF" aria-hidden="true">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M9.99992 0.833374C4.93992 0.833374 0.833252 4.94004 0.833252 10C0.833252 15.06 4.93992 19.1667 9.99992 19.1667C15.0599 19.1667 19.1666 15.06 19.1666 10C19.1666 4.94004 15.0599 0.833374 9.99992 0.833374ZM9.08325 16.4167V14.5834H10.9166V16.4167H9.08325ZM11.9891 10.1559L12.8141 9.31254C13.3366 8.79004 13.6666 8.05671 13.6666 7.25004C13.6666 5.22421 12.0258 3.58337 9.99992 3.58337C7.97409 3.58337 6.33325 5.22421 6.33325 7.25004H8.16659C8.16659 6.24171 8.99158 5.41671 9.99992 5.41671C11.0083 5.41671 11.8333 6.24171 11.8333 7.25004C11.8333 7.75421 11.6316 8.21254 11.2924 8.54254L10.1558 9.69754C9.49575 10.3667 9.08325 11.2834 9.08325 12.2917V12.75H10.9166C10.9166 11.375 11.3291 10.825 11.9891 10.1559Z"
+                          fill="currentColor"></path>
+                </svg>
+                    <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">Trợ giúp</p>
+                </div>
+                <div class="MuiBox-root jss3896 jss411"><svg class="MuiSvgIcon-root jss412" focusable="false"
+                                                             viewBox="0 0 16 14" color="#A2A8AF" aria-hidden="true">
+                    <path
+                            d="M8 14C5.10929 11.4904 0 8.36868 0 4.19619C0 1.84632 1.936 0 4.4 0C5.792 0 7.128 0.578989 8 1.55556C8.872 0.578989 10.208 0 11.6 0C14.064 0 16 1.84632 16 4.19619C16 8.36185 10.8971 11.5039 8 14Z"
+                            fill="currentColor"></path>
+                </svg>
+                    <p class="MuiTypography-root MuiTypography-body1" style="color: rgb(24, 37, 55);">Góp ý</p>
+                </div>
+                <div class="MuiBox-root jss3897  jss411 jss415">
+                    <div class=" sb-avatar sb-avatar--text"
+                         style="display: inline-block; vertical-align: middle; width: 30px; height: 30px; border-radius: 20px; font-family: Helvetica, Arial, sans-serif;">
+                        <div class=" sb-avatar__text" title="Phước Nguyễn"
+                             style="width: 30px; height: 30px; line-height: initial; text-align: center; color: rgb(255, 255, 255); border-radius: 20px; background: rgb(215, 61, 50);">
+                            <div style="display: table; table-layout: fixed; width: 100%; height: 100%; font-size: 10px;"><span
+                                    style="display: table-cell; vertical-align: middle; white-space: nowrap;"><span>P</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="MuiTypography-root jss414 MuiTypography-body1 MuiTypography-colorTextPrimary">Phước Nguyễn</p>
+                    <svg class="MuiSvgIcon-root arrow-avatar" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="MuiBox-root jss5786 jss5770">
+            <div class="MuiBox-root jss5787 jss5771">
+                <div class="MuiBox-root jss5788 jss5779"><button
+                        class="MuiButtonBase-root MuiButton-root MuiButton-text jss5791 MuiButton-textSizeSmall MuiButton-sizeSmall"
+                        tabindex="0" type="button"><span class="MuiButton-label"><span
+                        class="MuiButton-startIcon MuiButton-iconSizeSmall"><svg class="MuiSvgIcon-root jss5790"
+                                                                                 focusable="false" viewBox="0 0 14 20" aria-hidden="true">
+                          <path d="M6 8.74228e-08L6 12.17L2.41 8.59L1 10L7 16L13 10L11.59 8.59L8 12.17L8 0L6 8.74228e-08Z"
+                                fill="currentColor"></path>
+                          <path d="M0 18H14V20H0V18Z" fill="currentColor"></path>
+                        </svg></span>Xuất file</span><span class="MuiTouchRipple-root"></span></button></div>
+                <div class="MuiBox-root jss5821 jss5779"><button id="Sapo-Button-fbaebea4-aa77-4488-83d0-7fe7b400a17a"
+                                                                 class="sc-jqUVSM fEHNKi"><svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24"
+                                                                                               aria-hidden="true">
+                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+                </svg><span class="sc-papXJ fCIlZX">Tạo đơn trả hàng</span></button></div>
+            </div>
+            <div class="MuiBox-root jss5822 jss5772">
+                <div class="MuiBox-root jss5823 jss5773">
+                    <div class="sc-hZFzCs cTUhMx">
+                        <div id="scroller" class="sc-cHPgQl hYUFnd">
+                            <div class="sc-gHLcSH ieIWRo"><button id="" class="sc-KfMfS dvtKJo">Tất cả đơn trả</button><button
+                                    id="returning" class="sc-KfMfS ceoyok">Chưa nhận hàng</button><button id="unpaid"
+                                                                                                          class="sc-KfMfS ceoyok">Chưa hoàn tiền</button></div>
+                        </div>
+                    </div>
+                    <div class="MuiBox-root jss5824 jss5774">
+                        <div class="sc-hjriPb elNOYP">
+                            <div width="100%" class="sc-himrzO gTRFtW sc-gUAEMC dYvjic">
+                                <div class="sc-jIZahH hISLMV Sapo-InputRoot">
+                                    <div class="sc-gicCDI sc-ezWOiH bqqjdk kZUaKd"><svg viewBox="0 0 24 24" fill="none"
+                                                                                        xmlns="http://www.w3.org/2000/svg" class="sc-hsOonA echsof">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                              d="M14.891 13.477a6.002 6.002 0 0 0-9.134-7.72 6 6 0 0 0 7.72 9.134l5.715 5.716 1.415-1.415-5.716-5.715Zm-2.063-6.305a4 4 0 1 1-5.656 5.656 4 4 0 0 1 5.657-5.656Z"
+                                              fill="currentColor"></path>
+                                    </svg></div><input id="Sapo-TextField-20b27c9e-1bdb-40d6-b9a8-8b2f6ba7857e"
+                                                       placeholder="Tìm kiếm theo mã đơn hàng, đơn trả, tên, số điện thoại KH" type="text"
+                                                       class="sc-ikZpkk iYDwCJ" value="">
+                                    <fieldset class="sc-iIPllB iUBRZb"></fieldset>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="group" class="MuiButtonGroup-root jss5825"><button
+                                class="MuiButtonBase-root MuiButton-root jss5850 MuiButton-text MuiButton-outlined MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal"
+                                tabindex="0" type="button"><span class="MuiButton-label">Ngày tạo<span
+                                class="MuiButton-endIcon MuiButton-iconSizeMedium"><svg class="MuiSvgIcon-root"
+                                                                                        focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M7 10l5 5 5-5z"></path>
+                            </svg></span></span><span class="MuiTouchRipple-root"></span></button> <button
+                                class="MuiButtonBase-root MuiButton-root jss5850 MuiButton-text MuiButton-outlined MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal"
+                                tabindex="0" type="button" style=""><span class="MuiButton-label">Nhân viên trả hàng<span
+                                class="MuiButton-endIcon MuiButton-iconSizeMedium"><svg class="MuiSvgIcon-root"
+                                                                                        focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M7 10l5 5 5-5z"></path>
+                            </svg></span></span><span class="MuiTouchRipple-root"></span></button> <button
+                                class="MuiButtonBase-root MuiButton-root jss5850 MuiButton-text MuiButton-outlined MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal"
+                                tabindex="0" type="button" style=""><span class="MuiButton-label">Lý do trả hàng<span
+                                class="MuiButton-endIcon MuiButton-iconSizeMedium"><svg class="MuiSvgIcon-root"
+                                                                                        focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M7 10l5 5 5-5z"></path>
+                            </svg></span></span><span class="MuiTouchRipple-root"></span></button> <button
+                                class="MuiButtonBase-root MuiButton-root jss5850 MuiButton-outlined MuiButtonGroup-grouped MuiButtonGroup-groupedHorizontal MuiButtonGroup-groupedOutlined MuiButtonGroup-groupedOutlinedHorizontal"
+                                tabindex="0" type="button" style=""><span class="MuiButton-label">Bộ lọc khác<span
+                                class="MuiButton-endIcon MuiButton-iconSizeMedium"><svg class="MuiSvgIcon-root"
+                                                                                        focusable="false" viewBox="0 0 24 24" aria-hidden="true" fill="none"
+                                                                                        style="color: rgb(163, 168, 175);">
+                              <path d="M21.6625 2H3V3.55518H21.6625V2Z" fill="currentColor"></path>
+                              <path
+                                      d="M3.37329 4.48828L10.5584 11.7667C10.6517 11.8599 10.7761 11.9844 10.7761 12.1088V21.9999L13.8865 20.3203V12.1088C13.8865 11.9844 14.0109 11.8599 14.1042 11.7667L21.2893 4.48828H3.37329Z"
+                                      fill="currentColor"></path>
+                            </svg></span></span><span class="MuiTouchRipple-root"></span></button></div>
+                    </div>
+                    <div class="MuiBox-root jss5862"></div>
+                    <div class="MuiBox-root jss5864"></div>
+                </div>
+                <div class="MuiPaper-root jss5992 sapo-grid MuiPaper-elevation1 MuiPaper-rounded">
+                    <div class="MuiTableContainer-root jss5993 sapo-grid-header-wrapper stickyHeader" style="top: 52px;">
+                        <table class="MuiTable-root jss5994 sapo-grid-header" aria-labelledby="tableTitle"
+                               aria-label="enhanced table">
+                            <colgroup>
+                                <col style="width: 45px;">
+                                <col style="width: 167px;">
+                                <col style="width: 167px;">
+                                <col style="width: 167px;">
+                                <col style="width: 167px;">
+                                <col style="width: 167px;">
+                                <col style="width: 137px;">
+                                <col style="width: 167px;">
+                                <col style="width: 167px;">
+                            </colgroup>
+                            <thead class="MuiTableHead-root jss6035">
+                            <tr class="MuiTableRow-root MuiTableRow-head">
+                                <th class="MuiTableCell-root MuiTableCell-head jss6044 MuiTableCell-paddingCheckbox" scope="col"
+                                    rowspan="1" style="padding-left: 0px;">
+                                    <div class="MuiBox-root jss6065"><span class="MuiButtonBase-root MuiIconButton-root"
+                                                                           tabindex="0" role="button" aria-disabled="false" data-tip="Điều chỉnh cột hiển thị"
+                                                                           currentitem="false" style="width: 100%;"><span class="MuiIconButton-label"><svg
+                                            class="MuiSvgIcon-root" focusable="false" viewBox="0 0 20 20" aria-hidden="true"
+                                            style="color: rgb(163, 168, 175);">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                          d="M13.7043 10C13.7043 12.2091 11.9135 14 9.70435 14C7.49521 14 5.70435 12.2091 5.70435 10C5.70435 7.79086 7.49521 6 9.70435 6C11.9135 6 13.7043 7.79086 13.7043 10ZM11.7043 10C11.7043 11.1046 10.8089 12 9.70435 12C8.59978 12 7.70435 11.1046 7.70435 10C7.70435 8.89543 8.59978 8 9.70435 8C10.8089 8 11.7043 8.89543 11.7043 10Z"
+                                          fill="curentColor"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                          d="M0.134012 6.57627L1.95412 3.42375C2.18909 3.01677 2.67573 2.82831 3.12352 2.97089L4.96049 3.55576C5.20561 3.37551 5.45994 3.21016 5.722 3.06011C5.97165 2.91655 6.22977 2.78606 6.49544 2.6696L6.90741 0.786304C7.00784 0.32722 7.41437 0 7.88431 0H11.5245C11.9945 0 12.401 0.32722 12.5014 0.786304L12.9134 2.6696C13.1953 2.79318 13.4687 2.93254 13.7325 3.08657C13.9784 3.22954 14.2173 3.38604 14.4481 3.55576L16.2851 2.97089C16.7329 2.82831 17.2196 3.01678 17.4545 3.42375L19.2746 6.57627C19.5096 6.98325 19.4295 7.49893 19.0821 7.81544L17.6571 9.11387C17.6898 9.40883 17.7059 9.70429 17.7057 9.99888C17.706 10.2942 17.6899 10.5904 17.6571 10.8862L19.0821 12.1846C19.4295 12.5011 19.5096 13.0168 19.2746 13.4238L17.4545 16.5763C17.2195 16.9832 16.7329 17.1717 16.2851 17.0291L14.4481 16.4443C14.2145 16.6161 13.9725 16.7743 13.7235 16.9187C13.4625 17.0706 13.1921 17.2082 12.9134 17.3304L12.5014 19.2137C12.401 19.6728 11.9945 20 11.5245 20H7.88431C7.41437 20 7.00784 19.6728 6.90741 19.2137L6.49544 17.3304C6.23287 17.2153 5.97766 17.0865 5.73072 16.9449C5.46558 16.7935 5.20833 16.6265 4.96049 16.4443L3.12352 17.0291C2.67573 17.1717 2.18908 16.9832 1.95411 16.5763L0.134011 13.4238C-0.100959 13.0168 -0.0208463 12.5011 0.326519 12.1846L1.75152 10.8862C1.71876 10.5908 1.70271 10.295 1.70299 9.99999C1.70271 9.70503 1.71876 9.40919 1.75152 9.11386L0.326521 7.81544C-0.0208451 7.49893 -0.100958 6.98324 0.134012 6.57627ZM10.7196 2L11.1773 4.09226L12.1104 4.50132C12.3214 4.59382 12.5262 4.69821 12.724 4.8137L12.7272 4.81557C12.9116 4.92275 13.0906 5.04 13.2633 5.16703L14.0841 5.77058L16.1249 5.12082L17.1401 6.87921L15.557 8.3217L15.6693 9.3343C15.6938 9.5551 15.7058 9.77644 15.7056 9.9973L15.7057 10.001C15.7059 10.2225 15.6939 10.4444 15.6693 10.6657L15.557 11.6783L17.1401 13.1208L16.1249 14.8792L14.0841 14.2294L13.2633 14.833C13.0885 14.9616 12.9072 15.0801 12.7205 15.1884L12.7172 15.1902C12.5215 15.3042 12.319 15.4072 12.1104 15.4987L11.1773 15.9077L10.7196 18H8.68921L8.23153 15.9077L7.29845 15.4987C7.10189 15.4125 6.91071 15.316 6.7256 15.2099L6.72233 15.208C6.52353 15.0945 6.33082 14.9694 6.14531 14.833L5.32452 14.2294L3.28372 14.8792L2.26851 13.1208L3.85162 11.6783L3.73933 10.6657C3.71481 10.4446 3.70278 10.223 3.70299 10.0019L3.70298 9.99813C3.70278 9.77698 3.71481 9.55537 3.73933 9.3343L3.85162 8.3217L2.26851 6.87921L3.28372 5.12081L5.32451 5.77058L6.14531 5.16703C6.32879 5.03211 6.51931 4.90824 6.71579 4.79574L6.71905 4.79386C6.90621 4.68623 7.09958 4.58849 7.29844 4.50132L8.23152 4.09226L8.68921 2H10.7196Z"
+                                          fill="curentColor"></path>
+                                  </svg></span><span class="MuiTouchRipple-root"></span></span></div>
+                                </th>
+                                <th class="MuiTableCell-root MuiTableCell-head jss6039 MuiTableCell-alignLeft" scope="col"
+                                    colspan="1" rowspan="1">Mã đơn trả hàng</th>
+                                <th class="MuiTableCell-root MuiTableCell-head jss6039 MuiTableCell-alignLeft" scope="col"
+                                    colspan="1" rowspan="1">Mã đơn hàng</th>
+                                <th class="MuiTableCell-root MuiTableCell-head jss6039 MuiTableCell-alignLeft" scope="col"
+                                    colspan="1" rowspan="1">Khách hàng</th>
+                                <th class="MuiTableCell-root MuiTableCell-head jss6039 MuiTableCell-alignCenter" scope="col"
+                                    colspan="1" rowspan="1">Trạng thái</th>
+                                <th class="MuiTableCell-root MuiTableCell-head jss6039 MuiTableCell-alignCenter" scope="col"
+                                    colspan="1" rowspan="1">Hoàn tiền</th>
+                                <th class="MuiTableCell-root MuiTableCell-head jss6039 MuiTableCell-alignRight" scope="col"
+                                    colspan="1" rowspan="1">Tổng tiền</th>
+                                <th class="MuiTableCell-root MuiTableCell-head jss6039 MuiTableCell-alignCenter" scope="col"
+                                    colspan="1" rowspan="1">Ngày nhận hàng</th>
+                                <th class="MuiTableCell-root MuiTableCell-head jss6039 MuiTableCell-alignLeft" scope="col"
+                                    colspan="1" rowspan="1">Lý do trả hàng</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="MuiTableContainer-root jss5995 sapo-grid-body-wrapper">
+                        <div
+                                style="position: relative; overflow: hidden; width: 100%; height: auto; min-height: 0px; max-height: unset;">
+                            <div
+                                    style="position: relative; overflow: scroll; margin-right: -17px; margin-bottom: -17px; min-height: 17px;">
+                                <table class="MuiTable-root jss5996 sapo-grid-body" aria-labelledby="tableTitle"
+                                       aria-label="enhanced table">
+                                    <colgroup>
+                                        <col style="width: 45px;">
+                                        <col style="width: 167px;">
+                                        <col style="width: 167px;">
+                                        <col style="width: 167px;">
+                                        <col style="width: 167px;">
+                                        <col style="width: 167px;">
+                                        <col style="width: 137px;">
+                                        <col style="width: 167px;">
+                                        <col style="width: 167px;">
+                                    </colgroup>
+                                    <tbody class="MuiTableBody-root">
+                                    <tr class="MuiTableRow-root jss6067 MuiTableRow-hover" role="checkbox" aria-checked="false"
+                                        tabindex="-1">
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6068 MuiTableCell-paddingCheckbox"
+                                            style="padding-left: 44px;"></td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignLeft"><a
+                                                class="jss6077"
+                                                href="https://phumlz.mysapogo.com/admin/order_returns/1100423579">SRN00005</a></td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignLeft"><a
+                                                class="jss6077" href="https://phumlz.mysapogo.com/admin/orders/1158820673">SON00024</a>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignLeft">
+                                            <p class="MuiTypography-root jss5780 MuiTypography-body1" title="Phumlz"
+                                               style="float: left;">Phumlz</p>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignCenter">
+                                            <div class="sc-jSMfEi hBmWYo"><span class="sc-eCYdqJ bzQjtT">Đã nhận</span></div>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignCenter">
+                                            <p class="MuiTypography-root MuiTypography-body1" title="Hoàn tiền toàn bộ"><img
+                                                    src="https://sapo.sapocdn.net/sapo-frontend-v3/master/static/media/916ceb4a6d60046d4173.svg" style="width: 12px; height: 12px;"></p>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignRight">
+                                            <p class="MuiTypography-root MuiTypography-body1">27,500</p>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignCenter">
+                                            <p class="MuiTypography-root MuiTypography-body1">31/10/2022 11:28</p>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignLeft">
+                                            <p class="MuiTypography-root jss5780 MuiTypography-body1" title="Lý do khác"
+                                               style="float: left;">Lý do khác</p>
+                                        </td>
+                                    </tr>
+                                    <tr class="MuiTableRow-root jss6067 MuiTableRow-hover" role="checkbox" aria-checked="false"
+                                        tabindex="-1">
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6068 MuiTableCell-paddingCheckbox"
+                                            style="padding-left: 44px;"></td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignLeft"><a
+                                                class="jss6077"
+                                                href="https://phumlz.mysapogo.com/admin/order_returns/1100423574">SRN00004</a></td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignLeft"><a
+                                                class="jss6077" href="https://phumlz.mysapogo.com/admin/orders/1158818549">phumlz</a></td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignLeft">
+                                            <p class="MuiTypography-root jss5780 MuiTypography-body1" title="Phumlz"
+                                               style="float: left;">Phumlz</p>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignCenter">
+                                            <div class="sc-jSMfEi hBmWYo"><span class="sc-eCYdqJ bzQjtT">Đã nhận</span></div>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignCenter">
+                                            <p class="MuiTypography-root MuiTypography-body1" title="Hoàn tiền toàn bộ"><img
+                                                    src="https://sapo.sapocdn.net/sapo-frontend-v3/master/static/media/916ceb4a6d60046d4173.svg" style="width: 12px; height: 12px;"></p>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignRight">
+                                            <p class="MuiTypography-root MuiTypography-body1">549,998</p>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignCenter">
+                                            <p class="MuiTypography-root MuiTypography-body1">31/10/2022 11:28</p>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignLeft">
+                                            <p class="MuiTypography-root jss5780 MuiTypography-body1" title="Lý do khác"
+                                               style="float: left;">Lý do khác</p>
+                                        </td>
+                                    </tr>
+                                    <tr class="MuiTableRow-root jss6067 MuiTableRow-hover" role="checkbox" aria-checked="false"
+                                        tabindex="-1">
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6068 MuiTableCell-paddingCheckbox"
+                                            style="padding-left: 44px;"></td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignLeft"><a
+                                                class="jss6077"
+                                                href="https://phumlz.mysapogo.com/admin/order_returns/1100423528">SRN00003</a></td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignLeft"><a
+                                                class="jss6077" href="https://phumlz.mysapogo.com/admin/orders/1158814199">SON00023</a>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignLeft">
+                                            <p class="MuiTypography-root jss5780 MuiTypography-body1" title="phunguyen"
+                                               style="float: left;">phunguyen</p>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignCenter">
+                                            <div class="sc-jSMfEi hBmWYo"><span class="sc-eCYdqJ bzQjtT">Đã nhận</span></div>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignCenter">
+                                            <p class="MuiTypography-root MuiTypography-body1" title="Hoàn tiền toàn bộ"><img
+                                                    src="https://sapo.sapocdn.net/sapo-frontend-v3/master/static/media/916ceb4a6d60046d4173.svg" style="width: 12px; height: 12px;"></p>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignRight">
+                                            <p class="MuiTypography-root MuiTypography-body1">0</p>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignCenter">
+                                            <p class="MuiTypography-root MuiTypography-body1">31/10/2022 11:10</p>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignLeft">
+                                            <p class="MuiTypography-root jss5780 MuiTypography-body1" title="Lý do khác"
+                                               style="float: left;">Lý do khác</p>
+                                        </td>
+                                    </tr>
+                                    <tr class="MuiTableRow-root jss6067 MuiTableRow-hover" role="checkbox" aria-checked="false"
+                                        tabindex="-1">
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6068 MuiTableCell-paddingCheckbox"
+                                            style="padding-left: 44px;"></td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignLeft"><a
+                                                class="jss6077"
+                                                href="https://phumlz.mysapogo.com/admin/order_returns/1100423520">SRN00002</a></td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignLeft"><a
+                                                class="jss6077" href="https://phumlz.mysapogo.com/admin/orders/1157933048">SON00015</a>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignLeft">
+                                            <p class="MuiTypography-root jss5780 MuiTypography-body1" title="Anh Quyền"
+                                               style="float: left;">Anh Quyền</p>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignCenter">
+                                            <div class="sc-jSMfEi hBmWYo"><span class="sc-eCYdqJ bzQjtT">Đã nhận</span></div>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignCenter">
+                                            <p class="MuiTypography-root MuiTypography-body1" title="Hoàn tiền toàn bộ"><img
+                                                    src="https://sapo.sapocdn.net/sapo-frontend-v3/master/static/media/916ceb4a6d60046d4173.svg" style="width: 12px; height: 12px;"></p>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignRight">
+                                            <p class="MuiTypography-root MuiTypography-body1">825,000</p>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignCenter">
+                                            <p class="MuiTypography-root MuiTypography-body1">31/10/2022 11:05</p>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignLeft">
+                                            <p class="MuiTypography-root jss5780 MuiTypography-body1" title="Lý do khác"
+                                               style="float: left;">Lý do khác</p>
+                                        </td>
+                                    </tr>
+                                    <tr class="MuiTableRow-root jss6067 MuiTableRow-hover" role="checkbox" aria-checked="false"
+                                        tabindex="-1">
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6068 MuiTableCell-paddingCheckbox"
+                                            style="padding-left: 44px;"></td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignLeft"><a
+                                                class="jss6077"
+                                                href="https://phumlz.mysapogo.com/admin/order_returns/1100423515">SRN00001</a></td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignLeft"><a
+                                                class="jss6077" href="https://phumlz.mysapogo.com/admin/orders/1157946067">SON00020</a>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignLeft">
+                                            <p class="MuiTypography-root jss5780 MuiTypography-body1" title="Khách lẻ"
+                                               style="float: left;">Khách lẻ</p>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignCenter">
+                                            <div class="sc-jSMfEi hBmWYo"><span class="sc-eCYdqJ bzQjtT">Đã nhận</span></div>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignCenter">
+                                            <p class="MuiTypography-root MuiTypography-body1" title="Chưa hoàn tiền"><img
+                                                    src="/Trang chủ_files/916ceb4a6d60046d4173.svg" style="width: 12px; height: 12px;"></p>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignRight">
+                                            <p class="MuiTypography-root MuiTypography-body1">54,998</p>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignCenter">
+                                            <p class="MuiTypography-root MuiTypography-body1">31/10/2022 11:03</p>
+                                        </td>
+                                        <td class="MuiTableCell-root MuiTableCell-body jss6073 MuiTableCell-alignLeft">
+                                            <p class="MuiTypography-root jss5780 MuiTypography-body1" title="Lý do khác"
+                                               style="float: left;">Lý do khác</p>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="jss5998" style="position: fixed; height: 6px; left: 262px;">
+                                <div class="jss5999" style="position: relative; display: block; height: 100%; width: 0px;"></div>
+                            </div>
+                            <div style="position: absolute; width: 6px; right: 2px; bottom: 2px; top: 2px; border-radius: 3px;">
+                                <div
+                                        style="position: relative; display: block; width: 100%; cursor: pointer; border-radius: inherit; background-color: rgba(0, 0, 0, 0.2); height: 0px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="MuiBox-root jss6158 jss6153 sapo-pagination">
+                        <p class="MuiTypography-root MuiTypography-body1">Hiển thị</p>
+                        <div class="MuiFormControl-root">
+                            <div class="MuiInputBase-root MuiOutlinedInput-root jss6154 MuiInputBase-formControl">
+                                <div
+                                        class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input"
+                                        tabindex="0" role="button" aria-haspopup="listbox">
+                                    <p class="MuiTypography-root jss6156 MuiTypography-body1">100</p>
+                                </div><input type="hidden" value="100"><svg
+                                    class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined" focusable="false"
+                                    viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M7 10l5 5 5-5z"></path>
+                            </svg>
+                                <fieldset aria-hidden="true" class="jss6210 MuiOutlinedInput-notchedOutline"
+                                          style="padding-left: 8px;">
+                                    <legend class="jss6211" style="width: 0.01px;"><span>​</span></legend>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <p class="MuiTypography-root MuiTypography-body1">kết quả</p>
+                        <p class="MuiTypography-root jss6155 MuiTypography-body1">Từ 1 đến 5 trên tổng 5</p>
+                        <nav aria-label="pagination navigation" class="MuiPagination-root jss6157">
+                            <ul class="MuiPagination-ul">
+                                <li><button
+                                        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-page MuiPaginationItem-textPrimary Mui-disabled MuiPaginationItem-sizeSmall Mui-disabled"
+                                        tabindex="-1" type="button" disabled="" aria-label="Go to previous page"><svg
+                                        class="MuiSvgIcon-root MuiPaginationItem-icon" focusable="false" viewBox="0 0 24 24"
+                                        aria-hidden="true">
+                                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+                                </svg></button></li>
+                                <li><button
+                                        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-page MuiPaginationItem-textPrimary Mui-selected MuiPaginationItem-sizeSmall"
+                                        tabindex="0" type="button" aria-current="true" aria-label="page 1">1<span
+                                        class="MuiTouchRipple-root"></span></button></li>
+                                <li><button
+                                        class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-page MuiPaginationItem-textPrimary Mui-disabled MuiPaginationItem-sizeSmall Mui-disabled"
+                                        tabindex="-1" type="button" disabled="" aria-label="Go to next page"><svg
+                                        class="MuiSvgIcon-root MuiPaginationItem-icon" focusable="false" viewBox="0 0 24 24"
+                                        aria-hidden="true">
+                                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+                                </svg></button></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="__react_component_tooltip t20086795-0357-4f48-a355-08cb18f74c40 place-top type-dark"
+                         id="t20086795-0357-4f48-a355-08cb18f74c40" data-id="tooltip">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section-footer">
+</div>
+<div class='container-fluid-md notifications'>
+    <div class='ajax-notification'><span class='ajax-notification-message'></span></div>
+</div>
+<div class="modal fade" id="sapo-modal-container" data-width="" tabindex="-1" role="dialog" data-backdrop="false">
+</div>
+<div class="modal-backdrop fade in" id="sapo-modal-backdrop"></div>
+
+</body>
+<th:block th:replace="/layout/script :: script" />
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
