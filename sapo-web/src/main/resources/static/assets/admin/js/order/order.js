@@ -764,6 +764,8 @@ function editCustomer() {
     $("#update_order_customer").modal("show");
 }
 
+
+
 function showProductInfo(productId) {
     renderSaleOrderItem(productId, "plus");
     renderSaleOrder();
