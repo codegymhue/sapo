@@ -77,7 +77,7 @@
                                                                     </svg>
                                                                 </div>
                                                                 <input aria-invalid="false"
-                                                                       id="myInput"
+                                                                       id="f"
                                                                        name="myInput"
                                                                        placeholder="Tìm theo tên, SĐT, mã khách hàng ... (F4)"
                                                                        type="text"
@@ -160,7 +160,7 @@
                                                         <div class="MuiBox-root jss18602 jss18150">
                                                             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap searchEmployee"
                                                                onclick="showListEmployees()">
-                                                                Phước Nguyễn
+                                                                Khanh Hoàng
                                                             </p>
                                                             <svg class="MuiSvgIcon-root" focusable="false"
                                                                  viewBox="0 0 24 24" aria-hidden="true">
@@ -1131,7 +1131,8 @@
                                                     <span class="MuiButton-label">Kiểm tra tồn kho</span><span
                                                         class="MuiTouchRipple-root"></span></button>
                                                 <span style="width: 1px; height: 24px; background-color: rgb(211, 213, 215); margin-right: 10px; margin-left: 10px;"></span>
-                                                <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
+
+                                               <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
                                                         tabindex="0" type="button" title="Điều chỉnh thông tin hiển thị"
                                                         style="margin-left: 8px;"><span class="MuiIconButton-label"><svg
                                                         viewBox="0 0 24 24" fill="none"
@@ -1451,73 +1452,74 @@
                                                 </li>
 
 
-<!--                                                <li class="MuiListItem-root jss1275 MuiListItem-gutters">-->
-<!--                                                    <div class="MuiListItemText-root"><span-->
-<!--                                                            class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">Chiết khấu (F6)</span>-->
-<!--                                                    </div>-->
-<!--                                                    &lt;!&ndash;                                                 mới dán thêm&ndash;&gt;-->
-<!--                                                    <div id="discount_order"-->
-<!--                                                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight">-->
-<!--                                                        <button class="MuiButtonBase-root MuiButton-root MuiButton-text jss3901 btn-discount"-->
-<!--                                                                tabindex="0"-->
-<!--                                                                type="button" id="dropdownMenuButton1_2"-->
-<!--                                                                data-bs-auto-close="outside"-->
-<!--                                                                data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--                                                            <span class="MuiButton-label" id="discount_value_order"-->
-<!--                                                                  style="font-weight: 400;">0</span>-->
-<!--                                                            <p class="MuiTypography-root discount_rate_line_item MuiTypography-body1"-->
-<!--                                                               id="percent_value_order"-->
-<!--                                                               style="color: rgb(255, 77, 77); font-size: 12px;">-->
-<!--                                                            </p>-->
-<!--                                                        </button>-->
-<!--                                                        <div aria-labelledby="dropdownMenuButton1_2"-->
-<!--                                                             class="dropdown-menu MuiPaper-root jss1041 MuiPaper-elevation3 MuiPaper-rounded hidden_discount show"-->
-<!--                                                             style="width: 190px; position: absolute; margin: 0px; inset: 0px auto auto 0px; transform: translate(1072px, 653px);"-->
-<!--                                                             data-popper-placement="bottom-start">-->
-<!--                                                            <div id="arrow"-->
-<!--                                                                 style="position: absolute;left: 0px;transform: translate(95px, 0px);"></div>-->
-<!--                                                            <div class="MuiBox-root jss4417">-->
-<!--                                                                <div class="MuiBox-root jss4418">-->
-<!--                                                                    <div class="MuiBox-root jss4419">-->
-<!--                                                                        <div class="MuiToggleButtonGroup-root jss1283"-->
-<!--                                                                             role="group">-->
-<!--                                                                            <button onclick="switchDiscountOrder(value)"-->
-<!--                                                                                    class="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped Mui-selected "-->
-<!--                                                                                    tabindex="0" type="button"-->
-<!--                                                                                    value="VALUE" aria-pressed="true">-->
-<!--                                                                                <span class="MuiToggleButton-label">Giá trị</span>-->
-<!--                                                                                <span class="MuiTouchRipple-root"></span>-->
-<!--                                                                            </button>-->
-<!--                                                                            <button onclick="switchDiscountOrder(value)"-->
-<!--                                                                                    class="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped"-->
-<!--                                                                                    tabindex="0" type="button"-->
-<!--                                                                                    value="PERCENT"-->
-<!--                                                                                    aria-pressed="false">-->
-<!--                                                                                <span class="MuiToggleButton-label">%</span>-->
-<!--                                                                                <span class="MuiTouchRipple-root"></span>-->
-<!--                                                                            </button>-->
-<!--                                                                        </div>-->
-<!--                                                                        <div class="MuiFormControl-root jss4241 jss4243 jss1284"-->
-<!--                                                                             style="width: 92px; margin-left: 7px;">-->
-<!--                                                                            <div class="MuiFormControl-root MuiTextField-root jss4244"-->
-<!--                                                                                 inputmode="numeric">-->
-<!--                                                                                <div class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl">-->
-<!--                                                                                    <input id="discount_input_order"-->
-<!--                                                                                           aria-invalid="false"-->
-<!--                                                                                           autocomplete="off"-->
-<!--                                                                                           name="numonly" type="text"-->
-<!--                                                                                           class="MuiInputBase-input MuiInput-input"-->
-<!--                                                                                           value="0"-->
-<!--                                                                                           style="width: 100%; text-align: right;"/>-->
-<!--                                                                                </div>-->
-<!--                                                                            </div>-->
-<!--                                                                        </div>-->
-<!--                                                                    </div>-->
-<!--                                                                </div>-->
-<!--                                                            </div>-->
-<!--                                                        </div>-->
-<!--                                                    </div>-->
-<!--                                                </li>-->
+                                                <li class="MuiListItem-root jss1275 MuiListItem-gutters">
+                                                    <div class="MuiListItemText-root"><span
+                                                            class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">Chiết khấu (F6)</span>
+                                                    </div>
+                                                    <!--                                                 mới dán thêm-->
+                                                    <div id="discount_order"
+                                                         class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight">
+                                                        <button class="MuiButtonBase-root MuiButton-root MuiButton-text jss3901 btn-discount"
+                                                                tabindex="0"
+                                                                type="button" id="dropdownMenuButton1_2"
+                                                                data-bs-auto-close="outside"
+                                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <span class="MuiButton-label" id="discount_value_order"
+                                                                  style="font-weight: 400;">0</span>
+                                                            <p class="MuiTypography-root discount_rate_line_item MuiTypography-body1"
+                                                               id="percent_value_order"
+                                                               style="color: rgb(255, 77, 77); font-size: 12px;">
+                                                            </p>
+                                                        </button>
+                                                        <div aria-labelledby="dropdownMenuButton1_2"
+                                                             class="dropdown-menu MuiPaper-root jss1041 MuiPaper-elevation3 MuiPaper-rounded hidden_discount show"
+                                                             style="width: 190px; position: absolute; margin: 0px; inset: 0px auto auto 0px; transform: translate(1072px, 653px);"
+                                                             data-popper-placement="bottom-start">
+                                                            <div id="arrow"
+                                                                 style="position: absolute;left: 0px;transform: translate(95px, 0px);"></div>
+                                                            <div class="MuiBox-root jss4417">
+                                                                <div class="MuiBox-root jss4418">
+                                                                    <div class="MuiBox-root jss4419">
+                                                                        <div class="MuiToggleButtonGroup-root jss1283"
+                                                                             role="group">
+                                                                            <button onclick="switchDiscountOrder(value)"
+                                                                                    class="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped Mui-selected "
+                                                                                    tabindex="0" type="button"
+                                                                                    value="VALUE" aria-pressed="true">
+                                                                                <span class="MuiToggleButton-label">Giá trị</span>
+                                                                                <span class="MuiTouchRipple-root"></span>
+                                                                            </button>
+                                                                            <button onclick="switchDiscountOrder(value)"
+                                                                                    class="MuiButtonBase-root MuiToggleButton-root MuiToggleButtonGroup-grouped"
+                                                                                    tabindex="0" type="button"
+                                                                                    value="PERCENT"
+                                                                                    aria-pressed="false">
+                                                                                <span class="MuiToggleButton-label">%</span>
+                                                                                <span class="MuiTouchRipple-root"></span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="MuiFormControl-root jss4241 jss4243 jss1284"
+                                                                             style="width: 92px; margin-left: 7px;">
+                                                                            <div class="MuiFormControl-root MuiTextField-root jss4244"
+                                                                                 inputmode="numeric">
+                                                                                <div class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl">
+                                                                                    <input id="discount_input_order"
+                                                                                           aria-invalid="false"
+                                                                                           autocomplete="off"
+                                                                                           name="numonly" type="text"
+                                                                                           class="MuiInputBase-input MuiInput-input"
+                                                                                           value="0"
+                                                                                           style="width: 100%; text-align: right;"/>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
                                                 <li class="MuiListItem-root jss1275 MuiListItem-gutters"
                                                     style="top: 16px;font-weight: 100;">
                                                     <div class="MuiListItemText-root"><span
@@ -1979,6 +1981,26 @@
     </div>
 </div>
 
+<!--    <div id="editModal" tabindex="-1" role="dialog">-->
+<!--        <div class="modal-dialog" role="document">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <h5 class="modal-title">Modal title</h5>-->
+<!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                        <span aria-hidden="true">&times;</span>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <p>Modal body text goes here.</p>-->
+<!--                </div>-->
+<!--                <div class="modal-footer">-->
+<!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
+<!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
 </body>
 <th:block th:replace="/admin/order/modal_create_customer::modal_create_customer"/>
 <th:block th:replace="/admin/order/modal_update_customer::modal_update_customer"/>
@@ -1986,6 +2008,13 @@
 
 
 <th:block th:replace="/layout/script :: script"/>
+
+<script>
+    $("#showEditModal").on("click", () => {
+        $("#editModal").modal("show");
+
+    });
+</script>
 
 <script type="text/javascript" src="/assets/admin/js/order/app.js"></script>
 <script type="text/javascript" src="/assets/admin/js/order/order.js"></script>

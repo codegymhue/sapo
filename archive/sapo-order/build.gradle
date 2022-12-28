@@ -1,0 +1,14 @@
+
+group 'vn.sapo'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    implementation project(':sapo-customer')
+    implementation project(':sapo-product')
+    implementation project(':sapo-supplier')
+}

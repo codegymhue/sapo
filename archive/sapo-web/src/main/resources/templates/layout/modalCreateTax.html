@@ -1,0 +1,37 @@
+<th:block th:fragment="createTaxModal">
+    <div class="modal fade" id="modalAddTax" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Thêm thuế thông tin thuế</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="frmCreateTax" method="post">
+                        <div >
+                            <label for="inputTaxTitle" class="mb-3">Tên thuế <span style="color: red">*</span></label>
+                            <input type="text" id="inputTaxTitle" name="taxTitle" class="form-control" placeholder="VD: Thuế suất 10%"/>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-6">
+                                <label class="mb-3">Mã thuế</label>
+                                <input type="text" id="inputTaxCode" name="taxCode" class="form-control" placeholder="VD: VAT1"/>
+                            </div>
+                            <div class="col-6">
+                                <label for="inputTax" class="mb-3">Thuế suất % <span style="color: red">*</span></label>
+                                <input type="number" id="inputTax" name="tax" class="form-control" placeholder="VD: 10%"/>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="sc-jqUVSM dgJIMY" data-bs-dismiss="modal">Thoát</button>
+                    <button type="button" id="btnAddTax" class="sc-jqUVSM cHdopB">
+                        Xác nhận
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>

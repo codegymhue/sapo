@@ -37,6 +37,7 @@ function showListCustomer() {
         $(".searchCustomer").removeClass('d-none');
         $(".contentCustomer div").remove();
         $.each(data, (i, customer) => {
+
             let result = `
                 <div class="MuiBox-root jss4978 InfiniteScroll-MenuItem focus-key-event showInfo" onclick="showCustomerInfo(${customer.id})"
                      data-id="${customer.id}" tabindex="0">
@@ -47,7 +48,7 @@ function showListCustomer() {
                         </svg>
                         <div class="MuiBox-root jss4983"><p
                                 class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap">${customer.name}</p>
-                                <h6 class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-noWrap">${customer.phone}</h6></div>
+                                <h6 class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-noWrap">${customer.phoneNumber}</h6></div>
                         <span class="MuiTouchRipple-root"></span>
                     </li>
                 </div>
@@ -70,7 +71,7 @@ const searchCustomer = () => {
         let search = $(this).val();
         let results = [];
         customers.forEach((item) => {
-            if (((item.name).toLowerCase()).includes(search.toLowerCase()) || ((item.phone).toLowerCase()).includes(search.toLowerCase())) {
+            if (((item.name).toLowerCase()).includes(search.toLowerCase()) || ((item.phoneNumber).toLowerCase()).includes(search.toLowerCase())) {
                 results.push(item);
             }
         })
@@ -87,7 +88,7 @@ const searchCustomer = () => {
                         </svg>
                         <div class="MuiBox-root jss4983"><p
                                 class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap">${customer.name}</p>
-                                <h6 class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-noWrap">${customer.phone}</h6></div>
+                                <h6 class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-noWrap">${customer.phoneNumber}</h6></div>
                         <span class="MuiTouchRipple-root"></span>
                     </li>
                 </div>
@@ -102,7 +103,7 @@ const searchProduct = () => {
         let search = $(this).val();
         let results = [];
         products.forEach((item) => {
-            console.log(item)
+            // console.log(item)
             if (((item.title).toLowerCase()).includes(search.toLowerCase()) || ((item.sku).toLowerCase()).includes(search.toLowerCase())
                 || ((item.barCode).toLowerCase()).includes(search.toLowerCase())) {
                 results.push(item);
@@ -208,7 +209,7 @@ function showCustomerInfo(idCustomer) {
                             <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorPrimary"
                                 title="Denise Zimmerman">${result.name}</h6>
                             <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorTextPrimary">
-                                &nbsp;-&nbsp;${result.phone}</h6>
+                                &nbsp;-&nbsp;${result.phoneNumber}</h6>
                         </a>
                         <button
                             class="MuiButtonBase-root MuiIconButton-root jss948 MuiIconButton-colorSecondary MuiIconButton-sizeSmall"
@@ -236,13 +237,16 @@ function showCustomerInfo(idCustomer) {
                         <div class="MuiBox-root jss3898 jss944">
                             <div class="MuiBox-root jss3899">
                                 <p class="MuiTypography-root jss941 MuiTypography-body2">Địa chỉ giao hàng</p>
-                                <button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary" tabindex="0" type="button" style="margin: 0px 4px; height: 15px; min-width: unset;">
+                                <button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary" 
+                                onclick="editCustomer()"
+                                 id="showEditModal"
+                                tabindex="0" type="button" style="margin: 0px 4px; height: 15px; min-width: unset;">
                                 <span class="MuiButton-label">Thay đổi</span>
                                 <span class="MuiTouchRipple-root"></span>
                                 </button>
                             </div>
                             <div class="MuiBox-root jss3900">
-                                <p class="MuiTypography-root MuiTypography-body2">${result.phone}</p>
+                                <p class="MuiTypography-root MuiTypography-body2">${result.phoneNumber}</p>
                                 <p class="MuiTypography-root MuiTypography-body2">${fullShippingAddress}</p>
                             </div>
                         </div>
@@ -255,7 +259,7 @@ function showCustomerInfo(idCustomer) {
                                     <div class="MuiListItemText-root">
                                         <p
                                             class="MuiTypography-root jss3910 MuiTypography-body1 MuiTypography-colorError MuiTypography-alignRight">
-                                            ${result.debtTotal.formatVND()}</p>
+                                            ${result.debtsTotal.formatVND()}</p>
                                     </div>
                                 </li>
                                 <li class="MuiListItem-root MuiListItem-gutters"
@@ -306,6 +310,7 @@ function showCustomerInfo(idCustomer) {
                                 <button
                                     class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
                                     tabindex="0"
+                                    id="showEditModal"
                                     onclick="editCustomer()"
                                      type="button"
                                     style="margin: 0 4px; height: 15px; min-width: unset;"><span
@@ -314,7 +319,7 @@ function showCustomerInfo(idCustomer) {
                                 </button>
                             </div>
                             <div class="MuiBox-root jss4278">
-                                <p class="MuiTypography-root MuiTypography-body2">${result.phone}</p>
+                                <p class="MuiTypography-root MuiTypography-body2">${result.phoneNumber}</p>
                                 <p class="MuiTypography-root MuiTypography-body2">${fullBillAddress}</p>
                             </div>
                         </div>
@@ -373,17 +378,20 @@ function getAllItem() {
 }
 
 function showListProducts() {
+    // console.log("data: ", data);
     let renderProducts = (data) => {
+        console.log("data: ", data);
         $(".searchProduct").removeClass('d-none');
         $(".searchProduct").removeClass('hide').addClass('show');
 
         $(".contentProduct div").remove();
+
         $.each(data, (i, product) => {
             let result = `             
                     <div class="MuiBox-root jss3941 InfiniteScroll-MenuItem focus-key-event"
                     onclick="showProductInfo(${product.id})" data-id="${product.id}" tabindex="0">
                     <li class="MuiButtonBase-root MuiListItem-root MuiMenuItem-root jss1259 MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button" tabindex="-1" role="menuitem" aria-disabled="false">
-                        <img class="jss1260" src="${product.image}" alt="">
+                        <img class="jss1260" src="${product.mediaList[0].fileUrl}" alt="">
                             <div class="MuiBox-root jss3946">
                                 <div class="MuiBox-root jss3947">
                                     <p class="MuiTypography-root MuiTypography-body1" style="white-space: break-spaces;">${product.title} - ${product.barCode} </p>
@@ -718,13 +726,14 @@ function editCustomer() {
     let id = $("#idCustomer").val();
     $('#idCustomerUpdate').val(customer.id);
     $("#nameUpdate").val(customer.name)
-    $('#phoneUpdate').val(customer.phone);
-    $('#addressUpdate').val(customer.locationRegionResult.address);
-    $('#provinceUpdate').val(customer.locationRegionResult.provinceId);
-    getAllDistrictsByProvinceId(customer.locationRegionResult.provinceId).then(() => {
-        $("#districtUpdate").val(customer.locationRegionResult.districtId);
-        getAllWardsByDistrictId(customer.locationRegionResult.districtId).then(() => {
-            $("#wardUpdate").val(customer.locationRegionResult.wardId);
+    $('#phoneUpdate').val(customer.phoneNumber);
+    console.log(customer)
+    $('#addressUpdate').val(customer.addresses[0].line1);
+    $('#provinceUpdate').val(customer.addresses[0].provinceId);
+    getAllDistrictsByProvinceId(customer.addresses[0].provinceId).then(() => {
+        $("#districtUpdate").val(customer.addresses[0].districtId);
+        getAllWardsByDistrictId(customer.addresses[0].districtId).then(() => {
+            $("#wardUpdate").val(customer.addresses[0].wardId);
 
 
         })
@@ -736,7 +745,7 @@ function editCustomer() {
 }
 
 function showProductInfo(productId) {
-    renderSaleOrderItem(productId, "plus");
+    renderSaleOrderItem(productId, "plus", 0);
     renderSaleOrder();
 }
 
@@ -785,12 +794,19 @@ function discountProduct(event) {
 }
 
 const addQuantity = (productId) => {
-    renderSaleOrderItem(productId, "plus");
+    renderSaleOrderItem(productId, "plus",0);
     renderSaleOrder();
 }
 
+const editQuantity = (id) =>{
+    let valueNumber = document.querySelector(`#quantity_product_${id}`).value;
+    renderSaleOrderItem(id, "change",valueNumber);
+    renderSaleOrder();
+}
+
+
 function minusQuantity(productId) {
-    renderSaleOrderItem(productId, "minus");
+    renderSaleOrderItem(productId, "minus",0);
     renderSaleOrder();
     let saleOrderItem = saleOrderItems.find(saleOrderItem => saleOrderItem.productId === productId);
     if (saleOrderItem.quantity === 0) {
@@ -887,14 +903,17 @@ function renderAmountOrderItem(productId) {
     $(`#amount_product_${productId}`).text(amount.formatVND());
 }
 
-function renderSaleOrderItem(productId, operator) {
+function renderSaleOrderItem(productId, operator, valueNumber) {
     productId = parseInt(productId);
     let saleOrderItem = saleOrderItems.find(saleOrderItem => saleOrderItem.productId === productId);
     if (saleOrderItem !== undefined) {
+        if (valueNumber !== 0)
+            saleOrderItem.quantity = valueNumber;
         if (operator === "minus")
             saleOrderItem.quantity -= 1;
         if (operator === "plus")
-            saleOrderItem.quantity += 1;
+            saleOrderItem.quantity++;
+
         $(`#quantity_product_${productId}`).val(saleOrderItem.quantity);
         renderAmountOrderItem(productId);
     } else {
@@ -907,7 +926,7 @@ function renderSaleOrderItem(productId, operator) {
             <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter align-items-center"><a
                     class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary align-items-center"
                     target="_blank" href="/admin/products/118801409/variants/185370765"><img class="jss3898"
-                        src=${result.image} alt="Sản phẩm"></a></td>
+                        src=${result.mediaList[0].fileUrl} alt="Sản phẩm"></a></td>
             <td class="MuiTableCell-root MuiTableCell-body align-items-center">
                 <div class="MuiBox-root jss4053 jss3895 ">
                     <div class="MuiBox-root jss4054">
@@ -963,8 +982,9 @@ function renderSaleOrderItem(productId, operator) {
                             <div
                                 class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl">
                                 <input aria-invalid="false" autocomplete="off"
+                                    oninput='editQuantity(${result.id})'
                                     name="" type="text"
-                                    class="MuiInputBase-input MuiInput-input" value="1"
+                                    class="MuiInputBase-input MuiInput-input" value="1" min="1"
                                     style="text-align: center; width: 100%;"
                                     id="quantity_product_${result.id}">
                                 </div>
@@ -1209,7 +1229,7 @@ function showAllCategory() {
             $("#categoryCreate").empty();
 
             $.each(data, (i, item) => {
-                let str = `<option value="${item.id}">${item.name}</option>`;
+                let str = `<option value="${item.id}">${item.title}</option>`;
                 $(".showAllCategory").append(str);
             });
 

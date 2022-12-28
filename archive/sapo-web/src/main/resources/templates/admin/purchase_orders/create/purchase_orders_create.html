@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html class="sapo-menu-expand sapo-menu-toggle-active" lang="vi-VN" style="font-size: 10px">
+
+<head>
+    <th:block th:replace="/layout/header :: header"/>
+
+    <title>Tạo đơn nhập hàng</title>
+</head>
+
+<body class="" data-new-gr-c-s-check-loaded="14.1085.0" data-gr-ext-installed="">
+<th:block th:replace="/layout/menu :: menu"/>
+<!-- <div class="col-right -->
+<div class="col-right">
+    <div class="col-right_content" id="content">
+        <div class="ui-title-top-bar">
+            <div class="ui-title-top-bar_action w-100 flex">
+                <div class="w-50" style="padding-top:5px">
+                </div>
+                <div class="w-50" style="position:relative">
+                    <a href="javascript:" class="btn sapo-btn-default right" style="border-radius: 0 3px 3px 0;"
+                       data-toggle="dropdown"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+
+                    <a href="javascript:" class="btn sapo-btn-default right btn-create-order"
+                       style="border-radius: 3px 0 0 3px;">Đặt hàng và duyệt</a>
+                    <ul class="dropdown-menu newscroll" style="font-size:13px">
+                        <li><a>Đặt hàng</a></li>
+                        <li><a>Đặt hàng và duyệt</a></li>
+
+                    </ul>
+                </div>
+
+                <style>
+                    .info-account {
+                        position: relative;
+                    }
+
+                    .help-dashboard {
+                        position: absolute;
+                        top: -1px;
+                        right: -1px;
+                        z-index: 1;
+                    }
+
+                    .help-dashboard .help-dropdown .btn-blank {
+                        background: #fff url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDplN2MwNTFiZi1lNGJiLTNjNDktOGM3YS00NTZmZTZlNGQ1NmYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjI5NDdDQ0NGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjI5NDdDQ0JGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjdkNDRhZTRlLTIzMTMtYTE0ZC1hNWQ4LTA5YTVjYTBmNmM0NCIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjk3N2NmYTliLThmZDctZGU0Mi1hNDFiLWIwOTJiYzRkYWM2MiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Po5ReOIAAAIxSURBVHjalJU9aFNRGIbTk+sSh0xiEKciaBF1culiA2IdOlQHaRBKqEurYJYOFn9Ql7iJghQcSqlDAop0yFIoWJcigouKKIROClWnomaQVHw+eAPxcs7J9cDDhXvP997vfH9naPbybC6wEpiASRiFYcjDLmzBJqxCa/HRYtcn4ALCFWjDQ/gGNRiB/XrW9N6+t+euzFV8IkMpzwuwDGNwDVagmwsvO9003IMNqHKKjs9zE16Dg3AclgYI2+oitqT9ZrfGKQo+8WXF9DRs5/5j8YNt2eWl8494RaE4Dx1f+OAwnIRi4Acd2Y/1cuAUt7pi7PP4GLyHj/AavsPNyAlMp84PEqdyc0qer5oa8AuOQAnuw10YD0RpRXYTTnXcDCTvBByVp5/gK1yH33Am4H1XepNODfIi4MUPuANv+t7tgz3wM5Jj0xtN1HntwCZ7fztVrk3F/XFE3OyGE5XPToaKs33PlOBT8CWy1/TyTrOimEH8IpyFc/BuwF7T23UaQocyiJfhA7zMsNf0tpymWzmDwROYz9i0prfpNDan1EyxtRcODFK15pHeqom34I+mW2xdglsZvJ6WXsupeRY0NksRoxvyKOZ1SToL1ky9wdXQPH6uWvYtmy+vIsIF2W8g3EiP3KrKcn3ACUIer8u+6pvnHQ2jz/AWZjIkOUF4RvvNbrz/Jkob24cLmu91tX5Ts6KtziuqjsvKgSWv1gtF+g70Ldv4tO/2fxC4/a/Gbv+/AgwA9q+ezeP4kToAAAAASUVORK5CYII=") no-repeat center center;
+                        border: none;
+                        font-size: 0;
+                        box-shadow: none;
+                        margin-left: 0;
+                        height: 61px;
+                        width: 60px;
+                        border: 1px solid #dbdbdb;
+                        outline: none;
+                        border-radius: 0;
+                    }
+
+                    .help-dashboard .help-dropdown .btn-blank:focus {
+                        box-shadow: none;
+                    }
+
+                    .help-dashboard .help-dropdown .help-popup {
+                        top: 60px;
+                        box-shadow: #c6c6c6 0px 3px 5px 0px;
+                    }
+
+                    .help-dashboard .help-dropdown .help-popup:after {
+                        right: 20px;
+                    }
+
+                    .sapo-menu-expand .page-heading {
+                        z-index: 1001;
+                    }
+
+                    .help-dropdown {
+                        position: relative;
+                        margin-left: 10px;
+                        height: 36px;
+                    }
+
+
+                    .help-dropdown a {
+                        color: #686868;
+                        display: flex;
+                        height: 100%;
+                        border: none;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                        cursor: pointer;
+                        border: 1px solid #c4cdd5;
+                        float: right;
+                        width: auto;
+                    }
+
+                    .help-dropdown div:hover {
+                        background-color: #e7f2ff;
+                    }
+
+
+                    .help-dropdown .btn-blank:focus {
+                        box-shadow: none;
+                        border: 1px solid #c4cdd5;
+                    }
+
+                    .help-dropdown .help-popup {
+                        position: absolute;
+                        right: 0;
+                        z-index: 9999999;
+                        top: 45px;
+                        box-shadow: #c6c6c6 0 0 10px 5px;
+                        display: none;
+                        -webkit-transition: ease 0.5s;
+                        /* Safari */
+                        transition: ease 0.5s;
+                    }
+
+                    .help-dropdown .help-popup.shown {
+                        display: block;
+                        height: 560px;
+                        margin-top: 15px;
+                    }
+
+                    .help-dropdown .help-popup:after {
+                        content: "";
+                        display: block;
+                        width: 0px;
+                        height: 0px;
+                        border-left: 10px solid transparent;
+                        border-right: 10px solid transparent;
+                        border-bottom: 10px solid #f3f6f8;
+                        top: -9px;
+                        position: absolute;
+                        right: 25px;
+                    }
+                </style>
+                <div class="header-fr help-dropdown">
+                    <a class="btn sapo-btn-blank btn-help" onclick="showHelpPopup()"><img
+                            src="../../assets/images/icons8-help-20.png" style="padding-right: 5px;"><span>Trợ
+                                    giúp</span></a>
+                    <div class="help-popup">
+                        <iframe id="iframe-help" src=""
+                                style="width: 400px; height: 560px;border:none"></iframe>
+                        <input type="hidden" id="iframe-help-src"
+                               value="https://support.sapo.vn?view=omni&amp;url=http://depament-stor.mysapogo.com/admin/purchase_orders/create">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <header class="ui-title-bar-container" style="margin-top: 55px;">
+            <div class="ui-title-bar">
+                <div class="ui-title-bar__navigation">
+                    <div class="ui-breadcrumbs">
+                        <a href="/admin/purchase_orders">
+                            <svg class="next-icon next-icon--size-20 next-icon--no-nudge">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     xlink:href="#chevron-left-thinner"></use>
+                            </svg>
+                            <span class="ui-breadcrumb__item">Đơn nhập hàng</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="ui-title-bar__main-group">
+                    <div class="ui-title-bar__heading-group">
+                        <h1 class="ui-title-bar__title">Tạo đơn nhập hàng</h1>
+                    </div>
+                </div>
+                <div class="ui-title-bar__actions">
+                    <div class="progress-bar-order">
+                        <div class="progress-bar-item">
+                            <div class="progress-bar-item-title">
+                                Đặt hàng
+                            </div>
+                            <div class="progress-bar-item-line"></div>
+                            <div class="progress-bar-item-ico">
+                                <div class="progress-bar-item-ico-in active">
+                                    <svg class="next-icon next-icon--size-10 checkmark next-icon--color-white">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             xlink:href="#next-checkmark-thick"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="progress-bar-item-line "></div>
+                            <div class="progress-bar-item-date"></div>
+                        </div>
+                        <div class="progress-bar-item">
+                            <div class="progress-bar-item-title">
+                                Duyệt
+                            </div>
+                            <div class="progress-bar-item-line "></div>
+                            <div class="progress-bar-item-ico">
+                                <div class="progress-bar-item-ico-in ">
+                                    <svg class="next-icon next-icon--size-10 checkmark next-icon--color-white">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             xlink:href="#next-checkmark-thick"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="progress-bar-item-line "></div>
+                            <div class="progress-bar-item-date"></div>
+                        </div>
+                        <div class="progress-bar-item">
+                            <div class="progress-bar-item-title">
+                                Nhập kho
+                            </div>
+                            <div class="progress-bar-item-line "></div>
+                            <div class="progress-bar-item-ico">
+                                <div class="progress-bar-item-ico-in ">
+                                    <svg class="next-icon next-icon--size-10 checkmark next-icon--color-white">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             xlink:href="#next-checkmark-thick"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="progress-bar-item-line "></div>
+                            <div class="progress-bar-item-date"></div>
+                        </div>
+                        <div class="progress-bar-item">
+                            <div class="progress-bar-item-title">
+                                Hoàn thành
+                            </div>
+                            <div class="progress-bar-item-date"></div>
+
+                            <div class="progress-bar-item-line "></div>
+                            <div class="progress-bar-item-ico">
+                                <div class="progress-bar-item-ico-in  ">
+                                    <svg class="next-icon next-icon--size-10 checkmark next-icon--color-white">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             xlink:href="#next-checkmark-thick"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="purchase-order-container container" context="createPurchaseOrder" >
+
+            <div class="purchase-order-create--left" >
+<!--                <div context="lotsDate">-->
+<!--                </div>-->
+                <div class="page-info" >
+                    <div class="page-info-title">
+                        <span>Thông tin nhà cung cấp</span>
+                    </div>
+                    <div class="page-info-body" style="display: inline-block;" id="show_supplier_info">
+                        <div class="search-layout-common search-supplier"  id="search-supplier-wrap" onclick="showListSupplier()">
+                            <i class="fa fa-search" style=""></i>
+                            <input type="text"
+                                   class="sapo-textbox search select--a w-100 mb-0 " id="search-supplier"
+                                   placeholder="Tìm kiếm nhà cung cấp theo SĐT, tên, mã nhà cung cấp ... (F4)"
+
+                                   autocomplete="off" data-original-title="" title="">
+
+<!--                            modal show list supplier-->
+
+                            <div class="filter-body--suggest d-none searchSupplier" >
+                                <div class="popover fade show bs-popover-top " role="tooltip" id="popover276985"
+                                     x-placement="top"
+                                     style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, -182px, 0px);">
+                                    <div class="arrow" style="left: 331px;"></div>
+                                    <div class="popover-body">
+                                        <svg class="next-icon next-icon--no-nudge load-filter"
+                                             style="margin: 10px 0px; display: none;">
+
+                                        </svg>
+                                        <div class="dropdown-filter" style="">
+                                            <div class="single-suggest-result newscroll">
+                                                <button data-bs-toggle="modal" data-bs-target="#create_supplier" class="collection-select clearfix single-suggest-select"
+                                                        style="width: 100%; border: none">
+                                                    <a class="pull-left">
+                                                        <img style="width:30px;float:left;padding-top:3px"
+                                                             src="https://4ae.mysapogo.com/v2/images/create_customer.svg">
+                                                        <div  style="width:calc(100% - 30px);float:left;padding:6px 0 0 10px">
+                                                            <p>Thêm mới nhà cung cấp</p>
+                                                        </div>
+                                                    </a>
+                                                </button>
+                                                <div type="button" class="collection-select clearfix single-suggest-select contentSupplier"
+                                                     id="item-suggest-suppliers-182236815" style="background-color: white">
+
+
+                                                </div>
+                                            </div>
+                                            <div class="dropdown-paginate pull-right text-right" style="margin:0">
+                                                <a class="btn-prev btn-page btn btn-default disabled">
+                        <span class="page-prev">
+                            <svg role="img" class="next-icon next-icon--rotate-270 next-icon--size-16">
+
+                            </svg>
+                        </span>
+                                                </a>
+                                                <a class="btn-next btn-page btn btn-default disabled">
+                        <span class="page-next">
+                            <svg role="img" class="next-icon next-icon--rotate-90 next-icon--size-16">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-detailed"></use>
+                            </svg>
+                        </span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a class="modal_source display-popUp" type="text/html" style="display: none"
+                               define="{showDisplayPopUp: new Components.Modal(this)}"></a>
+                        </div>
+<!--                        modal info supplier-->
+
+                    </div>
+                </div>
+                <div class="page-info" style="padding-bottom:0px">
+                    <div class="page-info-title">
+                        <span>Thông tin sản phẩm</span>
+                        <div class="pull-right">
+                            <label style="display:flex;">
+                                        <span class="sapo-checkbox" style="margin-right: 5px;">
+                                            <input class="sapo-checkbox__input" type="checkbox" bind="seperateProduct"
+                                                   id="seperateProduct" bind-event-click="changeSeperateProduct()">
+                                            <span class="sapo-checkbox__checkmark"></span>
+                                        </span>
+                                <span class="label">Tách dòng</span>
+                            </label>
+                        </div>
+                        <div class="pull-right pr-5">
+                            <label style="display:flex;">
+                                        <span class="sapo-checkbox" style="margin-right: 5px;">
+                                            <input class="sapo-checkbox__input" type="checkbox"
+                                                   bind="suggestImportPrice" id="suggestImportPrice"
+                                                   bind-event-change="changeSuggestImportPrice()">
+                                            <span class="sapo-checkbox__checkmark"></span>
+                                        </span>
+                                <span class="label">Sử dụng giá nhập gần nhất</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="page-info-body" style="display: inline-block;">
+                        <div class="search-layout-common">
+                            <div id="search-product-wrap" style="margin:0 10px 15px 0">
+                                <i class="fa fa-search" style=""></i>
+                                <div id="search_product_bar">
+                                    <input type="text"
+                                           class="sapo-textbox search w-100 select--a mb-0 no-right-border"
+                                           id="search-product"
+                                           placeholder="Tìm kiếm sản phẩm theo tên, mã SKU, barcode ... (F3)"
+                                           bind="popoverSearchProduct.query"
+                                           bind-event-input="popoverSearchProduct.suggest(this)" autocomplete="off"
+                                           data-original-title="" title="">
+                                    <button type="button">Chọn nhiều</button>
+                                </div>
+                                <div id="autocomplete-product-holder" style="position:relative"></div>
+                                <div class="filter-body--suggest"></div>
+                            </div>
+                        </div>
+                        <div class="list-line-item" id="items_table">
+                            <table class="sapo-table-line-item">
+                                <thead>
+                                <tr class="step1">
+                                    <th style="width:125px">Mã SKU</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th style="width:85px" class="align-left">Đơn vị</th>
+                                    <th style="width:85px" class="align-right">Số lượng</th>
+                                    <th style="width:85px" class="align-right">Giá nhập</th>
+                                    <th style="width:85px" class="align-right">Thành tiền</th>
+
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody id="line_item_rows">
+                                </tbody>
+                            </table>
+                            <div class="no-item">
+                                <img src="https://phuphomaique.mysapogo.com/v2/images/no-product.svg">
+                                <p>Đơn nhập của bạn chưa có sản phẩm nào</p>
+                                <a href="javascript:" bind-event-click="focusSearch()">Thêm sản phẩm ngay</a>
+                            </div>
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <div class="list-info-money">
+                                <div class="item-info-money">
+                                    <div class="label">
+                                        Số lượng
+                                    </div>
+                                    <div class="value">
+                                        <span bind="formatQty(totalQuantity())">0</span>
+                                    </div>
+                                </div>
+                                <div class="item-info-money">
+                                    <div class="label">
+                                        Tổng tiền
+                                    </div>
+                                    <div class="value">
+                                        <span bind="formatMoney(totalMoneyOrder())">0</span>
+                                    </div>
+                                </div>
+                                <div class="item-info-money">
+                                    <div class="label">
+                                        <a href="javascript:" data-toggle="popover"
+                                           id="btn-discount-purchase-order" data-original-title="" title="">
+                                            Chiết khấu (F6)
+                                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                    <div class="value">
+                                        <span bind="formatMoney(totalDisCountOrder())">0</span>
+                                    </div>
+                                </div>
+                                <div class="list-tax">
+
+                                </div>
+                                <div class="item-info-money">
+                                    <div class="label">
+                                        <a href="javascript:" bind-event-click="openPopupCosts()"
+                                           id="btn-cost-purchase-order">
+                                            Chi phí (F7)
+                                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                    <div class="value">
+                                        <span bind="formatMoney(totalLandedCost())">0</span>
+                                    </div>
+                                </div>
+                                <div class="item-info-money">
+                                    <div class="label">
+
+                                        <b>Tiền cần trả</b>
+                                    </div>
+                                    <div class="value">
+                                        <span bind="formatMoney(totalMoneyReturnAmount())">0</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-info padding-info">
+                    <div class="page-info-body" style="display: inline-block;">
+                        <div class="page-info-body--sub none-border-top">
+                            <div class="title">
+                                <svg class="next-icon--size-20 next-icon--slate-lighter"
+                                     style="top: 5px;margin-right: 5px;">
+                                    <use xlink:href="#credit-card" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    </use>
+                                </svg>
+                                <span>Thanh toán</span>
+                                <div class="pull-right mt-2 font-weight-400" style="text-transform:none">
+                                    <label class="flex cursor-pointer">
+                                                <span class="sapo-checkbox" style="margin-right: 5px;">
+                                                    <input class="sapo-checkbox__input" type="checkbox"
+                                                           bind-event-click="showPayment(this)" id="check-payment"
+                                                           bind="choosePayment">
+                                                    <span class="sapo-checkbox__checkmark"></span>
+                                                </span>
+                                        <span class="label">Thanh toán với nhà cung cấp</span>
+
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="content page-payment pt-3" id="pre-payment" style="display:none">
+                                <div class="col-md-6 no-padding-left">
+                                    <label>Hình thức thanh toán</label>
+                                    <select bind="paymentMethodId"
+                                            class="w100 input-dropdown sapo-btn-blank select-padding">
+                                        <option value="">Chọn hình thức thanh toán</option>
+                                        <option value="2940432">Quẹt thẻ</option>
+                                        <option value="2940430">COD</option>
+                                        <option value="2940429">Chuyển khoản</option>
+                                        <option value="2940428">Tiền mặt</option>
+                                    </select>
+                                    <label>Tham chiếu</label>
+                                    <input class="sapo-textbox w100 pull-left">
+                                </div>
+                                <div class="col-md-6 no-padding-right">
+                                    <label>Số tiền thanh toán</label>
+                                    <div class="input-wrap">
+                                        <span class="currency-input"></span>
+                                        <input type="hidden" class="sapo-textbox align-right" id="" name=""
+                                               value="0">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-info padding-info">
+                    <div class="page-info-body" style="display: inline-block;">
+                        <div class="page-info-body--sub none-border-top">
+                            <div class="title">
+                                <svg class="next-icon--size-20 next-icon--slate-lighter"
+                                     style="top: 5px;margin-right: 5px;">
+                                    <use xlink:href="#credit-card" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    </use>
+                                </svg>
+                                <span>Nhập kho</span>
+                                <div class="pull-right mt-2 font-weight-400" style="text-transform:none">
+                                    <label class="flex cursor-pointer">
+                                                <span class="sapo-checkbox" style="margin-right: 5px;">
+                                                    <input class="sapo-checkbox__input" type="checkbox" id="receive">
+                                                    <span class="sapo-checkbox__checkmark"></span>
+                                                </span>
+                                        <span class="label">Nhập hàng vào kho</span>
+
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="purchase-order-create--right">
+                <div class="page-info">
+                    <div class="page-info-title">
+                        Thông tin đơn nhập hàng
+                    </div>
+                    <div class="page-info-body">
+
+                        <div id="form-create-purchase-order" class="field form-group">
+                            <label class="control-label">Mã đơn nhập hàng</label>
+                            <div class="controls">
+                                <input bind="code" bind-event-input="removeValidate(this)"
+                                       class="form-control sapo-textbox" data-toogle="tooltip" id="Code"
+                                       name="Code" type="label" value="" data-original-title="" title="">
+                                <span class="help-block help-block-margin"><span class="field-validation-valid"
+                                                                                 data-valmsg-for="Code"
+                                                                                 data-valmsg-replace="true"></span></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Chi nhánh</label>
+                            <select
+                                    class="w100 input-dropdown sapo-btn-blank select-padding right select2-hidden-accessible"
+                                    bind="locationId" id="locationId" bind-event-change="changeLocation()"
+                                    tabindex="-1" aria-hidden="true">
+                                <option value="643294" selected="">Chi nhánh mặc định</option>
+                            </select><span class="select2 select2-container select2-container--default"
+                                           dir="ltr" style="width: 270px;"><span class="selection"><span
+                                class="select2-selection select2-selection--single" role="combobox"
+                                aria-haspopup="true" aria-expanded="false" tabindex="0"
+                                aria-labelledby="select2-locationId-container"><span
+                                class="select2-selection__rendered"
+                                id="select2-locationId-container" title="Chi nhánh mặc định">Chi
+                                                    nhánh mặc định</span><span
+                                class="select2-selection__arrow input-dropdown"
+                                role="presentation"></span></span></span><span
+                                class="dropdown-wrapper" aria-hidden="true"></span></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Chính sách giá</label>
+                            <select class="w100 input-dropdown sapo-btn-blank select-padding" id="priceListId"
+                                    bind-event-change="selectPriceListId()">
+                                <option value="1945968" selected="">Giá nhập</option>
+                            </select>
+                        </div>
+                        <div class="form-group info-hide">
+                            <label>Tham chiếu</label>
+                            <input class="sapo-textbox w100 right" bind="reference"
+                                   bind-event-input="removeValidate(this)" data-toggle="tooltip"
+                                   data-original-title="" title="">
+                        </div>
+                        <div class="form-group info-hide">
+                            <label>Ngày hẹn giao</label>
+                            <div class="form-datepicker-common left">
+                                <input type="text" class="sapo-textbox w100 datetimepicker right" bind="dueOn"
+                                       autocomplete="off">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="btn-show-more--footer" bind-event-click="showMore(this)"
+                             style="width: unset; left: calc(50% - 33px); font-size: 11px">
+                            <a href="javascript:"><span id="btn-show-more-text">Xem thêm</span> <i
+                                    class="fa fa-caret-down" aria-hidden="true"
+                                    style="font-size: 11px; position: unset" color="#08f"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-info">
+                    <div class="page-info-body">
+                        <div class="page-info-item col-md-12 no-padding">
+                            <div class="page-info-item-title">
+                                GHI CHÚ
+                            </div>
+                            <textarea class="sapo-textbox" bind="note"></textarea>
+                        </div>
+                        <div class="page-info-item col-md-12 no-padding">
+                            <div class="page-info-item-title">
+                                TAG
+                            </div>
+                            <div class="bootstrap-tagsinput"><input type="text" placeholder=""
+                                                                    autocomplete="off"></div>
+                            <input class="sapo-textbox tags" bind="tagso"
+                                   style="display: none;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-title-bottom-bar">
+                <a href="javascript:" class="btn sapo-btn-default right" style="border-radius: 0 3px 3px 0;"
+                   data-toggle="dropdown"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                <a href="javascript:" class="btn sapo-btn-default right btn-create-order"
+                   style="border-radius: 3px 0 0 3px;">Đặt hàng và duyệt (F1)</a>
+                <ul class="dropdown-menu newscroll" style="font-size:13px">
+                    <li><a>Đặt hàng</a></li>
+                    <li><a>Đặt hàng và duyệt</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+
+<th:block th:replace="/layout/script :: script"/>
+<th:block th:replace="/admin/purchase_orders/modal_create_supplier :: modal_create_supplier"/>
+<script>
+    Page();
+    hj('trigger', 'split_test_b');
+</script>
+
+<script type="text/javascript" src="/assets/admin/js/purchase/app.js"></script>
+<script type="text/javascript" src="/assets/admin/js/purchase/purchase.js"></script>
+
+<link rel="stylesheet" href="/assets/admin/css/order/create_order.css">
+</html>

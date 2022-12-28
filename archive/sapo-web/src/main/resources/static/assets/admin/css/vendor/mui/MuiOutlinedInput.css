@@ -1,0 +1,77 @@
+.MuiOutlinedInput-root {
+    position: relative;
+    border-radius: 4px;
+  }
+
+  .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: rgba(0, 0, 0, 0.87);
+  }
+
+  @media (hover: none) {
+    .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+      border-color: rgba(0, 0, 0, 0.23);
+    }
+  }
+
+  .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #0088FF;
+    border-width: 2px;
+  }
+
+  .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline {
+    border-color: #f44336;
+  }
+
+  .MuiOutlinedInput-root.Mui-disabled .MuiOutlinedInput-notchedOutline {
+    border-color: rgba(0, 0, 0, 0.26);
+  }
+
+  .MuiOutlinedInput-colorSecondary.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #747C87;
+  }
+
+  .MuiOutlinedInput-adornedStart {
+    padding-left: 14px;
+  }
+
+  .MuiOutlinedInput-adornedEnd {
+    padding-right: 14px;
+  }
+
+  .MuiOutlinedInput-multiline {
+    padding: 18.5px 14px;
+  }
+
+  .MuiOutlinedInput-multiline.MuiOutlinedInput-marginDense {
+    padding-top: 10.5px;
+    padding-bottom: 10.5px;
+  }
+
+  .MuiOutlinedInput-notchedOutline {
+    border-color: rgba(0, 0, 0, 0.23);
+  }
+
+  .MuiOutlinedInput-input {
+    padding: 18.5px 14px;
+  }
+
+  .MuiOutlinedInput-input:-webkit-autofill {
+    border-radius: inherit;
+  }
+
+  .MuiOutlinedInput-inputMarginDense {
+    padding-top: 10.5px;
+    padding-bottom: 10.5px;
+  }
+
+  .MuiOutlinedInput-inputMultiline {
+    padding: 0;
+  }
+
+  .MuiOutlinedInput-inputAdornedStart {
+    padding-left: 0;
+  }
+
+  .MuiOutlinedInput-inputAdornedEnd {
+    padding-right: 0;
+  }

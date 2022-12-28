@@ -1,0 +1,26 @@
+<th:block th:fragment="createCatModal">
+    <div class="modal fade" id="modalAddCategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Thêm loại sản phẩm</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="frmCreateCat" method="post">
+                <div class="modal-body">
+                        <div >
+                            <label for="inputCategory" class="mb-3">Tên loại sản phẩm <span style="color: red">*</span></label>
+                            <input placeholder="VD: Bánh kẹo" type="text" id="inputCategory" name="inputCat" class="form-control"/>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="sc-jqUVSM dgJIMY" data-bs-dismiss="modal">Thoát</button>
+                    <button type="button" id="btnAddCategory" class="sc-jqUVSM cHdopB">
+                        Thêm loại sản phẩm
+                    </button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>
