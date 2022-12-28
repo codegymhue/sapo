@@ -1125,8 +1125,9 @@
                                                     class="MuiTouchRipple-root"></span></span><span
                                                     class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1">Tách dòng</span></label><span
                                                     style="width: 1px; height: 24px; background-color: rgb(211, 213, 215); margin-right: 10px;"></span>
-                                                <button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
+                                                <button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary "
                                                         tabindex="0" type="button"
+                                                        data-bs-toggle="modal" data-bs-target="#inventoryCheck"
                                                         style="padding-top: 0px; padding-bottom: 0px; height: 20px; font-weight: normal;">
                                                     <span class="MuiButton-label">Kiểm tra tồn kho</span><span
                                                         class="MuiTouchRipple-root"></span></button>
@@ -2020,7 +2021,7 @@
 <th:block th:replace="/admin/order/modal_create_customer::modal_create_customer"/>
 <th:block th:replace="/admin/order/modal_update_customer::modal_update_customer"/>
 <th:block th:replace="/admin/order/modal_create_product::modal_create_product"/>
-
+<th:block th:replace="/admin/order/modal_kho::modal_kho"/>
 
 <th:block th:replace="/layout/script :: script"/>
 
