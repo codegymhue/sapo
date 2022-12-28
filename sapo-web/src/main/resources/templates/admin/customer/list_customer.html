@@ -809,7 +809,7 @@
                 destroy: true,
                 columns: [
                     {data: 'id'},
-                    {data: 'code'},
+                    {data: 'customerCode'},
                     {data: 'name'},
                     {data: 'phoneNumber'},
                     {data: 'group.title'},
@@ -828,7 +828,7 @@
                     {
                         targets: 1,
                         render: function (data, type, row, meta) {
-                            return `<a href="/admin/customers/${row.id}">${row.code}</a>`;
+                            return `<a href="/admin/customers/${row.id}">${row.customerCode}</a>`;
                         }
                     },
                     // {

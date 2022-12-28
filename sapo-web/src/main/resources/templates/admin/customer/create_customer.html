@@ -484,7 +484,7 @@
         customer.birthday = $('#birthdayCreate').val();
         customer.status = $('#statusCreate').val
         customer.customerGender = $('#genderCreate').val();
-        customer.createAt = $('#birthdayCreate').val();
+
 
         customer.updateAt = null;
         shippingAddress.line1 = $('#addressCreate').val();
@@ -494,7 +494,6 @@
         shippingAddress.districtName = $('#district :selected').text();
         shippingAddress.wardId = $('#ward').val();
         shippingAddress.wardName = $('#ward :selected').text();
-        customer.employeeId = $('#employeeNameCreate').val();
         customer.createShippingAddressParam = shippingAddress;
         console.log(customer)
         $.ajax({
