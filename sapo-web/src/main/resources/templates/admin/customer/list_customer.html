@@ -530,20 +530,20 @@
     page.dialogs.elements.previousPage = $("#previousPage");
 
 
-    function checkall(class_name, obj) {
-        //Duyệt qua các checkbox có class = class_name (item)
-        //Trả về các phần tử ở dạng mảng, bắt dầu từ vị trí 0;
-        var items = document.getElementsByClassName(class_name);
-        if (obj.checked == true) //Đã được chọn
-        {
-            for (i = 0; i < items.length; i++)
-                items[i].checked = true;
-        }
-        else { //Checkbox chưa được chọn
-            for (i = 0; i < items.length; i++)
-                items[i].checked = false;
-        }
-    }
+    // function checkall(class_name, obj) {
+    //     //Duyệt qua các checkbox có class = class_name (item)
+    //     //Trả về các phần tử ở dạng mảng, bắt dầu từ vị trí 0;
+    //     var items = document.getElementsByClassName(class_name);
+    //     if (obj.checked == true) //Đã được chọn
+    //     {
+    //         for (i = 0; i < items.length; i++)
+    //             items[i].checked = true;
+    //     }
+    //     else { //Checkbox chưa được chọn
+    //         for (i = 0; i < items.length; i++)
+    //             items[i].checked = false;
+    //     }
+    // }
 
     page.commands.getAllCustomers = () => {
         $(document).ready(function () {
