@@ -5,7 +5,9 @@ import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 public interface CustomerService {
 
@@ -29,6 +31,12 @@ public interface CustomerService {
 
     boolean existsById(Integer id);
 
+
+//    Map<String, Object> getAllCustomerItemPage(Integer pageNo, Integer pageSize, String code, String name,
+//                                               String phoneNumber, String group, BigDecimal debtTotal,
+//                                               BigDecimal spendTotal, int quantityItemOrder
+//                                            , String status,
+//                                               String typeSort, String nameFieldSort);
     //
     //    @Override
     //    @Transactional(readOnly = true)
