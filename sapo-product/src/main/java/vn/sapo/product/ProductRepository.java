@@ -27,4 +27,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     Optional<Product> findBySku (String sku);
     Optional<Product> findByBarCode (String barCode);
+
+    @Query("SELECT p FROM Product AS p WHERE p.id = :productId AND p.deleted = false")
+    Product findByIdByDeletedIsFalse(@Param("productId") Integer id);
 }

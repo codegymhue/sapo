@@ -116,7 +116,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional(readOnly = true)
     public ProductResult findById(Integer id) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product not found"));
+        Product product = productRepository.findByIdByDeletedIsFalse(id);
+        if(product == null){
+            throw new NotFoundException("Sản phẩm này đã bị xóa hoặc không tồn tại!");
+        }
         Integer productId = product.getId();
         ProductResult dto = productMapper.toDTO(product);
         dto.setTotalInventory(itemService.getTotalInventoryQuantityByProductId(productId));

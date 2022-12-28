@@ -27,6 +27,10 @@
                     </svg>
                     <h6 class="MuiTypography-root MuiTypography-subtitle1">Quay lại danh sách sản phẩm</h6>
                 </a></div>
+
+                <th:block>
+                    <h2 th:if="errors" th:text="${errors}" style="color: red"></h2>
+                </th:block>
                 <span hidden id="productId" th:text="${product.getId()}"></span>
                 <div class="MuiBox-root jss4513">
                     <a href="/admin/products">
