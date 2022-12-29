@@ -10,6 +10,8 @@ import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerStatus;
 
+import java.time.Instant;
+
 @Component
 public class CustomerMapper implements InitializingBean {
     @Autowired
@@ -25,7 +27,8 @@ public class CustomerMapper implements InitializingBean {
 
     public Customer toModel(CreateCustomerParam createCustomerParam) {
         return modelMapper.map(createCustomerParam, Customer.class)
-                .setStatus(CustomerStatus.AVAILABLE);
+                .setStatus(CustomerStatus.AVAILABLE)
+                .setBirthday(createCustomerParam.getBirthday().)
     }
 
     public void transferFields(UpdateCustomerParam updateCustomerParam, Customer customer) {

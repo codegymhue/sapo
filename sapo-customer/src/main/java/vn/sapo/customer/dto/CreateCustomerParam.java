@@ -27,6 +27,7 @@ public class CreateCustomerParam {
 
     private String email;
 
+
     private Instant birthday;
 
     private CustomerGender gender;
