@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="vi-VN" class="sapo-menu-collapse sapo-menu-toggle-active" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="/layout/header :: header"/>
+    <title>Danh sách nhà cung cấp</title>
+</head>
+
+<body>
+    <th:block th:replace="/layout/menu :: menu"/>
+    <div class="col-right">
+        <div class="col-right_content">
+            <header class="ui-title-bar-container ui-title-bar-container--index">
+                <div class="ui-title-bar">
+                    <div class="ui-title-bar__main-group">
+                        <div class="ui-title-bar__heading-group">
+                            <h1 class="ui-title-bar__title">Nhà cung cấp</h1>
+                        </div>
+                    </div>
+                    <a href="/admin/suppliers/create" class="btn sapo-btn-default">Thêm nhà cung cấp</a>
+                </div>
+            </header>
+            <div class="gird-layout gird-layout--full-width">
+                <section class="grid-card">
+                    <div class="filter-tab-container">
+                        <ul class="filter-tab-list">
+                            <li class="filter-tab-item" style="opacity: 1;">
+                                <a href="/admin/suppliers" class="filter-tab filter-tab-active">Tất cả nhà cung cấp</a>
+                            </li>
+                            <li class="filter-tab-item" style="opacity: 1; padding-bottom: 3.5px;">
+                                <a href="/admin/suppliers?status=available" class="filter-tab">Đang giao dịch</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="filter-header">
+                        <button class="btn btn-filter" type="button">
+                            <span>Lọc nhà cung cấp</span>
+                            <svg id="svg-filter" class="next-icon next-icon--size-20">
+                                <use xlink:href="#next-disclosure" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+                            </svg>
+                        </button>
+                        <div class="group-input-query">
+                            <svg class="next-icon next-icon--size-16">
+                                <use xlink:href="#next-search-reverse" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+                            </svg>
+                            <input type="text" class="input-query sapo-textbox" title="Tìm kiếm theo mã nhà cung cấp, SĐT, tên nhà cung cấp" placeholder="Tìm kiếm theo mã nhà cung cấp, SĐT, tên nhà cung cấp"/>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <div id="sapo-table_wrapper">
+                            <table id="supplier-datatables" class="sapo-table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <div class="tooltip--select-all">
+                                                <div class="bulk-actions--select-all">
+                                                    <span class="btn bulk-actions--select-all-btn"></span>
+                                                    <input type="checkbox" class="next-checkbox bulk-actions--select-all-checkbox" title="Chọn tất cả nhà cung cấp"/>
+                                                    <span class="next-checkbox--styled">
+                                                        <svg>
+                                                            <use xlink:href="#next-checkmark-thick" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+                                                        </svg>
+                                                        <svg>
+                                                            <use xlink:href="#next-minus" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <th>Mã nhà cung cấp</th>
+                                        <th>Tên nhà cung cấp</th>
+                                        <th>Email</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Trạng thái</th>
+                                        <th>Nhân viên phụ trách</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Lần cập nhật cuối</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+
+<th:block th:replace="/layout/script :: script"/>
+<script src="/assets/admin/js/suppliers/supplier_list.js" type="text/javascript"></script>
+
+</html>

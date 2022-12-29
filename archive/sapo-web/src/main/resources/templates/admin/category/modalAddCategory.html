@@ -1,0 +1,33 @@
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
+
+<th:block th:fragment="modalAddCategory">
+  <div class="modal fade" id="modalAddCategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">Thêm loại sản phẩm</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="frmCreate" method="post">
+            <div class="col-lg-6 fl">
+              <div class="row col-lg-12 mt-3">
+                <div class="col-lg-12">
+                  <label>Tên loại sản phẩm</label>
+                  <input type="text" id="" name="" class="form-control">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" id="btnAddCategory" class="btn btn-outline-secondary">
+            <i class="fas fa-pencil-alt"></i>
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</th:block>

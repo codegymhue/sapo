@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html class="sapo-menu-expand sapo-menu-toggle-active" lang="vi-VN" style="font-size: 10px">
+
+<head>
+    <th:block th:replace="/layout/header :: header"/>
+
+    <title>Danh sách đơn nhập hàng</title>
+</head>
+
+<body class="" data-new-gr-c-s-check-loaded="14.1085.0" data-gr-ext-installed="">
+<div id="root" style="overflow: auto">
+    <div class="hidden" context="tenantInfo">
+    </div>
+    <div class="header-mobile">
+        <a href="javascript:" class="icon-menu visible-xs visible-sm" onclick="showMenu()">
+            <svg class="next-icon next-icon--size-20">
+                <use xlink:href="#icon-menu" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+            </svg>
+        </a>
+    </div>
+    <th:block th:replace="/layout/menu :: menu"/>
+</div>
+<div class="col-right">
+    <div class="col-right_content" id="content">
+        <form id="frmFilter" method="get">
+            <input type="hidden" name="filterName">
+            <input type="hidden" name="query" value="">
+            <input type="hidden" name="totalRecords" value="1">
+            <input type="hidden" name="numAroundPages" value="1">
+        </form>
+        <header class="ui-title-bar-container ui-title-bar-container--index">
+            <div class="ui-title-bar">
+                <div class="ui-title-bar__main-group">
+                    <div class="ui-title-bar__heading-group">
+                        <h1 class="ui-title-bar__title">Đơn nhập hàng</h1>
+                    </div>
+                    <div class="action-bar">
+                        <div class="action-bar__top-links d-flex align-items-center">
+                            <button class="btn sapo-btn-transparent action-bar__link export_product" type="button"
+                                    name="button">
+                                <svg
+                                        class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         xlink:href="#next-export-minor"></use>
+                                </svg>
+                                Xuất file
+                            </button>
+                            <button class="btn sapo-btn-transparent action-bar__link import_product" type="button"
+                                    name="button">
+                                <svg
+                                        class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         xlink:href="#next-import-minor"></use>
+                                </svg>
+                                Nhập danh sách
+                            </button>
+                            <button class="btn sapo-btn-transparent action-bar__link">
+                            <svg
+                                    class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-setting">
+                                </use>
+                            </svg>
+                            Điều chỉnh cột hiển thị
+                            <script class="modal_source" type="text/html"></script>
+                            </button>
+                            <div class="d-flex align-items-center"
+                                 style="height: 20px; border-left: 1px solid #D3D5D7; ">
+                                <a href="/admin/supplier_returns"
+                                   class="btn sapo-btn-transparent action-bar__link">
+                                    Quản lý trả hàng NCC
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script class="modal_source" type="text/html">
+                    <div class="modal-dialog modal-dialog-new" style="width:600px;max-width:unset">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <span class="ui-dialog-title" id="ui-dialog-title-1">
+                                Nhập dữ liệu đơn nhập hàng
+                            </span>
+                                <span class="modal-close-wrapper1">
+                                <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                          xlink:href="#cancel-small-minor"></use> </svg>
+                            </span>
+                            </div>
+                            <div class="modal-body">
+                                <form id="form-import" action="/admin/orders/import" method="post"
+                                      enctype="multipart/form-data">
+
+                                    <div>
+                                        <div id="load-status-import"></div>
+                                        <div id="empty-success" style="padding-right:10%;">
+                                            <div class="row">
+                                                <div class="col-6 row-float">
+                                                    <label class="mr-3" style="margin-bottom:5px">Chọn chi nhánh</label>
+                                                    <select class="sapo-select" name="locationId" id="location_id"
+                                                            style="width:200px;">
+                                                        <option value="643294">Chi nh&#xE1;nh m&#x1EB7;c &#x111;&#x1ECB;nh</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label class="mr-3" style="margin-bottom:5px">Chọn nhà cung
+                                                        cấp</label>
+                                                    <input type="hidden" id="supplierId" name="supplierId"/>
+                                                    <input type="hidden" id="supplierName" name="supplierName"/>
+                                                    <div style="position:relative">
+                                                        <div id="input-supplier">
+                                                            <i class="fa fa-user"
+                                                               style="position: absolute;padding: 10px 12px;pointer-events: none;color: #777;z-index:10"></i>
+                                                            <div class="page-info-body" style="width:200px">
+                                                                <div class="search-layout-common"
+                                                                     id="search-supplier-wrap">
+                                                                    <div class="w-100" style="position:relative">
+                                                                        <input style="height: 34px;padding-left:30px"
+                                                                               type="text" class="sapo-textbox"
+                                                                               id="search-supplier"
+                                                                               placeholder="Chọn nhà cung cấp">
+                                                                        <div id="autocomplete-product-holder"
+                                                                             style="position:relative"></div>
+                                                                    </div>
+                                                                    <div class="filter-body--suggest"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div style="padding-top: 20px">
+                                                Chú ý:
+                                            </div>
+                                            <div class="empty-success__text">
+                                                - Thời gian cập nhật mẫu file: 13/10/2022.
+                                            </div>
+                                            <div class="empty-success__text">
+                                                - Chuyển đổi file nhập dưới dạng .XLS hoặc .XLSX trước tải dữ liệu.
+                                            </div>
+                                            <div class="empty-success__text">
+                                                - Tải file mẫu đơn nhập hàng <a
+                                                    href=""
+                                                    style="color:#0088ff">tại đây</a>.
+                                            </div>
+                                            <div class="empty-success__text">
+                                                - File nhập có dung lượng tối đa là 2MB và 500 bản ghi.
+                                            </div>
+                                        </div>
+
+                                        <div id="chose-file">
+                                            <div class="chose-file-import">
+                                                <a class="btn-upload" title=""><i
+                                                        style="padding-right: 4px;" class="fa fa-cloud-download"
+                                                        aria-hidden="true"></i><span>Kéo thả file vào đây hoặc tải lên từ thiết bị</span></a>
+                                                <input name="importProductsFile" type="file" size="30" class="hide"
+                                                       id="importFileUpload"/>
+                                                <input id="overrideExistProducts" name="overrideExistProducts"
+                                                       type="hidden" value="false">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                    <div class="action-btn clearfix">
+                                        <button class="btn sapo-btn-default pull-right" id="importBtn">Nhập file
+                                    </button>
+                                    <button class="btn btn-blank pull-right mr-2" type="button">Thoát
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </script>
+                <script class="modal_source" type="text/html">
+                    <div class="modal-dialog modal-dialog-new">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <span class="ui-dialog-title" id="ui-dialog-title-empty">
+                            </span>
+                                <span class="modal-close-wrapper">
+                                <svg class="ui-icon-x ui-icon-x-20">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use> </svg>
+                            </span>
+                            </div>
+
+                            <div id="modal-body-empty" class="modal-body pull-center w100 p-0">
+
+                            </div>
+                            <div class="modal-footer">
+                                <div class="action-btn clearfix" id="modal-footer-empty">
+                                    <button class="close-modal btn btn-blank pull-right" type="button">Thoát</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </script>
+                <script class="modal_source" type="text/html">
+                    <div class="modal-dialog modal-dialog-new modal-export" style="width:680px;max-width:unset">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <span class="ui-dialog-title">
+                                <a href="javascript:" class="btn-back-header">
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                </a>
+
+                                Xuất file danh sách đơn nhập hàng
+                            </span>
+                                <span class="modal-close-wrapper1" >
+                                <svg class="ui-icon-x ui-icon-x-20">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                          xlink:href="#cancel-small-minor"></use> </svg>
+                            </span>
+                            </div>
+                            <div class="modal-body" style="max-height: calc(100vh - 200px);overflow-y: auto;">
+                                <form id="formExportOrders">
+                                    <div style="padding-left: 10px;">
+                                        <div style="font-weight:500;padding:5px 0">Giới hạn kết quả xuất</div>
+                                        <div class="sapo-radio-wrapper">
+                                            <label class="flex">
+                                            <span class="sapo-radiobox" style="margin-right: 7px;">
+                                                <input class="sapo-radiobox__input" type="radio" name="formExportType"
+                                                       id="allOrders" value="allOrders" checked>
+                                                <span class="sapo-radiobox__icon"></span>
+                                            </span>
+                                                Tất cả đơn nhập hàng
+                                            </label>
+                                        </div>
+                                        <div class="sapo-radio-wrapper">
+                                            <label class="flex">
+                                            <span class="sapo-radiobox" style="margin-right: 7px;">
+                                                <input class="sapo-radiobox__input" type="radio" name="formExportType"
+                                                       id="currentPage" value="currentPage">
+                                                <span class="sapo-radiobox__icon"></span>
+                                            </span>
+                                                Đơn nhập hàng trên trang này
+                                            </label>
+                                        </div>
+
+                                        <div class="sapo-radio-wrapper">
+                                            <label class="flex">
+                                            <span class="sapo-radiobox" style="margin-right: 7px;">
+                                                <input class="sapo-radiobox__input" type="radio" name="formExportType"
+                                                       id="selectedOrders" value="selectedOrders">
+                                                <span class="sapo-radiobox__icon"></span>
+                                            </span>
+                                                Các đơn nhập hàng được chọn
+                                            </label>
+                                        </div>
+                                        <div class="sapo-radio-wrapper">
+                                            <label class="flex">
+                                            <span class="sapo-radiobox" style="margin-right: 7px;">
+                                                <input class="sapo-radiobox__input" type="radio" name="formExportType"
+                                                       id="currentSearch" value="currentSearch">
+                                                <span class="sapo-radiobox__icon"></span>
+                                            </span>
+                                                <span id="order-match-current-search">1</span>&nbsp;đơn nhập hàng phù
+                                                hợp với kết quả tìm kiếm hiện tại
+                                            </label>
+                                        </div>
+                                        <div style="font-weight:500;padding:10px 0 5px">Loại file xuất</div>
+                                        <div class="sapo-radio-wrapper">
+                                            <label class="flex">
+                                            <span class="sapo-radiobox" style="margin-right: 7px;">
+                                                <input class="sapo-radiobox__input" type="radio" name="exportOrdersType"
+                                                       id="exportOrder" value="purchase_order_overview"
+                                                       checked="checked">
+                                                <span class="sapo-radiobox__icon"></span>
+                                            </span>
+                                                <span>File tổng quan theo đơn nhập hàng</span>
+                                            </label>
+                                        </div>
+                                        <div class="sapo-radio-wrapper">
+                                            <label class="flex">
+                                            <span class="sapo-radiobox" style="margin-right: 7px;">
+                                                <input class="sapo-radiobox__input" type="radio" name="exportOrdersType"
+                                                       id="exportDetail" value="purchase_order_list">
+                                                <span class="sapo-radiobox__icon"></span>
+                                            </span>
+                                                <span>File chi tiết</span>
+                                            </label>
+                                        </div>
+                                        <a href="javascript:" style="color: #0088ff;margin: 5px 0 5px;display: inline-block;">Tuỳ chọn
+                                            trường hiển thị</a>
+                                    </div>
+                                </form>
+                                <div id="formExportOrders-purchase_order_overview" style="display:none"></div>
+                                <div id="formExportOrders-purchase_order_list" style="display:none"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="action-btn clearfix">
+                                    <button class="btn sapo-btn-default pull-right">Xuất file
+                                    </button>
+                                    <button class="btn btn-blank pull-right mr-2" type="button">Thoát
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </script>
+                <div class="ui-title-bar__actions" style="margin-bottom:40px">
+                    <a href="/admin/purchase_orders/create" class="btn sapo-btn-default">Tạo đơn nhập hàng</a>
+
+                    <style>
+                        .info-account {
+                            position: relative;
+                        }
+
+                        .help-dashboard {
+                            position: absolute;
+                            top: -1px;
+                            right: -1px;
+                            z-index: 1;
+                        }
+
+                        .help-dashboard .help-dropdown .btn-blank {
+                            background: #fff url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDplN2MwNTFiZi1lNGJiLTNjNDktOGM3YS00NTZmZTZlNGQ1NmYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjI5NDdDQ0NGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjI5NDdDQ0JGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjdkNDRhZTRlLTIzMTMtYTE0ZC1hNWQ4LTA5YTVjYTBmNmM0NCIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjk3N2NmYTliLThmZDctZGU0Mi1hNDFiLWIwOTJiYzRkYWM2MiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Po5ReOIAAAIxSURBVHjalJU9aFNRGIbTk+sSh0xiEKciaBF1culiA2IdOlQHaRBKqEurYJYOFn9Ql7iJghQcSqlDAop0yFIoWJcigouKKIROClWnomaQVHw+eAPxcs7J9cDDhXvP997vfH9naPbybC6wEpiASRiFYcjDLmzBJqxCa/HRYtcn4ALCFWjDQ/gGNRiB/XrW9N6+t+euzFV8IkMpzwuwDGNwDVagmwsvO9003IMNqHKKjs9zE16Dg3AclgYI2+oitqT9ZrfGKQo+8WXF9DRs5/5j8YNt2eWl8494RaE4Dx1f+OAwnIRi4Acd2Y/1cuAUt7pi7PP4GLyHj/AavsPNyAlMp84PEqdyc0qer5oa8AuOQAnuw10YD0RpRXYTTnXcDCTvBByVp5/gK1yH33Am4H1XepNODfIi4MUPuANv+t7tgz3wM5Jj0xtN1HntwCZ7fztVrk3F/XFE3OyGE5XPToaKs33PlOBT8CWy1/TyTrOimEH8IpyFc/BuwF7T23UaQocyiJfhA7zMsNf0tpymWzmDwROYz9i0prfpNDan1EyxtRcODFK15pHeqom34I+mW2xdglsZvJ6WXsupeRY0NksRoxvyKOZ1SToL1ky9wdXQPH6uWvYtmy+vIsIF2W8g3EiP3KrKcn3ACUIer8u+6pvnHQ2jz/AWZjIkOUF4RvvNbrz/Jkob24cLmu91tX5Ts6KtziuqjsvKgSWv1gtF+g70Ldv4tO/2fxC4/a/Gbv+/AgwA9q+ezeP4kToAAAAASUVORK5CYII=") no-repeat center center;
+                            border: none;
+                            font-size: 0;
+                            box-shadow: none;
+                            margin-left: 0;
+                            height: 61px;
+                            width: 60px;
+                            border: 1px solid #dbdbdb;
+                            outline: none;
+                            border-radius: 0;
+                        }
+
+                        .help-dashboard .help-dropdown .btn-blank:focus {
+                            box-shadow: none;
+                        }
+
+                        .help-dashboard .help-dropdown .help-popup {
+                            top: 60px;
+                            box-shadow: #c6c6c6 0px 3px 5px 0px;
+                        }
+
+                        .help-dashboard .help-dropdown .help-popup:after {
+                            right: 20px;
+                        }
+
+                        .sapo-menu-expand .page-heading {
+                            z-index: 1001;
+                        }
+
+                        .help-dropdown {
+                            position: relative;
+                            margin-left: 10px;
+                            height: 36px;
+                        }
+
+
+                        .help-dropdown a {
+                            color: #686868;
+                            display: flex;
+                            height: 100%;
+                            border: none;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;
+                            cursor: pointer;
+                            border: 1px solid #c4cdd5;
+                            float: right;
+                            width: auto;
+                        }
+
+                        .help-dropdown div:hover {
+                            background-color: #e7f2ff;
+                        }
+
+
+                        .help-dropdown .btn-blank:focus {
+                            box-shadow: none;
+                            border: 1px solid #c4cdd5;
+                        }
+
+                        .help-dropdown .help-popup {
+                            position: absolute;
+                            right: 0;
+                            z-index: 9999999;
+                            top: 45px;
+                            box-shadow: #c6c6c6 0 0 10px 5px;
+                            display: none;
+                            -webkit-transition: ease 0.5s;
+                            /* Safari */
+                            transition: ease 0.5s;
+                        }
+
+                        .help-dropdown .help-popup.shown {
+                            display: block;
+                            height: 560px;
+                            margin-top: 15px;
+                        }
+
+                        .help-dropdown .help-popup:after {
+                            content: "";
+                            display: block;
+                            width: 0px;
+                            height: 0px;
+                            border-left: 10px solid transparent;
+                            border-right: 10px solid transparent;
+                            border-bottom: 10px solid #f3f6f8;
+                            top: -9px;
+                            position: absolute;
+                            right: 25px;
+                        }
+                    </style>
+                    <div class="header-fr help-dropdown">
+                        <a class="btn sapo-btn-blank btn-help" onclick="showHelpPopup()"><img
+                                src=""
+                                style="padding-right: 5px;"><span>Trợ giúp</span></a>
+                        <div class="help-popup">
+                            <iframe id="iframe-help" src=""
+                                    style="width: 400px; height: 560px;border:none"></iframe>
+                            <input type="hidden" id="iframe-help-src">
+                        </div>
+                    </div>
+
+<!--                    <script type="text/javascript">-->
+<!--                        function showHelpPopup() {-->
+<!--                            $("#iframe-help").attr("src", $("#iframe-help-src").val());-->
+<!--                            $(".help-popup").toggleClass("shown");-->
+<!--                            $(".favourite").css({"z-index": "0"});-->
+<!--                        }-->
+
+<!--                        $(function () {-->
+<!--                            $("body").on("click", function (e) {-->
+<!--                                if (!$(".help-dropdown .btn-help *").is(e.target) && !$(".help-dropdown .btn-help").is(e.target) && $(".help-popup").hasClass("shown")) {-->
+<!--                                    $("#iframe-help").attr("src", "");-->
+<!--                                    $(".help-popup").removeClass("shown");-->
+<!--                                }-->
+<!--                            });-->
+<!--                        });-->
+<!--                    </script>-->
+
+                </div>
+            </div>
+        </header>
+        <div class="gird-layout gird-layout--full-width">
+            <section class="grid-card">
+
+                <div id="filterAndSavedSearch" class="filter-and-saved-search-order">
+                    <div class="filter-tab-container">
+                        <ul class="filter-tab-list" id="filter-tab-list" role="tablist"
+                            data-has-next-tab-controller="true" style="overflow: unset;">
+                            <li class="filter-tab-item" data-tab-index="1" style="opacity: 1;">
+                                <a href=""
+                                   class="filter-tab show-all-items filter-tab-active">Tất cả đơn nhập hàng</a>
+                            </li>
+                            <li class="filter-tab-item" data-tab-index="2" style="opacity: 1;">
+                                <a href="" class="filter-tab ">
+                                    Đang giao dịch
+                                </a>
+                            </li>
+
+                            <li class="filter-tab-item filter-tab-item--more" style="position:relative;">
+                                <a data-toggle="popover" href="javascript:" class="filter-tab"
+                                   data-original-title="" title="">
+                                            <span data-toggle="popover">
+                                                <svg class="next-icon next-icon--size-16 next-icon--no-nudge"
+                                                     id="svg-msaved">
+                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                         xlink:href="#next-ellipsis"></use>
+                                                </svg>
+                                            </span>
+                                </a>
+
+                                <div class="filter-tab-item--more-content popover-content" style="display:none">
+                                    <ul class="popover-list-item">
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="table-filter-container">
+                        <div class="filter-header">
+                            <button class="btn btn-filter" type="button" data-toggle="popover"
+                                    data-original-title="" title="">
+                                <span>Lọc đơn nhập hàng</span>
+                                <svg class="next-icon next-icon--size-20" id="svg-filter">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         xlink:href="#next-disclosure"></use>
+                                </svg>
+                            </button>
+
+                            <div class="group-input-query">
+                                        <span class="">
+                                            <svg class="next-icon next-icon--size-16">
+                                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="#next-search-reverse"></use>
+                                            </svg>
+                                        </span>
+                                <input type="text" id="query-enter"
+                                       class="input-query sapo-textbox"
+                                       placeholder="Tìm kiếm theo mã đơn nhập hàng, tên nhà cung cấp">
+                            </div>
+                            <div id="saved-search-actions-next" class="saved-search-actions-next"
+                                 data-tg-refresh="saved-search-actions-next">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div id="resultFilter">
+                    <div class="orders" context="indexPurchaseOrder">
+                        <div class="ui-type-container clearfix">
+                            <div class="table-wrapper" style="opacity: 1;">
+                                <div id="bulk-actions-all" class="bulk-actions btn-group"
+                                     style="display: none; left: 0px; position: absolute;">
+                                    <a class="btn bulk-actions__main-bar disabled">
+                                        Đã chọn
+                                        <span class="selection-count bulk-action-items-count">
+                                                    (<span class="display-bulk-action-items-count">20</span> đơn nhập
+                                                    hàng)
+                                                </span>
+                                    </a>
+                                    <a class="btn bulk-actions__btn-dropdown" data-toggle="popover"
+                                       data-placement="bottom" data-original-title="" title="">
+                                        Chọn thao tác
+                                        <svg class="next-icon next-icon--size-20" id="svg-bulkaction">
+                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                 xlink:href="#next-disclosure"></use>
+                                        </svg>
+                                    </a>
+                                    <div style="display:none" class="popover-content">
+                                        <ul class="popover-list-item">
+                                            <li><a class="popover-item" href="javascript:void(0);">
+                                                Duyệt nhanh đơn nhập</a></li>
+                                            <li><a class="popover-item" href="javascript:void(0);">
+                                                Nhập kho nhanh</a>
+                                            </li>
+                                            <li><a class="popover-item" href="javascript:void(0);">
+                                                Thanh toán nhanh</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="bulk-action-all-selector">
+                                                <span>Đã chọn tất cả đơn nhập hàng<span class="on-this-page-text"> trên
+                                                        trang này.</span></span>
+                                    </div>
+                                    <div
+                                            class="next-input-wrapper bulk-actions--select-all bulk-actions--select-all-clone">
+                                        <label class="bulk-actions--select-all-btn btn hidden">
+                                        </label>
+                                        <input type="checkbox"
+                                               class="next-checkbox bulk-actions--select-all-checkbox bulk-actions--select-all-checkbox-clone"
+                                               bind-event-click="addOrRemoveAllBulkActionItems(this)">
+                                        <span class="next-checkbox--styled">
+                                                    <svg class="next-icon next-icon--size-10 checkmark">
+                                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                             xlink:href="#next-checkmark-thick"></use>
+                                                    </svg>
+                                                    <svg class="next-icon next-icon--size-10 indeterminate">
+                                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                             xlink:href="#next-minus"></use>
+                                                    </svg>
+                                                </span>
+                                    </div>
+
+                                </div>
+                                <div id="sapo-table_wrapper" class="dataTables_wrapper no-footer ps"
+                                     style="overflow-x: auto;">
+                                    <table class="sapo-table bulk-action-context dataTable no-footer"
+                                           id="sapo-table" role="grid">
+                                        <thead class="thead">
+                                        <tr class="tr" role="row">
+                                            <th class="select th select--drill-down sorting_disabled"
+                                                style="width: 26px;" rowspan="1"
+                                                colspan="1">
+                                            </th>
+                                            <th class="select th select--bulk-action sorting_disabled"
+                                                rowspan="1" colspan="1">
+                                                <div class="bulk-actions-tooltip-wrapper bulk-actions-wrapper-main"
+                                                     data-toggle="tooltip" data-placement="right" title=""
+                                                     data-original-title="Chọn tất cả đơn nhập hàng">
+                                                    <div class="tooltip--select-all">
+                                                        <div class="next-input-wrapper bulk-actions--select-all"
+                                                             style="left: auto;">
+                                                            <label
+                                                                    class="bulk-actions--select-all-btn btn hidden">
+                                                            </label>
+                                                            <input type="checkbox"
+                                                                   class="next-checkbox bulk-actions--select-all-checkbox">
+                                                            <span class="next-checkbox--styled">
+                                                                            <svg
+                                                                                    class="next-icon next-icon--size-10 checkmark">
+                                                                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                     xlink:href="#next-checkmark-thick">
+                                                                                </use>
+                                                                            </svg>
+                                                                            <svg
+                                                                                    class="next-icon next-icon--size-10 indeterminate">
+                                                                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                     xlink:href="#next-minus"></use>
+                                                                            </svg>
+                                                                        </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <th class="th align-left sorting_disabled"
+                                                rowspan="1" colspan="1">Mã đơn
+                                            </th>
+                                            <th class="th align-left sorting_disabled" rowspan="1"
+                                                colspan="1">Tên nhà cung cấp
+                                            </th>
+                                            <th nameth="location_name"
+                                                class="th align-left sorting_disabled" rowspan="1"
+                                                colspan="1">Chi nhánh
+                                            </th>
+                                            <th nameth="status_translated"
+                                                class="th align-left sorting_disabled" rowspan="1"
+                                                colspan="1">Trạng thái
+                                            </th>
+                                            <th nameth="payment_status_translated"
+                                                class="th align-left sorting_disabled" rowspan="1"
+                                                colspan="1">Thanh toán
+                                            </th>
+                                            <th nameth="receive_status_translated"
+                                                class="th align-left sorting_disabled" rowspan="1"
+                                                colspan="1">Nhập kho
+                                            </th>
+                                            <th nameth="total_amount"
+                                                class="th align-right sorting_disabled" rowspan="1"
+                                                colspan="1">Tổng tiền
+                                            </th>
+                                            </th>
+                                            <th nameth="account_name" class="th align-left sorting_disabled"
+                                                rowspan="1" colspan="1">Nhân viên tạo
+                                            </th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody> </tbody>
+
+                                    </table>
+                                    <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+                                        <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;">
+                                        </div>
+                                    </div>
+                                    <div class="ps__rail-y" style="top: 0px; right: 0px;">
+                                        <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="t-grid-pager-boder" value="/admin/purchase_orders" query="">
+                                <div class="t-pager t-reset">
+                                    <div class="col-4">
+                                        <div class="t-status-text dataTables_info">Hiển thị kết quả từ 1 - 1
+                                            trên tổng 1
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div></div>
+                        </div>
+
+                        <a class="modal_source display-popUp" style="display: none"></a>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="grid-footer-help">
+            <div class="grid-footer-help__content">
+                <div class="grid-footer-help__icon">
+                    <svg class="next-icon next-icon--size-24 next-icon--no-nudge" role="img"
+                         aria-labelledby="next-help-circle-title">
+                        <title id="next-help-circle-title">Help</title>
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-help-circle"></use>
+                    </svg>
+                </div>
+                <div>
+                    Bạn có thể xem thêm hướng dẫn về quản lý đơn nhập hàng
+                    <a target="_blank" style="color:#0088ff" title="Hướng dẫn" href="https://support.sapo.vn/danh-sach-don-nhap-hang-phan-he-moi">tại
+                    đây</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<th:block th:replace="/layout/script :: script"/>
+<script>
+    Page();
+</script>
+<script>
+    function showListPurchase() {
+        return $.ajax({
+            "headers": {
+                "accept": "application/json", "content-type": "application/json"
+            },
+
+            "type": "get", "url": "http://localhost:8080/api/admin/purchases"
+        })
+            .done((data) => {
+                console.log(data);
+                $.each(data, (i, item) => {
+                    $("tbody").append(`
+                <tr class="tr tr-18191424 odd" role="row">
+                                            <td class="select td select--drill-down" nametd="drill_down"
+                                                style="width: 26px;">
+                                                <div style="width: 14px;">
+                                                    <a href="javascript:void(0)" class="btn-quick-view"
+                                                       id="btn-quick-view-18191424"><i
+                                                            class="fa fa-angle-double-right fa-lg drill-down-icon"></i></a>
+                                                </div>
+                                            </td>
+                                            <td class="select td bulk-action" nametd="bulk_action">
+                                                <div class="next-input-wrapper">
+                                                    <input type="checkbox" value="18191424">
+                                                    <span class="next-checkbox--styled"><svg
+                                                            class="next-icon next-icon--size-10 checkmark">
+                                                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                             xlink:href="#next-checkmark-thick"></use>
+                                                                    </svg></span>
+                                                </div>
+                                            </td>
+
+
+                                            <td nametd="supplier_name" class="cursor-pointer name td">
+                                            <span>${item.purchaseOrderCode}</span>
+                                            </td>
+
+                                            <td class="cursor-pointer name td ">
+                                            <span>${item.supplierResult.name}</span>
+                                            </td>
+
+                                            <td nametd="location_name" class="cursor-pointer name td">
+                                            <span>Chi nhánh mặc định</span>
+                                            </td>
+
+                                            <td nametd="status_translated" class="cursor-pointer name td">
+                                            <span class="text--limeade">${item.status}</span>
+                                            </td>
+
+                                            <td nametd="payment_status_translated"
+                                                class="cursor-pointer name td">
+                                            <span class="text--limeade">${item.pays}</span>
+                                            </td>
+
+                                            <td nametd="receive_status_translated"
+                                                class="cursor-pointer name td">
+                                            <span class="text--limeade">Đã nhập hàng</span>
+                                            </td>
+
+                                            <td nametd="total_amount"
+                                                class="cursor-pointer name td align-right">
+                                            <span>${item.grandTotal}</span>
+                                            </td>
+
+                                            <td nametd="actived_account_id"
+                                                class="cursor-pointer name td ">
+                                            <span>${item.employeeResult.name}</span>
+                                            </td>
+                `);
+                });
+            })
+            .fail((jqXHR) => {
+                console.log("An error occurred: " + jqXHR);
+            });
+    }
+    showListPurchase();
+</script>
+</html>

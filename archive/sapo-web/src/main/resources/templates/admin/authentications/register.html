@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="vi-VN">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1.0"/>
+
+    <title>Department Store - Đăng ký</title>
+
+    <link rel="icon" type="image/x-icon" href="/assets/admin/images/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="https://sapo.dktcdn.net/sso-service/c54c3caa-style.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/admin/css/authentications/authentication.css"/>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap"/>
+</head>
+
+<body>
+<div class="login-style register-background">
+    <div class="form container">
+        <div class="header">
+            <img alt="sapo-logo.svg" src="/assets/admin/images/sapo-logo.svg" class="sapo-logo prevent-select"/>
+            <div class="mt-3 text-center">
+                <h1 class="h5 prevent-select">Đăng ký để tạo tài khoản mới</h1>
+            </div>
+        </div>
+        <form class="mt-4" action="#" method="post">
+            <div class="form-login-info">
+                <div class="form-group">
+                    <input id="register-name" type="text" class="form-input" title="Nhập họ và tên" placeholder="Nhập họ và tên" autocomplete="off" aria-autocomplete="none" required/>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input id="register-phone" type="tel" class="form-input" title="Nhập số điện thoại" placeholder="Nhập số điện thoại" autocomplete="off" aria-autocomplete="none" required/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input id="register-email" type="email" class="form-input" title="Nhập địa chỉ email" placeholder="Nhập địa chỉ email" autocomplete="off" aria-autocomplete="none" required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input id="register-address" type="text" class="form-input" title="Nhập địa chỉ" placeholder="Nhập địa chỉ" autocomplete="off" aria-autocomplete="none" required/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <select id="province" class="select-form-input" title="Chọn tỉnh thành phố" required></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <select id="district" class="select-form-input" title="Chọn quận huyện" required></select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <select id="ward" class="select-form-input" title="Chọn phường xã" required></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-5 text-center">
+                <button type="submit" class="btn-login">Đăng ký</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" type="text/javascript"></script>
+<script src="/assets/admin/js/authentications/authentication.js" type="module"></script>
+<script src="/assets/admin/js/location_regions/location_region.js" type="text/javascript"></script>
+
+</html>

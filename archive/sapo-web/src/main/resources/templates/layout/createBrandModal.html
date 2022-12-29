@@ -1,0 +1,28 @@
+<th:block th:fragment="createBrandModal">
+    <div class="modal fade" id="modalAddBrand" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog  ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Thêm nhãn hiệu</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="frmCreateBrand" method="post">
+                <div class="modal-body">
+
+                        <div>
+                            <label for="inputBrand" class="mb-3">Tên nhãn hiệu <span style="color: red">*</span></label>
+                            <input placeholder="VD: Kinh đô" type="text" id="inputBrand" name="inputBrand" class="form-control"/>
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="sc-jqUVSM dgJIMY" data-bs-dismiss="modal">Thoát</button>
+                    <button type="button" id="btnAddBrand" class="sc-jqUVSM cHdopB">
+                        Thêm nhãn hiệu
+                    </button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>
