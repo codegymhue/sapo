@@ -113,8 +113,8 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerResult create(CreateCustomerParam createCustomerParam) {
         Customer customer = customerMapper.toModel(createCustomerParam);
         customer = customerRepository.save(customer);
-        if (customer.getCode() == null)
-            customer.setCode(CodePrefix.CUSTOMER + CodePrefix.format(customer.getId()));
+//        if (customer.getCode() == null)
+//            customer.setCode(CodePrefix.CUSTOMER + CodePrefix.format(customer.getId()));
         return customerMapper.toDTO(customer);
     }
 

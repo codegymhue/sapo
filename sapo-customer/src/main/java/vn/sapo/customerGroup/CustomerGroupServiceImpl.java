@@ -49,9 +49,14 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
                 .collect(Collectors.toList());
     }
 
+//    @Override
+//    public List<CustomerGroupResult> sortByGroup() {
+//        return customerGroupRepository.sortByGroup();
+//    }
+
     @Override
     public List<CustomerGroupResult> sortByGroup() {
-        return customerGroupRepository.sortByGroup();
+        return customerGroupRepository.findCustomerGroupById();
     }
 
 //    @Override

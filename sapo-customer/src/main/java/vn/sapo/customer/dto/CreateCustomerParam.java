@@ -23,7 +23,7 @@ public class CreateCustomerParam {
 
     private String phone;
 
-    private String groupId;
+    private Integer groupId;
 
     private String email;
 
