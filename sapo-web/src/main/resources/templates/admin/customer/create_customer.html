@@ -475,6 +475,7 @@
     let shippingAddress = new ShippingAddress();
 
     $('#btnCreateCustomer').on('click', () => {
+<<<<<<< HEAD
         customer.id = null;
         customer.name = $('#nameCreate').val();
         customer.customerCode = $('#codeCreate').val();
@@ -483,6 +484,15 @@
         customer.email = $('#emailCreate').val();
         customer.birthday = $('#birthdayCreate').val();
         customer.status = $('#statusCreate').val
+=======
+        customer.fullName = $('#nameCreate').val();
+        customer.customerCode = $('#codeCreate').val();
+        customer.groupId = $('#customerGroupCreate :selected').val();
+        customer.phoneNumber = $('#phoneCreate').val();
+        customer.email = $('#emailCreate').val();
+        customer.birthday = $('#birthdayCreate').val();
+        // customer.birthday = '2022-12-28T16:44:24Z';
+>>>>>>> order
         customer.customerGender = $('#genderCreate').val();
 
 

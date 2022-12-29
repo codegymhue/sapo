@@ -73,16 +73,18 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public void deleteById(Integer id) {
         customerRepository.deleteById(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean existsById(Integer id) {
         return customerRepository.existsById(id);
     }
 
+<<<<<<< HEAD
 //    @Override
 //    public Map<String, Object> getAllCustomerItemPage(Integer pageNo, Integer pageSize, String code, String name, String phoneNumber, String group, BigDecimal debtTotal, BigDecimal spendTotal, int quantityItemOrder, String status, String typeSort, String nameFieldSort) {
 //        return null;
@@ -110,14 +112,23 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
+=======
+    @Transactional(readOnly = true)
+>>>>>>> order
     public CustomerResult create(CreateCustomerParam createCustomerParam) {
         Customer customer = customerMapper.toModel(createCustomerParam);
         customer = customerRepository.save(customer);
+<<<<<<< HEAD
+=======
+        String cusCode = customer.getCustomerCode();
+        if (cusCode == null || cusCode.trim().isEmpty())
+            customer.setCustomerCode(CodePrefix.CUSTOMER + CodePrefix.format(customer.getId()));
+>>>>>>> order
         return customerMapper.toDTO(customer);
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public CustomerResult update(UpdateCustomerParam updateCustomerParam) {
         Customer customer = customerRepository.findById(updateCustomerParam.getId())
                 .orElseThrow(() -> new NotFoundException("Customer not found"));
@@ -133,42 +144,31 @@ public class CustomerServiceImpl implements CustomerService {
 //        return saleOrderByCustomer;
 //    }
 //
-//    @Override
-//    @Transactional(readOnly = true)
-//    public List<CustomerDebtImpl> findCustomerDebtsByCustomerId(Integer customerId) {
-//        List<CustomerDebt> customerDebts = customerRepository.findCustomerDebtsByCustomerId(customerId);
-//
-//        List<CustomerDebtImpl> customerDebts1 = customerDebts.stream().map(customerDebt -> {
-//            CustomerDebtImpl customerDebtImpl = new CustomerDebtImpl();
-//            customerDebtImpl.setFromICustomerOwer(customerDebt);
-//            return customerDebtImpl;
-//        }).collect(Collectors.toList());
-//        BigDecimal tam = BigDecimal.valueOf(0);
-//        for (CustomerDebtImpl customerDebtImpl : customerDebts1) {
-//            tam = tam.add(customerDebtImpl.getTransaction());
-//            customerDebtImpl.setTotalDebt(tam);
-//            System.out.println(customerDebtImpl.getTransaction());
-//        }
-//        return customerDebts1;
-//    }
-//
-//    @Override
-//    public void deleteById(Integer customerId) {
-//        Customer customer = customerRepository.findById(customerId).get();
-//        try {
-//            shippingAddressService.delete(customer.getShippingAddress().getId());
-//            customerRepository.deleteById(customerId);
-//        } catch (Exception e) {
-//            throw new DataInputException("Lỗi không xác định");
-//        }
-//
-//    }
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public void changeStatusToAvailable(List<Integer> customerIds, boolean status) {
         for (Integer customerId : customerIds) {
             Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new NotFoundException("Product not found"));
             customer.setStatus(status ? CustomerStatus.AVAILABLE : CustomerStatus.UNAVAILABLE);
         }
     }
+<<<<<<< HEAD
 }
+=======
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CustomerResult> findAllCustomerByGroupAndStatus(Integer groupTitleId, String customerStatus) {
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAllCustomerByTitleContainingAndStatus(groupTitleId, CustomerStatus.parseCustomerGroup(customerStatus))
+                .stream()
+                .map(customerMapper::toDTO)
+                .collect(Collectors.toList());
+        return customerResults;
+    }
+    }
+
+
+
+>>>>>>> order

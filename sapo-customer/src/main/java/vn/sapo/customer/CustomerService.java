@@ -4,6 +4,11 @@ import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
+<<<<<<< HEAD
+=======
+import vn.sapo.entities.customer.CustomerGender;
+import vn.sapo.entities.customer.CustomerStatus;
+>>>>>>> order
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -31,6 +36,7 @@ public interface CustomerService {
 
     boolean existsById(Integer id);
 
+<<<<<<< HEAD
 
 //    Map<String, Object> getAllCustomerItemPage(Integer pageNo, Integer pageSize, String code, String name,
 //                                               String phoneNumber, String group, BigDecimal debtTotal,
@@ -77,4 +83,12 @@ public interface CustomerService {
     //    }
     @Transactional
     void changeStatusToAvailable(List<Integer> customerIds, boolean status);
+=======
+    @Transactional
+    void changeStatusToAvailable(List<Integer> customerIds, boolean status);
+
+    List<CustomerResult> findAllCustomerByGroupAndStatus(Integer groupTitleId, String customerStatus);
+
+
+>>>>>>> order
 }

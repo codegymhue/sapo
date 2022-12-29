@@ -196,7 +196,6 @@ public class CustomerAPI {
 
 
     @PutMapping("/updateStatusAvailable")
-
     public ResponseEntity<?> updateStatusAvailable(@RequestBody List<Integer> arrayIdCustomer) {
         customerService.changeStatusToAvailable(arrayIdCustomer, true);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -211,6 +210,7 @@ public class CustomerAPI {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+<<<<<<< HEAD
 
 
 //    @GetMapping("/customerGroup")
@@ -279,5 +279,56 @@ public class CustomerAPI {
 //        List<CustomerDebtImpl> customerDebtImpl = customerService.findCustomerDebtsByCustomerId(id);
 //        return new ResponseEntity<>(customerDebtImpl, HttpStatus.OK);
 //    }
+=======
+//    findAllCustomerByGroupAndStatus
+        @GetMapping("/findAllCustomerByGroupAndStatus/{groupId}/{status}")
+        public ResponseEntity<?> findAllCustomerByGroupAndStatus(@PathVariable Integer groupId, @PathVariable String status) {
+            List<CustomerResult> customers = customerService.findAllCustomerByGroupAndStatus(groupId, status);
+        customers.forEach(this::setData);
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
+    public void setData(CustomerResult customer) {
+        BigDecimal spendTotal = getSpendTotalByCustomerId(customer.getId());
+        BigDecimal paidTotal = getPaidTotalByCustomerId(customer.getId());
+        customer.setSpendTotal(spendTotal);
+        customer.setDebtTotal(spendTotal.subtract(paidTotal));
+        customer.setQuantityProductOrder(getQuantityProductOrderByCustomerId(customer.getId()));
+        customer.setQuantityItemOrder(getQuantityItemCustomerOrderById(customer.getId()));
+        customer.setLastDayOrder(getLastDayOrderByCustomerId(customer.getId()));
+    }
+
+    public BigDecimal getSpendTotalByCustomerId(Integer customerId) {
+        BigDecimal spendTotal = saleOrderService.getSpendTotalByCustomerId(customerId);
+        if (spendTotal == null)
+            spendTotal = BigDecimal.valueOf(0);
+        return spendTotal;
+    }
+
+    public BigDecimal getPaidTotalByCustomerId(Integer customerId) {
+        BigDecimal paidTotal = paymentSaleOrderService.getPaidTotalByCustomerId(customerId);
+        if (paidTotal == null)
+            paidTotal = BigDecimal.valueOf(0);
+        return paidTotal;
+    }
+
+    public Integer getQuantityProductOrderByCustomerId(Integer customerId) {
+        Integer quantityProductOrder = saleOrderService.getQuantityProductOrder(customerId);
+        if (quantityProductOrder == null)
+            quantityProductOrder = 0;
+        return quantityProductOrder;
+    }
+
+    public Integer getQuantityItemCustomerOrderById(Integer customerId) {
+        Integer quantityItemOrder = orderItemService.getQuantityItemCustomerOrderById(customerId);
+        if (quantityItemOrder == null)
+            quantityItemOrder = 0;
+        return quantityItemOrder;
+    }
+
+    public Instant getLastDayOrderByCustomerId(Integer customerId) {
+        return saleOrderService.getLastDayOrderByCustomerId(customerId);
+    }
+>>>>>>> order
 }
 
