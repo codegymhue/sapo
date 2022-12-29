@@ -3,6 +3,8 @@ class App {
     static DOMAIN_API = "http://localhost:8080";
     // static BASE_URL_Customer = this.DOMAIN_API + "/api/customers";
     static BASE_URL_CUSTOMER  = this.DOMAIN_API + "/api/customers";
+    static BASE_URL_CUSTOMER_GROUP  = this.DOMAIN_API + "/api/customer_groups";
+
     static URL_CREATE_CUSTOMER = this.BASE_URL_Customer + "/create";
     static URL_UPDATE_CUSTOMER = this.BASE_URL_Customer  + "/update";
 
@@ -74,10 +76,10 @@ class App {
                 
                 <td class="align-middle">${item.name || ""}</td>
                   <td class="align-middle">${item.phoneNumber || ""}</td>
-                <td class="align-middle text-center ">${item.groupCustomerId}</td>
+                <td class="align-middle text-center ">${item.groupCustomer}</td>
                 <td class="align-middle text-center">${item.debtsTotal}</td>
                 <td class="align-middle text-center">${item.spendTotal}</td>
-                <td class="align-middle text-end">${item.orderTotal}</td>
+                <td class="align-middle text-end">${item.quantityItemOrder}</td>
             </tr>
         `;
         return str;
@@ -85,14 +87,17 @@ class App {
 
 }
 class Customer {
-    constructor(id, code, name, phoneNumber, groupId, debtsTotal, spendTotal) {
+    constructor(id, code, name, phoneNumber, groupCustomer, debtsTotal, spendTotal, quantityItemOrder) {
         this.id = id;
         this.code = code;
         this.name = name;
         this.phoneNumber = phoneNumber;
-        this.groupId = groupId;
+        this.groupCustomer = groupCustomer;
         this.debtsTotal = debtsTotal;
         this.spendTotal  = spendTotal;
+        this.quantityItemOrder = quantityItemOrder
+
+
     }
 }
 

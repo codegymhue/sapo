@@ -15,6 +15,7 @@ import vn.sapo.exceptions.NotFoundException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -81,6 +82,11 @@ public class CustomerServiceImpl implements CustomerService {
     public boolean existsById(Integer id) {
         return customerRepository.existsById(id);
     }
+
+//    @Override
+//    public Map<String, Object> getAllCustomerItemPage(Integer pageNo, Integer pageSize, String code, String name, String phoneNumber, String group, BigDecimal debtTotal, BigDecimal spendTotal, int quantityItemOrder, String status, String typeSort, String nameFieldSort) {
+//        return null;
+//    }
 
 
 //    @Override

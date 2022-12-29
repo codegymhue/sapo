@@ -6,7 +6,6 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.entities.customer.CustomerGender;
-import vn.sapo.entities.customer.CustomerGroup;
 
 import java.time.Instant;
 
@@ -18,13 +17,13 @@ public class CreateCustomerParam {
     
     private Integer id;
 
-    private String code;
+    private String customerCode;
 
     private String fullName;
 
     private String phone;
 
-    private CustomerGroup group;
+    private String groupId;
 
     private String email;
 

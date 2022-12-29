@@ -18,9 +18,9 @@ public interface CustomerGroupService {
 
     List<CustomerGroupResult> sortByGroup();
 
-    List<CustomerGroupResult> getAllPricingPolicy();
-
-    List<CustomerGroupResult> getAllPaymentMethod();
+//    List<CustomerGroupResult> getAllPricingPolicy();
+//
+//    List<CustomerGroupResult> getAllPaymentMethod();
 
     CustomerGroupResult findById(Integer id);
 

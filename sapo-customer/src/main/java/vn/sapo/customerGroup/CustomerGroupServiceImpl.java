@@ -22,6 +22,7 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     private CustomerGroupRepository customerGroupRepository;
 
     @Override
+    @Transactional
     public CustomerGroupResult create(CreateCusGroupParam createCusGroupParam) {
         CustomerGroup customerGroup = customerGroupMapper.toModel(createCusGroupParam);
         customerGroup = customerGroupRepository.save(customerGroup);
@@ -53,15 +54,15 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
         return customerGroupRepository.sortByGroup();
     }
 
-    @Override
-    public List<CustomerGroupResult> getAllPricingPolicy() {
-        return customerGroupRepository.getAllPricingPolicy();
-    }
-
-    @Override
-    public List<CustomerGroupResult> getAllPaymentMethod() {
-        return customerGroupRepository.getAllPaymentMethod();
-    }
+//    @Override
+//    public List<CustomerGroupResult> getAllPricingPolicy() {
+//        return customerGroupRepository.getAllPricingPolicy();
+//    }
+//
+//    @Override
+//    public List<CustomerGroupResult> getAllPaymentMethod() {
+//        return customerGroupRepository.getAllPaymentMethod();
+//    }
 
     @Override
     public CustomerGroupResult findById(Integer id) {

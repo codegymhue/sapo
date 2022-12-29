@@ -30,7 +30,7 @@ public class Customer extends BaseEntity {
     private Integer id;
 
     @Column(name = "customer_code", unique = true)
-    private String code;
+    private String customerCode;
 
     @Column(name = "full_name", nullable = false)
     private String fullName;

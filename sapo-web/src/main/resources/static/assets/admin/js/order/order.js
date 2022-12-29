@@ -107,7 +107,8 @@ const searchProduct = () => {
             if (((item.title).toLowerCase()).includes(search.toLowerCase()) || ((item.sku).toLowerCase()).includes(search.toLowerCase())
                 || ((item.barCode).toLowerCase()).includes(search.toLowerCase())) {
                 results.push(item);
-            }    searchProduct();
+            }
+            searchProduct();
 
         })
         $(".searchProduct").removeClass('d-none');
@@ -235,16 +236,27 @@ function showCustomerInfo(idCustomer) {
                 <div class="MuiBox-root jss3896 jss952">
                     <div class="MuiBox-root jss3897">
                         <div class="MuiBox-root jss3898 jss944">
-                            <div class="MuiBox-root jss3899">
+                                <div class="btn-group">
                                 <p class="MuiTypography-root jss941 MuiTypography-body2">Địa chỉ giao hàng</p>
-                                <button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary" 
-                                onclick="editCustomer()"
-                                 id="showEditModal"
-                                tabindex="0" type="button" style="margin: 0px 4px; height: 15px; min-width: unset;">
-                                <span class="MuiButton-label">Thay đổi</span>
-                                <span class="MuiTouchRipple-root"></span>
-                                </button>
+                      <button style="height: 10px" class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary " type="button" id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                        <span class="MuiButton-label">Thay đổi</span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="defaultDropdown" style="width: 450px">
+                        <li>
+                        <p class="dropdown-item" href="#" style="font-weight: bold">Thay Đổi Địa Chỉ 
+                        <button style="float: right;height: 10px" data-bs-toggle="modal" data-bs-target="#create_order_address"
+                         class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary ">Thêm Mới</button>
+                        </li></p>
+                        <li>
+                        <button style="float: right;height: 10px" onclick="editCustomer()" class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary ">sửa</button>
+                        <div class="MuiBox-root jss3900" style="padding-left: 20px;">
+                                <p class="MuiTypography-root MuiTypography-body2 my-2" style="font-weight: bold">${result.phoneNumber}</p>
+                                <p class="MuiTypography-root MuiTypography-body2">${fullShippingAddress}</p>
                             </div>
+                        </li>
+                     
+                      </ul>
+                    </div>
                             <div class="MuiBox-root jss3900">
                                 <p class="MuiTypography-root MuiTypography-body2">${result.phoneNumber}</p>
                                 <p class="MuiTypography-root MuiTypography-body2">${fullShippingAddress}</p>
@@ -259,7 +271,7 @@ function showCustomerInfo(idCustomer) {
                                     <div class="MuiListItemText-root">
                                         <p
                                             class="MuiTypography-root jss3910 MuiTypography-body1 MuiTypography-colorError MuiTypography-alignRight">
-                                            ${result.debtsTotal.formatVND()}</p>
+                                            0</p>
                                     </div>
                                 </li>
                                 <li class="MuiListItem-root MuiListItem-gutters"
@@ -271,7 +283,7 @@ function showCustomerInfo(idCustomer) {
                                     <div class="MuiListItemText-root">
                                         <p
                                             class="MuiTypography-root jss3910 MuiTypography-body1 MuiTypography-colorPrimary MuiTypography-alignRight">
-                                             ${result.spendTotal.formatVND()}</p>
+                                             0</p>
                                     </div>
                                 </li>
                                 
@@ -307,17 +319,26 @@ function showCustomerInfo(idCustomer) {
                         <div class="MuiBox-root jss4276 jss944">
                             <div class="MuiBox-root jss4277">
                                 <p class="MuiTypography-root jss941 MuiTypography-body2">Địa chỉ nhận hóa đơn</p>
-                                <button
-                                    class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
-                                    tabindex="0"
-                                    id="showEditModal"
-                                    onclick="editCustomer()"
-                                     type="button"
-                                    style="margin: 0 4px; height: 15px; min-width: unset;"><span
-                                        class="MuiButton-label">Thay đổi</span><span
-                                        class="MuiTouchRipple-root"></span>
-                                </button>
+                                 <button style="height: 10px" class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary " type="button" id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                        <span class="MuiButton-label">Thay đổi</span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="defaultDropdown" style="width: 450px">
+                        <li>
+                        <p class="dropdown-item" href="#" style="font-weight: bold">Thay Đổi Địa Chỉ 
+                        <button style="float: right;height: 10px" data-bs-toggle="modal" data-bs-target="#create_order_customer"
+                         class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary ">Thêm Mới</button>
+                        </li></p>
+                        <li>
+                        <button style="float: right;height: 10px" onclick="editCustomer()" class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary ">sửa</button>
+                        <div class="MuiBox-root jss3900" style="padding-left: 20px;">
+                                <p class="MuiTypography-root MuiTypography-body2" style="font-weight: bold">${result.phoneNumber}</p>
+                                <p class="MuiTypography-root MuiTypography-body2">${fullShippingAddress}</p>
                             </div>
+                        </li>
+                     
+                      </ul>
+                            </div>
+
                             <div class="MuiBox-root jss4278">
                                 <p class="MuiTypography-root MuiTypography-body2">${result.phoneNumber}</p>
                                 <p class="MuiTypography-root MuiTypography-body2">${fullBillAddress}</p>
@@ -583,9 +604,9 @@ function getEmployeeById(id) {
 
 function doCreateCustomer() {
     $('#btnCreateCustomer').on('click', () => {
-        customer.name = $('#nameCreate').val();
-        customer.customerCode = $('#codeCreate').val();
-        customer.phone = $('#phoneCreate').val();
+        customer.fullName = $('#nameCreate').val();
+        customer.code = $('#codeCreate').val();
+        customer.phoneNumber = $('#phoneCreate').val();
 
         customer.createShippingAddressParam = shippingAddress;
         shippingAddress.line1 = $("#addressCreate").val();
@@ -727,7 +748,6 @@ function editCustomer() {
     $('#idCustomerUpdate').val(customer.id);
     $("#nameUpdate").val(customer.name)
     $('#phoneUpdate').val(customer.phoneNumber);
-    console.log(customer)
     $('#addressUpdate').val(customer.addresses[0].line1);
     $('#provinceUpdate').val(customer.addresses[0].provinceId);
     getAllDistrictsByProvinceId(customer.addresses[0].provinceId).then(() => {
@@ -744,8 +764,10 @@ function editCustomer() {
     $("#update_order_customer").modal("show");
 }
 
+
+
 function showProductInfo(productId) {
-    renderSaleOrderItem(productId, "plus", 0);
+    renderSaleOrderItem(productId, "plus");
     renderSaleOrder();
 }
 
@@ -1238,6 +1260,28 @@ function showAllCategory() {
             console.log("Error");
         })
 }
+function showAllEmployee(){
+    return $.ajax({
+        headers: {
+            "accept": "application/json",
+            "content-type": "application/json"
+        },
+        type: "GET",
+        url: "http://localhost:8080/api/employees"
+    })
+        .done((data) => {
+            $("#employeeCreate").empty();
+
+            $.each(data, (i, item) => {
+                let str = `<option value="${item.id}">${item.fullName}</option>`;
+                $(".showAllEmployee").append(str);
+            });
+
+        })
+        .fail((jqXHR) => {
+            console.log("Error");
+        })
+}
 
 function doCreateProductShort() {
     product.id = 0;
@@ -1309,6 +1353,7 @@ $(() => {
     handleCloseListProducts();
     searchProduct();
     showAllCategory();
+    showAllEmployee();
 })
 
 

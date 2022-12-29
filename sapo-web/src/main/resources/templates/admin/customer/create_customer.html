@@ -41,7 +41,8 @@
                 </a></div>
                 <div class="MuiBox-root jss20296">
                     <button type="button" id="btnCloseCustomer"
-                            class=" ldZiUT btnCloseCustomer">Hủy
+
+                            class=" ldZiUT btnCloseCustomer" href="/admin/customers">Hủy
                     </button>
                     <button
                             id="btnCreateCustomer"
@@ -75,10 +76,10 @@
                                                     <div
                                                             class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl">
                                                         <input
-                                                               id="nameCreate" name="nameCreate"
-                                                               placeholder="Nhập tên khách hàng"  type="text"
-                                                               class="MuiInputBase-input MuiOutlinedInput-input"
-                                                               minlength="3" maxlength="12"
+                                                                id="nameCreate" name="nameCreate"
+                                                                placeholder="Nhập tên khách hàng" type="text"
+                                                                class="MuiInputBase-input MuiOutlinedInput-input"
+                                                                minlength="3" maxlength="12"
                                                         >
 
 
@@ -205,7 +206,8 @@
                                                         <div class="sc-jIZahH hISLMV Sapo-InputRoot">
                                                             <div class="input-group input-daterange">
                                                                 <input type="date" id="birthdayCreate"
-                                                                       class="birthdayCreate form-control" style="height: 41px;" ></div>
+                                                                       class="birthdayCreate form-control"
+                                                                       style="height: 41px;"></div>
 
                                                             <fieldset class="sc-iIPllB iUBRZb"></fieldset>
                                                             <div class="sc-gicCDI sc-bZkfAO bqqjdk nysSE">
@@ -257,7 +259,8 @@
                                                                    for="province">Tỉnh - Thành Phố </label>
                                                         </div>
                                                         <div tabindex="0">
-                                                            <select class="form-select jss87874" name="province" id="province">
+                                                            <select class="form-select jss87874" name="province"
+                                                                    id="province">
                                                                 <option selected value="0">
                                                                     <p class="MuiTypography-root label-select MuiTypography-body1 MuiTypography-colorTextPrimary">
                                                                         Chọn Tỉnh/Thành phố</p>
@@ -275,7 +278,8 @@
                                                                    for="district">
                                                                 Huyện </label>
                                                         </div>
-                                                        <select class="form-select jss87874" name="district" id="district">
+                                                        <select class="form-select jss87874" name="district"
+                                                                id="district">
                                                             <option value="0">
                                                                 <p class="MuiTypography-root label-select MuiTypography-body1 MuiTypography-colorTextPrimary">
                                                                     Chọn Quận/Huyện</p>
@@ -442,8 +446,9 @@
 
         }
     }
+
     class ShippingAddress {
-        constructor(id, fullName, mobile,line1, line2, email,districtId,  districtName, provinceId, provinceName, wardId, wardName, zipCode,customerId,supplierId ,isDefault) {
+        constructor(id, fullName, mobile, line1, line2, email, districtId, districtName, provinceId, provinceName, wardId, wardName, zipCode, customerId, supplierId, isDefault) {
             this.fullName = fullName;
             this.line1 = line1;
             this.line2 = line2;
@@ -459,7 +464,8 @@
             this.zipCode = zipCode;
             this.customerId = customerId;
             this.id = id;
-            this.isDefault = isDefault;supplierId
+            this.isDefault = isDefault;
+            supplierId
             this.supplierId = supplierId;
         }
     }
@@ -478,7 +484,7 @@
         customer.birthday = $('#birthdayCreate').val();
         customer.status = $('#statusCreate').val
         customer.customerGender = $('#genderCreate').val();
-        customer.createAt = $('#birthdayCreate').val();
+
 
         customer.updateAt = null;
         shippingAddress.line1 = $('#addressCreate').val();
@@ -488,7 +494,6 @@
         shippingAddress.districtName = $('#district :selected').text();
         shippingAddress.wardId = $('#ward').val();
         shippingAddress.wardName = $('#ward :selected').text();
-        customer.employeeId = $('#employeeNameCreate').val();
         customer.createShippingAddressParam = shippingAddress;
         console.log(customer)
         $.ajax({
@@ -515,16 +520,13 @@
             .fail((jqXHR) => {
                 console.log(jqXHR);
                 if (jqXHR.responseJSON) {
-                    $.each(jqXHR.responseJSON, (key, item)=> {
+                    $.each(jqXHR.responseJSON, (key, item) => {
                         App.IziToast.showErrorAlert(item);
                     })
                 }
 
             })
     });
-
-
-
 
 
     function getAllProvinces() {
@@ -622,7 +624,9 @@
 
             let districtId = $("#district").val();
 
-            getAllWardsByDistrictId(districtId);
+            getAllWardsByDistrictId(districtId)
+
+
         });
     });
     $("#province").on('change', () => {
@@ -650,7 +654,6 @@
         let districtId = $("#districtUpdate").val();
         getAllWardsByDistrictId(districtId);
     });
-
 
 
     function getAllEmployeeSelect() {
@@ -717,7 +720,7 @@
             .fail((jqXHR) => {
                 console.log(jqXHR);
                 if (jqXHR.responseJSON) {
-                    $.each(jqXHR.responseJSON, (key, item)=> {
+                    $.each(jqXHR.responseJSON, (key, item) => {
                         App.IziToast.showErrorAlert(item);
                     })
                 }
@@ -729,9 +732,6 @@
     $('#okbn').on('click', () => alert(":ok caauj"))
 
     $('#btnCloseCustomer').on('click', () => alert(":ok caauj"))
-
-
-
 
 
     getAllCustomerGender();

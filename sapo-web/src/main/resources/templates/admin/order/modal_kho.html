@@ -1,0 +1,420 @@
+
+<th:block th:fragment="modal_kho">
+<!--    <div class="modal fade" aria-labelledby="exampleModalLabel" id="inventoryCheck"  aria-hidden="true" role="dialog" tabindex="-1">-->
+
+<!--        <div class="modal-dialog modal-lg">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>-->
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                </div>-->
+<!--                <div class="sc-csvncw bLzQuC"><div class="MuiBox-root jss4034 jss4031">-->
+<!--                    <div class="MuiBox-root jss4035" style="width: 256px; margin-right: 20px;">-->
+<!--                        <div class="MuiBox-root jss4036 jss4029" style="width: 100%;">-->
+<!--                            <div class="MuiFormControl-root jss1093 MuiFormControl-fullWidth" style="width: 100%; height: 36px;">-->
+<!--                                <div class="MuiInputBase-root MuiOutlinedInput-root jss1094 MuiInputBase-fullWidth MuiInputBase-formControl">-->
+<!--                                    <div class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu jss1095 MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input" tabindex="0" role="button" aria-haspopup="listbox" aria-labelledby="mui-component-select-inventory" id="mui-component-select-inventory">Chi nhánh mặc định</div>-->
+<!--                                    <input name="inventory" type="hidden" value=",654248">-->
+<!--                                    <svg class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined" focusable="false" viewBox="0 0 24 24" aria-hidden="true">-->
+<!--                                        <path d="M7 10l5 5 5-5z"></path>-->
+<!--                                    </svg>-->
+<!--                                    <fieldset aria-hidden="true" class="jss1037 MuiOutlinedInput-notchedOutline" style="padding-left: 8px;">-->
+<!--                                        <legend class="jss1038" style="width: 0.01px;"><span>​</span>-->
+<!--                                        </legend>-->
+<!--                                    </fieldset>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="MuiBox-root jss4037">-->
+<!--                        <div class="MuiBox-root jss4038 jss4029" style="width: 100%;">-->
+<!--                            <div class="MuiFormControl-root jss1093 MuiFormControl-fullWidth" style="width: 100%; height: 36px;">-->
+<!--                                <div class="MuiInputBase-root MuiOutlinedInput-root jss1094 MuiInputBase-fullWidth MuiInputBase-formControl">-->
+<!--                                    <div class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu jss1095 MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input" tabindex="0" role="button" aria-haspopup="listbox" aria-labelledby="mui-component-select-column" id="mui-component-select-column">Cột hiển thị</div>-->
+<!--                                    <input name="column" type="hidden" value=",1979667,1979665,on_hand,available">-->
+<!--                                    <svg class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined" focusable="false" viewBox="0 0 24 24" aria-hidden="true">-->
+<!--                                        <path d="M7 10l5 5 5-5z"></path>-->
+<!--                                    </svg>-->
+<!--                                    <fieldset aria-hidden="true" class="jss1037 MuiOutlinedInput-notchedOutline" style="padding-left: 8px;">-->
+<!--                                    <legend class="jss1038" style="width: 0.01px;">-->
+<!--                                        <span>​</span>-->
+<!--                                    </legend>-->
+<!--                                </fieldset>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                    <div class="MuiBox-root jss4073 jss4028">-->
+<!--                        <div class="jss4074" style="width: 100%;">-->
+<!--                            <div class="MuiBox-root jss4081 jss4078 TableHead" style="top: 0px;">-->
+<!--                                <div class="MuiBox-root jss4082 row"><div class="MuiBox-root jss4083 jss4080 col sticky left" style="width: 142px; height: 80px; left: 0px; box-shadow: rgb(232, 234, 235) 1px 0px; justify-content: center;">-->
+<!--                                    <h6 class="MuiTypography-root content MuiTypography-subtitle1 MuiTypography-noWrap MuiTypography-alignCenter" title="Mã SKU">Mã SKU</h6>-->
+<!--                                </div>-->
+<!--                                    <div class="MuiBox-root jss4089 jss4080 col sticky left" style="width: 332px; height: 80px; left: 142px; box-shadow: rgb(232, 234, 235) 1px 0px; justify-content: center;">-->
+<!--                                        <h6 class="MuiTypography-root content MuiTypography-subtitle1 MuiTypography-noWrap MuiTypography-alignCenter" title="Tên sản phẩm">Tên sản phẩm</h6>-->
+<!--                                    </div>-->
+<!--                                    <div class="MuiBox-root jss4095 jss4080 col sticky left" style="width: 116px; height: 80px; left: 474px; box-shadow: rgb(232, 234, 235) 1px 0px; justify-content: center;">-->
+<!--                                        <h6 class="MuiTypography-root content MuiTypography-subtitle1 MuiTypography-noWrap MuiTypography-alignCenter">Số lượng</h6>-->
+<!--                                    </div>-->
+<!--                                    <div class="MuiBox-root jss4101 col"><div class="MuiBox-root jss4102 row row-sub">-->
+<!--                                        <div class="MuiBox-root jss4103 jss4080 cell cell-sub" style="width: 232px; height: 40px; justify-content: center;">-->
+<!--                                            <h6 class="MuiTypography-root content MuiTypography-subtitle1 MuiTypography-noWrap MuiTypography-alignCenter" title="Chính sách giá">Chính sách giá</h6>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                        <div class="MuiBox-root jss4109 row row-sub">-->
+<!--                                            <div class="MuiBox-root jss4110 jss4080 cell cell-sub jss4033" style="width: 116px; height: 40px; justify-content: right;">-->
+<!--                                                <h6 class="MuiTypography-root content MuiTypography-subtitle1 MuiTypography-noWrap MuiTypography-alignRight">Giá bán lẻ</h6>-->
+<!--                                            </div>-->
+<!--                                            <div class="MuiBox-root jss4116 jss4080 cell cell-sub jss4033" style="width: 116px; height: 40px; justify-content: right;">-->
+<!--                                                <h6 class="MuiTypography-root content MuiTypography-subtitle1 MuiTypography-noWrap MuiTypography-alignRight" title="Giá bán buôn">Giá bán buôn</h6>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="MuiBox-root jss4122 col">-->
+<!--                                        <div class="MuiBox-root jss4123 row row-sub">-->
+<!--                                            <div class="MuiBox-root jss4124 jss4080 cell cell-sub" style="width: 232px; height: 40px; justify-content: center;">-->
+<!--                                                <h6 class="MuiTypography-root content MuiTypography-subtitle1 MuiTypography-noWrap MuiTypography-alignCenter" title="Chi nhánh mặc định">Chi nhánh mặc định</h6>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="MuiBox-root jss4130 row row-sub"><div class="MuiBox-root jss4131 jss4080 cell cell-sub jss4033" style="width: 116px; height: 40px; justify-content: center;">-->
+<!--                                            <h6 class="MuiTypography-root content MuiTypography-subtitle1 MuiTypography-noWrap MuiTypography-alignCenter" title="Tồn kho">Tồn kho</h6>-->
+<!--                                        </div><div class="MuiBox-root jss4137 jss4080 cell cell-sub jss4033" style="width: 116px; height: 40px; justify-content: center;">-->
+<!--                                            <h6 class="MuiTypography-root content MuiTypography-subtitle1 MuiTypography-noWrap MuiTypography-alignCenter" title="Có thể bán">Có thể bán</h6>-->
+<!--                                        </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="scrollbar-container ps">-->
+<!--                                <div class="MuiBox-root jss4143 jss4075 TableBody">-->
+<!--                                    <div class="MuiBox-root jss4144 row nth" style="width: fit-content;">-->
+<!--                                        <div class="jss4076 body-cell sticky col__sku" style="left: 0px; min-height: 36px; width: 142px; min-width: 142px; box-shadow: rgb(232, 234, 235) 1px 0px;">-->
+<!--                                            <a class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-root MuiTypography-body1 MuiTypography-noWrap MuiTypography-colorPrimary" href="/admin/products/124653990/variants/193202034/locations" target="_blank" data-tip="PVN04" currentitem="false" style="display: block;">PVN04</a>-->
+<!--                                        </div>-->
+<!--                                        <div class="jss4076 body-cell sticky col__name" style="left: 142px; min-height: 36px; width: 332px; min-width: 332px; box-shadow: rgb(232, 234, 235) 1px 0px;">-->
+<!--                                            <p class="MuiTypography-root MuiTypography-body1" data-tip="Sữa dưỡng thể Vaseline trắng da tức thì 350ml" currentitem="false">Sữa dưỡng thể Vaseline trắng da tức thì 350ml</p>-->
+<!--                                        </div>-->
+<!--                                        <div class="jss4076 body-cell sticky col__quantity" style="left: 474px; text-align: center; min-height: 36px; width: 116px; min-width: 116px; box-shadow: rgb(232, 234, 235) 1px 0px;">-->
+<!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap" data-tip="1" currentitem="false">1</p></div><div class="jss4076 body-cell col__price_1979667" style="text-align: right; min-height: 36px; width: 116px; min-width: 116px;">-->
+<!--                                        <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap" data-tip="160000" currentitem="false" style="color: rgb(15, 24, 36);">160,000</p></div><div class="jss4076 body-cell col__price_1979665" style="text-align: right; min-height: 36px; width: 116px; min-width: 116px;">-->
+<!--                                        <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap" data-tip="130000" currentitem="false" style="color: rgb(15, 24, 36);">130,000</p>-->
+<!--                                    </div>-->
+<!--                                        <div class="jss4076 body-cell col__field_654248_on_hand" style="text-align: center; min-height: 36px; width: 116px; min-width: 116px;">-->
+<!--                                            <p class="MuiTypography-root MuiTypography-body1" data-tip="75" currentitem="false" style="color: rgb(15, 24, 36);">75</p>-->
+<!--                                        </div>-->
+<!--                                        <div class="jss4076 body-cell col__field_654248_available" style="text-align: center; min-height: 36px; width: 117px; min-width: 117px;">-->
+<!--                                            <p class="MuiTypography-root MuiTypography-body1" data-tip="69" currentitem="false" style="color: rgb(15, 24, 36);">69</p></div>-->
+<!--                                    </div>-->
+<!--                                    <div class="MuiBox-root jss4145 row" style="width: fit-content;"><div class="jss4076 body-cell sticky col__sku" style="left: 0px; min-height: 36px; width: 142px; min-width: 142px; box-shadow: rgb(232, 234, 235) 1px 0px;">-->
+<!--                                        <a class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-root MuiTypography-body1 MuiTypography-noWrap MuiTypography-colorPrimary" href="/admin/products/124653983/variants/193202027/locations" target="_blank" data-tip="PVN01" currentitem="false" style="display: block;">PVN01</a></div><div class="jss4076 body-cell sticky col__name" style="left: 142px; min-height: 36px; width: 332px; min-width: 332px; box-shadow: rgb(232, 234, 235) 1px 0px;">-->
+<!--                                        <p class="MuiTypography-root MuiTypography-body1" data-tip="Bia Sapporo bạc lon 330ml (Lốc 6 lon)" currentitem="false">Bia Sapporo bạc lon 330ml (Lốc 6 lon)</p>-->
+<!--                                    </div>-->
+<!--                                        <div class="jss4076 body-cell sticky col__quantity" style="left: 474px; text-align: center; min-height: 36px; width: 116px; min-width: 116px; box-shadow: rgb(232, 234, 235) 1px 0px;">-->
+<!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap" data-tip="1" currentitem="false">1</p>-->
+<!--                                        </div>-->
+<!--                                        <div class="jss4076 body-cell col__price_1979667" style="text-align: right; min-height: 36px; width: 116px; min-width: 116px;">-->
+<!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap" data-tip="105000" currentitem="false" style="color: rgb(15, 24, 36);">105,000</p>-->
+<!--                                        </div>-->
+<!--                                        <div class="jss4076 body-cell col__price_1979665" style="text-align: right; min-height: 36px; width: 116px; min-width: 116px;">-->
+<!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap" data-tip="95000" currentitem="false" style="color: rgb(15, 24, 36);">95,000</p>-->
+<!--                                        </div>-->
+<!--                                        <div class="jss4076 body-cell col__field_654248_on_hand" style="text-align: center; min-height: 36px; width: 116px; min-width: 116px;"><p class="MuiTypography-root MuiTypography-body1" data-tip="82" currentitem="false" style="color: rgb(15, 24, 36);">82</p>-->
+<!--                                        </div>-->
+<!--                                        <div class="jss4076 body-cell col__field_654248_available" style="text-align: center; min-height: 36px; width: 117px; min-width: 117px;"><p class="MuiTypography-root MuiTypography-body1" data-tip="77" currentitem="false" style="color: rgb(15, 24, 36);">77</p>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="ps__rail-x" style="left: 0px; bottom: 0px;">-->
+<!--                                    <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;">-->
+
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="ps__rail-y" style="top: 0px; right: 0px;">-->
+<!--                                    <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;">-->
+
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="__react_component_tooltip tb2f9fcd8-a1d0-4cf8-b190-01021a66e960 place-top type-light jss4077"-->
+<!--                                 id="tb2f9fcd8-a1d0-4cf8-b190-01021a66e960" data-id="tooltip" style="left: 141px; top: 265px;">-->
+<!--                                <style aria-hidden="true">-->
+<!--                    .tb2f9fcd8-a1d0-4cf8-b190-01021a66e960 {-->
+<!--                        color: #222;-->
+<!--                        background: #fff;-->
+<!--                        border: 1px solid transparent;-->
+<!--                    }-->
+
+<!--                    .tb2f9fcd8-a1d0-4cf8-b190-01021a66e960.place-top {-->
+<!--                        margin-top: -10px;-->
+<!--                    }-->
+<!--                    .tb2f9fcd8-a1d0-4cf8-b190-01021a66e960.place-top::before {-->
+<!--                        border-top: 8px solid transparent;-->
+<!--                    }-->
+<!--                    .tb2f9fcd8-a1d0-4cf8-b190-01021a66e960.place-top::after {-->
+<!--                        border-left: 8px solid transparent;-->
+<!--                        border-right: 8px solid transparent;-->
+<!--                        bottom: -6px;-->
+<!--                        left: 50%;-->
+<!--                        margin-left: -8px;-->
+<!--                        border-top-color: #fff;-->
+<!--                        border-top-style: solid;-->
+<!--                        border-top-width: 6px;-->
+<!--                    }-->
+
+<!--                    .tb2f9fcd8-a1d0-4cf8-b190-01021a66e960.place-bottom {-->
+<!--                        margin-top: 10px;-->
+<!--                    }-->
+<!--                    .tb2f9fcd8-a1d0-4cf8-b190-01021a66e960.place-bottom::before {-->
+<!--                        border-bottom: 8px solid transparent;-->
+<!--                    }-->
+<!--                    .tb2f9fcd8-a1d0-4cf8-b190-01021a66e960.place-bottom::after {-->
+<!--                        border-left: 8px solid transparent;-->
+<!--                        border-right: 8px solid transparent;-->
+<!--                        top: -6px;-->
+<!--                        left: 50%;-->
+<!--                        margin-left: -8px;-->
+<!--                        border-bottom-color: #fff;-->
+<!--                        border-bottom-style: solid;-->
+<!--                        border-bottom-width: 6px;-->
+<!--                    }-->
+
+<!--                    .tb2f9fcd8-a1d0-4cf8-b190-01021a66e960.place-left {-->
+<!--                        margin-left: -10px;-->
+<!--                    }-->
+<!--                    .tb2f9fcd8-a1d0-4cf8-b190-01021a66e960.place-left::before {-->
+<!--                        border-left: 8px solid transparent;-->
+<!--                    }-->
+<!--                    .tb2f9fcd8-a1d0-4cf8-b190-01021a66e960.place-left::after {-->
+<!--                        border-top: 5px solid transparent;-->
+<!--                        border-bottom: 5px solid transparent;-->
+<!--                        right: -6px;-->
+<!--                        top: 50%;-->
+<!--                        margin-top: -4px;-->
+<!--                        border-left-color: #fff;-->
+<!--                        border-left-style: solid;-->
+<!--                        border-left-width: 6px;-->
+<!--                    }-->
+
+<!--                    .tb2f9fcd8-a1d0-4cf8-b190-01021a66e960.place-right {-->
+<!--                        margin-left: 10px;-->
+<!--                    }-->
+<!--                    .tb2f9fcd8-a1d0-4cf8-b190-01021a66e960.place-right::before {-->
+<!--                        border-right: 8px solid transparent;-->
+<!--                    }-->
+<!--                    .tb2f9fcd8-a1d0-4cf8-b190-01021a66e960.place-right::after {-->
+<!--                        border-top: 5px solid transparent;-->
+<!--                        border-bottom: 5px solid transparent;-->
+<!--                        left: -6px;-->
+<!--                        top: 50%;-->
+<!--                        margin-top: -4px;-->
+<!--                        border-right-color: #fff;-->
+<!--                        border-right-style: solid;-->
+<!--                        border-right-width: 6px;-->
+<!--                    }-->
+<!--                </style>PVN01</div></div></div></div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+    <div class="modal fade" id="inventoryCheck" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Kiểm tra tồn kho</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" id="myModal">
+                    <div class="modal-body" >
+                        <div class="sc-iqcoie iZrCvq sc-gITdmR cFtstx">
+                            <div class="sc-dFdIVH bPLSPb">
+                                <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3" style="margin: 0px -12px;">
+                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
+                                        <div width="100%" class="sc-cCsOjp gKHUxf"><label
+                                                for="nameCreate"
+                                                class="sc-ksZaOG ftuIiY">Tên khách hàng<span class="sc-hAZoDl eHshpr">
+                                    </span>
+                                        </label>
+                                            <div class="sc-gXmSlM PBwdZ Sapo-InputRoot">
+                                                <input
+                                                        id="nameCreate" type="text"
+                                                        class="sc-himrzO iRSKAB" value=""/>
+                                                <fieldset class="sc-ezWOiH fCFLbv">
+
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
+                                        <div width="100%" class="sc-cCsOjp gKHUxf"><label
+                                                for="phoneCreate"
+                                                class="sc-ksZaOG ftuIiY">Số điện thoại</label>
+                                            <div class="sc-gXmSlM PBwdZ Sapo-InputRoot">
+                                                <input id="phoneCreate" type="text" class="sc-himrzO iRSKAB" value=""/>
+                                                <fieldset class="sc-ezWOiH fCFLbv"></fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
+                                        <div class="MuiFormControl-root jss1315 MuiFormControl-fullWidth"><label
+                                                class="MuiFormLabel-root MuiInputLabel-root jss1316 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
+                                                data-shrink="true" for="addressCreate">Địa chỉ cụ
+                                            thể</label>
+                                            <div class="MuiFormControl-root MuiTextField-root jss1317 jss1318 jss3873 MuiFormControl-fullWidth"
+                                                 title="">
+                                                <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline">
+                                                    <input aria-invalid="false" id="addressCreate" type="text"
+                                                           name="address"
+                                                           placeholder="Nhập sô nhà, tên đường, tên khu vực"
+                                                           aria-label="Without label"
+                                                           class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline" />
+                                                    <fieldset aria-hidden="true"
+                                                              class="jss1037 MuiOutlinedInput-notchedOutline"
+                                                              style="padding-left: 8px;">
+                                                        <legend class="jss1038" style="width: 0.01px;"><span>&ZeroWidthSpace;</span>
+                                                        </legend>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
+                                        <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
+                                            <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4">
+                                                <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
+                                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
+                                                        <div class="MuiBox-root jss5333 jss5392">
+                                                            <div class="MuiBox-root jss5334 jss5402">
+                                                                <p class="MuiTypography-root MuiTypography-body1"
+                                                                   style="color: rgb(70, 81, 95);">Tỉnh /
+                                                                    Thành phố</p>
+                                                            </div>
+                                                            <div class="MuiBox-root jss5335 jss5401" tabindex="0">
+
+                                                                <select class="jss87874" name="province" id="province">
+                                                                    <option value="0">
+                                                                        <p class="MuiTypography-root label-select MuiTypography-body1 MuiTypography-colorTextPrimary">
+                                                                            Chọn Tỉnh/Thành phố</p>
+                                                                    </option>
+                                                                    <svg class="MuiSvgIcon-root arrow-icon"
+                                                                         focusable="false" viewBox="0 0 24 24"
+                                                                         aria-hidden="true">
+                                                                        <path d="M7 10l5 5 5-5z"></path>
+                                                                    </svg>
+                                                                </select>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4">
+                                                <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
+                                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
+                                                        <div class="MuiBox-root jss5333 jss5392">
+                                                            <div class="MuiBox-root jss5334 jss5402">
+                                                                <p class="MuiTypography-root MuiTypography-body1"
+                                                                   style="color: rgb(70, 81, 95);">Quận /
+                                                                    Huyện</p>
+                                                            </div>
+                                                            <div class="MuiBox-root jss5335 jss5401" tabindex="0">
+
+                                                                <select class="jss87874" name="district" id="district">
+                                                                    <option value="0">
+                                                                        <p class="MuiTypography-root label-select MuiTypography-body1 MuiTypography-colorTextPrimary">
+                                                                            Chọn Quận/Huyện</p>
+                                                                    </option>
+                                                                    <svg class="MuiSvgIcon-root arrow-icon"
+                                                                         focusable="false" viewBox="0 0 24 24"
+                                                                         aria-hidden="true">
+                                                                        <path d="M7 10l5 5 5-5z"></path>
+                                                                    </svg>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4">
+                                                <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
+                                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
+                                                        <div class="MuiBox-root jss5351 jss5452">
+                                                            <div class="MuiBox-root jss5352 jss5462">
+                                                                <p class="MuiTypography-root MuiTypography-body1"
+                                                                   style="color: rgb(70, 81, 95);">Phường xã
+                                                                </p>
+                                                            </div>
+                                                            <div class="MuiBox-root jss5353 jss5461" tabindex="0">
+                                                                <select class="jss87874" name="ward" id="ward">
+                                                                    <option value="0">
+                                                                        <p class="MuiTypography-root label-select MuiTypography-body1 MuiTypography-colorTextPrimary">
+                                                                            Chọn Phường/Xã</p>
+                                                                    </option>
+                                                                    <svg class="MuiSvgIcon-root arrow-icon"
+                                                                         focusable="false" viewBox="0 0 24 24"
+                                                                         aria-hidden="true">
+                                                                        <path d="M7 10l5 5 5-5z"></path>
+                                                                    </svg>
+                                                                </select>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
+                                        <div width="100%" class="sc-cCsOjp gKHUxf"><label
+                                                for="codeCreate"
+                                                class="sc-ksZaOG ftuIiY">Mã khách hàng<span
+                                                class="sc-hAZoDl eHshpr">&nbsp</span></label>
+                                            <div class="sc-gXmSlM PBwdZ Sapo-InputRoot">
+                                                <input id="codeCreate" type="text"
+                                                       class="sc-himrzO iRSKAB" value="">
+                                                <fieldset class="sc-ezWOiH fCFLbv"></fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 ">
+                                        <div class="MuiBox-root jss5491 jss5544">
+                                            <div class="MuiBox-root jss5492 jss5554"><p
+                                                    class="MuiTypography-root MuiTypography-body1"
+                                                    style="color: rgb(70, 81, 95);">Nhân viên phụ trách</p>
+                                            </div>
+                                            <div class="MuiBox-root jss5493 jss5553" tabindex="0">
+
+                                                <select id="employeeCreate" class="form-select showAllEmployee"
+                                                        style="height:40px;">
+                                                    <option value="0">
+                                                        <p class="MuiTypography-root label-select MuiTypography-body1 MuiTypography-colorTextPrimary ">Chọn nhân viên <br />
+                                                        </p>
+                                                    </option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sc-brCFrO cGcePZ">
+                                <button type="button" data-bs-dismiss="modal"
+                                        class="sc-jqUVSM TJspa"><span
+                                        class="sc-papXJ jcEYKF primary">Thoát</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</th:block>

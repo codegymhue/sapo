@@ -22,7 +22,7 @@ public class CustomerResult {
 
     private Integer id;
 
-    private String code;
+    private String customerCode;
 
     private String name;
 
