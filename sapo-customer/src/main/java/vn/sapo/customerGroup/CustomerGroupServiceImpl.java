@@ -49,21 +49,23 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
                 .collect(Collectors.toList());
     }
 
+//    @Override
+//    public List<CustomerGroupResult> sortByGroup() {
+//        return customerGroupRepository.sortByGroup();
+//    }
+
     @Override
-    @Transactional
     public List<CustomerGroupResult> sortByGroup() {
-        return customerGroupRepository.sortByGroup();
+        return customerGroupRepository.findCustomerGroupById();
     }
 
     @Override
-    @Transactional
     public CustomerGroupResult findById(Integer id) {
         CustomerGroup customerGroup = customerGroupRepository.findById(id).get();
         return customerGroupMapper.toDTO(customerGroup);
     }
 
     @Override
-    @Transactional
     public void deleteById(Integer id) {
         customerGroupRepository.deleteById(id);
     }

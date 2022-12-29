@@ -1,17 +1,7 @@
 package vn.sapo.entities.pricing_policy;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.Accessors;
-
 import javax.persistence.*;
-@Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@Table(name = "customer_group")
-@Accessors(chain = true)
+
 public class PricingPolicy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
