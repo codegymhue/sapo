@@ -85,7 +85,20 @@ class App {
         return str;
     }
 
+}
+class Customer {
+    constructor(id, code, name, phoneNumber, groupCustomer, debtsTotal, spendTotal, quantityItemOrder) {
+        this.id = id;
+        this.code = code;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.groupCustomer = groupCustomer;
+        this.debtsTotal = debtsTotal;
+        this.spendTotal  = spendTotal;
+        this.quantityItemOrder = quantityItemOrder
 
+
+    }
 }
 
 

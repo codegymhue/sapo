@@ -8,7 +8,7 @@ import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.address.dto.UpdateAddressParam;
 import vn.sapo.entities.Address;
-import vn.sapo.shared.exceptions.NotFoundException;
+import vn.sapo.exceptions.NotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;

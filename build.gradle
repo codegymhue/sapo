@@ -54,12 +54,15 @@ allprojects { proj ->
 //        implementation 'com.googlecode.jmapper-framework:jmapper-core:1.6.1.CR2'
         implementation 'org.modelmapper:modelmapper:3.1.1'
         implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.1'
-        implementation 'com.vladmihalcea:hibernate-types-52:2.21.1'
+
+        // implementation "com.vladmihalcea:hibernate-types-52:${hibernate_types_version}"
+
         runtimeOnly 'mysql:mysql-connector-java'
 
 
     }
     ext {
         jjwt_version = "0.11.5"
+        hibernate_types_version = "2.20.0"
     }
 }

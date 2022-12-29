@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.brand.dto.*;
 import vn.sapo.entities.product.Brand;
-import vn.sapo.shared.exceptions.DataInputException;
+import vn.sapo.exceptions.DataInputException;
 
 import java.util.*;
 

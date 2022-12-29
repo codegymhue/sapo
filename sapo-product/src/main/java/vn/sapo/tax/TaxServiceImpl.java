@@ -3,8 +3,8 @@ package vn.sapo.tax;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.sapo.entities.tax.Tax;
-import vn.sapo.shared.exceptions.DataInputException;
-import vn.sapo.shared.exceptions.NotFoundException;
+import vn.sapo.exceptions.DataInputException;
+import vn.sapo.exceptions.NotFoundException;
 import vn.sapo.product_tax.dto.ProductTaxResult;
 import vn.sapo.tax.dto.*;
 

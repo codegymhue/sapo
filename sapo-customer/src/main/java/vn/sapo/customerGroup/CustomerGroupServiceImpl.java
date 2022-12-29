@@ -3,12 +3,12 @@ package vn.sapo.customerGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import vn.sapo.shared.configurations.CodePrefix;
+import vn.sapo.configurations.CodePrefix;
 import vn.sapo.customerGroup.dto.CreateCusGroupParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.customerGroup.dto.UpdateCusGroupParam;
 import vn.sapo.entities.customer.CustomerGroup;
-import vn.sapo.shared.exceptions.NotFoundException;
+import vn.sapo.exceptions.NotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
