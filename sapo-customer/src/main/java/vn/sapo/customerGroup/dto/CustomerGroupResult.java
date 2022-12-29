@@ -25,4 +25,5 @@ public class CustomerGroupResult {
 
     private Long countCus;
 
+//    private Integer pricePolicyId;
 }

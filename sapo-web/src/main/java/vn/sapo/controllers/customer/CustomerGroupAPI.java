@@ -38,6 +38,18 @@ public class CustomerGroupAPI {
         return new ResponseEntity<>(list,HttpStatus.OK);
     }
 
+    @GetMapping("/customer_groups/pricingPolicy ")
+    public ResponseEntity<?> getAllPricingPolicy (){
+        List<CustomerGroupResult> list = customerGroupService.getAllPricingPolicy();
+        return new ResponseEntity<>(list,HttpStatus.OK);
+    }
+
+    @GetMapping("/customer_groups/PaymentMethod ")
+    public ResponseEntity<?> getAllPaymentMethod(){
+        List<CustomerGroupResult> list = customerGroupService.getAllPaymentMethod();
+        return new ResponseEntity<>(list,HttpStatus.OK);
+    }
+
     @GetMapping("/customer_groups/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
         CustomerGroupResult customerGroupResult = customerGroupService.findById(id);

@@ -54,6 +54,16 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     }
 
     @Override
+    public List<CustomerGroupResult> getAllPricingPolicy() {
+        return customerGroupRepository.getAllPricingPolicy();
+    }
+
+    @Override
+    public List<CustomerGroupResult> getAllPaymentMethod() {
+        return customerGroupRepository.getAllPaymentMethod();
+    }
+
+    @Override
     public CustomerGroupResult findById(Integer id) {
         CustomerGroup customerGroup = customerGroupRepository.findById(id).get();
         return customerGroupMapper.toDTO(customerGroup);
