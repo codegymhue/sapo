@@ -60,16 +60,16 @@
                     <div class=" sb-avatar sb-avatar--text"
                          style="display: inline-block; vertical-align: middle; width: 30px; height: 30px; border-radius: 20px; font-family: Helvetica, Arial, sans-serif;">
                         <div class=" sb-avatar__text"
-                             title="Phú Nguyễn"
+                             title="Trúc Nguyễn"
                              style="width: 30px; height: 30px; line-height: initial; text-align: center; color: rgb(255, 255, 255); border-radius: 20px; background: rgb(215, 61, 50);">
                             <div style="display: table; table-layout: fixed; width: 100%; height: 100%; font-size: 10px;">
                                 <span style="display: table-cell; vertical-align: middle; white-space: nowrap;">
-                                    <span>P</span>
+                                    <span>T</span>
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <p class="MuiTypography-root jss445 MuiTypography-body1 MuiTypography-colorTextPrimary">Phú Nguyễn</p>
+                    <p class="MuiTypography-root jss445 MuiTypography-body1 MuiTypography-colorTextPrimary">Trúc Nguyễn</p>
                     <svg class="MuiSvgIcon-root arrow-avatar"
                          focusable="false"
                          viewBox="0 0 24 24"
@@ -105,31 +105,6 @@
                       </span>
                         </button>
                     </a>
-                    <div class="MuiBox-root jss6793"
-                         style="width: 1px; height: 20px; border-left: 1px solid rgb(211, 213, 215); margin: 0 8px;">
-                    </div>
-
-                    <div class="MuiBox-root jss6794 jss6746">
-<!--                        <a class="jss6750"-->
-<!--                           href="#">-->
-<!--                            <button id="Sapo-Button-ba11a07a-f11d-475b-9638-2e9af46ee60d"-->
-<!--                                    class="sc-jqUVSM eUKSRG">-->
-<!--                                <span class="sc-papXJ jcEYKF">Loại sản phẩm-->
-<!--                                </span>-->
-<!--                            </button>-->
-<!--                        </a>-->
-                        <div class="MuiBox-root jss6796 jss6747">
-                        </div>
-<!--                        <a class="jss6750"-->
-<!--                           href="#">-->
-<!--                            <button id="Sapo-Button-99086ae8-8fc4-4ac6-8782-c93192bd428a"-->
-<!--                                    class="sc-jqUVSM eUKSRG">-->
-<!--                                <span class="sc-papXJ jcEYKF">Quản lý khác-->
-<!--                                </span>-->
-<!--                            </button>-->
-<!--                        </a>-->
-
-                    </div>
                 </div>
                 <div class="MuiBox-root jss6799 jss6741">
                     <div class="sc-kDDrLX cKOfva">
@@ -595,22 +570,16 @@
 
     page.dialogs.elements.category.on("change", () => {
         page.elements.pageNo.text(1);
-        page.dialogs.elements.brand.val("-1");
-        page.dialogs.elements.status.val("");
         page.commands.getAllProducts();
     })
 
     page.dialogs.elements.brand.on("change", () => {
         page.elements.pageNo.text(1);
-        page.dialogs.elements.category.val("-1");
-        page.dialogs.elements.status.val("");
         page.commands.getAllProducts();
     })
 
     page.dialogs.elements.status.on("change", () =>{
         page.elements.pageNo.text(1);
-        page.dialogs.elements.category.val("-1");
-        page.dialogs.elements.brand.val("-1");
         page.commands.getAllProducts();
     })
 

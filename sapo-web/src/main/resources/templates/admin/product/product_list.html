@@ -559,22 +559,16 @@
 
     page.dialogs.elements.category.on("change", () => {
         page.elements.pageNo.text(1);
-        page.dialogs.elements.brand.val("-1");
-        page.dialogs.elements.status.val("");
         page.commands.getAllProducts();
     })
 
     page.dialogs.elements.brand.on("change", () => {
         page.elements.pageNo.text(1);
-        page.dialogs.elements.category.val("-1");
-        page.dialogs.elements.status.val("");
         page.commands.getAllProducts();
     })
 
     page.dialogs.elements.status.on("change", () =>{
         page.elements.pageNo.text(1);
-        page.dialogs.elements.category.val("-1");
-        page.dialogs.elements.brand.val("-1");
         page.commands.getAllProducts();
     })
 

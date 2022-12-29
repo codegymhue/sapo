@@ -306,10 +306,18 @@ public class ProductServiceImpl implements ProductService {
             products = productRepository.findAllByTitleContaining(title, pageable);
         } else if (brandId == -1 && status.equals("")) {
             products = productRepository.findAllByTitleContainingAndCategoryId(categoryId, title, pageable);
-        } else if (status.equals("")) {
+        } else if (categoryId == -1 && status.equals("")) {
             products = productRepository.findAllByTitleContainingAndBrandId(brandId, title, pageable);
-        } else {
+        } else if(categoryId == -1 && brandId == -1) {
             products = productRepository.findAllByTitleContainingAndStatus(ProductStatus.parseProductStatus(status), title, pageable);
+        } else if(status.equals("")){
+            products = productRepository.findAllByTitleContainingAndCategoryIdAndBrandId(title, categoryId, brandId, pageable);
+        } else if (brandId == -1) {
+            products = productRepository.findAllByTitleContainingAndCategoryIdAndStatus(title, categoryId, ProductStatus.parseProductStatus(status), pageable);
+        } else if (categoryId == -1) {
+            products = productRepository.findAllByTitleContainingAndBrandIdAndStatus(title, brandId, ProductStatus.parseProductStatus(status), pageable );
+        } else {
+            products = productRepository.findAllByTitleContainingAndCategoryIdAndBrandIdAndStatus(title, categoryId, brandId,ProductStatus.parseProductStatus(status), pageable);
         }
         if (products.hasContent()) {
             List<Product> productList = products.getContent();
@@ -345,7 +353,6 @@ public class ProductServiceImpl implements ProductService {
         } else {
             pageable = PageRequest.of(pageNo, pageSize, Sort.by(nameFieldSort).descending());
         }
-
         Page<Product> products;
         if (title.equals("") && categoryId == -1 && brandId == -1 && status.equals("")) {
             products = productRepository.findAllByDeletedIsFalse(pageable);
@@ -353,10 +360,18 @@ public class ProductServiceImpl implements ProductService {
             products = productRepository.findAllByTitleContaining(title, pageable);
         } else if (brandId == -1 && status.equals("")) {
             products = productRepository.findAllByTitleContainingAndCategoryId(categoryId, title, pageable);
-        } else if (status.equals("")) {
+        } else if (categoryId == -1 && status.equals("")) {
             products = productRepository.findAllByTitleContainingAndBrandId(brandId, title, pageable);
-        } else {
+        } else if(categoryId == -1 && brandId == -1) {
             products = productRepository.findAllByTitleContainingAndStatus(ProductStatus.parseProductStatus(status), title, pageable);
+        } else if(status.equals("")){
+            products = productRepository.findAllByTitleContainingAndCategoryIdAndBrandId(title, categoryId, brandId, pageable);
+        } else if (brandId == -1) {
+            products = productRepository.findAllByTitleContainingAndCategoryIdAndStatus(title, categoryId, ProductStatus.parseProductStatus(status), pageable);
+        } else if (categoryId == -1) {
+            products = productRepository.findAllByTitleContainingAndBrandIdAndStatus(title, brandId, ProductStatus.parseProductStatus(status), pageable );
+        } else {
+            products = productRepository.findAllByTitleContainingAndCategoryIdAndBrandIdAndStatus(title, categoryId, brandId,ProductStatus.parseProductStatus(status), pageable);
         }
         if (products.hasContent()) {
             List<Product> productList = products.getContent();
