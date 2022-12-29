@@ -18,6 +18,10 @@ public interface CustomerGroupService {
 
     List<CustomerGroupResult> sortByGroup();
 
+//    List<CustomerGroupResult> getAllPricingPolicy();
+//
+//    List<CustomerGroupResult> getAllPaymentMethod();
+
     CustomerGroupResult findById(Integer id);
 
     void deleteById(Integer id);

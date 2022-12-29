@@ -58,11 +58,27 @@ class CustomerGroup_App {
     }
 }
 class CustomerGroup{
-    constructor(id,title,cusGrpCode,createdAt,countCus) {
+    constructor(id,title,cusGrpCode,createdAt,countCus,pricing_policy_id, payment_method_id, description, discount) {
         this.id = id;
         this.title = title;
         this.cusGrpCode = cusGrpCode;
         this.createdAt = createdAt;
         this.countCus = countCus;
+        this.pricing_policy_id = pricing_policy_id;
+        this.payment_method_id = payment_method_id;
+        this.description = description;
+        this.discount = discount
     }
 }
+
+// class CreateCusGroupParam {
+//     constructor(id, title, cusGrpCode, pricing_policy_id, payment_method_id, description, discount) {
+//         this.id = id;
+//         this.title = title;
+//         this.cusGrpCode = cusGrpCode;
+//         this.pricing_policy_id = pricing_policy_id;
+//         this.payment_method_id = payment_method_id;
+//         this.description = description;
+//         this.discount = discount
+//     }
+// }

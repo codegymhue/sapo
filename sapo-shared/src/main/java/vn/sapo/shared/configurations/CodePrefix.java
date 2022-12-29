@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum CodePrefix {
 
     CUSTOMER("CUZN"),
+    CUSTOMER_GROUP("CTN"),
     ANONYMOUS("ANONYMOUS");
 
     private final String value;

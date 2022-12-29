@@ -27,15 +27,15 @@ public class CustomerGroupAPI {
     @Autowired
     CustomerGroupMapper customerGroupMapper;
 
-    @GetMapping("")
-    public ResponseEntity<?> getAllCustomerGroup(){
+    @GetMapping
+    public ResponseEntity<?> getAllCustomerGroup() {
         return new ResponseEntity<>(customerGroupService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/sortGroup")
-    public ResponseEntity<?> sortByGroup (){
+    public ResponseEntity<?> sortByGroup() {
         List<CustomerGroupResult> list = customerGroupService.sortByGroup();
-        return new ResponseEntity<>(list,HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -44,18 +44,19 @@ public class CustomerGroupAPI {
         return new ResponseEntity<>(customerGroupResult, HttpStatus.OK);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody CreateCusGroupParam createCusGroupParam){
+    @PostMapping()
+    public ResponseEntity<?> create(@RequestBody CreateCusGroupParam createCusGroupParam) {
         CustomerGroupResult dto = customerGroupService.create(createCusGroupParam);
         dto = customerGroupService.findById(dto.getId());
-        return new ResponseEntity<>(dto,HttpStatus.OK);
-    }
-    @PutMapping("/update")
-    public ResponseEntity<?> updateCusGroup(@RequestBody UpdateCusGroupParam updateCusGroupParam){
-        return new ResponseEntity<>(customerGroupService.update(updateCusGroupParam),HttpStatus.OK);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateCusGroup(@RequestBody UpdateCusGroupParam updateCusGroupParam) {
+        return new ResponseEntity<>(customerGroupService.update(updateCusGroupParam), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
     public void deleteCusGroupById(@PathVariable Integer id) {
         customerGroupService.deleteById(id);
     }

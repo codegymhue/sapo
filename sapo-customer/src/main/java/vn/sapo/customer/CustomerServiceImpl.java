@@ -105,7 +105,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional(readOnly = true)
     public List<CustomerResult> findAllCustomerByGroupAndStatus(Integer groupTitleId, String customerStatus) {
         List<CustomerResult> customerResults = new ArrayList<>();
-        customerResults = customerRepository.findAllCustomerByTitleContainingAndStatus(groupTitleId, CustomerStatus.parseCustomerGroup(customerStatus))
+        customerResults = customerRepository.findAllByGroupIdAndStatus(groupTitleId, CustomerStatus.parseCustomerGroup(customerStatus))
                 .stream()
                 .map(customerMapper::toDTO)
                 .collect(Collectors.toList());
