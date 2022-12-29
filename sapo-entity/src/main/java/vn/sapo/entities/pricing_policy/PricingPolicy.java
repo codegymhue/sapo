@@ -9,7 +9,7 @@ public class PricingPolicy {
     private Integer id;
 
     @Column(name = "pricing_policy_code", unique = true)
-    private String code;
+    private String pricingPolicyCode;
 
     @Column(name = "title", nullable = false)
     private String title;
