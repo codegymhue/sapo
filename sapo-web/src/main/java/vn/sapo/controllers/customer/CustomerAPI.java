@@ -6,21 +6,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vn.sapo.address.AddressService;
 import vn.sapo.address.dto.CreateAddressParam;
-import vn.sapo.customer.CustomerMapper;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
-import vn.sapo.exceptions.NotFoundException;
 import vn.sapo.order.sale.SaleOrderService;
 import vn.sapo.order.sale.item.OrderItemService;
 import vn.sapo.payment.sale.PaymentSaleOrderService;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.HashMap;
 import java.util.List;
-import java.util.function.Consumer;
 
 @RestController
 @RequestMapping("/api/customers")

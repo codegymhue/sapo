@@ -27,12 +27,12 @@ public class CustomerMapper implements InitializingBean {
 
 
     public CustomerResult toDTO(Customer customer) {
-        System.out.println(customer);
-        return modelMapper.map(customer, CustomerResult.class)
-                .setCode(customer.getCode())
-                .setName(customer.getFullName())
-                .setPhoneNumber(customer.getPhoneNumber())
-                .setGroup(customerGroupService.findById(customer.getGroupId()));
+//        System.out.println(customer);
+       return modelMapper.map(customer, CustomerResult.class);
+//                .setCode(customer.getCode())
+//                .setName(customer.getFullName())
+//                .setPhoneNumber(customer.getPhoneNumber())
+//                .setGroup(customerGroupService.findById(customer.getGroupId()));
     }
 
 //    public CustomerOrderResult toOrderDTO(Customer customer) {
@@ -67,17 +67,17 @@ public class CustomerMapper implements InitializingBean {
 //    }
 //
 
-    public Customer toCustomer(CreateCustomerParam customerCreate) {
-       return new Customer()
-               .setCode(customerCreate.getCode())
-               .setFullName(customerCreate.getFullName())
-               .setPhoneNumber(customerCreate.getPhone())
-               .setGroup(customerCreate.getGroup())
-               .setGender(customerCreate.getGender())
-               .setEmail(customerCreate.getEmail())
-                .setBirthday(customerCreate.getBirthday())
-                .setEmployeeId(customerCreate.getEmployeeId());
-    }
+//    public Customer toCustomer(CreateCustomerParam customerCreate) {
+//       return new Customer()
+//               .setCode(customerCreate.getCode())
+//               .setFullName(customerCreate.getFullName())
+//               .setPhoneNumber(customerCreate.getPhone())
+//               .setGroup(customerCreate.getGroup())
+//               .setGender(customerCreate.getGender())
+//               .setEmail(customerCreate.getEmail())
+//                .setBirthday(customerCreate.getBirthday())
+//                .setEmployeeId(customerCreate.getEmployeeId());
+//    }
 //
 //    public Customer toCustomer(UpdateCustomerParam updateCustomerParam, Customer customer) {
 //        return customer
