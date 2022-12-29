@@ -481,13 +481,13 @@
     let shippingAddress = new ShippingAddress();
 
     $('#btnCreateCustomer').on('click', () => {
-        customer.name = $('#nameCreate').val();
+        customer.fullName = $('#nameCreate').val();
         customer.customerCode = $('#codeCreate').val();
-        customer.customerGroup = $('#customerGroupCreate :selected').val();
+        customer.groupId = $('#customerGroupCreate :selected').val();
         customer.phoneNumber = $('#phoneCreate').val();
         customer.email = $('#emailCreate').val();
-        // customer.birthday = $('#birthdayCreate').val();
-        customer.birthday = '2022-12-28T16:44:24Z';
+        customer.birthday = $('#birthdayCreate').val();
+        // customer.birthday = '2022-12-28T16:44:24Z';
         customer.customerGender = $('#genderCreate').val();
         shippingAddress.line1 = $('#addressCreate').val();
         shippingAddress.provinceId = $('#province').val();
