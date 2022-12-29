@@ -5,12 +5,9 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import vn.sapo.customer.dto.CreateCustomerParam;
-import vn.sapo.customer.dto.CustomerOrderResult;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
-import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.entities.customer.Customer;
-import vn.sapo.entities.customer.CustomerGroup;
 import vn.sapo.entities.customer.CustomerStatus;
 
 @Component
@@ -18,27 +15,18 @@ public class CustomerMapper implements InitializingBean {
     @Autowired
     private ModelMapper modelMapper;
 
-    @Autowired
-    private CustomerGroupService customerGroupService;
-
     @Override
     public void afterPropertiesSet() throws Exception {
     }
-
 
     public CustomerResult toDTO(Customer customer) {
         System.out.println(customer);
         return modelMapper.map(customer, CustomerResult.class)
                 .setName(customer.getFullName())
-                .setPhoneNumber(customer.getPhoneNumber())
-                .setGroup(customerGroupService.findById(customer.getGroupId()));
-    }
+                .setPhoneNumber(customer.getPhoneNumber());
 
-//    public CustomerOrderResult toOrderDTO(Customer customer) {
-//        return modelMapper.map(customer, CustomerOrderResult.class)
-//                .setName(customer.getFullName())
-//                .setPhone(customer.getPhoneNumber());
-//    }
+
+    }
 
     public Customer toModel(CreateCustomerParam createCustomerParam) {
         return modelMapper.map(createCustomerParam, Customer.class)
@@ -69,7 +57,7 @@ public class CustomerMapper implements InitializingBean {
     public Customer toCustomer(CreateCustomerParam customerCreate) {
        return new Customer()
                .setFullName(customerCreate.getFullName())
-               .setPhoneNumber(customerCreate.getPhone())
+               .setPhoneNumber(customerCreate.getPhoneNumber())
                .setGender(customerCreate.getGender())
                .setEmail(customerCreate.getEmail())
                 .setBirthday(customerCreate.getBirthday())
@@ -106,6 +94,5 @@ public class CustomerMapper implements InitializingBean {
 //                .setCustomerStatus(customer.getCustomerStatus());
 //
 //    }
-
 
 }

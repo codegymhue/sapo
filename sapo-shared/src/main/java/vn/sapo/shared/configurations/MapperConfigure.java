@@ -1,4 +1,4 @@
-package vn.sapo.configurations;
+package vn.sapo.shared.configurations;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
