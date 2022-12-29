@@ -433,25 +433,25 @@
 <script>
 
 
-    // class Customer {
-    //     constructor(id, customerCode, name, phone, customerGroup, email, birthday, status, createAt, updateAt, employeeId, deleted, createShippingAddressParam) {
-    //         this.id = id;
-    //         this.customerCode = customerCode;
-    //         this.name = name;
-    //         this.phone = phone;
-    //         this.customerGroup = customerGroup;
-    //         this.email = email;
-    //         this.birthday = birthday;
-    //         this.status = status;
-    //         this.createAt = createAt;
-    //         this.updateAt = updateAt;
-    //         this.employeeId = employeeId;
-    //         this.deleted = deleted;
-    //         this.createShippingAddressParam = createShippingAddressParam;
-    //
-    //
-    //     }
-    // }
+    class Customer {
+        constructor(id, customerCode, name, phone, customerGroup, email, birthday, status, createAt, updateAt, employeeId, deleted, createShippingAddressParam) {
+            this.id = id;
+            this.customerCode = customerCode;
+            this.name = name;
+            this.phone = phone;
+            this.customerGroup = customerGroup;
+            this.email = email;
+            this.birthday = birthday;
+            this.status = status;
+            this.createAt = createAt;
+            this.updateAt = updateAt;
+            this.employeeId = employeeId;
+            this.deleted = deleted;
+            this.createShippingAddressParam = createShippingAddressParam;
+
+
+        }
+    }
 
     class ShippingAddress {
         constructor(id, fullName, mobile, line1, line2, email, districtId, districtName, provinceId, provinceName, wardId, wardName, zipCode, customerId, supplierId, isDefault) {
@@ -481,8 +481,6 @@
     let shippingAddress = new ShippingAddress();
 
     $('#btnCreateCustomer').on('click', () => {
-
-        customer.id = null;
         customer.name = $('#nameCreate').val();
         customer.customerCode = $('#codeCreate').val();
         customer.customerGroup = $('#customerGroupCreate :selected').val();
