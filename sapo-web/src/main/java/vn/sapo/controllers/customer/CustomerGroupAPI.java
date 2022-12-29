@@ -21,12 +21,6 @@ public class CustomerGroupAPI {
     @Autowired
     CustomerGroupService customerGroupService;
 
-    @Autowired
-    CustomerGroupRepository customerGroupRepository;
-
-    @Autowired
-    CustomerGroupMapper customerGroupMapper;
-
     @GetMapping
     public ResponseEntity<?> getAllCustomerGroup() {
         return new ResponseEntity<>(customerGroupService.findAll(), HttpStatus.OK);

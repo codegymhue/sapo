@@ -1,23 +1,21 @@
-package vn.sapo.payment.method.dto;
+package vn.sapo.pricingPolicy.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import vn.sapo.entities.pricing_policy.PricingPolicyType;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Accessors(chain = true)
-public class PaymentMethodResult {
+public class PricingPolicyResult {
     private Integer id;
+
+    private String pricingPolicyCode;
 
     private String title;
 
