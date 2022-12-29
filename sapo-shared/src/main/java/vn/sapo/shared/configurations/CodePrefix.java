@@ -1,4 +1,4 @@
-package vn.sapo.configurations;
+package vn.sapo.shared.configurations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
