@@ -24,6 +24,10 @@ import java.util.UUID;
         typeClass = JsonType.class,
         defaultForType = TaxConfig.class
 )
+@TypeDef(
+        typeClass = JsonType.class,
+        defaultForType = PolicyPriceConfig.class
+)
 public class Configuration extends BaseEntity {
     @Id
     @Column(name = "app_key")
