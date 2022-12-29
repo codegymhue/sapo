@@ -472,6 +472,7 @@ function getAllProvinces() {
                     let str = `<option value="${item.province_id}">${item.province_name}</option>`;
                     $("#province").append(str);
                     $('#provinceUpdate').append(str);
+                    $('#provinceCreate').append(str);
                 });
             }
 
@@ -484,6 +485,7 @@ function getAllProvinces() {
 function getAllDistrictsByProvinceId(provinceId) {
     $("#district").empty();
     $("#districtUpdate").empty();
+    $("#districtCreate").empty();
     return $.ajax({
         headers: {
             "accept": "application/json",
@@ -501,6 +503,7 @@ function getAllDistrictsByProvinceId(provinceId) {
                     let str = ` <option value="${item.district_id}">${item.district_name}</option>`;
                     $("#district").append(str);
                     $('#districtUpdate').append(str);
+                    $("#districtCreate").append(str);
                 })
 
             }
@@ -513,6 +516,7 @@ function getAllDistrictsByProvinceId(provinceId) {
 function getAllWardsByDistrictId(districtId) {
     $("#ward").empty();
     $('#wardUpdate').empty();
+    $('#wardCreate').empty();
     return $.ajax({
         headers: {
             "accept": "application/json",
@@ -534,6 +538,7 @@ function getAllWardsByDistrictId(districtId) {
                     let str = `<option value="${item.ward_id}">${item.ward_name}</option>`;
                     $("#ward").append(str);
                     $('#wardUpdate').append(str);
+                    $('#wardCreate').append(str);
                 });
             }
         })
@@ -569,6 +574,14 @@ $("#provinceUpdate").on("change", () => {
     let provinceId = $("#provinceUpdate").val();
     getAllDistrictsByProvinceId(provinceId).then(() => {
         let districtId = $("#districtUpdate").val();
+        getAllWardsByDistrictId(districtId);
+    })
+})
+
+$("#provinceCreate").on("change", () => {
+    let provinceId = $("#provinceCreate").val();
+    getAllDistrictsByProvinceId(provinceId).then(() => {
+        let districtId = $("#districtCreate").val();
         getAllWardsByDistrictId(districtId);
     })
 })
@@ -1315,6 +1328,37 @@ function doCreateProductShort() {
 
 }
 
+
+const addMethod = () =>{
+    $("#Sapo-Button-f0726689-04b0-47c3-87a6-b0920b152f7f").on("click", function(){
+        let str = `
+                <div class="MuiBox-root jss7221 jss7211" style="margin-top: 0px;">
+                <div class="MuiBox-root jss7222 jss7212">
+                    <button class="MuiButtonBase-root MuiIconButton-root jss7215" tabindex="0" type="button"><span
+                            class="MuiIconButton-label"><svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24"
+                                aria-hidden="true">
+                                <path
+                                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                                </path>
+                            </svg></span><span class="MuiTouchRipple-root"></span></button><button
+                        id="Sapo-Button-1a53f6d7-aa43-4c9d-ab8d-f2658d9a1ee2" class="sc-jqUVSM ibbvGc"><span
+                            class="sc-papXJ jcEYKF">
+                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap">Chọn phương thức</p><svg
+                                class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true"
+                                style="color: rgb(163, 168, 175);">
+                                <path d="M7 10l5 5 5-5z"></path>
+                            </svg>
+                        </span></button>
+                </div>
+                     <div id="f6_total_discount_order" class="jss7218">167,200</div>
+                </div>
+                `
+    })
+    $("#method_add").append(str);
+}
+
+
+
 $("#btnCreateProductShort").on("click", function () {
     doCreateProductShort();
 })
@@ -1354,6 +1398,7 @@ $(() => {
     searchProduct();
     showAllCategory();
     showAllEmployee();
+    addMethod();
 })
 
 

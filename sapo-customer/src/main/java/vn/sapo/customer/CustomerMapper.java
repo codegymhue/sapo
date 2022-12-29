@@ -29,7 +29,6 @@ public class CustomerMapper implements InitializingBean {
     public CustomerResult toDTO(Customer customer) {
         System.out.println(customer);
         return modelMapper.map(customer, CustomerResult.class)
-                .setCode(customer.getCode())
                 .setName(customer.getFullName())
                 .setPhoneNumber(customer.getPhoneNumber())
                 .setGroup(customerGroupService.findById(customer.getGroupId()));
@@ -69,10 +68,10 @@ public class CustomerMapper implements InitializingBean {
 
     public Customer toCustomer(CreateCustomerParam customerCreate) {
        return new Customer()
-               .setCode(customerCreate.getCode())
+
                .setFullName(customerCreate.getFullName())
                .setPhoneNumber(customerCreate.getPhone())
-               .setGroup(customerCreate.getGroup())
+
                .setGender(customerCreate.getGender())
                .setEmail(customerCreate.getEmail())
                 .setBirthday(customerCreate.getBirthday())
