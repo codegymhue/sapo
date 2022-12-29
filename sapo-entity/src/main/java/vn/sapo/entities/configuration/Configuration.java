@@ -1,0 +1,41 @@
+package vn.sapo.entities.configuration;
+
+import com.vladmihalcea.hibernate.type.json.JsonType;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+import org.hibernate.annotations.TypeDef;
+import vn.sapo.entities.BaseEntity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.util.UUID;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@Table(name = "configuration")
+@Accessors(chain = true)
+@TypeDef(
+        typeClass = JsonType.class,
+        defaultForType = TaxConfig.class
+)
+public class Configuration extends BaseEntity {
+    @Id
+    @Column(name = "app_key")
+    private String appKey;
+    @Column(name = "tax", nullable = false, columnDefinition = "JSON")
+    private TaxConfig tax;
+    @Column(name = "policy_price", nullable = false, columnDefinition = "JSON")
+    private PolicyPriceConfig policyPrice;
+
+    @Override
+    public void prePersist() {
+        super.prePersist();
+        appKey = UUID.randomUUID().toString();
+    }
+}
