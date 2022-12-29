@@ -1,5 +1,6 @@
 package vn.sapo.entities.customer;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,7 +18,8 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "customer")
+@AllArgsConstructor
+@Table(name ="customer")
 @Accessors(chain = true)
 public class Customer extends BaseEntity {
     public Customer(Integer id) {

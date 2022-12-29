@@ -3,12 +3,12 @@ package vn.sapo.customerGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import vn.sapo.configurations.CodePrefix;
+import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.customerGroup.dto.CreateCusGroupParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.customerGroup.dto.UpdateCusGroupParam;
 import vn.sapo.entities.customer.CustomerGroup;
-import vn.sapo.exceptions.NotFoundException;
+import vn.sapo.shared.exceptions.NotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,7 +27,7 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
         CustomerGroup customerGroup = customerGroupMapper.toModel(createCusGroupParam);
         customerGroup = customerGroupRepository.save(customerGroup);
         if (customerGroup.getTitle() == null)
-            customerGroup.setTitle(CodePrefix.CUSTOMER + CodePrefix.format(customerGroup.getId()));
+            customerGroup.setTitle(CodePrefix.CUSTOMER_GROUP + CodePrefix.format(customerGroup.getId()));
         return customerGroupMapper.toDTO(customerGroup);
     }
 
@@ -58,16 +58,6 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     public List<CustomerGroupResult> sortByGroup() {
         return customerGroupRepository.findCustomerGroupById();
     }
-
-//    @Override
-//    public List<CustomerGroupResult> getAllPricingPolicy() {
-//        return customerGroupRepository.getAllPricingPolicy();
-//    }
-//
-//    @Override
-//    public List<CustomerGroupResult> getAllPaymentMethod() {
-//        return customerGroupRepository.getAllPaymentMethod();
-//    }
 
     @Override
     public CustomerGroupResult findById(Integer id) {

@@ -21,7 +21,7 @@ public class CreateCustomerParam {
 
     private String fullName;
 
-    private String phone;
+    private String phoneNumber;
 
     private Integer groupId;
 
@@ -34,5 +34,6 @@ public class CreateCustomerParam {
     private Integer employeeId;
 
     private CreateAddressParam createAddressParam;
+
 
 }

@@ -16,7 +16,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/customer_groups")
 public class CustomerGroupAPI {
     @Autowired
     CustomerGroupService customerGroupService;
@@ -27,47 +27,36 @@ public class CustomerGroupAPI {
     @Autowired
     CustomerGroupMapper customerGroupMapper;
 
-    @GetMapping("/customer_groups")
-    public ResponseEntity<?> getAllCustomerGroup(){
+    @GetMapping
+    public ResponseEntity<?> getAllCustomerGroup() {
         return new ResponseEntity<>(customerGroupService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/customer_groups/sortGroup")
-    public ResponseEntity<?> sortByGroup (){
+    @GetMapping("/sortGroup")
+    public ResponseEntity<?> sortByGroup() {
         List<CustomerGroupResult> list = customerGroupService.sortByGroup();
-        return new ResponseEntity<>(list,HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-//    @GetMapping("/customer_groups/pricingPolicy ")
-//    public ResponseEntity<?> getAllPricingPolicy (){
-//        List<CustomerGroupResult> list = customerGroupService.getAllPricingPolicy();
-//        return new ResponseEntity<>(list,HttpStatus.OK);
-//    }
-
-//    @GetMapping("/customer_groups/PaymentMethod ")
-//    public ResponseEntity<?> getAllPaymentMethod(){
-//        List<CustomerGroupResult> list = customerGroupService.getAllPaymentMethod();
-//        return new ResponseEntity<>(list,HttpStatus.OK);
-//    }
-
-    @GetMapping("/customer_groups/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
         CustomerGroupResult customerGroupResult = customerGroupService.findById(id);
         return new ResponseEntity<>(customerGroupResult, HttpStatus.OK);
     }
 
-    @PostMapping("/customer_groups/create")
-    public ResponseEntity<?> create(@RequestBody CreateCusGroupParam createCusGroupParam){
+    @PostMapping()
+    public ResponseEntity<?> create(@RequestBody CreateCusGroupParam createCusGroupParam) {
         CustomerGroupResult dto = customerGroupService.create(createCusGroupParam);
         dto = customerGroupService.findById(dto.getId());
-        return new ResponseEntity<>(dto,HttpStatus.OK);
-    }
-    @PutMapping("/customer_groups/update")
-    public ResponseEntity<?> updateCusGroup(@RequestBody UpdateCusGroupParam updateCusGroupParam){
-        return new ResponseEntity<>(customerGroupService.update(updateCusGroupParam),HttpStatus.OK);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/customer_groups/delete/{id}")
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateCusGroup(@RequestBody UpdateCusGroupParam updateCusGroupParam) {
+        return new ResponseEntity<>(customerGroupService.update(updateCusGroupParam), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
     public void deleteCusGroupById(@PathVariable Integer id) {
         customerGroupService.deleteById(id);
     }
