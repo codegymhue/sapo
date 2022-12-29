@@ -86,11 +86,12 @@ public class SaleOrderServiceImpl implements SaleOrderService {
         order.setEmployeeId(1);
         order.setOrderStatus(OrderStatusCode.CHECKOUT);
         order.setPaymentStatus(OrderStatusCode.UNPAID);
-        order = saleOrderRepository.save(order);
         order.setOrderCode("SON" + order.getId());
-        BigDecimal total = BigDecimal.valueOf(0);
-        BigDecimal subTotal = BigDecimal.valueOf(0);
-        BigDecimal grandTotal = BigDecimal.valueOf(0);
+        order = saleOrderRepository.save(order);
+
+        BigDecimal total = new BigDecimal(0);
+        BigDecimal subTotal = new BigDecimal(0);
+        BigDecimal grandTotal = new BigDecimal(0);
         for (CreateSaleOrderItemParam saleOrderItemParam : orderParam.getSaleOrderItems()) {
 
             Product product = productRepository.findById(saleOrderItemParam.getProductId())
@@ -99,6 +100,7 @@ public class SaleOrderServiceImpl implements SaleOrderService {
                     );
 
             //lấy toàn bộ item theo productId
+
             List<Item> items = itemRepository.findAllByProductIdAndAvailableGreaterThanOrderByCreatedAt(saleOrderItemParam.getProductId(), 0);
             int totalAvailable = items.stream().mapToInt(Item::getAvailable).sum();
             if (totalAvailable < saleOrderItemParam.getQuantity()) {
