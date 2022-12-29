@@ -27,8 +27,7 @@ public class CustomerMapper implements InitializingBean {
 
     public Customer toModel(CreateCustomerParam createCustomerParam) {
         return modelMapper.map(createCustomerParam, Customer.class)
-                .setStatus(CustomerStatus.AVAILABLE)
-                .setBirthday(createCustomerParam.getBirthday().)
+                .setStatus(CustomerStatus.AVAILABLE);
     }
 
     public void transferFields(UpdateCustomerParam updateCustomerParam, Customer customer) {
