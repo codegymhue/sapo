@@ -9,6 +9,7 @@ import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.entities.customer.Customer;
+import vn.sapo.entities.customer.CustomerGender;
 import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.exceptions.NotFoundException;
 
@@ -22,7 +23,6 @@ import java.util.stream.Collectors;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-
     @Autowired
     private CustomerMapper customerMapper;
 
@@ -32,33 +32,13 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private AddressService addressService;
 
-
     @Override
     @Transactional(readOnly = true)
     public CustomerResult findById(Integer id) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Cutomer not found"));
         Integer customerId = customer.getId();
-        CustomerResult dto = customerMapper.toDTO(customer);
-//        dto.setSpendTotal(spendTotal);
-//        dto.setDebtTotal(spendTotal.subtract(paidTotal));
-
-//        Integer quantityProductOrder = saleOrderService.getQuantityProductOrder(customerResult.getId());
-//        if (quantityProductOrder == null) {
-//            quantityProductOrder = 0;
-//        }
-//        customerResult.setQuantityProductOrder(quantityProductOrder);
-//        Integer quantityItemOrder = orderItemService.getQuantityItemCustomerOrderById(customerResult.getId());
-//        if (quantityItemOrder == null) {
-//            quantityItemOrder = 0;
-//        }
-//        customerResult.setQuantityItemOrder(quantityItemOrder);
-//
-//        Instant lastDayOrder = saleOrderService.getLastDayOrderByCustomerId(customerResult.getId());
-//
-//        customerResult.setLastDayOrder(lastDayOrder);
-
-        return dto;
+        return customerMapper.toDTO(customer);
     }
 
     @Override
@@ -83,38 +63,12 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.existsById(id);
     }
 
-//    @Override
-//    public Map<String, Object> getAllCustomerItemPage(Integer pageNo, Integer pageSize, String code, String name, String phoneNumber, String group, BigDecimal debtTotal, BigDecimal spendTotal, int quantityItemOrder, String status, String typeSort, String nameFieldSort) {
-//        return null;
-//    }
-
-
-//    @Override
-//    @Transactional(readOnly = true)
-//    public List<CustomerResult> findCustomerByStatus() {
-//        return customerRepository.findCustomersByCustomerStatus()
-//                .stream()
-//                .map(customer -> {
-//                    CustomerResult dto = customerMapper.toDTO(customer);
-////                    BigDecimal spendTotal = saleOrderService.getSpendTotalByCustomerId(customer.getId());
-////                    if (spendTotal == null)
-////                        spendTotal = BigDecimal.valueOf(0);
-////                    BigDecimal debtTotal = paymentSaleOrderService.getDebtTotalByCustomerId(customer.getId());
-////                    if (debtTotal == null)
-////                        debtTotal = BigDecimal.valueOf(0);
-////                    dto.setSpendTotal(spendTotal);
-////                    dto.setDebtTotal(debtTotal);
-//                    return dto;
-//                }).collect(Collectors.toList());
-//    }
-
-    @Override
-    @Transactional
     public CustomerResult create(CreateCustomerParam createCustomerParam) {
+        System.out.println("Đay là param" + createCustomerParam);
         Customer customer = customerMapper.toModel(createCustomerParam);
         customer = customerRepository.save(customer);
-        if (customer.getCode() == null)
-            customer.setCode(CodePrefix.CUSTOMER + CodePrefix.format(customer.getId()));
+        if (customer.getCustomerCode() == null)
+            customer.setCustomerCode(CodePrefix.CUSTOMER + CodePrefix.format(customer.getId()));
         return customerMapper.toDTO(customer);
     }
 
@@ -173,4 +127,6 @@ public class CustomerServiceImpl implements CustomerService {
             customer.setStatus(status ? CustomerStatus.AVAILABLE : CustomerStatus.UNAVAILABLE);
         }
     }
+
+
 }

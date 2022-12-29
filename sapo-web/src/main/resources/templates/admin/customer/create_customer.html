@@ -34,7 +34,7 @@
                     <svg class="MuiSvgIcon-root jss20295"
                          focusable="false" viewBox="0 0 8 13" aria-hidden="true">
                         <path
-                                d="M6.01041 0L0 6.01041L6.01041 12.0208L7.42462 10.6066L2.82843 6.01041L7.42462 1.41421L6.01041 0Z"
+                                d="M6.01041 0L0 6.  01041L6.01041 12.0208L7.42462 10.6066L2.82843 6.01041L7.42462 1.41421L6.01041 0Z"
                                 fill="currentColor"></path>
                     </svg>
                     <h6 class="MuiTypography-root MuiTypography-subtitle1">Quay lại danh sách khách hàng</h6>
@@ -226,7 +226,13 @@
                                                                 tính</label></div>
                                                             <div class="MuiInputBase-root MuiOutlinedInput-root jss20633 MuiInputBase-fullWidth MuiInputBase-formControl">
                                                                 <select class="jss87874 form-select" name="genderCreate"
-                                                                        id="genderCreate"></select>
+                                                                        id="genderCreate">
+                                                                    <option selected value="-1">Giới tính</option>
+                                                                    <option value="1">Nam</option>
+                                                                    <option value="2">Nữ</option>
+                                                                    <option value="3">Khác</option>
+
+                                                                </select>
 
                                                                 <input name="gender" type="hidden" value="other">
                                                                 <svg
@@ -421,31 +427,31 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
-<script rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<!--<script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 <script>
 
 
-    class Customer {
-        constructor(id, customerCode, name, phone, customerGroup, email, birthday, status, createAt, updateAt, employeeId, deleted, createShippingAddressParam) {
-            this.id = id;
-            this.customerCode = customerCode;
-            this.name = name;
-            this.phone = phone;
-            this.customerGroup = customerGroup;
-            this.email = email;
-            this.birthday = birthday;
-            this.status = status;
-            this.createAt = createAt;
-            this.updateAt = updateAt;
-            this.employeeId = employeeId;
-            this.deleted = deleted;
-            this.createShippingAddressParam = createShippingAddressParam;
-
-
-        }
-    }
+    // class Customer {
+    //     constructor(id, customerCode, name, phone, customerGroup, email, birthday, status, createAt, updateAt, employeeId, deleted, createShippingAddressParam) {
+    //         this.id = id;
+    //         this.customerCode = customerCode;
+    //         this.name = name;
+    //         this.phone = phone;
+    //         this.customerGroup = customerGroup;
+    //         this.email = email;
+    //         this.birthday = birthday;
+    //         this.status = status;
+    //         this.createAt = createAt;
+    //         this.updateAt = updateAt;
+    //         this.employeeId = employeeId;
+    //         this.deleted = deleted;
+    //         this.createShippingAddressParam = createShippingAddressParam;
+    //
+    //
+    //     }
+    // }
 
     class ShippingAddress {
         constructor(id, fullName, mobile, line1, line2, email, districtId, districtName, provinceId, provinceName, wardId, wardName, zipCode, customerId, supplierId, isDefault) {
@@ -470,23 +476,21 @@
         }
     }
 
-    let customer = new Customer()
+    let customer = new Customer();
 
     let shippingAddress = new ShippingAddress();
 
     $('#btnCreateCustomer').on('click', () => {
+
         customer.id = null;
         customer.name = $('#nameCreate').val();
         customer.customerCode = $('#codeCreate').val();
         customer.customerGroup = $('#customerGroupCreate :selected').val();
-        customer.phone = $('#phoneCreate').val();
+        customer.phoneNumber = $('#phoneCreate').val();
         customer.email = $('#emailCreate').val();
-        customer.birthday = $('#birthdayCreate').val();
-        customer.status = $('#statusCreate').val
+        // customer.birthday = $('#birthdayCreate').val();
+        customer.birthday = '2022-12-28T16:44:24Z';
         customer.customerGender = $('#genderCreate').val();
-
-
-        customer.updateAt = null;
         shippingAddress.line1 = $('#addressCreate').val();
         shippingAddress.provinceId = $('#province').val();
         shippingAddress.provinceName = $('#province :selected').text();
@@ -495,7 +499,9 @@
         shippingAddress.wardId = $('#ward').val();
         shippingAddress.wardName = $('#ward :selected').text();
         customer.createShippingAddressParam = shippingAddress;
+        console.log("đay là customer")
         console.log(customer)
+        console.log(shippingAddress)
         $.ajax({
             "headers": {
                 "accept": "application/json",
@@ -508,14 +514,14 @@
             .done((data) => {
                 App.IziToast.showSuccessAlert('Thêm mới khách hàng thành công  !!!')
                 window.location.href = "/admin/customers";
-                $('#nameCreate').val("");
-                $('#codeCreate').val("");
-                $('#phoneCreate').val("");
-                $('#emailCreate').val("");
-                $('#birthdayCreate').val("");
-                $('#statusCreate').val("")
-                $('#addressCreate').val("");
-                $('#employeeNameCreate').val();
+                // $('#nameCreate').val("");
+                // $('#codeCreate').val("");
+                // $('#phoneCreate').val("");
+                // $('#emailCreate').val("");
+                // $('#birthdayCreate').val("");
+                // $('#statusCreate').val("")
+                // $('#addressCreate').val("");
+                // $('#employeeNameCreate').val();
             })
             .fail((jqXHR) => {
                 console.log(jqXHR);
@@ -666,9 +672,8 @@
             url: "http://localhost:8080/api/employees"
         })
             .done((data) => {
-                console.log(data)
                 $.each(data, (i, item) => {
-                    let str = `<option value="${item.id}">${item.name}</option>`;
+                    let str = `<option value="${item.id}">${item.fullName}</option>`;
                     $("#employeeNameCreate").append(str);
                 });
             })
@@ -685,13 +690,13 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: "http://localhost:8080/api/customers/customerGroup"
+            url: "http://localhost:8080/api/customer_groups"
         })
             .done((data) => {
                 console.log(data)
                 $.each(data, (i, item) => {
                     console.log(item)
-                    let str = `<option value="${item}">${item}</option>`;
+                    let str = `<option value="${item.id}">${item.title}</option>`;
                     $("#customerGroupCreate").append(str);
                 });
             })

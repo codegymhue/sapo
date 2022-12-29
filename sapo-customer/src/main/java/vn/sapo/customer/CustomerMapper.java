@@ -18,28 +18,15 @@ public class CustomerMapper implements InitializingBean {
     @Autowired
     private ModelMapper modelMapper;
 
-    @Autowired
-    private CustomerGroupService customerGroupService;
-
     @Override
     public void afterPropertiesSet() throws Exception {
     }
 
 
     public CustomerResult toDTO(Customer customer) {
-        System.out.println(customer);
-        return modelMapper.map(customer, CustomerResult.class)
-                .setCode(customer.getCode())
-                .setName(customer.getFullName())
-                .setPhoneNumber(customer.getPhoneNumber())
-                .setGroup(customerGroupService.findById(customer.getGroupId()));
+        return modelMapper.map(customer, CustomerResult.class);
     }
 
-//    public CustomerOrderResult toOrderDTO(Customer customer) {
-//        return modelMapper.map(customer, CustomerOrderResult.class)
-//                .setName(customer.getFullName())
-//                .setPhone(customer.getPhoneNumber());
-//    }
 
     public Customer toModel(CreateCustomerParam createCustomerParam) {
         return modelMapper.map(createCustomerParam, Customer.class)
@@ -67,17 +54,16 @@ public class CustomerMapper implements InitializingBean {
 //    }
 //
 
-    public Customer toCustomer(CreateCustomerParam customerCreate) {
-       return new Customer()
-               .setCode(customerCreate.getCode())
-               .setFullName(customerCreate.getFullName())
-               .setPhoneNumber(customerCreate.getPhone())
-               .setGroup(customerCreate.getGroup())
-               .setGender(customerCreate.getGender())
-               .setEmail(customerCreate.getEmail())
-                .setBirthday(customerCreate.getBirthday())
-                .setEmployeeId(customerCreate.getEmployeeId());
-    }
+//    public Customer toCustomer(CreateCustomerParam customerCreate) {
+//       return new Customer()
+//               .setCustomerCode(customerCreate.getCustomerCode())
+//               .setFullName(customerCreate.getFullName())
+//               .setPhoneNumber(customerCreate.getPhone())
+//               .setGroupId(customerCreate.getGroupId())
+//               .set(customerCreate.getEmail())
+//                .setBirthday(customerCreate.getBirthday())
+//                .setEmployeeId(customerCreate.getEmployeeId());
+//    }
 //
 //    public Customer toCustomer(UpdateCustomerParam updateCustomerParam, Customer customer) {
 //        return customer
