@@ -23,9 +23,9 @@ public class CreateCustomerParam {
 
     private String fullName;
 
-    private String phone;
+    private String phoneNumber;
 
-    private String groupId;
+    private Integer groupId;
 
     private String email;
 

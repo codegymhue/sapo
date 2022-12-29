@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.category.dto.*;
 import vn.sapo.entities.product.*;
-import vn.sapo.exceptions.DataInputException;
+import vn.sapo.shared.exceptions.DataInputException;
 
 import java.util.ArrayList;
 import java.util.List;

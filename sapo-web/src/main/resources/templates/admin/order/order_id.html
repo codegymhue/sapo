@@ -41,14 +41,11 @@
                     <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6" style="flex-direction: column;">
                         <div class="MuiBox-root jss966">
                             <h4 id="get-order-id" class="MuiTypography-root MuiTypography-h4"
-                                style="line-height: 28px; margin-right: 20px;" >
-<!--                                th:text="${orders.orderCode}">-->
-
-                            </h4>
-<!--                            <div th:class="${orders.orderStatusId} == 'CHECKOUT' ? 'hlxtkG' : (${orders.orderStatusId} == 'COMPLETE' ? 'hBmWYo' : 'csJERM')">-->
-<!--                                <span th:text="${orders.orderStatus.name}"-->
-<!--                                      th:class="${orders.orderStatusId} == 'CHECKOUT' ? 'gIZkwA' : (${orders.orderStatusId} == 'COMPLETE' ? 'bzQjtT' : 'ccQLIN')"></span>-->
-<!--                            </div>-->
+                                style="line-height: 28px; margin-right: 20px;" th:text="${orders.orderCode}"></h4>
+                            <div th:class="${orders.orderStatusId} == 'CHECKOUT' ? 'hlxtkG' : (${orders.orderStatusId} == 'COMPLETE' ? 'hBmWYo' : 'csJERM')">
+                                <span th:text="${orders.orderStatus.name}"
+                                      th:class="${orders.orderStatusId} == 'CHECKOUT' ? 'gIZkwA' : (${orders.orderStatusId} == 'COMPLETE' ? 'bzQjtT' : 'ccQLIN')"></span>
+                            </div>
                         </div>
                         <div class="MuiBox-root jss967" style="margin-top: 10px;">
                             <div class="iDRoAG">
@@ -85,9 +82,8 @@
                                                 <span class="MuiTypography-root MuiStepLabel-label MuiStepLabel-alternativeLabel MuiStepLabel-completed MuiStepLabel-active MuiTypography-body2 MuiTypography-displayBlock">
                                                     <p class="MuiTypography-root MuiTypography-body1">Đặt hàng</p>
                                                     <p class="MuiTypography-root MuiTypography-body1"
-                                                       style="color: rgb(116, 124, 135); font-size: 12px;">
-<!--                                                       th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"-->
-                                                    </p>
+                                                       style="color: rgb(116, 124, 135); font-size: 12px;"
+                                                       th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
                                                 </span>
                                             </span>
                                         </span>
@@ -107,10 +103,8 @@
                                                 <span class="MuiTypography-root MuiStepLabel-label MuiStepLabel-alternativeLabel MuiStepLabel-completed MuiStepLabel-active MuiTypography-body2 MuiTypography-displayBlock">
                                                     <p class="MuiTypography-root MuiTypography-body1">Duyệt</p>
                                                     <p class="MuiTypography-root MuiTypography-body1"
-                                                       style="color: rgb(116, 124, 135); font-size: 12px;">
-<!--                                                       th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"-->
-
-                                                    </p>
+                                                       style="color: rgb(116, 124, 135); font-size: 12px;"
+                                                       th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
                                                 </span>
                                             </span>
                                         </span>
@@ -130,10 +124,8 @@
                                                 <span class="MuiTypography-root MuiStepLabel-label MuiStepLabel-alternativeLabel MuiStepLabel-completed MuiStepLabel-active MuiTypography-body2 MuiTypography-displayBlock">
                                                     <p class="MuiTypography-root MuiTypography-body1">Đóng gói</p>
                                                     <p class="MuiTypography-root MuiTypography-body1"
-                                                       style="color: rgb(116, 124, 135); font-size: 12px;">
-<!--                                                       th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"-->
-
-                                                    </p>
+                                                       style="color: rgb(116, 124, 135); font-size: 12px;"
+                                                       th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
                                                 </span>
                                             </span>
                                         </span>
@@ -153,9 +145,8 @@
                                                 <span class="MuiTypography-root MuiStepLabel-label MuiStepLabel-alternativeLabel MuiStepLabel-completed MuiStepLabel-active MuiTypography-body2 MuiTypography-displayBlock">
                                                     <p class="MuiTypography-root MuiTypography-body1">Xuất kho</p>
                                                     <p class="MuiTypography-root MuiTypography-body1"
-                                                       style="color: rgb(116, 124, 135); font-size: 12px;">
-<!--                                                       th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"-->
-                                                    </p>
+                                                       style="color: rgb(116, 124, 135); font-size: 12px;"
+                                                       th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
                                                 </span>
                                             </span>
                                         </span>
@@ -175,9 +166,8 @@
                                                 <span class="MuiTypography-root MuiStepLabel-label MuiStepLabel-alternativeLabel MuiStepLabel-completed MuiStepLabel-active MuiTypography-body2 MuiTypography-displayBlock">
                                                     <p class="MuiTypography-root MuiTypography-body1">Hoàn thành</p>
                                                     <p class="MuiTypography-root MuiTypography-body1"
-                                                       style="color: rgb(116, 124, 135); font-size: 12px;">
-<!--                                                       th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"-->
-                                                    </p>
+                                                       style="color: rgb(116, 124, 135); font-size: 12px;"
+                                                       th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
                                                 </span>
                                             </span>
                                         </span>
@@ -206,15 +196,13 @@
                                             </h6>
                                             <div class="MuiBox-root jss4559">
                                                 <a target="_blank"
-                                                   style="text-decoration: none; display: inline-flex; align-items: center; padding-right: 4px;">
-<!--                                                   th:href="'/admin/orders/' + ${orders.id}">-->
-                                                    <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorPrimary">
-<!--                                                        th:text="${orders.fullName}">-->
-
-                                                    </h6>
+                                                   style="text-decoration: none; display: inline-flex; align-items: center; padding-right: 4px;"
+                                                   th:href="'/admin/orders/' + ${orders.id}">
+                                                    <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorPrimary"
+                                                        th:text="${orders.fullName}"></h6>
                                                 </a>
                                                 -
-<!--                                                <h5 th:text="${orders.mobile}" style="padding-left: 4px;"></h5>-->
+                                                <h5 th:text="${orders.mobile}" style="padding-left: 4px;"></h5>
                                             </div>
                                         </div>
                                     </div>
@@ -227,18 +215,14 @@
                                                             chỉ giao hàng</p>
                                                     </div>
                                                     <div class="MuiBox-root jss4570">
-                                                        <p class="MuiTypography-root MuiTypography-body2">
-<!--                                                           th:text="${orders.mobile}">-->
-                                                        </p>
-                                                        <p class="MuiTypography-root MuiTypography-body2">
-<!--                                                           th:text="${orders.line1}">-->
-                                                        </p>
-                                                        <p class="MuiTypography-root MuiTypography-body2">
-<!--                                                           th:text="${orders.line2}">-->
-                                                        </p>
-                                                        <p class="MuiTypography-root MuiTypography-body2">
-<!--                                                           th:text="${orders.city + ', ' + orders.province}">-->
-                                                        </p>
+                                                        <p class="MuiTypography-root MuiTypography-body2"
+                                                           th:text="${orders.mobile}"></p>
+                                                        <p class="MuiTypography-root MuiTypography-body2"
+                                                           th:text="${orders.line1}"></p>
+                                                        <p class="MuiTypography-root MuiTypography-body2"
+                                                           th:text="${orders.line2}"></p>
+                                                        <p class="MuiTypography-root MuiTypography-body2"
+                                                           th:text="${orders.city + ', ' + orders.province}"></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -720,9 +704,8 @@
                                         <p
                                                 class="MuiTypography-root MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth MuiTypography-body2">
                                             Bán bởi <span>:</span></p>
-                                        <p class="MuiTypography-root MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth MuiTypography-body2">
-<!--                                           th:text="${orders.employee.name}">-->
-                                        </p>
+                                        <p class="MuiTypography-root MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth MuiTypography-body2"
+                                           th:text="${orders.employee.name}"></p>
                                     </div>
                                     <div class="MuiGrid-root jss4349 MuiGrid-container MuiGrid-wrap-xs-nowrap">
                                         <p
@@ -745,9 +728,8 @@
                                         <p
                                                 class="MuiTypography-root MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth MuiTypography-body2">
                                             Ngày bán <span>:</span></p>
-                                        <p class="MuiTypography-root MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth MuiTypography-body2">
-<!--                                           th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}">-->
-                                        </p>
+                                        <p class="MuiTypography-root MuiGrid-root MuiGrid-item MuiGrid-zeroMinWidth MuiTypography-body2"
+                                           th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
                                     </div>
                                 </div>
                             </div>
@@ -758,8 +740,8 @@
                                         <div class="MuiBox-root jss4364">
                                             <h6 class="MuiTypography-root MuiTypography-h6"
                                                 style="padding-top: 8px;">Ghi chú</h6>
-                                            <p class="MuiTypography-root jss4353 MuiTypography-body2">
-<!--                                               th:text="${orders.description} != '' ? ${orders.description} : 'Chưa có ghi chú'">-->
+                                            <p class="MuiTypography-root jss4353 MuiTypography-body2"
+                                               th:text="${orders.description} != '' ? ${orders.description} : 'Chưa có ghi chú'">
                                             </p>
                                         </div>
                                     </div>
@@ -834,8 +816,7 @@
                                                     </th>
                                                 </tr>
                                                 </thead>
-                                                <tbody class="MuiTableBody-root" >
-<!--                                                       th:each="item : ${orders.orderItems}">-->
+                                                <tbody class="MuiTableBody-root" th:each="item : ${orders.orderItems}">
                                                 <tr class="MuiTableRow-root jss5868 isNormalLineItem">
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter">
                                                         <div class="__react_component_tooltip ta6d41119-e511-48af-b149-ee128339bf68 place-bottom type-dark"
@@ -944,16 +925,15 @@
                                                         <a class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary"
                                                            target="_blank"
                                                            href="/admin/products/122358547/variants/189770148"><img
-                                                                class="jss5872">
-<!--                                                                th:src="*{item.product.mainUrl}">-->
-                                                        </a>
+                                                                class="jss5872"
+                                                                th:src="*{item.product.mainUrl}"></a>
                                                     </td>
                                                     <td class="MuiTableCell-root MuiTableCell-body">
                                                         <div class="MuiBox-root jss5885 jss5869">
                                                             <div class="MuiBox-root jss5886">
                                                                 <div class="MuiBox-root jss5887">
-                                                                    <p class="MuiTypography-root MuiTypography-body1">
-<!--                                                                       th:text="*{item.product.title}">-->
+                                                                    <p class="MuiTypography-root MuiTypography-body1"
+                                                                       th:text="*{item.product.title}">
                                                                         <button class="MuiButtonBase-root MuiIconButton-root"
                                                                                 tabindex="0" type="button"
                                                                                 style="padding: 0px; margin-left: 6px; height: fit-content;">
@@ -976,33 +956,27 @@
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter"
                                                         style="width: 105px; padding-left: 0px; padding-right: 0px;"><p
                                                             class="MuiTypography-root MuiTypography-body1"
-                                                            style="text-align: center; cursor: not-allowed;">
-<!--                                                            th:text="*{item.quantity}">-->
-                                                    </p></td>
+                                                            style="text-align: center; cursor: not-allowed;"
+                                                            th:text="*{item.quantity}"></p></td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight">
                                                                             <span class="MuiTypography-root MuiTypography-body1"
                                                                                   data-tip="true"
                                                                                   data-for="tooltipTax-1258834332"
                                                                                   currentitem="false"
-                                                                                  style="text-align: right;">
-<!--                                                                                  th:text="*{#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT') + '₫'}">-->
-                                                                            </span>
+                                                                                  style="text-align: right;"
+                                                                                  th:text="*{#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT') + '₫'}"></span>
                                                     </td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight">
                                                         <button class="MuiButtonBase-root MuiButton-root MuiButton-text jss5875 showOnly"
                                                                 tabindex="0" type="button"
                                                                 id="discount-line-item-1258834332"><span
-                                                                class="MuiButton-label">
-<!--                                                            th:text="*{item.discount}">-->
-                                                            <p
+                                                                class="MuiButton-label" th:text="*{item.discount}"><p
                                                                 class="MuiTypography-root discount_rate_line_item MuiTypography-body1"
                                                                 style="color: rgb(255, 77, 77); font-size: 12px;"></p></span>
                                                         </button>
                                                     </td>
-                                                    <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight">
-<!--                                                        th:text="*{#numbers.formatDecimal(item.quantity * item.price, 0, 'COMMA', 0, 'POINT') + '₫'}">-->
-
-                                                    </td>
+                                                    <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight"
+                                                        th:text="*{#numbers.formatDecimal(item.quantity * item.price, 0, 'COMMA', 0, 'POINT') + '₫'}"></td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -1019,9 +993,8 @@
                                                         class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">Tổng tiền</span>
                                                 </div>
                                                 <div class="MuiListItemText-root"><span
-                                                        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-alignRight MuiTypography-displayBlock">
-<!--                                                        th:text="${#numbers.formatDecimal(orders.total, 0, 'COMMA', 0, 'POINT') + '₫'}">-->
-                                                </span>
+                                                        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-alignRight MuiTypography-displayBlock"
+                                                        th:text="${#numbers.formatDecimal(orders.total, 0, 'COMMA', 0, 'POINT') + '₫'}"></span>
                                                 </div>
                                             </li>
                                             <li class="MuiListItem-root jss4430 MuiListItem-gutters">
@@ -1106,9 +1079,8 @@
                                                     <span class="MuiTypography-root MuiListItemText-primary MuiTypography-subtitle1 MuiTypography-displayBlock">Khách phải trả</span>
                                                 </div>
                                                 <div class="MuiListItemText-root">
-                                                    <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-alignRight">
-<!--                                                        th:text="${#numbers.formatDecimal(orders.grandTotal, 0, 'COMMA', 0, 'POINT') + '₫'}">-->
-                                                    </h6>
+                                                    <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-alignRight"
+                                                        th:text="${#numbers.formatDecimal(orders.grandTotal, 0, 'COMMA', 0, 'POINT') + '₫'}"></h6>
                                                 </div>
                                             </li>
                                         </div>
