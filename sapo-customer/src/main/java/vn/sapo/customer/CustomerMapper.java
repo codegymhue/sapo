@@ -1,14 +1,20 @@
 package vn.sapo.customer;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
+import org.modelmapper.spi.SourceGetter;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
+import vn.sapo.entities.Address;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerStatus;
+
+import java.time.Instant;
 
 @Component
 public class CustomerMapper implements InitializingBean {
@@ -17,6 +23,8 @@ public class CustomerMapper implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        TypeMap<CreateCustomerParam, Customer> dto2Model = modelMapper.createTypeMap(CreateCustomerParam.class, Customer.class);
+        dto2Model.addMapping(source -> source.getBirthday().toInstant(), Customer::setBirthday);
     }
 
     public CustomerResult toDTO(Customer customer) {
