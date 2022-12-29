@@ -20,8 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/customers")
 public class CustomerAPI {
-
-
+    @Autowired
     private CustomerService customerService;
     @Autowired
     private AddressService addressService;
@@ -76,7 +75,6 @@ public class CustomerAPI {
     }
 
     @PutMapping("/updateStatusAvailable")
-
     public ResponseEntity<?> updateStatusAvailable(@RequestBody List<Integer> arrayIdCustomer) {
         customerService.changeStatusToAvailable(arrayIdCustomer, true);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -89,75 +87,13 @@ public class CustomerAPI {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @GetMapping("/customerGroup")
-//    public CustomerGroup[] findAllByCustomerGroup() {
-//        CustomerGroup[] customerGroups = CustomerGroup.values();
-//        System.out.println(customerGroups);
-//        return customerGroups;
-//    }
-//
-//    @GetMapping("/customerGender")
-//    public String[] findAllByCustomerGender() {
-//        String[] customerGender = new String[0];
-//        customerGender =  CustomerGender.parseCustomerGender;
-////        CustomerGender[] customerGender = CustomerGender.values();
-//
-//        return customerGender;
-//    }
-////
-//    @GetMapping("/cu")
-//    public CustomerStatus[] findAllByCustomerStatus() {
-//        CustomerStatus[] customerStatuses = CustomerStatus.values();
-//        return customerStatuses;
-//    }
-
-
-//    @GetMapping("/showAllCustomerMixInfo")
-//    public ResponseEntity<?> showAllCustomerMixInfo() {
-//        List<ICustomer> iCustomers = customerService.showAllCustomerMixInfo();
-//        return new ResponseEntity<>(iCustomers, HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/showAllCustomerMixInfoByStatus")
-//    public ResponseEntity<?> showAllCustomerMixInfoByStatus() {
-//        List<ICustomer> iCustomers = customerService.showAllCustomerMixInfoByStatus();
-//        return new ResponseEntity<>(iCustomers, HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/showAllShippingAddress/{id}")
-//    public ResponseEntity<?> showListCustomerInfo(@PathVariable Integer id) {
-//        -=]
-//
-//        return new ResponseEntity<>(iCustomer, HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/historyCustomerOrder/{id}")
-//    public ResponseEntity<?> showListCustomerOrderById(@PathVariable Integer id) {
-//        List<SaleOrderResult> saleOrderByCustomers = customerService.findHistoryCustomerOrder(id);
-//        return new ResponseEntity<>(saleOrderByCustomers, HttpStatus.OK);
-//    }
-
-
-//    @GetMapping("/customerDebt/{id}")
-//    public ResponseEntity<?> showListCustomerDebtById(@PathVariable Integer id) {
-//        List<ICustomerOwerImpl> iCustomerImpls = customerService.CustomerOwerById(id);
-//        return new ResponseEntity<>(iCustomerImpls, HttpStatus.OK);
-//    }
-//
-//
-//    @GetMapping("/getQuantityOrderByCustomer/{id}")
-//    @Transactional(readOnly = true)
-//    public ResponseEntity<?> getQuantityOrderByCustomer(@PathVariable Integer id) {
-//        Integer iCustomerImpls = customerRepository.getQuantityOrderByCustomer(id);
-//        return new ResponseEntity<>(iCustomerImpls, HttpStatus.OK);
-//    }
-
-
-//    @GetMapping("/customerDebt/{id}")
-//    public ResponseEntity<?> findCustomerDebtById(@PathVariable Integer id) {
-//        List<CustomerDebtImpl> customerDebtImpl = customerService.findCustomerDebtsByCustomerId(id);
-//        return new ResponseEntity<>(customerDebtImpl, HttpStatus.OK);
-//    }
+//    findAllCustomerByGroupAndStatus
+        @GetMapping("/findAllCustomerByGroupAndStatus/{groupId}/{status}")
+        public ResponseEntity<?> findAllCustomerByGroupAndStatus(@PathVariable Integer groupId, @PathVariable String status) {
+            List<CustomerResult> customers = customerService.findAllCustomerByGroupAndStatus(groupId, status);
+        customers.forEach(this::setData);
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
 
     public void setData(CustomerResult customer) {
         BigDecimal spendTotal = getSpendTotalByCustomerId(customer.getId());

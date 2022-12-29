@@ -437,6 +437,39 @@
 </script>
 
 <script>
+    $("#ddl-group-customer").on('change', () => {
+       let groupId =  $("#ddl-group-customer :selected").val();
+        let status =  $("#ddl-status :selected").val();
+        findCustomerByGroupAndStatus(groupId, status)
+    });
+        // page.dialogs.elements.groupCustomer.on('change', () => {
+        //     let groupId =  $("#ddl-group-customer").val();
+        //     let status =  $("#ddl-status").val();
+        //     findCustomerByGroupAndStatus(groupId, status)
+        // });
+
+    function findCustomerByGroupAndStatus(groupId, status) {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "http://localhost:8080/api/customers/findAllCustomerByGroupAndStatus/2/AVAILABLE",
+        })
+            .done((data) => {
+                console.log(data)
+                $.each(data, (i, item) => {
+                    console.log(item)
+
+                });
+            })
+            .fail((jqXHR) => {
+                App.IziToast.showErrorAlert("Lỗi tại customer")
+            })
+    }
+
+
     function showAllCustomerGroup() {
         return $.ajax({
             headers: {
@@ -445,7 +478,7 @@
             },
             type: "GET",
             // url: page.urls.getAllCustomerGroup,
-            "url": "http://localhost:8080/api/customer_groups",
+            url: "http://localhost:8080/api/customer_groups",
         })
             .done((data) => {
                 console.log(data)
@@ -456,7 +489,7 @@
                 });
             })
             .fail((jqXHR) => {
-
+                App.IziToast.showErrorAlert("Lỗi tại customer Group")
             })
     }
 
@@ -483,9 +516,7 @@
         initializeEventControl: {}
     }
 
-    showAllCustomerGroup()
 
-    let customer = new Customer();
     let totalPage;
     let sortPage = {"type": "des", "value": "id"};
     let arrayIdCustomer = [];
@@ -794,7 +825,7 @@
                         },
                         "infoThousands": ".",
                         "thousands": "."
-                    } ,
+                    },
                 ajax: {
                     contentType: 'application/json',
                     url: "http://localhost:8080/api/customers",
@@ -873,7 +904,6 @@
         })
 
 
-
         // let pageNo = Number(page.elements.pageNo.text());
         // let pageSize = Number(page.elements.pageSize.val());
         //
@@ -888,42 +918,7 @@
         // page.commands.getAllCustomersItemOnPageNo(pageNo, pageSize, search, groupCustomer, status);
     }
 
-    // page.commands.getAllCustomersItemOnPageNo = () => {
 
-    // let arrCustomer = [];
-    // for (let i = 0; i < 14; i++) {
-    //     arrCustomer.push({
-    //         "id": i,
-    //         "code": i,
-    //         "name": "fake ",
-    //         "phoneNumber": "0542578531",
-    //         "groupCustomer": "Vip",
-    //         "debtsTotal": 12032940,
-    //         "spendTotal": 25123124,
-    //         "quantityItemOrder": 2
-    //     });
-    // }
-    //
-    // arrCustomer.map(item => {
-    //     page.elements.tbCustomer.append(App.renderRowCustomer(item));
-    // });
-
-
-    // $.ajax({
-    //     headers: {
-    //         "accept": "application/json",
-    //         "content-type": "application/json"
-    //     },
-    //     type: "GET",
-    //     url: page.urls.getAllCustomers,
-    // }).done((data) => {
-    //     data.map(item => {
-    //         page.elements.tbCustomer.append(App.renderRowCustomer(item));
-    //     });
-    // }).fail((jqXHR) => {
-    //     App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404)
-    // })
-    // }
     page.elements.checkAll.on("change", function () {
         page.elements.selectAction.prop("checked", true);
         arrayIdCustomer = [];
@@ -943,7 +938,7 @@
 
     page.loadData = () => {
         page.commands.getAllCustomers();
-
+        showAllCustomerGroup()
     }
 
     $(() => {
