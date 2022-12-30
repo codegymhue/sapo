@@ -349,16 +349,8 @@
         })
             .done((data) => {
                 console.log(data);
-                CustomerGroup_App.IziToast.showSuccessAlert('Thêm mới khách hàng thành công  !!!')
-                window.location.href = "/admin/customers/create";
-                // $('#nameCreate').val("");
-                // $('#codeCreate').val("");
-                // $('#phoneCreate').val("");
-                // $('#emailCreate').val("");
-                // $('#birthdayCreate').val("");
-                // $('#statusCreate').val("")
-                // $('#addressCreate').val("");
-                // $('#employeeNameCreate').val();
+                CustomerGroup_App.IziToast.showSuccessAlert('Thêm mới nhóm khách hàng thành công  !!!')
+                window.location.href = "/admin/customer_groups/create";
             })
             .fail((jqXHR) => {
                 console.log(jqXHR);

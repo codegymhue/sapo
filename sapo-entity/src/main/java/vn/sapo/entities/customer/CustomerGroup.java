@@ -25,6 +25,11 @@ public class CustomerGroup extends BaseEntity {
     private String title;
     @Column(name = "cus_grp_code", nullable = false, length = 50)
     private String cusGrpCode;
+    @Column(name = "description", nullable = false)
+    private String description;
+    @Column(name = "discount", nullable = false)
+    private Integer discount;
+
 
     public CustomerGroup(Integer id) {
         this.id = id;

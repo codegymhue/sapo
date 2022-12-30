@@ -8,15 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CustomerResult;
-import vn.sapo.product.ProductExcelExporter;
-import vn.sapo.product.dto.ProductResult;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -39,7 +31,7 @@ public class CustomerController {
 
     @GetMapping("/customer_groups/create")
     public String showCustomerGroupCreatePage() {
-        return "/admin/customer/model_create_cus_group";
+        return "/admin/customer/create_cus_group";
     }
 
     @GetMapping("customers/create")

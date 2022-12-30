@@ -36,6 +36,18 @@ class CustomerGroup_App {
             })
         }
 
+        static showSuspendedConfirmDialog() {
+            return Swal.fire({
+                icon: 'warning',
+                text: 'Bạn có muốn xóa nhóm khách hàng này không ?',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không',
+            })
+        }
+
     }
     static IziToast = class  {
         static showSuccessAlert(m) {

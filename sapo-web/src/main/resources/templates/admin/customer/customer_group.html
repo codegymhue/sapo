@@ -4,6 +4,7 @@
     <th:block th:replace="/layout/header.html"/>
     <title>Danh sách khách hàng</title>
     <link rel="stylesheet" href="/assets/admin/css/customer/customer_group.css"/>
+    <link rel="stylesheet" href="/assets/admin/css/customer/cus_group.css"/>
 </head>
 <body data-new-gr-c-s-check-loaded="14.1085.0" cz-shortcut-listen="true">
 <div id="root" style="overflow: auto;">
@@ -126,7 +127,7 @@
                                 style="position: relative; overflow: hidden; width: 100%; height: auto; min-height: 0px; max-height: unset;">
                             <div
                                     style="position: relative; overflow: scroll; margin-right: -17px; margin-bottom: -17px; min-height: 17px;">
-                                <table class="MuiTable-root jss24494 sapo-grid-body" aria-labelledby="tableTitle"
+                                <table class="table table-hover" aria-labelledby="tableTitle"
                                        aria-label="enhanced table">
                                     <colgroup>
                                         <col style="width: 208px;">
@@ -137,141 +138,7 @@
                                         <col style="width: 119px;">
                                     </colgroup>
                                     <tbody class="MuiTableBody-root" id="customerGroupList">
-                                    <!--                                    <tr class="MuiTableRow-root jss24569 MuiTableRow-hover" role="checkbox"-->
-                                    <!--                                        tabindex="-1">-->
-                                    <!--                                        <td-->
-                                    <!--                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">-->
-                                    <!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"-->
-                                    <!--                                               data-tip="Vip" currentitem="false"-->
-                                    <!--                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">-->
-                                    <!--                                                Vip</p>-->
-                                    <!--                                        </td>-->
-                                    <!--                                        <td-->
-                                    <!--                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">-->
-                                    <!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"-->
-                                    <!--                                               data-tip="VIP" currentitem="false"-->
-                                    <!--                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">-->
-                                    <!--                                                VIP</p>-->
-                                    <!--                                        </td>-->
-                                    <!--                                        <td-->
-                                    <!--                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">-->
-                                    <!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"-->
-                                    <!--                                               data-tip="Cố định" currentitem="false"-->
-                                    <!--                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">-->
-                                    <!--                                                Cố định</p>-->
-                                    <!--                                        </td>-->
-                                    <!--                                        <td-->
-                                    <!--                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">-->
-                                    <!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"-->
-                                    <!--                                               data-tip="" currentitem="false"-->
-                                    <!--                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">-->
-                                    <!--                                            </p>-->
-                                    <!--                                        </td>-->
-                                    <!--                                        <td-->
-                                    <!--                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignCenter">-->
-                                    <!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"-->
-                                    <!--                                               data-tip="0" currentitem="false"-->
-                                    <!--                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">-->
-                                    <!--                                                0</p>-->
-                                    <!--                                        </td>-->
-                                    <!--                                        <td-->
-                                    <!--                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">-->
-                                    <!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"-->
-                                    <!--                                               data-tip="05/11/2022" currentitem="false"-->
-                                    <!--                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">-->
-                                    <!--                                                05/11/2022</p>-->
-                                    <!--                                        </td>-->
-                                    <!--                                    </tr>-->
-                                    <!--                                    <tr class="MuiTableRow-root jss24569 MuiTableRow-hover" role="checkbox"-->
-                                    <!--                                        tabindex="-1">-->
-                                    <!--                                        <td-->
-                                    <!--                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">-->
-                                    <!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"-->
-                                    <!--                                               data-tip="Bán buôn" currentitem="false"-->
-                                    <!--                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">-->
-                                    <!--                                                Bán buôn</p>-->
-                                    <!--                                        </td>-->
-                                    <!--                                        <td-->
-                                    <!--                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">-->
-                                    <!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"-->
-                                    <!--                                               data-tip="BANBUON" currentitem="false"-->
-                                    <!--                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">-->
-                                    <!--                                                BANBUON</p>-->
-                                    <!--                                        </td>-->
-                                    <!--                                        <td-->
-                                    <!--                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">-->
-                                    <!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"-->
-                                    <!--                                               data-tip="Cố định" currentitem="false"-->
-                                    <!--                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">-->
-                                    <!--                                                Cố định</p>-->
-                                    <!--                                        </td>-->
-                                    <!--                                        <td-->
-                                    <!--                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">-->
-                                    <!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"-->
-                                    <!--                                               data-tip="" currentitem="false"-->
-                                    <!--                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">-->
-                                    <!--                                            </p>-->
-                                    <!--                                        </td>-->
-                                    <!--                                        <td-->
-                                    <!--                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignCenter">-->
-                                    <!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"-->
-                                    <!--                                               data-tip="0" currentitem="false"-->
-                                    <!--                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">-->
-                                    <!--                                                0</p>-->
-                                    <!--                                        </td>-->
-                                    <!--                                        <td-->
-                                    <!--                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">-->
-                                    <!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"-->
-                                    <!--                                               data-tip="05/11/2022" currentitem="false"-->
-                                    <!--                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">-->
-                                    <!--                                                05/11/2022</p>-->
-                                    <!--                                        </td>-->
-                                    <!--                                    </tr>-->
-                                    <!--                                    <tr class="MuiTableRow-root jss24569 MuiTableRow-hover" role="checkbox"-->
-                                    <!--                                        tabindex="-1">-->
-                                    <!--                                        <td-->
-                                    <!--                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">-->
-                                    <!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"-->
-                                    <!--                                               data-tip="Bán lẻ" currentitem="false"-->
-                                    <!--                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">-->
-                                    <!--                                                Bán lẻ</p>-->
-                                    <!--                                        </td>-->
-                                    <!--                                        <td-->
-                                    <!--                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">-->
-                                    <!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"-->
-                                    <!--                                               data-tip="BANLE" currentitem="false"-->
-                                    <!--                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">-->
-                                    <!--                                                BANLE</p>-->
-                                    <!--                                        </td>-->
-                                    <!--                                        <td-->
-                                    <!--                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">-->
-                                    <!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"-->
-                                    <!--                                               data-tip="Cố định" currentitem="false"-->
-                                    <!--                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">-->
-                                    <!--                                                Cố định</p>-->
-                                    <!--                                        </td>-->
-                                    <!--                                        <td-->
-                                    <!--                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">-->
-                                    <!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"-->
-                                    <!--                                               data-tip="" currentitem="false"-->
-                                    <!--                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">-->
-                                    <!--                                            </p>-->
-                                    <!--                                        </td>-->
-                                    <!--                                        <td-->
-                                    <!--                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignCenter">-->
-                                    <!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"-->
-                                    <!--                                               data-tip="7" currentitem="false"-->
-                                    <!--                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">-->
-                                    <!--                                                7</p>-->
-                                    <!--                                        </td>-->
-                                    <!--                                        <td-->
-                                    <!--                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">-->
-                                    <!--                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"-->
-                                    <!--                                               data-tip="05/11/2022" currentitem="false"-->
-                                    <!--                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">-->
-                                    <!--                                                05/11/2022</p>-->
-                                    <!--                                        </td>-->
-                                    <!--                                    </tr>-->
+
                                     </tbody>
                                 </table>
                             </div>
@@ -357,6 +224,8 @@
 <th:block th:replace="/layout/script :: script"/>
 <script src="/assets/admin/js/customer/customerGroup_App.js"></script>
 <script>
+    let customerGroup = new CustomerGroup();
+
     function getAllCustomerGroupByGroup() {
         return $.ajax({
             headers: {
@@ -369,9 +238,9 @@
             .done((data) => {
                 $.each(data, (i, item) => {
                     console.log(item)
-                    let str = `<tr class="MuiTableRow-root jss24569 MuiTableRow-hover" role="checkbox"
+                    let str = `<tr data-id="${item.id}" class="MuiTableRow-root jss24569 MuiTableRow-hover upCusGrp" role="checkbox"
                                         tabindex="-1">
-                                        <td
+                                            <td
                                                 class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
                                             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
                                                data-tip="Vip" currentitem="false"
@@ -397,7 +266,7 @@
                                             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
                                                data-tip="" currentitem="false"
                                                style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
-                                            </p>
+                                               ${item.description || ""}</p>
                                         </td>
                                         <td id = "countCus"
                                                 class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignCenter">
@@ -416,11 +285,59 @@
                                     </tr>`;
                     $("#customerGroupList").append(str);
                 });
+                getIdRow();
             })
             .fail((jqXHR) => {
-
+                if (jqXHR.responseJSON) {
+                    $.each(jqXHR.responseJSON, (key, item) => {
+                        CustomerGroup_App.IziToast.showErrorAlert(item);
+                    })
+                }
             })
     }
+
+    function getIdRow() {
+        $(".upCusGrp").on("click", function () {
+            let id = $(this).data("id");
+            console.log(id);
+            getCusGroupById(id).then(() => {
+                $("#upTitle").val(customerGroup.title);
+                $("#upCusGrpCode").val(customerGroup.cusGrpCode);
+                $("#ipDescription").val(customerGroup.description);
+                $("#upPricing_policy_id").val(customerGroup.pricing_policy_id);
+                $("#upDiscount").val(customerGroup.discount);
+                $("#upPayment_method_id").val(customerGroup.payment_method_id);
+                console.log(customerGroup);
+                // page.elements.modalUpdate.modal("show");
+            })
+                .catch(() => {
+                    console.log("get edit fail");
+                    CustomerGroup_App.IziToast.showErrorAlert("get edit fail");
+                });
+        })
+    }
+
+    function getCusGroupById(Id) {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "http://localhost:8080/api/customer_groups" + "/" + Id
+        })
+            .done((data) => {
+                customerGroup = data;
+            })
+            .fail((jqXHR) => {
+                if (jqXHR.responseJSON) {
+                    $.each(jqXHR.responseJSON, (key, item) => {
+                        CustomerGroup_App.IziToast.showErrorAlert(item);
+                    })
+                }
+            });
+    }
+
     getAllCustomerGroupByGroup();
 </script>
 

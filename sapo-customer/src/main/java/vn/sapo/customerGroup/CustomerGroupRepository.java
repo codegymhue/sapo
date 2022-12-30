@@ -14,7 +14,8 @@ public interface CustomerGroupRepository  extends JpaRepository<CustomerGroup, I
 
     @Query("select new vn.sapo.customerGroup.dto.CustomerGroupResult(g.id,g.cusGrpCode," +
             "g.title," +
-            "g.createdAt, count(c.groupId))" +
+            "g.createdAt, count(c.groupId)," +
+            "g.description,g.discount)" +
             "from CustomerGroup as g " +
             "left join Customer as c " +
             "on g.id = c.groupId " +
