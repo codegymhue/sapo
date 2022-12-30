@@ -17,7 +17,7 @@ public class CustomerOrderResult {
 
     private String code;
 
-    private String name;
+    private String fullName;
 
     private String phone;
 
