@@ -11,6 +11,7 @@ import vn.sapo.entities.product.Item;
 import vn.sapo.entities.product.Product;
 import vn.sapo.entities.tax.ProductTax;
 import vn.sapo.entities.tax.TaxType;
+import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotEnoughQuantityException;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.item.ItemRepository;
@@ -86,12 +87,11 @@ public class SaleOrderServiceImpl implements SaleOrderService {
         order.setEmployeeId(1);
         order.setOrderStatus(OrderStatusCode.CHECKOUT);
         order.setPaymentStatus(OrderStatusCode.UNPAID);
-        order.setOrderCode("SON" + order.getId());
         order = saleOrderRepository.save(order);
-
-        BigDecimal total = new BigDecimal(0);
-        BigDecimal subTotal = new BigDecimal(0);
-        BigDecimal grandTotal = new BigDecimal(0);
+        order.setOrderCode(CodePrefix.SALE_ORDER.generate(order.getId()));
+        BigDecimal total = BigDecimal.valueOf(0);
+        BigDecimal subTotal = BigDecimal.valueOf(0);
+        BigDecimal grandTotal = BigDecimal.valueOf(0);
         for (CreateSaleOrderItemParam saleOrderItemParam : orderParam.getSaleOrderItems()) {
 
             Product product = productRepository.findById(saleOrderItemParam.getProductId())
@@ -100,7 +100,6 @@ public class SaleOrderServiceImpl implements SaleOrderService {
                     );
 
             //lấy toàn bộ item theo productId
-
             List<Item> items = itemRepository.findAllByProductIdAndAvailableGreaterThanOrderByCreatedAt(saleOrderItemParam.getProductId(), 0);
             int totalAvailable = items.stream().mapToInt(Item::getAvailable).sum();
             if (totalAvailable < saleOrderItemParam.getQuantity()) {

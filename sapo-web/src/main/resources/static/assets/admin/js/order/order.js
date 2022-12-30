@@ -472,6 +472,7 @@ function getAllProvinces() {
                     let str = `<option value="${item.province_id}">${item.province_name}</option>`;
                     $("#province").append(str);
                     $('#provinceUpdate').append(str);
+                    $('#provinceCreate').append(str);
                 });
             }
 
@@ -484,6 +485,7 @@ function getAllProvinces() {
 function getAllDistrictsByProvinceId(provinceId) {
     $("#district").empty();
     $("#districtUpdate").empty();
+    $("#districtCreate").empty();
     return $.ajax({
         headers: {
             "accept": "application/json",
@@ -501,6 +503,7 @@ function getAllDistrictsByProvinceId(provinceId) {
                     let str = ` <option value="${item.district_id}">${item.district_name}</option>`;
                     $("#district").append(str);
                     $('#districtUpdate').append(str);
+                    $('#districtCreate').append(str);
                 })
 
             }
@@ -513,6 +516,7 @@ function getAllDistrictsByProvinceId(provinceId) {
 function getAllWardsByDistrictId(districtId) {
     $("#ward").empty();
     $('#wardUpdate').empty();
+    $('#wardCreate').empty();
     return $.ajax({
         headers: {
             "accept": "application/json",
@@ -534,6 +538,7 @@ function getAllWardsByDistrictId(districtId) {
                     let str = `<option value="${item.ward_id}">${item.ward_name}</option>`;
                     $("#ward").append(str);
                     $('#wardUpdate').append(str);
+                    $('#wardCreate').append(str);
                 });
             }
         })
@@ -1006,13 +1011,14 @@ function renderSaleOrderItem(productId, operator, valueNumber) {
                                 <input aria-invalid="false" autocomplete="off"
                                     oninput='editQuantity(${result.id})'
                                     name="" type="text"
-                                    class="MuiInputBase-input MuiInput-input" value="1" min="1"
+                                    class="MuiInputBase-input MuiInput-input"
                                     style="text-align: center; width: 100%;"
                                     id="quantity_product_${result.id}">
                                 </div>
                         </div>
                     </div><button
-                        class="MuiButtonBase-root MuiIconButton-root jss3912 icon-btn btn-add auto-hidden" onclick="addQuantity(${result.id})"
+                        class="MuiButtonBase-root MuiIconButton-root jss3912 icon-btn btn-add auto-hidden" 
+                        onclick="addQuantity(${result.id})"
                          id="addQuantity_${result.id}"
                         tabindex="0" type="button"><span class="MuiIconButton-label"><svg
                                 class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall" focusable="false"
