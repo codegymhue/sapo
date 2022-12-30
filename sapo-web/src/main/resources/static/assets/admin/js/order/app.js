@@ -150,7 +150,7 @@ class ItemResult {
 }
 
 class Product {
-    constructor(id, title, sku, categoryId, retailPrice, quantity, mass, importPrice) {
+    constructor(id, title, sku, categoryId, retailPrice, quantity, mass, importPrice,mediaList) {
         this.id = id;
         this.title = title;
         this.sku = sku;
@@ -159,8 +159,32 @@ class Product {
         this.importPrice = importPrice;
         this.categoryId = categoryId;
         this.mass = mass;
+        this.mediaList = mediaList;
     }
 }
+
+class Address {
+    constructor(id,phoneNumber,email,customerId,supplierId,line1,line2,wardId,wardName,districtId,districtName,provinceId,provinceName,zipCode,isShipping,isReceiveBill) {
+        this.id = id;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.customerId = customerId;
+        this.supplierId = supplierId;
+        this.line1 = line1;
+        this.line2 = line2;
+        this.wardId = wardId;
+        this.wardName = wardName;
+        this.districtId = districtId;
+        this.districtName = districtName;
+        this.provinceId = provinceId;
+        this.provinceName = provinceName;
+        this.zipCode = zipCode;
+        this.isShipping = isShipping;
+        this.isReceiveBill = isReceiveBill;
+
+    }
+}
+
 class App {
     static SweetAlert = class {
         static showSuccessAlert(t) {

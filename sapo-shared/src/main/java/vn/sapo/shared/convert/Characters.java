@@ -1,4 +1,4 @@
-package vn.sapo.convert;
+package vn.sapo.shared.convert;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;

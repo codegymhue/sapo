@@ -1,4 +1,4 @@
-package vn.sapo.configurations;
+package vn.sapo.shared.configurations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum CodePrefix {
 
     CUSTOMER("CUZN"),
+    CUSTOMER_GROUP("CTN"),
     ANONYMOUS("ANONYMOUS");
 
     private final String value;

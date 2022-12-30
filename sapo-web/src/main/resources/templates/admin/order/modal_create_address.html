@@ -1,0 +1,196 @@
+<!--<html lang="vi-VN" xmlns:th="http://www.thymeleaf.org">-->
+<th:block th:fragment="modal_create_address">
+    <div class="modal fade" id="create_order_address" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm địa chỉ giao hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" id="myModal">
+                    <div class="modal-body" >
+                        <div class="sc-iqcoie iZrCvq sc-gITdmR cFtstx">
+                            <div class="sc-dFdIVH bPLSPb">
+                                <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3" style="margin: 0px -12px;">
+                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
+                                        <div width="100%" class="sc-cCsOjp gKHUxf"><label
+                                                for="nameCreate"
+                                                class="sc-ksZaOG ftuIiY">Tên khách hàng<span class="sc-hAZoDl eHshpr">
+                                    </span>
+                                        </label>
+                                            <div class="sc-gXmSlM PBwdZ Sapo-InputRoot">
+                                                <input
+                                                        id="nameCreate" type="text"
+                                                        class="sc-himrzO iRSKAB" value=""/>
+                                                <fieldset class="sc-ezWOiH fCFLbv">
+
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
+                                        <div width="100%" class="sc-cCsOjp gKHUxf"><label
+                                                for="phoneCreate"
+                                                class="sc-ksZaOG ftuIiY">Số điện thoại</label>
+                                            <div class="sc-gXmSlM PBwdZ Sapo-InputRoot">
+                                                <input id="phoneCreate" type="text" class="sc-himrzO iRSKAB" value=""/>
+                                                <fieldset class="sc-ezWOiH fCFLbv"></fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
+                                        <div class="MuiFormControl-root jss1315 MuiFormControl-fullWidth"><label
+                                                class="MuiFormLabel-root MuiInputLabel-root jss1316 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
+                                                data-shrink="true" for="addressCreate">Địa chỉ cụ
+                                            thể</label>
+                                            <div class="MuiFormControl-root MuiTextField-root jss1317 jss1318 jss3873 MuiFormControl-fullWidth"
+                                                 title="">
+                                                <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline">
+                                                    <input aria-invalid="false" id="addressCreate" type="text"
+                                                           name="address"
+                                                           placeholder="Nhập sô nhà, tên đường, tên khu vực"
+                                                           aria-label="Without label"
+                                                           class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline" />
+                                                    <fieldset aria-hidden="true"
+                                                              class="jss1037 MuiOutlinedInput-notchedOutline"
+                                                              style="padding-left: 8px;">
+                                                        <legend class="jss1038" style="width: 0.01px;"><span>&ZeroWidthSpace;</span>
+                                                        </legend>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
+                                        <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
+                                            <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4">
+                                                <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
+                                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
+                                                        <div class="MuiBox-root jss5333 jss5392">
+                                                            <div class="MuiBox-root jss5334 jss5402">
+                                                                <p class="MuiTypography-root MuiTypography-body1"
+                                                                   style="color: rgb(70, 81, 95);">Tỉnh /
+                                                                    Thành phố</p>
+                                                            </div>
+                                                            <div class="MuiBox-root jss5335 jss5401" tabindex="0">
+
+                                                                <select class="jss87874" name="province" id="province">
+                                                                    <option value="0">
+                                                                        <p class="MuiTypography-root label-select MuiTypography-body1 MuiTypography-colorTextPrimary">
+                                                                            Chọn Tỉnh/Thành phố</p>
+                                                                    </option>
+                                                                    <svg class="MuiSvgIcon-root arrow-icon"
+                                                                         focusable="false" viewBox="0 0 24 24"
+                                                                         aria-hidden="true">
+                                                                        <path d="M7 10l5 5 5-5z"></path>
+                                                                    </svg>
+                                                                </select>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4">
+                                                <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
+                                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
+                                                        <div class="MuiBox-root jss5333 jss5392">
+                                                            <div class="MuiBox-root jss5334 jss5402">
+                                                                <p class="MuiTypography-root MuiTypography-body1"
+                                                                   style="color: rgb(70, 81, 95);">Quận /
+                                                                    Huyện</p>
+                                                            </div>
+                                                            <div class="MuiBox-root jss5335 jss5401" tabindex="0">
+
+                                                                <select class="jss87874" name="district" id="district">
+                                                                    <option value="0">
+                                                                        <p class="MuiTypography-root label-select MuiTypography-body1 MuiTypography-colorTextPrimary">
+                                                                            Chọn Quận/Huyện</p>
+                                                                    </option>
+                                                                    <svg class="MuiSvgIcon-root arrow-icon"
+                                                                         focusable="false" viewBox="0 0 24 24"
+                                                                         aria-hidden="true">
+                                                                        <path d="M7 10l5 5 5-5z"></path>
+                                                                    </svg>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4">
+                                                <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
+                                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
+                                                        <div class="MuiBox-root jss5351 jss5452">
+                                                            <div class="MuiBox-root jss5352 jss5462">
+                                                                <p class="MuiTypography-root MuiTypography-body1"
+                                                                   style="color: rgb(70, 81, 95);">Phường xã
+                                                                </p>
+                                                            </div>
+                                                            <div class="MuiBox-root jss5353 jss5461" tabindex="0">
+                                                                <select class="jss87874" name="ward" id="ward">
+                                                                    <option value="0">
+                                                                        <p class="MuiTypography-root label-select MuiTypography-body1 MuiTypography-colorTextPrimary">
+                                                                            Chọn Phường/Xã</p>
+                                                                    </option>
+                                                                    <svg class="MuiSvgIcon-root arrow-icon"
+                                                                         focusable="false" viewBox="0 0 24 24"
+                                                                         aria-hidden="true">
+                                                                        <path d="M7 10l5 5 5-5z"></path>
+                                                                    </svg>
+                                                                </select>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
+                                        <div width="100%" class="sc-cCsOjp gKHUxf"><label
+                                                for="codeCreate"
+                                                class="sc-ksZaOG ftuIiY">Email<span
+                                                class="sc-hAZoDl eHshpr">&nbsp</span></label>
+                                            <div class="sc-gXmSlM PBwdZ Sapo-InputRoot">
+                                                <input id="codeCreate" type="text"
+                                                       class="sc-himrzO iRSKAB" value="">
+                                                <fieldset class="sc-ezWOiH fCFLbv"></fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 ">
+                                        <div class="MuiBox-root jss5491 jss5544">
+                                            <div class="MuiBox-root jss5492 jss5554"><p
+                                                    class="MuiTypography-root MuiTypography-body1"
+                                                    style="color: rgb(70, 81, 95);">Mã Bưu Điện</p>
+                                            </div>
+                                            <div class="MuiBox-root jss5493 jss5553" tabindex="0">
+                                                <input id="zipcode" type="text"
+                                                       class="sc-himrzO iRSKAB" value="">
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sc-brCFrO cGcePZ">
+                                <button type="button" data-bs-dismiss="modal"
+                                        class="sc-jqUVSM TJspa"><span
+                                        class="sc-papXJ jcEYKF">Thoát</span></button>
+                                <button type="button" id="btnCreateCustomer"
+                                        class="sc-jqUVSM hFJmrT"><span
+                                        class="sc-papXJ jcEYKF">Thêm</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

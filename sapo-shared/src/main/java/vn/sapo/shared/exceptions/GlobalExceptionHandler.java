@@ -1,4 +1,4 @@
-package vn.sapo.exceptions;
+package vn.sapo.shared.exceptions;
 
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
