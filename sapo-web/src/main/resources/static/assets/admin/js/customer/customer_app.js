@@ -2,14 +2,14 @@ class App {
 
     static DOMAIN_API = "http://localhost:8080";
     // static BASE_URL_Customer = this.DOMAIN_API + "/api/customers";
-    static BASE_URL_CUSTOMER  = this.DOMAIN_API + "/api/customers";
-    static BASE_URL_CUSTOMER_GROUP  = this.DOMAIN_API + "/api/customer_groups";
+    static BASE_URL_CUSTOMER = this.DOMAIN_API + "/api/customers";
+    static BASE_URL_CUSTOMER_GROUP = this.DOMAIN_API + "/api/customer_groups";
 
     static URL_CREATE_CUSTOMER = this.BASE_URL_Customer + "/create";
-    static URL_UPDATE_CUSTOMER = this.BASE_URL_Customer  + "/update";
+    static URL_UPDATE_CUSTOMER = this.BASE_URL_Customer + "/update";
 
     static AlertMessageVi = class {
-        static SUCCESS_CREATED = "Tạo dữ liệu thành công !";
+        static SUCCESS_CREATED = "Tạo khách hàng thành công !";
         static SUCCESS_UPDATED = "Cập nhật dữ liệu thành công !";
         static SUCCESS_DELETE = "Xóa dữ liệu thành công";
 
@@ -43,7 +43,7 @@ class App {
         }
 
     }
-    static IziToast = class  {
+    static IziToast = class {
         static showSuccessAlert(m) {
             iziToast.success({
                 title: 'Success',
@@ -53,37 +53,17 @@ class App {
             });
         }
 
-        static showErrorAlert(m) {
-            iziToast.error({
-                title: 'Error',
-                position: 'topRight',
-                timeout: 2500,
-                message: m,
-            });
-        }
     }
 
-    static renderRowCustomer(item) {
-        let str = `
-             <tr id="tr_${item.id}" >
-                <td class="align-middle">
-                    <label for="${item.id}" style="padding: 0.5rem; cursor:pointer">
-                        <input style="cursor:pointer" id ="${item.id}" class="selectCheckbox"  name="options[]" type="checkbox" value="${item.id}">
-                    </label>
-                </td>
 
-                <td class="align-middle"><a href="/admin/customer/${item.id}" style="text-decoration: none">${item.code}</a></td>
-                
-                <td class="align-middle">${item.name || ""}</td>
-                  <td class="align-middle">${item.phoneNumber || ""}</td>
-                <td class="align-middle text-center ">${item.groupCustomer}</td>
-                <td class="align-middle text-center">${item.debtsTotal}</td>
-                <td class="align-middle text-center">${item.spendTotal}</td>
-                <td class="align-middle text-end">${item.quantityItemOrder}</td>
-            </tr>
-        `;
-        return str;
-    }
+            static showErrorAlert(m) {
+                iziToast.error({
+                    title: 'Error',
+                    position: 'topRight',
+                    timeout: 2500,
+                    message: m,
+                });
+            }
 
 
 }

@@ -62,7 +62,7 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.existsById(id);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public CustomerResult create(CreateCustomerParam createCustomerParam) {
         System.out.println("Đay là param" + createCustomerParam);
         Customer customer = customerMapper.toModel(createCustomerParam);
