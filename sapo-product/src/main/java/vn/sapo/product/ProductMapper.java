@@ -9,11 +9,14 @@ import vn.sapo.brand.dto.BrandResult;
 import vn.sapo.category.CategoryMapper;
 import vn.sapo.category.dto.CategoryResult;
 import vn.sapo.entities.product.Product;
+import vn.sapo.entities.product.ProductStatus;
+import vn.sapo.item.ItemService;
 import vn.sapo.media.MediaMapper;
 import vn.sapo.product.dto.*;
 import vn.sapo.tax.TaxMapper;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 @Component
 public class ProductMapper implements InitializingBean {
@@ -36,6 +39,8 @@ public class ProductMapper implements InitializingBean {
 
     @Autowired
     MediaMapper mediaMapper;
+    @Autowired
+    ItemService itemService;
 
     public Product toModel(CreateProductParam productWithImageParam) {
         return new Product()
@@ -61,8 +66,24 @@ public class ProductMapper implements InitializingBean {
         return modelMapper.map(product, ProductResult.class)
                 .setCategory(product.getCategoryId() != null ? categoryMapper.toDTO(product.getCategory()) : new CategoryResult())
                 .setBrand(product.getBrandId() != null ? brandMapper.toDTO(product.getBrand()) : new BrandResult())
+                .setTotalInventory(itemService.getTotalInventoryQuantityByProductId(product.getId()))
+                .setAvailableInventory(itemService.getAvailableInventoryQuantityByProductId(product.getId()))
+//                .setRetailPrice(product.getRetailPrice() != null ? product.getRetailPrice() : new BigDecimal(0))
+//                .setWholesalePrice(product.getWholesalePrice() != null ? product.getWholesalePrice() : new BigDecimal(0))
+//                .setImportPrice(product.getImportPrice() != null ? product.getImportPrice() : new BigDecimal(0))
+
                 ;
     }
+//    public ProductResult toDTOExcelFile(Product product){
+//        return new ProductResult()
+//                .setCategory(product.getCategoryId() != null ? categoryMapper.toDTO(product.getCategory()) : new CategoryResult())
+//                .setBrand(product.getBrandId() != null ? brandMapper.toDTO(product.getBrand()) : new BrandResult())
+//                .setRetailPrice(product.getRetailPrice() != null ? product.getRetailPrice() : new BigDecimal(0))
+//                .setWholesalePrice(product.getWholesalePrice() != null ? product.getWholesalePrice() : new BigDecimal(0))
+//                .setImportPrice(product.getImportPrice() != null ? product.getImportPrice() : new BigDecimal(0))
+//                .setStatus(product.getStatus())
+//                ;
+//    }
 
     public ProductDetailResult toDTODetail(Product product) {
         return new ProductDetailResult()

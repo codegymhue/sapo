@@ -22,6 +22,7 @@ import vn.sapo.item.ItemMapper;
 import vn.sapo.item.ItemService;
 import vn.sapo.media.MediaMapper;
 import vn.sapo.media.MediaService;
+import vn.sapo.media.dto.MediaParam;
 import vn.sapo.product.dto.*;
 import vn.sapo.product_tax.ProductTaxMapper;
 import vn.sapo.product_tax.ProductTaxRepository;
@@ -90,6 +91,7 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     Characters characters;
 
+ 
     @Override
     @Transactional(readOnly = true)
     public List<ProductResult> findAll() {
@@ -112,7 +114,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional(readOnly = true)
     public ProductResult findById(Integer id) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product not found"));
+        Product product = productRepository.findByIdByDeletedIsFalse(id);
+        if(product == null){
+            throw new NotFoundException("Sản phẩm này đã bị xóa hoặc không tồn tại!");
+        }
         Integer productId = product.getId();
         ProductResult dto = productMapper.toDTO(product);
         dto.setTotalInventory(itemService.getTotalInventoryQuantityByProductId(productId));
@@ -211,9 +216,12 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new NotFoundException("Product not found"));
         product.setStatus(updateProductParam.isEnableSell() ? ProductStatus.AVAILABLE :
                 ProductStatus.UNAVAILABLE);
-
         if(updateProductParam.getSku().equals("")){
             updateProductParam.setSku(product.getSku());
+        }
+
+        if(updateProductParam.getBarCode().equals("")){
+            updateProductParam.setBarCode(product.getBarCode());
         }
 
         if(!product.getSku().equals(updateProductParam.getSku())){
@@ -238,6 +246,13 @@ public class ProductServiceImpl implements ProductService {
             productTaxParams.add(0, new ProductTaxParam(1, TaxType.TAX_PURCHASE));
             productTaxParams.add(1, new ProductTaxParam(1, TaxType.TAX_SALE));
             productTaxService.createAll(productTaxParams, product);
+        }
+        if (updateProductParam.getMediaList().size() == 0) {
+            mediaService.deleteAllByProductId(productId);
+        }
+        if (updateProductParam.getMediaList().size() != 0) {
+            mediaService.deleteAllByProductId(productId);
+            mediaService.save(updateProductParam.getMediaList(), product);
         }
     }
 
@@ -289,10 +304,18 @@ public class ProductServiceImpl implements ProductService {
             products = productRepository.findAllByTitleContaining(title, pageable);
         } else if (brandId == -1 && status.equals("")) {
             products = productRepository.findAllByTitleContainingAndCategoryId(categoryId, title, pageable);
-        } else if (status.equals("")) {
+        } else if (categoryId == -1 && status.equals("")) {
             products = productRepository.findAllByTitleContainingAndBrandId(brandId, title, pageable);
-        } else {
+        } else if(categoryId == -1 && brandId == -1) {
             products = productRepository.findAllByTitleContainingAndStatus(ProductStatus.parseProductStatus(status), title, pageable);
+        } else if(status.equals("")){
+            products = productRepository.findAllByTitleContainingAndCategoryIdAndBrandId(title, categoryId, brandId, pageable);
+        } else if (brandId == -1) {
+            products = productRepository.findAllByTitleContainingAndCategoryIdAndStatus(title, categoryId, ProductStatus.parseProductStatus(status), pageable);
+        } else if (categoryId == -1) {
+            products = productRepository.findAllByTitleContainingAndBrandIdAndStatus(title, brandId, ProductStatus.parseProductStatus(status), pageable );
+        } else {
+            products = productRepository.findAllByTitleContainingAndCategoryIdAndBrandIdAndStatus(title, categoryId, brandId,ProductStatus.parseProductStatus(status), pageable);
         }
         if (products.hasContent()) {
             List<Product> productList = products.getContent();
@@ -328,7 +351,6 @@ public class ProductServiceImpl implements ProductService {
         } else {
             pageable = PageRequest.of(pageNo, pageSize, Sort.by(nameFieldSort).descending());
         }
-
         Page<Product> products;
         if (title.equals("") && categoryId == -1 && brandId == -1 && status.equals("")) {
             products = productRepository.findAllByDeletedIsFalse(pageable);
@@ -336,10 +358,18 @@ public class ProductServiceImpl implements ProductService {
             products = productRepository.findAllByTitleContaining(title, pageable);
         } else if (brandId == -1 && status.equals("")) {
             products = productRepository.findAllByTitleContainingAndCategoryId(categoryId, title, pageable);
-        } else if (status.equals("")) {
+        } else if (categoryId == -1 && status.equals("")) {
             products = productRepository.findAllByTitleContainingAndBrandId(brandId, title, pageable);
-        } else {
+        } else if(categoryId == -1 && brandId == -1) {
             products = productRepository.findAllByTitleContainingAndStatus(ProductStatus.parseProductStatus(status), title, pageable);
+        } else if(status.equals("")){
+            products = productRepository.findAllByTitleContainingAndCategoryIdAndBrandId(title, categoryId, brandId, pageable);
+        } else if (brandId == -1) {
+            products = productRepository.findAllByTitleContainingAndCategoryIdAndStatus(title, categoryId, ProductStatus.parseProductStatus(status), pageable);
+        } else if (categoryId == -1) {
+            products = productRepository.findAllByTitleContainingAndBrandIdAndStatus(title, brandId, ProductStatus.parseProductStatus(status), pageable );
+        } else {
+            products = productRepository.findAllByTitleContainingAndCategoryIdAndBrandIdAndStatus(title, categoryId, brandId,ProductStatus.parseProductStatus(status), pageable);
         }
         if (products.hasContent()) {
             List<Product> productList = products.getContent();

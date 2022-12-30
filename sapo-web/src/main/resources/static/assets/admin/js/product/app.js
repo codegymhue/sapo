@@ -47,7 +47,7 @@ class App {
         let str = `
              <tr id="tr_${item.id}" >
                 <td class="align-middle">
-                <label for="${item.id}" style="padding: 0.5rem; cursor:pointer">
+                <label for="${item.id}" style="padding: 1rem; cursor:pointer">
                     <input style="cursor:pointer" id ="${item.id}" class="selectCheckbox"  name="options[]" type="checkbox" value="${item.id}">
                 </label>
                 </td>
@@ -70,13 +70,13 @@ class App {
     static renderRowProductVariant(item, showStatus){
         let str = `
              <tr id="tr_${item.id}" >
-                <td class="align-middle">
-                 <label for="${item.id}" style="padding: 0.5rem; cursor:pointer">
-                    <input id ="${item.id}" style="cursor:pointer" class="selectCheckbox"  name="options[]" type="checkbox" value="${item.id}">
-                </label>
+                <td class="align-middle sticky-col first-col" style="background-color: white !important">
+                     <label for="${item.id}" style="padding: 1rem; cursor:pointer">
+                        <input id ="${item.id}" style="cursor:pointer" class="selectCheckbox"  name="options[]" type="checkbox" value="${item.id}">
+                    </label>
                 </td>
-                <td class="align-middle"><img width="50px" height="40px" src=${item.image || "/assets/admin/images/no-image.jpg"} alt="image"></td>
-                <td class="align-middle">
+                <td class="align-middle sticky-col second-col" style="background-color: white !important"><img width="50px" height="40px" src=${item.image || "/assets/admin/images/no-image.jpg"} alt="image"></td>
+                <td class="align-middle sticky-col third-col" style="background-color: white !important">
                     <a href="/admin/product/${item.id}" style="text-decoration: none">${item.title}</a>
                     <br>
                     <span>${item.sku}</span>

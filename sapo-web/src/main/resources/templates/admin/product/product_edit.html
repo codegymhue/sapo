@@ -15,9 +15,15 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/admin/css/product/selectMenu.css">
+    <link rel="stylesheet" href="/assets/admin/css/w3school/w3.css">
     <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        }
         .error {
-            color: #991b1b !important;
+            color: #F44336 !important;
+            font-style: italic !important;
+            font-size: small;
         }
     </style>
 </head>
@@ -84,7 +90,7 @@
                                             <div class="MuiBox-root jss27085 jss26699 borderBottom">
                                                 <div class="MuiBox-root jss29133">
                                                     <h6 class="MuiTypography-root MuiTypography-h6"
-                                                        style="padding: 16px 24px;">Thông tin chung
+                                                        style="padding: 16px 24px;font-size: 16px;">Thông tin chung
                                                     </h6>
                                                 </div>
                                             </div>
@@ -96,7 +102,8 @@
                                                             <div class="MuiFormControl-root MuiTextField-root jss27091 MuiFormControl-fullWidth">
                                                                 <div class="row">
                                                                     <div class="col">
-                                                                        <span style="font-weight: 500">Tên sản phẩm</span>
+                                                                        <span>Tên sản phẩm</span>
+                                                                        <span style="color: red">*</span>
                                                                         <input id="titleUpdate"
                                                                                style="width: 100%"
                                                                                placeholder="Nhập tên sản phẩm"
@@ -112,7 +119,7 @@
                                                             <div class="MuiFormControl-root MuiTextField-root jss27091 MuiFormControl-fullWidth">
                                                                 <div class="row">
                                                                     <div class="col-6">
-                                                                        <span style="font-weight: 500">Mã sản phẩm/SKU</span>
+                                                                        <span>Mã sản phẩm/SKU</span>
                                                                         <input aria-invalid="false"
                                                                                placeholder="Ví dụ: BANHCOSY"
                                                                                type="text"
@@ -121,7 +128,7 @@
                                                                         th:field="*{sku}">
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <span style="font-weight: 500">Khối lượng (g)</span>
+                                                                        <span>Khối lượng (g)</span>
                                                                         <input aria-invalid="false"
                                                                                type="number"
                                                                                name="massUpdate"
@@ -139,7 +146,7 @@
                                                             <div class="MuiFormControl-root MuiTextField-root jss27091 MuiFormControl-fullWidth">
                                                                 <div class="row">
                                                                     <div class="col-6">
-                                                                        <span style="font-weight: 500">Mã vạch/Barcode</span>
+                                                                        <span>Mã vạch/Barcode</span>
                                                                         <input aria-invalid="false"
                                                                                id="barCodeUpdate 9744ef65-28ce-426a-a13d-040b33005036"
                                                                                placeholder="Nhập tay hoặc sử dụng máy quét mã vạch"
@@ -149,7 +156,7 @@
                                                                         th:field="*{barCode}">
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <span style="font-weight: 500">Đơn vị tính</span>
+                                                                        <span>Đơn vị tính</span>
                                                                         <input aria-invalid="false"
                                                                                placeholder="chiếc, hộp, lon"
                                                                                type="text"
@@ -179,7 +186,7 @@
                                         <div class="MuiPaper-root jss26552 MuiPaper-elevation1 MuiPaper-rounded">
                                             <div class="MuiBox-root jss26764 jss26699 borderBottom">
                                                 <div class="MuiBox-root jss29282 jss26559">
-                                                    <h6 class="MuiTypography-root MuiTypography-h6">Giá sản phẩm</h6>
+                                                    <h6 class="MuiTypography-root MuiTypography-h6"style="font-size: 16px;">Giá sản phẩm</h6>
                                                 </div>
                                             </div>
                                             <div class="MuiBox-root jss26767 product-content-infor">
@@ -190,19 +197,21 @@
                                                              style="margin-bottom: 20px">
                                                             <div class="row">
                                                                 <div class="col-6">
-                                                                    <span style="font-weight: 500">Giá bán lẻ</span>
+                                                                    <span>Giá bán lẻ</span>
                                                                     <input aria-invalid="false"
                                                                            autocomplete="off"
-                                                                           id="retailPriceUpdate 731b40ed-6bd4-451f-979e-e4957c2c84a0"
-                                                                           type="number"
+                                                                           id="retailPriceUpdate"
+                                                                           type="text"
                                                                            name="retailPriceUpdate"
                                                                            aria-label="Without label"
                                                                            class="retailPriceUpdate form-control"
                                                                            style="width: 100%; text-align: right;"
-                                                                           th:value="${#numbers.formatDecimal(product.retailPrice, 0, 0, 'POINT')}">
+                                                                           pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency"
+                                                                           th:value="${#numbers.formatDecimal(product.retailPrice, 0, 0, 'POINT')}"
+                                                                    >
                                                                 </div>
                                                                 <div class="col-6">
-                                                                    <span style="font-weight: 500">Giá bán buôn</span>
+                                                                    <span>Giá bán buôn</span>
                                                                     <input aria-invalid="false"
                                                                            autocomplete="off"
                                                                            id="wholesalePriceUpdate 50a30b49-8f95-4c1c-b0ec-1683c8f22fb1"
@@ -224,7 +233,7 @@
                                                         <div class="MuiFormControl-root MuiTextField-root jss27091 MuiFormControl-fullWidth">
                                                             <div class="row">
                                                                 <div class="col">
-                                                                    <span style="font-weight: 500">Giá nhập</span>
+                                                                    <span>Giá nhập</span>
                                                                     <input aria-invalid="false"
                                                                            autocomplete="off"
                                                                            id="importPriceUpdate 1901e214-820f-4ed4-b224-4509d7f7ff3c"
@@ -301,7 +310,7 @@
                                              style="box-shadow: rgba(168, 168, 168, 0.25) 0 2px 4px; padding-bottom: 0; display: block;">
                                             <div class="MuiBox-root jss26822 jss26699 borderBottom"
                                                  style="padding: 16px 24px;">
-                                                <h6 class="MuiTypography-root MuiTypography-h6">Thông tin bổ sung</h6>
+                                                <h6 class="MuiTypography-root MuiTypography-h6">Phân loại</h6>
                                             </div>
                                             <div class="MuiBox-root jss26823">
                                                 <!--                                        nhat-dev: select menu categories-->
@@ -336,7 +345,7 @@
                                                                 <li class="text-primary dropdown-item">
                                                                     <button id="btnCreateCat" style="border: none; color: #2d9dff;padding: 10px;text-align: start;
                                                                      font-weight: 500;
-                                                                     font-size: 14px" class="bg-white w-100">
+                                                                     font-size: 14px" class="bg-white w-100" type="button">
                                                                         <i class="fa-solid fa-circle-plus"
                                                                            style="margin: 0 9px"></i>Thêm mới
                                                                         loại sản phẩm
@@ -363,7 +372,7 @@
                                                                 justify-content: space-between;
                                                                 align-items: center; ">
                                                             <span id="brandProType"
-                                                                  th:text="*{brandId != null} ? *{brand.title} : 'Chọn loại nhãn hiệu'"></span>
+                                                                  th:text="*{brandId != null} ? *{brand.title} : 'Chọn nhãn hiệu'"></span>
                                                         </div>
                                                         <ul class="dropdown-menu w-100 brandIdUpdate showAllBrand">
                                                             <div>
@@ -380,7 +389,7 @@
                                                                 <li class="text-primary dropdown-item">
                                                                     <button id="btnCreateBrand" style="border: none; color: #2d9dff;padding: 10px;text-align: start;
                                                                      font-weight: 500;
-                                                                     font-size: 14px" class="bg-white w-100">
+                                                                     font-size: 14px" class="bg-white w-100" type="button">
                                                                         <i class="fa-solid fa-circle-plus"
                                                                            style="margin: 0 9px"></i>Thêm mới nhãn hiệu
                                                                     </button>
@@ -567,7 +576,8 @@
                                                                                 <button style="border: none; color: #2d9dff;padding: 10px;text-align: start;
                                                                      font-weight: 500;
                                                                      font-size: 14px"
-                                                                                        class="bg-white w-100 btnCreateTax">
+                                                                                        class="bg-white w-100 btnCreateTax"
+                                                                                type="button">
                                                                                     <i class="fa-solid fa-circle-plus"
                                                                                        style="margin: 0 9px"></i>Thêm
                                                                                     mới thuế
@@ -612,7 +622,8 @@
                                                                                 <button style="border: none; color: #2d9dff;padding: 10px;text-align: start;
                                                                      font-weight: 500;
                                                                      font-size: 14px"
-                                                                                        class="bg-white w-100 btnCreateTax">
+                                                                                        class="bg-white w-100 btnCreateTax"
+                                                                                        type="button">
                                                                                     <i class="fa-solid fa-circle-plus"
                                                                                        style="margin: 0 9px"></i>Thêm
                                                                                     mới thuế
@@ -696,11 +707,11 @@
                                                                             Chi nhánh mặc định</p></td>
                                                                     <td class="MuiTableCell-root MuiTableCell-body jss7570 MuiTableCell-alignCenter">
                                                                         <p class="MuiTypography-root MuiTypography-body1"
-                                                                           th:text="*{totalInventory}">
+                                                                           th:text="${#numbers.formatDecimal(product.totalInventory, 0, 'COMMA',0 , 'POINT')}">
                                                                         </p></td>
                                                                     <td class="MuiTableCell-root MuiTableCell-body jss7570 MuiTableCell-alignCenter">
                                                                         <p class="MuiTypography-root MuiTypography-body1"
-                                                                           th:text="*{availableInventory}">
+                                                                           th:text="${#numbers.formatDecimal(product.availableInventory, 0, 'COMMA',0 , 'POINT')}">
                                                                         </p></td>
                                                                     <td class="MuiTableCell-root MuiTableCell-body jss7570 MuiTableCell-alignCenter">
                                                                         <p class="MuiTypography-root MuiTypography-body1"
@@ -776,6 +787,24 @@
         </form>
     </div>
 </div>
+<div class="modal fade" id="previewImg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen-lg-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Chi Tiết Ảnh</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="w3-content">
+                    <div class="row bigImg" style="height: 400px; ">
+                    </div>
+                    <div class="w3-row-padding w3-section smallImg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <th:block th:replace="/layout/script :: script"/>
 
 <script src="/assets/admin/js/cate_brand/category.js"></script>
@@ -798,7 +827,18 @@
 
 </body>
 
-<script>
+
+
+<script th:inline="javascript">
+
+    /*<![CDATA[*/
+
+    var medias = /*[[${medias}]]*/ 'default';
+
+
+    /*]]>*/
+
+    let media = JSON.parse(medias);
     let page = {
         cloudinary: {},
         urls: {
@@ -822,8 +862,7 @@
     let category = new Category();
     let brand = new Brand();
     let tax = new Tax();
-    let imgs = [];
-
+    var imgs = [];
 
     page.cloudinary.api_key = 142768397813839;
     page.cloudinary.api_secret = "8JitSG_omu6CkELDwlpNH-uqAaE";
@@ -886,6 +925,7 @@
         product.taxInclusive = $("#priceDepsTax").val() == 2 ? true : false;
         product.taxList = taxs;
         product.mediaList = imgs;
+        console.log(imgs);
 
         $.ajax({
             "headers": {
@@ -999,6 +1039,7 @@
         page.dialogs.elements.frmUpdateProduct.trigger("submit");
     })
 
+
     // Upload file images
     $.cloudinary.config({
         api_key: page.cloudinary.api_key,
@@ -1042,22 +1083,46 @@
             img.fileType = infoImg.resource_type;
             img.fileFolder = infoImg.folder;
             img.fileName = infoImg.original_filename;
-            console.log(img);
             imgs.push(img);
-            let str = `<div id="div_${img.fileName}" class="profile-pic jss26799 MuiGrid-item MuiGrid-grid-md-2" style="width: 100%; height: 50%; margin: 0 24px 24px 0; padding: 0">
-                            <img id="img." src="${img.fileUrl}" width="100%" height="120px" style="float: left"/>
-                            <div class="edit" id="${img.fileName}" onclick="removeImg(this)">
-                                <i class="fa-solid fa-circle-xmark" style="color: red"></i>
-                            </div>
-                       </div>`
-            page.dialogs.elements.showImg.append(str);
+            page.commands.pushImage(img);
+            console.log(imgs)
             $(".progress").attr('hidden', true);
             $(".loading").remove();
-            // console.log(imgs)
         })
         .on('fileuploadprogress', function (e, data) {
             return $(".progress").removeAttr('hidden').css("width", `${data.loaded / data.total * 100}%`);
         });
+
+    page.commands.pushImage = (img) => {
+        let str = `<div id="div_${img.cloudId}" class="profile-pic jss26799 MuiGrid-item MuiGrid-grid-md-2" style="width: 100%; height: 50%; margin: 0 24px 24px 0; padding: 0">
+                            <img id="img." src="${img.fileUrl}" onclick="showPreviewImg()" width="100%" height="120px" style="float: left"/>
+                            <div class="edit" id="${img.cloudId}" onclick="removeImg(this)">
+                                <i class="fa-solid fa-circle-xmark" style="color: red"></i>
+                            </div>
+                       </div>`
+        page.dialogs.elements.showImg.append(str);
+        if (imgs.length !== 0) {
+            page.dialogs.elements.showImgSmall.removeAttr("hidden");
+            page.dialogs.elements.showImgBig.attr("hidden", true);
+        }
+        return;
+    }
+
+    if (media.length !== 0) {
+        console.log("hahah")
+        console.log(media)
+        for (let i = 0; i < media.length; i++) {
+            let imgres = new Image();
+            imgres.cloudId = media[i].cloudId
+            imgres.fileFolder = media[i].fileFolder
+            imgres.fileName =media[i].fileName
+            imgres.fileType = media[i].fileType
+            imgres.fileUrl = media[i].fileUrl
+            imgs.push(imgres);
+            page.commands.pushImage(imgres);
+            console.log("imgres",imgs)
+        }
+    }
 
     page.commands.renderImg = () => {
         let str = `<div class="profile-pic loading jss26799 MuiGrid-item MuiGrid-grid-md-2" style="width: 100%; height: 120px; margin: 0 24px 24px 0; padding: 0">
@@ -1071,20 +1136,109 @@
         return page.dialogs.elements.showImg.append(str);
     }
 
-    function removeImg(imgRemove) {
-        let idImg = (imgRemove.id);
-        if (imgRemove) {
-            imgs.splice(imgs.indexOf(idImg), 1);
+    function showPreviewImg() {
+        $(".bigImg").empty();
+        $(".smallImg").empty();
+
+        for (let i = 0; i < imgs.length; i++) {
+            let str1 = "";
+            let str2 = "";
+            if (i == 0) {
+                str1 = `<img class="mySlides" src="${imgs[i].fileUrl}" style="width: 400px; height: 300px; text-align: center">`
+                str2 = `<div class="w3-col s4">
+                            <img class="demo w3-opacity w3-hover-opacity-off" src="${imgs[i].fileUrl}" style="width:100%; cursor:pointer" onclick="currentDiv(${i + 1})">
+                        </div>`
+            }
+            else {
+                str1 = `<img class="mySlides" src="${imgs[i].fileUrl}" style="width: 400px; height: 300px; display:none; text-align: center">`
+                str2 = `<div class="w3-col s4">
+                            <img class="demo w3-opacity w3-hover-opacity-off" src="${imgs[i].fileUrl}" style="width:100%;cursor:pointer" onclick="currentDiv(${i + 1})">
+                        </div>`
+            }
+            $(".bigImg").append(str1);
+            $(".smallImg").append(str2);
         }
-        $("#div_" + idImg).remove();
+        $("#previewImg").modal('show');
+    }
+    function currentDiv(n) {
+        showDivs(slideIndex = n);
+    }
+
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        if (n > x.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = x.length}
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+        }
+        x[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " w3-opacity-off";
+    }
+
+    function removeImg(imgRemove) {
+        if (imgRemove) {
+            for (let i = 0; i < imgs.length; i++) {
+                if (imgs[i].cloudId === imgRemove.id) {
+                    imgs.splice(i, 1);
+                }
+            }
+        }
+        $("#div_" + imgRemove.id).remove();
         if (imgs.length < 1) {
             page.dialogs.elements.showImgBig.removeAttr("hidden");
             page.dialogs.elements.showImgSmall.attr("hidden", true);
         }
     }
 
+    $('#btnAddCategory').on("click", function () {
+        $("#frmCreateCat").trigger("submit");
+    })
 
-    $('#btnAddCategory').on('click', () => {
+    $("#frmCreateCat").validate({
+        rules: {
+            inputCat: {
+                required: true,
+                maxlength: 50
+            }
+        },
+        messages: {
+            inputCat: {
+                required: "Tên loại sản phẩm không được để trống",
+                maxlength: "Loại sản phẩm tối đa 50 kí tự"
+            }
+        },
+        submitHandler: function (){
+            createCategory();
+        }
+    });
+
+    $('#btnAddBrand').on("click", function () {
+        $("#frmCreateBrand").trigger("submit");
+    })
+    $("#frmCreateBrand").validate({
+        rules: {
+            inputBrand: {
+                required: true,
+                maxlength: 50
+            }
+        },
+        messages: {
+            inputBrand: {
+                required: "Tên nhãn hiệu không được để trống",
+                maxlength: "Nhãn hiệu tối đa 50 kí tự"
+            }
+        },
+        submitHandler: function (){
+            createBrand()
+        }
+    });
+
+    function createCategory() {
         category.id = 0;
         category.title = $('#inputCategory').val();
         console.log(category)
@@ -1098,7 +1252,7 @@
             "data": JSON.stringify(category)
         })
             .done((data) => {
-                App.IziToast.showSuccessAlert("Thêm loại sản phẩm thành công!")
+                App.IziToast.showSuccessAlert("Tạo loại sản phẩm mới thành công!");
                 $(".showAllCategory #showAllCAt").empty();
                 showAllCategories();
                 $('#modalAddCategory').modal('hide');
@@ -1106,12 +1260,14 @@
 
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert("Thêm loại sản phẩm thất bại!")
+                App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
-    })
+    }
+    //<<<--------nhat-dev end onclick create category
 
 
-    $('#btnAddBrand').on('click', () => {
+    //----->>>Nhat-dev OnClick button to create brand
+    function createBrand() {
         brand.id = 0;
         brand.title = $('#inputBrand').val();
         console.log(brand)
@@ -1125,20 +1281,60 @@
             "data": JSON.stringify(brand)
         })
             .done((data) => {
-                App.IziToast.showSuccessAlert("Thêm nhãn hiệu thành công!")
+                App.IziToast.showSuccessAlert("Tạo nhãn hiệu mới thành công!");
                 $(".showAllBrand #showAllBrand").empty();
-                showAllBrands()
+                showAllBrands();
                 $('#modalAddBrand').modal('hide');
                 $('#frmCreateBrand')[0].reset();
 
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert("Thêm nhãn hiệu thất bại!")
+                App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
-    })
+    }
     //<<<--------nhat-dev end onclick create brand
     //----->>>Nhat-dev OnClick button to create tax
-    $('#btnAddTax').on('click', () => {
+
+    $('#btnAddTax').on("click", function () {
+        $("#frmCreateTax").trigger("submit");
+    })
+    $("#frmCreateTax").validate({
+        rules: {
+            taxTitle: {
+                required: true,
+                maxlength: 50
+            },
+            taxCode: {
+                required: true,
+                maxlength: 50
+            },
+            tax: {
+                required: true,
+                min: 0,
+                max: 100
+            }
+        },
+        messages: {
+            taxTitle: {
+                required: "Tên thuế không được để trống",
+                maxlength: "Thuế tối đa 50 kí tự"
+            },
+            taxCode: {
+                required: "Mã thuế không được để trống",
+                maxlength: "Mã thuế tối đa 50 kí tự"
+            },
+            tax: {
+                required: "Thuế suất không được để trống",
+                min: "Thuế suất tối thiếu 0%",
+                max: "Thuế suất tối đa 100%"
+            }
+        },
+        submitHandler: function (){
+            createTax();
+        }
+    });
+
+    function createTax() {
         tax.id = 0;
         tax.title = $('#inputTaxTitle').val();
         tax.code = $('#inputTaxCode').val();
@@ -1155,7 +1351,7 @@
             "data": JSON.stringify(tax)
         })
             .done((data) => {
-                App.IziToast.showSuccessAlert("Thêm thuế thành công!")
+                App.IziToast.showSuccessAlert("Tạo thuế thành công!")
                 $(".showAllTax #showALlTax").empty();
                 $(".showAllTaxOut #showALlTaxOut").empty();
                 showAllTaxes()
@@ -1164,9 +1360,9 @@
 
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert("Thêm thuế thất bại!")
+                App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
-    })
+    }
     //<<<--------nhat-dev end onclick create brand
     //checkbox event apply tax
     $('#applyTax').click(function () {
@@ -1184,7 +1380,6 @@
             $("#showCreateVariant").css("display", "none");
         }
     });
-
 
     //nhat_dev called function categories and brands
     showAllCategories();
