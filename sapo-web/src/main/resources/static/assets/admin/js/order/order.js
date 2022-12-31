@@ -47,7 +47,7 @@ function showListCustomer() {
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"></path>
                         </svg>
                         <div class="MuiBox-root jss4983"><p
-                                class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap">${customer.name}</p>
+                                class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap">${customer.fullName}</p>
                                 <h6 class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-noWrap">${customer.phoneNumber}</h6></div>
                         <span class="MuiTouchRipple-root"></span>
                     </li>
@@ -87,7 +87,7 @@ const searchCustomer = () => {
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"></path>
                         </svg>
                         <div class="MuiBox-root jss4983"><p
-                                class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap">${customer.name}</p>
+                                class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap">${customer.fullName}</p>
                                 <h6 class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-noWrap">${customer.phoneNumber}</h6></div>
                         <span class="MuiTouchRipple-root"></span>
                     </li>
@@ -166,7 +166,7 @@ function showCustomerInfo(idCustomer) {
         if (shippingAddress.provinceName != null)
             fullShippingAddress += `${shippingAddress.provinceName}`;
         saleOrder.customerId = customer.id;
-        saleOrder.fullName = customer.name;
+        saleOrder.fullName = customer.fullName;
         saleOrder.mobile = customer.phone;
         saleOrder.email = customer.email;
         saleOrder.line1 = shippingAddress.line1;
@@ -208,7 +208,7 @@ function showCustomerInfo(idCustomer) {
                     <div class="MuiBox-root jss3889"><a target="_blank" href="/admin/customers/181966855"
                             style="text-decoration: none; display: inline-flex; align-items: center;">
                             <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorPrimary"
-                                title="Denise Zimmerman">${result.name}</h6>
+                                title="Denise Zimmerman">${result.fullName}</h6>
                             <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorTextPrimary">
                                 &nbsp;-&nbsp;${result.phoneNumber}</h6>
                         </a>
@@ -472,6 +472,7 @@ function getAllProvinces() {
                     let str = `<option value="${item.province_id}">${item.province_name}</option>`;
                     $("#province").append(str);
                     $('#provinceUpdate').append(str);
+                    $('#provinceCreate').append(str);
                 });
             }
 
@@ -484,6 +485,7 @@ function getAllProvinces() {
 function getAllDistrictsByProvinceId(provinceId) {
     $("#district").empty();
     $("#districtUpdate").empty();
+    $("#districtCreate").empty();
     return $.ajax({
         headers: {
             "accept": "application/json",
@@ -501,6 +503,7 @@ function getAllDistrictsByProvinceId(provinceId) {
                     let str = ` <option value="${item.district_id}">${item.district_name}</option>`;
                     $("#district").append(str);
                     $('#districtUpdate').append(str);
+                    $('#districtCreate').append(str);
                 })
 
             }
@@ -513,6 +516,7 @@ function getAllDistrictsByProvinceId(provinceId) {
 function getAllWardsByDistrictId(districtId) {
     $("#ward").empty();
     $('#wardUpdate').empty();
+    $('#wardCreate').empty();
     return $.ajax({
         headers: {
             "accept": "application/json",
@@ -534,6 +538,7 @@ function getAllWardsByDistrictId(districtId) {
                     let str = `<option value="${item.ward_id}">${item.ward_name}</option>`;
                     $("#ward").append(str);
                     $('#wardUpdate').append(str);
+                    $('#wardCreate').append(str);
                 });
             }
         })
@@ -746,7 +751,7 @@ function getAllEmployees() {
 function editCustomer() {
     let id = $("#idCustomer").val();
     $('#idCustomerUpdate').val(customer.id);
-    $("#nameUpdate").val(customer.name)
+    $("#nameUpdate").val(customer.fullName)
     $('#phoneUpdate').val(customer.phoneNumber);
     $('#addressUpdate').val(customer.addresses[0].line1);
     $('#provinceUpdate').val(customer.addresses[0].provinceId);
@@ -1006,13 +1011,14 @@ function renderSaleOrderItem(productId, operator, valueNumber) {
                                 <input aria-invalid="false" autocomplete="off"
                                     oninput='editQuantity(${result.id})'
                                     name="" type="text"
-                                    class="MuiInputBase-input MuiInput-input" value="1" min="1"
+                                    class="MuiInputBase-input MuiInput-input"
                                     style="text-align: center; width: 100%;"
                                     id="quantity_product_${result.id}">
                                 </div>
                         </div>
                     </div><button
-                        class="MuiButtonBase-root MuiIconButton-root jss3912 icon-btn btn-add auto-hidden" onclick="addQuantity(${result.id})"
+                        class="MuiButtonBase-root MuiIconButton-root jss3912 icon-btn btn-add auto-hidden" 
+                        onclick="addQuantity(${result.id})"
                          id="addQuantity_${result.id}"
                         tabindex="0" type="button"><span class="MuiIconButton-label"><svg
                                 class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall" focusable="false"

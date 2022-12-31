@@ -11,6 +11,7 @@ import vn.sapo.entities.product.Item;
 import vn.sapo.entities.product.Product;
 import vn.sapo.entities.tax.ProductTax;
 import vn.sapo.entities.tax.TaxType;
+import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotEnoughQuantityException;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.item.ItemRepository;
@@ -87,7 +88,7 @@ public class SaleOrderServiceImpl implements SaleOrderService {
         order.setOrderStatus(OrderStatusCode.CHECKOUT);
         order.setPaymentStatus(OrderStatusCode.UNPAID);
         order = saleOrderRepository.save(order);
-        order.setOrderCode("SON" + order.getId());
+        order.setOrderCode(CodePrefix.SALE_ORDER.generate(order.getId()));
         BigDecimal total = BigDecimal.valueOf(0);
         BigDecimal subTotal = BigDecimal.valueOf(0);
         BigDecimal grandTotal = BigDecimal.valueOf(0);

@@ -16,12 +16,12 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
-public class ProductExcelExporter {
+public class ProductExcelExporterInventory {
     private XSSFWorkbook workbook;
     private XSSFSheet sheet;
     private List<ProductResult> productList;
 
-    public ProductExcelExporter(List<ProductResult> productList) {
+    public ProductExcelExporterInventory(List<ProductResult> productList) {
         this.productList = productList;
         workbook = new XSSFWorkbook();
     }
@@ -46,7 +46,6 @@ public class ProductExcelExporter {
         createCell(row, 5, "Giá bán lẻ", style);
         createCell(row, 6, "Giá bán buôn", style);
         createCell(row, 7, "Giá nhập", style);
-        //
         createCell(row, 8, "Đơn vị", style);
         createCell(row, 9, "Mã SKU", style);
         createCell(row, 10, "Mã BarCode", style);
@@ -56,6 +55,18 @@ public class ProductExcelExporter {
         createCell(row, 14, "Ngày cập nhật", style);
         createCell(row, 15, "Có thể bán", style);
         createCell(row, 16, "Tồn kho", style);
+        //
+        createCell(row, 17, "Hàng đang về", style);
+        createCell(row, 18, "Hàng đang giao", style);
+        createCell(row, 19, "Đang giao dịch", style);
+        createCell(row, 20, "Áp dụng thuế", style);
+        createCell(row, 21, "Giá gồm thuế", style);
+        createCell(row, 22, "Thuế đầu vào", style);
+        createCell(row, 23, "Thuế đầu ra", style);
+
+
+
+
 
     }
 
@@ -104,6 +115,16 @@ public class ProductExcelExporter {
             createCell(row, columnCount++, product.getUpdatedAt().toString(), style);
             createCell(row, columnCount++, product.getAvailableInventory(), style);
             createCell(row, columnCount++, product.getTotalInventory(), style);
+            createCell(row, columnCount++, product.getInTransit(), style);
+            createCell(row, columnCount++, product.getShipping(), style);
+            createCell(row, columnCount++, product.getTrading(), style);
+            createCell(row, columnCount++, product.isApplyTax() == true ? "Có" : "Không", style);
+            createCell(row, columnCount++, product.isTaxInclusive()== true ? "Có" : "Không", style);
+            createCell(row, columnCount++, product.getPurchaseTaxList().toString(), style);
+            createCell(row, columnCount++, product.getSaleTaxList().toString(), style);
+
+            //
+
         }
     }
 

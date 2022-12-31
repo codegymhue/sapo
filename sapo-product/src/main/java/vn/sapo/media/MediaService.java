@@ -12,4 +12,6 @@ public interface MediaService {
 
     List<MediaResult> save(List<MediaParam> mediaParam, Integer idProduct);
     String getLinkMediaByProductIdIsMain(Integer productId);
+
+    void deleteAllByProductId(Integer productId);
 }
