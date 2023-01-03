@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @Setter
 @Accessors(chain = true)
 public class CreateAddressParam {
-    @NotBlank(message = "Trường customer_ID không được để trống")
+    @NotBlank(message = "Trường customer_ID bị null")
     private Integer customerId;
     private Integer supplierId;
     @NotBlank(message = "Tên khách hàng không được để trống")
@@ -32,6 +32,7 @@ public class CreateAddressParam {
 
     private String email;
     private String zipCode;
+
     private boolean isReceiveBill;
     private boolean isShipping;
 }
