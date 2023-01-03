@@ -27,7 +27,7 @@ public class SaleOrder extends BaseEntity {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "order_code", unique = true)
+    @Column(name = "order_code")
     private String orderCode;
 
     @Column(name = "full_name", length = 50)

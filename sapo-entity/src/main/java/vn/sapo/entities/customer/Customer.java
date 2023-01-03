@@ -55,9 +55,6 @@ public class Customer extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private CustomerGender gender;
 
-    @Column(name = "description")
-    private String description;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cus_group_id", nullable = false)
     private CustomerGroup group;

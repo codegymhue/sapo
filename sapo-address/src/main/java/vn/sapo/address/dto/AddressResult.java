@@ -41,5 +41,4 @@ public class AddressResult {
     private boolean isShipping;
 
     private boolean isReceiveBill;
-
 }
