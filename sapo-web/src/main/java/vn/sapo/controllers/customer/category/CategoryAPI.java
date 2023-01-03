@@ -1,4 +1,4 @@
-package vn.sapo.controllers.category;
+package vn.sapo.controllers.customer.category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
