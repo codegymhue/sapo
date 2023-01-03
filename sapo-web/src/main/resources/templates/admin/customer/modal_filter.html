@@ -32,7 +32,55 @@
             background: transparent;
             padding: 0px;
         }
+
+        .sidenav {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        .sidenav a, .dropdown-btn {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #818181;
+            display: block;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .dropdown-container {
+            display: none;
+            background-color: white;
+            padding-left: 8px;
+        }
+
+        .fa-caret-down {
+            float: right;
+            padding-right: 8px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
     </style>
+    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="/assets/admin/css/customer/filter.css"/>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
@@ -60,19 +108,21 @@
                         class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorPrimary">Bộ lọc nâng cao</h6></span>
             </button>
         </div>
-        <div>
-            <p class="MuiTypography-root jss1745 MuiTypography-body1">Nổi bật</p>
-        </div>
+
         <div class="offcanvas-body">
+            <div>
+                <p class="MuiTypography-root jss1745 MuiTypography-body1" style="margin-left: -23px">Nổi bật</p>
+            </div>
             <div class="dropdown">
-                <div class="btn bg-secondary dropdown-toggle select-btn-cat"
-                     type="button" data-bs-toggle="dropdown"
-                     aria-expanded="false" style=" border: solid 1px #D3D5D7;border: solid 1px #D3D5D7;
+                <div
+                        type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false" style="
                                                                 display: flex;
                                                                 justify-content: space-between;
                                                                 align-items: center; ">
-                                                        <span id="catProType"
-                                                              th:text="*{categoryId != null} ? *{category.title} : 'Nhóm khách Hàng' "></span>
+                    <button class="dropdown-btn" style="font-size: 1rem;">. Chọn Khách Hàng
+                        <i class="fa fa-caret-down"></i>
+                    </button>
                 </div>
                 <ul class="dropdown-menu w-100 categoryIdUpdate showAllCategory">
                     <div>
@@ -102,56 +152,211 @@
                     </div>
                 </ul>
             </div>
-            <div class="MuiBox-root jss1758 jss1737 filter-item" filter-name="gender"
-                 style="transition: all 300ms ease 0s;">
-                <div class="MuiBox-root jss1759 jss1738 open">
-                    <div class="MuiBox-root jss1760"><p class="MuiTypography-root bullet MuiTypography-body1">•</p>
-                        <p class="MuiTypography-root MuiTypography-body1">Giới tính</p></div>
-                    <svg class="MuiSvgIcon-root arrow-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true"
-                         style="width: 24px; height: 24px;">
-                        <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path>
-                    </svg>
+            <button class="dropdown-btn" style="font-size: 1rem;">. Giới Tính
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Nam
+                    </label>
                 </div>
-                <div class="MuiCollapse-container MuiCollapse-entered"
-                     style="min-height: 0px; height: auto; transition-duration: 300ms;">
-                    <div class="MuiCollapse-wrapper">
-                        <div class="MuiCollapse-wrapperInner">
-                            <div class="MuiBox-root jss1761 jss1739">
-                                <div class="MuiBox-root jss1764">
-                                    <div direction="column" class="sc-ESujJ iFpoII">
-                                        <div class="sc-yeoIj eCdJYU">
-                                            <div class="sc-dWINGa fBqWAt"><input
-                                                    id="Sapo-Radio-4f06ba0d-0d44-431c-bbb3-eb0f325b1e40" type="radio"
-                                                    class="sc-bPyhqo jTTHGH">
-                                                <div class="sc-fWIMVQ keGhLG"></div>
-                                            </div>
-                                            <label for="Sapo-Radio-4f06ba0d-0d44-431c-bbb3-eb0f325b1e40"
-                                                   class="sc-jGprRt cWJjIw">Nam</label></div>
-                                        <div class="sc-yeoIj eCdJYU">
-                                            <div class="sc-dWINGa fBqWAt"><input
-                                                    id="Sapo-Radio-a07195f9-486e-4424-a07f-dbcd2208bf58" type="radio"
-                                                    class="sc-bPyhqo jTTHGH">
-                                                <div class="sc-fWIMVQ keGhLG"></div>
-                                            </div>
-                                            <label for="Sapo-Radio-a07195f9-486e-4424-a07f-dbcd2208bf58"
-                                                   class="sc-jGprRt cWJjIw">Nữ</label></div>
-                                        <div class="sc-yeoIj eCdJYU">
-                                            <div class="sc-dWINGa fBqWAt"><input
-                                                    id="Sapo-Radio-3923faed-9d72-4b0f-85d2-f496592dc67b" type="radio"
-                                                    class="sc-bPyhqo jTTHGH">
-                                                <div class="sc-fWIMVQ keGhLG"></div>
-                                            </div>
-                                            <label for="Sapo-Radio-3923faed-9d72-4b0f-85d2-f496592dc67b"
-                                                   class="sc-jGprRt cWJjIw">Khác</label></div>
-                                    </div>
-                                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Nữ
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Khác
+                    </label>
+                </div>
+            </div>
+            <button class="dropdown-btn" style="font-size: 1rem;">. Ngày Tháng sinh
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <div class="row">
+                    <div class="btn bg-secondary dropdown-toggle select-btn-cat col-6"
+                         type="button" data-bs-toggle="dropdown"
+                         aria-expanded="false" style=" border: solid 1px #D3D5D7;border: solid 1px #D3D5D7;
+                                                                display: flex;
+                                                                justify-content: space-between;
+                                                                align-items: center; ">
+                                                        <span id=""
+                                                              th:text="*{categoryId != null} ? *{category.title} : 'chọn ngày' "></span>
+                    </div>
+                    <ul class="dropdown-menu w-100 categoryIdUpdate showAllCategory">
+
+                    </ul>
+                    <div class="btn bg-secondary dropdown-toggle select-btn-cat col-6"
+                         type="button" data-bs-toggle="dropdown"
+                         aria-expanded="false" style=" border: solid 1px #D3D5D7;border: solid 1px #D3D5D7;
+                                                                display: flex;
+                                                                justify-content: space-between;
+                                                                align-items: center; ">
+                                                        <span id=""
+                                                              th:text="*{categoryId != null} ? *{category.title} : 'chọn Tháng' "></span>
+                    </div>
+                    <ul class="dropdown-menu w-100 categoryIdUpdate showAllCategory">
+
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <div
+                        type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false" style="
+                                                                display: flex;
+                                                                justify-content: space-between;
+                                                                align-items: center; ">
+                    <button class="dropdown-btn" style="font-size: 1rem;">. Nhân Viên Phụ Trách
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                </div>
+                <ul class="dropdown-menu w-100 categoryIdUpdate showAllCategory">
+                    <div>
+                        <li>
+                            <div class="d-flex align-items-center">
+                                <i class="fa-solid fa-magnifying-glass" style="margin-left: 16px;
+                                                                   margin-right: 4px;
+                                                                   color: #828282"></i>
+                                <input id="searchEmployee" style="margin: 2px"
+                                       class="w-100 form-control border border-0"
+                                       placeholder="Tìm kiếm hoặc nhập mới"/>
+                            </div>
+                        </li>
+                        <li class="text-primary dropdown-item">
+                            <ul style="margin-top: 5px">
+                                <input type="checkbox" id="" name="vehicle1" value="Bike">
+                                <label for="vehicle1">sang</label><br>
+                                <input type="checkbox" id="" name="vehicle2" value="Car">
+                                <label for="vehicle2">khanh</label><br>
+
+                            </ul>
+                        </li>
+                    </div>
+                </ul>
+                <div>
+                    <p class="MuiTypography-root jss1745 MuiTypography-body1" style="margin-left: -23px">Nhóm Khác</p>
+                </div>
+                <div class="dropdown">
+                    <div
+                            type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" style="
+                                                                display: flex;
+                                                                justify-content: space-between;
+                                                                align-items: center; ">
+                        <button class="dropdown-btn" style="font-size: 1rem;">. Trạng Thái
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                    </div>
+                    <ul class="dropdown-menu w-100 categoryIdUpdate showAllCategory">
+                        <div>
+                            <li class="text dropdown-item">
+                                <ul style="margin-top: 5px">
+                                    <input type="checkbox" id="" name="vehicle1" value="Bike">
+                                    <label for="vehicle1">Đang Giao Dịch</label><br>
+                                    <input type="checkbox" id="" name="vehicle2" value="Car">
+                                    <label for="vehicle2">Ngừng Giao Dịch</label><br>
+
+                                </ul>
+                            </li>
+                        </div>
+                    </ul>
+                    <button class="dropdown-btn" style="font-size: 1rem;">. Tags
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        <input placeholder="Nhập tại đây" type="text" class="MuiInputBase-input" value="">
+                    </div>
+                    <button class="dropdown-btn" style="font-size: 1rem;">. Ngày Tạo
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        <div class="row">
+                            <div class="col-6">
+                                <input id="datepicker" width="170" placeholder="dd/mm/yyyy"/>
+                                <p><a href="https://gijgo.com/datepicker/example/bootstrap-5">
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <input id="datepicker2" width="170" placeholder="dd/mm/yyyy"/>
+                                <p><a href="https://gijgo.com/datepicker/example/bootstrap-5">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="dropdown-btn" style="font-size: 1rem;">. Khoảng Ngày Sinh
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        <div class="row">
+                            <div class="col-6">
+                                <input id="datepicker3" width="170" placeholder="dd/mm/yyyy"/>
+                                <p><a href="https://gijgo.com/datepicker/example/bootstrap-5">
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <input id="datepicker4" width="170" placeholder="dd/mm/yyyy"/>
+                                <p><a href="https://gijgo.com/datepicker/example/bootstrap-5">
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <button class="dropdown-btn" style="font-size: 1rem;">. Ngày Sinh
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <input id="datepicker5" width="370"/>
+                <p><a href="https://gijgo.com/datepicker/example/bootstrap-5">
+                </a>
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse my-3" style="width: 95%">
+            <button type="button" class="btn btn-danger mx-2" style="width: 70px; color: rgb(255, 255, 255);background: rgb(0, 136, 255);border: none;">Lọc</button>
+            <button type="button" class="btn btn-primary" style="width: 90px; border: 1px solid rgb(255, 77, 77);background: rgb(255, 255, 255);color: rgb(255, 77, 77);">Xóa Bộ Lọc
+            </button>
         </div>
 
-
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+    <script>
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap5'
+        });
+        $('#datepicker2').datepicker({
+            uiLibrary: 'bootstrap5'
+        });
+        $('#datepicker3').datepicker({
+            uiLibrary: 'bootstrap5'
+        });
+        $('#datepicker4').datepicker({
+            uiLibrary: 'bootstrap5'
+        });
+        $('#datepicker5').datepicker({
+            uiLibrary: 'bootstrap5'
+        });
+    </script>
 </th:block>
