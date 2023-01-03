@@ -69,7 +69,7 @@ public class CustomerServiceImpl implements CustomerService {
         customer = customerRepository.save(customer);
         String cusCode = customer.getCustomerCode();
         if (cusCode == null || cusCode.trim().isEmpty())
-            customer.setCustomerCode(CodePrefix.CUSTOMER + CodePrefix.format(customer.getId()));
+            customer.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
 
         return customerMapper.toDTO(customer);
     }
