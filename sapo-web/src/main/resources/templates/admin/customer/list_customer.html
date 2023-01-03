@@ -3,6 +3,7 @@
 <head>
     <th:block th:replace="/layout/header.html"/>
     <title>Danh sách khách hàng</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/admin/css/customer/customer.css"/>
 </head>
 <body style="font-size: 12px">
@@ -199,31 +200,16 @@
                             </div>
                         </div>
                         <div role="group"
-
                              class="MuiButtonGroup-root jss6803">
-                            <button data-bs-toggle="modal" data-bs-target="#filterCustomer" id="Sapo-Button-36500209-3250-443b-accc-5a44188f93d4" class="sc-jqUVSM jDWLfh"><span
-                                    class="sc-papXJ ffDJGn"><p class="MuiTypography-root MuiTypography-body1 ">Bộ lọc</p></span>
+                            <button type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" id="Sapo-Button-36500209-3250-443b-accc-5a44188f93d4" class="sc-jqUVSM jDWLfh "><span
+                                    class="sc-papXJ ffDJGn"><p class="MuiTypography-root MuiTypography-body1 " style="margin-top: 10px;">Bộ lọc</p></span>
                                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20"
-                                     height="20" font-size="20" style="font-size: 20px; color: rgb(163, 168, 175);">
+                                     height="20"  style="font-size: 20px; color: rgb(163, 168, 175);">
                                     <path d="M20.052 3.667H4.5v1.296h15.552V3.667ZM4.811 5.74l5.988 6.066c.078.077.181.181.181.285v8.242l2.592-1.4v-6.842c0-.104.104-.208.182-.285L19.74 5.74H4.811Z"
                                           fill="currentColor"></path>
                                 </svg>
                             </button>
                             <button disabled="" id="btn-save-search" class="sc-jqUVSM gMKSKz"><span class="sc-papXJ jcEYKF">Lưu bộ lọc</span></button>
-                            <select id="ddl-group-customer" class="form-select" aria-label="Default select example"
-                                    style="width: 180px">
-                                <option selected value="-1" id="showAllCustomerGroup">Nhóm khách hàng</option>
-
-                            </select>
-                            <!--                            <select id="brand" class="form-select" aria-label="Default select example" style="width: 180px">-->
-                            <!--                                <option selected value="-1">Nhãn hiệu</option>-->
-                            <!--                            </select>-->
-                            <select id="ddl-status" class="form-select" aria-label="Default select example"
-                                    style="width: 180px">
-                                <option selected value="-1">Trạng thái</option>
-                                <option value="AVAILABLE">Đang giao dịch</option>
-                                <option value="UNAVAILABLE">Ngừng giao dịch</option>
-                            </select>
                         </div>
                     </div>
                     <div class="MuiBox-root jss6842"></div>
@@ -377,8 +363,9 @@
         </div>
     </div>
 </div>
-
+<th:block th:replace="/admin/customer/modal_filter::modal_filter"/>
 <th:block th:replace="/layout/script :: script"/>
+
 <script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="/assets/admin/js/customer/customer_app.js"></script>
 <script>
