@@ -120,11 +120,11 @@
                                                                 display: flex;
                                                                 justify-content: space-between;
                                                                 align-items: center; ">
-                    <button class="dropdown-btn" style="font-size: 1rem;">. Chọn Khách Hàng
+                    <button class="dropdown-btn" style="font-size: 1rem;">. Nhóm Khách Hàng
                         <i class="fa fa-caret-down"></i>
                     </button>
                 </div>
-                <ul class="dropdown-menu w-100 categoryIdUpdate showAllCategory">
+                <ul class="dropdown-menu w-100 categoryIdUpdate showAllCustomerGroup">
                     <div>
                         <li>
                             <div class="d-flex align-items-center">
@@ -136,17 +136,7 @@
                                        placeholder="Tìm kiếm hoặc nhập mới"/>
                             </div>
                         </li>
-                        <li class="text-primary dropdown-item">
-                            <ul style="margin-top: 5px">
-                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                                <label for="vehicle1"> I have a bike</label><br>
-                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                                <label for="vehicle2"> I have a car</label><br>
-                                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                                <label for="vehicle3"> I have a boat</label><br><br>
-                            </ul>
-                        </li>
-                        <div id="showAllCAt">
+                        <div id="customerGroupFilter">
 
                         </div>
                     </div>
@@ -155,21 +145,24 @@
             <button class="dropdown-btn" style="font-size: 1rem;">. Giới Tính
                 <i class="fa fa-caret-down"></i>
             </button>
-            <div class="dropdown-container">
+            <div class="dropdown-container" id="genderFilter">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                           value="1">
                     <label class="form-check-label" for="flexRadioDefault1">
                         Nam
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked
+                           value="2">
                     <label class="form-check-label" for="flexRadioDefault2">
                         Nữ
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked
+                           value="3">
                     <label class="form-check-label" for="flexRadioDefault2">
                         Khác
                     </label>
@@ -186,11 +179,40 @@
                                                                 display: flex;
                                                                 justify-content: space-between;
                                                                 align-items: center; ">
-                                                        <span id=""
-                                                              th:text="*{categoryId != null} ? *{category.title} : 'chọn ngày' "></span>
+                                                        <span id="allDay"> chọn ngày </span>
                     </div>
-                    <ul class="dropdown-menu w-100 categoryIdUpdate showAllCategory">
-
+                    <ul class="dropdown-menu w-50 table table-hover">
+                        <li onclick=handleClickDay(1)>1</li>
+                        <li onclick=handleClickDay(2)>2</li>
+                        <li onclick=handleClickDay(3)>3</li>
+                        <li onclick=handleClickDay(4)>4</li>
+                        <li onclick=handleClickDay(5)>5</li>
+                        <li onclick=handleClickDay(6)>6</li>
+                        <li onclick=handleClickDay(7)>7</li>
+                        <li onclick=handleClickDay(8)>8</li>
+                        <li onclick=handleClickDay(9)>9</li>
+                        <li onclick=handleClickDay(10)>10</li>
+                        <li onclick=handleClickDay(11)>11</li>
+                        <li onclick=handleClickDay(12)>12</li>
+                        <li onclick=handleClickDay(13)>13</li>
+                        <li onclick=handleClickDay(14)>14</li>
+                        <li onclick=handleClickDay(15)>15</li>
+                        <li onclick=handleClickDay(16)>16</li>
+                        <li onclick=handleClickDay(17)>17</li>
+                        <li onclick=handleClickDay(18)>18</li>
+                        <li onclick=handleClickDay(19)>19</li>
+                        <li onclick=handleClickDay(20)>20</li>
+                        <li onclick=handleClickDay(21)>21</li>
+                        <li onclick=handleClickDay(22)>22</li>
+                        <li onclick=handleClickDay(23)>23</li>
+                        <li onclick=handleClickDay(24)>24</li>
+                        <li onclick=handleClickDay(25)>25</li>
+                        <li onclick=handleClickDay(26)>26</li>
+                        <li onclick=handleClickDay(27)>27</li>
+                        <li onclick=handleClickDay(28)>28</li>
+                        <li onclick=handleClickDay(29)>29</li>
+                        <li onclick=handleClickDay(30)>30</li>
+                        <li onclick=handleClickDay(31)>31</li>
                     </ul>
                     <div class="btn bg-secondary dropdown-toggle select-btn-cat col-6"
                          type="button" data-bs-toggle="dropdown"
@@ -198,11 +220,21 @@
                                                                 display: flex;
                                                                 justify-content: space-between;
                                                                 align-items: center; ">
-                                                        <span id=""
-                                                              th:text="*{categoryId != null} ? *{category.title} : 'chọn Tháng' "></span>
+                                                        <span id="allYear">Chọn Tháng</span>
                     </div>
-                    <ul class="dropdown-menu w-100 categoryIdUpdate showAllCategory">
-
+                    <ul class="dropdown-menu w-50 table table-hover">
+                        <li  onclick=handleClickYear(1)>1</li>
+                        <li  onclick=handleClickYear(2)>2</li>
+                        <li  onclick=handleClickYear(3)>3</li>
+                        <li  onclick=handleClickYear(4)>4</li>
+                        <li  onclick=handleClickYear(5)>5</li>
+                        <li  onclick=handleClickYear(6)>6</li>
+                        <li  onclick=handleClickYear(7)>7</li>
+                        <li  onclick=handleClickYear(8)>8</li>
+                        <li  onclick=handleClickYear(9)>9</li>
+                        <li  onclick=handleClickYear(10)>10</li>
+                        <li  onclick=handleClickYear(11)>11</li>
+                        <li  onclick=handleClickYear(12)>12</li>
                     </ul>
                 </div>
             </div>
@@ -229,44 +261,34 @@
                                        placeholder="Tìm kiếm hoặc nhập mới"/>
                             </div>
                         </li>
-                        <li class="text-primary dropdown-item">
-                            <ul style="margin-top: 5px">
-                                <input type="checkbox" id="" name="vehicle1" value="Bike">
-                                <label for="vehicle1">sang</label><br>
-                                <input type="checkbox" id="" name="vehicle2" value="Car">
-                                <label for="vehicle2">khanh</label><br>
+                        <div id="employeeNameFilter">
 
-                            </ul>
-                        </li>
+                        </div>
                     </div>
                 </ul>
                 <div>
                     <p class="MuiTypography-root jss1745 MuiTypography-body1" style="margin-left: -23px">Nhóm Khác</p>
                 </div>
                 <div class="dropdown">
-                    <div
-                            type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false" style="
-                                                                display: flex;
-                                                                justify-content: space-between;
-                                                                align-items: center; ">
-                        <button class="dropdown-btn" style="font-size: 1rem;">. Trạng Thái
-                            <i class="fa fa-caret-down"></i>
-                        </button>
-                    </div>
-                    <ul class="dropdown-menu w-100 categoryIdUpdate showAllCategory">
-                        <div>
-                            <li class="text dropdown-item">
-                                <ul style="margin-top: 5px">
-                                    <input type="checkbox" id="" name="vehicle1" value="Bike">
-                                    <label for="vehicle1">Đang Giao Dịch</label><br>
-                                    <input type="checkbox" id="" name="vehicle2" value="Car">
-                                    <label for="vehicle2">Ngừng Giao Dịch</label><br>
-
-                                </ul>
-                            </li>
+                    <button class="dropdown-btn" style="font-size: 1rem;">. Trạng Thái
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="flexRadioDefault"
+                                   value="1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Đang Giao Dịch
+                            </label>
                         </div>
-                    </ul>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="flexRadioDefault" checked
+                                   value="2">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Ngừng Giao Dịch
+                            </label>
+                        </div>
+                    </div>
                     <button class="dropdown-btn" style="font-size: 1rem;">. Tags
                         <i class="fa fa-caret-down"></i>
                     </button>
@@ -319,8 +341,12 @@
             </div>
         </div>
         <div class="d-flex flex-row-reverse my-3" style="width: 95%">
-            <button type="button" class="btn btn-danger mx-2" style="width: 70px; color: rgb(255, 255, 255);background: rgb(0, 136, 255);border: none;">Lọc</button>
-            <button type="button" class="btn btn-primary" style="width: 90px; border: 1px solid rgb(255, 77, 77);background: rgb(255, 255, 255);color: rgb(255, 77, 77);">Xóa Bộ Lọc
+            <button type="button" class="btn btn-danger mx-2"
+                    style="width: 70px; color: rgb(255, 255, 255);background: rgb(0, 136, 255);border: none;">Lọc
+            </button>
+            <button type="button" class="btn btn-primary"
+                    style="width: 90px; border: 1px solid rgb(255, 77, 77);background: rgb(255, 255, 255);color: rgb(255, 77, 77);">
+                Xóa Bộ Lọc
             </button>
         </div>
 
@@ -343,6 +369,94 @@
             });
         }
 
+        function getAllCustomerGender() {
+            return $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "GET",
+                url: "http://localhost:8080/api/customers/customerGender"
+            })
+                .done((data) => {
+                    console.log(data)
+                    $.each(data, (i, item) => {
+                        console.log(item)
+                        let str = `<option value="${item}">
+                           ${item}
+                        </option>`;
+                        $("#genderFilter").append(str);
+                    });
+                })
+                .fail((jqXHR) => {
+                    console.log(jqXHR);
+                    if (jqXHR.responseJSON) {
+                        $.each(jqXHR.responseJSON, (key, item) => {
+                            App.IziToast.showErrorAlert(item);
+                        })
+                    }
+
+                })
+        }
+
+        function getAllCustomerGroup() {
+            return $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "GET",
+                url: "http://localhost:8080/api/customer_groups"
+            })
+                .done((data) => {
+                    console.log(data)
+                    $.each(data, (i, item) => {
+                        console.log(item)
+                        let str = `<div value="${item.id}">
+                            <input type="checkbox">
+                            ${item.title}</div>`;
+                        $("#customerGroupFilter").append(str);
+                    });
+                })
+                .fail((jqXHR) => {
+
+                })
+        }
+
+        function getAllEmployeeSelect() {
+            return $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "GET",
+                url: "http://localhost:8080/api/employees"
+            })
+                .done((data) => {
+                    $.each(data, (i, item) => {
+                        let str = `<div value="${item.id}">
+                        <input type="checkbox">
+                        ${item.fullName}</div>`;
+                        $("#employeeNameFilter").append(str);
+                    });
+                })
+                .fail((jqXHR) => {
+
+
+                })
+        }
+
+        function handleClickDay(day){
+
+            // $("#allDay").innerHTML = day;
+            document.querySelector("#allDay").innerHTML=day;
+        }
+        function handleClickYear(year){
+
+            // $("#allDay").innerHTML = day;
+            document.querySelector("#allYear").innerHTML=year;
+        }
+
         $('#datepicker').datepicker({
             uiLibrary: 'bootstrap5'
         });
@@ -358,5 +472,10 @@
         $('#datepicker5').datepicker({
             uiLibrary: 'bootstrap5'
         });
+
+        getAllCustomerGroup();
+        getAllCustomerGender();
+        getAllEmployeeSelect();
     </script>
+
 </th:block>
