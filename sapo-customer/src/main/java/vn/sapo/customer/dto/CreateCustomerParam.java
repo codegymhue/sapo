@@ -19,7 +19,6 @@ import java.util.Date;
 public class CreateCustomerParam {
 
     private Integer id;
-
     private String customerCode;
 
     private String fullName;

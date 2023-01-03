@@ -470,8 +470,6 @@
         }
     }
 
-
-
     let customer = new Customer();
 
     let shippingAddress = new ShippingAddress();
@@ -483,8 +481,8 @@
         customer.phoneNumber = $('#phoneCreate').val();
         customer.email = $('#emailCreate').val();
         customer.birthday = $('#birthdayCreate').val();
+        // customer.birthday = '2022-12-28T16:44:24Z';
         customer.customerGender = $('#genderCreate').val();
-        customer.employeeName = $('#employeeNameCreate :selected').val();
         shippingAddress.line1 = $('#addressCreate').val();
         shippingAddress.provinceId = $('#province').val();
         shippingAddress.provinceName = $('#province :selected').text();
@@ -493,10 +491,9 @@
         shippingAddress.wardId = $('#ward').val();
         shippingAddress.wardName = $('#ward :selected').text();
         customer.createShippingAddressParam = shippingAddress;
-
+        console.log("đay là customer")
         console.log(customer)
-
-
+        console.log(shippingAddress)
         $.ajax({
             "headers": {
                 "accept": "application/json",
@@ -507,32 +504,17 @@
             "data": JSON.stringify(customer)
         })
             .done((data) => {
-               App.IziToast.showSuccessAlert("tạo khách hàng thành công !");
-                setTimeout(() => {
-
-
-                }, 2500)
-
-
-
-
-                $('#nameCreate').val("");
-                $('#codeCreate').val("");
-                $('#phoneCreate').val("");
-                $('#emailCreate').val("");
-                $('#birthdayCreate').val("");
-                $('#statusCreate').val("")
-                $('#addressCreate').val("");
-                $('#employeeNameCreate').val();
-
-
-
-
-
-
+                App.IziToast.showSuccessAlert('Thêm mới khách hàng thành công  !!!')
+                window.location.href = "/admin/customers";
+                // $('#nameCreate').val("");
+                // $('#codeCreate').val("");
+                // $('#phoneCreate').val("");
+                // $('#emailCreate').val("");
+                // $('#birthdayCreate').val("");
+                // $('#statusCreate').val("")
+                // $('#addressCreate').val("");
+                // $('#employeeNameCreate').val();
             })
-
-
             .fail((jqXHR) => {
                 console.log(jqXHR);
                 if (jqXHR.responseJSON) {
@@ -744,9 +726,9 @@
     }
 
 
-    // $('#btnCreateCustomer').on('click', () => alert("Tạo Khách hàng thành công"))
+    $('#okbn').on('click', () => alert(":ok caauj"))
 
-    $('#btnCloseCustomer').on('click', () => window.location.href = "/admin/customers/")
+    $('#btnCloseCustomer').on('click', () => alert(":ok caauj"))
 
 
     getAllCustomerGender();
