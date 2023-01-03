@@ -1,4 +1,28 @@
 class App {
+
+    static DOMAIN_API = "http://localhost:8080";
+    // static BASE_URL_Customer = this.DOMAIN_API + "/api/customers";
+    static BASE_URL_CUSTOMER = this.DOMAIN_API + "/api/customers";
+    static BASE_URL_CUSTOMER_GROUP = this.DOMAIN_API + "/api/customer_groups";
+
+    static URL_CREATE_CUSTOMER = this.BASE_URL_Customer + "/create";
+    static URL_UPDATE_CUSTOMER = this.BASE_URL_Customer + "/update";
+
+    static AlertMessageVi = class {
+        static SUCCESS_CREATED = "Tạo khách hàng thành công !";
+        static SUCCESS_UPDATED = "Cập nhật dữ liệu thành công !";
+        static SUCCESS_DELETE = "Xóa dữ liệu thành công";
+
+        static ERROR_TITLE = "Thao tác không thành công, Tên sản phẩm không được để trống.";
+        static ERROR_400 = "Thao tác không thành công, vui lòng kiểm tra lại dữ liệu.";
+        static ERROR_401 = "Unauthorized - Access Token của bạn hết hạn hoặc không hợp lệ.";
+        static ERROR_403 = "Forbidden - Bạn không được quyền truy cập tài nguyên này.";
+        static ERROR_404 = "Not Found - Tài nguyên này đã bị xóa hoặc không tồn tại";
+        static ERROR_500 = "Internal Server Error - Hệ thống Server đang có vấn đề hoặc không truy cập được.";
+
+    }
+
+
     static SweetAlert = class {
         static showSuccessAlert(t) {
             Swal.fire({
@@ -19,7 +43,7 @@ class App {
         }
 
     }
-    static IziToast = class  {
+    static IziToast = class {
         static showSuccessAlert(m) {
             iziToast.success({
                 title: 'Success',
@@ -29,15 +53,19 @@ class App {
             });
         }
 
-        static showErrorAlert(m) {
-            iziToast.error({
-                title: 'Error',
-                position: 'topRight',
-                timeout: 2500,
-                message: m,
-            });
-        }
     }
+
+
+            static showErrorAlert(m) {
+                iziToast.error({
+                    title: 'Error',
+                    position: 'topRight',
+                    timeout: 2500,
+                    message: m,
+                });
+            }
+
+
 }
 
 

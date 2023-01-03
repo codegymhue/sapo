@@ -60,16 +60,16 @@
                     <div class=" sb-avatar sb-avatar--text"
                          style="display: inline-block; vertical-align: middle; width: 30px; height: 30px; border-radius: 20px; font-family: Helvetica, Arial, sans-serif;">
                         <div class=" sb-avatar__text"
-                             title="Phú Nguyễn"
+                             title="Trúc Nguyễn"
                              style="width: 30px; height: 30px; line-height: initial; text-align: center; color: rgb(255, 255, 255); border-radius: 20px; background: rgb(215, 61, 50);">
                             <div style="display: table; table-layout: fixed; width: 100%; height: 100%; font-size: 10px;">
                                 <span style="display: table-cell; vertical-align: middle; white-space: nowrap;">
-                                    <span>P</span>
+                                    <span>T</span>
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <p class="MuiTypography-root jss445 MuiTypography-body1 MuiTypography-colorTextPrimary">Phú Nguyễn</p>
+                    <p class="MuiTypography-root jss445 MuiTypography-body1 MuiTypography-colorTextPrimary">Trúc Nguyễn</p>
                     <svg class="MuiSvgIcon-root arrow-avatar"
                          focusable="false"
                          viewBox="0 0 24 24"
@@ -82,42 +82,29 @@
         <div class="MuiBox-root jss6754 jss6732">
             <div class="MuiBox-root jss6755 jss6733">
                 <div class="MuiBox-root jss6756 jss6741">
-<!--                    <button class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"-->
-<!--                            tabindex="0"-->
-<!--                            type="button">-->
-<!--                      <span class="MuiButton-label">-->
-<!--                        <span class="MuiButton-startIcon MuiButton-iconSizeSmall">-->
-<!--                            <i class="fa-solid fa-print"></i>-->
-<!--                        </span>In tem mã-->
-<!--                      </span>-->
-<!--                        <span class="MuiTouchRipple-root">-->
-<!--                      </span>-->
-<!--                    </button>-->
-                    <div class="MuiBox-root jss6793"
-                         style="width: 1px; height: 20px; border-left: 1px solid rgb(211, 213, 215); margin: 0 8px;">
-                    </div>
-
-                    <div class="MuiBox-root jss6794 jss6746">
-<!--                        <a class="jss6750"-->
-<!--                           href="#">-->
-<!--                            <button id="Sapo-Button-ba11a07a-f11d-475b-9638-2e9af46ee60d"-->
-<!--                                    class="sc-jqUVSM eUKSRG">-->
-<!--                                <span class="sc-papXJ jcEYKF">Loại sản phẩm-->
-<!--                                </span>-->
-<!--                            </button>-->
-<!--                        </a>-->
-                        <div class="MuiBox-root jss6796 jss6747">
-                        </div>
-<!--                        <a class="jss6750"-->
-<!--                           href="#">-->
-<!--                            <button id="Sapo-Button-99086ae8-8fc4-4ac6-8782-c93192bd428a"-->
-<!--                                    class="sc-jqUVSM eUKSRG">-->
-<!--                                <span class="sc-papXJ jcEYKF">Quản lý khác-->
-<!--                                </span>-->
-<!--                            </button>-->
-<!--                        </a>-->
-
-                    </div>
+                    <a th:href="@{/admin/products/excel}">
+                        <button class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
+                                tabindex="0"
+                                type="button">
+                      <span class="MuiButton-label">
+                        <span class="MuiButton-startIcon MuiButton-iconSizeSmall">
+                          <svg class="MuiSvgIcon-root jss6758"
+                               focusable="false"
+                               viewBox="0 0 14 20"
+                               aria-hidden="true">
+                              <path d="M6 8.74228e-08L6 12.17L2.41 8.59L1 10L7 16L13 10L11.59 8.59L8 12.17L8 0L6 8.74228e-08Z"
+                                    fill="currentColor">
+                              </path>
+                              <path d="M0 18H14V20H0V18Z"
+                                    fill="currentColor">
+                              </path>
+                            </svg>
+                        </span>Xuất file
+                      </span>
+                            <span class="MuiTouchRipple-root">
+                      </span>
+                        </button>
+                    </a>
                 </div>
                 <div class="MuiBox-root jss6799 jss6741">
                     <div class="sc-kDDrLX cKOfva">
@@ -193,13 +180,13 @@
                         <table id="tbProduct" class="table table-hover" >
                             <thead style="background-color: #f4f6f8; height: 55px">
                                 <tr id="theadList" class="show">
-                                    <th class="align-middle ">
-                                        <label for="checkAll" style="padding: 0.5rem; cursor:pointer">
+                                    <th class="align-middle sticky-col first-col" style="background-color: #f4f6f8 !important">
+                                        <label for="checkAll" style="padding: 1rem; cursor:pointer">
                                             <input style="cursor:pointer" id="checkAll" type="checkbox" value="" data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả">
                                         </label>
                                     </th>
-                                    <th class="align-middle" scope="col">Ảnh</th>
-                                    <th class="align-middle" scope="col">
+                                    <th class="align-middle sticky-col second-col" scope="col" style="background-color: #f4f6f8 !important">Ảnh</th>
+                                    <th class="align-middle sticky-col third-col" scope="col" style="background-color: #f4f6f8 !important">
                                         <button class="sort" id="btnTitleSort">Tên phiên bản sản phẩm <i class="fa-solid fa-sort"></i></button>
                                     </th>
                                     <th class="align-middle" scope="col">Mã vạch</th>
@@ -231,12 +218,12 @@
 
                                 <tr class="hide" id="selectActionThead" style="border: snow">
                                     <td class="align-middle" style="width: 20px">
-                                        <label for="selectAction" style="padding: 0.5rem; cursor:pointer">
+                                        <label for="selectAction" style="padding: 1rem; cursor:pointer">
                                             <input style="cursor:pointer" id="selectAction" type="checkbox" value="" >
                                         </label>
                                     </td>
                                     <td colspan="2" class="align-middle" id="numberSelectProductList" style="width: 12%"></td>
-                                    <td class="align-middle" style="width: 150px">
+                                    <td class="align-middle" style="width: 7%" colspan="2">
                                         <div class="btn-group">
                                             <button class="btn dropdown-toggle btnDropdown me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 Chọn thao tác
@@ -262,11 +249,11 @@
                                         </div>
                                     </td>
                                     <td style="width: 100px"></td>
-                                    <td style="width: 100px"></td>
-                                    <td style="width: 160px"></td>
+                                    <td style="width: 140px"></td>
                                     <td style="width: 110px"></td>
                                     <td style="width: 110px"></td>
-                                    <td colspan="9"></td>
+                                    <td style="width: 110px"></td>
+                                    <td colspan="8"></td>
                                 </tr>
                             </thead>
                             <tbody >
@@ -583,22 +570,16 @@
 
     page.dialogs.elements.category.on("change", () => {
         page.elements.pageNo.text(1);
-        page.dialogs.elements.brand.val("-1");
-        page.dialogs.elements.status.val("");
         page.commands.getAllProducts();
     })
 
     page.dialogs.elements.brand.on("change", () => {
         page.elements.pageNo.text(1);
-        page.dialogs.elements.category.val("-1");
-        page.dialogs.elements.status.val("");
         page.commands.getAllProducts();
     })
 
     page.dialogs.elements.status.on("change", () =>{
         page.elements.pageNo.text(1);
-        page.dialogs.elements.category.val("-1");
-        page.dialogs.elements.brand.val("-1");
         page.commands.getAllProducts();
     })
 

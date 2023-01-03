@@ -1,4 +1,4 @@
-package vn.sapo.configurations;
+package vn.sapo.shared.configurations;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum CodePrefix {
 
     CUSTOMER("CUZN"),
+    SALE_ORDER("SON"),
+    CUSTOMER_GROUP("CTN"),
     ANONYMOUS("ANONYMOUS");
 
     private final String value;
@@ -29,7 +31,7 @@ public enum CodePrefix {
         throw new IllegalArgumentException(value + "invalid");
     }
 
-    public static String format(int value) {
-        return String.format("%05d", value);
+    public String generate(int value) {
+        return String.format("%s%05d", this.value, value);
     }
 }

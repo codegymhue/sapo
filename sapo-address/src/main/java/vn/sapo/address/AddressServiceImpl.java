@@ -8,7 +8,7 @@ import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.address.dto.UpdateAddressParam;
 import vn.sapo.entities.Address;
-import vn.sapo.exceptions.NotFoundException;
+import vn.sapo.shared.exceptions.NotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +26,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     @Transactional(readOnly = true)
     public List<AddressResult> findByCustomerId(Integer customerId) {
-        return addressRepository.findByCustomerId(customerId)
+        return addressRepository.findAllByCustomerId(customerId)
                 .stream()
                 .map(addressMapper::toDTO)
                 .collect(Collectors.toList());

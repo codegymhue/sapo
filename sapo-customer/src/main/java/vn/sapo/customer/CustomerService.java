@@ -7,21 +7,17 @@ import vn.sapo.customer.dto.UpdateCustomerParam;
 import java.util.List;
 
 public interface CustomerService {
-
     CustomerResult findById(Integer id);
-
     List<CustomerResult> findAll();
-
     CustomerResult create(CreateCustomerParam customerCreate);
-
-    //
     CustomerResult update(UpdateCustomerParam updateCustomer);
-
-//    List<SaleOrderResult> findHistoryCustomerOrder(Integer id);
-
-//    List<CustomerDebtImpl> findCustomerDebtsByCustomerId(Integer customerId);
-
     void deleteById(Integer id);
-
     boolean existsById(Integer id);
+    void changeStatusToAvailable(List<Integer> customerIds, boolean status);
+    List<CustomerResult> findAllCustomerByGroupAndStatus(Integer groupTitleId, String customerStatus);
+
+    List<CustomerResult> findAllCustomerByStatus(String status);
+
+    List<CustomerResult> findAllCustomerByGroupId(Integer groupId);
+
 }

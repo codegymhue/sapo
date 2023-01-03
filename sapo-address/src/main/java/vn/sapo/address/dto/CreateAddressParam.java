@@ -12,7 +12,7 @@ import javax.validation.constraints.*;
 @Setter
 @Accessors(chain = true)
 public class CreateAddressParam {
-    @NotBlank(message = "Trường customer_ID bị null")
+    @NotBlank(message = "Trường customer_ID không được để trống")
     private Integer customerId;
     private Integer supplierId;
     @NotBlank(message = "Tên khách hàng không được để trống")
@@ -45,13 +45,8 @@ public class CreateAddressParam {
     @NotBlank(message = "Không được để trống trường  province")
     private String provinceName;
 
-
-    @NotBlank(message = "Không được để trống email")
-    @Email(message = "Email : đây ko  phải là 1 email")
-    @Size(min = 2, max = 30, message = "Dữ liệu email không được ngắn hơn 2 kí tự và nhiều hơn 30 kí tự")
     private String email;
     private String zipCode;
-
     private boolean isReceiveBill;
     private boolean isShipping;
 }

@@ -4,26 +4,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.address.AddressService;
-import vn.sapo.configurations.CodePrefix;
+import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.entities.customer.Customer;
-import vn.sapo.exceptions.NotFoundException;
+import vn.sapo.entities.customer.CustomerGender;
+import vn.sapo.entities.customer.CustomerStatus;
+import vn.sapo.shared.exceptions.NotFoundException;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
-
-//    @Autowired
-//    OrderItemService orderItemService;
-//
-//    @Autowired
-//    PaymentSaleOrderService paymentSaleOrderService;
 
     @Autowired
     private CustomerMapper customerMapper;
@@ -33,9 +29,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private AddressService addressService;
-//    @Autowired
-//    SaleOrderService saleOrderService;
-
 
     @Override
     @Transactional(readOnly = true)
@@ -43,112 +36,54 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Cutomer not found"));
         Integer customerId = customer.getId();
-        CustomerResult dto = customerMapper.toDTO(customer);
-        BigDecimal spendTotal = getSpendTotalByCustomerId(customerId);
-
-        BigDecimal paidTotal = getPaidTotalByCustomerId(customerId);
-
-        dto.setSpendTotal(spendTotal);
-        dto.setDebtTotal(spendTotal.subtract(paidTotal));
-
-//        Integer quantityProductOrder = saleOrderService.getQuantityProductOrder(customerResult.getId());
-//        if (quantityProductOrder == null) {
-//            quantityProductOrder = 0;
-//        }
-//        customerResult.setQuantityProductOrder(quantityProductOrder);
-//        Integer quantityItemOrder = orderItemService.getQuantityItemCustomerOrderById(customerResult.getId());
-//        if (quantityItemOrder == null) {
-//            quantityItemOrder = 0;
-//        }
-//        customerResult.setQuantityItemOrder(quantityItemOrder);
-//
-//        Instant lastDayOrder = saleOrderService.getLastDayOrderByCustomerId(customerResult.getId());
-//
-//        customerResult.setLastDayOrder(lastDayOrder);
-
-        return dto;
+        return customerMapper.toDTO(customer);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<CustomerResult> findAll() {
-        return customerRepository.findAll()
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAll()
                 .stream()
-                .map(customer -> {
-                    CustomerResult dto = customerMapper.toDTO(customer);
-                    Integer customerId = customer.getId();
-                    BigDecimal spendTotal = getSpendTotalByCustomerId(customerId);
-                    BigDecimal paidTotal = getPaidTotalByCustomerId(customerId);//paymentSaleOrderService.getPaidTotalByCustomerId(customer.getId());
-                    dto.setSpendTotal(spendTotal);
-                    dto.setDebtTotal(spendTotal.subtract(paidTotal));
-                    return dto;
-                }).collect(Collectors.toList());
+                .map(customerMapper::toDTO).collect(Collectors.toList());
+        return customerResults;
     }
 
-    public BigDecimal getSpendTotalByCustomerId(Integer customerId) {
-        BigDecimal spendTotal = null;// saleOrderService.getSpendTotalByCustomerId(customer.getId());
-        if (spendTotal == null)
-            spendTotal = BigDecimal.valueOf(0);
-        return spendTotal;
-    }
-
-    public BigDecimal getPaidTotalByCustomerId(Integer customerId) {
-        BigDecimal paidTotal = null;//paymentSaleOrderService.getPaidTotalByCustomerId(customer.getId());
-        if (paidTotal == null)
-            paidTotal = BigDecimal.valueOf(0);
-        return paidTotal;
-    }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public void deleteById(Integer id) {
         customerRepository.deleteById(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean existsById(Integer id) {
         return customerRepository.existsById(id);
     }
 
-
-//    @Override
-//    @Transactional(readOnly = true)
-//    public List<CustomerResult> findCustomerByStatus() {
-//        return customerRepository.findCustomersByCustomerStatus()
-//                .stream()
-//                .map(customer -> {
-//                    CustomerResult dto = customerMapper.toDTO(customer);
-////                    BigDecimal spendTotal = saleOrderService.getSpendTotalByCustomerId(customer.getId());
-////                    if (spendTotal == null)
-////                        spendTotal = BigDecimal.valueOf(0);
-////                    BigDecimal debtTotal = paymentSaleOrderService.getDebtTotalByCustomerId(customer.getId());
-////                    if (debtTotal == null)
-////                        debtTotal = BigDecimal.valueOf(0);
-////                    dto.setSpendTotal(spendTotal);
-////                    dto.setDebtTotal(debtTotal);
-//                    return dto;
-//                }).collect(Collectors.toList());
-//    }
-
-    @Override
     @Transactional
     public CustomerResult create(CreateCustomerParam createCustomerParam) {
+        System.out.println("Đay là param" + createCustomerParam);
         Customer customer = customerMapper.toModel(createCustomerParam);
         customer = customerRepository.save(customer);
-        if (customer.getCode() == null)
-            customer.setCode(CodePrefix.CUSTOMER + CodePrefix.format(customer.getId()));
+        String cusCode = customer.getCustomerCode();
+        if (cusCode == null || cusCode.trim().isEmpty())
+            customer.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
+
         return customerMapper.toDTO(customer);
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public CustomerResult update(UpdateCustomerParam updateCustomerParam) {
         Customer customer = customerRepository.findById(updateCustomerParam.getId())
                 .orElseThrow(() -> new NotFoundException("Customer not found"));
         customerMapper.transferFields(updateCustomerParam, customer);
         return customerMapper.toDTO(customer);
     }
-//
+
+    //
 //    @Override
 //    @Transactional(readOnly = true)
 //    public List<SaleOrderResult> findHistoryCustomerOrder(Integer id) {
@@ -156,35 +91,51 @@ public class CustomerServiceImpl implements CustomerService {
 //        return saleOrderByCustomer;
 //    }
 //
-//    @Override
-//    @Transactional(readOnly = true)
-//    public List<CustomerDebtImpl> findCustomerDebtsByCustomerId(Integer customerId) {
-//        List<CustomerDebt> customerDebts = customerRepository.findCustomerDebtsByCustomerId(customerId);
-//
-//        List<CustomerDebtImpl> customerDebts1 = customerDebts.stream().map(customerDebt -> {
-//            CustomerDebtImpl customerDebtImpl = new CustomerDebtImpl();
-//            customerDebtImpl.setFromICustomerOwer(customerDebt);
-//            return customerDebtImpl;
-//        }).collect(Collectors.toList());
-//        BigDecimal tam = BigDecimal.valueOf(0);
-//        for (CustomerDebtImpl customerDebtImpl : customerDebts1) {
-//            tam = tam.add(customerDebtImpl.getTransaction());
-//            customerDebtImpl.setTotalDebt(tam);
-//            System.out.println(customerDebtImpl.getTransaction());
-//        }
-//        return customerDebts1;
-//    }
-//
-//    @Override
-//    public void deleteById(Integer customerId) {
-//        Customer customer = customerRepository.findById(customerId).get();
-//        try {
-//            shippingAddressService.delete(customer.getShippingAddress().getId());
-//            customerRepository.deleteById(customerId);
-//        } catch (Exception e) {
-//            throw new DataInputException("Lỗi không xác định");
-//        }
-//
-//    }
+    @Override
+    @Transactional(readOnly = true)
+    public void changeStatusToAvailable(List<Integer> customerIds, boolean status) {
+        for (Integer customerId : customerIds) {
+            Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new NotFoundException("Product not found"));
+            customer.setStatus(status ? CustomerStatus.AVAILABLE : CustomerStatus.UNAVAILABLE);
+        }
+    }
 
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CustomerResult> findAllCustomerByGroupAndStatus(Integer groupTitleId, String customerStatus) {
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAllByGroupIdAndStatus(groupTitleId, CustomerStatus.parseCustomerGroup(customerStatus))
+                .stream()
+                .map(customerMapper::toDTO)
+                .collect(Collectors.toList());
+        return customerResults;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CustomerResult> findAllCustomerByStatus(String status) {
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAllByStatus(CustomerStatus.parseCustomerGroup(status))
+                .stream()
+                .map(customerMapper::toDTO)
+                .collect(Collectors.toList());
+        System.out.println(customerResults);
+        return customerResults;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CustomerResult> findAllCustomerByGroupId(Integer groupId) {
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAllByGroupId(groupId)
+                .stream()
+                .map(customerMapper::toDTO)
+                .collect(Collectors.toList());
+        System.out.println(customerResults);
+        return customerResults;
+    }
 }
+
+
+

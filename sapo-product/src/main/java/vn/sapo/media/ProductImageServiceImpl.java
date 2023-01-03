@@ -53,4 +53,9 @@ public class ProductImageServiceImpl implements MediaService {
     public String getLinkMediaByProductIdIsMain(Integer productId) {
         return mediaRepository.getLinkMediaByProductIdIsMain(productId).orElse("");
     }
+
+    @Override
+    public void deleteAllByProductId(Integer productId) {
+        mediaRepository.deleteAllByProductId(productId);
+    }
 }

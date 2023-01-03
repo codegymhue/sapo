@@ -2,6 +2,7 @@
 <html lang="vi-VN" class="sapo-menu-expand sapo-menu-toggle-active" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:replace="/layout/header::header"/>
+
     <title>Chi tiết đơn hàng</title>
     <link rel="stylesheet" type="text/css" href="/assets/admin/css/order/order_id.css"/>
 </head>
@@ -12,9 +13,12 @@
         <div class="MuiBox-root jss3788 jss3784">
             <div class="MuiBox-root jss3789 jss3787" style="max-width: 1366px;">
                 <div class="MuiBox-root jss3790">
-                    <a href="/admin/orders" class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss3786 MuiTypography-colorSecondary">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="width: 24px; height: 24px; margin-left: -9px; margin-right: 6px;">
-                            <path d="M14.298 5.99 8.288 12l6.01 6.01 1.414-1.414L11.116 12l4.596-4.596-1.414-1.414Z" fill="currentColor"/>
+                    <a href="/admin/orders"
+                       class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss3786 MuiTypography-colorSecondary">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                             style="width: 24px; height: 24px; margin-left: -9px; margin-right: 6px;">
+                            <path d="M14.298 5.99 8.288 12l6.01 6.01 1.414-1.414L11.116 12l4.596-4.596-1.414-1.414Z"
+                                  fill="currentColor"/>
                         </svg>
                         <h6 class="MuiTypography-root MuiTypography-subtitle1">Quay lại danh sách đơn hàng</h6>
                     </a>
@@ -36,38 +40,50 @@
                 <div class="MuiGrid-root MuiGrid-container">
                     <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6" style="flex-direction: column;">
                         <div class="MuiBox-root jss966">
-                            <h4 id="get-order-id" class="MuiTypography-root MuiTypography-h4" style="line-height: 28px; margin-right: 20px;" th:text="${orders.orderCode}"></h4>
+                            <h4 id="get-order-id" class="MuiTypography-root MuiTypography-h4"
+                                style="line-height: 28px; margin-right: 20px;" th:text="${orders.orderCode}"></h4>
                             <div th:class="${orders.orderStatusId} == 'CHECKOUT' ? 'hlxtkG' : (${orders.orderStatusId} == 'COMPLETE' ? 'hBmWYo' : 'csJERM')">
-                                <span th:text="${orders.orderStatus.name}" th:class="${orders.orderStatusId} == 'CHECKOUT' ? 'gIZkwA' : (${orders.orderStatusId} == 'COMPLETE' ? 'bzQjtT' : 'ccQLIN')"></span>
+                                <span th:text="${orders.orderStatus.name}"
+                                      th:class="${orders.orderStatusId} == 'CHECKOUT' ? 'gIZkwA' : (${orders.orderStatusId} == 'COMPLETE' ? 'bzQjtT' : 'ccQLIN')"></span>
                             </div>
                         </div>
                         <div class="MuiBox-root jss967" style="margin-top: 10px;">
                             <div class="iDRoAG">
                                 <button onclick="window.print();" class="ihvLYr">
-                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20" height="20" font-size="20" style="color: rgb(163, 168, 175);">
-                                        <path d="M16.163 2H7.837a2.496 2.496 0 0 0-2.5 2.5v3.337c0 .458.368.837.837.837a.829.829 0 0 0 .837-.837V4.5c0-.458.368-.837.837-.837h8.415c.413 0 .748.335.748.748v3.415a.836.836 0 1 0 1.674 0V4.5A2.53 2.53 0 0 0 16.163 2Z" fill="currentColor"/>
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.163 22H7.837a2.496 2.496 0 0 1-2.5-2.5v-5.837c0-.458.368-.837.837-.837h11.663c.457 0 .837.368.837.837V19.5a2.52 2.52 0 0 1-2.511 2.5Zm-1.45-5H9.287a.624.624 0 1 1 0-1.25h5.413c.346 0 .625.279.625.625a.608.608 0 0 1-.614.625Zm-5.425 2.5h5.424a.608.608 0 0 0 .614-.625.624.624 0 0 0-.625-.625H9.288a.624.624 0 1 0 0 1.25Z" fill="currentColor"/>
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M4.288 7h15.424A2.291 2.291 0 0 1 22 9.288v5.424c0 1.207-.94 2.199-2.125 2.282v-4.006a.986.986 0 0 0-.988-.988H5.124a.986.986 0 0 0-.987.988v3.996A2.283 2.283 0 0 1 2 14.7V9.288A2.291 2.291 0 0 1 4.288 7Z" fill="currentColor"/>
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20"
+                                         height="20" font-size="20" style="color: rgb(163, 168, 175);">
+                                        <path d="M16.163 2H7.837a2.496 2.496 0 0 0-2.5 2.5v3.337c0 .458.368.837.837.837a.829.829 0 0 0 .837-.837V4.5c0-.458.368-.837.837-.837h8.415c.413 0 .748.335.748.748v3.415a.836.836 0 1 0 1.674 0V4.5A2.53 2.53 0 0 0 16.163 2Z"
+                                              fill="currentColor"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                              d="M16.163 22H7.837a2.496 2.496 0 0 1-2.5-2.5v-5.837c0-.458.368-.837.837-.837h11.663c.457 0 .837.368.837.837V19.5a2.52 2.52 0 0 1-2.511 2.5Zm-1.45-5H9.287a.624.624 0 1 1 0-1.25h5.413c.346 0 .625.279.625.625a.608.608 0 0 1-.614.625Zm-5.425 2.5h5.424a.608.608 0 0 0 .614-.625.624.624 0 0 0-.625-.625H9.288a.624.624 0 1 0 0 1.25Z"
+                                              fill="currentColor"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                              d="M4.288 7h15.424A2.291 2.291 0 0 1 22 9.288v5.424c0 1.207-.94 2.199-2.125 2.282v-4.006a.986.986 0 0 0-.988-.988H5.124a.986.986 0 0 0-.987.988v3.996A2.283 2.283 0 0 1 2 14.7V9.288A2.291 2.291 0 0 1 4.288 7Z"
+                                              fill="currentColor"/>
                                     </svg>
                                     <span class="fCIlZX">In đơn hàng</span>
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6" style="display: flex; justify-content: flex-end;">
+                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6"
+                         style="display: flex; justify-content: flex-end;">
                         <div class="MuiBox-root jss974" style="margin: 0 25px 37px 0;">
                             <div class="MuiPaper-root MuiStepper-root jss972 MuiStepper-horizontal MuiStepper-alternativeLabel MuiPaper-elevation0">
                                 <div class="MuiStep-root MuiStep-horizontal MuiStep-alternativeLabel MuiStep-completed">
                                         <span class="MuiStepLabel-root MuiStepLabel-horizontal MuiStepLabel-alternativeLabel">
                                             <span class="MuiStepLabel-iconContainer MuiStepLabel-alternativeLabel">
-                                                <svg class="MuiSvgIcon-root MuiStepIcon-root MuiStepIcon-active MuiStepIcon-completed" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                                <svg class="MuiSvgIcon-root MuiStepIcon-root MuiStepIcon-active MuiStepIcon-completed"
+                                                     focusable="false" viewBox="0 0 24 24" aria-hidden="true">
                                                     <path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm-2 17l-5-5 1.4-1.4 3.6 3.6 7.6-7.6L19 8l-9 9z"/>
                                                 </svg>
                                             </span>
                                             <span class="MuiStepLabel-labelContainer">
                                                 <span class="MuiTypography-root MuiStepLabel-label MuiStepLabel-alternativeLabel MuiStepLabel-completed MuiStepLabel-active MuiTypography-body2 MuiTypography-displayBlock">
                                                     <p class="MuiTypography-root MuiTypography-body1">Đặt hàng</p>
-                                                    <p class="MuiTypography-root MuiTypography-body1" style="color: rgb(116, 124, 135); font-size: 12px;" th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
+                                                    <p class="MuiTypography-root MuiTypography-body1"
+                                                       style="color: rgb(116, 124, 135); font-size: 12px;"
+                                                       th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
                                                 </span>
                                             </span>
                                         </span>
@@ -78,14 +94,17 @@
                                     </div>
                                     <span class="MuiStepLabel-root MuiStepLabel-horizontal MuiStepLabel-alternativeLabel">
                                             <span class="MuiStepLabel-iconContainer MuiStepLabel-alternativeLabel">
-                                                <svg class="MuiSvgIcon-root MuiStepIcon-root MuiStepIcon-active MuiStepIcon-completed" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                                <svg class="MuiSvgIcon-root MuiStepIcon-root MuiStepIcon-active MuiStepIcon-completed"
+                                                     focusable="false" viewBox="0 0 24 24" aria-hidden="true">
                                                     <path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm-2 17l-5-5 1.4-1.4 3.6 3.6 7.6-7.6L19 8l-9 9z"/>
                                                 </svg>
                                             </span>
                                             <span class="MuiStepLabel-labelContainer">
                                                 <span class="MuiTypography-root MuiStepLabel-label MuiStepLabel-alternativeLabel MuiStepLabel-completed MuiStepLabel-active MuiTypography-body2 MuiTypography-displayBlock">
                                                     <p class="MuiTypography-root MuiTypography-body1">Duyệt</p>
-                                                    <p class="MuiTypography-root MuiTypography-body1" style="color: rgb(116, 124, 135); font-size: 12px;" th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
+                                                    <p class="MuiTypography-root MuiTypography-body1"
+                                                       style="color: rgb(116, 124, 135); font-size: 12px;"
+                                                       th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
                                                 </span>
                                             </span>
                                         </span>
@@ -96,14 +115,17 @@
                                     </div>
                                     <span class="MuiStepLabel-root MuiStepLabel-horizontal MuiStepLabel-alternativeLabel">
                                             <span class="MuiStepLabel-iconContainer MuiStepLabel-alternativeLabel">
-                                                <svg class="MuiSvgIcon-root MuiStepIcon-root MuiStepIcon-active MuiStepIcon-completed" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                                <svg class="MuiSvgIcon-root MuiStepIcon-root MuiStepIcon-active MuiStepIcon-completed"
+                                                     focusable="false" viewBox="0 0 24 24" aria-hidden="true">
                                                     <path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm-2 17l-5-5 1.4-1.4 3.6 3.6 7.6-7.6L19 8l-9 9z"/>
                                                 </svg>
                                             </span>
                                             <span class="MuiStepLabel-labelContainer">
                                                 <span class="MuiTypography-root MuiStepLabel-label MuiStepLabel-alternativeLabel MuiStepLabel-completed MuiStepLabel-active MuiTypography-body2 MuiTypography-displayBlock">
                                                     <p class="MuiTypography-root MuiTypography-body1">Đóng gói</p>
-                                                    <p class="MuiTypography-root MuiTypography-body1" style="color: rgb(116, 124, 135); font-size: 12px;" th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
+                                                    <p class="MuiTypography-root MuiTypography-body1"
+                                                       style="color: rgb(116, 124, 135); font-size: 12px;"
+                                                       th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
                                                 </span>
                                             </span>
                                         </span>
@@ -114,14 +136,17 @@
                                     </div>
                                     <span class="MuiStepLabel-root MuiStepLabel-horizontal MuiStepLabel-alternativeLabel">
                                             <span class="MuiStepLabel-iconContainer MuiStepLabel-alternativeLabel">
-                                                <svg class="MuiSvgIcon-root MuiStepIcon-root MuiStepIcon-active MuiStepIcon-completed" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                                <svg class="MuiSvgIcon-root MuiStepIcon-root MuiStepIcon-active MuiStepIcon-completed"
+                                                     focusable="false" viewBox="0 0 24 24" aria-hidden="true">
                                                     <path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm-2 17l-5-5 1.4-1.4 3.6 3.6 7.6-7.6L19 8l-9 9z"/>
                                                 </svg>
                                             </span>
                                             <span class="MuiStepLabel-labelContainer">
                                                 <span class="MuiTypography-root MuiStepLabel-label MuiStepLabel-alternativeLabel MuiStepLabel-completed MuiStepLabel-active MuiTypography-body2 MuiTypography-displayBlock">
                                                     <p class="MuiTypography-root MuiTypography-body1">Xuất kho</p>
-                                                    <p class="MuiTypography-root MuiTypography-body1" style="color: rgb(116, 124, 135); font-size: 12px;" th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
+                                                    <p class="MuiTypography-root MuiTypography-body1"
+                                                       style="color: rgb(116, 124, 135); font-size: 12px;"
+                                                       th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
                                                 </span>
                                             </span>
                                         </span>
@@ -132,14 +157,17 @@
                                     </div>
                                     <span class="MuiStepLabel-root MuiStepLabel-horizontal MuiStepLabel-alternativeLabel">
                                             <span class="MuiStepLabel-iconContainer MuiStepLabel-alternativeLabel">
-                                                <svg class="MuiSvgIcon-root MuiStepIcon-root MuiStepIcon-active MuiStepIcon-completed" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                                <svg class="MuiSvgIcon-root MuiStepIcon-root MuiStepIcon-active MuiStepIcon-completed"
+                                                     focusable="false" viewBox="0 0 24 24" aria-hidden="true">
                                                     <path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm-2 17l-5-5 1.4-1.4 3.6 3.6 7.6-7.6L19 8l-9 9z"/>
                                                 </svg>
                                             </span>
                                             <span class="MuiStepLabel-labelContainer">
                                                 <span class="MuiTypography-root MuiStepLabel-label MuiStepLabel-alternativeLabel MuiStepLabel-completed MuiStepLabel-active MuiTypography-body2 MuiTypography-displayBlock">
                                                     <p class="MuiTypography-root MuiTypography-body1">Hoàn thành</p>
-                                                    <p class="MuiTypography-root MuiTypography-body1" style="color: rgb(116, 124, 135); font-size: 12px;" th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
+                                                    <p class="MuiTypography-root MuiTypography-body1"
+                                                       style="color: rgb(116, 124, 135); font-size: 12px;"
+                                                       th:text="${#dates.format(orders.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
                                                 </span>
                                             </span>
                                         </span>
@@ -148,22 +176,30 @@
                         </div>
                     </div>
                 </div>
-                <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-wrap-xs-nowrap" style="margin-top: 0;">
-                    <div class="MuiGrid-root MuiGrid-item" style="flex: 1 1 0; margin-bottom: 12px; height: fit-content;">
+                <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 MuiGrid-wrap-xs-nowrap"
+                     style="margin-top: 0;">
+                    <div class="MuiGrid-root MuiGrid-item"
+                         style="flex: 1 1 0; margin-bottom: 12px; height: fit-content;">
                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
                             <div class="MuiPaper-root  jss4190 MuiPaper-elevation1 MuiPaper-rounded">
                                 <div class="MuiBox-root jss4209">
                                     <div class="MuiBox-root jss4557 jss4191 jss4192">
                                         <div class="MuiBox-root jss4558">
-                                            <h6 class="MuiTypography-root MuiTypography-h6" style="display: flex; align-items: center;">
-                                                <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" style="color: rgb(163, 168, 175); font-size: 22px; margin-right: 10px;">
+                                            <h6 class="MuiTypography-root MuiTypography-h6"
+                                                style="display: flex; align-items: center;">
+                                                <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24"
+                                                     aria-hidden="true"
+                                                     style="color: rgb(163, 168, 175); font-size: 22px; margin-right: 10px;">
                                                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
                                                 </svg>
                                                 Thông tin khách hàng
                                             </h6>
                                             <div class="MuiBox-root jss4559">
-                                                <a target="_blank" style="text-decoration: none; display: inline-flex; align-items: center; padding-right: 4px;" th:href="'/admin/orders/' + ${orders.id}">
-                                                    <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorPrimary" th:text="${orders.fullName}"></h6>
+                                                <a target="_blank"
+                                                   style="text-decoration: none; display: inline-flex; align-items: center; padding-right: 4px;"
+                                                   th:href="'/admin/orders/' + ${orders.id}">
+                                                    <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-colorPrimary"
+                                                        th:text="${orders.fullName}"></h6>
                                                 </a>
                                                 -
                                                 <h5 th:text="${orders.mobile}" style="padding-left: 4px;"></h5>
@@ -175,121 +211,126 @@
                                             <div class="MuiBox-root jss4567">
                                                 <div class="MuiBox-root jss4568 jss4196" style="margin-right: 300px;">
                                                     <div class="MuiBox-root jss4569">
-                                                        <p class="MuiTypography-root jss4193 MuiTypography-body2">Địa chỉ giao hàng</p>
+                                                        <p class="MuiTypography-root jss4193 MuiTypography-body2">Địa
+                                                            chỉ giao hàng</p>
                                                     </div>
                                                     <div class="MuiBox-root jss4570">
-                                                        <p class="MuiTypography-root MuiTypography-body2" th:text="${orders.mobile}"></p>
-                                                        <p class="MuiTypography-root MuiTypography-body2" th:text="${orders.line1}"></p>
-                                                        <p class="MuiTypography-root MuiTypography-body2" th:text="${orders.line2}"></p>
-                                                        <p class="MuiTypography-root MuiTypography-body2" th:text="${orders.city + ', ' + orders.province}"></p>
+                                                        <p class="MuiTypography-root MuiTypography-body2"
+                                                           th:text="${orders.mobile}"></p>
+                                                        <p class="MuiTypography-root MuiTypography-body2"
+                                                           th:text="${orders.line1}"></p>
+                                                        <p class="MuiTypography-root MuiTypography-body2"
+                                                           th:text="${orders.line2}"></p>
+                                                        <p class="MuiTypography-root MuiTypography-body2"
+                                                           th:text="${orders.city + ', ' + orders.province}"></p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="MuiBox-root jss1389 jss1040 jss1042 jss1041"
                                              style="margin-top: 122px;">
-<!--                                            <div class="MuiBox-root jss1399 jss1390">-->
-<!--                                                <li class="MuiListItem-root MuiListItem-gutters"-->
-<!--                                                    style="padding: 5px 8px;">-->
-<!--                                                    <div class="MuiListItemText-root">-->
-<!--                                                        <p class="MuiTypography-root jss1391 MuiTypography-body1">Nợ-->
-<!--                                                            phải thu</p>-->
-<!--                                                    </div>-->
-<!--                                                    <div class="MuiListItemText-root">-->
-<!--                                                        <p-->
-<!--                                                                class="MuiTypography-root jss1398 MuiTypography-body1 MuiTypography-colorError MuiTypography-alignRight">-->
-<!--                                                            -608,947</p>-->
-<!--                                                    </div>-->
-<!--                                                </li>-->
-<!--                                                <li class="MuiListItem-root MuiListItem-gutters"-->
-<!--                                                    style="padding: 5px 8px;">-->
-<!--                                                    <div class="MuiListItemText-root">-->
-<!--                                                            <span-->
-<!--                                                                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">-->
-<!--                                                                <button-->
-<!--                                                                        class="MuiButtonBase-root MuiButton-root MuiButton-text"-->
-<!--                                                                        tabindex="0" type="button"-->
-<!--                                                                        id="btn-detail-loyalty-customer"-->
-<!--                                                                        style="padding: 0px 8px; margin: 0px -8px; height: auto; font-weight: normal;">-->
-<!--                                                                    <span class="MuiButton-label">-->
-<!--                                                                        <p-->
-<!--                                                                                class="MuiTypography-root jss1391 MuiTypography-body1">-->
-<!--                                                                            Điểm tích lũy</p>-->
-<!--                                                                        <span-->
-<!--                                                                                class="MuiButton-endIcon MuiButton-iconSizeMedium">-->
-<!--                                                                            <svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary"-->
-<!--                                                                                 focusable="false" viewBox="0 0 24 24"-->
-<!--                                                                                 aria-hidden="true"-->
-<!--                                                                                 style="width: 22px; cursor: pointer; color: rgb(255, 77, 77); margin-left: -4px;">-->
-<!--                                                                                <path-->
-<!--                                                                                        d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z">-->
-<!--                                                                                </path>-->
-<!--                                                                            </svg>-->
-<!--                                                                        </span>-->
-<!--                                                                    </span>-->
-<!--                                                                </button>-->
-<!--                                                            </span>-->
-<!--                                                    </div>-->
-<!--                                                    <div class="MuiListItemText-root">-->
-<!--                                                            <span-->
-<!--                                                                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">-->
-<!--                                                                <div>-->
-<!--                                                                    <p class="MuiTypography-root jss1391 MuiTypography-body1 MuiTypography-colorPrimary MuiTypography-alignRight"-->
-<!--                                                                       style="cursor: pointer; display: flex; justify-content: flex-end;">-->
-<!--                                                                        Kích hoạt-->
-<!--                                                                        <svg class="MuiSvgIcon-root" focusable="false"-->
-<!--                                                                             viewBox="0 0 24 24" aria-hidden="true"-->
-<!--                                                                             style="width: 14px; margin-left: 5px;">-->
-<!--                                                                            <path-->
-<!--                                                                                    d="M5.88 4.12L13.76 12l-7.88 7.88L8 22l10-10L8 2z" />-->
-<!--                                                                        </svg>-->
-<!--                                                                    </p>-->
-<!--                                                                </div>-->
-<!--                                                            </span>-->
-<!--                                                    </div>-->
-<!--                                                </li>-->
-<!--                                                <li class="MuiListItem-root MuiListItem-gutters"-->
-<!--                                                    style="cursor: pointer; padding: 5px 8px;">-->
-<!--                                                    <div class="MuiListItemText-root">-->
-<!--                                                        <p class="MuiTypography-root jss1391 MuiTypography-body1">-->
-<!--                                                            Tổng-->
-<!--                                                            chi tiêu (0 đơn)</p>-->
-<!--                                                    </div>-->
-<!--                                                    <div class="MuiListItemText-root">-->
-<!--                                                        <p-->
-<!--                                                                class="MuiTypography-root jss1398 MuiTypography-body1 MuiTypography-colorPrimary MuiTypography-alignRight">-->
-<!--                                                            54</p>-->
-<!--                                                    </div>-->
-<!--                                                </li>-->
-<!--                                                <div class="MuiBox-root jss1400">-->
-<!--                                                    <li class="MuiListItem-root MuiListItem-gutters"-->
-<!--                                                        style="cursor: pointer; padding: 5px 8px;">-->
-<!--                                                        <div class="MuiListItemText-root">-->
-<!--                                                            <p-->
-<!--                                                                    class="MuiTypography-root jss1391 MuiTypography-body1">-->
-<!--                                                                Trả hàng (0 sản phẩm)</p>-->
-<!--                                                        </div>-->
-<!--                                                        <div class="MuiListItemText-root">-->
-<!--                                                            <p-->
-<!--                                                                    class="MuiTypography-root jss1398 MuiTypography-body1 MuiTypography-colorError MuiTypography-alignRight">-->
-<!--                                                                0</p>-->
-<!--                                                        </div>-->
-<!--                                                    </li>-->
-<!--                                                    <li class="MuiListItem-root MuiListItem-gutters"-->
-<!--                                                        style="cursor: pointer; padding: 5px 8px;">-->
-<!--                                                        <div class="MuiListItemText-root">-->
-<!--                                                            <p-->
-<!--                                                                    class="MuiTypography-root jss1391 MuiTypography-body1">-->
-<!--                                                                Giao hàng thất bại (0 đơn)</p>-->
-<!--                                                        </div>-->
-<!--                                                        <div class="MuiListItemText-root">-->
-<!--                                                            <p-->
-<!--                                                                    class="MuiTypography-root jss1398 MuiTypography-body1 MuiTypography-colorError MuiTypography-alignRight">-->
-<!--                                                                0</p>-->
-<!--                                                        </div>-->
-<!--                                                    </li>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
+                                            <!--                                            <div class="MuiBox-root jss1399 jss1390">-->
+                                            <!--                                                <li class="MuiListItem-root MuiListItem-gutters"-->
+                                            <!--                                                    style="padding: 5px 8px;">-->
+                                            <!--                                                    <div class="MuiListItemText-root">-->
+                                            <!--                                                        <p class="MuiTypography-root jss1391 MuiTypography-body1">Nợ-->
+                                            <!--                                                            phải thu</p>-->
+                                            <!--                                                    </div>-->
+                                            <!--                                                    <div class="MuiListItemText-root">-->
+                                            <!--                                                        <p-->
+                                            <!--                                                                class="MuiTypography-root jss1398 MuiTypography-body1 MuiTypography-colorError MuiTypography-alignRight">-->
+                                            <!--                                                            -608,947</p>-->
+                                            <!--                                                    </div>-->
+                                            <!--                                                </li>-->
+                                            <!--                                                <li class="MuiListItem-root MuiListItem-gutters"-->
+                                            <!--                                                    style="padding: 5px 8px;">-->
+                                            <!--                                                    <div class="MuiListItemText-root">-->
+                                            <!--                                                            <span-->
+                                            <!--                                                                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">-->
+                                            <!--                                                                <button-->
+                                            <!--                                                                        class="MuiButtonBase-root MuiButton-root MuiButton-text"-->
+                                            <!--                                                                        tabindex="0" type="button"-->
+                                            <!--                                                                        id="btn-detail-loyalty-customer"-->
+                                            <!--                                                                        style="padding: 0px 8px; margin: 0px -8px; height: auto; font-weight: normal;">-->
+                                            <!--                                                                    <span class="MuiButton-label">-->
+                                            <!--                                                                        <p-->
+                                            <!--                                                                                class="MuiTypography-root jss1391 MuiTypography-body1">-->
+                                            <!--                                                                            Điểm tích lũy</p>-->
+                                            <!--                                                                        <span-->
+                                            <!--                                                                                class="MuiButton-endIcon MuiButton-iconSizeMedium">-->
+                                            <!--                                                                            <svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary"-->
+                                            <!--                                                                                 focusable="false" viewBox="0 0 24 24"-->
+                                            <!--                                                                                 aria-hidden="true"-->
+                                            <!--                                                                                 style="width: 22px; cursor: pointer; color: rgb(255, 77, 77); margin-left: -4px;">-->
+                                            <!--                                                                                <path-->
+                                            <!--                                                                                        d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z">-->
+                                            <!--                                                                                </path>-->
+                                            <!--                                                                            </svg>-->
+                                            <!--                                                                        </span>-->
+                                            <!--                                                                    </span>-->
+                                            <!--                                                                </button>-->
+                                            <!--                                                            </span>-->
+                                            <!--                                                    </div>-->
+                                            <!--                                                    <div class="MuiListItemText-root">-->
+                                            <!--                                                            <span-->
+                                            <!--                                                                    class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">-->
+                                            <!--                                                                <div>-->
+                                            <!--                                                                    <p class="MuiTypography-root jss1391 MuiTypography-body1 MuiTypography-colorPrimary MuiTypography-alignRight"-->
+                                            <!--                                                                       style="cursor: pointer; display: flex; justify-content: flex-end;">-->
+                                            <!--                                                                        Kích hoạt-->
+                                            <!--                                                                        <svg class="MuiSvgIcon-root" focusable="false"-->
+                                            <!--                                                                             viewBox="0 0 24 24" aria-hidden="true"-->
+                                            <!--                                                                             style="width: 14px; margin-left: 5px;">-->
+                                            <!--                                                                            <path-->
+                                            <!--                                                                                    d="M5.88 4.12L13.76 12l-7.88 7.88L8 22l10-10L8 2z" />-->
+                                            <!--                                                                        </svg>-->
+                                            <!--                                                                    </p>-->
+                                            <!--                                                                </div>-->
+                                            <!--                                                            </span>-->
+                                            <!--                                                    </div>-->
+                                            <!--                                                </li>-->
+                                            <!--                                                <li class="MuiListItem-root MuiListItem-gutters"-->
+                                            <!--                                                    style="cursor: pointer; padding: 5px 8px;">-->
+                                            <!--                                                    <div class="MuiListItemText-root">-->
+                                            <!--                                                        <p class="MuiTypography-root jss1391 MuiTypography-body1">-->
+                                            <!--                                                            Tổng-->
+                                            <!--                                                            chi tiêu (0 đơn)</p>-->
+                                            <!--                                                    </div>-->
+                                            <!--                                                    <div class="MuiListItemText-root">-->
+                                            <!--                                                        <p-->
+                                            <!--                                                                class="MuiTypography-root jss1398 MuiTypography-body1 MuiTypography-colorPrimary MuiTypography-alignRight">-->
+                                            <!--                                                            54</p>-->
+                                            <!--                                                    </div>-->
+                                            <!--                                                </li>-->
+                                            <!--                                                <div class="MuiBox-root jss1400">-->
+                                            <!--                                                    <li class="MuiListItem-root MuiListItem-gutters"-->
+                                            <!--                                                        style="cursor: pointer; padding: 5px 8px;">-->
+                                            <!--                                                        <div class="MuiListItemText-root">-->
+                                            <!--                                                            <p-->
+                                            <!--                                                                    class="MuiTypography-root jss1391 MuiTypography-body1">-->
+                                            <!--                                                                Trả hàng (0 sản phẩm)</p>-->
+                                            <!--                                                        </div>-->
+                                            <!--                                                        <div class="MuiListItemText-root">-->
+                                            <!--                                                            <p-->
+                                            <!--                                                                    class="MuiTypography-root jss1398 MuiTypography-body1 MuiTypography-colorError MuiTypography-alignRight">-->
+                                            <!--                                                                0</p>-->
+                                            <!--                                                        </div>-->
+                                            <!--                                                    </li>-->
+                                            <!--                                                    <li class="MuiListItem-root MuiListItem-gutters"-->
+                                            <!--                                                        style="cursor: pointer; padding: 5px 8px;">-->
+                                            <!--                                                        <div class="MuiListItemText-root">-->
+                                            <!--                                                            <p-->
+                                            <!--                                                                    class="MuiTypography-root jss1391 MuiTypography-body1">-->
+                                            <!--                                                                Giao hàng thất bại (0 đơn)</p>-->
+                                            <!--                                                        </div>-->
+                                            <!--                                                        <div class="MuiListItemText-root">-->
+                                            <!--                                                            <p-->
+                                            <!--                                                                    class="MuiTypography-root jss1398 MuiTypography-body1 MuiTypography-colorError MuiTypography-alignRight">-->
+                                            <!--                                                                0</p>-->
+                                            <!--                                                        </div>-->
+                                            <!--                                                    </li>-->
+                                            <!--                                                </div>-->
+                                            <!--                                            </div>-->
                                         </div>
                                         <div class="MuiBox-root jss4568 jss4196"
                                              style="margin-right: 300px; margin-top: 22px;">
@@ -315,14 +356,14 @@
                                                 <p class="MuiTypography-root jss4193 MuiTypography-body2">Liên hệ
                                                 </p>
                                             </div>
-<!--                                            <div class="MuiBox-root jss4570">-->
-<!--                                                <p class="MuiTypography-root MuiTypography-body2"-->
-<!--                                                   style="color: rgb(163, 168, 175);">Chưa có thông tin liên hệ</p>-->
-<!--                                                <input type="email" class="form-control"-->
-<!--                                                      value="lkdjkf"-->
-<!--                                                       style="margin-top: 14px; width: 54%; height: 36px !important;"-->
-<!--                                                       disabled />-->
-<!--                                            </div>-->
+                                            <!--                                            <div class="MuiBox-root jss4570">-->
+                                            <!--                                                <p class="MuiTypography-root MuiTypography-body2"-->
+                                            <!--                                                   style="color: rgb(163, 168, 175);">Chưa có thông tin liên hệ</p>-->
+                                            <!--                                                <input type="email" class="form-control"-->
+                                            <!--                                                      value="lkdjkf"-->
+                                            <!--                                                       style="margin-top: 14px; width: 54%; height: 36px !important;"-->
+                                            <!--                                                       disabled />-->
+                                            <!--                                            </div>-->
                                         </div>
                                     </div>
                                 </div>
@@ -368,7 +409,9 @@
                                                 <button class="MuiButtonBase-root MuiIconButton-root" tabindex="0"
                                                         type="button" style="padding: 0px; margin-left: 10px;"><span
                                                         class="MuiIconButton-label"><svg class="MuiSvgIcon-root"
-                                                                                         focusable="false" viewBox="0 0 24 24" aria-hidden="true"
+                                                                                         focusable="false"
+                                                                                         viewBox="0 0 24 24"
+                                                                                         aria-hidden="true"
                                                                                          style="color: rgb(163, 168, 175);">
                                                                 <path d="M7 10l5 5 5-5z"></path>
                                                             </svg></span><span
@@ -430,7 +473,9 @@
                                                 <button class="MuiButtonBase-root MuiIconButton-root" tabindex="0"
                                                         type="button" style="padding: 0px; margin-left: 10px;"><span
                                                         class="MuiIconButton-label"><svg class="MuiSvgIcon-root"
-                                                                                         focusable="false" viewBox="0 0 24 24" aria-hidden="true"
+                                                                                         focusable="false"
+                                                                                         viewBox="0 0 24 24"
+                                                                                         aria-hidden="true"
                                                                                          style="color: rgb(163, 168, 175);">
                                                                 <path d="M7 10l5 5 5-5z"></path>
                                                             </svg></span><span
@@ -521,8 +566,10 @@
                                                     tabindex="0" type="button" title=""
                                                     style="margin: -2px 0px -2px 4px; padding: 4px;"><span
                                                     class="MuiIconButton-label"><svg viewBox="0 0 24 24" fill="none"
-                                                                                     xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                                                     font-size="20" style="color: rgb(163, 168, 175);">
+                                                                                     xmlns="http://www.w3.org/2000/svg"
+                                                                                     width="20" height="20"
+                                                                                     font-size="20"
+                                                                                     style="color: rgb(163, 168, 175);">
                                                             <path fill-rule="evenodd" clip-rule="evenodd"
                                                                   d="M10 2h10c1.152 0 2 .848 2 2v10c0 1.152-.848 2-2 2h-4v4c0 1.152-.848 2-2 2H4c-1.152 0-2-.848-2-2V10c0-1.152.848-2 2-2h4V4c0-1.152.848-2 2-2Zm-2 8H4v10h10v-4h-4c-1.152 0-2-.848-2-2v-4Zm2-6v10h10V4H10Z"
                                                                   fill="currentColor"></path>
@@ -535,7 +582,9 @@
                                                     tabindex="0" type="button"
                                                     style="color: rgb(163, 168, 175); margin-left: 6px; padding: 0px;">
                                                     <span class="MuiIconButton-label"><svg class="MuiSvgIcon-root"
-                                                                                           focusable="false" viewBox="0 0 24 24" aria-hidden="true"
+                                                                                           focusable="false"
+                                                                                           viewBox="0 0 24 24"
+                                                                                           aria-hidden="true"
                                                                                            style="font-size: 24px;">
                                                             <path d="M7 14l5-5 5 5z"></path>
                                                         </svg></span><span class="MuiTouchRipple-root"></span></button>
@@ -550,7 +599,9 @@
                                                         class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary MuiIconButton-sizeSmall"
                                                         tabindex="0" type="button"><span
                                                         class="MuiIconButton-label"><svg class="MuiSvgIcon-root"
-                                                                                         focusable="false" viewBox="0 0 24 24" aria-hidden="true"
+                                                                                         focusable="false"
+                                                                                         viewBox="0 0 24 24"
+                                                                                         aria-hidden="true"
                                                                                          style="color: rgb(163, 168, 175);">
                                                                 <path
                                                                         d="M19 8h-1V3H6v5H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zM8 5h8v3H8V5zm8 12v2H8v-4h8v2zm2-2v-2H6v2H4v-4c0-.55.45-1 1-1h14c.55 0 1 .45 1 1v4h-2z">
@@ -713,12 +764,11 @@
                                     </div>
                                 </div>
                                 <div class="MuiBox-root jss1240">
-                                    <button
-                                            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
+                                    <button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
                                             tabindex="0" type="button"
                                             style="padding-top: 0px; padding-bottom: 0px; height: 20px; font-weight: normal;">
-                                        <span class="MuiButton-label">Kiểm tra tồn kho</span><span
-                                            class="MuiTouchRipple-root"></span></button>
+                                        <span class="MuiButton-label">Kiểm tra tồn kho</span>
+                                        <span class="MuiTouchRipple-root"></span></button>
                                     <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall"
                                             tabindex="0" type="button" title="Điều chỉnh thông tin hiển thị"
                                             style="margin-left: 8px;"><span class="MuiIconButton-label"><svg
@@ -736,7 +786,8 @@
                             </div>
                             <div class="MuiBox-root jss4413 jss4374">
                                 <div class="MuiBox-root jss4414">
-                                    <div class="MuiBox-root jss4415" style="border-bottom: 1px solid rgb(232, 234, 235);">
+                                    <div class="MuiBox-root jss4415"
+                                         style="border-bottom: 1px solid rgb(232, 234, 235);">
                                         <div class="MuiTableContainer-root jss4416 ">
                                             <table class="MuiTable-root MuiTable-stickyHeader"
                                                    aria-label="simple table" style="border-collapse: inherit;">
@@ -776,12 +827,15 @@
                                                                     background: #222;
                                                                     border: 1px solid transparent;
                                                                 }
+
                                                                 .ta6d41119-e511-48af-b149-ee128339bf68.place-top {
                                                                     margin-top: -10px;
                                                                 }
+
                                                                 .ta6d41119-e511-48af-b149-ee128339bf68.place-top::before {
                                                                     border-top: 8px solid transparent;
                                                                 }
+
                                                                 .ta6d41119-e511-48af-b149-ee128339bf68.place-top::after {
                                                                     border-left: 8px solid transparent;
                                                                     border-right: 8px solid transparent;
@@ -792,12 +846,15 @@
                                                                     border-top-style: solid;
                                                                     border-top-width: 6px;
                                                                 }
+
                                                                 .ta6d41119-e511-48af-b149-ee128339bf68.place-bottom {
                                                                     margin-top: 10px;
                                                                 }
+
                                                                 .ta6d41119-e511-48af-b149-ee128339bf68.place-bottom::before {
                                                                     border-bottom: 8px solid transparent;
                                                                 }
+
                                                                 .ta6d41119-e511-48af-b149-ee128339bf68.place-bottom::after {
                                                                     border-left: 8px solid transparent;
                                                                     border-right: 8px solid transparent;
@@ -808,12 +865,15 @@
                                                                     border-bottom-style: solid;
                                                                     border-bottom-width: 6px;
                                                                 }
+
                                                                 .ta6d41119-e511-48af-b149-ee128339bf68.place-left {
                                                                     margin-left: -10px;
                                                                 }
+
                                                                 .ta6d41119-e511-48af-b149-ee128339bf68.place-left::before {
                                                                     border-left: 8px solid transparent;
                                                                 }
+
                                                                 .ta6d41119-e511-48af-b149-ee128339bf68.place-left::after {
                                                                     border-top: 5px solid transparent;
                                                                     border-bottom: 5px solid transparent;
@@ -824,12 +884,15 @@
                                                                     border-left-style: solid;
                                                                     border-left-width: 6px;
                                                                 }
+
                                                                 .ta6d41119-e511-48af-b149-ee128339bf68.place-right {
                                                                     margin-left: 10px;
                                                                 }
+
                                                                 .ta6d41119-e511-48af-b149-ee128339bf68.place-right::before {
                                                                     border-right: 8px solid transparent;
                                                                 }
+
                                                                 .ta6d41119-e511-48af-b149-ee128339bf68.place-right::after {
                                                                     border-top: 5px solid transparent;
                                                                     border-bottom: 5px solid transparent;
@@ -869,7 +932,8 @@
                                                         <div class="MuiBox-root jss5885 jss5869">
                                                             <div class="MuiBox-root jss5886">
                                                                 <div class="MuiBox-root jss5887">
-                                                                    <p class="MuiTypography-root MuiTypography-body1" th:text="*{item.product.title}">
+                                                                    <p class="MuiTypography-root MuiTypography-body1"
+                                                                       th:text="*{item.product.title}">
                                                                         <button class="MuiButtonBase-root MuiIconButton-root"
                                                                                 tabindex="0" type="button"
                                                                                 style="padding: 0px; margin-left: 6px; height: fit-content;">
@@ -879,23 +943,29 @@
                                                                     </p>
                                                                 </div>
                                                                 <h6 class="MuiTypography-root MuiTypography-subtitle2 MuiTypography-colorTextSecondary"
-                                                                    style="font-weight: normal; margin: 2px 0px;">Mặc định</h6><a
+                                                                    style="font-weight: normal; margin: 2px 0px;">Mặc
+                                                                    định</h6><a
                                                                     class="MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary"
                                                                     target="_blank"
                                                                     href="/admin/products/122358547/variants/189770148"><span
-                                                                    class="MuiTypography-root MuiTypography-body1 MuiTypography-colorPrimary" th:text="*{item.product.sku}"></span></a>
+                                                                    class="MuiTypography-root MuiTypography-body1 MuiTypography-colorPrimary"
+                                                                    th:text="*{item.product.sku}"></span></a>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignCenter"
                                                         style="width: 105px; padding-left: 0px; padding-right: 0px;"><p
                                                             class="MuiTypography-root MuiTypography-body1"
-                                                            style="text-align: center; cursor: not-allowed;" th:text="*{item.quantity}"></p></td>
+                                                            style="text-align: center; cursor: not-allowed;"
+                                                            th:text="*{item.quantity}"></p></td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight">
                                                                             <span class="MuiTypography-root MuiTypography-body1"
-                                                                                  data-tip="true" data-for="tooltipTax-1258834332"
+                                                                                  data-tip="true"
+                                                                                  data-for="tooltipTax-1258834332"
                                                                                   currentitem="false"
-                                                                                  style="text-align: right;" th:text="*{#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT') + '₫'}"></span></td>
+                                                                                  style="text-align: right;"
+                                                                                  th:text="*{#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT') + '₫'}"></span>
+                                                    </td>
                                                     <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight">
                                                         <button class="MuiButtonBase-root MuiButton-root MuiButton-text jss5875 showOnly"
                                                                 tabindex="0" type="button"
@@ -905,7 +975,8 @@
                                                                 style="color: rgb(255, 77, 77); font-size: 12px;"></p></span>
                                                         </button>
                                                     </td>
-                                                    <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight" th:text="*{#numbers.formatDecimal(item.quantity * item.price, 0, 'COMMA', 0, 'POINT') + '₫'}"></td>
+                                                    <td class="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight"
+                                                        th:text="*{#numbers.formatDecimal(item.quantity * item.price, 0, 'COMMA', 0, 'POINT') + '₫'}"></td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -922,18 +993,19 @@
                                                         class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock">Tổng tiền</span>
                                                 </div>
                                                 <div class="MuiListItemText-root"><span
-                                                        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-alignRight MuiTypography-displayBlock" th:text="${#numbers.formatDecimal(orders.total, 0, 'COMMA', 0, 'POINT') + '₫'}"></span>
+                                                        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-alignRight MuiTypography-displayBlock"
+                                                        th:text="${#numbers.formatDecimal(orders.total, 0, 'COMMA', 0, 'POINT') + '₫'}"></span>
                                                 </div>
                                             </li>
                                             <li class="MuiListItem-root jss4430 MuiListItem-gutters">
-<!--                                                <div class="MuiListItemText-root">-->
-<!--                                                    <span class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock" th:text="'VAT (' + ${orders.order} + ')'"></span>-->
-<!--                                                </div>-->
-<!--                                                <div class="MuiListItemText-root" style="text-align: right;"><span-->
-<!--                                                        class="MuiTypography-root MuiTypography-body1"-->
-<!--                                                        data-tip="true" data-for="toolTipTaxItem-10"-->
-<!--                                                        currentitem="false">35,000</span>-->
-<!--                                                </div>-->
+                                                <!--                                                <div class="MuiListItemText-root">-->
+                                                <!--                                                    <span class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock" th:text="'VAT (' + ${orders.order} + ')'"></span>-->
+                                                <!--                                                </div>-->
+                                                <!--                                                <div class="MuiListItemText-root" style="text-align: right;"><span-->
+                                                <!--                                                        class="MuiTypography-root MuiTypography-body1"-->
+                                                <!--                                                        data-tip="true" data-for="toolTipTaxItem-10"-->
+                                                <!--                                                        currentitem="false">35,000</span>-->
+                                                <!--                                                </div>-->
                                                 <div class="__react_component_tooltip t905c93fd-37a2-4f83-8928-e58daec447de place-bottom type-dark"
                                                      id="toolTipTaxItem-10" data-id="tooltip">
                                                     <div class="MuiBox-root jss5791">
@@ -959,8 +1031,10 @@
                                                                         tabindex="0" type="button"
                                                                         style="padding: 0px; margin-left: 6px; top: -3px;"><span
                                                             class="MuiIconButton-label"><svg viewBox="0 0 16 16"
-                                                                                             fill="none" xmlns="http://www.w3.org/2000/svg"
-                                                                                             width="16" height="16" font-size="16"
+                                                                                             fill="none"
+                                                                                             xmlns="http://www.w3.org/2000/svg"
+                                                                                             width="16" height="16"
+                                                                                             font-size="16"
                                                                                              color="primary"
                                                                                              style="font-size: 16px; cursor: pointer;">
                                                                         <path
@@ -988,8 +1062,10 @@
                                             </li>
                                             <li class="MuiListItem-root jss4430 MuiListItem-gutters">
                                                 <div class="MuiListItemText-root" style="margin: 0; height: 28px;">
-                                                    <span class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock" style="margin-left: auto;">
-                                                        <div class="MuiBox-root jss5367" style="display: flex; align-items: flex-end;">
+                                                    <span class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                                                          style="margin-left: auto;">
+                                                        <div class="MuiBox-root jss5367"
+                                                             style="display: flex; align-items: flex-end;">
                                                             <p class="MuiTypography-root MuiTypography-body1">Mã giảm giá</p>
                                                         </div>
                                                     </span>
@@ -1003,7 +1079,8 @@
                                                     <span class="MuiTypography-root MuiListItemText-primary MuiTypography-subtitle1 MuiTypography-displayBlock">Khách phải trả</span>
                                                 </div>
                                                 <div class="MuiListItemText-root">
-                                                    <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-alignRight" th:text="${#numbers.formatDecimal(orders.grandTotal, 0, 'COMMA', 0, 'POINT') + '₫'}"></h6>
+                                                    <h6 class="MuiTypography-root MuiTypography-h6 MuiTypography-alignRight"
+                                                        th:text="${#numbers.formatDecimal(orders.grandTotal, 0, 'COMMA', 0, 'POINT') + '₫'}"></h6>
                                                 </div>
                                             </li>
                                         </div>

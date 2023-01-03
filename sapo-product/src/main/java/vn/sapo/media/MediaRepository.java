@@ -17,4 +17,6 @@ public interface MediaRepository extends JpaRepository<Media, String> {
 
     @Query(value = "call sp_getLinkMediaByProductIdIsMain(:productId)", nativeQuery = true)
     Optional<String> getLinkMediaByProductIdIsMain(@Param("productId") Integer productId);
+
+    void deleteAllByProductId(Integer productId);
 }

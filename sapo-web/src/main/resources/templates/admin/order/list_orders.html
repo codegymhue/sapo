@@ -411,6 +411,7 @@
             .done((data) => {
                 console.log(data);
                 $.each(data, (i, item) => {
+                    console.log(item)
                     $("tbody").append(`
                 <tr class="MuiTableRow-root jss5097 MuiTableRow-hover" role="checkbox"
                                     aria-checked="false"

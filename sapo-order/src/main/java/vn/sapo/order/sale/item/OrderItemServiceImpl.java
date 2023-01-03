@@ -30,6 +30,10 @@ public class OrderItemServiceImpl implements OrderItemService {
 
     @Override
     public Integer getQuantityItemCustomerOrderById(Integer id) {
-        return orderItemRepository.getQuantityItemCustomerOrderById(id);
+        Integer quantityOrderByCustomerId = orderItemRepository.getQuantityItemCustomerOrderById(id);
+        if (quantityOrderByCustomerId == null){
+            return quantityOrderByCustomerId = 0;
+        }
+        return quantityOrderByCustomerId;
     }
 }
