@@ -1,7 +1,9 @@
 package vn.sapo.controllers.customer;
 
+import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,10 +50,10 @@ public class CustomerController {
         return "/admin/customer/create_customer";
     }
 
-    @GetMapping("/history")
-    public String showCustomerHistoryPage() {
-        return "/admin/customer/history_customer";
-    }
+//    @GetMapping("/history")
+//    public String showCustomerHistoryPage() {
+//        return "/admin/customer/history_customer";
+//    }
 
 
     @GetMapping("/customers/customerInfo/{id}")
@@ -59,11 +61,11 @@ public class CustomerController {
         ModelAndView modelAndView = new ModelAndView();
         CustomerResult iCustomer = customerService.findById(id);
         modelAndView.addObject("customer", iCustomer);
-        modelAndView.setViewName("/admin/customer/history_customer");
+        modelAndView.setViewName("/admin/customer/info_customer");
         return modelAndView;
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/customers/edit/{id}")
     public ModelAndView showCustomerEditPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         Optional<CustomerResult> customerOptional = Optional.ofNullable(customerService.findById(id));
