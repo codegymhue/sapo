@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum CustomerGender {
-    NAM("Nam"), NU("Nữ"),KHAC("Khác");
+    NAM("NAM"), NU("NỮ"),KHAC("KHÁC");
     private final String value;
     CustomerGender(String value) {
         this.value = value;

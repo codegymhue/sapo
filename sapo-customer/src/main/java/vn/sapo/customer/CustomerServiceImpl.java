@@ -51,7 +51,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public void deleteById(Integer id) {
         customerRepository.deleteById(id);
     }
@@ -75,7 +75,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public CustomerResult update(UpdateCustomerParam updateCustomerParam) {
         Customer customer = customerRepository.findById(updateCustomerParam.getId())
                 .orElseThrow(() -> new NotFoundException("Customer not found"));
