@@ -1,24 +1,157 @@
 <!DOCTYPE html>
 <th:block th:fragment="modal_filter">
+    <style>
+        .jss1745 {
+            color: #0088FF;
+            padding: 8px 24px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .deudDf {
+            display: inline-flex;
+            -webkit-box-pack: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            -webkit-box-align: center;
+            align-items: center;
+            outline: 0px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            line-height: 1.42857rem;
+            margin: 0px;
+            overflow: hidden;
+            position: relative;
+            height: 2.57143rem;
+            min-width: unset;
+            color: rgb(0, 136, 255);
+            border: none;
+            background: transparent;
+            padding: 0px;
+        }
+    </style>
+    <link rel="stylesheet" href="/assets/admin/css/customer/filter.css"/>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+            <div class="MuiBox-root jss2790"><p class="MuiTypography-root title MuiTypography-body1" style="float: left;
+    margin-top: 12px;font-size: 20px;font-weight: 500;">Bộ lọc</p>
+                <button class="MuiButtonBase-root MuiIconButton-root jss1753" tabindex="0" type="button"><span
+                        class="MuiIconButton-label"><svg viewBox="0 0 24 24" fill="none"
+                                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                         font-size="24"><path
+                        d="M6.167 3.667v13.475l-2.159-2.15-1.175 1.175L7 20.333l4.167-4.166-1.175-1.175-2.159 2.15V3.667H6.167ZM17.833 20.333V6.858l2.159 2.15 1.175-1.175L17 3.667l-4.167 4.166 1.175 1.175 2.159-2.15v13.475h1.666Z"
+                        fill="currentColor"></path></svg></span><span class="MuiTouchRipple-root"></span></button>
+            </div>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
+        <div class="MuiBox-root jss2794 jss1744 filter-basic">
+            <button id="Sapo-Button-70cf5262-5927-4383-98a0-897d1ccf81f1" class="sc-jqUVSM deudDf">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                     font-size="20" style="float: left">
+                    <path d="m18.425 12-6.01 6.01L11 16.596 15.596 12 11 7.404l1.414-1.414 6.01 6.01Z"
+                          fill="currentColor"></path>
+                    <path d="m13 12-6.01 6.01-1.415-1.414L10.172 12 5.575 7.404 6.99 5.99 13 12Z"
+                          fill="currentColor"></path>
+                </svg>
+                <span class="sc-papXJ fCIlZX"><h6
+                        class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorPrimary">Bộ lọc nâng cao</h6></span>
+            </button>
+        </div>
+        <div>
+            <p class="MuiTypography-root jss1745 MuiTypography-body1">Nổi bật</p>
+        </div>
         <div class="offcanvas-body">
-            <div>
-                Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-            </div>
-            <div class="dropdown mt-3">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
-                    Dropdown button
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <div class="dropdown">
+                <div class="btn bg-secondary dropdown-toggle select-btn-cat"
+                     type="button" data-bs-toggle="dropdown"
+                     aria-expanded="false" style=" border: solid 1px #D3D5D7;border: solid 1px #D3D5D7;
+                                                                display: flex;
+                                                                justify-content: space-between;
+                                                                align-items: center; ">
+                                                        <span id="catProType"
+                                                              th:text="*{categoryId != null} ? *{category.title} : 'Nhóm khách Hàng' "></span>
+                </div>
+                <ul class="dropdown-menu w-100 categoryIdUpdate showAllCategory">
+                    <div>
+                        <li>
+                            <div class="d-flex align-items-center">
+                                <i class="fa-solid fa-magnifying-glass" style="margin-left: 16px;
+                                                                   margin-right: 4px;
+                                                                   color: #828282"></i>
+                                <input id="inputSearchCat" style="margin: 2px"
+                                       class="w-100 form-control border border-0"
+                                       placeholder="Tìm kiếm hoặc nhập mới"/>
+                            </div>
+                        </li>
+                        <li class="text-primary dropdown-item">
+                            <ul style="margin-top: 5px">
+                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                                <label for="vehicle1"> I have a bike</label><br>
+                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                                <label for="vehicle2"> I have a car</label><br>
+                                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                <label for="vehicle3"> I have a boat</label><br><br>
+                            </ul>
+                        </li>
+                        <div id="showAllCAt">
+
+                        </div>
+                    </div>
                 </ul>
             </div>
+            <div class="MuiBox-root jss1758 jss1737 filter-item" filter-name="gender"
+                 style="transition: all 300ms ease 0s;">
+                <div class="MuiBox-root jss1759 jss1738 open">
+                    <div class="MuiBox-root jss1760"><p class="MuiTypography-root bullet MuiTypography-body1">•</p>
+                        <p class="MuiTypography-root MuiTypography-body1">Giới tính</p></div>
+                    <svg class="MuiSvgIcon-root arrow-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true"
+                         style="width: 24px; height: 24px;">
+                        <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path>
+                    </svg>
+                </div>
+                <div class="MuiCollapse-container MuiCollapse-entered"
+                     style="min-height: 0px; height: auto; transition-duration: 300ms;">
+                    <div class="MuiCollapse-wrapper">
+                        <div class="MuiCollapse-wrapperInner">
+                            <div class="MuiBox-root jss1761 jss1739">
+                                <div class="MuiBox-root jss1764">
+                                    <div direction="column" class="sc-ESujJ iFpoII">
+                                        <div class="sc-yeoIj eCdJYU">
+                                            <div class="sc-dWINGa fBqWAt"><input
+                                                    id="Sapo-Radio-4f06ba0d-0d44-431c-bbb3-eb0f325b1e40" type="radio"
+                                                    class="sc-bPyhqo jTTHGH">
+                                                <div class="sc-fWIMVQ keGhLG"></div>
+                                            </div>
+                                            <label for="Sapo-Radio-4f06ba0d-0d44-431c-bbb3-eb0f325b1e40"
+                                                   class="sc-jGprRt cWJjIw">Nam</label></div>
+                                        <div class="sc-yeoIj eCdJYU">
+                                            <div class="sc-dWINGa fBqWAt"><input
+                                                    id="Sapo-Radio-a07195f9-486e-4424-a07f-dbcd2208bf58" type="radio"
+                                                    class="sc-bPyhqo jTTHGH">
+                                                <div class="sc-fWIMVQ keGhLG"></div>
+                                            </div>
+                                            <label for="Sapo-Radio-a07195f9-486e-4424-a07f-dbcd2208bf58"
+                                                   class="sc-jGprRt cWJjIw">Nữ</label></div>
+                                        <div class="sc-yeoIj eCdJYU">
+                                            <div class="sc-dWINGa fBqWAt"><input
+                                                    id="Sapo-Radio-3923faed-9d72-4b0f-85d2-f496592dc67b" type="radio"
+                                                    class="sc-bPyhqo jTTHGH">
+                                                <div class="sc-fWIMVQ keGhLG"></div>
+                                            </div>
+                                            <label for="Sapo-Radio-3923faed-9d72-4b0f-85d2-f496592dc67b"
+                                                   class="sc-jGprRt cWJjIw">Khác</label></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
     </div>
 </th:block>
