@@ -62,7 +62,7 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.existsById(id);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public CustomerResult create(CreateCustomerParam createCustomerParam) {
         System.out.println("Đay là param" + createCustomerParam);
         Customer customer = customerMapper.toModel(createCustomerParam);
@@ -111,7 +111,31 @@ public class CustomerServiceImpl implements CustomerService {
                 .collect(Collectors.toList());
         return customerResults;
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CustomerResult> findAllCustomerByStatus(String status) {
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAllByStatus(CustomerStatus.parseCustomerGroup(status))
+                .stream()
+                .map(customerMapper::toDTO)
+                .collect(Collectors.toList());
+        System.out.println(customerResults);
+        return customerResults;
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CustomerResult> findAllCustomerByGroupId(Integer groupId) {
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAllByGroupId(groupId)
+                .stream()
+                .map(customerMapper::toDTO)
+                .collect(Collectors.toList());
+        System.out.println(customerResults);
+        return customerResults;
+    }
+}
 
 
 
