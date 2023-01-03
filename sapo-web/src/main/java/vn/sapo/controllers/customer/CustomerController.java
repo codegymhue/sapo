@@ -12,6 +12,7 @@ import vn.sapo.customer.CustomerExcelExporter;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.CustomerExcelExporterInventory;
 import vn.sapo.customer.dto.CustomerResult;
+import vn.sapo.customerGroup.CustomerGroupService;
 
 
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +29,9 @@ public class CustomerController {
 
     @Autowired
     CustomerService customerService;
+
+    @Autowired
+    CustomerGroupService customerGroupService;
 
 
     @GetMapping("/customers")

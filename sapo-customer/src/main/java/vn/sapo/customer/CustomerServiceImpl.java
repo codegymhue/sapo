@@ -64,7 +64,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Transactional
     public CustomerResult create(CreateCustomerParam createCustomerParam) {
-        System.out.println("Đay là param" + createCustomerParam);
         Customer customer = customerMapper.toModel(createCustomerParam);
         customer = customerRepository.save(customer);
         String cusCode = customer.getCustomerCode();
