@@ -8,6 +8,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import vn.sapo.address.dto.AddressResult;
 import vn.sapo.customer.dto.CustomerResult;
+import vn.sapo.entities.customer.CustomerGender;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +20,7 @@ public class CustomerExcelExporter {
     private XSSFSheet sheet;
     private List<CustomerResult> customerList;
 
-    public CustomerExcelExporter(List<CustomerResult> customerList){
+    public CustomerExcelExporter(List<CustomerResult> customerList) {
         this.customerList = customerList;
         workbook = new XSSFWorkbook();
     }
@@ -83,8 +84,29 @@ public class CustomerExcelExporter {
         cell.setCellStyle(style);
     }
 
+    String province, district, ward;
+
+    private String[] getAddress(CustomerResult customerResult) {
+
+        if (customerResult.getAddresses()!=null)
+        for (AddressResult ar : customerResult.getAddresses()){
+            province = ar.getProvinceName();
+            district = ar.getDistrictName();
+            ward = ar.getWardName();
+
+        }
+        else if (customerResult.getAddresses() == null) {
+            province = "";
+            district = "";
+            ward = "";
+        }
+         return new String[] {province, district, ward};
+    }
+
     private void writeDataLines() {
         int rowCount = 1;
+
+        AddressResult address = new AddressResult();
 
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
@@ -92,29 +114,27 @@ public class CustomerExcelExporter {
         style.setFont(font);
         for (CustomerResult customer : customerList) {
 
-            for (AddressResult address : customer.getAddresses()){
-                String province = address.getProvinceName();
-                String district = address.getDistrictName();
-                String ward = address.getWardName();
+            Row row = sheet.createRow(rowCount++);
+            int columnCount = 0;
 
-                Row row = sheet.createRow(rowCount++);
-                int columnCount = 0;
 
-                createCell(row, columnCount++, customer.getFullName(), style);
+                createCell(row, columnCount++, customer.getFullName()== null ? "" : customer.getFullName(), style);
                 createCell(row, columnCount++, customer.getCustomerCode(), style);
-                createCell(row, columnCount++, customer.getGroup(), style);
+                createCell(row, columnCount++, customer.getGroup().getCusGrpCode(), style);
                 createCell(row, columnCount++, "Theo nhóm khách hàng", style);
                 createCell(row, columnCount++, customer.getEmail(), style);
                 createCell(row, columnCount++, customer.getPhoneNumber(), style);
-                createCell(row, columnCount++, customer.getBirthday(), style);
-                createCell(row, columnCount++, customer.getGender(), style);
+                createCell(row, columnCount++, customer.getBirthday() == null ? "" :  customer.getBirthday(), style);
+                createCell(row, columnCount++, customer.getGender()==null ? "Khác" : customer.getGender().getValue(), style);
                 createCell(row, columnCount++, "", style);
                 createCell(row, columnCount++, "", style);
                 createCell(row, columnCount++, "", style);
-                createCell(row, columnCount++, customer.getBillAddress(), style);
+
+                createCell(row,columnCount++, address.getLine1() == null ? "" : address.getLine1(), style);
                 createCell(row, columnCount++,province, style);
                 createCell(row, columnCount++,district, style);
                 createCell(row, columnCount++,ward, style);
+
                 createCell(row, columnCount++,"website", style);
                 createCell(row, columnCount++,"fax", style);
                 createCell(row, columnCount++,"Mã số thuế", style);
@@ -129,10 +149,10 @@ public class CustomerExcelExporter {
                 createCell(row, columnCount++,"ngày mua cuối", style);
                 createCell(row, columnCount++,"điểm hiện tại", style);
                 createCell(row, columnCount++,"Hạng thẻ hiện tại", style);
+
+
             }
 
-
-        }
     }
 
     public void export(HttpServletResponse response) throws IOException {
