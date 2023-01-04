@@ -16,8 +16,4 @@ public interface CustomerService {
     void changeStatusToAvailable(List<Integer> customerIds, boolean status);
     List<CustomerResult> findAllCustomerByGroupAndStatus(Integer groupTitleId, String customerStatus);
 
-    List<CustomerResult> findAllCustomerByStatus(String status);
-
-    List<CustomerResult> findAllCustomerByGroupId(Integer groupId);
-
 }

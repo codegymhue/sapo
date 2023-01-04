@@ -1,9 +1,11 @@
 package vn.sapo.controllers.customer;
+import org.apache.tomcat.jni.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vn.sapo.address.AddressService;
+import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CreateCustomerParam;
@@ -46,8 +48,9 @@ public class CustomerAPI {
 
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteCustomerById(@PathVariable Integer id) {
+        addressService.deleteByCustomerId(id);
         customerService.deleteById(id);
     }
 
@@ -69,16 +72,24 @@ public class CustomerAPI {
         return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.OK);
     }
 
-    @GetMapping("/customerGroup")
-    public ResponseEntity<?> getAllCustomerGroup() {
-        return new ResponseEntity<>(customerService.findAll(), HttpStatus.OK);
+//    @GetMapping("/customerGroup")
+//    public ResponseEntity<?> getAllCustomerGroup() {
+//        return new ResponseEntity<>(customerService.findAll(), HttpStatus.OK);
+//    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteCustomer(@PathVariable Integer id) {
+        customerService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
+
 
     @PutMapping("/updateStatusAvailable")
     public ResponseEntity<?> updateStatusAvailable(@RequestBody List<Integer> arrayIdCustomer) {
         customerService.changeStatusToAvailable(arrayIdCustomer, true);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 
     @PutMapping("/updateStatusUnavailable")
 
@@ -90,23 +101,11 @@ public class CustomerAPI {
 //    findAllCustomerByGroupAndStatus
         @GetMapping("/findAllCustomerByGroupAndStatus/{groupId},{status}")
         public ResponseEntity<?> findAllCustomerByGroupAndStatus(@PathVariable Integer groupId, @PathVariable String status) {
-            List<CustomerResult> customerResults = customerService.findAllCustomerByGroupAndStatus(groupId, status);
-            customerResults.forEach(this::setData);
-        return new ResponseEntity<>(customerResults, HttpStatus.OK);
+            List<CustomerResult> customers = customerService.findAllCustomerByGroupAndStatus(groupId, status);
+        customers.forEach(this::setData);
+        return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
-    @GetMapping("/findAllCustomerByStatus/{status}")
-    public ResponseEntity<?> findAllCustomerByStatus(@PathVariable String status) {
-        List<CustomerResult> customerResults = customerService.findAllCustomerByStatus(status);
-        customerResults.forEach(this::setData);
-        return new ResponseEntity<>(customerResults, HttpStatus.OK);
-    }
-    @GetMapping("/findAllCustomerByGroupId/{groupId}")
-    public ResponseEntity<?> findAllCustomerByGroupId(@PathVariable Integer groupId) {
-        List<CustomerResult> customerResults = customerService.findAllCustomerByGroupId(groupId);
-        customerResults.forEach(this::setData);
-        return new ResponseEntity<>(customerResults, HttpStatus.OK);
-    }
     public void setData(CustomerResult customer) {
         BigDecimal spendTotal = getSpendTotalByCustomerId(customer.getId());
         BigDecimal paidTotal = getPaidTotalByCustomerId(customer.getId());

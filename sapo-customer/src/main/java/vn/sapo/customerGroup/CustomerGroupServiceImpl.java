@@ -28,7 +28,7 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
         CustomerGroup customerGroup = customerGroupMapper.toModel(createCusGroupParam);
         customerGroup = customerGroupRepository.save(customerGroup);
         if (customerGroup.getTitle() == null)
-            customerGroup.setTitle(CodePrefix.CUSTOMER_GROUP.generate(customerGroup.getId()));
+            customerGroup.setTitle(CodePrefix.CUSTOMER_GROUP + CodePrefix.format(customerGroup.getId()));
         return customerGroupMapper.toDTO(customerGroup);
     }
 
