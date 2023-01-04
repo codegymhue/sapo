@@ -223,13 +223,9 @@
                                                                         id="genderCreate">
                                                                     <option selected value="-1">Giới tính</option>
                                                                     <option value="NAM">Nam</option>
-<<<<<<< HEAD
-                                                                    <option value="NỮ">Nữ</option>
-                                                                    <option value="KHÁC">Khác</option>
-=======
                                                                     <option value="NU">Nữ</option>
                                                                     <option value="KHAC">Khác</option>
->>>>>>> khanh_dev
+
 
                                                                 </select>
 
@@ -487,13 +483,10 @@
         customer.phoneNumber = $('#phoneCreate').val();
         customer.email = $('#emailCreate').val();
         customer.birthday = $('#birthdayCreate').val();
-<<<<<<< HEAD
         customer.customerGender = $('#genderCreate :selected').val();
         customer.employeeName = $('#employeeNameCreate :selected').val();
-=======
         // customer.birthday = '2022-12-28T16:44:24Z';
         customer.customerGender = $('#genderCreate').val();
->>>>>>> sang_dev
         shippingAddress.line1 = $('#addressCreate').val();
         shippingAddress.provinceId = $('#province').val();
         shippingAddress.provinceName = $('#province :selected').text();
@@ -515,16 +508,9 @@
             "data": JSON.stringify(customer)
         })
             .done((data) => {
-<<<<<<< HEAD
                App.IziToast.showSuccessAlert("tạo khách hàng thành công !");
                 setTimeout(() => {
-
-
                 }, 2500)
-
-
-
-
                 $('#nameCreate').val();
                 $('#codeCreate').val();
                 $('#phoneCreate').val();
@@ -535,12 +521,6 @@
                 $('#genderCreate').val();
                 $('#employeeNameCreate').val();
 
-
-
-
-
-
-=======
                 App.IziToast.showSuccessAlert('Thêm mới khách hàng thành công  !!!')
                 window.location.href = "/admin/customers";
                 // $('#nameCreate').val("");
@@ -551,7 +531,6 @@
                 // $('#statusCreate').val("")
                 // $('#addressCreate').val("");
                 // $('#employeeNameCreate').val();
->>>>>>> sang_dev
             })
             .fail((jqXHR) => {
                 console.log(jqXHR);

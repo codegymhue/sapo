@@ -4,11 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum CustomerGender {
-<<<<<<< HEAD
-    NAM("NAM"), NU("NỮ"),KHAC("KHÁC");
-=======
     NAM("NAM"), NU("NU"), KHAC("KHAC");
->>>>>>> khanh_dev
+
     private final String value;
 
     CustomerGender(String value) {
