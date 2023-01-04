@@ -249,17 +249,16 @@
                             </th>
                             <th class="align-middle" scope="col">Mã khách hàng</th>
                             <th class="align-middle" scope="col">
-                                <button class="sort" id="btnTitleSort">Tên khách hàng<i class="fa-solid fa-sort"></i>
+                                <button class="sort" id="btnTitleSort">Tên khách hàng
                                 </button>
                             </th>
                             <th class="align-middle" scope="col">Số điện thoại</th>
                             <th class="align-middle" scope="col">Nhóm khách hàng</th>
                             <th class="align-middle" scope="col">
-                                <button class="sort" id="btnCreatAtSort">Công nợ hiện tại<i
-                                        class="fa-solid fa-sort"></i></button>
+                                <button class="sort" id="btnCreatAtSort">Công nợ hiện tại</button>
                             </th>
                             <th class="align-middle" scope="col">
-                                <button class="sort" id="btnUpdateAtSort">Tổng chi tiêu <i class="fa-solid fa-sort"></i>
+                                <button class="sort" id="btnUpdateAtSort">Tổng chi tiêu
                                 </button>
                             </th>
                             <th class="align-middle" scope="col">Tổng SL đơn hàng</th>
@@ -761,7 +760,7 @@
                     {
                         targets: 1,
                         render: function (data, type, row, meta) {
-                            return `<a href="/admin/customers/customerInfo/${row.id}">${row.customerCode}</a>`;
+                            return `<a href="/admin/customers/ ${row.id}">${row.customerCode}</a>`;
                         }
                     },
 
@@ -1679,6 +1678,7 @@
         }
 
     })
+
     $("#ddl-group-customer").on('change', () => {
         let groupId = $("#ddl-group-customer :selected").val();
         let status = $("#ddl-status :selected").val();
