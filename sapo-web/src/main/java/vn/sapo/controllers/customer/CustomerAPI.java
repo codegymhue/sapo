@@ -1,4 +1,5 @@
 package vn.sapo.controllers.customer;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +46,6 @@ public class CustomerAPI {
     }
 
 
-
     @DeleteMapping("/{id}")
     public void deleteCustomerById(@PathVariable Integer id) {
         customerService.deleteById(id);
@@ -87,10 +87,10 @@ public class CustomerAPI {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    findAllCustomerByGroupAndStatus
-        @GetMapping("/findAllCustomerByGroupAndStatus/{groupId},{status}")
-        public ResponseEntity<?> findAllCustomerByGroupAndStatus(@PathVariable Integer groupId, @PathVariable String status) {
-            List<CustomerResult> customers = customerService.findAllCustomerByGroupAndStatus(groupId, status);
+    //    findAllCustomerByGroupAndStatus
+    @GetMapping("/findAllCustomerByGroupAndStatus/{groupId},{status}")
+    public ResponseEntity<?> findAllCustomerByGroupAndStatus(@PathVariable Integer groupId, @PathVariable String status) {
+        List<CustomerResult> customers = customerService.findAllCustomerByGroupAndStatus(groupId, status);
         customers.forEach(this::setData);
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
@@ -136,5 +136,13 @@ public class CustomerAPI {
     public Instant getLastDayOrderByCustomerId(Integer customerId) {
         return saleOrderService.getLastDayOrderByCustomerId(customerId);
     }
+
+    @GetMapping("/findAllCustomerByGroup/{groupId}")
+    public ResponseEntity<?> findAllByGroupId(@PathVariable Integer groupTitleId) {
+        List<CustomerResult> customers = customerService.findAllByGroupId(groupTitleId);
+        customers.forEach(this::setData);
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+    
 }
 
