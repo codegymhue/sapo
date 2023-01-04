@@ -110,25 +110,39 @@ public class CustomerExcelExporter {
                 createCell(row, columnCount++, customer.getPhoneNumber() != null ? customer.getPhoneNumber() : "" , style);
                 createCell(row, columnCount++, customer.getBirthday() != null ? customer.getBirthday().toString() : "", style);
                 createCell(row, columnCount++, customer.getGender() != null ? customer.getGender().getValue() : "", style);
-                createCell(row, columnCount++, address.getFullName() != null ? address.getFullName() : "" , style);
-                createCell(row, columnCount++, address.getPhoneNumber() != null ? address.getPhoneNumber() : "" , style);
-                createCell(row, columnCount++, address.getEmail() != null ? address.getEmail() : "", style);
-                createCell(row, columnCount++, address.getLine1() != null ? address.getLine1() : "" , style);
-                createCell(row, columnCount++, address.getProvinceId() != null ? address.getProvinceName() : "", style);
-                createCell(row, columnCount++, address.getDistrictId() != null ? address.getDistrictName() : "" , style);
-                createCell(row, columnCount++, address.getWardId() != null ? address.getWardName() : "", style);
+
+                if (customer.getAddresses().size() == 0) {
+                    createCell(row, columnCount++, "", style);
+                    createCell(row, columnCount++, "", style);
+                    createCell(row, columnCount++, "", style);
+                    createCell(row, columnCount++, "", style);
+                    createCell(row, columnCount++, "", style);
+                    createCell(row, columnCount++, "", style);
+                    createCell(row, columnCount++, "", style);
+                }else {
+                    for (AddressResult ar : customer.getAddresses()) {
+                        createCell(row, columnCount++, ar.getFullName() != null ? ar.getFullName() : "", style);
+                        createCell(row, columnCount++, ar.getPhoneNumber() != null ? ar.getPhoneNumber() : "", style);
+                        createCell(row, columnCount++, ar.getEmail() != null ? ar.getEmail() != null : "", style);
+                        createCell(row, columnCount++, ar.getLine1() != null ? ar.getLine1() : "", style);
+                        createCell(row, columnCount++, ar.getProvinceName() != null ?  ar.getProvinceName() : "", style);
+                        createCell(row, columnCount++, ar.getDistrictName() != null ? ar.getDistrictName() : "", style);
+                        createCell(row, columnCount++, ar.getWardName() != null ? ar.getWardName() : "", style);
+                    }
+                }
                 createCell(row, columnCount++, "website", style);
                 createCell(row, columnCount++, "fax", style);
                 createCell(row, columnCount++, "Mã số thuế", style);
                 createCell(row, columnCount++, customer.getDescription() != null ? customer.getDescription() : "" , style);
                 createCell(row, columnCount++, "chính sách giá mặc định", style);
                 createCell(row, columnCount++, "chiết khấu mặc định %", style);
-                createCell(row, columnCount++, "nợ", style);
+                createCell(row, columnCount++, "Paymen Metod", style);
+                createCell(row, columnCount++, customer.getDebtTotal(), style);
                 createCell(row, columnCount++, "tổng chi", style);
-                createCell(row, columnCount++, customer.getQuantityProductOrder() , style);
-                createCell(row, columnCount++, customer.getQuantityItemOrder(), style);
-                createCell(row, columnCount++, "tổng hoàn trả", style);
-                createCell(row, columnCount++, "ngày mua cuối", style);
+                createCell(row, columnCount++, customer.getQuantityItemOrder() , style);
+                createCell(row, columnCount++, customer.getQuantityProductOrder(), style);
+                createCell(row, columnCount++, "SL hoàn trả", style);
+                createCell(row, columnCount++, customer.getLastDayOrder()!=null ? customer.getLastDayOrder() : "", style);
                 createCell(row, columnCount++, "điểm hiện tại", style);
                 createCell(row, columnCount++, "Hạng thẻ hiện tại", style);
         }
