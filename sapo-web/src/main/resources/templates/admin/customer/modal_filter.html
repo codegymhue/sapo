@@ -179,7 +179,7 @@
                                                                 display: flex;
                                                                 justify-content: space-between;
                                                                 align-items: center; ">
-                                                        <span id="allDay"> chọn ngày </span>
+                        <span id="allDay"> chọn ngày </span>
                     </div>
                     <ul class="dropdown-menu w-50 table table-hover">
                         <li onclick=handleClickDay(1)>1</li>
@@ -220,21 +220,21 @@
                                                                 display: flex;
                                                                 justify-content: space-between;
                                                                 align-items: center; ">
-                                                        <span id="allYear">Chọn Tháng</span>
+                        <span id="allYear">Chọn Tháng</span>
                     </div>
                     <ul class="dropdown-menu w-50 table table-hover">
-                        <li  onclick=handleClickYear(1)>1</li>
-                        <li  onclick=handleClickYear(2)>2</li>
-                        <li  onclick=handleClickYear(3)>3</li>
-                        <li  onclick=handleClickYear(4)>4</li>
-                        <li  onclick=handleClickYear(5)>5</li>
-                        <li  onclick=handleClickYear(6)>6</li>
-                        <li  onclick=handleClickYear(7)>7</li>
-                        <li  onclick=handleClickYear(8)>8</li>
-                        <li  onclick=handleClickYear(9)>9</li>
-                        <li  onclick=handleClickYear(10)>10</li>
-                        <li  onclick=handleClickYear(11)>11</li>
-                        <li  onclick=handleClickYear(12)>12</li>
+                        <li onclick=handleClickYear(1)>1</li>
+                        <li onclick=handleClickYear(2)>2</li>
+                        <li onclick=handleClickYear(3)>3</li>
+                        <li onclick=handleClickYear(4)>4</li>
+                        <li onclick=handleClickYear(5)>5</li>
+                        <li onclick=handleClickYear(6)>6</li>
+                        <li onclick=handleClickYear(7)>7</li>
+                        <li onclick=handleClickYear(8)>8</li>
+                        <li onclick=handleClickYear(9)>9</li>
+                        <li onclick=handleClickYear(10)>10</li>
+                        <li onclick=handleClickYear(11)>11</li>
+                        <li onclick=handleClickYear(12)>12</li>
                     </ul>
                 </div>
             </div>
@@ -446,15 +446,16 @@
                 })
         }
 
-        function handleClickDay(day){
+        function handleClickDay(day) {
 
             // $("#allDay").innerHTML = day;
-            document.querySelector("#allDay").innerHTML=day;
+            document.querySelector("#allDay").innerHTML = day;
         }
-        function handleClickYear(year){
+
+        function handleClickYear(year) {
 
             // $("#allDay").innerHTML = day;
-            document.querySelector("#allYear").innerHTML=year;
+            document.querySelector("#allYear").innerHTML = year;
         }
 
         $('#datepicker').datepicker({
