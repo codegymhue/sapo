@@ -329,13 +329,11 @@
                                             <h6 class="MuiTypography-root MuiTypography-h6">Thông tin bổ sung</h6>
                                         </div>
                                         <div class="MuiBox-root jss26823">
-                                            <!--                                        nhat-dev: select menu categories-->
                                             <div class="MuiBox-root jss26824 item-box"
                                                  style="border-top: 0; padding-top: 0;">
                                                 <h6 class="MuiTypography-root title MuiTypography-subtitle1">
                                                     Loại sản phẩm</h6>
                                                 <div class="dropdown">
-                                                    <!--                                                <input id="getIdValueCat" type="hidden"/>-->
                                                     <div class="btn bg-secondary dropdown-toggle select-btn-cat"
                                                          type="button" data-bs-toggle="dropdown"
                                                          aria-expanded="false" style=" border: solid 1px #D3D5D7;border: solid 1px #D3D5D7;
@@ -374,7 +372,6 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <!--                                        nhat-dev: select menu brands-->
                                             <div class="MuiBox-root jss26843 item-box"
                                                  style="border-top: 0; padding-top: 0;">
                                                 <h6 class="MuiTypography-root title MuiTypography-subtitle1">Nhãn
@@ -500,7 +497,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!--                                        ap dung thue-->
                                             <div class="MuiBox-root jss26957">
                                                 <h6 class="MuiTypography-root MuiTypography-subtitle1">Thuế
                                                     <span class="MuiTypography-root MuiTypography-caption">
@@ -603,7 +599,6 @@
                                                                         style="color: rgb(70, 81, 95);">Thuế đầu ra</p>
                                                             </div>
                                                             <div class="dropdown">
-                                                                <!--                                                <input id="getIdValueCat" type="hidden"/>-->
                                                                 <div class="btn bg-secondary dropdown-toggle select-btn-tax-out"
                                                                      type="button" data-bs-toggle="dropdown"
                                                                      aria-expanded="false" style=" border: solid 1px #D3D5D7; border: solid 1px #D3D5D7;
@@ -626,7 +621,6 @@
                                                                         </li>
                                                                     </div>
                                                                     <div id="showALlTaxOut">
-
                                                                     </div>
                                                                 </ul>
                                                             </div>
@@ -681,7 +675,6 @@
 <script src="/assets/admin/js/cate_brand/category.js"></script>
 <script src="/assets/admin/js/cate_brand/brand.js"></script>
 <script src="/assets/admin/js/tax/tax.js"></script>
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
         type="text/javascript" crossorigin></script>
@@ -725,7 +718,6 @@
     var imgs = [];
 
 
-    //QHuy
     page.cloudinary.api_key = 142768397813839;
     page.cloudinary.api_secret = "8JitSG_omu6CkELDwlpNH-uqAaE";
     page.cloudinary.cloud_name = 'ngdquochuy241';
@@ -734,7 +726,6 @@
     page.elements.showAllBrand = $(".showAllBrand");
     page.elements.btnCreateProduct = $(".btnCreateProduct");
 
-    // Thêm sản phẩm
     page.dialogs.elements.frmCreateProduct = $("#frmCreateProduct");
     page.dialogs.elements.titleCreate = $('#titleCreate');
     page.dialogs.elements.enableSell = $("#enableSell");
@@ -748,9 +739,7 @@
     page.dialogs.elements.wholesalePriceCreate = $('.wholesalePriceCreate');
     page.dialogs.elements.categoryIdCreate = $('.categoryIdCreate');
     page.dialogs.elements.brandIdCreate = $('.brandIdCreate');
-    // page.dialogs.elements.
 
-    // Thêm ảnh sản phẩm
     page.dialogs.elements.openImgUpload = $(".OpenImgUpload");
     page.dialogs.elements.inputImage = $('#image');
     page.dialogs.elements.showImg = $("#showImg");
@@ -764,7 +753,6 @@
         console.log("page.elements.btnCreateProduct.onClick");
     })
 
-    // Validation
     page.dialogs.elements.frmCreateProduct.validate({
         rules: {
             titleCreate: {
@@ -912,7 +900,6 @@
         }
     });
 
-    //Thêm sản phẩm
     page.commands.createProduct = () => {
         let taxs = [];
         let taxIn = new ProductTaxParam();
@@ -968,7 +955,6 @@
             })
     }
 
-    // Upload file images
     $.cloudinary.config({
         api_key: page.cloudinary.api_key,
         api_secret: page.cloudinary.api_secret,
@@ -1101,9 +1087,6 @@
             page.dialogs.elements.showImgSmall.attr("hidden", true);
         }
     }
-    //inputBrand
-    //----->>>Nhat-dev OnClick button to create Category
-
 
     function createCategory() {
         category.id = 0;
@@ -1130,10 +1113,7 @@
                 App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
     }
-    //<<<--------nhat-dev end onclick create category
 
-
-    //----->>>Nhat-dev OnClick button to create brand
     function createBrand() {
         brand.id = 0;
         brand.title = $('#inputBrand').val();
@@ -1159,8 +1139,6 @@
                 App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
     }
-    //<<<--------nhat-dev end onclick create brand
-    //----->>>Nhat-dev OnClick button to create tax
 
     $('#btnAddTax').on("click", function () {
         $("#frmCreateTax").trigger("submit");
@@ -1230,8 +1208,7 @@
                 App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
     }
-    //<<<--------nhat-dev end onclick create brand
-    //checkbox event apply tax
+
     $('#applyTax').click(function () {
         if ($("#applyTax").is(':checked')) {
             $("#showTaxModal").css("display", "block");
@@ -1247,7 +1224,6 @@
         }
     });
 
-    //nhat-dev onchange input import price and cost price
     $('.importPriceCreate ').keyup(function () {
         $('#costPrice').val($(this).val());
     });
@@ -1257,7 +1233,6 @@
     });
 
     page.loadData = () => {
-        //nhat_dev called function categories and brands
         showAllCategories();
         searchCat();
         showAllBrands();

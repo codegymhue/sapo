@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
 
-
 @Data
 @Accessors(chain = true)
 public class ProductCreate implements Serializable {

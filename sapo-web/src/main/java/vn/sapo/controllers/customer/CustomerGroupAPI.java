@@ -60,6 +60,4 @@ public class CustomerGroupAPI {
     public void deleteCusGroupById(@PathVariable Integer id) {
         customerGroupService.deleteById(id);
     }
-
-
 }

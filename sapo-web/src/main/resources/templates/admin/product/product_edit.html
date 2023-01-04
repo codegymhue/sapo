@@ -169,17 +169,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!--                                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12"-->
-                                                    <!--                                                     style="padding: 0 10px;">-->
-                                                    <!--                                                    <button id="Sapo-Button-439884e3-ac6f-4fd5-bb67-ef5151e7d1db"-->
-                                                    <!--                                                            class="sc-jqUVSM eAvhdO">-->
-                                                    <!--                                                        <span class="sc-papXJ jcEYKF">-->
-                                                    <!--                                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorPrimary"-->
-                                                    <!--                                                               style="cursor: pointer; display: inline;">Mô tả sản phẩm-->
-                                                    <!--                                                            </p>-->
-                                                    <!--                                                        </span>-->
-                                                    <!--                                                    </button>-->
-                                                    <!--                                                </div>-->
                                                 </div>
                                             </div>
                                         </div>
@@ -280,8 +269,7 @@
                                                                        multiple="multiple"
                                                                        data-cloudinary-field="image_id"
                                                                        data-form-data="{ &quot;upload_preset&quot;:  &quot;jgxfxyic&quot;, &quot;callback&quot;: &quot;https://www.example.com/cloudinary_cors.html&quot;}"
-                                                                       hidden
-                                                                />
+                                                                       hidden/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -313,14 +301,11 @@
                                                 <h6 class="MuiTypography-root MuiTypography-h6">Phân loại</h6>
                                             </div>
                                             <div class="MuiBox-root jss26823">
-                                                <!--                                        nhat-dev: select menu categories-->
                                                 <div class="MuiBox-root jss26824 item-box"
                                                      style="border-top: 0; padding-top: 0;">
                                                     <h6 class="MuiTypography-root title MuiTypography-subtitle1">
                                                         Loại sản phẩm</h6>
-                                                    <div class="dropdown"
-                                                    >
-                                                        <!--                                                <input id="getIdValueCat" type="hidden"/>-->
+                                                    <div class="dropdown">
                                                         <div class="btn bg-secondary dropdown-toggle select-btn-cat"
                                                              type="button" data-bs-toggle="dropdown"
                                                              aria-expanded="false" style=" border: solid 1px #D3D5D7;border: solid 1px #D3D5D7;
@@ -358,13 +343,11 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <!--                                        nhat-dev: select menu brands-->
                                                 <div class="MuiBox-root jss26843 item-box"
                                                      style="border-top: 0; padding-top: 0;">
                                                     <h6 class="MuiTypography-root title MuiTypography-subtitle1">Nhãn
                                                         hiệu</h6>
                                                     <div class="dropdown">
-                                                        <!--                                                <input id="getIdValueCat" type="hidden"/>-->
                                                         <div class="btn bg-secondary dropdown-toggle select-btn-brand"
                                                              type="button" data-bs-toggle="dropdown"
                                                              aria-expanded="false" style=" border: solid 1px #D3D5D7;border: solid 1px #D3D5D7;
@@ -484,7 +467,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!--                                        ap dung thue-->
                                                 <div class="MuiBox-root jss26957">
                                                     <h6 class="MuiTypography-root MuiTypography-subtitle1">Thuế
                                                         <span class="MuiTypography-root MuiTypography-caption">
@@ -537,8 +519,7 @@
                                                                         phẩm</label></div>
                                                                     <select class="form-select"
                                                                             aria-label="Default select example"
-                                                                            id="priceDepsTax"
-                                                                    >
+                                                                            id="priceDepsTax">
                                                                         <option value="1">Giá chưa bao gồm thuế
                                                                         </option>
                                                                         <option value="2"
@@ -558,7 +539,6 @@
                                                                     >Thuế đầu vào</p>
                                                                 </div>
                                                                 <div class="dropdown">
-                                                                    <!--                                                <input id="getIdValueCat" type="hidden"/>-->
                                                                     <div class="btn bg-secondary dropdown-toggle select-btn-tax"
                                                                          type="button" data-bs-toggle="dropdown"
                                                                          aria-expanded="false" style=" border: solid 1px #D3D5D7;border: solid 1px #D3D5D7;
@@ -602,7 +582,6 @@
                                                                         ra</p>
                                                                 </div>
                                                                 <div class="dropdown">
-                                                                    <!--                                                <input id="getIdValueCat" type="hidden"/>-->
                                                                     <div class="btn bg-secondary dropdown-toggle select-btn-tax-out"
                                                                          type="button" data-bs-toggle="dropdown"
                                                                          aria-expanded="false" style=" border: solid 1px #D3D5D7; border: solid 1px #D3D5D7;
@@ -832,10 +811,7 @@
 <script th:inline="javascript">
 
     /*<![CDATA[*/
-
     var medias = /*[[${medias}]]*/ 'default';
-
-
     /*]]>*/
 
     let media = JSON.parse(medias);
@@ -875,7 +851,6 @@
 
     page.elements.productId = $("#productId");
 
-    // Sửa sản phẩm
     page.dialogs.elements.titleUpdate = $('.titleUpdate');
     page.dialogs.elements.enableSell = $("#enableSell");
     page.dialogs.elements.descriptionUpdate = $('.descriptionUpdate');
@@ -889,7 +864,6 @@
     page.dialogs.elements.categoryIdUpdate = $('.categoryIdUpdate');
     page.dialogs.elements.brandIdUpdate = $('.brandIdUpdate');
 
-    // Thêm ảnh sản phẩm
     page.dialogs.elements.openImgUpload = $(".OpenImgUpload");
     page.dialogs.elements.inputImage = $('#image');
     page.dialogs.elements.showImg = $("#showImg");
@@ -897,7 +871,6 @@
     page.dialogs.elements.showImgSmall = $("#showImgSmall");
     page.dialogs.elements.progress = $('.progress');
     page.dialogs.elements.progressBar = $(".progress-bar");
-    //Sửa sản phẩm
     page.commands.updateProduct = () => {
         let taxIn = new ProductTaxParam();
         let taxOut = new ProductTaxParam();
@@ -949,7 +922,6 @@
             })
     }
 
-    // Validation
     page.elements.frmUpdateProduct.validate({
         rules: {
             title: {
@@ -1039,8 +1011,6 @@
         page.dialogs.elements.frmUpdateProduct.trigger("submit");
     })
 
-
-    // Upload file images
     $.cloudinary.config({
         api_key: page.cloudinary.api_key,
         api_secret: page.cloudinary.api_secret,
@@ -1263,10 +1233,7 @@
                 App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
     }
-    //<<<--------nhat-dev end onclick create category
 
-
-    //----->>>Nhat-dev OnClick button to create brand
     function createBrand() {
         brand.id = 0;
         brand.title = $('#inputBrand').val();
@@ -1286,14 +1253,11 @@
                 showAllBrands();
                 $('#modalAddBrand').modal('hide');
                 $('#frmCreateBrand')[0].reset();
-
             })
             .fail((jqXHR) => {
                 App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
     }
-    //<<<--------nhat-dev end onclick create brand
-    //----->>>Nhat-dev OnClick button to create tax
 
     $('#btnAddTax').on("click", function () {
         $("#frmCreateTax").trigger("submit");
@@ -1363,8 +1327,7 @@
                 App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
     }
-    //<<<--------nhat-dev end onclick create brand
-    //checkbox event apply tax
+
     $('#applyTax').click(function () {
         if ($("#applyTax").is(':checked')) {
             $("#showTaxModal").css("display", "block");
@@ -1373,6 +1336,7 @@
             $("#showTaxModal").css("display", "none");
         }
     });
+
     $('#enableVariant').click(function () {
         if ($("#enableVariant").is(':checked')) {
             $("#showCreateVariant").css("display", "block");
@@ -1381,7 +1345,6 @@
         }
     });
 
-    //nhat_dev called function categories and brands
     showAllCategories();
     searchCat();
     showAllBrands();

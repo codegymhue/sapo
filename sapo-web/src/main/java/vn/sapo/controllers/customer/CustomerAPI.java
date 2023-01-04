@@ -87,7 +87,6 @@ public class CustomerAPI {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    findAllCustomerByGroupAndStatus
         @GetMapping("/findAllCustomerByGroupAndStatus/{groupId},{status}")
         public ResponseEntity<?> findAllCustomerByGroupAndStatus(@PathVariable Integer groupId, @PathVariable String status) {
             List<CustomerResult> customers = customerService.findAllCustomerByGroupAndStatus(groupId, status);

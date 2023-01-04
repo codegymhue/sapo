@@ -18,8 +18,6 @@ public class ItemResult {
 
     private Integer employeeId;
 
-//    private EmployeeResult employee;
-
     private Integer supplierId;
 
     private Integer purchaseOrderId;

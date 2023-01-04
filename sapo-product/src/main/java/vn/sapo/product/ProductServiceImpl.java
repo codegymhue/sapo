@@ -22,7 +22,6 @@ import vn.sapo.item.ItemMapper;
 import vn.sapo.item.ItemService;
 import vn.sapo.media.MediaMapper;
 import vn.sapo.media.MediaService;
-import vn.sapo.media.dto.MediaParam;
 import vn.sapo.product.dto.*;
 import vn.sapo.product_tax.ProductTaxMapper;
 import vn.sapo.product_tax.ProductTaxRepository;
@@ -91,7 +90,6 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     Characters characters;
 
- 
     @Override
     @Transactional(readOnly = true)
     public List<ProductResult> findAll() {
@@ -108,7 +106,6 @@ public class ProductServiceImpl implements ProductService {
                     return dto;
                 })
                 .collect(Collectors.toList());
-
     }
 
     @Override
@@ -403,6 +400,7 @@ public class ProductServiceImpl implements ProductService {
             product.setStatus(status ? ProductStatus.AVAILABLE : ProductStatus.UNAVAILABLE);
         }
     }
+
     @Override
     @Transactional
     public void deleteSoftProduct(List<Integer> productIds) {

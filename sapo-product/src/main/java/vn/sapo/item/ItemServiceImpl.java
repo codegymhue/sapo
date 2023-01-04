@@ -19,9 +19,6 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     private ItemMapper itemMapper;
 
-//    @Autowired
-//    private EmployeeMapper employeeMapper;
-
     @Autowired
     private ProductMapper productMapper;
 
@@ -32,7 +29,6 @@ public class ItemServiceImpl implements ItemService {
                 .stream()
                 .map(item -> {
                     ItemResult result = itemMapper.toDTO(item);
-//                    result.setEmployee(employeeMapper.toDTO(item.getEmployee()));
                     return result;
                 })
                 .collect(Collectors.toList());
