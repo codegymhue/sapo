@@ -1,5 +1,6 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="vi-VN" class="sapo-menu-expand sapo-menu-toggle-active">
+<html xmlns:th="http://www.thymeleaf.org" lang="vi-VN" class="sapo-menu-expand sapo-menu-toggle-active" th:object="${customer}">
+th:object="${customer}"
 <head>
     <th:block th:replace="/layout/header.html"/>
     <title>Chi tiết khách hàng</title>
@@ -20,14 +21,23 @@
                               fill="currentColor"></path>
                     </svg>
                     <h6 class="MuiTypography-root MuiTypography-subtitle1">Quay lại danh sách khách hàng</h6></a></div>
+                <th:block>
+                    <h2 th:if="errors" th:text="${errors}" style="color: red"></h2>
+                </th:block>
+                <input type="hidden"  id="customerId" th:value="*{id}" >
                 <div class="MuiBox-root jss2119">
-                    <button id="btn_deleteCustomer" class="sc-jqUVSM gYRFmk"><span
+
+                    <button id="btn_deleteCustomer" class="sc-jqUVSM gYRFmk">
+
+                        <span
                             class="sc-papXJ jcEYKF">Xóa khách hàng</span></button>
+                    <a th:value="*{id}" th:href="@{/admin/customer/edit/__${customer.getId()}__}">
                     <button id="btn-create-voucher" class="sc-jqUVSM FmJDc"><span class="sc-papXJ ffDJGn">Tạo phiếu thu/chi</span>
                         <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M7 10l5 5 5-5z"></path>
                         </svg>
                     </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -35,22 +45,25 @@
             <div class="MuiBox-root jss647 jss609">
                 <div class="MuiBox-root jss648 jss612">
                     <h6 class="MuiTypography-root jss613 MuiTypography-subtitle1">
-                        Gail Hansen</h6></div>
+                         </h6></div>
                 <div class="MuiBox-root jss649 jss612"></div>
             </div>
             <div class="MuiBox-root jss654 jss614">
                 <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
                     <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-8">
+                        <h2 th:value="*{id}" th:text="*{fullName}" style="margin-top: -44px; padding-bottom: 10px"></h2>
                         <div class="MuiBox-root jss758 jss615">
                             <div class="MuiBox-root jss759 jss622 jss617">
                                 <div class="MuiBox-root jss760 jss621">
                                     <div class="MuiBox-root jss761" style="display: flex;"><h6
                                             class="MuiTypography-root MuiTypography-subtitle1"
                                             style="padding-right: 16px;">Thông tin cá nhân</h6>
-                                        <div class="sc-jSMfEi hlxtkG"><span
-                                                class="sc-eCYdqJ gIZkwA">Đang giao dịch</span></div>
+                                        <div th:class="*{status == status.AVAILABLE} ? 'PGrDd' : 'PGrDf'">
+                                    <span th:text="*{status == status.AVAILABLE} ? 'Đang giao dịch' : 'Ngừng giao dịch'"
+                                          th:class="*{status == status.AVAILABLE} ? 'gIZkwA' : 'gIZkwB'"></span>
+                                        </div>
                                     </div>
-                                    <a class="jss2101" href="/admin/customers/edit/{id}">Cập nhật</a></div>
+                                    <a class="jss2101" href="/admin/customers/update/">Cập nhật</a></div>
 
 
                                 <div class="MuiBox-root jss762 jss623">
@@ -73,18 +86,18 @@
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3">
                                             <div class="MuiPaper-root jss624 MuiPaper-elevation1 MuiPaper-rounded"><h6
+                                                    class="MuiTypography-root jss626 MuiTypography-subtitle1" th:text="*{birthday}"
+                                                     ></h6>
+                                                <h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    title="01/12/2004" itemid="display-dob">: 01/12/2004</h6><h6
+                                                    th:text="*{gender}"> </h6>
+                                                <h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    title="Khác" itemid="display-sex">: Khác</h6><h6
-                                                    class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    itemid="display-phone-number" title="0999999999">: 0999999999</h6>
+                                                    th:text="*{phoneNumber}"></h6>
                                                 <h6 class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    itemid="display-email" title="tyjaxa@mailinator.com">:
-                                                    tyjaxa@mailinator.com</h6><h6
+                                                    th:text="*{email}" ></h6><h6
                                                         class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                        title="Thiên Thiên" itemid="display-account-name">: Thiên
-                                                    Thiên</h6><span>---</span></div>
+                                                        th:text="*{employee}"></h6><span></span></div>
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3">
                                             <div class="MuiPaper-root jss624 jss625 MuiPaper-elevation1 MuiPaper-rounded">
@@ -639,61 +652,61 @@
 
 
     // Liên hệ
-    function showCustomerInfotangent() {
-        let idCustomer = $('.idCustomerDelete').val();
-        console.log(idCustomer)
-        return $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "GET",
-            url: "http://localhost:8080/api/customers/historyCustomerOrder/" + idCustomer
-        })
-            .done((data) => {
-                console.log(data)
-                $.each(data, (i, order) => {
-                    let str = `
-                    <tr class="MuiTableRow-root jss1427 MuiTableRow-hover" role="checkbox"
-                                                    tabindex="-1">
-                                                    <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
-                                                        <a class="jss1437" href="/admin/orders/1167549753">${order.orderCode}</a>
-                                                    </td>
-                                                    <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
-                                                        <div class="sc-jSMfEi hBmWYo">
-                                                        <span class="sc-eCYdqJ bzQjtT">${order.orderStatus.name}</span>
-                                                        </div>
-                                                    </td>
-
-                                                    <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignRight">
-                                                        <p class="MuiTypography-root MuiTypography-body1"
-                                                           title="1,415,000">
-                                                           ${order.grandTotal != null ? (new Intl.NumberFormat('vi-VN', {
-                        style: 'currency',
-                        currency: 'VND'
-                    }).format(order.grandTotal)) : "---"}
-                                                           </p></td>
-                                                    <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
-                                                        <p class="MuiTypography-root MuiTypography-body1"
-                                                           title="Chi nhánh mặc định">Chi nhánh mặc định</p></td>
-                                                    <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
-                                                        <p class="MuiTypography-root MuiTypography-body1" title="Pos">
-                                                            Web</p></td>
-                                                    <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
-                                                        <p class="MuiTypography-root MuiTypography-body1"
-                                                           title="">${order.employee.name}</p></td>
-                                                    <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
-                                                        <div>${order.createAt}</div>
-                                                    </td>
-                                                </tr>
-                    `
-                    $(".showAllCustomerOrderHistory").append(str);
-                });
-            })
-            .fail((jqXHR) => {
-
-            })
-    }
+    // function showCustomerInfotangent() {
+    //     let idCustomer = $('.idCustomerDelete').val();
+    //     console.log(idCustomer)
+    //     return $.ajax({
+    //         headers: {
+    //             "accept": "application/json",
+    //             "content-type": "application/json"
+    //         },
+    //         type: "GET",
+    //         url: "http://localhost:8080/api/customers/historyCustomerOrder/" + idCustomer
+    //     })
+    //         .done((data) => {
+    //             console.log(data)
+    //             $.each(data, (i, order) => {
+    //                 let str = `
+    //                 <tr class="MuiTableRow-root jss1427 MuiTableRow-hover" role="checkbox"
+    //                                                 tabindex="-1">
+    //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
+    //                                                     <a class="jss1437" href="/admin/orders/1167549753">${order.orderCode}</a>
+    //                                                 </td>
+    //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
+    //                                                     <div class="sc-jSMfEi hBmWYo">
+    //                                                     <span class="sc-eCYdqJ bzQjtT">${order.orderStatus.name}</span>
+    //                                                     </div>
+    //                                                 </td>
+    //
+    //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignRight">
+    //                                                     <p class="MuiTypography-root MuiTypography-body1"
+    //                                                        title="1,415,000">
+    //                                                        ${order.grandTotal != null ? (new Intl.NumberFormat('vi-VN', {
+    //                     style: 'currency',
+    //                     currency: 'VND'
+    //                 }).format(order.grandTotal)) : "---"}
+    //                                                        </p></td>
+    //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
+    //                                                     <p class="MuiTypography-root MuiTypography-body1"
+    //                                                        title="Chi nhánh mặc định">Chi nhánh mặc định</p></td>
+    //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
+    //                                                     <p class="MuiTypography-root MuiTypography-body1" title="Pos">
+    //                                                         Web</p></td>
+    //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
+    //                                                     <p class="MuiTypography-root MuiTypography-body1"
+    //                                                        title="">${order.employee.name}</p></td>
+    //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
+    //                                                     <div>${order.createAt}</div>
+    //                                                 </td>
+    //                                             </tr>
+    //                 `
+    //                 $(".showAllCustomerOrderHistory").append(str);
+    //             });
+    //         })
+    //         .fail((jqXHR) => {
+    //
+    //         })
+    // }
 
     deleteEventModelShow();
     idDeleteCustomerById();
@@ -706,18 +719,21 @@
     }
 
     function deleteCustomerHander() {
-        let idCustomer = $('.idCustomerDelete').val();
+        let idCustomer = $('#customerId').val();
+
         $('#btn_deleteCustomer').click(function () {
-            alert(" ok nuông")
+            // alert(" ok nuông")
+            console.log(idCustomer)
             return $.ajax({
                 headers: {
                     "accept": "application/json",
                     "content-type": "application/json"
                 },
                 type: "DELETE",
-                url: "http://localhost:8080/api/customers/delete"
+                url: "http://localhost:8080/api/customers/delete/" + idCustomer
             })
                 .done((data) => {
+                    $('#modal_delete_customer').modal('hide');
                     App.IziToast.showSuccessAlert('Xoá khách hàng thành công  !!!')
                     window.location.href = "/admin/customers";
                 })

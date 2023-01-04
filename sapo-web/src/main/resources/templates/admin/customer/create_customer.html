@@ -12,7 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <th:block th:replace="/layout/header.html"/>
-    <title>Danh sách khách hàng</title>
+    <title>Tạo thêm khách hàng mới</title>
     <link rel="stylesheet" href="/assets/admin/css/customer/customer_create.css"/>
 </head>
 <body data-new-gr-c-s-check-loaded="14.1085.0" cz-shortcut-listen="true">
@@ -223,13 +223,8 @@
                                                                         id="genderCreate">
                                                                     <option selected value="-1">Giới tính</option>
                                                                     <option value="NAM">Nam</option>
-<<<<<<< HEAD
-                                                                    <option value="NỮ">Nữ</option>
-                                                                    <option value="KHÁC">Khác</option>
-=======
                                                                     <option value="NU">Nữ</option>
                                                                     <option value="KHAC">Khác</option>
->>>>>>> khanh_dev
 
                                                                 </select>
 
@@ -433,12 +428,12 @@
 
 
     class Customer {
-        constructor(id, customerCode, name, phone, customerGroup, customerGender, email, birthday, status, createAt, updateAt, employeeId, deleted, createShippingAddressParam) {
+        constructor(id, customerCode, name, phone, customerGroup, gender, email, birthday, status, createAt, updateAt, employeeId, deleted, createAddressParam) {
             this.id = id;
             this.customerCode = customerCode;
             this.name = name;
             this.phone = phone;
-            this.customerGender = customerGender;
+            this.gender = gender;
             this.customerGroup = customerGroup;
             this.email = email;
             this.birthday = birthday;
@@ -447,18 +442,18 @@
             this.updateAt = updateAt;
             this.employeeId = employeeId;
             this.deleted = deleted;
-            this.createShippingAddressParam = createShippingAddressParam;
+            this.createAddressParam = createAddressParam;
 
 
         }
     }
 
-    class ShippingAddress {
-        constructor(id, fullName, mobile, line1, line2, email, districtId, districtName, provinceId, provinceName, wardId, wardName, zipCode, customerId, supplierId, isDefault) {
+    class CreateAddressParam {
+        constructor(id, fullName, phoneNumber, line1, line2, email, districtId, districtName, provinceId, provinceName, wardId, wardName, zipCode, customerId, supplierId, isDefault) {
             this.fullName = fullName;
             this.line1 = line1;
             this.line2 = line2;
-            this.mobile = mobile;
+            this.phoneNumber = phoneNumber;
             this.email = email;
             // this.address = address;
             this.districtId = districtId;
@@ -478,7 +473,7 @@
 
     let customer = new Customer();
 
-    let shippingAddress = new ShippingAddress();
+    let createAddressParam = new CreateAddressParam();
 
     $('#btnCreateCustomer').on('click', () => {
         customer.fullName = $('#nameCreate').val();
@@ -487,24 +482,23 @@
         customer.phoneNumber = $('#phoneCreate').val();
         customer.email = $('#emailCreate').val();
         customer.birthday = $('#birthdayCreate').val();
-<<<<<<< HEAD
-        customer.customerGender = $('#genderCreate :selected').val();
-        customer.employeeName = $('#employeeNameCreate :selected').val();
-=======
+        customer.gender = $('#genderCreate :selected').val();
+        customer.employeeId = $('#employeeNameCreate :selected').val();
         // customer.birthday = '2022-12-28T16:44:24Z';
-        customer.customerGender = $('#genderCreate').val();
->>>>>>> sang_dev
-        shippingAddress.line1 = $('#addressCreate').val();
-        shippingAddress.provinceId = $('#province').val();
-        shippingAddress.provinceName = $('#province :selected').text();
-        shippingAddress.districtId = $('#district').val();
-        shippingAddress.districtName = $('#district :selected').text();
-        shippingAddress.wardId = $('#ward').val();
-        shippingAddress.wardName = $('#ward :selected').text();
-        customer.createShippingAddressParam = shippingAddress;
-        console.log("đay là customer")
-        console.log(customer)
-        console.log(shippingAddress)
+        // shippingAddress.fullName = $('#nameCreate').val();
+        createAddressParam.line1 = $('#addressCreate').val();
+        createAddressParam.provinceId = $('#province').val();
+        createAddressParam.provinceName = $('#province :selected').text();
+        createAddressParam.districtId = $('#district').val();
+        createAddressParam.districtName = $('#district :selected').text();
+        createAddressParam.wardId = $('#ward').val();
+        createAddressParam.wardName = $('#ward :selected').text();
+        createAddressParam.phoneNumber = $('#phoneCreate').val();
+        customer.createAddressParam = createAddressParam;
+        // console.log("đay là customer")
+        // console.log(customer.gender)
+        // console.log(customer)
+        console.log(createAddressParam)
         $.ajax({
             "headers": {
                 "accept": "application/json",
@@ -515,43 +509,26 @@
             "data": JSON.stringify(customer)
         })
             .done((data) => {
-<<<<<<< HEAD
+
                App.IziToast.showSuccessAlert("tạo khách hàng thành công !");
                 setTimeout(() => {
-
-
                 }, 2500)
+                // $('#nameCreate').val();
+                // $('#codeCreate').val();
+                // $('#phoneCreate').val();
+                // $('#emailCreate').val();
+                // $('#birthdayCreate').val();
+                // $('#statusCreate').val()
+                // $('#addressCreate').val();
+                // $('#genderCreate').val();
+                // $('#employeeNameCreate :selected').val();
 
-
-
-
-                $('#nameCreate').val();
-                $('#codeCreate').val();
-                $('#phoneCreate').val();
-                $('#emailCreate').val();
-                $('#birthdayCreate').val();
-                $('#statusCreate').val()
-                $('#addressCreate').val();
-                $('#genderCreate').val();
-                $('#employeeNameCreate').val();
 
 
 
 
 
 
-=======
-                App.IziToast.showSuccessAlert('Thêm mới khách hàng thành công  !!!')
-                window.location.href = "/admin/customers";
-                // $('#nameCreate').val("");
-                // $('#codeCreate').val("");
-                // $('#phoneCreate').val("");
-                // $('#emailCreate').val("");
-                // $('#birthdayCreate').val("");
-                // $('#statusCreate').val("")
-                // $('#addressCreate').val("");
-                // $('#employeeNameCreate').val();
->>>>>>> sang_dev
             })
             .fail((jqXHR) => {
                 console.log(jqXHR);

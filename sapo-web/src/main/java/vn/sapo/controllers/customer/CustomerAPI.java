@@ -1,9 +1,11 @@
 package vn.sapo.controllers.customer;
+import org.apache.tomcat.jni.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vn.sapo.address.AddressService;
+import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CreateCustomerParam;
@@ -46,8 +48,9 @@ public class CustomerAPI {
 
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteCustomerById(@PathVariable Integer id) {
+        addressService.deleteByCustomerId(id);
         customerService.deleteById(id);
     }
 
@@ -74,11 +77,19 @@ public class CustomerAPI {
 //        return new ResponseEntity<>(customerService.findAll(), HttpStatus.OK);
 //    }
 
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteCustomer(@PathVariable Integer id) {
+        customerService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
     @PutMapping("/updateStatusAvailable")
     public ResponseEntity<?> updateStatusAvailable(@RequestBody List<Integer> arrayIdCustomer) {
         customerService.changeStatusToAvailable(arrayIdCustomer, true);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 
     @PutMapping("/updateStatusUnavailable")
 

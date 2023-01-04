@@ -38,4 +38,5 @@ public class CreateCustomerParam {
 
     private CreateAddressParam createAddressParam;
 
+
 }
