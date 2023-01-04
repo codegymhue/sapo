@@ -26,16 +26,4 @@ public class CustomerGroupResult {
     private Long countCus;
 
 //    private Integer pricePolicyId;
-
-
-    @Override
-    public String toString() {
-        return "CustomerGroupResult{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", cusGrpCode='" + cusGrpCode + '\'' +
-                ", createdAt=" + createdAt +
-                ", countCus=" + countCus +
-                '}';
-    }
 }

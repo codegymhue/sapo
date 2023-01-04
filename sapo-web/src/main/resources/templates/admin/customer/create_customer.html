@@ -222,10 +222,9 @@
                                                                 <select class="jss87874 form-select" name="genderCreate"
                                                                         id="genderCreate">
                                                                     <option selected value="-1">Giới tính</option>
-                                                                    <option value="NAM">Nam</option>
-                                                                    <option value="NU">Nữ</option>
-                                                                    <option value="KHAC">Khác</option>
-
+                                                                    <option value="1">Nam</option>
+                                                                    <option value="2">Nữ</option>
+                                                                    <option value="3">Khác</option>
 
                                                                 </select>
 
@@ -429,12 +428,11 @@
 
 
     class Customer {
-        constructor(id, customerCode, name, phone, customerGroup, customerGender, email, birthday, status, createAt, updateAt, employeeId, deleted, createShippingAddressParam) {
+        constructor(id, customerCode, name, phone, customerGroup, email, birthday, status, createAt, updateAt, employeeId, deleted, createShippingAddressParam) {
             this.id = id;
             this.customerCode = customerCode;
             this.name = name;
             this.phone = phone;
-            this.customerGender = customerGender;
             this.customerGroup = customerGroup;
             this.email = email;
             this.birthday = birthday;
@@ -483,8 +481,6 @@
         customer.phoneNumber = $('#phoneCreate').val();
         customer.email = $('#emailCreate').val();
         customer.birthday = $('#birthdayCreate').val();
-        customer.customerGender = $('#genderCreate :selected').val();
-        customer.employeeName = $('#employeeNameCreate :selected').val();
         // customer.birthday = '2022-12-28T16:44:24Z';
         customer.customerGender = $('#genderCreate').val();
         shippingAddress.line1 = $('#addressCreate').val();
@@ -508,19 +504,6 @@
             "data": JSON.stringify(customer)
         })
             .done((data) => {
-               App.IziToast.showSuccessAlert("tạo khách hàng thành công !");
-                setTimeout(() => {
-                }, 2500)
-                $('#nameCreate').val();
-                $('#codeCreate').val();
-                $('#phoneCreate').val();
-                $('#emailCreate').val();
-                $('#birthdayCreate').val();
-                $('#statusCreate').val()
-                $('#addressCreate').val();
-                $('#genderCreate').val();
-                $('#employeeNameCreate').val();
-
                 App.IziToast.showSuccessAlert('Thêm mới khách hàng thành công  !!!')
                 window.location.href = "/admin/customers";
                 // $('#nameCreate').val("");
@@ -699,7 +682,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: "http://localhost:8080/api/customer_groups/"
+            url: "http://localhost:8080/api/customer_groups"
         })
             .done((data) => {
                 console.log(data)
@@ -754,14 +737,14 @@
 
 </script>
 <script>
-    // $(document).ready(function () {
-    //
-    //     $('.input-daterange').datepicker({
-    //         format: 'dd-mm-yyyy',
-    //         todayHighlight: true,
-    //         startDate: '0d'
-    //     });
-    //
-    // });
+    $(document).ready(function () {
+
+        $('.input-daterange').datepicker({
+            format: 'dd-mm-yyyy',
+            todayHighlight: true,
+            startDate: '0d'
+        });
+
+    });
 </script>
 </html>
