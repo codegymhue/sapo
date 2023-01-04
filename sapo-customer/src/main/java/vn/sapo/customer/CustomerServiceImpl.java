@@ -51,7 +51,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public void deleteById(Integer id) {
         customerRepository.deleteById(id);
     }
@@ -64,6 +64,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Transactional(readOnly = true)
     public CustomerResult create(CreateCustomerParam createCustomerParam) {
+        System.out.println("Đay là param" + createCustomerParam);
         Customer customer = customerMapper.toModel(createCustomerParam);
         customer = customerRepository.save(customer);
         String cusCode = customer.getCustomerCode();
@@ -74,7 +75,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public CustomerResult update(UpdateCustomerParam updateCustomerParam) {
         Customer customer = customerRepository.findById(updateCustomerParam.getId())
                 .orElseThrow(() -> new NotFoundException("Customer not found"));
