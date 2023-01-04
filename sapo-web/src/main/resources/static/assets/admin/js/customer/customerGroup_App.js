@@ -83,6 +83,7 @@ class CustomerGroup{
     }
 }
 
+
 // class CreateCusGroupParam {
 //     constructor(id, title, cusGrpCode, pricing_policy_id, payment_method_id, description, discount) {
 //         this.id = id;

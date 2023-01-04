@@ -12,9 +12,13 @@ import java.util.Optional;
 @Repository
 public interface CustomerGroupRepository  extends JpaRepository<CustomerGroup, Integer> {
 
-    @Query("select new vn.sapo.customerGroup.dto.CustomerGroupResult(g.id,g.cusGrpCode," +
+    @Query("select new vn.sapo.customerGroup.dto.CustomerGroupResult(g.id," +
             "g.title," +
-            "g.createdAt, count(c.groupId)," +
+            "g.cusGrpCode," +
+            "g.pricing_policy_id," +
+            "g.payment_method_id," +
+            "g.createdAt, " +
+            "count(c.groupId)," +
             "g.description,g.discount)" +
             "from CustomerGroup as g " +
             "left join Customer as c " +

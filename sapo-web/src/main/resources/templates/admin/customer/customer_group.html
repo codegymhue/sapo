@@ -299,43 +299,10 @@
     function getIdRow() {
         $(".upCusGrp").on("click", function () {
             let id = $(this).data("id");
+            window.location.href = "/admin/customer_groups/"+id;
             console.log(id);
-            getCusGroupById(id).then(() => {
-                $("#upTitle").val(customerGroup.title);
-                $("#upCusGrpCode").val(customerGroup.cusGrpCode);
-                $("#ipDescription").val(customerGroup.description);
-                $("#upPricing_policy_id").val(customerGroup.pricing_policy_id);
-                $("#upDiscount").val(customerGroup.discount);
-                $("#upPayment_method_id").val(customerGroup.payment_method_id);
-                console.log(customerGroup);
-                // page.elements.modalUpdate.modal("show");
-            })
-                .catch(() => {
-                    console.log("get edit fail");
-                    CustomerGroup_App.IziToast.showErrorAlert("get edit fail");
-                });
-        })
-    }
 
-    function getCusGroupById(Id) {
-        return $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "GET",
-            url: "http://localhost:8080/api/customer_groups" + "/" + Id
         })
-            .done((data) => {
-                customerGroup = data;
-            })
-            .fail((jqXHR) => {
-                if (jqXHR.responseJSON) {
-                    $.each(jqXHR.responseJSON, (key, item) => {
-                        CustomerGroup_App.IziToast.showErrorAlert(item);
-                    })
-                }
-            });
     }
 
     getAllCustomerGroupByGroup();

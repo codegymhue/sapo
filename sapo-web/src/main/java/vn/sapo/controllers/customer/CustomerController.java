@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CustomerResult;
+import vn.sapo.customerGroup.CustomerGroupService;
+import vn.sapo.customerGroup.dto.CustomerGroupResult;
 
 import java.util.Optional;
 
@@ -24,15 +26,6 @@ public class CustomerController {
         return "/admin/customer/list_customer";
     }
 
-    @GetMapping("/customer_groups")
-    public String showCustomerGroupPage() {
-        return "/admin/customer/customer_group";
-    }
-
-    @GetMapping("/customer_groups/create")
-    public String showCustomerGroupCreatePage() {
-        return "/admin/customer/create_cus_group";
-    }
 
     @GetMapping("customers/create")
     public String showCustomerCreatePage() {
@@ -63,6 +56,7 @@ public class CustomerController {
         modelAndView.setViewName("/admin/customer/edit_customer");
         return modelAndView;
     }
+
 
 //    @GetMapping("customers/export/excel")
 //    public void exportToExcel(HttpServletResponse response) throws IOException {

@@ -29,7 +29,10 @@ public class CustomerGroup extends BaseEntity {
     private String description;
     @Column(name = "discount", nullable = false)
     private Integer discount;
-
+    @Column(name = "payment_method_id", nullable = false)
+    private Integer payment_method_id;
+    @Column(name = "pricing_policy_id", nullable = false)
+    private Integer pricing_policy_id;
 
     public CustomerGroup(Integer id) {
         this.id = id;

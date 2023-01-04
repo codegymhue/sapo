@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "customer_group")
+@Table(name = "pricing_policy")
 @Accessors(chain = true)
 public class PricingPolicy {
     @Id
