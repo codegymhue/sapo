@@ -6,10 +6,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.beans.factory.annotation.Autowired;
 import vn.sapo.address.dto.AddressResult;
 import vn.sapo.customer.dto.CustomerResult;
-import vn.sapo.customerGroup.dto.CustomerGroupResult;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -20,8 +18,6 @@ public class CustomerExcelExporterInventory {
     private XSSFWorkbook workbook;
     private XSSFSheet sheet;
     private List<CustomerResult> customerList;
-    @Autowired
-    CustomerGroupResult customerGroupResult;
 
     public CustomerExcelExporterInventory(List<CustomerResult> customerList){
         this.customerList = customerList;
@@ -115,7 +111,7 @@ public class CustomerExcelExporterInventory {
                 createCell(row, columnCount++, "", style);
                 createCell(row, columnCount++, "", style);
                 createCell(row, columnCount++, "", style);
-                createCell(row, columnCount++, address.getLine1(), style);
+                createCell(row, columnCount++, customer.getBillAddress(), style);
                 createCell(row, columnCount++,province, style);
                 createCell(row, columnCount++,district, style);
                 createCell(row, columnCount++,ward, style);

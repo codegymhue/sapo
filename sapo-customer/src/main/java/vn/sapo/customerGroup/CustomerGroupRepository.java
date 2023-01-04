@@ -17,6 +17,7 @@ public interface CustomerGroupRepository  extends JpaRepository<CustomerGroup, I
             "left join Customer as c " +
             "on g.id = c.groupId " +
             "group by g.id")
+    // id in (3,4,7,8)
     List<CustomerGroupResult> sortByGroup();
 
 //    @Query("select g.pricing_policy_id,g.cus_grp_code,g.title from CustomerGroup as g" +

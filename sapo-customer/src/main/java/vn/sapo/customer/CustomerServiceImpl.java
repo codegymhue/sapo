@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.address.AddressService;
+import vn.sapo.customer.dto.CusEmployeeResult;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
@@ -13,6 +14,7 @@ import vn.sapo.entities.customer.CustomerGender;
 import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.shared.exceptions.NotFoundException;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,6 +31,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private AddressService addressService;
+
+
 
     @Override
     @Transactional(readOnly = true)
@@ -51,7 +55,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public void deleteById(Integer id) {
         customerRepository.deleteById(id);
     }
@@ -64,6 +68,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Transactional(readOnly = true)
     public CustomerResult create(CreateCustomerParam createCustomerParam) {
+        System.out.println("Đay là param" + createCustomerParam);
         Customer customer = customerMapper.toModel(createCustomerParam);
         customer = customerRepository.save(customer);
         String cusCode = customer.getCustomerCode();
@@ -74,7 +79,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public CustomerResult update(UpdateCustomerParam updateCustomerParam) {
         Customer customer = customerRepository.findById(updateCustomerParam.getId())
                 .orElseThrow(() -> new NotFoundException("Customer not found"));
@@ -97,6 +102,26 @@ public class CustomerServiceImpl implements CustomerService {
             Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new NotFoundException("Product not found"));
             customer.setStatus(status ? CustomerStatus.AVAILABLE : CustomerStatus.UNAVAILABLE);
         }
+    }
+
+//    @Override
+//    public List<CustomerResult> findAllByFilter(Integer groupTitLeId, CustomerGender gender, String status, CusEmployeeResult employee, Instant createdAt, Instant birthday) {
+//        List<CustomerResult> customerResults = new ArrayList<>();
+//        customerResults = customerRepository.findAllByFilter(groupTitLeId,gender,CustomerStatus.parseCustomerGroup(status),employee,createdAt,birthday)
+//                .stream()
+//                .map(customerMapper::toDTO)
+//                .collect(Collectors.toList());
+//        return customerResults;
+//    }
+
+    @Override
+    public List<CustomerResult> findAllByGroupId(Integer groupTitleId) {
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAllByGroupId(groupTitleId)
+                .stream()
+                .map(customerMapper::toDTO)
+                .collect(Collectors.toList());
+        return customerResults;
     }
 
 
