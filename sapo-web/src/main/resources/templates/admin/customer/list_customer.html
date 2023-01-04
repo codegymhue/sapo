@@ -10,6 +10,7 @@
 <body style="font-size: 12px">
 <div>
     <th:block th:replace="/layout/menu :: menu"/>
+    <th:block th:replace="/admin/customer/modal_importFile :: #modalImportFileCustomers" />
     <!--    <th:block th:replace="/layout/modalImportFile :: #modalImportFile"/>-->
     <div class="col-right  MuiBox-root jss64 jss40">
         <div class="MuiBox-root jss6915 jss440 "
@@ -1401,6 +1402,12 @@
     page.dialogs.elements.nextPage = $("#nextPage");
     page.dialogs.elements.previousPage = $("#previousPage");
 
+    page.elements.importFile = $("#importFile");
+
+    page.elements.importFile.on("click", function (){
+        $("#modalImportFileCustomers").modal("show");
+    })
+
 
 
     page.commands.getAllCustomers = () => {
@@ -1709,6 +1716,26 @@
         }
 
     })
+
+    $('#btnImportFileCustomers').click(function () {
+        let data = new FormData();
+        let file = $('#formFileCustomers')[0].files[0];
+        data.append('file',file);
+        $.ajax({
+            url: 'http://localhost:8080/api/upload',
+            processData: false,
+            contentType: false,
+            data: data,
+            type: 'POST'
+        }).done(function(result) {
+            $("#btnImportFileCustomers").modal("hide");
+            $("#formFileCustomers")[0].reset();
+            page.commands.getAllCustomers();
+            App.IziToast.showSuccessAlert("Tải file lên thành công!")
+        }).fail((jqXHR) => {
+            App.IziToast.showErrorAlert("Tải file lên không thành công!")
+        })
+    });
 
 
     page.loadData = () => {
