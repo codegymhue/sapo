@@ -114,8 +114,11 @@
                                              field="[object Object]" form="[object Object]">
                                             <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline">
                                                 <textarea aria-invalid="false" id="upDescription"
-                                                          rows="3" aria-label="Without label" th:value="${customerGroup.description}"
-                                                          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline"></textarea>
+                                                          rows="3" aria-label="Without label"
+                                                          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline"
+                                                          th:field="*{customerGroup.description}"
+                                                >
+                                                </textarea>
                                                 <fieldset aria-hidden="true"
                                                           class="jss823 MuiOutlinedInput-notchedOutline"
                                                           style="padding-left: 8px;">
@@ -191,9 +194,8 @@
                                                         </button>
                                                     </li>
                                                 </div>
-                                                <div id="showAllPricing"
-                                                     th:value="${customerGroup.getPricingPolicyId()}">
-
+                                                <div id="showAllPricing">
+                                                    <div  th:selected="${customerGroup.getPricingPolicyId()}"></div>
 
                                                 </div>
                                             </ul>
@@ -239,9 +241,10 @@
                                                 <span id="upPaymentType">Chọn hình thức thanh toán</span>
                                                 <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"></path></svg>
                                             </div>
-                                            <ul class="dropdown-menu w-100 categoryIdCreate showAllPaymentMethod" th:value="${customerGroup.paymentMethodId}">
+                                            <ul class="dropdown-menu w-100 categoryIdCreate showAllPaymentMethod" >
                                                 <li>Chọn hình thức thanh toán</li>
-                                                <div id="showAllPay" >
+                                                <div id="showAllPay"
+                                                     th:selected="${customerGroup.paymentMethodId}">
 
                                                 </div>
                                             </ul>
@@ -316,7 +319,7 @@
                 paymentMethod = data;
                 paymentMethod.forEach(item => {
                     let isSelected = item === selectedPayment ? "selected" : "";
-                    let str = `<li id="${item.id}" data-id="${item.id}" onclick="updateNamePay(${item.id})" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
+                    let str = `<li id="${item.id}" data-id="${item.id}" onclick="updateNamePay('${item.id}')" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
                     $(".showAllPaymentMethod #showAllPay").append(str);
                 });
             })
@@ -327,7 +330,7 @@
     //show select payment method
     function updateNamePay(id) {
         const arrayCat = paymentMethod.filter(item => item.id === id)
-        const val = arrayCat[0].title.text();
+        const val = arrayCat[0].title;
         console.log("is", id, val)
         selectBtnPay.firstElementChild.innerText = val;
         $("#upPaymentType").data("id", id);
@@ -337,7 +340,6 @@
 
     $('#btnUpdateCustomerGroup').on('click', () => {
         let id = $("#cusGrpId").text();
-        getCusGroupById(id).then(()=>{
             updateCusGroupParam.id = id;
             updateCusGroupParam.title = $('#upTitleGroup').val();
             updateCusGroupParam.cusGrpCode = $('#upCusGrpCode').val();
@@ -345,8 +347,7 @@
             updateCusGroupParam.pricing_policy_id = $('#upPricingType').data("id");
             updateCusGroupParam.discount = $('#upDiscount').val();
             updateCusGroupParam.payment_method_id = $('#upPaymentType').data("id");
-        })
-        console.log(updateCusGroupParam)
+             console.log(updateCusGroupParam)
         $.ajax({
             "headers": {
                 "accept": "application/json",
