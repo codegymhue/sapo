@@ -1,19 +1,16 @@
 package vn.sapo.controllers.customer;
 
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import vn.sapo.customer.CustomerExcelExporter;
-import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.CustomerExcelExporterInventory;
+import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customerGroup.CustomerGroupService;
-
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -37,16 +34,6 @@ public class CustomerController {
     @GetMapping("/customers")
     public String showListCustomerPage() {
         return "/admin/customer/list_customer";
-    }
-
-    @GetMapping("/customer_groups")
-    public String showCustomerGroupPage() {
-        return "/admin/customer/customer_group";
-    }
-
-    @GetMapping("/customer_groups/create")
-    public String showCustomerGroupCreatePage() {
-        return "/admin/customer/model_create_cus_group";
     }
 
     @GetMapping("customers/create")
