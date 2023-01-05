@@ -17,11 +17,11 @@ import java.util.Objects;
 public class ProductTaxId implements Serializable {
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", foreignKey = @ForeignKey(name="fk_product_tax_id_product"))
     private Product product;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "tax_id")
+    @JoinColumn(name = "tax_id", foreignKey = @ForeignKey(name="fk_product_tax_id_tax"))
     private Tax tax;
 
     @Enumerated(EnumType.STRING)

@@ -63,13 +63,13 @@ public class Product extends BaseEntity {
     private BigDecimal wholesalePrice;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name="fk_product_category"))
     private Category category;
     @Column(name = "category_id", insertable = false, updatable = false)
     private Integer categoryId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "brand_id")
+    @JoinColumn(name = "brand_id",foreignKey = @ForeignKey(name="fk_product_brand"))
     private Brand brand;
     @Column(name = "brand_id", insertable = false, updatable = false)
     private Integer brandId;
