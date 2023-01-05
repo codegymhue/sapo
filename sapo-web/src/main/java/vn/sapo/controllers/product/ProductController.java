@@ -27,7 +27,6 @@ import java.util.List;
 public class ProductController {
     @Autowired
     ProductService productService;
-
     @Autowired
     MediaService mediaService;
 
@@ -60,7 +59,7 @@ public class ProductController {
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
-
+            System.out.println(medias);
             modelAndView.addObject("medias", medias);
             modelAndView.addObject("product", productService.findById(product.getId()));
         }

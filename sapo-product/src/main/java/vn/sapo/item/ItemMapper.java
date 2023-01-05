@@ -7,8 +7,6 @@ import vn.sapo.product.dto.*;
 
 @Component
 public class ItemMapper {
-
-
     public Item toModel(ItemParam itemParam) {
         return new Item()
                 .setId(itemParam.getId())

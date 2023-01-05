@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<th:block th:fragment="modal_filter">
+    <style>
+        .jss1745 {
+            color: #0088FF;
+            padding: 8px 24px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .deudDf {
+            display: inline-flex;
+            -webkit-box-pack: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            -webkit-box-align: center;
+            align-items: center;
+            outline: 0px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            line-height: 1.42857rem;
+            margin: 0px;
+            overflow: hidden;
+            position: relative;
+            height: 2.57143rem;
+            min-width: unset;
+            color: rgb(0, 136, 255);
+            border: none;
+            background: transparent;
+            padding: 0px;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        .sidenav a, .dropdown-btn {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #818181;
+            display: block;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .dropdown-container {
+            display: none;
+            background-color: white;
+            padding-left: 8px;
+        }
+
+        .fa-caret-down {
+            float: right;
+            padding-right: 8px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+    </style>
+    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/assets/admin/css/customer/filter.css"/>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <div class="MuiBox-root jss2790"><p class="MuiTypography-root title MuiTypography-body1" style="float: left;
+    margin-top: 12px;font-size: 20px;font-weight: 500;">Bộ lọc</p>
+                <button class="MuiButtonBase-root MuiIconButton-root jss1753" tabindex="0" type="button"><span
+                        class="MuiIconButton-label"><svg viewBox="0 0 24 24" fill="none"
+                                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                         font-size="24"><path
+                        d="M6.167 3.667v13.475l-2.159-2.15-1.175 1.175L7 20.333l4.167-4.166-1.175-1.175-2.159 2.15V3.667H6.167ZM17.833 20.333V6.858l2.159 2.15 1.175-1.175L17 3.667l-4.167 4.166 1.175 1.175 2.159-2.15v13.475h1.666Z"
+                        fill="currentColor"></path></svg></span><span class="MuiTouchRipple-root"></span></button>
+            </div>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="MuiBox-root jss2794 jss1744 filter-basic">
+            <button id="Sapo-Button-70cf5262-5927-4383-98a0-897d1ccf81f1" class="sc-jqUVSM deudDf">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                     font-size="20" style="float: left">
+                    <path d="m18.425 12-6.01 6.01L11 16.596 15.596 12 11 7.404l1.414-1.414 6.01 6.01Z"
+                          fill="currentColor"></path>
+                    <path d="m13 12-6.01 6.01-1.415-1.414L10.172 12 5.575 7.404 6.99 5.99 13 12Z"
+                          fill="currentColor"></path>
+                </svg>
+                <span class="sc-papXJ fCIlZX"><h6
+                        class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorPrimary">Bộ lọc nâng cao</h6></span>
+            </button>
+        </div>
+
+        <div class="offcanvas-body">
+            <div>
+                <p class="MuiTypography-root jss1745 MuiTypography-body1" style="margin-left: -23px">Nổi bật</p>
+            </div>
+            <div class="dropdown">
+                <div
+                        type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false" style="
+                                                                display: flex;
+                                                                justify-content: space-between;
+                                                                align-items: center; ">
+                    <button class="dropdown-btn" style="font-size: 1rem;">. Nhóm Khách Hàng
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                </div>
+                <ul class="dropdown-menu w-100">
+                    <div>
+                        <li>
+                            <div class="d-flex align-items-center">
+                                <i class="fa-solid fa-magnifying-glass" style="margin-left: 16px;
+                                                                   margin-right: 4px;
+                                                                   color: #828282"></i>
+                                <input id="inputSearchCat" style="margin: 2px"
+                                       class="w-100 form-control border border-0"
+                                       placeholder="Tìm kiếm hoặc nhập mới"/>
+                            </div>
+                        </li>
+                        <div id="customerGroupFilter">
+
+                        </div>
+                    </div>
+                </ul>
+            </div>
+            <button class="dropdown-btn" style="font-size: 1rem;">. Giới Tính
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container" id="genderFilter">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                           value="1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Nam
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked
+                           value="2">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Nữ
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked
+                           value="3">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Khác
+                    </label>
+                </div>
+            </div>
+            <button class="dropdown-btn" style="font-size: 1rem;">. Ngày Tháng sinh
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <div class="row">
+                    <div class="btn bg-secondary dropdown-toggle select-btn-cat col-6"
+                         type="button" data-bs-toggle="dropdown"
+                         aria-expanded="false" style=" border: solid 1px #D3D5D7;border: solid 1px #D3D5D7;
+                                                                display: flex;
+                                                                justify-content: space-between;
+                                                                align-items: center; ">
+                        <span id="allDay"> chọn ngày </span>
+                    </div>
+                    <ul class="dropdown-menu w-50 table table-hover">
+                        <li onclick=handleClickDay(1)>1</li>
+                        <li onclick=handleClickDay(2)>2</li>
+                        <li onclick=handleClickDay(3)>3</li>
+                        <li onclick=handleClickDay(4)>4</li>
+                        <li onclick=handleClickDay(5)>5</li>
+                        <li onclick=handleClickDay(6)>6</li>
+                        <li onclick=handleClickDay(7)>7</li>
+                        <li onclick=handleClickDay(8)>8</li>
+                        <li onclick=handleClickDay(9)>9</li>
+                        <li onclick=handleClickDay(10)>10</li>
+                        <li onclick=handleClickDay(11)>11</li>
+                        <li onclick=handleClickDay(12)>12</li>
+                        <li onclick=handleClickDay(13)>13</li>
+                        <li onclick=handleClickDay(14)>14</li>
+                        <li onclick=handleClickDay(15)>15</li>
+                        <li onclick=handleClickDay(16)>16</li>
+                        <li onclick=handleClickDay(17)>17</li>
+                        <li onclick=handleClickDay(18)>18</li>
+                        <li onclick=handleClickDay(19)>19</li>
+                        <li onclick=handleClickDay(20)>20</li>
+                        <li onclick=handleClickDay(21)>21</li>
+                        <li onclick=handleClickDay(22)>22</li>
+                        <li onclick=handleClickDay(23)>23</li>
+                        <li onclick=handleClickDay(24)>24</li>
+                        <li onclick=handleClickDay(25)>25</li>
+                        <li onclick=handleClickDay(26)>26</li>
+                        <li onclick=handleClickDay(27)>27</li>
+                        <li onclick=handleClickDay(28)>28</li>
+                        <li onclick=handleClickDay(29)>29</li>
+                        <li onclick=handleClickDay(30)>30</li>
+                        <li onclick=handleClickDay(31)>31</li>
+                    </ul>
+                    <div class="btn bg-secondary dropdown-toggle select-btn-cat col-6"
+                         type="button" data-bs-toggle="dropdown"
+                         aria-expanded="false" style=" border: solid 1px #D3D5D7;border: solid 1px #D3D5D7;
+                                                                display: flex;
+                                                                justify-content: space-between;
+                                                                align-items: center; ">
+                        <span id="allYear">Chọn Tháng</span>
+                    </div>
+                    <ul class="dropdown-menu w-50 table table-hover">
+                        <li onclick=handleClickYear(1)>1</li>
+                        <li onclick=handleClickYear(2)>2</li>
+                        <li onclick=handleClickYear(3)>3</li>
+                        <li onclick=handleClickYear(4)>4</li>
+                        <li onclick=handleClickYear(5)>5</li>
+                        <li onclick=handleClickYear(6)>6</li>
+                        <li onclick=handleClickYear(7)>7</li>
+                        <li onclick=handleClickYear(8)>8</li>
+                        <li onclick=handleClickYear(9)>9</li>
+                        <li onclick=handleClickYear(10)>10</li>
+                        <li onclick=handleClickYear(11)>11</li>
+                        <li onclick=handleClickYear(12)>12</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <div
+                        type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false" style="
+                                                                display: flex;
+                                                                justify-content: space-between;
+                                                                align-items: center; ">
+                    <button class="dropdown-btn" style="font-size: 1rem;">. Nhân Viên Phụ Trách
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                </div>
+                <ul class="dropdown-menu w-100 categoryIdUpdate showAllCategory">
+                    <div>
+                        <li>
+                            <div class="d-flex align-items-center">
+                                <i class="fa-solid fa-magnifying-glass" style="margin-left: 16px;
+                                                                   margin-right: 4px;
+                                                                   color: #828282"></i>
+                                <input id="searchEmployee" style="margin: 2px"
+                                       class="w-100 form-control border border-0"
+                                       placeholder="Tìm kiếm hoặc nhập mới"/>
+                            </div>
+                        </li>
+                        <div id="employeeNameFilter">
+
+                        </div>
+                    </div>
+                </ul>
+                <div>
+                    <p class="MuiTypography-root jss1745 MuiTypography-body1" style="margin-left: -23px">Nhóm Khác</p>
+                </div>
+                <div class="dropdown">
+                    <button class="dropdown-btn" style="font-size: 1rem;">. Trạng Thái
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="flexRadioDefault"
+                                   value="1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Đang Giao Dịch
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="flexRadioDefault" checked
+                                   value="2">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Ngừng Giao Dịch
+                            </label>
+                        </div>
+                    </div>
+                    <button class="dropdown-btn" style="font-size: 1rem;">. Tags
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        <input placeholder="Nhập tại đây" type="text" class="MuiInputBase-input" value="">
+                    </div>
+                    <button class="dropdown-btn" style="font-size: 1rem;">. Ngày Tạo
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        <div class="row">
+                            <div class="col-6">
+                                <input id="datepicker" width="170" placeholder="dd/mm/yyyy"/>
+                                <p><a href="https://gijgo.com/datepicker/example/bootstrap-5">
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <input id="datepicker2" width="170" placeholder="dd/mm/yyyy"/>
+                                <p><a href="https://gijgo.com/datepicker/example/bootstrap-5">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="dropdown-btn" style="font-size: 1rem;">. Khoảng Ngày Sinh
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        <div class="row">
+                            <div class="col-6">
+                                <input id="datepicker3" width="170" placeholder="dd/mm/yyyy"/>
+                                <p><a href="https://gijgo.com/datepicker/example/bootstrap-5">
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <input id="datepicker4" width="170" placeholder="dd/mm/yyyy"/>
+                                <p><a href="https://gijgo.com/datepicker/example/bootstrap-5">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="dropdown-btn" style="font-size: 1rem;">. Ngày Sinh
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <input id="datepicker5" width="370"/>
+                <p><a href="https://gijgo.com/datepicker/example/bootstrap-5">
+                </a>
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse my-3" style="width: 95%">
+            <button type="button" class="btn btn-danger mx-2"
+                    style="width: 70px; color: rgb(255, 255, 255);background: rgb(0, 136, 255);border: none;"
+                    id="btnFilter">Lọc
+            </button>
+            <button type="button" class="btn btn-primary"
+                    style="width: 90px; border: 1px solid rgb(255, 77, 77);background: rgb(255, 255, 255);color: rgb(255, 77, 77);">
+                Xóa Bộ Lọc
+            </button>
+        </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+    <script>
+
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+
+        $("#btnFilter").on('click', () => {
+            let arrayGroupId = [];
+            let elements = $('input[class="customerGroup-input"]');
+            $.each(elements, (i, item) => {
+                if (item.checked) {
+                    arrayGroupId.push(item.getAttribute("data-id"))
+                }
+            });
+
+        });
+
+        // function findCustomerByGroup(groupId) {
+        //     $("#tbCustomer").DataTable({
+        //         // chuyển tiếng việt cho datatable
+        //         language:
+        //             {
+        //                 "processing": "Đang xử lý...",
+        //                 "aria": {
+        //                     "sortAscending": ": Sắp xếp thứ tự tăng dần",
+        //                     "sortDescending": ": Sắp xếp thứ tự giảm dần"
+        //                 },
+        //                 "autoFill": {
+        //                     "cancel": "Hủy",
+        //                     "fill": "Điền tất cả ô với <i>%d<\/i>",
+        //                     "fillHorizontal": "Điền theo hàng ngang",
+        //                     "fillVertical": "Điền theo hàng dọc"
+        //                 },
+        //                 "buttons": {
+        //                     "collection": "Chọn lọc <span class=\"ui-button-icon-primary ui-icon ui-icon-triangle-1-s\"><\/span>",
+        //                     "colvis": "Hiển thị theo cột",
+        //                     "colvisRestore": "Khôi phục hiển thị",
+        //                     "copy": "Sao chép",
+        //                     "copyKeys": "Nhấn Ctrl hoặc u2318 + C để sao chép bảng dữ liệu vào clipboard.<br \/><br \/>Để hủy, click vào thông báo này hoặc nhấn ESC",
+        //                     "copySuccess": {
+        //                         "1": "Đã sao chép 1 dòng dữ liệu vào clipboard",
+        //                         "_": "Đã sao chép %d dòng vào clipboard"
+        //                     },
+        //                     "copyTitle": "Sao chép vào clipboard",
+        //                     "pageLength": {
+        //                         "-1": "Xem tất cả các dòng",
+        //                         "_": "Hiển thị %d dòng",
+        //                         "1": "Hiển thị 1 dòng"
+        //                     },
+        //                     "print": "In ấn",
+        //                     "createState": "Tạo trạng thái",
+        //                     "csv": "CSV",
+        //                     "excel": "Excel",
+        //                     "pdf": "PDF",
+        //                     "removeAllStates": "Xóa hết trạng thái",
+        //                     "removeState": "Xóa",
+        //                     "renameState": "Đổi tên",
+        //                     "savedStates": "Trạng thái đã lưu",
+        //                     "stateRestore": "Trạng thái %d",
+        //                     "updateState": "Cập nhật"
+        //                 },
+        //                 "select": {
+        //                     "cells": {
+        //                         "1": "1 ô đang được chọn",
+        //                         "_": "%d ô đang được chọn"
+        //                     },
+        //                     "columns": {
+        //                         "1": "1 cột đang được chọn",
+        //                         "_": "%d cột đang được được chọn"
+        //                     },
+        //                     "rows": {
+        //                         "1": "1 dòng đang được chọn",
+        //                         "_": "%d dòng đang được chọn"
+        //                     }
+        //                 },
+        //                 "searchBuilder": {
+        //                     "title": {
+        //                         "_": "Thiết lập tìm kiếm (%d)",
+        //                         "0": "Thiết lập tìm kiếm"
+        //                     },
+        //                     "button": {
+        //                         "0": "Thiết lập tìm kiếm",
+        //                         "_": "Thiết lập tìm kiếm (%d)"
+        //                     },
+        //                     "value": "Giá trị",
+        //                     "clearAll": "Xóa hết",
+        //                     "condition": "Điều kiện",
+        //                     "conditions": {
+        //                         "date": {
+        //                             "after": "Sau",
+        //                             "before": "Trước",
+        //                             "between": "Nằm giữa",
+        //                             "empty": "Rỗng",
+        //                             "equals": "Bằng với",
+        //                             "not": "Không phải",
+        //                             "notBetween": "Không nằm giữa",
+        //                             "notEmpty": "Không rỗng"
+        //                         },
+        //                         "number": {
+        //                             "between": "Nằm giữa",
+        //                             "empty": "Rỗng",
+        //                             "equals": "Bằng với",
+        //                             "gt": "Lớn hơn",
+        //                             "gte": "Lớn hơn hoặc bằng",
+        //                             "lt": "Nhỏ hơn",
+        //                             "lte": "Nhỏ hơn hoặc bằng",
+        //                             "not": "Không phải",
+        //                             "notBetween": "Không nằm giữa",
+        //                             "notEmpty": "Không rỗng"
+        //                         },
+        //                         "string": {
+        //                             "contains": "Chứa",
+        //                             "empty": "Rỗng",
+        //                             "endsWith": "Kết thúc bằng",
+        //                             "equals": "Bằng",
+        //                             "not": "Không phải",
+        //                             "notEmpty": "Không rỗng",
+        //                             "startsWith": "Bắt đầu với",
+        //                             "notContains": "Không chứa",
+        //                             "notEndsWith": "Không kết thúc với",
+        //                             "notStartsWith": "Không bắt đầu với"
+        //                         },
+        //                         "array": {
+        //                             "equals": "Bằng",
+        //                             "empty": "Trống",
+        //                             "contains": "Chứa",
+        //                             "not": "Không",
+        //                             "notEmpty": "Không được rỗng",
+        //                             "without": "không chứa"
+        //                         }
+        //                     },
+        //                     "logicAnd": "Và",
+        //                     "logicOr": "Hoặc",
+        //                     "add": "Thêm điều kiện",
+        //                     "data": "Dữ liệu",
+        //                     "deleteTitle": "Xóa quy tắc lọc",
+        //                     "leftTitle": "Giảm thụt lề",
+        //                     "rightTitle": "Tăng thụt lề"
+        //                 },
+        //                 "searchPanes": {
+        //                     "countFiltered": "{shown} ({total})",
+        //                     "emptyPanes": "Không có phần tìm kiếm",
+        //                     "clearMessage": "Xóa hết",
+        //                     "loadMessage": "Đang load phần tìm kiếm",
+        //                     "collapse": {
+        //                         "0": "Phần tìm kiếm",
+        //                         "_": "Phần tìm kiếm (%d)"
+        //                     },
+        //                     "title": "Bộ lọc đang hoạt động - %d",
+        //                     "count": "{total}",
+        //                     "collapseMessage": "Thu gọn tất cả",
+        //                     "showMessage": "Hiện tất cả"
+        //                 },
+        //                 "datetime": {
+        //                     "hours": "Giờ",
+        //                     "minutes": "Phút",
+        //                     "next": "Sau",
+        //                     "previous": "Trước",
+        //                     "seconds": "Giây",
+        //                     "amPm": [
+        //                         "am",
+        //                         "pm"
+        //                     ],
+        //                     "unknown": "-",
+        //                     "weekdays": [
+        //                         "Chủ nhật"
+        //                     ],
+        //                     "months": [
+        //                         "Tháng Một",
+        //                         "Tháng Hai",
+        //                         "Tháng Ba",
+        //                         "Tháng Tư",
+        //                         "Tháng Năm",
+        //                         "Tháng Sáu",
+        //                         "Tháng Bảy",
+        //                         "Tháng Tám",
+        //                         "Tháng Chín",
+        //                         "Tháng Mười",
+        //                         "Tháng Mười Một",
+        //                         "Tháng Mười Hai"
+        //                     ]
+        //                 },
+        //                 "emptyTable": "Không có dữ liệu",
+        //                 "info": "Hiển thị _START_ tới _END_ của _TOTAL_ dữ liệu",
+        //                 "infoEmpty": "Hiển thị 0 tới 0 của 0 dữ liệu",
+        //                 "lengthMenu": "Hiển thị _MENU_ dữ liệu",
+        //                 "loadingRecords": "Đang tải...",
+        //                 "paginate": {
+        //                     "first": "Đầu tiên",
+        //                     "last": "Cuối cùng",
+        //                     "next": "Sau",
+        //                     "previous": "Trước"
+        //                 },
+        //                 "search": "Tìm kiếm:",
+        //                 "zeroRecords": "Không tìm thấy kết quả",
+        //                 "decimal": ",",
+        //                 "editor": {
+        //                     "close": "Đóng",
+        //                     "create": {
+        //                         "button": "Thêm",
+        //                         "submit": "Thêm",
+        //                         "title": "Thêm mục mới"
+        //                     },
+        //                     "edit": {
+        //                         "button": "Sửa",
+        //                         "submit": "Cập nhật",
+        //                         "title": "Sửa mục"
+        //                     },
+        //                     "error": {
+        //                         "system": "Đã xảy ra lỗi hệ thống (&lt;a target=\"\\\" rel=\"nofollow\" href=\"\\\"&gt;Thêm thông tin&lt;\/a&gt;)."
+        //                     },
+        //                     "multi": {
+        //                         "info": "Các mục đã chọn chứa các giá trị khác nhau cho đầu vào này. Để chỉnh sửa và đặt tất cả các mục cho đầu vào này thành cùng một giá trị, hãy nhấp hoặc nhấn vào đây, nếu không chúng sẽ giữ lại các giá trị riêng lẻ của chúng.",
+        //                         "noMulti": "Đầu vào này có thể được chỉnh sửa riêng lẻ, nhưng không phải là một phần của một nhóm.",
+        //                         "restore": "Hoàn tác thay đổi",
+        //                         "title": "Nhiều giá trị"
+        //                     },
+        //                     "remove": {
+        //                         "button": "Xóa",
+        //                         "confirm": {
+        //                             "_": "Bạn có chắc chắn muốn xóa %d hàng không?",
+        //                             "1": "Bạn có chắc chắn muốn xóa 1 hàng không?"
+        //                         },
+        //                         "submit": "Xóa",
+        //                         "title": "Xóa"
+        //                     }
+        //                 },
+        //                 "infoFiltered": "(được lọc từ _MAX_ dữ liệu)",
+        //                 "searchPlaceholder": "Nhập tìm kiếm...",
+        //                 "stateRestore": {
+        //                     "creationModal": {
+        //                         "button": "Thêm",
+        //                         "columns": {
+        //                             "search": "Tìm kiếm cột",
+        //                             "visible": "Khả năng hiển thị cột"
+        //                         },
+        //                         "name": "Tên:",
+        //                         "order": "Sắp xếp",
+        //                         "paging": "Phân trang",
+        //                         "scroller": "Cuộn vị trí",
+        //                         "search": "Tìm kiếm",
+        //                         "searchBuilder": "Trình tạo tìm kiếm",
+        //                         "select": "Chọn",
+        //                         "title": "Thêm trạng thái",
+        //                         "toggleLabel": "Bao gồm:"
+        //                     },
+        //                     "duplicateError": "Trạng thái có tên này đã tồn tại.",
+        //                     "emptyError": "Tên không được để trống.",
+        //                     "emptyStates": "Không có trạng thái đã lưu",
+        //                     "removeConfirm": "Bạn có chắc chắn muốn xóa %s không?",
+        //                     "removeError": "Không xóa được trạng thái.",
+        //                     "removeJoiner": "và",
+        //                     "removeSubmit": "Xóa",
+        //                     "removeTitle": "Xóa trạng thái",
+        //                     "renameButton": "Đổi tên",
+        //                     "renameLabel": "Tên mới cho %s:",
+        //                     "renameTitle": "Đổi tên trạng thái"
+        //                 },
+        //                 "infoThousands": ".",
+        //                 "thousands": "."
+        //             },
+        //         ajax: {
+        //             contentType: 'application/json',
+        //             url: "http://localhost:8080/api/customers//findAllCustomerByGroup/" + groupId,
+        //             type: "GET",
+        //             dataSrc: ''
+        //         },
+        //         lengthMenu: [
+        //             [5, 10, 20, -1],
+        //             ["5", "10", "20", "All"]
+        //         ],
+        //         searching: false,
+        //         destroy: true,
+        //         columns: [
+        //             {data: 'id'},
+        //             {data: 'customerCode'},
+        //             {data: 'fullName'},
+        //             {data: 'phoneNumber'},
+        //             {data: 'group.title'},
+        //             {data: 'debtTotal'},
+        //             {data: 'spendTotal'},
+        //             {data: "quantityItemOrder"}],
+        //         columnDefs: [
+        //             {
+        //                 targets: 0,
+        //                 render: function (data, type, row, meta) {
+        //                     return `
+        //                        <input type="checkbox" value="check_none" />
+        //                     `
+        //                 }
+        //             },
+        //             {
+        //                 targets: 1,
+        //                 render: function (data, type, row, meta) {
+        //                     return `<a href="/admin/customers/customerInfo/${row.id}">${row.customerCode}</a>`;
+        //                 }
+        //             },
+        //
+        //
+        //         ],
+        //     })
+        //
+        //
+        // }
+        function getAllCustomerGender() {
+            return $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "GET",
+                url: "http://localhost:8080/api/customers/customerGender"
+            })
+                .done((data) => {
+                    console.log(data)
+                    $.each(data, (i, item) => {
+                        console.log(item)
+                        let str = `<option value="${item}">
+                           ${item}
+                        </option>`;
+                        $("#genderFilter").append(str);
+                    });
+                })
+                .fail((jqXHR) => {
+                    console.log(jqXHR);
+                    if (jqXHR.responseJSON) {
+                        $.each(jqXHR.responseJSON, (key, item) => {
+                            App.IziToast.showErrorAlert(item);
+                        })
+                    }
+
+                })
+        }
+
+        let arrAllGroupId = [];
+
+        function getAllCustomerGroup() {
+            return $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "GET",
+                url: "http://localhost:8080/api/customer_groups"
+            })
+                .done((data) => {
+                    // console.log(data)
+                    $.each(data, (i, item) => {
+                        let str = `<div>
+                            <input type="checkbox"  class="customerGroup-input" data-id=${item.id}>
+                            ${item.title}
+                            </div>`;
+                        $("#customerGroupFilter").append(str);
+                        arrAllGroupId.push(item.id);
+                    });
+                })
+                .fail((jqXHR) => {
+
+                })
+        }
+
+        function getAllEmployeeSelect() {
+            return $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "GET",
+                url: "http://localhost:8080/api/employees"
+            })
+                .done((data) => {
+                    $.each(data, (i, item) => {
+                        let str = `<div value="${item.id}">
+                        <input type="checkbox">
+                        ${item.fullName}</div>`;
+                        $("#employeeNameFilter").append(str);
+                    });
+                })
+                .fail((jqXHR) => {
+
+
+                })
+        }
+
+        function handleClickDay(day) {
+
+            // $("#allDay").innerHTML = day;
+            document.querySelector("#allDay").innerHTML = day;
+        }
+
+        function handleClickYear(year) {
+
+            // $("#allDay").innerHTML = day;
+            document.querySelector("#allYear").innerHTML = year;
+        }
+
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap5'
+        });
+        $('#datepicker2').datepicker({
+            uiLibrary: 'bootstrap5'
+        });
+        $('#datepicker3').datepicker({
+            uiLibrary: 'bootstrap5'
+        });
+        $('#datepicker4').datepicker({
+            uiLibrary: 'bootstrap5'
+        });
+        $('#datepicker5').datepicker({
+            uiLibrary: 'bootstrap5'
+        });
+
+        getAllCustomerGroup();
+        getAllCustomerGender();
+        getAllEmployeeSelect();
+    </script>
+
+</th:block>

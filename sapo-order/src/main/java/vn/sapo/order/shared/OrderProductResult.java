@@ -1,13 +1,12 @@
 package vn.sapo.order.shared;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Accessors(chain = true)
 public class OrderProductResult {
     private Integer id;

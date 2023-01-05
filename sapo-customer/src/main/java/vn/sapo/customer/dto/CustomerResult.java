@@ -38,6 +38,8 @@ public class CustomerResult {
 
     private CustomerGender gender;
 
+    private String description;
+
     private BigDecimal debtTotal;
 
     private BigDecimal spendTotal;
