@@ -4,20 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.address.AddressService;
-import vn.sapo.customer.dto.CusEmployeeResult;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.entities.customer.Customer;
-import vn.sapo.entities.customer.CustomerGender;
 import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.shared.exceptions.NotFoundException;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
