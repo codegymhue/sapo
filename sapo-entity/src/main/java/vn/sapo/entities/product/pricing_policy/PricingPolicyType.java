@@ -1,4 +1,4 @@
-package vn.sapo.entities.pricing_policy;
+package vn.sapo.entities.product.pricing_policy;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

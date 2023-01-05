@@ -1,6 +1,5 @@
-package vn.sapo.entities.pricing_policy;
+package vn.sapo.entities.product.pricing_policy;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
