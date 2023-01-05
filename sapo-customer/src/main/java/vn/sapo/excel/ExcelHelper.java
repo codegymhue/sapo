@@ -57,23 +57,16 @@ public class ExcelHelper {
 
                 CreateCustomerParam customer = new CreateCustomerParam();
                 AddressResult address = new AddressResult();
+
+                customer.setId(customer.getId());
                 address.setProvinceId(-1);
                 address.setDistrictId(-1);
                 address.setWardId(-1);
 
 
-//                ProductTaxParam taxOut = new ProductTaxParam();
-
                 int cellIdx = 0;
                 while (cellsInRow.hasNext()) {
                     Cell currentCell = cellsInRow.next();
-
-                    for (int i = 0; i <= customers.size(); i++){
-                        int j = 0;
-                        if(++j > i){
-                            customer.setId(j);
-                        }
-                    }
 
                     switch (cellIdx) {
                         case 0:
