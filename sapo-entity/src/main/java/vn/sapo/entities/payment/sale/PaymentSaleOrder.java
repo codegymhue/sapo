@@ -1,19 +1,18 @@
 package vn.sapo.entities.payment.sale;
 
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.sapo.entities.*;
-import vn.sapo.entities.customer.*;
-import vn.sapo.entities.order.sale.*;
-import vn.sapo.entities.payment.*;
+import vn.sapo.entities.BaseEntity;
+import vn.sapo.entities.Employee;
+import vn.sapo.entities.customer.Customer;
+import vn.sapo.entities.order.sale.SaleOrder;
+import vn.sapo.entities.payment.PaymentMethod;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.Instant;
 
 @Getter
 @Setter
@@ -46,7 +45,7 @@ public class PaymentSaleOrder extends BaseEntity {
     private PaymentMethod paymentMethod;
 
     @Column(name = "payment_method_id", insertable = false, updatable = false)
-    private Integer paymentMethodId;
+    private String paymentMethodId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private SaleOrder order;
@@ -72,7 +71,7 @@ public class PaymentSaleOrder extends BaseEntity {
         return this;
     }
 
-    public PaymentSaleOrder setPaymentMethodId(Integer paymentMethodId) {
+    public PaymentSaleOrder setPaymentMethodId(String paymentMethodId) {
         this.paymentMethod = new PaymentMethod(this.paymentMethodId = paymentMethodId);
         return this;
     }
@@ -81,13 +80,5 @@ public class PaymentSaleOrder extends BaseEntity {
         this.order = new SaleOrder(this.orderId = orderId);
         return this;
     }
-
-    public PaymentSaleOrder(Integer employeeId, Integer paymentMethodId, Integer orderId, Integer customerId) {
-        setEmployeeId(employeeId);
-        setPaymentMethodId(paymentMethodId);
-        setOrderId(paymentMethodId);
-        setCustomerId(customerId);
-    }
-
 
 }
