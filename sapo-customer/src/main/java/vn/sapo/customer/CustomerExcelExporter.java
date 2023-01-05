@@ -138,7 +138,7 @@ public class CustomerExcelExporter {
                 createCell(row, columnCount++, "chiết khấu mặc định %", style);
                 createCell(row, columnCount++, "Paymen Metod", style);
                 createCell(row, columnCount++, customer.getDebtTotal(), style);
-                createCell(row, columnCount++, "tổng chi", style);
+                createCell(row, columnCount++, customer.getSpendTotal(), style);
                 createCell(row, columnCount++, customer.getQuantityItemOrder() , style);
                 createCell(row, columnCount++, customer.getQuantityProductOrder(), style);
                 createCell(row, columnCount++, "SL hoàn trả", style);
