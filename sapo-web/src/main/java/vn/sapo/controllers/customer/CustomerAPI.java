@@ -1,18 +1,16 @@
 package vn.sapo.controllers.customer;
+import org.apache.tomcat.jni.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.address.AddressService;
+import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
-import vn.sapo.excel.ExcelHelper;
-import vn.sapo.excel.ExcelService;
-import vn.sapo.excel.ResponseMessage;
 import vn.sapo.order.sale.SaleOrderService;
 import vn.sapo.order.sale.item.OrderItemService;
 import vn.sapo.payment.sale.PaymentSaleOrderService;
@@ -34,9 +32,6 @@ public class CustomerAPI {
     PaymentSaleOrderService paymentSaleOrderService;
     @Autowired
     SaleOrderService saleOrderService;
-    @Autowired
-    ExcelService excelService;
-
 
     @GetMapping("")
     public ResponseEntity<?> findAll() {
@@ -53,8 +48,9 @@ public class CustomerAPI {
 
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteCustomerById(@PathVariable Integer id) {
+        addressService.deleteByCustomerId(id);
         customerService.deleteById(id);
     }
 
@@ -76,37 +72,24 @@ public class CustomerAPI {
         return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.OK);
     }
 
-    @GetMapping("/customerGroup")
-    public ResponseEntity<?> getAllCustomerGroup() {
-        return new ResponseEntity<>(customerService.findAll(), HttpStatus.OK);
+//    @GetMapping("/customerGroup")
+//    public ResponseEntity<?> getAllCustomerGroup() {
+//        return new ResponseEntity<>(customerService.findAll(), HttpStatus.OK);
+//    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteCustomer(@PathVariable Integer id) {
+        customerService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    //upload file
-    @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
-        String message = "";
-
-        if (ExcelHelper.hasExcelFormat(file)) {
-            try {
-                excelService.save(file);
-
-                message = "Uploaded the file successfully: " + file.getOriginalFilename();
-                return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
-            } catch (Exception e) {
-                message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
-            }
-        }
-
-        message = "Please upload an excel file!";
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
-    }
 
     @PutMapping("/updateStatusAvailable")
     public ResponseEntity<?> updateStatusAvailable(@RequestBody List<Integer> arrayIdCustomer) {
         customerService.changeStatusToAvailable(arrayIdCustomer, true);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 
     @PutMapping("/updateStatusUnavailable")
 
@@ -115,6 +98,7 @@ public class CustomerAPI {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+//    findAllCustomerByGroupAndStatus
         @GetMapping("/findAllCustomerByGroupAndStatus/{groupId},{status}")
         public ResponseEntity<?> findAllCustomerByGroupAndStatus(@PathVariable Integer groupId, @PathVariable String status) {
             List<CustomerResult> customers = customerService.findAllCustomerByGroupAndStatus(groupId, status);
