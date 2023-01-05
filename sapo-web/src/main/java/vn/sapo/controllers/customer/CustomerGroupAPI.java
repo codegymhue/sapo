@@ -51,9 +51,11 @@ public class CustomerGroupAPI {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @PutMapping("update/{id}")
+    @PutMapping("update")
     public ResponseEntity<?> updateCusGroup(@RequestBody UpdateCusGroupParam updateCusGroupParam) {
-        return new ResponseEntity<>(customerGroupService.update(updateCusGroupParam), HttpStatus.OK);
+        CustomerGroupResult dto = customerGroupService.update(updateCusGroupParam);
+        dto = customerGroupService.findById(dto.getId());
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

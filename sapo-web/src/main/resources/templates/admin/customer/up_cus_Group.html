@@ -21,6 +21,7 @@
                           fill="currentColor"></path>
                 </svg>
                 <h6 class="MuiTypography-root MuiTypography-subtitle1">Quay lại danh sách nhóm khách hàng</h6></a>
+                <span hidden id="cusGrpId" th:text="${customerGroup.getId()}"></span>
             </div>
             <div class="MuiBox-root jss20296">
                 <button id="Sapo-Button-b07b3814-cc54-436f-95b3-3dc5c028fe16" class="hFrEkh btn save_Dele"
@@ -296,8 +297,8 @@
         const val = arrayCat[0].title;
         console.log("is", id, val)
         selectBtnPri.firstElementChild.innerText = val;
-        $("#pricingType").data("id", id);
-        let idValue = $("#pricingType").data("id");
+        $("#upPricingType").data("id", id);
+        let idValue = $("#upPricingType").data("id");
         console.log(idValue);
     }
     // Lấy List Payment Method
@@ -329,15 +330,15 @@
         const val = arrayCat[0].title;
         console.log("is", id, val)
         selectBtnPay.firstElementChild.innerText = val;
-        $("#paymentType").data("id", id);
-        let idValue = $("#paymentType").data("id");
+        $("#upPaymentType").data("id", id);
+        let idValue = $("#upPaymentType").data("id");
         console.log(idValue);
     }
 
     $('#btnUpdateCustomerGroup').on('click', () => {
-        // let id = ;
+        let id = $("#cusGrpId").text();
         getCusGroupById(id).then(()=>{
-            updateCusGroupParam.id = $(customerGroup.id);
+            updateCusGroupParam.id = id;
             updateCusGroupParam.title = $('#upTitleGroup').val();
             updateCusGroupParam.cusGrpCode = $('#upCusGrpCode').val();
             updateCusGroupParam.description = $('#upDescription').val();
@@ -352,13 +353,17 @@
                 "content-type": "application/json"
             },
             "type": "POST",
-            "url": "http://localhost:8080/api/customer_groups/update/"+ id,
+            "url": "http://localhost:8080/api/customer_groups/update",
             "data": JSON.stringify(updateCusGroupParam)
         })
             .done((data) => {
                 console.log(data);
+                let id = data.id;
                 CustomerGroup_App.IziToast.showSuccessAlert('Sửa nhóm khách hàng thành công  !!!')
-                // window.location.href = "/admin/customer_groups/create";
+
+                setTimeout(() => {
+                    window.location.href = "/admin/customer_groups/" + id;
+                }, 1000)
 
             })
             .fail((jqXHR) => {

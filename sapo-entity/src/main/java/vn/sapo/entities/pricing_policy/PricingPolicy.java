@@ -14,8 +14,8 @@ import javax.persistence.*;
 @Accessors(chain = true)
 public class PricingPolicy {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "pricing_policy_code", unique = true)
@@ -27,4 +27,6 @@ public class PricingPolicy {
     @Column(name = "pricing_policy_type")
     @Enumerated(EnumType.STRING)
     private PricingPolicyType pricingPolicyType;
+
+    public PricingPolicy (Integer id){this.id = id;}
 }
