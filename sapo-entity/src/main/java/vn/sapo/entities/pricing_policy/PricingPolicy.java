@@ -29,4 +29,8 @@ public class PricingPolicy {
     @Column(name = "pricing_policy_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private PricingPolicyType pricingPolicyType;
+
+    public PricingPolicy(Integer id) {
+        this.id = id;
+    }
 }
