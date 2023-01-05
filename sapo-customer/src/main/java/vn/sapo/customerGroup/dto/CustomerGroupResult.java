@@ -21,9 +21,9 @@ public class CustomerGroupResult {
 
     private String cusGrpCode;
 
-    private Integer pricing_policy_id;
+    private Integer pricingPolicyId;
 
-    private Integer payment_method_id;
+    private String paymentMethodId;
 
     private Instant createdAt;
 
