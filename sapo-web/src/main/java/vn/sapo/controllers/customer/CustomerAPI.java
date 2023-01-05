@@ -51,7 +51,9 @@ public class CustomerAPI {
     @DeleteMapping("/delete/{id}")
     public void deleteCustomerById(@PathVariable Integer id) {
         addressService.deleteByCustomerId(id);
+
         customerService.deleteById(id);
+
     }
 
     @PostMapping("/create")
