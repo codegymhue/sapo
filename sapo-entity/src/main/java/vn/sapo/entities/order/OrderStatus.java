@@ -22,8 +22,8 @@ public class OrderStatus {
     @Column(name = "id")
     private String id;
 
-    @Column(name = "name", nullable = false, length = 50)
-    private String name;
+    @Column(name = "title", nullable = false, length = 50)
+    private String title;
 
     public OrderStatus(String id) {
         this.id = id;

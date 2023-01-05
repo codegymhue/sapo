@@ -14,5 +14,9 @@ public interface CustomerService {
     void deleteById(Integer id);
     boolean existsById(Integer id);
     void changeStatusToAvailable(List<Integer> customerIds, boolean status);
+
+    List<CustomerResult> findAllByGroupId(Integer groupTitleId);
+
     List<CustomerResult> findAllCustomerByGroupAndStatus(Integer groupTitleId, String customerStatus);
+
 }

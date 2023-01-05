@@ -1,6 +1,8 @@
 package vn.sapo.product.dto;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -9,7 +11,8 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 
-@Data
+@Getter
+@Setter
 @Accessors(chain = true)
 public class ProductCreate implements Serializable {
     private Integer id;

@@ -21,7 +21,7 @@ public class CategoryAPI {
     @Autowired
     CategoryMapper categoryMapper;
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<?> showAllCategory() {
         List<CategoryResult> categories = categoryService.findAll();
         return new ResponseEntity<>(categories, HttpStatus.OK);
