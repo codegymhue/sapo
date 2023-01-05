@@ -1032,6 +1032,37 @@
             return $(".progress").removeAttr('hidden').css("width", `${data.loaded / data.total * 100}%`);
         });
 
+    page.commands.pushImage = (img) => {
+        let str = `<div id="div_${img.cloudId}" class="profile-pic jss26799 MuiGrid-item MuiGrid-grid-md-2" style="width: 100%; height: 50%; margin: 0 24px 24px 0; padding: 0">
+                            <img id="img." src="${img.fileUrl}" onclick="showPreviewImg()" width="100%" height="120px" style="float: left"/>
+                            <div class="edit" id="${img.cloudId}" onclick="removeImg(this)">
+                                <i class="fa-solid fa-circle-xmark" style="color: red"></i>
+                            </div>
+                       </div>`
+        page.dialogs.elements.showImg.append(str);
+        if (imgs.length !== 0) {
+            page.dialogs.elements.showImgSmall.removeAttr("hidden");
+            page.dialogs.elements.showImgBig.attr("hidden", true);
+        }
+        return;
+    }
+
+    if (media.length !== 0) {
+        console.log("hahah")
+        console.log(media)
+        for (let i = 0; i < media.length; i++) {
+            let imgres = new Image();
+            imgres.cloudId = media[i].cloudId
+            imgres.fileFolder = media[i].fileFolder
+            imgres.fileName =media[i].fileName
+            imgres.fileType = media[i].fileType
+            imgres.fileUrl = media[i].fileUrl
+            imgs.push(imgres);
+            page.commands.pushImage(imgres);
+            console.log("imgres",imgs)
+        }
+    }
+
     page.commands.renderImg = () => {
         let str = `<div class="profile-pic loading jss26799 MuiGrid-item MuiGrid-grid-md-2" style="width: 100%; height: 120px; margin: 0 24px 24px 0; padding: 0">
                         <div class="progress"  style="margin:0 0; background-color: #0db473; height: 8px">
