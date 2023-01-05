@@ -12,7 +12,6 @@ import vn.sapo.shared.exceptions.NotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 @Service
 public class CustomerGroupServiceImpl implements CustomerGroupService {
 
@@ -36,8 +35,8 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     @Transactional
     public CustomerGroupResult update(UpdateCusGroupParam updateCusGroupParam) {
         CustomerGroup customerGroup = customerGroupRepository.findById(updateCusGroupParam.getId())
-                .orElseThrow(() -> new NotFoundException("Customer Group not found"));
-        customerGroupMapper.transferFields(updateCusGroupParam, customerGroup);
+                .orElseThrow(()-> new NotFoundException("Customer Group not found"));
+                customerGroupMapper.transferFields(updateCusGroupParam,customerGroup);
         return customerGroupMapper.toDTO(customerGroup);
     }
 
@@ -50,23 +49,21 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
                 .collect(Collectors.toList());
     }
 
-//    @Override
-//    public List<CustomerGroupResult> sortByGroup() {
-//        return customerGroupRepository.sortByGroup();
-//    }
-@Override
-
+    @Override
+    @Transactional
     public List<CustomerGroupResult> sortByGroup() {
         return customerGroupRepository.sortByGroup();
     }
 
     @Override
+    @Transactional
     public CustomerGroupResult findById(Integer id) {
         CustomerGroup customerGroup = customerGroupRepository.findById(id).get();
         return customerGroupMapper.toDTO(customerGroup);
     }
 
     @Override
+    @Transactional
     public void deleteById(Integer id) {
         customerGroupRepository.deleteById(id);
     }

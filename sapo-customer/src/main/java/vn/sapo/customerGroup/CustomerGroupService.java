@@ -24,5 +24,6 @@ public interface CustomerGroupService {
 
     CustomerGroupResult findById(Integer id);
 
+
     void deleteById(Integer id);
 }
