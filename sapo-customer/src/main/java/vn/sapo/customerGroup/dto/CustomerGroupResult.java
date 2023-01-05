@@ -21,9 +21,16 @@ public class CustomerGroupResult {
 
     private String cusGrpCode;
 
+    private Integer pricingPolicyId;
+
+    private String paymentMethodId;
+
     private Instant createdAt;
 
     private Long countCus;
 
-//    private Integer pricePolicyId;
+    private String description;
+
+    private Integer discount;
+
 }

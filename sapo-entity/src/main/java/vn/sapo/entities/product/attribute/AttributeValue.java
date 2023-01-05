@@ -27,7 +27,7 @@ public class AttributeValue {
     private Integer attributeId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "attribute_id", nullable = false)
+    @JoinColumn(name = "attribute_id", nullable = false, foreignKey = @ForeignKey(name="fk_attribute_value_atribute"))
     private Attribute attribute;
 
     public AttributeValue(Integer id) {

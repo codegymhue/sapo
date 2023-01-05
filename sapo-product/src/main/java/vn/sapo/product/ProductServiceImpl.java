@@ -14,6 +14,7 @@ import vn.sapo.brand.dto.BrandResult;
 import vn.sapo.category.CategoryMapper;
 import vn.sapo.category.CategoryRepository;
 import vn.sapo.category.dto.CategoryResult;
+import vn.sapo.product_pricing_policy.ProductPricingPolicyService;
 import vn.sapo.shared.convert.Characters;
 import vn.sapo.entities.product.*;
 import vn.sapo.entities.tax.TaxType;
@@ -65,6 +66,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     ProductTaxRepository productTaxRepository;
+
+    @Autowired
+    ProductPricingPolicyService productPricingPolicyService;
 
     @Autowired
     CategoryRepository categoryRepository;
@@ -194,6 +198,7 @@ public class ProductServiceImpl implements ProductService {
         }
         Integer productId = product.getId();
         productTaxService.createAll(createProductParam.getTaxList(), product);
+        productPricingPolicyService.createAll(createProductParam.getPriceList(), productId);
         if (createProductParam.getMediaList().size() != 0) {
             mediaService.save(createProductParam.getMediaList(), product);
         }

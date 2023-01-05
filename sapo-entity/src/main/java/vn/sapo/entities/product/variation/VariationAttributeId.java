@@ -10,6 +10,7 @@ import vn.sapo.entities.tax.Tax;
 import vn.sapo.entities.tax.TaxType;
 
 import javax.persistence.Embeddable;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
@@ -21,11 +22,11 @@ import java.util.Objects;
 @Embeddable
 public class VariationAttributeId implements Serializable {
     @ManyToOne(optional = false)
-    @JoinColumn(name = "variation_id")
+    @JoinColumn(name = "variation_id", foreignKey = @ForeignKey(name="fk_variation_attribute_product_variation"))
     private ProductVariation productVariation;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "attribute_value_id")
+    @JoinColumn(name = "attribute_value_id", foreignKey = @ForeignKey(name="fk_variation_attribute_attribute_value"))
     private AttributeValue attributeValue;
 
     public VariationAttributeId(Integer variationId, Integer attributeValueId) {

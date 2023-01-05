@@ -1,12 +1,12 @@
-package vn.sapo.entities.product.product_pricing;
+package vn.sapo.entities.product.pricing_policy;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import vn.sapo.entities.pricing_policy.PricingPolicy;
 import vn.sapo.entities.product.Product;
 
 import javax.persistence.Embeddable;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
@@ -18,11 +18,11 @@ import java.util.Objects;
 @Embeddable
 public class ProductPricingId implements Serializable {
     @ManyToOne(optional = false)
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", foreignKey = @ForeignKey(name="fk_product_pricing_product"))
     private Product product;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "pricing_id")
+    @JoinColumn(name = "pricing_policy_id", foreignKey = @ForeignKey(name="fk_product_pricing_pricing_policy"))
     private PricingPolicy pricingPolicy;
 
     public ProductPricingId(Integer productId, Integer pricingPolicyId) {

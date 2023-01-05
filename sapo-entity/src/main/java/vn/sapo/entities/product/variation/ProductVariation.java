@@ -52,7 +52,7 @@ public class ProductVariation {
     private Integer productId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "product_id", nullable = false, foreignKey = @ForeignKey(name="fk_product_variation_product"))
     private Product product;
 
     public ProductVariation(Integer id) {

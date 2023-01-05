@@ -1,4 +1,4 @@
-package vn.sapo.payment.method.dto;
+package vn.sapo.pricing_policy.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,8 +11,10 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class PaymentMethodResult {
+public class PricingPolicyResult {
     private Integer id;
+
+    private String pricingPolicyCode;
 
     private String title;
 
