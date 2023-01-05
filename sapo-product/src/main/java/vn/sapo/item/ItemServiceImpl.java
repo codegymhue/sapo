@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class ItemServiceImpl implements ItemService {
-
     @Autowired
     private ItemRepository itemRepository;
 
@@ -21,18 +20,6 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ProductMapper productMapper;
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<ItemResult> findAll() {
-        return itemRepository.findAll()
-                .stream()
-                .map(item -> {
-                    ItemResult result = itemMapper.toDTO(item);
-                    return result;
-                })
-                .collect(Collectors.toList());
-    }
 
     @Override
     @Transactional(readOnly = true)
@@ -59,7 +46,6 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Optional <Item> findByProductId(Integer productId) {
-//        cần thêm
         return itemRepository.findByProductId(productId);
     }
 

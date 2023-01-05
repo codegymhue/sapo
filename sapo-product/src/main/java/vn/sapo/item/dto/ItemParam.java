@@ -6,8 +6,8 @@ import lombok.experimental.*;
 import java.math.*;
 
 @NoArgsConstructor
-@AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Accessors(chain = true)
 public class ItemParam {
 
