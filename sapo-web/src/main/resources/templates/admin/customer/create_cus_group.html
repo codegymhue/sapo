@@ -313,7 +313,7 @@
                 paymentMethod = data;
                 paymentMethod.forEach(item => {
                     let isSelected = item === selectedPayment ? "selected" : "";
-                    let str = `<li id="${item.paymentMethodId}" data-id="${item.paymentMethodId}" onclick="updateNamePay(${item.paymentMethodId})" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
+                    let str = `<li id="${item.id}" data-id="${item.id}" onclick="updateNamePay(${item.id})" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
                     $(".showAllPaymentMethod #showAllPay").append(str);
                 });
             })
@@ -323,8 +323,9 @@
     }
     //show select payment method
     function updateNamePay(id) {
-        const arrayCat = paymentMethod.filter(item => item.id === id)
+        const arrayCat = paymentMethod.filter(item => item.id === "id")
         const val = arrayCat[0].title;
+        console.log(val);
         console.log("is", id, val)
         selectBtnPay.firstElementChild.innerText = val;
         $("#paymentType").data("id", id);

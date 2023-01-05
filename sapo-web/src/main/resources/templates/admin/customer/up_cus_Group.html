@@ -239,9 +239,10 @@
                                                 <span id="upPaymentType">Chọn hình thức thanh toán</span>
                                                 <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"></path></svg>
                                             </div>
-                                            <ul class="dropdown-menu w-100 categoryIdCreate showAllPaymentMethod" th:value="${customerGroup.paymentMethodId}">
+                                            <ul class="dropdown-menu w-100 categoryIdCreate showAllPaymentMethod" >
                                                 <li>Chọn hình thức thanh toán</li>
-                                                <div id="showAllPay" >
+                                                <div id="showAllPay">
+<!--                                                     th:value="${customerGroup.paymentMethodId}">-->
 
                                                 </div>
                                             </ul>
@@ -327,7 +328,7 @@
     //show select payment method
     function updateNamePay(id) {
         const arrayCat = paymentMethod.filter(item => item.id === id)
-        const val = arrayCat[0].title.text();
+        const val = arrayCat[0].title;
         console.log("is", id, val)
         selectBtnPay.firstElementChild.innerText = val;
         $("#upPaymentType").data("id", id);
