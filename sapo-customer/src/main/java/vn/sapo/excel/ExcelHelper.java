@@ -6,7 +6,11 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
+import vn.sapo.address.dto.AddressResult;
+import vn.sapo.customer.CustomerService;
+import vn.sapo.customer.CustomerServiceImpl;
 import vn.sapo.customer.dto.CreateCustomerParam;
+import vn.sapo.entities.customer.CustomerGender;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,9 +21,9 @@ import java.util.List;
 public class ExcelHelper {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
-    static String[] HEADER = { "Id","Customer Code", "Full Name", "Phone Number", "Group id",
+    static String[] HEADER = {"Id", "Customer Code", "Full Name", "Phone Number", "Group id",
             "Email", "Birthday", "Gender", "employeeId"};
-    static String SHEET = "Customer";
+    static String SHEET = "FileNhapDSKhachHang";
 
     public static boolean hasExcelFormat(MultipartFile file) {
 
@@ -52,86 +56,115 @@ public class ExcelHelper {
                 Iterator<Cell> cellsInRow = currentRow.iterator();
 
                 CreateCustomerParam customer = new CreateCustomerParam();
-//                List<ProductTaxParam> taxParams = new ArrayList<>();
-//                ProductTaxParam taxIn = new ProductTaxParam();
+                AddressResult address = new AddressResult();
+                address.setProvinceId(-1);
+                address.setDistrictId(-1);
+                address.setWardId(-1);
+
+
 //                ProductTaxParam taxOut = new ProductTaxParam();
 
                 int cellIdx = 0;
                 while (cellsInRow.hasNext()) {
                     Cell currentCell = cellsInRow.next();
 
+                    for (int i = 0; i <= customers.size(); i++){
+                        int j = 0;
+                        if(++j > i){
+                            customer.setId(j);
+                        }
+                    }
+
                     switch (cellIdx) {
                         case 0:
-//                            customer.setId((int) currentCell.getNumericCellValue());
+                            customer.setFullName(currentCell.getStringCellValue());
                             break;
                         case 1:
-//                            product.setTitle(currentCell.getStringCellValue());
+                            customer.setCustomerCode(currentCell.getStringCellValue());
                             break;
                         case 2:
-//                            product.setSku(currentCell.getStringCellValue());
+                            customer.setGroupId((int) currentCell.getNumericCellValue());
                             break;
                         case 3:
-//                            product.setMass((float) currentCell.getNumericCellValue());
+//                             áp dụng uu đãi
                             break;
                         case 4:
-//                            product.setBarCode(currentCell.getStringCellValue());
+                            customer.setEmail(currentCell.getStringCellValue());
                             break;
                         case 5:
-//                            product.setUnit(currentCell.getStringCellValue());
+                            customer.setPhoneNumber(currentCell.getStringCellValue());
                             break;
                         case 6:
-//                            product.setRetailPrice(BigDecimal.valueOf(currentCell.getNumericCellValue()));
+                            customer.setBirthday(currentCell.getDateCellValue());
                             break;
                         case 7:
-//                            product.setWholesalePrice(BigDecimal.valueOf(currentCell.getNumericCellValue()));
+                            customer.setGender(CustomerGender.parseCustomerGender(currentCell.getStringCellValue()));
                             break;
                         case 8:
-//                            product.setImportPrice(BigDecimal.valueOf(currentCell.getNumericCellValue()));
+//                             Website
                             break;
                         case 9:
-//                            product.setBrandId((int) currentCell.getNumericCellValue());
+//                             Fax
                             break;
                         case 10:
-//                            product.setCategoryId((int) currentCell.getNumericCellValue());
+//                           Mã số thuế
                             break;
                         case 11:
-//                            product.setApplyTax(currentCell.getBooleanCellValue());
+//                            SĐT nhân viên phụ trách
                             break;
                         case 12:
-//                            product.setTaxInclusive(currentCell.getBooleanCellValue());
+                            customer.setDescription(currentCell.getStringCellValue());
                             break;
                         case 13:
-//                            taxIn.setTaxId((int) currentCell.getNumericCellValue());
+//                            chính sách giá mặc định
                             break;
                         case 14:
-//                            taxOut.setTaxId((int) currentCell.getNumericCellValue());
+//                            chiết khấu mặc định
                             break;
                         case 15:
-//                            taxIn.setTaxType(TaxType.parseTypeTax(currentCell.getStringCellValue()));
+//                            phương thức thanh toán mặc định
                             break;
                         case 16:
-//                            taxOut.setTaxType(TaxType.parseTypeTax(currentCell.getStringCellValue()));
+                           address.setFullName(currentCell.getStringCellValue());
                             break;
                         case 17:
-//                            product.setDescription(currentCell.getStringCellValue());
+                            address.setPhoneNumber(currentCell.getStringCellValue());
                             break;
                         case 18:
-//                            product.setEnableSell(currentCell.getBooleanCellValue());
+                         address.setEmail(currentCell.getStringCellValue());
                             break;
                         case 19:
-//                            product.setEnableVariant(currentCell.getBooleanCellValue());
+                            address.setLine1(currentCell.getStringCellValue());
                             break;
                         case 20:
-//                            product.setCostPrice(BigDecimal.valueOf(currentCell.getNumericCellValue()));
+                            address.setProvinceName(currentCell.getStringCellValue());
                             break;
                         case 21:
-//                            product.setQuantity((int) currentCell.getNumericCellValue());
+                            address.setDistrictName(currentCell.getStringCellValue());
+                            break;
+                        case 22:
+                            address.setWardName(currentCell.getStringCellValue());
+                            break;
+                        case 23:
+//                            nợ hiện tại
+                            break;
+                        case 24:
+//                            tổng chi tiêu
+                            break;
+                        case 25:
+//                            gi chú
+                            break;
+                        case 26:
+//                            tag
                             break;
                         default:
                             break;
                     }
                     cellIdx++;
                 }
+                customer.setAddresses(new ArrayList<AddressResult>() {{
+                    add(address);
+                }});
                 customers.add(customer);
             }
 
