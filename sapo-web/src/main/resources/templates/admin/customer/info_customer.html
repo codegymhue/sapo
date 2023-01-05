@@ -722,7 +722,7 @@ th:object="${customer}"
         let idCustomer = $('#customerId').val();
 
         $('#btn_deleteCustomer').click(function () {
-            // alert(" ok nuông")
+            $('#modal_delete_customer').modal('show');
             console.log(idCustomer)
             return $.ajax({
                 headers: {
