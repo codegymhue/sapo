@@ -36,14 +36,14 @@ public class CustomerGroup extends BaseEntity {
     @JoinColumn(name = "payment_method_id")
     private PaymentMethod paymentMethod;
 
-    @Column(name = "payment_method_id", nullable = false)
+    @Column(name = "payment_method_id", nullable = false, insertable = false, updatable =false)
     private String payment_method_id;
 
     @OneToOne
     @JoinColumn(name = "pricing_policy_id")
     private PricingPolicy pricingPolicy;
 
-    @Column(name = "pricing_policy_id", nullable = false)
+    @Column(name = "pricing_policy_id", nullable = false,insertable = false, updatable =false)
     private Integer pricing_policy_id;
 
     public CustomerGroup(Integer id) {
