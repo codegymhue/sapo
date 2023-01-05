@@ -15,9 +15,9 @@ public class UpdateCusGroupParam {
 
     private String cusGrpCode;
 
-    private Integer pricing_policy_id;
+    private Integer pricingPolicyId;
 
-    private Integer payment_method_id;
+    private String paymentMethodId;
 
     private String description;
 
