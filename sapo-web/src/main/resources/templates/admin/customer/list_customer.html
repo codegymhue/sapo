@@ -1722,7 +1722,7 @@
         let file = $('#formFileCustomers')[0].files[0];
         data.append('file',file);
         $.ajax({
-            url: 'http://localhost:8080/api/upload',
+            url: 'http://localhost:8080/api/customers/upload',
             processData: false,
             contentType: false,
             data: data,
