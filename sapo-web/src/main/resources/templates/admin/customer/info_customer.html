@@ -63,7 +63,7 @@ th:object="${customer}"
                                           th:class="*{status == status.AVAILABLE} ? 'gIZkwA' : 'gIZkwB'"></span>
                                         </div>
                                     </div>
-                                    <a class="jss2101" href="/admin/customers/update/">Cập nhật</a></div>
+                                    <a class="jss2101"  th:href="'/admin/customers/update/'+ ${customer.getId()}">Cập nhật</a></div>
 
 
                                 <div class="MuiBox-root jss762 jss623">
@@ -97,7 +97,7 @@ th:object="${customer}"
                                                 <h6 class="MuiTypography-root jss626 MuiTypography-subtitle1"
                                                     th:text="*{email}" ></h6><h6
                                                         class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                        th:text="*{employee}"></h6><span></span></div>
+                                                        th:text="${customer.getEmployee().getFullName()}"></h6><span></span></div>
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3">
                                             <div class="MuiPaper-root jss624 jss625 MuiPaper-elevation1 MuiPaper-rounded">
@@ -113,25 +113,25 @@ th:object="${customer}"
                                                 Mô tả</h6></div>
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3">
-                                            <div class="MuiPaper-root jss624  MuiPaper-elevation1 MuiPaper-rounded"><h6
+                                            <div class="MuiPaper-root jss624  MuiPaper-elevation1 MuiPaper-rounded">
+                                                <a class="jss627" href="/admin/customer_group/" style="padding-left: 0px;">
+                                                    <h6 class="MuiTypography-root jss626 MuiTypography-subtitle1" th:text="${customer.getGroup().getTitle()}">
+
+                                                </h6>
+                                                </a>
+                                                <h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    itemid="display-group-name" title="Bán lẻ">: <a class="jss2101"
-                                                                                                    href="/admin/customer_groups/2635492"
-                                                                                                    style="padding-left: 0px;">Bán
-                                                lẻ</a></h6><h6
-                                                    class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    itemid="display-code" title="Est minim voluptatum">: Est minim
-                                                voluptatum</h6><h6
+                                                    th:text="*{customerCode}"></h6><h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
                                                     itemid="display-tax-number" title="614">: 614</h6><h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    itemid="display-website" title="https://www.dycimec.cc">: <a
+                                                    itemid="display-website" title="https://animehay.pro/">: <a
                                                     class="jss2101"
-                                                    href="/admin/customers/195915110/https://www.dycimec.cc"
-                                                    style="padding-left: 0px;">https://www.dycimec.cc</a></h6><h6
-                                                    class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    itemid="display-description" title="Possimus iste dolor">: Possimus
-                                                iste dolor</h6></div>
+                                                    href="https://animehay.pro/"
+                                                    style="padding-left: 0px; text-decoration: none">https://animehay.pro/</a></h6><h6
+                                                    class="MuiTypography-root jss626 MuiTypography-subtitle1">
+
+                                                </h6></div>
                                         </div>
                                     </div>
                                 </div>
