@@ -1,4 +1,4 @@
-package vn.sapo.pricing_policy;
+package vn.sapo.pricing_policy.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
