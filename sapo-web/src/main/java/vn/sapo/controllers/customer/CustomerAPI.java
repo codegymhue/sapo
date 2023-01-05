@@ -55,11 +55,8 @@ public class CustomerAPI {
 
     @DeleteMapping("/{id}")
     public void deleteCustomerById(@PathVariable Integer id) {
-<<<<<<< HEAD
-        addressService.deleteByCustomerId(id);
 
-=======
->>>>>>> d7895722413eedb2e59ec7e98524fb2b0d116a15
+        addressService.deleteByCustomerId(id);
         customerService.deleteById(id);
 
     }
