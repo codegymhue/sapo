@@ -6,6 +6,7 @@ import vn.sapo.item.dto.*;
 import java.util.*;
 
 public interface ItemService {
+    List<ItemResult> findAll();
 
     int getTotalInventoryQuantityByProductId(Integer productId);
 
