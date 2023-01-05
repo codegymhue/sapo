@@ -1075,6 +1075,50 @@
         return page.dialogs.elements.showImg.append(str);
     }
 
+    function showPreviewImg() {
+        $(".bigImg").empty();
+        $(".smallImg").empty();
+
+        for (let i = 0; i < imgs.length; i++) {
+            let str1 = "";
+            let str2 = "";
+            if (i == 0) {
+                str1 = `<img class="mySlides" src="${imgs[i].fileUrl}" style="width: 400px; height: 300px; text-align: center">`
+                str2 = `<div class="w3-col s4">
+                            <img class="demo w3-opacity w3-hover-opacity-off" src="${imgs[i].fileUrl}" style="width:100%; cursor:pointer" onclick="currentDiv(${i + 1})">
+                        </div>`
+            }
+            else {
+                str1 = `<img class="mySlides" src="${imgs[i].fileUrl}" style="width: 400px; height: 300px; display:none; text-align: center">`
+                str2 = `<div class="w3-col s4">
+                            <img class="demo w3-opacity w3-hover-opacity-off" src="${imgs[i].fileUrl}" style="width:100%;cursor:pointer" onclick="currentDiv(${i + 1})">
+                        </div>`
+            }
+            $(".bigImg").append(str1);
+            $(".smallImg").append(str2);
+        }
+        $("#previewImg").modal('show');
+    }
+    function currentDiv(n) {
+        showDivs(slideIndex = n);
+    }
+
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        if (n > x.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = x.length}
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+        }
+        x[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " w3-opacity-off";
+    }
+
     function removeImg(imgRemove) {
         let idImg = (imgRemove.id);
         if (imgRemove) {
@@ -1086,8 +1130,7 @@
             page.dialogs.elements.showImgSmall.attr("hidden", true);
         }
     }
-
-
+    
     $('#btnAddCategory').on('click', () => {
         category.id = 0;
         category.title = $('#inputCategory').val();
