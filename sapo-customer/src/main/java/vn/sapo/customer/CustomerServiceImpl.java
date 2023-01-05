@@ -9,7 +9,6 @@ import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.entities.customer.Customer;
-import vn.sapo.entities.customer.CustomerGender;
 import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.shared.exceptions.NotFoundException;
 
@@ -29,6 +28,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private AddressService addressService;
+
+
 
     @Override
     @Transactional(readOnly = true)
@@ -56,21 +57,22 @@ public class CustomerServiceImpl implements CustomerService {
         customerRepository.deleteById(id);
     }
 
+
+
     @Override
     @Transactional(readOnly = true)
     public boolean existsById(Integer id) {
         return customerRepository.existsById(id);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public CustomerResult create(CreateCustomerParam createCustomerParam) {
         System.out.println("Đay là param" + createCustomerParam);
         Customer customer = customerMapper.toModel(createCustomerParam);
-        customer = customerRepository.save(customer);
-        String cusCode = customer.getCustomerCode();
+       Customer newCustomer = customerRepository.save(customer);
+        String cusCode = newCustomer.getCustomerCode();
         if (cusCode == null || cusCode.trim().isEmpty())
-            customer.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
-
+            customer.setCustomerCode(CodePrefix.CUSTOMER + CodePrefix.format(customer.getId()));
         return customerMapper.toDTO(customer);
     }
 
@@ -95,9 +97,29 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional(readOnly = true)
     public void changeStatusToAvailable(List<Integer> customerIds, boolean status) {
         for (Integer customerId : customerIds) {
-            Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new NotFoundException("Product not found"));
+            Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new NotFoundException("Customer not found"));
             customer.setStatus(status ? CustomerStatus.AVAILABLE : CustomerStatus.UNAVAILABLE);
         }
+    }
+
+//    @Override
+//    public List<CustomerResult> findAllByFilter(Integer groupTitLeId, CustomerGender gender, String status, CusEmployeeResult employee, Instant createdAt, Instant birthday) {
+//        List<CustomerResult> customerResults = new ArrayList<>();
+//        customerResults = customerRepository.findAllByFilter(groupTitLeId,gender,CustomerStatus.parseCustomerGroup(status),employee,createdAt,birthday)
+//                .stream()
+//                .map(customerMapper::toDTO)
+//                .collect(Collectors.toList());
+//        return customerResults;
+//    }
+
+    @Override
+    public List<CustomerResult> findAllByGroupId(Integer groupTitleId) {
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAllByGroupId(groupTitleId)
+                .stream()
+                .map(customerMapper::toDTO)
+                .collect(Collectors.toList());
+        return customerResults;
     }
 
 
@@ -111,6 +133,7 @@ public class CustomerServiceImpl implements CustomerService {
                 .collect(Collectors.toList());
         return customerResults;
     }
+
     }
 
 

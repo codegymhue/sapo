@@ -9,7 +9,8 @@
 //
 //import javax.persistence.*;
 //
-//@Data
+//@Getter
+//@Setter
 //@NoArgsConstructor
 //@Accessors(chain = true)
 //@Entity

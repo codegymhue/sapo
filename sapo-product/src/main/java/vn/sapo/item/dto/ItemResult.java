@@ -8,7 +8,8 @@ import java.math.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Accessors(chain = true)
 public class ItemResult {
 
