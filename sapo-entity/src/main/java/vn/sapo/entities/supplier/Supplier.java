@@ -53,14 +53,14 @@ public class Supplier extends BaseEntity {
     private PaymentMethod paymentMethod;
 
     @Column(name = "payment_method_id", updatable = false, insertable = false)
-    private String paymentMethodId;
+    private Integer paymentMethodId;
 
 
     public Supplier(Integer id) {
         this.id = id;
     }
 
-    public Supplier(Integer employeeId, String paymentMethodId) {
+    public Supplier(Integer employeeId, Integer paymentMethodId) {
         setEmployeeId(employeeId);
         setPaymentMethodId(paymentMethodId);
 
@@ -71,7 +71,7 @@ public class Supplier extends BaseEntity {
         return this;
     }
 
-    public Supplier setPaymentMethodId(String paymentMethodId) {
+    public Supplier setPaymentMethodId(Integer paymentMethodId) {
         this.paymentMethod = new PaymentMethod(this.paymentMethodId = paymentMethodId);
         return this;
     }

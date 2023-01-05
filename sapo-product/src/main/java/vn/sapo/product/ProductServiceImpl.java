@@ -14,7 +14,6 @@ import vn.sapo.brand.dto.BrandResult;
 import vn.sapo.category.CategoryMapper;
 import vn.sapo.category.CategoryRepository;
 import vn.sapo.category.dto.CategoryResult;
-import vn.sapo.product_pricing_policy.ProductPricingPolicyService;
 import vn.sapo.shared.convert.Characters;
 import vn.sapo.entities.product.*;
 import vn.sapo.entities.tax.TaxType;
@@ -23,6 +22,7 @@ import vn.sapo.item.ItemMapper;
 import vn.sapo.item.ItemService;
 import vn.sapo.media.MediaMapper;
 import vn.sapo.media.MediaService;
+import vn.sapo.media.dto.MediaParam;
 import vn.sapo.product.dto.*;
 import vn.sapo.product_tax.ProductTaxMapper;
 import vn.sapo.product_tax.ProductTaxRepository;
@@ -68,9 +68,6 @@ public class ProductServiceImpl implements ProductService {
     ProductTaxRepository productTaxRepository;
 
     @Autowired
-    ProductPricingPolicyService productPricingPolicyService;
-
-    @Autowired
     CategoryRepository categoryRepository;
 
     @Autowired
@@ -94,6 +91,7 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     Characters characters;
 
+ 
     @Override
     @Transactional(readOnly = true)
     public List<ProductResult> findAll() {
@@ -110,6 +108,7 @@ public class ProductServiceImpl implements ProductService {
                     return dto;
                 })
                 .collect(Collectors.toList());
+
     }
 
     @Override
@@ -198,7 +197,6 @@ public class ProductServiceImpl implements ProductService {
         }
         Integer productId = product.getId();
         productTaxService.createAll(createProductParam.getTaxList(), product);
-        productPricingPolicyService.createAll(createProductParam.getPriceList(), productId);
         if (createProductParam.getMediaList().size() != 0) {
             mediaService.save(createProductParam.getMediaList(), product);
         }
@@ -405,7 +403,6 @@ public class ProductServiceImpl implements ProductService {
             product.setStatus(status ? ProductStatus.AVAILABLE : ProductStatus.UNAVAILABLE);
         }
     }
-
     @Override
     @Transactional
     public void deleteSoftProduct(List<Integer> productIds) {

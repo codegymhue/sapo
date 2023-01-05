@@ -42,11 +42,11 @@ public class Media {
     private Integer variationId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false, foreignKey = @ForeignKey(name="fk_media_product"))
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "variation_id", nullable = false, foreignKey = @ForeignKey(name="fk_media_product_variation"))
+    @JoinColumn(name = "variation_id", nullable = false)
     private ProductVariation productVariation;
 
     public Media(Integer productId) {

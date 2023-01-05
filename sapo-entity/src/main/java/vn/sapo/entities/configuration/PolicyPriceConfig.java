@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class PolicyPriceConfig {
-    private String fixPriceSellingType;
+    private FixPriceSellingType fixPriceSellingType;
     private String defaultSalesPrice;
     private String defaultPurchasePrice;
     private boolean suggestLatestSellingPrice;

@@ -26,6 +26,7 @@ public class ProductExcelExporterInventory {
         workbook = new XSSFWorkbook();
     }
 
+
     private void writeHeaderLine() {
         sheet = workbook.createSheet("Users");
 
@@ -54,6 +55,7 @@ public class ProductExcelExporterInventory {
         createCell(row, 14, "Ngày cập nhật", style);
         createCell(row, 15, "Có thể bán", style);
         createCell(row, 16, "Tồn kho", style);
+        //
         createCell(row, 17, "Hàng đang về", style);
         createCell(row, 18, "Hàng đang giao", style);
         createCell(row, 19, "Đang giao dịch", style);
@@ -61,6 +63,11 @@ public class ProductExcelExporterInventory {
         createCell(row, 21, "Giá gồm thuế", style);
         createCell(row, 22, "Thuế đầu vào", style);
         createCell(row, 23, "Thuế đầu ra", style);
+
+
+
+
+
     }
 
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
@@ -115,6 +122,9 @@ public class ProductExcelExporterInventory {
             createCell(row, columnCount++, product.isTaxInclusive()== true ? "Có" : "Không", style);
             createCell(row, columnCount++, product.getPurchaseTaxList().toString(), style);
             createCell(row, columnCount++, product.getSaleTaxList().toString(), style);
+
+            //
+
         }
     }
 
@@ -127,5 +137,6 @@ public class ProductExcelExporterInventory {
         workbook.close();
 
         outputStream.close();
+
     }
 }

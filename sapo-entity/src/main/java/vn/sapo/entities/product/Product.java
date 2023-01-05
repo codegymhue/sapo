@@ -6,8 +6,6 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import vn.sapo.entities.BaseEntity;
 import vn.sapo.entities.media.Media;
-import vn.sapo.entities.product.pricing_policy.ProductPrice;
-import vn.sapo.entities.product.pricing_policy.ProductPricingPolicy;
 import vn.sapo.entities.tax.ProductTax;
 import vn.sapo.entities.tax.Tax;
 import vn.sapo.entities.tax.TaxType;
@@ -15,7 +13,6 @@ import vn.sapo.entities.tax.TaxType;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor
@@ -63,13 +60,13 @@ public class Product extends BaseEntity {
     private BigDecimal wholesalePrice;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name="fk_product_category"))
+    @JoinColumn(name = "category_id")
     private Category category;
     @Column(name = "category_id", insertable = false, updatable = false)
     private Integer categoryId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "brand_id",foreignKey = @ForeignKey(name="fk_product_brand"))
+    @JoinColumn(name = "brand_id")
     private Brand brand;
     @Column(name = "brand_id", insertable = false, updatable = false)
     private Integer brandId;
@@ -86,16 +83,14 @@ public class Product extends BaseEntity {
     private boolean deleted = false;
 
     @OneToMany(mappedBy = "id.product")
+//    @OrderBy("tax_id")
     @OrderBy("taxId")
     private Set<ProductTax> productTaxSet;
 
-    @OneToMany(mappedBy = "id.product")
-    private Set<ProductPricingPolicy> productPricingPolicySet;
 
     public Set<Media> getMediaList() {
         return mediaSet;
     }
-
 
     public String getMainImageUrl() {
         if (mediaSet == null)
@@ -105,14 +100,6 @@ public class Product extends BaseEntity {
                 .map(Media::getFileUrl)
                 .findAny()
                 .orElse(null);
-    }
-
-    public List<ProductPrice> getProductPriceList() {
-        if (productPricingPolicySet == null)
-            return new ArrayList<>();
-        return productPricingPolicySet.stream()
-                .map(productPricingPolicy -> new ProductPrice(productPricingPolicy.getPricingPolicyTitle(),productPricingPolicy.getPrice()))
-                .collect(Collectors.toList());
     }
 
     public List<Tax> getTaxList() {

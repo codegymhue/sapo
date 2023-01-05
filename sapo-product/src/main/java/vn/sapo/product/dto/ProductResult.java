@@ -8,12 +8,17 @@ import lombok.experimental.Accessors;
 import vn.sapo.brand.dto.BrandResult;
 import vn.sapo.category.dto.CategoryResult;
 import vn.sapo.entities.product.ProductStatus;
+import vn.sapo.entities.tax.ProductTax;
+import vn.sapo.entities.tax.Tax;
+import vn.sapo.entities.tax.TaxType;
 import vn.sapo.media.dto.MediaResult;
 import vn.sapo.tax.dto.TaxResult;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter

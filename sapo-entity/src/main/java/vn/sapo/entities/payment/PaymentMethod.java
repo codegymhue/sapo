@@ -22,14 +22,14 @@ import javax.persistence.GenerationType;
 public class PaymentMethod {
 
     @Id
+    @Column(name = "id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, length = 50)
-    private String id;
+    private Integer id;
 
     @Column(name = "title", nullable = false, length = 50)
     private String title;
 
-    public PaymentMethod(String id) {
+    public PaymentMethod(Integer id) {
         this.id = id;
     }
 

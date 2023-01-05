@@ -1,5 +1,8 @@
 package vn.sapo.product.dto;
 
+
+
+
 import lombok.*;
 import lombok.experimental.Accessors;
 import vn.sapo.brand.dto.BrandResult;
@@ -7,6 +10,7 @@ import vn.sapo.category.dto.CategoryResult;
 import vn.sapo.entities.product.ProductStatus;
 import vn.sapo.item.dto.ItemResult;
 import vn.sapo.media.dto.MediaResult;
+import vn.sapo.product_tax.dto.ProductTaxResult;
 import vn.sapo.tax.dto.TaxResult;
 
 import java.math.BigDecimal;

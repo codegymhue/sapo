@@ -51,15 +51,15 @@ public class CustomerGroupAPI {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @PutMapping("update")
+    @PutMapping("/{id}")
     public ResponseEntity<?> updateCusGroup(@RequestBody UpdateCusGroupParam updateCusGroupParam) {
-        CustomerGroupResult dto = customerGroupService.update(updateCusGroupParam);
-        dto = customerGroupService.findById(dto.getId());
-        return new ResponseEntity<>(dto, HttpStatus.OK);
+        return new ResponseEntity<>(customerGroupService.update(updateCusGroupParam), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public void deleteCusGroupById(@PathVariable Integer id) {
         customerGroupService.deleteById(id);
     }
+
+
 }

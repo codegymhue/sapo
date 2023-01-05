@@ -5,6 +5,7 @@ import vn.sapo.product.dto.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public interface ProductService {
 
@@ -33,6 +34,8 @@ public interface ProductService {
     Map<String, Object> getAllProductVariantPage(Integer pageNo, Integer pageSize, String title,
                                                  Integer categoryId, Integer brandId, String status,
                                                  String typeSort, String nameFieldSort);
+
+
 
     void changeStatusToAvailable(List<Integer> productIds,boolean status);
 

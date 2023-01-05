@@ -18,9 +18,9 @@ public class CreateCusGroupParam {
 
     private String cusGrpCode;
 
-    private Integer pricingPolicyId;
+    private Integer pricing_policy_id;
 
-    private String paymentMethodId;
+    private Integer payment_method_id;
 
     private String description;
 

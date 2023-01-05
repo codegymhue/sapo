@@ -28,6 +28,6 @@ public class Attribute {
     private Integer productId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false, foreignKey = @ForeignKey(name="fk_attribute_product"))
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 }

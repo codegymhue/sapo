@@ -26,6 +26,7 @@ public class ProductExcelExporter {
         workbook = new XSSFWorkbook();
     }
 
+
     private void writeHeaderLine() {
         sheet = workbook.createSheet("Users");
 
@@ -45,6 +46,7 @@ public class ProductExcelExporter {
         createCell(row, 5, "Giá bán lẻ", style);
         createCell(row, 6, "Giá bán buôn", style);
         createCell(row, 7, "Giá nhập", style);
+        //
         createCell(row, 8, "Đơn vị", style);
         createCell(row, 9, "Mã SKU", style);
         createCell(row, 10, "Mã BarCode", style);
@@ -54,6 +56,7 @@ public class ProductExcelExporter {
         createCell(row, 14, "Ngày cập nhật", style);
         createCell(row, 15, "Có thể bán", style);
         createCell(row, 16, "Tồn kho", style);
+
     }
 
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
@@ -113,5 +116,6 @@ public class ProductExcelExporter {
         workbook.close();
 
         outputStream.close();
+
     }
 }

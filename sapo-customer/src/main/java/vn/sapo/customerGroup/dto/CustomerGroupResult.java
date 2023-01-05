@@ -21,16 +21,21 @@ public class CustomerGroupResult {
 
     private String cusGrpCode;
 
-    private Integer pricingPolicyId;
-
-    private String paymentMethodId;
-
     private Instant createdAt;
 
     private Long countCus;
 
-    private String description;
+//    private Integer pricePolicyId;
 
-    private Integer discount;
 
+    @Override
+    public String toString() {
+        return "CustomerGroupResult{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", cusGrpCode='" + cusGrpCode + '\'' +
+                ", createdAt=" + createdAt +
+                ", countCus=" + countCus +
+                '}';
+    }
 }

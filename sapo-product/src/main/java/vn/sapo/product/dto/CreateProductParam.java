@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import vn.sapo.media.dto.MediaParam;
-import vn.sapo.product_pricing_policy.dto.ProductPriceCreParam;
 import vn.sapo.product_tax.dto.ProductTaxParam;
 
 import java.io.Serializable;
@@ -35,5 +34,4 @@ public class CreateProductParam implements Serializable {
     private boolean enableVariant;
     private List<ProductTaxParam> taxList;
     private List<MediaParam> mediaList;
-    private List<ProductPriceCreParam> priceList;
 }

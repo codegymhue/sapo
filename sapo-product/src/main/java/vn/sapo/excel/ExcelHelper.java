@@ -13,10 +13,14 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
+import vn.sapo.entities.product.Product;
+import vn.sapo.entities.product.ProductStatus;
 import vn.sapo.entities.tax.TaxType;
 import vn.sapo.media.dto.MediaParam;
 import vn.sapo.product.dto.CreateProductParam;
 import vn.sapo.product_tax.dto.ProductTaxParam;
+import vn.sapo.tax.dto.CreateTaxParam;
+
 
 public class ExcelHelper {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
@@ -46,6 +50,7 @@ public class ExcelHelper {
             while (rows.hasNext()) {
                 Row currentRow = rows.next();
 
+                // skip header
                 if (rowNumber == 0) {
                     rowNumber++;
                     continue;

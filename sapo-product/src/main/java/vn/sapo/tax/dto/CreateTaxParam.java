@@ -10,9 +10,11 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @Accessors(chain = true)
 public class CreateTaxParam {
-
     private Integer id;
+
     private String code;
+
     private String title;
+
     private float tax;
 }

@@ -14,12 +14,4 @@ public class UpdateCusGroupParam {
     private String title;
 
     private String cusGrpCode;
-
-    private Integer pricingPolicyId;
-
-    private String paymentMethodId;
-
-    private String description;
-
-    private Integer discount;
 }

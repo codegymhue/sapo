@@ -41,7 +41,7 @@ public class PaymentPurchaseOrder extends BaseEntity {
     private PaymentMethod paymentMethod;
 
     @Column(name = "payment_method_id", insertable = false, updatable = false)
-    private String paymentMethodId;
+    private Integer paymentMethodId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "purchase_order_id")
     private PurchaseOrder purchaseOrder;
@@ -58,7 +58,7 @@ public class PaymentPurchaseOrder extends BaseEntity {
         return this;
     }
 
-    public PaymentPurchaseOrder setPaymentMethodId(String paymentMethodId) {
+    public PaymentPurchaseOrder setPaymentMethodId(Integer paymentMethodId) {
         this.paymentMethod = new PaymentMethod(this.paymentMethodId = paymentMethodId);
         return this;
     }
@@ -68,9 +68,9 @@ public class PaymentPurchaseOrder extends BaseEntity {
         return this;
     }
 
-    public PaymentPurchaseOrder(Integer employeeId, String paymentMethodId, Integer purchaseOrderId) {
+    public PaymentPurchaseOrder(Integer employeeId, Integer paymentMethodId, Integer purchaseOrderId) {
         setEmployeeId(employeeId);
         setPaymentMethodId(paymentMethodId);
-        setPurchaseOrderId(purchaseOrderId);
+        setPurchaseOrderId(paymentMethodId);
     }
 }

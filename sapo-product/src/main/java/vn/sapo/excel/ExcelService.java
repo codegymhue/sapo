@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import vn.sapo.entities.product.Product;
+import vn.sapo.product.ProductRepository;
 import vn.sapo.product.ProductService;
 import vn.sapo.product.dto.CreateProductParam;
 
