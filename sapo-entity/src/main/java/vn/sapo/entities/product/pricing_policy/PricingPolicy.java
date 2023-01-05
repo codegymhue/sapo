@@ -1,4 +1,4 @@
-package vn.sapo.entities.pricing_policy;
+package vn.sapo.entities.product.pricing_policy;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,5 +28,7 @@ public class PricingPolicy {
     @Enumerated(EnumType.STRING)
     private PricingPolicyType pricingPolicyType;
 
-    public PricingPolicy (Integer id){this.id = id;}
+    public PricingPolicy(Integer id) {
+        this.id = id;
+    }
 }

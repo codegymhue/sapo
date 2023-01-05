@@ -1,10 +1,11 @@
-package vn.sapo.pricingPolicy;
+package vn.sapo.pricing_policy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import vn.sapo.entities.pricing_policy.PricingPolicy;
-import vn.sapo.pricingPolicy.dto.PricingPolicyResult;
+import vn.sapo.entities.product.pricing_policy.PricingPolicy;
+import vn.sapo.pricing_policy.dto.PricingPolicyResult;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

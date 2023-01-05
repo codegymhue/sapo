@@ -1,11 +1,10 @@
-package vn.sapo.pricingPolicy.dto;
+package vn.sapo.pricing_policy.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.sapo.entities.pricing_policy.PricingPolicyType;
 
 @NoArgsConstructor
 @AllArgsConstructor

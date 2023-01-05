@@ -1,8 +1,7 @@
-package vn.sapo.pricingPolicy;
+package vn.sapo.pricing_policy;
 
 import org.springframework.stereotype.Service;
-import vn.sapo.customerGroup.dto.CustomerGroupResult;
-import vn.sapo.pricingPolicy.dto.PricingPolicyResult;
+import vn.sapo.pricing_policy.dto.PricingPolicyResult;
 
 import java.util.List;
 

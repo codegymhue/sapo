@@ -8,7 +8,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import vn.sapo.entities.BaseEntity;
 import vn.sapo.entities.payment.PaymentMethod;
-import vn.sapo.entities.pricing_policy.PricingPolicy;
+import vn.sapo.entities.product.pricing_policy.PricingPolicy;
 
 import javax.persistence.*;
 

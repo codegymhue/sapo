@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CustomerResult;
-import vn.sapo.customerGroup.CustomerGroupService;
-import vn.sapo.customerGroup.dto.CustomerGroupResult;
 
 import java.util.Optional;
 
@@ -31,6 +29,7 @@ public class CustomerController {
     public String showCustomerCreatePage() {
         return "/admin/customer/create_customer";
     }
+
 
     @GetMapping("/history")
     public String showCustomerHistoryPage() {
