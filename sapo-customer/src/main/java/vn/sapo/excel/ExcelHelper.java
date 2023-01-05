@@ -10,6 +10,7 @@ import vn.sapo.address.dto.AddressResult;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.CustomerServiceImpl;
 import vn.sapo.customer.dto.CreateCustomerParam;
+import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerGender;
 
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class ExcelHelper {
             Iterator<Row> rows = sheet.iterator();
 
             List<CreateCustomerParam> customers = new ArrayList<CreateCustomerParam>();
-
+            int id = 500;
             int rowNumber = 0;
             while (rows.hasNext()) {
                 Row currentRow = rows.next();
@@ -58,10 +59,11 @@ public class ExcelHelper {
                 CreateCustomerParam customer = new CreateCustomerParam();
                 AddressResult address = new AddressResult();
 
-                customer.setId(customer.getId());
+
                 address.setProvinceId(-1);
                 address.setDistrictId(-1);
                 address.setWardId(-1);
+
 
 
                 int cellIdx = 0;
@@ -151,17 +153,28 @@ public class ExcelHelper {
 //                            tag
                             break;
                         default:
+
                             break;
                     }
                     cellIdx++;
+
                 }
+
+
+
                 customer.setAddresses(new ArrayList<AddressResult>() {{
                     add(address);
                 }});
+                customer.setId(id);
+                address.setId(id);
+                id++;
                 customers.add(customer);
+
             }
 
             workbook.close();
+
+
 
             return customers;
         } catch (IOException e) {

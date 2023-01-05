@@ -109,7 +109,7 @@
                     <div class="MuiBox-root jss6793"
                          style="width: 1px; height: 20px; border-left: 1px solid rgb(211, 213, 215); margin: 0 8px;">
                     </div>
-                    <button id="importFile"
+                    <button id="importFileCustomers"
                             class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
                             tabindex="0"
                             type="button">
@@ -473,7 +473,7 @@
     page.dialogs.elements.nextPage = $("#nextPage");
     page.dialogs.elements.previousPage = $("#previousPage");
 
-    page.elements.importFile = $("#importFile");
+    page.elements.importFile = $("#importFileCustomers");
 
     page.elements.importFile.on("click", function (){
         $("#modalImportFileCustomers").modal("show");
@@ -1698,9 +1698,6 @@
         if(status === -1 || groupId === -1){
             page.commands.getAllCustomers();
         }
-
-
-
     });
 
     $('#btnImportFileCustomers').click(function () {
@@ -1714,8 +1711,8 @@
             data: data,
             type: 'POST'
         }).done(function(result) {
-            $("#btnImportFileCustomers").modal("hide");
-            $("#formFileCustomers")[0].reset();
+            $("#modalImportFileCustomers").modal("hide");
+            $("#frmFileCustomers")[0].reset();
             page.commands.getAllCustomers();
             App.IziToast.showSuccessAlert("Tải file lên thành công!")
         }).fail((jqXHR) => {
