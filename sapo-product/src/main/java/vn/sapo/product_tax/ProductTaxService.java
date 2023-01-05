@@ -1,8 +1,6 @@
 package vn.sapo.product_tax;
 
 import vn.sapo.entities.product.Product;
-import vn.sapo.product.dto.CreateProductParam;
-import vn.sapo.product_tax.dto.CreateProductTaxParam;
 import vn.sapo.product_tax.dto.ProductTaxParam;
 import vn.sapo.product_tax.dto.ProductTaxResult;
 

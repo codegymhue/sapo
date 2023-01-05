@@ -9,14 +9,12 @@ import vn.sapo.brand.dto.BrandResult;
 import vn.sapo.category.CategoryMapper;
 import vn.sapo.category.dto.CategoryResult;
 import vn.sapo.entities.product.Product;
-import vn.sapo.entities.product.ProductStatus;
 import vn.sapo.item.ItemService;
 import vn.sapo.media.MediaMapper;
 import vn.sapo.product.dto.*;
 import vn.sapo.tax.TaxMapper;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 @Component
 public class ProductMapper implements InitializingBean {
@@ -25,7 +23,6 @@ public class ProductMapper implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-//        TypeMap<Product, ProductResult> model2Dto = modelMapper.createTypeMap(Product.class, ProductResult.class);
     }
 
     @Autowired
@@ -55,7 +52,6 @@ public class ProductMapper implements InitializingBean {
                 .setImportPrice(productWithImageParam.getImportPrice())
                 .setRetailPrice(productWithImageParam.getRetailPrice())
                 .setWholesalePrice(productWithImageParam.getWholesalePrice());
-
     }
     
     public void transferFields(UpdateProductParam updateCustomerParam, Product product) {
@@ -67,23 +63,8 @@ public class ProductMapper implements InitializingBean {
                 .setCategory(product.getCategoryId() != null ? categoryMapper.toDTO(product.getCategory()) : new CategoryResult())
                 .setBrand(product.getBrandId() != null ? brandMapper.toDTO(product.getBrand()) : new BrandResult())
                 .setTotalInventory(itemService.getTotalInventoryQuantityByProductId(product.getId()))
-                .setAvailableInventory(itemService.getAvailableInventoryQuantityByProductId(product.getId()))
-//                .setRetailPrice(product.getRetailPrice() != null ? product.getRetailPrice() : new BigDecimal(0))
-//                .setWholesalePrice(product.getWholesalePrice() != null ? product.getWholesalePrice() : new BigDecimal(0))
-//                .setImportPrice(product.getImportPrice() != null ? product.getImportPrice() : new BigDecimal(0))
-
-                ;
+                .setAvailableInventory(itemService.getAvailableInventoryQuantityByProductId(product.getId()));
     }
-//    public ProductResult toDTOExcelFile(Product product){
-//        return new ProductResult()
-//                .setCategory(product.getCategoryId() != null ? categoryMapper.toDTO(product.getCategory()) : new CategoryResult())
-//                .setBrand(product.getBrandId() != null ? brandMapper.toDTO(product.getBrand()) : new BrandResult())
-//                .setRetailPrice(product.getRetailPrice() != null ? product.getRetailPrice() : new BigDecimal(0))
-//                .setWholesalePrice(product.getWholesalePrice() != null ? product.getWholesalePrice() : new BigDecimal(0))
-//                .setImportPrice(product.getImportPrice() != null ? product.getImportPrice() : new BigDecimal(0))
-//                .setStatus(product.getStatus())
-//                ;
-//    }
 
     public ProductDetailResult toDTODetail(Product product) {
         return new ProductDetailResult()
@@ -140,16 +121,6 @@ public class ProductMapper implements InitializingBean {
                 .setInTransit(0)
                 .setShipping(0);
     }
-// TODO Nay khong biet o dau
-//    public ProductSaleResult toDTOProductSale(Product product) {
-//        return new ProductSaleResult()
-//                .setId(product.getId())
-//                .setTitle(product.getTitle())
-//                .setMainUrl(product.getImage())
-//                .setSku(product.getSku());
-//
-//    }
-
 
     public Product toModel(ProductShortParam productShortParam) {
         return new Product(Integer.parseInt(productShortParam.getCategoryId()))
@@ -160,6 +131,5 @@ public class ProductMapper implements InitializingBean {
                 .setRetailPrice(new BigDecimal(Integer.parseInt(productShortParam.getRetailPrice())))
                 .setSku(productShortParam.getSku())
                 .setImportPrice(new BigDecimal(Integer.parseInt(productShortParam.getImportPrice())));
-
     }
 }

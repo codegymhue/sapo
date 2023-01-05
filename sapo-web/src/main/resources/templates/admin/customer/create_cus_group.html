@@ -1,31 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="vi-VN" class="sapo-menu-expand sapo-menu-toggle-active">
 <head>
-
-    <!--    <link rel="stylesheet"-->
-    <!--          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">-->
-    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">-->
-    <!--    <link rel="stylesheet"-->
-    <!--          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css">-->
-    <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>-->
-    <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>-->
-    <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>-->
-    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">-->
-
-    <th:block th:replace="/layout/header.html"/>
+    <th:block th:replace="/layout/header :: header"/>
     <title>Thêm Nhóm khách hàng</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="/assets/admin/css/customer/customer_group.css"/>
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"-->
+<!--          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="/assets/admin/css/customer/cus_group.css"/>
 </head>
 <body>
-<th:block th:replace="/layout/menu.html"/>
+<th:block th:replace="/layout/menu :: menu"/>
 <div class="MuiBox-root jss64 jss40">
     <div class="MuiBox-root jss23598 jss23594 ">
-        <div class="MuiBox-root jss23599 jss23597">
-            <div class="MuiBox-root jss23600"><a
+        <div class="MuiBox-root jss23599 jss10118">
+            <div class="MuiBox-root jss10121"><a
                     class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss23596 MuiTypography-colorSecondary"
-                    href="/admin/customer_groups">
+                    href="/admin/customer_groups" style="display: flex">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                      style="width: 24px; height: 24px; margin-left: -9px; margin-right: 6px;">
                     <path d="M14.298 5.99 8.288 12l6.01 6.01 1.414-1.414L11.116 12l4.596-4.596-1.414-1.414Z"
@@ -33,22 +22,21 @@
                 </svg>
                 <h6 class="MuiTypography-root MuiTypography-subtitle1">Quay lại danh sách nhóm khách hàng</h6></a>
             </div>
-            <div class="MuiBox-root jss23601">
-                <button id="Sapo-Button-b07b3814-cc54-436f-95b3-3dc5c028fe16" class="sc-jqUVSM hFrEkh"
-                        fdprocessedid="mh7x7"><span class="sc-papXJ jcEYKF">Hủy</span></button>
-                <button id="btnCreateCustomerGroup" class="sc-jqUVSM FmJDc btnCreateCustomerGroup"
-                        fdprocessedid="ct2jmq"><span class="sc-papXJ jcEYKF">Lưu</span></button>
+            <div class="MuiBox-root jss20296">
+                <button id="Sapo-Button-b07b3814-cc54-436f-95b3-3dc5c028fe16" class="hFrEkh btn save_Dele"
+                        fdprocessedid="mh7x7"><span class="">Hủy</span></button>
+                <button id="btnCreateCustomerGroup" class="btn btnCreateCustomerGroup FmJDc"
+                        fdprocessedid="ct2jmq"><span class="">Lưu</span></button>
             </div>
         </div>
     </div>
-    <form action="#"></form>
     <form action="#">
-        <div class="MuiBox-root jss23604 jss23590">
+        <div class="MuiBox-root jss23604 jss608">
             <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
                     <div class="MuiPaper-root jss23708 MuiPaper-elevation1 MuiPaper-rounded"
                          style="box-shadow: rgba(168, 168, 168, 0.25) 0px 2px 4px; height: 100%;">
-                        <div class="MuiBox-root jss23710 jss23709 borderBottom">
+                        <div class="MuiBox-root jss751 jss722 borderBottom">
                             <div class="MuiBox-root jss24250"><h6 class="MuiTypography-root MuiTypography-h6"
                                                                   style="margin-left: 24px;">Thông tin chung</h6>
                             </div>
@@ -56,12 +44,12 @@
                         <div class="MuiBox-root jss23712" style="padding: 16px 24px 24px;">
                             <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2">
                                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
-                                    <div class="MuiFormControl-root jss23713 MuiFormControl-fullWidth"><label
-                                            class="MuiFormLabel-root MuiInputLabel-root jss23714 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink Mui-required Mui-required"
+                                    <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth"><label
+                                            class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink Mui-required Mui-required"
                                             data-shrink="true" for="titleGroup">Tên
                                         nhóm<span
                                                 class="MuiFormLabel-asterisk MuiInputLabel-asterisk">&thinsp;*</span></label>
-                                        <div class="MuiFormControl-root MuiTextField-root jss23715 MuiFormControl-fullWidth"
+                                        <div class="MuiFormControl-root MuiTextField-root jss756 MuiFormControl-fullWidth"
                                              field="[object Object]" form="[object Object]">
                                             <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl">
                                                 <input aria-invalid="false"
@@ -72,9 +60,9 @@
                                                        class="MuiInputBase-input MuiOutlinedInput-input" value=""
                                                        fdprocessedid="7i85i6">
                                                 <fieldset aria-hidden="true"
-                                                          class="jss23387 MuiOutlinedInput-notchedOutline"
+                                                          class="jss823 MuiOutlinedInput-notchedOutline"
                                                           style="padding-left: 8px;">
-                                                    <legend class="jss23388" style="width: 0.01px;"><span>&ZeroWidthSpace;</span>
+                                                    <legend class="jss824" style="width: 0.01px;"><span>&ZeroWidthSpace;</span>
                                                     </legend>
                                                 </fieldset>
                                             </div>
@@ -82,11 +70,11 @@
                                     </div>
                                 </div>
                                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
-                                    <div class="MuiFormControl-root jss23713 MuiFormControl-fullWidth"><label
-                                            class="MuiFormLabel-root MuiInputLabel-root jss23714 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
+                                    <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth"><label
+                                            class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
                                             data-shrink="true" for="cusGrpCode">Mã
                                         nhóm</label>
-                                        <div class="MuiFormControl-root MuiTextField-root jss23715 MuiFormControl-fullWidth"
+                                        <div class="MuiFormControl-root MuiTextField-root jss756 MuiFormControl-fullWidth"
                                              field="[object Object]" form="[object Object]">
                                             <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl">
                                                 <input aria-invalid="false"
@@ -96,9 +84,9 @@
                                                        class="MuiInputBase-input MuiOutlinedInput-input" value=""
                                                        fdprocessedid="sytfp">
                                                 <fieldset aria-hidden="true"
-                                                          class="jss23387 MuiOutlinedInput-notchedOutline"
+                                                          class="jss823 MuiOutlinedInput-notchedOutline"
                                                           style="padding-left: 8px;">
-                                                    <legend class="jss23388" style="width: 0.01px;"><span>&ZeroWidthSpace;</span>
+                                                    <legend class="jss824" style="width: 0.01px;"><span>&ZeroWidthSpace;</span>
                                                     </legend>
                                                 </fieldset>
                                             </div>
@@ -106,8 +94,8 @@
                                     </div>
                                 </div>
                                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
-                                    <div class="MuiFormControl-root jss23713 MuiFormControl-fullWidth"><label
-                                            class="MuiFormLabel-root MuiInputLabel-root jss23714 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
+                                    <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth"><label
+                                            class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
                                             data-shrink="true" for="description">Mô tả<span
                                             class="MuiTypography-root MuiTypography-caption"><svg
                                             viewBox="0 0 16 16"
@@ -121,16 +109,16 @@
                                             fill="#0088FF"></path><path fill-rule="evenodd" clip-rule="evenodd"
                                                                         d="M8 2C4.688 2 2 4.688 2 8s2.688 6 6 6 6-2.688 6-6-2.688-6-6-6ZM3.2 8c0 2.646 2.154 4.8 4.8 4.8s4.8-2.154 4.8-4.8S10.646 3.2 8 3.2A4.806 4.806 0 0 0 3.2 8Z"
                                                                         fill="#0088FF"></path></svg></span></label>
-                                        <div class="MuiFormControl-root MuiTextField-root jss23715 jss23716 MuiFormControl-fullWidth"
+                                        <div class="MuiFormControl-root MuiTextField-root jss757 jss756 MuiFormControl-fullWidth"
                                              field="[object Object]" form="[object Object]">
                                             <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline">
                                                 <textarea aria-invalid="false" id="description"
                                                           rows="3" aria-label="Without label"
                                                           class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline"></textarea>
                                                 <fieldset aria-hidden="true"
-                                                          class="jss23387 MuiOutlinedInput-notchedOutline"
+                                                          class="jss823 MuiOutlinedInput-notchedOutline"
                                                           style="padding-left: 8px;">
-                                                    <legend class="jss23388" style="width: 0.01px;"><span>&ZeroWidthSpace;</span>
+                                                    <legend class="jss824" style="width: 0.01px;"><span>&ZeroWidthSpace;</span>
                                                     </legend>
                                                 </fieldset>
                                             </div>
@@ -142,10 +130,10 @@
                     </div>
                 </div>
                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
-                    <div class="MuiPaper-root jss23708 MuiPaper-elevation1 MuiPaper-rounded"
+                    <div class="MuiPaper-root jss721 MuiPaper-elevation1 MuiPaper-rounded"
                          style="box-shadow: rgba(168, 168, 168, 0.25) 0px 2px 4px; height: 100%;">
-                        <div class="MuiBox-root jss23760 jss23709 borderBottom">
-                            <div class="MuiBox-root jss24271"><h6 class="MuiTypography-root MuiTypography-h6"
+                        <div class="MuiBox-root jss751 jss722 borderBottom">
+                            <div class="MuiBox-root jss1769"><h6 class="MuiTypography-root MuiTypography-h6"
                                                                   style="margin-left: 24px;">Cài đặt nâng cao</h6>
                                 <button class="MuiButtonBase-root MuiIconButton-root" tabindex="0" type="button"
                                         title="Cài đặt nâng cao" fdprocessedid="dazdea"
@@ -164,26 +152,57 @@
                         <div class="MuiBox-root jss23767" style="padding: 16px 24px 24px;">
                             <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2">
                                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
-                                    <div class="MuiBox-root jss23783 jss24277">
-                                        <div class="MuiBox-root jss23784 jss24287"><p
-                                                class="MuiTypography-root MuiTypography-body1"
-                                                style="color: rgb(70, 81, 95);">Giá mặc định</p></div>
-                                        <div class="MuiBox-root jss23785 jss24286" tabindex="0"><p
-                                                class="MuiTypography-root label-select MuiTypography-body1 MuiTypography-colorTextPrimary">
-                                            Chọn giá mặc định</p>
-                                            <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24"
-                                                 aria-hidden="true">
-                                                <path d="M7 10l5 5 5-5z"></path>
-                                            </svg>
+                                    <div class="MuiBox-root jss865 jss1785 item-box"
+                                         style="border-top: 0; padding-top: 0;">
+                                        <span class="MuiTypography-root title MuiTypography-subtitle1">
+                                            Giá Mặc Định</span>
+                                        <div class="dropdown jss1784">
+                                            <div class="dropdown-toggle select-btn-pri"
+                                                 type="button" data-bs-toggle="dropdown"
+                                                 aria-expanded="false" style="
+                                                        padding: 10px 0;
+                                                        display: flex;
+                                                        justify-content: space-between;
+                                                        align-items: center; ">
+                                                <span id="pricingType">Chọn giá mặc định</span>
+                                                <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"></path></svg>
+                                            </div>
+                                            <ul class="dropdown-menu w-100 pricingPolicyIdCreate showAllPricingPolicy">
+                                                <div style="border-bottom: 1px solid #e3e3e3;">
+                                                    <li>
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="fa-solid fa-magnifying-glass" style="margin-left: 16px;
+                                                                   margin-right: 4px;
+                                                                   color: #828282"></i>
+                                                            <input id="inputSearchPri" style="margin: 2px"
+                                                                   class="w-100 form-control border border-0"
+                                                                   placeholder="Tìm kiếm hoặc nhập mới"/>
+                                                        </div>
+                                                    </li>
+                                                    <li class="text-primary dropdown-item">
+                                                        <button id="btnCreatePri" style="border: none; color: #2d9dff;padding: 10px;text-align: start;
+                                                                     font-weight: 500;
+                                                                     font-size: 14px" type="button"
+                                                                class="bg-white w-100">
+                                                            <i class="fa-solid fa-circle-plus"
+                                                               style="margin: 0 9px"></i>Thêm mới
+                                                            chính sách giá
+                                                        </button>
+                                                    </li>
+                                                </div>
+                                                <div id="showAllPricing">
+
+                                                </div>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
-                                    <div class="MuiFormControl-root jss23713 MuiFormControl-fullWidth"><label
-                                            class="MuiFormLabel-root MuiInputLabel-root jss23714 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
+                                    <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth"><label
+                                            class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
                                             data-shrink="true" for="discount">Chiết khấu
                                         (%)</label>
-                                        <div class="MuiFormControl-root MuiTextField-root jss23715 MuiFormControl-fullWidth"
+                                        <div class="MuiFormControl-root MuiTextField-root jss756  MuiFormControl-fullWidth"
                                              field="[object Object]" form="[object Object]">
                                             <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl">
                                                 <input aria-invalid="false"
@@ -192,9 +211,9 @@
                                                        class="MuiInputBase-input MuiOutlinedInput-input" value="0"
                                                        style="text-align: right;" fdprocessedid="16ju8f">
                                                 <fieldset aria-hidden="true"
-                                                          class="jss23387 MuiOutlinedInput-notchedOutline"
+                                                          class="jss823 MuiOutlinedInput-notchedOutline"
                                                           style="padding-left: 8px;">
-                                                    <legend class="jss23388" style="width: 0.01px;"><span>&ZeroWidthSpace;</span>
+                                                    <legend class="jss824" style="width: 0.01px;"><span>&ZeroWidthSpace;</span>
                                                     </legend>
                                                 </fieldset>
                                             </div>
@@ -202,30 +221,27 @@
                                     </div>
                                 </div>
                                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
-                                    <div class="MuiBox-root jss23799" style="width: 100%;">
-                                        <div class="MuiFormControl-root jss23792 MuiFormControl-fullWidth"
-                                             style="width: 100%;">
-                                            <div class="MuiBox-root jss23800 jss23797"><label
-                                                    class="MuiFormLabel-root MuiInputLabel-root jss23795 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined"
-                                                    data-shrink="true">Hình thức thanh toán</label></div>
-                                            <div class="MuiInputBase-root MuiOutlinedInput-root jss23793 placeholder MuiInputBase-fullWidth MuiInputBase-formControl"
-                                                 field="[object Object]" form="[object Object]">
-                                                <div class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu jss23794 MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input"
-                                                     tabindex="0" role="button" aria-haspopup="listbox"
-                                                     fdprocessedid="mggv8">Chọn hình thức thanh toán
-                                                </div>
-                                                <input type="hidden" value="">
-                                                <svg class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
-                                                     focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-                                                    <path d="M7 10l5 5 5-5z"></path>
-                                                </svg>
-                                                <fieldset aria-hidden="true"
-                                                          class="jss23387 MuiOutlinedInput-notchedOutline"
-                                                          style="padding-left: 8px;">
-                                                    <legend class="jss23388" style="width: 0.01px;"><span>&ZeroWidthSpace;</span>
-                                                    </legend>
-                                                </fieldset>
+                                    <div class="MuiBox-root jss865 jss1785 item-box"
+                                         style="border-top: 0; padding-top: 0;">
+                                        <span class="MuiTypography-root title MuiTypography-subtitle1">
+                                            Hình Thức Thanh Toán</span>
+                                        <div class="dropdown jss1784">
+                                            <div class="dropdown-toggle select-btn-pay"
+                                                 type="button" data-bs-toggle="dropdown"
+                                                 aria-expanded="false" style="
+                                                        padding: 10px 0;
+                                                        display: flex;
+                                                        justify-content: space-between;
+                                                        align-items: center; ">
+                                                <span id="paymentType">Chọn hình thức thanh toán</span>
+                                                <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"></path></svg>
                                             </div>
+                                            <ul class="dropdown-menu w-100 categoryIdCreate showAllPaymentMethod">
+                                                <li>Chọn hình thức thanh toán</li>
+                                                <div id="showAllPay">
+
+                                                </div>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -237,42 +253,93 @@
         </div>
     </form>
 </div>
+
 </body>
 
 <th:block th:replace="/layout/script :: script"/>
 <script src="/assets/admin/js/customer/customerGroup_App.js"></script>
-<script>
 
-    function getAllPricingPolicy(){
+<script>
+    let pricingPolicy;
+    let paymentMethod;
+    const selectBtnPri = document.querySelector('.select-btn-pri');
+    const selectBtnPay = document.querySelector('.select-btn-pay');
+    let createCusGroupParam = new CustomerGroup();
+    // Lấy List Pricing Policy
+    function getAllPricingPolicy(selectedPricing) {
         return $.ajax({
             headers: {
                 "accept": "application/json",
                 "content-type": "application/json"
             },
             type: "GET",
-            url: "http://localhost:8080/api/customer_groups/sortGroup"
+            url: "http://localhost:8080/api/pricingPolicys"
         })
             .done((data) => {
-                $.each(data, (i, item) => {
-                    console.log(item)
-                    let str = ``;
-                    $("#customerGroupList").append(str);
+                console.log(data);
+                pricingPolicy = data;
+                pricingPolicy.forEach(item => {
+                    let isSelected = item === selectedPricing ? "selected" : "";
+                    let str = `<li id="${item.id}" data-id="${item.id}" onclick="updateNamePri(${item.id})" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
+                    $(".showAllPricingPolicy #showAllPricing").append(str);
                 });
             })
             .fail((jqXHR) => {
 
             })
     }
+    //show select pricing policy
+    function updateNamePri(id) {
+        const arrayCat = pricingPolicy.filter(item => item.id === id)
+        const val = arrayCat[0].title;
+        console.log("is", id, val)
+        selectBtnPri.firstElementChild.innerText = val;
+        $("#pricingType").data("id", id);
+        let idValue = $("#pricingType").data("id");
+        console.log(idValue);
+    }
+    // Lấy List Payment Method
+    function getAllPaymentMethod(selectedPayment) {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "http://localhost:8080/api/admin/payment_methods"
+        })
+            .done((data) => {
+                console.log(data);
+                paymentMethod = data;
+                paymentMethod.forEach(item => {
+                    let isSelected = item === selectedPayment ? "selected" : "";
+                    let str = `<li id="${item.paymentMethodId}" data-id="${item.paymentMethodId}" onclick="updateNamePay(${item.paymentMethodId})" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
+                    $(".showAllPaymentMethod #showAllPay").append(str);
+                });
+            })
+            .fail((jqXHR) => {
 
-    let createCusGroupParam = new CustomerGroup();
+            })
+    }
+    //show select payment method
+    function updateNamePay(id) {
+        const arrayCat = paymentMethod.filter(item => item.id === id)
+        const val = arrayCat[0].title;
+        console.log("is", id, val)
+        selectBtnPay.firstElementChild.innerText = val;
+        $("#paymentType").data("id", id);
+        let idValue = $("#paymentType").data("id");
+        console.log(idValue);
+    }
+
     $('#btnCreateCustomerGroup').on('click', () => {
         createCusGroupParam.id = null;
         createCusGroupParam.title = $('#titleGroup').val();
         createCusGroupParam.cusGrpCode = $('#cusGrpCode').val();
         createCusGroupParam.description = $('#description').val();
-        createCusGroupParam.pricing_policy_id = $('#pricing_policy_id :selected').text();
+        createCusGroupParam.pricingPolicyId = $('#pricingType').data("id");
         createCusGroupParam.discount = $('#discount').val();
-        createCusGroupParam.payment_method_id = $('#payment_method_id :selected').text();
+        createCusGroupParam.paymentMethodId = $('#paymentType').data("id");
 
         console.log(createCusGroupParam)
         $.ajax({
@@ -281,21 +348,14 @@
                 "content-type": "application/json"
             },
             "type": "POST",
-            "url": "http://localhost:8080/api/customer_groups/create",
+            "url": "http://localhost:8080/api/customer_groups",
             "data": JSON.stringify(createCusGroupParam)
         })
             .done((data) => {
                 console.log(data);
-                CustomerGroup_App.IziToast.showSuccessAlert('Thêm mới khách hàng thành công  !!!')
-                window.location.href = "/admin/customers";
-                $('#nameCreate').val("");
-                $('#codeCreate').val("");
-                $('#phoneCreate').val("");
-                $('#emailCreate').val("");
-                $('#birthdayCreate').val("");
-                $('#statusCreate').val("")
-                $('#addressCreate').val("");
-                $('#employeeNameCreate').val();
+                CustomerGroup_App.IziToast.showSuccessAlert('Thêm mới nhóm khách hàng thành công  !!!')
+                window.location.href = "/admin/customer/up_cus_Group";
+
             })
             .fail((jqXHR) => {
                 console.log(jqXHR);
@@ -306,6 +366,15 @@
                 }
 
             })
+    })
+
+    $(".save_Dele").on('click',()=>{
+        window.location.href = "/admin/customer_groups";
+    })
+
+    $(()=>{
+        getAllPricingPolicy();
+        getAllPaymentMethod();
     })
 </script>
 </html>

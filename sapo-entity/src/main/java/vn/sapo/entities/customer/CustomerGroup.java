@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import vn.sapo.entities.BaseEntity;
+import vn.sapo.entities.payment.PaymentMethod;
+import vn.sapo.entities.product.pricing_policy.PricingPolicy;
 
 import javax.persistence.*;
 
@@ -25,6 +27,24 @@ public class CustomerGroup extends BaseEntity {
     private String title;
     @Column(name = "cus_grp_code", nullable = false, length = 50)
     private String cusGrpCode;
+    @Column(name = "description", nullable = false)
+    private String description;
+    @Column(name = "discount", nullable = false)
+    private Integer discount;
+
+    @OneToOne
+    @JoinColumn(name = "payment_method_id")
+    private PaymentMethod paymentMethod;
+
+    @Column(name = "payment_method_id", nullable = false, insertable = false, updatable =false)
+    private String payment_method_id;
+
+    @OneToOne
+    @JoinColumn(name = "pricing_policy_id")
+    private PricingPolicy pricingPolicy;
+
+    @Column(name = "pricing_policy_id", nullable = false,insertable = false, updatable =false)
+    private Integer pricing_policy_id;
 
     public CustomerGroup(Integer id) {
         this.id = id;
