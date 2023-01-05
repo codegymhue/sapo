@@ -192,7 +192,7 @@
                                                     </li>
                                                 </div>
                                                 <div id="showAllPricing"
-                                                     th:value="${customerGroup.pricing_policy_id}">
+                                                     th:value="${customerGroup.getPricingPolicyId()}">
 
 
                                                 </div>
@@ -239,9 +239,9 @@
                                                 <span id="upPaymentType">Chọn hình thức thanh toán</span>
                                                 <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"></path></svg>
                                             </div>
-                                            <ul class="dropdown-menu w-100 categoryIdCreate showAllPaymentMethod">
+                                            <ul class="dropdown-menu w-100 categoryIdCreate showAllPaymentMethod" th:value="${customerGroup.paymentMethodId}">
                                                 <li>Chọn hình thức thanh toán</li>
-                                                <div id="showAllPay" th:value="${customerGroup.payment_method_id}">
+                                                <div id="showAllPay" >
 
                                                 </div>
                                             </ul>
@@ -327,7 +327,7 @@
     //show select payment method
     function updateNamePay(id) {
         const arrayCat = paymentMethod.filter(item => item.id === id)
-        const val = arrayCat[0].title;
+        const val = arrayCat[0].title.text();
         console.log("is", id, val)
         selectBtnPay.firstElementChild.innerText = val;
         $("#upPaymentType").data("id", id);
@@ -388,6 +388,7 @@
         })
             .done((data) => {
                 customerGroup = data;
+                console.log(customerGroup);
             })
             .fail((jqXHR) => {
                 if (jqXHR.responseJSON) {
