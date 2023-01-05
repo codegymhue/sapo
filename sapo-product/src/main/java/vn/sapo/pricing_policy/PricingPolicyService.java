@@ -1,25 +1,14 @@
 package vn.sapo.pricing_policy;
 
-import vn.sapo.entities.product.pricing_policy.PricingPolicy;
-import vn.sapo.pricing_policy.dto.PricingPolicyResult;
-import vn.sapo.product_tax.dto.ProductTaxResult;
-import vn.sapo.tax.dto.CreateTaxParam;
-import vn.sapo.tax.dto.TaxResult;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
+@Service
 public interface PricingPolicyService {
+    List<PricingPolicyResult> findAll();
 
-    Optional<PricingPolicy> findByTitle(String title);
+    PricingPolicyResult findById(Integer id);
 
-    boolean existsById(Integer id);
-
-    TaxResult create(CreateTaxParam taxParam);
-
-    public void createAll(List<CreateTaxParam> taxListParam);
-
-    List<TaxResult> findAllByProductId(List<ProductTaxResult> productTaxResults);
-
-    void deleteAllByProductId(Integer productId);
+    void deleteById(Integer id);
 }

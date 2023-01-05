@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProductPricingPolicyService {
 
-    List<ProductPriceResult> createAll(List<ProductPriceCreParam> productPriceCreParams, Product product);
+    List<ProductPriceResult> createAll(List<ProductPriceCreParam> productPriceCreParams, Integer productId);
 
     List<ProductPriceResult> findAllByProductId(Integer productId);
 

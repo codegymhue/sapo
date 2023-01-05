@@ -198,7 +198,7 @@ public class ProductServiceImpl implements ProductService {
         }
         Integer productId = product.getId();
         productTaxService.createAll(createProductParam.getTaxList(), product);
-        productPricingPolicyService.createAll(createProductParam.getPriceList(),product);
+        productPricingPolicyService.createAll(createProductParam.getPriceList(), productId);
         if (createProductParam.getMediaList().size() != 0) {
             mediaService.save(createProductParam.getMediaList(), product);
         }

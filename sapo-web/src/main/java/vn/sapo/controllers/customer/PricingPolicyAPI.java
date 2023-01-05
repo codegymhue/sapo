@@ -7,10 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import vn.sapo.pricingPolicy.PricingPolicyService;
-import vn.sapo.pricingPolicy.dto.PricingPolicyResult;
-
-import java.util.List;
+import vn.sapo.pricing_policy.PricingPolicyService;
 
 @RestController
 @RequestMapping("/api/pricingPolicys")

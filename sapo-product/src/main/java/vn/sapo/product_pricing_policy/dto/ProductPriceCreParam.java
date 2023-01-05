@@ -10,6 +10,6 @@ import java.math.BigDecimal;
 @Setter
 @Accessors(chain = true)
 public class ProductPriceCreParam {
-    private String pricePolicyTitle;
+    private Integer pricingPolicyId;
     private BigDecimal price;
 }
