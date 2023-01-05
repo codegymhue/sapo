@@ -27,7 +27,6 @@ import java.util.List;
 public class ProductController {
     @Autowired
     ProductService productService;
-
     @Autowired
     MediaService mediaService;
 
