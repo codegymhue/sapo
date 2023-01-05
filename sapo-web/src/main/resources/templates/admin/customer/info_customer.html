@@ -1,10 +1,9 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="vi-VN" class="sapo-menu-expand sapo-menu-toggle-active" th:object="${customer}">
-th:object="${customer}"
+<html xmlns:th="http://www.thymeleaf.org" lang="vi-VN" class="sapo-menu-expand sapo-menu-toggle-active" th:object="${customer}"  >
 <head>
     <th:block th:replace="/layout/header.html"/>
     <title>Chi tiết khách hàng</title>
-    <link rel="stylesheet" href="/assets/admin/css/customer/edit.css"/>
+    <link rel="stylesheet" href="/assets/admin/css/customer/info.css"/>
 </head>
 <body data-new-gr-c-s-check-loaded="14.1085.0">
 <div id="root" style="overflow: auto;">
@@ -63,7 +62,7 @@ th:object="${customer}"
                                           th:class="*{status == status.AVAILABLE} ? 'gIZkwA' : 'gIZkwB'"></span>
                                         </div>
                                     </div>
-                                    <a class="jss2101" href="/admin/customers/update/">Cập nhật</a></div>
+                                    <a class="jss2101" th:href="'/admin/customers/update/'+ ${customer.id}  ">Cập nhật</a></div>
 
 
                                 <div class="MuiBox-root jss762 jss623">
@@ -97,7 +96,7 @@ th:object="${customer}"
                                                 <h6 class="MuiTypography-root jss626 MuiTypography-subtitle1"
                                                     th:text="*{email}" ></h6><h6
                                                         class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                        th:text="*{employee}"></h6><span></span></div>
+                                                        th:text="${customer.getEmployee().getFullName()  }"></h6><span></span></div>
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3">
                                             <div class="MuiPaper-root jss624 jss625 MuiPaper-elevation1 MuiPaper-rounded">
@@ -113,25 +112,24 @@ th:object="${customer}"
                                                 Mô tả</h6></div>
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3">
-                                            <div class="MuiPaper-root jss624  MuiPaper-elevation1 MuiPaper-rounded"><h6
+                                            <div class="MuiPaper-root jss624  MuiPaper-elevation1 MuiPaper-rounded">
+                                                <h6
+                                                    class="MuiTypography-root jss626 MuiTypography-subtitle1">
+                                                    <a  href="/admin/customer_groups" th:text="${customer.getGroup().getTitle()}" style="text-decoration: none">
+                                                    </a>
+                                                </h6>
+                                                <h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    itemid="display-group-name" title="Bán lẻ">: <a class="jss2101"
-                                                                                                    href="/admin/customer_groups/2635492"
-                                                                                                    style="padding-left: 0px;">Bán
-                                                lẻ</a></h6><h6
+                                                    th:text="*{customerCode}"></h6><h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    itemid="display-code" title="Est minim voluptatum">: Est minim
-                                                voluptatum</h6><h6
-                                                    class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    itemid="display-tax-number" title="614">: 614</h6><h6
-                                                    class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    itemid="display-website" title="https://www.dycimec.cc">: <a
+                                                     >: 614</h6><h6
+                                                    class="MuiTypography-root jss626 MuiTypography-subtitle1">
+                                                     <a
                                                     class="jss2101"
-                                                    href="/admin/customers/195915110/https://www.dycimec.cc"
-                                                    style="padding-left: 0px;">https://www.dycimec.cc</a></h6><h6
+                                                    href="https://animehay.pro/"
+                                                    style="padding-left: 0px;">https://animehay.pro/</a></h6><h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    itemid="display-description" title="Possimus iste dolor">: Possimus
-                                                iste dolor</h6></div>
+                                                    th:text="*{description}"></h6></div>
                                         </div>
                                     </div>
                                 </div>
@@ -189,7 +187,7 @@ th:object="${customer}"
                             <div class="MuiBox-root jss2269 jss2096 jss2093">
                                 <div class="MuiBox-root jss2270 jss2095"><h6
                                         class="MuiTypography-root MuiTypography-subtitle1">Thông tin gợi ý khi bán
-                                    hàng</h6><a class="jss2101" href="/admin/customers/195915110/edit">Cập nhật</a>
+                                    hàng</h6><a class="jss2101" th:href="'/admin/customers/update/'+ ${customer.getId()}">Cập nhật</a>
                                 </div>
                                 <div class="MuiBox-root jss2271 jss2097">
                                     <div class="MuiGrid-root MuiGrid-container">
@@ -470,9 +468,7 @@ th:object="${customer}"
 <script src="/assets/admin/js/customer/customer_app.js"></script>
 <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>-->
 <!--<script src="https://cdn.datatables.net/plug-ins/1.13.1/i18n/vi.json"></script>-->
-<script>
-    Page();
-</script>
+
 <script>
 
     // handleCreateShowProduct();
@@ -713,9 +709,12 @@ th:object="${customer}"
 
     function showModalDelete() {
         $('#btnSowModalDelete').click(function () {
-            alert("ok")
+            // alert("ok")
             $('#modal_delete_customer').modal('show');
         });
+    }
+    function confirmDeleteCustomer() {
+
     }
 
     function deleteCustomerHander() {
@@ -735,7 +734,10 @@ th:object="${customer}"
                 .done((data) => {
                     $('#modal_delete_customer').modal('hide');
                     App.IziToast.showSuccessAlert('Xoá khách hàng thành công  !!!')
-                    window.location.href = "/admin/customers";
+                    setTimeout(() => {
+                        window.location.href = "/admin/customers/";
+                    },2600)
+
                 })
                 .fail((jqXHR) => {
                     $.each(jqXHR.responseJSON, (key, item) => {

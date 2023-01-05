@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="vi-VN" class="sapo-menu-expand sapo-menu-toggle-active">
+<html xmlns:th="http://www.thymeleaf.org" lang="vi-VN" class="sapo-menu-expand sapo-menu-toggle-active" th:object="${customer}">
 <head>
     <title>Danh sách khách hàng</title>
     <th:block th:replace="/layout/header.html"/>
@@ -22,7 +22,7 @@
             <div class="MuiBox-root jss20293 jss20291">
                 <div class="MuiBox-root jss20294"><a
                         class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss20290 MuiTypography-colorSecondary"
-                        href="https://depament-stor.mysapogo.com/admin/customers">
+                        href="/admin/customers" style="text-decoration: none">
                     <svg class="MuiSvgIcon-root jss20295"
                          focusable="false" viewBox="0 0 8 13" aria-hidden="true">
                         <path
@@ -100,7 +100,7 @@
                                                                        placeholder="Nhập mã khách hàng" type="text"
                                                                        aria-label="Without label"
                                                                        class="MuiInputBase-input MuiOutlinedInput-input"
-                                                                       value="" th:field="*{customer.name}">
+                                                                       value="" th:fields="*{customer.name}">
                                                                 <fieldset aria-hidden="true"
                                                                           class="jss20550 MuiOutlinedInput-notchedOutline"
                                                                           style="padding-left: 8px;">
