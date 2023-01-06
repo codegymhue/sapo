@@ -10,6 +10,7 @@ import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.entities.customer.CustomerGender;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -44,4 +45,8 @@ public class CreateCustomerParam {
     private Integer employeeId;
 
     private CreateAddressParam createAddressParam;
+
+    private BigDecimal debtTotal;  // nợ
+
+    private BigDecimal spendTotal; //chi tiêu
 }
