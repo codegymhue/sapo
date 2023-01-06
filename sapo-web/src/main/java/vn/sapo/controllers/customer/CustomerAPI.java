@@ -147,5 +147,11 @@ public class CustomerAPI {
     public Instant getLastDayOrderByCustomerId(Integer customerId) {
         return saleOrderService.getLastDayOrderByCustomerId(customerId);
     }
+    @GetMapping("/findAllCustomerByGroup/{groupId}")
+    public ResponseEntity<?> findAllByGroupId(@PathVariable Integer groupTitleId) {
+        List<CustomerResult> customers = customerService.findAllByGroupId(groupTitleId);
+        customers.forEach(this::setData);
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
 }
 
