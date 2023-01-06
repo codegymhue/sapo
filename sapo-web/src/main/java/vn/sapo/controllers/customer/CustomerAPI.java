@@ -1,17 +1,16 @@
 package vn.sapo.controllers.customer;
-import org.apache.tomcat.jni.Address;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vn.sapo.address.AddressService;
-import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
-import vn.sapo.customer.CustomerRepository;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
+import vn.sapo.excel.ExcelService;
 import vn.sapo.order.sale.SaleOrderService;
 import vn.sapo.order.sale.item.OrderItemService;
 import vn.sapo.payment.sale.PaymentSaleOrderService;
@@ -34,7 +33,7 @@ public class CustomerAPI {
     @Autowired
     SaleOrderService saleOrderService;
     @Autowired
-    private CustomerRepository customerRepository;
+    ExcelService excelService;
 
     @GetMapping("")
     public ResponseEntity<?> findAll() {
@@ -46,6 +45,7 @@ public class CustomerAPI {
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
         CustomerResult dto = customerService.findById(id);
+        setData(dto);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
@@ -101,6 +101,14 @@ public class CustomerAPI {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+//    findAllCustomerByGroupAndStatus
+        @GetMapping("/findAllCustomerByGroupAndStatus/{groupId},{status}")
+        public ResponseEntity<?> findAllCustomerByGroupAndStatus(@PathVariable Integer groupId, @PathVariable String status) {
+            List<CustomerResult> customers = customerService.findAllCustomerByGroupAndStatus(groupId, status);
+        customers.forEach(this::setData);
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
     public void setData(CustomerResult customer) {
         BigDecimal spendTotal = getSpendTotalByCustomerId(customer.getId());
         BigDecimal paidTotal = getPaidTotalByCustomerId(customer.getId());
@@ -142,28 +150,5 @@ public class CustomerAPI {
     public Instant getLastDayOrderByCustomerId(Integer customerId) {
         return saleOrderService.getLastDayOrderByCustomerId(customerId);
     }
-    @PostMapping ("/findAllCustomerByGroup")
-    public ResponseEntity<?> findAllByGroupId(@RequestBody  List<Integer> arrGroupId ) {
-        List<CustomerResult> customers = customerService.findAllByGroupListId(arrGroupId);
-        return new ResponseEntity<>(customers, HttpStatus.OK);
-    }
-
-    @PostMapping("/findAllCustomerByGender")
-    public ResponseEntity<?> findAllByGenderId(@RequestBody String arrGenderId) {
-        List<CustomerResult> customers = customerService.findAllByGenderId(arrGenderId);
-        return new ResponseEntity<>(customers,HttpStatus.OK);
-    }
-
-    @PostMapping("/findAllCustomerEmployee")
-    public ResponseEntity<?> findAllByEmployeeId(@RequestBody List<Integer> arrEmployeeId) {
-        List<CustomerResult> customers = customerService.findAllEmployeeListId(arrEmployeeId);
-        return new ResponseEntity<>(customers, HttpStatus.OK);
-    }
-
-//    @PostMapping("/findAllCustomerByStatus")
-//    public ResponseEntity<?> findAllStatusListId(@RequestBody List<String> arrStatusId) {
-//        List<CustomerResult> customers = customerService.findAllByStatusListId(arrStatusId);
-//        return new ResponseEntity<>(customers, HttpStatus.OK);
-//    }
 }
 
