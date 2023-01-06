@@ -80,6 +80,9 @@ public class CustomerAPI {
 //        return new ResponseEntity<>(customerService.findAll(), HttpStatus.OK);
 //    }
 
+
+
+
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteCustomer(@PathVariable Integer id) {
         customerService.deleteById(id);
@@ -102,12 +105,9 @@ public class CustomerAPI {
     }
 
 //    findAllCustomerByGroupAndStatus
-        @GetMapping("/findAllCustomerByGroupAndStatus/{groupId},{status}")
-        public ResponseEntity<?> findAllCustomerByGroupAndStatus(@PathVariable Integer groupId, @PathVariable String status) {
-            List<CustomerResult> customers = customerService.findAllCustomerByGroupAndStatus(groupId, status);
-        customers.forEach(this::setData);
-        return new ResponseEntity<>(customers, HttpStatus.OK);
-    }
+
+
+
 
     public void setData(CustomerResult customer) {
         BigDecimal spendTotal = getSpendTotalByCustomerId(customer.getId());
@@ -150,5 +150,29 @@ public class CustomerAPI {
     public Instant getLastDayOrderByCustomerId(Integer customerId) {
         return saleOrderService.getLastDayOrderByCustomerId(customerId);
     }
+
+    @PostMapping ("/findAllCustomerByGroup")
+    public ResponseEntity<?> findAllByGroupId(@RequestBody  List<Integer> arrGroupId ) {
+        List<CustomerResult> customers = customerService.findAllByGroupListId(arrGroupId);
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
+    @PostMapping("/findAllCustomerByGender")
+    public ResponseEntity<?> findAllByGenderId(@RequestBody String arrGenderId) {
+        List<CustomerResult> customers = customerService.findAllByGenderId(arrGenderId);
+        return new ResponseEntity<>(customers,HttpStatus.OK);
+    }
+
+    @PostMapping("/findAllCustomerEmployee")
+    public ResponseEntity<?> findAllByEmployeeId(@RequestBody List<Integer> arrEmployeeId) {
+        List<CustomerResult> customers = customerService.findAllEmployeeListId(arrEmployeeId);
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
+//    @PostMapping("/findAllCustomerByStatus")
+//    public ResponseEntity<?> findAllStatusListId(@RequestBody List<String> arrStatusId) {
+//        List<CustomerResult> customers = customerService.findAllByStatusListId(arrStatusId);
+//        return new ResponseEntity<>(customers, HttpStatus.OK);
+//    }
 }
 

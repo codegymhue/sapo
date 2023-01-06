@@ -22,6 +22,9 @@ public interface CustomerService {
 
     List<CustomerResult> findAllByGenderId(String genderId);
 
+
+
+
 //    List<CustomerResult> findAllByStatusListId(List<String> statusIds);
 
 }
