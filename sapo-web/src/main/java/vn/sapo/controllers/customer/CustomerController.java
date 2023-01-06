@@ -85,7 +85,7 @@ public class CustomerController {
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         String currentDateTime = dateFormatter.format(new Date());
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=customers_" + currentDateTime + ".xlsx";
+        String headerValue = "attachment; filename=Customers_" + currentDateTime + ".xlsx";
         response.setHeader(headerKey, headerValue);
         List<CustomerResult> listCustomers = customerService.findAll();
         CustomerExcelExporter excelExporter = new CustomerExcelExporter(listCustomers);
@@ -98,7 +98,7 @@ public class CustomerController {
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         String currentDateTime = dateFormatter.format(new Date());
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=customers_" + currentDateTime + ".xlsx";
+        String headerValue = "attachment; filename=Customers_" + currentDateTime + ".xlsx";
         response.setHeader(headerKey, headerValue);
         List<CustomerResult> listCustomers = customerService.findAll();
         CustomerExcelExporterInventory excelExporter = new CustomerExcelExporterInventory(listCustomers);
