@@ -7,6 +7,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.address.dto.AddressResult;
+import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.entities.customer.CustomerGender;
 
@@ -57,14 +58,10 @@ public class ExcelHelper {
                 Iterator<Cell> cellsInRow = currentRow.iterator();
 
                 CreateCustomerParam customer = new CreateCustomerParam();
-                AddressResult address = new AddressResult();
-//                CreateAddressParam addressParam = new CreateAddressParam();
-
-
-//                address.setProvinceId(-1);
+                CreateAddressParam address = new CreateAddressParam();
+                address.setProvinceId(-1);
                 address.setDistrictId(-1);
                 address.setWardId(-1);
-
 
 
                 int cellIdx = 0;
@@ -77,7 +74,7 @@ public class ExcelHelper {
                             break;
                         case 1:
                             if (currentCell.getStringCellValue() == null)
-                                customer.setCustomerCode("CUSTOMER00" + customer.getId());
+                                customer.setCustomerCode("CUZN000" + customer.getId());
                             customer.setCustomerCode(currentCell.getStringCellValue());
                             break;
                         case 2:
@@ -166,18 +163,12 @@ public class ExcelHelper {
 
                 }
 
-
-
-                customer.setAddresses(new ArrayList<AddressResult>() {{
-                    add(address);
-                }});
+//                customer.setCreateAddressParam(new ArrayList<AddressResult>() {{
+//                    add(address);
+//                }});
                 customers.add(customer);
-
             }
-
             workbook.close();
-
-
 
             return customers;
         } catch (IOException e) {

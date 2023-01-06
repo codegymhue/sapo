@@ -23,6 +23,7 @@ import vn.sapo.payment.sale.PaymentSaleOrderService;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
+import java.util.function.Consumer;
 
 @RestController
 @RequestMapping("/api/customers")
@@ -99,14 +100,12 @@ public class CustomerAPI {
 
     // UpLoad File Excel
     @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, CreateCustomerParam createCustomerParam) {
         String message = "";
-
         if (ExcelHelper.hasExcelFormat(file)) {
             try {
-//                AddressServiceImpl addressService1 = new AddressServiceImpl();
-                excelService.save(file);
-//                create(addressService1);
+                List<CreateCustomerParam> customers = excelService.save(file);
+                customers.forEach(createCustomerParam1 -> create(createCustomerParam1));
                 message = "Uploaded the file successfully: " + file.getOriginalFilename();
                 return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
             } catch (Exception e) {

@@ -40,8 +40,6 @@ public class CreateCustomerParam {
 
     private CustomerGroupResult group;
 
-    private List<AddressResult> addresses;
-
     private Integer employeeId;
 
     private CreateAddressParam createAddressParam;
