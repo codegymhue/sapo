@@ -23,7 +23,8 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/admin")
 public class CustomerController {
-
+    @Autowired
+    CustomerAPI customerAPI;
     @Autowired
     CustomerService customerService;
 
@@ -52,6 +53,7 @@ public class CustomerController {
         ModelAndView modelAndView = new ModelAndView();
         try{
             CustomerResult customer = customerService.findById(id);
+            customerAPI.setData(customer);
             modelAndView.addObject("customer", customer);
         }catch (Exception ex){
             modelAndView.addObject("errors", ex.getMessage());

@@ -45,7 +45,8 @@
                 </div>
             </div>
         </div>
-        <div class="MuiBox-root jss20344 jss20286">
+        <form id="formCreate">
+        <div class="MuiBox-root jss20344 jss20286" >
             <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-8">
                     <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
@@ -407,6 +408,7 @@
                 </div>
             </div>
         </div>
+        </form>
         <form action="https://depament-stor.mysapogo.com/admin/customers/create#"></form>
         <form action="https://depament-stor.mysapogo.com/admin/customers/create#"></form>
     </div>
@@ -513,21 +515,7 @@
                App.IziToast.showSuccessAlert("tạo khách hàng thành công !");
                 setTimeout(() => {
                 }, 2500)
-                // $('#nameCreate').val();
-                // $('#codeCreate').val();
-                // $('#phoneCreate').val();
-                // $('#emailCreate').val();
-                // $('#birthdayCreate').val();
-                // $('#statusCreate').val()
-                // $('#addressCreate').val();
-                // $('#genderCreate').val();
-                // $('#employeeNameCreate :selected').val();
-
-
-
-
-
-
+                $('#formCreate')[0].reset();
 
             })
             .fail((jqXHR) => {
@@ -537,7 +525,7 @@
                         App.IziToast.showErrorAlert(item);
                     })
                 }
-
+                // App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
             })
     });
 

@@ -1,16 +1,16 @@
 package vn.sapo.controllers.customer;
-import org.apache.tomcat.jni.Address;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vn.sapo.address.AddressService;
-import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
+import vn.sapo.excel.ExcelService;
 import vn.sapo.order.sale.SaleOrderService;
 import vn.sapo.order.sale.item.OrderItemService;
 import vn.sapo.payment.sale.PaymentSaleOrderService;
@@ -32,6 +32,8 @@ public class CustomerAPI {
     PaymentSaleOrderService paymentSaleOrderService;
     @Autowired
     SaleOrderService saleOrderService;
+    @Autowired
+    ExcelService excelService;
 
     @GetMapping("")
     public ResponseEntity<?> findAll() {
@@ -43,6 +45,7 @@ public class CustomerAPI {
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
         CustomerResult dto = customerService.findById(id);
+        setData(dto);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
