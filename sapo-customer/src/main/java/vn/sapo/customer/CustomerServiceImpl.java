@@ -9,13 +9,11 @@ import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.entities.customer.Customer;
-import vn.sapo.entities.customer.CustomerGender;
 import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.shared.exceptions.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -30,6 +28,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private AddressService addressService;
+
+
 
     @Override
     @Transactional(readOnly = true)
@@ -52,7 +52,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public void deleteById(Integer id) {
         customerRepository.deleteById(id);
     }
@@ -67,6 +67,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Transactional
     public CustomerResult create(CreateCustomerParam createCustomerParam) {
+        System.out.println("Đay là param" + createCustomerParam);
         Customer customer = customerMapper.toModel(createCustomerParam);
        Customer newCustomer = customerRepository.save(customer);
         String cusCode = newCustomer.getCustomerCode();
@@ -76,7 +77,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public CustomerResult update(UpdateCustomerParam updateCustomerParam) {
         Customer customer = customerRepository.findById(updateCustomerParam.getId())
                 .orElseThrow(() -> new NotFoundException("Customer not found"));
@@ -103,17 +104,50 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    @Transactional(readOnly = true)
-    public List<CustomerResult> findAllCustomerByGroupAndStatus(Integer groupTitleId, String customerStatus) {
+    @Transactional
+    public List<CustomerResult> findAllByGroupListId(List<Integer> groupIds) {
         List<CustomerResult> customerResults = new ArrayList<>();
-        customerResults = customerRepository.findAllByGroupIdAndStatus(groupTitleId, CustomerStatus.parseCustomerGroup(customerStatus))
+        customerResults = customerRepository.findAllByGroupIdIn(groupIds)
                 .stream()
                 .map(customerMapper::toDTO)
                 .collect(Collectors.toList());
         return customerResults;
     }
 
+    @Override
+    @Transactional
+    public List<CustomerResult> findAllEmployeeListId(List<Integer> employeeIds) {
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAllByEmployeeIdIn(employeeIds)
+                .stream()
+                .map(customerMapper::toDTO)
+                .collect(Collectors.toList());
+        return customerResults;
     }
+
+    @Override
+    @Transactional
+    public List<CustomerResult> findAllByGenderId(String genderId) {
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAllByGender(genderId)
+                .stream()
+                .map(customerMapper::toDTO)
+                .collect(Collectors.toList());
+        return customerResults;
+    }
+
+//    @Override
+//    @Transactional
+//    public List<CustomerResult> findAllByStatusListId(List<String> statusIds) {
+//        List<CustomerResult> customerResults = new ArrayList<>();
+//        customerResults = customerRepository.findAllByStatusIdIn(statusIds)
+//                .stream()
+//                .map(customerMapper::toDTO)
+//                .collect(Collectors.toList());
+//        return customerResults;
+//    }
+
+}
 
 
 
