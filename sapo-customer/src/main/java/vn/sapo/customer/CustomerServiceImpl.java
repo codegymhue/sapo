@@ -72,7 +72,7 @@ public class CustomerServiceImpl implements CustomerService {
        Customer newCustomer = customerRepository.save(customer);
         String cusCode = newCustomer.getCustomerCode();
         if (cusCode == null || cusCode.trim().isEmpty())
-            customer.setCustomerCode(CodePrefix.CUSTOMER + CodePrefix.format(customer.getId()));
+            customer.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
         return customerMapper.toDTO(customer);
     }
 
@@ -102,39 +102,52 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
+
+    @Override
+    @Transactional
+    public List<CustomerResult> findAllByGroupListId(List<Integer> groupIds) {
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAllByGroupIdIn(groupIds)
+                .stream()
+                .map(customerMapper::toDTO)
+                .collect(Collectors.toList());
+        return customerResults;
+    }
+
+    @Override
+    @Transactional
+    public List<CustomerResult> findAllEmployeeListId(List<Integer> employeeIds) {
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAllByEmployeeIdIn(employeeIds)
+                .stream()
+                .map(customerMapper::toDTO)
+                .collect(Collectors.toList());
+        return customerResults;
+    }
+
+    @Override
+    @Transactional
+    public List<CustomerResult> findAllByGenderId(String genderId) {
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAllByGender(genderId)
+                .stream()
+                .map(customerMapper::toDTO)
+                .collect(Collectors.toList());
+        return customerResults;
+    }
+
 //    @Override
-//    public List<CustomerResult> findAllByFilter(Integer groupTitLeId, CustomerGender gender, String status, CusEmployeeResult employee, Instant createdAt, Instant birthday) {
+//    @Transactional
+//    public List<CustomerResult> findAllByStatusListId(List<String> statusIds) {
 //        List<CustomerResult> customerResults = new ArrayList<>();
-//        customerResults = customerRepository.findAllByFilter(groupTitLeId,gender,CustomerStatus.parseCustomerGroup(status),employee,createdAt,birthday)
+//        customerResults = customerRepository.findAllByStatusIdIn(statusIds)
 //                .stream()
 //                .map(customerMapper::toDTO)
 //                .collect(Collectors.toList());
 //        return customerResults;
 //    }
 
-    @Override
-    public List<CustomerResult> findAllByGroupId(Integer groupTitleId) {
-        List<CustomerResult> customerResults = new ArrayList<>();
-        customerResults = customerRepository.findAllByGroupId(groupTitleId)
-                .stream()
-                .map(customerMapper::toDTO)
-                .collect(Collectors.toList());
-        return customerResults;
-    }
-
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<CustomerResult> findAllCustomerByGroupAndStatus(Integer groupTitleId, String customerStatus) {
-        List<CustomerResult> customerResults = new ArrayList<>();
-        customerResults = customerRepository.findAllByGroupIdAndStatus(groupTitleId, CustomerStatus.parseCustomerGroup(customerStatus))
-                .stream()
-                .map(customerMapper::toDTO)
-                .collect(Collectors.toList());
-        return customerResults;
-    }
-
-    }
+}
 
 
 

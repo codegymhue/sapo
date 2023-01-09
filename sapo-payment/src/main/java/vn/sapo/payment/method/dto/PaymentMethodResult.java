@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 public class PaymentMethodResult {
-    private Integer id;
+    private String id;
 
     private String title;
 

@@ -1,15 +1,22 @@
 package vn.sapo.controllers.customer;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.address.AddressService;
+
+import vn.sapo.address.AddressServiceImpl;
+import vn.sapo.address.dto.AddressResult;
+
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
+import vn.sapo.excel.ExcelService;
+
 import vn.sapo.excel.ExcelHelper;
 import vn.sapo.excel.ExcelService;
 import vn.sapo.excel.ResponseMessage;
@@ -20,6 +27,7 @@ import vn.sapo.payment.sale.PaymentSaleOrderService;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
+import java.util.function.Consumer;
 
 @RestController
 @RequestMapping("/api/customers")
@@ -37,7 +45,6 @@ public class CustomerAPI {
     @Autowired
     ExcelService excelService;
 
-
     @GetMapping("")
     public ResponseEntity<?> findAll() {
         List<CustomerResult> customers = customerService.findAll();
@@ -48,13 +55,15 @@ public class CustomerAPI {
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
         CustomerResult dto = customerService.findById(id);
+        setData(dto);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteCustomerById(@PathVariable Integer id) {
+        addressService.deleteByCustomerId(id);
         customerService.deleteById(id);
     }
 
@@ -76,20 +85,35 @@ public class CustomerAPI {
         return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.OK);
     }
 
-    @GetMapping("/customerGroup")
-    public ResponseEntity<?> getAllCustomerGroup() {
-        return new ResponseEntity<>(customerService.findAll(), HttpStatus.OK);
+//    @GetMapping("/customerGroup")
+//    public ResponseEntity<?> getAllCustomerGroup() {
+//        return new ResponseEntity<>(customerService.findAll(), HttpStatus.OK);
+//    }
+
+
+
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteCustomer(@PathVariable Integer id) {
+        customerService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    //upload file
-    @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
-        String message = "";
 
+    @PutMapping("/updateStatusAvailable")
+    public ResponseEntity<?> updateStatusAvailable(@RequestBody List<Integer> arrayIdCustomer) {
+        customerService.changeStatusToAvailable(arrayIdCustomer, true);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    // UpLoad File Excel
+    @PostMapping("/upload")
+    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, CreateCustomerParam createCustomerParam) {
+        String message = "";
         if (ExcelHelper.hasExcelFormat(file)) {
             try {
-                excelService.save(file);
-
+                List<CreateCustomerParam> customers = excelService.save(file);
+                customers.forEach(createCustomerParam1 -> create(createCustomerParam1));
                 message = "Uploaded the file successfully: " + file.getOriginalFilename();
                 return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
             } catch (Exception e) {
@@ -102,11 +126,6 @@ public class CustomerAPI {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
     }
 
-    @PutMapping("/updateStatusAvailable")
-    public ResponseEntity<?> updateStatusAvailable(@RequestBody List<Integer> arrayIdCustomer) {
-        customerService.changeStatusToAvailable(arrayIdCustomer, true);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
 
     @PutMapping("/updateStatusUnavailable")
 
@@ -115,12 +134,10 @@ public class CustomerAPI {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-        @GetMapping("/findAllCustomerByGroupAndStatus/{groupId},{status}")
-        public ResponseEntity<?> findAllCustomerByGroupAndStatus(@PathVariable Integer groupId, @PathVariable String status) {
-            List<CustomerResult> customers = customerService.findAllCustomerByGroupAndStatus(groupId, status);
-        customers.forEach(this::setData);
-        return new ResponseEntity<>(customers, HttpStatus.OK);
-    }
+//    findAllCustomerByGroupAndStatus
+
+
+
 
     public void setData(CustomerResult customer) {
         BigDecimal spendTotal = getSpendTotalByCustomerId(customer.getId());
@@ -163,5 +180,29 @@ public class CustomerAPI {
     public Instant getLastDayOrderByCustomerId(Integer customerId) {
         return saleOrderService.getLastDayOrderByCustomerId(customerId);
     }
+
+    @PostMapping ("/findAllCustomerByGroup")
+    public ResponseEntity<?> findAllByGroupId(@RequestBody  List<Integer> arrGroupId ) {
+        List<CustomerResult> customers = customerService.findAllByGroupListId(arrGroupId);
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
+    @PostMapping("/findAllCustomerByGender")
+    public ResponseEntity<?> findAllByGenderId(@RequestBody String arrGenderId) {
+        List<CustomerResult> customers = customerService.findAllByGenderId(arrGenderId);
+        return new ResponseEntity<>(customers,HttpStatus.OK);
+    }
+
+    @PostMapping("/findAllCustomerEmployee")
+    public ResponseEntity<?> findAllByEmployeeId(@RequestBody List<Integer> arrEmployeeId) {
+        List<CustomerResult> customers = customerService.findAllEmployeeListId(arrEmployeeId);
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
+//    @PostMapping("/findAllCustomerByStatus")
+//    public ResponseEntity<?> findAllStatusListId(@RequestBody List<String> arrStatusId) {
+//        List<CustomerResult> customers = customerService.findAllByStatusListId(arrStatusId);
+//        return new ResponseEntity<>(customers, HttpStatus.OK);
+//    }
 }
 

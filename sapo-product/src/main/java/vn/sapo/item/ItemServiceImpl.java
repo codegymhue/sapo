@@ -22,6 +22,11 @@ public class ItemServiceImpl implements ItemService {
     private ProductMapper productMapper;
 
     @Override
+    public List<ItemResult> findAll() {
+        return null;
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public int getTotalInventoryQuantityByProductId(Integer productId) {
         return itemRepository.getTotalInventoryQuantityByProductId(productId).orElse(0);

@@ -313,7 +313,7 @@
                 paymentMethod = data;
                 paymentMethod.forEach(item => {
                     let isSelected = item === selectedPayment ? "selected" : "";
-                    let str = `<li id="${item.id}" data-id="${item.id}" onclick="updateNamePay(${item.id})" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
+                    let str = `<li id="${item.id}" data-id="${item.id}" onclick="updateNamePay('${item.id}')" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
                     $(".showAllPaymentMethod #showAllPay").append(str);
                 });
             })
@@ -337,9 +337,9 @@
         createCusGroupParam.title = $('#titleGroup').val();
         createCusGroupParam.cusGrpCode = $('#cusGrpCode').val();
         createCusGroupParam.description = $('#description').val();
-        createCusGroupParam.pricing_policy_id = $('#pricingType').data("id");
+        createCusGroupParam.pricingPolicyId = $('#pricingType').data("id");
         createCusGroupParam.discount = $('#discount').val();
-        createCusGroupParam.payment_method_id = $('#paymentType').data("id");
+        createCusGroupParam.paymentMethodId = $('#paymentType').data("id");
 
         console.log(createCusGroupParam)
         $.ajax({
@@ -348,13 +348,13 @@
                 "content-type": "application/json"
             },
             "type": "POST",
-            "url": "http://localhost:8080/api/customer_groups",
+            "url": "http://localhost:8080/api/customer_groups/create",
             "data": JSON.stringify(createCusGroupParam)
         })
             .done((data) => {
                 console.log(data);
                 CustomerGroup_App.IziToast.showSuccessAlert('Thêm mới nhóm khách hàng thành công  !!!')
-                window.location.href = "/admin/customer/up_cus_Group";
+                // window.location.href = "/admin/customer/up_cus_Group";
 
             })
             .fail((jqXHR) => {

@@ -83,8 +83,8 @@
         <div class="MuiBox-root jss6754 jss6732">
             <div class="MuiBox-root jss6755 jss6733">
                 <div class="MuiBox-root jss6756 jss6741">
-                    <!--                    <a th:href="@{/admin/products/export/excel}">-->
-                    <button class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
+                    <a th:href="@{/admin/customers/export/excel}">
+                    <button class="MuiButtonBase-root MuiButton-rloot MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
                             tabindex="0"
                             type="button">
                       <span class="MuiButton-label">
@@ -109,7 +109,7 @@
                     <div class="MuiBox-root jss6793"
                          style="width: 1px; height: 20px; border-left: 1px solid rgb(211, 213, 215); margin: 0 8px;">
                     </div>
-                    <button id="importFile"
+                    <button id="importFileCustomers"
                             class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
                             tabindex="0"
                             type="button">
@@ -404,7 +404,8 @@
 </script>
 
 <script>
-
+    var myOffcanvas = document.getElementById('offcanvasExample')
+    var bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
 
     let page = {
         urls: {
@@ -473,7 +474,7 @@
     page.dialogs.elements.nextPage = $("#nextPage");
     page.dialogs.elements.previousPage = $("#previousPage");
 
-    page.elements.importFile = $("#importFile");
+    page.elements.importFile = $("#importFileCustomers");
 
     page.elements.importFile.on("click", function (){
         $("#modalImportFileCustomers").modal("show");
@@ -760,7 +761,7 @@
                     {
                         targets: 1,
                         render: function (data, type, row, meta) {
-                            return `<a href="/admin/customers/ ${row.id}">${row.customerCode}</a>`;
+                            return `<a href="/admin/customers/${row.id}" style="text-decoration: none">${row.customerCode}</a>`;
                         }
                     },
 
@@ -1649,10 +1650,8 @@
             url: "http://localhost:8080/api/customer_groups",
         })
             .done((data) => {
-                console.log(data)
 
                 $.each(data, (i, item) => {
-                    console.log(item)
                     let str = `<option value="${item.id}">${item.title}</option>`;
                     page.dialogs.elements.groupCustomer.append(str);
                 });
@@ -1698,9 +1697,6 @@
         if(status === -1 || groupId === -1){
             page.commands.getAllCustomers();
         }
-
-
-
     });
 
     $('#btnImportFileCustomers').click(function () {
@@ -1714,8 +1710,8 @@
             data: data,
             type: 'POST'
         }).done(function(result) {
-            $("#btnImportFileCustomers").modal("hide");
-            $("#formFileCustomers")[0].reset();
+            $("#modalImportFileCustomers").modal("hide");
+            $("#frmFileCustomers")[0].reset();
             page.commands.getAllCustomers();
             App.IziToast.showSuccessAlert("Tải file lên thành công!")
         }).fail((jqXHR) => {

@@ -8,6 +8,6 @@ import vn.sapo.order.sale.dto.SaleOrderStatusResult;
 public class OrderStatusMapper {
     public SaleOrderStatusResult toDTO(OrderStatus orderStatus) {
         return new SaleOrderStatusResult()
-                .setTitle(orderStatus.getTitle());
+                .setName(orderStatus.getName());
     }
 }

@@ -1,17 +1,21 @@
 package vn.sapo.entities.product.pricing_policy;
 
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-
 import javax.persistence.*;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @Table(name = "pricing_policy")
 @Accessors(chain = true)
+
+
+
 public class PricingPolicy {
     @Id
     @Column(name = "id", nullable = false)
