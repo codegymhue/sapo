@@ -19,6 +19,7 @@ dependencies {
     implementation project(':sapo-payment')
     implementation project(':sapo-order')
     implementation project(':sapo-employee')
+    implementation project(path: ':sapo-entity')
     developmentOnly "org.springframework.boot:spring-boot-devtools"
 
     // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
