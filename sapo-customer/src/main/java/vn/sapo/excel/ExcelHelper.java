@@ -6,7 +6,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
-import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.entities.customer.CustomerGender;
@@ -26,6 +25,7 @@ public class ExcelHelper {
             "Mô tả", "Chính sách giá mặc định", "Chiết khấu mặc định (%)", "Phương thức thanh toán mặc định",
             "Người liên hệ", "Người liên hệ - SĐT", "Người liên hệ - Email", "Địa chỉ", "Tỉnh thành", "Quận huyện",
             "Phường xã", "Nợ hiện tại", "Tổng chi tiêu", "Ghi chú", "Tags" };
+
     static String SHEET = "FileNhapDSKhachHang";
 
     public static boolean hasExcelFormat(MultipartFile file) {
@@ -38,6 +38,7 @@ public class ExcelHelper {
     }
 
     public static List<CreateCustomerParam> excelToCustomers(InputStream is) {
+
         try {
             Workbook workbook = new XSSFWorkbook(is);
 
@@ -45,6 +46,7 @@ public class ExcelHelper {
             Iterator<Row> rows = sheet.iterator();
 
             List<CreateCustomerParam> customers = new ArrayList<CreateCustomerParam>();
+
             int rowNumber = 0;
             while (rows.hasNext()) {
                 Row currentRow = rows.next();
@@ -58,6 +60,8 @@ public class ExcelHelper {
                 Iterator<Cell> cellsInRow = currentRow.iterator();
 
                 CreateCustomerParam customer = new CreateCustomerParam();
+                customer.setEmployeeId(6);
+
                 CreateAddressParam address = new CreateAddressParam();
                 address.setProvinceId(-1);
                 address.setDistrictId(-1);
@@ -105,7 +109,8 @@ public class ExcelHelper {
 //                           Mã số thuế
                             break;
                         case 11:
-//                            SĐT nhân viên phụ trách
+//                            if (currentCell.getStringCellValue()==null)
+//                                customer.setEmployeeId(6);
 
                             break;
                         case 12:
@@ -156,16 +161,13 @@ public class ExcelHelper {
 //                            tag
                             break;
                         default:
-
                             break;
                     }
                     cellIdx++;
 
                 }
 
-//                customer.setCreateAddressParam(new ArrayList<AddressResult>() {{
-//                    add(address);
-//                }});
+                customer.setCreateAddressParam(address);
                 customers.add(customer);
             }
             workbook.close();
