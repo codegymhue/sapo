@@ -17,8 +17,11 @@ import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerFilter;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
+
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.excel.ExcelHelper;
+
+import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.excel.ExcelService;
 import vn.sapo.excel.ResponseMessage;
 import vn.sapo.order.sale.SaleOrderService;
@@ -44,6 +47,8 @@ public class CustomerAPI {
     SaleOrderService saleOrderService;
     @Autowired
     ExcelService excelService;
+    @Autowired
+    CustomerGroupService customerGroupService;
 
     @GetMapping("")
     public ResponseEntity<?> findAll() {
@@ -118,6 +123,15 @@ public class CustomerAPI {
     }
 
 
+//
+//    @DeleteMapping("/delete")
+//    public ResponseEntity<?> deleteCustomer(@PathVariable Integer id) {
+//        customerService.deleteById(id);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+
+
+
     @PutMapping("/updateStatusAvailable")
     public ResponseEntity<?> updateStatusAvailable(@RequestBody List<Integer> arrayIdCustomer) {
         customerService.changeStatusToAvailable(arrayIdCustomer, true);
@@ -163,8 +177,12 @@ public class CustomerAPI {
         customer.setQuantityProductOrder(getQuantityProductOrderByCustomerId(customer.getId()));
         customer.setQuantityItemOrder(getQuantityItemCustomerOrderById(customer.getId()));
         customer.setLastDayOrder(getLastDayOrderByCustomerId(customer.getId()));
-    }
+//        Integer pricingPolicy = getPricingPolicyByCustomerId(customer.getId());
 
+    }
+//public Integer getPricingPolicyByCustomerId(Integer customerId){
+//        Integer pricingPolicy = customerGroupService.getPricingPolicyByCustomerId(customerId);
+//}
     public BigDecimal getSpendTotalByCustomerId(Integer customerId) {
         BigDecimal spendTotal = saleOrderService.getSpendTotalByCustomerId(customerId);
         if (spendTotal == null)
@@ -192,6 +210,7 @@ public class CustomerAPI {
             quantityItemOrder = 0;
         return quantityItemOrder;
     }
+
 
     public Instant getLastDayOrderByCustomerId(Integer customerId) {
         return saleOrderService.getLastDayOrderByCustomerId(customerId);

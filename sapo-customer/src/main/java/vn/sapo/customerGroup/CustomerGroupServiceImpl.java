@@ -24,11 +24,13 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     @Override
     @Transactional
     public CustomerGroupResult create(CreateCusGroupParam createCusGroupParam) {
-        CustomerGroup cusGroup = customerGroupMapper.toModel(createCusGroupParam);
-        cusGroup = customerGroupRepository.save(cusGroup);
-        if (cusGroup.getTitle() == null)
-            cusGroup.setTitle(CodePrefix.CUSTOMER_GROUP.generate(cusGroup.getId()));
-        return customerGroupMapper.toDTO(cusGroup);
+
+        CustomerGroup customerGroup = customerGroupMapper.toModel(createCusGroupParam);
+        customerGroup = customerGroupRepository.save(customerGroup);
+        if (customerGroup.getTitle() == null)
+            customerGroup.setTitle(CodePrefix.CUSTOMER_GROUP.generate(customerGroup.getId()));
+        return customerGroupMapper.toDTO(customerGroup);
+
     }
 
     @Override

@@ -56,8 +56,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public void deleteById(Integer id) {
+        addressService.deleteByCustomerId(id);
         customerRepository.deleteById(id);
     }
 

@@ -12,9 +12,6 @@ import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customerGroup.CustomerGroupService;
 
-import vn.sapo.customerGroup.dto.CustomerGroupResult;
-
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -57,6 +54,7 @@ public class CustomerController {
         try{
             CustomerResult customer = customerService.findById(id);
             customerAPI.setData(customer);
+            customerGroupService.sortByGroup();
             modelAndView.addObject("customer", customer);
         }catch (Exception ex){
             modelAndView.addObject("errors", ex.getMessage());
