@@ -34,28 +34,28 @@ public class Item extends BaseEntity {
     private BigDecimal price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", foreignKey = @ForeignKey(name="fk_item_product"))
     private Product product;
 
     @Column(name = "product_id", insertable = false, updatable = false)
     private Integer productId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "supplier_Id")
+    @JoinColumn(name = "supplier_Id", foreignKey = @ForeignKey(name="fk_item_supplier"))
     private Supplier supplier;
 
     @Column(name = "supplier_Id", insertable = false, updatable = false)
     private Integer supplierId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "purchase_order_id")
+    @JoinColumn(name = "purchase_order_id", foreignKey = @ForeignKey(name="fk_item_purchase_order"))
     private PurchaseOrder purchaseOrder;
 
     @Column(name = "purchase_order_id", insertable = false, updatable = false)
     private Integer purchaseOrderId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id")
+    @JoinColumn(name = "employee_id", foreignKey = @ForeignKey(name="fk_item_employee"))
     private Employee employee;
 
     @Column(name = "employee_id", insertable = false, updatable = false)

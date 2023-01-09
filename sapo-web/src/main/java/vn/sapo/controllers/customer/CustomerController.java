@@ -1,18 +1,18 @@
 package vn.sapo.controllers.customer;
 
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import vn.sapo.customer.CustomerExcelExporter;
-import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.CustomerExcelExporterInventory;
+import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customerGroup.CustomerGroupService;
+
+import vn.sapo.customerGroup.dto.CustomerGroupResult;
 
 
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +26,8 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/admin")
 public class CustomerController {
-
+    @Autowired
+    CustomerAPI customerAPI;
     @Autowired
     CustomerService customerService;
 
@@ -37,16 +38,6 @@ public class CustomerController {
     @GetMapping("/customers")
     public String showListCustomerPage() {
         return "/admin/customer/list_customer";
-    }
-
-    @GetMapping("/customer_groups")
-    public String showCustomerGroupPage() {
-        return "/admin/customer/customer_group";
-    }
-
-    @GetMapping("/customer_groups/create")
-    public String showCustomerGroupCreatePage() {
-        return "/admin/customer/model_create_cus_group";
     }
 
     @GetMapping("customers/create")
@@ -65,6 +56,7 @@ public class CustomerController {
         ModelAndView modelAndView = new ModelAndView();
         try{
             CustomerResult customer = customerService.findById(id);
+            customerAPI.setData(customer);
             modelAndView.addObject("customer", customer);
         }catch (Exception ex){
             modelAndView.addObject("errors", ex.getMessage());
@@ -84,33 +76,34 @@ public class CustomerController {
     }
 
     //export excel file
+
+    // Upload File Excel
+
     @GetMapping("/customers/export/excel")
     public void exportToExcel(HttpServletResponse response) throws IOException {
         response.setContentType("application/octet-stream");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         String currentDateTime = dateFormatter.format(new Date());
-
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=customers_" + currentDateTime + ".xlsx";
+        String headerValue = "attachment; filename=Customers_" + currentDateTime + ".xlsx";
         response.setHeader(headerKey, headerValue);
         List<CustomerResult> listCustomers = customerService.findAll();
         CustomerExcelExporter excelExporter = new CustomerExcelExporter(listCustomers);
         excelExporter.export(response);
     }
+
     @GetMapping("/customers/excel")
     public void exportItemToExcel(HttpServletResponse response) throws IOException {
         response.setContentType("application/octet-stream");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         String currentDateTime = dateFormatter.format(new Date());
-
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=customers_" + currentDateTime + ".xlsx";
+        String headerValue = "attachment; filename=Customers_" + currentDateTime + ".xlsx";
         response.setHeader(headerKey, headerValue);
         List<CustomerResult> listCustomers = customerService.findAll();
         CustomerExcelExporterInventory excelExporter = new CustomerExcelExporterInventory(listCustomers);
         excelExporter.export(response);
     }
-
 
 //    @GetMapping("customers/export/excel")
 //    public void exportToExcel(HttpServletResponse response) throws IOException {

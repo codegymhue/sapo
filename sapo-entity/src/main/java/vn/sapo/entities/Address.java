@@ -29,7 +29,7 @@ public class Address {
     @Column(name = "email", length = 50)
     private String email;
 
-    @Column(name = "line1", length = 50)
+    @Column(name = "line1", length = 50, nullable = false)
     private String line1;
 
     @Column(name = "line2", length = 50)

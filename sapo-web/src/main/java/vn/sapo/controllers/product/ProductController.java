@@ -3,6 +3,7 @@ package vn.sapo.controllers.product;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ import java.util.List;
 public class ProductController {
     @Autowired
     ProductService productService;
+
     @Autowired
     MediaService mediaService;
 
@@ -59,7 +61,7 @@ public class ProductController {
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
-
+            System.out.println(medias);
             modelAndView.addObject("medias", medias);
             modelAndView.addObject("product", productService.findById(product.getId()));
         }
@@ -81,7 +83,6 @@ public class ProductController {
     }
 
 
-    //    Điều chỉnh giá vốn
     @GetMapping("/price_adjustments")
     public ModelAndView showPriceAdjustmentsPage() {
         ModelAndView modelAndView = new ModelAndView();
@@ -89,7 +90,6 @@ public class ProductController {
         return modelAndView;
     }
 
-    // Chuyển hàng
     @GetMapping("/stock_transfers")
     public ModelAndView showStockTransferPage() {
         ModelAndView modelAndView = new ModelAndView();
@@ -98,7 +98,6 @@ public class ProductController {
     }
 
 
-    // Quản lý kho
     @GetMapping("/inventory_management")
     public ModelAndView showInventoryManagementPage() {
         ModelAndView modelAndView = new ModelAndView();
@@ -106,7 +105,6 @@ public class ProductController {
         return modelAndView;
     }
 
-    //export excel file
     @GetMapping("/products/export/excel")
     public void exportToExcel(HttpServletResponse response) throws IOException {
         response.setContentType("application/octet-stream");
@@ -133,7 +131,5 @@ public class ProductController {
         ProductExcelExporterInventory excelExporter = new ProductExcelExporterInventory(listProducts);
         excelExporter.export(response);
     }
-
-
 }
 

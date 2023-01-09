@@ -44,22 +44,23 @@ public class CustomerGroupAPI {
         return new ResponseEntity<>(customerGroupResult, HttpStatus.OK);
     }
 
-    @PostMapping()
+    @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CreateCusGroupParam createCusGroupParam) {
+        System.out.println(createCusGroupParam);
         CustomerGroupResult dto = customerGroupService.create(createCusGroupParam);
         dto = customerGroupService.findById(dto.getId());
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update")
     public ResponseEntity<?> updateCusGroup(@RequestBody UpdateCusGroupParam updateCusGroupParam) {
-        return new ResponseEntity<>(customerGroupService.update(updateCusGroupParam), HttpStatus.OK);
+        CustomerGroupResult dto = customerGroupService.update(updateCusGroupParam);
+        dto = customerGroupService.findById(dto.getId());
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public void deleteCusGroupById(@PathVariable Integer id) {
         customerGroupService.deleteById(id);
     }
-
-
 }

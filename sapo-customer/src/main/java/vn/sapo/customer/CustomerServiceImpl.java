@@ -4,20 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.address.AddressService;
-import vn.sapo.customer.dto.CusEmployeeResult;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.entities.customer.Customer;
-import vn.sapo.entities.customer.CustomerGender;
 import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.shared.exceptions.NotFoundException;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -76,7 +72,7 @@ public class CustomerServiceImpl implements CustomerService {
        Customer newCustomer = customerRepository.save(customer);
         String cusCode = newCustomer.getCustomerCode();
         if (cusCode == null || cusCode.trim().isEmpty())
-            customer.setCustomerCode(CodePrefix.CUSTOMER + CodePrefix.format(customer.getId()));
+            customer.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
         return customerMapper.toDTO(customer);
     }
 
@@ -106,10 +102,45 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
+
+    @Override
+    @Transactional
+    public List<CustomerResult> findAllByGroupListId(List<Integer> groupIds) {
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAllByGroupIdIn(groupIds)
+                .stream()
+                .map(customerMapper::toDTO)
+                .collect(Collectors.toList());
+        return customerResults;
+    }
+
+    @Override
+    @Transactional
+    public List<CustomerResult> findAllEmployeeListId(List<Integer> employeeIds) {
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAllByEmployeeIdIn(employeeIds)
+                .stream()
+                .map(customerMapper::toDTO)
+                .collect(Collectors.toList());
+        return customerResults;
+    }
+
+    @Override
+    @Transactional
+    public List<CustomerResult> findAllByGenderId(String genderId) {
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAllByGender(genderId)
+                .stream()
+                .map(customerMapper::toDTO)
+                .collect(Collectors.toList());
+        return customerResults;
+    }
+
 //    @Override
-//    public List<CustomerResult> findAllByFilter(Integer groupTitLeId, CustomerGender gender, String status, CusEmployeeResult employee, Instant createdAt, Instant birthday) {
+//    @Transactional
+//    public List<CustomerResult> findAllByStatusListId(List<String> statusIds) {
 //        List<CustomerResult> customerResults = new ArrayList<>();
-//        customerResults = customerRepository.findAllByFilter(groupTitLeId,gender,CustomerStatus.parseCustomerGroup(status),employee,createdAt,birthday)
+//        customerResults = customerRepository.findAllByStatusIdIn(statusIds)
 //                .stream()
 //                .map(customerMapper::toDTO)
 //                .collect(Collectors.toList());
@@ -139,6 +170,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     }
+
 
 
 
