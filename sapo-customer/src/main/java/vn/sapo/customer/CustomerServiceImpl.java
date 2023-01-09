@@ -52,8 +52,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public void deleteById(Integer id) {
+        addressService.deleteByCustomerId(id);
         customerRepository.deleteById(id);
     }
 
@@ -72,7 +73,7 @@ public class CustomerServiceImpl implements CustomerService {
        Customer newCustomer = customerRepository.save(customer);
         String cusCode = newCustomer.getCustomerCode();
         if (cusCode == null || cusCode.trim().isEmpty())
-            customer.setCustomerCode(CodePrefix.CUSTOMER + CodePrefix.format(customer.getId()));
+            customer.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
         return customerMapper.toDTO(customer);
     }
 

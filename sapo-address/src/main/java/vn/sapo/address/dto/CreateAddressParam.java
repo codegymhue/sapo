@@ -5,7 +5,6 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -20,7 +19,6 @@ public class CreateAddressParam {
     private String line1;
 
     private String line2;
-
     private Integer wardId;
     private String wardName;
 
