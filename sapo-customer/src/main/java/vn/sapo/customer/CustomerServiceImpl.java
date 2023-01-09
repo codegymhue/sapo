@@ -116,15 +116,15 @@ public class CustomerServiceImpl implements CustomerService {
 //        return customerResults;
 //    }
 
-    @Override
-    public List<CustomerResult> findAllByGroupId(Integer groupTitleId) {
-        List<CustomerResult> customerResults = new ArrayList<>();
-        customerResults = customerRepository.findAllByGroupId(groupTitleId)
-                .stream()
-                .map(customerMapper::toDTO)
-                .collect(Collectors.toList());
-        return customerResults;
-    }
+//    @Override
+//    public List<CustomerResult> findAllByGroupId(Integer groupTitleId) {
+//        List<CustomerResult> customerResults = new ArrayList<>();
+//        customerResults = customerRepository.findAllByGroupId(groupTitleId)
+//                .stream()
+//                .map(customerMapper::toDTO)
+//                .collect(Collectors.toList());
+//        return customerResults;
+//    }
 
 
     @Override
