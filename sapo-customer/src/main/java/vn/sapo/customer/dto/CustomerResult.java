@@ -34,7 +34,7 @@ public class CustomerResult {
 
     private Instant birthday;
 
-    private CustomerGroupResult group;
+    private CusGroupResult group;
 
     private CustomerGender gender;
 

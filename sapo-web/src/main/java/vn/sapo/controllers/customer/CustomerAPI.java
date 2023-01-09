@@ -1,22 +1,23 @@
 package vn.sapo.controllers.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.address.AddressService;
-
-import vn.sapo.address.AddressServiceImpl;
-import vn.sapo.address.dto.AddressResult;
-
 import vn.sapo.address.dto.CreateAddressParam;
+import vn.sapo.customer.CustomerFilterRepository;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CreateCustomerParam;
+import vn.sapo.customer.dto.CustomerFilter;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
-import vn.sapo.excel.ExcelService;
-
+import vn.sapo.entities.customer.Customer;
 import vn.sapo.excel.ExcelHelper;
 import vn.sapo.excel.ExcelService;
 import vn.sapo.excel.ResponseMessage;
@@ -27,7 +28,6 @@ import vn.sapo.payment.sale.PaymentSaleOrderService;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
-import java.util.function.Consumer;
 
 @RestController
 @RequestMapping("/api/customers")
@@ -60,6 +60,26 @@ public class CustomerAPI {
     }
 
 
+    @PostMapping("/filter")
+    public ResponseEntity<?> testFilter(@RequestBody CustomerFilter customerFilter,
+                                        @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
+                                        @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
+                                        @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
+
+        Sort sortable = null;
+        if (sort.equals("ASC")) {
+            sortable = Sort.by("id").ascending();
+        }
+        if (sort.equals("DESC")) {
+            sortable = Sort.by("id").descending();
+        }
+
+
+        Pageable pageable = PageRequest.of(page, size, sortable);
+        Page<CustomerResult> pagealeCustomers = customerService.findAllByFilters(customerFilter, pageable);
+        return new ResponseEntity<>(pagealeCustomers, HttpStatus.OK);
+
+    }
 
     @DeleteMapping("/delete/{id}")
     public void deleteCustomerById(@PathVariable Integer id) {
@@ -89,8 +109,6 @@ public class CustomerAPI {
 //    public ResponseEntity<?> getAllCustomerGroup() {
 //        return new ResponseEntity<>(customerService.findAll(), HttpStatus.OK);
 //    }
-
-
 
 
     @DeleteMapping("/delete")
@@ -137,8 +155,6 @@ public class CustomerAPI {
 //    findAllCustomerByGroupAndStatus
 
 
-
-
     public void setData(CustomerResult customer) {
         BigDecimal spendTotal = getSpendTotalByCustomerId(customer.getId());
         BigDecimal paidTotal = getPaidTotalByCustomerId(customer.getId());
@@ -181,28 +197,11 @@ public class CustomerAPI {
         return saleOrderService.getLastDayOrderByCustomerId(customerId);
     }
 
-    @PostMapping ("/findAllCustomerByGroup")
-    public ResponseEntity<?> findAllByGroupId(@RequestBody  List<Integer> arrGroupId ) {
+    @PostMapping("/findAllCustomerByGroup")
+    public ResponseEntity<?> findAllByGroupId(@RequestBody List<Integer> arrGroupId) {
         List<CustomerResult> customers = customerService.findAllByGroupListId(arrGroupId);
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
-    @PostMapping("/findAllCustomerByGender")
-    public ResponseEntity<?> findAllByGenderId(@RequestBody String arrGenderId) {
-        List<CustomerResult> customers = customerService.findAllByGenderId(arrGenderId);
-        return new ResponseEntity<>(customers,HttpStatus.OK);
-    }
-
-    @PostMapping("/findAllCustomerEmployee")
-    public ResponseEntity<?> findAllByEmployeeId(@RequestBody List<Integer> arrEmployeeId) {
-        List<CustomerResult> customers = customerService.findAllEmployeeListId(arrEmployeeId);
-        return new ResponseEntity<>(customers, HttpStatus.OK);
-    }
-
-//    @PostMapping("/findAllCustomerByStatus")
-//    public ResponseEntity<?> findAllStatusListId(@RequestBody List<String> arrStatusId) {
-//        List<CustomerResult> customers = customerService.findAllByStatusListId(arrStatusId);
-//        return new ResponseEntity<>(customers, HttpStatus.OK);
-//    }
 }
 
