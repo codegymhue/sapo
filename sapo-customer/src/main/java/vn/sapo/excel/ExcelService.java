@@ -17,10 +17,8 @@ public class ExcelService {
 
     public List<CreateCustomerParam> save(MultipartFile file) {
         try {
+
             List<CreateCustomerParam> customers = ExcelHelper.excelToCustomers(file.getInputStream());
-            for (CreateCustomerParam c : customers) {
-                customerService.create(c);
-            }
             return customers;
 
         } catch (IOException e) {

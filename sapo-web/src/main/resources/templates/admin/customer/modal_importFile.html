@@ -1,15 +1,17 @@
 <th:block th:fragment="modalImportFileCustomers">
-  <div class="modal fade" id="modalImportFileCustomers" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-    <div class="modal-dialog  ">
+  <div class="modal fade lg" id="modalImportFileCustomers" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5">Nhập file dữ liệu khách hàng</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          <h6 class="MuiTypography-root MuiTypography-subtitle1">Chú ý:</h6>
+          <div class="MuiBox-root jss2606 jss2605"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" font-size="24" color="error"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.734 21.002a1 1 0 0 1-.865-1.501l9.265-16.004a1 1 0 0 1 1.731 0L22.131 19.5a1 1 0 0 1-.866 1.501H2.735ZM13 18h-.935a.992.992 0 0 1-.13 0H11v-2h2v2Zm0-3.998h-2v-5h2v5Z" fill="#FF4D4D"></path></svg><div class="MuiBox-root jss2607" style="margin-left: 20px;"><span class="MuiTypography-root MuiTypography-body2">Mẫu nhập file khách hàng đã được thay đổi vào<span class="MuiTypography-root MuiTypography-body1" style="font-weight: 500;"> 12/09/2022</span></span><p class="MuiTypography-root MuiTypography-body2">Bạn vui lòng kiểm tra và tải lại file mới để tránh sai lệch dữ liệu</p></div></div>
           <form id="frmFileCustomers" method="post">
             <div>
-              <span>Tải File mẫu <a target="_blank" href="/assets/admin/files/MauExcelCustomers.xlsx" download>tại đây</a></span>
+              <span>Tải File mẫu <a target="_blank" href="/assets/admin/files/file_nhap_mau_khach_hang.xlsx" download>tại đây</a></span>
               <br>
               <label class="mb-3">Nhập file vào đây</label>
               <input class="form-control" type="file" id="formFileCustomers">

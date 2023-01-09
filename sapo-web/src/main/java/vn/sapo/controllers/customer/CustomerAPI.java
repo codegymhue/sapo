@@ -140,7 +140,7 @@ public class CustomerAPI {
 
     // UpLoad File Excel
     @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, CreateCustomerParam createCustomerParam) {
+    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
         if (ExcelHelper.hasExcelFormat(file)) {
             try {
