@@ -18,7 +18,6 @@ import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.excel.ExcelService;
 
 import vn.sapo.excel.ExcelHelper;
-import vn.sapo.excel.ExcelService;
 import vn.sapo.excel.ResponseMessage;
 import vn.sapo.order.sale.SaleOrderService;
 import vn.sapo.order.sale.item.OrderItemService;
@@ -27,7 +26,6 @@ import vn.sapo.payment.sale.PaymentSaleOrderService;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
-import java.util.function.Consumer;
 
 @RestController
 @RequestMapping("/api/customers")
@@ -117,8 +115,8 @@ public class CustomerAPI {
                 message = "Uploaded the file successfully: " + file.getOriginalFilename();
                 return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
             } catch (Exception e) {
-                message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+//                message = "Could not upload the file: " + file.getOriginalFilename() + "!";
+//                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
             }
         }
 
