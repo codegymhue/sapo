@@ -185,17 +185,17 @@ public class CustomerAPI {
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
-    @PostMapping("/findAllCustomerByGender")
-    public ResponseEntity<?> findAllByGenderId(@RequestBody String arrGenderId) {
-        List<CustomerResult> customers = customerService.findAllByGenderId(arrGenderId);
-        return new ResponseEntity<>(customers,HttpStatus.OK);
-    }
-
-    @PostMapping("/findAllCustomerEmployee")
-    public ResponseEntity<?> findAllByEmployeeId(@RequestBody List<Integer> arrEmployeeId) {
-        List<CustomerResult> customers = customerService.findAllEmployeeListId(arrEmployeeId);
-        return new ResponseEntity<>(customers, HttpStatus.OK);
-    }
+//    @PostMapping("/findAllCustomerByGender")
+//    public ResponseEntity<?> findAllByGenderId(@RequestBody String arrGenderId) {
+//        List<CustomerResult> customers = customerService.findAllByGenderId(arrGenderId);
+//        return new ResponseEntity<>(customers,HttpStatus.OK);
+//    }
+//
+//    @PostMapping("/findAllCustomerEmployee")
+//    public ResponseEntity<?> findAllByEmployeeId(@RequestBody List<Integer> arrEmployeeId) {
+//        List<CustomerResult> customers = customerService.findAllEmployeeListId(arrEmployeeId);
+//        return new ResponseEntity<>(customers, HttpStatus.OK);
+//    }
 
 //    @PostMapping("/findAllCustomerByStatus")
 //    public ResponseEntity<?> findAllStatusListId(@RequestBody List<String> arrStatusId) {
