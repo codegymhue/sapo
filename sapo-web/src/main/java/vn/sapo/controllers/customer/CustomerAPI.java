@@ -11,17 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.address.AddressService;
 import vn.sapo.address.dto.CreateAddressParam;
-import vn.sapo.customer.CustomerFilterRepository;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerFilter;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
-
-import vn.sapo.entities.customer.Customer;
-import vn.sapo.excel.ExcelHelper;
-
 import vn.sapo.customerGroup.CustomerGroupService;
+import vn.sapo.excel.ExcelHelper;
 import vn.sapo.excel.ExcelService;
 import vn.sapo.excel.ResponseMessage;
 import vn.sapo.order.sale.SaleOrderService;
@@ -57,7 +53,7 @@ public class CustomerAPI {
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
         CustomerResult dto = customerService.findById(id);
         setData(dto);
@@ -106,8 +102,9 @@ public class CustomerAPI {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateCustomer(@RequestBody UpdateCustomerParam updateCustomer) {
-        return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.OK);
+    public ResponseEntity<?> updateCustomer(@RequestBody UpdateCustomerParam updateCustomerParam) {
+        customerService.update(updateCustomerParam);
+        return new ResponseEntity<>(customerService.findById(updateCustomerParam.getId()), HttpStatus.OK);
     }
 
 //    @GetMapping("/customerGroup")
