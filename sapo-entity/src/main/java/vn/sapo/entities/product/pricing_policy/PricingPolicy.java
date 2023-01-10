@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import vn.sapo.entities.customer.CustomerGroup;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,9 +15,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table(name = "pricing_policy")
 @Accessors(chain = true)
-
-
-
 public class PricingPolicy {
     @Id
     @Column(name = "id", nullable = false)
