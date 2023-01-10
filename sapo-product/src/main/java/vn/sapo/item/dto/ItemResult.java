@@ -8,8 +8,7 @@ import java.math.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 @Accessors(chain = true)
 public class ItemResult {
 
@@ -18,8 +17,6 @@ public class ItemResult {
     private Integer productId;
 
     private Integer employeeId;
-
-//    private EmployeeResult employee;
 
     private Integer supplierId;
 

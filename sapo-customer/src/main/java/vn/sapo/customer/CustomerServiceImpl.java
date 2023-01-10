@@ -1,23 +1,22 @@
 package vn.sapo.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.address.AddressService;
-import vn.sapo.customer.dto.CusEmployeeResult;
-import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.customer.dto.CreateCustomerParam;
+import vn.sapo.customer.dto.CustomerFilter;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.entities.customer.Customer;
-import vn.sapo.entities.customer.CustomerGender;
 import vn.sapo.entities.customer.CustomerStatus;
+import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -29,10 +28,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private CustomerFilterRepository customerFilterRepository;
 
     @Autowired
     private AddressService addressService;
-
 
 
     @Override
@@ -56,11 +56,11 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public void deleteById(Integer id) {
+        addressService.deleteByCustomerId(id);
         customerRepository.deleteById(id);
     }
-
 
 
     @Override
@@ -73,10 +73,10 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerResult create(CreateCustomerParam createCustomerParam) {
         System.out.println("Đay là param" + createCustomerParam);
         Customer customer = customerMapper.toModel(createCustomerParam);
-       Customer newCustomer = customerRepository.save(customer);
+        Customer newCustomer = customerRepository.save(customer);
         String cusCode = newCustomer.getCustomerCode();
         if (cusCode == null || cusCode.trim().isEmpty())
-            customer.setCustomerCode(CodePrefix.CUSTOMER + CodePrefix.format(customer.getId()));
+            customer.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
         return customerMapper.toDTO(customer);
     }
 
@@ -106,39 +106,26 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
-//    @Override
-//    public List<CustomerResult> findAllByFilter(Integer groupTitLeId, CustomerGender gender, String status, CusEmployeeResult employee, Instant createdAt, Instant birthday) {
-//        List<CustomerResult> customerResults = new ArrayList<>();
-//        customerResults = customerRepository.findAllByFilter(groupTitLeId,gender,CustomerStatus.parseCustomerGroup(status),employee,createdAt,birthday)
-//                .stream()
-//                .map(customerMapper::toDTO)
-//                .collect(Collectors.toList());
-//        return customerResults;
-//    }
 
     @Override
-    public List<CustomerResult> findAllByGroupId(Integer groupTitleId) {
+    @Transactional
+    public List<CustomerResult> findAllByGroupListId(List<Integer> groupIds) {
         List<CustomerResult> customerResults = new ArrayList<>();
-        customerResults = customerRepository.findAllByGroupId(groupTitleId)
+        customerResults = customerRepository.findAllByGroupIdIn(groupIds)
                 .stream()
                 .map(customerMapper::toDTO)
                 .collect(Collectors.toList());
         return customerResults;
     }
-
 
     @Override
     @Transactional(readOnly = true)
-    public List<CustomerResult> findAllCustomerByGroupAndStatus(Integer groupTitleId, String customerStatus) {
-        List<CustomerResult> customerResults = new ArrayList<>();
-        customerResults = customerRepository.findAllByGroupIdAndStatus(groupTitleId, CustomerStatus.parseCustomerGroup(customerStatus))
-                .stream()
-                .map(customerMapper::toDTO)
-                .collect(Collectors.toList());
-        return customerResults;
+    public Page<CustomerResult> findAllByFilters(CustomerFilter filters, Pageable pageable) {
+        return customerFilterRepository.findAllByFilters(filters, pageable).map(customerMapper::toDTO);
     }
 
-    }
+
+}
 
 
 

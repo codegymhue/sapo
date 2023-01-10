@@ -18,6 +18,14 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     private ItemMapper itemMapper;
 
+    @Autowired
+    private ProductMapper productMapper;
+
+    @Override
+    public List<ItemResult> findAll() {
+        return null;
+    }
+
     @Override
     @Transactional(readOnly = true)
     public int getTotalInventoryQuantityByProductId(Integer productId) {
@@ -43,7 +51,6 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Optional <Item> findByProductId(Integer productId) {
-//        cần thêm
         return itemRepository.findByProductId(productId);
     }
 

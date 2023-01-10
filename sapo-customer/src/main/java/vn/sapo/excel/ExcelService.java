@@ -2,6 +2,7 @@ package vn.sapo.excel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
+import vn.sapo.address.AddressService;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CreateCustomerParam;
 
@@ -11,13 +12,14 @@ import java.util.List;
 public class ExcelService {
     @Autowired
     CustomerService customerService;
+    @Autowired
+    AddressService addressService;
 
-    public void save(MultipartFile file) {
+    public List<CreateCustomerParam> save(MultipartFile file) {
         try {
+
             List<CreateCustomerParam> customers = ExcelHelper.excelToCustomers(file.getInputStream());
-            for (CreateCustomerParam c : customers) {
-                customerService.create(c);
-            }
+            return customers;
 
         } catch (IOException e) {
             throw new RuntimeException("fail to store excel data: " + e.getMessage());

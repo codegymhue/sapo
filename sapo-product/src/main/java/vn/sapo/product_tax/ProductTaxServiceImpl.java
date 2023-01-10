@@ -62,7 +62,6 @@ public class ProductTaxServiceImpl implements ProductTaxService {
                 .collect(Collectors.toList());
     }
 
-
     @Override
     public void deleteAllByProductId(Integer productId) {
         productTaxRepository.deleteAllByProductId(productId);

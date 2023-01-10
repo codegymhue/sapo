@@ -6,6 +6,9 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import vn.sapo.entities.BaseEntity;
 import vn.sapo.entities.media.Media;
+import vn.sapo.entities.product.pricing_policy.PricingPolicyType;
+import vn.sapo.entities.product.pricing_policy.ProductPrice;
+import vn.sapo.entities.product.pricing_policy.ProductPricingPolicy;
 import vn.sapo.entities.tax.ProductTax;
 import vn.sapo.entities.tax.Tax;
 import vn.sapo.entities.tax.TaxType;
@@ -60,13 +63,13 @@ public class Product extends BaseEntity {
     private BigDecimal wholesalePrice;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "fk_product_category"))
     private Category category;
     @Column(name = "category_id", insertable = false, updatable = false)
     private Integer categoryId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "brand_id")
+    @JoinColumn(name = "brand_id", foreignKey = @ForeignKey(name = "fk_product_brand"))
     private Brand brand;
     @Column(name = "brand_id", insertable = false, updatable = false)
     private Integer brandId;
@@ -83,14 +86,16 @@ public class Product extends BaseEntity {
     private boolean deleted = false;
 
     @OneToMany(mappedBy = "id.product")
-//    @OrderBy("tax_id")
     @OrderBy("taxId")
     private Set<ProductTax> productTaxSet;
 
+    @OneToMany(mappedBy = "id.product")
+    private Set<ProductPricingPolicy> productPricingPolicySet;
 
     public Set<Media> getMediaList() {
         return mediaSet;
     }
+
 
     public String getMainImageUrl() {
         if (mediaSet == null)
@@ -100,6 +105,24 @@ public class Product extends BaseEntity {
                 .map(Media::getFileUrl)
                 .findAny()
                 .orElse(null);
+    }
+
+    public List<ProductPrice> getProductPriceSaleList () {
+        if (productPricingPolicySet == null)
+            return new ArrayList<>();
+        return productPricingPolicySet.stream()
+                .filter(pPricingPolicy -> pPricingPolicy.getPricingPolicyType() == PricingPolicyType.SALE)
+                .map(pPricingPolicy -> new ProductPrice(pPricingPolicy.getPricingPolicyId(), pPricingPolicy.getPricingPolicyTitle(), pPricingPolicy.getPrice()))
+                .collect(Collectors.toList());
+    }
+
+    public List<ProductPrice> getProductPricePurchaseList () {
+        if (productPricingPolicySet == null)
+            return new ArrayList<>();
+        return productPricingPolicySet.stream()
+                .filter(pPricingPolicy -> pPricingPolicy.getPricingPolicyType() == PricingPolicyType.PURCHASE)
+                .map(pPricingPolicy -> new ProductPrice(pPricingPolicy.getPricingPolicyId(), pPricingPolicy.getPricingPolicyTitle(), pPricingPolicy.getPrice()))
+                .collect(Collectors.toList());
     }
 
     public List<Tax> getTaxList() {

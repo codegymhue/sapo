@@ -1,6 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="vi-VN" class="sapo-menu-expand sapo-menu-toggle-active" th:object="${customer}">
-th:object="${customer}"
+
 <head>
     <th:block th:replace="/layout/header.html"/>
     <title>Chi tiết khách hàng</title>
@@ -27,11 +27,11 @@ th:object="${customer}"
                 <input type="hidden"  id="customerId" th:value="*{id}" >
                 <div class="MuiBox-root jss2119">
 
-                    <button id="btn_deleteCustomer" class="sc-jqUVSM gYRFmk">
+                    <button id="btnSowModalDelete" class="sc-jqUVSM gYRFmk">
 
                         <span
                             class="sc-papXJ jcEYKF">Xóa khách hàng</span></button>
-                    <a th:value="*{id}" th:href="@{/admin/customer/edit/__${customer.getId()}__}">
+                    <a th:value="*{id}" th:href="@{/admin/customer/modal_delete_customer.html/__${customer.getId()}__}">
                     <button id="btn-create-voucher" class="sc-jqUVSM FmJDc"><span class="sc-papXJ ffDJGn">Tạo phiếu thu/chi</span>
                         <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M7 10l5 5 5-5z"></path>
@@ -63,7 +63,7 @@ th:object="${customer}"
                                           th:class="*{status == status.AVAILABLE} ? 'gIZkwA' : 'gIZkwB'"></span>
                                         </div>
                                     </div>
-                                    <a class="jss2101" href="/admin/customers/update/">Cập nhật</a></div>
+                                    <a class="jss2101"  th:href="'/admin/customers/update/'+ ${customer.getId()}">Cập nhật</a></div>
 
 
                                 <div class="MuiBox-root jss762 jss623">
@@ -86,18 +86,18 @@ th:object="${customer}"
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3">
                                             <div class="MuiPaper-root jss624 MuiPaper-elevation1 MuiPaper-rounded"><h6
-                                                    class="MuiTypography-root jss626 MuiTypography-subtitle1" th:text="*{birthday}"
+                                                    class="MuiTypography-root jss626 MuiTypography-subtitle1" th:text="${': ' +  #dates.format(customer.birthday, 'dd/MM/yyyy')}"
                                                      ></h6>
                                                 <h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    th:text="*{gender}"> </h6>
+                                                    th:text="*{': ' + gender}"> </h6>
                                                 <h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    th:text="*{phoneNumber}"></h6>
+                                                    th:text="*{': '+phoneNumber}"></h6>
                                                 <h6 class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    th:text="*{email}" ></h6><h6
+                                                    th:text="*{': '+email}" ></h6><h6
                                                         class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                        th:text="*{employee}"></h6><span></span></div>
+                                                        th:text="${': '+customer.getEmployee().getFullName()}"></h6><span></span></div>
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3">
                                             <div class="MuiPaper-root jss624 jss625 MuiPaper-elevation1 MuiPaper-rounded">
@@ -113,25 +113,26 @@ th:object="${customer}"
                                                 Mô tả</h6></div>
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3">
-                                            <div class="MuiPaper-root jss624  MuiPaper-elevation1 MuiPaper-rounded"><h6
+                                            <div class="MuiPaper-root jss624  MuiPaper-elevation1 MuiPaper-rounded">
+                                                <a class="jss627" th:href="'/admin/customer_groups/'+ ${customer.getGroup().getId()}" style="padding-left: 0px;">
+                                                    <h6 class="MuiTypography-root jss626 MuiTypography-subtitle1" th:text="${': '+customer.getGroup().getTitle()}">
+
+                                                </h6>
+                                                </a>
+                                                <h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    itemid="display-group-name" title="Bán lẻ">: <a class="jss2101"
-                                                                                                    href="/admin/customer_groups/2635492"
-                                                                                                    style="padding-left: 0px;">Bán
-                                                lẻ</a></h6><h6
-                                                    class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    itemid="display-code" title="Est minim voluptatum">: Est minim
-                                                voluptatum</h6><h6
+                                                    th:text="*{': '+ customerCode}"></h6><h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
                                                     itemid="display-tax-number" title="614">: 614</h6><h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    itemid="display-website" title="https://www.dycimec.cc">: <a
+                                                    itemid="display-website" title="https://animehay.pro/">: <a
                                                     class="jss2101"
-                                                    href="/admin/customers/195915110/https://www.dycimec.cc"
-                                                    style="padding-left: 0px;">https://www.dycimec.cc</a></h6><h6
+                                                    href="https://animehay.pro/"
+                                                    style="padding-left: 0px; text-decoration: none">https://animehay.pro/</a></h6><h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    itemid="display-description" title="Possimus iste dolor">: Possimus
-                                                iste dolor</h6></div>
+                                                    th:text="*{': ' + description}">
+
+                                                </h6></div>
                                         </div>
                                     </div>
                                 </div>
@@ -155,11 +156,11 @@ th:object="${customer}"
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3">
                                             <div class="MuiPaper-root jss2098 MuiPaper-elevation1 MuiPaper-rounded"><h6
                                                     class="MuiTypography-root jss2100 MuiTypography-subtitle1"
-                                                    itemid="display-total-sales">: 16</h6><h6
+                                                    th:text="${ ': '  + customer.spendTotal}">: 16</h6><h6
                                                     class="MuiTypography-root jss2100 MuiTypography-subtitle1"
                                                     itemid="display-order-purchases">: 0</h6><h6
                                                     class="MuiTypography-root jss2100 MuiTypography-subtitle1"
-                                                    itemid="display-last-order-on">: ---</h6></div>
+                                                    th:text="${': ' +  #dates.format(customer.lastDayOrder, 'dd/MM/yyyy')} ">: ---</h6></div>
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3">
                                             <div class="MuiPaper-root jss2098 jss2099 MuiPaper-elevation1 MuiPaper-rounded">
@@ -175,9 +176,10 @@ th:object="${customer}"
                                                     class="MuiTypography-root jss2100 MuiTypography-subtitle1"
                                                     itemid="display-net-quantity">: 0</h6><h6
                                                     class="MuiTypography-root jss2100 MuiTypography-subtitle1"
-                                                    itemid="display-returned-item-quantity">: 0</h6><h6
+                                                    itemid="display-returned-item-quantity">: 0 </h6><h6
                                                     class="MuiTypography-root jss2100 MuiTypography-subtitle1"
-                                                    itemid="display-debt">: 211</h6></div>
+                                                    itemid="display-returned-item-debts"
+                                            th:text="*{': '+debtTotal}"></h6></div>
                                         </div>
                                     </div>
                                 </div>
@@ -189,7 +191,7 @@ th:object="${customer}"
                             <div class="MuiBox-root jss2269 jss2096 jss2093">
                                 <div class="MuiBox-root jss2270 jss2095"><h6
                                         class="MuiTypography-root MuiTypography-subtitle1">Thông tin gợi ý khi bán
-                                    hàng</h6><a class="jss2101" href="/admin/customers/195915110/edit">Cập nhật</a>
+                                    hàng</h6><a class="jss2101" th:href="'/admin/customers/update/' + ${customer.getId()}">Cập nhật</a>
                                 </div>
                                 <div class="MuiBox-root jss2271 jss2097">
                                     <div class="MuiGrid-root MuiGrid-container">
@@ -249,214 +251,7 @@ th:object="${customer}"
                         </div>
                     </div>
                 </div>
-                <div class="MuiBox-root jss2275 jss2105">
-                    <div class="MuiBox-root jss14009 jss14006">
-                        <div class="MuiPaper-root jss14011 sapo-grid MuiPaper-elevation1 MuiPaper-rounded">
-                            <div class="MuiTableContainer-root jss14012 sapo-grid-header-wrapper">
-                                <table class="MuiTable-root jss14013 sapo-grid-header" aria-labelledby="tableTitle"
-                                       aria-label="enhanced table">
-                                    <colgroup>
-                                        <col style="width: 105px;">
-                                        <col style="width: 287px;">
-                                        <col style="width: 181px;">
-                                        <col style="width: 219px;">
-                                    </colgroup>
-                                    <thead class="MuiTableHead-root jss14026">
-                                    <tr class="MuiTableRow-root MuiTableRow-head">
-                                        <th class="MuiTableCell-root MuiTableCell-head jss14030 MuiTableCell-alignLeft"
-                                            scope="col" colspan="1" rowspan="1">Mã nhóm
-                                        </th>
-                                        <th class="MuiTableCell-root MuiTableCell-head jss14030 MuiTableCell-alignLeft"
-                                            scope="col" colspan="1" rowspan="1">Tên nhóm
-                                        </th>
-                                        <th class="MuiTableCell-root MuiTableCell-head jss14030 MuiTableCell-alignLeft"
-                                            scope="col" colspan="1" rowspan="1">Loại nhóm
-                                        </th>
-                                        <th class="MuiTableCell-root MuiTableCell-head jss14030 MuiTableCell-alignLeft"
-                                            scope="col" colspan="1" rowspan="1">Mô tả
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                            <div class="MuiTableContainer-root jss14014 sapo-grid-body-wrapper">
-                                <div style="position: relative; overflow: hidden; width: 100%; height: auto; min-height: 0px; max-height: unset;">
-                                    <div style="position: relative; overflow: scroll; margin-right: -17px; margin-bottom: -17px; min-height: 17px;">
-                                        <table class="MuiTable-root jss14015 sapo-grid-body"
-                                               aria-labelledby="tableTitle" aria-label="enhanced table">
-                                            <colgroup>
-                                                <col style="width: 105px;">
-                                                <col style="width: 287px;">
-                                                <col style="width: 181px;">
-                                                <col style="width: 219px;">
-                                            </colgroup>
-                                            <tbody class="MuiTableBody-root">
-                                            <tr class="MuiTableRow-root jss14057 MuiTableRow-hover" role="checkbox"
-                                                tabindex="-1">
-                                                <td class="MuiTableCell-root MuiTableCell-body jss14063 MuiTableCell-alignLeft">
-                                                    <a class="jss14067" href="/admin/customer_groups/2635492">BANLE</a>
-                                                </td>
-                                                <td class="MuiTableCell-root MuiTableCell-body jss14063 MuiTableCell-alignLeft">
-                                                    <p class="MuiTypography-root MuiTypography-body1"
-                                                       title="t.customerGroupValidate.name">Bán lẻ</p></td>
-                                                <td class="MuiTableCell-root MuiTableCell-body jss14063 MuiTableCell-alignLeft">
-                                                    <p class="MuiTypography-root MuiTypography-body1"
-                                                       title="t.customerGroupValidate.groupType">Cố định</p></td>
-                                                <td class="MuiTableCell-root MuiTableCell-body jss14063 MuiTableCell-alignLeft">
-                                                    <p class="MuiTypography-root MuiTypography-body1"
-                                                       title="t.customerGroupValidate.note"><span>---</span></p></td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="jss14017" style="position: fixed; height: 6px; left: 262px;">
-                                        <div class="jss14018"
-                                             style="position: relative; display: block; height: 100%; width: 0px;"></div>
-                                    </div>
-                                    <div style="position: absolute; width: 6px; right: 2px; bottom: 2px; top: 2px; border-radius: 3px;">
-                                        <div style="position: relative; display: block; width: 100%; cursor: pointer; border-radius: inherit; background-color: rgba(0, 0, 0, 0.2); height: 0px;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="MuiBox-root jss14073 jss14068 sapo-pagination"><p
-                                    class="MuiTypography-root MuiTypography-body1">Hiển thị</p>
-                                <div class="MuiFormControl-root">
-                                    <div class="MuiInputBase-root MuiOutlinedInput-root jss14069 MuiInputBase-formControl">
-                                        <div class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input"
-                                             tabindex="0" role="button" aria-haspopup="listbox"><p
-                                                class="MuiTypography-root jss14071 MuiTypography-body1">20</p></div>
-                                        <input type="hidden" value="20">
-                                        <svg class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
-                                             focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-                                            <path d="M7 10l5 5 5-5z"></path>
-                                        </svg>
-                                        <fieldset aria-hidden="true" class="jss14121 MuiOutlinedInput-notchedOutline"
-                                                  style="padding-left: 8px;">
-                                            <legend class="jss14122" style="width: 0.01px;"><span>​</span></legend>
-                                        </fieldset>
-                                    </div>
-                                </div>
-                                <p class="MuiTypography-root MuiTypography-body1">kết quả</p>
-                                <p class="MuiTypography-root jss14070 MuiTypography-body1">Từ 1 đến 1 trên tổng 1</p>
-                                <nav aria-label="pagination navigation" class="MuiPagination-root jss14072">
-                                    <ul class="MuiPagination-ul">
-                                        <li>
-                                            <button class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-page MuiPaginationItem-textPrimary Mui-disabled MuiPaginationItem-sizeSmall Mui-disabled"
-                                                    tabindex="-1" type="button" disabled=""
-                                                    aria-label="Go to previous page">
-                                                <svg class="MuiSvgIcon-root MuiPaginationItem-icon" focusable="false"
-                                                     viewBox="0 0 24 24" aria-hidden="true">
-                                                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
-                                                </svg>
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-page MuiPaginationItem-textPrimary Mui-selected MuiPaginationItem-sizeSmall"
-                                                    tabindex="0" type="button" aria-current="true" aria-label="page 1">1<span
-                                                    class="MuiTouchRipple-root"></span></button>
-                                        </li>
-                                        <li>
-                                            <button class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-page MuiPaginationItem-textPrimary Mui-disabled MuiPaginationItem-sizeSmall Mui-disabled"
-                                                    tabindex="-1" type="button" disabled=""
-                                                    aria-label="Go to next page">
-                                                <svg class="MuiSvgIcon-root MuiPaginationItem-icon" focusable="false"
-                                                     viewBox="0 0 24 24" aria-hidden="true">
-                                                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
-                                                </svg>
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                            <div class="__react_component_tooltip tf8ca45a8-9cd5-4329-bee6-7fea00bb0df6 place-top type-dark"
-                                 id="tf8ca45a8-9cd5-4329-bee6-7fea00bb0df6" data-id="tooltip">
-                                <style aria-hidden="true">
-                                    .tf8ca45a8-9cd5-4329-bee6-7fea00bb0df6 {
-                                        color: #fff;
-                                        background: #222;
-                                        border: 1px solid transparent;
-                                    }
 
-                                    .tf8ca45a8-9cd5-4329-bee6-7fea00bb0df6.place-top {
-                                        margin-top: -10px;
-                                    }
-
-                                    .tf8ca45a8-9cd5-4329-bee6-7fea00bb0df6.place-top::before {
-                                        border-top: 8px solid transparent;
-                                    }
-
-                                    .tf8ca45a8-9cd5-4329-bee6-7fea00bb0df6.place-top::after {
-                                        border-left: 8px solid transparent;
-                                        border-right: 8px solid transparent;
-                                        bottom: -6px;
-                                        left: 50%;
-                                        margin-left: -8px;
-                                        border-top-color: #222;
-                                        border-top-style: solid;
-                                        border-top-width: 6px;
-                                    }
-
-                                    .tf8ca45a8-9cd5-4329-bee6-7fea00bb0df6.place-bottom {
-                                        margin-top: 10px;
-                                    }
-
-                                    .tf8ca45a8-9cd5-4329-bee6-7fea00bb0df6.place-bottom::before {
-                                        border-bottom: 8px solid transparent;
-                                    }
-
-                                    .tf8ca45a8-9cd5-4329-bee6-7fea00bb0df6.place-bottom::after {
-                                        border-left: 8px solid transparent;
-                                        border-right: 8px solid transparent;
-                                        top: -6px;
-                                        left: 50%;
-                                        margin-left: -8px;
-                                        border-bottom-color: #222;
-                                        border-bottom-style: solid;
-                                        border-bottom-width: 6px;
-                                    }
-
-                                    .tf8ca45a8-9cd5-4329-bee6-7fea00bb0df6.place-left {
-                                        margin-left: -10px;
-                                    }
-
-                                    .tf8ca45a8-9cd5-4329-bee6-7fea00bb0df6.place-left::before {
-                                        border-left: 8px solid transparent;
-                                    }
-
-                                    .tf8ca45a8-9cd5-4329-bee6-7fea00bb0df6.place-left::after {
-                                        border-top: 5px solid transparent;
-                                        border-bottom: 5px solid transparent;
-                                        right: -6px;
-                                        top: 50%;
-                                        margin-top: -4px;
-                                        border-left-color: #222;
-                                        border-left-style: solid;
-                                        border-left-width: 6px;
-                                    }
-
-                                    .tf8ca45a8-9cd5-4329-bee6-7fea00bb0df6.place-right {
-                                        margin-left: 10px;
-                                    }
-
-                                    .tf8ca45a8-9cd5-4329-bee6-7fea00bb0df6.place-right::before {
-                                        border-right: 8px solid transparent;
-                                    }
-
-                                    .tf8ca45a8-9cd5-4329-bee6-7fea00bb0df6.place-right::after {
-                                        border-top: 5px solid transparent;
-                                        border-bottom: 5px solid transparent;
-                                        left: -6px;
-                                        top: 50%;
-                                        margin-top: -4px;
-                                        border-right-color: #222;
-                                        border-right-style: solid;
-                                        border-right-width: 6px;
-                                    }
-                                </style>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -713,7 +508,7 @@ th:object="${customer}"
 
     function showModalDelete() {
         $('#btnSowModalDelete').click(function () {
-            alert("ok")
+            // alert("ok")
             $('#modal_delete_customer').modal('show');
         });
     }
@@ -722,7 +517,7 @@ th:object="${customer}"
         let idCustomer = $('#customerId').val();
 
         $('#btn_deleteCustomer').click(function () {
-            // alert(" ok nuông")
+            // alert(" ok bạn ey")
             console.log(idCustomer)
             return $.ajax({
                 headers: {
@@ -733,9 +528,12 @@ th:object="${customer}"
                 url: "http://localhost:8080/api/customers/delete/" + idCustomer
             })
                 .done((data) => {
+                    App.IziToast.showSuccessAlert("Xoá khách hàng thành công  !!! ");
                     $('#modal_delete_customer').modal('hide');
-                    App.IziToast.showSuccessAlert('Xoá khách hàng thành công  !!!')
-                    window.location.href = "/admin/customers";
+
+                    setTimeout(() => {
+                        window.location.href = "/admin/customers";
+                    }, 2500)
                 })
                 .fail((jqXHR) => {
                     $.each(jqXHR.responseJSON, (key, item) => {

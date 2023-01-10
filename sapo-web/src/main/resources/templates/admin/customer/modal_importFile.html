@@ -1,34 +1,63 @@
 <th:block th:fragment="modalImportFileCustomers">
-  <div class="modal fade" id="modalImportFileCustomers" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-    <div class="modal-dialog  ">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5">Nhập file dữ liệu khách hàng</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="frmFile" method="post">
-            <div>
-              <span>Tải File mẫu <a target="_blank" href="/assets/admin/files/MauExcelCustomers.xlsx" download>tại đây</a></span>
-              <br>
-              <label class="mb-3">Nhập file vào đây</label>
-              <input class="form-control" type="file" id="formFileCustomers">
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn-outline-secondary" data-bs-dismiss="modal" style="border: 1px solid #bdbdbd;
+    <div class="modal fade" id="modalImportFileCustomers" data-bs-backdrop="static" data-bs-keyboard="false"
+         tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Nhập file dữ liệu khách hàng</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="MuiTypography-root MuiTypography-subtitle1">Chú ý:</h6>
+                    <div class="py-2 mx-3" style="width: 96%; background-color: #ffc0cb6b; height: 70px; border-radius: 10px;">
+                        <svg class="mx-4 my-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                             font-size="24" color="error" style="float: left">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M2.734 21.002a1 1 0 0 1-.865-1.501l9.265-16.004a1 1 0 0 1 1.731 0L22.131 19.5a1 1 0 0 1-.866 1.501H2.735ZM13 18h-.935a.992.992 0 0 1-.13 0H11v-2h2v2Zm0-3.998h-2v-5h2v5Z"
+                                  fill="#FF4D4D">
+                            </path>
+                        </svg>
+                        <div class="MuiBox-root jss2607" style="margin-left: 20px;">
+                          <span class="MuiTypography-root MuiTypography-body2">Mẫu nhập file khách hàng đã được thay đổi vào
+                            <span class="MuiTypography-root MuiTypography-body1"
+                                  style="font-weight: 500;"> 01/01/2023</span>
+                          </span>
+                            <p class="MuiTypography-root MuiTypography-body2">Bạn vui lòng kiểm tra và tải lại file mới
+                                để tránh sai lệch dữ liệu</p>
+                        </div>
+                    </div>
+                    <form id="frmFileCustomers" method="post">
+                        <div>
+                            <ul class="my-3" style="font-size: 14px">
+                                <li>
+                                    <span>Tải File mẫu <a target="_blank" href="/assets/admin/files/file_nhap_mau_khach_hang.xlsx" download style="text-decoration: none">tại đây</a> (cập nhật ngày: 01/01/2023)</span>
+                                </li>
+                                <li>
+                                   <span>File có dung lượng tối đa là 2MB và 5000 dòng</span>
+                                </li>
+                            </ul>
+                            <label class="mb-3">Nhập file vào đây</label>
+                            <input class="form-control" type="file" id="formFileCustomers">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-outline-primary" data-bs-dismiss="modal" style="border: 1px solid #bdbdbd;
                                                                                              padding: 6px 12px;
                                                                                              border-radius: 6px;
-                                                                                             font-weight: 500;">Thoát</button>
-          <button type="button" id="btnImportFileCustomers" class="btn-outline-info" style="border: 1px solid lightseagreen;
+                                                                                             font-weight: 500;">Thoát
+                    </button>
+                    <button type="button" id="btnImportFileCustomers" class="btn-primary" style="border: 1px solid lightseagreen;
                                                                                              padding: 6px 12px;
-                                                                                             border-radius: 6px;
+                                                                                             border-radius: 5px;
                                                                                              font-weight: 500;">
-            Tải file lên
-          </button>
+                        Nhập file
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+    <style>
+
+    </style>
 </th:block>

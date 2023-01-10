@@ -5,6 +5,7 @@
 
     <th:block th:replace="/layout/header :: header"/>
     <title>Danh sách sản phẩm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/admin/css/product/product_list.css"/>
 </head>
 
@@ -17,44 +18,6 @@
              id="header">
             <h3 class="MuiTypography-root MuiTypography-h3">Danh sách sản phẩm</h3>
             <div class="MuiBox-root jss6916 jss441">
-<!--                <div class="MuiBox-root jss6917 jss442">-->
-<!--                    <svg class="MuiSvgIcon-root jss443"-->
-<!--                         focusable="false"-->
-<!--                         viewBox="0 0 24 24"-->
-<!--                         color="#A2A8AF"-->
-<!--                         aria-hidden="true">-->
-<!--                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z">-->
-<!--                        </path>-->
-<!--                    </svg>-->
-<!--                    <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">Vay vốn kinh doanh</p>-->
-<!--                </div>-->
-<!--                <div class="MuiBox-root jss6932 jss442">-->
-<!--                    <svg class="MuiSvgIcon-root jss443"-->
-<!--                         focusable="false"-->
-<!--                         viewBox="0 0 20 20"-->
-<!--                         color="#A2A8AF"-->
-<!--                         aria-hidden="true">-->
-<!--                        <path fill-rule="evenodd"-->
-<!--                              clip-rule="evenodd"-->
-<!--                              d="M9.99992 0.833374C4.93992 0.833374 0.833252 4.94004 0.833252 10C0.833252 15.06 4.93992 19.1667 9.99992 19.1667C15.0599 19.1667 19.1666 15.06 19.1666 10C19.1666 4.94004 15.0599 0.833374 9.99992 0.833374ZM9.08325 16.4167V14.5834H10.9166V16.4167H9.08325ZM11.9891 10.1559L12.8141 9.31254C13.3366 8.79004 13.6666 8.05671 13.6666 7.25004C13.6666 5.22421 12.0258 3.58337 9.99992 3.58337C7.97409 3.58337 6.33325 5.22421 6.33325 7.25004H8.16659C8.16659 6.24171 8.99158 5.41671 9.99992 5.41671C11.0083 5.41671 11.8333 6.24171 11.8333 7.25004C11.8333 7.75421 11.6316 8.21254 11.2924 8.54254L10.1558 9.69754C9.49575 10.3667 9.08325 11.2834 9.08325 12.2917V12.75H10.9166C10.9166 11.375 11.3291 10.825 11.9891 10.1559Z"-->
-<!--                              fill="currentColor">-->
-<!--                        </path>-->
-<!--                    </svg>-->
-<!--                    <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">Trợ giúp</p>-->
-<!--                </div>-->
-<!--                <div class="MuiBox-root jss6933 jss442">-->
-<!--                    <svg class="MuiSvgIcon-root jss443"-->
-<!--                         focusable="false"-->
-<!--                         viewBox="0 0 16 14"-->
-<!--                         color="#A2A8AF"-->
-<!--                         aria-hidden="true">-->
-<!--                        <path d="M8 14C5.10929 11.4904 0 8.36868 0 4.19619C0 1.84632 1.936 0 4.4 0C5.792 0 7.128 0.578989 8 1.55556C8.872 0.578989 10.208 0 11.6 0C14.064 0 16 1.84632 16 4.19619C16 8.36185 10.8971 11.5039 8 14Z"-->
-<!--                              fill="currentColor">-->
-<!--                        </path>-->
-<!--                    </svg>-->
-<!--                    <p class="MuiTypography-root MuiTypography-body1"-->
-<!--                       style="color: rgb(24, 37, 55);">Góp ý</p>-->
-<!--                </div>-->
                 <div class="MuiBox-root jss6934  jss442 jss446">
                     <div class=" sb-avatar sb-avatar--text"
                          style="display: inline-block; vertical-align: middle; width: 30px; height: 30px; border-radius: 20px; font-family: Helvetica, Arial, sans-serif;">
@@ -69,12 +32,6 @@
                         </div>
                     </div>
                     <p class="MuiTypography-root jss445 MuiTypography-body1 MuiTypography-colorTextPrimary">Trúc Nguyễn</p>
-<!--                    <svg class="MuiSvgIcon-root arrow-avatar"-->
-<!--                         focusable="false"-->
-<!--                         viewBox="0 0 24 24"-->
-<!--                         aria-hidden="true">-->
-<!--                        <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path>-->
-<!--                    </svg>-->
                 </div>
             </div>
         </div>
@@ -145,17 +102,6 @@
                                 <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
                             </svg>Thêm sản phẩm
                         </a>
-<!--                        <button id="btn-create-product"-->
-<!--                                class="sc-jqUVSM dfbErd">-->
-<!--                            <span class="sc-papXJ jcEYKF">-->
-<!--                                <svg class="MuiSvgIcon-root"-->
-<!--                                     focusable="false"-->
-<!--                                     viewBox="0 0 24 24"-->
-<!--                                     aria-hidden="true">-->
-<!--                                    <path d="M7 10l5 5 5-5z"></path>-->
-<!--                                </svg>-->
-<!--                            </span>-->
-<!--                        </button>-->
                     </div>
                 </div>
             </div>
@@ -191,8 +137,7 @@
                                                placeholder="Tìm kiếm theo tên sản phẩm"
                                                type="text"
                                                class="sc-ikZpkk iYDwCJ form-control searchTitle "
-                                               value=""
-                                        >
+                                               value="">
                                     </label>
                                     <fieldset class="sc-iIPllB iUBRZb"></fieldset>
                                 </div>
@@ -494,7 +439,6 @@
     page.dialogs.elements.nextPage = $("#nextPage");
     page.dialogs.elements.previousPage = $("#previousPage");
 
-    //nhat-dev import file
     page.elements.importFile = $("#importFile");
 
     page.elements.importFile.on("click", function (){
@@ -580,7 +524,6 @@
             page.elements.pageNo.text(pageNext);
             page.commands.getAllProducts();
         }
-
     })
 
     page.dialogs.elements.previousPage.on("click", () => {

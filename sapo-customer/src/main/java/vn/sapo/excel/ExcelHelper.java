@@ -6,10 +6,13 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
+import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customer.dto.CreateCustomerParam;
+import vn.sapo.entities.customer.CustomerGender;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,9 +20,13 @@ import java.util.List;
 public class ExcelHelper {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
-    static String[] HEADER = { "Id","Customer Code", "Full Name", "Phone Number", "Group id",
-            "Email", "Birthday", "Gender", "employeeId"};
-    static String SHEET = "Customer";
+    static String[] HEADER = {"Tên khách hàng", "Mã khách hàng", "Mã nhóm khách hàng", "Áp dụng ưu đãi", "Email",
+            "Điện thoại", "Ngày sinh", "Giới tính", "Website", "Fax", "Mã số thuế", "SĐT nhân viên phụ trách",
+            "Mô tả", "Chính sách giá mặc định", "Chiết khấu mặc định (%)", "Phương thức thanh toán mặc định",
+            "Người liên hệ", "Người liên hệ - SĐT", "Người liên hệ - Email", "Địa chỉ", "Tỉnh thành", "Quận huyện",
+            "Phường xã", "Nợ hiện tại", "Tổng chi tiêu", "Ghi chú", "Tags" };
+
+    static String SHEET = "FileNhapDSKhachHang";
 
     public static boolean hasExcelFormat(MultipartFile file) {
 
@@ -31,6 +38,7 @@ public class ExcelHelper {
     }
 
     public static List<CreateCustomerParam> excelToCustomers(InputStream is) {
+
         try {
             Workbook workbook = new XSSFWorkbook(is);
 
@@ -52,9 +60,13 @@ public class ExcelHelper {
                 Iterator<Cell> cellsInRow = currentRow.iterator();
 
                 CreateCustomerParam customer = new CreateCustomerParam();
-//                List<ProductTaxParam> taxParams = new ArrayList<>();
-//                ProductTaxParam taxIn = new ProductTaxParam();
-//                ProductTaxParam taxOut = new ProductTaxParam();
+                customer.setEmployeeId(6);
+
+                CreateAddressParam address = new CreateAddressParam();
+                address.setProvinceId(-1);
+                address.setDistrictId(-1);
+                address.setWardId(-1);
+
 
                 int cellIdx = 0;
                 while (cellsInRow.hasNext()) {
@@ -62,79 +74,102 @@ public class ExcelHelper {
 
                     switch (cellIdx) {
                         case 0:
-//                            customer.setId((int) currentCell.getNumericCellValue());
+                            customer.setFullName(currentCell.getStringCellValue());
                             break;
                         case 1:
-//                            product.setTitle(currentCell.getStringCellValue());
+                            if (currentCell.getStringCellValue() == null)
+                                customer.setCustomerCode("CUZN000" + customer.getId());
+                            customer.setCustomerCode(currentCell.getStringCellValue());
                             break;
                         case 2:
-//                            product.setSku(currentCell.getStringCellValue());
+                            customer.setGroupId((int) currentCell.getNumericCellValue());
                             break;
                         case 3:
-//                            product.setMass((float) currentCell.getNumericCellValue());
+//                             áp dụng uu đãi
                             break;
                         case 4:
-//                            product.setBarCode(currentCell.getStringCellValue());
+                            customer.setEmail(currentCell.getStringCellValue());
                             break;
                         case 5:
-//                            product.setUnit(currentCell.getStringCellValue());
+                            customer.setPhoneNumber(currentCell.getStringCellValue());
                             break;
                         case 6:
-//                            product.setRetailPrice(BigDecimal.valueOf(currentCell.getNumericCellValue()));
+                            customer.setBirthday(currentCell.getDateCellValue());
                             break;
                         case 7:
-//                            product.setWholesalePrice(BigDecimal.valueOf(currentCell.getNumericCellValue()));
+                            customer.setGender(CustomerGender.parseCustomerGender(currentCell.getStringCellValue()));
                             break;
                         case 8:
-//                            product.setImportPrice(BigDecimal.valueOf(currentCell.getNumericCellValue()));
+//                             Website
                             break;
                         case 9:
-//                            product.setBrandId((int) currentCell.getNumericCellValue());
+//                             Fax
                             break;
                         case 10:
-//                            product.setCategoryId((int) currentCell.getNumericCellValue());
+//                           Mã số thuế
                             break;
                         case 11:
-//                            product.setApplyTax(currentCell.getBooleanCellValue());
+//                            if (currentCell.getStringCellValue()==null)
+//                                customer.setEmployeeId(6);
+
                             break;
                         case 12:
-//                            product.setTaxInclusive(currentCell.getBooleanCellValue());
+                            customer.setDescription(currentCell.getStringCellValue());
                             break;
                         case 13:
-//                            taxIn.setTaxId((int) currentCell.getNumericCellValue());
+//                            chính sách giá mặc định
                             break;
                         case 14:
-//                            taxOut.setTaxId((int) currentCell.getNumericCellValue());
+//                            chiết khấu mặc định
                             break;
                         case 15:
-//                            taxIn.setTaxType(TaxType.parseTypeTax(currentCell.getStringCellValue()));
+//                            phương thức thanh toán mặc định
                             break;
                         case 16:
-//                            taxOut.setTaxType(TaxType.parseTypeTax(currentCell.getStringCellValue()));
+                            address.setFullName(currentCell.getStringCellValue());
                             break;
                         case 17:
-//                            product.setDescription(currentCell.getStringCellValue());
+                            address.setPhoneNumber(currentCell.getStringCellValue());
                             break;
                         case 18:
-//                            product.setEnableSell(currentCell.getBooleanCellValue());
+                            address.setEmail(currentCell.getStringCellValue());
                             break;
                         case 19:
-//                            product.setEnableVariant(currentCell.getBooleanCellValue());
+                            address.setLine1(currentCell.getStringCellValue());
                             break;
                         case 20:
-//                            product.setCostPrice(BigDecimal.valueOf(currentCell.getNumericCellValue()));
+                            address.setProvinceName(currentCell.getStringCellValue());
                             break;
                         case 21:
-//                            product.setQuantity((int) currentCell.getNumericCellValue());
+                            address.setDistrictName(currentCell.getStringCellValue());
+                            break;
+                        case 22:
+                            address.setWardName(currentCell.getStringCellValue());
+                            break;
+                        case 23:
+//                            nợ hiện tại
+                            customer.setDebtTotal(BigDecimal.valueOf(currentCell.getNumericCellValue()));
+                            break;
+                        case 24:
+//                            tổng chi tiêu
+                            customer.setSpendTotal(BigDecimal.valueOf(currentCell.getNumericCellValue()));
+                            break;
+                        case 25:
+//                            gi chú
+                            break;
+                        case 26:
+//                            tag
                             break;
                         default:
                             break;
                     }
                     cellIdx++;
+
                 }
+
+                customer.setCreateAddressParam(address);
                 customers.add(customer);
             }
-
             workbook.close();
 
             return customers;
