@@ -9,6 +9,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import vn.sapo.address.dto.AddressResult;
 import vn.sapo.customer.dto.CustomerResult;
 
+
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -105,7 +106,7 @@ public class CustomerExcelExporter {
                 createCell(row, columnCount++, customer.getFullName() != null ? customer.getFullName() : "" , style);
                 createCell(row, columnCount++, customer.getCustomerCode(), style);
                 createCell(row, columnCount++, customer.getGroup().getTitle(), style);
-                createCell(row, columnCount++, "Theo nhóm khách hàng", style);
+                createCell(row, columnCount++, customer.getGroup().getTitle(), style);
                 createCell(row, columnCount++, customer.getEmail() != null ? customer.getEmail() : "", style);
                 createCell(row, columnCount++, customer.getPhoneNumber() != null ? customer.getPhoneNumber() : "" , style);
                 createCell(row, columnCount++, customer.getBirthday() != null ? customer.getBirthday().toString() : "", style);
@@ -144,7 +145,7 @@ public class CustomerExcelExporter {
                 createCell(row, columnCount++, customer.getQuantityItemOrder() , style);
                 createCell(row, columnCount++, customer.getQuantityProductOrder(), style);
                 createCell(row, columnCount++, "SL hoàn trả", style);
-                createCell(row, columnCount++, customer.getLastDayOrder()!=null ? customer.getLastDayOrder() : "", style);
+                createCell(row, columnCount++, customer.getLastDayOrder()!=null ? customer.getLastDayOrder().toString() : "", style);
                 createCell(row, columnCount++, "điểm hiện tại", style);
                 createCell(row, columnCount++, "Hạng thẻ hiện tại", style);
         }
