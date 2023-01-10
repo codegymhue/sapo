@@ -16,8 +16,8 @@ public interface CustomerGroupRepository  extends JpaRepository<CustomerGroup, I
             "g.id," +
             "g.title," +
             "g.cusGrpCode," +
-            "g.pricing_policy_id," +
-            "g.payment_method_id," +
+            "g.pricingPolicyId," +
+            "g.paymentMethodId," +
             "g.createdAt, " +
             "count(c.groupId)," +
             "g.description,g.discount)" +
