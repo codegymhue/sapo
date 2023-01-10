@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.address.AddressService;
 import vn.sapo.address.dto.CreateAddressParam;
+import vn.sapo.customer.CustomerFilterRepository;
 import vn.sapo.customer.CustomerService;
-import vn.sapo.customer.dto.CreateCustomerParam;
-import vn.sapo.customer.dto.CustomerFilter;
-import vn.sapo.customer.dto.CustomerResult;
-import vn.sapo.customer.dto.UpdateCustomerParam;
-import vn.sapo.customerGroup.CustomerGroupService;
+import vn.sapo.customer.dto.*;
+
+import vn.sapo.entities.customer.Customer;
 import vn.sapo.excel.ExcelHelper;
+
+import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.excel.ExcelService;
 import vn.sapo.excel.ResponseMessage;
 import vn.sapo.order.sale.SaleOrderService;
@@ -26,7 +27,9 @@ import vn.sapo.payment.sale.PaymentSaleOrderService;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Iterator;
 import java.util.List;
+import java.util.function.Function;
 
 @RestController
 @RequestMapping("/api/customers")
@@ -53,7 +56,7 @@ public class CustomerAPI {
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
         CustomerResult dto = customerService.findById(id);
         setData(dto);
@@ -64,7 +67,7 @@ public class CustomerAPI {
     @PostMapping("/filter")
     public ResponseEntity<?> testFilter(@RequestBody CustomerFilter customerFilter,
                                         @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-                                        @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
+                                        @RequestParam(name = "size", required = false, defaultValue = "5") Integer size,
                                         @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
 
         Sort sortable = null;
@@ -78,10 +81,17 @@ public class CustomerAPI {
 
         Pageable pageable = PageRequest.of(page, size, sortable);
         Page<CustomerResult> pagealeCustomers = customerService.findAllByFilters(customerFilter, pageable);
+
+        CustomerDataTable customerDataTable = new CustomerDataTable();
+        if(pagealeCustomers != null){
+            customerDataTable.setDraw(pagealeCustomers.getPageable().getPageNumber());
+            customerDataTable.setRecordsTotal(pagealeCustomers.getSize());
+            customerDataTable.setRecordsFiltered(pagealeCustomers.getSize());
+            customerDataTable.setContent(pagealeCustomers.getContent());
+        }
         return new ResponseEntity<>(pagealeCustomers, HttpStatus.OK);
 
     }
-
     @DeleteMapping("/delete/{id}")
     public void deleteCustomerById(@PathVariable Integer id) {
         addressService.deleteByCustomerId(id);
@@ -102,9 +112,8 @@ public class CustomerAPI {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateCustomer(@RequestBody UpdateCustomerParam updateCustomerParam) {
-        customerService.update(updateCustomerParam);
-        return new ResponseEntity<>(customerService.findById(updateCustomerParam.getId()), HttpStatus.OK);
+    public ResponseEntity<?> updateCustomer(@RequestBody UpdateCustomerParam updateCustomer) {
+        return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.OK);
     }
 
 //    @GetMapping("/customerGroup")
