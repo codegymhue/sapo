@@ -67,7 +67,6 @@ public class CustomerController {
     public ModelAndView showCustomerEditPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         Optional<CustomerResult> customerOptional = Optional.ofNullable(customerService.findById(id));
-        System.out.println(customerOptional.get());
         modelAndView.addObject("customer", customerOptional);
         modelAndView.setViewName("/admin/customer/edit_customer");
         return modelAndView;

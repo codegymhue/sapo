@@ -1,23 +1,24 @@
 package vn.sapo.controllers.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.address.AddressService;
-
-import vn.sapo.address.AddressServiceImpl;
-import vn.sapo.address.dto.AddressResult;
-
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CreateCustomerParam;
+import vn.sapo.customer.dto.CustomerFilter;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
-import vn.sapo.excel.ExcelService;
-
+import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.excel.ExcelHelper;
+import vn.sapo.excel.ExcelService;
 import vn.sapo.excel.ResponseMessage;
 import vn.sapo.order.sale.SaleOrderService;
 import vn.sapo.order.sale.item.OrderItemService;
@@ -42,6 +43,8 @@ public class CustomerAPI {
     SaleOrderService saleOrderService;
     @Autowired
     ExcelService excelService;
+    @Autowired
+    CustomerGroupService customerGroupService;
 
     @GetMapping("")
     public ResponseEntity<?> findAll() {
@@ -50,7 +53,7 @@ public class CustomerAPI {
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
         CustomerResult dto = customerService.findById(id);
         setData(dto);
@@ -58,6 +61,26 @@ public class CustomerAPI {
     }
 
 
+    @PostMapping("/filter")
+    public ResponseEntity<?> testFilter(@RequestBody CustomerFilter customerFilter,
+                                        @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
+                                        @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
+                                        @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
+
+        Sort sortable = null;
+        if (sort.equals("ASC")) {
+            sortable = Sort.by("id").ascending();
+        }
+        if (sort.equals("DESC")) {
+            sortable = Sort.by("id").descending();
+        }
+
+
+        Pageable pageable = PageRequest.of(page, size, sortable);
+        Page<CustomerResult> pagealeCustomers = customerService.findAllByFilters(customerFilter, pageable);
+        return new ResponseEntity<>(pagealeCustomers, HttpStatus.OK);
+
+    }
 
     @DeleteMapping("/delete/{id}")
     public void deleteCustomerById(@PathVariable Integer id) {
@@ -79,8 +102,9 @@ public class CustomerAPI {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateCustomer(@RequestBody UpdateCustomerParam updateCustomer) {
-        return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.OK);
+    public ResponseEntity<?> updateCustomer(@RequestBody UpdateCustomerParam updateCustomerParam) {
+        customerService.update(updateCustomerParam);
+        return new ResponseEntity<>(customerService.findById(updateCustomerParam.getId()), HttpStatus.OK);
     }
 
 //    @GetMapping("/customerGroup")
@@ -89,13 +113,20 @@ public class CustomerAPI {
 //    }
 
 
-
-
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteCustomer(@PathVariable Integer id) {
         customerService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
+//
+//    @DeleteMapping("/delete")
+//    public ResponseEntity<?> deleteCustomer(@PathVariable Integer id) {
+//        customerService.deleteById(id);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+
 
 
     @PutMapping("/updateStatusAvailable")
@@ -115,8 +146,8 @@ public class CustomerAPI {
                 message = "Uploaded the file successfully: " + file.getOriginalFilename();
                 return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
             } catch (Exception e) {
-//                message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-//                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+                message = "Could not upload the file: " + file.getOriginalFilename() + "!";
+                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
             }
         }
 
@@ -135,8 +166,6 @@ public class CustomerAPI {
 //    findAllCustomerByGroupAndStatus
 
 
-
-
     public void setData(CustomerResult customer) {
         BigDecimal spendTotal = getSpendTotalByCustomerId(customer.getId());
         BigDecimal paidTotal = getPaidTotalByCustomerId(customer.getId());
@@ -145,8 +174,12 @@ public class CustomerAPI {
         customer.setQuantityProductOrder(getQuantityProductOrderByCustomerId(customer.getId()));
         customer.setQuantityItemOrder(getQuantityItemCustomerOrderById(customer.getId()));
         customer.setLastDayOrder(getLastDayOrderByCustomerId(customer.getId()));
-    }
+//        Integer pricingPolicy = getPricingPolicyByCustomerId(customer.getId());
 
+    }
+//public Integer getPricingPolicyByCustomerId(Integer customerId){
+//        Integer pricingPolicy = customerGroupService.getPricingPolicyByCustomerId(customerId);
+//}
     public BigDecimal getSpendTotalByCustomerId(Integer customerId) {
         BigDecimal spendTotal = saleOrderService.getSpendTotalByCustomerId(customerId);
         if (spendTotal == null)
@@ -175,32 +208,16 @@ public class CustomerAPI {
         return quantityItemOrder;
     }
 
+
     public Instant getLastDayOrderByCustomerId(Integer customerId) {
         return saleOrderService.getLastDayOrderByCustomerId(customerId);
     }
 
-    @PostMapping ("/findAllCustomerByGroup")
-    public ResponseEntity<?> findAllByGroupId(@RequestBody  List<Integer> arrGroupId ) {
+    @PostMapping("/findAllCustomerByGroup")
+    public ResponseEntity<?> findAllByGroupId(@RequestBody List<Integer> arrGroupId) {
         List<CustomerResult> customers = customerService.findAllByGroupListId(arrGroupId);
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
-//    @PostMapping("/findAllCustomerByGender")
-//    public ResponseEntity<?> findAllByGenderId(@RequestBody String arrGenderId) {
-//        List<CustomerResult> customers = customerService.findAllByGenderId(arrGenderId);
-//        return new ResponseEntity<>(customers,HttpStatus.OK);
-//    }
-//
-//    @PostMapping("/findAllCustomerEmployee")
-//    public ResponseEntity<?> findAllByEmployeeId(@RequestBody List<Integer> arrEmployeeId) {
-//        List<CustomerResult> customers = customerService.findAllEmployeeListId(arrEmployeeId);
-//        return new ResponseEntity<>(customers, HttpStatus.OK);
-//    }
-
-//    @PostMapping("/findAllCustomerByStatus")
-//    public ResponseEntity<?> findAllStatusListId(@RequestBody List<String> arrStatusId) {
-//        List<CustomerResult> customers = customerService.findAllByStatusListId(arrStatusId);
-//        return new ResponseEntity<>(customers, HttpStatus.OK);
-//    }
 }
 
