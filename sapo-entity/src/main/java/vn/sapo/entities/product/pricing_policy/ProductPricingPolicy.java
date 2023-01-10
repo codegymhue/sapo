@@ -46,6 +46,10 @@ public class ProductPricingPolicy implements Serializable {
         return id.getPricingPolicy().getTitle();
     }
 
+    public PricingPolicyType getPricingPolicyType() {
+        return id.getPricingPolicy().getPricingPolicyType();
+    }
+
     public Product getProduct() {
         return id.getProduct();
     }

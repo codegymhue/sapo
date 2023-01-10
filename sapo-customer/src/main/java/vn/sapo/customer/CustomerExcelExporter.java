@@ -123,8 +123,10 @@ public class CustomerExcelExporter {
                     for (AddressResult ar : customer.getAddresses()) {
                         createCell(row, columnCount++, ar.getFullName() != null ? ar.getFullName() : "", style);
                         createCell(row, columnCount++, ar.getPhoneNumber() != null ? ar.getPhoneNumber() : "", style);
-                        createCell(row, columnCount++, ar.getEmail() != null ? ar.getEmail() != null : "", style);
+                        createCell(row, columnCount++, ar.getEmail() != null ? ar.getEmail() : "", style);
                         createCell(row, columnCount++, ar.getLine1() != null ? ar.getLine1() : "", style);
+                        if (ar.getLine2() != null)
+                            createCell(sheet.createRow(rowCount++),columnCount-1,ar.getLine2(),style);
                         createCell(row, columnCount++, ar.getProvinceName() != null ?  ar.getProvinceName() : "", style);
                         createCell(row, columnCount++, ar.getDistrictName() != null ? ar.getDistrictName() : "", style);
                         createCell(row, columnCount++, ar.getWardName() != null ? ar.getWardName() : "", style);

@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import vn.sapo.entities.BaseEntity;
 import vn.sapo.entities.media.Media;
+import vn.sapo.entities.product.pricing_policy.PricingPolicyType;
 import vn.sapo.entities.product.pricing_policy.ProductPrice;
 import vn.sapo.entities.product.pricing_policy.ProductPricingPolicy;
 import vn.sapo.entities.tax.ProductTax;
@@ -15,7 +16,6 @@ import vn.sapo.entities.tax.TaxType;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor
@@ -63,13 +63,13 @@ public class Product extends BaseEntity {
     private BigDecimal wholesalePrice;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name="fk_product_category"))
+    @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "fk_product_category"))
     private Category category;
     @Column(name = "category_id", insertable = false, updatable = false)
     private Integer categoryId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "brand_id",foreignKey = @ForeignKey(name="fk_product_brand"))
+    @JoinColumn(name = "brand_id", foreignKey = @ForeignKey(name = "fk_product_brand"))
     private Brand brand;
     @Column(name = "brand_id", insertable = false, updatable = false)
     private Integer brandId;
@@ -107,11 +107,21 @@ public class Product extends BaseEntity {
                 .orElse(null);
     }
 
-    public List<ProductPrice> getProductPriceList() {
+    public List<ProductPrice> getProductPriceSaleList () {
         if (productPricingPolicySet == null)
             return new ArrayList<>();
         return productPricingPolicySet.stream()
-                .map(productPricingPolicy -> new ProductPrice(productPricingPolicy.getPricingPolicyTitle(),productPricingPolicy.getPrice()))
+                .filter(pPricingPolicy -> pPricingPolicy.getPricingPolicyType() == PricingPolicyType.SALE)
+                .map(pPricingPolicy -> new ProductPrice(pPricingPolicy.getPricingPolicyId(), pPricingPolicy.getPricingPolicyTitle(), pPricingPolicy.getPrice()))
+                .collect(Collectors.toList());
+    }
+
+    public List<ProductPrice> getProductPricePurchaseList () {
+        if (productPricingPolicySet == null)
+            return new ArrayList<>();
+        return productPricingPolicySet.stream()
+                .filter(pPricingPolicy -> pPricingPolicy.getPricingPolicyType() == PricingPolicyType.PURCHASE)
+                .map(pPricingPolicy -> new ProductPrice(pPricingPolicy.getPricingPolicyId(), pPricingPolicy.getPricingPolicyTitle(), pPricingPolicy.getPrice()))
                 .collect(Collectors.toList());
     }
 

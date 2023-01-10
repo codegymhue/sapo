@@ -1,9 +1,7 @@
 package vn.sapo.customer.dto;
 
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.Accessors;
 import vn.sapo.address.dto.AddressResult;
 
@@ -11,8 +9,7 @@ import java.util.List;
 
 
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Accessors(chain = true)
 public class CustomerOrderResult {
 

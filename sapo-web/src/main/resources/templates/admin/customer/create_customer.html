@@ -45,7 +45,8 @@
                 </div>
             </div>
         </div>
-        <div class="MuiBox-root jss20344 jss20286">
+        <form id="formCreate">
+        <div class="MuiBox-root jss20344 jss20286" >
             <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-8">
                     <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
@@ -367,7 +368,7 @@
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
                                             <div class="MuiFormControl-root jss20481 MuiFormControl-fullWidth"><label
                                                     class="MuiFormLabel-root MuiInputLabel-root jss20482 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-                                                    data-shrink="true" for="129ba31d-25d3-4145-bcb2-5d99b07b3e3e">Mô
+                                                    data-shrink="true" for="descriptionCreate">Mô
                                                 tả<span
                                                         class="MuiTypography-root MuiTypography-caption"
                                                         title="Mô tả khách hàng của bạn để phục vụ cho việc chăm sóc khách hàng tốt hơn"><svg
@@ -384,8 +385,8 @@
                                                 <div class="MuiFormControl-root MuiTextField-root jss20483 jss20484 MuiFormControl-fullWidth">
                                                     <div
                                                             class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline">
-                              <textarea aria-invalid="false" id="129ba31d-25d3-4145-bcb2-5d99b07b3e3e"
-                                        name="description" placeholder="Nhập mô tả" rows="3" aria-label="Without label"
+                              <textarea aria-invalid="false" id="descriptionCreate"
+                                        name="descriptionCreate" placeholder="Nhập mô tả" rows="3" aria-label="Without label"
                                         class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline"></textarea>
                                                         <fieldset aria-hidden="true"
                                                                   class="jss20550 MuiOutlinedInput-notchedOutline"
@@ -407,6 +408,7 @@
                 </div>
             </div>
         </div>
+        </form>
         <form action="https://depament-stor.mysapogo.com/admin/customers/create#"></form>
         <form action="https://depament-stor.mysapogo.com/admin/customers/create#"></form>
     </div>
@@ -428,7 +430,7 @@
 
 
     class Customer {
-        constructor(id, customerCode, name, phone, customerGroup, gender, email, birthday, status, createAt, updateAt, employeeId, deleted, createAddressParam) {
+        constructor(id, customerCode, name, phone, customerGroup, gender, email, birthday, status, createAt, updateAt, employeeId, deleted, createAddressParam, description) {
             this.id = id;
             this.customerCode = customerCode;
             this.name = name;
@@ -443,13 +445,13 @@
             this.employeeId = employeeId;
             this.deleted = deleted;
             this.createAddressParam = createAddressParam;
-
+            this.description = description;
 
         }
     }
 
     class CreateAddressParam {
-        constructor(id, fullName, phoneNumber, line1, line2, email, districtId, districtName, provinceId, provinceName, wardId, wardName, zipCode, customerId, supplierId, isDefault) {
+        constructor(id, fullName, phoneNumber, line1, line2, email, districtId, districtName, provinceId, provinceName, wardId, wardName, zipCode, customerId, supplierId, isDefault, description) {
             this.fullName = fullName;
             this.line1 = line1;
             this.line2 = line2;
@@ -466,8 +468,8 @@
             this.customerId = customerId;
             this.id = id;
             this.isDefault = isDefault;
-            supplierId
             this.supplierId = supplierId;
+            this.description = description;
         }
     }
 
@@ -484,6 +486,7 @@
         customer.birthday = $('#birthdayCreate').val();
         customer.gender = $('#genderCreate :selected').val();
         customer.employeeId = $('#employeeNameCreate :selected').val();
+        customer.description = $('#descriptionCreate').val();
         // customer.birthday = '2022-12-28T16:44:24Z';
         // shippingAddress.fullName = $('#nameCreate').val();
         createAddressParam.line1 = $('#addressCreate').val();
@@ -513,21 +516,7 @@
                App.IziToast.showSuccessAlert("tạo khách hàng thành công !");
                 setTimeout(() => {
                 }, 2500)
-                // $('#nameCreate').val();
-                // $('#codeCreate').val();
-                // $('#phoneCreate').val();
-                // $('#emailCreate').val();
-                // $('#birthdayCreate').val();
-                // $('#statusCreate').val()
-                // $('#addressCreate').val();
-                // $('#genderCreate').val();
-                // $('#employeeNameCreate :selected').val();
-
-
-
-
-
-
+                $('#formCreate')[0].reset();
 
             })
             .fail((jqXHR) => {
@@ -537,7 +526,7 @@
                         App.IziToast.showErrorAlert(item);
                     })
                 }
-
+                // App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
             })
     });
 

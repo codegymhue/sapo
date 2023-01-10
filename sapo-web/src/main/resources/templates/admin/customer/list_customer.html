@@ -60,7 +60,7 @@
                     <div class=" sb-avatar sb-avatar--text"
                          style="display: inline-block; vertical-align: middle; width: 30px; height: 30px; border-radius: 20px; font-family: Helvetica, Arial, sans-serif;">
                         <div class=" sb-avatar__text"
-                             title="Phú Nguyễn"
+                             title="SKT"
                              style="width: 30px; height: 30px; line-height: initial; text-align: center; color: rgb(255, 255, 255); border-radius: 20px; background: rgb(215, 61, 50);">
                             <div style="display: table; table-layout: fixed; width: 100%; height: 100%; font-size: 10px;">
                                 <span style="display: table-cell; vertical-align: middle; white-space: nowrap;">
@@ -69,8 +69,7 @@
                             </div>
                         </div>
                     </div>
-                    <p class="MuiTypography-root jss445 MuiTypography-body1 MuiTypography-colorTextPrimary">Phú
-                        Nguyễn</p>
+                    <p class="MuiTypography-root jss445 MuiTypography-body1 MuiTypography-colorTextPrimary">SKT</p>
                     <svg class="MuiSvgIcon-root arrow-avatar"
                          focusable="false"
                          viewBox="0 0 24 24"
@@ -83,8 +82,8 @@
         <div class="MuiBox-root jss6754 jss6732">
             <div class="MuiBox-root jss6755 jss6733">
                 <div class="MuiBox-root jss6756 jss6741">
-                    <!--                    <a th:href="@{/admin/products/export/excel}">-->
-                    <button class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
+                    <a th:href="@{/admin/customers/export/excel}">
+                    <button class="MuiButtonBase-root MuiButton-rloot MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
                             tabindex="0"
                             type="button">
                       <span class="MuiButton-label">
@@ -109,7 +108,7 @@
                     <div class="MuiBox-root jss6793"
                          style="width: 1px; height: 20px; border-left: 1px solid rgb(211, 213, 215); margin: 0 8px;">
                     </div>
-                    <button id="importFile"
+                    <button id="importFileCustomers"
                             class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
                             tabindex="0"
                             type="button">
@@ -169,7 +168,7 @@
                         <div id="scroller"
                              class="sc-cHPgQl hYUFnd">
                             <div class="sc-gHLcSH ieIWRo">
-                                <button class="sc-KfMfS dvtKJo"> <a href="/admin/customers">Tất cả khách hàng</a>
+                                <button class="sc-KfMfS dvtKJo"> <a href="/admin/customers" style="text-decoration: none">Tất cả khách hàng</a>
                                 </button>
                             </div>
                         </div>
@@ -404,7 +403,8 @@
 </script>
 
 <script>
-
+    var myOffcanvas = document.getElementById('offcanvasExample')
+    var bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
 
     let page = {
         urls: {
@@ -473,7 +473,7 @@
     page.dialogs.elements.nextPage = $("#nextPage");
     page.dialogs.elements.previousPage = $("#previousPage");
 
-    page.elements.importFile = $("#importFile");
+    page.elements.importFile = $("#importFileCustomers");
 
     page.elements.importFile.on("click", function (){
         $("#modalImportFileCustomers").modal("show");
@@ -760,7 +760,7 @@
                     {
                         targets: 1,
                         render: function (data, type, row, meta) {
-                            return `<a href="/admin/customers/ ${row.id}">${row.customerCode}</a>`;
+                            return `<a href="/admin/customers/${row.id}" style="text-decoration: none">${row.customerCode}</a>`;
                         }
                     },
 
@@ -1649,10 +1649,8 @@
             url: "http://localhost:8080/api/customer_groups",
         })
             .done((data) => {
-                console.log(data)
 
                 $.each(data, (i, item) => {
-                    console.log(item)
                     let str = `<option value="${item.id}">${item.title}</option>`;
                     page.dialogs.elements.groupCustomer.append(str);
                 });
@@ -1698,9 +1696,6 @@
         if(status === -1 || groupId === -1){
             page.commands.getAllCustomers();
         }
-
-
-
     });
 
     $('#btnImportFileCustomers').click(function () {
@@ -1714,8 +1709,8 @@
             data: data,
             type: 'POST'
         }).done(function(result) {
-            $("#btnImportFileCustomers").modal("hide");
-            $("#formFileCustomers")[0].reset();
+            $("#modalImportFileCustomers").modal("hide");
+            $("#frmFileCustomers")[0].reset();
             page.commands.getAllCustomers();
             App.IziToast.showSuccessAlert("Tải file lên thành công!")
         }).fail((jqXHR) => {
