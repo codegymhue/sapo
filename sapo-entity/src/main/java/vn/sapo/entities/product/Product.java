@@ -21,9 +21,9 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Setter
 @Getter
-@Entity
 @Accessors(chain = true)
 @Table(name = "product")
+@Entity
 public class Product extends BaseEntity {
 
     @Id

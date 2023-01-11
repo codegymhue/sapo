@@ -26,10 +26,12 @@ public interface CustomerFilterRepository extends JpaRepository<Customer, Intege
 
             List<Predicate> predicates = new ArrayList<>();
             if(filter.getKeyword() != null){
+                //TODO: KIEM TRA LAI KHUC NAY.
                 Predicate predicateFullName = criteriaBuilder.like(root.get("fullName"),'%' + filter.getKeyword() + '%');
                 Predicate predicateCustomerCode = criteriaBuilder.like(root.get("customerCode"),'%' + filter.getKeyword() + '%');
                 Predicate predicatePhoneNumber = criteriaBuilder.like(root.get("phoneNumber"),'%' + filter.getKeyword() + '%');
                 Predicate predicateKw = criteriaBuilder.or(predicateCustomerCode, predicateFullName,predicatePhoneNumber);
+                //TODO: KIEM TRA LAI KHUC NAY. KO add predicates lam sao AND
                 predicates.add(predicateKw);
             }
             if (!filter.getGroupIds().isEmpty()) {

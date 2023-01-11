@@ -9,8 +9,6 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@AllArgsConstructor
-@NoArgsConstructor
 public class CusGrpPricingPolicyResult {
     private Integer id;
 

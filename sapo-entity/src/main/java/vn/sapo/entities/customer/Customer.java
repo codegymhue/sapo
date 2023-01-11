@@ -1,6 +1,5 @@
 package vn.sapo.entities.customer;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,12 +13,12 @@ import java.time.Instant;
 import java.util.Optional;
 import java.util.Set;
 
-@Entity
+
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name ="customer")
+@Entity
 @Accessors(chain = true)
 public class Customer extends BaseEntity {
     public Customer(Integer id) {
@@ -39,7 +38,6 @@ public class Customer extends BaseEntity {
 
     @Column(name = "phone_number", length = 15)
     private String phoneNumber;
-
 
     @Column(name = "email")
     private String email;
