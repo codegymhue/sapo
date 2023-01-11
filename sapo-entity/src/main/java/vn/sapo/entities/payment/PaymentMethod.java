@@ -20,12 +20,9 @@ import javax.persistence.GenerationType;
 @Table(name = "payment_method")
 @Accessors(chain = true)
 public class PaymentMethod {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, length = 50)
     private String id;
-
     @Column(name = "title", nullable = false, length = 50)
     private String title;
 

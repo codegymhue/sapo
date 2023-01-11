@@ -117,6 +117,7 @@ public class CustomerAPI {
         return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.OK);
     }
 
+    //TODO: Thua Code
 //    @GetMapping("/customerGroup")
 //    public ResponseEntity<?> getAllCustomerGroup() {
 //        return new ResponseEntity<>(customerService.findAll(), HttpStatus.OK);
@@ -152,7 +153,7 @@ public class CustomerAPI {
         if (ExcelHelper.hasExcelFormat(file)) {
             try {
                 List<CreateCustomerParam> customers = excelService.save(file);
-                customers.forEach(createCustomerParam1 -> create(createCustomerParam1));
+                customers.forEach(param -> create(param));
                 message = "Uploaded the file successfully: " + file.getOriginalFilename();
                 return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
             } catch (Exception e) {

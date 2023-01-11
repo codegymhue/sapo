@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Getter
@@ -16,6 +17,10 @@ public class UpdateAddressParam {
     private Integer customerId;
 
     private Integer supplierId;
+    @NotBlank(message = "Tên khách hàng không được để trống")
+    private String fullName;
+    private String phoneNumber;
+    private String email;
 
     private String line1;
 
@@ -32,10 +37,6 @@ public class UpdateAddressParam {
     private Integer provinceId;
 
     private String provinceName;
-
-    private String phoneNumber;
-
-    private String email;
 
     private String zipCode;
 }

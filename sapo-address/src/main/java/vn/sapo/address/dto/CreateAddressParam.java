@@ -1,5 +1,6 @@
 package vn.sapo.address.dto;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @Accessors(chain = true)
+@EqualsAndHashCode
 public class CreateAddressParam {
     private Integer customerId;
     private Integer supplierId;
