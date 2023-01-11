@@ -8,6 +8,7 @@ import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.address.dto.UpdateAddressParam;
 import vn.sapo.entities.Address;
+import vn.sapo.entities.customer.Customer;
 import vn.sapo.shared.exceptions.NotFoundException;
 
 import java.util.List;
@@ -22,6 +23,15 @@ public class AddressServiceImpl implements AddressService {
     @Autowired
     AddressMapper addressMapper;
 
+
+    @Override
+    @Transactional(readOnly = true)
+    public AddressResult findById(Integer id) {
+        Address address = addressRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("address not found"));
+        Integer customerId = address.getCustomerId();
+        return addressMapper.toDTO(address);
+    }
 
     @Override
     @Transactional(readOnly = true)

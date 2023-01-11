@@ -1,11 +1,14 @@
 package vn.sapo.customer;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
 import vn.sapo.address.dto.AddressResult;
 import vn.sapo.customer.dto.CustomerResult;
 
@@ -15,11 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+
 public class CustomerExcelExporter {
     private XSSFWorkbook workbook;
     private XSSFSheet sheet;
     private List<CustomerResult> customerList;
-    private AddressResult address = new AddressResult();
 
 
     public CustomerExcelExporter(List<CustomerResult> customerList) {
@@ -63,7 +66,7 @@ public class CustomerExcelExporter {
         createCell(row, 23, "Tổng chi tiêu", style);
         createCell(row, 24, "SL đơn hàng", style);
         createCell(row, 25, "Tổng SL sản phẩm đã mua", style);
-        createCell(row, 26, "Tổng SL sản phẩm hoàn trả", style);
+//        createCell(row, 26, "Tổng SL sản phẩm hoàn trả", style);
         createCell(row, 27, "Ngày mua cuối cùng", style);
         createCell(row, 28, "Điểm hiện tại", style);
         createCell(row, 29, "Hạng thẻ hiện tại", style);
@@ -138,16 +141,16 @@ public class CustomerExcelExporter {
                 createCell(row, columnCount++, "Mã số thuế", style);
                 createCell(row, columnCount++, customer.getDescription() != null ? customer.getDescription() : "" , style);
                 createCell(row, columnCount++, "chính sách giá mặc định", style);
-                createCell(row, columnCount++, "chiết khấu mặc định %", style);
+                createCell(row, columnCount++, customer.getGroup().getDiscount(), style);
                 createCell(row, columnCount++, "Paymen Metod", style);
-                createCell(row, columnCount++, customer.getDebtTotal(), style);
-                createCell(row, columnCount++, customer.getSpendTotal(), style);
-                createCell(row, columnCount++, customer.getQuantityItemOrder() , style);
+                createCell(row, columnCount++, customer.getDebtTotal() != null ? customer.getDebtTotal() : "0" , style);
+                createCell(row, columnCount++, customer.getSpendTotal() != null ? customer.getSpendTotal() : "0", style);
+                createCell(row, columnCount++, customer.getQuantityItemOrder(), style);
                 createCell(row, columnCount++, customer.getQuantityProductOrder(), style);
-                createCell(row, columnCount++, "SL hoàn trả", style);
+//                createCell(row, columnCount++, "SL hoàn trả", style);
                 createCell(row, columnCount++, customer.getLastDayOrder()!=null ? customer.getLastDayOrder().toString() : "", style);
-                createCell(row, columnCount++, "điểm hiện tại", style);
-                createCell(row, columnCount++, "Hạng thẻ hiện tại", style);
+                createCell(row, columnCount++, "", style);
+                createCell(row, columnCount++, "", style);
         }
 }
 

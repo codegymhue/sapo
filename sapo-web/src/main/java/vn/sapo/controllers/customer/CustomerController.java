@@ -42,11 +42,6 @@ public class CustomerController {
         return "/admin/customer/create_customer";
     }
 
-//    @GetMapping("/history")
-//    public String showCustomerHistoryPage() {
-//        return "/admin/customer/history_customer";
-//    }
-
 
     @GetMapping("/customers/{id}")
     public ModelAndView showCustomerInfoPage(@PathVariable Integer id) {
@@ -76,8 +71,6 @@ public class CustomerController {
 
     //export excel file
 
-    // Upload File Excel
-
     @GetMapping("/customers/export/excel")
     public void exportToExcel(HttpServletResponse response) throws IOException {
         response.setContentType("application/octet-stream");
@@ -104,17 +97,4 @@ public class CustomerController {
         excelExporter.export(response);
     }
 
-//    @GetMapping("customers/export/excel")
-//    public void exportToExcel(HttpServletResponse response) throws IOException {
-//        response.setContentType("application/octet-stream");
-//        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-//        String currentDateTime = dateFormatter.format(new Date());
-//
-//        String headerKey = "Content-Disposition";
-//        String headerValue = "attachment; filename=products_" + currentDateTime + ".xlsx";
-//        response.setHeader(headerKey, headerValue);
-//        List<CustomerResult> listCustomers = customerService.findAll();
-//        ProductExcelExporter excelExporter = new ProductExcelExporter(listCustomers);
-//        excelExporter.export(response);
-//    }
 }

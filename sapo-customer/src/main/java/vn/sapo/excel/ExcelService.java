@@ -2,7 +2,6 @@ package vn.sapo.excel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
-import vn.sapo.address.AddressService;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CreateCustomerParam;
 
@@ -12,8 +11,6 @@ import java.util.List;
 public class ExcelService {
     @Autowired
     CustomerService customerService;
-    @Autowired
-    AddressService addressService;
 
     public List<CreateCustomerParam> save(MultipartFile file) {
         try {
