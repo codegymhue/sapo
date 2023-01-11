@@ -64,7 +64,7 @@
                              style="width: 30px; height: 30px; line-height: initial; text-align: center; color: rgb(255, 255, 255); border-radius: 20px; background: rgb(215, 61, 50);">
                             <div style="display: table; table-layout: fixed; width: 100%; height: 100%; font-size: 10px;">
                                 <span style="display: table-cell; vertical-align: middle; white-space: nowrap;">
-                                    <span>P</span>
+                                    <span>S</span>
                                 </span>
                             </div>
                         </div>
@@ -191,7 +191,7 @@
                                     </div>
                                     <label style="width: 100%">
                                         <input id="inp-search"
-                                               placeholder="Tìm kiếm theo tên, SĐT khách hàng..."
+                                               placeholder="Tìm kiếm theo Mã Khách Hàng, Tên, SDT Khách Hàng"
                                                type="text"
                                                class="sc-ikZpkk iYDwCJ form-control searchTitle "
                                                value="">
@@ -483,9 +483,10 @@
 
     page.commands.getAllCustomers = () => {
         $(document).ready(function () {
-            console.log("show all customer")
             $("#tbCustomer").DataTable({
                 // chuyển tiếng việt cho datatable
+                processing: true,
+                serverSide: true,
                 language:
                     {
                         "processing": "Đang xử lý...",
@@ -767,10 +768,68 @@
 
                 ],
             })
+
+            drawDataTable();
         })
 
     }
+    function drawDataTable(){
+        $("#tbCustomer").DataTable({
+            // chuyển tiếng việt cho datatable
+            "processing": true,
+            "serverSide": true,
 
+            ajax: {
+                url: 'http://localhost:8080/api/customers/filter',
+                type: 'POST',
+                dataSrc: "content",
+                contentType: 'application/json',
+                "data": function (d) {
+                    d.groupIds = customerFilter.groupIds;
+                    d.gender = customerFilter.gender;
+                    d.dayOfBirthday = customerFilter.dayOfBirthday;
+                    d.monthOfBirthday = customerFilter.monthOfBirthday;
+                    d.employeeIds = customerFilter.employeeIds;
+                    d.keyword = customerFilter.keyword;
+                    d.statusList = [];
+                    return JSON.stringify(d)
+                }
+            },
+            lengthMenu: [
+                [5, 10, 20, -1],
+                ["5", "10", "20", "All"]
+            ],
+            searching: false,
+            destroy: true,
+            columns: [
+                {data: 'id'},
+                {data: 'customerCode'},
+                {data: 'fullName'},
+                {data: 'phoneNumber'},
+                {data: 'group.title'},
+                {data: 'debtTotal'},
+                {data: 'spendTotal'},
+                {data: "quantityItemOrder"}],
+             columnDefs: [
+             {
+                            targets: 0,
+                            render: function (data, type, row, meta) {
+                                return `
+                               <input type="checkbox" value="check_none" />
+                            `
+                            }
+                        },
+             {
+                            targets: 1,
+                            render: function (data, type, row, meta) {
+                                return `<a href="/admin/customers/ ${row.id}">${row.customerCode}</a>`;
+                            }
+                        },
+
+
+             ],
+        })
+    }
 
     function findCustomerByGroup(groupId) {
         $("#tbCustomer").DataTable({
