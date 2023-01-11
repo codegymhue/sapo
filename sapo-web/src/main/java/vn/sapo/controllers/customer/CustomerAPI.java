@@ -60,10 +60,13 @@ public class CustomerAPI {
 
     @PostMapping("/filter")
     public ResponseEntity<?> testFilter(@RequestBody CustomerFilter customerFilter,
-                                        @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-                                        @RequestParam(name = "size", required = false, defaultValue = "5") Integer size,
                                         @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
+        // start = 10; length = 5;
+        int start = customerFilter.getStart();
+        int length = customerFilter.getLength();
 
+
+        int page = start/length + 1;
         Sort sortable = null;
         if (sort.equals("ASC")) {
             sortable = Sort.by("id").ascending();
@@ -73,18 +76,17 @@ public class CustomerAPI {
         }
 
 
-        Pageable pageable = PageRequest.of(page, size, sortable);
+        Pageable pageable = PageRequest.of(page-1, length, sortable);
         Page<CustomerResult> pagealeCustomers = customerService.findAllByFilters(customerFilter, pageable);
 
         CustomerDataTable customerDataTable = new CustomerDataTable();
         if(pagealeCustomers != null){
-            customerDataTable.setDraw(pagealeCustomers.getPageable().getPageNumber());
-            customerDataTable.setRecordsTotal(pagealeCustomers.getSize());
-            customerDataTable.setRecordsFiltered(pagealeCustomers.getSize());
-            customerDataTable.setContent(pagealeCustomers.getContent());
+            customerDataTable.setRecordsTotal(pagealeCustomers.getTotalElements());
+            customerDataTable.setRecordsFiltered(pagealeCustomers.getTotalElements());
+            customerDataTable.setData(pagealeCustomers.getContent());
+            customerDataTable.setDraw(customerFilter.getDraw());
         }
-        return new ResponseEntity<>(pagealeCustomers, HttpStatus.OK);
-
+        return new ResponseEntity<>(customerDataTable, HttpStatus.OK);
     }
     @DeleteMapping("/delete/{id}")
     public void deleteCustomerById(@PathVariable Integer id) {
