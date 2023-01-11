@@ -8,7 +8,7 @@ import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.entities.customer.CustomerGender;
 
-import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -28,7 +28,7 @@ public class UpdateCustomerParam {
     private String email;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Instant birthday;
+    private Date birthday;
 
     private CustomerGender gender;
 
@@ -39,4 +39,8 @@ public class UpdateCustomerParam {
     private Integer employeeId;
 
     private CreateAddressParam createAddressParam;
+
+
+
+
 }

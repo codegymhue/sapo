@@ -33,7 +33,7 @@ public class UpdateAddressParam {
 
     private String provinceName;
 
-    private String mobile;
+    private String phoneNumber;
 
     private String email;
 

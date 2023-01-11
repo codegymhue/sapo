@@ -11,14 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.address.AddressService;
 import vn.sapo.address.dto.CreateAddressParam;
-import vn.sapo.customer.CustomerFilterRepository;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.*;
-
-import vn.sapo.entities.customer.Customer;
-import vn.sapo.excel.ExcelHelper;
-
 import vn.sapo.customerGroup.CustomerGroupService;
+import vn.sapo.excel.ExcelHelper;
 import vn.sapo.excel.ExcelService;
 import vn.sapo.excel.ResponseMessage;
 import vn.sapo.order.sale.SaleOrderService;
@@ -27,9 +23,7 @@ import vn.sapo.payment.sale.PaymentSaleOrderService;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.Iterator;
 import java.util.List;
-import java.util.function.Function;
 
 @RestController
 @RequestMapping("/api/customers")
@@ -122,11 +116,11 @@ public class CustomerAPI {
 //    }
 
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteCustomer(@PathVariable Integer id) {
-        customerService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//    @DeleteMapping("/delete")
+//    public ResponseEntity<?> deleteCustomer(@PathVariable Integer id) {
+//        customerService.deleteById(id);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
 
 //

@@ -87,6 +87,7 @@ public class CustomerServiceImpl implements CustomerService {
                 .orElseThrow(() -> new NotFoundException("Customer not found"));
         customerMapper.transferFields(updateCustomerParam, customer);
         return customerMapper.toDTO(customer);
+
     }
 
     //

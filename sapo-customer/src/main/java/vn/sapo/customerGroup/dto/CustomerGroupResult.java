@@ -6,8 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import vn.sapo.entities.tax.Tax;
 
 import java.time.Instant;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,5 +34,7 @@ public class CustomerGroupResult {
     private String description;
 
     private Integer discount;
+
+
 
 }
