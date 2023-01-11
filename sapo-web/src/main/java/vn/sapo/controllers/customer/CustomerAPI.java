@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.address.AddressService;
+import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customer.CustomerFilterRepository;
 import vn.sapo.customer.CustomerService;
@@ -27,6 +28,7 @@ import vn.sapo.payment.sale.PaymentSaleOrderService;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
@@ -226,6 +228,19 @@ public class CustomerAPI {
     public ResponseEntity<?> findAllByGroupId(@RequestBody List<Integer> arrGroupId) {
         List<CustomerResult> customers = customerService.findAllByGroupListId(arrGroupId);
         return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/address")
+    public ResponseEntity<?> shippingAddress(@PathVariable Integer id) {
+        CustomerResult dto = customerService.findById(id);
+        setData(dto);
+
+        CustomerResultDataTable customerResultDataTable = new CustomerResultDataTable();
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults.add(dto);
+        customerResultDataTable.setData(customerResults);
+
+        return new ResponseEntity<>(customerResultDataTable, HttpStatus.OK);
     }
 
 }
