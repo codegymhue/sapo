@@ -4,7 +4,7 @@
 <head>
     <th:block th:replace="/layout/header.html"/>
     <title>Chi tiết khách hàng</title>
-    <link rel="stylesheet" href="/assets/admin/css/customer/edit.css"/>
+    <link rel="stylesheet" href="/assets/admin/css/customer/info.css"/>
 </head>
 <body data-new-gr-c-s-check-loaded="14.1085.0">
 <div id="root" style="overflow: auto;">
@@ -58,9 +58,9 @@
                                     <div class="MuiBox-root jss761" style="display: flex;"><h6
                                             class="MuiTypography-root MuiTypography-subtitle1"
                                             style="padding-right: 16px;">Thông tin cá nhân</h6>
-                                        <div th:class="*{status == status.AVAILABLE} ? 'PGrDd' : 'PGrDf'">
+                                        <div th:class="*{status == status.AVAILABLE} ? 'hlxtkG':'csJERM ' ">
                                     <span th:text="*{status == status.AVAILABLE} ? 'Đang giao dịch' : 'Ngừng giao dịch'"
-                                          th:class="*{status == status.AVAILABLE} ? 'gIZkwA' : 'gIZkwB'"></span>
+                                          th:class="*{status == status.AVAILABLE} ? 'gIZkwA' : 'ccQLIN'"></span>
                                         </div>
                                     </div>
                                     <a class="jss2101"  th:href="'/admin/customers/update/'+ ${customer.getId()}">Cập nhật</a></div>

@@ -13,6 +13,7 @@ import java.util.List;
 @Setter
 @Accessors(chain = true)
 public class CustomerFilter {
+    private String keyword;
     private Integer id;
     private String customerCode;
     List<Integer> groupIds;
