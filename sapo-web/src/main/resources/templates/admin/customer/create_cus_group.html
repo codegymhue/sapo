@@ -284,7 +284,10 @@
         },
         initializeEventControl: {}
     }
-    page.dialogs.elements.titleGroup = $("#titleGroup");
+    page.dialogs.elements.titleGroupCre = $("#titleGroup");
+    page.dialogs.elements.cusGrpCodeCre = $("#cusGrpCode");
+    page.dialogs.elements.descriptionCre = $("#description");
+
 
 
     // Lấy List Pricing Policy
@@ -380,7 +383,7 @@
                 console.log(data.id);
                 CustomerGroup_App.IziToast.showSuccessAlert('Thêm mới nhóm khách hàng thành công  !!!')
                 let id = data.id;
-                // window.location.href = "/admin/customer_groups/"+id;
+                window.location.href = "/admin/customer_groups/"+id;
 
             })
             .fail((jqXHR) => {
@@ -400,26 +403,26 @@
 
     $("#frmCreateCusGrp").validate({
         rules: {
-            titleGroup: {
+            titleGroupCre: {
                 required: true,
                 maxlength: 50,
             },
-            cusGrpCode: {
+            cusGrpCodeCre: {
                 maxlength: 50,
             },
-            description: {
+            descriptionCre: {
                 maxlength: 255,
             },
         },
         messages: {
-            titleGroup: {
+            titleGroupCre: {
                 required: "Vui lòng nhập tên nhóm (ví dụ: Bán Chẳn)",
                 maxlength: "Tên sản phẩm không quá 50 ký tự."
             },
-            cusGrpCode: {
+            cusGrpCodeCre: {
                 maxlength: "Mã nhóm không quá 50 ký tự",
             },
-            description: {
+            descriptionCre: {
                 maxlength: "Mô tả không quá 255 ký tự",
             },
         },

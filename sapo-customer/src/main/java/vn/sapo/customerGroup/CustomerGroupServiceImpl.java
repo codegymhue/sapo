@@ -25,13 +25,18 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     @Transactional
     public CustomerGroupResult create(CreateCusGroupParam createCusGroupParam) {
         CustomerGroup customerGroup = customerGroupMapper.toModel(createCusGroupParam);
+        if (customerGroup.getPricingPolicyId() == null){
+            customerGroup.setPricingPolicyId(null);
+        }
+        if (createCusGroupParam.getPaymentMethodId() == null){
+            customerGroup.setPaymentMethodId(null);
+        }
         customerGroup = customerGroupRepository.save(customerGroup);
         if (customerGroup.getCusGrpCode() == ""){
             customerGroup.setCusGrpCode("CTN000" + customerGroup.getId());
         }
-
-        if (customerGroup.getTitle() == null)
-            customerGroup.setTitle(CodePrefix.CUSTOMER_GROUP.generate(customerGroup.getId()));
+//        if (customerGroup.getTitle() == null)
+//            customerGroup.setTitle(CodePrefix.CUSTOMER_GROUP.generate(customerGroup.getId()));
         return customerGroupMapper.toDTO(customerGroup);
 
     }

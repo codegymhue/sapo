@@ -59,8 +59,9 @@ public class CustomerGroupAPI {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteCusGroupById(@PathVariable Integer id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteCusGroupById(@PathVariable Integer id) {
         customerGroupService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
