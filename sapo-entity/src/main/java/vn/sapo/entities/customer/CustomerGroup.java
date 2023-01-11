@@ -30,23 +30,27 @@ public class CustomerGroup extends BaseEntity {
     private String title;
     @Column(name = "cus_grp_code", nullable = false, length = 50)
     private String cusGrpCode;
-    @Column(name = "description", nullable = false,length = 255)
+    @Column(name = "description", nullable = false)
     private String description;
     @Column(name = "discount", nullable = false)
     private Integer discount;
+
+    @Column(name = "cus_grp_type")
+    @Enumerated(EnumType.STRING)
+    private CustomerGroupType cusGrpType;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_method_id")
     private PaymentMethod paymentMethod;
 
-    @Column(name = "payment_method_id", nullable = false, insertable = false, updatable =false)
+    @Column(name = "payment_method_id", insertable = false, updatable = false)
     private String paymentMethodId;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pricing_policy_id",nullable = false)
+    @JoinColumn(name = "pricing_policy_id")
     private PricingPolicy pricingPolicy;
 
-    @Column(name = "pricing_policy_id", nullable = false,insertable = false, updatable =false)
+    @Column(name = "pricing_policy_id", insertable = false, updatable = false)
     private Integer pricingPolicyId;
 
     public CustomerGroup(Integer id) {
@@ -57,6 +61,7 @@ public class CustomerGroup extends BaseEntity {
         this.pricingPolicy = new PricingPolicy(this.pricingPolicyId = pricingPolicyId);
         return this;
     }
+
     public CustomerGroup setPaymentMethodId(String paymentMethodId) {
         this.paymentMethod = new PaymentMethod(this.paymentMethodId = paymentMethodId);
         return this;

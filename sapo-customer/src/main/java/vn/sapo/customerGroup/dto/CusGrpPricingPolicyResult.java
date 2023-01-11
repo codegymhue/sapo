@@ -1,4 +1,4 @@
-package vn.sapo.pricing_policy.dto;
+package vn.sapo.customerGroup.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,19 +8,13 @@ import lombok.experimental.Accessors;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Accessors(chain = true)
-public class PricingPolicyResult {
+@AllArgsConstructor
+@NoArgsConstructor
+public class CusGrpPricingPolicyResult {
     private Integer id;
-
-    private String pricingPolicyCode;
 
     private String title;
 
-    @Override
-    public String toString() {
-        return  title;
-    }
 
 }

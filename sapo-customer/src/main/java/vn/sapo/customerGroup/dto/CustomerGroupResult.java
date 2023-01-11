@@ -6,13 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import vn.sapo.entities.product.pricing_policy.PricingPolicy;
 
 import java.time.Instant;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
 @Accessors(chain = true)
 public class CustomerGroupResult {
     private Integer id;
@@ -22,6 +22,8 @@ public class CustomerGroupResult {
     private String cusGrpCode;
 
     private Integer pricingPolicyId;
+
+    private CusGrpPricingPolicyResult pricingPolicy;
 
     private String paymentMethodId;
 

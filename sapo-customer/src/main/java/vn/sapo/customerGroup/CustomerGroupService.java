@@ -5,6 +5,7 @@ import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.customerGroup.dto.CreateCusGroupParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
+import vn.sapo.customerGroup.dto.ICustomerGroup;
 import vn.sapo.customerGroup.dto.UpdateCusGroupParam;
 
 import java.util.*;
@@ -16,7 +17,7 @@ public interface CustomerGroupService {
 
     List<CustomerGroupResult> findAll();
 
-    List<CustomerGroupResult> sortByGroup();
+    List<ICustomerGroup> sortByGroup();
 
 
     CustomerGroupResult findById(Integer id);

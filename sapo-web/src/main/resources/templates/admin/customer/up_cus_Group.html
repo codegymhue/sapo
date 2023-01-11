@@ -169,7 +169,7 @@
                                                         display: flex;
                                                         justify-content: space-between;
                                                         align-items: center; ">
-                                                <span id="upPricingType">Chọn giá mặc định</span>
+                                                <span id="upPricingType" th:text="*{customerGroup.pricingPolicyId != null} ? *{customerGroup.getPricingPolicyId()} : 'Chọn giá mặc định' ">/span>
                                             </div>
                                             <ul class="dropdown-menu w-100 pricingPolicyIdCreate showAllPricingPolicy">
                                                 <div style="border-bottom: 1px solid #e3e3e3;">
@@ -238,12 +238,11 @@
                                                         display: flex;
                                                         justify-content: space-between;
                                                         align-items: center; ">
-                                                <span id="upPaymentType">Chọn hình thức thanh toán</span>
+                                                <span id="upPaymentType" th:text="*{customerGroup.paymentMethodId != null} ? *{customerGroup.paymentMethodId} : 'Chọn hình thức thanh toán' "></span>
                                             </div>
                                             <ul class="dropdown-menu w-100 categoryIdCreate showAllPaymentMethod" >
                                                 <li>Chọn hình thức thanh toán</li>
-                                                <div id="showAllPay"
-                                                     th:selected="*{customerGroup.paymentMethodId}">
+                                                <div id="showAllPay">
 
                                                 </div>
                                             </ul>

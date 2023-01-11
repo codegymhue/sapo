@@ -34,8 +34,7 @@ public class CustomerGroupAPI {
 
     @GetMapping("/sortGroup")
     public ResponseEntity<?> sortByGroup() {
-        List<CustomerGroupResult> list = customerGroupService.sortByGroup();
-        return new ResponseEntity<>(list, HttpStatus.OK);
+        return new ResponseEntity<>(customerGroupService.sortByGroup(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
