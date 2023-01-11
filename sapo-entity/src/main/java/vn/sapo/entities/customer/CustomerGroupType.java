@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum CustomerGroupType {
 
-    NAM("FIXED"), NU("DYNAMIC");
+    FIXED("FIXED"), DYNAMIC("DYNAMIC");
 
     private final String value;
 
