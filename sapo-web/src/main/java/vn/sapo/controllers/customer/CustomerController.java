@@ -66,6 +66,8 @@ public class CustomerController {
     @GetMapping("/customers/update/{id}")
     public ModelAndView showCustomerEditPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView();
+
+
         Optional<CustomerResult> customerOptional = Optional.ofNullable(customerService.findById(id));
         modelAndView.addObject("customer", customerOptional);
         modelAndView.setViewName("/admin/customer/edit_customer");

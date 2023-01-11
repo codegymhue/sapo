@@ -10,11 +10,11 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @Accessors(chain = true)
 public class CreateAddressParam {
-    @NotBlank(message = "Trường customer_ID bị null")
     private Integer customerId;
     private Integer supplierId;
     @NotBlank(message = "Tên khách hàng không được để trống")
     private String fullName;
+    @NotBlank(message = "Số điện thoại không được để trống")
     private String phoneNumber;
     private String email;
 
