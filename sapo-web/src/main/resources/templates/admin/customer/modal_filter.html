@@ -180,7 +180,7 @@
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                <div class="row">
+                <div class="row" id="dayYer">
                     <div class="btn bg-secondary dropdown-toggle select-btn-cat col-6"
                          type="button" data-bs-toggle="dropdown"
                          aria-expanded="false" style=" border: solid 1px #D3D5D7;border: solid 1px #D3D5D7;
@@ -230,7 +230,7 @@
                                                                 align-items: center; ">
                         <span id="allYear">Chọn Tháng</span>
                     </div>
-                    <ul class="dropdown-menu w-50 table table-hover">
+                    <ul class="dropdown-menu w-50 table table-hover Year">
                         <li onclick=handleClickYear(1)>1</li>
                         <li onclick=handleClickYear(2)>2</li>
                         <li onclick=handleClickYear(3)>3</li>
@@ -380,21 +380,6 @@
             });
         }
 
-        /**
-         $("#btnFilter").on('click', () => {
-            let arrayFilterId = [];
-            let elements = $('input[class="customerGroup-input"]');
-            $.each(elements, (i, item) => {
-                if (item.checked) {
-                    arrayFilterId.push(item.getAttribute("data-id"))
-                }
-                getAllFilter(arrayFilterId);
-            });
-            console.log(arrayFilterId)
-                getAllGroupFilter()
-            bsOffcanvas.hide();
-        });
-         **/
 
         function drawDataTable() {
             $("#tbCustomer").DataTable({
@@ -457,14 +442,64 @@
 
         // nút lọc
         $("#btnFilter").on('click', () => {
+            // drawFilterLabel();
             drawDataTable();
             bsOffcanvas.hide()
         });
 
         // nút xóa bộ lọc
         $("#btnCloseFilter").on('click', () => {
+            $("#offcanvasExample input[type=checkbox]").each((index, item)=>{
+                $(item).prop('checked', false);
+            })
+            $("#offcanvasExample input[type=radio]").each((index, item)=>{
+                $(item).prop('checked', false);
+            })
 
         })
+        function drawFilterLabel(){
+            if(document.getElementById("divDeleteFilterGroupLabel")!=null){
+                $( "#divDeleteFilterGroupLabel" ).remove();
+            }
+            drawFilterLabelGroup();
+
+        }
+        function drawFilterLabelGroup(){
+            if(customerFilter.groupIds.length !== 0){
+                let strNameFilterGroup = "";
+                for(let i=0;i<customerFilter.groupIds.length;i++){
+                    for (let j = 0; j < customerGroups.length; j++) {
+                        if(customerFilter.groupIds[i]==customerGroups[j].id){
+                            strNameFilterGroup += customerGroups[i].title;
+                        }
+                    }
+                    if(i!== customerFilter.groupIds.length-1){
+                        strNameFilterGroup += ", "
+                    }
+                }
+                let labelGroups = `
+                    <div class="jss4169" id="divDeleteFilterGroupLabel"><span class="jss4170 label">Nhóm khách hàng: ${strNameFilterGroup}</span>
+                            <div class="jss4171"><button class="MuiButtonBase-root MuiIconButton-root delete-icon" tabindex="0"
+                                                         type="button"><span class="MuiIconButton-label" id="btnDeleteFilterGroupLabel"><svg class="MuiSvgIcon-root" focusable="false"
+                                                                                                              viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                                </path>
+                            </svg></span><span class="MuiTouchRipple-root"></span></button></div>
+                        </div>
+                `;
+
+                $( "#filterLabel" ).append(labelGroups);
+                $("#btnDeleteFilterGroupLabel").click(function() {
+                    customerFilter.groupIds = [];
+                    $( "#divDeleteFilterGroupLabel" ).remove();
+                    drawDataTable();
+                    $("#customerGroupFilter input[type=checkbox]").each((index, item)=>{
+                        $(item).prop('checked', false);
+                    })
+                });
+            }
+        }
 
         function getAllCustomerGender() {
             return $.ajax({
@@ -536,6 +571,7 @@
         }
 
 
+
         function getAllCustomerGroup() {
             return $.ajax({
                 headers: {
@@ -547,6 +583,7 @@
             })
                 .done((data) => {
                     // console.log(data)
+                    customerGroups = data;
                     $.each(data, (i, item) => {
                         let str = `<div>
                             <input type="checkbox"  class="customerGroup-input" data-id=${item.id}>
@@ -570,6 +607,7 @@
                 url: "http://localhost:8080/api/employees"
             })
                 .done((data) => {
+                    employees = data;
                     $.each(data, (i, item) => {
                         let str = `<div value="${item.id}">
                         <input type="checkbox" class="customerEmployee-input" data-id=${item.id}>
@@ -767,7 +805,7 @@
 
             $("#allYear").text(month)
 
-            $('div.toolbar').html(`<b>Month:  ${month}</b>`);
+
         }
     </script>
 

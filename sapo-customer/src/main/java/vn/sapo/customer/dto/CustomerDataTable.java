@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CustomerDataTable {
     private Integer draw;
-    private Integer recordsTotal;
-    private Integer recordsFiltered;
-    private List<CustomerResult> content;
+    private Long recordsTotal;
+    private Long recordsFiltered;
+    private List<CustomerResult> data;
 }
