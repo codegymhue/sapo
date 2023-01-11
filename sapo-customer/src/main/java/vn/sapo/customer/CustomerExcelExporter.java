@@ -138,7 +138,7 @@ public class CustomerExcelExporter {
                 createCell(row, columnCount++, "Mã số thuế", style);
                 createCell(row, columnCount++, customer.getDescription() != null ? customer.getDescription() : "" , style);
                 createCell(row, columnCount++, "chính sách giá mặc định", style);
-                createCell(row, columnCount++, "chiết khấu mặc định %", style);
+                createCell(row, columnCount++, customer.getGroup().getDiscount(), style);
                 createCell(row, columnCount++, "Paymen Metod", style);
                 createCell(row, columnCount++, customer.getDebtTotal(), style);
                 createCell(row, columnCount++, customer.getSpendTotal(), style);
@@ -146,8 +146,8 @@ public class CustomerExcelExporter {
                 createCell(row, columnCount++, customer.getQuantityProductOrder(), style);
                 createCell(row, columnCount++, "SL hoàn trả", style);
                 createCell(row, columnCount++, customer.getLastDayOrder()!=null ? customer.getLastDayOrder().toString() : "", style);
-                createCell(row, columnCount++, "điểm hiện tại", style);
-                createCell(row, columnCount++, "Hạng thẻ hiện tại", style);
+                createCell(row, columnCount++, "", style);
+                createCell(row, columnCount++, "", style);
         }
 }
 
