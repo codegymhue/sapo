@@ -5,14 +5,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.entities.customer.CustomerGender;
+import vn.sapo.entities.customer.CustomerStatus;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 
 @Getter
@@ -50,4 +49,5 @@ public class CreateCustomerParam {
     private BigDecimal debtTotal;  // nợ
 
     private BigDecimal spendTotal; //chi tiêu
+    private CustomerStatus status;
 }

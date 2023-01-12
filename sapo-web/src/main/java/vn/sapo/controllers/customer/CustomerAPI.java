@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.address.AddressService;
-import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.*;
@@ -24,10 +23,7 @@ import vn.sapo.payment.sale.PaymentSaleOrderService;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-
 import java.util.ArrayList;
-import java.util.Iterator;
-
 import java.util.List;
 
 @RestController
@@ -48,7 +44,7 @@ public class CustomerAPI {
     @Autowired
     CustomerGroupService customerGroupService;
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<?> findAll() {
         List<CustomerResult> customers = customerService.findAll();
         customers.forEach(this::setData);
@@ -71,7 +67,7 @@ public class CustomerAPI {
         int length = customerFilter.getLength();
 
 
-        int page = start/length + 1;
+        int page = start / length + 1;
         Sort sortable = null;
         if (sort.equals("ASC")) {
             sortable = Sort.by("id").ascending();
@@ -81,11 +77,11 @@ public class CustomerAPI {
         }
 
 
-        Pageable pageable = PageRequest.of(page-1, length, sortable);
+        Pageable pageable = PageRequest.of(page - 1, length, sortable);
         Page<CustomerResult> pagealeCustomers = customerService.findAllByFilters(customerFilter, pageable);
 
         CustomerDataTable customerDataTable = new CustomerDataTable();
-        if(pagealeCustomers != null){
+        if (pagealeCustomers != null) {
             customerDataTable.setRecordsTotal(pagealeCustomers.getTotalElements());
             customerDataTable.setRecordsFiltered(pagealeCustomers.getTotalElements());
             customerDataTable.setData(pagealeCustomers.getContent());
@@ -93,6 +89,7 @@ public class CustomerAPI {
         }
         return new ResponseEntity<>(customerDataTable, HttpStatus.OK);
     }
+
     @DeleteMapping("/delete/{id}")
     public void deleteCustomerById(@PathVariable Integer id) {
         addressService.deleteByCustomerId(id);
@@ -112,37 +109,21 @@ public class CustomerAPI {
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<?> updateCustomer(@RequestBody UpdateCustomerParam updateCustomer) {
-        return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.OK);
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@RequestBody UpdateCustomerParam updateCustomer) {
+        return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.CREATED);
     }
 
-    //TODO: Thua Code
-//    @GetMapping("/customerGroup")
-//    public ResponseEntity<?> getAllCustomerGroup() {
-//        return new ResponseEntity<>(customerService.findAll(), HttpStatus.OK);
-//    }
-
-
-//    @DeleteMapping("/delete")
-//    public ResponseEntity<?> deleteCustomer(@PathVariable Integer id) {
-//        customerService.deleteById(id);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-
-
-//
-//    @DeleteMapping("/delete")
-//    public ResponseEntity<?> deleteCustomer(@PathVariable Integer id) {
-//        customerService.deleteById(id);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-
-
-
     @PutMapping("/updateStatusAvailable")
-    public ResponseEntity<?> updateStatusAvailable(@RequestBody List<Integer> arrayIdCustomer) {
-        customerService.changeStatusToAvailable(arrayIdCustomer, true);
+    public ResponseEntity<?> updateStatusAvailable(@RequestBody List<Integer> customerIds) {
+        customerService.changeStatusToAvailable(customerIds, true);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/updateStatusUnavailable")
+
+    public ResponseEntity<?> updateStatusUnavailable(@RequestBody List<Integer> arrayIdCustomer) {
+        customerService.changeStatusToAvailable(arrayIdCustomer, false);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -166,17 +147,6 @@ public class CustomerAPI {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
     }
 
-
-    @PutMapping("/updateStatusUnavailable")
-
-    public ResponseEntity<?> updateStatusUnavailable(@RequestBody List<Integer> arrayIdCustomer) {
-        customerService.changeStatusToAvailable(arrayIdCustomer, false);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-//    findAllCustomerByGroupAndStatus
-
-
     public void setData(CustomerResult customer) {
         BigDecimal spendTotal = getSpendTotalByCustomerId(customer.getId());
         BigDecimal paidTotal = getPaidTotalByCustomerId(customer.getId());
@@ -185,12 +155,8 @@ public class CustomerAPI {
         customer.setQuantityProductOrder(getQuantityProductOrderByCustomerId(customer.getId()));
         customer.setQuantityItemOrder(getQuantityItemCustomerOrderById(customer.getId()));
         customer.setLastDayOrder(getLastDayOrderByCustomerId(customer.getId()));
-//        Integer pricingPolicy = getPricingPolicyByCustomerId(customer.getId());
-
     }
-//public Integer getPricingPolicyByCustomerId(Integer customerId){
-//        Integer pricingPolicy = customerGroupService.getPricingPolicyByCustomerId(customerId);
-//}
+
     public BigDecimal getSpendTotalByCustomerId(Integer customerId) {
         BigDecimal spendTotal = saleOrderService.getSpendTotalByCustomerId(customerId);
         if (spendTotal == null)

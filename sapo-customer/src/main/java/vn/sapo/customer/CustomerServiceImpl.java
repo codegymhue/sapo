@@ -22,27 +22,31 @@ import java.util.stream.Collectors;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
+
     @Autowired
     private CustomerMapper customerMapper;
+
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
     private CustomerFilterRepository customerFilterRepository;
+
     @Autowired
     private AddressService addressService;
+
 
     @Override
     @Transactional(readOnly = true)
     public CustomerResult findById(Integer id) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Cutomer not found"));
+        Integer customerId = customer.getId();
         return customerMapper.toDTO(customer);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<CustomerResult> findAll() {
-        //TODO: Bot tro debug kieu nay.
         List<CustomerResult> customerResults = new ArrayList<>();
         customerResults = customerRepository.findAll()
                 .stream()
@@ -50,12 +54,14 @@ public class CustomerServiceImpl implements CustomerService {
         return customerResults;
     }
 
+
     @Override
     @Transactional
     public void deleteById(Integer id) {
         addressService.deleteByCustomerId(id);
         customerRepository.deleteById(id);
     }
+
 
     @Override
     @Transactional(readOnly = true)
@@ -81,12 +87,18 @@ public class CustomerServiceImpl implements CustomerService {
                 .orElseThrow(() -> new NotFoundException("Customer not found"));
         customerMapper.transferFields(updateCustomerParam, customer);
         return customerMapper.toDTO(customer);
-
     }
 
+    //
+//    @Override
+//    @Transactional(readOnly = true)
+//    public List<SaleOrderResult> findHistoryCustomerOrder(Integer id) {
+//        List<SaleOrderResult> saleOrderByCustomer = saleOrderService.findAllSaleOrderByCustomerId(id);
+//        return saleOrderByCustomer;
+//    }
+//
     @Override
-    //TODO: @Transactional(readOnly = true) co the thay doi duoc trang thai?
-    @Transactional(readOnly = true)
+    @Transactional
     public void changeStatusToAvailable(List<Integer> customerIds, boolean status) {
         for (Integer customerId : customerIds) {
             Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new NotFoundException("Customer not found"));
@@ -94,14 +106,10 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
+
     @Override
     @Transactional
     public List<CustomerResult> findAllByGroupListId(List<Integer> groupIds) {
-        //TODO: tai sao ko code the nay
-        // return customerRepository.findAllByGroupIdIn(groupIds)
-        //                .stream()
-        //                .map(customerMapper::toDTO)
-        //                .collect(Collectors.toList());
         List<CustomerResult> customerResults = new ArrayList<>();
         customerResults = customerRepository.findAllByGroupIdIn(groupIds)
                 .stream()

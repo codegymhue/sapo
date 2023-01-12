@@ -18,38 +18,33 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/customers")
 public class CustomerController {
     @Autowired
     CustomerAPI customerAPI;
     @Autowired
     CustomerService customerService;
-
     @Autowired
     CustomerGroupService customerGroupService;
 
-
-    @GetMapping("/customers")
+    @GetMapping
     public String showListCustomerPage() {
         return "/admin/customer/list_customer";
     }
 
-    @GetMapping("customers/create")
+    @GetMapping("/create")
     public String showCustomerCreatePage() {
         return "/admin/customer/create_customer";
     }
 
-
-    @GetMapping("/customers/{id}")
+    @GetMapping("/{id}")
     public ModelAndView showCustomerInfoPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         try{
             CustomerResult customer = customerService.findById(id);
             customerAPI.setData(customer);
-            customerGroupService.sortByGroup();
             modelAndView.addObject("customer", customer);
         }catch (Exception ex){
             modelAndView.addObject("errors", ex.getMessage());
@@ -58,20 +53,17 @@ public class CustomerController {
         return modelAndView;
     }
 
-    @GetMapping("/customers/update/{id}")
+    @GetMapping("/{id}/edit")
     public ModelAndView showCustomerEditPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView();
-
-
-        Optional<CustomerResult> customerOptional = Optional.ofNullable(customerService.findById(id));
-        modelAndView.addObject("customer", customerOptional);
+        modelAndView.addObject("customer", customerService.findById(id));
         modelAndView.setViewName("/admin/customer/edit_customer");
         return modelAndView;
     }
 
     //export excel file
 
-    @GetMapping("/customers/export/excel")
+    @GetMapping("/export/excel")
     public void exportToExcel(HttpServletResponse response) throws IOException {
         response.setContentType("application/octet-stream");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
@@ -84,7 +76,7 @@ public class CustomerController {
         excelExporter.export(response);
     }
 
-    @GetMapping("/customers/excel")
+    @GetMapping("/excel")
     public void exportItemToExcel(HttpServletResponse response) throws IOException {
         response.setContentType("application/octet-stream");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
