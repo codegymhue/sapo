@@ -8,6 +8,7 @@ import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.customerGroup.dto.ICustomerGroup;
 import vn.sapo.customerGroup.dto.UpdateCusGroupParam;
 import vn.sapo.entities.customer.CustomerGroup;
+import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 
 import java.util.List;
@@ -27,17 +28,8 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     public CustomerGroupResult create(CreateCusGroupParam createCusGroupParam) {
         CustomerGroup customerGroup = customerGroupMapper.toModel(createCusGroupParam);
         customerGroup = customerGroupRepository.save(customerGroup);
-        String result = "CTN";
-        String number = customerGroup.getId().toString();
-        int numberZero = 5 - number.length();
-        String strNumberZero = "";
-        for (int i = 0; i < numberZero; i++) {
-            strNumberZero+= "0";
-        }
-        result = result + strNumberZero;
-        System.out.println(result);
-        if (customerGroup.getCusGrpCode() == "")
-            customerGroup.setCusGrpCode(result+customerGroup.getId());
+        if (customerGroup.getCusGrpCode() == null)
+            customerGroup.setCusGrpCode(CodePrefix.CUSTOMER_GROUP.generate(customerGroup.getId()));
         return customerGroupMapper.toDTO(customerGroup);
 
     }

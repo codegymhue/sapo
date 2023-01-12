@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.springframework.lang.Nullable;
+
+import javax.persistence.Column;
 
 @NoArgsConstructor
 @AllArgsConstructor

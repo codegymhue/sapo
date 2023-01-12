@@ -11,10 +11,10 @@ import vn.sapo.entities.tax.Tax;
 import java.time.Instant;
 import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Accessors(chain = true)
 public class CustomerGroupResult {
     private Integer id;
@@ -25,7 +25,11 @@ public class CustomerGroupResult {
 
     private Integer pricingPolicyId;
 
+    private CusGrpPricingPolicyResult pricingPolicy;
+
     private String paymentMethodId;
+
+    private CusGrpPaymentMethodResult paymentMethod;
 
     private Instant createdAt;
 
@@ -34,7 +38,6 @@ public class CustomerGroupResult {
     private String description;
 
     private Integer discount;
-
 
 
 }

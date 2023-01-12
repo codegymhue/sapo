@@ -7,12 +7,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.modelmapper.internal.bytebuddy.implementation.bind.annotation.Empty;
 import vn.sapo.entities.BaseEntity;
 import vn.sapo.entities.Employee;
 import vn.sapo.entities.payment.PaymentMethod;
 import vn.sapo.entities.product.pricing_policy.PricingPolicy;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Null;
 
 @Entity
 @Getter
@@ -27,7 +30,7 @@ public class CustomerGroup extends BaseEntity {
     private Integer id;
     @Column(name = "title", nullable = false, length = 50)
     private String title;
-    @Column(name = "cus_grp_code", nullable = false, length = 50)
+    @Column(name = "cus_grp_code", length = 50)
     private String cusGrpCode;
     @Column(name = "description", nullable = false)
     private String description;

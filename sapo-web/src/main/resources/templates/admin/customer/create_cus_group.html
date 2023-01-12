@@ -363,7 +363,7 @@
     function createCusGrp() {
         createCusGroupParam.id = null;
         createCusGroupParam.title = $('#titleGroup').val();
-        createCusGroupParam.cusGrpCode = $('#cusGrpCode').val();
+        createCusGroupParam.cusGrpCode = $('#cusGrpCode').val() == "" ? null : $('#cusGrpCode').val();
         createCusGroupParam.description = $('#description').val();
         createCusGroupParam.pricingPolicyId = $('#pricingType').data("id");
         createCusGroupParam.discount = $('#discount').val();

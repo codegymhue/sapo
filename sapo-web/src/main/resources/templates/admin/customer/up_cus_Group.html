@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="vi-VN" class="sapo-menu-expand sapo-menu-toggle-active">
 <head>
     <th:block th:replace="/layout/header :: header"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/admin/css/customer/cus_group.css"/>
     <title>Cập Nhập Nhóm Khách Hàng</title>
     <link rel="stylesheet" href="/assets/admin/css/product/selectMenu.css">
@@ -32,7 +33,7 @@
             </div>
         </div>
     </div>
-    <form action="#" >
+    <form id="frmUpdateCusGrp" method="post">
         <div class="MuiBox-root jss23604 jss608">
             <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
@@ -64,7 +65,8 @@
                                                 <fieldset aria-hidden="true"
                                                           class="jss823 MuiOutlinedInput-notchedOutline"
                                                           style="padding-left: 8px;">
-                                                    <legend class="jss824" style="width: 0.01px;"><span>&ZeroWidthSpace;</span>
+                                                    <legend class="jss824" style="width: 0.01px;">
+                                                        <span>&ZeroWidthSpace;</span>
                                                     </legend>
                                                 </fieldset>
                                             </div>
@@ -83,12 +85,14 @@
                                                        id="upCusGrpCode"
                                                        placeholder="Nhập mã nhóm khách hàng" type="text"
                                                        aria-label="Without label"
-                                                       class="MuiInputBase-input MuiOutlinedInput-input" th:value="${customerGroup.cusGrpCode}"
+                                                       class="MuiInputBase-input MuiOutlinedInput-input"
+                                                       th:value="${customerGroup.cusGrpCode}"
                                                        fdprocessedid="sytfp">
                                                 <fieldset aria-hidden="true"
                                                           class="jss823 MuiOutlinedInput-notchedOutline"
                                                           style="padding-left: 8px;">
-                                                    <legend class="jss824" style="width: 0.01px;"><span>&ZeroWidthSpace;</span>
+                                                    <legend class="jss824" style="width: 0.01px;">
+                                                        <span>&ZeroWidthSpace;</span>
                                                     </legend>
                                                 </fieldset>
                                             </div>
@@ -123,7 +127,8 @@
                                                 <fieldset aria-hidden="true"
                                                           class="jss823 MuiOutlinedInput-notchedOutline"
                                                           style="padding-left: 8px;">
-                                                    <legend class="jss824" style="width: 0.01px;"><span>&ZeroWidthSpace;</span>
+                                                    <legend class="jss824" style="width: 0.01px;">
+                                                        <span>&ZeroWidthSpace;</span>
                                                     </legend>
                                                 </fieldset>
                                             </div>
@@ -169,7 +174,8 @@
                                                         display: flex;
                                                         justify-content: space-between;
                                                         align-items: center; ">
-                                                <span id="upPricingType" th:text="*{customerGroup.pricingPolicyId != null} ? *{customerGroup.getPricingPolicyId()} : 'Chọn giá mặc định' "></span>
+                                                <span id="upPricingType"
+                                                      th:text="*{customerGroup.pricingPolicyId != null} ? *{customerGroup.pricingPolicy.title} : 'Chọn giá mặc định' "></span>
                                             </div>
                                             <ul class="dropdown-menu w-100 pricingPolicyIdCreate showAllPricingPolicy">
                                                 <div style="border-bottom: 1px solid #e3e3e3;">
@@ -212,12 +218,14 @@
                                                 <input aria-invalid="false"
                                                        id="upDiscount"
                                                        type="text" aria-label="Without label"
-                                                       class="MuiInputBase-input MuiOutlinedInput-input" th:value="*{customerGroup.discount}"
+                                                       class="MuiInputBase-input MuiOutlinedInput-input"
+                                                       th:value="*{customerGroup.discount}"
                                                        style="text-align: right;" fdprocessedid="16ju8f">
                                                 <fieldset aria-hidden="true"
                                                           class="jss823 MuiOutlinedInput-notchedOutline"
                                                           style="padding-left: 8px;">
-                                                    <legend class="jss824" style="width: 0.01px;"><span>&ZeroWidthSpace;</span>
+                                                    <legend class="jss824" style="width: 0.01px;">
+                                                        <span>&ZeroWidthSpace;</span>
                                                     </legend>
                                                 </fieldset>
                                             </div>
@@ -237,9 +245,10 @@
                                                         display: flex;
                                                         justify-content: space-between;
                                                         align-items: center; ">
-                                                <span id="upPaymentType" th:text="*{customerGroup.paymentMethodId != null} ? *{customerGroup.paymentMethodId} : 'Chọn hình thức thanh toán' "></span>
+                                                <span id="upPaymentType"
+                                                      th:text="*{customerGroup.paymentMethodId != null} ? *{customerGroup.paymentMethod.title} : 'Chọn hình thức thanh toán' "></span>
                                             </div>
-                                            <ul class="dropdown-menu w-100 categoryIdCreate showAllPaymentMethod" >
+                                            <ul class="dropdown-menu w-100 categoryIdCreate showAllPaymentMethod">
                                                 <li>Chọn hình thức thanh toán</li>
                                                 <div id="showAllPay">
 
@@ -262,12 +271,30 @@
 <th:block th:replace="/layout/script :: script"/>
 <script src="/assets/admin/js/customer/customerGroup_App.js"></script>
 
-<script>
+<script th:inline="javascript">
     let pricingPolicy;
     let paymentMethod;
     const selectBtnPri = document.querySelector('.select-btn-pri');
     const selectBtnPay = document.querySelector('.select-btn-pay');
     let updateCusGroupParam = new CustomerGroup();
+
+    let page = {
+        urls: {
+        },
+        elements: {},
+        loadData: {},
+        commands: {},
+        dialogs: {
+            elements: {},
+            loadData: {},
+            commands: {},
+        },
+        initializeEventControl: {}
+    }
+    page.dialogs.elements.titleGroupUp = $("#upCusGrpCode");
+    page.dialogs.elements.cusGrpCodeUp = $("#upCusGrpCode");
+    page.dialogs.elements.descriptionUp = $("#upDescription");
+
     // Lấy List Pricing Policy
     function getAllPricingPolicy(selectedPricing) {
         return $.ajax({
@@ -291,6 +318,7 @@
 
             })
     }
+
     //show select pricing policy
     function updateNamePri(id) {
         const arrayCat = pricingPolicy.filter(item => item.id === id)
@@ -301,6 +329,7 @@
         let idValue = $("#upPricingType").data("id");
         console.log(idValue);
     }
+
     // Lấy List Payment Method
     function getAllPaymentMethod(selectedPayment) {
         return $.ajax({
@@ -324,6 +353,7 @@
 
             })
     }
+
     //show select payment method
     function updateNamePay(id) {
         const arrayCat = paymentMethod.filter(item => item.id === id)
@@ -335,33 +365,33 @@
         console.log(idValue);
     }
 
-    $('#btnUpdateCustomerGroup').on('click', () => {
+    function updateCusGrp() {
         let id = $("#cusGrpId").text();
-            updateCusGroupParam.id = id;
-            updateCusGroupParam.title = $('#upTitleGroup').val();
-            updateCusGroupParam.cusGrpCode = $('#upCusGrpCode').val();
-            updateCusGroupParam.description = $('#upDescription').val();
-            updateCusGroupParam.pricing_policy_id = $('#upPricingType').data("id");
-            updateCusGroupParam.discount = $('#upDiscount').val();
-            updateCusGroupParam.payment_method_id = $('#upPaymentType').data("id");
-             console.log(updateCusGroupParam)
+        updateCusGroupParam.id = id;
+        updateCusGroupParam.title = $('#upTitleGroup').val();
+        updateCusGroupParam.cusGrpCode = $('#upCusGrpCode').val();
+        updateCusGroupParam.description = $('#upDescription').val();
+        updateCusGroupParam.pricingPolicyId = $('#upPricingType').data("id");
+        updateCusGroupParam.discount = $('#upDiscount').val();
+        updateCusGroupParam.paymentMethodId = $('#upPaymentType').data("id");
+        console.log(updateCusGroupParam)
         $.ajax({
             "headers": {
                 "accept": "application/json",
                 "content-type": "application/json"
             },
             "type": "POST",
-            "url": "http://localhost:8080/api/customer_groups/update",
+            "url": "http://localhost:8080/api/customer_groups/update" + id,
             "data": JSON.stringify(updateCusGroupParam)
         })
             .done((data) => {
                 console.log(data);
-                let id = data.id;
+                console.log(id);
                 CustomerGroup_App.IziToast.showSuccessAlert('Sửa nhóm khách hàng thành công  !!!')
 
-                setTimeout(() => {
-                    window.location.href = "/admin/customer_groups/" + id;
-                }, 1000)
+                // setTimeout(() => {
+                //     window.location.href = "/admin/customer_groups/" + id;
+                // }, 1000)
 
             })
             .fail((jqXHR) => {
@@ -373,39 +403,54 @@
                 }
 
             })
+    }
+
+    $('#btnUpdateCustomerGroup').on("click", function () {
+        $("#frmUpdateCusGrp").trigger("submit");
     })
 
-    function getCusGroupById(Id) {
-        return $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
+    $("#frmUpdateCusGrp").validate({
+        rules: {
+            titleGroupUp: {
+                required: true,
+                maxlength: 50,
             },
-            type: "GET",
-            url: "http://localhost:8080/api/customer_groups" + "/" + Id
-        })
-            .done((data) => {
-                customerGroup = data;
-                console.log(customerGroup);
-            })
-            .fail((jqXHR) => {
-                if (jqXHR.responseJSON) {
-                    $.each(jqXHR.responseJSON, (key, item) => {
-                        CustomerGroup_App.IziToast.showErrorAlert(item);
-                    })
-                }
-            });
-    }
+            cusGrpCodeUp: {
+                maxlength: 50,
+            },
+            descriptionUp: {
+                maxlength: 255,
+            },
+        },
+        messages: {
+            titleGroupUp: {
+                required: "Vui lòng nhập tên nhóm (ví dụ: Bán Chẳn)",
+                maxlength: "Tên sản phẩm không quá 50 ký tự."
+            },
+            cusGrpCodeUp: {
+                maxlength: "Mã nhóm không quá 50 ký tự",
+            },
+            descriptionUp: {
+                maxlength: "Mô tả không quá 255 ký tự",
+            },
+        },
+        submitHandler: function () {
+            updateCusGrp();
+        },
+        invalidHandler: () => {
+            CustomerGroup_App.IziToast.showErrorAlert(CustomerGroup_App.AlertMessageVi.ERROR_400);
+        }
+    })
 
     function showModalDelete() {
         $('#btnSowModalDelete').click(function () {
-                // alert("modal dele")
+            // alert("modal dele")
             $('#modal_dele_cus_grp').modal('show');
         });
     }
 
     function deleteCusGrpHander() {
-       let id = $("#cusGrpId").text();
+        let id = $("#cusGrpId").text();
 
         $('#btn_deleteCustomer').click(function () {
             // alert(" ok")
@@ -436,7 +481,7 @@
 
     deleteCusGrpHander();
 
-    $(()=>{
+    $(() => {
         getAllPricingPolicy();
         getAllPaymentMethod();
         showModalDelete();

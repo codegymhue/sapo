@@ -17,7 +17,11 @@ public class UpdateCusGroupParam {
 
     private Integer pricingPolicyId;
 
+    private CusGrpPricingPolicyResult pricingPolicy;
+
     private String paymentMethodId;
+
+    private CusGrpPaymentMethodResult paymentMethod;
 
     private String description;
 
