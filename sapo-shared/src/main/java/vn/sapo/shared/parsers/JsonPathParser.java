@@ -1,14 +1,9 @@
 package vn.sapo.shared.parsers;
 
-import java.util.Iterator;
+import com.jayway.jsonpath.*;
+
 import java.util.Map;
 import java.util.Set;
-
-import com.jayway.jsonpath.Configuration;
-import com.jayway.jsonpath.JsonPath;
-import com.jayway.jsonpath.Option;
-import com.jayway.jsonpath.ParseContext;
-import com.jayway.jsonpath.ReadContext;
 
 public class JsonPathParser {
     public static final JsonPathParser INSTANCE = new JsonPathParser();

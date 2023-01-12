@@ -19,9 +19,6 @@ public class AddressAPI {
     @Autowired
     AddressService addressService;
 
-    @Autowired
-    AddressRepository addressRepository;
-
     @GetMapping("/findByCustomerId/{id}")
     public ResponseEntity<?> findByCustomerId(@PathVariable Integer id) {
         List<AddressResult> address = addressService.findByCustomerId(id);

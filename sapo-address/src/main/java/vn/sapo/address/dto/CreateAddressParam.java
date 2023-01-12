@@ -1,5 +1,6 @@
 package vn.sapo.address.dto;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -9,12 +10,13 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @Accessors(chain = true)
+@EqualsAndHashCode
 public class CreateAddressParam {
-    @NotBlank(message = "Trường customer_ID bị null")
     private Integer customerId;
     private Integer supplierId;
     @NotBlank(message = "Tên khách hàng không được để trống")
     private String fullName;
+    @NotBlank(message = "Số điện thoại không được để trống")
     private String phoneNumber;
     private String email;
 

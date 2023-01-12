@@ -140,7 +140,8 @@
                                                                 class="MuiFormLabel-root MuiInputLabel-root jss20482 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
                                                                 data-shrink="true"
                                                                 for="phoneCreate">Số điện
-                                                            thoại</label>
+                                                            thoại<span
+                                                                    class="MuiFormLabel-asterisk MuiInputLabel-asterisk"> *</span></label>
                                                         <div class="MuiFormControl-root MuiTextField-root jss20483 MuiFormControl-fullWidth">
                                                             <div
                                                                     class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl">
@@ -199,7 +200,7 @@
                                                                 class="sc-evZas diplSI" for="birthdayCreate">Ngày
                                                             sinh</label>
                                                         <div class="sc-jIZahH hISLMV Sapo-InputRoot">
-                                                            <div class="input-group input-da    terange">
+                                                            <div class="input-group input-da derange">
                                                                 <input type="date" id="birthdayCreate"
                                                                        class="birthdayCreate form-control"
                                                                        style="height: 41px;"></div>
@@ -487,8 +488,7 @@
         customer.gender = $('#genderCreate :selected').val();
         customer.employeeId = $('#employeeNameCreate :selected').val();
         customer.description = $('#descriptionCreate').val();
-        // customer.birthday = '2022-12-28T16:44:24Z';
-        // shippingAddress.fullName = $('#nameCreate').val();
+
         createAddressParam.line1 = $('#addressCreate').val();
         createAddressParam.provinceId = $('#province').val();
         createAddressParam.provinceName = $('#province :selected').text();

@@ -18,7 +18,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "customer_group")
 @Accessors(chain = true)
 public class CustomerGroup extends BaseEntity {

@@ -25,5 +25,10 @@ public class CustomerFilter {
     private Date createdFrom;
     private Date createdTo;
 
+    private Integer draw;           //page hiện tại
+    private Integer length;            // số lượng trên 1 trang
+    private Integer start;             // lấy bắt đầu từ
+
+
 
 }

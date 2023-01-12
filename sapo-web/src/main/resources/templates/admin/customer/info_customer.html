@@ -241,22 +241,57 @@
                     <div class="sc-dSuTWQ gCRNBf">
                         <div id="scroller" class="sc-hZFzCs fvZzuO">
                             <div class="sc-KfMfS jyZcwm">
-                                <button id="histories" class="sc-cHPgQl fJFgex">Lịch sử mua hàng</button>
-                                <button id="debts" class="sc-cHPgQl fJFgex">Công nợ</button>
+<!--                                <button id="histories" class="sc-cHPgQl fJFgex">Lịch sử mua hàng</button>-->
+<!--                                <button id="debts" class="sc-cHPgQl fJFgex">Công nợ</button>-->
                                 <button id="contacts" class="sc-cHPgQl fJFgex">Liên hệ</button>
                                 <button id="addresses" class="sc-cHPgQl fJFgex">Địa chỉ</button>
                                 <button id="notes" class="sc-cHPgQl fJFgex">Ghi chú</button>
                                 <button id="customer_groups" class="sc-cHPgQl fACSJt">Nhóm khách hàng</button>
                             </div>
+
                         </div>
+
+                    </div>
+                    <div style="font-size:small" id="tableCheckbox">
+                        <table id="tbAddress" class="table table-hover" style="width:100%">
+                            <thead style="background-color: #f4f6f8; height: 55px">
+                                <th class="align-middle" >Số điện thoại</th>
+                                <th class="align-middle">Địa chỉ</th>
+                                <th class="align-middle" >Phường xã</th>
+                                <th class="align-middle" >Quận huyện</th>
+                                <th class="align-middle" >Tỉnh thành phố</th>
+                                <th class="align-middle" >Mã bưu điện</th>
+                                <th class="align-middle" >Email</th>
+
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+
+                        <!--                            <table id="tbAddress" class="table table-hover" style="    width: 100%;">-->
+                        <!--                                <thead style="background-color: #f4f6f8; height: 55px">-->
+                        <!--                                </thead>-->
+                        <!--                                <tbody>-->
+                        <!--                                </tbody>-->
+                        <!--                            </table>-->
+
+
+
+
+
+
                     </div>
                 </div>
+
+            </div>
+
+
 
             </div>
         </div>
     </div>
 </div>
-
 
 </body>
 <th:block th:replace="/admin/customer/modal_delete_customer::modal_delete_customer"/>
@@ -268,297 +303,361 @@
 <script>
     Page();
 </script>
-<script>
+    <script>
 
-    // handleCreateShowProduct();
-    //
-    // function handleCreateShowProduct() {
-    //     $('#btn_showModalCreateAddress').click(function () {
-    //         $('#modal_create_shippingAddress').modal('show');
-    //     })
-    // }
-
-    class ShippingAddress {
-        constructor(id, fullName, mobile, line1, line2, email, districtId, districtName, provinceId, provinceName, wardId, wardName, zipCode, customerId, supplierId, isDefault) {
-            this.fullName = fullName;
-            this.line1 = line1;
-            this.line2 = line2;
-            this.mobile = mobile;
-            this.email = email;
-            // this.address = address;
-            this.districtId = districtId;
-            this.districtName = districtName;
-            this.provinceId = provinceId;
-            this.provinceName = provinceName;
-            this.wardId = wardId;
-            this.wardName = wardName;
-            this.zipCode = zipCode;
-            this.customerId = customerId;
-            this.id = id;
-            this.isDefault = isDefault;
-            supplierId
-            this.supplierId = supplierId;
+        handleCreateShowCustomer();
+        function handleCreateShowCustomer() {
+            $('#btn_showModalCreateAddress').click(function () {
+                $('#modal_create_shippingAddress').modal('show');
+            })
         }
-    }
 
-    let shippingAddress = new ShippingAddress();
-    // Thêm mới địa chỉ
+        // Thêm mới địa chỉ
 
-    $("#btn_createCustomerShippingAddress").on('click', () => {
-        shippingAddress.supplierId = 1;
-        shippingAddress.id = 2
-        shippingAddress.line1 = $('.addressCreate').val();
-        shippingAddress.s = "b"
-        shippingAddress.fullName = $('.fullNameCreate').val();
-        shippingAddress.mobile = $('.mobileCreate').val();
-        shippingAddress.email = $('.emailCreate').val();
-        // shippingAddress.address = $('.addressCreate').val();
-        shippingAddress.provinceId = $('#province').val();
-        shippingAddress.provinceName = $('#province :selected').text();
-        shippingAddress.districtId = $('#district').val();
-        shippingAddress.districtName = $('#district :selected').text();
-        shippingAddress.wardId = $('#ward').val();
-        shippingAddress.wardName = $('#ward :selected').text();
-        shippingAddress.customerId = $('.idCustomerDelete').val();
-        shippingAddress.zipCode = $('.zipCodeCreate').val();
-        shippingAddress.isDefault = true;
-        console.log(shippingAddress)
-        $.ajax({
-            "headers": {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            "type": "POST",
-            "url": "http://localhost:8080/api/shippingAddress/create",
-            "data": JSON.stringify(shippingAddress)
-        })
-            .done((data) => {
-                App.IziToast.showSuccessAlert('Thêm mới khách hàng thành công  !!!')
-                $('#modal_create_shippingAddress').off('show');
-                showCustomerInfoShippingAddressByCustomerId();
-            })
-            .fail((jqXHR) => {
-                $.each(jqXHR.responseJSON, (key, item) => {
-                    App.IziToast.showErrorAlert(item);
-                })
+        $("#address").on('click', () => {
 
-            })
-    })
-
-    function createCustomerShippingAddress() {
-
-
-    }
-
-    // liên hệ
-    $('#contacts').click(function () {
-
-        deleteEventModelShow();
-        $('#contacts').css({
-            'color': '#4a8aff',
-            'border-bottom': '2px solid rgb(0, 136, 255)'
-        });
-        $('.showModelHistory').append(modalcontact)
-
-    });
-    //địa chỉ
-    $('#addresses').click(function () {
-        deleteEventModelShow();
-        $('#addresses').css({
-            'color': '#4a8aff',
-            'border-bottom': '2px solid rgb(0, 136, 255)'
-        });
-        $('.showModelHistory').append(modalAddress)
-        showCustomerInfoShippingAddressByCustomerId();
-        handleCreateShowProduct();
-
-    });
-    // mô tả
-    $('#notes').click(function () {
-        deleteEventModelShow();
-        $('#notes').css({
-            'color': '#4a8aff',
-            'border-bottom': '2px solid rgb(0, 136, 255)'
-        });
-        $('.showModelHistory').append(modalNote)
-    });
-
-    function idDeleteCustomerById() {
-        let idDelete = $('.idCustomerDelete').val()
-
-    }
-
-
-    // //Địa chỉ
-    // function showCustomerInfoShippingAddressByCustomerId() {
-    //     let idCustomer = $('.idCustomerDelete').val();
-    //     console.log(idCustomer)
-    //     return $.ajax({
-    //         headers: {
-    //             "accept": "application/json",
-    //             "content-type": "application/json"
-    //         },
-    //         type: "GET",
-    //         url: "http://localhost:8080/api/shippingAddress/findByCustomerId/" + idCustomer
-    //     })
-    //         .done((data) => {
-    //             console.log(data)
-    //             $.each(data, (i, shippingAddress) => {
-    //                 let str = `
-    //                  <tr class="MuiTableRow-root jss6092 MuiTableRow-hover" role="checkbox" aria-checked="false" tabindex="-1">
-    //                           <td class="MuiTableCell-root MuiTableCell-body jss6095 MuiTableCell-paddingCheckbox" style="padding-left: 16px;"><span class="MuiButtonBase-root MuiIconButton-root jss6087 MuiCheckbox-root MuiCheckbox-colorPrimary jss6077 MuiIconButton-colorPrimary" aria-disabled="false" style="margin: 0px;"><span class="MuiIconButton-label"><input class="jss6090" type="checkbox" data-indeterminate="false" value=""><span class="jss6078" font-size="small"></span></span><span class="MuiTouchRipple-root"></span></span></td>
-    //                           <td class="MuiTableCell-root MuiTableCell-body jss6098 cellClick MuiTableCell-alignLeft">
-    //                             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap" data-tip="09876543255" currentitem="false" style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
-    //                               ${shippingAddress.mobile}</p>
-    //                           </td>
-    //                           <td class="MuiTableCell-root MuiTableCell-body jss6098 MuiTableCell-alignLeft">
-    //                             <div style="cursor: pointer;">${shippingAddress.address}</div>
-    //                           </td>
-    //                           <td class="MuiTableCell-root MuiTableCell-body jss6098 MuiTableCell-alignLeft">
-    //                             <div style="cursor: pointer;">${shippingAddress.wardName}</div>
-    //                           </td>
-    //                           <td class="MuiTableCell-root MuiTableCell-body jss6098 MuiTableCell-alignLeft">
-    //                             <div style="cursor: pointer;">${shippingAddress.districtName}</div>
-    //                           </td>
-    //                           <td class="MuiTableCell-root MuiTableCell-body jss6098 cellClick MuiTableCell-alignLeft">
-    //                             <p class="MuiTypography-root MuiTypo212graphy-body1 MuiTypography-noWrap" data-tip="" currentitem="false" style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
-    //                            ${shippingAddress.provinceName}
-    //                             </p>
-    //                           </td>
-    //                           <td class="MuiTableCell-root MuiTableCell-body jss6098 cellClick MuiTableCell-alignLeft">
-    //                             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap" data-tip="" currentitem="false" style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
-    //                             ${shippingAddress.zipCode}
-    //                             </p>
-    //                           </td>
-    //                           <td class="MuiTableCell-root MuiTableCell-body jss6098 cellClick MuiTableCell-alignLeft">
-    //                             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap" data-tip="" currentitem="false" style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
-    //                             ${shippingAddress.email}
-    //                             </p>
-    //                           </td>
-    //                         </tr>
-    //                 `
-    //                 $(".showShippingAddress").append(str);
-    //             });
-    //         })
-    //         .fail((jqXHR) => {
-    //
-    //         })
-    // }
-
-
-    // Liên hệ
-    // function showCustomerInfotangent() {
-    //     let idCustomer = $('.idCustomerDelete').val();
-    //     console.log(idCustomer)
-    //     return $.ajax({
-    //         headers: {
-    //             "accept": "application/json",
-    //             "content-type": "application/json"
-    //         },
-    //         type: "GET",
-    //         url: "http://localhost:8080/api/customers/historyCustomerOrder/" + idCustomer
-    //     })
-    //         .done((data) => {
-    //             console.log(data)
-    //             $.each(data, (i, order) => {
-    //                 let str = `
-    //                 <tr class="MuiTableRow-root jss1427 MuiTableRow-hover" role="checkbox"
-    //                                                 tabindex="-1">
-    //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
-    //                                                     <a class="jss1437" href="/admin/orders/1167549753">${order.orderCode}</a>
-    //                                                 </td>
-    //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
-    //                                                     <div class="sc-jSMfEi hBmWYo">
-    //                                                     <span class="sc-eCYdqJ bzQjtT">${order.orderStatus.name}</span>
-    //                                                     </div>
-    //                                                 </td>
-    //
-    //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignRight">
-    //                                                     <p class="MuiTypography-root MuiTypography-body1"
-    //                                                        title="1,415,000">
-    //                                                        ${order.grandTotal != null ? (new Intl.NumberFormat('vi-VN', {
-    //                     style: 'currency',
-    //                     currency: 'VND'
-    //                 }).format(order.grandTotal)) : "---"}
-    //                                                        </p></td>
-    //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
-    //                                                     <p class="MuiTypography-root MuiTypography-body1"
-    //                                                        title="Chi nhánh mặc định">Chi nhánh mặc định</p></td>
-    //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
-    //                                                     <p class="MuiTypography-root MuiTypography-body1" title="Pos">
-    //                                                         Web</p></td>
-    //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
-    //                                                     <p class="MuiTypography-root MuiTypography-body1"
-    //                                                        title="">${order.employee.name}</p></td>
-    //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
-    //                                                     <div>${order.createAt}</div>
-    //                                                 </td>
-    //                                             </tr>
-    //                 `
-    //                 $(".showAllCustomerOrderHistory").append(str);
-    //             });
-    //         })
-    //         .fail((jqXHR) => {
-    //
-    //         })
-    // }
-
-    deleteEventModelShow();
-    idDeleteCustomerById();
-
-    function showModalDelete() {
-        $('#btnSowModalDelete').click(function () {
-            // alert("ok")
-            $('#modal_delete_customer').modal('show');
-        });
-    }
-
-    function deleteCustomerHander() {
-        let idCustomer = $('#customerId').val();
-
-        $('#btn_deleteCustomer').click(function () {
-            // alert(" ok bạn ey")
-            console.log(idCustomer)
-            return $.ajax({
-                headers: {
+            customer.fullName = $('#fullName').val();
+            customer.phoneNumber = $('#phoneNumber').val();
+            customer.email = $('#email').val();
+            address.supplierId = 1;
+            address.id = 2
+            address.line1 = $('.addressCreate').val();
+            address.s = "b"
+            address.fullName = $('.fullNameCreate').val();
+            address.phoneNumber = $('.mobileCreate').val();
+            address.email = $('.emailCreate').val();
+            // shippingAddress.address = $('.addressCreate').val();
+            address.provinceId = $('#province').val();
+            address.provinceName = $('#province :selected').text();
+            address.districtId = $('#district').val();
+            address.districtName = $('#district :selected').text();
+            address.wardId = $('#ward').val();
+            address.wardName = $('#ward :selected').text();
+            address.customerId = $('.idCustomerDelete').val();
+            address.zipCode = $('.zipCodeCreate').val();
+            customer.address = address;
+            address.isDefault = true;
+            console.log(address)
+            $.ajax({
+                "headers": {
                     "accept": "application/json",
                     "content-type": "application/json"
                 },
-                type: "DELETE",
-                url: "http://localhost:8080/api/customers/delete/" + idCustomer
+                "type": "POST",
+                "url": "http://localhost:8080/api/shippingAddress/create",
+                "data": JSON.stringify(address)
             })
                 .done((data) => {
-                    App.IziToast.showSuccessAlert("Xoá khách hàng thành công  !!! ");
-                    $('#modal_delete_customer').modal('hide');
-
-                    setTimeout(() => {
-                        window.location.href = "/admin/customers";
-                    }, 2500)
+                    App.IziToast.showSuccessAlert('Thêm mới khách hàng thành công  !!!')
+                    $('#modal_create_shippingAddress').off('show');
+                    showCustomerInfoShippingAddressByCustomerId();
                 })
                 .fail((jqXHR) => {
                     $.each(jqXHR.responseJSON, (key, item) => {
                         App.IziToast.showErrorAlert(item);
                     })
+
                 })
         })
-    }
 
-    showModalDelete();
-    deleteCustomerHander();
+        function createCustomerShippingAddress() {
+
+
+        }
+
+        // liên hệ
+        $('#contacts').click(function () {
+
+            deleteEventModelShow();
+            $('#contacts').css({
+                'color': '#4a8aff',
+                'border-bottom': '2px solid rgb(0, 136, 255)'
+            });
+        });
+
+        //địa chỉ
+        $('#addresses').on('click', () => {
+            showAddress();
+            $('#addresses').css({
+                'color': '#4a8aff',
+                'border-bottom': '2px solid rgb(0, 136, 255)'
+            });
+        });
+
+        // mô tả
+        $('#notes').click(function () {
+            deleteEventModelShow();
+            $('#notes').css({
+                'color': '#4a8aff',
+                'border-bottom': '2px solid rgb(0, 136, 255)'
+            });
+            $('.showDataTable').append(modalNote)
+        });
+
+        function idDeleteCustomerById() {
+            let idDelete = $('.idCustomerDelete').val()
+        }
+
+        // // địa chỉ
+        function showAddress(){
+            $("#tbAddress").DataTable({
+                // chuyển tiếng việt cho datatable
+                ajax: {
+                    url: `http://localhost:8080/api/customers/${customer.id}/address`,
+                    type: 'GET',
+                    contentType: 'application/json'
+                },
+                lengthMenu: false,
+                searching: false,
+                destroy: false,
+                "aoColumns": [{
+                    "bVisible": false}
+                ],
+                search: false,
+                columns: [
+                    {data: 'phoneNumber'},
+                    {data: 'addresses[0].line1'},
+                    {data: 'addresses[0].wardName'},
+                    {data: 'addresses[0].districtName'},
+                    {data: 'addresses[0].provinceName'},
+                    {data: 'addresses[0].zipCode'},
+                    {data: "email"},
+                ]
+
+            })
+        }
+
+        function drawDataTable(){
+            console.log("id: " + address.customerId)
+            let id = address.customerId;
+            $("#tbAddress").DataTable({
+                // chuyển tiếng việt cho datatable
+                "processing": true,
+                "serverSide": true,
+
+                ajax: {
+                    url: 'http://localhost:8080/api/customers/664/address',
+                    type: 'GET',
+                    dataSrc: "content",
+                    contentType: 'application/json',
+                    "data": function (d) {
+                        d.customerId = shippingAddress.customerId;
+                        d.phoneNumber = shippingAddress.phoneNumber;
+                        d.line1 = shippingAddress.line1;
+                        d.wardName = shippingAddress.wardName;
+                        d.districtName = shippingAddress.districtName;
+                        d.provinceName = shippingAddress.provinceName;
+                        d.zipCode = shippingAddress.zipCode;
+                        d.email = shippingAddress.email;
+                        return JSON.stringify(d)
+                    }
+                },
+                lengthMenu: [
+                    [5, 10, 20, -1],
+                    ["5", "10", "20", "All"]
+                ],
+                searching: false,
+                destroy: true,
+                columns: [
+                    {data: 'customerId'},
+                    {data: 'phoneNumber'},
+                    {data: 'line1'},
+                    {data: 'wardName'},
+                    {data: 'districtName'},
+                    {data: 'provinceName'},
+                    {data: "zipCode"},
+                    {data: 'email'},
+            ],
+                columnDefs: [
+                    {
+                        targets: 0,
+                        render: function (data, type, row, meta) {
+                            return `
+                                   <input type="checkbox" value="check_none" />
+                                `
+                        }
+                    },
+                    {
+                        targets: 1,
+                        render: function (data, type, row, meta) {
+                            return `<a href="/admin/customers/${row.id}/address">${row.customerCode}</a>`;
+                        }
+                    },
+                ],
+            })
+        }
+
+
+        // //Địa chỉ
+        // function showModalAddresses() {
+        //     let id = shippingAddress.customerId;
+        //     return $.ajax({
+        //         headers: {
+        //             "accept": "application/json",
+        //             "content-type": "application/json"
+        //         },
+        //         type: "GET",
+        //         url: "http://localhost:8080/api/shippingAddress/" + id
+        //     })
+        //         .done((data) => {
+        //             console.log("Data: " + data)
+        //             $.each(data, (i, shippingAddress) => {
+        //                 let str = `
+        //                  <tr class="MuiTableRow-root jss6092 MuiTableRow-hover" role="checkbox" aria-checked="false" tabindex="-1">
+        //                           <td class="MuiTableCell-root MuiTableCell-body jss6095 MuiTableCell-paddingCheckbox" style="padding-left: 16px;"><span class="MuiButtonBase-root MuiIconButton-root jss6087 MuiCheckbox-root MuiCheckbox-colorPrimary jss6077 MuiIconButton-colorPrimary" aria-disabled="false" style="margin: 0px;"><span class="MuiIconButton-label"><input class="jss6090" type="checkbox" data-indeterminate="false" value=""><span class="jss6078" font-size="small"></span></span><span class="MuiTouchRipple-root"></span></span></td>
+        //                           <td class="MuiTableCell-root MuiTableCell-body jss6098 cellClick MuiTableCell-alignLeft">
+        //                             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap" data-tip="09876543255" currentitem="false" style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
+        //                               ${shippingAddress.mobile}</p>
+        //                           </td>
+        //                           <td class="MuiTableCell-root MuiTableCell-body jss6098 MuiTableCell-alignLeft">
+        //                             <div style="cursor: pointer;">${shippingAddress.address}</div>
+        //                           </td>
+        //                           <td class="MuiTableCell-root MuiTableCell-body jss6098 MuiTableCell-alignLeft">
+        //                             <div style="cursor: pointer;">${shippingAddress.wardName}</div>
+        //                           </td>
+        //                           <td class="MuiTableCell-root MuiTableCell-body jss6098 MuiTableCell-alignLeft">
+        //                             <div style="cursor: pointer;">${shippingAddress.districtName}</div>
+        //                           </td>
+        //                           <td class="MuiTableCell-root MuiTableCell-body jss6098 cellClick MuiTableCell-alignLeft">
+        //                             <p class="MuiTypography-root MuiTypo212graphy-body1 MuiTypography-noWrap" data-tip="" currentitem="false" style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
+        //                            ${shippingAddress.provinceName}
+        //                             </p>
+        //                           </td>
+        //                           <td class="MuiTableCell-root MuiTableCell-body jss6098 cellClick MuiTableCell-alignLeft">
+        //                             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap" data-tip="" currentitem="false" style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
+        //                             ${shippingAddress.zipCode}
+        //                             </p>
+        //                           </td>
+        //                           <td class="MuiTableCell-root MuiTableCell-body jss6098 cellClick MuiTableCell-alignLeft">
+        //                             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap" data-tip="" currentitem="false" style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
+        //                             ${shippingAddress.email}
+        //                             </p>
+        //                           </td>
+        //                         </tr>
+        //                 `
+        //                 $(".showShippingAddress").append(str);
+        //             });
+        //         })
+        //         .fail((jqXHR) => {
+        //
+        //         })
+        // }
+
+        //
+        // // Liên hệ
+        // function showCustomerInfotangent() {
+        //     let idCustomer = $('.idCustomerDelete').val();
+        //     console.log(idCustomer)
+        //     return $.ajax({
+        //         headers: {
+        //             "accept": "application/json",
+        //             "content-type": "application/json"
+        //         },
+        //         type: "GET",
+        //         url: "http://localhost:8080/api/customers/historyCustomerOrder/" + idCustomer
+        //     })
+        //         .done((data) => {
+        //             console.log(data)
+        //             $.each(data, (i, order) => {
+        //                 let str = `
+        //                 <tr class="MuiTableRow-root jss1427 MuiTableRow-hover" role="checkbox"
+        //                                                 tabindex="-1">
+        //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
+        //                                                     <a class="jss1437" href="/admin/orders/1167549753">${order.orderCode}</a>
+        //                                                 </td>
+        //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
+        //                                                     <div class="sc-jSMfEi hBmWYo">
+        //                                                     <span class="sc-eCYdqJ bzQjtT">${order.orderStatus.name}</span>
+        //                                                     </div>
+        //                                                 </td>
+        //
+        //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignRight">
+        //                                                     <p class="MuiTypography-root MuiTypography-body1"
+        //                                                        title="1,415,000">
+        //                                                        ${order.grandTotal != null ? (new Intl.NumberFormat('vi-VN', {
+        //                     style: 'currency',
+        //                     currency: 'VND'
+        //                 }).format(order.grandTotal)) : "---"}
+        //                                                        </p></td>
+        //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
+        //                                                     <p class="MuiTypography-root MuiTypography-body1"
+        //                                                        title="Chi nhánh mặc định">Chi nhánh mặc định</p></td>
+        //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
+        //                                                     <p class="MuiTypography-root MuiTypography-body1" title="Pos">
+        //                                                         Web</p></td>
+        //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
+        //                                                     <p class="MuiTypography-root MuiTypography-body1"
+        //                                                        title="">${order.employee.name}</p></td>
+        //                                                 <td class="MuiTableCell-root MuiTableCell-body jss1433 MuiTableCell-alignLeft">
+        //                                                     <div>${order.createAt}</div>
+        //                                                 </td>
+        //                                             </tr>
+        //                 `
+        //                 $(".showAllCustomerOrderHistory").append(str);
+        //             });
+        //         })
+        //         .fail((jqXHR) => {
+        //
+        //         })
+        // }
+
+        deleteEventModelShow();
+        idDeleteCustomerById();
+
+
+
+        function showModalDelete() {
+            $('#btnSowModalDelete').click(function () {
+                $('#modal_delete_customer').modal('show');
+            });
+        }
+
+        function deleteCustomerHander() {
+            let idCustomer = $('#customerId').val();
+
+            $('#btn_deleteCustomer').click(function () {
+                console.log(idCustomer)
+                return $.ajax({
+                    headers: {
+                        "accept": "application/json",
+                        "content-type": "application/json"
+                    },
+                    type: "DELETE",
+                    url: "http://localhost:8080/api/customers/delete/" + idCustomer
+                })
+                    .done((data) => {
+                        App.IziToast.showSuccessAlert("Xoá khách hàng thành công  !!! ");
+                        $('#modal_delete_customer').modal('hide');
+
+                        setTimeout(() => {
+                            window.location.href = "/admin/customers";
+                        }, 2500)
+                    })
+                    .fail((jqXHR) => {
+                        $.each(jqXHR.responseJSON, (key, item) => {
+                            App.IziToast.showErrorAlert(item);
+                        })
+                    })
+            })
+        }
+</script>
+<script th:inline="javascript">
+    customer = [[${customer}]];
+    console.log(customer)
 </script>
 
 <style>
-    .dataTables_length {
-        float: right;
-    }
+    /*.dataTables_length {*/
+    /*    float: right;*/
+    /*}*/
 
-    .dataTables_wrapper .dataTables_length {
-        float: right;
-    }
+    /*.dataTables_wrapper .dataTables_length {*/
+    /*    float: right;*/
+    /*}*/
 
-    #showAllCustomerInfo {
-        font-size: 14px;
-    }
+    /*#showAllCustomerInfo {*/
+    /*    font-size: 14px;*/
+    /*}*/
 
     .dataTables_wrapper .dataTables_filter {
         float: left;
@@ -569,12 +668,6 @@
         font-size: 16px;
     }
 
-    /*#showAllCustomerTable_filter{*/
-    /*    margin-top: -30px;*/
-    /*}*/
-    .dataTables_info {
-        font-size: 15px;
-    }
 
     .showAllCustomerTable_paginate {
         font-size: 15px;
@@ -605,10 +698,6 @@
         min-height: 59px;
         flex-direction: column;
         background-color: white;
-    }
-
-    .dataTables_info {
-        margin-left: 1044px;
     }
 
     #jss6532 {

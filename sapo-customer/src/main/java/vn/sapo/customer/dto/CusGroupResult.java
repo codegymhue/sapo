@@ -10,4 +10,5 @@ import lombok.experimental.Accessors;
 public class CusGroupResult {
     private Integer id;
     private String title;
+    private Integer discount;
 }

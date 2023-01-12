@@ -10,15 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.address.AddressService;
+import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
-import vn.sapo.customer.CustomerFilterRepository;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.*;
-
-import vn.sapo.entities.customer.Customer;
-import vn.sapo.excel.ExcelHelper;
-
 import vn.sapo.customerGroup.CustomerGroupService;
+import vn.sapo.excel.ExcelHelper;
 import vn.sapo.excel.ExcelService;
 import vn.sapo.excel.ResponseMessage;
 import vn.sapo.order.sale.SaleOrderService;
@@ -27,9 +24,11 @@ import vn.sapo.payment.sale.PaymentSaleOrderService;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+
+import java.util.ArrayList;
 import java.util.Iterator;
+
 import java.util.List;
-import java.util.function.Function;
 
 @RestController
 @RequestMapping("/api/customers")
@@ -66,10 +65,13 @@ public class CustomerAPI {
 
     @PostMapping("/filter")
     public ResponseEntity<?> testFilter(@RequestBody CustomerFilter customerFilter,
-                                        @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-                                        @RequestParam(name = "size", required = false, defaultValue = "5") Integer size,
                                         @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
+        // start = 10; length = 5;
+        int start = customerFilter.getStart();
+        int length = customerFilter.getLength();
 
+
+        int page = start/length + 1;
         Sort sortable = null;
         if (sort.equals("ASC")) {
             sortable = Sort.by("id").ascending();
@@ -79,18 +81,17 @@ public class CustomerAPI {
         }
 
 
-        Pageable pageable = PageRequest.of(page, size, sortable);
+        Pageable pageable = PageRequest.of(page-1, length, sortable);
         Page<CustomerResult> pagealeCustomers = customerService.findAllByFilters(customerFilter, pageable);
 
         CustomerDataTable customerDataTable = new CustomerDataTable();
         if(pagealeCustomers != null){
-            customerDataTable.setDraw(pagealeCustomers.getPageable().getPageNumber());
-            customerDataTable.setRecordsTotal(pagealeCustomers.getSize());
-            customerDataTable.setRecordsFiltered(pagealeCustomers.getSize());
-            customerDataTable.setContent(pagealeCustomers.getContent());
+            customerDataTable.setRecordsTotal(pagealeCustomers.getTotalElements());
+            customerDataTable.setRecordsFiltered(pagealeCustomers.getTotalElements());
+            customerDataTable.setData(pagealeCustomers.getContent());
+            customerDataTable.setDraw(customerFilter.getDraw());
         }
-        return new ResponseEntity<>(pagealeCustomers, HttpStatus.OK);
-
+        return new ResponseEntity<>(customerDataTable, HttpStatus.OK);
     }
     @DeleteMapping("/delete/{id}")
     public void deleteCustomerById(@PathVariable Integer id) {
@@ -116,17 +117,18 @@ public class CustomerAPI {
         return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.OK);
     }
 
+    //TODO: Thua Code
 //    @GetMapping("/customerGroup")
 //    public ResponseEntity<?> getAllCustomerGroup() {
 //        return new ResponseEntity<>(customerService.findAll(), HttpStatus.OK);
 //    }
 
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteCustomer(@PathVariable Integer id) {
-        customerService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//    @DeleteMapping("/delete")
+//    public ResponseEntity<?> deleteCustomer(@PathVariable Integer id) {
+//        customerService.deleteById(id);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
 
 //
@@ -151,7 +153,7 @@ public class CustomerAPI {
         if (ExcelHelper.hasExcelFormat(file)) {
             try {
                 List<CreateCustomerParam> customers = excelService.save(file);
-                customers.forEach(createCustomerParam1 -> create(createCustomerParam1));
+                customers.forEach(param -> create(param));
                 message = "Uploaded the file successfully: " + file.getOriginalFilename();
                 return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
             } catch (Exception e) {
@@ -226,6 +228,19 @@ public class CustomerAPI {
     public ResponseEntity<?> findAllByGroupId(@RequestBody List<Integer> arrGroupId) {
         List<CustomerResult> customers = customerService.findAllByGroupListId(arrGroupId);
         return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/address")
+    public ResponseEntity<?> shippingAddress(@PathVariable Integer id) {
+        CustomerResult dto = customerService.findById(id);
+        setData(dto);
+
+        CustomerResultDataTable customerResultDataTable = new CustomerResultDataTable();
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults.add(dto);
+        customerResultDataTable.setData(customerResults);
+
+        return new ResponseEntity<>(customerResultDataTable, HttpStatus.OK);
     }
 
 }

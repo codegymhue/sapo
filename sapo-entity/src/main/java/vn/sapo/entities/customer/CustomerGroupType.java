@@ -3,10 +3,10 @@ package vn.sapo.entities.customer;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-
+//TODO: Modelmapper loi ko can quan tam: Cu
 public enum CustomerGroupType {
 
-    NAM("FIXED"), NU("DYNAMIC");
+    FIXED("FIXED"), DYNAMIC("DYNAMIC");
 
     private final String value;
 

@@ -8,6 +8,7 @@ import vn.sapo.address.dto.UpdateAddressParam;
 import java.util.List;
 
 public interface AddressService {
+    AddressResult findById(Integer id);
 
     List<AddressResult> findByCustomerId(Integer customerId);
 

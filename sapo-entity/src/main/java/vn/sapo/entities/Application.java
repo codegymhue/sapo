@@ -1,15 +1,14 @@
 package vn.sapo.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @Accessors(chain = true)

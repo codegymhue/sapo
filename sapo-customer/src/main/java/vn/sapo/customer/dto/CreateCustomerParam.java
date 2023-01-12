@@ -19,8 +19,8 @@ import java.util.List;
 @Setter
 @Accessors(chain = true)
 public class CreateCustomerParam {
-
     private Integer id;
+
     private String customerCode;
 
     private String fullName;
