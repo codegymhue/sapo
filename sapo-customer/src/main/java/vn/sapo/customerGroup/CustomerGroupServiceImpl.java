@@ -8,7 +8,6 @@ import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.customerGroup.dto.ICustomerGroup;
 import vn.sapo.customerGroup.dto.UpdateCusGroupParam;
 import vn.sapo.entities.customer.CustomerGroup;
-import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 
 import java.util.List;
