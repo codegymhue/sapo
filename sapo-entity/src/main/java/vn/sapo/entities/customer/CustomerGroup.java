@@ -35,7 +35,7 @@ public class CustomerGroup extends BaseEntity {
     @Column(name = "discount", nullable = false)
     private Integer discount;
 
-    @Column(name = "cus_grp_type")
+    @Column(name = "cus_grp_type",nullable = false)
     @Enumerated(EnumType.STRING)
     private CustomerGroupType cusGrpType;
 
