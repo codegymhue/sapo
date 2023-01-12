@@ -87,7 +87,6 @@ public class CustomerServiceImpl implements CustomerService {
                 .orElseThrow(() -> new NotFoundException("Customer not found"));
         customerMapper.transferFields(updateCustomerParam, customer);
         return customerMapper.toDTO(customer);
-
     }
 
     //
@@ -99,7 +98,7 @@ public class CustomerServiceImpl implements CustomerService {
 //    }
 //
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public void changeStatusToAvailable(List<Integer> customerIds, boolean status) {
         for (Integer customerId : customerIds) {
             Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new NotFoundException("Customer not found"));

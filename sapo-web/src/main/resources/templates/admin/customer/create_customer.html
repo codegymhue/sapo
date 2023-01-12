@@ -197,7 +197,7 @@
                                                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
                                                     <div width="100%" class="sc-himrzO gTRFtW">
                                                         <label
-                                                                class="sc-evZas diplSI" for="birthdayCreate">Ngày
+                                                                class="sc-evZas diplSI" for="birthdayCreate" style="font-size: 14px;">Ngày
                                                             sinh</label>
                                                         <div class="sc-jIZahH hISLMV Sapo-InputRoot">
                                                             <div class="input-group input-da derange">
@@ -218,12 +218,12 @@
                                                              style="width: 100%;">
                                                             <div class="MuiBox-root jss20640 jss20637"><label
                                                                     class="MuiFormLabel-root MuiInputLabel-root jss20635 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-filled"
-                                                                    data-shrink="true" for="genderCreate">Giới
-                                                                tính</label></div>
+                                                                    data-shrink="true" for="genderCreate">Giới tính<span class="MuiFormLabel-asterisk MuiInputLabel-asterisk"> *</span>
+                                                                </label></div>
                                                             <div class="MuiInputBase-root MuiOutlinedInput-root jss20633 MuiInputBase-fullWidth MuiInputBase-formControl">
                                                                 <select class="jss87874 form-select" name="genderCreate"
                                                                         id="genderCreate">
-                                                                    <option selected value="-1">Giới tính</option>
+<!--                                                                    <option selected value="-1">Giới tính</option>-->
                                                                     <option value="NAM">Nam</option>
                                                                     <option value="NU">Nữ</option>
                                                                     <option value="KHAC">Khác</option>
@@ -235,7 +235,7 @@
                                                                         class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
                                                                         focusable="false"
                                                                         viewBox="0 0 24 24" aria-hidden="true">
-                                                                    <path d="M7 10l5 5 5-5z"></path>
+
                                                                 </svg>
                                                                 <fieldset aria-hidden="true"
                                                                           class="jss20550 MuiOutlinedInput-notchedOutline"
@@ -278,7 +278,7 @@
                                                             <label class="MuiTypography-root MuiTypography-body1"
                                                                    style="color: rgb(70, 81, 95);"
                                                                    for="district">
-                                                                Huyện </label>
+                                                                Huyện   </label>
                                                         </div>
                                                         <select class="form-select jss87874" name="district"
                                                                 id="district">
@@ -735,7 +735,7 @@
     $('#btnCloseCustomer').on('click', () => window.location.href = ("/admin/customers"))
 
 
-    getAllCustomerGender();
+    // getAllCustomerGender();
     getAllCustomerGroup();
     getAllEmployeeSelect();
 

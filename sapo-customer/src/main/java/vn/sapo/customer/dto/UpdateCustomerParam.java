@@ -1,17 +1,18 @@
 package vn.sapo.customer.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import vn.sapo.address.dto.AddressResult;
-import vn.sapo.address.dto.CreateAddressParam;
-import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.entities.customer.CustomerGender;
+import vn.sapo.entities.customer.CustomerStatus;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Accessors(chain = true)
 public class UpdateCustomerParam {
 
@@ -32,13 +33,9 @@ public class UpdateCustomerParam {
 
     private CustomerGender gender;
 
-    private CustomerGroupResult group;
-
-    private List<AddressResult> addresses;
-
     private Integer employeeId;
 
-    private CreateAddressParam createAddressParam;
+    private CustomerStatus status;
 
 
 

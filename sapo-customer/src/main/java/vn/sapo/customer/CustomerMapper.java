@@ -18,8 +18,10 @@ public class CustomerMapper implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        TypeMap<CreateCustomerParam, Customer> dto2Model = modelMapper.createTypeMap(CreateCustomerParam.class, Customer.class);
-        dto2Model.addMapping(source -> source.getBirthday().toInstant(), Customer::setBirthday);
+        TypeMap<CreateCustomerParam, Customer> createDTO2Model = modelMapper.createTypeMap(CreateCustomerParam.class, Customer.class);
+        createDTO2Model.addMapping(source -> source.getBirthday().toInstant(), Customer::setBirthday);
+        TypeMap<UpdateCustomerParam, Customer> updateDTO2Model = modelMapper.createTypeMap(UpdateCustomerParam.class, Customer.class);
+        updateDTO2Model.addMapping(source -> source.getBirthday().toInstant(), Customer::setBirthday);
     }
 
     public CustomerResult toDTO(Customer customer) {
