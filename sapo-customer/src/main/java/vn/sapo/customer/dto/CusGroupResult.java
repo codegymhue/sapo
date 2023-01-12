@@ -9,6 +9,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class CusGroupResult {
     private Integer id;
+    private String cusGrpCode;
     private String title;
+    private String description;
     private Integer discount;
 }
