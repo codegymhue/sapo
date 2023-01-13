@@ -63,5 +63,7 @@ public class CustomerResult {
     private int quantityItemOrder;
 
     private Instant lastDayOrder;
+
+    private CusPayment payment;
 }
 
