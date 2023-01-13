@@ -10,7 +10,7 @@
 <body style="font-size: 12px">
 <div>
     <th:block th:replace="/layout/menu :: menu"/>
-    <th:block th:replace="/admin/customer/modal_importFile :: #modalImportFileCustomers" />
+    <th:block th:replace="/admin/customer/modal_importFile.html" />
     <!--    <th:block th:replace="/layout/modalImportFile :: #modalImportFile"/>-->
     <div class="col-right  MuiBox-root jss64 jss40">
         <div class="MuiBox-root jss6915 jss440 "
@@ -480,11 +480,22 @@
 
     page.elements.importFile = $("#importFileCustomers");
 
+    page.elements.loading = $(".modal-content .modal-header .spinner");
+
     page.elements.importFile.on("click", function (){
         $("#modalImportFileCustomers").modal("show");
     })
 
+        page.commands.showLoading = () => {
+            page.elements.loading.css('z-index', 1);
+            page.elements.importFile.prop('disabled', true);
 
+    }
+
+    page.commands.closeLoading = () => {
+        page.elements.loading.css('z-index', -1);
+        page.elements.importFile.prop('disabled', false);
+    }
 
     page.commands.getAllCustomers = () => {
         $(document).ready(function () {
@@ -779,6 +790,7 @@
 
     }
     function drawDataTable(){
+
         $("#tbCustomer").DataTable({
             // chuyển tiếng việt cho datatable
             "processing": true,
@@ -1762,7 +1774,8 @@
         }
     });
 
-    $('#btnImportFileCustomers').click(function () {
+    $('#btnImportFileCustomers').on('click', () => {
+        page.commands.showLoading();
         let data = new FormData();
         let file = $('#formFileCustomers')[0].files[0];
         data.append('file',file);
@@ -1776,10 +1789,14 @@
             $("#modalImportFileCustomers").modal("hide");
             $("#frmFileCustomers")[0].reset();
             page.commands.getAllCustomers();
+            page.commands.closeLoading();
             App.IziToast.showSuccessAlert("Tải file lên thành công!")
         }).fail((jqXHR) => {
             App.IziToast.showErrorAlert("Tải file lên không thành công!")
+            page.commands.closeLoading();
         })
+
+
     });
 
 
