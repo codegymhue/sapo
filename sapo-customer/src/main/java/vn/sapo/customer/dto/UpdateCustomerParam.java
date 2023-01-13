@@ -37,6 +37,8 @@ public class UpdateCustomerParam {
 
     private CustomerStatus status;
 
+    private String description;
+
 
 
 
