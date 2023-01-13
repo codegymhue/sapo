@@ -93,9 +93,12 @@
                                                     th:text="*{': ' + gender}"> </h6>
                                                 <h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    th:text="*{': '+phoneNumber}"></h6>
+                                                    th:utext="${phoneNumber} ? ${': '+ phoneNumber} : ${': --- '}"
+                                                ></h6>
                                                 <h6 class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    th:text="*{': '+email}" ></h6><h6
+
+                                                    th:utext="${email} ? ${': '+ email} : ${': --- '}"
+                                                    ></h6><h6
                                                         class="MuiTypography-root jss626 MuiTypography-subtitle1"
                                                         th:text="${': '+customer.getEmployee().getFullName()}"></h6><span></span></div>
                                         </div>
@@ -115,7 +118,9 @@
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3">
                                             <div class="MuiPaper-root jss624  MuiPaper-elevation1 MuiPaper-rounded">
                                                 <a class="jss627" th:href="'/admin/customer_groups/'+ ${customer.getGroup().getId()}" style="padding-left: 0px;">
-                                                    <h6 class="MuiTypography-root jss626 MuiTypography-subtitle1" th:text="${': '+customer.getGroup().getTitle()}">
+                                                    <h6 class="MuiTypography-root jss626 MuiTypography-subtitle1"
+                                                        th:text="${': '+customer.getGroup().getTitle()}"
+                                                    >
 
                                                 </h6>
                                                 </a>
@@ -130,7 +135,8 @@
                                                     href="https://animehay.pro/"
                                                     style="padding-left: 0px; text-decoration: none">https://animehay.pro/</a></h6><h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    th:text="*{': ' + description}">
+                                                    th:utext="${description} ? ${': '+ description} : ${': --- '}"
+                                            >
 
                                                 </h6></div>
                                         </div>

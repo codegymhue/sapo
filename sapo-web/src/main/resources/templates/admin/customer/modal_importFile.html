@@ -7,9 +7,7 @@
                 <div class="modal-header">
                     <h1 class="modal-title fs-5">Nhập file dữ liệu khách hàng</h1>
 
-                    <div class="spinner" style="z-index: -1">
-                        <div class="blob blob-0"></div>
-                    </div>
+                    <span class="loader" style="z-index: -1"></span>
 
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -58,67 +56,9 @@
                                                                                              border-radius: 5px;
                                                                                              font-weight: 500;">
                         Nhập file
-                    </button>
                 </div>
             </div>
         </div>
     </div>
-    <style>
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-        .spinner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 30%;
-            z-index: 1003;
-            background: #ffffff00;
-            overflow: hidden;
-        }
-        .spinner div:first-child {
-            display: block;
-            position: relative;
-            left: 50%;
-            top: 50%;
-            width: 150px;
-            height: 150px;
-            margin: -75px 0 0 -75px;
-            border-radius: 50%;
-            box-shadow: 0 3px 3px 0 rgb(1, 81, 255);
-            transform: translate3d(0, 0, 0);
-            animation: spin 1s linear infinite;
-        }
-        .spinner div:first-child:after,
-        .spinner div:first-child:before {
-            content: "";
-            position: absolute;
-            border-radius: 50%;
-        }
-        .spinner div:first-child:before {
-            top: 5px;
-            left: 5px;
-            right: 5px;
-            bottom: 5px;
-            box-shadow: 0 3px 3px 0 green;
-            -webkit-animation: spin 1s linear infinite;
-            animation: spin 2s linear infinite;
-        }
-        .spinner div:first-child:after {
-            top: 15px;
-            left: 15px;
-            right: 15px;
-            bottom: 15px;
-            box-shadow: 0 3px 3px 0 rgba(61, 175, 255, 1);
-            animation: spin 1.5s linear infinite;
-        }
-    </style>
 
 </th:block>
