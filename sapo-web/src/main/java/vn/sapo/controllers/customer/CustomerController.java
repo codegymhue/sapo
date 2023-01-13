@@ -11,6 +11,7 @@ import vn.sapo.customer.CustomerExcelExporterInventory;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customerGroup.CustomerGroupService;
+import vn.sapo.employee.EmployeeService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -28,6 +29,8 @@ public class CustomerController {
     CustomerService customerService;
     @Autowired
     CustomerGroupService customerGroupService;
+    @Autowired
+    EmployeeService employeeService;
 
     @GetMapping
     public String showListCustomerPage() {
@@ -57,6 +60,8 @@ public class CustomerController {
     public ModelAndView showCustomerEditPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("customer", customerService.findById(id));
+        modelAndView.addObject("group", customerGroupService.findAll());
+        modelAndView.addObject("employee", employeeService.findAll());
         modelAndView.setViewName("/admin/customer/edit_customer");
         return modelAndView;
     }

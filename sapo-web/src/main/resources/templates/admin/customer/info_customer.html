@@ -191,7 +191,7 @@
                             <div class="MuiBox-root jss2269 jss2096 jss2093">
                                 <div class="MuiBox-root jss2270 jss2095"><h6
                                         class="MuiTypography-root MuiTypography-subtitle1">Thông tin gợi ý khi bán
-                                    hàng</h6><a class="jss2101" th:href="'/admin/customers/update/' + ${customer.getId()}">Cập nhật</a>
+                                    hàng</h6><a class="jss2101" th:href="'/admin/customers/' + ${customer.getId()}+ '/edit'">Cập nhật</a>
                                 </div>
                                 <div class="MuiBox-root jss2271 jss2097">
                                     <div class="MuiGrid-root MuiGrid-container">
@@ -208,29 +208,38 @@
                                             <div class="MuiPaper-root jss2098 MuiPaper-elevation1 MuiPaper-rounded"><h6
                                                     class="MuiTypography-root jss2100 MuiTypography-subtitle1"
                                                     title="Giá nhập" itemid="display-default-price-list-name">: Giá
-                                                nhập</h6><h6 class="MuiTypography-root jss2100 MuiTypography-subtitle1"
-                                                             itemid="display-default-discount-rate">: 8%</h6><h6
+                                                nhập</h6>
+                                                <a class="jss627" th:href="'/admin/customer_groups/'+ ${customer.getGroup().getId()}" style="padding-left: 0px;">                                                <h6 class="MuiTypography-root jss2100 MuiTypography-subtitle1"
+                                                             itemid="display-default-discount-rate"
+                                                            th:text=" ${': ' + customer.getGroup().getDiscount + '%'} " >:</h6>
+
+                                                        </a>
+                                                <a class="jss627" th:href="'/admin/customer_groups/'+ ${customer.getGroup.getId()}" style="padding-left: 0px;">
+                                                <h6
                                                     class="MuiTypography-root jss2100 MuiTypography-subtitle1"
-                                                    title="Tiền mặt" itemid="display-default-payment-method-name">: Tiền
-                                                mặt</h6></div>
+                                                    title="Tiền mặt" itemid="display-default-payment-method-name"
+                                                    >: Tiền
+                                                mặt</h6>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="MuiBox-root jss2467 jss2096 jss2094">
-                                <div class="MuiBox-root jss2468 jss2095"><h6
-                                        class="MuiTypography-root MuiTypography-subtitle1">Thông tin tích điểm</h6>
-                                </div>
-                                <div class="MuiBox-root jss2469 jss2097 jss2280">
-                                    <div class="jss2281">Khách hàng chưa được kích hoạt điểm và hạng thành viên
-                                    </div>
-                                    <button class="MuiButtonBase-root MuiButton-root MuiButton-outlined jss2282"
-                                            tabindex="0" type="button"><span
-                                            class="MuiButton-label">Kích hoạt ngay</span><span
-                                            class="MuiTouchRipple-root"></span></button>
-                                </div>
-                            </div>
+<!--                            <div class="MuiBox-root jss2467 jss2096 jss2094">-->
+<!--                                <div class="MuiBox-root jss2468 jss2095"><h6-->
+<!--                                        class="MuiTypography-root MuiTypography-subtitle1">Thông tin tích điểm</h6>-->
+<!--                                </div>-->
+<!--                                <div class="MuiBox-root jss2469 jss2097 jss2280">-->
+<!--                                    <div class="jss2281">Khách hàng chưa được kích hoạt điểm và hạng thành viên-->
+<!--                                    </div>-->
+<!--                                    <button class="MuiButtonBase-root MuiButton-root MuiButton-outlined jss2282"-->
+<!--                                            tabindex="0" type="button"><span-->
+<!--                                            class="MuiButton-label">Kích hoạt ngay</span><span-->
+<!--                                            class="MuiTouchRipple-root"></span></button>-->
+<!--                                </div>-->
+<!--                            </div>-->
 
                         </div>
                     </div>

@@ -69,12 +69,12 @@
                                                         class="MuiFormLabel-asterisk MuiInputLabel-asterisk"> *</span></label>
                                                 <div class="MuiFormControl-root MuiTextField-root jss20483 MuiFormControl-fullWidth">
                                                     <div
-                                                            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl">
+                                                            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl row ml-1">
                                                         <input
                                                                 id="nameCreate" name="nameCreate"
                                                                 placeholder="Nhập tên khách hàng" type="text"
                                                                 class="MuiInputBase-input MuiOutlinedInput-input"
-                                                                minlength="3" maxlength="12"
+
                                                         >
 
 
@@ -140,8 +140,7 @@
                                                                 class="MuiFormLabel-root MuiInputLabel-root jss20482 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
                                                                 data-shrink="true"
                                                                 for="phoneCreate">Số điện
-                                                            thoại<span
-                                                                    class="MuiFormLabel-asterisk MuiInputLabel-asterisk"> *</span></label>
+                                                            thoại</label>
                                                         <div class="MuiFormControl-root MuiTextField-root jss20483 MuiFormControl-fullWidth">
                                                             <div
                                                                     class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl">
@@ -218,7 +217,7 @@
                                                              style="width: 100%;">
                                                             <div class="MuiBox-root jss20640 jss20637"><label
                                                                     class="MuiFormLabel-root MuiInputLabel-root jss20635 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-filled"
-                                                                    data-shrink="true" for="genderCreate">Giới tính<span class="MuiFormLabel-asterisk MuiInputLabel-asterisk"> *</span>
+                                                                    data-shrink="true" for="genderCreate">Giới tính
                                                                 </label></div>
                                                             <div class="MuiInputBase-root MuiOutlinedInput-root jss20633 MuiInputBase-fullWidth MuiInputBase-formControl">
                                                                 <select class="jss87874 form-select" name="genderCreate"
@@ -477,58 +476,56 @@
     let customer = new Customer();
 
     let createAddressParam = new CreateAddressParam();
+    function createCustomer(){
+        $('#btnCreateCustomer').on('click', () => {
+            customer.fullName = $('#nameCreate').val();
+            customer.customerCode = $('#codeCreate').val();
+            customer.groupId = $('#customerGroupCreate :selected').val();
+            customer.phoneNumber = $('#phoneCreate').val();
+            customer.email = $('#emailCreate').val();
+            customer.birthday = $('#birthdayCreate').val();
+            customer.gender = $('#genderCreate :selected').val();
+            customer.employeeId = $('#employeeNameCreate :selected').val();
+            customer.description = $('#descriptionCreate').val();
 
-    $('#btnCreateCustomer').on('click', () => {
-        customer.fullName = $('#nameCreate').val();
-        customer.customerCode = $('#codeCreate').val();
-        customer.groupId = $('#customerGroupCreate :selected').val();
-        customer.phoneNumber = $('#phoneCreate').val();
-        customer.email = $('#emailCreate').val();
-        customer.birthday = $('#birthdayCreate').val();
-        customer.gender = $('#genderCreate :selected').val();
-        customer.employeeId = $('#employeeNameCreate :selected').val();
-        customer.description = $('#descriptionCreate').val();
-
-        createAddressParam.line1 = $('#addressCreate').val();
-        createAddressParam.provinceId = $('#province').val();
-        createAddressParam.provinceName = $('#province :selected').text();
-        createAddressParam.districtId = $('#district').val();
-        createAddressParam.districtName = $('#district :selected').text();
-        createAddressParam.wardId = $('#ward').val();
-        createAddressParam.wardName = $('#ward :selected').text();
-        createAddressParam.phoneNumber = $('#phoneCreate').val();
-        customer.createAddressParam = createAddressParam;
-        // console.log("đay là customer")
-        // console.log(customer.gender)
-        // console.log(customer)
-        console.log(createAddressParam)
-        $.ajax({
-            "headers": {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            "type": "POST",
-            "url": "http://localhost:8080/api/customers/create",
-            "data": JSON.stringify(customer)
-        })
-            .done((data) => {
-
-               App.IziToast.showSuccessAlert("tạo khách hàng thành công !");
-                setTimeout(() => {
-                }, 2500)
-                $('#formCreate')[0].reset();
-
+            createAddressParam.line1 = $('#addressCreate').val();
+            createAddressParam.provinceId = $('#province').val();
+            createAddressParam.provinceName = $('#province :selected').text();
+            createAddressParam.districtId = $('#district').val();
+            createAddressParam.districtName = $('#district :selected').text();
+            createAddressParam.wardId = $('#ward').val();
+            createAddressParam.wardName = $('#ward :selected').text();
+            createAddressParam.phoneNumber = $('#phoneCreate').val();
+            customer.createAddressParam = createAddressParam;
+            // console.log("đay là customer")
+            // console.log(customer.gender)
+            // console.log(customer)
+            console.log(createAddressParam)
+            $.ajax({
+                "headers": {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                "type": "POST",
+                "url": "http://localhost:8080/api/customers/create",
+                "data": JSON.stringify(customer)
             })
-            .fail((jqXHR) => {
-                console.log(jqXHR);
-                if (jqXHR.responseJSON) {
-                    $.each(jqXHR.responseJSON, (key, item) => {
-                        App.IziToast.showErrorAlert(item);
-                    })
-                }
-                // App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
-            })
-    });
+                .done((data) => {
+
+                    App.IziToast.showSuccessAlert("tạo khách hàng thành công !");
+                    setTimeout(() => {
+                    }, 2500)
+                    $('#formCreate')[0].reset();
+
+                })
+                .fail((jqXHR) => {
+                    console.log(jqXHR);
+
+                    App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+                })
+        });
+    }
+
 
 
     function getAllProvinces() {
@@ -735,9 +732,28 @@
     $('#btnCloseCustomer').on('click', () => window.location.href = ("/admin/customers"))
 
 
+createCustomer();
     // getAllCustomerGender();
     getAllCustomerGroup();
     getAllEmployeeSelect();
+
+    $("#formCreate").validate({
+        rules: {
+            nameCreate: {
+                required: true
+
+            }
+        },
+        messages: {
+            nameCreate: {
+                required: "Vui lòng nhập tên khách hàng",
+
+            }
+        },
+        submitHandler: function (){
+            createCustomer();
+        }
+    });
 
 </script>
 <script>
