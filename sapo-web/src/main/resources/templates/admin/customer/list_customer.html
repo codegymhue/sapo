@@ -480,7 +480,7 @@
 
     page.elements.importFile = $("#importFileCustomers");
 
-    page.elements.loading = $(".modal-content .modal-header .spinner");
+    page.elements.loading = $(".modal-content .modal-header .loader");
 
     page.elements.importFile.on("click", function (){
         $("#modalImportFileCustomers").modal("show");
@@ -488,14 +488,17 @@
 
         page.commands.showLoading = () => {
             page.elements.loading.css('z-index', 1);
-            page.elements.importFile.prop('disabled', true);
+            $('#btnImportFileCustomers').prop('disabled', true);
 
-    }
+        }
 
-    page.commands.closeLoading = () => {
-        page.elements.loading.css('z-index', -1);
-        page.elements.importFile.prop('disabled', false);
-    }
+        page.commands.closeLoading = () => {
+            page.elements.loading.css('z-index', -1);
+            $('#btnImportFileCustomers').prop('disabled', false);
+        }
+
+
+
 
     page.commands.getAllCustomers = () => {
         $(document).ready(function () {
