@@ -99,8 +99,11 @@ public class CustomerAPI {
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CreateCustomerParam createCustomerParam) {
         System.out.println(createCustomerParam);
+
         CustomerResult dto = customerService.create(createCustomerParam);
         CreateAddressParam createAddressParam = createCustomerParam.getCreateAddressParam();
+
+
         if (createAddressParam == null)
             return new ResponseEntity<>(dto, HttpStatus.OK);
         createAddressParam.setCustomerId(dto.getId());
@@ -110,8 +113,8 @@ public class CustomerAPI {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody UpdateCustomerParam updateCustomer) {
-        return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.CREATED);
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UpdateCustomerParam updateCustomer) {
+        return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.OK);
     }
 
     @PutMapping("/updateStatusAvailable")

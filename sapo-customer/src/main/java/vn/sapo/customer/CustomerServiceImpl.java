@@ -13,6 +13,7 @@ import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.shared.configurations.CodePrefix;
+import vn.sapo.shared.exceptions.DataInputException;
 import vn.sapo.shared.exceptions.NotFoundException;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional(readOnly = true)
     public CustomerResult findById(Integer id) {
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Cutomer not found"));
+                .orElseThrow(() -> new NotFoundException("Không tìm thấy khách hàng"));
         Integer customerId = customer.getId();
         return customerMapper.toDTO(customer);
     }
@@ -71,10 +72,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Transactional
     public CustomerResult create(CreateCustomerParam createCustomerParam) {
-        System.out.println("Đay là param" + createCustomerParam);
         Customer customer = customerMapper.toModel(createCustomerParam);
         Customer newCustomer = customerRepository.save(customer);
         String cusCode = newCustomer.getCustomerCode();
+        if(createCustomerParam.getFullName()==null){
+            throw new DataInputException("Tên khách hàng không được để trống");
+        }
         if (cusCode == null || cusCode.trim().isEmpty())
             customer.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
         return customerMapper.toDTO(customer);
@@ -84,7 +87,17 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public CustomerResult update(UpdateCustomerParam updateCustomerParam) {
         Customer customer = customerRepository.findById(updateCustomerParam.getId())
-                .orElseThrow(() -> new NotFoundException("Customer not found"));
+                .orElseThrow(() -> new NotFoundException("Khách hàng không tồn tại hoặc đã bị xóa"));
+        if (updateCustomerParam.getFullName().isEmpty() || updateCustomerParam.getFullName().equals("")) {
+            updateCustomerParam.setFullName(customer.getFullName());
+        }
+        if (updateCustomerParam.getPhoneNumber().isEmpty() || updateCustomerParam.getPhoneNumber().equals("")) {
+            updateCustomerParam.setPhoneNumber(customer.getPhoneNumber());
+        }
+        if (updateCustomerParam.getCustomerCode().equals("")) {
+            updateCustomerParam.setCustomerCode(customer.getCustomerCode());
+        }
+
         customerMapper.transferFields(updateCustomerParam, customer);
         return customerMapper.toDTO(customer);
     }
