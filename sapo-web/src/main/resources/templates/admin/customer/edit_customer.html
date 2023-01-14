@@ -228,10 +228,12 @@
                                                 <div width="100%" class="sc-ciZhAO kfYubE"><label
                                                         for="birthdayUp" style="font-size: 14px;"
                                                         class="sc-hAZoDl iocNjj">Ngày sinh</label>
-                                                    <div class="sc-cCsOjp bwybwb Sapo-InputRoot"><input
+                                                    <div class="sc-cCsOjp bwybwb Sapo-InputRoot">
+                                                        <input
                                                             id="birthdayUp" name="birthday"
                                                             placeholder="Chọn ngày sinh"
-                                                            th:text="${#dates.format(customer.birthday, 'dd/MM/yyyy')}" type="date"
+                                                            th:value="${#dates.format(customer.birthday, 'yyyy-MM-dd')}"
+                                                             type="date"
                                                             class="sc-gXmSlM djQmoa" style="padding-right: 10px;">
                                                         <fieldset class="sc-iIPllB iUBRZb"></fieldset>
 <!--                                                        <div class="sc-kLLXSd sc-jIZahH knmXYz dsyMcL">-->
