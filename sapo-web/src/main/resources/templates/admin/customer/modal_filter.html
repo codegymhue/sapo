@@ -445,6 +445,38 @@
             // drawFilterLabel();
             drawDataTable();
             bsOffcanvas.hide()
+
+
+            checkCustomerFilterChange = {
+                ...customerFilter
+            }
+            let checkCustomerFilterRoot = {
+                id: null,
+                customerCode: null,
+                groupIds : [],
+                gender : null,
+                dayOfBirthday : null,
+                monthOfBirthday : null,
+                employeeIds : [],
+                statusList : [],
+                createdFrom : null,
+                createdTo : null,
+                keyword : null
+            }
+
+            console.log(checkCustomerFilterChange);
+            let obj = getChanges(checkCustomerFilterRoot, checkCustomerFilterChange);
+            if (isEmpty(obj)) {
+                console.log("Không có thay đổi");
+                $("#btn-save-search").attr( "disabled", "");
+                $("#btn-save-search").css("background-color","rgb(243, 244, 245)");
+                $("#btn-save-search").css("color","rgb(116, 124, 135)");
+            } else {
+                $("#btn-save-search").removeAttr( "disabled" );
+                $("#btn-save-search").css("background-color","rgb(51, 160, 255)");
+                $("#btn-save-search").css("color","white");
+                console.log("Có thay đổi");
+            }
         });
 
         // nút xóa bộ lọc
@@ -452,9 +484,12 @@
             $("#offcanvasExample input[type=checkbox]").each((index, item)=>{
                 $(item).prop('checked', false);
             })
+            customerFilter.groupIds = [];
             $("#offcanvasExample input[type=radio]").each((index, item)=>{
                 $(item).prop('checked', false);
             })
+            customerFilter.gender = null;
+            localStorage.removeItem(KEY_CUSTOMER_FILTER_SAVE);
         })
         function drawFilterLabel(){
             if(document.getElementById("divDeleteFilterGroupLabel")!=null){
@@ -691,8 +726,9 @@
             }
         }
 
-        let customerFilter = new CustomerFilter();
-
+        let customerFilter;
+        let KEY_CUSTOMER_FILTER_SAVE = "customer_filter";
+        let checkCustomerFilterChange;
 
         // lịch
         $('#datepicker').datepicker({

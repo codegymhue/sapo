@@ -400,6 +400,7 @@
 
 
 <script src="/assets/admin/js/customer/customer_app.js"></script>
+    <script src="/assets/admin/js/product/app.js"></script>
 <script>
     let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -787,7 +788,15 @@
             //
             //     ],
             // })
+            if(localStorage.getItem(KEY_CUSTOMER_FILTER_SAVE)==null){
+                customerFilter = new CustomerFilter();
+                localStorage.setItem(KEY_CUSTOMER_FILTER_SAVE, JSON.stringify(customerFilter));
+            }else{
 
+                customerFilter = JSON.parse(localStorage.getItem(KEY_CUSTOMER_FILTER_SAVE));
+                console.log("Get customer filter from localstorage: ")
+                console.log(customerFilter)
+            }
             drawDataTable();
         })
 
@@ -2041,11 +2050,18 @@
 
     });
 
-
+    function handleSaveFilter(){
+        $("#btn-save-search").on("click", ()=>{
+            localStorage.setItem(KEY_CUSTOMER_FILTER_SAVE, JSON.stringify(customerFilter));
+            App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_FILTERED);
+        });
+    }
 
     page.loadData = () => {
         page.commands.getAllCustomers();
         showAllCustomerGroup()
+
+        handleSaveFilter();
     }
 
     $(() => {
@@ -2056,6 +2072,79 @@
 
     let customerGroups;
     let employees;
+
+
+    const getChanges = (previous, current) => {
+        if (isPrimitive(previous) && isPrimitive(current)) {
+            if (previous === current) {
+                return "";
+            }
+
+            return current;
+        }
+
+        if (isObject(previous) && isObject(current)) {
+            const diff = getChanges(Object.entries(previous), Object.entries(current));
+
+            return diff.reduce((merged, [key, value]) => {
+                return {
+                    ...merged,
+                    [key]: value
+                }
+            }, {});
+        }
+
+        const changes = [];
+
+        if (JSON.stringify(previous) === JSON.stringify(current)) {
+            return changes;
+        }
+
+        for (let i = 0; i < current.length; i++) {
+            const item = current[i];
+
+            if (JSON.stringify(item) !== JSON.stringify(previous[i])) {
+                changes.push(item);
+            }
+        }
+
+        return changes;
+    };
+    function isEmpty(obj) {
+        for (var prop in obj) {
+            if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+                return false;
+            }
+        }
+
+        return JSON.stringify(obj) === JSON.stringify({});
+    }
+
+    const typeOf = o => Object.prototype.toString.call(o);
+    const isObject = o => o !== null && !Array.isArray(o) && typeOf(o).split(" ")[1].slice(0, -1) === "Object";
+
+    const isPrimitive = o => {
+        switch (typeof o) {
+            case "object": {
+                return false;
+            }
+            case "function": {
+                return false;
+            }
+            default: {
+                return true;
+            }
+        }
+    };
+
+
+
+
+
+
+
+
+
 </script>
 </div>
 </body>
