@@ -39,7 +39,7 @@
                 <div class="MuiBox-root jss3581">
                     <button id="btnCloseUpdate" class="sc-kDDrLX kESDbN"
                             style="font-size: 14px; width: 65px; height: 36px;"><span
-                            class="sc-jqUVSM cMXJOk">Hủy</span></button>
+                            class="sc-jqUVSM cMXJOk " th:href="'/admin/customers/'+${customer.id}" >Hủy</span></button>
                     <button id="btnUpdateCustomer" class="RthGc btnUpdateCustomer "
                             style="font-size: 14px; width: 65px; height: 36px;"><span
                             class="sc-jqUVSM cMXJOk">Lưu</span></button>
@@ -234,7 +234,7 @@
                                                             placeholder="Chọn ngày sinh"
                                                             th:value="${#dates.format(customer.birthday, 'yyyy-MM-dd')}"
                                                              type="date"
-                                                            class="sc-gXmSlM djQmoa" style="padding-right: 10px;">
+                                                            class="sc-gXmSlM djQmoa" style="padding-right: 10px; font-size: 14px;">
                                                         <fieldset class="sc-iIPllB iUBRZb"></fieldset>
 <!--                                                        <div class="sc-kLLXSd sc-jIZahH knmXYz dsyMcL">-->
 <!--                                                            <svg viewBox="0 0 24 25" fill="none"-->
@@ -306,10 +306,11 @@
                                                             <input aria-invalid="false"
                                                                    id="faxUpdate"
                                                                    name="faxUpdate" placeholder="Nhập số fax"
+                                                                   th:value="${customer.attFax}"
                                                                    type="text"
                                                                    aria-label="Without label" style="font-size: 14px;"
                                                                    class="MuiInputBase-input MuiOutlinedInput-input"
-                                                                   value="+1 (715) 774-4772">
+                                                                   >
                                                             <fieldset aria-hidden="true"
                                                                       class="jss4023 MuiOutlinedInput-notchedOutline"
                                                                       style="padding-left: 8px;">
@@ -324,17 +325,18 @@
                                                 <div class="MuiFormControl-root jss3954 MuiFormControl-fullWidth">
                                                     <label class="MuiFormLabel-root MuiInputLabel-root jss3955 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
                                                            data-shrink="true"
-                                                           for="4929db9f-d5a9-4ed3-9584-873fdcaf536c">Mã số
+                                                           for="taxCodeUp">Mã số
                                                         thuế</label>
                                                     <div class="MuiFormControl-root MuiTextField-root jss3956 MuiFormControl-fullWidth">
                                                         <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
                                                              style="font-size: 14px;">
                                                             <input aria-invalid="false"
-                                                                   id="4929db9f-d5a9-4ed3-9584-873fdcaf536c"
+                                                                   id="taxCodeUp"
                                                                    name="taxNumber" placeholder="Nhập mã số thuế"
+                                                                   th:value="${customer.attTaxCode}"
                                                                    type="text" aria-label="Without label"
                                                                    class="MuiInputBase-input MuiOutlinedInput-input"
-                                                                   value="811">
+                                                                   >
                                                             <fieldset aria-hidden="true"
                                                                       class="jss4023 MuiOutlinedInput-notchedOutline"
                                                                       style="padding-left: 8px;">
@@ -354,17 +356,17 @@
                                                 <div class="MuiFormControl-root jss3954 MuiFormControl-fullWidth">
                                                     <label class="MuiFormLabel-root MuiInputLabel-root jss3955 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
                                                            data-shrink="true"
-                                                           for="2bc1d11c-a27b-449c-b247-318aff97f85f">Website</label>
+                                                           for="websiteUp">Website</label>
                                                     <div class="MuiFormControl-root MuiTextField-root jss3956 MuiFormControl-fullWidth">
                                                         <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
                                                              style="font-size: 14px;">
                                                             <input aria-invalid="false"
-                                                                   id="2bc1d11c-a27b-449c-b247-318aff97f85f"
+                                                                   id="websiteUp"
                                                                    name="website"
                                                                    placeholder="Nhập tên miền website " type="text"
+                                                                   th:value="${customer.attWebsite}"
                                                                    aria-label="Without label"
-                                                                   class="MuiInputBase-input MuiOutlinedInput-input"
-                                                                   value="https://www.bibeguqejawet.us">
+                                                                   class="MuiInputBase-input MuiOutlinedInput-input">
                                                             <fieldset aria-hidden="true"
                                                                       class="jss4023 MuiOutlinedInput-notchedOutline"
                                                                       style="padding-left: 8px;">
@@ -595,6 +597,10 @@
             })
     }
 
+    $("#btnCloseUpdate").on('click', () =>
+        // alert("được")
+      window.location.href = `/admin/customers/${customer.id}`)
+
 
     // function getAllCustomerGroup() {
     //     return $.ajax({
@@ -632,7 +638,11 @@
             birthday: $('#birthdayUp').val(),
             gender: $('#genderUp :selected').val(),
             employee: $('#employeeNameUp :selected').val(),
-            description: $('#descriptionUp').val()
+            description: $('#descriptionUp').val(),
+            attTaxCode: $('#taxCodeUp').val(),
+            attFax: $('#faxUpdate').val(),
+            attWebsite: $('#websiteUp').val()
+
         }
 
         console.log(newCustomer);
@@ -646,6 +656,7 @@
             "data": JSON.stringify(newCustomer)
         })
             .done((data) => {
+                // console.log(data)
                 App.IziToast.showSuccessAlert("Sửa thông tin khách hàng thành công !");
                 setTimeout(() => {
                 }, 1500)
@@ -663,6 +674,14 @@
     // getAllCustomerGender();
     getAllCustomerGroup();
     getAllEmployeeSelect();
+
+    // $("#btnCloseUpdate").on('click', () =>{
+    //     alert("được")
+    // }) // window.location.href = `/admin/customers/${customer.id}`)
+
+
+
+
 
 </script>
 <script>

@@ -63,7 +63,7 @@
                                           th:class="*{status == status.AVAILABLE} ? 'gIZkwA' : 'ccQLIN'"></span>
                                         </div>
                                     </div>
-                                    <a class="jss2101"  th:href="'/admin/customers/'+ ${customer.getId()}+ '/edit'">Cập nhật</a></div>
+                                    <a class="jss2101"  th:href="'/admin/customers/'+ ${customer.getId()} + '/edit'">Cập nhật</a></div>
 
 
                                 <div class="MuiBox-root jss762 jss623">
@@ -128,17 +128,18 @@
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
                                                     th:text="*{': '+ customerCode}"></h6><h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    itemid="display-tax-number" title="614">: 614</h6><h6
+                                                    itemid="display-tax-number "
+                                                    th:text="*{': ' + attTaxCode}"></h6><h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    itemid="display-website" title="https://animehay.pro/">: <a
+                                                    itemid="display-website" title=""> <a
                                                     class="jss2101"
-                                                    href="https://animehay.pro/"
-                                                    style="padding-left: 0px; text-decoration: none">https://animehay.pro/</a></h6><h6
+                                                        th:text ="*{': '+ attWebsite}"
+                                                    style="padding-left: 0px; text-decoration: none"></a></h6><h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    th:utext="${customer.getDescription} ? ${': '+ customer.Description} : ${': --- '}"
-                                            >
+                                                    th:utext="${customer.getDescription()} ? ${': '+ customer.Description} : ${': --- '}">
 
-                                                </h6></div>
+                                                </h6>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
