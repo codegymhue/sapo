@@ -490,7 +490,12 @@
             $("#offcanvasExample input[type=radio]").each((index, item)=>{
                 $(item).prop('checked', false);
             })
+            customerFilter.groupIds = [];
             customerFilter.gender = null;
+            customerFilter.employeeIds = [];
+            customerFilter.statusList = null;
+            customerFilter.dayOfBirthday = null;
+            customerFilter.monthOfBirthday = null;
             localStorage.removeItem(KEY_CUSTOMER_FILTER_SAVE);
             App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_DELETE);
         })

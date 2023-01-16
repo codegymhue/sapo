@@ -97,7 +97,9 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         customerMapper.transferFields(updateCustomerParam, customer);
-        return customerMapper.toDTO(customer);
+
+        Customer customerResult = customerRepository.save(customer);
+        return customerMapper.toDTO(customerResult);
     }
 
     //
