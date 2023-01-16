@@ -11,6 +11,7 @@ class App {
     static AlertMessageVi = class {
         static SUCCESS_CREATED = "Tạo dữ liệu thành công !";
         static SUCCESS_UPDATED = "Cập nhật dữ liệu thành công !";
+        static SUCCESS_FILTERED = "Lưu bộ lọc thành công !";
         static SUCCESS_DELETE = "Xóa dữ liệu thành công";
         static ERROR_NAME = "Thao tác không thành công, Tên sản phẩm không được để trống";
         static ERROR_TITLE = "Thao tác không thành công, Tên sản phẩm không được để trống.";
@@ -34,6 +35,7 @@ class App {
             })
         }
 
+
         static showErrorAlert(t) {
             Swal.fire({
                 icon: 'error',
@@ -47,6 +49,14 @@ class App {
         static showSuccessAlert(m) {
             iziToast.success({
                 title: 'Success',
+                position: 'topRight',
+                timeout: 2500,
+                message: m,
+            });
+        }
+        static showFilter(m) {
+            iziToast.success({
+                title: 'lưu bộ lọc thành công',
                 position: 'topRight',
                 timeout: 2500,
                 message: m,
