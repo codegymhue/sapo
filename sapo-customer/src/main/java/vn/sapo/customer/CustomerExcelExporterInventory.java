@@ -106,12 +106,12 @@ public class CustomerExcelExporterInventory {
 
                 createCell(row, columnCount++, customer.getFullName(), style);
                 createCell(row, columnCount++, customer.getCustomerCode(), style);
-                createCell(row, columnCount++, customer.getGroup(), style);
+                createCell(row, columnCount++, customer.getGroup().getTitle(), style);
                 createCell(row, columnCount++, "Theo nhóm khách hàng", style);
                 createCell(row, columnCount++, customer.getEmail(), style);
                 createCell(row, columnCount++, customer.getPhoneNumber(), style);
-                createCell(row, columnCount++, customer.getBirthday(), style);
-                createCell(row, columnCount++, customer.getGender(), style);
+                createCell(row, columnCount++, customer.getBirthday().toString(), style);
+                createCell(row, columnCount++, customer.getGender().getValue(), style);
                 createCell(row, columnCount++, "", style);
                 createCell(row, columnCount++, "", style);
                 createCell(row, columnCount++, "", style);

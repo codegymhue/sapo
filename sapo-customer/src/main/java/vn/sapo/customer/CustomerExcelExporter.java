@@ -133,7 +133,7 @@ public class CustomerExcelExporter {
                 createCell(row, columnCount++, "", style);
                 createCell(row, columnCount++, "", style);
                 createCell(row, columnCount++, customer.getDescription() != null ? customer.getDescription() : "" , style);
-                createCell(row, columnCount++, "Theo nhóm " + customer.getGroup().getTitle(), style);
+                createCell(row, columnCount++, "Theo nhóm " +"' " + customer.getGroup().getTitle() +" '", style);
                 createCell(row, columnCount++, customer.getGroup().getDiscount(), style);
                 createCell(row, columnCount++, "", style);
                 createCell(row, columnCount++, customer.getDebtTotal() != null ? customer.getDebtTotal() : "0" , style);

@@ -8,7 +8,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customer.dto.CreateCustomerParam;
+import vn.sapo.customer.dto.CustomerResult;
+import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.entities.customer.CustomerGender;
+import vn.sapo.entities.customer.CustomerGroup;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -120,7 +123,8 @@ public class ExcelHelper {
 //                            chính sách giá mặc định
                             break;
                         case 14:
-//                            chiết khấu mặc định
+//                            if (currentCell.getNumericCellValue() != '')
+                            customer.setGroup(new CustomerGroupResult().setDiscount((int) currentCell.getNumericCellValue()));
                             break;
                         case 15:
 //                            phương thức thanh toán mặc định
