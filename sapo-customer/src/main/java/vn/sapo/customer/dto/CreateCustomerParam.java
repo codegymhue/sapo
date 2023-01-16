@@ -31,6 +31,9 @@ public class CreateCustomerParam {
     private Integer groupId;
 
     private String email;
+    private String website;
+    private String fax;
+    private String taxCode;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
