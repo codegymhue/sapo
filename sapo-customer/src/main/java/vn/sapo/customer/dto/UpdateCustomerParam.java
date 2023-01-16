@@ -38,7 +38,9 @@ public class UpdateCustomerParam {
     private CustomerStatus status;
 
     private String description;
-
+    private String website;
+    private String fax;
+    private String taxCode;
 
 
 
