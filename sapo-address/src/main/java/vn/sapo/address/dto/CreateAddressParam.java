@@ -16,7 +16,7 @@ public class CreateAddressParam {
     private Integer supplierId;
     @NotBlank(message = "Tên khách hàng không được để trống")
     private String fullName;
-    @NotBlank(message = "Số điện thoại không được để trống")
+
     private String phoneNumber;
     private String email;
 
