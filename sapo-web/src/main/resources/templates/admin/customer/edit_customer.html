@@ -24,13 +24,13 @@
             <div class="MuiBox-root jss3579 jss2927">
                 <div class="MuiBox-root jss3580"><a
                         class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss2926 MuiTypography-colorSecondary"
-                        href="/admin/customers">
+                        href="/admin/customers" style="text-decoration: none">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                          style="width: 24px; height: 24px; margin-left: -9px; margin-right: 6px;">
                         <path d="M14.298 5.99 8.288 12l6.01 6.01 1.414-1.414L11.116 12l4.596-4.596-1.414-1.414Z"
                               fill="currentColor"></path>
                     </svg>
-                    <h6 class="MuiTypography-root MuiTypography-subtitle1">Quay lại danh sách khách hàng</h6></a>
+                    <h6 class="MuiTypography-root MuiTypography-subtitle1" >Quay lại danh sách khách hàng</h6></a>
                     <th:block>
                         <h2 th:if="errors" th:text="${errors}" style="color: red"></h2>
                     </th:block>
@@ -107,7 +107,7 @@
                                                                        placeholder="Nhập mã khách hàng"
                                                                        th:value="${customer.customerCode}"
                                                                        type="text" aria-label="Without label"
-                                                                       class="MuiInputBase-input MuiOutlinedInput-input" readonly
+                                                                       class="MuiInputBase-input MuiOutlinedInput-input"
                                                                 >
                                                                 <fieldset aria-hidden="true"
                                                                           class="jss4023 MuiOutlinedInput-notchedOutline"
