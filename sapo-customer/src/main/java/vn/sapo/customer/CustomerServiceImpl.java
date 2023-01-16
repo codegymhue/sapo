@@ -91,9 +91,7 @@ public class CustomerServiceImpl implements CustomerService {
         if (updateCustomerParam.getFullName().isEmpty() || updateCustomerParam.getFullName().equals("")) {
             updateCustomerParam.setFullName(customer.getFullName());
         }
-        if (updateCustomerParam.getPhoneNumber().isEmpty() || updateCustomerParam.getPhoneNumber().equals("")) {
-            updateCustomerParam.setPhoneNumber(customer.getPhoneNumber());
-        }
+
         if (updateCustomerParam.getCustomerCode().equals("")) {
             updateCustomerParam.setCustomerCode(customer.getCustomerCode());
         }
