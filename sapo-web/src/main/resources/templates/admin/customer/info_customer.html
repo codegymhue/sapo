@@ -93,11 +93,11 @@
                                                     th:text="*{': ' + gender}"> </h6>
                                                 <h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    th:utext="${phoneNumber} ? ${': '+ phoneNumber} : ${': --- '}"
+                                                    th:utext="${customer.getPhoneNumber()} ? ${': '+ customer.getPhoneNumber()} : ${': --- '}"
                                                 ></h6>
                                                 <h6 class="MuiTypography-root jss626 MuiTypography-subtitle1"
 
-                                                    th:utext="${email} ? ${': '+ email} : ${': --- '}"
+                                                    th:utext="${customer.getEmail()} ? ${': '+ customer.getEmail()} : ${': --- '}"
                                                     ></h6><h6
                                                         class="MuiTypography-root jss626 MuiTypography-subtitle1"
                                                         th:text="${': '+customer.getEmployee().getFullName()}"></h6><span></span></div>
@@ -135,7 +135,7 @@
                                                     href="https://animehay.pro/"
                                                     style="padding-left: 0px; text-decoration: none">https://animehay.pro/</a></h6><h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    th:utext="${description} ? ${': '+ description} : ${': --- '}"
+                                                    th:utext="${customer.getDescription} ? ${': '+ customer.Description} : ${': --- '}"
                                             >
 
                                                 </h6></div>

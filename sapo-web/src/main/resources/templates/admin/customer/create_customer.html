@@ -512,12 +512,12 @@
                 "data": JSON.stringify(customer)
             })
                 .done((data) => {
-
+                    console.log(data)
                     App.IziToast.showSuccessAlert("tạo khách hàng thành công !");
                     setTimeout(() => {
                     }, 2500)
                     $('#formCreate')[0].reset();
-                    // window.location.href = `/admin/customers/${customer.customerCode}`;
+                    window.location.href = `/admin/customers/${data.id}`;
 
                 })
                 .fail((jqXHR) => {
