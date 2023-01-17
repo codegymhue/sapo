@@ -12,6 +12,7 @@ import vn.sapo.customer.dto.CustomerResult;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 
@@ -25,6 +26,11 @@ public class CustomerExcelExporter {
         this.customerList = customerList;
         workbook = new XSSFWorkbook();
     }
+
+    String nam = "Nam";
+    String nu = "Nữ";
+    String khac = "Khác";
+
 
     private void writeHeaderLine() {
         sheet = workbook.createSheet("Customers");
@@ -64,8 +70,6 @@ public class CustomerExcelExporter {
         createCell(row, 25, "Tổng SL sản phẩm đã mua", style);
         createCell(row, 26, "Tổng SL sản phẩm hoàn trả", style);
         createCell(row, 27, "Ngày mua cuối cùng", style);
-        createCell(row, 28, "Điểm hiện tại", style);
-        createCell(row, 29, "Hạng thẻ hiện tại", style);
 
     }
 
@@ -106,7 +110,14 @@ public class CustomerExcelExporter {
                 createCell(row, columnCount++, customer.getEmail() != null ? customer.getEmail() : "", style);
                 createCell(row, columnCount++, customer.getPhoneNumber() != null ? customer.getPhoneNumber() : "" , style);
                 createCell(row, columnCount++, customer.getBirthday() != null ? customer.getBirthday().toString() : "", style);
-                createCell(row, columnCount++, customer.getGender() != null ? customer.getGender().getValue() : "", style);
+
+
+                if (customer.getGender().getValue().equals("NAM"))
+                    createCell(row, columnCount++, nam, style);
+                if (customer.getGender().getValue().equals("NU"))
+                    createCell(row, columnCount++, nu, style);
+                if (customer.getGender().getValue().equals("KHAC"))
+                    createCell(row, columnCount++, khac, style);
 
                 if (customer.getAddresses().size() == 0) {
                     createCell(row, columnCount++, "", style);
@@ -142,8 +153,6 @@ public class CustomerExcelExporter {
                 createCell(row, columnCount++, customer.getQuantityProductOrder(), style);
                 createCell(row, columnCount++, "", style);
                 createCell(row, columnCount++, customer.getLastDayOrder()!=null ? customer.getLastDayOrder().toString() : "", style);
-                createCell(row, columnCount++, "", style);
-                createCell(row, columnCount++, "", style);
         }
 }
 
