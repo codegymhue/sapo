@@ -8,10 +8,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customer.dto.CreateCustomerParam;
-import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.entities.customer.CustomerGender;
-import vn.sapo.entities.customer.CustomerGroup;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -85,7 +83,9 @@ public class ExcelHelper {
                             customer.setCustomerCode(currentCell.getStringCellValue());
                             break;
                         case 2:
+                            System.out.println(customer.setGroupId((int) currentCell.getNumericCellValue()));
                             customer.setGroupId((int) currentCell.getNumericCellValue());
+//
                             break;
                         case 3:
 //                             áp dụng uu đãi
@@ -103,17 +103,15 @@ public class ExcelHelper {
                             customer.setGender(CustomerGender.parseCustomerGender(currentCell.getStringCellValue()));
                             break;
                         case 8:
-//                             Website
+                            customer.setAttWebsite(currentCell.getStringCellValue());
                             break;
                         case 9:
-//                             Fax
+                             customer.setAttFax(currentCell.getStringCellValue());
                             break;
                         case 10:
-//                           Mã số thuế
+                            customer.setAttTaxCode(currentCell.getStringCellValue());
                             break;
                         case 11:
-//                            if (currentCell.getStringCellValue()==null)
-//                                customer.setEmployeeId(6);
 
                             break;
                         case 12:
@@ -123,8 +121,7 @@ public class ExcelHelper {
 //                            chính sách giá mặc định
                             break;
                         case 14:
-//                            if (currentCell.getNumericCellValue() != '')
-                            customer.setGroup(new CustomerGroupResult().setDiscount((int) currentCell.getNumericCellValue()));
+                            customer.setGroup(new CustomerGroupResult().setDiscount(0));
                             break;
                         case 15:
 //                            phương thức thanh toán mặc định
@@ -151,11 +148,9 @@ public class ExcelHelper {
                             address.setWardName(currentCell.getStringCellValue());
                             break;
                         case 23:
-//                            nợ hiện tại
                             customer.setDebtTotal(BigDecimal.valueOf(currentCell.getNumericCellValue()));
                             break;
                         case 24:
-//                            tổng chi tiêu
                             customer.setSpendTotal(BigDecimal.valueOf(currentCell.getNumericCellValue()));
                             break;
                         case 25:

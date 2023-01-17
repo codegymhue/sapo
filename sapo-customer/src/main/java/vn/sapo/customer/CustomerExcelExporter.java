@@ -129,9 +129,9 @@ public class CustomerExcelExporter {
                         createCell(row, columnCount++, ar.getWardName() != null ? ar.getWardName() : "", style);
                     }
                 }
-                createCell(row, columnCount++, "", style);
-                createCell(row, columnCount++, "", style);
-                createCell(row, columnCount++, "", style);
+                createCell(row, columnCount++, customer.getAttWebsite()!=null ? customer.getAttWebsite() : "", style);
+                createCell(row, columnCount++, customer.getAttFax() !=null ? customer.getAttFax() : "", style);
+                createCell(row, columnCount++, customer.getAttTaxCode() !=null ? customer.getAttTaxCode() : "", style);
                 createCell(row, columnCount++, customer.getDescription() != null ? customer.getDescription() : "" , style);
                 createCell(row, columnCount++, "Theo nhóm " +"' " + customer.getGroup().getTitle() +" '", style);
                 createCell(row, columnCount++, customer.getGroup().getDiscount(), style);

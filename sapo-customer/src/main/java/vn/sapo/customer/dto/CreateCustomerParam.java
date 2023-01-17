@@ -44,13 +44,10 @@ public class CreateCustomerParam {
 
     private Integer employeeId;
 
-
     private CreateAddressParam createAddressParam;
 
-//    private List<CreateAddressParam> createAddressParams;
+    private BigDecimal debtTotal;
 
-    private BigDecimal debtTotal;  // nợ
-
-    private BigDecimal spendTotal; //chi tiêu
+    private BigDecimal spendTotal;
     private CustomerStatus status;
 }
