@@ -75,6 +75,7 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = customerMapper.toModel(createCustomerParam);
         Customer newCustomer = customerRepository.save(customer);
         String cusCode = newCustomer.getCustomerCode();
+        //TODO: save DB roi getFullName ko dc de trong la sao?
         if(createCustomerParam.getFullName()==null){
             throw new DataInputException("Tên khách hàng không được để trống");
         }
