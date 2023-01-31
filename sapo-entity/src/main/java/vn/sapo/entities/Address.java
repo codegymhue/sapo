@@ -72,10 +72,10 @@ public class Address {
     @Column(name = "supplier_id", insertable = false, updatable = false)
     private Integer supplierId;
 
-    @Column(name = "is_shipping")
+    @Column(name = "is_shipping", nullable = false)
     private boolean isShippingAddress;
 
-    @Column(name = "is_receive_bill")
+    @Column(name = "is_receive_bill", nullable = false)
     private boolean isReceiveBill;
 
     public Address setCustomerId(Integer customerId) {

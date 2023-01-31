@@ -72,10 +72,34 @@ public class AddressServiceTest {
 
     @BeforeAll
     public static void setUp() {
-        addresses.add(new Address().setId(1).setFullName("Tran Van Cu").setPhoneNumber("0987654321").setLine1("28 Nguyen Tri Phuong").setCustomerId(1));
-        addresses.add(new Address().setId(2).setFullName("Thanh Van Cu").setPhoneNumber("0989897688").setLine1("30 Nguyen Tri Phuong").setLine2("3 Floor").setCustomerId(2));
-        addresses.add(new Address().setId(3).setFullName("Chị Thanh Hoan").setLine1("30 Nguyen Tri Phuong").setCustomerId(2));
-        addresses.add(new Address().setId(4).setFullName("Chị Ánh ngọc").setLine1("35 Nguyen Tri Phuong").setCustomerId(4));
+        addresses.add(new Address()
+                .setId(1)
+                .setFullName("Tran Van Cu")
+                .setEmail("cutran23@gmail.com")
+                .setPhoneNumber("0987654321")
+                .setLine1("28 Nguyen Tri Phuong")
+                .setCustomerId(1));
+
+        addresses.add(new Address()
+                .setId(2)
+                .setFullName("Thanh thanh")
+                .setEmail("thanh@gmail.com")
+                .setPhoneNumber("0989897688")
+                .setLine1("30 Nguyen Tri Phuong")
+                .setLine2("3 Floor")
+                .setCustomerId(2));
+
+        addresses.add(new Address()
+                .setId(3)
+                .setFullName("Chị Thanh Hoan")
+//                .setLine1("30 Nguyen Tri Phuong")
+                .setCustomerId(2));
+
+        addresses.add(new Address()
+                .setId(4)
+                .setFullName("Chị Ánh ngọc")
+                .setLine1("35 Nguyen Tri Phuong")
+                .setCustomerId(4));
     }
 
     @BeforeEach
@@ -89,9 +113,6 @@ public class AddressServiceTest {
         when(addressRepository.findAllByCustomerId(anyInt())).thenReturn(newList);
         when(addressRepository.findAll()).thenReturn(addresses);
         when(addressRepository.findById(1)).thenReturn(Optional.of(addresses.get(1)));
-//        when(addressRepository.existsById(1)).thenReturn(false);
-//        when(addressRepository.save(any()))
-//                .thenReturn(addresses.get(1));
         when(addressRepository.existsById(4)).thenReturn(true);
         when(addressRepository.save(any()))
                 .thenReturn(addresses.get(3));
@@ -102,22 +123,21 @@ public class AddressServiceTest {
         List<AddressResult> dtoList = addressService.findByCustomerId(2);
         assertAddress(dtoList.get(0), addresses.get(1));
         assertAddress(dtoList.get(1), addresses.get(2));
-
-//        try {
-//            assertAddress(dtoList.get(2), addresses.get(3));
-//        } catch (Exception e) {
-//            assertThat(e, instanceOf(IndexOutOfBoundsException.class));
-//            assertEquals(e.getMessage(), "Customer not found");
-//        }
     }
+    @Test
+    public void testFindByCustomerNotId() {
+        try {
+            addressService.findByCustomerId(7);
+        } catch (Exception e) {
+            assertThat(e, instanceOf(IndexOutOfBoundsException.class));
+            assertEquals(e.getMessage(), "Customer not found");
+        }
+    }
+
 
     @Test
     public void testFindAll() {
-        Assertions.assertThat(addressService.findAll()).hasSize(2);
-    }
-
-    @Test
-    public void testFindAll2() {
+        Assertions.assertThat(addressService.findAll()).hasSize(4);
         try {
             addressService.findAll();
         } catch (Exception e) {
@@ -128,8 +148,10 @@ public class AddressServiceTest {
 
     @Test
     public void testFindById() {
-        assertAddress(addressService.findById(2), addresses.get(1));
-        assertAddress(addressService.findById(2), addresses.get(1));
+        assertAddress(addressService.findById(1), addresses.get(1));
+    }
+    @Test
+    public void testNotFindById() {
         try {
             addressService.findById(3);
         } catch (Exception e) {
@@ -144,9 +166,17 @@ public class AddressServiceTest {
                 .setId(4)
                 .setFullName("Chị Ánh ngọc")
                 .setLine1("45 Nguyen hue");
-//        when(addressRepository.existsById(4)).thenReturn(true);
        AddressResult actual =  addressService.update(updateAddressParam);
        assertAddress(actual, addresses.get(3));
+    }
+    @Test
+    public void testUpdateNot() {
+        UpdateAddressParam updateAddressParam = new UpdateAddressParam()
+                .setId(4)
+                .setFullName(null)
+                .setLine1("45 Nguyen hue");
+        AddressResult actual =  addressService.update(updateAddressParam);
+        assertAddress(actual, addresses.get(3));
     }
 
     @Test
@@ -162,9 +192,10 @@ public class AddressServiceTest {
     public void assertAddress(AddressResult actual, Address expected) {
         Assertions.assertThat(actual.getId()).isEqualTo(expected.getId());
         Assertions.assertThat(actual.getFullName()).isEqualTo(expected.getFullName());
+        Assertions.assertThat(actual.getLine1()).isEqualTo(expected.getLine1());
+        Assertions.assertThat(actual.getLine2()).isEqualTo(expected.getLine2());
+        Assertions.assertThat(actual.getEmail()).isEqualTo(expected.getEmail());
+        Assertions.assertThat(actual.getDistrictName()).isEqualTo(expected.getDistrictName());
     }
 
-//    public void assertAddress(AddressResult actual) {
-//        addresses.forEach(expected -> assertAddress(actual, expected));
-//    }
 }
