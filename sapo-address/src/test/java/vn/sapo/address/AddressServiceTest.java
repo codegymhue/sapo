@@ -110,6 +110,7 @@ public class AddressServiceTest {
 //            if(address.getCustomerId()==2)
 //                a.add(address);
 //        }
+        // nguoi khac co sua ne.....
         when(addressRepository.findAllByCustomerId(anyInt())).thenReturn(newList);
         when(addressRepository.findAll()).thenReturn(addresses);
         when(addressRepository.findById(1)).thenReturn(Optional.of(addresses.get(1)));
