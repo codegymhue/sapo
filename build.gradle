@@ -22,6 +22,10 @@ allprojects { proj ->
         }
     }
 
+    java {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
 
     dependencies {
         switch (proj.name) {
@@ -47,7 +51,7 @@ allprojects { proj ->
         implementation "org.springframework.boot:spring-boot-starter-data-jpa"
         implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
         implementation "org.springframework.boot:spring-boot-starter-validation"
-
+        runtimeOnly 'org.springframework.boot:spring-boot-starter-tomcat'
         testImplementation "org.springframework.boot:spring-boot-starter-test"
         testImplementation "com.h2database:h2"
 
