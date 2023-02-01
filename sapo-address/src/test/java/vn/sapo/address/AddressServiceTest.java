@@ -91,7 +91,6 @@ public class AddressServiceTest {
                 .setPhoneNumber("0899624654")
                 .setReceiveBill(true)
                 .setShippingAddress(true)
-                .setZipCode(null)
         );
         addresses.add(new Address()
                 .setId(2)
@@ -108,7 +107,7 @@ public class AddressServiceTest {
                 .setPhoneNumber("0989897688")
                 .setLine1("30 Nguyen Tri Phuong")
                 .setLine2("3 Floor")
-                .setShippingAddress(false)
+                .setShippingAddress(true)
                 .setReceiveBill(true)
                 .setCustomerId(2));
 
@@ -122,7 +121,6 @@ public class AddressServiceTest {
                 .setFullName("Chị Ánh ngọc")
                 .setLine1("35 Nguyen Tri Phuong")
                 .setCustomerId(4));
-
     }
 
     @BeforeEach
@@ -137,7 +135,6 @@ public class AddressServiceTest {
         when(addressRepository.findAll()).thenReturn(addresses);
         when(addressRepository.findById(1)).thenReturn(Optional.of(addresses.get(1)));
         when(addressRepository.existsById(1)).thenReturn(false);
-
 //        when(addressRepository.save(any()))
 //                .thenReturn(addresses.get(3));
     }
