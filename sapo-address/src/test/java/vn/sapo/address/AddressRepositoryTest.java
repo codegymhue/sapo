@@ -18,19 +18,19 @@ import vn.sapo.address.dto.UpdateAddressParam;
 //@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Sql("/sapo.sql")
 public class AddressRepositoryTest {
-    //        @Spy
     @Autowired
     private AddressRepository addressRepository;
-
-
-    //        @Test
-//        public void testFindAllByCustomerId() {
-//
-//        }
     @Test
     public void testFindAll() {
         Assertions.assertThat(addressRepository.findAll()).hasSize(1);
     }
-
+    @Test
+    public void testFindById(){
+        Assertions.assertThat(addressRepository.findById(1).get().getId()).isEqualTo(1);
+    }
+    @Test
+    public void testExistsById() {
+        Assertions.assertThat(addressRepository.existsById(1)).isTrue();
+    }
 
 }
