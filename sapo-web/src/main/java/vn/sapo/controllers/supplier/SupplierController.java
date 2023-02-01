@@ -29,7 +29,7 @@ public class SupplierController {
 
     @GetMapping("/create")
     public ModelAndView showSupplierCreatePage() {
-        return new ModelAndView("/admin/suppliers/supplier_create");
+        return new ModelAndView("/admin/suppliers/create_suppliers");
     }
 
 }
