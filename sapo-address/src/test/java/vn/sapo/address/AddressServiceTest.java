@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.util.Assert;
 import vn.sapo.address.dto.AddressResult;
@@ -25,51 +26,25 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static org.assertj.core.api.BDDAssumptions.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.willDoNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
+@Import(AddressConfigurationTest.class)
 public class AddressServiceTest {
+
     @MockBean
     AddressRepository addressRepository;
     @Autowired
     AddressMapper addressMapper;
     @Autowired
     AddressService addressService;
-
-    @Autowired
-    UpdateAddressParam updateAddressParam;
-
-    @TestConfiguration
-    public static class AddressServiceTestConfiguration {
-        @Bean
-        public ModelMapper getModelMapper() {
-            ModelMapper mapper = new ModelMapper();
-            mapper.getConfiguration().setSkipNullEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT);
-            return mapper;
-        }
-
-        @Bean
-        AddressService addressService() {
-            return new AddressServiceImpl();
-        }
-
-        @Bean
-        AddressMapper addressMapper() {
-            return new AddressMapper();
-        }
-
-        @Bean
-        UpdateAddressParam updateAddressParam() {
-            return new UpdateAddressParam();
-        }
-    }
 
     private static final List<Address> addresses = new ArrayList<>();
 
@@ -144,10 +119,6 @@ public class AddressServiceTest {
         List<AddressResult> dtoList = addressService.findByCustomerId(2);
         assertAddress(dtoList.get(0), addresses.get(2));
         assertAddress(dtoList.get(1), addresses.get(3));
-    }
-
-    @Test
-    public void testFindByCustomerNotId() {
         try {
             addressService.findByCustomerId(7);
         } catch (Exception e) {
@@ -156,10 +127,10 @@ public class AddressServiceTest {
         }
     }
 
+
     @Test
     public void testFindAll() {
         Assertions.assertThat(addressService.findAll()).hasSize(5);
-
         try {
             addressService.findAll().isEmpty();
         } catch (Exception e) {
@@ -220,15 +191,17 @@ public class AddressServiceTest {
         Assertions.assertThat(actual.getLine1()).isEqualTo(expected.getLine1());
         Assertions.assertThat(actual.getLine2()).isEqualTo(expected.getLine2());
         Assertions.assertThat(actual.getEmail()).isEqualTo(expected.getEmail());
-        Assertions.assertThat(actual.getDistrictName()).isEqualTo(expected.getDistrictName());
         Assertions.assertThat(actual.getDistrictId()).isEqualTo(expected.getDistrictId());
-        Assertions.assertThat(actual.getProvinceName()).isEqualTo(expected.getProvinceName());
+        Assertions.assertThat(actual.getDistrictName()).isEqualTo(expected.getDistrictName());
         Assertions.assertThat(actual.getProvinceId()).isEqualTo(expected.getProvinceId());
-        Assertions.assertThat(actual.getWardName()).isEqualTo(expected.getWardName());
+        Assertions.assertThat(actual.getProvinceName()).isEqualTo(expected.getProvinceName());
         Assertions.assertThat(actual.getWardId()).isEqualTo(expected.getWardId());
+        Assertions.assertThat(actual.getWardName()).isEqualTo(expected.getWardName());
         Assertions.assertThat(actual.getSupplierId()).isEqualTo(expected.getSupplierId());
         Assertions.assertThat(actual.isReceiveBill()).isEqualTo(expected.isReceiveBill());
         Assertions.assertThat(actual.isShipping()).isEqualTo(expected.isShippingAddress());
+        Assertions.assertThat(actual.getZipCode()).isEqualTo(expected.getZipCode());
     }
+
 
 }

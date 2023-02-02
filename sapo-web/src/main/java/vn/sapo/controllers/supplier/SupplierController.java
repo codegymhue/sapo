@@ -31,5 +31,9 @@ public class SupplierController {
     public ModelAndView showSupplierCreatePage() {
         return new ModelAndView("/admin/suppliers/create_suppliers");
     }
+    @GetMapping("/detail")
+    public ModelAndView showSupplierDetailPage() {
+        return new ModelAndView("/admin/suppliers/detail_suppliers");
+    }
 
 }
