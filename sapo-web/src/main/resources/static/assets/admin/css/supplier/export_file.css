@@ -1375,7 +1375,6 @@ fieldset[disabled] .datepicker table tr td span.active:hover:hover {
 }
 
 .leaflet-safari .leaflet-tile {
-    image-rendering: -webkit-optimize-contrast
 }
 
 .leaflet-safari .leaflet-tile-container {
@@ -2058,7 +2057,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
     z-index: 999999;
     background-color: #000;
     opacity: 0;
-    background: radial-gradient(center, ellipse cover, rgba(0, 0, 0, .4) 0, rgba(0, 0, 0, .9) 100%);
     filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#66000000',endColorstr='#e6000000',GradientType=1)";
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
     filter: alpha(opacity=50);
@@ -3098,7 +3096,6 @@ tr.introjs-showElement>th {
     margin-bottom: -1px;
     z-index: 100;
     width: 33.333333333%;
-    color: 333;
     background: #fff
 }
 
@@ -3312,7 +3309,6 @@ tr.introjs-showElement>th {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    -webkit-transform: translateZ()
 }
 
 .feedback-setblackout:hover,
@@ -3515,7 +3511,6 @@ tr.introjs-showElement>th {
 
 .icon-wrap-feedback {
     padding: 0 12px;
-    cursor: -webkit-grab;
     width: 19px;
     float: left
 }
@@ -3771,9 +3766,6 @@ html {
     -ms-overflow-style: scrollbar
 }
 
-@-ms-viewport {
-    width: device-width
-}
 
 article,
 aside,
@@ -12939,7 +12931,6 @@ a.text-dark:hover {
 }
 
 .text-hide {
-    font: 0/0 a;
     color: transparent;
     text-shadow: none;
     background-color: transparent;
@@ -20099,8 +20090,6 @@ table.sapo-table-line-item tbody tr:last-child {
 
 .form-success .ui-button .ico,
 .form-wrapper .ui-button .ico {
-    margin-top: -button-vertical-spacing(large)-4px;
-    margin-bottom: -button-vertical-spacing(large);
     vertical-align: middle
 }
 
@@ -20246,7 +20235,6 @@ table.sapo-table-line-item tbody tr:last-child {
 .form-wrapper .ui-text-area::-webkit-input-placeholder {
     color: #637381;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: antialiased
 }
 
 .form-success .ui-text-area:-ms-input-placeholder,
@@ -20255,14 +20243,12 @@ table.sapo-table-line-item tbody tr:last-child {
 .form-wrapper .ui-text-area::-ms-input-placeholder {
     color: #637381;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: antialiased
 }
 
 .form-success .ui-text-area::placeholder,
 .form-wrapper .ui-text-area::placeholder {
     color: #637381;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: antialiased
 }
 
 .form-success .ui-text-area:focus,
@@ -25366,7 +25352,6 @@ h1 {
     -ms-flex-item-align: center;
     align-self: center;
     padding: 1.6rem 1.6rem 1.6rem 0;
-    display: -webkit-inline-box
 }
 
 .banner-status-success .banner__content h2 {
@@ -26298,7 +26283,6 @@ tr[class^=item-combo-] .line-item-name {
 }
 
 .popover-menu-class {
-    background-color: "#08f"
 }
 
 .sapo-menu-list-item .sapo-menu-list-item-link--primary.driver-highlighted-element {
@@ -26855,7 +26839,6 @@ tr[class^=item-combo-] .line-item-name {
     max-width: calc(100% - 15px);
     display: inline-block;
     overflow-x: hidden;
-    overflow-y: -webkit-paged-y;
     float: left;
     font-size: 13px
 }
@@ -27390,7 +27373,7 @@ tr[class^=item-combo-] .line-item-name {
 
 .header_dashboard .wrap-noti .uibar {
     width: calc(100% - 110px);
-    -webkit-width: calc(100% -110px);
+    -webkit-width: calc(100% - 110px);
     -moz-width: calc(100% - 110px);
     -o-width: calc(100% - 110px);
     -os-width: calc(100% - 110px);
@@ -27401,7 +27384,7 @@ tr[class^=item-combo-] .line-item-name {
 @media (min-width:992px) and (max-width:1139px) {
     .header_dashboard .wrap-noti .uibar {
         width: calc(100% - 55px);
-        -webkit-width: calc(100% 55px);
+        -webkit-width: calc(100% - 55px);
         -moz-width: calc(100% - 55px);
         -o-width: calc(100% - 55px);
         -os-width: calc(100% - 55px)
@@ -27415,7 +27398,7 @@ tr[class^=item-combo-] .line-item-name {
     border: none;
     padding: 0;
     outline: none;
-    border-color: none;
+    /*border-color: none;*/
     cursor: pointer
 }
 
@@ -30479,7 +30462,6 @@ tr[class^=item-combo-] .line-item-name {
 
 .popover-noti .line-noti {
     border-bottom: 1px solid #ecf0f3;
-    display: -webkit-inline-box
 }
 
 .popover-noti .line-noti .left-noti-item {
@@ -34670,7 +34652,6 @@ tr[class^=item-combo-] .line-item-name {
 .modal-dialog-suggest-fee .btn-loading .btn-spinner {
     animation: rotate .5s linear infinite;
     opacity: 1;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" 100 ")";
     filter: alpha(opacity=100)
 }
 
@@ -34742,7 +34723,6 @@ tr[class^=item-combo-] .line-item-name {
     margin-top: -10px;
     margin-left: -10px;
     opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" 0 ")";
     filter: alpha(opacity=0)
 }
 
@@ -35975,7 +35955,6 @@ table.sapo-table-delivery tbody tr {
 
 #warrantyNumday {
     padding-left: 10px;
-    vertical-align: -webkit-baseline-middle
 }
 
 .line-limit-2 {
@@ -36316,7 +36295,6 @@ table.sapo-table-delivery tbody tr {
 
 #pagination-text {
     display: inline-block;
-    vertical-align: -webkit-baseline-middle
 }
 
 #tbody-table-list-condition .popover-gift {
@@ -38153,7 +38131,6 @@ i.green {
 }
 
 .icon-country-wrapper svg {
-    vertical-align: -webkit-baseline-middle;
     margin-top: 1px;
     margin-left: .5px
 }
@@ -44230,7 +44207,6 @@ input:disabled {
 }
 
 #suggest-prediction-dashboard .inputSearchProduct .filter-stock-products {
-    box-shadow: 1 1 10 #000;
     width: 100%
 }
 
@@ -46705,7 +46681,6 @@ input:disabled {
     padding: 0 17px;
     height: 36px;
     border-radius: 3px;
-    font-weight: 500px
 }
 
 .loyalty-intro button {
@@ -51242,7 +51217,6 @@ tr[id^=orderLineItems-show-packize-] td {
     -ms-flex-item-align: center;
     align-self: center;
     padding: 1.6rem 1.6rem 1.6rem 0;
-    display: -webkit-inline-box
 }
 
 .banner-status-warning .banner__content h2 {

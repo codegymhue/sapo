@@ -2058,7 +2058,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
     z-index: 999999;
     background-color: #000;
     opacity: 0;
-    background: radial-gradient(center, ellipse cover, rgba(0, 0, 0, .4) 0, rgba(0, 0, 0, .9) 100%);
     filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#66000000',endColorstr='#e6000000',GradientType=1)";
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
     filter: alpha(opacity=50);
@@ -27390,7 +27389,7 @@ tr[class^=item-combo-] .line-item-name {
 
 .header_dashboard .wrap-noti .uibar {
     width: calc(100% - 110px);
-    -webkit-width: calc(100% -110px);
+    -webkit-width: calc(100% - 110px);
     -moz-width: calc(100% - 110px);
     -o-width: calc(100% - 110px);
     -os-width: calc(100% - 110px);
@@ -27401,7 +27400,7 @@ tr[class^=item-combo-] .line-item-name {
 @media (min-width:992px) and (max-width:1139px) {
     .header_dashboard .wrap-noti .uibar {
         width: calc(100% - 55px);
-        -webkit-width: calc(100% 55px);
+        -webkit-width: calc(100% - 55px);
         -moz-width: calc(100% - 55px);
         -o-width: calc(100% - 55px);
         -os-width: calc(100% - 55px)
@@ -27415,7 +27414,6 @@ tr[class^=item-combo-] .line-item-name {
     border: none;
     padding: 0;
     outline: none;
-    border-color: none;
     cursor: pointer
 }
 

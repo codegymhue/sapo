@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xuất File Nhà Cung Cấp</title>
-    <link rel="stylesheet" href="export_file.css">
+    <link rel="stylesheet" href="/assets/admin/css/supplier/export_file.css">
 </head>
 <body>
-    
+
 </body>
 </html>
 <div class="modal-header">
@@ -26,7 +26,6 @@
 </div>
 
 
-
 <div class="modal-body" style="max-height: calc(100vh - 200px);overflow-y: auto;">
     <form id="formExportSuppliers">
         <div style="padding-left: 10px;">
@@ -35,7 +34,7 @@
                 <label class="flex">
                     <span class="sapo-radiobox" style="margin-right: 7px;">
                         <input class="sapo-radiobox__input" type="radio" name="formExportType" id="allSuppliers"
-                            value="allSuppliers" checked="">
+                               value="allSuppliers" checked="">
                         <span class="sapo-radiobox__icon"></span>
                     </span>
                     Tất cả nhà cung cấp
@@ -45,7 +44,7 @@
                 <label class="flex">
                     <span class="sapo-radiobox" style="margin-right: 7px;">
                         <input class="sapo-radiobox__input" type="radio" name="formExportType" id="currentPage"
-                            value="currentPage">
+                               value="currentPage">
                         <span class="sapo-radiobox__icon"></span>
                     </span>
                     Nhà cung cấp trên trang này
@@ -56,7 +55,7 @@
                 <label class="flex">
                     <span class="sapo-radiobox" style="margin-right: 7px;">
                         <input class="sapo-radiobox__input" type="radio" name="formExportType" id="selectedSuppliers"
-                            value="selectedSuppliers" disabled="disabled">
+                               value="selectedSuppliers" disabled="disabled">
                         <span class="sapo-radiobox__icon"></span>
                     </span>
                     Các nhà cung cấp được chọn
@@ -66,7 +65,7 @@
                 <label class="flex">
                     <span class="sapo-radiobox" style="margin-right: 7px;">
                         <input class="sapo-radiobox__input" type="radio" name="formExportType" id="currentSearch"
-                            value="currentSearch">
+                               value="currentSearch">
                         <span class="sapo-radiobox__icon"></span>
                     </span>
                     <span id="order-match-current-search">5</span>&nbsp;nhà cung cấp phù hợp với kết quả tìm kiếm hiện
@@ -78,28 +77,27 @@
             <div class="export-field-group--header modal-setting-column pb-3">
                 <label class="border-checkmark1">
                     <input type="checkbox" class="export-field-group--toggle-all"
-                        bind-event-change="toggleGroupFormImport(this)"><span>Xuất dữ liệu theo mẫu file nhập</span>
+                           bind-event-change="toggleGroupFormImport(this)"><span>Xuất dữ liệu theo mẫu file nhập</span>
                     <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                 </label>
             </div>
 
             <a id="export-field-group--show-export-supplier" href="javascript:" bind-event-click="showExportForm()"
-                style="color: #0088ff;margin: 5px 0 5px;display: inline-block;">Tuỳ chọn trường hiển thị</a>
+               style="color: #0088ff;margin: 5px 0 5px;display: inline-block;">Tuỳ chọn trường hiển thị</a>
         </div>
     </form>
     <div id="formExportSuppliers-supplier_overview" style="display:none">
 
 
-
         <div class="export-field-group export-field-group--order export-field-row"
-            id="export-field-group--supplier_overview">
+             id="export-field-group--supplier_overview">
             <div class="export-field-group--content d-flex">
                 <div class="export-field-col" style="width: calc(100%/3)">
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input checked="" class="export-field-group--toggle-item export-field-group--value-name"
-                                hidden="" type="checkbox" value="name" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   hidden="" type="checkbox" value="name" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Tên nhà cung cấp </span>
                         </label>
@@ -107,9 +105,9 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input checked="" disabled=""
-                                class="export-field-group--toggle-item export-field-group--value-code" hidden=""
-                                type="checkbox" value="code" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   class="export-field-group--toggle-item export-field-group--value-code" hidden=""
+                                   type="checkbox" value="code" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1 disable" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Mã nhà cung cấp </span>
                         </label>
@@ -117,8 +115,8 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input checked="" class="export-field-group--toggle-item export-field-group--value-group"
-                                hidden="" type="checkbox" value="group" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   hidden="" type="checkbox" value="group" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Nhóm nhà cung cấp </span>
                         </label>
@@ -126,8 +124,8 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input checked="" class="export-field-group--toggle-item export-field-group--value-email"
-                                hidden="" type="checkbox" value="email" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   hidden="" type="checkbox" value="email" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Email </span>
                         </label>
@@ -135,8 +133,8 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input checked="" class="export-field-group--toggle-item export-field-group--value-phone"
-                                hidden="" type="checkbox" value="phone" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   hidden="" type="checkbox" value="phone" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Số điện thoại </span>
                         </label>
@@ -144,8 +142,8 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input class="export-field-group--toggle-item export-field-group--value-website" hidden=""
-                                type="checkbox" value="website" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   type="checkbox" value="website" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Website </span>
                         </label>
@@ -153,8 +151,8 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input class="export-field-group--toggle-item export-field-group--value-fax" hidden=""
-                                type="checkbox" value="fax" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   type="checkbox" value="fax" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Fax </span>
                         </label>
@@ -162,8 +160,8 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input class="export-field-group--toggle-item export-field-group--value-taxNumber" hidden=""
-                                type="checkbox" value="taxNumber" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   type="checkbox" value="taxNumber" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Mã số thuế </span>
                         </label>
@@ -171,9 +169,10 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input checked=""
-                                class="export-field-group--toggle-item export-field-group--value-assigneeName" hidden=""
-                                type="checkbox" value="assigneeName" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   class="export-field-group--toggle-item export-field-group--value-assigneeName"
+                                   hidden=""
+                                   type="checkbox" value="assigneeName" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Nhân viên phụ trách </span>
                         </label>
@@ -183,8 +182,8 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input class="export-field-group--toggle-item export-field-group--value-priceListDefault"
-                                hidden="" type="checkbox" value="priceListDefault" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   hidden="" type="checkbox" value="priceListDefault" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Chính sách giá mặc định </span>
                         </label>
@@ -192,8 +191,8 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input class="export-field-group--toggle-item export-field-group--value-paymentTermDefault"
-                                hidden="" type="checkbox" value="paymentTermDefault" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   hidden="" type="checkbox" value="paymentTermDefault" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Kỳ hạn thanh toán mặc định </span>
                         </label>
@@ -201,9 +200,9 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input
-                                class="export-field-group--toggle-item export-field-group--value-paymentMethodDefault"
-                                hidden="" type="checkbox" value="paymentMethodDefault" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                    class="export-field-group--toggle-item export-field-group--value-paymentMethodDefault"
+                                    hidden="" type="checkbox" value="paymentMethodDefault" field-group="SupplierFields"
+                                    bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Hình thức thanh toán mặc định </span>
                         </label>
@@ -211,8 +210,8 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input checked="" class="export-field-group--toggle-item export-field-group--value-contact"
-                                hidden="" type="checkbox" value="contact" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   hidden="" type="checkbox" value="contact" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Người liên hệ </span>
                         </label>
@@ -220,9 +219,9 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input checked=""
-                                class="export-field-group--toggle-item export-field-group--value-contactNumber"
-                                hidden="" type="checkbox" value="contactNumber" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   class="export-field-group--toggle-item export-field-group--value-contactNumber"
+                                   hidden="" type="checkbox" value="contactNumber" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>SĐT người liên hệ </span>
                         </label>
@@ -230,9 +229,10 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input checked=""
-                                class="export-field-group--toggle-item export-field-group--value-contactEmail" hidden=""
-                                type="checkbox" value="contactEmail" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   class="export-field-group--toggle-item export-field-group--value-contactEmail"
+                                   hidden=""
+                                   type="checkbox" value="contactEmail" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Email người liên hệ </span>
                         </label>
@@ -240,8 +240,8 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input checked="" class="export-field-group--toggle-item export-field-group--value-address"
-                                hidden="" type="checkbox" value="address" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   hidden="" type="checkbox" value="address" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Nhãn </span>
                         </label>
@@ -249,8 +249,8 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input checked="" class="export-field-group--toggle-item export-field-group--value-address1"
-                                hidden="" type="checkbox" value="address1" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   hidden="" type="checkbox" value="address1" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Địa chỉ 1 </span>
                         </label>
@@ -258,8 +258,8 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input class="export-field-group--toggle-item export-field-group--value-address2" hidden=""
-                                type="checkbox" value="address2" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   type="checkbox" value="address2" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Địa chỉ 2 </span>
                         </label>
@@ -269,8 +269,8 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input checked="" class="export-field-group--toggle-item export-field-group--value-city"
-                                hidden="" type="checkbox" value="city" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   hidden="" type="checkbox" value="city" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Tỉnh thành </span>
                         </label>
@@ -278,8 +278,8 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input checked="" class="export-field-group--toggle-item export-field-group--value-district"
-                                hidden="" type="checkbox" value="district" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   hidden="" type="checkbox" value="district" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Quận huyện </span>
                         </label>
@@ -287,8 +287,8 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input checked="" class="export-field-group--toggle-item export-field-group--value-ward"
-                                hidden="" type="checkbox" value="ward" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   hidden="" type="checkbox" value="ward" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Phường xã </span>
                         </label>
@@ -296,8 +296,8 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input checked="" class="export-field-group--toggle-item export-field-group--value-debt"
-                                hidden="" type="checkbox" value="debt" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   hidden="" type="checkbox" value="debt" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Nợ hiện tại </span>
                         </label>
@@ -305,8 +305,8 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input class="export-field-group--toggle-item export-field-group--value-status" hidden=""
-                                type="checkbox" value="status" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   type="checkbox" value="status" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Trạng thái </span>
                         </label>
@@ -314,8 +314,8 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input class="export-field-group--toggle-item export-field-group--value-description"
-                                hidden="" type="checkbox" value="description" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   hidden="" type="checkbox" value="description" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Mô tả </span>
                         </label>
@@ -323,8 +323,8 @@
                     <div class="export-field-item modal-setting-column py-2">
                         <label class="border-checkmark1">
                             <input class="export-field-group--toggle-item export-field-group--value-tags" hidden=""
-                                type="checkbox" value="tags" field-group="SupplierFields"
-                                bind-event-change="toggleItem(this)">
+                                   type="checkbox" value="tags" field-group="SupplierFields"
+                                   bind-event-change="toggleItem(this)">
                             <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
                             <span>Tags </span>
                         </label>

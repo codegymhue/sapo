@@ -20,9 +20,20 @@ public class SupplierController {
         return new ModelAndView("/admin/suppliers/supplier_list");
     }
 
-    @GetMapping("/{id}/histories")
+    @GetMapping("/export")
+    public ModelAndView showSupplierListExport() {
+        return new ModelAndView("/admin/suppliers/modals/export_file");
+    }
+
+    @GetMapping("/import")
+    public ModelAndView showSupplierListImport() {
+        return new ModelAndView("/admin/suppliers/modals/import_file");
+    }
+
+
+    @GetMapping("/{id}/detail")
     public ModelAndView showSupplierHistoryPage(@PathVariable Integer id) {
-        ModelAndView modelAndView = new ModelAndView("/admin/suppliers/supplier_history");
+        ModelAndView modelAndView = new ModelAndView("/admin/suppliers/detail_supplier");
         modelAndView.addObject("suppliers", supplierService.findById(id));
         return modelAndView;
     }
