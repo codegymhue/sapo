@@ -31,9 +31,9 @@ public class CreateCustomerParam {
     private Integer groupId;
 
     private String email;
-    private String attWebsite;
-    private String attFax;
-    private String attTaxCode;
+    private String website;
+    private String fax;
+    private String taxCode;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthday;

@@ -25,7 +25,7 @@ public class CustomerMapper implements InitializingBean {
     }
 
     public CustomerResult toDTO(Customer customer) {
-        return modelMapper.map(customer, CustomerResult.class);
+            return modelMapper.map(customer, CustomerResult.class);
     }
 
     public Customer toModel(CreateCustomerParam createCustomerParam) {

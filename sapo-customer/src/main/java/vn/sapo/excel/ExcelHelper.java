@@ -103,13 +103,13 @@ public class ExcelHelper {
                             customer.setGender(CustomerGender.parseCustomerGender(currentCell.getStringCellValue()));
                             break;
                         case 8:
-                            customer.setAttWebsite(currentCell.getStringCellValue());
+                            customer.setWebsite(currentCell.getStringCellValue());
                             break;
                         case 9:
-                             customer.setAttFax(currentCell.getStringCellValue());
+                             customer.setFax(currentCell.getStringCellValue());
                             break;
                         case 10:
-                            customer.setAttTaxCode(currentCell.getStringCellValue());
+                            customer.setTaxCode(currentCell.getStringCellValue());
                             break;
                         case 11:
 

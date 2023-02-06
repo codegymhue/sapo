@@ -306,7 +306,7 @@
                                                             <input aria-invalid="false"
                                                                    id="faxUpdate"
                                                                    name="faxUpdate" placeholder="Nhập số fax"
-                                                                   th:value="${customer.attFax}"
+                                                                   th:value="${customer.fax}"
                                                                    type="text"
                                                                    aria-label="Without label" style="font-size: 14px;"
                                                                    class="MuiInputBase-input MuiOutlinedInput-input"
@@ -333,7 +333,7 @@
                                                             <input aria-invalid="false"
                                                                    id="taxCodeUp"
                                                                    name="taxNumber" placeholder="Nhập mã số thuế"
-                                                                   th:value="${customer.attTaxCode}"
+                                                                   th:value="${customer.taxCode}"
                                                                    type="text" aria-label="Without label"
                                                                    class="MuiInputBase-input MuiOutlinedInput-input"
                                                                    >
@@ -639,9 +639,9 @@
             gender: $('#genderUp :selected').val(),
             employee: $('#employeeNameUp :selected').val(),
             description: $('#descriptionUp').val(),
-            attTaxCode: $('#taxCodeUp').val(),
-            attFax: $('#faxUpdate').val(),
-            attWebsite: $('#websiteUp').val()
+            taxCode: $('#taxCodeUp').val(),
+            fax: $('#faxUpdate').val(),
+            website: $('#websiteUp').val()
 
         }
 

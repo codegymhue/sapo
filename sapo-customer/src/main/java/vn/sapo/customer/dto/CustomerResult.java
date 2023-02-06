@@ -64,8 +64,8 @@ public class CustomerResult {
     private Instant lastDayOrder;
 
     private CusPayment payment;
-    private  String attTaxCode;
-    private  String attFax;
-    private String attWebsite;
+    private  String taxCode;
+    private  String fax;
+    private String website;
 }
 

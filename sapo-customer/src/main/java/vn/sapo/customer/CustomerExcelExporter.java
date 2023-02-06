@@ -12,7 +12,6 @@ import vn.sapo.customer.dto.CustomerResult;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 
@@ -140,9 +139,9 @@ public class CustomerExcelExporter {
                         createCell(row, columnCount++, ar.getWardName() != null ? ar.getWardName() : "", style);
                     }
                 }
-                createCell(row, columnCount++, customer.getAttWebsite()!=null ? customer.getAttWebsite() : "", style);
-                createCell(row, columnCount++, customer.getAttFax() !=null ? customer.getAttFax() : "", style);
-                createCell(row, columnCount++, customer.getAttTaxCode() !=null ? customer.getAttTaxCode() : "", style);
+                createCell(row, columnCount++, customer.getWebsite()!=null ? customer.getWebsite() : "", style);
+                createCell(row, columnCount++, customer.getFax() !=null ? customer.getFax() : "", style);
+                createCell(row, columnCount++, customer.getTaxCode() !=null ? customer.getTaxCode() : "", style);
                 createCell(row, columnCount++, customer.getDescription() != null ? customer.getDescription() : "" , style);
                 createCell(row, columnCount++, "Theo nhóm " +"' " + customer.getGroup().getTitle() +" '", style);
                 createCell(row, columnCount++, customer.getGroup().getDiscount(), style);
