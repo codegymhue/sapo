@@ -2,50 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org" class="sapo-menu-expand sapo-menu-toggle-active" lang="vi-VN">
 
 <head>
-  <meta charset="utf-8" />
+    <meta charset="utf-8"/>
 
   <th:block th:replace="/layout/header.html"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <title>Chi tiết nhà cung cấp</title>
 
-  <script>
-    var CKEDITOR_BASEPATH = '/v2/lib/ckeditor/';
-    var S_LANG = 'vi-VN';
-    var S_LANG_RES = 'https://sapo.dktcdn.net/sapo-frontend-x/d9ad77d.i18n_vi-VN.json';
-  </script>
-  <script src="https://sapo.dktcdn.net/sapo-frontend-x/d852af0.client.bundle.js"></script>
+
+    <script>
+        var CKEDITOR_BASEPATH = '/v2/lib/ckeditor/';
+        var S_LANG = 'vi-VN';
+        var S_LANG_RES = 'https://sapo.dktcdn.net/sapo-frontend-x/d9ad77d.i18n_vi-VN.json';
+    </script>
+    <script src="https://sapo.dktcdn.net/sapo-frontend-x/d852af0.client.bundle.js"></script>
 
 </head>
 <body class="body_dashboard partners suppliers detail" _c_t_j1="1">
 <th:block th:replace="/layout/menu :: menu"/>
 <div id="container">
-  <div class="hidden" context="tenantInfo" define="{tenantInfo: new Components.TenantInfo(this,{&quot;countries&quot;:{&quot;countryId&quot;:201}})}">
-  </div>
-  <div class="header-mobile">
-    <a href="javascript:" class="icon-menu visible-xs visible-sm" onclick="showMenu()">
-      <svg class="next-icon next-icon--size-20">
-        <use xlink:href="#icon-menu" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
-      </svg>
-    </a>
-  </div>
-
-  <div class="col-right">
-    <div class="col-right_content" id="content">
-
-      <header class="ui-title-bar-container">
-        <div class="ui-title-bar" style="display:inline-block;min-height:0px;">
-          <div class="ui-title-bar__navigation w-50 left">
-            <div class="ui-breadcrumbs">
-              <a href="/admin/suppliers" id="link-index-shipper">
-                <svg class="next-icon next-icon--size-20 next-icon--no-nudge">
-                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#chevron-left-thinner"></use>
-                </svg>
-                <span class="ui-breadcrumb__item">Danh sách nhà cung cấp</span>
-              </a>
-            </div>
-
-<!--            <input type="hidden"  id="supplierId" th:value="${supplier.id}" >-->
-
+    <div class="hidden" context="tenantInfo"
+         define="{tenantInfo: new Components.TenantInfo(this,{&quot;countries&quot;:{&quot;countryId&quot;:201}})}">
+    </div>
+    <div class="header-mobile">
+        <a href="javascript:" class="icon-menu visible-xs visible-sm" onclick="showMenu()">
+            <svg class="next-icon next-icon--size-20">
+                <use xlink:href="#icon-menu" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+            </svg>
+        </a>
+    </div>
           </div>
           <div class="w-50 right detail-supplier">
 
@@ -172,175 +156,228 @@
                   <div class="content text-overflow-hiden div-pd-r-10" title="">
                     <span title="COD" th:text="${supplier.paymentMethodId}"></span>
                   </div>
+
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="gird-layout gird-layout--full-width" style="padding:0px;width:100%;">
-          <section class="grid-card">
-            <div class="filter-tab-container" style="border-bottom: 1px solid #dfe4e8; width: 100%;display: inline-block;">
-              <ul class="filter-tab-list" id="filter-tab-list" style="width: 50%; float: left;border-bottom:none;" role="tablist" data-has-next-tab-controller="true">
-                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('history',this)">
-                  <a href="javascript:" id="filter-tab-history" class="filter-tab show-all-items filter-tab-active">Lịch sử nhập hàng</a>
-                </li>
-                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('debt',this)">
-                  <a href="javascript:" id="filter-tab-debt" class="filter-tab show-all-items ">Công nợ</a>
-                </li>
-                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('contact',this)">
-                  <a href="javascript:" id="filter-tab-contact" class="filter-tab show-all-items ">Liên hệ</a>
-                </li>
-                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('address',this)">
-                  <a href="javascript:" id="filter-tab-address" class="filter-tab show-all-items ">Địa chỉ</a>
-                </li>
-                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('note',this)">
-                  <a href="javascript:" id="filter-tab-note" class="filter-tab show-all-items ">Ghi chú</a>
-                </li>
-              </ul>
-              <div>
-                <a href="javascript:" class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-contact" style="margin-top:6px;margin-right:15px;display:none;" bind-event-click="showPopupCreate('contact')">Thêm mới liên hệ</a>
-                <a href="javascript:" class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-address" style="margin-top:6px;margin-right:15px;display:none;" bind-event-click="showPopupCreate('address')">Thêm mới địa chỉ</a>
-                <a href="javascript:" class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-note" style="margin-top:6px;margin-right:15px;display:none;" bind-event-click="showPopupCreate('note')">Thêm mới ghi chú</a>
-                <a class="btn sapo-btn-blank right btn-help btn-create btn-create-debt" bind-event-click="exportDebt()" style="margin-top:6px;margin-right:15px;display:none;">
-                  <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge" style="padding-right: 5px; margin-top: 7px;">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-export-minor"></use>
-                  </svg>
-                  <span>Xuất file</span>
-                </a>
-              </div>
-            </div>
+                <div class="gird-layout gird-layout--full-width" style="padding:0px;width:100%;">
+                    <section class="grid-card">
+                        <div class="filter-tab-container"
+                             style="border-bottom: 1px solid #dfe4e8; width: 100%;display: inline-block;">
+                            <ul class="filter-tab-list" id="filter-tab-list"
+                                style="width: 50%; float: left;border-bottom:none;" role="tablist"
+                                data-has-next-tab-controller="true">
+                                <li class="filter-tab-item" style="opacity:1;"
+                                    bind-event-click="loadTab('history',this)">
+                                    <a href="javascript:" id="filter-tab-history"
+                                       class="filter-tab show-all-items filter-tab-active">Lịch sử nhập hàng</a>
+                                </li>
+                                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('debt',this)">
+                                    <a href="javascript:" id="filter-tab-debt" class="filter-tab show-all-items ">Công
+                                        nợ</a>
+                                </li>
+                                <li class="filter-tab-item" style="opacity:1;"
+                                    bind-event-click="loadTab('contact',this)">
+                                    <a href="javascript:" id="filter-tab-contact" class="filter-tab show-all-items ">Liên
+                                        hệ</a>
+                                </li>
+                                <li class="filter-tab-item" style="opacity:1;"
+                                    bind-event-click="loadTab('address',this)">
+                                    <a href="javascript:" id="filter-tab-address" class="filter-tab show-all-items ">Địa
+                                        chỉ</a>
+                                </li>
+                                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('note',this)">
+                                    <a href="javascript:" id="filter-tab-note" class="filter-tab show-all-items ">Ghi
+                                        chú</a>
+                                </li>
+                            </ul>
+                            <div>
+                                <a href="javascript:"
+                                   class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-contact"
+                                   style="margin-top:6px;margin-right:15px;display:none;"
+                                   bind-event-click="showPopupCreate('contact')">Thêm mới liên hệ</a>
+                                <a href="javascript:"
+                                   class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-address"
+                                   style="margin-top:6px;margin-right:15px;display:none;"
+                                   bind-event-click="showPopupCreate('address')">Thêm mới địa chỉ</a>
+                                <a href="javascript:"
+                                   class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-note"
+                                   style="margin-top:6px;margin-right:15px;display:none;"
+                                   bind-event-click="showPopupCreate('note')">Thêm mới ghi chú</a>
+                                <a class="btn sapo-btn-blank right btn-help btn-create btn-create-debt"
+                                   bind-event-click="exportDebt()"
+                                   style="margin-top:6px;margin-right:15px;display:none;">
+                                    <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge"
+                                         style="padding-right: 5px; margin-top: 7px;">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             xlink:href="#next-export-minor"></use>
+                                    </svg>
+                                    <span>Xuất file</span>
+                                </a>
+                            </div>
+                        </div>
 
-            <div id="histories" class="tab-list-content" style=""></div>
-            <div id="debts" style="display:none;">
-              <div class="page-info w100 " style="box-shadow:none;-webkit-box-shadow:none;">
-                <div class="page-info-title">
-                  <div class="filter-header p-0 left">
-                    <button class="btn btn-filter" style="margin: -15px 0px 11px 3px;" type="button" data-toggle="popover" data-original-title="" title="">
-                      <span>Lọc công nợ</span>
-                      <svg class="next-icon next-icon--size-20" id="svg-filter">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-disclosure"></use>
-                      </svg>
-                    </button>
-                  </div>
-                  <div class="filter-list left filter-list-debt" style="display:none;margin-top: -11px;">
-                    <ul class="filter-list-tag">
-                      <li class="filter-tag">
+                        <div id="histories" class="tab-list-content" style=""></div>
+                        <div id="debts" style="display:none;">
+                            <div class="page-info w100 " style="box-shadow:none;-webkit-box-shadow:none;">
+                                <div class="page-info-title">
+                                    <div class="filter-header p-0 left">
+                                        <button class="btn btn-filter" style="margin: -15px 0px 11px 3px;" type="button"
+                                                data-toggle="popover" data-original-title="" title="">
+                                            <span>Lọc công nợ</span>
+                                            <svg class="next-icon next-icon--size-20" id="svg-filter">
+                                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                     xlink:href="#next-disclosure"></use>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="filter-list left filter-list-debt"
+                                         style="display:none;margin-top: -11px;">
+                                        <ul class="filter-list-tag">
+                                            <li class="filter-tag">
                                                     <span class="tag__label">
                                                         Ngày ghi nhận: <span id="issuedOnMinMax"></span>
                                                     </span>
-                        &nbsp;&nbsp;
-                        <button type="button" class="tag__remove-button" bind-event-click="removeFilter(true)">
-                          <svg class="next-icon next-icon--size-12">
-                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-remove"></use>
-                          </svg>
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="filter-body" id="filter-debts">
-                    <div class="filter-content" style="display:none">
-                      <div class="mb-2">Hiển thị công nợ theo</div>
+                                                &nbsp;&nbsp;
+                                                <button type="button" class="tag__remove-button"
+                                                        bind-event-click="removeFilter(true)">
+                                                    <svg class="next-icon next-icon--size-12">
+                                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                             xlink:href="#next-remove"></use>
+                                                    </svg>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="filter-body" id="filter-debts">
+                                        <div class="filter-content" style="display:none">
+                                            <div class="mb-2">Hiển thị công nợ theo</div>
 
-                      <div class="filter-item" style="width:auto;display:block">
-                        <div class="select__wrapper label-filter">
-                          <div>
-                            Ngày ghi nhận
-                          </div>
+                                            <div class="filter-item" style="width:auto;display:block">
+                                                <div class="select__wrapper label-filter">
+                                                    <div>
+                                                        Ngày ghi nhận
+                                                    </div>
+                                                </div>
+                                                <div class="input-group input-daterange pull-left"
+                                                     style="width: 300px;">
+                                                    <input type="text"
+                                                           class="form-control from-date input-date sapo-textbox choosed-single-id m-0"
+                                                           style="width: 120px;" placeholder="Từ ngày"
+                                                           autocomplete="off">
+                                                    <div class="input-group-append"><span
+                                                            class="input-group-text"></span></div>
+                                                    <input type="text"
+                                                           class="form-control to-date input-date sapo-textbox choosed-single-id m-0"
+                                                           style="width: 120px;" placeholder="Đến ngày"
+                                                           autocomplete="off">
+                                                </div>
+                                                <a href="javascript" class="remove-item-filter"
+                                                   bind-event-click="removeFilter(false)">
+                                                    <svg class="next-icon next-icon--size-20">
+                                                        <use xlink:href="#delete-minor"></use>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                            <div class="next-input-wrapper--vertical-block"
+                                                 style="order: 99999999;margin-top:7px">
+                                                <button class="btn sapo-btn-default" type="button"
+                                                        bind-event-click="filterDebt(1)" name="button">Lọc
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="popover-holder"></div>
+
+                                    </div>
+                                </div>
+                                <div class="page-info-body">
+                                    <div class="page-info-body--sub block pb-0 " style="padding:0px 20px;">
+                                        <div class="ui-type-container clearfix" id="table-debts">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="input-group input-daterange pull-left" style="width: 300px;">
-                          <input type="text" class="form-control from-date input-date sapo-textbox choosed-single-id m-0" style="width: 120px;" placeholder="Từ ngày" autocomplete="off">
-                          <div class="input-group-append"><span class="input-group-text"></span></div>
-                          <input type="text" class="form-control to-date input-date sapo-textbox choosed-single-id m-0" style="width: 120px;" placeholder="Đến ngày" autocomplete="off">
-                        </div>
-                        <a href="javascript" class="remove-item-filter" bind-event-click="removeFilter(false)"><svg class="next-icon next-icon--size-20">
-                          <use xlink:href="#delete-minor"></use>
-                        </svg></a>
-                      </div>
-                      <div class="next-input-wrapper--vertical-block" style="order: 99999999;margin-top:7px">
-                        <button class="btn sapo-btn-default" type="button" bind-event-click="filterDebt(1)" name="button">Lọc</button>
-                      </div>
-                    </div>
-                    <div class="popover-holder"></div>
-
-                  </div>
+                        <div id="contacts" class="tab-list-content" style="display:none;"></div>
+                        <div id="addresses" class="tab-list-content" style="display:none;"></div>
+                        <div id="notes" class="tab-list-content" style="display:none;"></div>
+                    </section>
                 </div>
-                <div class="page-info-body">
-                  <div class="page-info-body--sub block pb-0 " style="padding:0px 20px;">
-                    <div class="ui-type-container clearfix" id="table-debts">
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-            <div id="contacts" class="tab-list-content" style="display:none;"></div>
-            <div id="addresses" class="tab-list-content" style="display:none;"></div>
-            <div id="notes" class="tab-list-content" style="display:none;"></div>
-          </section>
-        </div>
-        <script class="modal_source" define="{deleteSupplierModal: new Components.Modal(this)}" type="text/html">
-          <div class="modal-dialog modal-dialog-new">
-            <div class="modal-content">
-              <div class="modal-header">
+                <script class="modal_source" define="{deleteSupplierModal: new Components.Modal(this)}"
+                        type="text/html">
+                    <div class="modal-dialog modal-dialog-new">
+                        <div class="modal-content">
+                            <div class="modal-header">
                     <span class="ui-dialog-title">
                         Xóa nhà cung cấp
                     </span>
-                <span class="modal-close-wrapper">
-                        <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use> </svg>
+                                <span class="modal-close-wrapper">
+                        <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                  xlink:href="#cancel-small-minor"></use> </svg>
                     </span>
-              </div>
-              <div class="modal-body pull-center">
-                <p>Bạn có chắc chắn muốn xóa nhà cung cấp <span style="font-weight:500;">Nguyen Tan Luong</span>? Thao tác này không thể khôi phục.</p>
-              </div>
-              <div class="modal-footer">
-                <div class="action-btn clearfix">
-                  <button class="btn sapo-btn-red right" type="button" bind-event-click="deleteSupplier(this)">Xóa</button>
-                  <button class="close-modal btn sapo-btn-blank right mr-3" type="button">Thoát</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </script>
-        <script class="modal_source" define="{showMessagePopup: new Components.Modal(this)}" type="text/html">
-          <div class="modal-dialog modal-dialog-new">
-            <div class="modal-content">
-              <div class="modal-header">
+                            </div>
+                            <div class="modal-body pull-center">
+                                <p>Bạn có chắc chắn muốn xóa nhà cung cấp <span style="font-weight:500;">Nguyen Tan Luong</span>?
+                                    Thao tác này không thể khôi phục.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="action-btn clearfix">
+                                    <button class="btn sapo-btn-red right" type="button"
+                                            bind-event-click="deleteSupplier(this)">Xóa
+                                    </button>
+                                    <button class="close-modal btn sapo-btn-blank right mr-3" type="button">Thoát
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </script>
+                <script class="modal_source" define="{showMessagePopup: new Components.Modal(this)}" type="text/html">
+                    <div class="modal-dialog modal-dialog-new">
+                        <div class="modal-content">
+                            <div class="modal-header">
                     <span class="ui-dialog-title" id="ui-dialog-title-empty">
                     </span>
-                <span class="modal-close-wrapper">
-                        <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use> </svg>
+                                <span class="modal-close-wrapper">
+                        <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                  xlink:href="#cancel-small-minor"></use> </svg>
                     </span>
-              </div>
+                            </div>
 
-              <div id="modal-body-empty" class="modal-body product-option-edit pull-center w100" style="padding:0px;">
+                            <div id="modal-body-empty" class="modal-body product-option-edit pull-center w100"
+                                 style="padding:0px;">
 
-              </div>
-              <div class="modal-footer">
-                <div class="action-btn clearfix" id="modal-footer-empty">
-                  <button class="close-modal btn btn-blank pull-right" type="button">Thoát</button>
-                </div>
-              </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="action-btn clearfix" id="modal-footer-empty">
+                                    <button class="close-modal btn btn-blank pull-right" type="button">Thoát</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </script>
+                <a class="modal_source display-popUp" type="text/html" style="display: none"
+                   define="{showDisplayPopUp: new Components.Modal(this)}"></a>
+                <a class="modal_source display-popUp" type="text/html" style="display: none"
+                   define="{showDisplayContactPopUp: new Components.Modal(this)}"></a>
+                <a class="modal_source display-popUp" type="text/html" style="display: none"
+                   define="{showDisplayAddressPopUp: new Components.Modal(this)}"></a>
+                <a class="modal_source display-popUp" type="text/html" style="display: none"
+                   define="{showDisplayNotePopUp: new Components.Modal(this)}"></a>
             </div>
-          </div>
-        </script>
-        <a class="modal_source display-popUp" type="text/html" style="display: none" define="{showDisplayPopUp: new Components.Modal(this)}"></a>
-        <a class="modal_source display-popUp" type="text/html" style="display: none" define="{showDisplayContactPopUp: new Components.Modal(this)}"></a>
-        <a class="modal_source display-popUp" type="text/html" style="display: none" define="{showDisplayAddressPopUp: new Components.Modal(this)}"></a>
-        <a class="modal_source display-popUp" type="text/html" style="display: none" define="{showDisplayNotePopUp: new Components.Modal(this)}"></a>
-      </div>
+        </div>
+        <div class="popup-box">
+            <iframe scrolling="no" src="about:blank" name="myIframe" id="popupPrint"
+                    style="border:0;position:absolute;width:0px;height:0px;left:0px;top:0px;"></iframe>
+        </div>
     </div>
-    <div class="popup-box">
-      <iframe scrolling="no" src="about:blank" name="myIframe" id="popupPrint" style="border:0;position:absolute;width:0px;height:0px;left:0px;top:0px;"></iframe>
-    </div>
-  </div>
 </div>
 <div class="section-footer">
 
 </div>
 <div class="container-fluid-md notifications">
-  <div class="ajax-notification"><span class="ajax-notification-message"></span></div>
+    <div class="ajax-notification"><span class="ajax-notification-message"></span></div>
 </div>
 <div class="modal fade" id="sapo-modal-container" data-width="" tabindex="-1" role="dialog" data-backdrop="false">
 </div>
@@ -348,43 +385,44 @@
 
 
 <style>
-  #surveys {
-    position: fixed;
-    bottom: 0;
-    width: calc(100% - 23rem);
-    right: 0;
-    z-index: 999999
-  }
+    #surveys {
+        position: fixed;
+        bottom: 0;
+        width: calc(100% - 23rem);
+        right: 0;
+        z-index: 999999
+    }
 
-  .sapo-menu-collapse #surveys {
-    width: calc(100% - 5.6rem) !important;
-  }
+    .sapo-menu-collapse #surveys {
+        width: calc(100% - 5.6rem) !important;
+    }
 </style>
 <div id="surveys"></div>
 
 <script>
-  Page();
-  hj('trigger', 'split_test_b');
+    Page();
+    hj('trigger', 'split_test_b');
 </script>
 
 <!-- End Freshchat -->
 
-<div context="notificationVNPay" define="{notificationVNPay: new Components.NotificationVNPay(this, {accountId:941587 })}">
-  <div class="popup-notification">
-    <a href="javascript:" bind-event-click="closeNoti()" class="close">
-      <svg>
-        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use>
-      </svg>
-    </a>
-    <a href="" target="_blank" class="link-order">
-      <img class="left" src="/v2/images/ico-sapo.png">
+<div context="notificationVNPay"
+     define="{notificationVNPay: new Components.NotificationVNPay(this, {accountId:941587 })}">
+    <div class="popup-notification">
+        <a href="javascript:" bind-event-click="closeNoti()" class="close">
+            <svg>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use>
+            </svg>
+        </a>
+        <a href="" target="_blank" class="link-order">
+            <img class="left" src="/v2/images/ico-sapo.png">
 
-    </a>
-    <a href="" target="_blank" class="link-order">
-      <div class="title left">Thanh toán đơn hàng</div>
-      <div class="desc left"></div>
-    </a>
-  </div>
+        </a>
+        <a href="" target="_blank" class="link-order">
+            <div class="title left">Thanh toán đơn hàng</div>
+            <div class="desc left"></div>
+        </a>
+    </div>
 </div>
 ﻿
 
