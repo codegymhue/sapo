@@ -95,11 +95,16 @@
             <div class="order-sources">
               <a href="javascript:" data-toggle="dropdown" aria-expanded="false" style="color:#212b35">Thao tác khác<i class="fa fa-caret-down ml-2" aria-hidden="true"></i></a>
               <ul class="dropdown-menu newscroll" style="font-size:13px">
-                <li><a href="/admin/suppliers/206718863/edit">Cập nhật thông tin</a></li>
+                <li>
+<!--                  <a th:value="${supplier.id}" th:field="@{/admin/suppliers/}">-->
+
+                  Cập nhật thông tin</a></li>
                 <li><a href="javascript:" bind-event-click="showDeleteSupplier()">Xoá nhà cung
                   cấp</a></li>
               </ul>
             </div>
+<!--            <a th:value="*{id}" th:href="@{/admin/customer/modal_delete_customer.html/__${customer.getId()}__}">-->
+
 
           </div>
           <div class="page-info-body" id="supplier-info">
