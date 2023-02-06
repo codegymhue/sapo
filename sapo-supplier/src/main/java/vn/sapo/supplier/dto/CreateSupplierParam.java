@@ -19,7 +19,5 @@ public class CreateSupplierParam {
     private String phone;
     private String description;
     private Integer paymentMethodId;
-    private Instant createdAt;
-    private Instant updatedAt;
 
 }
