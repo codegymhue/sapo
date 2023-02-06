@@ -64,14 +64,14 @@
                 }
             </style>
             <div class="header-fr help-dropdown">
-              <a class="btn sapo-btn-blank btn-help " style="margin-left: 5px" onclick="showHelpPopup()"><img src="/v2/images/dashboard/icons8-help-20.png" style="padding-right: 5px; height: 48px "><span>Trợ giúp</span></a>
+              <a class="btn sapo-btn-blank btn-help " style="margin-left: 5px" onclick="showHelpPopup()"><img src="/v2/images/dashboard/icons8-help-20.png" style="padding-right: 5px"><span>Trợ giúp</span></a>
               <div class="help-popup">
                 <iframe id="iframe-help" src="" style="width: 400px; height: 560px;border:none"></iframe>
                 <input type="hidden" id="iframe-help-src" value="https://support.sapo.vn?ver=2&amp;view=pos&amp;url=http://anges.mysapogo.com/admin/suppliers/206718863/histories">
               </div>
             </div>
 
-            <a href="javascript:" class="btn sapo-btn-default right" style="border-radius: 3px 0 0 3px;" data-toggle="dropdown">Tạo phiếu thu/chi</a>
+            <a href="javascript:" class="btn sapo-btn-default right" style="border-radius: 3px 0 0 3px;height: 39px" data-toggle="dropdown">Tạo phiếu thu/chi</a>
             <ul class="dropdown-menu newscroll" style="font-size:13px">
               <li><a bind-event-click="detailSupplier.createReceiptVoucher()">Tạo phiếu thu</a></li>
               <li><a bind-event-click="detailSupplier.createPaymentVoucher()">Tạo phiếu chi</a></li>
@@ -96,11 +96,13 @@
               <a href="javascript:" data-toggle="dropdown" aria-expanded="false" style="color:#212b35">Thao tác khác<i class="fa fa-caret-down ml-2" aria-hidden="true"></i></a>
               <ul class="dropdown-menu newscroll" style="font-size:13px">
                 <li>
-<!--                  <a th:value="${supplier.id}" th:field="@{/admin/suppliers/}">-->
-
-                  Cập nhật thông tin</a></li>
-                <li><a href="javascript:" bind-event-click="showDeleteSupplier()">Xoá nhà cung
-                  cấp</a></li>
+<!--                  <a th:value="${supplier.id}" th:href="@{/admin/suppliers/edit/__${supplier.getId()}__}">-->
+                    Cập nhật thông tin</a>
+                </li>
+                <li>
+                  <a href="javascript:" bind-event-click="showDeleteSupplier()">Xoá nhà cung
+                  cấp</a>
+                </li>
               </ul>
             </div>
 <!--            <a th:value="*{id}" th:href="@{/admin/customer/modal_delete_customer.html/__${customer.getId()}__}">-->
@@ -388,6 +390,6 @@
 </div>
 ﻿
 
-<th:block th:replace="/layout/header.html"/>
+<!--<th:block th:replace="/layout/footer.html"/>-->
 </body>
 </html>
