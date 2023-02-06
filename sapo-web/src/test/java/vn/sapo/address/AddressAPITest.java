@@ -44,7 +44,6 @@ public class AddressAPITest {
                         .setLine2("5 Floor")
                         .setCustomerId(1)
         );
-
     }
 
     @BeforeEach

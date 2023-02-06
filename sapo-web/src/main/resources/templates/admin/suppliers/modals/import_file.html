@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhập File nhà cung cấp</title>
+    <link rel="stylesheet" href="/assets/admin/css/supplier/import_file.css">
+</head>
+<body>
+
+</body>
+</html>
+
+<div class="modal-header">
+    <span class="ui-dialog-title" id="ui-dialog-title-1">
+        Nhập dữ liệu nhà cung cấp
+    </span>
+    <span class="modal-close-wrapper1" bind-event-click="closePopup()">
+        <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                  xlink:href="#cancel-small-minor"></use> </svg>
+    </span>
+</div>
+
+<div class="modal-body">
+    <form id="form-import" action="/suppliers/import?area=Suppliers" method="post" enctype="multipart/form-data">
+        <div>
+            <div id="load-status-import"></div>
+            <div id="empty-success">
+                <div>
+                    Chú ý:
+                </div>
+                <div class="empty-success__text">
+                    - Mã nhà cung cấp phải là duy nhất đối với các nhà cung cấp độc lập
+                </div>
+                <div class="empty-success__text">
+                    - Chuyển đổi file nhập dưới dạng .XLS trước tải dữ liệu.
+                </div>
+                <div class="empty-success__text">
+                    - Tải file mẫu nhà cung cấp <a href="/v2/file/sapo_mau_nhap_nha_cung_cap_17052022.xlsx"
+                                                   style="color:#0088ff">tại đây</a>
+                </div>
+                <div class="empty-success__text">
+                    - File nhập có dung lượng tối đa là 2MB và 5000 bản ghi.
+                </div>
+            </div>
+
+            <div id="chose-file">
+                <div class="chose-file-import">
+                    <a class="btn-upload" bind-event-click="showImport()" href="javascript:void(0)"
+                       data-original-title="" title=""><i style="padding-right: 4px;" class="fa fa-cloud-download"
+                                                          aria-hidden="true"></i><span>Kéo thả file vào đây hoặc tải lên từ thiết bị</span></a>
+                    <input name="importProductsFile" type="file" size="30" class="hide" id="importFileUpload"
+                           accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                           bind-event-change="enableButtonImport()" multiple="">
+                    <input id="overrideExistProducts" name="overrideExistProducts" type="hidden" value="false">
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <div class="action-btn clearfix">
+        <button class="btn sapo-btn-default pull-right" id="importBtn" bind-event-click="confirmImport(this)">Nhập
+            file
+        </button>
+        <button class="btn btn-blank pull-right mr-2" bind-event-click="closePopup()" type="button">Thoát</button>
+    </div>
+</div>

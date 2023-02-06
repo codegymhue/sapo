@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import vn.sapo.supplier.SupplierService;
+import vn.sapo.supplier.dto.SupplierResult;
 
 @Controller
 @RequestMapping("/admin/suppliers")
@@ -20,16 +21,37 @@ public class SupplierController {
         return new ModelAndView("/admin/suppliers/supplier_list");
     }
 
-    @GetMapping("/{id}/histories")
+    @GetMapping("/export")
+    public ModelAndView showSupplierListExport() {
+        return new ModelAndView("/admin/suppliers/modals/export_file");
+    }
+
+    @GetMapping("/import")
+    public ModelAndView showSupplierListImport() {
+        return new ModelAndView("/admin/suppliers/modals/import_file");
+    }
+
+
+    @GetMapping("/{id}/detail")
     public ModelAndView showSupplierHistoryPage(@PathVariable Integer id) {
-        ModelAndView modelAndView = new ModelAndView("/admin/suppliers/supplier_history");
-        modelAndView.addObject("suppliers", supplierService.findById(id));
+        ModelAndView modelAndView = new ModelAndView();
+        try{
+            SupplierResult supplier = supplierService.findById(id);
+            modelAndView.addObject("supplier", supplier);
+        } catch (Exception e) {
+            modelAndView.addObject("error", e.getMessage());
+        }
+        modelAndView.setViewName("/admin/suppliers/detail_suppliers");
         return modelAndView;
     }
 
     @GetMapping("/create")
     public ModelAndView showSupplierCreatePage() {
-        return new ModelAndView("/admin/suppliers/supplier_create");
+        return new ModelAndView("/admin/suppliers/create_suppliers");
+    }
+    @GetMapping("/detail")
+    public ModelAndView showSupplierDetailPage() {
+        return new ModelAndView("/admin/suppliers/detail_suppliers");
     }
 
 }

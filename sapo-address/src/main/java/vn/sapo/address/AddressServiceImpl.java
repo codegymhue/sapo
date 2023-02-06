@@ -59,9 +59,7 @@ public class AddressServiceImpl implements AddressService {
         Address address = addressMapper.toModel(updateAddressParam);
         address = addressRepository.save(address);
         return addressMapper.toDTO(address);
-
     }
-
 
     @Override
     @Transactional

@@ -28,8 +28,11 @@ public class SupplierResult {
     private String description;
     private Integer employeeId;
     private SupEmployeeResult employee;
-    private Integer paymentMethodId;
+    private String paymentMethodId;
     private SupPaymentMethodResult paymentMethod;
+    private SupGroupResult supGroupResult;
+    private String title;
+
     private Instant createAt;
     private Instant updateAt;
     private BigDecimal debtTotal;
