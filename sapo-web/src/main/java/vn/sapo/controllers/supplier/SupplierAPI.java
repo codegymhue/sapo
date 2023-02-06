@@ -23,7 +23,8 @@ public class SupplierAPI {
 
     @GetMapping("/{id}/histories")
     public ResponseEntity<SupplierResult> findById(@PathVariable Integer id) {
-        return new ResponseEntity<>(supplierService.findById(id), HttpStatus.OK);
+        SupplierResult dto = supplierService.findById(id);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @PostMapping("/create")

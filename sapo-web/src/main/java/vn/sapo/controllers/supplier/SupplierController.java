@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import vn.sapo.supplier.SupplierService;
+import vn.sapo.supplier.dto.SupplierResult;
 
 @Controller
 @RequestMapping("/admin/suppliers")
@@ -22,8 +23,14 @@ public class SupplierController {
 
     @GetMapping("/{id}/histories")
     public ModelAndView showSupplierHistoryPage(@PathVariable Integer id) {
-        ModelAndView modelAndView = new ModelAndView("/admin/suppliers/supplier_history");
-        modelAndView.addObject("suppliers", supplierService.findById(id));
+        ModelAndView modelAndView = new ModelAndView();
+        try{
+            SupplierResult supplier = supplierService.findById(id);
+            modelAndView.addObject("supplier", supplier);
+        } catch (Exception e) {
+            modelAndView.addObject("error", e.getMessage());
+        }
+        modelAndView.setViewName("/admin/suppliers/detail_suppliers");
         return modelAndView;
     }
 
