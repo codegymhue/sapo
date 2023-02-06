@@ -110,6 +110,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="page-info">
                         <div class="page-info-title">Cài đặt nâng cao</div>
                         <div class="page-info-body">
@@ -139,5 +140,257 @@
 <script>Page();</script>
 
 </body>
-
 </html>
+<script>
+    class Supplier {
+        constructor(id, supplierCode, name, email, phone, description, employeeId, paymentMethodId, createAt, updatedAt, createAddressParam, status, attFax, attTaxCode, attWebsite, debtTotal) {
+            this.id = id;
+            this.supplierCode = supplierCode;
+            this.name = name;
+            this.email = email;
+            this.phone = phone;
+            this.description = description;
+            this.employeeId = employeeId;
+            this.attWebsite = attWebsite;
+            this.attTaxCode = attTaxCode;
+            this.attFax = attFax;
+            this.paymentMethodId = paymentMethodId;
+            this.createAt = createAt;
+            this.updatedAt = updatedAt;
+            this.createAddressParam = createAddressParam;
+            this.status = status;
+            this.debtTotal = debtTotal
+
+        }
+    }
+
+    class CreateAddressParam {
+        constructor(id, fullName, phoneNumber, line1, line2, email, districtId, districtName, provinceId, provinceName, wardId, wardName, zipCode, customerId, supplierId, isDefault, description) {
+            this.fullName = fullName;
+            this.line1 = line1;
+            this.line2 = line2;
+            this.phoneNumber = phoneNumber;
+            this.email = email;
+            this.districtId = districtId;
+            this.districtName = districtName;
+            this.provinceId = provinceId;
+            this.provinceName = provinceName;
+            this.wardId = wardId;
+            this.wardName = wardName;
+            this.zipCode = zipCode;
+            this.customerId = customerId;
+            this.id = id;
+            this.isDefault = isDefault;
+            this.supplierId = supplierId;
+            this.description = description;
+        }
+    }
+
+    let supplier = new Supplier();
+
+    let createAddressParam = new CreateAddressParam();
+
+    function createSupplier() {
+        $('#btnCreateSupplier').on('click', () => {
+            supplier.fullName = $('#nameCreate').val();
+            supplier.attFax = $('#faxCreate').val();
+            supplier.attTaxCode = $('#taxCodeCreate').val();
+            supplier.attWebsite = $('#websiteCreate').val();
+
+            supplier.customerCode = $('#codeCreate').val();
+            supplier.groupId = $('#customerGroupCreate :selected').val();
+            supplier.phoneNumber = $('#phoneCreate').val();
+            supplier.email = $('#emailCreate').val();
+            supplier.birthday = $('#birthdayCreate').val();
+            supplier.employeeId = $('#employeeNameCreate :selected').val();
+            supplier.description = $('#descriptionCreate').val();
+            supplier.paymentMethodId = $('#paymentMethodCreate :selected').val();
+
+            createAddressParam.line1 = $('#addressCreate').val();
+            createAddressParam.provinceId = $('#province').val();
+            createAddressParam.provinceName = $('#province :selected').text();
+            createAddressParam.districtId = $('#district').val();
+            createAddressParam.districtName = $('#district :selected').text();
+            createAddressParam.wardId = $('#ward').val();
+            createAddressParam.wardName = $('#ward :selected').text();
+            createAddressParam.phoneNumber = $('#phoneCreate').val();
+            customer.createAddressParam = createAddressParam;
+
+            console.log(createAddressParam)
+            $.ajax({
+                "headers": {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                "type": "POST",
+                "url": "http://localhost:8080/api/suppliers/create",
+                "data": JSON.stringify(supplier)
+            })
+                .done((data) => {
+                    console.log(data)
+                    App.IziToast.showSuccessAlert("tạo nhà cung cấp thành công !");
+                    setTimeout(() => {
+                    }, 2500)
+                    $('#formCreate')[0].reset();
+                    window.location.href = `/admin/suppliers/${data.id}`;
+
+                })
+                .fail((jqXHR) => {
+                    console.log(jqXHR);
+
+                    App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+                })
+        });
+    }
+
+    function getAllProvinces() {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "https://vapi.vnappmob.com/api/province/"
+        })
+            .done((data) => {
+                if (data.results.length === 0) {
+                    let str = `<option value="0">Chọn Tỉnh/Thành Phố</option>`;
+                    $("#province").append(str);
+                } else {
+                    $.each(data.results, (i, item) => {
+                        let str = `<option value="${item.province_id}">${item.province_name}</option>`;
+                        $("#province").append(str);
+                        $('#provinceUpdate').append(str);
+                    });
+                }
+
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR);
+            })
+    }
+
+    function getAllDistrictsByProvinceId(provinceId) {
+        $("#district").empty();
+        $("#districtUpdate").empty();
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "https://vapi.vnappmob.com/api/province/district/" + provinceId
+        })
+            .done((data) => {
+                if (data.results.length === 0) {
+                    let str = `<option value="0">Chọn Quận/Huyện</option>`;
+                    $("#district").append(str);
+                } else {
+                    $.each(data.results, (i, item) => {
+                        let str = ` <option value="${item.district_id}">${item.district_name}</option>`;
+                        $("#district").append(str);
+                        $('#districtUpdate').append(str);
+                    })
+
+                }
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR);
+            })
+    }
+
+    function getAllWardsByDistrictId(districtId) {
+        $("#ward").empty();
+        $('#wardUpdate').empty();
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "https://vapi.vnappmob.com/api/province/ward/" + districtId
+        })
+            .done((data) => {
+                // $('#ward').html('');
+                // $('#wardUpdate').html('');
+
+                if (data.results.length === 0) {
+                    let str = `<option value="0">Chọn Phường/Xã</option>`;
+                    $("#ward").append(str);
+
+                } else {
+                    $.each(data.results, (i, item) => {
+                        let str = `<option value="${item.ward_id}">${item.ward_name}</option>`;
+                        $("#ward").append(str);
+                        $('#wardUpdate').append(str);
+                    });
+                }
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR);
+            })
+    }
+
+    getAllProvinces().then(() => {
+        let provinceId = $("#province").val();
+
+        getAllDistrictsByProvinceId(provinceId).then(() => {
+
+            let districtId = $("#district").val();
+
+            getAllWardsByDistrictId(districtId)
+
+
+        });
+    });
+    $("#province").on('change', () => {
+        let provinceId = $("#province").val();
+        getAllDistrictsByProvinceId(provinceId).done(() => {
+            let districtId = $("#district").val();
+            getAllWardsByDistrictId(districtId);
+        })
+
+        $("#district").on('change', () => {
+            let districtId = $("#district").val();
+            getAllWardsByDistrictId(districtId);
+        })
+    });
+
+    $("#provinceUpdate").on("change", () => {
+        let provinceId = $("#provinceUpdate").val();
+        getAllDistrictsByProvinceId(provinceId).then(() => {
+            let districtId = $("#districtUpdate").val();
+            getAllWardsByDistrictId(districtId);
+        })
+    })
+
+    $("#districtUpdate").on("change", () => {
+        let districtId = $("#districtUpdate").val();
+        getAllWardsByDistrictId(districtId);
+    });
+
+
+    function getAllEmployeeSelect() {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "http://localhost:8080/api/employees"
+        })
+            .done((data) => {
+                $.each(data, (i, item) => {
+                    let str = `<option value="${item.id}">${item.fullName}</option>`;
+                    $("#employeeNameCreate").append(str);
+                });
+            })
+            .fail((jqXHR) => {
+
+
+            })
+    }
+
+    createSupplier();
+    getAllEmployeeSelect();
+</script>
