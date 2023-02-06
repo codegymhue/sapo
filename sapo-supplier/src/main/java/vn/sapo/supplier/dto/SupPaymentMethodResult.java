@@ -1,6 +1,13 @@
 package vn.sapo.supplier.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Getter
+@Setter
+@Accessors(chain = true)
 public class SupPaymentMethodResult {
-    private Integer id;
-    private Integer fullName;
+    private String id;
+    private String fullName;
 }
