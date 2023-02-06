@@ -3,6 +3,7 @@ package vn.sapo.entities;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.supplier.Supplier;
 
@@ -12,6 +13,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@Accessors(chain = true)
 @Entity
 @Table(name = "address")
 public class Address {
@@ -70,10 +72,10 @@ public class Address {
     @Column(name = "supplier_id", insertable = false, updatable = false)
     private Integer supplierId;
 
-    @Column(name = "is_shipping")
+    @Column(name = "is_shipping", nullable = false)
     private boolean isShippingAddress;
 
-    @Column(name = "is_receive_bill")
+    @Column(name = "is_receive_bill", nullable = false)
     private boolean isReceiveBill;
 
     public Address setCustomerId(Integer customerId) {
