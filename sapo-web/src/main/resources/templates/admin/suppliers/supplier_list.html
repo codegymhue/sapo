@@ -1,120 +1,11 @@
 <!DOCTYPE html>
 <html class="sapo-menu-expand sapo-menu-toggle-active" lang="vi-VN">
+<!-- <link rel="stylesheet" href="supplier.css"> -->
 
 <head>
     <meta charset="utf-8"/>
-    <script>
-        var CKEDITOR_BASEPATH = '/v2/lib/ckeditor/';
-        var S_LANG = 'vi-VN';
-        var S_LANG_RES = 'https://sapo.dktcdn.net/sapo-frontend-x/d9ad77d.i18n_vi-VN.json';
-    </script>
-    <script src="https://sapo.dktcdn.net/sapo-frontend-x/d7687c7.client.bundle.js"></script>
-    <link rel="stylesheet" href="https://sapo.dktcdn.net/sapo-frontend-x/6386cc5.main.css"/>
-    <script src="https://sapo.dktcdn.net/fe-cdn-production/lib/wootric/wootric-sdk.js"></script>
-    <script src="https://sapo.dktcdn.net/fe-cdn-production/lib/upload-files/jquery.multifile.js"></script>
+    <th:block th:replace="/layout/header.html"/>
 
-    <link href="https://sapo.dktcdn.net/fe-cdn-production/lib/driver/driver.min.css?v=20220218" rel="stylesheet"/>
-    <title>Danh s&#xE1;ch nh&#xE0; cung c&#x1EA5;p</title>
-    <script>
-        (function (h, o, t, j, a, r) {
-            h.hj = h.hj || function () {
-                (h.hj.q = h.hj.q || []).push(arguments)
-            };
-            h._hjSettings = {hjid: 1081489, hjsv: 6};
-            a = o.getElementsByTagName('head')[0];
-            r = o.createElement('script');
-            r.async = 1;
-            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
-            a.appendChild(r);
-        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
-    </script>
-    <style>
-        .feedback-account-sso {
-            display: none
-        }
-
-        .grid-footer-help,
-        .account-helper-elm,
-        .instruction-wrap,
-        .ui-footer-help__content {
-        }
-    </style>
-    <script>
-        (function (f, b) {
-            if (!b.__SV) {
-                var e, g, i, h;
-                window.mixpanel = b;
-                b._i = [];
-                b.init = function (e, f, c) {
-                    function g(a, d) {
-                        var b = d.split(".");
-                        2 == b.length && (a = a[b[0]], d = b[1]);
-                        a[d] = function () {
-                            a.push([d].concat(Array.prototype.slice.call(arguments, 0)))
-                        }
-                    }
-
-                    var a = b;
-                    "undefined" !== typeof c ? a = b[c] = [] : c = "mixpanel";
-                    a.people = a.people || [];
-                    a.toString = function (a) {
-                        var d = "mixpanel";
-                        "mixpanel" !== c && (d += "." + c);
-                        a || (d += " (stub)");
-                        return d
-                    };
-                    a.people.toString = function () {
-                        return a.toString(1) + ".people (stub)"
-                    };
-                    i = "disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
-                    for (h = 0; h < i.length; h++) g(a, i[h]);
-                    var j = "set set_once union unset remove delete".split(" ");
-                    a.get_group = function () {
-                        function b(c) {
-                            d[c] = function () {
-                                call2_args = arguments;
-                                call2 = [c].concat(Array.prototype.slice.call(call2_args, 0));
-                                a.push([e, call2])
-                            }
-                        }
-
-                        for (var d = {}, e = ["get_group"].concat(Array.prototype.slice.call(arguments, 0)), c = 0; c < j.length; c++) b(j[c]);
-                        return d
-                    };
-                    b._i.push([e, f, c])
-                };
-                b.__SV = 1.2;
-                e = f.createElement("script");
-                e.type = "text/javascript";
-                e.async = !0;
-                e.src = "undefined" !== typeof MIXPANEL_CUSTOM_LIB_URL ?
-                    MIXPANEL_CUSTOM_LIB_URL : "file:" === f.location.protocol && "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//) ? "https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js" : "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";
-                g = f.getElementsByTagName("script")[0];
-                g.parentNode.insertBefore(e, g)
-            }
-        })(document, window.mixpanel || []);
-        mixpanel.init("458e4ee056e5f2551c5ea5277600a92e", {batch_requests: true, persistence: "localStorage"});
-        mixpanel.init("3eeb208c1975f4e8de5b726659d3789f", {
-            batch_requests: true,
-            persistence: "localStorage"
-        }, "project_v2");
-        mixpanel.init("54a5c453cd7ed47d5a5c9ab1f4866e8d", {
-            batch_requests: true,
-            persistence: "localStorage"
-        }, "project_v3");
-        mixpanel.init("29b3fe744c6ce711fd5458235a181b34", {
-            batch_requests: true,
-            persistence: "localStorage"
-        }, "project_v4");
-        mixpanel.init("1f0c89f1365ae2b207cddf00468f4cdc", {
-            batch_requests: true,
-            persistence: "localStorage"
-        }, "project_coupon");
-        mixpanel.init("6057ed3adb8a3070741591d4703ca8dd", {
-            batch_requests: true,
-            persistence: "localStorage"
-        }, "project_stock_adj");
-    </script>
 
 </head>
 
@@ -130,6 +21,7 @@
             </svg>
         </a>
     </div>
+<<<<<<< HEAD
     <div class="col-left">
 
         <nav id="left-nav" class="sapo-menu sapo-menu-show-submenu sapo-menu-show-secondary sapo-menu-toggle-active"
@@ -5156,1367 +5048,191 @@
             </svg>
         </div>
     </div>
+=======
+    <th:block th:replace="/layout/menu :: menu"/>
+>>>>>>> supplier
     <div class="col-right">
-        <div class="col-right_content" id="content">
-            <form id="frmFilter" method="get">
-                <input type="hidden" name="filterName" bind="filterName"/>
-                <input type="hidden" name="query" value=""/>
-                <input type="hidden" name="totalRecords" value="15"/>
-                <input type="hidden" name="numAroundPages" value="15"/>
-            </form>
-
-            <header class="ui-title-bar-container ui-title-bar-container--index"
-                    define="{importAndExport:new Components.Supplier.ImportAndExportSupplier(this,{&quot;typeName&quot;:&quot;nhà cung cấp&quot;})}"
-                    context="importAndExport">
+        <div class="col-right_content">
+            <header class="ui-title-bar-container ui-title-bar-container--index">
                 <div class="ui-title-bar">
                     <div class="ui-title-bar__main-group">
                         <div class="ui-title-bar__heading-group">
                             <h1 class="ui-title-bar__title">Nhà cung cấp</h1>
                         </div>
-                        <div class="action-bar">
-                            <div class="action-bar__top-links">
-                                <button class="btn sapo-btn-transparent action-bar__link export_product"
-                                        bind-event-click="showExportSuppliers()" data-popover-index="1" type="button"
-                                        name="button">
-                                    <svg
-                                            class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
-                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                             xlink:href="#next-export-minor"></use>
-                                    </svg>
-                                    Xuất file
-                                </button>
-                                <button class="btn sapo-btn-transparent action-bar__link import_product"
-                                        bind-event-click="openFileImport()" data-popover-index="1" type="button"
-                                        name="button">
-                                    <svg
-                                            class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
-                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                             xlink:href="#next-import-minor"></use>
-                                    </svg>
-                                    Nhập file
-                                </button>
-                                <a class="btn sapo-btn-transparent action-bar__link" href="/admin/supplier_groups"
-                                   data-popover-index="1">
-                                    <img src="/v2/images/icon/friends.svg"
-                                         style="width: 18px; height: 18px; position: relative; top: -0.6rem; margin-top: -1.1rem; margin-bottom: -1.1rem; margin-right: 3px;"/>
-                                    Nhóm nhà cung cấp
-                                </a>
-                                <button class="btn sapo-btn-transparent action-bar__link"
-                                        define="{settingsColumnSuppliers:new Components.SettingsColumn(this,{})}"
-                                        context="settingsColumnSuppliers"
-                                        bind-event-click="settingsColumnSuppliers.showChooseFieldPopup('supplier')">
-                                    <svg
-                                            class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
-                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-setting">
-                                        </use>
-                                    </svg>
-                                    Điều chỉnh cột hiển thị
-                                    <script class="modal_source"
-                                            define="{settingsColumnSuppliersModal: new Components.Modal(this)}"
-                                            type="text/html">
-                        </script>
-                                </button>
-                            </div>
-                        </div>
                     </div>
-                    <div class="ui-title-bar__actions" style="margin-bottom:40px">
-                        <a href="/admin/suppliers/create" class="btn sapo-btn-default">Thêm nhà cung cấp</a>
-
-                        <style>
-                            .info-account {
-                                position: relative;
-                            }
-
-                            .help-dashboard {
-                                position: absolute;
-                                top: -1px;
-                                right: -1px;
-                                z-index: 1;
-                            }
-
-                            .help-dashboard .help-dropdown .btn-blank {
-                                background: #fff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDplN2MwNTFiZi1lNGJiLTNjNDktOGM3YS00NTZmZTZlNGQ1NmYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjI5NDdDQ0NGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjI5NDdDQ0JGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjdkNDRhZTRlLTIzMTMtYTE0ZC1hNWQ4LTA5YTVjYTBmNmM0NCIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjk3N2NmYTliLThmZDctZGU0Mi1hNDFiLWIwOTJiYzRkYWM2MiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Po5ReOIAAAIxSURBVHjalJU9aFNRGIbTk+sSh0xiEKciaBF1culiA2IdOlQHaRBKqEurYJYOFn9Ql7iJghQcSqlDAop0yFIoWJcigouKKIROClWnomaQVHw+eAPxcs7J9cDDhXvP997vfH9naPbybC6wEpiASRiFYcjDLmzBJqxCa/HRYtcn4ALCFWjDQ/gGNRiB/XrW9N6+t+euzFV8IkMpzwuwDGNwDVagmwsvO9003IMNqHKKjs9zE16Dg3AclgYI2+oitqT9ZrfGKQo+8WXF9DRs5/5j8YNt2eWl8494RaE4Dx1f+OAwnIRi4Acd2Y/1cuAUt7pi7PP4GLyHj/AavsPNyAlMp84PEqdyc0qer5oa8AuOQAnuw10YD0RpRXYTTnXcDCTvBByVp5/gK1yH33Am4H1XepNODfIi4MUPuANv+t7tgz3wM5Jj0xtN1HntwCZ7fztVrk3F/XFE3OyGE5XPToaKs33PlOBT8CWy1/TyTrOimEH8IpyFc/BuwF7T23UaQocyiJfhA7zMsNf0tpymWzmDwROYz9i0prfpNDan1EyxtRcODFK15pHeqom34I+mW2xdglsZvJ6WXsupeRY0NksRoxvyKOZ1SToL1ky9wdXQPH6uWvYtmy+vIsIF2W8g3EiP3KrKcn3ACUIer8u+6pvnHQ2jz/AWZjIkOUF4RvvNbrz/Jkob24cLmu91tX5Ts6KtziuqjsvKgSWv1gtF+g70Ldv4tO/2fxC4/a/Gbv+/AgwA9q+ezeP4kToAAAAASUVORK5CYII=') no-repeat center center;
-                                border: none;
-                                font-size: 0;
-                                box-shadow: none;
-                                margin-left: 0;
-                                height: 61px;
-                                width: 60px;
-                                border: 1px solid #dbdbdb;
-                                outline: none;
-                                border-radius: 0;
-                            }
-
-                            .help-dashboard .help-dropdown .btn-blank:focus {
-                                box-shadow: none;
-                            }
-
-                            .help-dashboard .help-dropdown .help-popup {
-                                top: 60px;
-                                box-shadow: #c6c6c6 0px 3px 5px 0px;
-                            }
-
-                            .help-dashboard .help-dropdown .help-popup:after {
-                                right: 20px;
-                            }
-
-                            .sapo-menu-expand .page-heading {
-                                z-index: 1001;
-                            }
-
-                            .help-dropdown {
-                                position: relative;
-                                margin-left: 10px;
-                                height: 36px;
-                            }
-
-
-                            .help-dropdown a {
-                                color: #686868;
-                                display: flex;
-                                height: 100%;
-                                border: none;
-                                flex-direction: row;
-                                justify-content: center;
-                                align-items: center;
-                                cursor: pointer;
-                                border: 1px solid #c4cdd5;
-                                float: right;
-                                width: auto;
-                            }
-
-                            .help-dropdown div:hover {
-                                background-color: #e7f2ff;
-                            }
-
-
-                            .help-dropdown .btn-blank:focus {
-                                box-shadow: none;
-                                border: 1px solid #c4cdd5;
-                            }
-
-                            .help-dropdown .help-popup {
-                                position: absolute;
-                                right: 0;
-                                z-index: 9999999;
-                                top: 45px;
-                                box-shadow: #c6c6c6 0 0 10px 5px;
-                                display: none;
-                                -webkit-transition: ease 0.5s;
-                                /* Safari */
-                                transition: ease 0.5s;
-                            }
-
-                            .help-dropdown .help-popup.shown {
-                                display: block;
-                                height: 560px;
-                                margin-top: 15px;
-                            }
-
-                            .help-dropdown .help-popup:after {
-                                content: "";
-                                display: block;
-                                width: 0px;
-                                height: 0px;
-                                border-left: 10px solid transparent;
-                                border-right: 10px solid transparent;
-                                border-bottom: 10px solid #f3f6f8;
-                                top: -9px;
-                                position: absolute;
-                                right: 25px;
-                            }
-                        </style>
-                        <div class="header-fr help-dropdown">
-                            <a class="btn sapo-btn-blank btn-help" onclick="showHelpPopup()"><img
-                                    src="/v2/images/dashboard/icons8-help-20.png"
-                                    style="padding-right: 5px;"/><span>Trợ giúp</span></a>
-                            <div class="help-popup">
-                                <iframe id="iframe-help" src=""
-                                        style="width: 400px; height: 560px;border:none"></iframe>
-                                <input type="hidden" id="iframe-help-src"
-                                       value="https://support.sapo.vn?ver=2&amp;view=omni&amp;url=http://khanhshopp.mysapogo.com/admin/suppliers"/>
-                            </div>
-                        </div>
-
-                        <script type="text/javascript">
-                            function showHelpPopup() {
-                                $("#iframe-help").attr("src", $("#iframe-help-src").val());
-                                $(".help-popup").toggleClass("shown");
-                                $(".favourite").css({"z-index": "0"});
-                            }
-
-                            $(function () {
-                                $('body').on('click', function (e) {
-                                    if (!$('.help-dropdown .btn-help *').is(e.target) && !$('.help-dropdown .btn-help').is(e.target) && $('.help-popup').hasClass("shown")) {
-                                        $("#iframe-help").attr("src", "");
-                                        $(".help-popup").removeClass("shown");
-                                    }
-                                });
-                            });
+                    <a href="/admin/suppliers/create" class="btn sapo-btn-default">Thêm nhà cung cấp</a>
+                </div>
+                <div class="action-bar">
+                    <div class="action-bar__top-links">
+                        <button class="btn sapo-btn-transparent action-bar__link export_product" type="button"
+                                name="button">
+                            <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-export-minor"></use>
+                            </svg>
+                            Xuất file
+                        </button>
+                        <button class="btn sapo-btn-transparent action-bar__link import_product" type="button"
+                                name="button">
+                            <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-import-minor"></use>
+                            </svg>
+                            Nhập file
+                        </button>
+                        <a class="btn sapo-btn-transparent action-bar__link" href="#" data-popover-index="1">
+                            <img src="/v2/images/icon/friends.svg"
+                                 style="width: 18px; height: 18px; position: relative; top: -0.6rem; margin-top: -1.1rem; margin-bottom: -1.1rem; margin-right: 3px;">
+                            Nhóm nhà cung cấp
+                        </a>
+                        <button class="btn sapo-btn-transparent action-bar__link">
+                            <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-setting"></use>
+                            </svg>
+                            Điều chỉnh cột hiển thị
+                            <script class="modal_source"
+                                    define="{settingsColumnSuppliersModal: new Components.Modal(this)}"
+                                    type="text/html">
                         </script>
-
+                        </button>
                     </div>
                 </div>
-
-                <script class="modal_source" define="{importModal: new Components.Modal(this)}" type="text/html">
-                    <div class="modal-dialog modal-dialog-new" style="width:600px;max-width:unset">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                    <span class="ui-dialog-title">
-                        Nhập dữ liệu nhà cung cấp
-                    </span>
-                                <span class="modal-close-wrapper1" bind-event-click="closePopup()">
-                        <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                  xlink:href="#cancel-small-minor"></use> </svg>
-                    </span>
-                            </div>
-                            <div class="modal-body">
-                                <form id="form-import" action="/suppliers/import?area=Suppliers" method="post"
-                                      enctype="multipart/form-data">
-                                    <div>
-                                        <div id="load-status-import"></div>
-                                        <div id="empty-success">
-                                            <div>
-                                                Chú ý:
-                                            </div>
-                                            <div class="empty-success__text">
-                                                - Mã nhà cung cấp phải là duy nhất đối với các nhà cung cấp độc lập
-                                            </div>
-                                            <div class="empty-success__text">
-                                                - Chuyển đổi file nhập dưới dạng .XLS trước tải dữ liệu.
-                                            </div>
-                                            <div class="empty-success__text">
-                                                - Tải file mẫu nhà cung cấp <a
-                                                    href="/v2/file/sapo_mau_nhap_nha_cung_cap_17052022.xlsx"
-                                                    style="color:#0088ff">tại đây</a>
-                                            </div>
-                                            <div class="empty-success__text">
-                                                - File nhập có dung lượng tối đa là 2MB và 5000 bản ghi.
-                                            </div>
-                                        </div>
-
-                                        <div id="chose-file">
-                                            <div class="chose-file-import">
-                                                <a class="btn-upload" bind-event-click="showImport()"
-                                                   href="javascript:void(0)" data-original-title="" title=""><i
-                                                        style="padding-right: 4px;" class="fa fa-cloud-download"
-                                                        aria-hidden="true"></i><span>Kéo thả file vào đây hoặc tải lên từ thiết bị</span></a>
-                                                <input name="importProductsFile" type="file" size="30" class="hide"
-                                                       id="importFileUpload"
-                                                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                                                       bind-event-change="enableButtonImport()"/>
-                                                <input id="overrideExistProducts" name="overrideExistProducts"
-                                                       type="hidden" value="false">
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <div class="action-btn clearfix">
-                                    <button class="btn sapo-btn-default pull-right" id="importBtn"
-                                            bind-event-click="confirmImport(this)">Nhập file
-                                    </button>
-                                    <button class="btn btn-blank pull-right mr-2" bind-event-click="closePopup()"
-                                            type="button">Thoát
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </script>
-
-                <script class="modal_source" define="{exportSuppliersModal: new Components.Modal(this)}"
-                        type="text/html">
-                    <div class="modal-dialog modal-dialog-new modal-export" style="width:680px;max-width:unset">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                    <span class="ui-dialog-title">
-                        <a href="javascript:" bind-event-click="backExportForm()" class="btn-back-header"
-                           style="display: none">
-                            <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                        </a>
-                        Xuất file danh sách nhà cung cấp
-                    </span>
-                                <span class="modal-close-wrapper1" bind-event-click="closeExportPopup()">
-                        <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                  xlink:href="#cancel-small-minor"></use> </svg>
-                    </span>
-                            </div>
-                            <div class="modal-body" style="max-height: calc(100vh - 200px);overflow-y: auto;">
-                                <form id="formExportSuppliers">
-                                    <div style="padding-left: 10px;">
-                                        <div style="font-weight:500;padding:5px 0">Giới hạn kết quả xuất</div>
-                                        <div class="sapo-radio-wrapper">
-                                            <label class="flex">
-                                    <span class="sapo-radiobox" style="margin-right: 7px;">
-                                        <input class="sapo-radiobox__input" type="radio" name="formExportType"
-                                               id="allSuppliers" value="allSuppliers" checked>
-                                        <span class="sapo-radiobox__icon"></span>
-                                    </span>
-                                                Tất cả nhà cung cấp
-                                            </label>
-                                        </div>
-                                        <div class="sapo-radio-wrapper">
-                                            <label class="flex">
-                                    <span class="sapo-radiobox" style="margin-right: 7px;">
-                                        <input class="sapo-radiobox__input" type="radio" name="formExportType"
-                                               id="currentPage" value="currentPage">
-                                        <span class="sapo-radiobox__icon"></span>
-                                    </span>
-                                                Nhà cung cấp trên trang này
-                                            </label>
-                                        </div>
-
-                                        <div class="sapo-radio-wrapper">
-                                            <label class="flex">
-                                    <span class="sapo-radiobox" style="margin-right: 7px;">
-                                        <input class="sapo-radiobox__input" type="radio" name="formExportType"
-                                               id="selectedSuppliers" value="selectedSuppliers">
-                                        <span class="sapo-radiobox__icon"></span>
-                                    </span>
-                                                Các nhà cung cấp được chọn
-                                            </label>
-                                        </div>
-                                        <div class="sapo-radio-wrapper">
-                                            <label class="flex">
-                                    <span class="sapo-radiobox" style="margin-right: 7px;">
-                                        <input class="sapo-radiobox__input" type="radio" name="formExportType"
-                                               id="currentSearch" value="currentSearch">
-                                        <span class="sapo-radiobox__icon"></span>
-                                    </span>
-                                                <span id="order-match-current-search">15</span>&nbsp;nhà cung cấp phù
-                                                hợp với kết quả tìm kiếm hiện tại
-                                            </label>
-                                        </div>
-
-                                        <div style="font-weight:500;padding:10px 0 5px">Loại file xuất</div>
-                                        <div class="export-field-group--header modal-setting-column pb-3">
-                                            <label class="border-checkmark1">
-                                                <input type="checkbox" class="export-field-group--toggle-all"
-                                                       bind-event-change="toggleGroupFormImport(this)"/><span>Xuất dữ liệu theo mẫu file nhập</span>
-                                                <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                            </label>
-                                        </div>
-
-                                        <a id="export-field-group--show-export-supplier" href="javascript:"
-                                           bind-event-click="showExportForm()"
-                                           style="color: #0088ff;margin: 5px 0 5px;display: inline-block;">Tuỳ chọn
-                                            trường hiển thị</a>
-                                    </div>
-                                </form>
-                                <div id="formExportSuppliers-supplier_overview" style="display:none"></div>
-                            </div>
-                            <div class="modal-footer">
-                                <div class="action-btn clearfix">
-                                    <button class="btn sapo-btn-default pull-right"
-                                            bind-event-click="confirmExport(this)">Xuất file
-                                    </button>
-                                    <button class="btn btn-blank pull-right mr-2" bind-event-click="closeExportPopup()"
-                                            type="button">Thoát
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </script>
-
-                <script class="modal_source" define="{showMessagePopup: new Components.Modal(this)}"
-                        type="text/html">
-                    <div class="modal-dialog modal-dialog-new">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                    <span class="ui-dialog-title" id="ui-dialog-title-empty">
-                    </span>
-                                <span class="modal-close-wrapper">
-                        <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                  xlink:href="#cancel-small-minor"></use> </svg>
-                    </span>
-                            </div>
-
-                            <div id="modal-body-empty" class="modal-body product-option-edit pull-center w100"
-                                 style="padding:0px;">
-
-                            </div>
-                            <div class="modal-footer">
-                                <div class="action-btn clearfix" id="modal-footer-empty">
-                                    <button class="close-modal btn btn-blank pull-right" type="button">Thoát</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </script>
             </header>
-
             <div class="gird-layout gird-layout--full-width">
                 <section class="grid-card">
-
-                    <div id="filterAndSavedSearch" class="filter-and-saved-search-order"
-                         context="filterAndSavedSearch"
-                         define="{filterAndSavedSearch: new Components.Supplier.SupplierFilterAndSavedSearch(this,{&quot;urlLoad&quot;:&quot;/admin/suppliers&quot;,&quot;query&quot;:&quot;&quot;,&quot;limit&quot;:20,&quot;savedSearchs&quot;:[{&quot;id&quot;:3198739,&quot;name&quot;:&quot;thu&quot;,&quot;type&quot;:&quot;supplier&quot;,&quot;createdOn&quot;:&quot;2023-01-09T07:27:42Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:28:17Z&quot;,&quot;query&quot;:null,&quot;jsonContent&quot;:&quot;{\&quot;id\&quot;:3198739,\&quot;ids\&quot;:null,\&quot;query\&quot;:\&quot;Anh\&quot;,\&quot;tags\&quot;:null,\&quot;filter_name\&quot;:null,\&quot;create_min\&quot;:null,\&quot;create_max\&quot;:null,\&quot;supplier_group_id\&quot;:null,\&quot;assignee_id\&quot;:null,\&quot;assignee_name\&quot;:null,\&quot;assignee_ids\&quot;:null,\&quot;page\&quot;:1,\&quot;limit\&quot;:20,\&quot;status\&quot;:null,\&quot;statuses\&quot;:null,\&quot;supplier_ids\&quot;:null,\&quot;export_products_type\&quot;:null}&quot;,&quot;accountId&quot;:937831,&quot;filterParams&quot;:null},{&quot;id&quot;:3198742,&quot;name&quot;:&quot;add&quot;,&quot;type&quot;:&quot;supplier&quot;,&quot;createdOn&quot;:&quot;2023-01-09T07:31:29Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:31:29Z&quot;,&quot;query&quot;:null,&quot;jsonContent&quot;:&quot;{\&quot;id\&quot;:0,\&quot;ids\&quot;:null,\&quot;query\&quot;:null,\&quot;tags\&quot;:null,\&quot;filter_name\&quot;:\&quot;add\&quot;,\&quot;create_min\&quot;:null,\&quot;create_max\&quot;:null,\&quot;supplier_group_id\&quot;:\&quot;2642114\&quot;,\&quot;assignee_id\&quot;:null,\&quot;assignee_name\&quot;:null,\&quot;assignee_ids\&quot;:null,\&quot;page\&quot;:1,\&quot;limit\&quot;:20,\&quot;status\&quot;:\&quot;active\&quot;,\&quot;statuses\&quot;:null,\&quot;supplier_ids\&quot;:null,\&quot;export_products_type\&quot;:null}&quot;,&quot;accountId&quot;:937831,&quot;filterParams&quot;:null},{&quot;id&quot;:3199498,&quot;name&quot;:&quot;đang giao dịch&ThienThien&quot;,&quot;type&quot;:&quot;supplier&quot;,&quot;createdOn&quot;:&quot;2023-01-10T08:24:50Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-10T08:24:50Z&quot;,&quot;query&quot;:null,&quot;jsonContent&quot;:&quot;{\&quot;id\&quot;:0,\&quot;ids\&quot;:null,\&quot;query\&quot;:null,\&quot;tags\&quot;:\&quot;NCC hộp\&quot;,\&quot;filter_name\&quot;:\&quot;đang giao dịch&ThienThien\&quot;,\&quot;create_min\&quot;:null,\&quot;create_max\&quot;:null,\&quot;supplier_group_id\&quot;:null,\&quot;assignee_id\&quot;:null,\&quot;assignee_name\&quot;:null,\&quot;assignee_ids\&quot;:\&quot;937831\&quot;,\&quot;page\&quot;:1,\&quot;limit\&quot;:20,\&quot;status\&quot;:\&quot;active\&quot;,\&quot;statuses\&quot;:null,\&quot;supplier_ids\&quot;:null,\&quot;export_products_type\&quot;:null}&quot;,&quot;accountId&quot;:937831,&quot;filterParams&quot;:null}],&quot;savedSearchId&quot;:0})}">
-                        <div class="filter-tab-container">
-                            <ul class="filter-tab-list" id="filter-tab-list" role="tablist"
-                                data-has-next-tab-controller="true">
-                                <li class="filter-tab-item" data-tab-index="1">
-                                    <a href="/admin/suppliers"
-                                       class="filter-tab show-all-items filter-tab-active">Tất cả nhà cung cấp</a>
-                                </li>
-                                <li class="filter-tab-item" data-tab-index="2">
-                                    <a href="/admin/suppliers?status=active" class="filter-tab ">
-                                        Đang giao dịch
-                                    </a>
-                                </li>
-                                <li class="filter-tab-item" data-tab-index="3" data-tab-id="3198739"
-                                    data-tab-name="thu">
-                                    <a href="/admin/suppliers?savedSearchId=3198739" class="filter-tab">thu</a>
-                                </li>
-                                <li class="filter-tab-item" data-tab-index="4" data-tab-id="3198742"
-                                    data-tab-name="add">
-                                    <a href="/admin/suppliers?savedSearchId=3198742" class="filter-tab">add</a>
-                                </li>
-                                <li class="filter-tab-item" data-tab-index="5" data-tab-id="3199498"
-                                    data-tab-name="&#x111;ang giao d&#x1ECB;ch&amp;ThienThien">
-                                    <a href="/admin/suppliers?savedSearchId=3199498" class="filter-tab">&#x111;ang
-                                        giao d&#x1ECB;ch&amp;ThienThien</a>
-                                </li>
-                                <li class="filter-tab-item filter-tab-item--more" style="position:relative;">
-                                    <a data-toggle="popover" href="javascript:" class="filter-tab">
-                                            <span data-toggle="popover">
-                                                <svg class="next-icon next-icon--size-16 next-icon--no-nudge"
-                                                     id="svg-msaved">
-                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                         xlink:href="#next-ellipsis"></use>
-                                                </svg>
-                                            </span>
-                                    </a>
-
-                                    <div class="filter-tab-item--more-content popover-content" style="display:none">
-                                        <ul class="popover-list-item">
-                                            <li data-tab-id="3198739">
-                                                <a class="popover-item"
-                                                   href="/admin/suppliers?savedSearchId=3198739">thu</a>
-                                            </li>
-                                            <li data-tab-id="3198742">
-                                                <a class="popover-item"
-                                                   href="/admin/suppliers?savedSearchId=3198742">add</a>
-                                            </li>
-                                            <li data-tab-id="3199498">
-                                                <a class="popover-item"
-                                                   href="/admin/suppliers?savedSearchId=3199498">&#x111;ang giao
-                                                    d&#x1ECB;ch&amp;ThienThien</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="table-filter-container">
-                            <div class="filter-header">
-                                <button class="btn btn-filter" type="button" data-toggle="popover">
-                                    <span>Lọc nhà cung cấp</span>
-                                    <svg class="next-icon next-icon--size-20" id="svg-filter">
-                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                             xlink:href="#next-disclosure"></use>
-                                    </svg>
-                                </button>
-                                <div class="group-input-query">
-                                        <span class="">
-                                            <svg class="next-icon next-icon--size-16">
-                                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                     xlink:href="#next-search-reverse"></use>
-                                            </svg>
-                                        </span>
-                                    <input type="text" bind="query" id="query-enter"
-                                           class="input-query sapo-textbox"
-                                           placeholder='Tìm kiếm theo mã nhà cung cấp, SĐT, tên nhà cung cấp'>
-                                </div>
-                                <div id="saved-search-actions-next" class="saved-search-actions-next"
-                                     data-tg-refresh="saved-search-actions-next">
-                                </div>
-                            </div>
-                            <div class="filter-body">
-                                <div class="filter-content" style="display:none">
-                                    <p class="title">Hiển thị nhà cung cấp theo:</p>
-
-                                    <div class="filter-item" filter-type="status" style="width:auto;">
-                                        <input type="hidden" class="choosed-single-id"/>
-                                        <div class="select__wrapper">
-                                            <select class="sapo-select select-change-filter"
-                                                    bind-event-change="changeItemFilter(this)">
-                                                <option value="status" selected>Tr&#x1EA1;ng th&#xE1;i</option>
-                                                <option value="assigneeIds">Nh&#xE2;n vi&#xEA;n</option>
-                                                <option value="tags">Tags</option>
-                                                <option value="supplierGroupId">Nh&#xF3;m nh&#xE0; cung c&#x1EA5;p
-                                                </option>
-                                                <option value="createdOn">Ng&#xE0;y t&#x1EA1;o</option>
-                                            </select>
-                                            <svg class="next-icon next-icon--size-16">
-                                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                     xlink:href="#select-chevron"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="btn-group pull-left" data-toggle="buttons">
-                                            <label class="btn filter-button-tag "
-                                                   bind-event-click="setParamFilterActive('active',this)">
-                                                <input type="checkbox" autocomplete="off"> &#x110;ang giao
-                                                d&#x1ECB;ch
-                                            </label>
-                                            <label class="btn filter-button-tag "
-                                                   bind-event-click="setParamFilterActive('disable',this)">
-                                                <input type="checkbox" autocomplete="off"> Ng&#x1EEB;ng giao
-                                                d&#x1ECB;ch
-                                            </label>
-                                        </div>
-                                        <a href="javascript" bind-event-click="removeItemFilter(this, 'status')"
-                                           class="remove-item-filter">
-                                            <svg class="next-icon next-icon--size-20">
-                                                <use xlink:href="#delete-minor"></use>
-                                            </svg>
-                                        </a>
-                                    </div>
-
-                                    <div class="filter-item" filter-type="assigneeIds" style="width:auto;">
-                                        <input type="hidden" class="choosed-single-id"/>
-                                        <div class="select__wrapper">
-                                            <select class="sapo-select select-change-filter"
-                                                    bind-event-change="changeItemFilter(this)">
-                                                <option value="status">Tr&#x1EA1;ng th&#xE1;i</option>
-                                                <option value="assigneeIds" selected>Nh&#xE2;n vi&#xEA;n</option>
-                                                <option value="tags">Tags</option>
-                                                <option value="supplierGroupId">Nh&#xF3;m nh&#xE0; cung c&#x1EA5;p
-                                                </option>
-                                                <option value="createdOn">Ng&#xE0;y t&#x1EA1;o</option>
-                                            </select>
-                                            <svg class="next-icon next-icon--size-16">
-                                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                     xlink:href="#select-chevron"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="btn-group pull-left">
-                                            <div>
-                                                <select multiple="multiple" id="assigneeIds"
-                                                        class="form-control margin-select"
-                                                        style="min-width:300px; height: 36px; visibility: hidden"
-                                                        placeholder='Chọn nhân viên'>
-                                                    <option value="937831">Thi&#xEA;n Thi&#xEA;n</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <a href="javascript"
-                                           bind-event-click="removeItemFilter(this, 'assigneeIds')"
-                                           class="remove-item-filter">
-                                            <svg class="next-icon next-icon--size-20">
-                                                <use xlink:href="#delete-minor"></use>
-                                            </svg>
-                                        </a>
-                                    </div>
-
-                                    <div class="filter-item" filter-type="tags" style="width:auto;">
-                                        <div class="select__wrapper">
-                                            <select class="sapo-select select-change-filter"
-                                                    bind-event-change="changeItemFilter(this)">
-                                                <option value="status">Tr&#x1EA1;ng th&#xE1;i</option>
-                                                <option value="assigneeIds">Nh&#xE2;n vi&#xEA;n</option>
-                                                <option value="tags" selected>Tags</option>
-                                                <option value="supplierGroupId">Nh&#xF3;m nh&#xE0; cung c&#x1EA5;p
-                                                </option>
-                                                <option value="createdOn">Ng&#xE0;y t&#x1EA1;o</option>
-                                            </select>
-                                            <svg class="next-icon next-icon--size-16">
-                                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                     xlink:href="#select-chevron"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="autocomplete-suggestion-holder float-left position-relative">
-                                            <input type="text" class="sapo-textbox choosed-single-id" id="tags"/>
-                                        </div>
-                                        <a href="javascript" bind-event-click="removeItemFilter(this, 'tags')"
-                                           class="remove-item-filter">
-                                            <svg class="next-icon next-icon--size-20">
-                                                <use xlink:href="#delete-minor"></use>
-                                            </svg>
-                                        </a>
-                                    </div>
-
-
-                                    <div class="filter-item" filter-type="supplierGroupId" style="width:auto;">
-                                        <div class="select__wrapper">
-                                            <select class="sapo-select select-change-filter"
-                                                    bind-event-change="changeItemFilter(this)">
-                                                <option value="status">Tr&#x1EA1;ng th&#xE1;i</option>
-                                                <option value="assigneeIds">Nh&#xE2;n vi&#xEA;n</option>
-                                                <option value="tags">Tags</option>
-                                                <option value="supplierGroupId" selected>Nh&#xF3;m nh&#xE0; cung
-                                                    c&#x1EA5;p
-                                                </option>
-                                                <option value="createdOn">Ng&#xE0;y t&#x1EA1;o</option>
-                                            </select>
-                                            <svg class="next-icon next-icon--size-16">
-                                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                     xlink:href="#select-chevron"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="autocomplete-suggestion-holder float-left position-relative"
-                                             style="max-width:600px">
-                                            <div class="w100" id="search-supplierGroupId-container">
-                                            </div>
-                                            <div class="hidden">
-                                                <input type="hidden" class="sapo-textbox choosed-single-id"
-                                                       id="supplierGroupId"/>
-                                            </div>
-                                            <div class="select__wrapper" style="margin:0;width:300px;"
-                                                 id="search-suggest-variant">
-                                                <a class="sapo-select select--a select-suggest"
-                                                   style="text-align:center" href="javascript:">Chọn nhóm nhà cung
-                                                    cấp</a>
-                                                <svg class="next-icon next-icon--size-16">
-                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                         xlink:href="#select-chevron"></use>
-                                                </svg>
-                                                <div class="filter-body--variantIds filter-body--suggest">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a href="javascript"
-                                           bind-event-click="removeItemFilter(this, 'supplierGroupId')"
-                                           class="remove-item-filter">
-                                            <svg class="next-icon next-icon--size-20">
-                                                <use xlink:href="#delete-minor"></use>
-                                            </svg>
-                                        </a>
-                                    </div>
-
-                                    <div class="filter-item" filter-type="createdOn" style="width:auto;">
-                                        <div class="select__wrapper">
-                                            <select class="sapo-select select-change-filter"
-                                                    bind-event-change="changeItemFilter(this)">
-                                                <option value="status">Tr&#x1EA1;ng th&#xE1;i</option>
-                                                <option value="assigneeIds">Nh&#xE2;n vi&#xEA;n</option>
-                                                <option value="tags">Tags</option>
-                                                <option value="supplierGroupId">Nh&#xF3;m nh&#xE0; cung c&#x1EA5;p
-                                                </option>
-                                                <option value="createdOn" selected>Ng&#xE0;y t&#x1EA1;o</option>
-                                            </select>
-                                            <svg class="next-icon next-icon--size-16">
-                                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                     xlink:href="#select-chevron"></use>
-                                            </svg>
-                                        </div>
-                                        <div class="input-group input-daterange pull-left" style="width: 300px;">
-                                            <input type="text"
-                                                   class="form-control from-date input-date sapo-textbox choosed-single-id"
-                                                   style="width: 120px;" name="createMin" value=""
-                                                   placeholder="Từ ngày" autocomplete="off">
-                                            <div class="input-group-append"><span class="input-group-text"></span>
-                                            </div>
-                                            <input type="text"
-                                                   class="form-control to-date input-date sapo-textbox choosed-single-id"
-                                                   style="width: 120px;" name="createMax" value=""
-                                                   placeholder="Đến ngày" autocomplete="off">
-                                        </div>
-                                        <a href="javascript" bind-event-click="removeItemFilter(this, 'createdOn')"
-                                           class="remove-item-filter">
-                                            <svg class="next-icon next-icon--size-20">
-                                                <use xlink:href="#delete-minor"></use>
-                                            </svg>
-                                        </a>
-                                    </div>
-
-                                    <div class="select__wrapper" style="order: 99999998;display:block">
-                                        <select class="sapo-select select-change-filter--all"
-                                                bind-event-change="resetFilter(this)" bind="filterType">
-                                            <option value="">Chọn điều kiện lọc</option>
-                                            <option value="status">Tr&#x1EA1;ng th&#xE1;i</option>
-                                            <option value="assigneeIds">Nh&#xE2;n vi&#xEA;n</option>
-                                            <option value="tags">Tags</option>
-                                            <option value="supplierGroupId">Nh&#xF3;m nh&#xE0; cung c&#x1EA5;p
-                                            </option>
-                                            <option value="createdOn">Ng&#xE0;y t&#x1EA1;o</option>
-                                        </select>
-                                        <svg class="next-icon next-icon--size-16">
-                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                 xlink:href="#select-chevron"></use>
-                                        </svg>
-                                    </div>
-                                    <div class="next-input-wrapper--vertical-block"
-                                         style="order: 99999999;margin-top:7px">
-                                        <button class="btn sapo-btn-default" type="button"
-                                                bind-event-click="submitFilter(this)" name="button">Lọc
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="popover-holder"></div>
-                            </div>
+                    <div class="filter-tab-container">
+                        <ul class="filter-tab-list">
+                            <li class="filter-tab-item" style="opacity: 1;">
+                                <a href="/admin/suppliers" class="filter-tab filter-tab-active">Tất cả nhà cung cấp</a>
+                            </li>
+                            <li class="filter-tab-item" style="opacity: 1; padding-bottom: 3.5px;">
+                                <a href="/admin/suppliers?status=available" class="filter-tab">Đang giao dịch</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="filter-header">
+                        <button class="btn btn-filter" type="button">
+                            <span>Lọc nhà cung cấp</span>
+                            <svg id="svg-filter" class="next-icon next-icon--size-20">
+                                <use xlink:href="#next-disclosure" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+                            </svg>
+                        </button>
+                        <div class="group-input-query">
+                            <svg class="next-icon next-icon--size-16">
+                                <use xlink:href="#next-search-reverse" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+                            </svg>
+                            <input type="text" class="input-query sapo-textbox"
+                                   title="Tìm kiếm theo mã nhà cung cấp, SĐT, tên nhà cung cấp"
+                                   placeholder="Tìm kiếm theo mã nhà cung cấp, SĐT, tên nhà cung cấp"/>
                         </div>
                     </div>
-
-
-                    <div id="resultFilter">
-                        <div class="suppliers" context="indexSupplier"
-                             define="{indexSupplier: new Components.Supplier.IndexSupplier(this,{&quot;suppliers&quot;:[{&quot;id&quot;:201324239,&quot;tenantId&quot;:686677,&quot;code&quot;:&quot;SUPN00018&quot;,&quot;name&quot;:&quot;Van Tai&quot;,&quot;email&quot;:&quot;1234@gmail.com&quot;,&quot;createdOn&quot;:&quot;2023-01-11T06:47:02Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-11T06:47:02Z&quot;,&quot;description&quot;:null,&quot;fax&quot;:null,&quot;phoneNumber&quot;:null,&quot;status&quot;:&quot;active&quot;,&quot;taxNumber&quot;:null,&quot;website&quot;:null,&quot;supplierGroupId&quot;:2642487,&quot;groupName&quot;:&quot;CAR&quot;,&quot;ids&quot;:null,&quot;assigneeId&quot;:937831,&quot;defaultPaymentTermId&quot;:null,&quot;defaultPaymentMethodId&quot;:3012377,&quot;defaultTaxTypeId&quot;:null,&quot;defaultTaxRate&quot;:0.0,&quot;defaultLedgerAccountId&quot;:null,&quot;defaultDiscountRate&quot;:null,&quot;defaultStockLocationId&quot;:null,&quot;defaultPriceListId&quot;:1989087,&quot;tags&quot;:[],&quot;addresses&quot;:[{&quot;id&quot;:174188589,&quot;tenantId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-11T06:47:02Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-11T06:47:02Z&quot;,&quot;partnerId&quot;:0,&quot;subjectId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;countryId&quot;:null,&quot;city&quot;:&quot;Hà Nội&quot;,&quot;status&quot;:&quot;active&quot;,&quot;district&quot;:&quot;Quận Hà Đông&quot;,&quot;ward&quot;:&quot;Phường Yết Kiêu&quot;,&quot;address1&quot;:&quot;123 abc&quot;,&quot;address2&quot;:null,&quot;zipCode&quot;:null,&quot;email&quot;:&quot;1234@gmail.com&quot;,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:&quot;28 NTP&quot;,&quot;phoneNumber&quot;:null}],&quot;contacts&quot;:[],&quot;notes&quot;:[],&quot;debt&quot;:0.0,&quot;initDebtAmount&quot;:null},{&quot;id&quot;:200883588,&quot;tenantId&quot;:686677,&quot;code&quot;:&quot;SUP1234&quot;,&quot;name&quot;:&quot;Thanh Hoan&quot;,&quot;email&quot;:null,&quot;createdOn&quot;:&quot;2023-01-10T08:50:36Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-10T08:50:36Z&quot;,&quot;description&quot;:null,&quot;fax&quot;:null,&quot;phoneNumber&quot;:&quot;1234567890&quot;,&quot;status&quot;:&quot;active&quot;,&quot;taxNumber&quot;:null,&quot;website&quot;:null,&quot;supplierGroupId&quot;:2642096,&quot;groupName&quot;:&quot;Giay&quot;,&quot;ids&quot;:null,&quot;assigneeId&quot;:937831,&quot;defaultPaymentTermId&quot;:null,&quot;defaultPaymentMethodId&quot;:3012376,&quot;defaultTaxTypeId&quot;:null,&quot;defaultTaxRate&quot;:0.0,&quot;defaultLedgerAccountId&quot;:null,&quot;defaultDiscountRate&quot;:null,&quot;defaultStockLocationId&quot;:null,&quot;defaultPriceListId&quot;:null,&quot;tags&quot;:[],&quot;addresses&quot;:[{&quot;id&quot;:173768720,&quot;tenantId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-10T08:50:36Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-10T08:50:36Z&quot;,&quot;partnerId&quot;:0,&quot;subjectId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;countryId&quot;:null,&quot;city&quot;:&quot;Hà Nội&quot;,&quot;status&quot;:&quot;active&quot;,&quot;district&quot;:&quot;Quận Ba Đình&quot;,&quot;ward&quot;:&quot;Phường Trúc Bạch&quot;,&quot;address1&quot;:&quot;Huế&quot;,&quot;address2&quot;:null,&quot;zipCode&quot;:null,&quot;email&quot;:null,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:&quot;Hà Nội&quot;,&quot;phoneNumber&quot;:&quot;1234567890&quot;}],&quot;contacts&quot;:[],&quot;notes&quot;:[],&quot;debt&quot;:20000000.0000,&quot;initDebtAmount&quot;:null},{&quot;id&quot;:200395681,&quot;tenantId&quot;:686677,&quot;code&quot;:&quot;SUPN00015&quot;,&quot;name&quot;:&quot;chonloi&quot;,&quot;email&quot;:null,&quot;createdOn&quot;:&quot;2023-01-09T08:00:17Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T08:21:15Z&quot;,&quot;description&quot;:null,&quot;fax&quot;:null,&quot;phoneNumber&quot;:null,&quot;status&quot;:&quot;active&quot;,&quot;taxNumber&quot;:null,&quot;website&quot;:null,&quot;supplierGroupId&quot;:2642074,&quot;groupName&quot;:&quot;Khác&quot;,&quot;ids&quot;:null,&quot;assigneeId&quot;:null,&quot;defaultPaymentTermId&quot;:null,&quot;defaultPaymentMethodId&quot;:null,&quot;defaultTaxTypeId&quot;:null,&quot;defaultTaxRate&quot;:0.0,&quot;defaultLedgerAccountId&quot;:null,&quot;defaultDiscountRate&quot;:null,&quot;defaultStockLocationId&quot;:null,&quot;defaultPriceListId&quot;:null,&quot;tags&quot;:[],&quot;addresses&quot;:[{&quot;id&quot;:173311191,&quot;tenantId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-09T08:00:17Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T08:00:17Z&quot;,&quot;partnerId&quot;:0,&quot;subjectId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;countryId&quot;:null,&quot;city&quot;:null,&quot;status&quot;:&quot;active&quot;,&quot;district&quot;:null,&quot;ward&quot;:null,&quot;address1&quot;:&quot;hue&quot;,&quot;address2&quot;:null,&quot;zipCode&quot;:null,&quot;email&quot;:null,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:null,&quot;phoneNumber&quot;:null}],&quot;contacts&quot;:[],&quot;notes&quot;:[],&quot;debt&quot;:2.0000,&quot;initDebtAmount&quot;:null},{&quot;id&quot;:200395396,&quot;tenantId&quot;:686677,&quot;code&quot;:&quot;SUPN00014&quot;,&quot;name&quot;:&quot;Anh thư&quot;,&quot;email&quot;:&quot;support@sapo.vn&quot;,&quot;createdOn&quot;:&quot;2023-01-09T07:59:34Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T08:21:15Z&quot;,&quot;description&quot;:null,&quot;fax&quot;:null,&quot;phoneNumber&quot;:&quot;1900 6732&quot;,&quot;status&quot;:&quot;active&quot;,&quot;taxNumber&quot;:null,&quot;website&quot;:null,&quot;supplierGroupId&quot;:2642074,&quot;groupName&quot;:&quot;Khác&quot;,&quot;ids&quot;:null,&quot;assigneeId&quot;:null,&quot;defaultPaymentTermId&quot;:null,&quot;defaultPaymentMethodId&quot;:null,&quot;defaultTaxTypeId&quot;:null,&quot;defaultTaxRate&quot;:0.0,&quot;defaultLedgerAccountId&quot;:null,&quot;defaultDiscountRate&quot;:null,&quot;defaultStockLocationId&quot;:null,&quot;defaultPriceListId&quot;:null,&quot;tags&quot;:[],&quot;addresses&quot;:[{&quot;id&quot;:173310933,&quot;tenantId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-09T07:59:34Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:59:34Z&quot;,&quot;partnerId&quot;:0,&quot;subjectId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;countryId&quot;:null,&quot;city&quot;:null,&quot;status&quot;:&quot;active&quot;,&quot;district&quot;:null,&quot;ward&quot;:null,&quot;address1&quot;:&quot;hue&quot;,&quot;address2&quot;:null,&quot;zipCode&quot;:null,&quot;email&quot;:&quot;support@sapo.vn&quot;,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:null,&quot;phoneNumber&quot;:&quot;1900 6732&quot;},{&quot;id&quot;:173315590,&quot;tenantId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-09T08:11:28Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T08:11:28Z&quot;,&quot;partnerId&quot;:0,&quot;subjectId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;countryId&quot;:null,&quot;city&quot;:null,&quot;status&quot;:&quot;active&quot;,&quot;district&quot;:null,&quot;ward&quot;:null,&quot;address1&quot;:&quot;hatinh&quot;,&quot;address2&quot;:null,&quot;zipCode&quot;:null,&quot;email&quot;:null,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:null,&quot;phoneNumber&quot;:null},{&quot;id&quot;:173728069,&quot;tenantId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-10T07:09:43Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-10T07:10:27Z&quot;,&quot;partnerId&quot;:0,&quot;subjectId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;countryId&quot;:null,&quot;city&quot;:&quot;Hải Phòng&quot;,&quot;status&quot;:&quot;active&quot;,&quot;district&quot;:&quot;Quận Hải An&quot;,&quot;ward&quot;:&quot;Phường Đằng Lâm&quot;,&quot;address1&quot;:&quot;chi nhánh hải phòng&quot;,&quot;address2&quot;:&quot;chi nhánh hà tĩnh&quot;,&quot;zipCode&quot;:null,&quot;email&quot;:null,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:null,&quot;phoneNumber&quot;:null}],&quot;contacts&quot;:[{&quot;id&quot;:1110713,&quot;name&quot;:&quot;Anh Thư&quot;,&quot;tenantId&quot;:0,&quot;title&quot;:null,&quot;createdOn&quot;:&quot;2023-01-10T07:19:49Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-10T07:19:49Z&quot;,&quot;subjectId&quot;:0,&quot;email&quot;:null,&quot;phoneNumber&quot;:null,&quot;phone&quot;:null,&quot;fax&quot;:null,&quot;mobile&quot;:null,&quot;department&quot;:null,&quot;note&quot;:null,&quot;status&quot;:&quot;active&quot;},{&quot;id&quot;:1110714,&quot;name&quot;:&quot;Anh Thư&quot;,&quot;tenantId&quot;:0,&quot;title&quot;:null,&quot;createdOn&quot;:&quot;2023-01-10T07:20:09Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-10T07:20:09Z&quot;,&quot;subjectId&quot;:0,&quot;email&quot;:null,&quot;phoneNumber&quot;:null,&quot;phone&quot;:null,&quot;fax&quot;:null,&quot;mobile&quot;:null,&quot;department&quot;:null,&quot;note&quot;:null,&quot;status&quot;:&quot;active&quot;}],&quot;notes&quot;:[{&quot;id&quot;:1041810,&quot;tenantId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-10T07:08:45Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-10T07:08:45Z&quot;,&quot;accountId&quot;:937831,&quot;account&quot;:{&quot;id&quot;:0,&quot;tenantId&quot;:0,&quot;createdOn&quot;:null,&quot;modifiedOn&quot;:null,&quot;status&quot;:null,&quot;avatarUrl&quot;:null,&quot;email&quot;:null,&quot;sex&quot;:null,&quot;password&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;fullName&quot;:null,&quot;userName&quot;:null,&quot;locationId&quot;:0,&quot;mobile&quot;:null,&quot;countryCode&quot;:null,&quot;intlPhoneNo&quot;:null,&quot;guideStatus&quot;:null,&quot;accountOwner&quot;:false,&quot;fakeLoginAccount&quot;:null,&quot;limitedAccess&quot;:false,&quot;permissions&quot;:[],&quot;startSession&quot;:null,&quot;lastLogin&quot;:null,&quot;description&quot;:null,&quot;address&quot;:null,&quot;dob&quot;:null,&quot;hasPassword&quot;:null,&quot;isDuplicateMobile&quot;:null,&quot;globalSessionId&quot;:null,&quot;ssoLoginIdentity&quot;:null,&quot;hasUpgradedSSO&quot;:null,&quot;isAccountSSO&quot;:null,&quot;sapoAccountProfileUrl&quot;:null,&quot;isAccountAuthenticated&quot;:false,&quot;accountRoles&quot;:[],&quot;languageCode&quot;:null,&quot;dataPermissions&quot;:[]},&quot;partnerId&quot;:0,&quot;content&quot;:&quot;nhà cung cấp áo&quot;,&quot;status&quot;:&quot;active&quot;},{&quot;id&quot;:1041811,&quot;tenantId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-10T07:08:59Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-10T07:32:45Z&quot;,&quot;accountId&quot;:937831,&quot;account&quot;:{&quot;id&quot;:0,&quot;tenantId&quot;:0,&quot;createdOn&quot;:null,&quot;modifiedOn&quot;:null,&quot;status&quot;:null,&quot;avatarUrl&quot;:null,&quot;email&quot;:null,&quot;sex&quot;:null,&quot;password&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;fullName&quot;:null,&quot;userName&quot;:null,&quot;locationId&quot;:0,&quot;mobile&quot;:null,&quot;countryCode&quot;:null,&quot;intlPhoneNo&quot;:null,&quot;guideStatus&quot;:null,&quot;accountOwner&quot;:false,&quot;fakeLoginAccount&quot;:null,&quot;limitedAccess&quot;:false,&quot;permissions&quot;:[],&quot;startSession&quot;:null,&quot;lastLogin&quot;:null,&quot;description&quot;:null,&quot;address&quot;:null,&quot;dob&quot;:null,&quot;hasPassword&quot;:null,&quot;isDuplicateMobile&quot;:null,&quot;globalSessionId&quot;:null,&quot;ssoLoginIdentity&quot;:null,&quot;hasUpgradedSSO&quot;:null,&quot;isAccountSSO&quot;:null,&quot;sapoAccountProfileUrl&quot;:null,&quot;isAccountAuthenticated&quot;:false,&quot;accountRoles&quot;:[],&quot;languageCode&quot;:null,&quot;dataPermissions&quot;:[]},&quot;partnerId&quot;:0,&quot;content&quot;:&quot;còn nợ 100000111111&quot;,&quot;status&quot;:&quot;active&quot;}],&quot;debt&quot;:60000000.0000,&quot;initDebtAmount&quot;:null},{&quot;id&quot;:200378112,&quot;tenantId&quot;:686677,&quot;code&quot;:&quot;SUPN00013&quot;,&quot;name&quot;:&quot;Sách&quot;,&quot;email&quot;:&quot;kimdong@hn.vnn.vn&quot;,&quot;createdOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T08:21:15Z&quot;,&quot;description&quot;:&quot;Cung cấp sách giáo khoa, truyện đọc cho học sinh&quot;,&quot;fax&quot;:null,&quot;phoneNumber&quot;:&quot;(08)4 3943.4490&quot;,&quot;status&quot;:&quot;active&quot;,&quot;taxNumber&quot;:&quot;9876123&quot;,&quot;website&quot;:&quot;nxbkimdong.com.vn&quot;,&quot;supplierGroupId&quot;:2642074,&quot;groupName&quot;:&quot;Khác&quot;,&quot;ids&quot;:null,&quot;assigneeId&quot;:null,&quot;defaultPaymentTermId&quot;:null,&quot;defaultPaymentMethodId&quot;:3012375,&quot;defaultTaxTypeId&quot;:null,&quot;defaultTaxRate&quot;:0.0,&quot;defaultLedgerAccountId&quot;:null,&quot;defaultDiscountRate&quot;:null,&quot;defaultStockLocationId&quot;:null,&quot;defaultPriceListId&quot;:1989087,&quot;tags&quot;:[],&quot;addresses&quot;:[{&quot;id&quot;:173294767,&quot;tenantId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;partnerId&quot;:0,&quot;subjectId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;countryId&quot;:null,&quot;city&quot;:&quot;Hà Nội&quot;,&quot;status&quot;:&quot;active&quot;,&quot;district&quot;:&quot;Quận Hai Bà Trưng&quot;,&quot;ward&quot;:null,&quot;address1&quot;:&quot;55 Quang Trung&quot;,&quot;address2&quot;:null,&quot;zipCode&quot;:null,&quot;email&quot;:&quot;kimdong@hn.vnn.vn&quot;,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:&quot;Kim Đồng Publishing House&quot;,&quot;phoneNumber&quot;:&quot;(08)4 3943.4490&quot;}],&quot;contacts&quot;:[{&quot;id&quot;:1110654,&quot;name&quot;:&quot;Hoa&quot;,&quot;tenantId&quot;:0,&quot;title&quot;:null,&quot;createdOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;subjectId&quot;:0,&quot;email&quot;:&quot;hoa@dkt.com.vn&quot;,&quot;phoneNumber&quot;:&quot;01688722255&quot;,&quot;phone&quot;:null,&quot;fax&quot;:null,&quot;mobile&quot;:null,&quot;department&quot;:null,&quot;note&quot;:null,&quot;status&quot;:&quot;active&quot;}],&quot;notes&quot;:[],&quot;debt&quot;:0.0000,&quot;initDebtAmount&quot;:null},{&quot;id&quot;:200378111,&quot;tenantId&quot;:686677,&quot;code&quot;:&quot;SUPN00012&quot;,&quot;name&quot;:&quot;Bánh kẹo&quot;,&quot;email&quot;:&quot;info@kinhdo.vn&quot;,&quot;createdOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T08:21:15Z&quot;,&quot;description&quot;:&quot;Công ty bánh kẹo&quot;,&quot;fax&quot;:&quot;(84) (8) 38270839&quot;,&quot;phoneNumber&quot;:&quot;(84) (8) 38270838&quot;,&quot;status&quot;:&quot;active&quot;,&quot;taxNumber&quot;:null,&quot;website&quot;:&quot;www.kinhdo.vn&quot;,&quot;supplierGroupId&quot;:2642074,&quot;groupName&quot;:&quot;Khác&quot;,&quot;ids&quot;:null,&quot;assigneeId&quot;:null,&quot;defaultPaymentTermId&quot;:null,&quot;defaultPaymentMethodId&quot;:3012375,&quot;defaultTaxTypeId&quot;:null,&quot;defaultTaxRate&quot;:0.0,&quot;defaultLedgerAccountId&quot;:null,&quot;defaultDiscountRate&quot;:null,&quot;defaultStockLocationId&quot;:null,&quot;defaultPriceListId&quot;:1989087,&quot;tags&quot;:[&quot;NCC hộp&quot;],&quot;addresses&quot;:[{&quot;id&quot;:173294765,&quot;tenantId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;partnerId&quot;:0,&quot;subjectId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;countryId&quot;:null,&quot;city&quot;:&quot;TP Hồ Chí Minh&quot;,&quot;status&quot;:&quot;active&quot;,&quot;district&quot;:&quot;Quận 1&quot;,&quot;ward&quot;:null,&quot;address1&quot;:&quot;138 – 142  Hai Bà Trưng&quot;,&quot;address2&quot;:null,&quot;zipCode&quot;:null,&quot;email&quot;:&quot;info@kinhdo.vn&quot;,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:&quot;MonDeLez  Kinh Đô&quot;,&quot;phoneNumber&quot;:&quot;(84) (8) 38270838&quot;}],&quot;contacts&quot;:[{&quot;id&quot;:1110653,&quot;name&quot;:&quot;Nguyễn Minh Thu&quot;,&quot;tenantId&quot;:0,&quot;title&quot;:null,&quot;createdOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;subjectId&quot;:0,&quot;email&quot;:&quot;minhthu@gmail.com&quot;,&quot;phoneNumber&quot;:&quot;0988231007&quot;,&quot;phone&quot;:null,&quot;fax&quot;:null,&quot;mobile&quot;:null,&quot;department&quot;:null,&quot;note&quot;:null,&quot;status&quot;:&quot;active&quot;}],&quot;notes&quot;:[],&quot;debt&quot;:0.0000,&quot;initDebtAmount&quot;:null},{&quot;id&quot;:200378109,&quot;tenantId&quot;:686677,&quot;code&quot;:&quot;SUPN00011&quot;,&quot;name&quot;:&quot;Anh Khoa&quot;,&quot;email&quot;:&quot;trananh@gmail.com&quot;,&quot;createdOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T08:21:15Z&quot;,&quot;description&quot;:&quot;Là một trong những doanh nghiệp hàng đầu trong lĩnh vực bán lẻ điện máy, máy tính và điện thoại&quot;,&quot;fax&quot;:&quot;(84-4) 3766 7708&quot;,&quot;phoneNumber&quot;:&quot;1900 545 545&quot;,&quot;status&quot;:&quot;active&quot;,&quot;taxNumber&quot;:&quot;101217009&quot;,&quot;website&quot;:&quot;www.trananh.vn&quot;,&quot;supplierGroupId&quot;:2642074,&quot;groupName&quot;:&quot;Khác&quot;,&quot;ids&quot;:null,&quot;assigneeId&quot;:null,&quot;defaultPaymentTermId&quot;:null,&quot;defaultPaymentMethodId&quot;:3012375,&quot;defaultTaxTypeId&quot;:null,&quot;defaultTaxRate&quot;:0.0,&quot;defaultLedgerAccountId&quot;:null,&quot;defaultDiscountRate&quot;:null,&quot;defaultStockLocationId&quot;:null,&quot;defaultPriceListId&quot;:1989087,&quot;tags&quot;:[],&quot;addresses&quot;:[{&quot;id&quot;:173294764,&quot;tenantId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;partnerId&quot;:0,&quot;subjectId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;countryId&quot;:null,&quot;city&quot;:&quot;Hà Nội&quot;,&quot;status&quot;:&quot;active&quot;,&quot;district&quot;:&quot;Quận Nam Từ Liêm&quot;,&quot;ward&quot;:null,&quot;address1&quot;:&quot;256 Quang Trung&quot;,&quot;address2&quot;:null,&quot;zipCode&quot;:null,&quot;email&quot;:&quot;trananh@gmail.com&quot;,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:&quot;Học viện An ninh&quot;,&quot;phoneNumber&quot;:&quot;1900 545 545&quot;}],&quot;contacts&quot;:[{&quot;id&quot;:1110648,&quot;name&quot;:&quot;Nguyễn Minh Thảo&quot;,&quot;tenantId&quot;:0,&quot;title&quot;:null,&quot;createdOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;subjectId&quot;:0,&quot;email&quot;:&quot;minhthao@yahoo.com&quot;,&quot;phoneNumber&quot;:&quot;01688722251&quot;,&quot;phone&quot;:null,&quot;fax&quot;:null,&quot;mobile&quot;:null,&quot;department&quot;:null,&quot;note&quot;:null,&quot;status&quot;:&quot;active&quot;},{&quot;id&quot;:1110649,&quot;name&quot;:&quot;Nguyễn Minh Trang&quot;,&quot;tenantId&quot;:0,&quot;title&quot;:null,&quot;createdOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;subjectId&quot;:0,&quot;email&quot;:&quot;minhtrang@dkt.com&quot;,&quot;phoneNumber&quot;:&quot;01688722252&quot;,&quot;phone&quot;:null,&quot;fax&quot;:null,&quot;mobile&quot;:null,&quot;department&quot;:null,&quot;note&quot;:null,&quot;status&quot;:&quot;active&quot;},{&quot;id&quot;:1110650,&quot;name&quot;:&quot;Nguyễn Minh Minh&quot;,&quot;tenantId&quot;:0,&quot;title&quot;:null,&quot;createdOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;subjectId&quot;:0,&quot;email&quot;:&quot;minhminh@gmail.com&quot;,&quot;phoneNumber&quot;:&quot;01688722253&quot;,&quot;phone&quot;:null,&quot;fax&quot;:null,&quot;mobile&quot;:null,&quot;department&quot;:null,&quot;note&quot;:null,&quot;status&quot;:&quot;active&quot;},{&quot;id&quot;:1110651,&quot;name&quot;:&quot;Hân&quot;,&quot;tenantId&quot;:0,&quot;title&quot;:null,&quot;createdOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;subjectId&quot;:0,&quot;email&quot;:&quot;han@dkt.com.vn&quot;,&quot;phoneNumber&quot;:&quot;01688722254&quot;,&quot;phone&quot;:null,&quot;fax&quot;:null,&quot;mobile&quot;:null,&quot;department&quot;:null,&quot;note&quot;:null,&quot;status&quot;:&quot;active&quot;},{&quot;id&quot;:1110652,&quot;name&quot;:&quot;Linh&quot;,&quot;tenantId&quot;:0,&quot;title&quot;:null,&quot;createdOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:18:13Z&quot;,&quot;subjectId&quot;:0,&quot;email&quot;:&quot;ha@dkt.com.vn&quot;,&quot;phoneNumber&quot;:&quot;01688722256&quot;,&quot;phone&quot;:null,&quot;fax&quot;:null,&quot;mobile&quot;:null,&quot;department&quot;:null,&quot;note&quot;:null,&quot;status&quot;:&quot;active&quot;}],&quot;notes&quot;:[],&quot;debt&quot;:0.0000,&quot;initDebtAmount&quot;:null},{&quot;id&quot;:200378108,&quot;tenantId&quot;:686677,&quot;code&quot;:&quot;SUPN00010&quot;,&quot;name&quot;:&quot;Anh Thư&quot;,&quot;email&quot;:&quot;support@sapo.vn&quot;,&quot;createdOn&quot;:&quot;2023-01-09T07:18:12Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T08:21:16Z&quot;,&quot;description&quot;:&quot;Phần mềm quản lý bán hàng Sapo được cung cấp bởi Công ty cổ phần công nghệ DKT - đơn vị sở hữu nền tảng bán hàng online được nhiều người sử dụng nhất Việt Nam, Bizweb.&quot;,&quot;fax&quot;:null,&quot;phoneNumber&quot;:&quot;1900 6732&quot;,&quot;status&quot;:&quot;active&quot;,&quot;taxNumber&quot;:null,&quot;website&quot;:&quot;www.sapo.vn&quot;,&quot;supplierGroupId&quot;:2642074,&quot;groupName&quot;:&quot;Khác&quot;,&quot;ids&quot;:null,&quot;assigneeId&quot;:null,&quot;defaultPaymentTermId&quot;:null,&quot;defaultPaymentMethodId&quot;:3012375,&quot;defaultTaxTypeId&quot;:null,&quot;defaultTaxRate&quot;:0.0,&quot;defaultLedgerAccountId&quot;:null,&quot;defaultDiscountRate&quot;:null,&quot;defaultStockLocationId&quot;:null,&quot;defaultPriceListId&quot;:1989087,&quot;tags&quot;:[&quot;NCC nguyên liệu&quot;,&quot;NCC phía Nam&quot;],&quot;addresses&quot;:[{&quot;id&quot;:173294763,&quot;tenantId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-09T07:18:12Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:18:12Z&quot;,&quot;partnerId&quot;:0,&quot;subjectId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;countryId&quot;:null,&quot;city&quot;:&quot;Hà Nội&quot;,&quot;status&quot;:&quot;active&quot;,&quot;district&quot;:&quot;Quận Ba Đình&quot;,&quot;ward&quot;:null,&quot;address1&quot;:&quot;266 Đội Cấn&quot;,&quot;address2&quot;:&quot;442 Đội Cấn&quot;,&quot;zipCode&quot;:null,&quot;email&quot;:&quot;support@sapo.vn&quot;,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:&quot;Ladeco&quot;,&quot;phoneNumber&quot;:&quot;1900 6732&quot;}],&quot;contacts&quot;:[{&quot;id&quot;:1110647,&quot;name&quot;:&quot;Nguyễn Minh Thu&quot;,&quot;tenantId&quot;:0,&quot;title&quot;:null,&quot;createdOn&quot;:&quot;2023-01-09T07:18:12Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:18:12Z&quot;,&quot;subjectId&quot;:0,&quot;email&quot;:&quot;minhthu@gmail.com&quot;,&quot;phoneNumber&quot;:&quot;0988231007&quot;,&quot;phone&quot;:null,&quot;fax&quot;:null,&quot;mobile&quot;:null,&quot;department&quot;:null,&quot;note&quot;:null,&quot;status&quot;:&quot;active&quot;}],&quot;notes&quot;:[],&quot;debt&quot;:1000000.0000,&quot;initDebtAmount&quot;:null},{&quot;id&quot;:200371699,&quot;tenantId&quot;:686677,&quot;code&quot;:&quot;SUPN00008&quot;,&quot;name&quot;:&quot;Nhà xuất bản Kim Đồng&quot;,&quot;email&quot;:&quot;kimdong@hn.vnn.vn&quot;,&quot;createdOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T08:21:16Z&quot;,&quot;description&quot;:&quot;Cung cấp sách giáo khoa, truyện đọc cho học sinh&quot;,&quot;fax&quot;:null,&quot;phoneNumber&quot;:&quot;(08)4 3943.4490&quot;,&quot;status&quot;:&quot;active&quot;,&quot;taxNumber&quot;:&quot;9876123&quot;,&quot;website&quot;:&quot;nxbkimdong.com.vn&quot;,&quot;supplierGroupId&quot;:2642074,&quot;groupName&quot;:&quot;Khác&quot;,&quot;ids&quot;:null,&quot;assigneeId&quot;:null,&quot;defaultPaymentTermId&quot;:null,&quot;defaultPaymentMethodId&quot;:3012375,&quot;defaultTaxTypeId&quot;:null,&quot;defaultTaxRate&quot;:0.0,&quot;defaultLedgerAccountId&quot;:null,&quot;defaultDiscountRate&quot;:null,&quot;defaultStockLocationId&quot;:null,&quot;defaultPriceListId&quot;:1989087,&quot;tags&quot;:[],&quot;addresses&quot;:[{&quot;id&quot;:173288687,&quot;tenantId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;partnerId&quot;:0,&quot;subjectId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;countryId&quot;:null,&quot;city&quot;:&quot;Hà Nội&quot;,&quot;status&quot;:&quot;active&quot;,&quot;district&quot;:&quot;Quận Hai Bà Trưng&quot;,&quot;ward&quot;:null,&quot;address1&quot;:&quot;55 Quang Trung&quot;,&quot;address2&quot;:null,&quot;zipCode&quot;:null,&quot;email&quot;:&quot;kimdong@hn.vnn.vn&quot;,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:&quot;Kim Đồng Publishing House&quot;,&quot;phoneNumber&quot;:&quot;(08)4 3943.4490&quot;}],&quot;contacts&quot;:[{&quot;id&quot;:1110644,&quot;name&quot;:&quot;Hoa&quot;,&quot;tenantId&quot;:0,&quot;title&quot;:null,&quot;createdOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;subjectId&quot;:0,&quot;email&quot;:&quot;hoa@dkt.com.vn&quot;,&quot;phoneNumber&quot;:&quot;01688722255&quot;,&quot;phone&quot;:null,&quot;fax&quot;:null,&quot;mobile&quot;:null,&quot;department&quot;:null,&quot;note&quot;:null,&quot;status&quot;:&quot;active&quot;}],&quot;notes&quot;:[],&quot;debt&quot;:0.0000,&quot;initDebtAmount&quot;:null},{&quot;id&quot;:200371698,&quot;tenantId&quot;:686677,&quot;code&quot;:&quot;SUPN00007&quot;,&quot;name&quot;:&quot;Kinh Đô&quot;,&quot;email&quot;:&quot;info@kinhdo.vn&quot;,&quot;createdOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T08:21:16Z&quot;,&quot;description&quot;:&quot;Công ty bánh kẹo&quot;,&quot;fax&quot;:&quot;(84) (8) 38270839&quot;,&quot;phoneNumber&quot;:&quot;(84) (8) 38270838&quot;,&quot;status&quot;:&quot;active&quot;,&quot;taxNumber&quot;:null,&quot;website&quot;:&quot;www.kinhdo.vn&quot;,&quot;supplierGroupId&quot;:2642074,&quot;groupName&quot;:&quot;Khác&quot;,&quot;ids&quot;:null,&quot;assigneeId&quot;:null,&quot;defaultPaymentTermId&quot;:null,&quot;defaultPaymentMethodId&quot;:3012375,&quot;defaultTaxTypeId&quot;:null,&quot;defaultTaxRate&quot;:0.0,&quot;defaultLedgerAccountId&quot;:null,&quot;defaultDiscountRate&quot;:null,&quot;defaultStockLocationId&quot;:null,&quot;defaultPriceListId&quot;:1989087,&quot;tags&quot;:[&quot;NCC hộp&quot;],&quot;addresses&quot;:[{&quot;id&quot;:173288686,&quot;tenantId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;partnerId&quot;:0,&quot;subjectId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;countryId&quot;:null,&quot;city&quot;:&quot;TP Hồ Chí Minh&quot;,&quot;status&quot;:&quot;active&quot;,&quot;district&quot;:&quot;Quận 1&quot;,&quot;ward&quot;:null,&quot;address1&quot;:&quot;138 – 142  Hai Bà Trưng&quot;,&quot;address2&quot;:null,&quot;zipCode&quot;:null,&quot;email&quot;:&quot;info@kinhdo.vn&quot;,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:&quot;MonDeLez  Kinh Đô&quot;,&quot;phoneNumber&quot;:&quot;(84) (8) 38270838&quot;}],&quot;contacts&quot;:[{&quot;id&quot;:1110643,&quot;name&quot;:&quot;Nguyễn Minh Thu&quot;,&quot;tenantId&quot;:0,&quot;title&quot;:null,&quot;createdOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;subjectId&quot;:0,&quot;email&quot;:&quot;minhthu@gmail.com&quot;,&quot;phoneNumber&quot;:&quot;0988231007&quot;,&quot;phone&quot;:null,&quot;fax&quot;:null,&quot;mobile&quot;:null,&quot;department&quot;:null,&quot;note&quot;:null,&quot;status&quot;:&quot;active&quot;}],&quot;notes&quot;:[],&quot;debt&quot;:0.0000,&quot;initDebtAmount&quot;:null},{&quot;id&quot;:200371697,&quot;tenantId&quot;:686677,&quot;code&quot;:&quot;SUPN00006&quot;,&quot;name&quot;:&quot;Trần Anh&quot;,&quot;email&quot;:&quot;trananh@gmail.com&quot;,&quot;createdOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T08:21:16Z&quot;,&quot;description&quot;:&quot;Là một trong những doanh nghiệp hàng đầu trong lĩnh vực bán lẻ điện máy, máy tính và điện thoại&quot;,&quot;fax&quot;:&quot;(84-4) 3766 7708&quot;,&quot;phoneNumber&quot;:&quot;1900 545 545&quot;,&quot;status&quot;:&quot;active&quot;,&quot;taxNumber&quot;:&quot;101217009&quot;,&quot;website&quot;:&quot;www.trananh.vn&quot;,&quot;supplierGroupId&quot;:2642074,&quot;groupName&quot;:&quot;Khác&quot;,&quot;ids&quot;:null,&quot;assigneeId&quot;:null,&quot;defaultPaymentTermId&quot;:null,&quot;defaultPaymentMethodId&quot;:3012375,&quot;defaultTaxTypeId&quot;:null,&quot;defaultTaxRate&quot;:0.0,&quot;defaultLedgerAccountId&quot;:null,&quot;defaultDiscountRate&quot;:null,&quot;defaultStockLocationId&quot;:null,&quot;defaultPriceListId&quot;:1989087,&quot;tags&quot;:[],&quot;addresses&quot;:[{&quot;id&quot;:173288685,&quot;tenantId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;partnerId&quot;:0,&quot;subjectId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;countryId&quot;:null,&quot;city&quot;:&quot;Hà Nội&quot;,&quot;status&quot;:&quot;active&quot;,&quot;district&quot;:&quot;Quận Nam Từ Liêm&quot;,&quot;ward&quot;:null,&quot;address1&quot;:&quot;256 Quang Trung&quot;,&quot;address2&quot;:null,&quot;zipCode&quot;:null,&quot;email&quot;:&quot;trananh@gmail.com&quot;,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:&quot;Học viện An ninh&quot;,&quot;phoneNumber&quot;:&quot;1900 545 545&quot;}],&quot;contacts&quot;:[{&quot;id&quot;:1110638,&quot;name&quot;:&quot;Nguyễn Minh Thảo&quot;,&quot;tenantId&quot;:0,&quot;title&quot;:null,&quot;createdOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;subjectId&quot;:0,&quot;email&quot;:&quot;minhthao@yahoo.com&quot;,&quot;phoneNumber&quot;:&quot;01688722251&quot;,&quot;phone&quot;:null,&quot;fax&quot;:null,&quot;mobile&quot;:null,&quot;department&quot;:null,&quot;note&quot;:null,&quot;status&quot;:&quot;active&quot;},{&quot;id&quot;:1110639,&quot;name&quot;:&quot;Nguyễn Minh Trang&quot;,&quot;tenantId&quot;:0,&quot;title&quot;:null,&quot;createdOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;subjectId&quot;:0,&quot;email&quot;:&quot;minhtrang@dkt.com&quot;,&quot;phoneNumber&quot;:&quot;01688722252&quot;,&quot;phone&quot;:null,&quot;fax&quot;:null,&quot;mobile&quot;:null,&quot;department&quot;:null,&quot;note&quot;:null,&quot;status&quot;:&quot;active&quot;},{&quot;id&quot;:1110640,&quot;name&quot;:&quot;Nguyễn Minh Minh&quot;,&quot;tenantId&quot;:0,&quot;title&quot;:null,&quot;createdOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;subjectId&quot;:0,&quot;email&quot;:&quot;minhminh@gmail.com&quot;,&quot;phoneNumber&quot;:&quot;01688722253&quot;,&quot;phone&quot;:null,&quot;fax&quot;:null,&quot;mobile&quot;:null,&quot;department&quot;:null,&quot;note&quot;:null,&quot;status&quot;:&quot;active&quot;},{&quot;id&quot;:1110641,&quot;name&quot;:&quot;Hân&quot;,&quot;tenantId&quot;:0,&quot;title&quot;:null,&quot;createdOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;subjectId&quot;:0,&quot;email&quot;:&quot;han@dkt.com.vn&quot;,&quot;phoneNumber&quot;:&quot;01688722254&quot;,&quot;phone&quot;:null,&quot;fax&quot;:null,&quot;mobile&quot;:null,&quot;department&quot;:null,&quot;note&quot;:null,&quot;status&quot;:&quot;active&quot;},{&quot;id&quot;:1110642,&quot;name&quot;:&quot;Linh&quot;,&quot;tenantId&quot;:0,&quot;title&quot;:null,&quot;createdOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;subjectId&quot;:0,&quot;email&quot;:&quot;ha@dkt.com.vn&quot;,&quot;phoneNumber&quot;:&quot;01688722256&quot;,&quot;phone&quot;:null,&quot;fax&quot;:null,&quot;mobile&quot;:null,&quot;department&quot;:null,&quot;note&quot;:null,&quot;status&quot;:&quot;active&quot;}],&quot;notes&quot;:[],&quot;debt&quot;:0.0000,&quot;initDebtAmount&quot;:null},{&quot;id&quot;:200371693,&quot;tenantId&quot;:686677,&quot;code&quot;:&quot;SUPN00005&quot;,&quot;name&quot;:&quot;SapoShop&quot;,&quot;email&quot;:&quot;support@sapo.vn&quot;,&quot;createdOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T08:21:16Z&quot;,&quot;description&quot;:&quot;Phần mềm quản lý bán hàng Sapo được cung cấp bởi Công ty cổ phần công nghệ DKT - đơn vị sở hữu nền tảng bán hàng online được nhiều người sử dụng nhất Việt Nam, Bizweb.&quot;,&quot;fax&quot;:null,&quot;phoneNumber&quot;:&quot;1900 6732&quot;,&quot;status&quot;:&quot;active&quot;,&quot;taxNumber&quot;:null,&quot;website&quot;:&quot;www.sapo.vn&quot;,&quot;supplierGroupId&quot;:2642074,&quot;groupName&quot;:&quot;Khác&quot;,&quot;ids&quot;:null,&quot;assigneeId&quot;:null,&quot;defaultPaymentTermId&quot;:null,&quot;defaultPaymentMethodId&quot;:3012375,&quot;defaultTaxTypeId&quot;:null,&quot;defaultTaxRate&quot;:0.0,&quot;defaultLedgerAccountId&quot;:null,&quot;defaultDiscountRate&quot;:null,&quot;defaultStockLocationId&quot;:null,&quot;defaultPriceListId&quot;:1989087,&quot;tags&quot;:[&quot;NCC nguyên liệu&quot;,&quot;NCC phía Nam&quot;],&quot;addresses&quot;:[{&quot;id&quot;:173288681,&quot;tenantId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;partnerId&quot;:0,&quot;subjectId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;countryId&quot;:null,&quot;city&quot;:&quot;Hà Nội&quot;,&quot;status&quot;:&quot;active&quot;,&quot;district&quot;:&quot;Quận Ba Đình&quot;,&quot;ward&quot;:null,&quot;address1&quot;:&quot;266 Đội Cấn&quot;,&quot;address2&quot;:&quot;442 Đội Cấn&quot;,&quot;zipCode&quot;:null,&quot;email&quot;:&quot;support@sapo.vn&quot;,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:&quot;Ladeco&quot;,&quot;phoneNumber&quot;:&quot;1900 6732&quot;}],&quot;contacts&quot;:[{&quot;id&quot;:1110637,&quot;name&quot;:&quot;Nguyễn Minh Thu&quot;,&quot;tenantId&quot;:0,&quot;title&quot;:null,&quot;createdOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T07:04:17Z&quot;,&quot;subjectId&quot;:0,&quot;email&quot;:&quot;minhthu@gmail.com&quot;,&quot;phoneNumber&quot;:&quot;0988231007&quot;,&quot;phone&quot;:null,&quot;fax&quot;:null,&quot;mobile&quot;:null,&quot;department&quot;:null,&quot;note&quot;:null,&quot;status&quot;:&quot;active&quot;}],&quot;notes&quot;:[],&quot;debt&quot;:1000000.0000,&quot;initDebtAmount&quot;:null},{&quot;id&quot;:200234133,&quot;tenantId&quot;:686677,&quot;code&quot;:&quot;PHONE3006&quot;,&quot;name&quot;:&quot;RinStore&quot;,&quot;email&quot;:&quot;rinstore@gmail.com&quot;,&quot;createdOn&quot;:&quot;2023-01-09T02:18:16Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T08:21:17Z&quot;,&quot;description&quot;:&quot;&quot;,&quot;fax&quot;:&quot;&quot;,&quot;phoneNumber&quot;:&quot;1234567890&quot;,&quot;status&quot;:&quot;active&quot;,&quot;taxNumber&quot;:&quot;&quot;,&quot;website&quot;:&quot;&quot;,&quot;supplierGroupId&quot;:2642114,&quot;groupName&quot;:&quot;PHONE&quot;,&quot;ids&quot;:null,&quot;assigneeId&quot;:null,&quot;defaultPaymentTermId&quot;:null,&quot;defaultPaymentMethodId&quot;:null,&quot;defaultTaxTypeId&quot;:null,&quot;defaultTaxRate&quot;:0.0,&quot;defaultLedgerAccountId&quot;:null,&quot;defaultDiscountRate&quot;:null,&quot;defaultStockLocationId&quot;:null,&quot;defaultPriceListId&quot;:null,&quot;tags&quot;:[],&quot;addresses&quot;:[{&quot;id&quot;:173157552,&quot;tenantId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-09T02:18:16Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T02:18:16Z&quot;,&quot;partnerId&quot;:0,&quot;subjectId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;countryId&quot;:null,&quot;city&quot;:null,&quot;status&quot;:&quot;active&quot;,&quot;district&quot;:null,&quot;ward&quot;:null,&quot;address1&quot;:&quot;hue&quot;,&quot;address2&quot;:null,&quot;zipCode&quot;:null,&quot;email&quot;:&quot;rinstore@gmail.com&quot;,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:&quot;hue&quot;,&quot;phoneNumber&quot;:&quot;1234567890&quot;}],&quot;contacts&quot;:[],&quot;notes&quot;:[],&quot;debt&quot;:0.0,&quot;initDebtAmount&quot;:null},{&quot;id&quot;:200228324,&quot;tenantId&quot;:686677,&quot;code&quot;:&quot;SHIRT3006&quot;,&quot;name&quot;:&quot;Văn A&quot;,&quot;email&quot;:&quot;shirt@gmail.com&quot;,&quot;createdOn&quot;:&quot;2023-01-09T02:03:50Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T08:21:17Z&quot;,&quot;description&quot;:&quot;&quot;,&quot;fax&quot;:&quot;&quot;,&quot;phoneNumber&quot;:&quot;0123456789&quot;,&quot;status&quot;:&quot;active&quot;,&quot;taxNumber&quot;:&quot;&quot;,&quot;website&quot;:&quot;&quot;,&quot;supplierGroupId&quot;:2642101,&quot;groupName&quot;:&quot;Ao&quot;,&quot;ids&quot;:null,&quot;assigneeId&quot;:null,&quot;defaultPaymentTermId&quot;:null,&quot;defaultPaymentMethodId&quot;:3012379,&quot;defaultTaxTypeId&quot;:null,&quot;defaultTaxRate&quot;:0.0,&quot;defaultLedgerAccountId&quot;:null,&quot;defaultDiscountRate&quot;:null,&quot;defaultStockLocationId&quot;:null,&quot;defaultPriceListId&quot;:1989087,&quot;tags&quot;:[],&quot;addresses&quot;:[{&quot;id&quot;:173151977,&quot;tenantId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-09T02:03:50Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T02:03:50Z&quot;,&quot;partnerId&quot;:0,&quot;subjectId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;countryId&quot;:null,&quot;city&quot;:&quot;Hà Tĩnh&quot;,&quot;status&quot;:&quot;active&quot;,&quot;district&quot;:&quot;Thành phố Hà Tĩnh&quot;,&quot;ward&quot;:&quot;Phường Trần Phú&quot;,&quot;address1&quot;:&quot;Hà Tĩnh&quot;,&quot;address2&quot;:null,&quot;zipCode&quot;:null,&quot;email&quot;:&quot;shirt@gmail.com&quot;,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:&quot;hatinh&quot;,&quot;phoneNumber&quot;:&quot;0123456789&quot;}],&quot;contacts&quot;:[],&quot;notes&quot;:[],&quot;debt&quot;:0.0,&quot;initDebtAmount&quot;:null},{&quot;id&quot;:200221762,&quot;tenantId&quot;:686677,&quot;code&quot;:&quot;SUP3006&quot;,&quot;name&quot;:&quot;Thanh Hoan&quot;,&quot;email&quot;:&quot;thanhhoan@gmail.com&quot;,&quot;createdOn&quot;:&quot;2023-01-09T01:46:40Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T08:21:17Z&quot;,&quot;description&quot;:&quot;&quot;,&quot;fax&quot;:&quot;&quot;,&quot;phoneNumber&quot;:&quot;0976481543&quot;,&quot;status&quot;:&quot;active&quot;,&quot;taxNumber&quot;:&quot;&quot;,&quot;website&quot;:&quot;&quot;,&quot;supplierGroupId&quot;:2642096,&quot;groupName&quot;:&quot;Giay&quot;,&quot;ids&quot;:null,&quot;assigneeId&quot;:null,&quot;defaultPaymentTermId&quot;:null,&quot;defaultPaymentMethodId&quot;:3012379,&quot;defaultTaxTypeId&quot;:null,&quot;defaultTaxRate&quot;:0.0,&quot;defaultLedgerAccountId&quot;:null,&quot;defaultDiscountRate&quot;:null,&quot;defaultStockLocationId&quot;:null,&quot;defaultPriceListId&quot;:1989087,&quot;tags&quot;:[],&quot;addresses&quot;:[{&quot;id&quot;:173145727,&quot;tenantId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-09T01:46:40Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-09T01:46:40Z&quot;,&quot;partnerId&quot;:0,&quot;subjectId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;countryId&quot;:null,&quot;city&quot;:&quot;Hà Tĩnh&quot;,&quot;status&quot;:&quot;active&quot;,&quot;district&quot;:&quot;Thành phố Hà Tĩnh&quot;,&quot;ward&quot;:null,&quot;address1&quot;:&quot;Hà tĩnh&quot;,&quot;address2&quot;:null,&quot;zipCode&quot;:null,&quot;email&quot;:&quot;thanhhoan@gmail.com&quot;,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:null,&quot;phoneNumber&quot;:&quot;0976481543&quot;}],&quot;contacts&quot;:[],&quot;notes&quot;:[],&quot;debt&quot;:0.0,&quot;initDebtAmount&quot;:null}],&quot;listOption&quot;:{&quot;supplier_group&quot;:true,&quot;code&quot;:true,&quot;supplier_name&quot;:true,&quot;email&quot;:true,&quot;phone_number&quot;:true,&quot;status&quot;:true,&quot;debt&quot;:true,&quot;fax&quot;:false,&quot;tax_number&quot;:false,&quot;website&quot;:false,&quot;assignee_name&quot;:false,&quot;created_on&quot;:false,&quot;modified_on&quot;:false},&quot;typeName&quot;:&quot;Nhà cung cấp&quot;,&quot;limit&quot;:20,&quot;page&quot;:1,&quot;totalRecords&quot;:15})}">
-                            <div class="ui-type-container clearfix">
-                                <div class="table-wrapper">
-
-                                    <div id="bulk-actions-all" class="bulk-actions btn-group">
-                                        <a class="btn bulk-actions__main-bar disabled">
-                                            Đã chọn
-                                            <span class="selection-count bulk-action-items-count">
-                                                    (<span class="display-bulk-action-items-count">20</span> nh&#xE0;
-                                                    cung c&#x1EA5;p)
-                                                </span>
-                                        </a>
-                                        <a class="btn bulk-actions__btn-dropdown" data-toggle="popover"
-                                           data-placement="bottom">
-                                            Chọn thao tác
-                                            <svg class="next-icon next-icon--size-20" id="svg-bulkaction">
-                                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                     xlink:href="#next-disclosure"></use>
-                                            </svg>
-                                        </a>
-                                        <div style="display:none" class="popover-content">
-                                            <ul class="popover-list-item">
-                                                <li><a class="popover-item" href="javascript:void(0);"
-                                                       bind-event-click="showUpdateBulkModal()">Cập nhật nhà cung
-                                                    cấp</a></li>
-                                                <li><a class="popover-item" href="javascript:void(0);"
-                                                       bind-event-click="showDisableBulkModal()">Ngừng giao
-                                                    dịch</a></li>
-                                                <li><a class="popover-item" href="javascript:void(0);"
-                                                       bind-event-click="showActiveBulkModal()">Cập nhật trạng
-                                                    thái</a></li>
-                                                <li><a class="popover-item" href="javascript:void(0);"
-                                                       bind-event-click="showDeleteBulkModal()">Xóa nhà cung
-                                                    cấp</a></li>
-                                            </ul>
+                    <div class="table-wrapper">
+                        <div id="sapo-table_wrapper">
+                            <table id="supplier-datatables" class="sapo-table">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <div class="tooltip--select-all">
+                                            <div class="bulk-actions--select-all">
+                                                <span class="btn bulk-actions--select-all-btn"></span>
+                                                <input type="checkbox"
+                                                       class="next-checkbox bulk-actions--select-all-checkbox"
+                                                       title="Chọn tất cả nhà cung cấp"/>
+                                                <span class="next-checkbox--styled">
+                                                        <svg>
+                                                            <use xlink:href="#next-checkmark-thick"
+                                                                 xmlns:xlink="http://www.w3.org/1999/xlink"/>
+                                                        </svg>
+                                                        <svg>
+                                                            <use xlink:href="#next-minus"
+                                                                 xmlns:xlink="http://www.w3.org/1999/xlink"/>
+                                                        </svg>
+                                                    </span>
+                                            </div>
                                         </div>
-                                        <div class="bulk-action-all-selector">
-                                                <span>Đã chọn tất cả nhà cung cấp<span class="on-this-page-text"> trên
-                                                        trang này.</span></span>
-                                        </div>
-                                        <div
-                                                class="next-input-wrapper bulk-actions--select-all bulk-actions--select-all-clone">
-                                            <label class="bulk-actions--select-all-btn btn hidden">
-                                            </label>
-                                            <input type="checkbox"
-                                                   class="next-checkbox bulk-actions--select-all-checkbox bulk-actions--select-all-checkbox-clone"
-                                                   bind-event-click="addOrRemoveAllBulkActionItems(this)">
-                                            <span class="next-checkbox--styled">
-                                                    <svg class="next-icon next-icon--size-10 checkmark">
-                                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                             xlink:href="#next-checkmark-thick"></use>
-                                                    </svg>
-                                                    <svg class="next-icon next-icon--size-10 indeterminate">
-                                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                             xlink:href="#next-minus"></use>
-                                                    </svg>
-                                                </span>
-                                        </div>
-
-                                        <script class="modal_source"
-                                                define="{disableBulkModal: new Components.Modal(this)}"
-                                                type="text/html">
-                                            <div class="modal-dialog modal-dialog-new modal-assign-account">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                <span class="ui-dialog-title">
-                                                    Ngừng giao dịch
-                                                </span>
-                                                        <span class="modal-close-wrapper">
-                                                    <svg class="ui-icon-x ui-icon-x-20"> <use
-                                                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                            xlink:href="#cancel-small-minor"></use> </svg>
-                                                </span>
-                                                    </div>
-                                                    <div class="modal-body mx-3">
-                                                        <div class="form">
-                                                            <div class="form-group row mb-4">
-                                                        <span style="margin:auto;">
-                                                           Thao tác này sẽ ngừng giao dịch các nhà cung cấp bạn đã chọn.
-                                                        </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <div class="action-btn clearfix">
-                                                            <button class="btn pull-right margin-left-5 sapo-btn-default"
-                                                                    type="button"
-                                                                    bind-event-click="updateBulkaction('disable',this)">
-                                                                Lưu
-                                                            </button>
-                                                            <button class="close-modal btn btn-blank pull-right"
-                                                                    type="button">Thoát
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <div class="action-btn clearfix">
-                                                    <button class="btn pull-right margin-left-5 sapo-btn-default"
-                                                            type="button"
-                                                            bind-event-click="updateBulkaction('disable',this)">Lưu
-                                                    </button>
-                                                    <button class="close-modal btn btn-blank pull-right" type="button">
-                                                        Thoát
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            </div>
-                                            </div>
-                                        </script>
-                                        <script class="modal_source"
-                                                define="{activeBulkModal: new Components.Modal(this)}" type="text/html">
-                                            <div class="modal-dialog modal-dialog-new modal-assign-account">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                <span class="ui-dialog-title">
-                                                    Cập nhật trạng thái
-                                                </span>
-                                                        <span class="modal-close-wrapper">
-                                                    <svg class="ui-icon-x ui-icon-x-20"> <use
-                                                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                            xlink:href="#cancel-small-minor"></use> </svg>
-                                                </span>
-                                                    </div>
-                                                    <div class="modal-body mx-3">
-                                                        <div class="form">
-                                                            <div class="form-group row mb-4">
-                                                        <span style="margin:auto;">
-                                                            Thao tác này sẽ cập nhật trạng thái giao dịch các nhà cung cấp bạn đã chọn.
-                                                        </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <div class="action-btn clearfix">
-                                                            <button class="btn pull-right margin-left-5 sapo-btn-default"
-                                                                    type="button"
-                                                                    bind-event-click="updateBulkaction('active',this)">
-                                                                Lưu
-                                                            </button>
-                                                            <button class="close-modal btn btn-blank pull-right"
-                                                                    type="button">Thoát
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <div class="action-btn clearfix">
-                                                    <button class="btn pull-right margin-left-5 sapo-btn-default"
-                                                            type="button"
-                                                            bind-event-click="updateBulkaction('active',this)">Lưu
-                                                    </button>
-                                                    <button class="close-modal btn btn-blank pull-right" type="button">
-                                                        Thoát
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            </div>
-                                            </div>
-                                        </script>
-                                        <script class="modal_source"
-                                                define="{deleteBulkModal: new Components.Modal(this)}" type="text/html">
-                                            <div class="modal-dialog modal-dialog-new modal-assign-account">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                <span class="ui-dialog-title">
-                                                    Xóa nhà cung cấp
-                                                </span>
-                                                        <span class="modal-close-wrapper">
-                                                    <svg class="ui-icon-x ui-icon-x-20"> <use
-                                                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                            xlink:href="#cancel-small-minor"></use> </svg>
-                                                </span>
-                                                    </div>
-                                                    <div class="modal-body mx-3">
-                                                        <div class="form">
-                                                            <div class="form-group row mb-4">
-                                                        <span style="margin:auto;">
-                                                           Thao tác này sẽ xóa các nhà cung cấp bạn đã chọn. Thao tác này không thể khôi phục.
-                                                        </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <div class="action-btn clearfix">
-                                                            <button class="btn pull-right margin-left-5 sapo-btn-red"
-                                                                    type="button"
-                                                                    bind-event-click="updateBulkaction('deleted',this)">
-                                                                Xóa
-                                                            </button>
-                                                            <button class="close-modal btn btn-blank pull-right"
-                                                                    type="button">Thoát
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <div class="action-btn clearfix">
-                                                    <button class="btn pull-right margin-left-5 sapo-btn-red"
-                                                            type="button"
-                                                            bind-event-click="updateBulkaction('deleted',this)">Xóa
-                                                    </button>
-                                                    <button class="close-modal btn btn-blank pull-right" type="button">
-                                                        Thoát
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            </div>
-                                            </div>
-                                        </script>
-                                        <script class="modal_source"
-                                                define="{updateBulkModal: new Components.Modal(this)}" type="text/html">
-                                            <div class="modal-dialog modal-dialog-new modal-assign-account">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                <span class="ui-dialog-title">
-                                                    Cập nhật thông tin nhà cung cấp
-                                                </span>
-                                                        <span class="modal-close-wrapper">
-                                                    <svg class="ui-icon-x ui-icon-x-20"> <use
-                                                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                            xlink:href="#cancel-small-minor"></use> </svg>
-                                                </span>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="row mb-3">
-                                                            <div class="col-6">
-                                                                <div class="label mb-2">Nhân viên phụ trách</div>
-                                                                <select class="w100 input-dropdown sapo-btn-blank select-padding left"
-                                                                        style="width:250px;" bind="accountIdBulk"
-                                                                        id="accountIdBulk">
-                                                                    <option value="0" selected>Chọn nhân viên phụ
-                                                                        trách
-                                                                    </option>
-                                                                    <option value="937831">Thi&#xEA;n Thi&#xEA;n
-                                                                    </option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <div class="label mb-2">Giá mặc định</div>
-                                                                <select class="w100 input-dropdown sapo-btn-blank select-padding left"
-                                                                        style="width:250px;" bind="priceIdBulk"
-                                                                        id="priceIdBulk">
-                                                                    <option value="0" selected>Chọn giá mặc định
-                                                                    </option>
-                                                                    <option value="1989087">Gi&#xE1; nh&#x1EAD;p
-                                                                    </option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mb-3">
-                                                            <div class="col-6">
-                                                                <div class="label mb-2">Chiết khấu (%)</div>
-                                                                <div class="input-wrap"><input autocomplete="off"
-                                                                                               placeholder="0"
-                                                                                               bind="discountPercentBulk_txt"
-                                                                                               define="{ numberInput: new Components.NumberInput(this, 'indexSupplier','3','999999','','','False')}"
-                                                                                               context="numberInput"
-                                                                                               class="sapo-textbox align-right"
-                                                                                               maximum-value="999999"
-                                                                                               style="width:250px;"/>
-                                                                    type="hidden" bind="discountPercentBulk"
-                                                                    class="sapo-textbox align-right" id="" name="" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="row mb-3">
-                                                                    <div class="col-6">
-                                                                        <div class="label mb-2">Nhân viên phụ trách
-                                                                        </div>
-                                                                        <select class="w100 input-dropdown sapo-btn-blank select-padding left"
-                                                                                style="width:250px;"
-                                                                                bind="accountIdBulk"
-                                                                                id="accountIdBulk">
-                                                                            <option value="0" selected>Chọn nhân viên
-                                                                                phụ
-                                                                                trách
-                                                                            </option>
-                                                                            <option value="937831">Thi&#xEA;n Thi&#xEA;n
-                                                                            </option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <div class="label mb-2">Giá mặc định</div>
-                                                                        <select class="w100 input-dropdown sapo-btn-blank select-padding left"
-                                                                                style="width:250px;" bind="priceIdBulk"
-                                                                                id="priceIdBulk">
-                                                                            <option value="0" selected>Chọn giá mặc định
-                                                                            </option>
-                                                                            <option value="1989087">Gi&#xE1; nh&#x1EAD;p
-                                                                            </option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mb-3">
-                                                                    <div class="col-6">
-                                                                        <div class="label mb-2">Chiết khấu (%)</div>
-                                                                        <div class="input-wrap"><input
-                                                                                autocomplete="off"
-                                                                                placeholder="0"
-                                                                                bind="discountPercentBulk_txt"
-                                                                                define="{ numberInput: new Components.NumberInput(this, 'indexSupplier','3','999999','','','False')}"
-                                                                                context="numberInput"
-                                                                                class="sapo-textbox align-right"
-                                                                                maximum-value="999999"
-                                                                                style="width:250px;"
-                                                                        />
-                                                                            type="hidden" bind="discountPercentBulk"
-                                                                            class="sapo-textbox align-right" id=""
-                                                                            name=""/>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <div class="label mb-2">Hình thức thanh toán
-                                                                        </div>
-                                                                        <select class="w100 input-dropdown sapo-btn-blank select-padding left"
-                                                                                style="width:250px;"
-                                                                                bind="paymentMethodIdBulk"
-                                                                                id="paymentMethodIdBulk">
-                                                                            <option value="0" selected>Chọn hình thức
-                                                                                thanh
-                                                                                toán
-                                                                            </option>
-                                                                            <option value="3012379">Qu&#x1EB9;t th&#x1EBB;
-                                                                            </option>
-                                                                            <option value="3012378">Thanh to&#xE1;n b&#x1EB1;ng
-                                                                                &#x111;i&#x1EC3;m
-                                                                            </option>
-                                                                            <option value="3012377">COD</option>
-                                                                            <option value="3012376">Chuy&#x1EC3;n kho&#x1EA3;n
-                                                                            </option>
-                                                                            <option value="3012375">Ti&#x1EC1;n m&#x1EB7;t
-                                                                            </option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <div class="action-btn clearfix">
-                                                                    <button class="btn pull-right margin-left-5 sapo-btn-default"
-                                                                            type="button"
-                                                                            bind-event-click="updateBulkaction('update',this)">
-                                                                        Lưu
-                                                                    </button>
-                                                                    <button class="close-modal btn btn-blank pull-right"
-                                                                            id="close-popup" type="button">Thoát
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                        </script>
-
-                                        <script class="modal_source"
-                                                define="{showUpdateBulkactionModal: new Components.Modal(this, { preventESCToHide: true })}"
-                                                type="text/html">
-                                            <div class="modal-dialog modal-dialog-new update_bulkaction_modal">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                <span class="ui-dialog-title">
-                                                </span>
-                                                    </div>
-                                                    <div class="modal-body pull-center">
-                                                        <h2>Đang xử lý dữ liệu</h2>
-                                                        <div>
-                                                            <div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="info-update">
-                                                            <div class="info-update-title"><span
-                                                                    id="label-countOrderComplete">Nhà cung cấp duyệt thành công: </span><span
-                                                                    id="countOrderComplete"
-                                                                    style="color:#0088ff">0</span><a href="javascript:"
-                                                                                                     bind-event-click="showListOrderUpdate(this)">Chi
-                                                                tiết<i class="fa fa-angle-double-down"
-                                                                       aria-hidden="true"></i></a></div>
-                                                            <div class="info-update-body" id="listOrderComplete">
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="info-update">
-                                                            <div class="info-update-title"><span
-                                                                    id="label-countOrderFail">Nhà cung cấp duyệt không thành công: </span><span
-                                                                    id="countOrderFail" style="color:#ff0000">0</span><a
-                                                                    href="javascript:"
-                                                                    bind-event-click="showListOrderUpdate(this)">Chi
-                                                                tiết<i class="fa fa-angle-double-down"
-                                                                       aria-hidden="true"></i></a></div>
-                                                            <div class="info-update-body" id="listOrderFail">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <div class="action-btn clearfix">
-                                                            <button class="btn pull-right sapo-btn-blank" type="button"
-                                                                    id="buttonPrintAfterPacking"
-                                                                    bind-event-click="showPrintAfterPackingModal()"
-                                                                    style="margin-left:10px;display:none;">In hướng dẫn
-                                                                đóng gói
-                                                            </button>
-                                                        </div>
-                                                        <div class="action-btn clearfix">
-                                                            <button class="btn pull-right sapo-btn-default btn--reload-page"
-                                                                    type="button"
-                                                                    bind-event-click='window.location.href = window.location.href'
-                                                                    style="float:right; margin-left:10px;">Xác nhận
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </script>
-                                    </div>
-                                    </script>
-                                </div>
-                                <table class="sapo-table bulk-action-context" id="sapo-table">
-                                    <thead class="thead">
-                                    <tr class="tr">
-                                        <th class="select th select--bulk-action" nameth="bulk_action">
-                                            <div class="bulk-actions-tooltip-wrapper bulk-actions-wrapper-main"
-                                                 data-toggle="tooltip" data-placement="right"
-                                                 title="Chọn tất cả nhà cung cấp">
-                                                <div class="tooltip--select-all">
-                                                    <div class="next-input-wrapper bulk-actions--select-all"
-                                                         style="left: auto;">
-                                                        <label
-                                                                class="bulk-actions--select-all-btn btn hidden">
-                                                        </label>
-                                                        <input type="checkbox"
-                                                               class="next-checkbox bulk-actions--select-all-checkbox"
-                                                               bind-event-click="addOrRemoveAllBulkActionItems(this)">
-                                                        <span class="next-checkbox--styled">
-                                                                        <svg
-                                                                                class="next-icon next-icon--size-10 checkmark">
-                                                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                                 xlink:href="#next-checkmark-thick">
-                                                                            </use>
-                                                                        </svg>
-                                                                        <svg
-                                                                                class="next-icon next-icon--size-10 indeterminate">
-                                                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                                 xlink:href="#next-minus"></use>
-                                                                        </svg>
-                                                                    </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </th>
-
-                                        <th nameth="code" class="th align-left ">Mã nhà cung cấp</th>
-                                        <th nameth="supplier_name" class="th align-left ">Tên nhà cung cấp
-                                        </th>
-                                        <th nameth="supplier_group" class="th align-left ">Nhóm nhà cung cấp
-                                        </th>
-                                        <th nameth="email" class="th align-left ">Email</th>
-                                        <th nameth="phone_number" class="th align-left ">Số điện thoại</th>
-                                        <th nameth="status" class="th align-left ">Trạng thái</th>
-                                        <th nameth="debt" class="th align-right ">Nợ hiện tại</th>
-                                        <th nameth="fax" class="th align-left hidden">Số Fax</th>
-                                        <th nameth="tax_number" class="th align-left hidden">Mã số thuế</th>
-                                        <th nameth="website" class="th align-left hidden">Website</th>
-                                        <th nameth="assignee_name" class="th align-left hidden">Nhân viên
-                                            phụ trách
-                                        </th>
-                                        <th nameth="created_on" class="th align-left hidden">Ngày tạo</th>
-                                        <th nameth="modified_on" class="th align-left hidden">Lần cập nhật
-                                            cuối
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                            <div class="t-grid-pager-boder" value="/admin/suppliers" query="">
-                                <div class="t-pager t-reset">
-                                    <div class="col-4">
-                                        <div class="t-status-text dataTables_info">Hiển thị kết quả từ 1 - 15
-                                            trên tổng 15
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                    </th>
+                                    <th>Mã nhà cung cấp</th>
+                                    <th>Tên nhà cung cấp</th>
+                                    <th>Email</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Trạng thái</th>
+                                    <th>Nhân viên phụ trách</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Lần cập nhật cuối</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr id="tr_${supplier.id}">
+                                    <td></td>
+                                    <td>${supplier.supplierCode}</td>
+                                    <td>${supplier.name}</td>
+                                    <td>Email</td>
+                                    <td>SDT</td>
+                                    <td>trang thai</td>
+                                    <td>NV phu trach</td>
+                                    <td>Ngay tao</td>
+                                    <td>Lan cap nha cuoi</td>
+                                    <td className="hide">paymentMethod</td>
+                                    <td className="hide">description</td>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-            </div>
-            </section>
-        </div>
-        <div class="grid-footer-help">
-            <div class="grid-footer-help__content">
-                <div class="grid-footer-help__icon">
-                    <svg class="next-icon next-icon--size-24 next-icon--no-nudge" role="img"
-                         aria-labelledby="next-help-circle-title">
-                        <title id="next-help-circle-title">Help</title>
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-help-circle"></use>
-                    </svg>
-                </div>
-                <div>
-                    Bạn có thể xem thêm hướng dẫn về quản lý nhà cung cấp <a target="_blank"
-                                                                             style="color:#0088ff" title="Hướng dẫn"
-                                                                             href="https://support.sapo.vn/tong-quan-quan-ly-nha-cung-cap">tại
-                    đây</a>
-                </div>
+                </section>
             </div>
         </div>
-
-    </div>
-    <div class="popup-box">
-        <iframe scrolling="no" src="about:blank" name="myIframe" id="popupPrint"
-                style="border:0;position:absolute;width:0px;height:0px;left:0px;top:0px;"></iframe>
     </div>
 </div>
-</div>
-<div class="section-footer">
-
-</div>
-<div class='container-fluid-md notifications'>
-    <div class='ajax-notification'><span class='ajax-notification-message'></span></div>
-</div>
-<div class="modal fade" id="sapo-modal-container" data-width="" tabindex="-1" role="dialog" data-backdrop="false">
-</div>
-<div class="modal-backdrop fade in" id="sapo-modal-backdrop"></div>
+<script src="/assets/admin/js/suppliers/supplier_app.js"></script>
+<th:block th:replace="/layout/script :: script"/>
 
 
-<style>
-    #surveys {
-        position: fixed;
-        bottom: 0;
-        width: calc(100% - 23rem);
-        right: 0;
-        z-index: 999999
-    }
-
-    .sapo-menu-collapse #surveys {
-        width: calc(100% - 5.6rem) !important;
-    }
-</style>
-<div id="surveys"></div>
-
+:
 <script>
-    Page();
-    hj('trigger', 'split_test_b');
+
+    const page = {
+        urls: {
+            getAllSupplier: App.PRODUCT_API,
+        },
+        elements: {},
+        commands:{},
+    }
+
+    page.elements.tbSupplier = $("#supplier-datatables")
+
+
+
+    page.commands.getAllSupplier = () => {
+        $(document).ready(function () {
+            drawDataTable();
+        })
+
+    }
+    function drawDataTable(){
+        page.elements.tbSupplier.DataTable({
+            "processing": true,
+            "serverSide": true,
+            "paging": true,
+            ajax: {
+                type: "GET",
+                url: App.PRODUCT_API,
+                contentType: 'application/json',
+            }.done((data)=>{
+                console.log("xong",data)
+            })
+        })
+    }
+
+    page.commands.getAllProducts = () => {
+        $.ajax({
+            type: "GET",
+            url: page.urls.getAllSupplier,
+        })
+            .done((data) => {
+                console.log(data)
+            })
+
+    }
+
 </script>
-<script type='text/javascript'>
-    function showMenu() {
-        $(".col-left").css("margin-left", 0);
-        $(".col-left").addClass("is-mobile");
-    }
-
-    env = 'Production';
-    old_console_log = console.log;
-    console.log = function () {
-        if (env.toLowerCase() != "production") {
-            old_console_log.apply(this, arguments);
-        }
-    }
-    window.isAccountNonEmail = false
-    window.profileSso = 'https://profiles.sapo.vn';
-
-    function isAuthorized(authority) {
-        let accountRoles = [{"locationId": 0, "tenantRoleId": 1, "scopes": ["full"]}];
-        let accountOwner = true;
-        let check = false;
-        if (accountRoles == null || accountRoles == undefined)
-            accountRoles = [];
-        let accountRole;
-        if (accountOwner)
-            return true;
-        for (accountRole of accountRoles) {
-            if (accountRole.scopes.includes('full') || accountRole.scopes.includes(authority)) {
-                check = true;
-                break;
-            }
-        }
-        if (check)
-            return true;
-        else {
-            Sapo.Flash.error('Bạn không có quyền thực hiện chức năng này');
-            return false;
-        }
-    }
-
-    function hasPermission(authority) {
-        let accountRoles = [{"locationId": 0, "tenantRoleId": 1, "scopes": ["full"]}];
-        let accountOwner = true;
-        let check = false;
-        if (accountRoles == null || accountRoles == undefined)
-            accountRoles = [];
-        let accountRole;
-        if (accountOwner)
-            return true;
-        for (accountRole of accountRoles) {
-            if (accountRole.scopes.includes('full') || accountRole.scopes.includes(authority)) {
-                check = true;
-                break;
-            }
-        }
-        return check;
-    }
-</script>
-<!-- Freshchat -->
-
-
-<!-- End Freshchat -->
-
-<div context="notificationVNPay"
-     define="{notificationVNPay: new Components.NotificationVNPay(this, {accountId:937831 })}">
-    <div class="popup-notification">
-        <a href="javascript:" bind-event-click="closeNoti()" class="close">
-            <svg>
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use>
-            </svg>
-        </a>
-        <a href="" target="_blank" class="link-order">
-            <img class="left" src="/v2/images/ico-sapo.png"/>
-
-        </a>
-        <a href="" target="_blank" class="link-order">
-            <div class="title left">Thanh toán đơn hàng</div>
-            <div class="desc left"></div>
-        </a>
-    </div>
-</div>
-﻿
-
-<!-- LIVE -->
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-66880228-3"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-    gtag('config', 'UA-66880228-3');
-</script>
-<!-- Google Tag Manager -->
-<script>
-    (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push(
-            {'gtm.start': new Date().getTime(), event: 'gtm.js'}
-        );
-        var f = d.getElementsByTagName(s)[0],
-            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src =
-            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-WQ8HRN');</script>
-<!-- End Google Tag Manager -->
-<!-- Google Tag Manager (noscript) -->
-<noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQ8HRN" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe>
-</noscript>
-<!-- End Google Tag Manager (noscript) -->
-
 </body>
 
 </html>
