@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import vn.sapo.entities.*;
+import vn.sapo.entities.customer.CustomerGroup;
 import vn.sapo.entities.payment.*;
 
 import javax.persistence.*;
@@ -55,6 +56,12 @@ public class Supplier extends BaseEntity {
     @Column(name = "payment_method_id", updatable = false, insertable = false)
     private String paymentMethodId;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "sup_group_id", nullable = false)
+    private SupplierGroup group;
+
+    @Column(name = "sup_group_id", insertable = false, updatable = false)
+    private Integer groupId;
 
     public Supplier(Integer id) {
         this.id = id;
