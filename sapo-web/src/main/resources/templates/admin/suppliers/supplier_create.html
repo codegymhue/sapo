@@ -19,7 +19,7 @@
                 <div class="ui-title-top-bar_action flex">
                     <div class="w-50" style="padding-top: 5px;"></div>
                     <div class="w-50" style="position: relative;">
-                        <a class="btn sapo-btn-default right btn-create-supplier">Lưu</a>
+                        <a class="btn sapo-btn-default right btn-create-supplier" id="btnCreateSupplier">Lưu</a>
                         <a href="/admin/suppliers" class="btn sapo-btn-blank right mr-3">Huỷ</a>
                     </div>
                 </div>
@@ -49,30 +49,30 @@
                         <div class="page-info-title">Thông tin cá nhân</div>
                         <div class="page-info-body">
                             <div class="col-6 field pl-0">
-                                <label for="name" class="label-required mb-2">Tên nhà cung cấp</label>
-                                <input id="name" class="sapo-textbox w100" placeholder="Nhập tên nhà cung cấp" title="Nhập tên nhà cung cấp" required/>
+                                <label for="#nameCreate" class="label-required mb-2">Tên nhà cung cấp</label>
+                                <input id="#nameCreate" class="sapo-textbox w100" placeholder="Nhập tên nhà cung cấp" title="Nhập tên nhà cung cấp" required/>
                             </div>
                             <div class="col-6 field pr-0">
-                                <label for="code" class="label-required mb-2">Mã nhà cung cấp</label>
-                                <input id="code" class="sapo-textbox w100" placeholder="Nhập mã nhà cung cấp" title="Nhập mã nhà cung cấp" required/>
+                                <label for="#codeCreate" class="label-required mb-2">Mã nhà cung cấp</label>
+                                <input id="#codeCreate" class="sapo-textbox w100" placeholder="Nhập mã nhà cung cấp" title="Nhập mã nhà cung cấp" required/>
                             </div>
                             <div class="col-6 field pl-0">
-                                <label for="phone" class="label-required mb-2">Số điện thoại</label>
-                                <input id="phone" class="sapo-textbox w100" placeholder="Nhập số điện thoại" title="Nhập số điện thoại" required/>
+                                <label for="phoneCreate" class="label-required mb-2">Số điện thoại</label>
+                                <input id="phoneCreate" class="sapo-textbox w100" placeholder="Nhập số điện thoại" title="Nhập số điện thoại" required/>
                             </div>
                             <div class="col-6 field pr-0">
-                                <label for="email" class="label-required mb-2">Email</label>
-                                <input id="email" class="sapo-textbox w100" placeholder="Nhập email" title="Nhập email" required/>
+                                <label for="emailCreate" class="label-required mb-2">Email</label>
+                                <input id="emailCreate" class="sapo-textbox w100" placeholder="Nhập email" title="Nhập email" required/>
                             </div>
                         </div>
                     </div>
                     <div class="page-info">
                         <div class="page-info-title">Thông tin địa chỉ</div>
                         <div class="page-info-body">
-                            <div class="col-6 field pl-0">
-                                <label for="address" class="label-required mb-2">Địa chỉ</label>
-                                <input id="address" class="sapo-textbox w100" placeholder="Nhập địa chỉ" title="Nhập địa chỉ" required/>
-                            </div>
+<!--                            <div class="col-6 field pl-0">-->
+<!--                                <label for="address" class="label-required mb-2">Địa chỉ</label>-->
+<!--                                <input id="address" class="sapo-textbox w100" placeholder="Nhập địa chỉ" title="Nhập địa chỉ" required/>-->
+<!--                            </div>-->
                             <div class="col-6 field pr-0">
                                 <label for="province" class="label-required mb-2">Tỉnh thành phố</label>
                                 <select id="province" class="w100 input-dropdown sapo-btn-blank select-padding" title="Tỉnh thành phố" required>
@@ -87,21 +87,62 @@
                             </div>
                             <div class="col-6 field pr-0">
                                 <label for="ward" class="label-required mb-2">Phường xã</label>
-                                <select id="ward" class="w100 input-dropdown sapo-btn-blank select-padding" title="Chọn phường xã" required>
+                                <select id="ward" class="w100 input-dropdown sapo-btn-blank select-padding"
+                                        title="Chọn phường xã" required>
                                     <option value="" disabled selected>Chọn phường xã</option>
                                 </select>
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="page-info">
+                        <div class="page-info-title">
+                            Thông tin bổ sung
+                        </div>
+                        <div class="page-info-body">
+                            <div class="col-6 field pl-0">
+                                <div class="label mb-2">Số fax</div>
+                                <input bind="fax" class="sapo-textbox w100" data-toggle="tooltip"
+                                       bind-event-input="checkValidateDataSupplier" data-original-title="" title="">
+                            </div>
+                            <div class="col-6 field pr-0">
+                                <div class="label mb-2">Mã số thuế</div>
+                                <input bind="taxNumber" class="sapo-textbox w100" data-toggle="tooltip"
+                                       bind-event-input="checkValidateDataSupplier" data-original-title="" title="">
+                            </div>
+                            <div class="col-6 field pl-0">
+                                <div class="label mb-2">Website</div>
+                                <input bind="website" class="sapo-textbox w100" data-toggle="tooltip"
+                                       bind-event-input="checkValidateDataSupplier" data-original-title="" title="">
+                            </div>
+                            <div class="col-6 field pr-0">
+                                <div class="label mb-2">Công nợ</div>
+                                <div class="input-wrap"><input autocomplete="off" placeholder="" bind="debt_txt"
+                                                               define="{ numberInput: new Components.NumberInput(this, 'createSupplier','0','99999999999','','-99999999999','False')}"
+                                                               context="numberInput" class="sapo-textbox w100"
+
+                                                               bind-event-input="checkValidateDataSupplier"
+                                                               data-toggle="tooltip" data-original-title="" title=""
+                                                               ><input type="hidden" bind="debt"
+                                                                               class="sapo-textbox w100" id="" name=""
+                                                                               value="0"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
                 </div>
                 <div class="customer-create--right">
                     <div class="page-info">
                         <div class="page-info-title">Thông tin khác</div>
                         <div class="page-info-body">
                             <div class="col-12 field p-0">
-                                <label for="employee" class="label-required mb-2">Nhân viên phụ trách</label>
-                                <select id="employee" class="w100 input-dropdown sapo-btn-blank select-padding" title="Chọn nhân viên" required>
-                                    <option value="disabled selected" >Chọn nhân viên</option>
+                                <label for="employeeNameCreate" class="label-required mb-2">Nhân viên phụ trách</label>
+                                <select id="employeeNameCreate"
+                                        class="w100 input-dropdown sapo-btn-blank select-padding" required>
+
                                 </select>
                             </div>
                             <div class="page-info-item col-12 no-padding mb-4">
@@ -197,11 +238,10 @@
             supplier.attTaxCode = $('#taxCodeCreate').val();
             supplier.attWebsite = $('#websiteCreate').val();
 
-            supplier.customerCode = $('#codeCreate').val();
+            supplier.supplierCode = $('#codeCreate').val();
             supplier.groupId = $('#customerGroupCreate :selected').val();
-            supplier.phoneNumber = $('#phoneCreate').val();
+            supplier.phoneNumber =$('#phoneCreate').val();
             supplier.email = $('#emailCreate').val();
-            supplier.birthday = $('#birthdayCreate').val();
             supplier.employeeId = $('#employeeNameCreate :selected').val();
             supplier.description = $('#descriptionCreate').val();
             supplier.paymentMethodId = $('#paymentMethodCreate :selected').val();
@@ -393,4 +433,24 @@
 
     createSupplier();
     getAllEmployeeSelect();
+
+
+    $("#formCreate").validate({
+        rules: {
+            nameCreate: {
+                required: true
+
+            }
+        },
+        messages: {
+            nameCreate: {
+                required: "Vui lòng nhập tên nhà cung cấp",
+
+            }
+        },
+        submitHandler: function () {
+            createSupplier();
+        }
+    });
+
 </script>
