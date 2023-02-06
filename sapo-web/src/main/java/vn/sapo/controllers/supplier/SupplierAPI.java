@@ -38,4 +38,9 @@ public class SupplierAPI {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("/{id}/edit")
+    public ResponseEntity<SupplierResult> findByIdEdit(@PathVariable Integer id) {
+        SupplierResult dto = supplierService.findById(id);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
 }
