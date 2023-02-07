@@ -27,10 +27,10 @@ public class CreateSupplierParam {
     private Instant createdAt;
     private Instant updatedAt;
     private CreateAddressParam createAddressParam;
-    private SupplierStatus status;
-    private String attFax;
-    private String attTaxCode;
-    private String attWebsite;
+    private String status;
+    private  String taxCode;
+    private  String fax;
+    private String website;
     private BigDecimal debtTotal;
 
 
