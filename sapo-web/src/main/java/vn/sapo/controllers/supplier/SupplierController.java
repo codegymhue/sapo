@@ -1,6 +1,7 @@
 package vn.sapo.controllers.supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +36,7 @@ public class SupplierController {
     @GetMapping("/{id}/histories")
     public ModelAndView showSupplierHistoryPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView();
-        try{
+        try {
             SupplierResult supplier = supplierService.findById(id);
             modelAndView.addObject("supplier", supplier);
         } catch (Exception e) {
@@ -63,5 +64,6 @@ public class SupplierController {
         modelAndView.setViewName("/admin/suppliers/supplier_update");
         return modelAndView;
     }
+
 
 }
