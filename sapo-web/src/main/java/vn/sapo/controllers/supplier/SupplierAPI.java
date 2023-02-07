@@ -22,6 +22,7 @@ public class SupplierAPI {
         return new ResponseEntity<>(supplierService.findAll(), HttpStatus.OK);
     }
 
+
     @GetMapping("/{id}/histories")
     public ResponseEntity<SupplierResult> findById(@PathVariable Integer id) {
         SupplierResult dto = supplierService.findById(id);
@@ -38,6 +39,24 @@ public class SupplierAPI {
         supplierService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+//
+//    @GetMapping("/{id}/histories")
+//    public ResponseEntity<SupplierResult> findById(@PathVariable Integer id) {
+//        return new ResponseEntity<>(supplierService.findById(id), HttpStatus.OK);
+//    }
+//
+//    @PostMapping("/create")
+//    public ResponseEntity<SupplierResult> save(@RequestBody CreateSupplierParam supplierCreate) {
+//        return new ResponseEntity<>(supplierService.create(supplierCreate), HttpStatus.OK);
+//    }
+//
+//    @DeleteMapping("/{id}/delete")
+//    public ResponseEntity<String> deleteById(@PathVariable Integer id) {
+//        supplierService.deleteById(id);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+
 
     @GetMapping("/products/page")
     public ResponseEntity<?> getAllProductPageNoCategory(@RequestParam HashMap<String, String> hashMap) {
