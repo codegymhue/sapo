@@ -1,5 +1,7 @@
 package vn.sapo.controllers.supplier;
 
+import net.bytebuddy.asm.Advice;
+import org.hibernate.loader.custom.Return;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import vn.sapo.supplier.SupplierService;
 import vn.sapo.supplier.dto.CreateSupplierParam;
 import vn.sapo.supplier.dto.SupplierResult;
+import vn.sapo.supplier.dto.UpdateSupplierParam;
 
 import java.util.List;
 
@@ -42,5 +45,10 @@ public class SupplierAPI {
     public ResponseEntity<SupplierResult> findByIdEdit(@PathVariable Integer id) {
         SupplierResult dto = supplierService.findById(id);
         return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}/edit")
+    public ResponseEntity<?> update(@RequestBody UpdateSupplierParam updateSupplierParam) {
+    return new ResponseEntity<>(supplierService.update(updateSupplierParam), HttpStatus.OK);
     }
 }

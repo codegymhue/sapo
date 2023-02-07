@@ -24,8 +24,8 @@ public class SupplierResult {
     private String name;
     private String email;
     private String phone;
-    private SupplierStatus status;
     private String description;
+    private SupplierStatus status;
     private Integer employeeId;
     private SupEmployeeResult employee;
     private String paymentMethodId;

@@ -8,11 +8,11 @@
         var S_LANG = 'vi-VN';
         var S_LANG_RES = 'https://sapo.dktcdn.net/sapo-frontend-x/d9ad77d.i18n_vi-VN.json';
     </script>
+    <title>Cập nhật nhà cung cấp</title>
     <script src="https://sapo.dktcdn.net/sapo-frontend-x/d852af0.client.bundle.js"></script>
     <link rel="stylesheet" href="https://sapo.dktcdn.net/sapo-frontend-x/6386cc5.main.css"/>
     <script src="https://sapo.dktcdn.net/fe-cdn-production/lib/wootric/wootric-sdk.js"></script>
     <script src="https://sapo.dktcdn.net/fe-cdn-production/lib/upload-files/jquery.multifile.js"></script>
-
     <link href="https://sapo.dktcdn.net/fe-cdn-production/lib/driver/driver.min.css?v=20220218" rel="stylesheet"/>
 
 </head>
@@ -36,10 +36,10 @@
                     <div class="w-50" style="padding-top:5px">
                     </div>
                     <div class="w-50" style="position:relative">
-                        <a href="javascript:" class="btn sapo-btn-default right btn-update-supplier"
-                           bind-event-click="editSupplier.updateSupplier()">Lưu</a>
+                        <a href="javascript:" class="btn sapo-btn-default right btn-update-supplier btnUpdateSupplier">Lưu</a>
                         <a th:href="'/admin/suppliers/' + ${supplier.id} + '/histories'" class="btn sapo-btn-blank right mr-3">Huỷ</a>
                     </div>
+                    <input type="hidden" id="supplierId" th:value="${supplier.id}">
 
                     <style>
                         .help-dashboard .help-dropdown .help-popup {
@@ -127,7 +127,6 @@
                         <div class="ui-title-bar__heading-group">
                             <h1 class="ui-title-bar__title">Cập nhật nhà cung cấp
                                 <span th:value="${supplier.id}" th:text="${supplier.name}"></span>
-
                             </h1>
                         </div>
                     </div>
@@ -139,13 +138,13 @@
                     <div class="page-info-body">
                         <div class="col-12 field p-0">
                             <div class="label mb-2 label-required">Tên nhà cung cấp</div>
-                            <input bind="name" class="sapo-textbox w100" data-toggle="tooltip"
+                            <input id="nameUp" bind="name" class="sapo-textbox w100" data-toggle="tooltip"
                                    placeholder="Nhập tên nhà cung cấp"
                                    bind-event-input="checkValidateDataSupplier(this)" th:field="${supplier.name}">
                         </div>
                         <div class="col-6 field pl-0">
                             <div class="label mb-2">Mã nhà cung cấp</div>
-                            <input bind="code" class="sapo-textbox w100" data-toggle="tooltip"
+                            <input id="supplierCodeUp" bind="code" class="sapo-textbox w100" data-toggle="tooltip"
                                    bind-event-input="checkValidateDataSupplier(this)" th:field="${supplier.supplierCode}">
                         </div>
                         <div class="col-6 field pr-0">
@@ -164,13 +163,13 @@
                         </div>
                         <div class="col-6 field pl-0">
                             <div class="label mb-2">Số điện thoại</div>
-                            <input bind="phoneNumber" class="sapo-textbox w100" data-toggle="tooltip"
+                            <input id="phoneUp" bind="phoneNumber" class="sapo-textbox w100" data-toggle="tooltip"
                                    bind-event-input="checkValidateDataSupplier(this)" th:field="${supplier.phone}">
                             <div id="warning-dubble-phone" style="display:none;font-size:13px;color:#f6574d"></div>
                         </div>
                         <div class="col-6 field pr-0">
                             <div class="label mb-2">Email</div>
-                            <input bind="email" class="sapo-textbox w100" data-toggle="tooltip"
+                            <input id="emailUp" bind="email" class="sapo-textbox w100" data-toggle="tooltip"
                                    bind-event-input="checkValidateDataSupplier(this)" th:field="${supplier.email}">
                         </div>
                     </div>
@@ -183,22 +182,22 @@
                     <div class="page-info-body">
                         <div class="col-6 field pl-0">
                             <div class="label mb-2">Số fax</div>
-                            <input bind="fax" class="sapo-textbox w100" data-toggle="tooltip"
+                            <input id="attFaxUp" bind="fax" class="sapo-textbox w100" data-toggle="tooltip"
                                    bind-event-input="checkValidateDataSupplier(this)" th:field="${supplier.attFax}">
                         </div>
                         <div class="col-6 field pr-0">
                             <div class="label mb-2">Mã số thuế</div>
-                            <input bind="taxNumber" class="sapo-textbox w100" data-toggle="tooltip"
+                            <input id="attTaxCodeUp" bind="taxNumber" class="sapo-textbox w100" data-toggle="tooltip"
                                    bind-event-input="checkValidateDataSupplier(this)" th:field="${supplier.attTaxCode}">
                         </div>
                         <div class="col-6 field pl-0">
                             <div class="label mb-2">Website</div>
-                            <input bind="website" class="sapo-textbox w100" data-toggle="tooltip"
+                            <input id="attWebsiteUp" bind="website" class="sapo-textbox w100" data-toggle="tooltip"
                                    bind-event-input="checkValidateDataSupplier(this)" th:field="${supplier.attWebsite}">
                         </div>
                         <div class="col-6 field pr-0">
                             <div class="label mb-2">Trạng thái nhà cung cấp</div>
-                            <select bind="status" class="w100 input-dropdown sapo-btn-blank select-padding" th:field="${supplier.status}">
+                            <select id="statusUp" bind="status" class="w100 input-dropdown sapo-btn-blank select-padding" th:field="${supplier.status}">
                                 <option th:seleted="${supplier.status.toString() == 'AVAILABLE'}" value="AVAILABLE">Đang giao dịch</option>
                                 <option th:seleted="${supplier.status.toString() == 'UNAVAILABLE'}" value="UNAVAILABLE">Ngừng giao dịch</option>
                             </select>
@@ -215,15 +214,21 @@
                     <div class="page-info-body">
                         <div class="col-12 field p-0">
                             <div class="label mb-2">Nhân viên phụ trách</div>
-                            <div class="select__wrapper " id="search-account-wrap">
-                                <a class="sapo-select select--a select-suggest" id="search-account"
-                                   href="javascript:" >
-                                    <span th:text="${supplier.employee.fullName}"></span>
+                            <div class="select__wrapper w-100" id="search-account-wrap">
+                                <a class="sapo-select select--a select-suggest" id="search-account">
+                                    <select style="width: 282px; height: 25px;border: gray;"  id="fulNameEmployeeUp" th:text="${supplier.employee.fullName}">
+                                        <th:block th:each="employee : ${employee}">
+                                            <th:block th:if="${employee.id}== ${supplier.employeeId}">
+                                                <option th:text="${employee.fullName}"></option>
+                                            </th:block>
+                                        </th:block>
+                                    </select>
+
                                 </a>
-                                <svg class="next-icon next-icon--size-16">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         xlink:href="#select-chevron"></use>
-                                </svg>
+<!--                                <svg class="next-icon next-icon&#45;&#45;size-16">-->
+<!--                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"-->
+<!--                                         xlink:href="#select-chevron"></use>-->
+<!--                                </svg>-->
                                 <div class="filter-body--suggest">
                                 </div>
                             </div>
@@ -233,7 +238,7 @@
                                 MÔ TẢ
                                 <i class="fa fa-info" data-toggle="tooltip" data-placement="top"></i>
                             </div>
-                            <textarea bind="description" class="sapo-textbox" style="height:54px" th:text="${supplier.description}"></textarea>
+                            <textarea id="descriptionUp" bind="description" class="sapo-textbox" style="height:54px" th:text="${supplier.description}"></textarea>
                         </div>
                         <div class="page-info-item col-12 p-0">
                             <div class="page-info-item-title">
@@ -271,26 +276,32 @@
                             </div>
                             <div class="col-12 field p-0">
                                 <div class="label mb-2">Hình thức thanh toán</div>
-                                <select class="w100 input-dropdown sapo-btn-blank select-padding"
-                                        bind="defaultPaymentMethodId" >
-<!--                                  th:field="${supplier.paymentMethod}"-->
-<!--                                    <option th:value="${supplier.paymentMethod.id}" th:text="${supplier.paymentMethod.fullName}">Chọn hình thức</option>-->
-                                    <option value="3023202">
-                                        Qu&#x1EB9;t th&#x1EBB;
-                                    </option>
-                                    <option value="3023201">
-                                        Thanh to&#xE1;n b&#x1EB1;ng &#x111;i&#x1EC3;m
-                                    </option>
-                                    <option value="3023200">
-                                        COD
-                                    </option>
-                                    <option value="3023199">
-                                        Chuy&#x1EC3;n kho&#x1EA3;n
-                                    </option>
-                                    <option value="3023198">
-                                        Ti&#x1EC1;n m&#x1EB7;t
-                                    </option>
+                                <select style="width: 295px; height: 35px;"  id="paymentMethod">
+                                    <th:block th:each="paymentMethod : ${paymentMethod}">
+                                        <th:block th:if="${paymentMethod.getId()}== ${supplier.paymentMethodId}">
+                                            <option th:text="${paymentMethod.getTitle()}"></option>
+                                        </th:block>
+                                    </th:block>
                                 </select>
+<!--                                <select class="w100 input-dropdown sapo-btn-blank select-padding" bind="defaultPaymentMethodId" >-->
+<!--&lt;!&ndash;                          th:field="${supplier.paymentMethod}"&ndash;&gt;-->
+<!--&l                                <option th:value="${supplier.paymentMethod.id}" th:text="${supplier.paymentMethod.fullName}">Chọn hình thức</option>&ndash;&gt;-->
+<!--                                    <option value="3023202">-->
+<!--                                        Qu&#x1EB9;t th&#x1EBB;-->
+<!--                                    </option>-->
+<!--                                    <option value="3023201">-->
+<!--                                        Thanh to&#xE1;n b&#x1EB1;ng &#x111;i&#x1EC3;m-->
+<!--                                    </option>-->
+<!--                                    <option value="3023200">-->
+<!--                                        COD-->
+<!--                                    </option>-->
+<!--                                    <option value="3023199">-->
+<!--                                        Chuy&#x1EC3;n kho&#x1EA3;n-->
+<!--                                    </option>-->
+<!--                                    <option value="3023198">-->
+<!--                                        Ti&#x1EC1;n m&#x1EB7;t-->
+<!--                                    </option>-->
+<!--                                </select>-->
                             </div>
                         </div>
 
@@ -298,9 +309,9 @@
                 </div>
             </div>
             <div class="ui-title-bottom-bar">
-                <a href="javascript:" class="btn sapo-btn-default right btn-update-supplier"
-                   bind-event-click="updateSupplier()" id="btnUpdateSupplier">Lưu</a>
-                <a href="/admin/suppliers/206718863" class="btn sapo-btn-blank right mr-3">Huỷ</a>
+                <a href="javascript:" class="btn sapo-btn-default right btn-update-supplier btnUpdateSupplier">Lưu</a>
+                <a th:href="'/admin/suppliers/' + ${supplier.id} + '/histories'" class="btn sapo-btn-blank right mr-3">Huỷ</a>
+
             </div>
             <script class="modal_source" define="{createSupplierGroupModal: new Components.Modal(this)}"
                     type="text/html">
@@ -386,14 +397,12 @@
                                 <div class="col-12 field m-0">
                                     <div class="label mb-2">Áp dụng cho:</div>
                                     <div class="group-radiobox flex">
-                                        <label class="flex cursor-pointer" style="width: 150px;">
-                                    <span class="sapo-radiobox mr-2">
-                                        <input bind="priceList.isCost" autocomplete="off" class="sapo-radiobox__input"
-                                               type="radio" name="priceList.isCost" value="False" checked>
-                                        <span class="sapo-radiobox__icon"></span>
-                                    </span>
-                                            Bán hàng
-                                        </label>
+<!--                                        <label class="flex cursor-pointer" style="width: 150px;">-->
+<!--                                    <span class="sapo-radiobox mr-2">-->
+<!--                                        <input bind="priceList.isCost" autocomplete="off" class="sapo-radiobox__input"-->
+<!--                                               type="radio" name="priceList.isCost" value="False" checked>-->
+<!--                                        <span class="sapo-radiobox__icon"></span>-->
+<!--                                        </label>-->
                                         <label class="flex cursor-pointer" style="width: auto;">
                                     <span class="sapo-radiobox mr-2">
                                         <input bind="priceList.isCost" autocomplete="off" class="sapo-radiobox__input"
@@ -477,54 +486,116 @@
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQ8HRN" height="0" width="0"
             style="display:none;visibility:hidden"></iframe>
 </noscript>
-<!-- End Google Tag Manager (noscript) -->
-
 <th:block th:replace="/layout/footer.html"/>
 </body>
 <script>
-    class Supplier {
-        constructor(id, supplierCode, name,email, phone, status, description, employee, paymentMethod, group, createAt, updateAt, deleted) {
-            this.id = id;
-            this.supplierCode = supplierCode;
-            this.name = name;
+    // class Supplier {
+    //     constructor(id, supplierCode, name, email, phone, statusUp, employeeId, description, paymentMethodId, group, createAt, updateAt, deleted) {
+    //         this.id = id;
+    //         this.supplierCode = supplierCode;
+    //         this.name = name;
+    //         this.email = email;
+    //         this.phone = phone;
+    //         this.status = statusUp;
+    //         this.description = description;
+    //         this.paymentMethodId = paymentMethodId;
+    //         this.employeeId = employeeId;
+    //         this.createAt = createAt;
+    //         this.updatedAt = updateAt;
+    //         this.deleted = deleted;
+    //     }
+    // }
+    class UpdateSupplierParam{
+        constructor( id,  supplierCode,  name,  email,  phone,  description,  paymentMethodId,  supGroupName,  employeeId,  status) {
+            this.id= id;
+            this.supplierCode =supplierCode;
+            this.name= name;
             this.email = email;
             this.phone = phone;
-            this.status = status;
-            this.description = description;
-            this.paymentMethodId = paymentMethod;
-            this.createAt = createAt;
-            this.updatedAt = updateAt;
-            this.deleted = deleted;
+            this.desription = description;
+            this.paymentMethodId = paymentMethodId;
+            this.supGroupName = supGroupName;
+            this.employeeId = employeeId;
+            this.status = status
         }
     }
-    $("#btnUpdateSupplier").on('click', () => {
-        let newSupplier = {
-            id: supplier.id,
-            name: $("#")
-        }
-        $.ajax({
+
+    function getAllEmployeeSelect() {
+        return $.ajax({
             "headers": {
                 "accept": "application/json",
                 "content-type": "application/json"
             },
-            "type": "PUT",
-            "url": `http://localhost:8080/api/admin/suppliers/${supplier.id}/edit`,
-            // "data": JSON.stringify()
+            "type": "GET",
+            "url": "http://localhost:8080/api/employees"
         })
             .done((data) => {
-                // console.log(data)
-                App.IziToast.showSuccessAlert("Sửa thông tin nhà cung cấp thành công !");
-                setTimeout(() => {
-                }, 1500)
-                window.location.href = `/admin/suppliers/${supplier.id}/edit`;
-
+                $.each(data, (i, item) => {
+                    let str = `<option value="${item.id}">${item.fullName}</option>`;
+                    $("#fulNameEmployeeUp").append(str);
+                });
             })
-            .fail((jqXHR) => {
-                console.log(jqXHR);
-                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+    }
 
+    function getAllPaymentMethodSelect() {
+        return $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            "type": "GET",
+            "url": "/api/admin/payment_methods"
+        })
+            .done((data) => {
+                console.log("method select",data)
+                $.each(data, (i, item) => {
+                    let str = `<option value="${item.id}"> ${item.title}</option>`;
+                    $("#paymentMethod").append(str);
+                })
             })
-    })
+    }
+
+
+    // $(".btnUpdateSupplier").on('click', () => {
+    //     let idSupp = $("#supplierId").val();
+    //     console.log(idSupp);
+    //     // alert("hello");
+    //     let newUpdateSupplierParam = {
+    //         id: idSupp,
+    //         supplierCode: $("#supplierCodeUp").val(),
+    //         name: $("#nameUp").val(),
+    //         email: $("#emailUp").val(),
+    //         phone: $("#phoneUp").val(),
+    //         status: $("#statusUp").val(),
+    //         description: $("#descriptionUp").val(),
+    //     }
+    //     console.log(newUpdateSupplierParam);
+    //
+    //     $.ajax({
+    //         "headers": {
+    //             "accept": "application/json",
+    //             "content-type": "application/json"
+    //         },
+    //         "type": "PATCH",
+    //         "url": "http://localhost:8080/api/admin/suppliers/" + idSupp + "/edit",
+    //         "data": JSON.stringify(newUpdateSupplierParam)
+    //     })
+    //         .done(() => {
+    //             // console.log(data)
+    //             App.IziToast.showSuccessAlert("Sửa thông tin nhà cung cấp thành công !");
+    //             setTimeout(() => {
+    //             }, 1500)
+    //             // window.location.href = `/admin/suppliers/${supplier.id}/edit`;
+    //
+    //         })
+    //         .fail((jqXHR) => {
+    //             console.log(jqXHR);
+    //             App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+    //
+    //         })
+    // })
+    getAllEmployeeSelect();
+    getAllPaymentMethodSelect();
 
 </script>
 </html>
