@@ -24,13 +24,13 @@ public class SupplierResult {
     private String name;
     private String email;
     private String phone;
-    private SupplierStatus status;
+    private String status;
     private String description;
     private Integer employeeId;
-    private SupEmployeeResult employee;
-    private String paymentMethodId;
-    private SupPaymentMethodResult paymentMethod;
-    private SupGroupResult supGroupResult;
+    private String employee;
+    private Integer paymentMethodId;
+    private String paymentMethod;
+//    private SupGroupResult supGroupResult;
     private String title;
 
     private Instant createAt;
@@ -38,7 +38,7 @@ public class SupplierResult {
     private BigDecimal debtTotal;
     private List<AddressResult> addresses;
 
-    private String attTaxCode;
-    private String attFax;
-    private String attWebsite;
+    private  String taxCode;
+    private  String fax;
+    private String website;
 }
