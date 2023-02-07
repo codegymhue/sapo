@@ -7,8 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import vn.sapo.customer.dto.CusEmployeeResult;
+import vn.sapo.employee.EmployeeService;
+import vn.sapo.payment.method.PaymentMethodService;
 import vn.sapo.supplier.SupplierService;
+import vn.sapo.supplier.dto.SupEmployeeResult;
 import vn.sapo.supplier.dto.SupplierResult;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin/suppliers")
@@ -16,6 +22,12 @@ public class SupplierController {
 
     @Autowired
     private SupplierService supplierService;
+
+    @Autowired
+    EmployeeService employeeService;
+
+    @Autowired
+    PaymentMethodService paymentMethodService;
 
     @GetMapping
     public ModelAndView showSupplierListPage() {
@@ -58,6 +70,8 @@ public class SupplierController {
         try {
             SupplierResult supplier = supplierService.findById(id);
             modelAndView.addObject("supplier", supplier);
+            modelAndView.addObject("employee",  employeeService.findAll());
+            modelAndView.addObject("paymentMethod",  paymentMethodService.findAll());
         } catch (Exception e) {
             modelAndView.addObject("error", e.getMessage());
         }

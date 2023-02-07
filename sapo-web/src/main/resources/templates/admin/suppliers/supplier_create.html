@@ -19,7 +19,7 @@
                 <div class="ui-title-top-bar_action flex">
                     <div class="w-50" style="padding-top: 5px;"></div>
                     <div class="w-50" style="position: relative;">
-                        <a class="btn sapo-btn-default right btn-create-supplier" id="btnCreateSupplier">Lưu</a>
+                        <a class="btn sapo-btn-default right btn-create-supplier" id="supplier">Lưu</a>
                         <a href="/admin/suppliers" class="btn sapo-btn-blank right mr-3">Huỷ</a>
                     </div>
                 </div>
@@ -43,134 +43,183 @@
                     </div>
                 </div>
             </header>
-            <div class="customer-container container">
-                <div class="customer-create--left">
-                    <div class="page-info">
-                        <div class="page-info-title">Thông tin cá nhân</div>
-                        <div class="page-info-body">
-                            <div class="col-6 field pl-0">
-                                <label for="#nameCreate" class="label-required mb-2">Tên nhà cung cấp</label>
-                                <input id="#nameCreate" class="sapo-textbox w100" placeholder="Nhập tên nhà cung cấp" title="Nhập tên nhà cung cấp" required/>
-                            </div>
-                            <div class="col-6 field pr-0">
-                                <label for="#codeCreate" class="label-required mb-2">Mã nhà cung cấp</label>
-                                <input id="#codeCreate" class="sapo-textbox w100" placeholder="Nhập mã nhà cung cấp" title="Nhập mã nhà cung cấp" required/>
-                            </div>
-                            <div class="col-6 field pl-0">
-                                <label for="phoneCreate" class="label-required mb-2">Số điện thoại</label>
-                                <input id="phoneCreate" class="sapo-textbox w100" placeholder="Nhập số điện thoại" title="Nhập số điện thoại" required/>
-                            </div>
-                            <div class="col-6 field pr-0">
-                                <label for="emailCreate" class="label-required mb-2">Email</label>
-                                <input id="emailCreate" class="sapo-textbox w100" placeholder="Nhập email" title="Nhập email" required/>
+            <form id="formCreate">
+                <div class="customer-container container">
+                    <div class="customer-create--left">
+                        <div class="page-info">
+                            <div class="page-info-title">Thông tin cá nhân</div>
+                            <div class="page-info-body">
+                                <div class="col-6 field pl-0">
+                                    <label for="#nameCreate" class="label-required mb-2">Tên nhà cung cấp</label>
+                                    <input id="#nameCreate" class="sapo-textbox w100"
+                                           placeholder="Nhập tên nhà cung cấp" title="Nhập tên nhà cung cấp" required/>
+                                </div>
+                                <div class="col-6 field pr-0">
+                                    <label for="#codeCreate" class="label-required mb-2">Mã nhà cung cấp</label>
+                                    <input id="#codeCreate" class="sapo-textbox w100" placeholder="Nhập mã nhà cung cấp"
+                                           title="Nhập mã nhà cung cấp" required/>
+                                </div>
+                                <div class="col-6 field pl-0">
+                                    <label for="phoneCreate" class="label-required mb-2">Số điện thoại</label>
+                                    <input id="phoneCreate" class="sapo-textbox w100" placeholder="Nhập số điện thoại"
+                                           title="Nhập số điện thoại" required/>
+                                </div>
+                                <div class="col-6 field pr-0">
+                                    <label for="emailCreate" class="label-required mb-2">Email</label>
+                                    <input id="emailCreate" class="sapo-textbox w100" placeholder="Nhập email"
+                                           title="Nhập email" required/>
+                                </div>
+
+<!--                                <div class="MuiBox-root jss20574 jss21252">-->
+<!--                                    <div class="MuiBox-root jss20575 jss21262">-->
+<!--                                        <label for="customerGroupCreate" class="MuiTypography-root MuiTypography-body1" style="color: rgb(70, 81, 95);">Nhóm-->
+<!--                                            khách hàng</label>-->
+<!--                                    </div>-->
+<!--                                    <select classname="jss87874" class="form-select" name="customerGroupCreate" id="customerGroupCreate"><option value="1">VIP</option><option value="2">Bán buôn</option><option value="3">Bán Lẻ</option><option value="78">abc</option></select>-->
+<!--                                </div>-->
+
+
+                                <div class="col-6 field pr-0">
+                                    <div class="label mb-2">Nhóm nhà cung cấp</div>
+                                    <div class="select__wrapper " id="search-supplier-group-wrap">
+                                        <a class="sapo-select select--a select-suggest" id="search-supplier-group" href="javascript:" data-original-title="" title="">Chọn nhóm nhà cung cấp</a>
+                                        <svg class="next-icon next-icon--size-16"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use> </svg>
+                                        <div class="filter-body--suggest">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
                             </div>
                         </div>
-                    </div>
-                    <div class="page-info">
-                        <div class="page-info-title">Thông tin địa chỉ</div>
-                        <div class="page-info-body">
-<!--                            <div class="col-6 field pl-0">-->
-<!--                                <label for="address" class="label-required mb-2">Địa chỉ</label>-->
-<!--                                <input id="address" class="sapo-textbox w100" placeholder="Nhập địa chỉ" title="Nhập địa chỉ" required/>-->
-<!--                            </div>-->
-                            <div class="col-6 field pr-0">
-                                <label for="province" class="label-required mb-2">Tỉnh thành phố</label>
-                                <select id="province" class="w100 input-dropdown sapo-btn-blank select-padding" title="Tỉnh thành phố" required>
-                                    <option value="" disabled selected>Chọn tỉnh thành phố</option>
-                                </select>
-                            </div>
-                            <div class="col-6 field pl-0">
-                                <label for="district" class="label-required mb-2">Quận huyện</label>
-                                <select id="district" class="w100 input-dropdown sapo-btn-blank select-padding" title="Chọn quận huyện" required>
-                                    <option value="" disabled selected>Chọn quận huyện</option>
-                                </select>
-                            </div>
-                            <div class="col-6 field pr-0">
-                                <label for="ward" class="label-required mb-2">Phường xã</label>
-                                <select id="ward" class="w100 input-dropdown sapo-btn-blank select-padding"
-                                        title="Chọn phường xã" required>
-                                    <option value="" disabled selected>Chọn phường xã</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="page-info">
-                        <div class="page-info-title">
-                            Thông tin bổ sung
-                        </div>
-                        <div class="page-info-body">
-                            <div class="col-6 field pl-0">
-                                <div class="label mb-2">Số fax</div>
-                                <input bind="fax" class="sapo-textbox w100" data-toggle="tooltip"
-                                       bind-event-input="checkValidateDataSupplier" data-original-title="" title="">
-                            </div>
-                            <div class="col-6 field pr-0">
-                                <div class="label mb-2">Mã số thuế</div>
-                                <input bind="taxNumber" class="sapo-textbox w100" data-toggle="tooltip"
-                                       bind-event-input="checkValidateDataSupplier" data-original-title="" title="">
-                            </div>
-                            <div class="col-6 field pl-0">
-                                <div class="label mb-2">Website</div>
-                                <input bind="website" class="sapo-textbox w100" data-toggle="tooltip"
-                                       bind-event-input="checkValidateDataSupplier" data-original-title="" title="">
-                            </div>
-                            <div class="col-6 field pr-0">
-                                <div class="label mb-2">Công nợ</div>
-                                <div class="input-wrap"><input autocomplete="off" placeholder="" bind="debt_txt"
-                                                               define="{ numberInput: new Components.NumberInput(this, 'createSupplier','0','99999999999','','-99999999999','False')}"
-                                                               context="numberInput" class="sapo-textbox w100"
-
-                                                               bind-event-input="checkValidateDataSupplier"
-                                                               data-toggle="tooltip" data-original-title="" title=""
-                                                               ><input type="hidden" bind="debt"
-                                                                               class="sapo-textbox w100" id="" name=""
-                                                                               value="0"></div>
-                            </div>
-
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="customer-create--right">
-                    <div class="page-info">
-                        <div class="page-info-title">Thông tin khác</div>
-                        <div class="page-info-body">
-                            <div class="col-12 field p-0">
-                                <label for="employeeNameCreate" class="label-required mb-2">Nhân viên phụ trách</label>
-                                <select id="employeeNameCreate"
-                                        class="w100 input-dropdown sapo-btn-blank select-padding" required>
-
-                                </select>
-                            </div>
-                            <div class="page-info-item col-12 no-padding mb-4">
-                                <label for="description" class="label-required mb-2">Mô tả</label>
-                                <textarea id="description" class="sapo-textbox" title="Nhập mô tả" style="height: 119px;" required></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="page-info">
-                        <div class="page-info-title">Cài đặt nâng cao</div>
-                        <div class="page-info-body">
-                            <div id="config-customer" style="width: 100%;">
-                                <div class="col-12 field p-0">
-                                    <label for="payment_method" class="label-required mb-2">Hình thức thanh toán</label>
-                                    <select id="payment_method" class="w100 input-dropdown sapo-btn-blank select-padding" title="Chọn hình thức" required>
-                                        <option value="" disabled selected>Chọn hình thức</option>
+                        <div class="page-info">
+                            <div class="page-info-title">Thông tin địa chỉ</div>
+                            <div class="page-info-body">
+                                <!--                            <div class="col-6 field pl-0">-->
+                                <!--                                <label for="address" class="label-required mb-2">Địa chỉ</label>-->
+                                <!--                                <input id="address" class="sapo-textbox w100" placeholder="Nhập địa chỉ" title="Nhập địa chỉ" required/>-->
+                                <!--                            </div>-->
+                                <div class="col-6 field pr-0">
+                                    <label for="province" class="label-required mb-2">Tỉnh thành phố</label>
+                                    <select id="province" class="w100 input-dropdown sapo-btn-blank select-padding"
+                                            title="Tỉnh thành phố" required>
+                                        <option value="" disabled selected>Chọn tỉnh thành phố</option>
                                     </select>
+                                </div>
+                                <div class="col-6 field pl-0">
+                                    <label for="district" class="label-required mb-2">Quận huyện</label>
+                                    <select id="district" class="w100 input-dropdown sapo-btn-blank select-padding"
+                                            title="Chọn quận huyện" required>
+                                        <option value="" disabled selected>Chọn quận huyện</option>
+                                    </select>
+                                </div>
+                                <div class="col-6 field pr-0">
+                                    <label for="ward" class="label-required mb-2">Phường xã</label>
+                                    <select id="ward" class="w100 input-dropdown sapo-btn-blank select-padding"
+                                            title="Chọn phường xã" required>
+                                        <option value="" disabled selected>Chọn phường xã</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 field pl-0">
+                                <label for="addressCreate"><div class="label mb-2">Địa chỉ</div></label>
+                                <input id="addressCreate" bind="address2" class="sapo-textbox w100" placeholder="Nhập địa chỉ" data-toggle="tooltip"
+                                       bind-event-input="checkValidateDataSupplier(this)" data-original-title=""
+                                       title="">
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="page-info">
+                            <div class="page-info-title">
+                                Thông tin bổ sung
+                            </div>
+                            <div class="page-info-body">
+                                <div class="col-6 field pl-0">
+                                    <label for="faxCreate" div class="label mb-2">Số fax</label>
+                                    <input id="faxCreate" class="sapo-textbox w100" data-toggle="tooltip"
+                                           bind-event-input="checkValidateDataSupplier" data-original-title="" title="">
+                                </div>
+                                <div class="col-6 field pr-0">
+                                    <label for="taxCodeCreate" class="label mb-2">Mã số thuế</label>
+                                    <input id="taxCodeCreate" bind="taxNumber" class="sapo-textbox w100"
+                                           data-toggle="tooltip"
+                                           bind-event-input="checkValidateDataSupplier" data-original-title="" title="">
+                                </div>
+                                <div class="col-6 field pl-0">
+                                    <label for="websiteCreate">
+                                        <div class="label mb-2">Website</div>
+                                    </label>
+                                    <input id="websiteCreate" class="sapo-textbox w100" data-toggle="tooltip"
+                                           bind-event-input="checkValidateDataSupplier" data-original-title="" title="">
+                                </div>
+                                <div class="col-6 field pr-0">
+                                    <label for="debtTotalCreate">
+                                        <div class="label mb-2">Công nợ</div>
+                                    </label>
+                                    <div class="input-wrap"><input id="debtTotalCreate" autocomplete="off"
+                                                                   placeholder="" bind="debt_txt"
+                                                                   define="{ numberInput: new Components.NumberInput(this, 'createSupplier','0','99999999999','','-99999999999','False')}"
+                                                                   context="numberInput" class="sapo-textbox w100"
+
+                                                                   bind-event-input="checkValidateDataSupplier"
+                                                                   data-toggle="tooltip" data-original-title="" title=""
+                                    ><input type="hidden" bind="debt"
+                                            class="sapo-textbox w100" id="" name=""
+                                            value="0"></div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="customer-create--right">
+                        <div class="page-info">
+                            <div class="page-info-title">Thông tin khác</div>
+                            <div class="page-info-body">
+                                <div class="col-12 field p-0">
+                                    <label for="employeeNameCreate" class="label-required mb-2">Nhân viên phụ
+                                        trách</label>
+                                    <select id="employeeNameCreate"
+                                            class="w100 input-dropdown sapo-btn-blank select-padding" required>
+                                    </select>
+                                </div>
+                                <div class="page-info-item col-12 no-padding mb-4">
+                                    <label for="#descriptionCreate" class="label-required mb-2">Mô tả</label>
+                                    <textarea id="#descriptionCreate" class="sapo-textbox" title="Nhập mô tả"
+                                              style="height: 119px;" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="page-info">
+                            <div class="page-info-title">Cài đặt nâng cao</div>
+                            <div class="page-info-body">
+                                <div id="config-customer" style="width: 100%;">
+                                    <div class="col-12 field p-0">
+                                        <label for="paymentMethodCreate" class="label-required mb-2">Hình thức thanh
+                                            toán</label>
+                                        <select id="paymentMethodCreate"
+                                                class="w100 input-dropdown sapo-btn-blank select-padding"
+                                                title="Chọn hình thức" required>
+                                            <option value="" disabled selected>Chọn hình thức</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="ui-title-bottom-bar">
+                        <a class="btn sapo-btn-default right btn-create-supplier" id="btnCreateSupplier">Lưu</a>
+                        <a href="/admin/suppliers" class="btn sapo-btn-blank right mr-3">Huỷ</a>
+                    </div>
                 </div>
-                <div class="ui-title-bottom-bar">
-                    <a class="btn sapo-btn-default right btn-create-supplier">Lưu</a>
-                    <a href="/admin/suppliers" class="btn sapo-btn-blank right mr-3">Huỷ</a>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -184,7 +233,7 @@
 </html>
 <script>
     class Supplier {
-        constructor(id, supplierCode, name, email, phone, description, employeeId, paymentMethodId, createAt, updatedAt, createAddressParam, status, attFax, attTaxCode, attWebsite, debtTotal) {
+        constructor(id, supplierCode, name, email, phone, description, employeeId, paymentMethodId, createAt, updatedAt, createAddressParam, status, fax, taxCode, Website, debtTotal) {
             this.id = id;
             this.supplierCode = supplierCode;
             this.name = name;
@@ -192,9 +241,9 @@
             this.phone = phone;
             this.description = description;
             this.employeeId = employeeId;
-            this.attWebsite = attWebsite;
-            this.attTaxCode = attTaxCode;
-            this.attFax = attFax;
+            this.Website = Website;
+            this.taxCode = taxCode;
+            this.fax = fax;
             this.paymentMethodId = paymentMethodId;
             this.createAt = createAt;
             this.updatedAt = updatedAt;
@@ -207,6 +256,7 @@
 
     class CreateAddressParam {
         constructor(id, fullName, phoneNumber, line1, line2, email, districtId, districtName, provinceId, provinceName, wardId, wardName, zipCode, customerId, supplierId, isDefault, description) {
+            this.id = id;
             this.fullName = fullName;
             this.line1 = line1;
             this.line2 = line2;
@@ -220,7 +270,6 @@
             this.wardName = wardName;
             this.zipCode = zipCode;
             this.customerId = customerId;
-            this.id = id;
             this.isDefault = isDefault;
             this.supplierId = supplierId;
             this.description = description;
@@ -231,16 +280,19 @@
 
     let createAddressParam = new CreateAddressParam();
 
+
     function createSupplier() {
-        $('#btnCreateSupplier').on('click', () => {
-            supplier.fullName = $('#nameCreate').val();
-            supplier.attFax = $('#faxCreate').val();
-            supplier.attTaxCode = $('#taxCodeCreate').val();
-            supplier.attWebsite = $('#websiteCreate').val();
+        $('.btn-create-supplier').on('click', () => {
+            alert('alo alo')
+            supplier.name = $('#nameCreate').val();
+            supplier.fax = $('#faxCreate').val();
+            supplier.taxCode = $('#taxCodeCreate').val();
+            supplier.Website = $('#websiteCreate').val();
+            supplier.debtTotal = $('#debtTotalCreate').val();
 
             supplier.supplierCode = $('#codeCreate').val();
-            supplier.groupId = $('#customerGroupCreate :selected').val();
-            supplier.phoneNumber =$('#phoneCreate').val();
+            // supplier.groupId = $('#customerGroupCreate :selected').val();
+            supplier.phoneNumber = $('#phoneCreate').val();
             supplier.email = $('#emailCreate').val();
             supplier.employeeId = $('#employeeNameCreate :selected').val();
             supplier.description = $('#descriptionCreate').val();
@@ -254,7 +306,7 @@
             createAddressParam.wardId = $('#ward').val();
             createAddressParam.wardName = $('#ward :selected').text();
             createAddressParam.phoneNumber = $('#phoneCreate').val();
-            customer.createAddressParam = createAddressParam;
+            supplier.createAddressParam = createAddressParam;
 
             console.log(createAddressParam)
             $.ajax({
@@ -263,7 +315,7 @@
                     "content-type": "application/json"
                 },
                 "type": "POST",
-                "url": "http://localhost:8080/api/suppliers/create",
+                "url": "http://localhost:8080/api/admin/suppliers/create",
                 "data": JSON.stringify(supplier)
             })
                 .done((data) => {
@@ -278,7 +330,7 @@
                 .fail((jqXHR) => {
                     console.log(jqXHR);
 
-                    App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+                    // App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
                 })
         });
     }
@@ -383,6 +435,7 @@
 
         });
     });
+
     $("#province").on('change', () => {
         let provinceId = $("#province").val();
         getAllDistrictsByProvinceId(provinceId).done(() => {
@@ -410,6 +463,7 @@
     });
 
 
+    // select chọn nhân viên
     function getAllEmployeeSelect() {
         return $.ajax({
             headers: {
@@ -426,13 +480,36 @@
                 });
             })
             .fail((jqXHR) => {
+                console.log(jqXHR.error);
 
+            })
+    }
 
+    // select chọn phương thức thanh toán
+    function getAllPaymentMethodSelect() {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "http://localhost:8080/api/admin/payment_methods"
+        })
+            .done((data) => {
+                $.each(data, (i, item) => {
+                    let str = `<option value="${item.id}">${item.title}</option>`;
+                    $("#paymentMethodCreate").append(str);
+                });
+            })
+            .fail((jqXHR) => {
+
+                console.log(jqXHR.error);
             })
     }
 
     createSupplier();
     getAllEmployeeSelect();
+    getAllPaymentMethodSelect();
 
 
     $("#formCreate").validate({

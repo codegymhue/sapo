@@ -5,6 +5,7 @@ import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.dto.UpdateSupplierParam;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SupplierService {
 
@@ -14,8 +15,12 @@ public interface SupplierService {
 
     SupplierResult create(CreateSupplierParam createSupplierParam);
 
-    void update(UpdateSupplierParam createSupplierParam);
+    SupplierResult update(UpdateSupplierParam updateSupplierParam);
 
     void deleteById(Integer id);
+
+    Map<String, Object> getAllProductItemPage(Integer pageNo, Integer pageSize, String title,
+                                               String status
+                                              );
 
 }
