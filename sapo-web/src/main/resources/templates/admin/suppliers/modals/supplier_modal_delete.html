@@ -19,3 +19,21 @@
         </div>
     </div>
 </div>
+<script>
+    // http://localhost:8080/api/admin/suppliers/3/delete
+        function deleteSupplier (idSupplier){
+        $.ajax({
+            type: "DELETE",
+            url: 'http://localhost:8080/api/admin/suppliers/' + idSupplier + '/delete',
+        })
+            .done((data) => {
+                console.log(" ok bn")
+            })
+    }
+    ('#btnDeleteSupplier').on('click', () => {
+        let idSupplier =  ('inputDeleteSupplier').val();
+        console.log(idSupplier)
+        deleteSupplier(idSupplier)
+    });
+
+</script>
