@@ -15,6 +15,8 @@ import java.time.Instant;
 @AllArgsConstructor
 @Accessors(chain = true)
 public class SupplierResult {
+
+
     private Integer id;
     private String supplierCode;
     private String name;
@@ -27,7 +29,7 @@ public class SupplierResult {
     private String paymentMethodId;
     private SupPaymentMethodResult paymentMethod;
     private SupGroupResult supGroupResult;
-    private String title;
+    private String supGroupTitle;
 
     private Instant createAt;
     private Instant updateAt;

@@ -101,48 +101,29 @@
                                 <thead>
                                 <tr>
                                     <th>
-                                        <div class="tooltip--select-all">
-                                            <div class="bulk-actions--select-all">
-                                                <span class="btn bulk-actions--select-all-btn"></span>
-                                                <input type="checkbox"
-                                                       class="next-checkbox bulk-actions--select-all-checkbox"
-                                                       title="Chọn tất cả nhà cung cấp"/>
-                                                <span class="next-checkbox--styled">
-                                                        <svg>
-                                                            <use xlink:href="#next-checkmark-thick"
-                                                                 xmlns:xlink="http://www.w3.org/1999/xlink"/>
-                                                        </svg>
-                                                        <svg>
-                                                            <use xlink:href="#next-minus"
-                                                                 xmlns:xlink="http://www.w3.org/1999/xlink"/>
-                                                        </svg>
-                                                    </span>
-                                            </div>
-                                        </div>
+                                    <th class="align-middle" >
+                                        <label for="checkAll" style="padding: 1rem; cursor:pointer">
+                                            <input  style="cursor:pointer" id="checkAll" type="checkbox" value="" data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả">
+                                        </label>
+                                    </th>
                                     </th>
                                     <th>Mã nhà cung cấp</th>
                                     <th>Tên nhà cung cấp</th>
+<!--                                    <th>Nhóm nhà cung cấp</th>-->
                                     <th>Email</th>
                                     <th>Số điện thoại</th>
                                     <th>Trạng thái</th>
+<!--                                    <th>Nợ hiện tại</th>-->
+<!--                                    <th>Số Fax</th>-->
+<!--                                    <th>Mã số thuế</th>-->
+<!--                                    <th>Website</th>-->
                                     <th>Nhân viên phụ trách</th>
                                     <th>Ngày tạo</th>
                                     <th>Lần cập nhật cuối</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr id="tr_${supplier.id}">
-                                    <td></td>
-                                    <td>${supplier.supplierCode}</td>
-                                    <td>${supplier.name}</td>
-                                    <td>Email</td>
-                                    <td>SDT</td>
-                                    <td>trang thai</td>
-                                    <td>NV phu trach</td>
-                                    <td>Ngay tao</td>
-                                    <td>Lan cap nha cuoi</td>
-                                    <td className="hide">paymentMethod</td>
-                                    <td className="hide">description</td>
+
                                 </tbody>
                             </table>
                         </div>
@@ -177,31 +158,70 @@
         })
 
     }
+
+
     function drawDataTable(){
         page.elements.tbSupplier.DataTable({
             "processing": true,
             "serverSide": true,
             "paging": true,
             ajax: {
+                url: page.urls.getAllSupplier,
                 type: "GET",
-                url: App.PRODUCT_API,
                 contentType: 'application/json',
-            }.done((data)=>{
-                console.log("xong",data)
-            })
+                dataSrc:'',
+
+
+            },
+            searching: false,
+            columns:[
+                {data: 'id'},
+                {data: 'supplierCode'},
+                {data: 'name'},
+                {data: 'email'},
+                {data: 'phone'},
+                {data: 'status'},
+                {data: 'description'},
+                {data: 'employee.fullName'},
+                {data: 'paymentMethodId'},
+                // {data: 'title'},
+                {data: 'createAt'},
+                {data: 'updateAt'},
+                {data: 'createAt'},
+                {data: 'updateAt'},
+
+
+
+            ],
+            columnDefs:[
+                {
+                    targets:0,
+                    render: function (){
+                        return `
+                               <input type="checkbox" value="check_none" />
+                            `
+                    }
+                }
+            ]
         })
     }
 
-    page.commands.getAllProducts = () => {
-        $.ajax({
-            type: "GET",
-            url: page.urls.getAllSupplier,
-        })
-            .done((data) => {
-                console.log(data)
-            })
+
+
+    page.commands.loadData = () => {
+        page.commands.getAllSupplier();
 
     }
+
+    page.commands.initializeEventControl = () => {
+
+    }
+
+    $(() => {
+        page.commands.loadData();
+
+        page.commands.initializeEventControl();
+    })
 
 </script>
 </body>
