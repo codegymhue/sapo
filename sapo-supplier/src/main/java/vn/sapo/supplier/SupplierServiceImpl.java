@@ -1,15 +1,24 @@
 package vn.sapo.supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import vn.sapo.entities.product.Product;
+import vn.sapo.entities.product.ProductStatus;
 import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.supplier.dto.CreateSupplierParam;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.dto.UpdateSupplierParam;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -66,6 +75,44 @@ public class SupplierServiceImpl implements SupplierService {
     public void deleteById(Integer id) {
         findById(id);
         supplierRepository.deleteById(id);
+    }
+
+
+    @Override
+    @Transactional
+    public Map<String, Object> getAllProductItemPage(Integer pageNo, Integer pageSize, String title,
+                                                     String status
+                                                    ) {
+        System.out.println("response: "+pageNo);
+        System.out.println("response: "+pageSize);
+        System.out.println("response: "+title);
+        System.out.println("response: "+status);
+        pageNo = pageNo - 1;
+        Pageable pageable;
+
+        pageable = PageRequest.of(pageNo, pageSize);
+
+
+        Page<Supplier> suppliers;
+        suppliers = supplierRepository.findAll(pageable);
+        if (suppliers.hasContent()) {
+            List<Supplier> supplierList = suppliers.getContent();
+            List<SupplierResult> supplierResults = new ArrayList<>();
+            for (Supplier supplier : supplierList) {
+                SupplierResult supplierResult = supplierMapper.toDTO(supplier);
+
+                supplierResults.add(supplierResult);
+            }
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("suppliers", supplierResults);
+            response.put("totalItem", suppliers.getTotalElements());
+            response.put("totalPage", suppliers.getTotalPages());
+            System.out.println("response: "+response);
+            return response;
+        } else {
+            return new HashMap<>();
+        }
     }
 
 

@@ -15,6 +15,7 @@ import vn.sapo.supplier.dto.CreateSupplierParam;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.dto.UpdateSupplierParam;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -30,6 +31,7 @@ public class SupplierAPI {
     public ResponseEntity<List<SupplierResult>> findAll() {
         return new ResponseEntity<>(supplierService.findAll(), HttpStatus.OK);
     }
+
 
     @GetMapping("/{id}/histories")
     public ResponseEntity<SupplierResult> findById(@PathVariable Integer id) {
@@ -76,4 +78,39 @@ public class SupplierAPI {
     public ResponseEntity<?> update(@RequestBody UpdateSupplierParam updateSupplierParam) {
     return new ResponseEntity<>(supplierService.update(updateSupplierParam), HttpStatus.OK);
     }
+//
+//    @GetMapping("/{id}/histories")
+//    public ResponseEntity<SupplierResult> findById(@PathVariable Integer id) {
+//        return new ResponseEntity<>(supplierService.findById(id), HttpStatus.OK);
+//    }
+//
+//    @PostMapping("/create")
+//    public ResponseEntity<SupplierResult> save(@RequestBody CreateSupplierParam supplierCreate) {
+//        return new ResponseEntity<>(supplierService.create(supplierCreate), HttpStatus.OK);
+//    }
+//
+//    @DeleteMapping("/{id}/delete")
+//    public ResponseEntity<String> deleteById(@PathVariable Integer id) {
+//        supplierService.deleteById(id);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+
+
+    @GetMapping("/products/page")
+    public ResponseEntity<?> getAllProductPageNoCategory(@RequestParam HashMap<String, String> hashMap) {
+        Integer.valueOf(hashMap.get("pageNo"));
+                Integer.valueOf(hashMap.get("pageSize"));
+                hashMap.get("search");
+                hashMap.get("status");
+        System.out.println(hashMap);
+        return new ResponseEntity<>(supplierService.getAllProductItemPage(
+                Integer.valueOf(hashMap.get("pageNo")),
+                Integer.valueOf(hashMap.get("pageSize")),
+                hashMap.get("search"),
+                hashMap.get("status")
+                ),
+                HttpStatus.OK
+        );
+    }
+
 }

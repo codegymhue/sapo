@@ -5,6 +5,7 @@ class App{
     static PRODUCT_API = this.DOMAIN_SERVER + "/api/admin/suppliers";
 
 
+
     static renderRowSupplier(item, showStatus) {
         let str = `
              <tr id="tr_${item.id}" >
@@ -13,7 +14,7 @@ class App{
                     <input style="cursor:pointer" id ="${item.id}" class="selectCheckbox"  name="options[]" type="checkbox" value="${item.id}">
                 </label>
                 </td>
-                <td class="align-middle"><a href="/admin/supplier/${item.id}" style="text-decoration: none">${item.supplierCode}</a></td>
+                 <td class="align-middle"><a href="/admin/supplier/${item.id}" style="text-decoration: none">${item.supplierCode}</a></td>
                 <td class="align-middle">${item.name || ""}</td>
                 <td class="align-middle">${item.email || ""}</td>
                 <td class="align-middle">${item.phone || ""}</td>
@@ -51,5 +52,9 @@ class Supplier {
     this.updateAt = updateAt;
 }
 }
+
+
+
+
 
 
