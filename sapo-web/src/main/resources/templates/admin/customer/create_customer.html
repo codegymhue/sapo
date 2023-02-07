@@ -510,7 +510,7 @@
 
 
     class Customer {
-        constructor(id, attWebsite, attTaxCode, attFax, customerCode, name, phone, customerGroup, gender, email, birthday, status, createAt, updateAt, employeeId, deleted, createAddressParam, description) {
+        constructor(id, website, taxCode, fax, customerCode, name, phone, customerGroup, gender, email, birthday, status, createAt, updateAt, employeeId, deleted, createAddressParam, description) {
             this.id = id;
             this.customerCode = customerCode;
             this.name = name;
@@ -526,9 +526,9 @@
             this.deleted = deleted;
             this.createAddressParam = createAddressParam;
             this.description = description;
-            this.attWebsite = attWebsite;
-            this.attTaxCode = attTaxCode;
-            this.attFax = attFax;
+            this.website = website;
+            this.taxCode = taxCode;
+            this.fax = fax;
 
         }
     }
@@ -563,9 +563,9 @@
     function createCustomer() {
         $('#btnCreateCustomer').on('click', () => {
             customer.fullName = $('#nameCreate').val();
-            customer.attFax = $('#faxCreate').val();
-            customer.attTaxCode = $('#taxCodeCreate').val();
-            customer.attWebsite = $('#websiteCreate').val();
+            customer.fax = $('#faxCreate').val();
+            customer.taxCode = $('#taxCodeCreate').val();
+            customer.website = $('#websiteCreate').val();
 
             customer.customerCode = $('#codeCreate').val();
             customer.groupId = $('#customerGroupCreate :selected').val();
