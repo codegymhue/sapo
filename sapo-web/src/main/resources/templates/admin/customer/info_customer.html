@@ -129,11 +129,11 @@
                                                     th:text="*{': '+ customerCode}"></h6><h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
                                                     itemid="display-tax-number "
-                                                    th:text="*{': ' + attTaxCode}"></h6><h6
+                                                    th:text="*{': ' + taxCode}"></h6><h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
                                                     itemid="display-website" title=""> <a
                                                     class="jss2101"
-                                                        th:text ="*{': '+ attWebsite}"
+                                                        th:text ="*{': '+ website}"
                                                     style="padding-left: 0px; text-decoration: none"></a></h6><h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
                                                     th:utext="${customer.getDescription()} ? ${': '+ customer.Description} : ${': --- '}">
