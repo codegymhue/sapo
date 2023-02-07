@@ -90,42 +90,138 @@
                             <svg class="next-icon next-icon--size-16">
                                 <use xlink:href="#next-search-reverse" xmlns:xlink="http://www.w3.org/1999/xlink"/>
                             </svg>
-                            <input type="text" class="input-query sapo-textbox"
+                            <input type="text" class="input-query sapo-textbox searchTitle"
                                    title="Tìm kiếm theo mã nhà cung cấp, SĐT, tên nhà cung cấp"
                                    placeholder="Tìm kiếm theo mã nhà cung cấp, SĐT, tên nhà cung cấp"/>
                         </div>
                     </div>
                     <div class="table-wrapper">
                         <div id="sapo-table_wrapper">
-                            <table id="supplier-datatables" class="sapo-table">
-                                <thead>
-                                <tr>
-                                    <th>
+                            <table id="tbSupplier" class="table table-hover">
+                                <thead style="background-color: #f4f6f8; height: 55px">
+                                <tr id="theadList" class="show" >
                                     <th class="align-middle" >
                                         <label for="checkAll" style="padding: 1rem; cursor:pointer">
                                             <input  style="cursor:pointer" id="checkAll" type="checkbox" value="" data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả">
                                         </label>
                                     </th>
-                                    </th>
-                                    <th>Mã nhà cung cấp</th>
-                                    <th>Tên nhà cung cấp</th>
-<!--                                    <th>Nhóm nhà cung cấp</th>-->
-                                    <th>Email</th>
-                                    <th>Số điện thoại</th>
-                                    <th>Trạng thái</th>
-<!--                                    <th>Nợ hiện tại</th>-->
-<!--                                    <th>Số Fax</th>-->
-<!--                                    <th>Mã số thuế</th>-->
-<!--                                    <th>Website</th>-->
-                                    <th>Nhân viên phụ trách</th>
-                                    <th>Ngày tạo</th>
-                                    <th>Lần cập nhật cuối</th>
+                                    <th class="align-middle" scope="col">Mã nhà cung cấp</th>
+                                    <th class="align-middle" scope="col">Tên nhà cung cấp</th>
+                                    <th class="align-middle" scope="col">Nhóm nhà cung cấp</th>
+                                    <th class="align-middle" scope="col">Email</th>
+                                    <th class="align-middle" scope="col">Số điện thoại</th>
+                                    <th class="align-middle" scope="col">Trạng thái</th>
+<!--                                    <th class="align-middle" scope="col">Nợ hiện tại</th>-->
+<!--                                    <th class="align-middle" scope="col">Số fax</th>-->
+<!--                                    <th class="align-middle" scope="col">Mã số thuế</th>-->
+<!--                                    <th class="align-middle" scope="col">Website</th>-->
+<!--                                    <th class="align-middle" scope="col">Nhân viên phụ trách</th>-->
+<!--                                    <th class="align-middle" scope="col">Ngày tạo</th>-->
+<!--                                    <th class="align-middle" scope="col">Lần cập nhật cuối</th>-->
+                                </tr>
+                                <tr class="hide" id="selectActionThead" style="border: snow">
+                                    <td class="align-middle" style="width: 20px">
+                                        <label for="selectAction" style="padding: 1rem; cursor:pointer">
+                                            <input style="cursor:pointer" id="selectAction" type="checkbox" value="" >
+                                        </label>
+                                    </td>
+                                    <td colspan="2" class="align-middle" id="numberSelectProductList" style="width: 24%">
+                                    </td>
+                                    <td class="align-middle" colspan="2">
+                                        <div class="btn-group">
+                                            <button class="btn dropdown-toggle btnDropdown me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Chọn thao tác
+                                                <i class="fa-solid fa-sort-down" style="padding-left: 2.3rem"></i>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                                <li>
+                                                    <button class="dropdown-item btnDropdown" id="btnCheckInventory">Kiểm tra tồn kho</button>
+                                                </li>
+                                                <li>
+                                                    <button class="dropdown-item btnDropdown" id="btnAvailable">Đang giao dịch</button>
+                                                </li>
+                                                <li>
+                                                    <button class="dropdown-item btnDropdown" id="btnUnavailable">Ngừng giao dịch</button>
+                                                </li>
+                                                <li>
+                                                    <button class="dropdown-item btnDropdown" id="btnDelete">Xóa sản phẩm</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td colspan="5"></td>
                                 </tr>
                                 </thead>
-                                <tbody>
-
+                                <tbody >
                                 </tbody>
                             </table>
+<!--                            <table id="tbSupplier" class="sapo-table">-->
+<!--                                <thead>-->
+<!--                                <tr>-->
+<!--                                    <th>-->
+<!--                                    <th class="align-middle" >-->
+<!--                                        <label for="checkAll" style="padding: 1rem; cursor:pointer">-->
+<!--                                            <input  style="cursor:pointer" id="checkAll" type="checkbox" value="" data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả">-->
+<!--                                        </label>-->
+<!--                                    </th>-->
+<!--                                    </th>-->
+<!--                                    <th>Mã nhà cung cấp</th>-->
+<!--                                    <th>Tên nhà cung cấp</th>-->
+<!--&lt;!&ndash;                                    <th>Nhóm nhà cung cấp</th>&ndash;&gt;-->
+<!--                                    <th>Email</th>-->
+<!--                                    <th>Số điện thoại</th>-->
+<!--                                    <th>Trạng thái</th>-->
+<!--&lt;!&ndash;                                    <th>Nợ hiện tại</th>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <th>Số Fax</th>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <th>Mã số thuế</th>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <th>Website</th>&ndash;&gt;-->
+<!--                                    <th>Nhân viên phụ trách</th>-->
+<!--                                    <th>Ngày tạo</th>-->
+<!--                                    <th>Lần cập nhật cuối</th>-->
+<!--                                </tr>-->
+<!--                                </thead>-->
+<!--                                <tbody>-->
+
+<!--                                </tbody>-->
+<!--                            </table>-->
+                        </div>
+                        <div class="container-fluid " style="height: 50px">
+                            <div class="row col-md-12 d-flex align-items-center" style="font-size: small">
+                                <div class="col-md-5"></div>
+                                <div class="col-md-3 text-end">
+                                    <label class="me-2">Hiển thị</label>
+                                    <select class="me-2 " id="pageSize">
+                                        <option value="7">7</option>
+                                        <option value="14">14</option>
+                                        <option value="20">20</option>
+                                    </select>
+                                    <span>Kết quả</span>
+                                </div>
+                                <div class="col-md-3 text-center" id="totalPage" style="padding: initial">
+
+                                </div>
+                                <div class="col-md-1">
+                                    <nav aria-label="Page navigation example ">
+                                        <ul class="pagination" >
+                                            <li class="page-item">
+                                                <button class=" btn-outline-primary btn-sm me-2" id="previousPage" style="border: none">
+                                                    <i class="fa-solid fa-angle-left"></i>
+                                                </button>
+                                            </li>
+                                            <li class="page-item">
+                                                <button class="pageNumber btn-primary btn-sm me-2">
+                                                    <span id="pageNo">1</span>
+                                                </button>
+                                            </li>
+                                            <li class="page-item">
+                                                <button class=" btn-outline-primary btn-sm " id="nextPage" style="border: none">
+                                                    <i class="fa-solid fa-angle-right"></i>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -146,65 +242,120 @@
         },
         elements: {},
         commands:{},
+        dialogs: {
+            elements: {},
+            loadData: {},
+            commands: {},
+        },
     }
 
-    page.elements.tbSupplier = $("#supplier-datatables")
+    page.elements.tbSupplier = $("#tbSupplier")
+    page.elements.tbSupplier_tbody = $("#tbSupplier tbody");
+    // seach
+    page.elements.totalPage = $("#totalPage");
+    page.elements.pageNo = $("#pageNo");
+    page.elements.pageSize = $("#pageSize");
+    page.elements.search = $(".searchTitle");
 
 
+
+
+
+    //code
+    let totalPage;
 
     page.commands.getAllSupplier = () => {
-        $(document).ready(function () {
-            drawDataTable();
-        })
+        let pageNo = Number(page.elements.pageNo.text());
+        let pageSize =Number(page.elements.pageSize.val());
+        let search = page.elements.search.val().trim();
+        // let status = page.dialogs.elements.status.val();
+        page.commands.getAllProductsItemOnPageNo(pageNo, pageSize, search);
 
     }
 
-
-    function drawDataTable(){
-        page.elements.tbSupplier.DataTable({
-            "processing": true,
-            "serverSide": true,
-            "paging": true,
-            ajax: {
-                url: page.urls.getAllSupplier,
-                type: "GET",
-                contentType: 'application/json',
-                dataSrc:'',
-
-
+    page.commands.getAllProductsItemOnPageNo = (pageNo, pageSize, search, status) => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
             },
-            searching: false,
-            columns:[
-                {data: 'id'},
-                {data: 'supplierCode'},
-                {data: 'name'},
-                {data: 'email'},
-                {data: 'phone'},
-                {data: 'status'},
-                {data: 'description'},
-                {data: 'employee.fullName'},
-                {data: 'paymentMethodId'},
-                // {data: 'title'},
-                {data: 'createAt'},
-                {data: 'updateAt'},
-                {data: 'createAt'},
-                {data: 'updateAt'},
-
-
-
-            ],
-            columnDefs:[
-                {
-                    targets:0,
-                    render: function (){
-                        return `
-                               <input type="checkbox" value="check_none" />
-                            `
-                    }
-                }
-            ]
+            type: "GET",
+            url: page.urls.getAllSupplier + "/products/page",
+            data:({
+                "pageNo": pageNo,
+                "pageSize": pageSize,
+                "status": "AVAILABLE",
+            })
         })
+            .done((data) => {
+                console.log(data)
+                console.log(data.suppliers)
+                page.elements.tbSupplier_tbody.empty();
+                page.elements.totalPage.empty();
+                totalPage = data.totalPage;
+                data.suppliers.map(item => {
+                    if(item.status == "AVAILABLE"){
+                        page.elements.tbSupplier_tbody.append(App.renderRowSupplier(item, 'available'))
+                    } else {
+                        page.elements.tbSupplier_tbody.append(App.renderRowSupplier(item, 'unavailable'))
+                    }
+                });
+                // page.commands.resetInputCheckBox();
+                // page.commands.isCheckbox();
+                page.elements.totalPage.append(
+                    `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
+                )
+            })
+            // .fail((jqXHR) => {
+            //     App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404)
+            // })
     }
+
+    // function drawDataTable(){
+    //     page.elements.tbSupplier.DataTable({
+    //         "processing": true,
+    //         "serverSide": true,
+    //         "paging": true,
+    //         ajax: {
+    //             url: page.urls.getAllSupplier,
+    //             type: "GET",
+    //             contentType: 'application/json',
+    //             dataSrc:'',
+    //
+    //
+    //         },
+    //         searching: false,
+    //         columns:[
+    //             {data: 'id'},
+    //             {data: 'supplierCode'},
+    //             {data: 'name'},
+    //             {data: 'email'},
+    //             {data: 'phone'},
+    //             {data: 'status'},
+    //             {data: 'description'},
+    //             {data: 'employee.fullName'},
+    //             {data: 'paymentMethodId'},
+    //             // {data: 'title'},
+    //             {data: 'createAt'},
+    //             {data: 'updateAt'},
+    //             {data: 'createAt'},
+    //             {data: 'updateAt'},
+    //
+    //
+    //
+    //         ],
+    //         columnDefs:[
+    //             {
+    //                 targets:0,
+    //                 render: function (){
+    //                     return `
+    //                            <input type="checkbox" value="check_none" />
+    //                         `
+    //                 }
+    //             }
+    //         ]
+    //     })
+    // }
 
 
 

@@ -8,6 +8,7 @@ import vn.sapo.supplier.SupplierService;
 import vn.sapo.supplier.dto.CreateSupplierParam;
 import vn.sapo.supplier.dto.SupplierResult;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -36,6 +37,23 @@ public class SupplierAPI {
     public ResponseEntity<String> deleteById(@PathVariable Integer id) {
         supplierService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/products/page")
+    public ResponseEntity<?> getAllProductPageNoCategory(@RequestParam HashMap<String, String> hashMap) {
+        Integer.valueOf(hashMap.get("pageNo"));
+                Integer.valueOf(hashMap.get("pageSize"));
+                hashMap.get("search");
+                hashMap.get("status");
+        System.out.println(hashMap);
+        return new ResponseEntity<>(supplierService.getAllProductItemPage(
+                Integer.valueOf(hashMap.get("pageNo")),
+                Integer.valueOf(hashMap.get("pageSize")),
+                hashMap.get("search"),
+                hashMap.get("status")
+                ),
+                HttpStatus.OK
+        );
     }
 
 }
