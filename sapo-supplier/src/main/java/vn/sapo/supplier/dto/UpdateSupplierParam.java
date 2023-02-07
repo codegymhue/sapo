@@ -19,4 +19,5 @@ public class UpdateSupplierParam {
     private String supGroupName;
     private Integer employeeId;
     private SupplierStatus status;
+
 }

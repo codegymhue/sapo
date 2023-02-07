@@ -53,13 +53,13 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     @Transactional
-    public void update(UpdateSupplierParam updateSupplierParam) {
+    public SupplierResult update(UpdateSupplierParam updateSupplierParam) {
         Supplier supplier = supplierRepository.findById(updateSupplierParam.getId())
                 .orElseThrow(() -> new NotFoundException("Not found supplier"));
         supplierMapper.transferFields(updateSupplierParam, supplier);
-
+        Supplier supplierResult = supplierRepository.save(supplier);
+        return supplierMapper.toDTO(supplierResult);
     }
-
 
     @Override
     @Transactional
