@@ -32,7 +32,7 @@ public class SupplierController {
     }
 
 
-    @GetMapping("/{id}/detail")
+    @GetMapping("/{id}/histories")
     public ModelAndView showSupplierHistoryPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         try{
@@ -42,16 +42,26 @@ public class SupplierController {
             modelAndView.addObject("error", e.getMessage());
         }
         modelAndView.setViewName("/admin/suppliers/detail_suppliers");
+
         return modelAndView;
     }
 
     @GetMapping("/create")
     public ModelAndView showSupplierCreatePage() {
-        return new ModelAndView("/admin/suppliers/create_suppliers");
+        return new ModelAndView("/admin/suppliers/supplier_create");
     }
-    @GetMapping("/detail")
-    public ModelAndView showSupplierDetailPage() {
-        return new ModelAndView("/admin/suppliers/detail_suppliers");
+
+    @GetMapping("/{id}/edit")
+    public ModelAndView showSupplierEdit(@PathVariable Integer id) {
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            SupplierResult supplier = supplierService.findById(id);
+            modelAndView.addObject("supplier", supplier);
+        } catch (Exception e) {
+            modelAndView.addObject("error", e.getMessage());
+        }
+        modelAndView.setViewName("/admin/suppliers/supplier_update");
+        return modelAndView;
     }
 
 }
