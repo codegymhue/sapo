@@ -14,7 +14,7 @@ public interface SupplierService {
 
     SupplierResult create(CreateSupplierParam createSupplierParam);
 
-    void update(UpdateSupplierParam createSupplierParam);
+    SupplierResult update(UpdateSupplierParam updateSupplierParam);
 
     void deleteById(Integer id);
 
