@@ -40,7 +40,7 @@ public class SupplierResult {
     private BigDecimal debtTotal;
     private List<AddressResult> addresses;
 
-    private String attTaxCode;
-    private String attFax;
-    private String attWebsite;
+    private  String taxCode;
+    private  String fax;
+    private String website;
 }
