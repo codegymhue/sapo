@@ -98,11 +98,6 @@ public class SupplierAPI {
 
     @GetMapping("/products/page")
     public ResponseEntity<?> getAllProductPageNoCategory(@RequestParam HashMap<String, String> hashMap) {
-        Integer.valueOf(hashMap.get("pageNo"));
-                Integer.valueOf(hashMap.get("pageSize"));
-                hashMap.get("search");
-                hashMap.get("status");
-        System.out.println(hashMap);
         return new ResponseEntity<>(supplierService.getAllProductItemPage(
                 Integer.valueOf(hashMap.get("pageNo")),
                 Integer.valueOf(hashMap.get("pageSize")),
