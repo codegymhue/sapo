@@ -98,7 +98,7 @@
 //            createCell(row, columnCount++, supplier.getEmail() != null ? supplier.getEmail(): "" , style);
 //            createCell(row, columnCount++, supplier.getPhone() != null ? supplier.getPhone(): "", style);
 //            createCell(row, columnCount++, supplier.getWebsite() , style);
-//            createCell(row, columnCount++,supplier.getAddresses() != null ? supplier.getAddresses():"",style);
+//            createCell(row, columnCount++, supplier.getAddresses() != null ? supplier.getAddresses():"",style);
 //
 //
 //        }
