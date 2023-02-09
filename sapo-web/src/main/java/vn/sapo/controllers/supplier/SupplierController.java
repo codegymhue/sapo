@@ -2,6 +2,8 @@ package vn.sapo.controllers.supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +35,11 @@ public class SupplierController {
     public ModelAndView showSupplierListPage() {
         return new ModelAndView("/admin/suppliers/supplier_list");
     }
+
+//    @GetMapping("SearchSupplierGroupV1")
+//    public ResponseEntity<?> showSupplierListPage1() {
+//        return new ResponseEntity<>("{\"supplierGroups\":[{\"id\":2663304,\"tenantId\":690985,\"type\":\"supplier\",\"name\":\"sĩ\",\"nameTranslate\":\"sĩ\",\"createdOn\":\"2023-02-08T07:39:48Z\",\"modifiedOn\":\"2023-02-08T07:39:48Z\",\"status\":\"active\",\"code\":\"STN00004\",\"note\":\"\",\"countSupplier\":0,\"isDefault\":false},{\"id\":2663303,\"tenantId\":690985,\"type\":\"supplier\",\"name\":\"bán buôn\",\"nameTranslate\":\"bán buôn\",\"createdOn\":\"2023-02-08T07:39:31Z\",\"modifiedOn\":\"2023-02-08T07:39:31Z\",\"status\":\"active\",\"code\":\"1\",\"note\":\"\",\"countSupplier\":0,\"isDefault\":false},{\"id\":2663254,\"tenantId\":690985,\"type\":\"supplier\",\"name\":\"bán sĩ\",\"nameTranslate\":\"bán sĩ\",\"createdOn\":\"2023-02-08T07:17:54Z\",\"modifiedOn\":\"2023-02-08T07:17:54Z\",\"status\":\"active\",\"code\":\"STN00003\",\"note\":\"\",\"countSupplier\":0,\"isDefault\":false},{\"id\":2660089,\"tenantId\":690985,\"type\":\"supplier\",\"name\":\"Buôn\",\"nameTranslate\":\"Buôn\",\"createdOn\":\"2023-02-06T01:31:28Z\",\"modifiedOn\":\"2023-02-06T01:31:28Z\",\"status\":\"active\",\"code\":\"STN00002\",\"note\":\"\",\"countSupplier\":0,\"isDefault\":false},{\"id\":2660079,\"tenantId\":690985,\"type\":\"supplier\",\"name\":\"DEFAULT\",\"nameTranslate\":\"Khác\",\"createdOn\":\"2023-02-06T01:13:14Z\",\"modifiedOn\":\"2023-02-06T01:13:14Z\",\"status\":\"active\",\"code\":\"MACDINH\",\"note\":null,\"countSupplier\":32,\"isDefault\":true}],\"totalCount\":5,\"totalPage\":1,\"page\":1}", HttpStatus.OK);
+//    }
 
     @GetMapping("/export")
     public ModelAndView showSupplierListExport() {
@@ -70,12 +77,12 @@ public class SupplierController {
         try {
             SupplierResult supplier = supplierService.findById(id);
             modelAndView.addObject("supplier", supplier);
-            modelAndView.addObject("employee",  employeeService.findAll());
-            modelAndView.addObject("paymentMethod",  paymentMethodService.findAll());
+            modelAndView.addObject("employee", employeeService.findAll());
+            modelAndView.addObject("paymentMethod", paymentMethodService.findAll());
         } catch (Exception e) {
             modelAndView.addObject("error", e.getMessage());
         }
-        modelAndView.setViewName("/admin/suppliers/supplier_update");
+        modelAndView.setViewName("/admin/suppliers/update_supplier");
         return modelAndView;
     }
 

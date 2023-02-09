@@ -5,7 +5,6 @@ class App{
     static PRODUCT_API = this.DOMAIN_SERVER + "/api/admin/suppliers";
 
 
-
     static renderRowSupplier(item, showStatus) {
         let str = `
              <tr id="tr_${item.id}" >
@@ -52,6 +51,8 @@ class Supplier {
     this.updateAt = updateAt;
 }
 }
+
+
 
 
 

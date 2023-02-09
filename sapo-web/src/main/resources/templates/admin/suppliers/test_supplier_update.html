@@ -2,6 +2,8 @@
 <html class="sapo-menu-expand sapo-menu-toggle-active" lang="vi-VN">
 <head>
     <meta charset="utf-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 <!--    <th:block th:replace="/layout/header.html"/>-->
     <script>
         var CKEDITOR_BASEPATH = '/v2/lib/ckeditor/';
@@ -148,19 +150,37 @@
                                    bind-event-input="checkValidateDataSupplier(this)" th:field="${supplier.supplierCode}">
                         </div>
                         <div class="col-6 field pr-0">
-                            <div class="label mb-2">Nhóm nhà cung cấp</div>
+                            <div class="label mb-2">Nhóm nhà cung cấp
+                                <span id="showGroupSupplier">Thêm mới nhóm nhà cung cấp</span>
+                            </div>
+
                             <div class="select__wrapper " id="search-supplier-group-wrap">
                                 <a class="sapo-select select--a select-suggest" id="search-supplier-group"
                                    href="javascript:">
-                                    Kh&#xE1;c </a>
-                                <svg class="next-icon next-icon--size-16">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         xlink:href="#select-chevron"></use>
-                                </svg>
+                                    <div>
+                                        <select style="width: 288px; height: 30px; border: gray">
+
+                                            <option>Khác</option>
+
+                                                <button value="them" onclick="showGroup()">Thêm mới nhóm nhà cung cấp</button>
+
+                                            <option>Thêm vài cái</option>
+                                        </select>
+                                    </div>
+                                 </a>
+<!--                                <svg class="next-icon next-icon&#45;&#45;size-16">-->
+<!--                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"-->
+<!--                                         xlink:href="#select-chevron">-->
+<!--                                    </use>-->
+<!--                                </svg>-->
                                 <div class="filter-body--suggest">
                                 </div>
                             </div>
                         </div>
+
+<!--                        <h1 id="showGroupSupplier"> show ne</h1>-->
+                        <th:block th:replace="/admin/suppliers/modals/create_group_supplier :: create_group_supplier"/>
+
                         <div class="col-6 field pl-0">
                             <div class="label mb-2">Số điện thoại</div>
                             <input id="phoneUp" bind="phoneNumber" class="sapo-textbox w100" data-toggle="tooltip"
@@ -488,6 +508,7 @@
 </noscript>
 <th:block th:replace="/layout/footer.html"/>
 </body>
+<script src="/assets/admin/js/suppliers/supplier_app.js"></script>
 <script>
     // class Supplier {
     //     constructor(id, supplierCode, name, email, phone, statusUp, employeeId, description, paymentMethodId, group, createAt, updateAt, deleted) {
@@ -505,6 +526,18 @@
     //         this.deleted = deleted;
     //     }
     // }
+
+    const page = {
+        urls: {
+
+        },
+        elements: {},
+        commands: {},
+        dialogs: {
+            elements: {},
+            commands: {}
+        }
+    }
     class UpdateSupplierParam{
         constructor( id,  supplierCode,  name,  email,  phone,  description,  paymentMethodId,  supGroupName,  employeeId,  status) {
             this.id= id;
@@ -519,6 +552,17 @@
             this.status = status
         }
     }
+    page.elements.btnUpdateSupplier = $(".btnUpdateSupplier");
+    page.elements.supplierId = $("#supplierId");
+    page.elements.supplierCodeUp = $("#supplierCodeUp");
+    page.elements.nameUp = $("#nameUp");
+    page.elements.emailUp = $("#emailUp");
+    page.elements.phoneUp = $("#phoneUp")
+    page.elements.statusUp =   $("#statusUp");
+    page.elements.descriptionUp = $("#descriptionUp")
+
+
+
 
     function getAllEmployeeSelect() {
         return $.ajax({
@@ -555,45 +599,65 @@
             })
     }
 
+    page.elements.btnUpdateSupplier.on('click', () => {
+        let idSupp = page.elements.supplierId.val();
+        console.log(idSupp);
+        // alert("hello");
+        let newUpdateSupplierParam = {
+            id: idSupp,
+            supplierCode: page.elements.supplierCodeUp.val(),
+            name: page.elements.nameUp.val(),
+            email:   page.elements.emailUp.val(),
+            phone: page.elements.phoneUp.val(),
+            status:  page.elements.statusUp.val(),
+            description: page.elements.descriptionUp.val(),
+        }
+        console.log(newUpdateSupplierParam);
 
-    // $(".btnUpdateSupplier").on('click', () => {
-    //     let idSupp = $("#supplierId").val();
-    //     console.log(idSupp);
-    //     // alert("hello");
-    //     let newUpdateSupplierParam = {
-    //         id: idSupp,
-    //         supplierCode: $("#supplierCodeUp").val(),
-    //         name: $("#nameUp").val(),
-    //         email: $("#emailUp").val(),
-    //         phone: $("#phoneUp").val(),
-    //         status: $("#statusUp").val(),
-    //         description: $("#descriptionUp").val(),
+        $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            "type": "PATCH",
+            "url": "http://localhost:8080/api/admin/suppliers/" + idSupp + "/edit",
+            "data": JSON.stringify(newUpdateSupplierParam)
+        })
+            .done((data) => {
+                // console.log("data", data);
+                let trSupplier = $("#tr_" + data.id);
+                let tr = App.renderRowSupplier(data);
+                trSupplier.replaceWith(tr);
+                alert("Sửa nhà cung cấp thành công")
+                window.location.href = `/admin/suppliers/${data.id}/histories`;
+                // console.log(data)
+                // App.IziToast.showSuccessAlert("Sửa thông tin nhà cung cấp thành công!");
+                // setTimeout(() => {
+                // }, 1500)
+                // window.location.href = `/admin/suppliers/${idSupp}/edit`;
+            })
+            .fail((jqXHR) => {
+                // console.log(jqXHR);
+                // App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+
+            })
+    })
+
+    $("#showGroupSupplier").on('click', () =>{
+        $("#createGroupSupplier").modal('show');
+    })
+
+
+    // document.getElementById("showGroupSupplier").value="";
+    // console.log("trước function")
+    // function showGroup() {
+    //     if (document.getElementById("showGroupSupplier").value="them") {
+    //         console.log("trong if")
+    //         $("#createGroupSupplier").modal('show');
     //     }
-    //     console.log(newUpdateSupplierParam);
-    //
-    //     $.ajax({
-    //         "headers": {
-    //             "accept": "application/json",
-    //             "content-type": "application/json"
-    //         },
-    //         "type": "PATCH",
-    //         "url": "http://localhost:8080/api/admin/suppliers/" + idSupp + "/edit",
-    //         "data": JSON.stringify(newUpdateSupplierParam)
-    //     })
-    //         .done(() => {
-    //             // console.log(data)
-    //             App.IziToast.showSuccessAlert("Sửa thông tin nhà cung cấp thành công !");
-    //             setTimeout(() => {
-    //             }, 1500)
-    //             // window.location.href = `/admin/suppliers/${supplier.id}/edit`;
-    //
-    //         })
-    //         .fail((jqXHR) => {
-    //             console.log(jqXHR);
-    //             App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
-    //
-    //         })
-    // })
+    //     console.log("ngoai if")
+    // }
+
     getAllEmployeeSelect();
     getAllPaymentMethodSelect();
 
