@@ -1,3 +1,4 @@
+
 //package vn.sapo.supplier;
 //
 //import org.apache.poi.ss.usermodel.Cell;
@@ -82,39 +83,3 @@
 //        cell.setCellStyle(style);
 //    }
 //
-//    private void writeDataLines (){
-//        int rowCount = 1;
-//
-//        CellStyle style = workbook.createCellStyle();
-//        XSSFFont font = workbook.createFont();
-//        font.setFontHeight(14);
-//        style.setFont(font);
-//
-//        for (SupplierResult supplier : supplierList){
-//            Row row = sheet.createRow(rowCount++);
-//            int columnCount = 0;
-//            createCell(row, columnCount++, supplier.getName() != null ? supplier.getName(): "" , style);
-//            createCell(row, columnCount++, supplier.getSupplierCode(), style);
-//            createCell(row, columnCount++, supplier.getEmail() != null ? supplier.getEmail(): "" , style);
-//            createCell(row, columnCount++, supplier.getPhone() != null ? supplier.getPhone(): "", style);
-//            createCell(row, columnCount++, supplier.getWebsite() , style);
-//            createCell(row, columnCount++,supplier.getAddresses() != null ? supplier.getAddresses():"",style);
-//
-//
-//        }
-//    }
-//
-//    public void export(HttpServletResponse response) throws IOException {
-//        writeHeaderLine();
-//        writeDataLines();
-//
-//        ServletOutputStream outputStream = response.getOutputStream();
-//        workbook.write(outputStream);
-//        workbook.close();
-//
-//        outputStream.close();
-//
-//    }
-//
-//
-//}

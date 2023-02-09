@@ -1,43 +1,43 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <th:block th:fragment="create_group_supplier">
-  <div class="modal fade" id="createGroupSupplier" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+  <div class="modal" id="showModalGroupSupplier"  data-bs-backdrop="static" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-                    <span class="ui-dialog-title">
-                        Thêm mới nhóm nhà cung cấp
-                    </span>
-                    <span class="modal-close-wrapper" role="button" aria-label="Close dialog">
-                        <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use> </svg>
-                    </span>
+          <h3 class="modal-title">Thêm mới nhóm nhà cung cấp</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-6">
-                <div class="left field w-100">
-                  <div class="label mb-2 label-required">Tên nhóm</div>
-                  <input class="sapo-textbox w100 pull-left" bind="supplierGroup.name" data-toggle="tooltip" placeholder="Nhập tên nhóm nhà cung cấp" data-original-title="" title="">
-                </div>
-                <div class="left field w-100 mb-2">
-                  <div class="label mb-2">Mã nhóm</div>
-                  <input class="sapo-textbox w100 pull-left" bind="supplierGroup.code" data-toggle="tooltip" placeholder="Nhập mã nhóm nhà cung cấp" data-original-title="" title="">
-                </div>
-              </div>
-              <div class="col-6 field mb-2">
-                <div class="label mb-2">Ghi chú</div>
-                <textarea bind="supplierGroup.note" class="sapo-textbox" style="height:113px"></textarea>
-              </div>
-            </div>
+        <div class="modal-body">
+                      <div class="row">
+                        <span hide id="groupId"></span>
+                        <div class="col-6">
+                          <div class="left field w-100">
+                            <div class="label mb-2 label-required">Tên nhóm</div>
+                            <input id="groupTitleSup" class="sapo-textbox w100 pull-left" bind="supplierGroup.name" data-toggle="tooltip" placeholder="Nhập tên nhóm nhà cung cấp" data-original-title="" title="">
+                          </div>
+                          <div class="left field w-100 mb-2">
+                            <div class="label mb-2">Mã nhóm</div>
+                            <input id="groupCodeSup" class="sapo-textbox w100 pull-left" bind="supplierGroup.code" data-toggle="tooltip" placeholder="Nhập mã nhóm nhà cung cấp" data-original-title="" title="">
+                          </div>
+                        </div>
+                        <div class="col-6 field mb-2">
+                          <div class="label mb-2">Ghi chú</div>
+                          <textarea id="groupDescriptionSup" bind="supplierGroup.note" class="sapo-textbox" style="height:113px"></textarea>
+                        </div>
+                      </div>
         </div>
         <div class="modal-footer">
-          <div class="action-btn clearfix">
-            <button class="btn btn-default pull-right margin-left-5 sapo-btn-default" href="javascript:void(0)" >Thêm</button>
-            <button class="close-modal btn btn-blank pull-right" id="close-popup" type="button">Thoát</button>
-          </div>
+          <button class="btn secondary" data-bs-dismiss="modal">Thoát</button>
+          <button id="createGroupSupplier" class="btn primary">Thêm</button>
         </div>
+
+<!--        <div class="modal-footer">-->
+<!--          <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--          <button class="btn btn-primary">Save changes</button>-->
+<!--        </div>-->
       </div>
     </div>
   </div>
-
 </th:block>
 </html>
