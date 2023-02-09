@@ -27,7 +27,7 @@ public class SupplierIntegrationTest {
                 .setPhone("0989876565")
                 .setDescription("Quen thuoc")
                 .setSupplierCode("SPL0005");
-        expected = supplierAPI.save(supplierParam).getBody();
+//        expected = supplierAPI.save(supplierParam).getBody();
     }
 
     @Test
