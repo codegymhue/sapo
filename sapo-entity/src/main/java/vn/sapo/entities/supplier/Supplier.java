@@ -5,10 +5,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import vn.sapo.entities.*;
-import vn.sapo.entities.customer.CustomerGroup;
 import vn.sapo.entities.payment.*;
+import vn.sapo.entities.supplier.supplier_tag.Tag;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -62,6 +64,8 @@ public class Supplier extends BaseEntity {
 
     @Column(name = "sup_group_id", insertable = false, updatable = false)
     private Integer groupId;
+    @ManyToMany(mappedBy = "suppliers")
+    private Set<Tag> tags = new HashSet<>();
 
     public Supplier(Integer id) {
         this.id = id;
