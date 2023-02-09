@@ -1,4 +1,4 @@
-
+//
 //package vn.sapo.supplier;
 //
 //import org.apache.poi.ss.usermodel.Cell;
@@ -19,17 +19,16 @@
 //
 //public class SupplierExcelExporter {
 //
-//    private XSSFWorkbook workbook ;
+//    private XSSFWorkbook workbook;
 //
-//    private XSSFSheet sheet ;
+//    private XSSFSheet sheet;
 //
-//    private List <SupplierResult> supplierList;
+//    private List<SupplierResult> supplierList;
 //
 //    public SupplierExcelExporter(List<SupplierResult> supplierList) {
 //        this.supplierList = supplierList;
 //        workbook = new XSSFWorkbook();
 //    }
-//
 //
 //
 //    private void writeHeaderLine() {
@@ -72,8 +71,7 @@
 //        Cell cell = row.createCell(columnCount);
 //        if (value instanceof Integer) {
 //            cell.setCellValue((Integer) value);
-//        }
-//        else if (value instanceof Boolean) {
+//        } else if (value instanceof Boolean) {
 //            cell.setCellValue((Boolean) value);
 //        } else if (value instanceof Long) {
 //            cell.setCellValue((Long) value);
@@ -82,4 +80,4 @@
 //        }
 //        cell.setCellStyle(style);
 //    }
-//
+//}
