@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html class="sapo-menu-expand sapo-menu-toggle-active" lang="vi-VN">
+<html  xmlns:th="http://www.thymeleaf.org" class="sapo-menu-expand sapo-menu-toggle-active" lang="vi-VN">
 
 <head>
   <meta charset="utf-8" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
   <script>
+
     var CKEDITOR_BASEPATH = '/v2/lib/ckeditor/';
     var S_LANG = 'vi-VN';
     var S_LANG_RES = 'https://sapo.dktcdn.net/sapo-frontend-x/d9ad77d.i18n_vi-VN.json';
@@ -54,6 +58,7 @@
       </svg>
     </a>
   </div>
+  <th:block th:replace="/layout/supplier/menu :: menu"/>
 
   <div class="col-right">
     <div class="col-right_content" id="content">
@@ -238,17 +243,31 @@
               </div>
               <div class="col-6 field pr-0">
                 <div class="label mb-2">Nhóm nhà cung cấp</div>
-                <div class="select__wrapper " id="search-supplier-group-wrap">
-                  <a class="sapo-select select--a select-suggest" id="search-supplier-group">
-                    Khác</a>
-                  <svg class="next-icon next-icon--size-16">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                         xlink:href="#select-chevron"></use>
-                  </svg>
-                  <div class="filter-body--suggest">
+                <div>
+                  <div class="btn-group">
+                    <button class="btn btn-secondary dropdown-toggle" style="width: 300px" type="button" id="dropdownMenuClickableInside" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                     Khác
+                    </button>
+                    <ul id="renderGroupLi" class="dropdown-menu" aria-labelledby="dropdownMenuClickableInside" style="width: 300px">
+                      <li><input type="text" placeholder="Tìm kiếm" style="width: 300px; height: 30px"></li>
+                      <li><p id="showGroupSupplier" style="height: 30px; width: 300px; font-size: 11px; padding: 5px">Thêm mới nhóm nhà cung cấp</p></li>
+                      <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    </ul>
                   </div>
                 </div>
+
+<!--                <div class="select__wrapper " id="search-supplier-group-wrap">-->
+<!--                  <a class="sapo-select select&#45;&#45;a select-suggest" id="search-supplier-group">-->
+<!--                    Khác</a>-->
+<!--                  <svg class="next-icon next-icon&#45;&#45;size-16">-->
+<!--                    <use xmlns:xlink="http://www.w3.org/1999/xlink"-->
+<!--                         xlink:href="#select-chevron"></use>-->
+<!--                  </svg>-->
+<!--                  <div class="filter-body&#45;&#45;suggest">-->
+<!--                  </div>-->
+<!--                </div>-->
               </div>
+              <th:bock th:replace="/admin/suppliers/modals/create_group_supplier :: create_group_supplier"/>
               <div class="col-6 field pl-0">
                 <div class="label mb-2">Số điện thoại</div>
                 <input id="phoneUp" class="sapo-textbox w100" data-toggle="tooltip" th:field="${supplier.phone}">
@@ -269,15 +288,15 @@
             <div class="page-info-body">
               <div class="col-6 field pl-0">
                 <div class="label mb-2">Số fax</div>
-                <input id="attFaxUp" class="sapo-textbox w100" data-toggle="tooltip" th:field="${supplier.attFax}">
+                <input id="attFaxUp" class="sapo-textbox w100" data-toggle="tooltip" th:field="${supplier.fax}">
               </div>
               <div class="col-6 field pr-0">
                 <div class="label mb-2">Mã số thuế</div>
-                <input id="attTaxCodeUp" class="sapo-textbox w100" data-toggle="tooltip" th:field="${supplier.attTaxCode}">
+                <input id="attTaxCodeUp" class="sapo-textbox w100" data-toggle="tooltip" th:field="${supplier.taxCode}">
               </div>
               <div class="col-6 field pl-0">
                 <div class="label mb-2">Website</div>
-                <input id="attWebsiteUp"  class="sapo-textbox w100" data-toggle="tooltip" th:field="${supplier.attWebsite}">
+                <input id="attWebsiteUp"  class="sapo-textbox w100" data-toggle="tooltip" th:field="${supplier.website}">
               </div>
               <div class="col-6 field pr-0">
                 <div class="label mb-2">Trạng thái nhà cung cấp</div>
@@ -666,6 +685,15 @@
       commands: {}
     }
   }
+
+  class createSupGroupParam {
+    constructor(id, title,supplierCode, description ) {
+      this.id = id;
+      this.title = title;
+      this.supplierCode =supplierCode;
+      this.description =description;
+    }
+  }
   class UpdateSupplierParam{
     constructor( id,  supplierCode,  name,  email,  phone,  description,  paymentMethodId,  supGroupName,  employeeId,  status) {
       this.id= id;
@@ -687,8 +715,9 @@
   page.elements.emailUp = $("#emailUp");
   page.elements.phoneUp = $("#phoneUp")
   page.elements.statusUp =   $("#statusUp");
-  page.elements.descriptionUp = $("#descriptionUp")
+  page.elements.descriptionUp = $("#descriptionUp");
 
+  page.dialogs.elements.createGroupSupp = $("#createGroupSupp")
 
   function getAllEmployeeSelect() {
     return $.ajax({
@@ -737,6 +766,8 @@
       phone: page.elements.phoneUp.val(),
       status:  page.elements.statusUp.val(),
       description: page.elements.descriptionUp.val(),
+
+
     }
     console.log(newUpdateSupplierParam);
 
@@ -769,9 +800,78 @@
             })
   })
 
-  $("#showGroupSupplier").on('click', () =>{
-    $("#createGroupSupplier").modal('show');
-  })
+  // $("#showGroupSupplier").on('click', () =>{
+  //   $("#showModalGroupSupplier").modal('show');
+  // })
+  //
+  // $("#createGroupSupplier").on('click', () => {
+  //   let newGroupSup = new createSupGroupParam();
+  //   newGroupSup.id = $("#groupId").val();
+  //   newGroupSup.title = $("#groupTitleSup").val();
+  //   newGroupSup.supplierCode = $("#groupCodeSup").val();
+  //   newGroupSup.description = $("#groupDescriptionSup").val();
+  //   console.log("trc ajax", newGroupSup)
+  //   $.ajax({
+  //     "headers": {
+  //       "accept": "application/json",
+  //       "content-type": "application/json"
+  //     },
+  //     "type": "POST",
+  //     "url": "http://localhost:8080/api/admin/suppliers/group/create",
+  //     "data": JSON.stringify(newGroupSup)
+  //   })
+  //           .done((data) => {
+  //             location.reload();
+  //
+  //             // console.log("group",data);
+  //             // alert("Thêm nhóm nhà cung cấp thành công")
+  //             // // console.log("data", data);
+  //             // let trSupplier = $("#tr_" + data.id);
+  //             // let tr = renderRowGroupSupplier(data);
+  //             // trSupplier.append(tr);
+  //             // alert("Thêm nhóm nhà cung ứng thành công")
+  //
+  //             // let renderGroup = $("#renderGroupLi");
+  //             // getAllGroup(renderGroup);
+  //             // $("#showModalGroupSupplier").modal('hide');
+  //
+  //             // $.each(data, (i, item) => {
+  //             //   let tr = renderRowGroupSupplier(item);
+  //             //  $("#renderGroupLi").append(tr);
+  //             // })
+  //           })
+  //           .fail((jqXHR) => {
+  //             // console.log(jqXHR);
+  //             // App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+  //           })
+  // })
+  // function getAllGroup(element) {
+  //   $.ajax({
+  //     "headers": {
+  //       "accept": "application/json",
+  //       "content-type": "application/json"
+  //     },
+  //     type: "GET",
+  //     url: "http://localhost:8080/api/admin/suppliers/group",
+  //   })
+  //           .done((data) =>{
+  //
+  //             $.each(data, function (index, value) {
+  //               element.append(`<li value="${value.id}">${value.title}</li>`)
+  //             });
+  //           })
+  // }
+  // let renderGroup = $("#renderGroupLi");
+  // getAllGroup(renderGroup);
+  //
+  // function renderRowGroupSupplier(item){
+  //   let str = `
+  //               <li id="tr_${item.id}">
+  //               ${item.title}
+  //               </li>
+  //       `;
+  //   return str;
+  // }
 
 
   // document.getElementById("showGroupSupplier").value="";

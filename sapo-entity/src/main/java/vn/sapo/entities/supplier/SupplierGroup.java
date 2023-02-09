@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import vn.sapo.entities.BaseEntity;
+import vn.sapo.entities.customer.CustomerGroupType;
 
 import javax.persistence.*;
 
@@ -23,9 +24,13 @@ public class SupplierGroup extends BaseEntity {
     @Column(name = "title", nullable = false, length = 50)
     private String title;
 
-    @Column(name = "cus_grp_code", length = 50)
+    @Column(name = "sup_grp_code", length = 50)
     private String supplierCode;
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "sup_grp_type")
+    @Enumerated(EnumType.STRING)
+    private SupplierGroupType supplierGroupType;
 }
