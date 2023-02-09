@@ -40,7 +40,7 @@ public class SupplierAPITest {
                         .setPhone("0989876565")
                         .setDescription("Quen thuoc")
                         .setSupplierCode("SPL0001")
-                        .setPaymentMethodId(1)
+//                        .setPaymentMethodId()
                         .setSupplierCode("1234")
                         .setEmployeeId(1)
                 );
@@ -60,6 +60,4 @@ public class SupplierAPITest {
 //                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(1)))
 //                .andExpect(MockMvcResultMatchers.jsonPath("$[0].id", is(1)));
     }
-
-
 }

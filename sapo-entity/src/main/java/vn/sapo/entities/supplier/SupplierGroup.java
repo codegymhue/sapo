@@ -30,7 +30,4 @@ public class SupplierGroup extends BaseEntity {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "sup_grp_type")
-    @Enumerated(EnumType.STRING)
-    private SupplierGroupType supplierGroupType;
 }

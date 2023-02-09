@@ -251,7 +251,6 @@
                     <ul id="renderGroupLi" class="dropdown-menu" aria-labelledby="dropdownMenuClickableInside" style="width: 300px">
                       <li><input type="text" placeholder="Tìm kiếm" style="width: 300px; height: 30px"></li>
                       <li><p id="showGroupSupplier" style="height: 30px; width: 300px; font-size: 11px; padding: 5px">Thêm mới nhóm nhà cung cấp</p></li>
-                      <li><a class="dropdown-item" href="#">Menu item</a></li>
                     </ul>
                   </div>
                 </div>
@@ -800,78 +799,77 @@
             })
   })
 
-  // $("#showGroupSupplier").on('click', () =>{
-  //   $("#showModalGroupSupplier").modal('show');
-  // })
-  //
-  // $("#createGroupSupplier").on('click', () => {
-  //   let newGroupSup = new createSupGroupParam();
-  //   newGroupSup.id = $("#groupId").val();
-  //   newGroupSup.title = $("#groupTitleSup").val();
-  //   newGroupSup.supplierCode = $("#groupCodeSup").val();
-  //   newGroupSup.description = $("#groupDescriptionSup").val();
-  //   console.log("trc ajax", newGroupSup)
-  //   $.ajax({
-  //     "headers": {
-  //       "accept": "application/json",
-  //       "content-type": "application/json"
-  //     },
-  //     "type": "POST",
-  //     "url": "http://localhost:8080/api/admin/suppliers/group/create",
-  //     "data": JSON.stringify(newGroupSup)
-  //   })
-  //           .done((data) => {
-  //             location.reload();
-  //
-  //             // console.log("group",data);
-  //             // alert("Thêm nhóm nhà cung cấp thành công")
-  //             // // console.log("data", data);
-  //             // let trSupplier = $("#tr_" + data.id);
-  //             // let tr = renderRowGroupSupplier(data);
-  //             // trSupplier.append(tr);
-  //             // alert("Thêm nhóm nhà cung ứng thành công")
-  //
-  //             // let renderGroup = $("#renderGroupLi");
-  //             // getAllGroup(renderGroup);
-  //             // $("#showModalGroupSupplier").modal('hide');
-  //
-  //             // $.each(data, (i, item) => {
-  //             //   let tr = renderRowGroupSupplier(item);
-  //             //  $("#renderGroupLi").append(tr);
-  //             // })
-  //           })
-  //           .fail((jqXHR) => {
-  //             // console.log(jqXHR);
-  //             // App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
-  //           })
-  // })
-  // function getAllGroup(element) {
-  //   $.ajax({
-  //     "headers": {
-  //       "accept": "application/json",
-  //       "content-type": "application/json"
-  //     },
-  //     type: "GET",
-  //     url: "http://localhost:8080/api/admin/suppliers/group",
-  //   })
-  //           .done((data) =>{
-  //
-  //             $.each(data, function (index, value) {
-  //               element.append(`<li value="${value.id}">${value.title}</li>`)
-  //             });
-  //           })
-  // }
-  // let renderGroup = $("#renderGroupLi");
-  // getAllGroup(renderGroup);
-  //
-  // function renderRowGroupSupplier(item){
-  //   let str = `
-  //               <li id="tr_${item.id}">
-  //               ${item.title}
-  //               </li>
-  //       `;
-  //   return str;
-  // }
+  $("#showGroupSupplier").on('click', () =>{
+    $("#showModalGroupSupplier").modal('show');
+  })
+
+  $("#createGroupSupplier").on('click', () => {
+    let newGroupSup = new createSupGroupParam();
+    newGroupSup.id = $("#groupId").val();
+    newGroupSup.title = $("#groupTitleSup").val();
+    newGroupSup.supplierCode = $("#groupCodeSup").val();
+    newGroupSup.description = $("#groupDescriptionSup").val();
+    console.log("trc ajax", newGroupSup)
+    $.ajax({
+      "headers": {
+        "accept": "application/json",
+        "content-type": "application/json"
+      },
+      "type": "POST",
+      "url": "http://localhost:8080/api/admin/suppliers/group/create",
+      "data": JSON.stringify(newGroupSup)
+    })
+            .done((data) => {
+              location.reload();
+
+              // console.log("group",data);
+              // alert("Thêm nhóm nhà cung cấp thành công")
+              // // console.log("data", data);
+              // let trSupplier = $("#tr_" + data.id);
+              // let tr = renderRowGroupSupplier(data);
+              // trSupplier.append(tr);
+              // alert("Thêm nhóm nhà cung ứng thành công")
+
+              // let renderGroup = $("#renderGroupLi");
+              // getAllGroup(renderGroup);
+              // $("#showModalGroupSupplier").modal('hide');
+
+              // $.each(data, (i, item) => {
+              //   let tr = renderRowGroupSupplier(item);
+              //  $("#renderGroupLi").append(tr);
+              // })
+            })
+            .fail((jqXHR) => {
+              // console.log(jqXHR);
+              // App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+            })
+  })
+  function getAllGroup(element) {
+    $.ajax({
+      "headers": {
+        "accept": "application/json",
+        "content-type": "application/json"
+      },
+      type: "GET",
+      url: "http://localhost:8080/api/admin/suppliers/group",
+    })
+            .done((data) =>{
+              $.each(data, function (index, value) {
+                element.append(`<li value="${value.id}">${value.title}</li>`)
+              });
+            })
+  }
+  let renderGroup = $("#renderGroupLi");
+  getAllGroup(renderGroup);
+
+  function renderRowGroupSupplier(item){
+    let str = `
+                <li id="tr_${item.id}">
+                ${item.title}
+                </li>
+        `;
+    return str;
+  }
 
 
   // document.getElementById("showGroupSupplier").value="";
