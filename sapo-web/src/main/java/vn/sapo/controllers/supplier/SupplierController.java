@@ -28,6 +28,10 @@ public class SupplierController {
     public ModelAndView showSupplierListPage() {
         return new ModelAndView("/admin/suppliers/supplier_list");
     }
+    @GetMapping("/small")
+    public ModelAndView showSupplierListPageSmall() {
+        return new ModelAndView("/admin/suppliers/supplier_list_small");
+    }
 
 //    @GetMapping("SearchSupplierGroupV1")
 //    public ResponseEntity<?> showSupplierListPage1() {

@@ -1,6 +1,7 @@
 package vn.sapo.supplier;
 
 import vn.sapo.supplier.dto.CreateSupplierParam;
+import vn.sapo.supplier.dto.SupplierFilter;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.dto.UpdateSupplierParam;
 
@@ -22,5 +23,6 @@ public interface SupplierService {
     Map<String, Object> getAllProductItemPage(Integer pageNo, Integer pageSize, String title,
                                                String status
                                               );
+
 
 }
