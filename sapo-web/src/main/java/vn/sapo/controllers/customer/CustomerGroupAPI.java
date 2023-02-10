@@ -12,8 +12,6 @@ import vn.sapo.customerGroup.dto.CreateCusGroupParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.customerGroup.dto.UpdateCusGroupParam;
 
-import java.util.List;
-
 
 @RestController
 @RequestMapping("/api/customer_groups")

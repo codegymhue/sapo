@@ -50,7 +50,7 @@ public class SupplierServiceTest {
     public static void setUp() {
         suppliers.add(new Supplier()
                 .setId(1)
-                .setName("Thanh Ngân")
+                .setFullName("Thanh Ngân")
                 .setEmail("thanhngan1002@gmail.com")
                 .setPhone("0989876565")
                 .setDescription("Quen thuoc")
@@ -62,14 +62,14 @@ public class SupplierServiceTest {
         );
         suppliers.add(new Supplier()
                 .setId(2)
-                .setName("Anh Duy Khánh")
+                .setFullName("Anh Duy Khánh")
                 .setPhone("0787876765")
                 .setSupplierCode("SPL0001")
 
         );
         suppliers.add(new Supplier()
                 .setId(3)
-                .setName("Chị Bình Nguyên")
+                .setFullName("Chị Bình Nguyên")
                 .setEmployeeId(2)
                 .setPaymentMethodId("2")
         );
@@ -109,7 +109,7 @@ public class SupplierServiceTest {
     @Test
     public void testCreate () {
         CreateSupplierParam createSupplierParam = new CreateSupplierParam()
-                .setName("Chị khánh vân")
+                .setFullName("Chị khánh vân")
                 .setEmail("thanhngan1002@gmail.com")
                 .setPhone("0989876565")
                 .setDescription("Quen thuoc");
@@ -128,11 +128,11 @@ public class SupplierServiceTest {
 
     public void supplierAssert(SupplierResult actual, Supplier expected) {
         Assertions.assertThat(actual.getId()).isEqualTo(expected.getId());
-        Assertions.assertThat(actual.getName()).isEqualTo(expected.getName());
+        Assertions.assertThat(actual.getFullName()).isEqualTo(expected.getFullName());
         Assertions.assertThat(actual.getEmail()).isEqualTo(expected.getEmail());
         Assertions.assertThat(actual.getDescription()).isEqualTo(expected.getDescription());
         Assertions.assertThat(actual.getPhone()).isEqualTo(expected.getPhone());
-        Assertions.assertThat(actual.getEmployeeId()).isEqualTo(expected.getEmployeeId());
+        Assertions.assertThat(actual.getEmployee()).isEqualTo(expected.getEmployeeId());
         Assertions.assertThat(actual.getSupplierCode()).isEqualTo(expected.getSupplierCode());
         Assertions.assertThat(actual.getStatus()).isEqualTo(expected.getStatus());
         Assertions.assertThat(actual.getCreateAt()).isEqualTo(expected.getCreatedAt());

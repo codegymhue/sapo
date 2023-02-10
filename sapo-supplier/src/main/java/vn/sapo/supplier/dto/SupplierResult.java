@@ -20,19 +20,16 @@ import java.util.List;
 @AllArgsConstructor
 @Accessors(chain = true)
 public class SupplierResult {
-
-
     private Integer id;
     private String supplierCode;
-    private String name;
+    private String fullName;
     private String email;
     private String phone;
     private String description;
     private SupplierStatus status;
-    private Integer employeeId;
     private SupEmployeeResult employee;
-    private String paymentMethodId;
     private SupPaymentMethodResult paymentMethod;
+
 
     private SupplierGroupResult supplierGroupResult;
     private Integer supGroupId;
@@ -41,7 +38,6 @@ public class SupplierResult {
     private Instant updateAt;
     private BigDecimal debtTotal;
     private List<AddressResult> addresses;
-
     private  String taxCode;
     private  String fax;
     private String website;

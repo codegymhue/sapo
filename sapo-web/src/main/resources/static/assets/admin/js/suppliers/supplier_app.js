@@ -31,10 +31,29 @@ class App {
         return str;
     }
 
-    static IziToast = class {
+
+    static IziToast = class  {
         static showSuccessAlert(m) {
             iziToast.success({
-                title: 'Success',
+                title: 'Thêm thành công',
+                position: 'topRight',
+                timeout: 2500,
+                message: m,
+            });
+        }
+        static showFilter(m) {
+            iziToast.success({
+                title: 'lưu bộ lọc thành công',
+                position: 'topRight',
+                timeout: 2500,
+                message: m,
+            });
+        }
+
+        static showErrorAlert(m) {
+            iziToast.error({
+                title: 'Error',
+
                 position: 'topRight',
                 timeout: 2500,
                 message: m,

@@ -4,9 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.sapo.entities.*;
-import vn.sapo.entities.payment.*;
 import vn.sapo.entities.supplier.supplier_tag.Tag;
+
+import vn.sapo.entities.BaseEntity;
+import vn.sapo.entities.Employee;
+import vn.sapo.entities.payment.PaymentMethod;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -25,11 +27,11 @@ public class Supplier extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "supplier_code", unique = true, nullable = false, length = 50)
+    @Column(name = "supplier_code", unique = true, length = 50)
     private String supplierCode;
 
-    @Column(name = "name", nullable = false, length = 50)
-    private String name;
+    @Column(name = "full_name", nullable = false)
+    private String fullName;
 
     @Column(name = "email", nullable = false, length = 50)
     private String email;
@@ -52,14 +54,14 @@ public class Supplier extends BaseEntity {
     private Integer employeeId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "payment_method_id", nullable = false)
+    @JoinColumn(name = "payment_method_id")
     private PaymentMethod paymentMethod;
 
     @Column(name = "payment_method_id", updatable = false, insertable = false)
     private String paymentMethodId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "sup_group_id", nullable = false)
+    @JoinColumn(name = "sup_group_id")
     private SupplierGroup group;
 
     @Column(name = "sup_group_id", insertable = false, updatable = false)
@@ -74,7 +76,6 @@ public class Supplier extends BaseEntity {
     public Supplier(Integer employeeId, String paymentMethodId) {
         setEmployeeId(employeeId);
         setPaymentMethodId(paymentMethodId);
-
     }
 
     public Supplier setEmployeeId(Integer employeeId) {

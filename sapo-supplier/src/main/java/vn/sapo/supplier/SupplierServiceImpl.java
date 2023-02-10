@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.entities.product.Product;
 import vn.sapo.entities.product.ProductStatus;
 import vn.sapo.entities.supplier.Supplier;
+import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.supplier.dto.CreateSupplierParam;
 import vn.sapo.supplier.dto.SupplierResult;
@@ -22,7 +23,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional
 public class SupplierServiceImpl implements SupplierService {
 
     @Autowired
@@ -54,9 +54,11 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public SupplierResult create(CreateSupplierParam createSupplierParam) {
         Supplier supplier = supplierMapper.toModel(createSupplierParam);
+        supplier.setEmployeeId(1);
         supplier = supplierRepository.save(supplier);
-        if (supplier.getSupplierCode() == null)
-            supplier.setSupplierCode("SUPN" + supplier.getId());
+        String supplierCode = createSupplierParam.getSupplierCode();
+        if (supplierCode == null)
+            supplier.setSupplierCode(CodePrefix.SUPPLIER.generate(supplier.getId()));
         return supplierMapper.toDTO(supplier);
     }
 
