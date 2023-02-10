@@ -8,6 +8,7 @@ import lombok.experimental.Accessors;
 import vn.sapo.address.dto.AddressResult;
 import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.entities.supplier.SupplierStatus;
+import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -32,9 +33,10 @@ public class SupplierResult {
     private SupEmployeeResult employee;
     private String paymentMethodId;
     private SupPaymentMethodResult paymentMethod;
-    private SupGroupResult supGroupResult;
-    private String supGroupTitle;
 
+    private SupplierGroupResult supplierGroupResult;
+    private Integer supGroupId;
+    private String supGroupTitle;
     private Instant createAt;
     private Instant updateAt;
     private BigDecimal debtTotal;

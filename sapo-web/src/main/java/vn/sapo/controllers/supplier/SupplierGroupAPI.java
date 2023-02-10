@@ -11,12 +11,12 @@ import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin/suppliers/group")
+@RequestMapping("/api/admin/supplier_groups")
 public class SupplierGroupAPI {
     @Autowired
     private SupplierGroupService supplierGroupService;
     @GetMapping
-    public ResponseEntity<List<SupplierGroupResult>> FindAllGroup() {
+    public ResponseEntity<List<SupplierGroupResult>> findAll() {
         List<SupplierGroupResult> dto = supplierGroupService.finAll();
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }

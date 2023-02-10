@@ -16,7 +16,7 @@ public class UpdateSupplierParam {
     private String phone;
     private String description;
     private Integer paymentMethodId;
-    private String supGroupName;
+    private Integer supGroupId;
     private Integer employeeId;
     private SupplierStatus status;
 

@@ -10,6 +10,7 @@ import vn.sapo.employee.EmployeeService;
 import vn.sapo.payment.method.PaymentMethodService;
 import vn.sapo.supplier.SupplierService;
 import vn.sapo.supplier.dto.SupplierResult;
+import vn.sapo.supplierGroup.SupplierGroupService;
 
 @Controller
 @RequestMapping("/admin/suppliers")
@@ -20,6 +21,9 @@ public class SupplierController {
 
     @Autowired
     EmployeeService employeeService;
+
+    @Autowired
+    SupplierGroupService supplierGroupService;
 
     @Autowired
     PaymentMethodService paymentMethodService;
@@ -71,6 +75,7 @@ public class SupplierController {
         try {
             SupplierResult supplier = supplierService.findById(id);
             modelAndView.addObject("supplier", supplier);
+            modelAndView.addObject("supplierGroup", supplierGroupService.finAll());
             modelAndView.addObject("employee", employeeService.findAll());
             modelAndView.addObject("paymentMethod", paymentMethodService.findAll());
         } catch (Exception e) {

@@ -31,9 +31,18 @@ class App {
         return str;
     }
 
-
-
+    static IziToast = class {
+        static showSuccessAlert(m) {
+            iziToast.success({
+                title: 'Success',
+                position: 'topRight',
+                timeout: 2500,
+                message: m,
+            });
+        }
+    }
 }
+
 
 class Supplier {
     constructor(id, supplierCode, name, email, phone, status, description, employeeId, employee,

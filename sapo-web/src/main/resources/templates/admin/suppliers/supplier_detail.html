@@ -246,7 +246,7 @@
                 <div class="line-info flex">
                   <label>Nhóm nhà cung cấp<span class="right">:</span></label>
                   <div class="content text-overflow-hiden div-pd-r-10" >
-                    <span th:text="${supplier.supGroupTitle}"></span>
+                    <span th:text="${supplier.supGroupTitle} ? ${':' + supplier.supGroupTitle} : ${'---'} " ></span>
                   </div>
                 </div>
                 <div class="line-info flex">
@@ -269,11 +269,11 @@
               <div class="col-4 p-0">
                 <div class="line-info flex">
                   <label>Mã số thuế<span class="right">:</span></label>
-                  <div class="content text-overflow-hiden div-pd-r-10" th:text="${supplier.taxCode}">---</div>
+                  <div class="content text-overflow-hiden div-pd-r-10" th:text="${supplier.taxCode} ? ${supplier.taxCode} : ${'---'} "></div>
                 </div>
                 <div class="line-info flex">
                   <label>Website<span class="right">:</span></label>
-                  <a class="content text-overflow-hiden div-pd-r-10" target="_blank" th:text=" ${supplier.website}">---</a>
+                  <a class="content text-overflow-hiden div-pd-r-10" target="_blank" th:text=" ${supplier.website} ? ${supplier.website} : ${'---'}">---</a>
                 </div>
                 <div class="line-info flex">
                   <label>Mô tả<span class="right">:</span></label>
