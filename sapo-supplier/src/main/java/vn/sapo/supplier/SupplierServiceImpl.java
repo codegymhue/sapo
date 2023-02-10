@@ -12,9 +12,11 @@ import vn.sapo.entities.product.ProductStatus;
 import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.supplier.dto.CreateSupplierParam;
+import vn.sapo.supplier.dto.SupplierFilter;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.dto.UpdateSupplierParam;
 
+import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +32,6 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Autowired
     private SupplierRepository supplierRepository;
-
 
     @Override
     @Transactional(readOnly = true)
@@ -114,6 +115,5 @@ public class SupplierServiceImpl implements SupplierService {
             return new HashMap<>();
         }
     }
-
 
 }

@@ -356,7 +356,7 @@
                         </div>
                         <div class="table-filter-container">
                             <div class="filter-header">
-                                <button class="btn btn-filter" type="button" data-toggle="popover">
+                                <button class="btn btn-filter" id="btnFilter" type="button" data-toggle="popover">
                                     <span>Lọc nhà cung cấp</span>
                                     <svg class="next-icon next-icon--size-20" id="svg-filter">
                                         <use xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -389,7 +389,7 @@
                                                     bind-event-change="changeItemFilter(this)">
                                                 <option value="status" selected>Tr&#x1EA1;ng th&#xE1;i</option>
                                                 <option value="assigneeIds">Nh&#xE2;n vi&#xEA;n</option>
-                                                <option value="tags">Tags</option>
+                                                <option value="tags" hidden="hidden">Tags</option>
                                                 <option value="supplierGroupId">Nh&#xF3;m nh&#xE0; cung c&#x1EA5;p
                                                 </option>
                                                 <option value="createdOn">Ng&#xE0;y t&#x1EA1;o</option>
@@ -402,12 +402,14 @@
                                         <div class="btn-group pull-left" data-toggle="buttons">
                                             <label class="btn filter-button-tag "
                                                    bind-event-click="setParamFilterActive('active',this)">
-                                                <input type="checkbox" autocomplete="off"> &#x110;ang giao
+                                                <input type="checkbox" class="checkboxStatus" autocomplete="off">
+                                                &#x110;ang giao
                                                 d&#x1ECB;ch
                                             </label>
                                             <label class="btn filter-button-tag "
                                                    bind-event-click="setParamFilterActive('disable',this)">
-                                                <input type="checkbox" autocomplete="off"> Ng&#x1EEB;ng giao
+                                                <input type="checkbox" class="checkboxStatus" autocomplete="off"> Ng&#x1EEB;ng
+                                                giao
                                                 d&#x1ECB;ch
                                             </label>
                                         </div>
@@ -425,7 +427,7 @@
                                                     bind-event-change="changeItemFilter(this)">
                                                 <option value="status">Tr&#x1EA1;ng th&#xE1;i</option>
                                                 <option value="assigneeIds" selected>Nh&#xE2;n vi&#xEA;n</option>
-                                                <option value="tags">Tags</option>
+                                                <option value="tags" hidden="hidden">Tags</option>
                                                 <option value="supplierGroupId">Nh&#xF3;m nh&#xE0; cung c&#x1EA5;p
                                                 </option>
                                                 <option value="createdOn">Ng&#xE0;y t&#x1EA1;o</option>
@@ -460,7 +462,7 @@
                                                     bind-event-change="changeItemFilter(this)">
                                                 <option value="status">Tr&#x1EA1;ng th&#xE1;i</option>
                                                 <option value="assigneeIds">Nh&#xE2;n vi&#xEA;n</option>
-                                                <option value="tags" selected>Tags</option>
+                                                <option value="tags" hidden="hidden">Tags</option>
                                                 <option value="supplierGroupId">Nh&#xF3;m nh&#xE0; cung c&#x1EA5;p
                                                 </option>
                                                 <option value="createdOn">Ng&#xE0;y t&#x1EA1;o</option>
@@ -486,7 +488,7 @@
                                                     bind-event-change="changeItemFilter(this)">
                                                 <option value="status">Tr&#x1EA1;ng th&#xE1;i</option>
                                                 <option value="assigneeIds">Nh&#xE2;n vi&#xEA;n</option>
-                                                <option value="tags">Tags</option>
+                                                <option value="tags" hidden="hidden">Tags</option>
                                                 <option value="supplierGroupId" selected>Nh&#xF3;m nh&#xE0; cung
                                                     c&#x1EA5;p
                                                 </option>
@@ -534,7 +536,7 @@
                                                     bind-event-change="changeItemFilter(this)">
                                                 <option value="status">Tr&#x1EA1;ng th&#xE1;i</option>
                                                 <option value="assigneeIds">Nh&#xE2;n vi&#xEA;n</option>
-                                                <option value="tags">Tags</option>
+                                                <option value="tags" hidden="hidden">Tags</option>
                                                 <option value="supplierGroupId">Nh&#xF3;m nh&#xE0; cung c&#x1EA5;p
                                                 </option>
                                                 <option value="createdOn" selected>Ng&#xE0;y t&#x1EA1;o</option>
@@ -547,13 +549,13 @@
                                         <div class="input-group input-daterange pull-left" style="width: 300px;">
                                             <input type="text"
                                                    class="form-control from-date input-date sapo-textbox choosed-single-id"
-                                                   style="width: 120px;" name="createMin" value=""
+                                                   style="width: 120px;" name="createMin" id="createMin" value=""
                                                    placeholder="Từ ngày" autocomplete="off">
                                             <div class="input-group-append"><span class="input-group-text"></span>
                                             </div>
                                             <input type="text"
                                                    class="form-control to-date input-date sapo-textbox choosed-single-id"
-                                                   style="width: 120px;" name="createMax" value=""
+                                                   style="width: 120px;" name="createMax"id="createMax" value=""
                                                    placeholder="Đến ngày" autocomplete="off">
                                         </div>
                                         <a href="javascript" bind-event-click="removeItemFilter(this, 'createdOn')"
@@ -570,7 +572,7 @@
                                             <option value="">Chọn điều kiện lọc</option>
                                             <option value="status">Tr&#x1EA1;ng th&#xE1;i</option>
                                             <option value="assigneeIds">Nh&#xE2;n vi&#xEA;n</option>
-                                            <option value="tags">Tags</option>
+                                            <option value="tags" hidden="hidden">Tags</option>
                                             <option value="supplierGroupId">Nh&#xF3;m nh&#xE0; cung c&#x1EA5;p
                                             </option>
                                             <option value="createdOn">Ng&#xE0;y t&#x1EA1;o</option>
@@ -1165,6 +1167,7 @@
     const page = {
         urls: {
             getAllSupplier: App.PRODUCT_API,
+            getAllEmployee: App.EMPLOYEE_API,
         },
         elements: {},
         commands: {},
@@ -1179,7 +1182,30 @@
     page.elements.sapoTable_tbody = $("#sapo-table tbody");
     page.elements.inputQuery = $("#query-enter");
     page.elements.pageSize = $("#pageSize");
+    page.elements.checkboxStatus = $(".checkboxStatus")
+    page.elements.createMin = $("#createMin");
+    page.elements.createMax = $("#createMax");
+    page.elements.btnFilter = $("#btnFilter");
 
+
+
+    page.commands.getAllEmployee = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getAllEmployee,
+        })
+            .done((data) => {
+                console.log(data)
+            })
+    }
+
+    $(() => {
+        page.commands.getAllEmployee();
+    })
 
 </script>
 
