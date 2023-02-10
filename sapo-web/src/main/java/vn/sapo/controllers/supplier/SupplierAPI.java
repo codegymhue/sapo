@@ -39,11 +39,11 @@ public class SupplierAPI {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-//    @PostMapping("/create")
-//    public ResponseEntity<SupplierResult> save(@RequestBody CreateSupplierParam supplierCreate) {
-//        return new ResponseEntity<>(supplierService.create(supplierCreate), HttpStatus.OK);
-//
-//    }
+    @PostMapping("/createnew")
+    public ResponseEntity<SupplierResult> save(@RequestBody CreateSupplierParam supplierCreate) {
+        return new ResponseEntity<>(supplierService.create(supplierCreate), HttpStatus.OK);
+
+    }
 
 
     @PostMapping("/create")

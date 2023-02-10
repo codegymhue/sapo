@@ -1,5 +1,3 @@
-
-//
 //package vn.sapo.supplier;
 //
 //import org.apache.poi.ss.usermodel.Cell;
@@ -8,30 +6,30 @@
 //import org.apache.poi.xssf.usermodel.XSSFFont;
 //import org.apache.poi.xssf.usermodel.XSSFSheet;
 //import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+//import org.springframework.beans.factory.annotation.Autowired;
 //import vn.sapo.supplier.dto.SupplierResult;
+//import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 //
 //import javax.servlet.ServletOutputStream;
 //import javax.servlet.http.HttpServletResponse;
 //import java.io.IOException;
 //import java.util.List;
 //
-//
-//public class SupplierExcelExporter {
-//
+//public class SupplierExcelExporterInventory {
 //    private XSSFWorkbook workbook;
-//
 //    private XSSFSheet sheet;
-//
 //    private List<SupplierResult> supplierList;
 //
-//    public SupplierExcelExporter(List<SupplierResult> supplierList) {
+//    @Autowired
+//    SupplierGroupResult supplierGroupResult;
+//
+//    public SupplierExcelExporterInventory(List<SupplierResult> supplierList) {
 //        this.supplierList = supplierList;
 //        workbook = new XSSFWorkbook();
 //    }
 //
-//
 //    private void writeHeaderLine() {
-//        sheet = workbook.createSheet("Suppliers");
+//        sheet = workbook.createSheet("Customers");
 //        Row row = sheet.createRow(0);
 //
 //        CellStyle style = workbook.createCellStyle();
@@ -39,7 +37,6 @@
 //        font.setBold(true);
 //        font.setFontHeight(16);
 //        style.setFont(font);
-//
 //        createCell(row, 0, "Tên nhà cung cấp ", style);
 //        createCell(row, 1, "Mã nhà cung cấp", style);
 //        createCell(row, 2, "Mã nhóm nhà cung cấp", style);
@@ -63,6 +60,8 @@
 //        createCell(row, 20, "Quận/Huyện", style);
 //        createCell(row, 21, "Nợ hiện tại", style);
 //        createCell(row, 21, "Tags", style);
+//
+//
 //    }
 //
 //    private void createCell(Row row, int columnCount, Object value, CellStyle style) {
@@ -83,22 +82,12 @@
 //    private void writeDataLines() {
 //        int rowCount = 1;
 //
-//
 //        CellStyle style = workbook.createCellStyle();
 //        XSSFFont font = workbook.createFont();
 //        font.setFontHeight(14);
 //        style.setFont(font);
-//
-//        for (SupplierResult supplier : supplierList) {
-//            Row row = sheet.createRow(rowCount++);
-//            int columnCount = 0;
-//            createCell(row, columnCount++, supplier.getName() != null ? supplier.getName() : "", style);
-//            createCell(row, columnCount++, supplier.getSupplierCode(), style);
-//            createCell(row, columnCount++, supplier.getPhone() != null ? supplier.getPhone() : "", style);
-//        }
-//
-//
 //    }
+//
 //
 //
 //    public void export(HttpServletResponse response) throws IOException {
@@ -114,4 +103,3 @@
 //    }
 //
 //}
-

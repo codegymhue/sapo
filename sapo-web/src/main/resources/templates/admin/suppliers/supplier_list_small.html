@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html class="sapo-menu-expand sapo-menu-toggle-active" lang="vi-VN">
+<!-- <link rel="stylesheet" href="supplier.css"> -->
+
+<head>
+    <meta charset="utf-8"/>
+    <th:block th:replace="/layout/supplier/header.html"/>
+
+
+</head>
+
+<body class="body_dashboard partners suppliers index">
+<div id="container">
+    <div class="hidden" context="tenantInfo"
+         define="{tenantInfo: new Components.TenantInfo(this,{&quot;countries&quot;:{&quot;countryId&quot;:201}})}">
+    </div>
+    <div class="header-mobile">
+        <a href="javascript:" class="icon-menu visible-xs visible-sm" onclick="showMenu()">
+            <svg class="next-icon next-icon--size-20">
+                <use xlink:href="#icon-menu" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+            </svg>
+        </a>
+    </div>
+    <th:block th:replace="/layout/supplier/menu :: menu"/>
+    <div class="col-right">
+        <div class="col-right_content">
+            <header class="ui-title-bar-container ui-title-bar-container--index">
+                <div class="ui-title-bar">
+                    <div class="ui-title-bar__main-group">
+                        <div class="ui-title-bar__heading-group">
+                            <h1 class="ui-title-bar__title">Nhà cung cấp</h1>
+                        </div>
+                    </div>
+                    <a href="/admin/suppliers/create" class="btn sapo-btn-default">Thêm nhà cung cấp</a>
+                </div>
+                <div class="action-bar">
+                    <div class="action-bar__top-links">
+                        <button class="btn sapo-btn-transparent action-bar__link export_product" type="button"
+                                name="button">
+                            <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-export-minor"></use>
+                            </svg>
+                            Xuất file
+                        </button>
+                        <button class="btn sapo-btn-transparent action-bar__link import_product" type="button"
+                                name="button">
+                            <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-import-minor"></use>
+                            </svg>
+                            Nhập file
+                        </button>
+                        <a class="btn sapo-btn-transparent action-bar__link" href="#" data-popover-index="1">
+                            <img src="/v2/images/icon/friends.svg"
+                                 style="width: 18px; height: 18px; position: relative; top: -0.6rem; margin-top: -1.1rem; margin-bottom: -1.1rem; margin-right: 3px;">
+                            Nhóm nhà cung cấp
+                        </a>
+                        <button class="btn sapo-btn-transparent action-bar__link">
+                            <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-setting"></use>
+                            </svg>
+                            Điều chỉnh cột hiển thị
+                            <script class="modal_source"
+                                    define="{settingsColumnSuppliersModal: new Components.Modal(this)}"
+                                    type="text/html">
+                        </script>
+                        </button>
+                    </div>
+                </div>
+            </header>
+            <div class="gird-layout gird-layout--full-width">
+                <section class="grid-card">
+                    <div class="filter-tab-container">
+                        <ul class="filter-tab-list">
+                            <li class="filter-tab-item" style="opacity: 1;">
+                                <a href="/admin/suppliers" class="filter-tab filter-tab-active">Tất cả nhà cung cấp</a>
+                            </li>
+                            <li class="filter-tab-item" style="opacity: 1; padding-bottom: 3.5px;">
+                                <a href="/admin/suppliers?status=available" class="filter-tab">Đang giao dịch</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="filter-header  ">
+                        <button class="btn btn-filter" id="btnFilter" type="button">
+                            <span>Lọc nhà cung cấp</span>
+                            <svg id="svg-filter" class="next-icon next-icon--size-20">
+                                <use xlink:href="#next-disclosure" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+                            </svg>
+                        </button>
+                        <div class="group-input-query">
+                            <svg class="next-icon next-icon--size-16">
+                                <use xlink:href="#next-search-reverse" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+                            </svg>
+                            <input type="text" class="input-query sapo-textbox searchTitle"
+                                   title="Tìm kiếm theo mã nhà cung cấp, SĐT, tên nhà cung cấp"
+                                   placeholder="Tìm kiếm theo mã nhà cung cấp, SĐT, tên nhà cung cấp"/>
+                        </div>
+                    </div>
+                    <div class="filter-body"
+                         style="background-color: #dfe4e8; float: left;position: absolute; z-index: 99">
+                        <div class="filter-content" style="display:none">
+                            <p class="title" id="ptitle">Hiển thị nhà cung cấp theo:</p>
+
+                            <div class="select__wrapper">
+                                <select class="sapo-select select-change-filter--all" >
+                                    <option value="">Chọn điều kiện lọc</option>
+                                    <option value="status">Trạng thái</option>
+                                    <option value="assigneeIds">Nhân viên</option>
+                                    <option value="supplierGroupId">Nhóm nhà cung cấp</option>
+                                    <option value="createdOn">Ngày tạo</option>
+                                </select>
+                                <svg class="next-icon next-icon--size-16">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use>
+                                </svg>
+                            </div>
+                            <div class="next-input-wrapper--vertical-block" style="order: 99999999;margin-top:7px">
+                                <button class="btn sapo-btn-default" type="button" bind-event-click="submitFilter(this)"
+                                        name="button">Lọc
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <div id="sapo-table_wrapper">
+                            <table id="tbSupplier" class="table table-hover">
+                                <thead style="background-color: #f4f6f8; height: 55px">
+                                <tr id="theadList" class="show">
+                                    <th class="align-middle">
+                                        <label for="checkAll" style="padding: 1rem; cursor:pointer">
+                                            <input style="cursor:pointer" id="checkAll" type="checkbox" value=""
+                                                   data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả">
+                                        </label>
+                                    </th>
+                                    <th class="align-middle" scope="col">Mã nhà cung cấp</th>
+                                    <th class="align-middle" scope="col">Tên nhà cung cấp</th>
+                                    <th class="align-middle" scope="col">Nhóm nhà cung cấp</th>
+                                    <th class="align-middle" scope="col">Email</th>
+                                    <th class="align-middle" scope="col">Số điện thoại</th>
+                                    <th class="align-middle" scope="col">Trạng thái</th>
+
+                                    <!--                                    <th class="align-middle" scope="col">Nợ hiện tại</th>-->
+                                    <!--                                    <th class="align-middle" scope="col">Số fax</th>-->
+                                    <!--                                    <th class="align-middle" scope="col">Mã số thuế</th>-->
+                                    <!--                                    <th class="align-middle" scope="col">Website</th>-->
+                                    <!--                                    <th class="align-middle" scope="col">Nhân viên phụ trách</th>-->
+                                    <!--                                    <th class="align-middle" scope="col">Ngày tạo</th>-->
+                                    <!--                                    <th class="align-middle" scope="col">Lần cập nhật cuối</th>-->
+                                </tr>
+                                <tr class="hide" id="selectActionThead" style="border: snow">
+                                    <td class="align-middle" style="width: 20px">
+                                        <label for="selectAction" style="padding: 1rem; cursor:pointer">
+                                            <input style="cursor:pointer" id="selectAction" type="checkbox" value="">
+                                        </label>
+                                    </td>
+                                    <td colspan="2" class="align-middle" id="numberSelectProductList"
+                                        style="width: 24%">
+                                    </td>
+                                    <td class="align-middle" colspan="2">
+                                        <div class="btn-group">
+                                            <button class="btn dropdown-toggle btnDropdown me-2" type="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                Chọn thao tác
+                                                <i class="fa-solid fa-sort-down" style="padding-left: 2.3rem"></i>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                                <li>
+                                                    <button class="dropdown-item btnDropdown" id="btnCheckInventory">
+                                                        Kiểm tra tồn kho
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <button class="dropdown-item btnDropdown" id="btnAvailable">Đang
+                                                        giao dịch
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <button class="dropdown-item btnDropdown" id="btnUnavailable">Ngừng
+                                                        giao dịch
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <button class="dropdown-item btnDropdown" id="btnDelete">Xóa sản
+                                                        phẩm
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td colspan="5"></td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="container-fluid " style="height: 50px">
+                            <div class="row col-md-12 d-flex align-items-center" style="font-size: small">
+                                <div class="col-md-5"></div>
+                                <div class="col-md-3 text-end">
+                                    <label class="me-2">Hiển thị</label>
+                                    <select class="me-2 " id="pageSize">
+                                        <option value="7">7</option>
+                                        <option value="14">14</option>
+                                        <option value="20">20</option>
+                                    </select>
+                                    <span>Kết quả</span>
+                                </div>
+                                <div class="col-md-3 text-center" id="totalPage" style="padding: initial">
+
+                                </div>
+                                <div class="col-md-1">
+                                    <nav aria-label="Page navigation example ">
+                                        <ul class="pagination">
+                                            <li class="page-item">
+                                                <button class=" btn-outline-primary btn-sm me-2" id="previousPage"
+                                                        style="border: none">
+                                                    <i class="fa-solid fa-angle-left"></i>
+                                                </button>
+                                            </li>
+                                            <li class="page-item">
+                                                <button class="pageNumber btn-primary btn-sm me-2">
+                                                    <span id="pageNo">1</span>
+                                                </button>
+                                            </li>
+                                            <li class="page-item">
+                                                <button class=" btn-outline-primary btn-sm " id="nextPage"
+                                                        style="border: none">
+                                                    <i class="fa-solid fa-angle-right"></i>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/admin/js/suppliers/supplier_app.js"></script>
+<th:block th:replace="/layout/script :: script"/>
+
+
+:
+<script>
+
+    const page = {
+        urls: {
+            getAllSupplier: App.PRODUCT_API,
+        },
+        elements: {},
+        commands: {},
+        dialogs: {
+            elements: {},
+            loadData: {},
+            commands: {},
+        },
+
+    }
+
+    page.elements.tbSupplier = $("#tbSupplier")
+    page.elements.tbSupplier_tbody = $("#tbSupplier tbody");
+
+    //filter
+    page.elements.btnFilter = $("#btnFilter")
+    page.elements.filterBody = $(".filter-content")
+    page.dialogs.elements.modalFilter = $("#modalFilter")
+    page.dialogs.elements.changeFilter = $(".sapo-select")
+
+    // seach
+    page.elements.totalPage = $("#totalPage");
+    page.elements.pageNo = $("#pageNo");
+    page.elements.pageSize = $("#pageSize");
+    page.elements.search = $(".searchTitle");
+
+
+    //code
+    let totalPage;
+
+    page.commands.getAllSupplier = () => {
+        let pageNo = Number(page.elements.pageNo.text());
+        let pageSize = Number(page.elements.pageSize.val());
+        let search = page.elements.search.val().trim();
+        // let status = page.dialogs.elements.status.val();
+        page.commands.getAllProductsItemOnPageNo(pageNo, pageSize, search, status);
+    }
+
+    page.commands.getAllProductsItemOnPageNo = (pageNo, pageSize, search, status) => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getAllSupplier + "/products/page",
+            data: ({
+                "pageNo": pageNo,
+                "pageSize": pageSize,
+                // "status": status,
+                "search": search,
+            })
+
+        })
+            .done((data) => {
+                console.log(data)
+                console.log(data.suppliers)
+                page.elements.tbSupplier_tbody.empty();
+                page.elements.totalPage.empty();
+                totalPage = data.totalPage;
+                data.suppliers.map(item => {
+                    if (item.status == "AVAILABLE") {
+                        page.elements.tbSupplier_tbody.append(App.renderRowSupplier(item, 'available'))
+                    } else {
+                        page.elements.tbSupplier_tbody.append(App.renderRowSupplier(item, 'unavailable'))
+                    }
+                });
+                // page.commands.resetInputCheckBox();
+                // page.commands.isCheckbox();
+                page.elements.totalPage.append(
+                    `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
+                )
+            })
+
+        // .fail((jqXHR) => {
+        //     App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404)
+        // })
+    }
+
+    // modal btnFilter
+    // page.commands.dropdownFilter = () => {
+    //     page.elements.btnFilter.on("click", () => {
+    //         page.dialogs.elements.modalFilter.modal('show')
+    //     })
+    // }
+
+    // btnFilter lưu lại sau này thay đổi
+    page.commands.dropdownFilter = () => {
+        page.elements.btnFilter.on("click", () => {
+            let div = page.elements.filterBody
+            console.log(div)
+            Array.from(div).forEach((x) => {
+                console.log(x)
+                if (x.style.display === "none" || x.style.display === "") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            })
+        })
+    }
+
+    page.commands.changeFilter = () => {
+        page.dialogs.elements.changeFilter.on("change", () => {
+           let filter = page.dialogs.elements.changeFilter.val();
+            console.log(filter);
+            console.log(App.renderSelectWrapper()[0]);
+            console.log(App.renderSelectWrapper()[1])
+           page.elements.filterBody.append(App.renderFilter(filter))
+            // $("#ptitle").append(App.renderFilter(filter))
+        })
+    }
+
+    page.dialogs.commands.renderFilter = (value) => {
+        console.log("đã vào funtion")
+        $("#ptitle").append(App.renderFilter(value))
+
+    }
+
+
+    page.commands.loadData = () => {
+        page.commands.getAllSupplier();
+
+
+    }
+
+    page.commands.initializeEventControl = () => {
+        page.commands.dropdownFilter();
+        page.commands.changeFilter();
+
+    }
+
+    $(() => {
+        page.commands.loadData();
+
+        page.commands.initializeEventControl();
+    })
+
+
+</script>
+</body>
+
+</html>
