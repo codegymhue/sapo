@@ -38,7 +38,7 @@ public class SupplierRepositoryTest {
     public void testCreate() {
         Supplier supplier = new Supplier()
                 .setId(1)
-                .setName("Thanh Hoan")
+                .setFullName("Thanh Hoan")
                 .setEmail("thanhhoan45@gmail.com")
                 .setPhone("0989876765");
         Supplier actual = supplierRepository.save(supplier);

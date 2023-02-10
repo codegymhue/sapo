@@ -49,14 +49,11 @@ public class SupplierAPI {
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CreateSupplierParam createSupplierParam) {
         System.out.println(createSupplierParam );
-
         SupplierResult dto = supplierService.create(createSupplierParam);
         CreateAddressParam createAddressParam = createSupplierParam.getCreateAddressParam();
-
-
         if (createAddressParam == null)
             return new ResponseEntity<>(dto, HttpStatus.OK);
-        createAddressParam.setCustomerId(dto.getId());
+        createAddressParam.setSupplierId(dto.getId());
         addressService.create(createAddressParam);
         dto = supplierService.findById(dto.getId());
         return new ResponseEntity<>(dto, HttpStatus.CREATED);

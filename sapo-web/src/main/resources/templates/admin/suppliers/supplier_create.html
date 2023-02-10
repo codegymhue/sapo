@@ -281,12 +281,13 @@
 
     function createSupplier() {
         $('.btn-create-supplier').on('click', () => {
-            alert("alo 1235689")
+            // alert("alo 1235689")
             let supplier ={};
+
             supplier.name = $('#nameCreate').val();
             supplier.fax = $('#faxCreate').val();
             supplier.taxCode = $('#taxCodeCreate').val();
-            supplier.Website = $('#websiteCreate').val();
+            supplier.website = $('#websiteCreate').val();
             supplier.debtTotal = $('#debtTotalCreate').val();
 
             supplier.supplierCode = $('#codeCreate').val();
@@ -296,7 +297,9 @@
             supplier.employeeId = $('#employeeNameCreate :selected').val();
             supplier.description = $('#descriptionCreate').val();
             supplier.paymentMethodId = $('#paymentMethodCreate :selected').val();
+
             let createAddressParam = new CreateAddressParam();
+
             createAddressParam.line1 = $('#addressCreate').val();
             createAddressParam.provinceId = $('#province').val();
             createAddressParam.provinceName = $('#province :selected').text();
@@ -308,29 +311,31 @@
             supplier.createAddressParam = createAddressParam;
 
             console.log(supplier)
-            // $.ajax({
-            //     "headers": {
-            //         "accept": "application/json",
-            //         "content-type": "application/json"
-            //     },
-            //     "type": "POST",
-            //     "url": "http://localhost:8080/api/admin/suppliers/create",
-            //     "data": JSON.stringify(supplier)
-            // })
-            //     .done((data) => {
-            //         console.log(data)
-            //         App.IziToast.showSuccessAlert("tạo nhà cung cấp thành công !");
-            //         setTimeout(() => {
-            //         }, 2500)
-            //         $('#formCreate')[0].reset();
-            //         window.location.href = `/admin/suppliers/${data.id}`;
-            //
-            //     })
-            //     .fail((jqXHR) => {
-            //         console.log(jqXHR);
-            //
-            //         // App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
-            //     })
+            // console.log(JSON.stringify(supplier))
+            // console.log(createAddressParam)
+            $.ajax({
+                "headers": {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                "type": "POST",
+                "url": "http://localhost:8080/api/admin/suppliers/create",
+                "data": JSON.stringify(supplier)
+            })
+                .done((data) => {
+                    console.log(data)
+                    App.IziToast.showSuccessAlert("tạo nhà cung cấp thành công !");
+                    setTimeout(() => {
+                    }, 2500)
+                    $('#formCreate')[0].reset();
+                    window.location.href = `/admin/suppliers/${data.id}`;
+
+                })
+                .fail((jqXHR) => {
+                    console.log(jqXHR);
+
+                    // App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+                })
         });
     }
 
@@ -531,3 +536,4 @@
     });
 
 </script>
+

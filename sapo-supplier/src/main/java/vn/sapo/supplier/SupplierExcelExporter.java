@@ -90,11 +90,11 @@ public class SupplierExcelExporter {
         for (SupplierResult supplier : supplierList){
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
-            createCell(row, columnCount++, supplier.getName() != null ? supplier.getName(): "" , style);
+            createCell(row, columnCount++, supplier.getFullName() != null ? supplier.getFullName(): "" , style);
             createCell(row, columnCount++, supplier.getSupplierCode(), style);
             createCell(row, columnCount++, supplier.getEmail() != null ? supplier.getEmail(): "" , style);
             createCell(row, columnCount++, supplier.getPhone() != null ? supplier.getPhone(): "", style);
-            createCell(row, columnCount++, supplier.getAttWebsite() , style);
+//            createCell(row, columnCount++, supplier.getAttWebsite() , style);
 
 
         }
