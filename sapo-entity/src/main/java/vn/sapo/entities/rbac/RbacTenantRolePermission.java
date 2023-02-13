@@ -14,18 +14,18 @@ import java.time.Instant;
 @Getter
 @Accessors(chain = true)
 @Entity
-@Table(name = "rbac_tenant_role_permission")
+@Table(name = "rbac_role_permission")
 public class RbacTenantRolePermission extends BaseEntity {
     @EmbeddedId
     private RbacTenantRolePermissionId id;
 
     @MapsId("permissionId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "permission_id", nullable = false, foreignKey = @ForeignKey(name = "fk_trp_permission"))
+    @JoinColumn(name = "permission_id", nullable = false, foreignKey = @ForeignKey(name = "fk_rp_permission"))
     private RbacTenantPermission permission;
     @MapsId("roleId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "role_id", nullable = false, foreignKey = @ForeignKey(name = "fk_trp_role"))
+    @JoinColumn(name = "role_id", nullable = false, foreignKey = @ForeignKey(name = "fk_rp_role"))
     private RbacTenantRole role;
 
 }

@@ -17,7 +17,7 @@ import java.util.Set;
 @Getter
 @Accessors(chain = true)
 @Entity
-@Table(name = "rbac_tenant_roles")
+@Table(name = "rbac_roles")
 public class RbacTenantRole extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

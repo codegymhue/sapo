@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Accessors(chain = true)
 @Entity
-@Table(name = "rbac_tenant_permission")
+@Table(name = "rbac_permission")
 public class RbacTenantPermission extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
