@@ -9,5 +9,5 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class SupPaymentMethodResult {
     private String id;
-    private String fullName;
+    private String title;
 }

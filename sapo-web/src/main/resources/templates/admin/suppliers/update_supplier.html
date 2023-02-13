@@ -270,15 +270,16 @@
                                 <div class="label mb-2">Nhóm nhà cung cấp</div>
                                 <div>
                                     <div class="btn-group">
-                                        <!--                    <th:block th:each="employee : ${employee}">-->
-                                        <!--                      <th:block th:if="${employee.id}== ${supplier.employeeId}">-->
-                                        <!--                        <option th:text="${employee.fullName}"></option>-->
-                                        <!--                      </th:block>-->
-                                        <!--                    </th:block>-->
                                         <button id="changeValueSup" class="btn secondary dropdown-toggle"
                                                 style="width: 300px; height: 30px; text-align: left" data-bs-toggle="dropdown"
-                                                data-bs-auto-close="outside" aria-expanded="false" th:field="${supplier.title} ? ${supplier.title} : ${'---'} ">
+                                                data-bs-auto-close="outside" aria-expanded="false" >
+<!--                                            <th:block th:each="group : ${supplierGroup}">-->
+<!--                                                <th:block th:if="${group.id} == ${supplier.supplierGroup.id}">-->
+<!--                                                    <th:block   th:text="${group.title}"></th:block>-->
+<!--                                                </th:block>-->
+<!--                                            </th:block>-->
 
+<!--                                            th:field="${supplier.supplierGroup.title} ? ${supplier.supplierGroup.title} : ${'-&#45;&#45;'} "-->
 <!--                                            Khác-->
                                         </button>
                                         <ul id="renderGroupLi" class="dropdown-menu"
@@ -433,8 +434,8 @@
 
                                     <select style="width: 295px; height: 35px;" id="paymentMethod">
                                         <th:block th:each="paymentMethod : ${paymentMethod}">
-                                            <th:block th:if="${paymentMethod.getId()} == ${supplier.paymentMethod.id}">
-                                                <option th:text="${paymentMethod.getTitle()}"></option>
+                                            <th:block th:if="${paymentMethod.id} == ${supplier.paymentMethod.id}">
+                                                <option th:text="${paymentMethod.title}"></option>
                                             </th:block>
                                         </th:block>
                                     </select>
@@ -841,7 +842,7 @@
                 "content-type": "application/json"
             },
             "type": "PATCH",
-            "url": "http://localhost:8080/api/admin/suppliers/" + idSupp + "/edit",
+            "url": "http://localhost:8080/api/suppliers/" + idSupp,
             "data": JSON.stringify(newUpdateSupplierParam)
         })
 
@@ -882,7 +883,7 @@
                 "content-type": "application/json"
             },
             "type": "POST",
-            "url": "http://localhost:8080/api/admin/supplier_groups/create",
+            "url": "http://localhost:8080/api/supplier_groups/create",
             "data": JSON.stringify(newGroupSup)
         })
             .done((data) => {
@@ -927,7 +928,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: "http://localhost:8080/api/admin/supplier_groups",
+            url: "http://localhost:8080/api/supplier_groups",
         })
             .done((data) => {
                 supplierGroups = data;

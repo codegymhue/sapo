@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin/suppliers")
+@RequestMapping("/api/suppliers")
 public class SupplierAPI {
     @Autowired
     private SupplierService supplierService;
@@ -32,13 +32,12 @@ public class SupplierAPI {
         return new ResponseEntity<>(supplierService.findAll(), HttpStatus.OK);
     }
 
-
-    @GetMapping("/{id}/histories")
+    @GetMapping("/{id}")
     public ResponseEntity<SupplierResult> findById(@PathVariable Integer id) {
         SupplierResult dto = supplierService.findById(id);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
-
+    //TODO: Chua dung RESTFul
     @PostMapping("/createnew")
     public ResponseEntity<SupplierResult> save(@RequestBody CreateSupplierParam supplierCreate) {
         return new ResponseEntity<>(supplierService.create(supplierCreate), HttpStatus.OK);
@@ -65,21 +64,17 @@ public class SupplierAPI {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/edit")
-    public ResponseEntity<SupplierResult> findByIdEdit(@PathVariable Integer id) {
-        SupplierResult dto = supplierService.findById(id);
-        return new ResponseEntity<>(dto, HttpStatus.OK);
-    }
+//    @GetMapping("/{id}/edit")
+//    public ResponseEntity<SupplierResult> findByIdEdit(@PathVariable Integer id) {
+//        SupplierResult dto = supplierService.findById(id);
+//        return new ResponseEntity<>(dto, HttpStatus.OK);
+//    }
 
-    @PatchMapping("/{id}/edit")
+    @PatchMapping("/{id}")
     public ResponseEntity<?> update(@RequestBody UpdateSupplierParam updateSupplierParam) {
     return new ResponseEntity<>(supplierService.update(updateSupplierParam), HttpStatus.OK);
     }
-//
-//    @GetMapping("/{id}/histories")
-//    public ResponseEntity<SupplierResult> findById(@PathVariable Integer id) {
-//        return new ResponseEntity<>(supplierService.findById(id), HttpStatus.OK);
-//    }
+
 //
 //    @PostMapping("/create")
 //    public ResponseEntity<SupplierResult> save(@RequestBody CreateSupplierParam supplierCreate) {

@@ -11,7 +11,7 @@ import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin/supplier_groups")
+@RequestMapping("/api/supplier_groups")
 public class SupplierGroupAPI {
     @Autowired
     private SupplierGroupService supplierGroupService;

@@ -32,8 +32,6 @@ public class SupplierResult {
 
 
     private SupplierGroupResult supplierGroup;
-    private Integer groupId;
-    private String title;
     private Instant createAt;
     private Instant updateAt;
     private BigDecimal debtTotal;

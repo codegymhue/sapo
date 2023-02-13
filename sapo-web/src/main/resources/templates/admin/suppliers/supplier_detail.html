@@ -246,8 +246,7 @@
                 <div class="line-info flex">
                   <label>Nhóm nhà cung cấp<span class="right">:</span></label>
                   <div class="content text-overflow-hiden div-pd-r-10" >
-                    <span th:tex="${supplier.title} ? ${supplier.title} : ${'---'}"></span>
-<!--                    <span th:text="${supplier.supplierGroup.title} ? ${':' + supplier.supplierGroup.title} : ${'-&#45;&#45;'} " ></span>-->
+                    <span th:tex="${supplier.supplierGroup} ? ${supplier.supplierGroup.title} : ${'---'}"></span>
                   </div>
                 </div>
                 <div class="line-info flex">
@@ -305,7 +304,8 @@
                 <div class="line-info flex">
                   <label>Hình thức thanh toán<span class="right">:</span></label>
                   <div class="content text-overflow-hiden div-pd-r-10" title="">
-                    <span title="COD" th:text="${supplier.paymentMethod.id}"></span>
+
+                    <span th:text="${supplier.paymentMethod} ? ${supplier.paymentMethod.title} : ${'---'}"></span>
                   </div>
                 </div>
               </div>
@@ -638,32 +638,7 @@
     </a>
   </div>
 </div>
-﻿
 
-<!-- LIVE -->
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-66880228-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag() { dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'UA-66880228-3');
-</script>
-<!-- Google Tag Manager -->
-<script>
-  (function (w, d, s, l, i) {
-    w[l] = w[l] || []; w[l].push(
-
-            { 'gtm.start': new Date().getTime(), event: 'gtm.js' }
-    ); var f = d.getElementsByTagName(s)[0],
-            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-            'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-  })(window, document, 'script', 'dataLayer', 'GTM-WQ8HRN');</script>
-<!-- End Google Tag Manager -->
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQ8HRN" height="0" width="0"
-                  style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
 </body>
 </html>
