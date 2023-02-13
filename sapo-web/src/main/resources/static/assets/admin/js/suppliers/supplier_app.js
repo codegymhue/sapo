@@ -88,13 +88,27 @@ class App {
                     </div>`;
                 break;
             case "assigneeIds":
-                return `<div class="btn-group pull-left">
-                        <div>
-                            <select multiple="multiple" id="assigneeIds" class="form-control margin-select" style="min-width: 300px; height: 36px; visibility: hidden; display: none;" placeholder="Chọn nhân viên">
-                                    <option value="946220">Nguyễn Chơn Lợi</option>
-                            </select><div class="btn-group"><button type="button" class="multiselect dropdown-toggle btn sapo-btn-blank btn-default" data-toggle="dropdown" style="padding:0.8rem" title="Chọn nhân viên"><span class="multiselect-selected-text">Chọn nhân viên</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="icon-dropdown-select"><path d="M10 16l-4-4h8l-4 4zm0-12L6 8h8l-4-4z"></path></svg></button><ul class="multiselect-container dropdown-menu" style="width: 100%; max-height: 250px; overflow: hidden auto;"><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="946220"> Nguyễn Chơn Lợi</label></a></li></ul></div>
-                        </div>
-                    </div>`;
+                return ` <div>
+        <div class="btn-group show"><button type="button"
+                class="multiselect dropdown-toggle btn sapo-btn-blank btn-default" data-toggle="dropdown"
+                style="padding:0.8rem" title="Chọn nhân viên" aria-expanded="true"><span
+                    class="multiselect-selected-text">Chọn nhân viên</span><svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20" class="icon-dropdown-select">
+                    <path d="M10 16l-4-4h8l-4 4zm0-12L6 8h8l-4-4z"></path>
+                </svg></button>
+            <ul class="multiselect-container dropdown-menu show"
+                style="width: 100%; max-height: 250px; overflow: hidden auto; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);"
+                x-placement="bottom-start">
+                
+                <li class="multiselect--sapo-checkbox"><a tabindex="0" class="multiselect-a--sapo-checkbox"><span
+                            class="sapo-checkbox"><input type="checkbox" value="946220"
+                                id="multiselect-8b6152d9-7f76-3fc2-2511-2e4b1eccb76a" class="sapo-checkbox__input"><span
+                                class="sapo-checkbox__checkmark"></span></span><label
+                            class="checkbox multiselect-label--sapo-checkbox"
+                            for="multiselect-8b6152d9-7f76-3fc2-2511-2e4b1eccb76a"> Nguyễn Chơn Lợi</label></a></li>
+            </ul>
+        </div>
+    </div>`;
                 break;
             case "supplierGroupId":
                 return `<div class="autocomplete-suggestion-holder float-left position-relative" style="max-width:600px">
@@ -121,6 +135,31 @@ class App {
                 break;
         }
 
+    }
+
+    static renderStatusFilter(){
+let str = `<div class="filter-item" filter-type="status" style="width:auto;">
+        <input type="hidden" class="choosed-single-id">
+        <div class="select__wrapper">
+            <select class="sapo-select select-change-filter" bind-event-change="changeItemFilter(this)">
+                    <option value="status" selected="">Trạng thái</option>
+                    <option value="assigneeIds">Nhân viên</option>
+                    <option value="supplierGroupId">Nhóm nhà cung cấp</option>
+                    <option value="createdOn">Ngày tạo</option>
+            </select>
+            <svg class="next-icon next-icon--size-16"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use> </svg>
+        </div>
+        <div class="btn-group pull-left" data-toggle="buttons">
+            <label class="btn filter-button-tag " bind-event-click="setParamFilterActive('active',this)">
+                <input type="checkbox" autocomplete="off"> Đang giao dịch
+            </label>
+            <label class="btn filter-button-tag " bind-event-click="setParamFilterActive('disable',this)">
+                <input type="checkbox" autocomplete="off"> Ngừng giao dịch
+            </label>
+        </div>
+        <a href="javascript" bind-event-click="removeItemFilter(this, 'status')" class="remove-item-filter"><svg class="next-icon next-icon--size-20"><use xlink:href="#delete-minor"></use> </svg></a>
+    </div>`
+        return str;
     }
 
     static renderFilter(chose) {
