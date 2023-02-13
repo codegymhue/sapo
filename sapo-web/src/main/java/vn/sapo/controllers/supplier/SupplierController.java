@@ -81,7 +81,7 @@ public class SupplierController {
             modelAndView.addObject("supplier", supplier);
             modelAndView.addObject("supplierGroup", supplierGroupService.finAll());
             modelAndView.addObject("employee", employeeService.findAll());
-            modelAndView.addObject("paymentMethod", paymentMethodService.findAll());
+            modelAndView.addObject("paymentMethods", paymentMethodService.findAll());
         } catch (Exception e) {
             modelAndView.addObject("error", e.getMessage());
         }

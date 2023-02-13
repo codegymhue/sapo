@@ -88,7 +88,7 @@
                     <div class="w-50" style="padding-top:5px">
                     </div>
                     <div class="w-50" style="position:relative">
-                        <a href="javascript:" class="btn sapo-btn-default right btn-update-supplier btnUpdateSupplier">Lưu</a>
+                        <a href="#" class="btn sapo-btn-default right btn-update-supplier btnUpdateSupplier">Lưu</a>
                         <a th:href="'/admin/suppliers/' + ${supplier.id} + '/histories'"
                            class="btn sapo-btn-blank right mr-3">Huỷ</a>
                     </div>
@@ -272,7 +272,10 @@
                                     <div class="btn-group">
                                         <button id="changeValueSup" class="btn secondary dropdown-toggle"
                                                 style="width: 300px; height: 30px; text-align: left" data-bs-toggle="dropdown"
-                                                data-bs-auto-close="outside" aria-expanded="false" >
+                                                data-bs-auto-close="outside" aria-expanded="false" th:text="${supplier.group} ? ${supplier.group.title} : ${'---'}"
+                                        >
+
+
 <!--                                            <th:block th:each="group : ${supplierGroup}">-->
 <!--                                                <th:block th:if="${group.id} == ${supplier.supplierGroup.id}">-->
 <!--                                                    <th:block   th:text="${group.title}"></th:block>-->
@@ -369,13 +372,14 @@
                                 <div class="select__wrapper " id="search-account-wrap">
                                     <a class="sapo-select select--a select-suggest" id="search-account"
                                        href="javascript:">
-                                        <select style="width: 282px; height: 25px;border: gray;" id="fulNameEmployeeUp"
-                                                th:text="${supplier.employee.fullName}">
-                                            <th:block th:each="employee : ${employee}">
-                                                <th:block th:if="${employee.id}== ${supplier.employee.id}">
-                                                    <option th:text="${employee.fullName}"></option>
-                                                </th:block>
-                                            </th:block>
+                                        <select style="width: 282px; height: 25px;border: gray;" id="fulNameEmployeeUp" >
+                                            <option th:value="${supplier.employee.id}" th:text="${supplier.employee} ? ${supplier.employee.fullName} : ${'Chọn nhân viên phụ trách '}"></option>
+
+<!--                                            <th:block th:each="employee : ${employee}">-->
+<!--                                                <th:block th:if="${employee.id}== ${supplier.employee.id}">-->
+<!--                                                    <option th:text="${employee.fullName}"></option>-->
+<!--                                                </th:block>-->
+<!--                                            </th:block>-->
                                         </select>
                                     </a>
                                     <svg class="next-icon next-icon--size-16">
@@ -433,11 +437,7 @@
                                     <div class="label mb-2">Hình thức thanh toán</div>
 
                                     <select style="width: 295px; height: 35px;" id="paymentMethod">
-                                        <th:block th:each="paymentMethod : ${paymentMethod}">
-                                            <th:block th:if="${paymentMethod.id} == ${supplier.paymentMethod.id}">
-                                                <option th:text="${paymentMethod.title}"></option>
-                                            </th:block>
-                                        </th:block>
+                                        <option th:value="${supplier.paymentMethod.id}"  th:text="${supplier.paymentMethod} ? ${supplier.paymentMethod.title} : ${'Chọn hình thức thanh toán '}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -688,43 +688,6 @@
         </a>
     </div>
 </div>
-﻿
-
-<!-- LIVE -->
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-66880228-3"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-    gtag('config', 'UA-66880228-3');
-</script>
-<!-- Google Tag Manager -->
-<script>
-    (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push(
-            {'gtm.start': new Date().getTime(), event: 'gtm.js'}
-        );
-        var f = d.getElementsByTagName(s)[0],
-            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src =
-            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-WQ8HRN');</script>
-<!-- End Google Tag Manager -->
-<!-- Google Tag Manager (noscript) -->
-<noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQ8HRN" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe>
-</noscript>
-<!-- End Google Tag Manager (noscript) -->
-
 </body>
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/izitoast@1/dist/js/iziToast.min.js" type="text/javascript"
@@ -749,9 +712,8 @@
             this.description = description;
         }
     }
-
     class UpdateSupplierParam {
-        constructor(id, supplierCode, fullName, email, phone, description, paymentMethodId, supGroupId, employeeId, status) {
+        constructor(id, supplierCode, fullName, email, phone, description, paymentMethodId, groupId, employeeId, status) {
             this.id = id;
             this.supplierCode = supplierCode;
             this.fullName = fullName;
@@ -759,7 +721,7 @@
             this.phone = phone;
             this.desription = description;
             this.paymentMethodId = paymentMethodId;
-            this.supGroupId = supGroupId;
+            this.groupId = groupId;
             this.employeeId = employeeId;
             this.status = status
         }
@@ -773,7 +735,9 @@
     page.elements.phoneUp = $("#phoneUp")
     page.elements.statusUp = $("#statusUp");
     page.elements.descriptionUp = $("#descriptionUp");
-    page.elements.changeValueSup = $("#changeValueSup")
+    page.elements.changeValueSup = $("#changeValueSup");
+    page.elements.fulNameEmployeeUp = $("#fulNameEmployeeUp");
+    page.elements.paymentMethod = $("#paymentMethod");
 
     // page.dialogs.elements.createGroupSupp = $("#createGroupSupp")
 
@@ -797,7 +761,7 @@
             .done((data) => {
                 $.each(data, (i, item) => {
                     let str = `<option value="${item.id}">${item.fullName}</option>`;
-                    $("#fulNameEmployeeUp").append(str);
+                    page.elements.fulNameEmployeeUp.append(str);
                 });
             })
     }
@@ -815,7 +779,7 @@
                 console.log("method select", data)
                 $.each(data, (i, item) => {
                     let str = `<option value="${item.id}"> ${item.title}</option>`;
-                    $("#paymentMethod").append(str);
+                    page.elements.paymentMethod.append(str);
                 })
             })
     }
@@ -832,9 +796,12 @@
             phone: page.elements.phoneUp.val(),
             status: page.elements.statusUp.val(),
             description: page.elements.descriptionUp.val(),
+            employeeId: page.elements.fulNameEmployeeUp.val(),
+            paymentMethodId: page.elements.paymentMethod.val(),
             // supGroupId: $("#changeValueSup").data("id"),
-            supGroupId: page.elements.changeValueSup.val(),
+            groupId: page.elements.changeValueSup.val(),
         }
+        console.log("newUpdateSupplierParam : ",newUpdateSupplierParam)
 
         $.ajax({
             "headers": {
@@ -845,7 +812,6 @@
             "url": "http://localhost:8080/api/suppliers/" + idSupp,
             "data": JSON.stringify(newUpdateSupplierParam)
         })
-
             .done((data) => {
                 console.log("data", data.id);
                 let trSupplier = $("#tr_" + data.id);
@@ -857,13 +823,13 @@
                 }, 1500)
                 // alert("Sửa nhà cung cấp thành công")
                 window.location.href = `/admin/suppliers/${data.id}/histories`;
-                // window.location.href = `/admin/suppliers/${idSupp}/edit`;
+                // // window.location.href = `/admin/suppliers/${idSupp}/edit`;
             })
-            .fail((jqXHR) => {
-                // console.log(jqXHR);
-                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
-
-            })
+            // .fail((jqXHR) => {
+            //     // console.log(jqXHR);
+            //     App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+            //
+            // })
     })
 
     page.elements.showGroupSupplier.on('click', () => {

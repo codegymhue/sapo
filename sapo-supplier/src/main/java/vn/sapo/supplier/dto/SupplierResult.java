@@ -31,7 +31,7 @@ public class SupplierResult {
     private SupPaymentMethodResult paymentMethod;
 
 
-    private SupplierGroupResult supplierGroup;
+    private SupplierGroupResult group;
     private Instant createAt;
     private Instant updateAt;
     private BigDecimal debtTotal;
