@@ -1,15 +1,11 @@
 package vn.sapo.controllers.supplier;
 
-import net.bytebuddy.asm.Advice;
-import org.hibernate.loader.custom.Return;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vn.sapo.address.AddressService;
 import vn.sapo.address.dto.CreateAddressParam;
-import vn.sapo.customer.dto.CreateCustomerParam;
-import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.supplier.SupplierService;
 import vn.sapo.supplier.dto.CreateSupplierParam;
 import vn.sapo.supplier.dto.SupplierResult;
@@ -37,15 +33,8 @@ public class SupplierAPI {
         SupplierResult dto = supplierService.findById(id);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
-    //TODO: Chua dung RESTFul
-    @PostMapping("/createnew")
-    public ResponseEntity<SupplierResult> save(@RequestBody CreateSupplierParam supplierCreate) {
-        return new ResponseEntity<>(supplierService.create(supplierCreate), HttpStatus.OK);
 
-    }
-
-
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<?> create(@RequestBody CreateSupplierParam createSupplierParam) {
         System.out.println(createSupplierParam );
         SupplierResult dto = supplierService.create(createSupplierParam);
@@ -58,35 +47,17 @@ public class SupplierAPI {
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Integer id) {
         supplierService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @GetMapping("/{id}/edit")
-//    public ResponseEntity<SupplierResult> findByIdEdit(@PathVariable Integer id) {
-//        SupplierResult dto = supplierService.findById(id);
-//        return new ResponseEntity<>(dto, HttpStatus.OK);
-//    }
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> update(@RequestBody UpdateSupplierParam updateSupplierParam) {
     return new ResponseEntity<>(supplierService.update(updateSupplierParam), HttpStatus.OK);
     }
-
-//
-//    @PostMapping("/create")
-//    public ResponseEntity<SupplierResult> save(@RequestBody CreateSupplierParam supplierCreate) {
-//        return new ResponseEntity<>(supplierService.create(supplierCreate), HttpStatus.OK);
-//    }
-//
-//    @DeleteMapping("/{id}/delete")
-//    public ResponseEntity<String> deleteById(@PathVariable Integer id) {
-//        supplierService.deleteById(id);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-
 
     @GetMapping("/products/page")
     public ResponseEntity<?> getAllProductPageNoCategory(@RequestParam HashMap<String, String> hashMap) {
