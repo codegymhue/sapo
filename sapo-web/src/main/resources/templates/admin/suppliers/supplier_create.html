@@ -79,17 +79,57 @@
                                 <!--                                </div>-->
 
 
+<!--                                <div class="col-6 field pr-0">-->
+<!--                                    <div class="label mb-2">Nhóm nhà cung cấp</div>-->
+<!--                                    <div class="select__wrapper " id="search-supplier-group-wrap">-->
+<!--                                        <a class="sapo-select select&#45;&#45;a select-suggest" id="search-supplier-group" href="javascript:" data-original-title="" title="">Chọn nhóm nhà cung cấp</a>-->
+<!--                                        <svg class="next-icon next-icon&#45;&#45;size-16"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use> </svg>-->
+<!--                                        <div class="filter-body&#45;&#45;suggest">-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+
+
                                 <div class="col-6 field pr-0">
                                     <div class="label mb-2">Nhóm nhà cung cấp</div>
-                                    <div class="select__wrapper " id="search-supplier-group-wrap">
-                                        <a class="sapo-select select--a select-suggest" id="search-supplier-group" href="javascript:" data-original-title="" title="">Chọn nhóm nhà cung cấp</a>
-                                        <svg class="next-icon next-icon--size-16"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use> </svg>
-                                        <div class="filter-body--suggest">
+                                    <div>
+                                        <div class="btn-group">
+                                            <button id="changeValueSup" class="btn secondary dropdown-toggle"
+                                                    style="width: 300px; height: 30px; text-align: left" data-bs-toggle="dropdown"
+                                                    data-bs-auto-close="outside" aria-expanded="false" >
+                                                <!--                                            <th:block th:each="group : ${supplierGroup}">-->
+                                                <!--                                                <th:block th:if="${group.id} == ${supplier.supplierGroup.id}">-->
+                                                <!--                                                    <th:block   th:text="${group.title}"></th:block>-->
+                                                <!--                                                </th:block>-->
+                                                <!--                                            </th:block>-->
+
+                                                <!--                                            th:field="${supplier.supplierGroup.title} ? ${supplier.supplierGroup.title} : ${'-&#45;&#45;'} "-->
+                                                <!--                                            Khác-->
+                                            </button>
+                                            <ul id="renderGroupLi" class="dropdown-menu"
+                                                aria-labelledby="dropdownMenuClickableInside" style="width: 300px">
+                                                <li><input id="inputKey" type="text" placeholder="Tìm kiếm"
+                                                           style="width: 296px; height: 35px;font-size: 13px;"></li>
+
+                                                <li> <i class="fa-solid fa-plus"></i><p id="showGroupSupplier"
+                                                                                        style="height: 30px; width: 300px; font-size: 13px; padding: 5px">
+                                                    Thêm mới nhóm nhà cung cấp</p></li>
+                                            </ul>
                                         </div>
                                     </div>
+
+                                    <!--                <div class="select__wrapper " id="search-supplier-group-wrap">-->
+                                    <!--                  <a class="sapo-select select&#45;&#45;a select-suggest" id="search-supplier-group">-->
+                                    <!--                    Khác</a>-->
+                                    <!--                  <svg class="next-icon next-icon&#45;&#45;size-16">-->
+                                    <!--                    <use xmlns:xlink="http://www.w3.org/1999/xlink"-->
+                                    <!--                         xlink:href="#select-chevron"></use>-->
+                                    <!--                  </svg>-->
+                                    <!--                  <div class="filter-body&#45;&#45;suggest">-->
+                                    <!--                  </div>-->
+                                    <!--                </div>-->
                                 </div>
-
-
 
                             </div>
                         </div>
@@ -512,6 +552,45 @@
             })
     }
 
+    // select chọn nhóm nhà cung cấp
+    function getAllGroup(element) {
+        $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "http://localhost:8080/api/supplier_groups",
+        })
+            .done((data) => {
+                supplierGroups = data;
+                $.each(data, function (index, value) {
+                    element.append(
+                        `<li onclick="handleChangeGroupSupp(${value.id})">
+                        <p  class="w-20 border-0 " id="${value.id}" style="padding:7px; font-size: 11px; width: 300px;border: unset;" value="${value.id}">
+                        ${value.title}</p>
+                        </li>`
+                    )
+                });
+            })
+    }
+
+    function handleChangeGroupSupp(supplierGroupId) {
+        let supplierGroup = supplierGroups.find(supplierGroup => supplierGroup.id === supplierGroupId);
+        $("#changeValueSup").attr("data-id",supplierGroup.id);
+        $("#changeValueSup").val(supplierGroup.id);
+        $("#changeValueSup").text(supplierGroup.title);
+        var dropdown = new bootstrap.Dropdown(document.querySelector("#changeValueSup"));
+        dropdown.hide();
+    }
+
+    $("#changeValueSup").on('click', ()=> {
+        var dropdown = new bootstrap.Dropdown(document.querySelector("#changeValueSup"));
+        dropdown.show();
+    })
+
+    let renderGroup = $("#renderGroupLi");
+    getAllGroup(renderGroup);
     createSupplier();
     getAllEmployeeSelect();
     getAllPaymentMethodSelect();
