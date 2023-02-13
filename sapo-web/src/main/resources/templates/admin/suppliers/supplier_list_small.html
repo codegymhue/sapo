@@ -97,9 +97,29 @@
                     </div>
                     <div class="filter-body"
                          style="background-color: #dfe4e8; float: left;position: absolute; z-index: 99">
-                        <div class="filter-content" style="display:none">
+                        <div class="filter-content" style="display:block">
                             <p class="title" id="ptitle">Hiển thị nhà cung cấp theo:</p>
-
+                            <div class="filter-item" filter-type="status" style="width:auto; display: block">
+                                <input type="hidden" class="choosed-single-id" >
+                                <div class="select__wrapper">
+                                    <select class="sapo-select select-change-filter" >
+                                        <option value="status" selected="">Trạng thái</option>
+                                        <option value="assigneeIds">Nhân viên</option>
+                                        <option value="supplierGroupId">Nhóm nhà cung cấp</option>
+                                        <option value="createdOn">Ngày tạo</option>
+                                    </select>
+                                    <svg class="next-icon next-icon--size-16"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use> </svg>
+                                </div>
+                                <div class="btn-group pull-left" data-toggle="buttons">
+                                    <label class="btn filter-button-tag " bind-event-click="hello('active',this)">
+                                        <input type="checkbox" autocomplete="off" > Đang giao dịch
+                                    </label>
+                                    <label class="btn filter-button-tag " >
+                                        <input type="checkbox" autocomplete="off"> Ngừng giao dịch
+                                    </label>
+                                </div>
+                                <a href="javascript" class="remove-item-filter"><svg class="next-icon next-icon--size-20"><use xlink:href="#delete-minor"></use> </svg></a>
+                            </div>
                             <div class="select__wrapper">
                                 <select class="sapo-select select-change-filter--all">
                                     <option value="">Chọn điều kiện lọc</option>
@@ -245,10 +265,16 @@
 
 :
 <script>
+    function hello(str, element) {
+        console.log(str)
+        console.log(element)
+    }
+    let employee = [];
 
     const page = {
         urls: {
             getAllSupplier: App.PRODUCT_API,
+            getAllEmployee: App.EMPLOYEE_API,
         },
         elements: {},
         commands: {},
@@ -363,25 +389,71 @@
     //         // $("#ptitle").append(App.renderFilter(filter))
     //     })
     // }
+    //
+    // page.commands.selectChangeFilterAll = () => {
+    //     page.dialogs.elements.selectChangeFilterAll.on("change", () => {
+    //         let filter = page.dialogs.elements.selectChangeFilterAll.val();
+    //         page.elements.filterBody.append(App.renderFilter(filter))
+    //         page.dialogs.elements.selectChangeFilterAllOption.each(function () {
+    //             if ($(this).is(':selected'))
+    //                 $(this).prop("hidden", true)
+    //         })
+    //         page.dialogs.elements.selectChangeFilterAll.prop('selectedIndex', 0);
+    //     })
+    // }
 
-    page.commands.selectChangeFilterAll = () => {
-        page.dialogs.elements.selectChangeFilterAll.on("change", () => {
-            let filter = page.dialogs.elements.selectChangeFilterAll.val();
-            page.elements.filterBody.append(App.renderFilter(filter))
-            page.dialogs.elements.selectChangeFilterAllOption.each(function () {
-                if ($(this).is(':selected'))
-                    $(this).prop("hidden", true)
-            })
-            page.dialogs.elements.selectChangeFilterAll.prop('selectedIndex', 0);
+    // page.dialogs.commands.renderFilter = (value) => {
+    //     console.log("đã vào funtion")
+    //     $("#ptitle").append(App.renderFilter(value))
+    //
+    // }
+
+    page.commands.getAllEmployee = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getAllEmployee,
         })
+            .done((data) => {
+               employee= data;
+            })
     }
 
-    page.dialogs.commands.renderFilter = (value) => {
-        console.log("đã vào funtion")
-        $("#ptitle").append(App.renderFilter(value))
-
+    page.dialogs.commands.renderStatusFilter = () =>{
+        let str = `<div class="filter-item" filter-type="status" style="width:auto;">
+        <input type="hidden" class="choosed-single-id" value="active,disable">
+        <div class="select__wrapper">
+            <select class="sapo-select select-change-filter" bind-event-change="changeItemFilter(this)">
+                    <option value="status" selected="">Trạng thái</option>
+                    <option value="assigneeIds">Nhân viên</option>
+                    <option value="supplierGroupId">Nhóm nhà cung cấp</option>
+                    <option value="createdOn">Ngày tạo</option>
+            </select>
+            <svg class="next-icon next-icon--size-16"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use> </svg>
+        </div>
+        <div class="btn-group pull-left" data-toggle="buttons">
+            <label class="btn filter-button-tag " bind-event-click="setParamFilterActive('active',this)">
+                <input type="checkbox" autocomplete="off"> Đang giao dịch
+            </label>
+            <label class="btn filter-button-tag " bind-event-click="setParamFilterActive('disable',this)">
+                <input type="checkbox" autocomplete="off"> Ngừng giao dịch
+            </label>
+        </div>
+        <a href="javascript" bind-event-click="removeItemFilter(this, 'status')" class="remove-item-filter"><svg class="next-icon next-icon--size-20"><use xlink:href="#delete-minor"></use> </svg></a>
+    </div>`
+        return str;
     }
 
+    page.dialogs.commands.setParamFilterActive = () => {
+
+    }
+// $(".filter-button-tag").bind("click",(string)=> {
+//     $(".choosed-single-id").setAttribute("value", "active")
+//
+// })
 
     page.commands.loadData = () => {
         page.commands.getAllSupplier();
@@ -391,7 +463,7 @@
 
     page.commands.initializeEventControl = () => {
         page.commands.dropdownFilter();
-        page.commands.selectChangeFilterAll();
+        // page.commands.selectChangeFilterAll();
 
     }
 
