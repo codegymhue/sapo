@@ -11,12 +11,12 @@ import vn.sapo.entities.supplier.SupplierStatus;
 public class UpdateSupplierParam {
     private Integer id;
     private String supplierCode;
-    private String name;
+    private String fullName;
     private String email;
     private String phone;
     private String description;
     private Integer paymentMethodId;
-    private Integer supGroupId;
+    private Integer groupId;
     private Integer employeeId;
     private SupplierStatus status;
 

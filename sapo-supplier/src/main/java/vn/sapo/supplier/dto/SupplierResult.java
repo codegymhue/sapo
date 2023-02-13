@@ -31,9 +31,9 @@ public class SupplierResult {
     private SupPaymentMethodResult paymentMethod;
 
 
-    private SupplierGroupResult supplierGroupResult;
-    private Integer supGroupId;
-    private String supGroupTitle;
+    private SupplierGroupResult supplierGroup;
+    private Integer groupId;
+    private String title;
     private Instant createAt;
     private Instant updateAt;
     private BigDecimal debtTotal;

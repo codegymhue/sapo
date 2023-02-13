@@ -212,7 +212,7 @@
           <div class="ui-title-bar__main-group">
             <div class="ui-title-bar__heading-group">
               <div class="ui-title-bar__title">
-                <h1 class="text-overflow-hiden" th:value="${supplier.id}" th:text="${supplier.name}"> </h1>
+                <h1 class="text-overflow-hiden" th:value="${supplier.id}" th:text="${supplier.fullName}"> </h1>
               </div>
             </div>
           </div>
@@ -246,7 +246,8 @@
                 <div class="line-info flex">
                   <label>Nhóm nhà cung cấp<span class="right">:</span></label>
                   <div class="content text-overflow-hiden div-pd-r-10" >
-                    <span th:text="${supplier.supGroupTitle} ? ${':' + supplier.supGroupTitle} : ${'---'} " ></span>
+                    <span th:tex="${supplier.title} ? ${supplier.title} : ${'---'}"></span>
+<!--                    <span th:text="${supplier.supplierGroup.title} ? ${':' + supplier.supplierGroup.title} : ${'-&#45;&#45;'} " ></span>-->
                   </div>
                 </div>
                 <div class="line-info flex">
@@ -304,7 +305,7 @@
                 <div class="line-info flex">
                   <label>Hình thức thanh toán<span class="right">:</span></label>
                   <div class="content text-overflow-hiden div-pd-r-10" title="">
-                    <span title="COD" th:text="${supplier.paymentMethodId}"></span>
+                    <span title="COD" th:text="${supplier.paymentMethod.id}"></span>
                   </div>
                 </div>
               </div>

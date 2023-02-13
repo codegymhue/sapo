@@ -244,7 +244,7 @@
                     <div class="ui-title-bar__main-group">
                         <div class="ui-title-bar__heading-group">
                             <h1 class="ui-title-bar__title">Cập nhật nhà cung cấp <span th:value="${supplier.id}"
-                                                                                        th:text="${supplier.name}"></span>
+                                                                                        th:text="${supplier.fullName}"></span>
                             </h1>
                         </div>
                     </div>
@@ -258,7 +258,8 @@
                                 <div class="label mb-2 label-required">Tên nhà cung cấp</div>
                                 <input id="nameUp" class="sapo-textbox w100" data-toggle="tooltip"
                                        placeholder="Nhập tên nhà cung cấp"
-                                       th:field="${supplier.name}">
+                                       th:field="${supplier.fullName}"
+                                >
                             </div>
                             <div class="col-6 field pl-0">
                                 <div class="label mb-2">Mã nhà cung cấp</div>
@@ -275,9 +276,10 @@
                                         <!--                      </th:block>-->
                                         <!--                    </th:block>-->
                                         <button id="changeValueSup" class="btn secondary dropdown-toggle"
-                                                style="width: 300px; text-align: left" data-bs-toggle="dropdown"
-                                                data-bs-auto-close="outside" aria-expanded="false">
-                                            Khác
+                                                style="width: 300px; height: 30px; text-align: left" data-bs-toggle="dropdown"
+                                                data-bs-auto-close="outside" aria-expanded="false" th:field="${supplier.title} ? ${supplier.title} : ${'---'} ">
+
+<!--                                            Khác-->
                                         </button>
                                         <ul id="renderGroupLi" class="dropdown-menu"
                                             aria-labelledby="dropdownMenuClickableInside" style="width: 300px">
@@ -369,7 +371,7 @@
                                         <select style="width: 282px; height: 25px;border: gray;" id="fulNameEmployeeUp"
                                                 th:text="${supplier.employee.fullName}">
                                             <th:block th:each="employee : ${employee}">
-                                                <th:block th:if="${employee.id}== ${supplier.employeeId}">
+                                                <th:block th:if="${employee.id}== ${supplier.employee.id}">
                                                     <option th:text="${employee.fullName}"></option>
                                                 </th:block>
                                             </th:block>
@@ -431,7 +433,7 @@
 
                                     <select style="width: 295px; height: 35px;" id="paymentMethod">
                                         <th:block th:each="paymentMethod : ${paymentMethod}">
-                                            <th:block th:if="${paymentMethod.getId()}== ${supplier.paymentMethodId}">
+                                            <th:block th:if="${paymentMethod.getId()} == ${supplier.paymentMethod.id}">
                                                 <option th:text="${paymentMethod.getTitle()}"></option>
                                             </th:block>
                                         </th:block>
@@ -748,10 +750,10 @@
     }
 
     class UpdateSupplierParam {
-        constructor(id, supplierCode, name, email, phone, description, paymentMethodId, supGroupId, employeeId, status) {
+        constructor(id, supplierCode, fullName, email, phone, description, paymentMethodId, supGroupId, employeeId, status) {
             this.id = id;
             this.supplierCode = supplierCode;
-            this.name = name;
+            this.fullName = fullName;
             this.email = email;
             this.phone = phone;
             this.desription = description;
@@ -770,8 +772,17 @@
     page.elements.phoneUp = $("#phoneUp")
     page.elements.statusUp = $("#statusUp");
     page.elements.descriptionUp = $("#descriptionUp");
+    page.elements.changeValueSup = $("#changeValueSup")
 
-    page.dialogs.elements.createGroupSupp = $("#createGroupSupp")
+    // page.dialogs.elements.createGroupSupp = $("#createGroupSupp")
+
+    page.elements.showGroupSupplier= $("#showGroupSupplier");
+    page.dialogs.elements.showModalGroupSupplier= $("#showModalGroupSupplier");
+    page.dialogs.elements.createGroupSupplier = $("#createGroupSupplier");
+    page.dialogs.elements.groupId =  $("#groupId");
+    page.dialogs.elements.groupTitleSup =  $("#groupTitleSup");
+    page.dialogs.elements.groupCodeSup =  $("#groupCodeSup");
+    page.dialogs.elements.groupDescriptionSup =  $("#groupDescriptionSup");
 
     function getAllEmployeeSelect() {
         return $.ajax({
@@ -815,15 +826,14 @@
         let newUpdateSupplierParam = {
             id: idSupp,
             supplierCode: page.elements.supplierCodeUp.val(),
-            name: page.elements.nameUp.val(),
+            fullName: page.elements.nameUp.val(),
             email: page.elements.emailUp.val(),
             phone: page.elements.phoneUp.val(),
             status: page.elements.statusUp.val(),
             description: page.elements.descriptionUp.val(),
             // supGroupId: $("#changeValueSup").data("id"),
-            supGroupId: $("#changeValueSup").val(),
+            supGroupId: page.elements.changeValueSup.val(),
         }
-        console.log("cap nhat nha cung ung",newUpdateSupplierParam);
 
         $.ajax({
             "headers": {
@@ -834,8 +844,9 @@
             "url": "http://localhost:8080/api/admin/suppliers/" + idSupp + "/edit",
             "data": JSON.stringify(newUpdateSupplierParam)
         })
+
             .done((data) => {
-                console.log("data", data);
+                console.log("data", data.id);
                 let trSupplier = $("#tr_" + data.id);
                 let tr = App.renderRowSupplier(data);
                 trSupplier.replaceWith(tr);
@@ -844,26 +855,26 @@
                 setTimeout(() => {
                 }, 1500)
                 // alert("Sửa nhà cung cấp thành công")
-                // window.location.href = `/admin/suppliers/${data.id}/histories`;
+                window.location.href = `/admin/suppliers/${data.id}/histories`;
                 // window.location.href = `/admin/suppliers/${idSupp}/edit`;
             })
             .fail((jqXHR) => {
                 // console.log(jqXHR);
-                // App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
 
             })
     })
 
-    $("#showGroupSupplier").on('click', () => {
-        $("#showModalGroupSupplier").modal('show');
+    page.elements.showGroupSupplier.on('click', () => {
+        page.dialogs.elements.showModalGroupSupplier.modal('show');
     })
 
-    $("#createGroupSupplier").on('click', () => {
+    page.dialogs.elements.createGroupSupplier.on('click', () => {
         let newGroupSup = new createSupGroupParam();
-        newGroupSup.id = $("#groupId").val();
-        newGroupSup.title = $("#groupTitleSup").val();
-        newGroupSup.supplierCode = $("#groupCodeSup").val();
-        newGroupSup.description = $("#groupDescriptionSup").val();
+        newGroupSup.id =  page.dialogs.elements.groupId.val();
+        newGroupSup.title = page.dialogs.elements.groupTitleSup.val();
+        newGroupSup.supplierCode =  page.dialogs.elements.groupCodeSup.val();
+        newGroupSup.description =  page.dialogs.elements.groupDescriptionSup.val();
         console.log("trc ajax", newGroupSup)
         $.ajax({
             "headers": {
@@ -879,12 +890,11 @@
                 setTimeout(() => {
                 }, 1500);
 
-                $("#groupId").val("");
-                $("#groupTitleSup").val("");
-                $("#groupCodeSup").val("");
-                $("#groupDescriptionSup").val("");
-
-                $("#showModalGroupSupplier").modal('hide');
+                page.dialogs.elements.groupId.val("");
+                page.dialogs.elements.groupTitleSup.val("");
+                page.dialogs.elements.groupCodeSup.val("");
+                page.dialogs.elements.groupDescriptionSup.val("");
+                page.dialogs.elements.showModalGroupSupplier.modal('hide');
                 location.reload();
 
                 // console.log("group",data);
@@ -935,14 +945,19 @@
     let renderGroup = $("#renderGroupLi");
     getAllGroup(renderGroup);
 
-    // function handleChangeGroupSupp(supplierGroupId) {
-    //     let supplierGroup = supplierGroups.find(supplierGroup => supplierGroup.id === supplierGroupId);
-    //     $("#changeValueSup").attr("data-id",supplierGroup.id);
-    //     $("#changeValueSup").val(supplierGroup.id);
-    //     $("#changeValueSup").text(supplierGroup.title);
-    //     var dropdown = new bootstrap.Dropdown(document.querySelector("#changeValueSup"));
-    //     dropdown.hide();
-    // }
+    function handleChangeGroupSupp(supplierGroupId) {
+        let supplierGroup = supplierGroups.find(supplierGroup => supplierGroup.id === supplierGroupId);
+        $("#changeValueSup").attr("data-id",supplierGroup.id);
+        $("#changeValueSup").val(supplierGroup.id);
+        $("#changeValueSup").text(supplierGroup.title);
+        var dropdown = new bootstrap.Dropdown(document.querySelector("#changeValueSup"));
+        dropdown.hide();
+    }
+
+    $("#changeValueSup").on('click', ()=> {
+        var dropdown = new bootstrap.Dropdown(document.querySelector("#changeValueSup"));
+        dropdown.show();
+    })
 
     function renderRowGroupSupplier(item) {
         let str = `
