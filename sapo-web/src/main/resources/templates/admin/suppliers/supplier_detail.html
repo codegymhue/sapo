@@ -225,7 +225,11 @@
           <div class="page-info-title">
             Thông tin cá nhân
             <span class="badge sapo-badge badge--sushi position-absolute"
-                  style="left: calc(100%/3)">Đang giao dịch</span>
+                  style="left: calc(100%/3)">
+            <span th:text="*{supplier.status == supplier.status.AVAILABLE} ? 'Đang giao dịch' : 'Ngừng giao dịch'"></span>
+            </span>
+
+
             <div class="order-sources">
               <a href="javascript:" data-toggle="dropdown" aria-expanded="false"
                  style="color:#212b35">Thao tác khác<i class="fa fa-caret-down ml-2"
@@ -245,8 +249,9 @@
               <div class="col-4 p-0">
                 <div class="line-info flex">
                   <label>Nhóm nhà cung cấp<span class="right">:</span></label>
-                  <div class="content text-overflow-hiden div-pd-r-10" >
-                    <span th:tex="${supplier.supplierGroup} ? ${supplier.supplierGroup.title} : ${'---'}"></span>
+                  <div class="content text-overflow-hiden div-pd-r-10" th:text="${supplier.group} ? ${supplier.group.title}: ${'---'}" >
+
+<!--                    <span th:tex="${supplier.supplierGroup} ? ${supplier.supplierGroup.title} : ${'-&#45;&#45;'}"></span>-->
                   </div>
                 </div>
                 <div class="line-info flex">
@@ -292,7 +297,7 @@
                 <div class="line-info flex">
                   <label>Người phụ trách<span class="right">:</span></label>
                   <div class="content text-overflow-hiden div-pd-r-10" title="">
-                    <span th:text="${supplier.employee.fullName}"></span>
+                    <span th:text="${supplier.employee} ? ${supplier.employee.fullName} : ${'---'}"></span>
                   </div>
                 </div>
                 <div class="line-info flex">

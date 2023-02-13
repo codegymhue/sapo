@@ -7,21 +7,23 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.product.Product;
 import vn.sapo.entities.product.ProductStatus;
 import vn.sapo.entities.supplier.Supplier;
+import vn.sapo.entities.supplier.SupplierGroup;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.supplier.dto.CreateSupplierParam;
 import vn.sapo.supplier.dto.SupplierFilter;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.dto.UpdateSupplierParam;
+import vn.sapo.supplierGroup.SupplierGroupRepository;
+import vn.sapo.supplierGroup.SupplierGroupService;
 
+import javax.annotation.processing.SupportedOptions;
 import javax.persistence.criteria.Predicate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,6 +34,9 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Autowired
     private SupplierRepository supplierRepository;
+    @Autowired
+    private SupplierGroupRepository supplierGroupRepository;
+
 
     @Override
     @Transactional(readOnly = true)
@@ -65,12 +70,21 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     @Transactional
-    public SupplierResult update(UpdateSupplierParam updateSupplierParam) {
+    public SupplierResult  update(UpdateSupplierParam updateSupplierParam) {
+//        System.out.println(updateSupplierParam.getId());
+//        Optional<Supplier> supplier = supplierRepository.findById(updateSupplierParam.getId());
+//        System.out.println(supplier.get());
+
         Supplier supplier = supplierRepository.findById(updateSupplierParam.getId())
                 .orElseThrow(() -> new NotFoundException("Not found supplier"));
+        SupplierGroup supplierGroup = supplierGroupRepository.findById(updateSupplierParam.getGroupId()).get();
+
+        System.out.println(supplier);
         supplierMapper.transferFields(updateSupplierParam, supplier);
+        supplier.setGroup(supplierGroup);
         Supplier supplierResult = supplierRepository.save(supplier);
         return supplierMapper.toDTO(supplierResult);
+
     }
 
     @Override

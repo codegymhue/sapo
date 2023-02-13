@@ -35,14 +35,14 @@ public class SupplierAPITest {
     public static void setUp() {
         suppliers.add(new SupplierResult()
                         .setId(1)
-                        .setName("Thanh Ngân")
+                        .setFullName("Thanh Ngân")
                         .setEmail("thanhngan1002@gmail.com")
                         .setPhone("0989876565")
                         .setDescription("Quen thuoc")
                         .setSupplierCode("SPL0001")
 //                        .setPaymentMethodId()
                         .setSupplierCode("1234")
-                        .setEmployeeId(1)
+
                 );
     }
     @BeforeEach
