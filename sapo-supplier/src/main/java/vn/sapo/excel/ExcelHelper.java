@@ -19,12 +19,12 @@ import java.util.List;
 public class ExcelHelper {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
-    static String[] HEADER = {"Tên nhà cung cấp", "Mã nhà cung cấp", "Mã nhóm nhà cung cấp", "Email", "Điện thoại", "Website", "" +
-            "FAX", "Mã số thuế", "Mô tả", "Chính sách giá mặc định", "Thuế mặc định", "Kỳ hạn thanh toán mặc định", "Phương thức thanh toán mặc định",
+    static String[] HEADER = {"Tên nhà cung cấp", "Mã nhà cung cấp", "Mã nhóm nhà cung cấp", "Email", "Điện thoại", "Website",
+            "FAX", "Mã số thuế", "Mô tả", "Chính sách giá mặc định", "Kỳ hạn thanh toán mặc định", "Phương thức thanh toán mặc định",
             "Người liên hệ", "SDT người liên hệ", "Email người liên hệ", "Nhãn", "Địa chỉ 1", "Địa chỉ 2", "Tỉnh/Thành Phố",
             "Quận/Huyện", "Nợ hiện tại", "Tags"};
 
-    static String SHEET = "FileNhapDuLieuNhaCungCap";
+    static String SHEET = "DuLieuNhap";
 
     public static boolean hasExcelFormat(MultipartFile file) {
 
@@ -66,7 +66,7 @@ public class ExcelHelper {
                     Cell currentCell = cellsInRow.next();
                     switch (cellIdx) {
                         case 0:
-//                            supplier.setName(currentCell.getStringCellValue());
+                            supplier.setFullName(currentCell.getStringCellValue());
                             break;
                         case 1:
                             if (currentCell.getStringCellValue() == null)
@@ -74,79 +74,64 @@ public class ExcelHelper {
                             supplier.setSupplierCode(currentCell.getStringCellValue());
                             break;
                         case 2:
-//                         Ma nhom nha cung cap
+//                                ma nhom nha cung cap
                             break;
                         case 3:
-//                             áp dụng ưu đãi
-                            break;
-                        case 4:
                             supplier.setEmail(currentCell.getStringCellValue());
                             break;
-                        case 5:
+                        case 4:
                             supplier.setPhone(currentCell.getStringCellValue());
                             break;
+                        case 5:
+                            supplier.setWebsite(currentCell.getStringCellValue());
+                            break;
                         case 6:
-//đỏ
+                            supplier.setFax(currentCell.getStringCellValue());
                             break;
                         case 7:
-//đen
+                            supplier.setTaxCode(currentCell.getStringCellValue());
                             break;
                         case 8:
-//zui
+                            supplier.setDescription(currentCell.getStringCellValue());
                             break;
                         case 9:
-//lợn
+//                     chính sách giá mặc định
                             break;
                         case 10:
-// cò
+//                      Kỳ hạn thanh toán mặc định
                             break;
                         case 11:
-//heo
+                         supplier.setPaymentMethodId(currentCell.getStringCellValue());
                             break;
                         case 12:
-// chó
-                            break;
-                        case 13:
-//                            chính sách giá mặc định
-                            break;
-                        case 14:
-// vịt
-                            break;
-                        case 15:
-//                            phương thức thanh toán mặc định
-                            break;
-                        case 16:
                             address.setFullName(currentCell.getStringCellValue());
                             break;
-                        case 17:
+                        case 13:
                             address.setPhoneNumber(currentCell.getStringCellValue());
                             break;
-                        case 18:
+                        case 14:
                             address.setEmail(currentCell.getStringCellValue());
                             break;
-                        case 19:
-                            address.setLine1(currentCell.getStringCellValue());
+                        case 15:
+//                            nhãn
                             break;
-                        case 20:
+                        case 16:
+//                            địa chỉ 1
+                            break;
+                        case 17:
+//                            địa chỉ 2
+                            break;
+                        case 18:
                             address.setProvinceName(currentCell.getStringCellValue());
                             break;
-                        case 21:
+                        case 19:
                             address.setDistrictName(currentCell.getStringCellValue());
                             break;
-                        case 22:
-                            address.setWardName(currentCell.getStringCellValue());
+                        case 20:
+//                            nợ hiện tại
                             break;
-                        case 23:
-                            supplier.setDebtTotal(BigDecimal.valueOf(currentCell.getNumericCellValue()));
-                            break;
-                        case 24:
-// gà
-                            break;
-                        case 25:
-//                            ghi chú
-                            break;
-                        case 26:
-//                            tags
+                        case 21:
+//                              tags
                             break;
                         default:
                             break;
@@ -154,7 +139,6 @@ public class ExcelHelper {
                     cellIdx++;
 
                 }
-
                 supplier.setCreateAddressParam(address);
                 suppliers.add(supplier);
             }

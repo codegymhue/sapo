@@ -1,4 +1,4 @@
-
+//
 //
 //package vn.sapo.supplier;
 //
@@ -50,18 +50,17 @@
 //        createCell(row, 7, "Mã số thuế", style);
 //        createCell(row, 8, "Mô tả", style);
 //        createCell(row, 9, "Chính sách giá mặc định", style);
-//        createCell(row, 10, "Thuế mặc định", style);
-//        createCell(row, 11, "Kỳ hạn thanh toán mặc định", style);
-//        createCell(row, 12, "Phương thức thanh toán mặc định", style);
-//        createCell(row, 13, "Người liên hệ ", style);
-//        createCell(row, 14, "SDT người liên hệ ", style);
-//        createCell(row, 15, "Email người liên hệ", style);
-//        createCell(row, 16, "Nhãn", style);
-//        createCell(row, 17, "Địa chỉ 1", style);
-//        createCell(row, 18, "Địa chỉ 2", style);
-//        createCell(row, 19, "Tỉnh/Thành Phố", style);
-//        createCell(row, 20, "Quận/Huyện", style);
-//        createCell(row, 21, "Nợ hiện tại", style);
+//        createCell(row, 10, "Kỳ hạn thanh toán mặc định", style);
+//        createCell(row, 11, "Phương thức thanh toán mặc định", style);
+//        createCell(row, 12, "Người liên hệ ", style);
+//        createCell(row, 13, "SDT người liên hệ ", style);
+//        createCell(row, 14, "Email người liên hệ", style);
+//        createCell(row, 15, "Nhãn", style);
+//        createCell(row, 16, "Địa chỉ 1", style);
+//        createCell(row, 17, "Địa chỉ 2", style);
+//        createCell(row, 18, "Tỉnh/Thành Phố", style);
+//        createCell(row, 19, "Quận/Huyện", style);
+//        createCell(row, 20, "Nợ hiện tại", style);
 //        createCell(row, 21, "Tags", style);
 //    }
 //
@@ -92,7 +91,7 @@
 //        for (SupplierResult supplier : supplierList) {
 //            Row row = sheet.createRow(rowCount++);
 //            int columnCount = 0;
-//            createCell(row, columnCount++, supplier.getName() != null ? supplier.getName() : "", style);
+//            createCell(row, columnCount++, supplier.getFullName() != null ? supplier.getFullName() : "", style);
 //            createCell(row, columnCount++, supplier.getSupplierCode(), style);
 //            createCell(row, columnCount++, supplier.getPhone() != null ? supplier.getPhone() : "", style);
 //        }
@@ -114,4 +113,4 @@
 //    }
 //
 //}
-
+//
