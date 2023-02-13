@@ -16,7 +16,8 @@ class App {
                 </td>
                 
                  <td class="align-middle"><a href="/admin/suppliers/${item.id}/histories" style="text-decoration: none">${item.supplierCode}</a></td>
-                <td class="align-middle">${item.name || ""}</td>
+                <td class="align-middle">${item.fullName || ""}</td>
+                  <td class="align-middle">${item.groupId || ""}</td>
                 <td class="align-middle">${item.email || ""}</td>
                 <td class="align-middle">${item.phone || ""}</td>
                  <td class="align-middle">
@@ -60,6 +61,7 @@ class App {
                 message: m,
             });
         }
+    }
     static renderEmployeeOnFilter(employee) {
         let str = `<li class="multiselect--sapo-checkbox">
                         <a tabindex="0" class="multiselect-a--sapo-checkbox">
@@ -121,20 +123,20 @@ class App {
 
     }
 
-    static renderFilter(value) {
+    static renderFilter(chose) {
         let str = `
 <div class="filter-item" filter-type="assigneeIds" style="width: auto; display: block; order: 0;">
                     <input type="hidden" class="choosed-single-id" value="">
                     <div class="select__wrapper">
                         <select class="sapo-select select-change-filter" bind-event-change="changeItemFilter(this)">
-                                <option value="status" ${value == "status" ? "selected" : ""}>Trạng thái</option>
-                                <option value="assigneeIds" ${value == "assigneeIds" ? "selected" : ""}>Nhân viên</option>
-                                <option value="supplierGroupId" ${value == "supplierGroupId" ? "selected" : ""}>Nhóm nhà cung cấp</option>
-                                <option value="createdOn" ${value == "createdOn" ? "selected" : ""}>Ngày tạo</option>
+                                <option value="status" ${chose == "status" ? "selected" : ""}>Trạng thái</option>
+                                <option value="assigneeIds" ${chose == "assigneeIds" ? "selected" : ""}>Nhân viên</option>
+                                <option value="supplierGroupId" ${chose == "supplierGroupId" ? "selected" : ""}>Nhóm nhà cung cấp</option>
+                                <option value="createdOn" ${chose == "createdOn" ? "selected" : ""}>Ngày tạo</option>
                         </select>
                         <svg class="next-icon next-icon--size-16"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use> </svg>
                     </div>
-                    ${this.renderSwitchcaseFilter(value)}
+                    ${this.renderSwitchcaseFilter(chose)}
                     <a href="javascript" bind-event-click="removeItemFilter(this, 'assigneeIds')" class="remove-item-filter"><svg class="next-icon next-icon--size-20"><use xlink:href="#delete-minor"></use> </svg></a>
                 </div> <br>
                  `
@@ -154,11 +156,26 @@ class App {
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use>
                                 </svg>
                     </div>`
-        let value = $(".sapo-select").val()
+        let value = $(".sapo-select").val();
 
         return [str, value]
     }
-}
+
+
+    static selectChangeFilterAll(){
+        let str = `<div class="select__wrapper">
+                                <select class="sapo-select select-change-filter--all" >
+                                    <option value="">Chọn điều kiện lọc</option>
+                                    <option value="status">Trạng thái</option>
+                                    <option value="assigneeIds">Nhân viên</option>
+                                    <option value="supplierGroupId">Nhóm nhà cung cấp</option>
+                                    <option value="createdOn">Ngày tạo</option>
+                                </select>
+                                <svg class="next-icon next-icon--size-16">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use>
+                                </svg>
+                    </div>`
+    }
 }
 
 

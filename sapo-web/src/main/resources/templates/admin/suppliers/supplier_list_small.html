@@ -101,7 +101,7 @@
                             <p class="title" id="ptitle">Hiển thị nhà cung cấp theo:</p>
 
                             <div class="select__wrapper">
-                                <select class="sapo-select select-change-filter--all" >
+                                <select class="sapo-select select-change-filter--all">
                                     <option value="">Chọn điều kiện lọc</option>
                                     <option value="status">Trạng thái</option>
                                     <option value="assigneeIds">Nhân viên</option>
@@ -264,10 +264,12 @@
     page.elements.tbSupplier_tbody = $("#tbSupplier tbody");
 
     //filter
-    page.elements.btnFilter = $("#btnFilter")
-    page.elements.filterBody = $(".filter-content")
-    page.dialogs.elements.modalFilter = $("#modalFilter")
-    page.dialogs.elements.changeFilter = $(".sapo-select")
+    page.elements.btnFilter = $("#btnFilter");
+    page.elements.filterBody = $(".filter-content");
+    page.dialogs.elements.modalFilter = $("#modalFilter");
+    page.dialogs.elements.selectChangeFilterAll = $(".select-change-filter--all");
+    page.dialogs.elements.selectChangeFilterAllOption = $(".select-change-filter--all option");
+
 
     // seach
     page.elements.totalPage = $("#totalPage");
@@ -351,14 +353,26 @@
         })
     }
 
-    page.commands.changeFilter = () => {
-        page.dialogs.elements.changeFilter.on("change", () => {
-           let filter = page.dialogs.elements.changeFilter.val();
-            console.log(filter);
-            console.log(App.renderSelectWrapper()[0]);
-            console.log(App.renderSelectWrapper()[1])
-           page.elements.filterBody.append(App.renderFilter(filter))
-            // $("#ptitle").append(App.renderFilter(filter))
+    // page.commands.changeFilter = () => {
+    //     page.dialogs.elements.changeFilter.on("change", () => {
+    //        let filter = page.dialogs.elements.changeFilter.val();
+    //         console.log(filter);
+    //         console.log(App.renderSelectWrapper()[0]);
+    //         console.log(App.renderSelectWrapper()[1]);
+    //        page.elements.filterBody.append(App.renderFilter(filter))
+    //         // $("#ptitle").append(App.renderFilter(filter))
+    //     })
+    // }
+
+    page.commands.selectChangeFilterAll = () => {
+        page.dialogs.elements.selectChangeFilterAll.on("change", () => {
+            let filter = page.dialogs.elements.selectChangeFilterAll.val();
+            page.elements.filterBody.append(App.renderFilter(filter))
+            page.dialogs.elements.selectChangeFilterAllOption.each(function () {
+                if ($(this).is(':selected'))
+                    $(this).prop("hidden", true)
+            })
+            page.dialogs.elements.selectChangeFilterAll.prop('selectedIndex', 0);
         })
     }
 
@@ -377,7 +391,7 @@
 
     page.commands.initializeEventControl = () => {
         page.commands.dropdownFilter();
-        page.commands.changeFilter();
+        page.commands.selectChangeFilterAll();
 
     }
 
