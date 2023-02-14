@@ -54,7 +54,6 @@ public class ExcelHelper {
                 Iterator<Cell> cellsInRow = currentRow.iterator();
 
                 CreateSupplierParam supplier = new CreateSupplierParam();
-//                supplier.setEmployeeId(6);
 
                 CreateAddressParam address = new CreateAddressParam();
                 address.setProvinceId(-1);
@@ -75,6 +74,7 @@ public class ExcelHelper {
                             break;
                         case 2:
 //                                ma nhom nha cung cap
+
                             break;
                         case 3:
                             supplier.setEmail(currentCell.getStringCellValue());
