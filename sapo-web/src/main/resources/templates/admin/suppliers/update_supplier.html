@@ -256,7 +256,7 @@
                         <div class="page-info-body">
                             <div class="col-12 field p-0">
                                 <div class="label mb-2 label-required">Tên nhà cung cấp</div>
-                                <input id="nameUp" class="sapo-textbox w100" data-toggle="tooltip"
+                                <input required id="nameUp" class="sapo-textbox w100" data-toggle="tooltip"
                                        placeholder="Nhập tên nhà cung cấp"
                                        th:field="${supplier.fullName}"
                                 >
@@ -272,7 +272,7 @@
                                     <div class="btn-group">
                                         <button id="changeValueSup" class="btn secondary dropdown-toggle"
                                                 style="width: 300px; height: 30px; text-align: left" data-bs-toggle="dropdown"
-                                                data-bs-auto-close="outside" aria-expanded="false" th:text="${supplier.group} ? ${supplier.group.title} : ${'---'}"
+                                                data-bs-auto-close="outside" aria-expanded="false" th:value="${supplier.group.id}" th:text="${supplier.group} ? ${supplier.group.title} : ${'---'}"
                                         >
 
 
@@ -287,7 +287,7 @@
                                         </button>
                                         <ul id="renderGroupLi" class="dropdown-menu"
                                             aria-labelledby="dropdownMenuClickableInside" style="width: 300px">
-                                            <li><input id="inputKey" type="text" placeholder="Tìm kiếm"
+                                            <li><input id="inputKey" type="text" placeholder="Tìm kiếm" oninput="searchGroup()"
                                                        style="width: 296px; height: 35px;font-size: 13px;"></li>
 
                                             <li> <i class="fa-solid fa-plus"></i><p id="showGroupSupplier"
@@ -690,10 +690,11 @@
 </div>
 </body>
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
+<script src="/assets/admin/js/suppliers/jquery/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/izitoast@1/dist/js/iziToast.min.js" type="text/javascript"
         crossorigin></script>
 <script>
-    let supplierGroups;
+    let supplierGroups= [];
     const page = {
         urls: {},
         elements: {},
@@ -749,6 +750,37 @@
     page.dialogs.elements.groupCodeSup =  $("#groupCodeSup");
     page.dialogs.elements.groupDescriptionSup =  $("#groupDescriptionSup");
 
+
+    // function searchGroup(){
+    //     console.log("aaaaaaaa")
+//             let searchWord = $('#inputKey').val();
+//             console.log("key", searchWordbb);
+//
+//         let searchWord ;
+//             if(searchWord != null){
+//                 let arr = [];
+//                 supplierGroups.forEach(item => {
+//                     console.log("item", item)
+//                     if ((item.title).toLowerCase().includes(searchWord.toLowerCase())){
+//                         arr.push(item)
+//                     }
+//                 })
+//                 console.log(arr)
+//                 // render result item of searching
+//                 $.each(arr, (i, item) => {
+//                     console.log(item)
+//                     // let isSelected = item ===  $("#renderGroupLi").firstElementChild.innerText ? "selected" : "";
+//                     let result =  `
+//                       <li onclick="handleChangeGroupSupp(${item.id})">
+//                   <p  class="w-20 border-0 ${isSelected}" id="${item.id}" style="padding:7px; font-size: 11px; width: 300px;border: unset;" value="${item.id}">
+//                      ${item.title}</p>
+//                   </li>
+//
+// `;
+//                     $("#renderGroupLi").append(result);
+//                 })
+//             }
+//     }
     function getAllEmployeeSelect() {
         return $.ajax({
             "headers": {
@@ -817,26 +849,30 @@
                 let trSupplier = $("#tr_" + data.id);
                 let tr = App.renderRowSupplier(data);
                 trSupplier.replaceWith(tr);
-                // console.log(data)
                 App.IziToast.showSuccessAlert("Sửa thông tin nhà cung cấp thành công!");
                 setTimeout(() => {
                 }, 1500)
-                // alert("Sửa nhà cung cấp thành công")
                 window.location.href = `/admin/suppliers/${data.id}/histories`;
                 // // window.location.href = `/admin/suppliers/${idSupp}/edit`;
             })
-            // .fail((jqXHR) => {
-            //     // console.log(jqXHR);
-            //     App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
-            //
-            // })
+            .fail((jqXHR) => {
+                // console.log(jqXHR);
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+
+            })
     })
 
     page.elements.showGroupSupplier.on('click', () => {
+
+
         page.dialogs.elements.showModalGroupSupplier.modal('show');
     })
 
+
     page.dialogs.elements.createGroupSupplier.on('click', () => {
+        $("#formCreateGroup").trigger("submit");
+    })
+    function doCreateGroupSupplier() {
         let newGroupSup = new createSupGroupParam();
         newGroupSup.id =  page.dialogs.elements.groupId.val();
         newGroupSup.title = page.dialogs.elements.groupTitleSup.val();
@@ -882,10 +918,9 @@
                 // })
             })
             .fail((jqXHR) => {
-                // console.log(jqXHR);
-                // App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
             })
-    })
+    }
 
     function getAllGroup(element) {
         $.ajax({
@@ -914,17 +949,43 @@
 
     function handleChangeGroupSupp(supplierGroupId) {
         let supplierGroup = supplierGroups.find(supplierGroup => supplierGroup.id === supplierGroupId);
-        $("#changeValueSup").attr("data-id",supplierGroup.id);
-        $("#changeValueSup").val(supplierGroup.id);
-        $("#changeValueSup").text(supplierGroup.title);
-        var dropdown = new bootstrap.Dropdown(document.querySelector("#changeValueSup"));
+        page.elements.changeValueSup.attr("data-id",supplierGroup.id);
+
+        page.elements.changeValueSup.val(supplierGroup.id);
+        page.elements.changeValueSup.text(supplierGroup.title);
+
+        var dropdown = new bootstrap.Dropdown(document.querySelector($("#changeValueSup")));
         dropdown.hide();
     }
 
-    $("#changeValueSup").on('click', ()=> {
-        var dropdown = new bootstrap.Dropdown(document.querySelector("#changeValueSup"));
-        dropdown.show();
-    })
+    // page.elements.changeValueSup.on('click', ()=> {
+    //     var dropdown = new bootstrap.Dropdown(document.querySelector($("#changeValueSup")));
+    //     dropdown.show();
+    // })
+
+
+    // function searchGroup() {
+    //
+    //     let valueSearchInput = document.getElementById("inputKey").value
+    //     console.log("valueSearchInput: ", valueSearchInput)
+    //
+    //     let groupSearch = supplierGroups.filter(group => {
+    //         return group.title.toUpperCase().includes(valueSearchInput.toUpperCase());
+    //     })
+    //     console.log("nhom search", groupSearch)
+    //
+    //     // $("#renderGroupLi").empty();
+    //
+    //     $.each(groupSearch, (i, item) => {
+    //         $("#renderGroupLi").prepend (
+    //             `<li onclick="handleChangeGroupSupp(${item.id})">
+    //                 <p  class="w-20 border-0 " id="${item.id}" style="padding:7px; font-size: 11px; width: 300px;border: unset;" value="${item.id}">
+    //                 ${item.title}</p>
+    //                 </li>`
+    //         )
+    //     });
+    // }
+    // searchGroup();
 
     function renderRowGroupSupplier(item) {
         let str = `
@@ -934,12 +995,8 @@
         `;
         return str;
     }
+    let groupName
 
-    //
-    // $("#search").on('click', ()=>{
-    //   let stringSearch = $("#inputKey").val();
-    //
-    // })
 
 
     // document.getElementById("showGroupSupplier").value="";
@@ -951,9 +1008,45 @@
     //     }
     //     console.log("ngoai if")
     // }
+    $("#formCreateGroup").validate({
+        rules: {
+            groupTitleSup: {
+                required: true,
+                minlength: 5,
+            },
+        },
+        message: {
+            groupTitleSup: {
+                required: "Vui lòng nhập tên nhóm nhà cung cấp",
+                minlength: "Tên nhóm nhà cung cấp phải lớn hơn 5 ký tự",
+            },
+        },
+        submitHandler:() => {
+            doCreateGroupSupplier();
+        }
+    })
 
-    getAllEmployeeSelect();
-    getAllPaymentMethodSelect();
+    $("#nameUp").validate({
+        rules: {
+            nameUp: {
+                required: true,
+                minlength: 5,
+            },
+        },
+        message: {
+            nameUp: {
+                required: "Vui lòng nhập tên nhà cung cấp",
+                minlength: 45,
+            },
+        }
+    })
+
+    $(() => {
+        searchGroup();
+        getAllEmployeeSelect();
+        getAllPaymentMethodSelect();
+    })
+
 </script>
 
 </html>
