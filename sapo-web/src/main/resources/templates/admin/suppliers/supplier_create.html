@@ -361,7 +361,7 @@
                 "type": "POST",
                 "url": "http://localhost:8080/api/admin/suppliers/create",
                 "data": JSON.stringify(supplier)
-            })
+             })
                 .done((data) => {
                     console.log(data)
                     App.IziToast.showSuccessAlert("tạo nhà cung cấp thành công !");
@@ -574,7 +574,7 @@
                 });
             })
     }
-
+// nhóm nhà cung cấp
     function handleChangeGroupSupp(supplierGroupId) {
         let supplierGroup = supplierGroups.find(supplierGroup => supplierGroup.id === supplierGroupId);
         $("#changeValueSup").attr("data-id",supplierGroup.id);
@@ -594,7 +594,6 @@
     createSupplier();
     getAllEmployeeSelect();
     getAllPaymentMethodSelect();
-
 
     $("#formCreate").validate({
         rules: {
