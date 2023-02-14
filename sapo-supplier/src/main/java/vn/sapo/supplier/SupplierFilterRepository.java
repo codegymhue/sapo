@@ -26,12 +26,12 @@ public interface SupplierFilterRepository extends JpaRepository<Supplier, Intege
             if(filter.getFilter() != null){
                 Predicate predicateSupplierCode = criteriaBuilder.like(root.get("supplierCode"),'%' + filter.getFilter() + '%');
                 Predicate predicatePhone = criteriaBuilder.like(root.get("phone"),'%' + filter.getFilter() + '%');
-                Predicate predicateName = criteriaBuilder.like(root.get("name"),'%' + filter.getFilter() + '%');
+                Predicate predicateName = criteriaBuilder.like(root.get("fullName"),'%' + filter.getFilter() + '%');
                 Predicate predicateKw = criteriaBuilder.or(predicateSupplierCode, predicatePhone,predicateName);
                 predicates.add(predicateKw);
             }
-            if (!filter.getSupplierGroupId().isEmpty()) {
-                Predicate predicate = criteriaBuilder.or(root.get("group").get("id").in(filter.getSupplierGroupId()));
+            if (!filter.getGroupId().isEmpty()) {
+                Predicate predicate = criteriaBuilder.or(root.get("group").get("id").in(filter.getGroupId()));
                 predicates.add(predicate);
             }
 
@@ -47,19 +47,19 @@ public interface SupplierFilterRepository extends JpaRepository<Supplier, Intege
             Date createdFrom = filter.getCreatedFrom();
             Date createdTo = filter.getCreatedTo();
             Predicate createdAtPredicate = criteriaBuilder.conjunction();
-            Path<Date> createdAtPath = root.get("createdAt");
-            if (createdFrom != null && createdTo != null)
-                createdAtPredicate = criteriaBuilder.between(createdAtPath, createdFrom, createdTo);
-            else {
-                if (createdFrom != null)
-                    createdAtPredicate = criteriaBuilder.greaterThan(createdAtPath, createdFrom);
+            Path<Instant> createdAtPath = root.get("createdAt");
+            if (createdFrom != null && createdTo != null) {
+                createdAtPredicate = criteriaBuilder.between(createdAtPath, createdFrom.toInstant(), createdTo.toInstant());
 
-                if (createdTo != null)
-                    createdAtPredicate = criteriaBuilder.lessThan(createdAtPath, createdTo);
+            }else {
+                if (createdFrom != null) {
+                    createdAtPredicate = criteriaBuilder.greaterThan(createdAtPath, createdFrom.toInstant());
+
+                }if (createdTo != null) {
+                    createdAtPredicate = criteriaBuilder.lessThan(createdAtPath, createdTo.toInstant());
+                }
             }
             predicates.add(createdAtPredicate);
-
-
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
         }, pageable);
