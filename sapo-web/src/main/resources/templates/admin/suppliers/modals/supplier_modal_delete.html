@@ -24,7 +24,7 @@
         function deleteSupplier (idSupplier){
         $.ajax({
             type: "DELETE",
-            url: 'http://localhost:8080/api/admin/suppliers/' + idSupplier + '/delete',
+            url: 'http://localhost:8080/api/suppliers/' + idSupplier ,
         })
             .done((data) => {
                 console.log(" xóa thành công !")
