@@ -18,9 +18,17 @@ public class SupplierGroupServiceImpl implements SupplierGroupService{
     SupplierGroupMapper supplierGroupMapper;
     @Override
     public SupplierGroupResult create(CreateSupGroupParam createSupGroupParam) {
+//        List<SupplierGroup> supplierGroupList = supplierGroupRepository.findAll();
+//        System.out.println("Nhóm nhà cung cấp" + supplierGroupList);
+//       for(int i = 0; i< supplierGroupList.size(); i++) {
+//           if(createSupGroupParam.getTitle().equalsIgnoreCase(supplierGroupList.get(i).getTitle())) {
+//               System.out.println("NHÓM NHÀ CUNG CẤP ĐÃ TỒN TẠI");
+//               break;
+//           }
+//       }
         SupplierGroup supplierGroup = supplierGroupMapper.toModel(createSupGroupParam);
         supplierGroupRepository.save(supplierGroup);
-        if(supplierGroup.getSupplierCode() == null) {
+        if(supplierGroup.getSupplierCode().isEmpty()) {
             supplierGroup.setSupplierCode("STN" + supplierGroup.getId());
         }
         return supplierGroupMapper.toDTO(supplierGroup);
