@@ -4,12 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import vn.sapo.entities.customer.Customer;
-import vn.sapo.entities.product.Product;
-import vn.sapo.entities.product.ProductStatus;
 import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.entities.supplier.SupplierGroup;
 import vn.sapo.shared.configurations.CodePrefix;
@@ -19,11 +15,11 @@ import vn.sapo.supplier.dto.SupplierFilter;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.dto.UpdateSupplierParam;
 import vn.sapo.supplierGroup.SupplierGroupRepository;
-import vn.sapo.supplierGroup.SupplierGroupService;
 
-import javax.annotation.processing.SupportedOptions;
-import javax.persistence.criteria.Predicate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,6 +32,9 @@ public class SupplierServiceImpl implements SupplierService {
     private SupplierRepository supplierRepository;
     @Autowired
     private SupplierGroupRepository supplierGroupRepository;
+
+    @Autowired
+    private SupplierFilterRepository supplierFilterRepository;
 
 
     @Override
@@ -97,7 +96,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     @Transactional
-    public Map<String, Object> getAllProductItemPage(Integer pageNo, Integer pageSize, String title,
+    public Map<String, Object> getAllSupplierPage(Integer pageNo, Integer pageSize, String title,
                                                      String status
                                                     ) {
         System.out.println("response: "+pageNo);
@@ -108,7 +107,6 @@ public class SupplierServiceImpl implements SupplierService {
         Pageable pageable;
 
         pageable = PageRequest.of(pageNo, pageSize);
-
 
         Page<Supplier> suppliers;
         suppliers = supplierRepository.findAll(pageable);
@@ -130,6 +128,12 @@ public class SupplierServiceImpl implements SupplierService {
         } else {
             return new HashMap<>();
         }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<SupplierResult> findAllByFilters(SupplierFilter filter, Pageable pageable) {
+        return supplierFilterRepository.findAllByFilters(filter,pageable).map(supplierMapper::toDTO);
     }
 
 }

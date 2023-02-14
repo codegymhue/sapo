@@ -1,11 +1,14 @@
 package vn.sapo.supplier.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.sapo.entities.customer.CustomerStatus;
+import net.minidev.json.parser.JSONParser;
 import vn.sapo.entities.supplier.SupplierStatus;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -16,8 +19,11 @@ public class SupplierFilter {
     private String filter;
     private List<SupplierStatus> statuses;
     private List<Integer> employeeIds;
-    private List<Integer> supplierGroupId;
+    private List<Integer> groupId;
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern="yyyy-MM-dd", timezone = "UCT")
     private Date createdFrom;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern="yyyy-MM-dd", timezone = "UCT")
     private Date createdTo;
 
 //    private Integer pageNo;           //page hiện tại

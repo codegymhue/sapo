@@ -97,12 +97,13 @@
                     </div>
                     <div class="filter-body"
                          style="background-color: #dfe4e8; float: left;position: absolute; z-index: 99">
-                        <div class="filter-content" style="display:block">
+                        <div class="filter-content" style="display:none">
                             <p class="title" id="ptitle">Hiển thị nhà cung cấp theo:</p>
-                            <div class="filter-item" filter-type="status" style="width:auto; display: block">
-                                <input type="hidden" class="choosed-single-id" >
+
+                            <div class="filter-item" filter-type="status" data-id="0" style="width:auto;float: left; display: block">
+                                <input type="hidden" class="choosed-single-id">
                                 <div class="select__wrapper">
-                                    <select class="sapo-select select-change-filter" >
+                                    <select class="sapo-select select-change-filter" data-id="0" bind-event-change="changeItemFilter(this)">
                                         <option value="status" selected="">Trạng thái</option>
                                         <option value="assigneeIds">Nhân viên</option>
                                         <option value="supplierGroupId">Nhóm nhà cung cấp</option>
@@ -111,15 +112,81 @@
                                     <svg class="next-icon next-icon--size-16"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use> </svg>
                                 </div>
                                 <div class="btn-group pull-left" data-toggle="buttons">
-                                    <label class="btn filter-button-tag " bind-event-click="hello('active',this)">
-                                        <input type="checkbox" autocomplete="off" > Đang giao dịch
+                                    <label class="btn filter-button-tag " bind-event-click="setParamFilterActive('active',this)">
+                                        <input type="checkbox" autocomplete="off"> Đang giao dịch
                                     </label>
-                                    <label class="btn filter-button-tag " >
+                                    <label class="btn filter-button-tag " bind-event-click="setParamFilterActive('disable',this)">
                                         <input type="checkbox" autocomplete="off"> Ngừng giao dịch
                                     </label>
                                 </div>
-                                <a href="javascript" class="remove-item-filter"><svg class="next-icon next-icon--size-20"><use xlink:href="#delete-minor"></use> </svg></a>
-                            </div>
+                                <a href="javascript" bind-event-click="removeItemFilter(this, 'status')" class="remove-item-filter"><svg class="next-icon next-icon--size-20"><use xlink:href="#delete-minor"></use> </svg></a>
+                            </div><br>
+
+                            <div class="filter-item" filter-type="assigneeIds" data-id="1" style="width:auto;float: left">
+                                <input type="hidden" class="choosed-single-id">
+                                <div class="select__wrapper">
+                                    <select class="sapo-select select-change-filter" data-id="1" bind-event-change="changeItemFilter(this)">
+                                        <option value="status">Trạng thái</option>
+                                        <option value="assigneeIds" selected="">Nhân viên</option>
+                                        <option value="supplierGroupId">Nhóm nhà cung cấp</option>
+                                        <option value="createdOn">Ngày tạo</option>
+                                    </select>
+                                    <svg class="next-icon next-icon--size-16"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use> </svg>
+                                </div>
+                                <div class="btn-group pull-left">
+                                    <div>
+                                        <select multiple="multiple" id="assigneeIds" class="form-control margin-select" style="min-width: 300px; height: 36px;" placeholder="Chọn nhân viên">
+                                            <option value="999">Loi</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <a href="javascript" bind-event-click="removeItemFilter(this, 'assigneeIds')" class="remove-item-filter"><svg class="next-icon next-icon--size-20"><use xlink:href="#delete-minor"></use> </svg></a>
+                            </div><br>
+
+                            <div class="filter-item" filter-type="supplierGroupId" data-id="2" style="width:auto;float: left">
+                                <div class="select__wrapper">
+                                    <select class="sapo-select select-change-filter" data-id="2" bind-event-change="changeItemFilter(this)">
+                                        <option value="status">Trạng thái</option>
+                                        <option value="assigneeIds">Nhân viên</option>
+                                        <option value="supplierGroupId" selected="">Nhóm nhà cung cấp</option>
+                                        <option value="createdOn">Ngày tạo</option>
+                                    </select>
+                                    <svg class="next-icon next-icon--size-16"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use> </svg>
+                                </div>
+                                <div class="autocomplete-suggestion-holder float-left position-relative" style="max-width:600px">
+                                    <div class="w100" id="search-supplierGroupId-container">
+                                    </div>
+                                    <div class="hidden">
+                                        <div class="bootstrap-tagsinput"><input type="text" placeholder=""></div><input type="hidden" class="sapo-textbox choosed-single-id" id="supplierGroupId" value="" style="display: none;">
+                                    </div>
+                                    <div class="select__wrapper" style="margin:0;width:300px;" id="search-suggest-variant">
+                                        <a class="sapo-select select--a select-suggest" style="text-align:center" href="javascript:" data-original-title="" title="">Chọn nhóm nhà cung cấp</a>
+                                        <svg class="next-icon next-icon--size-16"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use> </svg>
+                                        <div class="filter-body--variantIds filter-body--suggest">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="javascript" bind-event-click="removeItemFilter(this, 'supplierGroupId')" class="remove-item-filter"><svg class="next-icon next-icon--size-20"><use xlink:href="#delete-minor"></use> </svg></a>
+                            </div><br>
+
+                            <div class="filter-item" filter-type="createdOn" data-id="3" style="width:auto; float: left">
+                                <div class="select__wrapper">
+                                    <select class="sapo-select select-change-filter" data-id="3" bind-event-change="changeItemFilter(this)">
+                                        <option value="status">Trạng thái</option>
+                                        <option value="assigneeIds">Nhân viên</option>
+                                        <option value="supplierGroupId">Nhóm nhà cung cấp</option>
+                                        <option value="createdOn" selected="">Ngày tạo</option>
+                                    </select>
+                                    <svg class="next-icon next-icon--size-16"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use> </svg>
+                                </div>
+                                <div class="input-group input-daterange pull-left" style="width: 300px;">
+                                    <input type="text" class="form-control from-date input-date sapo-textbox choosed-single-id" style="width: 120px;" name="createMin" value="" placeholder="Từ ngày" autocomplete="off">
+                                    <div class="input-group-append"><span class="input-group-text"></span></div>
+                                    <input type="text" class="form-control to-date input-date sapo-textbox choosed-single-id" style="width: 120px;" name="createMax" value="" placeholder="Đến ngày" autocomplete="off">
+                                </div>
+                                <a href="javascript" bind-event-click="removeItemFilter(this, 'createdOn')" class="remove-item-filter"><svg class="next-icon next-icon--size-20"><use xlink:href="#delete-minor"></use> </svg></a>
+                            </div><br>
                             <div class="select__wrapper">
                                 <select class="sapo-select select-change-filter--all">
                                     <option value="">Chọn điều kiện lọc</option>
@@ -269,11 +336,12 @@
         console.log(str)
         console.log(element)
     }
-    let employee = [];
+    $(".filter-item").css("display","block");
+    let employee;
 
     const page = {
         urls: {
-            getAllSupplier: App.PRODUCT_API,
+            getAllSupplier: App.SUPPLIER_API,
             getAllEmployee: App.EMPLOYEE_API,
         },
         elements: {},
@@ -295,6 +363,9 @@
     page.dialogs.elements.modalFilter = $("#modalFilter");
     page.dialogs.elements.selectChangeFilterAll = $(".select-change-filter--all");
     page.dialogs.elements.selectChangeFilterAllOption = $(".select-change-filter--all option");
+    page.dialogs.elements.selectChangeFilter = $(".select-change-filter");
+    page.dialogs.elements.filterItem = $(".filter-item");
+    page.dialogs.elements.selectAssigneeIds = $("#assigneeIds");
 
 
     // seach
@@ -322,7 +393,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: page.urls.getAllSupplier + "/products/page",
+            url: page.urls.getAllSupplier,
             data: ({
                 "pageNo": pageNo,
                 "pageSize": pageSize,
@@ -343,9 +414,11 @@
                     } else {
                         page.elements.tbSupplier_tbody.append(App.renderRowSupplier(item, 'unavailable'))
                     }
+                    console.log(item.createAt+" :createAt ");
+                    console.log(item.updateAt+" :updateAt ");
+                    console.log(item.createdAt+" :createdAt ");
+                    console.log(item.updatedAt+" :updatedAt ");
                 });
-                // page.commands.resetInputCheckBox();
-                // page.commands.isCheckbox();
                 page.elements.totalPage.append(
                     `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
                 )
@@ -356,14 +429,8 @@
         // })
     }
 
-    // modal btnFilter
-    // page.commands.dropdownFilter = () => {
-    //     page.elements.btnFilter.on("click", () => {
-    //         page.dialogs.elements.modalFilter.modal('show')
-    //     })
-    // }
 
-    // btnFilter lưu lại sau này thay đổi
+
     page.commands.dropdownFilter = () => {
         page.elements.btnFilter.on("click", () => {
             let div = page.elements.filterBody
@@ -379,34 +446,7 @@
         })
     }
 
-    // page.commands.changeFilter = () => {
-    //     page.dialogs.elements.changeFilter.on("change", () => {
-    //        let filter = page.dialogs.elements.changeFilter.val();
-    //         console.log(filter);
-    //         console.log(App.renderSelectWrapper()[0]);
-    //         console.log(App.renderSelectWrapper()[1]);
-    //        page.elements.filterBody.append(App.renderFilter(filter))
-    //         // $("#ptitle").append(App.renderFilter(filter))
-    //     })
-    // }
-    //
-    // page.commands.selectChangeFilterAll = () => {
-    //     page.dialogs.elements.selectChangeFilterAll.on("change", () => {
-    //         let filter = page.dialogs.elements.selectChangeFilterAll.val();
-    //         page.elements.filterBody.append(App.renderFilter(filter))
-    //         page.dialogs.elements.selectChangeFilterAllOption.each(function () {
-    //             if ($(this).is(':selected'))
-    //                 $(this).prop("hidden", true)
-    //         })
-    //         page.dialogs.elements.selectChangeFilterAll.prop('selectedIndex', 0);
-    //     })
-    // }
 
-    // page.dialogs.commands.renderFilter = (value) => {
-    //     console.log("đã vào funtion")
-    //     $("#ptitle").append(App.renderFilter(value))
-    //
-    // }
 
     page.commands.getAllEmployee = () => {
         $.ajax({
@@ -418,52 +458,33 @@
             url: page.urls.getAllEmployee,
         })
             .done((data) => {
-               employee= data;
-            })
+                $.each(data, (i, item) => {
+                    let str = `<option value="${item.id}">${item.fullName}</option>`;
+                    page.dialogs.elements.selectAssigneeIds.append(str);
+                });
+
+            }).fail((jqXHR) => {
+
+
+        })
     }
 
-    page.dialogs.commands.renderStatusFilter = () =>{
-        let str = `<div class="filter-item" filter-type="status" style="width:auto;">
-        <input type="hidden" class="choosed-single-id" value="active,disable">
-        <div class="select__wrapper">
-            <select class="sapo-select select-change-filter" bind-event-change="changeItemFilter(this)">
-                    <option value="status" selected="">Trạng thái</option>
-                    <option value="assigneeIds">Nhân viên</option>
-                    <option value="supplierGroupId">Nhóm nhà cung cấp</option>
-                    <option value="createdOn">Ngày tạo</option>
-            </select>
-            <svg class="next-icon next-icon--size-16"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use> </svg>
-        </div>
-        <div class="btn-group pull-left" data-toggle="buttons">
-            <label class="btn filter-button-tag " bind-event-click="setParamFilterActive('active',this)">
-                <input type="checkbox" autocomplete="off"> Đang giao dịch
-            </label>
-            <label class="btn filter-button-tag " bind-event-click="setParamFilterActive('disable',this)">
-                <input type="checkbox" autocomplete="off"> Ngừng giao dịch
-            </label>
-        </div>
-        <a href="javascript" bind-event-click="removeItemFilter(this, 'status')" class="remove-item-filter"><svg class="next-icon next-icon--size-20"><use xlink:href="#delete-minor"></use> </svg></a>
-    </div>`
-        return str;
-    }
+
 
     page.dialogs.commands.setParamFilterActive = () => {
 
     }
-// $(".filter-button-tag").bind("click",(string)=> {
-//     $(".choosed-single-id").setAttribute("value", "active")
-//
-// })
+
+
 
     page.commands.loadData = () => {
         page.commands.getAllSupplier();
-
+        page.commands.getAllEmployee();
 
     }
 
     page.commands.initializeEventControl = () => {
         page.commands.dropdownFilter();
-        // page.commands.selectChangeFilterAll();
 
     }
 
