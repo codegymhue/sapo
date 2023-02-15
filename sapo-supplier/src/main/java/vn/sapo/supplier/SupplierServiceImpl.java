@@ -98,10 +98,6 @@ public class SupplierServiceImpl implements SupplierService {
     public Map<String, Object> getAllSupplierPage(Integer pageNo, Integer pageSize, String title,
                                                      String status
                                                     ) {
-        System.out.println("response: "+pageNo);
-        System.out.println("response: "+pageSize);
-        System.out.println("response: "+title);
-        System.out.println("response: "+status);
         pageNo = pageNo - 1;
         Pageable pageable;
 
@@ -122,7 +118,6 @@ public class SupplierServiceImpl implements SupplierService {
             response.put("suppliers", supplierResults);
             response.put("totalItem", suppliers.getTotalElements());
             response.put("totalPage", suppliers.getTotalPages());
-            System.out.println("response: "+response);
             return response;
         } else {
             return new HashMap<>();
