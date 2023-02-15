@@ -12,15 +12,14 @@ import javax.validation.constraints.Size;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-
+@NoArgsConstructor
 @Setter
 @Getter
-@NoArgsConstructor
 @Accessors(chain = true)
 @Entity
-@Table(name = "rbac_module")
-public class RbacModule extends BaseEntity {
-    private static final long serialVersionUID = 7963198930656959401L;
+@Table(name = "rbac_operation")
+public class RbacOperation extends BaseEntity {
+    private static final long serialVersionUID = 5839851757303718238L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -28,8 +27,8 @@ public class RbacModule extends BaseEntity {
 
     @Size(max = 75)
     @NotNull
-    @Column(name = "module_code", nullable = false, length = 75)
-    private String moduleCode;
+    @Column(name = "operation_code", nullable = false, length = 75)
+    private String operationCode;
 
     @Size(max = 75)
     @NotNull
@@ -48,6 +47,6 @@ public class RbacModule extends BaseEntity {
     @Column(name = "content")
     private String content;
 
-    @OneToMany(mappedBy = "module")
-    private Set<RbacModulePermission> modulePermissions = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "operation")
+    private Set<RbacOperationPermission> operationPermissions = new LinkedHashSet<>();
 }

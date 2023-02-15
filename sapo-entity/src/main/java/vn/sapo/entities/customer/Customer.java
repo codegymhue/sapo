@@ -69,13 +69,13 @@ public class Customer extends BaseEntity {
     @Column(name = "extension_attributes", columnDefinition = "JSON")
     private HashMap<String, String> attributes;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "cus_group_id", nullable = false)
+    @JoinColumn(name = "customer_group_id", nullable = false, foreignKey = @ForeignKey(name = "fk_customer_customer_group"))
     private CustomerGroup group;
 
-    @Column(name = "cus_group_id", insertable = false, updatable = false)
+    @Column(name = "customer_group_id", insertable = false, updatable = false)
     private Integer groupId;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "employee_id", nullable = false)
+    @JoinColumn(name = "employee_id", nullable = false, foreignKey = @ForeignKey(name = "fk_customer_employee"))
     private Employee employee;
     @Column(name = "employee_id", insertable = false, updatable = false)
     private Integer employeeId;
