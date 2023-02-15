@@ -33,4 +33,6 @@ public class CustomerGroupResult {
 
     private Integer discount;
 
+
+
 }

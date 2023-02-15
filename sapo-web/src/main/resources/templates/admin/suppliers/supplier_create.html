@@ -19,7 +19,7 @@
                 <div class="ui-title-top-bar_action flex">
                     <div class="w-50" style="padding-top: 5px;"></div>
                     <div class="w-50" style="position: relative;">
-                        <a class="btn sapo-btn-default right btn-create-supplier">Lưu</a>
+                        <a class="btn sapo-btn-default right btn-create-supplier" id="supplier">Lưu</a>
                         <a href="/admin/suppliers" class="btn sapo-btn-blank right mr-3">Huỷ</a>
                     </div>
                 </div>
@@ -43,92 +43,223 @@
                     </div>
                 </div>
             </header>
-            <div class="customer-container container">
-                <div class="customer-create--left">
-                    <div class="page-info">
-                        <div class="page-info-title">Thông tin cá nhân</div>
-                        <div class="page-info-body">
-                            <div class="col-6 field pl-0">
-                                <label for="name" class="label-required mb-2">Tên nhà cung cấp</label>
-                                <input id="name" class="sapo-textbox w100" placeholder="Nhập tên nhà cung cấp" title="Nhập tên nhà cung cấp" required/>
-                            </div>
-                            <div class="col-6 field pr-0">
-                                <label for="code" class="label-required mb-2">Mã nhà cung cấp</label>
-                                <input id="code" class="sapo-textbox w100" placeholder="Nhập mã nhà cung cấp" title="Nhập mã nhà cung cấp" required/>
-                            </div>
-                            <div class="col-6 field pl-0">
-                                <label for="phone" class="label-required mb-2">Số điện thoại</label>
-                                <input id="phone" class="sapo-textbox w100" placeholder="Nhập số điện thoại" title="Nhập số điện thoại" required/>
-                            </div>
-                            <div class="col-6 field pr-0">
-                                <label for="email" class="label-required mb-2">Email</label>
-                                <input id="email" class="sapo-textbox w100" placeholder="Nhập email" title="Nhập email" required/>
+            <form id="formCreate">
+                <div class="customer-container container">
+                    <div class="customer-create--left">
+                        <div class="page-info">
+                            <div class="page-info-title">Thông tin cá nhân</div>
+                            <div class="page-info-body">
+                                <div class="col-6 field pl-0">
+                                    <label for="nameCreate" class="label-required mb-2">Tên nhà cung cấp</label>
+                                    <input id="nameCreate" class="sapo-textbox w100"
+                                           placeholder="Nhập tên nhà cung cấp" title="Nhập tên nhà cung cấp" required/>
+                                </div>
+                                <div class="col-6 field pr-0">
+                                    <label for="#codeCreate" class="label-required mb-2">Mã nhà cung cấp</label>
+                                    <input id="#codeCreate" class="sapo-textbox w100" placeholder="Nhập mã nhà cung cấp"
+                                           title="Nhập mã nhà cung cấp" required/>
+                                </div>
+                                <div class="col-6 field pl-0">
+                                    <label for="phoneCreate" class="label-required mb-2">Số điện thoại</label>
+                                    <input id="phoneCreate" class="sapo-textbox w100" placeholder="Nhập số điện thoại"
+                                           title="Nhập số điện thoại" required/>
+                                </div>
+                                <div class="col-6 field pr-0">
+                                    <label for="emailCreate" class="label-required mb-2">Email</label>
+                                    <input id="emailCreate" class="sapo-textbox w100" placeholder="Nhập email"
+                                           title="Nhập email" required/>
+                                </div>
+
+                                <!--                                <div class="MuiBox-root jss20574 jss21252">-->
+                                <!--                                    <div class="MuiBox-root jss20575 jss21262">-->
+                                <!--                                        <label for="customerGroupCreate" class="MuiTypography-root MuiTypography-body1" style="color: rgb(70, 81, 95);">Nhóm-->
+                                <!--                                            khách hàng</label>-->
+                                <!--                                    </div>-->
+                                <!--                                    <select classname="jss87874" class="form-select" name="customerGroupCreate" id="customerGroupCreate"><option value="1">VIP</option><option value="2">Bán buôn</option><option value="3">Bán Lẻ</option><option value="78">abc</option></select>-->
+                                <!--                                </div>-->
+
+
+<!--                                <div class="col-6 field pr-0">-->
+<!--                                    <div class="label mb-2">Nhóm nhà cung cấp</div>-->
+<!--                                    <div class="select__wrapper " id="search-supplier-group-wrap">-->
+<!--                                        <a class="sapo-select select&#45;&#45;a select-suggest" id="search-supplier-group" href="javascript:" data-original-title="" title="">Chọn nhóm nhà cung cấp</a>-->
+<!--                                        <svg class="next-icon next-icon&#45;&#45;size-16"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use> </svg>-->
+<!--                                        <div class="filter-body&#45;&#45;suggest">-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+
+
+                                <div class="col-6 field pr-0">
+                                    <div class="label mb-2">Nhóm nhà cung cấp</div>
+                                    <div>
+                                        <div class="btn-group">
+                                            <button id="changeValueSup" class="btn secondary dropdown-toggle"
+                                                    style="width: 300px; height: 30px; text-align: left" data-bs-toggle="dropdown"
+                                                    data-bs-auto-close="outside" aria-expanded="false" >
+                                                <!--                                            <th:block th:each="group : ${supplierGroup}">-->
+                                                <!--                                                <th:block th:if="${group.id} == ${supplier.supplierGroup.id}">-->
+                                                <!--                                                    <th:block   th:text="${group.title}"></th:block>-->
+                                                <!--                                                </th:block>-->
+                                                <!--                                            </th:block>-->
+
+                                                <!--                                            th:field="${supplier.supplierGroup.title} ? ${supplier.supplierGroup.title} : ${'-&#45;&#45;'} "-->
+                                                <!--                                            Khác-->
+                                            </button>
+                                            <ul id="renderGroupLi" class="dropdown-menu"
+                                                aria-labelledby="dropdownMenuClickableInside" style="width: 300px">
+                                                <li><input id="inputKey" type="text" placeholder="Tìm kiếm"
+                                                           style="width: 296px; height: 35px;font-size: 13px;"></li>
+
+                                                <li> <i class="fa-solid fa-plus"></i><p id="showGroupSupplier"
+                                                                                        style="height: 30px; width: 300px; font-size: 13px; padding: 5px">
+                                                    Thêm mới nhóm nhà cung cấp</p></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!--                <div class="select__wrapper " id="search-supplier-group-wrap">-->
+                                    <!--                  <a class="sapo-select select&#45;&#45;a select-suggest" id="search-supplier-group">-->
+                                    <!--                    Khác</a>-->
+                                    <!--                  <svg class="next-icon next-icon&#45;&#45;size-16">-->
+                                    <!--                    <use xmlns:xlink="http://www.w3.org/1999/xlink"-->
+                                    <!--                         xlink:href="#select-chevron"></use>-->
+                                    <!--                  </svg>-->
+                                    <!--                  <div class="filter-body&#45;&#45;suggest">-->
+                                    <!--                  </div>-->
+                                    <!--                </div>-->
+                                </div>
+
                             </div>
                         </div>
-                    </div>
-                    <div class="page-info">
-                        <div class="page-info-title">Thông tin địa chỉ</div>
-                        <div class="page-info-body">
-                            <div class="col-6 field pl-0">
-                                <label for="address" class="label-required mb-2">Địa chỉ</label>
-                                <input id="address" class="sapo-textbox w100" placeholder="Nhập địa chỉ" title="Nhập địa chỉ" required/>
-                            </div>
-                            <div class="col-6 field pr-0">
-                                <label for="province" class="label-required mb-2">Tỉnh thành phố</label>
-                                <select id="province" class="w100 input-dropdown sapo-btn-blank select-padding" title="Tỉnh thành phố" required>
-                                    <option value="" disabled selected>Chọn tỉnh thành phố</option>
-                                </select>
-                            </div>
-                            <div class="col-6 field pl-0">
-                                <label for="district" class="label-required mb-2">Quận huyện</label>
-                                <select id="district" class="w100 input-dropdown sapo-btn-blank select-padding" title="Chọn quận huyện" required>
-                                    <option value="" disabled selected>Chọn quận huyện</option>
-                                </select>
-                            </div>
-                            <div class="col-6 field pr-0">
-                                <label for="ward" class="label-required mb-2">Phường xã</label>
-                                <select id="ward" class="w100 input-dropdown sapo-btn-blank select-padding" title="Chọn phường xã" required>
-                                    <option value="" disabled selected>Chọn phường xã</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="customer-create--right">
-                    <div class="page-info">
-                        <div class="page-info-title">Thông tin khác</div>
-                        <div class="page-info-body">
-                            <div class="col-12 field p-0">
-                                <label for="employee" class="label-required mb-2">Nhân viên phụ trách</label>
-                                <select id="employee" class="w100 input-dropdown sapo-btn-blank select-padding" title="Chọn nhân viên" required>
-                                    <option value="disabled selected" >Chọn nhân viên</option>
-                                </select>
-                            </div>
-                            <div class="page-info-item col-12 no-padding mb-4">
-                                <label for="description" class="label-required mb-2">Mô tả</label>
-                                <textarea id="description" class="sapo-textbox" title="Nhập mô tả" style="height: 119px;" required></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="page-info">
-                        <div class="page-info-title">Cài đặt nâng cao</div>
-                        <div class="page-info-body">
-                            <div id="config-customer" style="width: 100%;">
-                                <div class="col-12 field p-0">
-                                    <label for="payment_method" class="label-required mb-2">Hình thức thanh toán</label>
-                                    <select id="payment_method" class="w100 input-dropdown sapo-btn-blank select-padding" title="Chọn hình thức" required>
-                                        <option value="" disabled selected>Chọn hình thức</option>
+                        <div class="page-info">
+                            <div class="page-info-title">Thông tin địa chỉ</div>
+                            <div class="page-info-body">
+                                <!--                            <div class="col-6 field pl-0">-->
+                                <!--                                <label for="address" class="label-required mb-2">Địa chỉ</label>-->
+                                <!--                                <input id="address" class="sapo-textbox w100" placeholder="Nhập địa chỉ" title="Nhập địa chỉ" required/>-->
+                                <!--                            </div>-->
+                                <div class="col-6 field pr-0">
+                                    <label for="province" class="label-required mb-2">Tỉnh thành phố</label>
+                                    <select id="province" class="w100 input-dropdown sapo-btn-blank select-padding"
+                                            title="Tỉnh thành phố" required>
+                                        <option value="" disabled selected>Chọn tỉnh thành phố</option>
                                     </select>
+                                </div>
+                                <div class="col-6 field pl-0">
+                                    <label for="district" class="label-required mb-2">Quận huyện</label>
+                                    <select id="district" class="w100 input-dropdown sapo-btn-blank select-padding"
+                                            title="Chọn quận huyện" required>
+                                        <option value="" disabled selected>Chọn quận huyện</option>
+                                    </select>
+                                </div>
+                                <div class="col-6 field pr-0">
+                                    <label for="ward" class="label-required mb-2">Phường xã</label>
+                                    <select id="ward" class="w100 input-dropdown sapo-btn-blank select-padding"
+                                            title="Chọn phường xã" required>
+                                        <option value="" disabled selected>Chọn phường xã</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 field pl-0">
+                                <label for="addressCreate"><div class="label mb-2">Địa chỉ</div></label>
+                                <input id="addressCreate" bind="address2" class="sapo-textbox w100" placeholder="Nhập địa chỉ" data-toggle="tooltip"
+                                       bind-event-input="checkValidateDataSupplier(this)" data-original-title=""
+                                       title="">
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="page-info">
+                            <div class="page-info-title">
+                                Thông tin bổ sung
+                            </div>
+                            <div class="page-info-body">
+                                <div class="col-6 field pl-0">
+                                    <label for="faxCreate" div class="label mb-2">Số fax</label>
+                                    <input id="faxCreate" class="sapo-textbox w100" data-toggle="tooltip"
+                                           bind-event-input="checkValidateDataSupplier" data-original-title="" title="">
+                                </div>
+                                <div class="col-6 field pr-0">
+                                    <label for="taxCodeCreate" class="label mb-2">Mã số thuế</label>
+                                    <input id="taxCodeCreate" bind="taxNumber" class="sapo-textbox w100"
+                                           data-toggle="tooltip"
+                                           bind-event-input="checkValidateDataSupplier" data-original-title="" title="">
+                                </div>
+                                <div class="col-6 field pl-0">
+                                    <label for="websiteCreate">
+                                        <div class="label mb-2">Website</div>
+                                    </label>
+                                    <input id="websiteCreate" class="sapo-textbox w100" data-toggle="tooltip"
+                                           bind-event-input="checkValidateDataSupplier" data-original-title="" title="">
+                                </div>
+                                <div class="col-6 field pr-0">
+                                    <label for="debtTotalCreate">
+                                        <div class="label mb-2">Công nợ</div>
+                                    </label>
+                                    <div class="input-wrap"><input id="debtTotalCreate" autocomplete="off"
+                                                                   placeholder="" bind="debt_txt"
+                                                                   define="{ numberInput: new Components.NumberInput(this, 'createSupplier','0','99999999999','','-99999999999','False')}"
+                                                                   context="numberInput" class="sapo-textbox w100"
+
+                                                                   bind-event-input="checkValidateDataSupplier"
+                                                                   data-toggle="tooltip" data-original-title="" title=""
+                                    ><input type="hidden" bind="debt"
+                                            class="sapo-textbox w100" id="" name=""
+                                            value="0"></div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="customer-create--right">
+                        <div class="page-info">
+                            <div class="page-info-title">Thông tin khác</div>
+                            <div class="page-info-body">
+                                <div class="col-12 field p-0">
+                                    <label for="employeeNameCreate" class="label-required mb-2">Nhân viên phụ
+                                        trách</label>
+                                    <select id="employeeNameCreate"
+                                            class="w100 input-dropdown sapo-btn-blank select-padding" required>
+                                    </select>
+                                </div>
+                                <div class="page-info-item col-12 no-padding mb-4">
+                                    <label for="descriptionCreate" class="label-required mb-2">Mô tả</label>
+                                    <textarea id="descriptionCreate" class="sapo-textbox" title="Nhập mô tả"
+                                              style="height: 119px;" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="page-info">
+                            <div class="page-info-title">Cài đặt nâng cao</div>
+                            <div class="page-info-body">
+                                <div id="config-customer" style="width: 100%;">
+                                    <div class="col-12 field p-0">
+                                        <label for="paymentMethodCreate" class="label-required mb-2">Hình thức thanh
+                                            toán</label>
+                                        <select id="paymentMethodCreate"
+                                                class="w100 input-dropdown sapo-btn-blank select-padding"
+                                                title="Chọn hình thức" required>
+                                            <option value="" disabled selected>Chọn hình thức</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="ui-title-bottom-bar">
+                        <a class="btn sapo-btn-default right btn-create-supplier" id="btnCreateSupplier">Lưu</a>
+                        <a href="/admin/suppliers" class="btn sapo-btn-blank right mr-3">Huỷ</a>
+                    </div>
                 </div>
-                <div class="ui-title-bottom-bar">
-                    <a class="btn sapo-btn-default right btn-create-supplier">Lưu</a>
-                    <a href="/admin/suppliers" class="btn sapo-btn-blank right mr-3">Huỷ</a>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -139,5 +270,348 @@
 <script>Page();</script>
 
 </body>
-
 </html>
+<script>
+    class Supplier {
+        constructor(id, supplierCode, name, email, phone, description, employeeId, paymentMethodId, createAt, updatedAt, createAddressParam, status, fax, taxCode, Website, debtTotal) {
+            this.id = id;
+            this.supplierCode = supplierCode;
+            this.name = name;
+            this.email = email;
+            this.phone = phone;
+            this.description = description;
+            this.employeeId = employeeId;
+            this.Website = Website;
+            this.taxCode = taxCode;
+            this.fax = fax;
+            this.paymentMethodId = paymentMethodId;
+            this.createAt = createAt;
+            this.updatedAt = updatedAt;
+            this.createAddressParam = createAddressParam;
+            this.status = status;
+            this.debtTotal = debtTotal
+
+        }
+    }
+
+    class CreateAddressParam {
+        constructor(id, fullName, phoneNumber, line1, line2, email, districtId, districtName, provinceId, provinceName, wardId, wardName, zipCode, customerId, supplierId, isDefault, description) {
+            this.id = id;
+            this.fullName = fullName;
+            this.line1 = line1;
+            this.line2 = line2;
+            this.phoneNumber = phoneNumber;
+            this.email = email;
+            this.districtId = districtId;
+            this.districtName = districtName;
+            this.provinceId = provinceId;
+            this.provinceName = provinceName;
+            this.wardId = wardId;
+            this.wardName = wardName;
+            this.zipCode = zipCode;
+            this.customerId = customerId;
+            this.isDefault = isDefault;
+            this.supplierId = supplierId;
+            this.description = description;
+        }
+    }
+
+
+
+
+    function createSupplier() {
+        $('.btn-create-supplier').on('click', () => {
+            // alert("alo 1235689")
+            let supplier ={};
+
+            supplier.name = $('#nameCreate').val();
+            supplier.fax = $('#faxCreate').val();
+            supplier.taxCode = $('#taxCodeCreate').val();
+            supplier.website = $('#websiteCreate').val();
+            supplier.debtTotal = $('#debtTotalCreate').val();
+
+            supplier.supplierCode = $('#codeCreate').val();
+            // supplier.groupId = $('#supplierGroupCreate :selected').val();
+            supplier.phone = $('#phoneCreate').val();
+            supplier.email = $('#emailCreate').val();
+            supplier.employeeId = $('#employeeNameCreate :selected').val();
+            supplier.description = $('#descriptionCreate').val();
+            supplier.paymentMethodId = $('#paymentMethodCreate :selected').val();
+
+            let createAddressParam = new CreateAddressParam();
+
+            createAddressParam.line1 = $('#addressCreate').val();
+            createAddressParam.provinceId = $('#province').val();
+            createAddressParam.provinceName = $('#province :selected').text();
+            createAddressParam.districtId = $('#district').val();
+            createAddressParam.districtName = $('#district :selected').text();
+            createAddressParam.wardId = $('#ward').val();
+            createAddressParam.wardName = $('#ward :selected').text();
+            createAddressParam.phoneNumber = $('#phoneCreate').val();
+            supplier.createAddressParam = createAddressParam;
+
+            console.log(supplier)
+            // console.log(JSON.stringify(supplier))
+            // console.log(createAddressParam)
+            $.ajax({
+                "headers": {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                "type": "POST",
+                "url": "http://localhost:8080/api/admin/suppliers/create",
+                "data": JSON.stringify(supplier)
+             })
+                .done((data) => {
+                    console.log(data)
+                    App.IziToast.showSuccessAlert("tạo nhà cung cấp thành công !");
+                    setTimeout(() => {
+                    }, 2500)
+                    $('#formCreate')[0].reset();
+                    window.location.href = `/admin/suppliers/${data.id}`;
+
+                })
+                .fail((jqXHR) => {
+                    console.log(jqXHR);
+
+                    // App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+                })
+        });
+    }
+
+    function getAllProvinces() {
+        return $.ajax({
+            headers: {
+                "accept"    : "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "https://vapi.vnappmob.com/api/province/"
+        })
+            .done((data) => {
+                if (data.results.length === 0) {
+                    let str = `<option value="0">Chọn Tỉnh/Thành Phố</option>`;
+                    $("#province").append(str);
+                } else {
+                    $.each(data.results, (i, item) => {
+                        let str = `<option value="${item.province_id}">${item.province_name}</option>`;
+                        $("#province").append(str);
+                        $('#provinceUpdate').append(str);
+                    });
+                }
+
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR);
+            })
+    }
+
+    function getAllDistrictsByProvinceId(provinceId) {
+        $("#district").empty();
+        $("#districtUpdate").empty();
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "https://vapi.vnappmob.com/api/province/district/" + provinceId
+        })
+            .done((data) => {
+                if (data.results.length === 0) {
+                    let str = `<option value="0">Chọn Quận/Huyện</option>`;
+                    $("#district").append(str);
+                } else {
+                    $.each(data.results, (i, item) => {
+                        let str = ` <option value="${item.district_id}">${item.district_name}</option>`;
+                        $("#district").append(str);
+                        $('#districtUpdate').append(str);
+                    })
+
+                }
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR);
+            })
+    }
+
+    
+    function getAllWardsByDistrictId(districtId) {
+        $("#ward").empty();
+        $('#wardUpdate').empty();
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "https://vapi.vnappmob.com/api/province/ward/" + districtId
+        })
+            .done((data) => {
+                // $('#ward').html('');
+                // $('#wardUpdate').html('');
+
+                if (data.results.length === 0) {
+                    let str = `<option value="0">Chọn Phường/Xã</option>`;
+                    $("#ward").append(str);
+
+                } else {
+                    $.each(data.results, (i, item) => {
+                        let str = `<option value="${item.ward_id}">${item.ward_name}</option>`;
+                        $("#ward").append(str);
+                        $('#wardUpdate').append(str);
+                    });
+                }
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR);
+            })
+    }
+
+    getAllProvinces().then(() => {
+        let provinceId = $("#province").val();
+
+        getAllDistrictsByProvinceId(provinceId).then(() => {
+
+            let districtId = $("#district").val();
+
+            getAllWardsByDistrictId(districtId)
+
+
+        });
+    });
+
+    $("#province").on('change', () => {
+        let provinceId = $("#province").val();
+        getAllDistrictsByProvinceId(provinceId).done(() => {
+            let districtId = $("#district").val();
+            getAllWardsByDistrictId(districtId);
+        })
+
+        $("#district").on('change', () => {
+            let districtId = $("#district").val();
+            getAllWardsByDistrictId(districtId);
+        })
+    });
+
+    $("#provinceUpdate").on("change", () => {
+        let provinceId = $("#provinceUpdate").val();
+        getAllDistrictsByProvinceId(provinceId).then(() => {
+            let districtId = $("#districtUpdate").val();
+            getAllWardsByDistrictId(districtId);
+        })
+    })
+
+    $("#districtUpdate").on("change", () => {
+        let districtId = $("#districtUpdate").val();
+        getAllWardsByDistrictId(districtId);
+    });
+
+
+    // select chọn nhân viên
+    function getAllEmployeeSelect() {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "http://localhost:8080/api/employees"
+        })
+            .done((data) => {
+                $.each(data, (i, item) => {
+                    let str = `<option value="${item.id}">${item.fullName}</option>`;
+                    $("#employeeNameCreate").append(str);
+                });
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR.error);
+
+            })
+    }
+
+    // select chọn phương thức thanh toán
+    function getAllPaymentMethodSelect() {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "http://localhost:8080/api/admin/payment_methods"
+        })
+            .done((data) => {
+                $.each(data, (i, item) => {
+                    let str = `<option value="${item.id}">${item.title}</option>`;
+                    $("#paymentMethodCreate").append(str);
+                });
+            })
+            .fail((jqXHR) => {
+
+                console.log(jqXHR.error);
+            })
+    }
+
+    // select chọn nhóm nhà cung cấp
+    function getAllGroup(element) {
+        $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "http://localhost:8080/api/supplier_groups",
+        })
+            .done((data) => {
+                supplierGroups = data;
+                $.each(data, function (index, value) {
+                    element.append(
+                        `<li onclick="handleChangeGroupSupp(${value.id})">
+                        <p  class="w-20 border-0 " id="${value.id}" style="padding:7px; font-size: 11px; width: 300px;border: unset;" value="${value.id}">
+                        ${value.title}</p>
+                        </li>`
+                    )
+                });
+            })
+    }
+// nhóm nhà cung cấp
+    function handleChangeGroupSupp(supplierGroupId) {
+        let supplierGroup = supplierGroups.find(supplierGroup => supplierGroup.id === supplierGroupId);
+        $("#changeValueSup").attr("data-id",supplierGroup.id);
+        $("#changeValueSup").val(supplierGroup.id);
+        $("#changeValueSup").text(supplierGroup.title);
+        var dropdown = new bootstrap.Dropdown(document.querySelector("#changeValueSup"));
+        dropdown.hide();
+    }
+
+    $("#changeValueSup").on('click', ()=> {
+        var dropdown = new bootstrap.Dropdown(document.querySelector("#changeValueSup"));
+        dropdown.show();
+    })
+
+    let renderGroup = $("#renderGroupLi");
+    getAllGroup(renderGroup);
+    createSupplier();
+    getAllEmployeeSelect();
+    getAllPaymentMethodSelect();
+
+    $("#formCreate").validate({
+        rules: {
+            nameCreate: {
+                required: true
+
+            }
+        },
+        messages: {
+            nameCreate: {
+                required: "Vui lòng nhập tên nhà cung cấp",
+
+            }
+        },
+        submitHandler: function () {
+            createSupplier();
+        }
+    });
+
+</script>
+

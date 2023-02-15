@@ -5,9 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import vn.sapo.address.dto.AddressResult;
+import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.entities.supplier.SupplierStatus;
+import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 
+import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,16 +22,21 @@ import java.time.Instant;
 public class SupplierResult {
     private Integer id;
     private String supplierCode;
-    private String name;
+    private String fullName;
     private String email;
     private String phone;
-    private SupplierStatus status;
     private String description;
-    private Integer employeeId;
+    private SupplierStatus status;
     private SupEmployeeResult employee;
-    private Integer paymentMethodId;
     private SupPaymentMethodResult paymentMethod;
+
+
+    private SupplierGroupResult group;
     private Instant createAt;
     private Instant updateAt;
-
+    private BigDecimal debtTotal;
+    private List<AddressResult> addresses;
+    private  String taxCode;
+    private  String fax;
+    private String website;
 }

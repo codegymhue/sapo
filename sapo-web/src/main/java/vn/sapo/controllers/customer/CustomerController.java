@@ -11,9 +11,7 @@ import vn.sapo.customer.CustomerExcelExporterInventory;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customerGroup.CustomerGroupService;
-
-import vn.sapo.customerGroup.dto.CustomerGroupResult;
-
+import vn.sapo.employee.EmployeeService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -21,37 +19,30 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/customers")
 public class CustomerController {
     @Autowired
     CustomerAPI customerAPI;
     @Autowired
     CustomerService customerService;
-
     @Autowired
     CustomerGroupService customerGroupService;
+    @Autowired
+    EmployeeService employeeService;
 
-
-    @GetMapping("/customers")
+    @GetMapping
     public String showListCustomerPage() {
         return "/admin/customer/list_customer";
     }
 
-    @GetMapping("customers/create")
+    @GetMapping("/create")
     public String showCustomerCreatePage() {
         return "/admin/customer/create_customer";
     }
 
-//    @GetMapping("/history")
-//    public String showCustomerHistoryPage() {
-//        return "/admin/customer/history_customer";
-//    }
-
-
-    @GetMapping("/customers/{id}")
+    @GetMapping("/{id}")
     public ModelAndView showCustomerInfoPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         try{
@@ -65,21 +56,19 @@ public class CustomerController {
         return modelAndView;
     }
 
-    @GetMapping("/customers/update/{id}")
+    @GetMapping("/{id}/edit")
     public ModelAndView showCustomerEditPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView();
-        Optional<CustomerResult> customerOptional = Optional.ofNullable(customerService.findById(id));
-        System.out.println(customerOptional.get());
-        modelAndView.addObject("customer", customerOptional);
+        modelAndView.addObject("customer", customerService.findById(id));
+        modelAndView.addObject("group", customerGroupService.findAll());
+        modelAndView.addObject("employee", employeeService.findAll());
         modelAndView.setViewName("/admin/customer/edit_customer");
         return modelAndView;
     }
 
     //export excel file
 
-    // Upload File Excel
-
-    @GetMapping("/customers/export/excel")
+    @GetMapping("/export/excel")
     public void exportToExcel(HttpServletResponse response) throws IOException {
         response.setContentType("application/octet-stream");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
@@ -92,7 +81,7 @@ public class CustomerController {
         excelExporter.export(response);
     }
 
-    @GetMapping("/customers/excel")
+    @GetMapping("/excel")
     public void exportItemToExcel(HttpServletResponse response) throws IOException {
         response.setContentType("application/octet-stream");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
@@ -105,17 +94,4 @@ public class CustomerController {
         excelExporter.export(response);
     }
 
-//    @GetMapping("customers/export/excel")
-//    public void exportToExcel(HttpServletResponse response) throws IOException {
-//        response.setContentType("application/octet-stream");
-//        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-//        String currentDateTime = dateFormatter.format(new Date());
-//
-//        String headerKey = "Content-Disposition";
-//        String headerValue = "attachment; filename=products_" + currentDateTime + ".xlsx";
-//        response.setHeader(headerKey, headerValue);
-//        List<CustomerResult> listCustomers = customerService.findAll();
-//        ProductExcelExporter excelExporter = new ProductExcelExporter(listCustomers);
-//        excelExporter.export(response);
-//    }
 }

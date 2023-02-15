@@ -16,13 +16,14 @@ public class CustomerGroupMapper {
     @Autowired
     private ModelMapper modelMapper;
 
-    public CustomerGroup toModel(CreateCusGroupParam createCusGroupParam){
-        return modelMapper.map(createCusGroupParam,CustomerGroup.class);
+    public CustomerGroup toModel(CreateCusGroupParam createCusGroupParam) {
+        return modelMapper.map(createCusGroupParam, CustomerGroup.class);
     }
 
     public CustomerGroupResult toDTO(CustomerGroup customerGroup) {
         return modelMapper.map(customerGroup, CustomerGroupResult.class);
     }
+
     public void transferFields(UpdateCusGroupParam updateCusGroupParam, CustomerGroup customerGroup) {
         modelMapper.map(updateCusGroupParam, customerGroup);
     }

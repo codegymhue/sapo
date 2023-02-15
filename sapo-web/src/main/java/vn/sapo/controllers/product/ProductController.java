@@ -3,7 +3,6 @@ package vn.sapo.controllers.product;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import vn.sapo.media.MediaService;
+import vn.sapo.pricing_policy.PricingPolicyService;
 import vn.sapo.product.ProductExcelExporter;
 import vn.sapo.product.ProductExcelExporterInventory;
 import vn.sapo.product.ProductService;
@@ -32,6 +32,9 @@ public class ProductController {
     @Autowired
     MediaService mediaService;
 
+    @Autowired
+    PricingPolicyService pricingPolicyService;
+
     @GetMapping("/products")
     public ModelAndView showProductListPage() {
         return new ModelAndView("/admin/product/product_list");
@@ -44,7 +47,21 @@ public class ProductController {
 
     @GetMapping("/products/create")
     public ModelAndView showProductCreatePage() {
-        return new ModelAndView("/admin/product/product_create");
+        ModelAndView modelAndView = new ModelAndView();
+        String productPriceSaleList;
+        String productPricePurchaseList;
+        ObjectWriter ow1 = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        ObjectWriter ow2 = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        try {
+            productPriceSaleList = ow1.writeValueAsString(pricingPolicyService.findAllSale());
+            productPricePurchaseList = ow2.writeValueAsString(pricingPolicyService.findAllPurchase());
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        modelAndView.addObject("productPriceSaleList", productPriceSaleList);
+        modelAndView.addObject("productPricePurchaseList", productPricePurchaseList);
+        modelAndView.setViewName("/admin/product/product_create");
+        return modelAndView;
     }
 
     @GetMapping("/product/edit/{id}")

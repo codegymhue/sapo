@@ -6,10 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Accessors(chain = true)
 public class PricingPolicyResult {
     private Integer id;
@@ -17,5 +17,10 @@ public class PricingPolicyResult {
     private String pricingPolicyCode;
 
     private String title;
+
+    @Override
+    public String toString() {
+        return  title;
+    }
 
 }

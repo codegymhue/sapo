@@ -1,0 +1,27 @@
+<th:block th:fragment="modal_dele_cus_grp">
+    <div class="modal fade" id="modal_dele_cus_grp" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xoá nhóm khách hàng</h5>
+                    <i type="button" class="fa fa-close" data-bs-dismiss="modal" aria-label="Close"></i>
+                </div>
+                <div class="modal-body" id="showCusGrpDelete">
+                    <span>Bạn có chắc chắn muốn xóa nhóm khách hàng nay không ? Thao tác này không thể khôi phục.</span>
+                </div>
+                <div class=" cGcePZ mt-4 my-4 me-4 d-flex justify-content-end">
+                    <div class="me-2" style="margin-right: 20px">
+                        <button type="button" data-bs-dismiss="modal"
+                                class="sc-jqUVSM TJspa btn-secondary btn-sm" style="width: 70px; height: 40px"><span
+                                class="sc-papXJ jcEYKF">Thoát</span></button>
+                    </div>
+                    <div>
+                        <button class=" btn-outline-danger btn-sm" id="btn_deleteCustomer" style="margin-right: 28px; width: 70px; height: 40px">Xoá</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>

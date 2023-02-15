@@ -14,12 +14,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.UUID;
 
-@Entity
+
 @Getter
 @Setter
+@Accessors(chain = true)
 @NoArgsConstructor
 @Table(name = "configuration")
-@Accessors(chain = true)
+@Entity
 @TypeDef(
         typeClass = JsonType.class,
         defaultForType = TaxConfig.class

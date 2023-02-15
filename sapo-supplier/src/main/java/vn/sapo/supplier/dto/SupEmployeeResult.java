@@ -9,5 +9,5 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class SupEmployeeResult {
     private Integer id;
-    private Integer fullName;
+    private String fullName;
 }

@@ -11,6 +11,7 @@ class App {
 
     static AlertMessageVi = class {
         static SUCCESS_CREATED = "Tạo dữ liệu thành công !";
+
         static SUCCESS_UPDATED = "Cập nhật dữ liệu thành công !";
         static SUCCESS_DELETE = "Xóa dữ liệu thành công";
 
@@ -27,6 +28,14 @@ class App {
         static showSuccessAlert(m) {
             iziToast.success({
                 title: 'Thành công: ',
+                position: 'topRight',
+                timeout: 2500,
+                message: m
+            });
+        }
+        static showFilterAlert(m) {
+            iziToast.success({
+                title: 'Lưu bộ lọc thành công: ',
                 position: 'topRight',
                 timeout: 2500,
                 message: m

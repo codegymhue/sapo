@@ -10,7 +10,7 @@
 <body style="font-size: 12px">
 <div>
     <th:block th:replace="/layout/menu :: menu"/>
-    <th:block th:replace="/admin/customer/modal_importFile :: #modalImportFileCustomers" />
+    <th:block th:replace="/admin/customer/modal_importFile.html" />
     <!--    <th:block th:replace="/layout/modalImportFile :: #modalImportFile"/>-->
     <div class="col-right  MuiBox-root jss64 jss40">
         <div class="MuiBox-root jss6915 jss440 "
@@ -60,17 +60,16 @@
                     <div class=" sb-avatar sb-avatar--text"
                          style="display: inline-block; vertical-align: middle; width: 30px; height: 30px; border-radius: 20px; font-family: Helvetica, Arial, sans-serif;">
                         <div class=" sb-avatar__text"
-                             title="Phú Nguyễn"
+                             title="SKT"
                              style="width: 30px; height: 30px; line-height: initial; text-align: center; color: rgb(255, 255, 255); border-radius: 20px; background: rgb(215, 61, 50);">
                             <div style="display: table; table-layout: fixed; width: 100%; height: 100%; font-size: 10px;">
                                 <span style="display: table-cell; vertical-align: middle; white-space: nowrap;">
-                                    <span>P</span>
+                                    <span>S</span>
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <p class="MuiTypography-root jss445 MuiTypography-body1 MuiTypography-colorTextPrimary">Phú
-                        Nguyễn</p>
+                    <p class="MuiTypography-root jss445 MuiTypography-body1 MuiTypography-colorTextPrimary">SKT</p>
                     <svg class="MuiSvgIcon-root arrow-avatar"
                          focusable="false"
                          viewBox="0 0 24 24"
@@ -83,11 +82,11 @@
         <div class="MuiBox-root jss6754 jss6732">
             <div class="MuiBox-root jss6755 jss6733">
                 <div class="MuiBox-root jss6756 jss6741">
-                    <a th:href="@{/admin/customers/export/excel}">
+                    <a th:href="@{/admin/customers/export/excel}" style="text-decoration: none; color: rgba(0,0,0,0.89)">
                     <button class="MuiButtonBase-root MuiButton-rloot MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
                             tabindex="0"
                             type="button">
-                      <span class="MuiButton-label">
+                      <span class="MuiButton-label" style="font-weight: 500">
                         <span class="MuiButton-startIcon MuiButton-iconSizeSmall">
                           <svg class="MuiSvgIcon-root jss6758"
                                focusable="false"
@@ -140,12 +139,12 @@
                         <a id="Sapo-Button-4967a07b-9f63-4c0e-bfd9-3ad94f06186c"
                            class="sc-jqUVSM fEHNKi"
                            href="/admin/customers/create"
-                           style="color: white">
+                           style="color: white; text-decoration: none">
                             <svg class="MuiSvgIcon-root"
                                  focusable="false"
                                  viewBox="0 0 24 24"
                                  aria-hidden="true">
-                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" ></path>
                             </svg>
                             Thêm khách hàng
                         </a>
@@ -169,7 +168,7 @@
                         <div id="scroller"
                              class="sc-cHPgQl hYUFnd">
                             <div class="sc-gHLcSH ieIWRo">
-                                <button class="sc-KfMfS dvtKJo"> <a href="/admin/customers">Tất cả khách hàng</a>
+                                <button class="sc-KfMfS dvtKJo"> <a href="/admin/customers" style="text-decoration: none">Tất cả khách hàng</a>
                                 </button>
                             </div>
                         </div>
@@ -192,7 +191,7 @@
                                     </div>
                                     <label style="width: 100%">
                                         <input id="inp-search"
-                                               placeholder="Tìm kiếm theo tên, SĐT khách hàng..."
+                                               placeholder="Tìm kiếm theo Mã Khách Hàng, Tên, SDT Khách Hàng"
                                                type="text"
                                                class="sc-ikZpkk iYDwCJ form-control searchTitle "
                                                value="">
@@ -237,6 +236,11 @@
                     <div class="MuiBox-root jss6842"></div>
                 </div>
 
+                <div class="MuiBox-root jss2434">
+                    <div class="jss2435" id="filterLabel">
+
+                    </div>
+                </div>
                 <div style="font-size:small" id="tableCheckbox">
                     <table id="tbCustomer" class="table table-hover" style="    width: 100%;">
                         <thead style="background-color: #f4f6f8; height: 55px">
@@ -396,6 +400,7 @@
 
 
 <script src="/assets/admin/js/customer/customer_app.js"></script>
+    <script src="/assets/admin/js/product/app.js"></script>
 <script>
     let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -476,302 +481,623 @@
 
     page.elements.importFile = $("#importFileCustomers");
 
+    page.elements.loading = $(".modal-content .modal-header .loader");
+
     page.elements.importFile.on("click", function (){
         $("#modalImportFileCustomers").modal("show");
     })
+
+        page.commands.showLoading = () => {
+            page.elements.loading.css('z-index', 1);
+            $('#btnImportFileCustomers').prop('disabled', true);
+
+        }
+
+        page.commands.closeLoading = () => {
+            page.elements.loading.css('z-index', -1);
+            $('#btnImportFileCustomers').prop('disabled', false);
+        }
+
 
 
 
     page.commands.getAllCustomers = () => {
         $(document).ready(function () {
-            console.log("show all customer")
-            $("#tbCustomer").DataTable({
-                // chuyển tiếng việt cho datatable
-                language:
-                    {
-                        "processing": "Đang xử lý...",
-                        "aria": {
-                            "sortAscending": ": Sắp xếp thứ tự tăng dần",
-                            "sortDescending": ": Sắp xếp thứ tự giảm dần"
-                        },
-                        "autoFill": {
-                            "cancel": "Hủy",
-                            "fill": "Điền tất cả ô với <i>%d<\/i>",
-                            "fillHorizontal": "Điền theo hàng ngang",
-                            "fillVertical": "Điền theo hàng dọc"
-                        },
-                        "buttons": {
-                            "collection": "Chọn lọc <span class=\"ui-button-icon-primary ui-icon ui-icon-triangle-1-s\"><\/span>",
-                            "colvis": "Hiển thị theo cột",
-                            "colvisRestore": "Khôi phục hiển thị",
-                            "copy": "Sao chép",
-                            "copyKeys": "Nhấn Ctrl hoặc u2318 + C để sao chép bảng dữ liệu vào clipboard.<br \/><br \/>Để hủy, click vào thông báo này hoặc nhấn ESC",
-                            "copySuccess": {
-                                "1": "Đã sao chép 1 dòng dữ liệu vào clipboard",
-                                "_": "Đã sao chép %d dòng vào clipboard"
-                            },
-                            "copyTitle": "Sao chép vào clipboard",
-                            "pageLength": {
-                                "-1": "Xem tất cả các dòng",
-                                "_": "Hiển thị %d dòng",
-                                "1": "Hiển thị 1 dòng"
-                            },
-                            "print": "In ấn",
-                            "createState": "Tạo trạng thái",
-                            "csv": "CSV",
-                            "excel": "Excel",
-                            "pdf": "PDF",
-                            "removeAllStates": "Xóa hết trạng thái",
-                            "removeState": "Xóa",
-                            "renameState": "Đổi tên",
-                            "savedStates": "Trạng thái đã lưu",
-                            "stateRestore": "Trạng thái %d",
-                            "updateState": "Cập nhật"
-                        },
-                        "select": {
-                            "cells": {
-                                "1": "1 ô đang được chọn",
-                                "_": "%d ô đang được chọn"
-                            },
-                            "columns": {
-                                "1": "1 cột đang được chọn",
-                                "_": "%d cột đang được được chọn"
-                            },
-                            "rows": {
-                                "1": "1 dòng đang được chọn",
-                                "_": "%d dòng đang được chọn"
-                            }
-                        },
-                        "searchBuilder": {
-                            "title": {
-                                "_": "Thiết lập tìm kiếm (%d)",
-                                "0": "Thiết lập tìm kiếm"
-                            },
-                            "button": {
-                                "0": "Thiết lập tìm kiếm",
-                                "_": "Thiết lập tìm kiếm (%d)"
-                            },
-                            "value": "Giá trị",
-                            "clearAll": "Xóa hết",
-                            "condition": "Điều kiện",
-                            "conditions": {
-                                "date": {
-                                    "after": "Sau",
-                                    "before": "Trước",
-                                    "between": "Nằm giữa",
-                                    "empty": "Rỗng",
-                                    "equals": "Bằng với",
-                                    "not": "Không phải",
-                                    "notBetween": "Không nằm giữa",
-                                    "notEmpty": "Không rỗng"
-                                },
-                                "number": {
-                                    "between": "Nằm giữa",
-                                    "empty": "Rỗng",
-                                    "equals": "Bằng với",
-                                    "gt": "Lớn hơn",
-                                    "gte": "Lớn hơn hoặc bằng",
-                                    "lt": "Nhỏ hơn",
-                                    "lte": "Nhỏ hơn hoặc bằng",
-                                    "not": "Không phải",
-                                    "notBetween": "Không nằm giữa",
-                                    "notEmpty": "Không rỗng"
-                                },
-                                "string": {
-                                    "contains": "Chứa",
-                                    "empty": "Rỗng",
-                                    "endsWith": "Kết thúc bằng",
-                                    "equals": "Bằng",
-                                    "not": "Không phải",
-                                    "notEmpty": "Không rỗng",
-                                    "startsWith": "Bắt đầu với",
-                                    "notContains": "Không chứa",
-                                    "notEndsWith": "Không kết thúc với",
-                                    "notStartsWith": "Không bắt đầu với"
-                                },
-                                "array": {
-                                    "equals": "Bằng",
-                                    "empty": "Trống",
-                                    "contains": "Chứa",
-                                    "not": "Không",
-                                    "notEmpty": "Không được rỗng",
-                                    "without": "không chứa"
-                                }
-                            },
-                            "logicAnd": "Và",
-                            "logicOr": "Hoặc",
-                            "add": "Thêm điều kiện",
-                            "data": "Dữ liệu",
-                            "deleteTitle": "Xóa quy tắc lọc",
-                            "leftTitle": "Giảm thụt lề",
-                            "rightTitle": "Tăng thụt lề"
-                        },
-                        "searchPanes": {
-                            "countFiltered": "{shown} ({total})",
-                            "emptyPanes": "Không có phần tìm kiếm",
-                            "clearMessage": "Xóa hết",
-                            "loadMessage": "Đang load phần tìm kiếm",
-                            "collapse": {
-                                "0": "Phần tìm kiếm",
-                                "_": "Phần tìm kiếm (%d)"
-                            },
-                            "title": "Bộ lọc đang hoạt động - %d",
-                            "count": "{total}",
-                            "collapseMessage": "Thu gọn tất cả",
-                            "showMessage": "Hiện tất cả"
-                        },
-                        "datetime": {
-                            "hours": "Giờ",
-                            "minutes": "Phút",
-                            "next": "Sau",
-                            "previous": "Trước",
-                            "seconds": "Giây",
-                            "amPm": [
-                                "am",
-                                "pm"
-                            ],
-                            "unknown": "-",
-                            "weekdays": [
-                                "Chủ nhật"
-                            ],
-                            "months": [
-                                "Tháng Một",
-                                "Tháng Hai",
-                                "Tháng Ba",
-                                "Tháng Tư",
-                                "Tháng Năm",
-                                "Tháng Sáu",
-                                "Tháng Bảy",
-                                "Tháng Tám",
-                                "Tháng Chín",
-                                "Tháng Mười",
-                                "Tháng Mười Một",
-                                "Tháng Mười Hai"
-                            ]
-                        },
-                        "emptyTable": "Không có dữ liệu",
-                        "info": "Hiển thị _START_ tới _END_ của _TOTAL_ dữ liệu",
-                        "infoEmpty": "Hiển thị 0 tới 0 của 0 dữ liệu",
-                        "lengthMenu": "Hiển thị _MENU_ dữ liệu",
-                        "loadingRecords": "Đang tải...",
-                        "paginate": {
-                            "first": "Đầu tiên",
-                            "last": "Cuối cùng",
-                            "next": "Sau",
-                            "previous": "Trước"
-                        },
-                        "search": "Tìm kiếm:",
-                        "zeroRecords": "Không tìm thấy kết quả",
-                        "decimal": ",",
-                        "editor": {
-                            "close": "Đóng",
-                            "create": {
-                                "button": "Thêm",
-                                "submit": "Thêm",
-                                "title": "Thêm mục mới"
-                            },
-                            "edit": {
-                                "button": "Sửa",
-                                "submit": "Cập nhật",
-                                "title": "Sửa mục"
-                            },
-                            "error": {
-                                "system": "Đã xảy ra lỗi hệ thống (&lt;a target=\"\\\" rel=\"nofollow\" href=\"\\\"&gt;Thêm thông tin&lt;\/a&gt;)."
-                            },
-                            "multi": {
-                                "info": "Các mục đã chọn chứa các giá trị khác nhau cho đầu vào này. Để chỉnh sửa và đặt tất cả các mục cho đầu vào này thành cùng một giá trị, hãy nhấp hoặc nhấn vào đây, nếu không chúng sẽ giữ lại các giá trị riêng lẻ của chúng.",
-                                "noMulti": "Đầu vào này có thể được chỉnh sửa riêng lẻ, nhưng không phải là một phần của một nhóm.",
-                                "restore": "Hoàn tác thay đổi",
-                                "title": "Nhiều giá trị"
-                            },
-                            "remove": {
-                                "button": "Xóa",
-                                "confirm": {
-                                    "_": "Bạn có chắc chắn muốn xóa %d hàng không?",
-                                    "1": "Bạn có chắc chắn muốn xóa 1 hàng không?"
-                                },
-                                "submit": "Xóa",
-                                "title": "Xóa"
-                            }
-                        },
-                        "infoFiltered": "(được lọc từ _MAX_ dữ liệu)",
-                        "searchPlaceholder": "Nhập tìm kiếm...",
-                        "stateRestore": {
-                            "creationModal": {
-                                "button": "Thêm",
-                                "columns": {
-                                    "search": "Tìm kiếm cột",
-                                    "visible": "Khả năng hiển thị cột"
-                                },
-                                "name": "Tên:",
-                                "order": "Sắp xếp",
-                                "paging": "Phân trang",
-                                "scroller": "Cuộn vị trí",
-                                "search": "Tìm kiếm",
-                                "searchBuilder": "Trình tạo tìm kiếm",
-                                "select": "Chọn",
-                                "title": "Thêm trạng thái",
-                                "toggleLabel": "Bao gồm:"
-                            },
-                            "duplicateError": "Trạng thái có tên này đã tồn tại.",
-                            "emptyError": "Tên không được để trống.",
-                            "emptyStates": "Không có trạng thái đã lưu",
-                            "removeConfirm": "Bạn có chắc chắn muốn xóa %s không?",
-                            "removeError": "Không xóa được trạng thái.",
-                            "removeJoiner": "và",
-                            "removeSubmit": "Xóa",
-                            "removeTitle": "Xóa trạng thái",
-                            "renameButton": "Đổi tên",
-                            "renameLabel": "Tên mới cho %s:",
-                            "renameTitle": "Đổi tên trạng thái"
-                        },
-                        "infoThousands": ".",
-                        "thousands": "."
-                    },
-                ajax: {
-                    contentType: 'application/json',
-                    url: "http://localhost:8080/api/customers",
-                    type: "GET",
-                    dataSrc: ''
-                },
-                lengthMenu: [
-                    [5, 10, 20, -1],
-                    ["5", "10", "20", "All"]
-                ],
-                searching: false,
-                destroy: true,
-                columns: [
-                    {data: 'id'},
-                    {data: 'customerCode'},
-                    {data: 'fullName'},
-                    {data: 'phoneNumber'},
-                    {data: 'group.title'},
-                    {data: 'debtTotal'},
-                    {data: 'spendTotal'},
-                    {data: "quantityItemOrder"}],
-                columnDefs: [
-                    {
-                        targets: 0,
-                        render: function (data, type, row, meta) {
-                            return `
-                               <input type="checkbox" value="check_none" />
-                            `
-                        }
-                    },
-                    {
-                        targets: 1,
-                        render: function (data, type, row, meta) {
-                            return `<a href="/admin/customers/${row.id}" style="text-decoration: none">${row.customerCode}</a>`;
-                        }
-                    },
+            // $("#tbCustomer").DataTable({
+            //     // chuyển tiếng việt cho datatable
+            //     processing: true,
+            //     serverSide: true,
+            //     language:
+            //         {
+            //             "processing": "Đang xử lý...",
+            //             "aria": {
+            //                 "sortAscending": ": Sắp xếp thứ tự tăng dần",
+            //                 "sortDescending": ": Sắp xếp thứ tự giảm dần"
+            //             },
+            //             "autoFill": {
+            //                 "cancel": "Hủy",
+            //                 "fill": "Điền tất cả ô với <i>%d<\/i>",
+            //                 "fillHorizontal": "Điền theo hàng ngang",
+            //                 "fillVertical": "Điền theo hàng dọc"
+            //             },
+            //             "buttons": {
+            //                 "collection": "Chọn lọc <span class=\"ui-button-icon-primary ui-icon ui-icon-triangle-1-s\"><\/span>",
+            //                 "colvis": "Hiển thị theo cột",
+            //                 "colvisRestore": "Khôi phục hiển thị",
+            //                 "copy": "Sao chép",
+            //                 "copyKeys": "Nhấn Ctrl hoặc u2318 + C để sao chép bảng dữ liệu vào clipboard.<br \/><br \/>Để hủy, click vào thông báo này hoặc nhấn ESC",
+            //                 "copySuccess": {
+            //                     "1": "Đã sao chép 1 dòng dữ liệu vào clipboard",
+            //                     "_": "Đã sao chép %d dòng vào clipboard"
+            //                 },
+            //                 "copyTitle": "Sao chép vào clipboard",
+            //                 "pageLength": {
+            //                     "-1": "Xem tất cả các dòng",
+            //                     "_": "Hiển thị %d dòng",
+            //                     "1": "Hiển thị 1 dòng"
+            //                 },
+            //                 "print": "In ấn",
+            //                 "createState": "Tạo trạng thái",
+            //                 "csv": "CSV",
+            //                 "excel": "Excel",
+            //                 "pdf": "PDF",
+            //                 "removeAllStates": "Xóa hết trạng thái",
+            //                 "removeState": "Xóa",
+            //                 "renameState": "Đổi tên",
+            //                 "savedStates": "Trạng thái đã lưu",
+            //                 "stateRestore": "Trạng thái %d",
+            //                 "updateState": "Cập nhật"
+            //             },
+            //             "select": {
+            //                 "cells": {
+            //                     "1": "1 ô đang được chọn",
+            //                     "_": "%d ô đang được chọn"
+            //                 },
+            //                 "columns": {
+            //                     "1": "1 cột đang được chọn",
+            //                     "_": "%d cột đang được được chọn"
+            //                 },
+            //                 "rows": {
+            //                     "1": "1 dòng đang được chọn",
+            //                     "_": "%d dòng đang được chọn"
+            //                 }
+            //             },
+            //             "searchBuilder": {
+            //                 "title": {
+            //                     "_": "Thiết lập tìm kiếm (%d)",
+            //                     "0": "Thiết lập tìm kiếm"
+            //                 },
+            //                 "button": {
+            //                     "0": "Thiết lập tìm kiếm",
+            //                     "_": "Thiết lập tìm kiếm (%d)"
+            //                 },
+            //                 "value": "Giá trị",
+            //                 "clearAll": "Xóa hết",
+            //                 "condition": "Điều kiện",
+            //                 "conditions": {
+            //                     "date": {
+            //                         "after": "Sau",
+            //                         "before": "Trước",
+            //                         "between": "Nằm giữa",
+            //                         "empty": "Rỗng",
+            //                         "equals": "Bằng với",
+            //                         "not": "Không phải",
+            //                         "notBetween": "Không nằm giữa",
+            //                         "notEmpty": "Không rỗng"
+            //                     },
+            //                     "number": {
+            //                         "between": "Nằm giữa",
+            //                         "empty": "Rỗng",
+            //                         "equals": "Bằng với",
+            //                         "gt": "Lớn hơn",
+            //                         "gte": "Lớn hơn hoặc bằng",
+            //                         "lt": "Nhỏ hơn",
+            //                         "lte": "Nhỏ hơn hoặc bằng",
+            //                         "not": "Không phải",
+            //                         "notBetween": "Không nằm giữa",
+            //                         "notEmpty": "Không rỗng"
+            //                     },
+            //                     "string": {
+            //                         "contains": "Chứa",
+            //                         "empty": "Rỗng",
+            //                         "endsWith": "Kết thúc bằng",
+            //                         "equals": "Bằng",
+            //                         "not": "Không phải",
+            //                         "notEmpty": "Không rỗng",
+            //                         "startsWith": "Bắt đầu với",
+            //                         "notContains": "Không chứa",
+            //                         "notEndsWith": "Không kết thúc với",
+            //                         "notStartsWith": "Không bắt đầu với"
+            //                     },
+            //                     "array": {
+            //                         "equals": "Bằng",
+            //                         "empty": "Trống",
+            //                         "contains": "Chứa",
+            //                         "not": "Không",
+            //                         "notEmpty": "Không được rỗng",
+            //                         "without": "không chứa"
+            //                     }
+            //                 },
+            //                 "logicAnd": "Và",
+            //                 "logicOr": "Hoặc",
+            //                 "add": "Thêm điều kiện",
+            //                 "data": "Dữ liệu",
+            //                 "deleteTitle": "Xóa quy tắc lọc",
+            //                 "leftTitle": "Giảm thụt lề",
+            //                 "rightTitle": "Tăng thụt lề"
+            //             },
+            //             "searchPanes": {
+            //                 "countFiltered": "{shown} ({total})",
+            //                 "emptyPanes": "Không có phần tìm kiếm",
+            //                 "clearMessage": "Xóa hết",
+            //                 "loadMessage": "Đang load phần tìm kiếm",
+            //                 "collapse": {
+            //                     "0": "Phần tìm kiếm",
+            //                     "_": "Phần tìm kiếm (%d)"
+            //                 },
+            //                 "title": "Bộ lọc đang hoạt động - %d",
+            //                 "count": "{total}",
+            //                 "collapseMessage": "Thu gọn tất cả",
+            //                 "showMessage": "Hiện tất cả"
+            //             },
+            //             "datetime": {
+            //                 "hours": "Giờ",
+            //                 "minutes": "Phút",
+            //                 "next": "Sau",
+            //                 "previous": "Trước",
+            //                 "seconds": "Giây",
+            //                 "amPm": [
+            //                     "am",
+            //                     "pm"
+            //                 ],
+            //                 "unknown": "-",
+            //                 "weekdays": [
+            //                     "Chủ nhật"
+            //                 ],
+            //                 "months": [
+            //                     "Tháng Một",
+            //                     "Tháng Hai",
+            //                     "Tháng Ba",
+            //                     "Tháng Tư",
+            //                     "Tháng Năm",
+            //                     "Tháng Sáu",
+            //                     "Tháng Bảy",
+            //                     "Tháng Tám",
+            //                     "Tháng Chín",
+            //                     "Tháng Mười",
+            //                     "Tháng Mười Một",
+            //                     "Tháng Mười Hai"
+            //                 ]
+            //             },
+            //             "emptyTable": "Không có dữ liệu",
+            //             "info": "Hiển thị _START_ tới _END_ của _TOTAL_ dữ liệu",
+            //             "infoEmpty": "Hiển thị 0 tới 0 của 0 dữ liệu",
+            //             "lengthMenu": "Hiển thị _MENU_ dữ liệu",
+            //             "loadingRecords": "Đang tải...",
+            //             "paginate": {
+            //                 "first": "Đầu tiên",
+            //                 "last": "Cuối cùng",
+            //                 "next": "Sau",
+            //                 "previous": "Trước"
+            //             },
+            //             "search": "Tìm kiếm:",
+            //             "zeroRecords": "Không tìm thấy kết quả",
+            //             "decimal": ",",
+            //             "editor": {
+            //                 "close": "Đóng",
+            //                 "create": {
+            //                     "button": "Thêm",
+            //                     "submit": "Thêm",
+            //                     "title": "Thêm mục mới"
+            //                 },
+            //                 "edit": {
+            //                     "button": "Sửa",
+            //                     "submit": "Cập nhật",
+            //                     "title": "Sửa mục"
+            //                 },
+            //                 "error": {
+            //                     "system": "Đã xảy ra lỗi hệ thống (&lt;a target=\"\\\" rel=\"nofollow\" href=\"\\\"&gt;Thêm thông tin&lt;\/a&gt;)."
+            //                 },
+            //                 "multi": {
+            //                     "info": "Các mục đã chọn chứa các giá trị khác nhau cho đầu vào này. Để chỉnh sửa và đặt tất cả các mục cho đầu vào này thành cùng một giá trị, hãy nhấp hoặc nhấn vào đây, nếu không chúng sẽ giữ lại các giá trị riêng lẻ của chúng.",
+            //                     "noMulti": "Đầu vào này có thể được chỉnh sửa riêng lẻ, nhưng không phải là một phần của một nhóm.",
+            //                     "restore": "Hoàn tác thay đổi",
+            //                     "title": "Nhiều giá trị"
+            //                 },
+            //                 "remove": {
+            //                     "button": "Xóa",
+            //                     "confirm": {
+            //                         "_": "Bạn có chắc chắn muốn xóa %d hàng không?",
+            //                         "1": "Bạn có chắc chắn muốn xóa 1 hàng không?"
+            //                     },
+            //                     "submit": "Xóa",
+            //                     "title": "Xóa"
+            //                 }
+            //             },
+            //             "infoFiltered": "(được lọc từ _MAX_ dữ liệu)",
+            //             "searchPlaceholder": "Nhập tìm kiếm...",
+            //             "stateRestore": {
+            //                 "creationModal": {
+            //                     "button": "Thêm",
+            //                     "columns": {
+            //                         "search": "Tìm kiếm cột",
+            //                         "visible": "Khả năng hiển thị cột"
+            //                     },
+            //                     "name": "Tên:",
+            //                     "order": "Sắp xếp",
+            //                     "paging": "Phân trang",
+            //                     "scroller": "Cuộn vị trí",
+            //                     "search": "Tìm kiếm",
+            //                     "searchBuilder": "Trình tạo tìm kiếm",
+            //                     "select": "Chọn",
+            //                     "title": "Thêm trạng thái",
+            //                     "toggleLabel": "Bao gồm:"
+            //                 },
+            //                 "duplicateError": "Trạng thái có tên này đã tồn tại.",
+            //                 "emptyError": "Tên không được để trống.",
+            //                 "emptyStates": "Không có trạng thái đã lưu",
+            //                 "removeConfirm": "Bạn có chắc chắn muốn xóa %s không?",
+            //                 "removeError": "Không xóa được trạng thái.",
+            //                 "removeJoiner": "và",
+            //                 "removeSubmit": "Xóa",
+            //                 "removeTitle": "Xóa trạng thái",
+            //                 "renameButton": "Đổi tên",
+            //                 "renameLabel": "Tên mới cho %s:",
+            //                 "renameTitle": "Đổi tên trạng thái"
+            //             },
+            //             "infoThousands": ".",
+            //             "thousands": "."
+            //         },
+            //     ajax: {
+            //         contentType: 'application/json',
+            //         url: "http://localhost:8080/api/customers",
+            //         type: "GET",
+            //         dataSrc: ''
+            //     },
+            //     lengthMenu: [
+            //         [5, 10, 20, -1],
+            //         ["5", "10", "20", "All"]
+            //     ],
+            //     searching: false,
+            //     destroy: true,
+            //     columns: [
+            //         {data: 'id'},
+            //         {data: 'customerCode'},
+            //         {data: 'fullName'},
+            //         {data: 'phoneNumber'},
+            //         {data: 'group.title'},
+            //         {data: 'debtTotal'},
+            //         {data: 'spendTotal'},
+            //         {data: "quantityItemOrder"}],
+            //     columnDefs: [
+            //         {
+            //             targets: 0,
+            //             render: function (data, type, row, meta) {
+            //                 return `
+            //                    <input type="checkbox" value="check_none" />
+            //                 `
+            //             }
+            //         },
+            //         {
+            //             targets: 1,
+            //             render: function (data, type, row, meta) {
+            //                 return `<a href="/admin/customers/${row.id}" style="text-decoration: none">${row.customerCode}</a>`;
+            //             }
+            //         },
+            //
+            //
+            //     ],
+            // })
+            if(localStorage.getItem(KEY_CUSTOMER_FILTER_SAVE)==null){
+                customerFilter = new CustomerFilter();
+                localStorage.setItem(KEY_CUSTOMER_FILTER_SAVE, JSON.stringify(customerFilter));
+            }else{
 
-
-                ],
-            })
+                customerFilter = JSON.parse(localStorage.getItem(KEY_CUSTOMER_FILTER_SAVE));
+                console.log("Get customer filter from localstorage: ")
+                console.log(customerFilter)
+            }
+            drawDataTable();
         })
 
     }
+    function drawDataTable(){
 
+        $("#tbCustomer").DataTable({
+            // chuyển tiếng việt cho datatable
+            "processing": true,
+            "serverSide": true,
+            "paging": true,
+            language:
+                {
+                    "processing": "Đang xử lý...",
+                    "aria": {
+                        "sortAscending": ": Sắp xếp thứ tự tăng dần",
+                        "sortDescending": ": Sắp xếp thứ tự giảm dần"
+                    },
+                    "autoFill": {
+                        "cancel": "Hủy",
+                        "fill": "Điền tất cả ô với <i>%d<\/i>",
+                        "fillHorizontal": "Điền theo hàng ngang",
+                        "fillVertical": "Điền theo hàng dọc"
+                    },
+                    "buttons": {
+                        "collection": "Chọn lọc <span class=\"ui-button-icon-primary ui-icon ui-icon-triangle-1-s\"><\/span>",
+                        "colvis": "Hiển thị theo cột",
+                        "colvisRestore": "Khôi phục hiển thị",
+                        "copy": "Sao chép",
+                        "copyKeys": "Nhấn Ctrl hoặc u2318 + C để sao chép bảng dữ liệu vào clipboard.<br \/><br \/>Để hủy, click vào thông báo này hoặc nhấn ESC",
+                        "copySuccess": {
+                            "1": "Đã sao chép 1 dòng dữ liệu vào clipboard",
+                            "_": "Đã sao chép %d dòng vào clipboard"
+                        },
+                        "copyTitle": "Sao chép vào clipboard",
+                        "pageLength": {
+                            "-1": "Xem tất cả các dòng",
+                            "_": "Hiển thị %d dòng",
+                            "1": "Hiển thị 1 dòng"
+                        },
+                        "print": "In ấn",
+                        "createState": "Tạo trạng thái",
+                        "csv": "CSV",
+                        "excel": "Excel",
+                        "pdf": "PDF",
+                        "removeAllStates": "Xóa hết trạng thái",
+                        "removeState": "Xóa",
+                        "renameState": "Đổi tên",
+                        "savedStates": "Trạng thái đã lưu",
+                        "stateRestore": "Trạng thái %d",
+                        "updateState": "Cập nhật"
+                    },
+                    "select": {
+                        "cells": {
+                            "1": "1 ô đang được chọn",
+                            "_": "%d ô đang được chọn"
+                        },
+                        "columns": {
+                            "1": "1 cột đang được chọn",
+                            "_": "%d cột đang được được chọn"
+                        },
+                        "rows": {
+                            "1": "1 dòng đang được chọn",
+                            "_": "%d dòng đang được chọn"
+                        }
+                    },
+                    "searchBuilder": {
+                        "title": {
+                            "_": "Thiết lập tìm kiếm (%d)",
+                            "0": "Thiết lập tìm kiếm"
+                        },
+                        "button": {
+                            "0": "Thiết lập tìm kiếm",
+                            "_": "Thiết lập tìm kiếm (%d)"
+                        },
+                        "value": "Giá trị",
+                        "clearAll": "Xóa hết",
+                        "condition": "Điều kiện",
+                        "conditions": {
+                            "date": {
+                                "after": "Sau",
+                                "before": "Trước",
+                                "between": "Nằm giữa",
+                                "empty": "Rỗng",
+                                "equals": "Bằng với",
+                                "not": "Không phải",
+                                "notBetween": "Không nằm giữa",
+                                "notEmpty": "Không rỗng"
+                            },
+                            "number": {
+                                "between": "Nằm giữa",
+                                "empty": "Rỗng",
+                                "equals": "Bằng với",
+                                "gt": "Lớn hơn",
+                                "gte": "Lớn hơn hoặc bằng",
+                                "lt": "Nhỏ hơn",
+                                "lte": "Nhỏ hơn hoặc bằng",
+                                "not": "Không phải",
+                                "notBetween": "Không nằm giữa",
+                                "notEmpty": "Không rỗng"
+                            },
+                            "string": {
+                                "contains": "Chứa",
+                                "empty": "Rỗng",
+                                "endsWith": "Kết thúc bằng",
+                                "equals": "Bằng",
+                                "not": "Không phải",
+                                "notEmpty": "Không rỗng",
+                                "startsWith": "Bắt đầu với",
+                                "notContains": "Không chứa",
+                                "notEndsWith": "Không kết thúc với",
+                                "notStartsWith": "Không bắt đầu với"
+                            },
+                            "array": {
+                                "equals": "Bằng",
+                                "empty": "Trống",
+                                "contains": "Chứa",
+                                "not": "Không",
+                                "notEmpty": "Không được rỗng",
+                                "without": "không chứa"
+                            }
+                        },
+                        "logicAnd": "Và",
+                        "logicOr": "Hoặc",
+                        "add": "Thêm điều kiện",
+                        "data": "Dữ liệu",
+                        "deleteTitle": "Xóa quy tắc lọc",
+                        "leftTitle": "Giảm thụt lề",
+                        "rightTitle": "Tăng thụt lề"
+                    },
+                    "searchPanes": {
+                        "countFiltered": "{shown} ({total})",
+                        "emptyPanes": "Không có phần tìm kiếm",
+                        "clearMessage": "Xóa hết",
+                        "loadMessage": "Đang load phần tìm kiếm",
+                        "collapse": {
+                            "0": "Phần tìm kiếm",
+                            "_": "Phần tìm kiếm (%d)"
+                        },
+                        "title": "Bộ lọc đang hoạt động - %d",
+                        "count": "{total}",
+                        "collapseMessage": "Thu gọn tất cả",
+                        "showMessage": "Hiện tất cả"
+                    },
+                    "datetime": {
+                        "hours": "Giờ",
+                        "minutes": "Phút",
+                        "next": "Sau",
+                        "previous": "Trước",
+                        "seconds": "Giây",
+                        "amPm": [
+                            "am",
+                            "pm"
+                        ],
+                        "unknown": "-",
+                        "weekdays": [
+                            "Chủ nhật"
+                        ],
+                        "months": [
+                            "Tháng Một",
+                            "Tháng Hai",
+                            "Tháng Ba",
+                            "Tháng Tư",
+                            "Tháng Năm",
+                            "Tháng Sáu",
+                            "Tháng Bảy",
+                            "Tháng Tám",
+                            "Tháng Chín",
+                            "Tháng Mười",
+                            "Tháng Mười Một",
+                            "Tháng Mười Hai"
+                        ]
+                    },
+                    "emptyTable": "Không có dữ liệu",
+                    "info": "Hiển thị _START_ tới _END_ của _TOTAL_ dữ liệu",
+                    "infoEmpty": "Hiển thị 0 tới 0 của 0 dữ liệu",
+                    "lengthMenu": "Hiển thị _MENU_ dữ liệu",
+                    "loadingRecords": "Đang tải...",
+                    "paginate": {
+                        "first": "Đầu tiên",
+                        "last": "Cuối cùng",
+                        "next": "Sau",
+                        "previous": "Trước"
+                    },
+                    "search": "Tìm kiếm:",
+                    "zeroRecords": "Không tìm thấy kết quả",
+                    "decimal": ",",
+                    "editor": {
+                        "close": "Đóng",
+                        "create": {
+                            "button": "Thêm",
+                            "submit": "Thêm",
+                            "title": "Thêm mục mới"
+                        },
+                        "edit": {
+                            "button": "Sửa",
+                            "submit": "Cập nhật",
+                            "title": "Sửa mục"
+                        },
+                        "error": {
+                            "system": "Đã xảy ra lỗi hệ thống (&lt;a target=\"\\\" rel=\"nofollow\" href=\"\\\"&gt;Thêm thông tin&lt;\/a&gt;)."
+                        },
+                        "multi": {
+                            "info": "Các mục đã chọn chứa các giá trị khác nhau cho đầu vào này. Để chỉnh sửa và đặt tất cả các mục cho đầu vào này thành cùng một giá trị, hãy nhấp hoặc nhấn vào đây, nếu không chúng sẽ giữ lại các giá trị riêng lẻ của chúng.",
+                            "noMulti": "Đầu vào này có thể được chỉnh sửa riêng lẻ, nhưng không phải là một phần của một nhóm.",
+                            "restore": "Hoàn tác thay đổi",
+                            "title": "Nhiều giá trị"
+                        },
+                        "remove": {
+                            "button": "Xóa",
+                            "confirm": {
+                                "_": "Bạn có chắc chắn muốn xóa %d hàng không?",
+                                "1": "Bạn có chắc chắn muốn xóa 1 hàng không?"
+                            },
+                            "submit": "Xóa",
+                            "title": "Xóa"
+                        }
+                    },
+                    "infoFiltered": "(được lọc từ _MAX_ dữ liệu)",
+                    "searchPlaceholder": "Nhập tìm kiếm...",
+                    "stateRestore": {
+                        "creationModal": {
+                            "button": "Thêm",
+                            "columns": {
+                                "search": "Tìm kiếm cột",
+                                "visible": "Khả năng hiển thị cột"
+                            },
+                            "name": "Tên:",
+                            "order": "Sắp xếp",
+                            "paging": "Phân trang",
+                            "scroller": "Cuộn vị trí",
+                            "search": "Tìm kiếm",
+                            "searchBuilder": "Trình tạo tìm kiếm",
+                            "select": "Chọn",
+                            "title": "Thêm trạng thái",
+                            "toggleLabel": "Bao gồm:"
+                        },
+                        "duplicateError": "Trạng thái có tên này đã tồn tại.",
+                        "emptyError": "Tên không được để trống.",
+                        "emptyStates": "Không có trạng thái đã lưu",
+                        "removeConfirm": "Bạn có chắc chắn muốn xóa %s không?",
+                        "removeError": "Không xóa được trạng thái.",
+                        "removeJoiner": "và",
+                        "removeSubmit": "Xóa",
+                        "removeTitle": "Xóa trạng thái",
+                        "renameButton": "Đổi tên",
+                        "renameLabel": "Tên mới cho %s:",
+                        "renameTitle": "Đổi tên trạng thái"
+                    },
+                },
+            ajax: {
+                url: 'http://localhost:8080/api/customers/filter',
+                type: 'POST',
+                // dataSrc: "content",
+                contentType: 'application/json',
+                "data": function (d) {
+                    d.groupIds = customerFilter.groupIds;
+                    d.gender = customerFilter.gender;
+                    d.dayOfBirthday = customerFilter.dayOfBirthday;
+                    d.monthOfBirthday = customerFilter.monthOfBirthday;
+                    d.employeeIds = customerFilter.employeeIds;
+                    d.keyword = customerFilter.keyword;
+                    d.statusList = [];
+                    return JSON.stringify(d)
+                }
+            },
+            lengthMenu: [
+                [10, 30, 50,1000000000],
+                ["10", "30", "50", "All"]
+            ],
+            searching: false,
+            destroy: true,
+            columns: [
+                {data: 'id'},
+                {data: 'customerCode'},
+                {data: 'fullName'},
+                {data: 'phoneNumber'},
+                {data: 'group.title'},
+                {data: 'debtTotal'},
+                {data: 'spendTotal'},
+                {data: "quantityItemOrder"}],
+             columnDefs: [
+             {
+                            targets: 0,
+                            render: function (data, type, row, meta) {
+                                return `
+                               <input type="checkbox" value="check_none" />
+                            `
+                            }
+                        },
+             {
+                            targets: 1,
+                            render: function (data, type, row, meta) {
+                                return `<a href="/admin/customers/${row.id}" style="text-decoration: none">${row.customerCode}</a>`;
+                            }
+                        },
+
+
+             ],
+        })
+    }
 
     function findCustomerByGroup(groupId) {
         $("#tbCustomer").DataTable({
@@ -1699,7 +2025,8 @@
         }
     });
 
-    $('#btnImportFileCustomers').click(function () {
+    $('#btnImportFileCustomers').on('click', () => {
+        page.commands.showLoading();
         let data = new FormData();
         let file = $('#formFileCustomers')[0].files[0];
         data.append('file',file);
@@ -1713,17 +2040,28 @@
             $("#modalImportFileCustomers").modal("hide");
             $("#frmFileCustomers")[0].reset();
             page.commands.getAllCustomers();
+            page.commands.closeLoading();
             App.IziToast.showSuccessAlert("Tải file lên thành công!")
         }).fail((jqXHR) => {
             App.IziToast.showErrorAlert("Tải file lên không thành công!")
+            page.commands.closeLoading();
         })
+
+
     });
 
-
+    function handleSaveFilter(){
+        $("#btn-save-search").on("click", ()=>{
+            localStorage.setItem(KEY_CUSTOMER_FILTER_SAVE, JSON.stringify(customerFilter));
+            App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_FILTERED);
+        });
+    }
 
     page.loadData = () => {
         page.commands.getAllCustomers();
         showAllCustomerGroup()
+
+        handleSaveFilter();
     }
 
     $(() => {
@@ -1731,6 +2069,82 @@
         page.loadData()
 
     });
+
+    let customerGroups;
+    let employees;
+
+
+    const getChanges = (previous, current) => {
+        if (isPrimitive(previous) && isPrimitive(current)) {
+            if (previous === current) {
+                return "";
+            }
+
+            return current;
+        }
+
+        if (isObject(previous) && isObject(current)) {
+            const diff = getChanges(Object.entries(previous), Object.entries(current));
+
+            return diff.reduce((merged, [key, value]) => {
+                return {
+                    ...merged,
+                    [key]: value
+                }
+            }, {});
+        }
+
+        const changes = [];
+
+        if (JSON.stringify(previous) === JSON.stringify(current)) {
+            return changes;
+        }
+
+        for (let i = 0; i < current.length; i++) {
+            const item = current[i];
+
+            if (JSON.stringify(item) !== JSON.stringify(previous[i])) {
+                changes.push(item);
+            }
+        }
+
+        return changes;
+    };
+    function isEmpty(obj) {
+        for (var prop in obj) {
+            if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+                return false;
+            }
+        }
+
+        return JSON.stringify(obj) === JSON.stringify({});
+    }
+
+    const typeOf = o => Object.prototype.toString.call(o);
+    const isObject = o => o !== null && !Array.isArray(o) && typeOf(o).split(" ")[1].slice(0, -1) === "Object";
+
+    const isPrimitive = o => {
+        switch (typeof o) {
+            case "object": {
+                return false;
+            }
+            case "function": {
+                return false;
+            }
+            default: {
+                return true;
+            }
+        }
+    };
+
+
+
+
+
+
+
+
+
 </script>
 </div>
 </body>

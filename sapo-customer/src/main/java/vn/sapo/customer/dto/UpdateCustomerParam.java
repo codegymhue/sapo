@@ -1,13 +1,18 @@
 package vn.sapo.customer.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import vn.sapo.entities.customer.CustomerGender;
-import vn.sapo.entities.customer.CustomerGroup;
+import vn.sapo.entities.customer.CustomerStatus;
 
-import java.time.Instant;
+import java.util.Date;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Accessors(chain = true)
 public class UpdateCustomerParam {
 
@@ -23,7 +28,20 @@ public class UpdateCustomerParam {
 
     private String email;
 
-    private Instant birthday;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date birthday;
 
     private CustomerGender gender;
+
+    private Integer employeeId;
+
+    private CustomerStatus status;
+
+    private String description;
+    private String website;
+    private String fax;
+    private String taxCode;
+
+
+
 }

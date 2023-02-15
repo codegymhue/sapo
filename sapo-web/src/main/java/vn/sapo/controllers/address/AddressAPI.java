@@ -19,13 +19,15 @@ public class AddressAPI {
     @Autowired
     AddressService addressService;
 
-    @Autowired
-    AddressRepository addressRepository;
+    @GetMapping("/findByCustomerId/{customerId}")
+    public ResponseEntity<?> findByCustomerId(@PathVariable Integer customerId) {
+        List<AddressResult> addresses = addressService.findByCustomerId(customerId);
+        return new ResponseEntity<>(addresses, HttpStatus.OK);
+    }
 
-    @GetMapping("/findByCustomerId/{id}")
-    public ResponseEntity<?> findByCustomerId(@PathVariable Integer id) {
-        List<AddressResult> address = addressService.findByCustomerId(id);
-        return new ResponseEntity<>(address, HttpStatus.OK);
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable Integer id) {
+        return new ResponseEntity<>(addressService.findById(id), HttpStatus.OK);
     }
 
     @GetMapping

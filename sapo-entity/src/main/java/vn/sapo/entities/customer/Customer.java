@@ -1,27 +1,35 @@
 package vn.sapo.entities.customer;
 
-import lombok.AllArgsConstructor;
+import com.vladmihalcea.hibernate.type.json.JsonType;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 import vn.sapo.entities.Address;
 import vn.sapo.entities.BaseEntity;
 import vn.sapo.entities.Employee;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.Set;
 
-@Entity
+
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name ="customer")
+@Table(name = "customer")
+@Entity
 @Accessors(chain = true)
+@TypeDef(
+        name = "json",
+        typeClass = JsonType.class)
 public class Customer extends BaseEntity {
+    public Customer() {
+        this.attributes = new HashMap<>();
+    }
+
     public Customer(Integer id) {
         this.id = id;
     }
@@ -40,7 +48,6 @@ public class Customer extends BaseEntity {
     @Column(name = "phone_number", length = 15)
     private String phoneNumber;
 
-
     @Column(name = "email")
     private String email;
 
@@ -55,6 +62,12 @@ public class Customer extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private CustomerGender gender;
 
+    @Column(name = "description")
+    private String description;
+
+    @Type(type = "json")
+    @Column(name = "extension_attributes", columnDefinition = "JSON")
+    private HashMap<String, String> attributes;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cus_group_id", nullable = false)
     private CustomerGroup group;
@@ -97,4 +110,34 @@ public class Customer extends BaseEntity {
         return opt.orElse(null);
     }
 
+    public final static String WEBSITE_ATTRIBUTE_NAME = "website";
+    public final static String FAX_ATTRIBUTE_NAME = "fax";
+    public final static String TAX_CODE_ATTRIBUTE_NAME = "taxCode";
+
+    public String getWebsite() {
+        return attributes.get(WEBSITE_ATTRIBUTE_NAME);
+    }
+
+    public String getFax() {
+        return attributes.get(FAX_ATTRIBUTE_NAME);
+    }
+
+    public String getTaxCode() {
+        return attributes.get(TAX_CODE_ATTRIBUTE_NAME);
+    }
+
+    public Customer setWebsite(String website) {
+        attributes.put(WEBSITE_ATTRIBUTE_NAME, website);
+        return this;
+    }
+
+    public Customer setFax(String fax) {
+        attributes.put(WEBSITE_ATTRIBUTE_NAME, fax);
+        return this;
+    }
+
+    public Customer setTaxCode(String taxCode) {
+        attributes.put(TAX_CODE_ATTRIBUTE_NAME, taxCode);
+        return this;
+    }
 }

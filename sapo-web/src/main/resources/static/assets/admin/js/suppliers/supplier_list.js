@@ -6,8 +6,9 @@
             "accept": "application/json",
             "content-type": "application/json"
         },
-        "url": "http://localhost:8080/api/admin/suppliers",
-        "type": "get"
+        "type": "GET",
+        "url": App.PRODUCT_API
+
     })
     .done((data) => {
         $.each(data, (i, item) => {

@@ -1,9 +1,11 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="vi-VN" class="sapo-menu-expand sapo-menu-toggle-active">
+<html xmlns:th="http://www.thymeleaf.org" lang="vi-VN" class="sapo-menu-expand sapo-menu-toggle-active"
+      th:object="${customer}">
 <head>
-    <title>Danh sách khách hàng</title>
+    <title> Cập nhật thông tin khách hàng</title>
     <th:block th:replace="/layout/header.html"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
@@ -11,133 +13,79 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
-    <link rel="stylesheet" href="/assets/admin/css/customer/customer_create.css"/>
+    <link rel="stylesheet" href="/assets/admin/css/customer/edit.css"/>
 </head>
 <body data-new-gr-c-s-check-loaded="14.1085.0" cz-shortcut-listen="true">
 <div id="root" style="overflow: auto;">
     <th:block th:replace="/layout/menu.html"/>
 
     <div class="col-right  MuiBox-root jss64 jss40">
-        <div class="MuiBox-root jss20292 jss20288 ">
-            <div class="MuiBox-root jss20293 jss20291">
-                <div class="MuiBox-root jss20294"><a
-                        class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss20290 MuiTypography-colorSecondary"
-                        href="https://depament-stor.mysapogo.com/admin/customers">
-                    <svg class="MuiSvgIcon-root jss20295"
-                         focusable="false" viewBox="0 0 8 13" aria-hidden="true">
-                        <path
-                                d="M6.01041 0L0 6.01041L6.01041 12.0208L7.42462 10.6066L2.82843 6.01041L7.42462 1.41421L6.01041 0Z"
-                                fill="currentColor"></path>
+        <div class="MuiBox-root jss3578 jss2924 jss2925">
+            <div class="MuiBox-root jss3579 jss2927">
+                <div class="MuiBox-root jss3580"><a
+                        class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss2926 MuiTypography-colorSecondary"
+                        href="/admin/customers" style="text-decoration: none">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                         style="width: 24px; height: 24px; margin-left: -9px; margin-right: 6px;">
+                        <path d="M14.298 5.99 8.288 12l6.01 6.01 1.414-1.414L11.116 12l4.596-4.596-1.414-1.414Z"
+                              fill="currentColor"></path>
                     </svg>
-                    <h6 class="MuiTypography-root MuiTypography-subtitle1">Quay lại danh sách khách hàng</h6>
-                </a></div>
-                <div class="MuiBox-root jss20296">
-                    <button type="button" id="btnCloseCustomer"
-                            class=" ldZiUT btnCloseCustomer">Hủy
-                    </button>
-                    <button
-
-                            class=" cHdopB btnEditCustomer"><span
-                            class="sc-papXJ jcEYKF">Lưu</span></button>
+                    <h6 class="MuiTypography-root MuiTypography-subtitle1" >Quay lại danh sách khách hàng</h6></a>
+                    <th:block>
+                        <h2 th:if="errors" th:text="${errors}" style="color: red"></h2>
+                    </th:block>
+                    <input type="hidden" id="customerId" th:value="${customer.getId()}">
+                </div>
+                <div class="MuiBox-root jss3581">
+                    <button id="btnCloseUpdate" class="sc-kDDrLX kESDbN"
+                            style="font-size: 14px; width: 65px; height: 36px;"><span
+                            class="sc-jqUVSM cMXJOk " th:href="'/admin/customers/'+${customer.id}" >Hủy</span></button>
+                    <button id="btnUpdateCustomer" class="RthGc btnUpdateCustomer "
+                            style="font-size: 14px; width: 65px; height: 36px;"><span
+                            class="sc-jqUVSM cMXJOk">Lưu</span></button>
                 </div>
             </div>
         </div>
-        <div class="MuiBox-root jss20344 jss20286">
+        <div class="MuiBox-root jss3817 jss3576">
             <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-8">
                     <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
-                            <div class="MuiPaper-root jss20448 MuiPaper-elevation1 MuiPaper-rounded"
+                            <div class="MuiPaper-root jss3921 MuiPaper-elevation1 MuiPaper-rounded"
                                  style="box-shadow: rgba(168, 168, 168, 0.25) 0px 2px 4px; height: 100%;">
-                                <div class="MuiBox-root jss20478 jss20449 borderBottom">
-                                    <div class="MuiBox-root jss21051">
-                                        <h6 class="MuiTypography-root MuiTypography-h6" style="margin-left: 24px;">Thông
-                                            tin chung</h6>
+                                <div class="MuiBox-root jss3951 jss3922 borderBottom">
+                                    <div class="MuiBox-root jss5737"><h6 class="MuiTypography-root MuiTypography-h6"
+                                                                         style="margin-left: 24px;">Thông tin
+                                        chung</h6>
                                     </div>
                                 </div>
-                                <div class="MuiBox-root jss20480" style="padding: 16px 24px 24px;">
+                                <div class="MuiBox-root jss3953" style="padding: 16px 24px 24px;">
                                     <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2">
-
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
+                                            <div class="MuiFormControl-root jss3954 MuiFormControl-fullWidth"><label
+                                                    class="MuiFormLabel-root MuiInputLabel-root jss3955 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink Mui-required Mui-required"
+                                                    data-shrink="true" for="fullNameUp">Tên
+                                                khách hàng<span
+                                                        class="MuiFormLabel-asterisk MuiInputLabel-asterisk"> *</span></label>
+                                                <div class="MuiFormControl-root MuiTextField-root jss3956 MuiFormControl-fullWidth">
+                                                    <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
+                                                         style="font-size: 14px;">
+                                                        <input aria-invalid="false"
+                                                               id="fullNameUp" name="fullName"
+                                                               placeholder="Nhập tên khách hàng"
+                                                               th:value="${customer.fullName}"
+                                                               type="text"
 
-<!--                                            <div class="MuiFormControl-root jss20481 MuiFormControl-fullWidth"><label-->
-<!--                                                    class="MuiFormLabel-root MuiInputLabel-root jss20482 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink Mui-required Mui-required"-->
-<!--                                                    data-shrink="true" for="nameCreate">Tên-->
-<!--                                                khách hàng<span-->
-<!--                                                        class="MuiFormLabel-asterisk MuiInputLabel-asterisk"> *</span></label>-->
-<!--                                                <div class="MuiFormControl-root MuiTextField-root jss20483 MuiFormControl-fullWidth">-->
-<!--                                                    <div-->
-<!--                                                            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl">-->
-<!--                                                        <input aria-invalid="false"-->
-<!--                                                               id="nameCreate" name="nameCreate"-->
-<!--                                                               placeholder="Nhập tên khách hàng" required="" type="text"-->
-<!--                                                               aria-label="Without label"-->
-<!--                                                               class="MuiInputBase-input MuiOutlinedInput-input"-->
-<!--                                                               value="" th:field="*{customer.name}">-->
-<!--                                                        <fieldset aria-hidden="true"-->
-<!--                                                                  class="jss20550 MuiOutlinedInput-notchedOutline"-->
-<!--                                                                  style="padding-left: 8px;">-->
-<!--                                                            <legend class="jss20551" style="width: 0.01px;">-->
-<!--                                                                <span>​</span></legend>-->
-<!--                                                        </fieldset>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
+                                                               aria-label="Without label"
+                                                               class="MuiInputBase-input MuiOutlinedInput-input"
 
-                                            <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
-                                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
-                                                    <div class="MuiFormControl-root jss20481 MuiFormControl-fullWidth">
-                                                        <label
-                                                                class="MuiFormLabel-root MuiInputLabel-root jss20482 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-                                                                data-shrink="true"
-                                                                for="codeCreate">Tên khách hàng </label>
-                                                        <div class="MuiFormControl-root MuiTextField-root jss20483 MuiFormControl-fullWidth">
-                                                            <div
-                                                                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl">
-                                                                <input aria-invalid="false"
-                                                                       id="nameCreate"
-                                                                       name="codeCreate"
-                                                                       placeholder="Nhập mã khách hàng" type="text"
-                                                                       aria-label="Without label"
-                                                                       class="MuiInputBase-input MuiOutlinedInput-input"
-                                                                       value="" th:field="*{customer.name}">
-                                                                <fieldset aria-hidden="true"
-                                                                          class="jss20550 MuiOutlinedInput-notchedOutline"
-                                                                          style="padding-left: 8px;">
-                                                                    <legend class="jss20551" style="width: 0.01px;">
-                                                                        <span>​</span></legend>
-                                                                </fieldset>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
-                                                    <div class="MuiBox-root jss20639" style="width: 100%;">
-                                                        <div class="MuiFormControl-root jss20632 MuiFormControl-fullWidth"
-                                                             style="width: 100%;">
-                                                            <div class="MuiBox-root jss20640 jss20637"><label
-                                                                    class="MuiFormLabel-root MuiInputLabel-root jss20635 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-filled"
-                                                                    data-shrink="true" for="genderCreate">Giới
-                                                                tính</label></div>
-                                                            <div class="MuiInputBase-root MuiOutlinedInput-root jss20633 MuiInputBase-fullWidth MuiInputBase-formControl">
-                                                                <select class="jss87874 form-select" name="genderCreate"
-                                                                        id="genderCreate"></select>
-
-                                                                <input name="gender" type="hidden" value="other">
-                                                                <svg
-                                                                        class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
-                                                                        focusable="false"
-                                                                        viewBox="0 0 24 24" aria-hidden="true">
-                                                                    <path d="M7 10l5 5 5-5z"></path>
-                                                                </svg>
-                                                                <fieldset aria-hidden="true"
-                                                                          class="jss20550 MuiOutlinedInput-notchedOutline"
-                                                                          style="padding-left: 8px;">
-                                                                    <legend class="jss20551" style="width: 0.01px;">
-                                                                        <span>​</span></legend>
-                                                                </fieldset>
-                                                            </div>
-                                                        </div>
+                                                        >
+                                                        <fieldset aria-hidden="true"
+                                                                  class="jss4023 MuiOutlinedInput-notchedOutline"
+                                                                  style="padding-left: 8px;">
+                                                            <legend class="jss4024" style="width: 0.01px;">
+                                                                <span>​</span></legend>
+                                                        </fieldset>
                                                     </div>
                                                 </div>
                                             </div>
@@ -145,26 +93,26 @@
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
                                             <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
                                                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
-                                                    <div class="MuiFormControl-root jss20481 MuiFormControl-fullWidth">
-                                                        <label
-                                                                class="MuiFormLabel-root MuiInputLabel-root jss20482 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-                                                                data-shrink="true"
-                                                                for="codeCreate">Mã khách
+                                                    <div class="MuiFormControl-root jss3954 MuiFormControl-fullWidth">
+                                                        <label class="MuiFormLabel-root MuiInputLabel-root jss3955 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
+                                                               data-shrink="true"
+                                                               for="customerCodeUp">Mã khách
                                                             hàng</label>
-                                                        <div class="MuiFormControl-root MuiTextField-root jss20483 MuiFormControl-fullWidth">
-                                                            <div
-                                                                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl">
+                                                        <div class="MuiFormControl-root MuiTextField-root jss3956 MuiFormControl-fullWidth">
+                                                            <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
+                                                                 style="font-size: 14px;">
                                                                 <input aria-invalid="false"
-                                                                       id="codeCreate"
-                                                                       name="codeCreate"
-                                                                       placeholder="Nhập mã khách hàng" type="text"
-                                                                       aria-label="Without label"
+                                                                       id="customerCodeUp"
+                                                                       name="customerCode"
+                                                                       placeholder="Nhập mã khách hàng"
+                                                                       th:value="${customer.customerCode}"
+                                                                       type="text" aria-label="Without label"
                                                                        class="MuiInputBase-input MuiOutlinedInput-input"
-                                                                       value="" th:field="*{customer.customerCode}">
+                                                                >
                                                                 <fieldset aria-hidden="true"
-                                                                          class="jss20550 MuiOutlinedInput-notchedOutline"
+                                                                          class="jss4023 MuiOutlinedInput-notchedOutline"
                                                                           style="padding-left: 8px;">
-                                                                    <legend class="jss20551" style="width: 0.01px;">
+                                                                    <legend class="jss4024" style="width: 0.01px;">
                                                                         <span>​</span></legend>
                                                                 </fieldset>
                                                             </div>
@@ -172,223 +120,304 @@
                                                     </div>
                                                 </div>
                                                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
-                                                    <div class="MuiBox-root jss20574 jss21252">
-                                                        <div class="MuiBox-root jss20575 jss21262">
-                                                            <label for="customerGroupCreate"
-                                                                   class="MuiTypography-root MuiTypography-body1"
-                                                                   style="color: rgb(70, 81, 95);">Nhóm
-                                                                khách hàng</label>
+                                                    <div class="MuiBox-root jss4047 jss5748">
+                                                        <div class="MuiBox-root jss4048 jss5758"><p
+                                                                class="MuiTypography-root MuiTypography-body1"
+                                                                style="color: rgb(70, 81, 95); font-size: 14px;"
+                                                                for="customerGroupUp">Nhóm khách hàng</p>
                                                         </div>
-                                                        <select th:field="*{customer.id}"
-                                                                className="jss87874" class="form-select"
-                                                                name="customerGroupCreate"
-                                                                id="customerGroupCreate">
-                                                            <!--                                                            <th:block>-->
-                                                            <!--                                                                <option  th:value="${customer.id}" th:text="${customer.customerGroup}"></option>-->
-                                                            <!--                                                            </th:block>-->
 
+                                                        <select classname="jss87874" class="form-select"
+                                                                name="group.id" id="customerGroupUp"
+                                                                style="height: 43px; margin-top: -2px; font-size: 14px;">
+                                                            <th:block th:each="group : ${group}">
+                                                                <th:block th:if="${group.id}==${customer.getGroup().getId()}" >
+                                                                    <option th:value="${group.id}"  th:text="${group.title}" selected></option>
+                                                                </th:block>
+                                                                <th:block th:unless="${group.id}==${customer.getGroup().getId()}" >
+                                                                    <option th:value="${group.id}"  th:text="${group.title}" ></option>
+                                                                </th:block>
+                                                            </th:block>
                                                         </select>
+
+                                                        <!--                                                            <a class="jss627" th:href="'/admin/customer_groups/'+ ${customer.getGroup().getId()}" style="padding-left: 0px;">-->
+                                                        <!--                                                                <h6 class="MuiTypography-root jss626 MuiTypography-subtitle1" th:text="${': '+customer.getGroup().getTitle()}">-->
+
+                                                        <!--                                                                </h6>-->
+                                                        <!--                                                            </a>-->
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
-                                            <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
-                                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
-                                                    <div class="MuiFormControl-root jss20481 MuiFormControl-fullWidth">
-                                                        <label
-                                                                class="MuiFormLabel-root MuiInputLabel-root jss20482 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-                                                                data-shrink="true"
-                                                                for="phoneCreate">Số điện
-                                                            thoại</label>
-                                                        <div class="MuiFormControl-root MuiTextField-root jss20483 MuiFormControl-fullWidth">
-                                                            <div
-                                                                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl">
-                                                                <input aria-invalid="false"
-                                                                       id="phoneCreate"
-                                                                       name="phoneCreate"
-                                                                       placeholder="Nhập số điện thoại" type="text"
-                                                                       aria-label="Without label"
-                                                                       class="MuiInputBase-input MuiOutlinedInput-input"
-                                                                       value="" th:field="*{customer.phone}">
-                                                                <fieldset aria-hidden="true"
-                                                                          class="jss20550 MuiOutlinedInput-notchedOutline"
-                                                                          style="padding-left: 8px;">
-                                                                    <legend class="jss20551" style="width: 0.01px;">
-                                                                        <span>​</span></legend>
-                                                                </fieldset>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
-                                                    <div class="MuiFormControl-root jss20481 MuiFormControl-fullWidth">
-                                                        <label
-                                                                class="MuiFormLabel-root MuiInputLabel-root jss20482 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-                                                                data-shrink="true"
-                                                                for="emailCreate">Email</label>
-                                                        <div class="MuiFormControl-root MuiTextField-root jss20483 MuiFormControl-fullWidth">
-                                                            <div
-                                                                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl">
-                                                                <input aria-invalid="false"
-                                                                       id="emailCreate"
-                                                                       name="emailCreate"
-                                                                       placeholder="Nhập địa chỉ email" type="text"
-                                                                       aria-label="Without label"
-                                                                       class="MuiInputBase-input MuiOutlinedInput-input"
-                                                                       value="" th:field="*{customer.email}">
-                                                                <fieldset aria-hidden="true"
-                                                                          class="jss20550 MuiOutlinedInput-notchedOutline"
-                                                                          style="padding-left: 8px;">
-                                                                    <legend class="jss20551" style="width: 0.01px;">
-                                                                        <span>​</span></legend>
-                                                                </fieldset>
-                                                            </div>
+                                    </div>
+                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
+                                        <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
+                                            <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
+                                                <div class="MuiFormControl-root jss3954 MuiFormControl-fullWidth">
+                                                    <label class="MuiFormLabel-root MuiInputLabel-root jss3955 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
+                                                           data-shrink="true"
+                                                           for="phoneUp">Số điện
+                                                        thoại</label>
+                                                    <div class="MuiFormControl-root MuiTextField-root jss3956 MuiFormControl-fullWidth">
+                                                        <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
+                                                             style="font-size: 14px;">
+                                                            <input aria-invalid="false"
+                                                                   id="phoneUp"
+                                                                   name="phoneNumber"
+                                                                   placeholder="Nhập số điện thoại" type="text"
+                                                                   th:value="${customer.phoneNumber}"
+                                                                   aria-label="Without label"
+                                                                   class="MuiInputBase-input MuiOutlinedInput-input"
+                                                                   value="098998989">
+                                                            <fieldset aria-hidden="true"
+                                                                      class="jss4023 MuiOutlinedInput-notchedOutline"
+                                                                      style="padding-left: 8px;">
+                                                                <legend class="jss4024" style="width: 0.01px;">
+                                                                    <span>​</span></legend>
+                                                            </fieldset>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-
-
-                                        <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
-                                            <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
-                                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
-                                                    <div width="100%" class="sc-himrzO gTRFtW"><label
-                                                            class="sc-evZas diplSI" for="birthdayCreate">Ngày
-                                                        sinh</label>
-                                                        <div class="sc-jIZahH hISLMV Sapo-InputRoot">
-                                                            <form autocomplete="off">
-                                                                <div class="input-group input-daterange">
-                                                                    <input type="text" id="birthdayCreate"
-                                                                           name="birthdayCreate" class="form-control"
-                                                                           placeholder="Leaving Date" readonly
-                                                                           th:field="*{customer.birthday}"></div>
-
-                                                            </form>
-
-
-                                                            <fieldset class="sc-iIPllB iUBRZb"></fieldset>
-                                                            <div class="sc-gicCDI sc-bZkfAO bqqjdk nysSE">
-                                                                <svg viewBox="0 0 24 25" fill="none"
-                                                                     xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                     height="24" font-size="24"
-                                                                     color="#A3A8AF">
-                                                                    <path
-                                                                            d="M7 12.5h2v2H7v-2ZM7 16.5h2v2H7v-2ZM13 12.5h-2v2h2v-2ZM11 16.5h2v2h-2v-2ZM17 12.5h-2v2h2v-2ZM15 16.5h2v2h-2v-2Z"
-                                                                            fill="#A3A8AF"></path>
-                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                          d="M19 22.5H5c-1.103 0-2-.897-2-2v-14c0-1.103.897-2 2-2h2v-2h2v2h6v-2h2v2h2c1.103 0 2 .897 2 2v14c0 1.103-.897 2-2 2Zm0-14v-2H5v2h14Zm0 2 .001 10H5v-10h14Z"
-                                                                          fill="#A3A8AF"></path>
-                                                                </svg>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
-                                                    <div class="MuiBox-root jss20639" style="width: 100%;">
-                                                        <div class="MuiFormControl-root jss20632 MuiFormControl-fullWidth"
-                                                             style="width: 100%;">
-                                                            <div class="MuiBox-root jss20640 jss20637"><label
-                                                                    class="MuiFormLabel-root MuiInputLabel-root jss20635 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-filled"
-                                                                    data-shrink="true" for="genderCreate">Trạng thái</label></div>
-                                                            <div class="MuiInputBase-root MuiOutlinedInput-root jss20633 MuiInputBase-fullWidth MuiInputBase-formControl">
-                                                                <select class="jss87874 form-select" name="customerStatus"
-                                                                        id="customerStatus">
-                                                                <option value="">Ngừng giao dịch</option>
-                                                                <option value="">Giao dịch</option>
-                                                                </select>
-<!--                                                                <input name="customerStatus" type="hidden" value="other">-->
-                                                                <svg
-                                                                        class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
-                                                                        focusable="false"
-                                                                        viewBox="0 0 24 24" aria-hidden="true">
-                                                                    <path d="M7 10l5 5 5-5z"></path>
-                                                                </svg>
-                                                                <fieldset aria-hidden="true"
-                                                                          class="jss20550 MuiOutlinedInput-notchedOutline"
-                                                                          style="padding-left: 8px;">
-                                                                    <legend class="jss20551" style="width: 0.01px;">
-                                                                        <span>​</span></legend>
-                                                                </fieldset>
-                                                            </div>
+                                            <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
+                                                <div class="MuiFormControl-root jss3954 MuiFormControl-fullWidth">
+                                                    <label class="MuiFormLabel-root MuiInputLabel-root jss3955 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
+                                                           data-shrink="true"
+                                                           for="emailUp">Email</label>
+                                                    <div class="MuiFormControl-root MuiTextField-root jss3956 MuiFormControl-fullWidth">
+                                                        <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
+                                                             style="font-size: 14px;">
+                                                            <input aria-invalid="false"
+                                                                   id="emailUp"
+                                                                   name="email"
+                                                                   placeholder="Nhập địa chỉ email"
+                                                                   th:value="${customer.email}"
+                                                                   type="text" aria-label="Without label"
+                                                                   class="MuiInputBase-input MuiOutlinedInput-input"
+                                                                   value="bibo@mailinator.com">
+                                                            <fieldset aria-hidden="true"
+                                                                      class="jss4023 MuiOutlinedInput-notchedOutline"
+                                                                      style="padding-left: 8px;">
+                                                                <legend class="jss4024" style="width: 0.01px;">
+                                                                    <span>​</span></legend>
+                                                            </fieldset>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
-
-<!--                                        <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">-->
-<!--                                            <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">-->
-<!--                                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">-->
-<!--                                                    <div class="MuiBox-root jss20603 jss21087">-->
-<!--                                                        <div class="MuiBox-root jss20604 jss21097">-->
-<!--                                                            <label class="MuiTypography-root MuiTypography-body1"-->
-<!--                                                                   style="color: rgb(70, 81, 95);"-->
-<!--                                                                   for="provinceNameCreate">Tỉnh - Thành Phố </label>-->
-<!--                                                        </div>-->
-<!--                                                        <div tabindex="0">-->
-<!--                                                            <select class="jss87874" name="provinceNameCreate"-->
-<!--                                                                    id="provinceNameCreate"></select>-->
-
-<!--                                                        </div>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-<!--                                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">-->
-<!--                                                    <div class="MuiBox-root jss20621 jss21102">-->
-<!--                                                        <div class="MuiBox-root jss20622 jss21112">-->
-<!--                                                            <label class="MuiTypography-root MuiTypography-body1"-->
-<!--                                                                   style="color: rgb(70, 81, 95);"-->
-<!--                                                                   for="districtNameCreate">-->
-<!--                                                                Huyện </label>-->
-<!--                                                        </div>-->
-<!--                                                        <select name="districtNameCreate" id="districtNameCreate"-->
-<!--                                                                class="jss87874"></select>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-<!--                                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">-->
-<!--                                                    <div class="MuiBox-root jss20621 jss21102">-->
-<!--                                                        <div class="MuiBox-root jss20622 jss21112">-->
-<!--                                                            <label class="MuiTypography-root MuiTypography-body1"-->
-<!--                                                                   style="color: rgb(70, 81, 95);" for="wardNameCreate">-->
-<!--                                                                Xã </label>-->
-<!--                                                        </div>-->
-<!--                                                        <select name="wardNameCreate" id="wardNameCreate"-->
-<!--                                                                class="form-select"></select>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-
-
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">-->
-<!--                                            <div class="MuiFormControl-root jss20481 MuiFormControl-fullWidth"><label-->
-<!--                                                    class="MuiFormLabel-root MuiInputLabel-root jss20482 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"-->
-<!--                                                    data-shrink="true" for="addressCreate">Địa-->
-<!--                                                chỉ cụ thể</label>-->
-<!--                                                <div class="MuiFormControl-root MuiTextField-root jss20483 jss20484 MuiFormControl-fullWidth">-->
-<!--                                                    <div-->
-<!--                                                            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline">-->
-<!--                                                        <input th:field="*{customer.locationRegionResult.address}" type="text"-->
-<!--                                                               aria-invalid="false" id="addressCreate"-->
-<!--                                                               name="addressCreate"-->
-<!--                                                               placeholder="Nhập địa chỉ" rows="2"-->
-<!--                                                               aria-label="Without label"-->
-<!--                                                               class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline"/>-->
-
-<!--                                                        <fieldset aria-hidden="true"-->
-<!--                                                                  class="jss20550 MuiOutlinedInput-notchedOutline"-->
-<!--                                                                  style="padding-left: 8px;">-->
-<!--                                                            <legend class="jss20551" style="width: 0.01px;">-->
-<!--                                                                <span>​</span></legend>-->
-<!--                                                        </fieldset>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
+                        <div class="MuiPaper-root jss3921 MuiPaper-elevation1 MuiPaper-rounded"
+                             style="box-shadow: rgba(168, 168, 168, 0.25) 0px 2px 4px; height: 100%; margin-top: 24px   ">
+                            <div class="MuiBox-root jss4061 jss3922 borderBottom">
+                                <div class="MuiBox-root jss5773"><h6 class="MuiTypography-root MuiTypography-h6"
+                                                                     style="margin-left: 24px;">Thông tin bổ
+                                    sung</h6></div>
+                            </div>
+                            <div class="MuiBox-root jss4063" style="padding: 16px 24px 24px;">
+                                <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2">
+                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
+                                        <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
+                                            <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
+                                                <div width="100%" class="sc-ciZhAO kfYubE"><label
+                                                        for="birthdayUp" style="font-size: 14px;"
+                                                        class="sc-hAZoDl iocNjj">Ngày sinh</label>
+                                                    <div class="sc-cCsOjp bwybwb Sapo-InputRoot">
+                                                        <input
+                                                            id="birthdayUp" name="birthday"
+                                                            placeholder="Chọn ngày sinh"
+                                                            th:value="${#dates.format(customer.birthday, 'yyyy-MM-dd')}"
+                                                             type="date"
+                                                            class="sc-gXmSlM djQmoa" style="padding-right: 10px; font-size: 14px;">
+                                                        <fieldset class="sc-iIPllB iUBRZb"></fieldset>
+<!--                                                        <div class="sc-kLLXSd sc-jIZahH knmXYz dsyMcL">-->
+<!--                                                            <svg viewBox="0 0 24 25" fill="none"-->
+<!--                                                                 xmlns="http://www.w3.org/2000/svg" width="24"-->
+<!--                                                                 height="24" font-size="24" color="primary">-->
+<!--                                                                <path d="M7 12.5h2v2H7v-2ZM7 16.5h2v2H7v-2ZM13 12.5h-2v2h2v-2ZM11 16.5h2v2h-2v-2ZM17 12.5h-2v2h2v-2ZM15 16.5h2v2h-2v-2Z"-->
+<!--                                                                      fill="#0088FF"></path>-->
+<!--                                                                <path fill-rule="evenodd" clip-rule="evenodd"-->
+<!--                                                                      d="M19 22.5H5c-1.103 0-2-.897-2-2v-14c0-1.103.897-2 2-2h2v-2h2v2h6v-2h2v2h2c1.103 0 2 .897 2 2v14c0 1.103-.897 2-2 2Zm0-14v-2H5v2h14Zm0 2 .001 10H5v-10h14Z"-->
+<!--                                                                      fill="#0088FF"></path>-->
+<!--                                                            </svg>-->
+<!--                                                        </div>-->
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
+                                                <div class="MuiBox-root jss4071" style="width: 100%;">
+                                                    <div class="MuiFormControl-root jss4064 MuiFormControl-fullWidth"
+                                                         style="width: 100%;">
+                                                        <div class="MuiBox-root jss4072 jss4069"><label
+                                                                class="MuiFormLabel-root MuiInputLabel-root jss4067 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-filled"
+                                                                data-shrink="true">Giới tính</label></div>
+                                                        <div class="MuiInputBase-root MuiOutlinedInput-root jss4065 MuiInputBase-fullWidth MuiInputBase-formControl">
+                                                            <select class="jss87874 form-select" name="gender"
+                                                                    id="genderUp" style="font-size: 14px;">
+                                                                <option th:selected="${customer.gender.toString() == '-1'}"
+                                                                        value="-1">Giới tính
+                                                                </option>
+                                                                <option th:selected="${customer.gender.toString() == 'NAM'}"
+                                                                        value="NAM">Nam
+                                                                </option>
+                                                                <option th:selected="${customer.gender.toString() == 'NU'}"
+                                                                        value="NU">Nữ
+                                                                </option>
+                                                                <option th:selected="${customer.gender.toString() == 'KHAC'}"
+                                                                        value="KHAC">Khác
+                                                                </option>
+
+                                                            </select>
+                                                            <input name="gender" type="hidden" value="other">
+                                                            <svg class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+                                                                 focusable="false" viewBox="0 0 24 24"
+                                                                 aria-hidden="true">
+
+                                                            </svg>
+                                                            <fieldset aria-hidden="true"
+                                                                      class="jss4023 MuiOutlinedInput-notchedOutline"
+                                                                      style="padding-left: 8px;">
+                                                                <legend class="jss4024" style="width: 0.01px;">
+                                                                    <span>​</span></legend>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
+                                        <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
+                                            <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
+                                                <div class="MuiFormControl-root jss3954 MuiFormControl-fullWidth">
+                                                    <label class="MuiFormLabel-root MuiInputLabel-root jss3955 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
+                                                           data-shrink="true"
+                                                           for="faxUpdate">Số fax</label>
+                                                    <div class="MuiFormControl-root MuiTextField-root jss3956 MuiFormControl-fullWidth">
+                                                        <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl">
+                                                            <input aria-invalid="false"
+                                                                   id="faxUpdate"
+                                                                   name="faxUpdate" placeholder="Nhập số fax"
+                                                                   th:value="${customer.fax}"
+                                                                   type="text"
+                                                                   aria-label="Without label" style="font-size: 14px;"
+                                                                   class="MuiInputBase-input MuiOutlinedInput-input"
+                                                                   >
+                                                            <fieldset aria-hidden="true"
+                                                                      class="jss4023 MuiOutlinedInput-notchedOutline"
+                                                                      style="padding-left: 8px;">
+                                                                <legend class="jss4024" style="width: 0.01px;">
+                                                                    <span>​</span></legend>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
+                                                <div class="MuiFormControl-root jss3954 MuiFormControl-fullWidth">
+                                                    <label class="MuiFormLabel-root MuiInputLabel-root jss3955 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
+                                                           data-shrink="true"
+                                                           for="taxCodeUp">Mã số
+                                                        thuế</label>
+                                                    <div class="MuiFormControl-root MuiTextField-root jss3956 MuiFormControl-fullWidth">
+                                                        <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
+                                                             style="font-size: 14px;">
+                                                            <input aria-invalid="false"
+                                                                   id="taxCodeUp"
+                                                                   name="taxNumber" placeholder="Nhập mã số thuế"
+                                                                   th:value="${customer.taxCode}"
+                                                                   type="text" aria-label="Without label"
+                                                                   class="MuiInputBase-input MuiOutlinedInput-input"
+                                                                   >
+                                                            <fieldset aria-hidden="true"
+                                                                      class="jss4023 MuiOutlinedInput-notchedOutline"
+                                                                      style="padding-left: 8px;">
+                                                                <legend class="jss4024" style="width: 0.01px;">
+                                                                    <span>​</span></legend>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
+                                        <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
+                                            <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
+                                                <div class="MuiFormControl-root jss3954 MuiFormControl-fullWidth">
+                                                    <label class="MuiFormLabel-root MuiInputLabel-root jss3955 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
+                                                           data-shrink="true"
+                                                           for="websiteUp">Website</label>
+                                                    <div class="MuiFormControl-root MuiTextField-root jss3956 MuiFormControl-fullWidth">
+                                                        <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
+                                                             style="font-size: 14px;">
+                                                            <input aria-invalid="false"
+                                                                   id="websiteUp"
+                                                                   name="website"
+                                                                   placeholder="Nhập tên miền website " type="text"
+                                                                   th:value="${customer.attWebsite}"
+                                                                   aria-label="Without label"
+                                                                   class="MuiInputBase-input MuiOutlinedInput-input">
+                                                            <fieldset aria-hidden="true"
+                                                                      class="jss4023 MuiOutlinedInput-notchedOutline"
+                                                                      style="padding-left: 8px;">
+                                                                <legend class="jss4024" style="width: 0.01px;">
+                                                                    <span>​</span></legend>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
+                                                <div class="MuiBox-root jss4102" style="width: 100%;">
+                                                    <div class="MuiFormControl-root jss4064 MuiFormControl-fullWidth"
+                                                         style="width: 100%;">
+                                                        <div class="MuiBox-root jss4103 jss4069"><label
+                                                                class="MuiFormLabel-root MuiInputLabel-root jss4067 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-filled"
+                                                                data-shrink="true">Trạng thái khách hàng</label>
+                                                        </div>
+                                                        <div class="MuiInputBase-root MuiOutlinedInput-root jss4065 MuiInputBase-fullWidth MuiInputBase-formControl">
+                                                            <select class="jss87874 form-select" name="status"
+
+                                                                    id="statusUp" style="font-size: 14px;">
+                                                                <option th:selected="${customer.status.toString() == 'AVAILABLE'}"
+                                                                        value="AVAILABLE">Đang giao dịch
+                                                                </option>
+                                                                <option th:selected="${customer.status.toString() == 'UNAVAILABLE'}"
+                                                                        value="UNAVAILABLE">Ngừng giao dịch
+                                                                </option>
+
+                                                            </select>
+                                                            <input name="status" type="hidden" value="active">
+                                                            <svg class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+                                                                 focusable="false" viewBox="0 0 24 24"
+                                                                 aria-hidden="true">
+                                                            </svg>
+                                                            <fieldset aria-hidden="true"
+                                                                      class="jss4023 MuiOutlinedInput-notchedOutline"
+                                                                      style="padding-left: 8px;">
+                                                                <legend class="jss4024" style="width: 0.01px;">
+                                                                    <span>​</span></legend>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -396,58 +425,70 @@
                 <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4">
                     <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
-                            <div class="MuiPaper-root jss20448 MuiPaper-elevation1 MuiPaper-rounded"
+                            <div class="MuiPaper-root jss3921 MuiPaper-elevation1 MuiPaper-rounded"
                                  style="box-shadow: rgba(168, 168, 168, 0.25) 0px 2px 4px; height: 100%;">
-                                <div class="MuiBox-root jss20680 jss20449 borderBottom">
-                                    <div class="MuiBox-root jss21138">
-                                        <h6 class="MuiTypography-root MuiTypography-h6" style="margin-left: 24px;">Thông
-                                            tin khác</h6>
+                                <div class="MuiBox-root jss4104 jss3922 borderBottom">
+                                    <div class="MuiBox-root jss5789"><h6 class="MuiTypography-root MuiTypography-h6"
+                                                                         style="margin-left: 24px;">Thông tin
+                                        khác</h6>
                                     </div>
                                 </div>
-                                <div class="MuiBox-root jss20682" style="padding: 16px 24px 24px;">
+                                <div class="MuiBox-root jss4106" style="padding: 16px 24px 24px;">
                                     <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2">
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
-                                            <div class="MuiBox-root jss20698 jss21139">
-                                                <div class="MuiBox-root jss20699 jss21149">
-                                                    <label class="MuiTypography-root MuiTypography-body1"
-                                                           style="color: rgb(70, 81, 95);" for="employeeNameCreate">Nhân
-                                                        viên phụ trách</label>
+                                            <div class="MuiBox-root jss4122 jss5790">
+                                                <div class="MuiBox-root jss4123 jss5800"><p
+                                                        class="MuiTypography-root MuiTypography-body1 s"
+                                                        style="color: rgb(70, 81, 95); font-size: 14px;"
+                                                        for="employeeNameUp">Nhân viên phụ trách</p>
                                                 </div>
 
-                                                <select name="employeeNameCreate" id="employeeNameCreate"
+                                                <select name="employee.id" id="employeeNameUp"
                                                         class="form-select"
 
-                                                        style="height:40px;"></select>
+                                                        style="height:40px; font-size: 14px;">
+                                                    <th:block th:each="employee :${employee}">
+                                                        <th:block th:if="${employee.id}==${customer.getEmployee().getId()}" >
+                                                            <option th:value="${employee.id}"  th:text="${employee.getFullName()}" selected></option>
+                                                        </th:block>
+                                                        <th:block th:unless="${employee.id}==${customer.getEmployee().getId()}" >
+                                                            <option th:value="${employee.id}"  th:text="${employee.getFullName()}" ></option>
+                                                        </th:block>
+                                                    </th:block>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
-                                            <div class="MuiFormControl-root jss20481 MuiFormControl-fullWidth"><label
-                                                    class="MuiFormLabel-root MuiInputLabel-root jss20482 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-                                                    data-shrink="true" for="129ba31d-25d3-4145-bcb2-5d99b07b3e3e">Mô
-                                                tả<span
-                                                        class="MuiTypography-root MuiTypography-caption"
+                                            <div class="MuiFormControl-root jss3954 MuiFormControl-fullWidth"><label
+                                                    class="MuiFormLabel-root MuiInputLabel-root jss3955 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
+                                                    data-shrink="true" for="descriptionUp">Mô
+                                                tả<span class="MuiTypography-root MuiTypography-caption"
                                                         title="Mô tả khách hàng của bạn để phục vụ cho việc chăm sóc khách hàng tốt hơn"><svg
-                                                        class="MuiSvgIcon-root MuiSvgIcon-colorPrimary"
-                                                        focusable="false" viewBox="0 0 12 12"
-                                                        aria-hidden="true"
-                                                        style="width: 12px; height: 12px; cursor: pointer; margin-left: 6px;">
-                                <path d="M5.4 3V4.2H6.6V3H5.4Z" fill="currenColor"></path>
-                                <path d="M5.4 6.6V9H7.2V7.8H6.6V5.4H4.8V6.6H5.4Z" fill="currenColor"></path>
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                      d="M6 0C2.688 0 0 2.688 0 6C0 9.312 2.688 12 6 12C9.312 12 12 9.312 12 6C12 2.688 9.312 0 6 0ZM1.2 6C1.2 8.646 3.354 10.8 6 10.8C8.646 10.8 10.8 8.646 10.8 6C10.8 3.354 8.646 1.2 6 1.2C3.354 1.2 1.2 3.354 1.2 6Z"
-                                      fill="currenColor"></path>
-                              </svg></span></label>
-                                                <div class="MuiFormControl-root MuiTextField-root jss20483 jss20484 MuiFormControl-fullWidth">
-                                                    <div
-                                                            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline">
-                              <textarea th:field="*{customer.customerStatus}" aria-invalid="false"
-                                        id="129ba31d-25d3-4145-bcb2-5d99b07b3e3e"
-                                        name="description" placeholder="Nhập mô tả" rows="3" aria-label="Without label"
-                                        class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline"></textarea>
+                                                        viewBox="0 0 16 16" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        font-size="14" color="primary"
+                                                        style="font-size: 16px; cursor: pointer; margin-left: 6px;"><path
+                                                        d="M7.4 5v1.2h1.2V5H7.4ZM7.4 8.6V11h1.8V9.8h-.6V7.4H6.8v1.2h.6Z"
+                                                        fill="#0088FF"></path><path fill-rule="evenodd"
+                                                                                    clip-rule="evenodd"
+                                                                                    d="M8 2C4.688 2 2 4.688 2 8s2.688 6 6 6 6-2.688 6-6-2.688-6-6-6ZM3.2 8c0 2.646 2.154 4.8 4.8 4.8s4.8-2.154 4.8-4.8S10.646 3.2 8 3.2A4.806 4.806 0 0 0 3.2 8Z"
+                                                                                    fill="#0088FF"></path></svg></span></label>
+                                                <div class="MuiFormControl-root MuiTextField-root jss3956 jss3957 MuiFormControl-fullWidth">
+                                                    <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline">
+                                                                                                <textarea
+                                                                                                        aria-invalid="false"
+                                                                                                        id="descriptionUp"
+                                                                                                        name="description"
+                                                                                                        placeholder="Nhập mô tả"
+                                                                                                        rows="3"
+                                                                                                        th:text="${customer.description}"
+                                                                                                        aria-label="Without label"
+                                                                                                        style="font-size: 14px;"
+                                                                                                        class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline"></textarea>
                                                         <fieldset aria-hidden="true"
-                                                                  class="jss20550 MuiOutlinedInput-notchedOutline"
+                                                                  class="jss4023 MuiOutlinedInput-notchedOutline"
                                                                   style="padding-left: 8px;">
-                                                            <legend class="jss20551" style="width: 0.01px;">
+                                                            <legend class="jss4024" style="width: 0.01px;">
                                                                 <span>​</span></legend>
                                                         </fieldset>
                                                     </div>
@@ -462,23 +503,16 @@
 
                     </div>
                 </div>
+
             </div>
-            <div style="display:none">
-                <input  th:field="*{customer.id}" class="customerIdEdit">
-            </div>
-<!--            <div style="display:none">-->
-<!--                <input   class="customerIdEditlocationRegionId"><th:block th:text="${customer.locationRegionId}"></th:block>-->
-<!--            </div>-->
         </div>
-        <form action="https://depament-stor.mysapogo.com/admin/customers/create#"></form>
-        <form action="https://depament-stor.mysapogo.com/admin/customers/create#"></form>
     </div>
 </div>
 </div>
 </body>
 <th:block th:replace="/layout/script :: script"/>
 <script>
-    Page();
+
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -486,139 +520,63 @@
 <script src="/assets/admin/js/customer/customer_app.js"></script>
 
 
-<script>
+<script th:inline="javascript">
 
+    /*<![CDATA[*/
+    var customer = /*[[${customer}]]*/ 'default';
 
-    class LocationRegion {
-        constructor(address, wardId, wardName, districtId, districtName, provinceId, provinceName) {
-            this.address = address;
-            this.wardId = wardId;
-            this.wardName = wardName;
-            this.districtId = districtId;
-            this.districtName = districtName;
-            this.provinceId = provinceId;
-            this.provinceName = provinceName;
+    /*]]>*/
 
-
-        }
-    }
 
     class Customer {
-        constructor(id, customerCode, name, phone,customerRegionId,  customerGroup, email, birthday, status, createAt, updateAt, employeeId, deleted, locationRegionResult) {
+        constructor(id, customerCode, name, phone, customerGroup, gender, email, birthday, status, createAt, updateAt, employee, deleted, updateAddressParam, description) {
             this.id = id;
-            this.customerRegionId = customerRegionId;
             this.customerCode = customerCode;
             this.name = name;
             this.phone = phone;
+            this.gender = gender;
+
             this.customerGroup = customerGroup;
             this.email = email;
             this.birthday = birthday;
             this.status = status;
             this.createAt = createAt;
             this.updateAt = updateAt;
-            this.employeeId = employeeId;
-            this.deleted = deleted;
-            this.locationRegionResult = locationRegionResult;
 
+            this.employee = employee;
+            this.deleted = deleted;
+            this.updateAddressParam = updateAddressParam;
+            this.description = description;
 
         }
     }
 
-    let customer = new Customer();
-
-    let locationRegion = new LocationRegion();
-
-    function getAllProvinces() {
-        return $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "GET",
-            url: "https://vapi.vnappmob.com/api/province/"
-        })
-            .done((data) => {
-                $.each(data.results, (i, item) => {
-                    let str = `<option value="${item.province_id}">${item.province_name}</option>`;
-                    $("#provinceNameCreate").append(str);
-                });
-                $("#districtNameCreate").empty()
-                $("#wardNameCreate").empty()
-            })
-            .fail((jqXHR) => {
-
-            })
+    class UpdateAddressParam {
+        constructor(id, fullName, phoneNumber, line1, line2, email, districtId, districtName, provinceId, provinceName, wardId, wardName, zipCode, customerId, supplierId, isDefault, description) {
+            this.fullName = fullName;
+            this.line1 = line1;
+            this.line2 = line2;
+            this.phoneNumber = phoneNumber;
+            this.email = email;
+            // this.address = address;
+            this.districtId = districtId;
+            this.districtName = districtName;
+            this.provinceId = provinceId;
+            this.provinceName = provinceName;
+            this.wardId = wardId;
+            this.wardName = wardName;
+            this.zipCode = zipCode;
+            this.customerId = customerId;
+            this.id = id;
+            this.isDefault = isDefault;
+            this.supplierId = supplierId;
+            this.description = description;
+        }
     }
-
-    function getAllDistrictsByProvinceId(provinceId) {
-        $("#district").empty()
-        return $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "GET",
-            url: "https://vapi.vnappmob.com/api/province/district/" + provinceId
-        })
-            .done((data) => {
-                $.each(data.results, (i, item) => {
-                    let str = `<option value="${item.district_id}">${item.district_name}</option>`;
-                    $("#districtNameCreate").append(str);
-                });
-            })
-            .fail((jqXHR) => {
-
-            })
-    }
-
-    function getAllWardsByDistrictId(districtId) {
-        $("#ward").empty()
-        return $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "GET",
-            url: "https://vapi.vnappmob.com/api/province/ward/" + districtId
-        })
-            .done((data) => {
-                console.log("districtId", districtId)
-                $.each(data.results, (i, item) => {
-                    let str = `<option value="${item.ward_id}">${item.ward_name}</option>`;
-                    $("#wardNameCreate").append(str);
-                });
-            })
-            .fail((jqXHR) => {
-
-            })
-    }
-
-    getAllProvinces().then(() => {
-        let provinceId = $("#provinceNameCreate").val();
-
-        getAllDistrictsByProvinceId(provinceId).then(() => {
-
-            let districtId = $("#districtNameCreate").val();
-
-            getAllWardsByDistrictId(districtId);
-        });
-    });
-    $("#provinceNameCreate").on('change', () => {
-        $("#districtNameCreate").empty()
-        let provinceId = $("#provinceNameCreate").val();
-        getAllDistrictsByProvinceId(provinceId).done(() => {
-            let districtId = $("#districtNameCreate").val();
-            getAllWardsByDistrictId(districtId);
-        })
-
-        $("#districtNameCreate").on('change', () => {
-            let districtId = $("#districtNameCreate").val();
-            getAllWardsByDistrictId(districtId);
-        })
-    });
 
 
     function getAllEmployeeSelect() {
+        // let employeeId = $("#employeeUp")
         return $.ajax({
             headers: {
                 "accept": "application/json",
@@ -628,10 +586,9 @@
             url: "http://localhost:8080/api/employees"
         })
             .done((data) => {
-                console.log(data)
                 $.each(data, (i, item) => {
-                    let str = `<option value="${item.id}">${item.name}</option>`;
-                    $("#employeeNameCreate").append(str);
+                    let str = `<option value="${item.id}">${item.fullName}</option>`;
+                    $("#employeeNameUp").append(str);
                 });
             })
             .fail((jqXHR) => {
@@ -640,203 +597,98 @@
             })
     }
 
-    function getAllCustomerGroup() {
-        return $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "GET",
-            url: "http://localhost:8080/api/customers/customerGroup"
-        })
-            .done((data) => {
-                console.log(data)
-                $.each(data, (i, item) => {
-                    console.log(item)
-                    let str = `<option value="${item}">${item}</option>`;
-                    $("#customerGroupCreate").append(str);
-                });
-            })
-            .fail((jqXHR) => {
 
-            })
-    }
-
-    function getAllCustomerGender() {
-        return $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "GET",
-            url: "http://localhost:8080/api/customers/customerGender"
-        })
-            .done((data) => {
-                console.log(data)
-                $.each(data, (i, item) => {
-                    console.log(item)
-                    let str = `<option value="${item}">${item}</option>`;
-                    $("#genderCreate").append(str);
-                });
-            })
-            .fail((jqXHR) => {
-
-            })
-    }
+    // function getAllCustomerGroup() {
+    //     return $.ajax({
+    //         headers: {
+    //             "accept": "application/json",
+    //             "content-type": "application/json"
+    //         },
+    //         type: "GET",
+    //         url: "http://localhost:8080/api/customer_groups/",
+    //     })
+    //         .done((data) => {
+    //             console.log(data)
+    //             $.each(data, (i, item) => {
+    //                 console.log(item)
+    //                 let str = `<option value="${item.id}">${item.title}</option>`;
+    //                 $("#customerGroupUp").append(str);
+    //             });
+    //         })
+    //         .fail((jqXHR) => {
+    //
+    //         })
+    // }
 
 
-    $('#okbn').on('click', () => alert(":ok caauj"))
+    $("#btnUpdateCustomer").on('click', () => {
+        // alert("Ok ban")
+        let newCustomer = {
+            id: customer.id,
+            status: $('#statusUp :selected').val(),
+            fullName: $('#fullNameUp').val(),
+            customerCode: $('#customerCodeUp').val(),
+            groupId: $('#customerGroupUp :selected').val(),
+            phoneNumber: $('#phoneUp').val(),
+            email: $('#emailUp').val(),
+            birthday: $('#birthdayUp').val(),
+            gender: $('#genderUp :selected').val(),
+            employee: $('#employeeNameUp :selected').val(),
+            description: $('#descriptionUp').val(),
+            taxCode: $('#taxCodeUp').val(),
+            fax: $('#faxUpdate').val(),
+            website: $('#websiteUp').val()
 
-    $('#btnCloseCustomer').on('click', () => alert(":ok caauj"))
+        }
 
-
-    $('#btnCreateCustomer').on('click', () => {
-        customer.id = null;
-        customer.name = $('#nameCreate').val();
-        customer.customerCode = $('#codeCreate').val();
-        customer.customerGroup = $('#customerGroupCreate :selected').val();
-        customer.phone = $('#phoneCreate').val();
-        customer.email = $('#emailCreate').val();
-        customer.birthday = $('#birthdayCreate').val();
-        customer.status = $('#statusCreate').val
-        customer.customerGender = $('#genderCreate').val();
-        customer.createAt = $('#birthdayCreate').val();
-
-        customer.updateAt = null;
-        locationRegion.address = $('#addressCreate').val();
-        locationRegion.address = $('#addressCreate').val();
-        locationRegion.provinceId = $('#provinceNameCreate').val();
-        locationRegion.provinceName = $('#provinceNameCreate :selected').text();
-        locationRegion.districtId = $('#districtNameCreate').val();
-        locationRegion.districtName = $('#districtNameCreate :selected').text();
-        locationRegion.wardId = $('#wardNameCreate').val();
-        locationRegion.wardName = $('#wardNameCreate :selected').text();
-        customer.employeeId = $('#employeeNameCreate').val();
-        customer.locationRegion = locationRegion;
-        console.log(customer)
-        $.ajax({
-            "headers": {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            "type": "POST",
-            "url": "http://localhost:8080/api/customers/create",
-            "data": JSON.stringify(customer)
-        })
-            .done((data) => {
-                App.IziToast.showSuccessAlert('Cập nhập khách hàng thành công !!!')
-                $('#nameCreate').val("");
-                $('#codeCreate').val("");
-                $('#phoneCreate').val("");
-                $('#emailCreate').val("");
-                $('#birthdayCreate').val("");
-                $('#statusCreate').val("")
-                $('#addressCreate').val("");
-                $('#employeeNameCreate').val();   $('#nameCreate').val("");
-                $('#codeCreate').val("");
-                $('#phoneCreate').val("");
-                $('#emailCreate').val("");
-                $('#birthdayCreate').val("");
-                $('#statusCreate').val("")
-                $('#addressCreate').val("");
-                $('#employeeNameCreate').val();
-
-                $('#provinceNameCreate').empty();
-                $('#districtNameCreate').empty();
-                $('#wardNameCreate').empty();
-                $('#employeeNameCreate').empty();
-            })
-            .fail((jqXHR) => {
-                console.log(jqXHR);
-                if (jqXHR.responseJSON) {
-                    $.each(jqXHR.responseJSON, (key, item)=> {
-                        App.IziToast.showErrorAlert(item);
-                    })
-                }
-
-            })
-    });
-
-
-    $(".btnEditCustomer").on('click', () => {
-        alert("ok cậu")
-        customer.name = $('#nameCreate').val();
-        customer.customerCode = $('#codeCreate').val();
-        customer.customerGroup = $('#customerGroupCreate :selected').val();
-        customer.phone = $('#phoneCreate').val();
-        customer.email = $('#emailCreate').val();
-        customer.birthday = $('#birthdayCreate').val();
-        customer.status = $('#statusCreate').val
-        customer.customerGender = $('#genderCreate').val();
-        customer.createAt = $('#birthdayCreate').val();
-        customer.updateAt = null;
-        locationRegion.address = $('#addressCreate').val();
-        locationRegion.address = $('#addressCreate').val();
-        locationRegion.provinceId = $('#provinceNameCreate').val();
-        locationRegion.provinceName = $('#provinceNameCreate :selected').text();
-        locationRegion.districtId = $('#districtNameCreate').val();
-        locationRegion.districtName = $('#districtNameCreate :selected').text();
-        locationRegion.wardId = $('#wardNameCreate').val();
-        locationRegion.wardName = $('#wardNameCreate :selected').text();
-        customer.employeeId = $('#employeeNameCreate').val();
-        customer.customerRegionId = $('.customerIdEditlocationRegionId').val;
-        customer.locationRegion = locationRegion;
-        console.log(customer.locationRegion)
-        console.log(customer.customerRegionId)
-        customer.id=$('.customerIdEdit').val()
-        customer.locationRegionResult = locationRegion;
-        let idCustomer = customer.id;
-        console.log(customer);
-
+        console.log(newCustomer);
         $.ajax({
             "headers": {
                 "accept": "application/json",
                 "content-type": "application/json"
             },
             "type": "PUT",
-            "url": "http://localhost:8080/api/customers/update/"+ idCustomer,
-            "data": JSON.stringify(customer)
+            "url": `http://localhost:8080/api/customers/${customer.id}`,
+            "data": JSON.stringify(newCustomer)
         })
             .done((data) => {
-                console.log(": Edit sản phẩm thành công")
-                $('#nameCreate').empty();
-                $('#codeCreate').empty();
-                $('#customerGroupCreate').empty();
-                $('#phoneCreate').empty();
-                $('#emailCreate').empty();
-                $('#statusCreate').empty
-                $('#birthdayCreate').empty();
-                $('#addressCreate').empty();
+                // console.log(data)
+                App.IziToast.showSuccessAlert("Sửa thông tin khách hàng thành công !");
+                setTimeout(() => {
+                }, 1500)
+                window.location.href = `/admin/customers/${customer.id}`;
 
-                $('#employeeNameCreate').empty();
             })
             .fail((jqXHR) => {
                 console.log(jqXHR);
-                if (jqXHR.responseJSON) {
-                    $.each(jqXHR.responseJSON, (key, item)=> {
-                        App.IziToast.showErrorAlert(item);
-                    })
-                }
+               App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
 
             })
     })
 
 
-    getAllCustomerGender();
+    // getAllCustomerGender();
     getAllCustomerGroup();
     getAllEmployeeSelect();
+
+    // $("#btnCloseUpdate").on('click', () =>{
+    //     alert("được")
+    // }) // window.location.href = `/admin/customers/${customer.id}`)
+
+
+
 
 
 </script>
 <script>
-    $(document).ready(function () {
-
-        $('.input-daterange').datepicker({
-            format: 'dd-mm-yyyy',
-            todayHighlight: true,
-            startDate: '0d'
-        });
-
-    });
+    // $(document).ready(function () {
+    //
+    //     $('.input-daterange').datepicker({
+    //         format: 'dd-mm-yyyy',
+    //         todayHighlight: true,
+    //         startDate: '0d'
+    //     });
+    //
+    // });
 </script>
 </html>

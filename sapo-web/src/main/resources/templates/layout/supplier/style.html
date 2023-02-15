@@ -1,0 +1,106 @@
+<th:block th:fragment="style">
+  <style>
+    .info-account {
+      position: relative;
+    }
+
+    .help-dashboard {
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      z-index: 1;
+    }
+
+    .help-dashboard .help-dropdown .btn-blank {
+      background: #fff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDplN2MwNTFiZi1lNGJiLTNjNDktOGM3YS00NTZmZTZlNGQ1NmYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjI5NDdDQ0NGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjI5NDdDQ0JGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjdkNDRhZTRlLTIzMTMtYTE0ZC1hNWQ4LTA5YTVjYTBmNmM0NCIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjk3N2NmYTliLThmZDctZGU0Mi1hNDFiLWIwOTJiYzRkYWM2MiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Po5ReOIAAAIxSURBVHjalJU9aFNRGIbTk+sSh0xiEKciaBF1culiA2IdOlQHaRBKqEurYJYOFn9Ql7iJghQcSqlDAop0yFIoWJcigouKKIROClWnomaQVHw+eAPxcs7J9cDDhXvP997vfH9naPbybC6wEpiASRiFYcjDLmzBJqxCa/HRYtcn4ALCFWjDQ/gGNRiB/XrW9N6+t+euzFV8IkMpzwuwDGNwDVagmwsvO9003IMNqHKKjs9zE16Dg3AclgYI2+oitqT9ZrfGKQo+8WXF9DRs5/5j8YNt2eWl8494RaE4Dx1f+OAwnIRi4Acd2Y/1cuAUt7pi7PP4GLyHj/AavsPNyAlMp84PEqdyc0qer5oa8AuOQAnuw10YD0RpRXYTTnXcDCTvBByVp5/gK1yH33Am4H1XepNODfIi4MUPuANv+t7tgz3wM5Jj0xtN1HntwCZ7fztVrk3F/XFE3OyGE5XPToaKs33PlOBT8CWy1/TyTrOimEH8IpyFc/BuwF7T23UaQocyiJfhA7zMsNf0tpymWzmDwROYz9i0prfpNDan1EyxtRcODFK15pHeqom34I+mW2xdglsZvJ6WXsupeRY0NksRoxvyKOZ1SToL1ky9wdXQPH6uWvYtmy+vIsIF2W8g3EiP3KrKcn3ACUIer8u+6pvnHQ2jz/AWZjIkOUF4RvvNbrz/Jkob24cLmu91tX5Ts6KtziuqjsvKgSWv1gtF+g70Ldv4tO/2fxC4/a/Gbv+/AgwA9q+ezeP4kToAAAAASUVORK5CYII=') no-repeat center center;
+      border: none;
+      font-size: 0;
+      box-shadow: none;
+      margin-left: 0;
+      height: 61px;
+      width: 60px;
+      border: 1px solid #dbdbdb;
+      outline: none;
+      border-radius: 0;
+    }
+
+    .help-dashboard .help-dropdown .btn-blank:focus {
+      box-shadow: none;
+    }
+
+    .help-dashboard .help-dropdown .help-popup {
+      top: 60px;
+      box-shadow: #c6c6c6 0px 3px 5px 0px;
+    }
+
+    .help-dashboard .help-dropdown .help-popup:after {
+      right: 20px;
+    }
+
+    .sapo-menu-expand .page-heading {
+      z-index: 1001;
+    }
+
+    .help-dropdown {
+      position: relative;
+      margin-left: 10px;
+      height: 36px;
+    }
+
+
+    .help-dropdown a {
+      color: #686868;
+      display: flex;
+      height: 100%;
+      border: none;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      border: 1px solid #c4cdd5;
+      float: right;
+      width: auto;
+    }
+
+    .help-dropdown div:hover {
+      background-color: #e7f2ff;
+    }
+
+
+    .help-dropdown .btn-blank:focus {
+      box-shadow: none;
+      border: 1px solid #c4cdd5;
+    }
+
+    .help-dropdown .help-popup {
+      position: absolute;
+      right: 0;
+      z-index: 9999999;
+      top: 45px;
+      box-shadow: #c6c6c6 0 0 10px 5px;
+      display: none;
+      -webkit-transition: ease 0.5s;
+      /* Safari */
+      transition: ease 0.5s;
+    }
+
+    .help-dropdown .help-popup.shown {
+      display: block;
+      height: 560px;
+      margin-top: 15px;
+    }
+
+    .help-dropdown .help-popup:after {
+      content: "";
+      display: block;
+      width: 0px;
+      height: 0px;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid #f3f6f8;
+      top: -9px;
+      position: absolute;
+      right: 25px;
+    }
+  </style>
+</th:block>

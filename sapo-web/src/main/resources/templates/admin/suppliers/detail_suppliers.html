@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="sapo-menu-expand sapo-menu-toggle-active" lang="vi-VN">
+
+<head>
+    <meta charset="utf-8" />
+
+    <th:block th:replace="/layout/header.html"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Chi tiết nhà cung cấp</title>
+
+    <script>
+        var CKEDITOR_BASEPATH = '/v2/lib/ckeditor/';
+        var S_LANG = 'vi-VN';
+        var S_LANG_RES = 'https://sapo.dktcdn.net/sapo-frontend-x/d9ad77d.i18n_vi-VN.json';
+    </script>
+    <script src="https://sapo.dktcdn.net/sapo-frontend-x/d852af0.client.bundle.js"></script>
+
+</head>
+<body class="body_dashboard partners suppliers detail" _c_t_j1="1">
+<th:block th:replace="/layout/menu :: menu"/>
+<div id="container">
+    <div class="hidden" context="tenantInfo" define="{tenantInfo: new Components.TenantInfo(this,{&quot;countries&quot;:{&quot;countryId&quot;:201}})}">
+    </div>
+    <div class="header-mobile">
+        <a href="javascript:" class="icon-menu visible-xs visible-sm" onclick="showMenu()">
+            <svg class="next-icon next-icon--size-20">
+                <use xlink:href="#icon-menu" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+            </svg>
+        </a>
+    </div>
+
+    <div class="col-right">
+        <div class="col-right_content" id="content">
+
+            <header class="ui-title-bar-container">
+                <div class="ui-title-bar" style="display:inline-block;min-height:0px;">
+                    <div class="ui-title-bar__navigation w-50 left">
+                        <div class="ui-breadcrumbs">
+                            <a href="/admin/suppliers" id="link-index-shipper">
+                                <svg class="next-icon next-icon--size-20 next-icon--no-nudge">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#chevron-left-thinner"></use>
+                                </svg>
+                                <span class="ui-breadcrumb__item">Danh sách nhà cung cấp</span>
+                            </a>
+                        </div>
+
+                        <!--            <input type="hidden"  id="supplierId" th:value="${supplier.id}" >-->
+
+                    </div>
+                    <div class="w-50 right detail-supplier">
+
+                        <style>
+
+                            .help-dropdown .help-popup {
+                                /*position: absolute;*/
+                                right: 0;
+                                /*z-index: 9999999;*/
+                                top: 45px;
+                                /*box-shadow: #c6c6c6 0 0 10px 5px;*/
+                                display: none;
+                                /*-webkit-transition: ease 0.5s;*/
+                                /* Safari */
+                                /*transition: ease 0.5s;*/
+                            }
+                        </style>
+                        <div class="header-fr help-dropdown">
+                            <a class="btn sapo-btn-blank btn-help " style="margin-left: 5px" onclick="showHelpPopup()">
+                                <img src="/v2/images/dashboard/icons8-help-20.png" style="padding-right: 5px"><span>Trợ giúp</span></a>
+                            <div class="help-popup">
+                                <iframe id="iframe-help" src="" style="width: 400px; height: 560px;border:none"></iframe>
+                                <input type="hidden" id="iframe-help-src" value="https://support.sapo.vn?ver=2&amp;view=pos&amp;url=http://anges.mysapogo.com/admin/suppliers/206718863/histories">
+                            </div>
+                        </div>
+
+                        <a href="javascript:" class="btn sapo-btn-default right" style="border-radius: 3px 0 0 3px;height: 39px" data-toggle="dropdown">Tạo phiếu thu/chi</a>
+                        <ul class="dropdown-menu newscroll" style="font-size:13px">
+                            <li><a bind-event-click="detailSupplier.createReceiptVoucher()">Tạo phiếu thu</a></li>
+                            <li><a bind-event-click="detailSupplier.createPaymentVoucher()">Tạo phiếu chi</a></li>
+                        </ul>
+                    </div>
+                    <div class="ui-title-bar__main-group">
+                        <div class="ui-title-bar__heading-group">
+                            <div class="ui-title-bar__title">
+                                <h1 class="text-overflow-hiden" th:value="${supplier.id}" th:text="${supplier.name}"> </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="detail-supplier-container container mt-0" context="detailSupplier" define="{detailSupplier: new Components.Supplier.DetailSupplier(this,{&quot;id&quot;:206718863,&quot;tenantId&quot;:688746,&quot;name&quot;:&quot;Nguyen Tan Luong&quot;,&quot;groupName&quot;:&quot;Khác&quot;,&quot;actionRouting&quot;:&quot;histories&quot;,&quot;email&quot;:&quot;nguyentanluong0503@gmail.com&quot;,&quot;assigneeId&quot;:941587,&quot;assigneeName&quot;:null,&quot;defaultLedgerAccountId&quot;:null,&quot;defaultPaymentTermId&quot;:null,&quot;defaultStockLocationId&quot;:null,&quot;defaultTaxTypeId&quot;:null,&quot;code&quot;:&quot;SUPN00005&quot;,&quot;type&quot;:null,&quot;issuedOnMax&quot;:null,&quot;issuedOnMin&quot;:null,&quot;supplierGroupId&quot;:2650779,&quot;defaultDiscountRate&quot;:null,&quot;defaultPriceListId&quot;:null,&quot;description&quot;:&quot;jrhfjahf&quot;,&quot;fax&quot;:null,&quot;taxNumber&quot;:null,&quot;stringTags&quot;:null,&quot;phoneNumber&quot;:&quot;0977194578&quot;,&quot;website&quot;:null,&quot;createdOn&quot;:&quot;2023-01-30T09:50:16Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-31T10:14:50Z&quot;,&quot;tags&quot;:[&quot;fastfuasj&quot;],&quot;tagso&quot;:null,&quot;contryId&quot;:0,&quot;cityId&quot;:0,&quot;districtId&quot;:0,&quot;countryId&quot;:0,&quot;debt&quot;:0.0,&quot;defaultPaymentMethodId&quot;:3023200,&quot;accountId&quot;:0,&quot;status&quot;:&quot;active&quot;,&quot;page&quot;:0,&quot;tenant&quot;:{&quot;id&quot;:688746,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;name&quot;:&quot;anges&quot;,&quot;industryId&quot;:14,&quot;industry&quot;:&quot;Thời trang&quot;,&quot;mobile&quot;:&quot;0899624267&quot;,&quot;phoneNo&quot;:&quot;0899624267&quot;,&quot;email&quot;:&quot;nguyenthanhhoan3006@gmail.com&quot;,&quot;contactEmail&quot;:null,&quot;fax&quot;:&quot;&quot;,&quot;timezone&quot;:null,&quot;description&quot;:null,&quot;address1&quot;:&quot;Thừa Thiên Huế&quot;,&quot;address2&quot;:null,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;statusError&quot;:0,&quot;city&quot;:&quot;Thừa Thiên Huế&quot;,&quot;district&quot;:null,&quot;cityId&quot;:0,&quot;countryId&quot;:201,&quot;districtId&quot;:0,&quot;domain&quot;:&quot;anges&quot;,&quot;domainUri&quot;:&quot;anges.mysapogo.com&quot;,&quot;startDate&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;endDate&quot;:&quot;2023-02-04T17:00:00Z&quot;,&quot;imageUrl&quot;:null,&quot;packageId&quot;:46,&quot;packageName&quot;:&quot;RETAIL_PRO_TRIAL&quot;,&quot;status&quot;:&quot;active&quot;,&quot;createdOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-28T13:42:40Z&quot;,&quot;locationIds&quot;:[659422],&quot;accountIds&quot;:null,&quot;productLimit&quot;:500,&quot;accountLimit&quot;:3,&quot;locationLimit&quot;:1,&quot;frontendRestricts&quot;:null,&quot;apiRestricts&quot;:null,&quot;viewTutorial&quot;:false,&quot;createSampleDataStatus&quot;:&quot;success&quot;,&quot;registerCompleted&quot;:true,&quot;registerFrom&quot;:&quot;N/A&quot;,&quot;landingPageType&quot;:1},&quot;priceList&quot;:null,&quot;taxType&quot;:null,&quot;supplierCode&quot;:{&quot;tenantId&quot;:0,&quot;code&quot;:null,&quot;id&quot;:0},&quot;paymentTerm&quot;:null,&quot;paymentMethod&quot;:{&quot;id&quot;:3023200,&quot;tenantId&quot;:688746,&quot;name&quot;:&quot;COD&quot;,&quot;status&quot;:&quot;active&quot;,&quot;createdOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;init&quot;:true,&quot;integrated&quot;:false,&quot;type&quot;:&quot;cod&quot;,&quot;removable&quot;:true},&quot;account&quot;:{&quot;id&quot;:941587,&quot;tenantId&quot;:688746,&quot;createdOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;status&quot;:&quot;active&quot;,&quot;avatarUrl&quot;:null,&quot;email&quot;:&quot;nguyenthanhhoan3006@gmail.com&quot;,&quot;sex&quot;:null,&quot;password&quot;:null,&quot;firstName&quot;:&quot;Thanh&quot;,&quot;lastName&quot;:&quot;Hoan Nguyễn&quot;,&quot;fullName&quot;:&quot;Hoan Nguyễn Thanh&quot;,&quot;userName&quot;:&quot;nguyenthanhhoan3006@gmail.com&quot;,&quot;locationId&quot;:0,&quot;mobile&quot;:&quot;0899624267&quot;,&quot;countryCode&quot;:&quot;84&quot;,&quot;intlPhoneNo&quot;:&quot;84899624267&quot;,&quot;guideStatus&quot;:null,&quot;accountOwner&quot;:true,&quot;fakeLoginAccount&quot;:null,&quot;limitedAccess&quot;:false,&quot;permissions&quot;:[],&quot;startSession&quot;:null,&quot;lastLogin&quot;:null,&quot;description&quot;:null,&quot;address&quot;:&quot;&quot;,&quot;dob&quot;:null,&quot;hasPassword&quot;:false,&quot;isDuplicateMobile&quot;:null,&quot;globalSessionId&quot;:null,&quot;ssoLoginIdentity&quot;:null,&quot;hasUpgradedSSO&quot;:false,&quot;isAccountSSO&quot;:true,&quot;sapoAccountProfileUrl&quot;:null,&quot;isAccountAuthenticated&quot;:false,&quot;accountRoles&quot;:[{&quot;locationId&quot;:0,&quot;tenantRoleId&quot;:1,&quot;scopes&quot;:[&quot;full&quot;]}],&quot;languageCode&quot;:&quot;vi&quot;,&quot;dataPermissions&quot;:null},&quot;accounts&quot;:null,&quot;contries&quot;:null,&quot;cities&quot;:null,&quot;listCityDistrict&quot;:null,&quot;paymentMethods&quot;:null,&quot;priceLists&quot;:null,&quot;taxTypes&quot;:null,&quot;paymentTerms&quot;:null,&quot;supplierGroups&quot;:null,&quot;districts&quot;:null,&quot;address&quot;:null,&quot;addresses&quot;:[{&quot;id&quot;:179127841,&quot;tenantId&quot;:0,&quot;subjectId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-30T09:50:16Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-30T09:50:16Z&quot;,&quot;partnerId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;city&quot;:&quot;Đắk Lắk&quot;,&quot;district&quot;:&quot;Thành phố Buôn Ma Thuột&quot;,&quot;ward&quot;:&quot;Xã Hòa Khánh&quot;,&quot;zipCode&quot;:null,&quot;state&quot;:null,&quot;address1&quot;:&quot;fa&quot;,&quot;address2&quot;:null,&quot;email&quot;:&quot;nguyentanluong0503@gmail.com&quot;,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:null,&quot;phoneNumber&quot;:&quot;0977194578&quot;,&quot;status&quot;:&quot;active&quot;,&quot;countryId&quot;:0,&quot;cityId&quot;:0,&quot;districtId&quot;:0,&quot;cityDistrictIds&quot;:null,&quot;selectContries&quot;:null,&quot;selectCities&quot;:null,&quot;selectDistricts&quot;:null,&quot;selectWards&quot;:null,&quot;listCityDistrict&quot;:null,&quot;wardSapos&quot;:null,&quot;listDistrict&quot;:null,&quot;listCity&quot;:null}],&quot;contacts&quot;:[],&quot;ids&quot;:[],&quot;returnUrl&quot;:null,&quot;action&quot;:null,&quot;checkCreate&quot;:0})}">
+                <div class="page-info page-info-order-detail w100">
+
+                    <div class="page-info-title">
+                        Thông tin cá nhân
+                        <span class="badge sapo-badge badge--sushi position-absolute" style="left: calc(100%/3)" th:text="${supplier.status == supplier.status.AVAILABLE} ? 'Đang giao dịch' : 'Ngừng giao dịch'"></span>
+                        <div class="order-sources">
+                            <a href="javascript:" data-toggle="dropdown" aria-expanded="false" style="color:#212b35">Thao tác khác<i class="fa fa-caret-down ml-2" aria-hidden="true"></i></a>
+                            <ul class="dropdown-menu newscroll" style="font-size:13px">
+                                <li>
+                                    <a th:href="'/admin/suppliers/'+${supplier.getId()}+'/edit'">Cập nhật thông tin</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:" bind-event-click="showDeleteSupplier()">Xoá nhà cung cấp</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--            <a th:value="*{id}" th:href="@{/admin/customer/modal_delete_customer.html/__${customer.getId()}__}">-->
+
+                    </div>
+                    <div class="page-info-body" id="supplier-info">
+                        <div class="page-info-body--sub flex pb-0">
+                            <div class="col-4 p-0">
+                                <div class="line-info flex">
+                                    <label>Nhóm nhà cung cấp<span class="right">:</span></label>
+                                    <div class="content text-overflow-hiden div-pd-r-10" title="Khác">
+                                        <span th:text="${supplier.supGroupTitle}"></span>
+                                    </div>
+                                </div>
+                                <div class="line-info flex">
+                                    <label>Mã<span class="right">:</span></label>
+                                    <span class="content" th:text="${supplier.supplierCode}"> </span>
+                                </div>
+                                <div class="line-info flex">
+                                    <label>Số điện thoại<span class="right">:</span></label>
+                                    <div class="content text-overflow-hiden div-pd-r-10">
+                                        <span th:text="${supplier.phone}"></span>
+                                    </div>
+                                </div>
+                                <div class="line-info flex">
+                                    <label>Nợ hiện tại<span class="right">:</span></label>
+                                    <div class="content" title="0">0</div>
+                                </div>
+                            </div>
+                            <div class="col-4 p-0">
+                                <div class="line-info flex">
+                                    <label>Mã số thuế <span class="right">:</span> </label>
+                                    <div class="content text-overflow-hiden div-pd-r-10" th:text="${supplier.taxCode}">---</div>
+                                </div>
+                                <div class="line-info flex">
+                                    <label>Website<span class="right">:</span></label>
+                                    <a class="content text-overflow-hiden div-pd-r-10" target="_blank" th:text=" ${supplier.website}">---</a>
+                                </div>
+                                <div class="line-info flex">
+                                    <label>Mô tả<span class="right">:</span></label>
+                                    <div class="content text-overflow-hiden div-pd-r-10">
+                                        <span th:text="${supplier.description}"></span>
+                                    </div>
+                                </div>
+                                <div class="line-info flex">
+                                    <label>Email<span class="right">:</span></label>
+                                    <div class="content text-overflow-hiden div-pd-r-10" >
+                                        <span th:text="${supplier.email}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 p-0">
+                                <div class="line-info flex">
+                                    <label>Người phụ trách<span class="right">:</span></label>
+                                    <div class="content text-overflow-hiden div-pd-r-10" title="">
+
+                                        <span th:text="${supplier.employee.fullName}"></span>
+                                    </div>
+                                </div>
+                                <div class="line-info flex">
+                                    <label>Giá mặc định<span class="right">:</span></label>
+                                    <div class="content text-overflow-hiden div-pd-r-10" title="">
+                                        <span>---</span>
+                                    </div>
+                                </div>
+                                <div class="line-info flex">
+                                    <label>Hình thức thanh toán<span class="right">:</span></label>
+                                    <div class="content text-overflow-hiden div-pd-r-10" title="">
+                                        <span title="COD" th:text="${supplier.paymentMethodId}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gird-layout gird-layout--full-width" style="padding:0px;width:100%;">
+                    <section class="grid-card">
+                        <div class="filter-tab-container" style="border-bottom: 1px solid #dfe4e8; width: 100%;display: inline-block;">
+                            <ul class="filter-tab-list" id="filter-tab-list" style="width: 50%; float: left;border-bottom:none;" role="tablist" data-has-next-tab-controller="true">
+                                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('history',this)">
+                                    <a href="javascript:" id="filter-tab-history" class="filter-tab show-all-items filter-tab-active">Lịch sử nhập hàng</a>
+                                </li>
+                                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('debt',this)">
+                                    <a href="javascript:" id="filter-tab-debt" class="filter-tab show-all-items ">Công nợ</a>
+                                </li>
+                                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('contact',this)">
+                                    <a href="javascript:" id="filter-tab-contact" class="filter-tab show-all-items ">Liên hệ</a>
+                                </li>
+                                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('address',this)">
+                                    <a href="javascript:" id="filter-tab-address" class="filter-tab show-all-items ">Địa chỉ</a>
+                                </li>
+                                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('note',this)">
+                                    <a href="javascript:" id="filter-tab-note" class="filter-tab show-all-items ">Ghi chú</a>
+                                </li>
+                            </ul>
+                            <div>
+                                <a href="javascript:" class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-contact" style="margin-top:6px;margin-right:15px;display:none;" bind-event-click="showPopupCreate('contact')">Thêm mới liên hệ</a>
+                                <a href="javascript:" class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-address" style="margin-top:6px;margin-right:15px;display:none;" bind-event-click="showPopupCreate('address')">Thêm mới địa chỉ</a>
+                                <a href="javascript:" class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-note" style="margin-top:6px;margin-right:15px;display:none;" bind-event-click="showPopupCreate('note')">Thêm mới ghi chú</a>
+                                <a class="btn sapo-btn-blank right btn-help btn-create btn-create-debt" bind-event-click="exportDebt()" style="margin-top:6px;margin-right:15px;display:none;">
+                                    <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge" style="padding-right: 5px; margin-top: 7px;">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-export-minor"></use>
+                                    </svg>
+                                    <span>Xuất file</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div id="histories" class="tab-list-content" style=""></div>
+                        <div id="debts" style="display:none;">
+                            <div class="page-info w100 " style="box-shadow:none;-webkit-box-shadow:none;">
+                                <div class="page-info-title">
+                                    <div class="filter-header p-0 left">
+                                        <button class="btn btn-filter" style="margin: -15px 0px 11px 3px;" type="button" data-toggle="popover" data-original-title="" title="">
+                                            <span>Lọc công nợ</span>
+                                            <svg class="next-icon next-icon--size-20" id="svg-filter">
+                                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-disclosure"></use>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="filter-list left filter-list-debt" style="display:none;margin-top: -11px;">
+                                        <ul class="filter-list-tag">
+                                            <li class="filter-tag">
+                                                    <span class="tag__label">
+                                                        Ngày ghi nhận: <span id="issuedOnMinMax"></span>
+                                                    </span>
+                                                &nbsp;&nbsp;
+                                                <button type="button" class="tag__remove-button" bind-event-click="removeFilter(true)">
+                                                    <svg class="next-icon next-icon--size-12">
+                                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-remove"></use>
+                                                    </svg>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="filter-body" id="filter-debts">
+                                        <div class="filter-content" style="display:none">
+                                            <div class="mb-2">Hiển thị công nợ theo</div>
+
+                                            <div class="filter-item" style="width:auto;display:block">
+                                                <div class="select__wrapper label-filter">
+                                                    <div>
+                                                        Ngày ghi nhận
+                                                    </div>
+                                                </div>
+                                                <div class="input-group input-daterange pull-left" style="width: 300px;">
+                                                    <input type="text" class="form-control from-date input-date sapo-textbox choosed-single-id m-0" style="width: 120px;" placeholder="Từ ngày" autocomplete="off">
+                                                    <div class="input-group-append"><span class="input-group-text"></span></div>
+                                                    <input type="text" class="form-control to-date input-date sapo-textbox choosed-single-id m-0" style="width: 120px;" placeholder="Đến ngày" autocomplete="off">
+                                                </div>
+                                                <a href="javascript" class="remove-item-filter" bind-event-click="removeFilter(false)"><svg class="next-icon next-icon--size-20">
+                                                    <use xlink:href="#delete-minor"></use>
+                                                </svg></a>
+                                            </div>
+                                            <div class="next-input-wrapper--vertical-block" style="order: 99999999;margin-top:7px">
+                                                <button class="btn sapo-btn-default" type="button" bind-event-click="filterDebt(1)" name="button">Lọc</button>
+                                            </div>
+                                        </div>
+                                        <div class="popover-holder"></div>
+
+                                    </div>
+                                </div>
+                                <div class="page-info-body">
+                                    <div class="page-info-body--sub block pb-0 " style="padding:0px 20px;">
+                                        <div class="ui-type-container clearfix" id="table-debts">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="contacts" class="tab-list-content" style="display:none;"></div>
+                        <div id="addresses" class="tab-list-content" style="display:none;"></div>
+                        <div id="notes" class="tab-list-content" style="display:none;"></div>
+                    </section>
+                </div>
+                <script class="modal_source" define="{deleteSupplierModal: new Components.Modal(this)}" type="text/html">
+                    <div class="modal-dialog modal-dialog-new">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                    <span class="ui-dialog-title">
+                        Xóa nhà cung cấp
+                    </span>
+                                <span class="modal-close-wrapper">
+                        <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use> </svg>
+                    </span>
+                            </div>
+                            <div class="modal-body pull-center">
+                                <p>Bạn có chắc chắn muốn xóa nhà cung cấp <span style="font-weight:500;">Nguyen Tan Luong</span>? Thao tác này không thể khôi phục.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="action-btn clearfix">
+                                    <button class="btn sapo-btn-red right" type="button" bind-event-click="deleteSupplier(this)">Xóa</button>
+                                    <button class="close-modal btn sapo-btn-blank right mr-3" type="button">Thoát</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </script>
+                <script class="modal_source" define="{showMessagePopup: new Components.Modal(this)}" type="text/html">
+                    <div class="modal-dialog modal-dialog-new">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                    <span class="ui-dialog-title" id="ui-dialog-title-empty">
+                    </span>
+                                <span class="modal-close-wrapper">
+                        <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use> </svg>
+                    </span>
+                            </div>
+
+                            <div id="modal-body-empty" class="modal-body product-option-edit pull-center w100" style="padding:0px;">
+
+                            </div>
+                            <div class="modal-footer">
+                                <div class="action-btn clearfix" id="modal-footer-empty">
+                                    <button class="close-modal btn btn-blank pull-right" type="button">Thoát</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </script>
+                <a class="modal_source display-popUp" type="text/html" style="display: none" define="{showDisplayPopUp: new Components.Modal(this)}"></a>
+                <a class="modal_source display-popUp" type="text/html" style="display: none" define="{showDisplayContactPopUp: new Components.Modal(this)}"></a>
+                <a class="modal_source display-popUp" type="text/html" style="display: none" define="{showDisplayAddressPopUp: new Components.Modal(this)}"></a>
+                <a class="modal_source display-popUp" type="text/html" style="display: none" define="{showDisplayNotePopUp: new Components.Modal(this)}"></a>
+            </div>
+        </div>
+        <div class="popup-box">
+            <iframe scrolling="no" src="about:blank" name="myIframe" id="popupPrint" style="border:0;position:absolute;width:0px;height:0px;left:0px;top:0px;"></iframe>
+        </div>
+    </div>
+</div>
+<div class="section-footer">
+
+</div>
+<div class="container-fluid-md notifications">
+    <div class="ajax-notification"><span class="ajax-notification-message"></span></div>
+</div>
+<div class="modal fade" id="sapo-modal-container" data-width="" tabindex="-1" role="dialog" data-backdrop="false">
+</div>
+<div class="modal-backdrop fade in" id="sapo-modal-backdrop"></div>
+
+
+<style>
+    #surveys {
+        position: fixed;
+        bottom: 0;
+        width: calc(100% - 23rem);
+        right: 0;
+        z-index: 999999
+    }
+
+    .sapo-menu-collapse #surveys {
+        width: calc(100% - 5.6rem) !important;
+    }
+</style>
+<div id="surveys"></div>
+
+<script>
+    Page();
+    hj('trigger', 'split_test_b');
+</script>
+
+<!-- End Freshchat -->
+
+<div context="notificationVNPay" define="{notificationVNPay: new Components.NotificationVNPay(this, {accountId:941587 })}">
+    <div class="popup-notification">
+        <a href="javascript:" bind-event-click="closeNoti()" class="close">
+            <svg>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use>
+            </svg>
+        </a>
+        <a href="" target="_blank" class="link-order">
+            <img class="left" src="/v2/images/ico-sapo.png">
+
+        </a>
+        <a href="" target="_blank" class="link-order">
+            <div class="title left">Thanh toán đơn hàng</div>
+            <div class="desc left"></div>
+        </a>
+    </div>
+</div>
+﻿
+
+<!--<th:block th:replace="/layout/footer.html"/>-->
+</body>
+</html>

@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.6.3'
+    id 'org.springframework.boot' version '2.7.7'
     id 'io.spring.dependency-management' version '1.1.0'
     id 'java'
 }
@@ -18,10 +18,14 @@ allprojects { proj ->
     }
     dependencyManagement {
         imports {
-            mavenBom("org.springframework.boot:spring-boot-dependencies:2.1.7.RELEASE")
+            mavenBom("org.springframework.boot:spring-boot-dependencies:2.7.7")
         }
     }
 
+    java {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
 
     dependencies {
         switch (proj.name) {
@@ -47,17 +51,22 @@ allprojects { proj ->
         implementation "org.springframework.boot:spring-boot-starter-data-jpa"
         implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
         implementation "org.springframework.boot:spring-boot-starter-validation"
+        runtimeOnly 'org.springframework.boot:spring-boot-starter-tomcat'
+        testImplementation "org.springframework.boot:spring-boot-starter-test"
+        testImplementation "com.h2database:h2"
 
         compileOnly "org.projectlombok:lombok"
         annotationProcessor "org.projectlombok:lombok"
 
-//        implementation 'com.googlecode.jmapper-framework:jmapper-core:1.6.1.CR2'
         implementation 'org.modelmapper:modelmapper:3.1.1'
         implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.1'
         implementation 'com.vladmihalcea:hibernate-types-52:2.21.1'
         runtimeOnly 'mysql:mysql-connector-java'
+        implementation 'com.jayway.jsonpath:json-path:2.4.0'
 
-
+    }
+    test {
+        useJUnitPlatform()
     }
     ext {
         jjwt_version = "0.11.5"

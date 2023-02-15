@@ -18,8 +18,8 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     private ItemMapper itemMapper;
 
-    @Autowired
-    private ProductMapper productMapper;
+//    @Autowired
+//    private ProductMapper productMapper;
 
     @Override
     public List<ItemResult> findAll() {

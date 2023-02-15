@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import vn.sapo.address.dto.AddressResult;
-import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.entities.customer.CustomerGender;
 import vn.sapo.entities.customer.CustomerStatus;
 
@@ -34,7 +33,7 @@ public class CustomerResult {
 
     private Instant birthday;
 
-    private CustomerGroupResult group;
+    private CusGroupResult group;
 
     private CustomerGender gender;
 
@@ -63,5 +62,10 @@ public class CustomerResult {
     private int quantityItemOrder;
 
     private Instant lastDayOrder;
+
+    private CusPayment payment;
+    private  String taxCode;
+    private  String fax;
+    private String website;
 }
 

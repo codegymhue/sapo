@@ -5,22 +5,21 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.entities.customer.CustomerGender;
+import vn.sapo.entities.customer.CustomerStatus;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 
 @Getter
 @Setter
 @Accessors(chain = true)
 public class CreateCustomerParam {
-
     private Integer id;
+
     private String customerCode;
 
     private String fullName;
@@ -32,6 +31,9 @@ public class CreateCustomerParam {
     private Integer groupId;
 
     private String email;
+    private String website;
+    private String fax;
+    private String taxCode;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
@@ -44,7 +46,8 @@ public class CreateCustomerParam {
 
     private CreateAddressParam createAddressParam;
 
-    private BigDecimal debtTotal;  // nợ
+    private BigDecimal debtTotal;
 
-    private BigDecimal spendTotal; //chi tiêu
+    private BigDecimal spendTotal;
+    private CustomerStatus status;
 }

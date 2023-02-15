@@ -1,10 +1,15 @@
 package vn.sapo.supplier;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.supplier.dto.CreateSupplierParam;
+import vn.sapo.supplier.dto.SupplierFilter;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.dto.UpdateSupplierParam;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SupplierService {
 
@@ -14,8 +19,13 @@ public interface SupplierService {
 
     SupplierResult create(CreateSupplierParam createSupplierParam);
 
-    void update(UpdateSupplierParam createSupplierParam);
+    SupplierResult update(UpdateSupplierParam updateSupplierParam);
 
     void deleteById(Integer id);
 
+    Map<String, Object> getAllSupplierPage(Integer pageNo, Integer pageSize, String title,
+                                               String status
+                                              );
+
+    Page<SupplierResult> findAllByFilters(SupplierFilter filter, Pageable pageable);
 }

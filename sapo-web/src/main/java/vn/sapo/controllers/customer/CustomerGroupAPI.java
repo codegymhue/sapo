@@ -12,8 +12,6 @@ import vn.sapo.customerGroup.dto.CreateCusGroupParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.customerGroup.dto.UpdateCusGroupParam;
 
-import java.util.List;
-
 
 @RestController
 @RequestMapping("/api/customer_groups")
@@ -34,8 +32,7 @@ public class CustomerGroupAPI {
 
     @GetMapping("/sortGroup")
     public ResponseEntity<?> sortByGroup() {
-        List<CustomerGroupResult> list = customerGroupService.sortByGroup();
-        return new ResponseEntity<>(list, HttpStatus.OK);
+        return new ResponseEntity<>(customerGroupService.sortByGroup(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -59,8 +56,9 @@ public class CustomerGroupAPI {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteCusGroupById(@PathVariable Integer id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteCusGroupById(@PathVariable Integer id) {
         customerGroupService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

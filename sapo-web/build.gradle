@@ -19,9 +19,8 @@ dependencies {
     implementation project(':sapo-payment')
     implementation project(':sapo-order')
     implementation project(':sapo-employee')
-    developmentOnly "org.springframework.boot:spring-boot-devtools"
 
-    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
-    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
-    //providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+//    testImplementation("com.squareup.okhttp3:okhttp:4.10.0")
+    testImplementation project(':sapo-address').sourceSets.test.output
+    developmentOnly "org.springframework.boot:spring-boot-devtools"
 }

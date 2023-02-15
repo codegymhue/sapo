@@ -1,22 +1,19 @@
 package vn.sapo.controllers.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.address.AddressService;
-
-import vn.sapo.address.AddressServiceImpl;
-import vn.sapo.address.dto.AddressResult;
-
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customer.CustomerService;
-import vn.sapo.customer.dto.CreateCustomerParam;
-import vn.sapo.customer.dto.CustomerResult;
-import vn.sapo.customer.dto.UpdateCustomerParam;
-import vn.sapo.excel.ExcelService;
-
+import vn.sapo.customer.dto.*;
+import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.excel.ExcelHelper;
 import vn.sapo.excel.ExcelService;
 import vn.sapo.excel.ResponseMessage;
@@ -26,8 +23,8 @@ import vn.sapo.payment.sale.PaymentSaleOrderService;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 @RestController
 @RequestMapping("/api/customers")
@@ -44,8 +41,10 @@ public class CustomerAPI {
     SaleOrderService saleOrderService;
     @Autowired
     ExcelService excelService;
+    @Autowired
+    CustomerGroupService customerGroupService;
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<?> findAll() {
         List<CustomerResult> customers = customerService.findAll();
         customers.forEach(this::setData);
@@ -60,6 +59,36 @@ public class CustomerAPI {
     }
 
 
+    @PostMapping("/filter")
+    public ResponseEntity<?> testFilter(@RequestBody CustomerFilter customerFilter,
+                                        @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
+        // start = 10; length = 5;
+        int start = customerFilter.getStart();
+        int length = customerFilter.getLength();
+
+
+        int page = start / length + 1;
+        Sort sortable = null;
+        if (sort.equals("ASC")) {
+            sortable = Sort.by("id").ascending();
+        }
+        if (sort.equals("DESC")) {
+            sortable = Sort.by("id").descending();
+        }
+
+
+        Pageable pageable = PageRequest.of(page - 1, length, sortable);
+        Page<CustomerResult> pagealeCustomers = customerService.findAllByFilters(customerFilter, pageable);
+
+        CustomerDataTable customerDataTable = new CustomerDataTable();
+        if (pagealeCustomers != null) {
+            customerDataTable.setRecordsTotal(pagealeCustomers.getTotalElements());
+            customerDataTable.setRecordsFiltered(pagealeCustomers.getTotalElements());
+            customerDataTable.setData(pagealeCustomers.getContent());
+            customerDataTable.setDraw(customerFilter.getDraw());
+        }
+        return new ResponseEntity<>(customerDataTable, HttpStatus.OK);
+    }
 
     @DeleteMapping("/delete/{id}")
     public void deleteCustomerById(@PathVariable Integer id) {
@@ -70,8 +99,11 @@ public class CustomerAPI {
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CreateCustomerParam createCustomerParam) {
         System.out.println(createCustomerParam);
+
         CustomerResult dto = customerService.create(createCustomerParam);
         CreateAddressParam createAddressParam = createCustomerParam.getCreateAddressParam();
+
+
         if (createAddressParam == null)
             return new ResponseEntity<>(dto, HttpStatus.OK);
         createAddressParam.setCustomerId(dto.getId());
@@ -80,52 +112,16 @@ public class CustomerAPI {
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<?> updateCustomer(@RequestBody UpdateCustomerParam updateCustomer) {
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UpdateCustomerParam updateCustomer) {
         return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.OK);
     }
 
-//    @GetMapping("/customerGroup")
-//    public ResponseEntity<?> getAllCustomerGroup() {
-//        return new ResponseEntity<>(customerService.findAll(), HttpStatus.OK);
-//    }
-
-
-
-
-    @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteCustomer(@PathVariable Integer id) {
-        customerService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-
     @PutMapping("/updateStatusAvailable")
-    public ResponseEntity<?> updateStatusAvailable(@RequestBody List<Integer> arrayIdCustomer) {
-        customerService.changeStatusToAvailable(arrayIdCustomer, true);
+    public ResponseEntity<?> updateStatusAvailable(@RequestBody List<Integer> customerIds) {
+        customerService.changeStatusToAvailable(customerIds, true);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-    // UpLoad File Excel
-    @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, CreateCustomerParam createCustomerParam) {
-        String message = "";
-        if (ExcelHelper.hasExcelFormat(file)) {
-            try {
-                List<CreateCustomerParam> customers = excelService.save(file);
-                customers.forEach(createCustomerParam1 -> create(createCustomerParam1));
-                message = "Uploaded the file successfully: " + file.getOriginalFilename();
-                return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
-            } catch (Exception e) {
-                message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
-            }
-        }
-
-        message = "Please upload an excel file!";
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
-    }
-
 
     @PutMapping("/updateStatusUnavailable")
 
@@ -134,10 +130,26 @@ public class CustomerAPI {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    findAllCustomerByGroupAndStatus
+    // UpLoad File Excel
+    @PostMapping("/upload")
+    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
+        String message = "";
+        if (ExcelHelper.hasExcelFormat(file)) {
+            try {
+                List<CreateCustomerParam> customers = excelService.save(file);
+                customers.forEach(param -> create(param));
+                message = "Uploaded the file successfully: " + file.getOriginalFilename();
+                return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+            } catch (Exception e) {
+                e.printStackTrace();
+                message = "Could not upload the file: " + file.getOriginalFilename() + "!";
+                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+            }
+        }
 
-
-
+        message = "Please upload an excel file!";
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
+    }
 
     public void setData(CustomerResult customer) {
         BigDecimal spendTotal = getSpendTotalByCustomerId(customer.getId());
@@ -177,32 +189,29 @@ public class CustomerAPI {
         return quantityItemOrder;
     }
 
+
     public Instant getLastDayOrderByCustomerId(Integer customerId) {
         return saleOrderService.getLastDayOrderByCustomerId(customerId);
     }
 
-    @PostMapping ("/findAllCustomerByGroup")
-    public ResponseEntity<?> findAllByGroupId(@RequestBody  List<Integer> arrGroupId ) {
+    @PostMapping("/findAllCustomerByGroup")
+    public ResponseEntity<?> findAllByGroupId(@RequestBody List<Integer> arrGroupId) {
         List<CustomerResult> customers = customerService.findAllByGroupListId(arrGroupId);
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
-    @PostMapping("/findAllCustomerByGender")
-    public ResponseEntity<?> findAllByGenderId(@RequestBody String arrGenderId) {
-        List<CustomerResult> customers = customerService.findAllByGenderId(arrGenderId);
-        return new ResponseEntity<>(customers,HttpStatus.OK);
+    @GetMapping("/{id}/address")
+    public ResponseEntity<?> shippingAddress(@PathVariable Integer id) {
+        CustomerResult dto = customerService.findById(id);
+        setData(dto);
+
+        CustomerResultDataTable customerResultDataTable = new CustomerResultDataTable();
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults.add(dto);
+        customerResultDataTable.setData(customerResults);
+
+        return new ResponseEntity<>(customerResultDataTable, HttpStatus.OK);
     }
 
-    @PostMapping("/findAllCustomerEmployee")
-    public ResponseEntity<?> findAllByEmployeeId(@RequestBody List<Integer> arrEmployeeId) {
-        List<CustomerResult> customers = customerService.findAllEmployeeListId(arrEmployeeId);
-        return new ResponseEntity<>(customers, HttpStatus.OK);
-    }
-
-//    @PostMapping("/findAllCustomerByStatus")
-//    public ResponseEntity<?> findAllStatusListId(@RequestBody List<String> arrStatusId) {
-//        List<CustomerResult> customers = customerService.findAllByStatusListId(arrStatusId);
-//        return new ResponseEntity<>(customers, HttpStatus.OK);
-//    }
 }
 

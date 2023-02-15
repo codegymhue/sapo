@@ -379,6 +379,8 @@ let modalAddress = `   <div class="MuiBox-root jss797 jss621">
               </div>
             </div>
 `
+
+// modal công nợ
 let modalCongNo = ` <div class="MuiBox-root jss828 jss820" >
                         <div class="MuiPaper-root jss864 sapo-grid MuiPaper-elevation1 MuiPaper-rounded">
                             <div class="MuiTableContainer-root jss865 sapo-grid-header-wrapper">
@@ -564,6 +566,8 @@ let modalCongNo = ` <div class="MuiBox-root jss828 jss820" >
                             </div>
                         </div>
                     </div>`
+
+// modall lịch sử mua hàng
 let modalHistoryOrder = `
                         <div class="MuiBox-root jss817 jss641">
                         <div class="MuiBox-root jss1378 jss1375">
@@ -626,6 +630,7 @@ let noModalNote = `
                     </div>
     `;
 
+// modal ghi chú
 let modalNote = `
                     <div class="MuiPaper-root jss22054 sapo-grid MuiPaper-elevation1 MuiPaper-rounded"><div class="MuiTableContainer-root jss22055 sapo-grid-header-wrapper"><table class="MuiTable-root jss22056 sapo-grid-header" aria-labelledby="tableTitle" aria-label="enhanced table"><colgroup><col style="width: 45px;"><col style="width: 297px;"><col style="width: 251px;"><col style="width: 207px;"></colgroup><thead class="MuiTableHead-root jss22069"><tr class="MuiTableRow-root MuiTableRow-head"><th class="MuiTableCell-root MuiTableCell-head jss22078 MuiTableCell-paddingCheckbox" scope="col" rowspan="1" style="padding-left: 16px;"><div class="MuiBox-root jss22099"><span class="MuiButtonBase-root MuiIconButton-root jss22110 MuiCheckbox-root MuiCheckbox-colorPrimary jss22100 MuiIconButton-colorPrimary" aria-disabled="false" data-tip="Chọn tất cả ghi chú" currentitem="false" style="margin: 0px;"><span class="MuiIconButton-label"><input class="jss22113" type="checkbox" data-indeterminate="false" value=""><span class="jss22101" font-size="small"></span></span><span class="MuiTouchRipple-root"></span></span></div></th><th class="MuiTableCell-root MuiTableCell-head jss22073 MuiTableCell-alignLeft" scope="col" colspan="1" rowspan="1">Ghi chú</th><th class="MuiTableCell-root MuiTableCell-head jss22073 MuiTableCell-alignLeft" scope="col" colspan="1" rowspan="1">Người thêm</th><th class="MuiTableCell-root MuiTableCell-head jss22073 MuiTableCell-alignLeft" scope="col" colspan="1" rowspan="1">Thời gian</th></tr></thead></table></div><div class="MuiTableContainer-root jss22057 sapo-grid-body-wrapper"><div style="position: relative; overflow: hidden; width: 100%; height: auto; min-height: 0px; max-height: unset;"><div style="position: relative; overflow: scroll; margin-right: -17px; margin-bottom: -17px; min-height: 17px;"><table class="MuiTable-root jss22058 sapo-grid-body" aria-labelledby="tableTitle" aria-label="enhanced table"><colgroup><col style="width: 45px;"><col style="width: 297px;"><col style="width: 251px;"><col style="width: 207px;"></colgroup><tbody class="MuiTableBody-root"><tr class="MuiTableRow-root jss22115 MuiTableRow-hover" role="checkbox" aria-checked="false" tabindex="-1"><td class="MuiTableCell-root MuiTableCell-body jss22118 MuiTableCell-paddingCheckbox" style="padding-left: 16px;"><span class="MuiButtonBase-root MuiIconButton-root jss22110 MuiCheckbox-root MuiCheckbox-colorPrimary jss22100 MuiIconButton-colorPrimary" aria-disabled="false" style="margin: 0px;"><span class="MuiIconButton-label"><input class="jss22113" type="checkbox" data-indeterminate="false" value=""><span class="jss22101" font-size="small"></span></span><span class="MuiTouchRipple-root"></span></span></td><td class="MuiTableCell-root MuiTableCell-body jss22121 cellClick MuiTableCell-alignLeft"><p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap" data-tip="sss" currentitem="false" style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">sss</p></td><td class="MuiTableCell-root MuiTableCell-body jss22121 MuiTableCell-alignLeft"><div class="MuiBox-root jss22125" style="cursor: pointer;">Nguyễn Đình Quốc Huy</div></td><td class="MuiTableCell-root MuiTableCell-body jss22121 MuiTableCell-alignLeft"><div class="MuiBox-root jss22126" style="cursor: pointer;">05-12-2022 12:39</div></td></tr></tbody></table></div><div class="jss22060" style="position: fixed; height: 6px; left: 262px;"><div class="jss22061" style="position: relative; display: block; height: 100%; width: 0px;"></div></div><div style="position: absolute; width: 6px; right: 2px; bottom: 2px; top: 2px; border-radius: 3px;"><div style="position: relative; display: block; width: 100%; cursor: pointer; border-radius: inherit; background-color: rgba(0, 0, 0, 0.2); height: 0px;"></div></div></div></div><div class="MuiBox-root jss22132 jss22127 sapo-pagination"><p class="MuiTypography-root MuiTypography-body1">Hiển thị</p><div class="MuiFormControl-root"><div class="MuiInputBase-root MuiOutlinedInput-root jss22128 MuiInputBase-formControl"><div class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input" tabindex="0" role="button" aria-haspopup="listbox"><p class="MuiTypography-root jss22130 MuiTypography-body1">20</p></div><input type="hidden" value="20"><svg class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"></path></svg><fieldset aria-hidden="true" class="jss21538 MuiOutlinedInput-notchedOutline" style="padding-left: 8px;"><legend class="jss21539" style="width: 0.01px;"><span>​</span></legend></fieldset></div></div><p class="MuiTypography-root MuiTypography-body1">kết quả</p><p class="MuiTypography-root jss22129 MuiTypography-body1">Từ 1 đến 1 trên tổng 1</p><nav aria-label="pagination navigation" class="MuiPagination-root jss22131"><ul class="MuiPagination-ul"><li><button class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-page MuiPaginationItem-textPrimary Mui-disabled MuiPaginationItem-sizeSmall Mui-disabled" tabindex="-1" type="button" disabled="" aria-label="Go to previous page"><svg class="MuiSvgIcon-root MuiPaginationItem-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg></button></li><li><button class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-page MuiPaginationItem-textPrimary Mui-selected MuiPaginationItem-sizeSmall" tabindex="0" type="button" aria-current="true" aria-label="page 1">1<span class="MuiTouchRipple-root"></span></button></li><li><button class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-page MuiPaginationItem-textPrimary Mui-disabled MuiPaginationItem-sizeSmall Mui-disabled" tabindex="-1" type="button" disabled="" aria-label="Go to next page"><svg class="MuiSvgIcon-root MuiPaginationItem-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg></button></li></ul></nav></div><div class="__react_component_tooltip tb680b5d8-75fa-4bd1-8da8-c1e0942cab02 place-top type-light jss22059" id="tb680b5d8-75fa-4bd1-8da8-c1e0942cab02" data-id="tooltip" style="left: 361px; top: 662px;"><style aria-hidden="true">
                         .tb680b5d8-75fa-4bd1-8da8-c1e0942cab02 {
@@ -704,6 +709,8 @@ let modalNote = `
                     </style>sss</div></div>
 
 `
+
+// modal nhóm khách hàng
 let modalCustomerGroup = `
                         <div class="MuiBox-root jss817 jss641">
                         <div class="MuiBox-root jss3895 jss3892">
@@ -1177,7 +1184,6 @@ $('#debts').click(function () {
 });
 
 
-
 //Công nợ
 function showCustomerInfoDebt() {
     $(document).ready(function () {
@@ -1423,7 +1429,7 @@ function showCustomerInfoDebt() {
                     },
                     "infoThousands": ".",
                     "thousands": "."
-                } ,
+                },
             ajax: {
                 contentType: 'application/json',
                 url: location.origin + "/api/customers/customerDebt/" + idCustomer,
@@ -1436,13 +1442,14 @@ function showCustomerInfoDebt() {
             "Destroy": true,
             select: true,
             columns: [{
-                data: 'order_code' },
+                data: 'order_code'
+            },
                 {data: 'employee_name'},
                 {data: 'create_at'},
                 {data: 'description'},
                 {data: 'transaction'},
                 {data: "totalDebt"}
-                ],
+            ],
             columnDefs: [
                 {
                     targets: 0,
@@ -1767,10 +1774,10 @@ function showCustomerInfoShippingAddressByCustomerId() {
                     },
                     "infoThousands": ".",
                     "thousands": "."
-                } ,
+                },
             ajax: {
                 contentType: 'application/json',
-                url: location.origin + "/api/shippingAddress/findByCustomerId/" + idCustomer,
+                url: location.origin + "/api/customers/shippingAddress/" + idCustomer,
                 type: "GET",
                 dataSrc: ''
             },
@@ -2061,7 +2068,7 @@ function showCustomerInfoHistory() {
                     },
                     "infoThousands": ".",
                     "thousands": "."
-                } ,
+                },
             ajax: {
                 contentType: 'application/json',
                 url: location.origin + "/api/customers/historyCustomerOrder/" + idCustomer,
@@ -2087,14 +2094,14 @@ function showCustomerInfoHistory() {
                 {
                     targets: 1,
                     render: function (data, type, row, meta) {
-                        if(row.orderStatus.name === "Hoàn thành"){
+                        if (row.orderStatus.name === "Hoàn thành") {
                             return `<a style="color:#2e6b26" class="hBmWYo bzQjtT">${row.orderStatus.name}</a>`;
 
                         }
-                        if(row.orderStatus.name === "Đang giao dịch"){
+                        if (row.orderStatus.name === "Đang giao dịch") {
                             return `<a  class="hBmWYo hlxtkG">${row.orderStatus.name}</a>`;
                         }
-                        if(row.orderStatus.name === "Đã hủy"){
+                        if (row.orderStatus.name === "Đã hủy") {
                             return `<a  class="hBmWYo2 hlxtkG2">${row.orderStatus.name}</a>`;
                         }
                         return `<a style="color:#141716;" class="'sc-eCYdqJ bzQjtT text-warning">${row.orderStatus.name}</a>`;

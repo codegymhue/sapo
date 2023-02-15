@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum CodePrefix {
 
+    SUPPLIER("SUPN"),
     CUSTOMER("CUZN"),
     SALE_ORDER("SON"),
     CUSTOMER_GROUP("CTN"),
@@ -31,7 +32,6 @@ public enum CodePrefix {
         throw new IllegalArgumentException(value + "invalid");
     }
 
-    public String generate(int value) {
-        return String.format("%s%05d", this.value, value);
+    public  String generate(int value) {return String.format("%s%05d", this.value, value);
     }
 }
