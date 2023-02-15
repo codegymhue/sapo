@@ -275,6 +275,27 @@
 </body>
 </html>
 <script>
+    class Supplier {
+        constructor(id, supplierCode, fullName, email, phone, description, paymentMethodId, taxCode, fax, website, debtTotal, createAddressParam, employeeId, employee) {
+            this.id = id;
+            this.supplierCode = supplierCode;
+            this.fullName = fullName;
+            this.email = email;
+            this.phone = phone;
+            this.description = description;
+            this.paymentMethodId = paymentMethodId;
+            this.taxCode = taxCode;
+            this.fax = fax;
+            this.website = website;
+            this.debtTotal = debtTotal;
+            this.createAddressParam = createAddressParam;
+            this.employeeId = employeeId;
+            this.employee = employee;
+
+        }
+    }
+
+
     class CreateAddressParam {
         constructor(id, fullName, phoneNumber, line1, line2, email, districtId, districtName, provinceId, provinceName, wardId, wardName, zipCode, customerId, supplierId, isDefault, description) {
             this.id = id;
@@ -305,7 +326,7 @@
             // alert("alo 1235689")
             let supplier ={};
 
-            supplier.name = $('#nameCreate').val();
+            supplier.fullName = $('#nameCreate').val();
             supplier.fax = $('#faxCreate').val();
             supplier.taxCode = $('#taxCodeCreate').val();
             supplier.website = $('#websiteCreate').val();
@@ -318,6 +339,8 @@
             supplier.employeeId = $('#employeeNameCreate :selected').val();
             supplier.description = $('#descriptionCreate').val();
             supplier.paymentMethodId = $('#paymentMethodCreate :selected').val();
+            supplier.GroupSupplier = $('#showGroupSupplier :selected').val();
+
 
             let createAddressParam = new CreateAddressParam();
 

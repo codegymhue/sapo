@@ -55,6 +55,7 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
+    @Transactional
     public SupplierResult create(CreateSupplierParam createSupplierParam) {
         Supplier supplier = supplierMapper.toModel(createSupplierParam);
         supplier.setEmployeeId(1);
