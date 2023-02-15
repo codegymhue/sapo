@@ -1,0 +1,408 @@
+<!--<!DOCTYPE html>-->
+<!--<html class="sapo-menu-expand sapo-menu-toggle-active" lang="vi-VN">-->
+<!--<head>-->
+<!--  <meta charset="utf-8" />-->
+<!--  <script>-->
+<!--    var CKEDITOR_BASEPATH = '/v2/lib/ckeditor/';-->
+<!--    var S_LANG = 'vi-VN';-->
+<!--    var S_LANG_RES = 'https://sapo.dktcdn.net/sapo-frontend-x/d9ad77d.i18n_vi-VN.json';-->
+<!--  </script>-->
+<!--  <script src="https://sapo.dktcdn.net/sapo-frontend-x/1bca3f4.client.bundle.js"></script>-->
+<!--  <link rel="stylesheet" href="https://sapo.dktcdn.net/sapo-frontend-x/6386cc5.main.css" />-->
+<!--  <script src="https://sapo.dktcdn.net/fe-cdn-production/lib/wootric/wootric-sdk.js"></script>-->
+<!--  <script src="https://sapo.dktcdn.net/fe-cdn-production/lib/upload-files/jquery.multifile.js"></script>-->
+
+<!--  <link href="https://sapo.dktcdn.net/fe-cdn-production/lib/driver/driver.min.css?v=20220218" rel="stylesheet" />-->
+<!--  <title>Danh s&#xE1;ch nh&#xF3;m nh&#xE0; cung c&#x1EA5;p</title>-->
+<!--  &lt;!&ndash; Hotjar Tracking Code for mysapo.vn &ndash;&gt;-->
+<!--  <script>-->
+<!--    (function (h, o, t, j, a, r) {-->
+<!--      h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };-->
+<!--      h._hjSettings = { hjid: 1081489, hjsv: 6 };-->
+<!--      a = o.getElementsByTagName('head')[0];-->
+<!--      r = o.createElement('script'); r.async = 1;-->
+<!--      r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;-->
+<!--      a.appendChild(r);-->
+<!--    })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');-->
+<!--  </script>-->
+<!--  <style>-->
+
+<!--    .modal-backdrop show{-->
+<!--      position: relative-->
+<!--    }-->
+
+<!--  </style>-->
+<!--  &lt;!&ndash; Freshchat &ndash;&gt;-->
+<!--  &lt;!&ndash; LIVE &ndash;&gt;-->
+<!--  &lt;!&ndash; mix pannels tracking&ndash;&gt;-->
+<!--  <script>-->
+<!--    (function (f, b) {-->
+<!--      if (!b.__SV) {-->
+<!--        var e, g, i, h; window.mixpanel = b; b._i = []; b.init = function (e, f, c) {-->
+<!--          function g(a, d) { var b = d.split("."); 2 == b.length && (a = a[b[0]], d = b[1]); a[d] = function () { a.push([d].concat(Array.prototype.slice.call(arguments, 0))) } } var a = b; "undefined" !== typeof c ? a = b[c] = [] : c = "mixpanel"; a.people = a.people || []; a.toString = function (a) { var d = "mixpanel"; "mixpanel" !== c && (d += "." + c); a || (d += " (stub)"); return d }; a.people.toString = function () { return a.toString(1) + ".people (stub)" }; i = "disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");-->
+<!--          for (h = 0; h < i.length; h++)g(a, i[h]); var j = "set set_once union unset remove delete".split(" "); a.get_group = function () { function b(c) { d[c] = function () { call2_args = arguments; call2 = [c].concat(Array.prototype.slice.call(call2_args, 0)); a.push([e, call2]) } } for (var d = {}, e = ["get_group"].concat(Array.prototype.slice.call(arguments, 0)), c = 0; c < j.length; c++)b(j[c]); return d }; b._i.push([e, f, c])-->
+<!--        }; b.__SV = 1.2; e = f.createElement("script"); e.type = "text/javascript"; e.async = !0; e.src = "undefined" !== typeof MIXPANEL_CUSTOM_LIB_URL ?-->
+<!--                MIXPANEL_CUSTOM_LIB_URL : "file:" === f.location.protocol && "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//) ? "https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js" : "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js"; g = f.getElementsByTagName("script")[0]; g.parentNode.insertBefore(e, g)-->
+<!--      }-->
+<!--    })(document, window.mixpanel || []);-->
+<!--    mixpanel.init("458e4ee056e5f2551c5ea5277600a92e", { batch_requests: true, persistence: "localStorage" });-->
+<!--    mixpanel.init("3eeb208c1975f4e8de5b726659d3789f", { batch_requests: true, persistence: "localStorage" }, "project_v2");-->
+<!--    mixpanel.init("54a5c453cd7ed47d5a5c9ab1f4866e8d", { batch_requests: true, persistence: "localStorage" }, "project_v3");-->
+<!--    mixpanel.init("29b3fe744c6ce711fd5458235a181b34", { batch_requests: true, persistence: "localStorage" }, "project_v4");-->
+<!--    mixpanel.init("1f0c89f1365ae2b207cddf00468f4cdc", { batch_requests: true, persistence: "localStorage" }, "project_coupon");-->
+<!--    mixpanel.init("6057ed3adb8a3070741591d4703ca8dd", { batch_requests: true, persistence: "localStorage" }, "project_stock_adj");-->
+<!--  </script>-->
+<!--  &lt;!&ndash; end mix pannels tracking&ndash;&gt;-->
+
+<!--</head>-->
+<!--<body class="body_dashboard partners suppliergroups index">-->
+<!--<div id="container">-->
+<!--  <div class="hidden" context="tenantInfo" define="{tenantInfo: new Components.TenantInfo(this,{&quot;countries&quot;:{&quot;countryId&quot;:201}})}"></div>-->
+<!--  <div class="header-mobile">-->
+<!--    <a href="javascript:" class="icon-menu visible-xs visible-sm" onclick="showMenu()">-->
+<!--      <svg class="next-icon next-icon&#45;&#45;size-20">-->
+<!--        <use xlink:href="#icon-menu" xmlns:xlink="http://www.w3.org/1999/xlink"></use>-->
+<!--      </svg>-->
+<!--    </a>-->
+<!--  </div>-->
+<!--  <th:block th:replace="/layout/supplier/menu :: menu"/>-->
+
+<!--  <div class="col-right">-->
+<!--    <div class="col-right_content" id="content">-->
+
+
+<!--      <header class="ui-title-bar-container ui-title-bar-container&#45;&#45;index">-->
+<!--        <div class="ui-title-bar" style="min-height:0px;" href="javascript:void(0)">-->
+<!--          <div class="ui-title-bar__navigation">-->
+<!--            <div class="ui-breadcrumbs">-->
+<!--              <a href="/admin/suppliers">-->
+<!--                <svg class="next-icon next-icon&#45;&#45;size-20 next-icon&#45;&#45;no-nudge">-->
+<!--                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#chevron-left-thinner"></use>-->
+<!--                </svg>-->
+<!--                <span class="ui-breadcrumb__item">Nhà cung cấp</span>-->
+<!--              </a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="ui-title-bar__main-group">-->
+<!--            <div class="ui-title-bar__heading-group">-->
+<!--              <h1 class="ui-title-bar__title" style="float:left; width: unset">Nhóm nhà cung cấp</h1>-->
+<!--              <div class="pull-right">-->
+
+<!--                <style>-->
+<!--                  .info-account {-->
+<!--                    position: relative;-->
+<!--                  }-->
+
+<!--                  .help-dashboard {-->
+<!--                    position: absolute;-->
+<!--                    top: -1px;-->
+<!--                    right: -1px;-->
+<!--                    z-index: 1;-->
+<!--                  }-->
+
+<!--                  .help-dashboard .help-dropdown .btn-blank {-->
+<!--                    background: #fff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDplN2MwNTFiZi1lNGJiLTNjNDktOGM3YS00NTZmZTZlNGQ1NmYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjI5NDdDQ0NGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjI5NDdDQ0JGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjdkNDRhZTRlLTIzMTMtYTE0ZC1hNWQ4LTA5YTVjYTBmNmM0NCIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjk3N2NmYTliLThmZDctZGU0Mi1hNDFiLWIwOTJiYzRkYWM2MiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Po5ReOIAAAIxSURBVHjalJU9aFNRGIbTk+sSh0xiEKciaBF1culiA2IdOlQHaRBKqEurYJYOFn9Ql7iJghQcSqlDAop0yFIoWJcigouKKIROClWnomaQVHw+eAPxcs7J9cDDhXvP997vfH9naPbybC6wEpiASRiFYcjDLmzBJqxCa/HRYtcn4ALCFWjDQ/gGNRiB/XrW9N6+t+euzFV8IkMpzwuwDGNwDVagmwsvO9003IMNqHKKjs9zE16Dg3AclgYI2+oitqT9ZrfGKQo+8WXF9DRs5/5j8YNt2eWl8494RaE4Dx1f+OAwnIRi4Acd2Y/1cuAUt7pi7PP4GLyHj/AavsPNyAlMp84PEqdyc0qer5oa8AuOQAnuw10YD0RpRXYTTnXcDCTvBByVp5/gK1yH33Am4H1XepNODfIi4MUPuANv+t7tgz3wM5Jj0xtN1HntwCZ7fztVrk3F/XFE3OyGE5XPToaKs33PlOBT8CWy1/TyTrOimEH8IpyFc/BuwF7T23UaQocyiJfhA7zMsNf0tpymWzmDwROYz9i0prfpNDan1EyxtRcODFK15pHeqom34I+mW2xdglsZvJ6WXsupeRY0NksRoxvyKOZ1SToL1ky9wdXQPH6uWvYtmy+vIsIF2W8g3EiP3KrKcn3ACUIer8u+6pvnHQ2jz/AWZjIkOUF4RvvNbrz/Jkob24cLmu91tX5Ts6KtziuqjsvKgSWv1gtF+g70Ldv4tO/2fxC4/a/Gbv+/AgwA9q+ezeP4kToAAAAASUVORK5CYII=') no-repeat center center;-->
+<!--                    border: none;-->
+<!--                    font-size: 0;-->
+<!--                    box-shadow: none;-->
+<!--                    margin-left: 0;-->
+<!--                    height: 61px;-->
+<!--                    width: 60px;-->
+<!--                    border: 1px solid #dbdbdb;-->
+<!--                    outline: none;-->
+<!--                    border-radius: 0;-->
+<!--                  }-->
+
+<!--                  .help-dashboard .help-dropdown .btn-blank:focus {-->
+<!--                    box-shadow: none;-->
+<!--                  }-->
+
+<!--                  .help-dashboard .help-dropdown .help-popup {-->
+<!--                    top: 60px;-->
+<!--                    box-shadow: #c6c6c6 0px 3px 5px 0px;-->
+<!--                  }-->
+
+<!--                  .help-dashboard .help-dropdown .help-popup:after {-->
+<!--                    right: 20px;-->
+<!--                  }-->
+
+<!--                  .sapo-menu-expand .page-heading {-->
+<!--                    z-index: 1001;-->
+<!--                  }-->
+
+<!--                  .help-dropdown {-->
+<!--                    position: relative;-->
+<!--                    margin-left: 10px;-->
+<!--                    height:36px;-->
+<!--                  }-->
+
+
+<!--                  .help-dropdown a {-->
+<!--                    color: #686868;-->
+<!--                    display: flex;-->
+<!--                    height: 100%;-->
+<!--                    border: none;-->
+<!--                    flex-direction: row;-->
+<!--                    justify-content: center;-->
+<!--                    align-items: center;-->
+<!--                    cursor: pointer;-->
+<!--                    border: 1px solid #c4cdd5;-->
+<!--                    float: right;-->
+<!--                    width: auto;-->
+<!--                  }-->
+
+<!--                  .help-dropdown div:hover {-->
+<!--                    background-color: #e7f2ff;-->
+<!--                  }-->
+
+
+<!--                  .help-dropdown .btn-blank:focus {-->
+<!--                    box-shadow: none;-->
+<!--                    border: 1px solid #c4cdd5;-->
+<!--                  }-->
+
+<!--                  .help-dropdown .help-popup {-->
+<!--                    position: absolute;-->
+<!--                    right: 0;-->
+<!--                    z-index: 9999999;-->
+<!--                    top: 45px;-->
+<!--                    box-shadow: #c6c6c6 0 0 10px 5px;-->
+<!--                    display: none;-->
+<!--                    -webkit-transition: ease 0.5s; /* Safari */-->
+<!--                    transition: ease 0.5s;-->
+<!--                  }-->
+
+<!--                  .help-dropdown .help-popup.shown {-->
+<!--                    display: block;-->
+<!--                    height: 560px;-->
+<!--                    margin-top: 15px;-->
+<!--                  }-->
+
+<!--                  .help-dropdown .help-popup:after {-->
+<!--                    content: "";-->
+<!--                    display: block;-->
+<!--                    width: 0px;-->
+<!--                    height: 0px;-->
+<!--                    border-left: 10px solid transparent;-->
+<!--                    border-right: 10px solid transparent;-->
+<!--                    border-bottom: 10px solid #f3f6f8;-->
+<!--                    top: -9px;-->
+<!--                    position: absolute;-->
+<!--                    right: 25px;-->
+<!--                  }-->
+<!--                </style>-->
+<!--                <a id="showGroupSupplier" class="btn sapo-btn-default">Thêm nhóm nhà cung cấp</a>-->
+<!--              </div>-->
+<!--              <th:bock th:replace="/admin/suppliers/modals/create_group_supplier :: create_group_supplier"/>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </header>-->
+
+<!--&lt;!&ndash;      <div class="gird-layout gird-layout&#45;&#45;full-width">&ndash;&gt;-->
+<!--&lt;!&ndash;        <section class="grid-card">&ndash;&gt;-->
+<!--&lt;!&ndash;          <div id="resultFilter">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="shipments" context="indexSupplierGroup" define="{indexSupplierGroup: new Components.SupplierGroup.IndexSupplierGroup(this,{&quot;supplierGroups&quot;:[{&quot;id&quot;:2671410,&quot;tenantId&quot;:693196,&quot;type&quot;:&quot;supplier&quot;,&quot;name&quot;:&quot;Bán Theo Tấn&quot;,&quot;nameTranslate&quot;:&quot;Bán Theo Tấn&quot;,&quot;createdOn&quot;:&quot;2023-02-15T04:37:12Z&quot;,&quot;modifiedOn&quot;:&quot;2023-02-15T04:37:12Z&quot;,&quot;status&quot;:&quot;active&quot;,&quot;code&quot;:&quot;STN00004&quot;,&quot;note&quot;:&quot;&quot;,&quot;countSupplier&quot;:1,&quot;isDefault&quot;:false},{&quot;id&quot;:2671385,&quot;tenantId&quot;:693196,&quot;type&quot;:&quot;supplier&quot;,&quot;name&quot;:&quot;Bán Buôn&quot;,&quot;nameTranslate&quot;:&quot;Bán Buôn&quot;,&quot;createdOn&quot;:&quot;2023-02-15T04:27:26Z&quot;,&quot;modifiedOn&quot;:&quot;2023-02-15T04:27:26Z&quot;,&quot;status&quot;:&quot;active&quot;,&quot;code&quot;:&quot;STN00003&quot;,&quot;note&quot;:&quot;&quot;,&quot;countSupplier&quot;:1,&quot;isDefault&quot;:false},{&quot;id&quot;:2669318,&quot;tenantId&quot;:693196,&quot;type&quot;:&quot;supplier&quot;,&quot;name&quot;:&quot;Bán Lẻ&quot;,&quot;nameTranslate&quot;:&quot;Bán Lẻ&quot;,&quot;createdOn&quot;:&quot;2023-02-14T01:29:16Z&quot;,&quot;modifiedOn&quot;:&quot;2023-02-14T01:29:16Z&quot;,&quot;status&quot;:&quot;active&quot;,&quot;code&quot;:&quot;STN00002&quot;,&quot;note&quot;:&quot;&quot;,&quot;countSupplier&quot;:1,&quot;isDefault&quot;:false},{&quot;id&quot;:2669297,&quot;tenantId&quot;:693196,&quot;type&quot;:&quot;supplier&quot;,&quot;name&quot;:&quot;DEFAULT&quot;,&quot;nameTranslate&quot;:&quot;Khác&quot;,&quot;createdOn&quot;:&quot;2023-02-14T01:21:10Z&quot;,&quot;modifiedOn&quot;:&quot;2023-02-14T01:21:10Z&quot;,&quot;status&quot;:&quot;active&quot;,&quot;code&quot;:&quot;MACDINH&quot;,&quot;note&quot;:null,&quot;countSupplier&quot;:1,&quot;isDefault&quot;:true}],&quot;supplierGroup&quot;:null,&quot;pageModel&quot;:{&quot;firstItem&quot;:0,&quot;hasNextPage&quot;:false,&quot;displayFormat&quot;:false,&quot;hasPreviousPage&quot;:false,&quot;lastItem&quot;:0,&quot;pageNumber&quot;:1,&quot;pageSize&quot;:20,&quot;totalRecords&quot;:4,&quot;totalPages&quot;:1,&quot;numAroundPages&quot;:0,&quot;classActive&quot;:null,&quot;classFirst&quot;:null,&quot;classPrev&quot;:null,&quot;classNext&quot;:null,&quot;classLast&quot;:null,&quot;themes&quot;:null,&quot;filePath&quot;:null,&quot;pageQueryName&quot;:null},&quot;query&quot;:&quot;&quot;,&quot;page&quot;:1,&quot;limit&quot;:20,&quot;totalPage&quot;:1,&quot;status&quot;:null,&quot;id&quot;:0,&quot;isShowPopupEdit&quot;:false})}">&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="ui-type-container clearfix">&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="table-wrapper">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <table class="sapo-table bulk-action-context" id="sapo-table">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <thead class="thead">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <tr class="tr">&ndash;&gt;-->
+<!--&lt;!&ndash;                      <th class="select th select&#45;&#45;bulk-action" nameth="bulk_action" style="display:none">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="bulk-actions-tooltip-wrapper bulk-actions-wrapper-main" data-toggle="tooltip" data-placement="right" title="Chọn tất cả ">&ndash;&gt;-->
+<!--&lt;!&ndash;                          <div class="tooltip&#45;&#45;select-all">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="next-input-wrapper bulk-actions&#45;&#45;select-all" style="left: auto;">&ndash;&gt;-->
+<!--&lt;!&ndash;                              <label class="bulk-actions&#45;&#45;select-all-btn btn hidden">&ndash;&gt;-->
+<!--&lt;!&ndash;                              </label>&ndash;&gt;-->
+<!--&lt;!&ndash;                              <input type="checkbox" class="next-checkbox bulk-actions&#45;&#45;select-all-checkbox" bind-event-click="addOrRemoveAllBulkActionItems(this)">&ndash;&gt;-->
+<!--&lt;!&ndash;                              <span class="next-checkbox&#45;&#45;styled">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                <svg class="next-icon next-icon&#45;&#45;size-10 checkmark"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-checkmark-thick"></use> </svg>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                <svg class="next-icon next-icon&#45;&#45;size-10 indeterminate"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-minus"></use> </svg>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            </span>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                          </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </th>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <th class="th">Tên nhóm</th>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <th class="th">Mã nhóm</th>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <th class="th">Ghi chú</th>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <th class="th align-center">Số lượng nhà cung cấp</th>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <th class="th">Ngày tạo</th>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </thead>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <tbody class="tbody">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <tr class="tr tr-2671410">&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="select td bulk-action" nametd="bulk_action" style="display:none">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="next-input-wrapper">&ndash;&gt;-->
+<!--&lt;!&ndash;                          <input type="checkbox" value="2671410" class="bulk-action-item next-checkbox">&ndash;&gt;-->
+<!--&lt;!&ndash;                          <span class="next-checkbox&#45;&#45;styled"><svg class="next-icon next-icon&#45;&#45;size-10 checkmark"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-checkmark-thick"></use> </svg></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="cursor-pointer" bind-event-click="openPopupEdit(2671410)">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <span>B&#xE1;n Theo T&#x1EA5;n</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="cursor-pointer" bind-event-click="openPopupEdit(2671410)">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <span>STN00004</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="cursor-pointer" bind-event-click="openPopupEdit(2671410)">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <span></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="align-center cursor-pointer" bind-event-click="openPopupEdit(2671410)">&ndash;&gt;-->
+<!--&lt;!&ndash;                        1                                                    </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="cursor-pointer" bind-event-click="openPopupEdit(2671410)">&ndash;&gt;-->
+<!--&lt;!&ndash;                        15/02/2023&ndash;&gt;-->
+<!--&lt;!&ndash;                      </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <tr class="tr tr-2671385">&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="select td bulk-action" nametd="bulk_action" style="display:none">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="next-input-wrapper">&ndash;&gt;-->
+<!--&lt;!&ndash;                          <input type="checkbox" value="2671385" class="bulk-action-item next-checkbox">&ndash;&gt;-->
+<!--&lt;!&ndash;                          <span class="next-checkbox&#45;&#45;styled"><svg class="next-icon next-icon&#45;&#45;size-10 checkmark"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-checkmark-thick"></use> </svg></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="cursor-pointer" bind-event-click="openPopupEdit(2671385)">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <span>B&#xE1;n Bu&#xF4;n</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="cursor-pointer" bind-event-click="openPopupEdit(2671385)">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <span>STN00003</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="cursor-pointer" bind-event-click="openPopupEdit(2671385)">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <span></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="align-center cursor-pointer" bind-event-click="openPopupEdit(2671385)">&ndash;&gt;-->
+<!--&lt;!&ndash;                        1                                                    </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="cursor-pointer" bind-event-click="openPopupEdit(2671385)">&ndash;&gt;-->
+<!--&lt;!&ndash;                        15/02/2023&ndash;&gt;-->
+<!--&lt;!&ndash;                      </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <tr class="tr tr-2669318">&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="select td bulk-action" nametd="bulk_action" style="display:none">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="next-input-wrapper">&ndash;&gt;-->
+<!--&lt;!&ndash;                          <input type="checkbox" value="2669318" class="bulk-action-item next-checkbox">&ndash;&gt;-->
+<!--&lt;!&ndash;                          <span class="next-checkbox&#45;&#45;styled"><svg class="next-icon next-icon&#45;&#45;size-10 checkmark"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-checkmark-thick"></use> </svg></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="cursor-pointer" bind-event-click="openPopupEdit(2669318)">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <span>B&#xE1;n L&#x1EBB;</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="cursor-pointer" bind-event-click="openPopupEdit(2669318)">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <span>STN00002</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="cursor-pointer" bind-event-click="openPopupEdit(2669318)">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <span></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="align-center cursor-pointer" bind-event-click="openPopupEdit(2669318)">&ndash;&gt;-->
+<!--&lt;!&ndash;                        1                                                    </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="cursor-pointer" bind-event-click="openPopupEdit(2669318)">&ndash;&gt;-->
+<!--&lt;!&ndash;                        14/02/2023&ndash;&gt;-->
+<!--&lt;!&ndash;                      </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <tr class="tr tr-2669297">&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="select td bulk-action" nametd="bulk_action" style="display:none">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="next-input-wrapper">&ndash;&gt;-->
+<!--&lt;!&ndash;                          <input type="checkbox" value="2669297" class="bulk-action-item next-checkbox">&ndash;&gt;-->
+<!--&lt;!&ndash;                          <span class="next-checkbox&#45;&#45;styled"><svg class="next-icon next-icon&#45;&#45;size-10 checkmark"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-checkmark-thick"></use> </svg></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="cursor-pointer" bind-event-click="openPopupEdit(2669297)">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <span>Kh&#xE1;c</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="cursor-pointer" bind-event-click="openPopupEdit(2669297)">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <span>MACDINH</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="cursor-pointer" bind-event-click="openPopupEdit(2669297)">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <span></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="align-center cursor-pointer" bind-event-click="openPopupEdit(2669297)">&ndash;&gt;-->
+<!--&lt;!&ndash;                        1                                                    </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <td class="cursor-pointer" bind-event-click="openPopupEdit(2669297)">&ndash;&gt;-->
+<!--&lt;!&ndash;                        14/02/2023&ndash;&gt;-->
+<!--&lt;!&ndash;                      </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </tbody>&ndash;&gt;-->
+<!--&lt;!&ndash;                  </table>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="t-grid-pager-boder" value="/admin/supplier_groups" query="">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <div class="t-pager t-reset"><div class="col-4"><div class="t-status-text dataTables_info">Hiển thị kết quả từ 1 - 4 trên tổng 4</div></div></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                <div define="{products_match_current_search: 4}"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </section>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      <div class="grid-footer-help">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="grid-footer-help__content">&ndash;&gt;-->
+<!--&lt;!&ndash;          <div class="grid-footer-help__icon">&ndash;&gt;-->
+<!--&lt;!&ndash;            <svg class="next-icon next-icon&#45;&#45;size-24 next-icon&#45;&#45;no-nudge" role="img" aria-labelledby="next-help-circle-title">&ndash;&gt;-->
+<!--&lt;!&ndash;              <title id="next-help-circle-title">Help</title>&ndash;&gt;-->
+<!--&lt;!&ndash;              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-help-circle"></use>&ndash;&gt;-->
+<!--&lt;!&ndash;            </svg>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          <div>&ndash;&gt;-->
+<!--&lt;!&ndash;            Bạn có thể xem thêm hướng dẫn về quản lý nhóm nhà cung cấp <a target="_blank" style="color:#0088ff" title="Hướng dẫn" href="https://support.sapo.vn/huong-dan-tao-nhom-nha-cung-cap">tại đây</a>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<!--<style>-->
+<!--  #surveys {-->
+<!--    position: fixed;-->
+<!--    bottom: 0;-->
+<!--    width: calc(100% - 23rem);-->
+<!--    right: 0;-->
+<!--    z-index: 999999-->
+<!--  }-->
+
+<!--  .sapo-menu-collapse #surveys {-->
+<!--    width: calc(100% - 5.6rem) !important;-->
+<!--  }-->
+<!--</style>-->
+<!--<div id="surveys"></div>-->
+
+<!--<script>-->
+<!--  Page();-->
+<!--  hj('trigger', 'split_test_b');-->
+<!--</script>-->
+
+<!--</body>-->
+
+<!--<script>-->
+<!--  const page = {-->
+<!--    urls: {},-->
+<!--    elements: {},-->
+<!--    commands: {},-->
+<!--    dialogs: {-->
+<!--      elements: {},-->
+<!--      commands: {}-->
+<!--    }-->
+<!--  }-->
+
+<!--  page.elements.showGroupSupplier= $("#showGroupSupplier");-->
+<!--  page.dialogs.elements.showModalGroupSupplier= $("#showModalGroupSupplier");-->
+<!--  page.dialogs.elements.createGroupSupplier = $("#createGroupSupplier");-->
+<!--  page.dialogs.elements.groupId =  $("#groupId");-->
+<!--  page.dialogs.elements.groupTitleSup =  $("#groupTitleSup");-->
+<!--  page.dialogs.elements.groupCodeSup =  $("#groupCodeSup");-->
+<!--  page.dialogs.elements.groupDescriptionSup =  $("#groupDescriptionSup");-->
+
+<!--  page.elements.showGroupSupplier.on('click', () => {-->
+<!--    page.dialogs.elements.showModalGroupSupplier.modal('show');-->
+<!--    page.dialogs.elements.groupId.val("");-->
+<!--    page.dialogs.elements.groupTitleSup.val("");-->
+<!--    page.dialogs.elements.groupCodeSup.val("");-->
+<!--    page.dialogs.elements.groupDescriptionSup.val("");-->
+<!--    // $("#modal-alert-danger").hide();-->
+<!--    $("#groupTitleSup-error").hide();-->
+<!--  })-->
+
+
+<!--</script>-->
+<!--</html>-->

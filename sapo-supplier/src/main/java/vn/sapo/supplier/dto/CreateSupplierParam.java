@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.shared.validation.constraints.NullOrNotBlank;
+import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -28,4 +29,5 @@ public class CreateSupplierParam {
     private String website;
     private BigDecimal debtTotal;
     private CreateAddressParam createAddressParam;
+    private SupplierGroupResult group;
 }
