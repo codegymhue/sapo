@@ -68,9 +68,6 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     @Transactional
     public SupplierResult update(UpdateSupplierParam updateSupplierParam) {
-//        System.out.println(updateSupplierParam.getId());
-//        Optional<Supplier> supplier = supplierRepository.findById(updateSupplierParam.getId());
-//        System.out.println(supplier.get());
 
         Supplier supplier = supplierRepository.findById(updateSupplierParam.getId())
                 .orElseThrow(() -> new NotFoundException("Not found supplier"));

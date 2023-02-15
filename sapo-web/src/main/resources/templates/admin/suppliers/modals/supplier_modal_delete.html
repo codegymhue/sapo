@@ -1,3 +1,5 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<th:block th:fragment="supplier_modal_delete">
 <div class="modal fade" id="supplier-delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -6,12 +8,18 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pull-center">
-                <p>
-                    Bạn có chắc chắn muốn xóa nhà cung cấp
-                    <span style="font-weight: 500;" th:text="*{name}"></span>?
-                </p>
-                <p>Thao tác này không thể khôi phục.</p>
+            <form >
+
+                    <input id="idDelete" hidden>
+                    <p>
+                        Bạn có chắc chắn muốn xóa nhà cung cấp
+                        <span style="font-weight: 500;" th:text="*{name}"></span>?
+                    </p>
+                    <p>Thao tác này không thể khôi phục.</p>
+
+            </form>
             </div>
+
             <div class="modal-footer">
                 <button type="button" id="btn-supplier-delete" class="btn sapo-btn-red right" th:value="*{id}">Xóa</button>
                 <button type="button" class="btn sapo-btn-blank right mr-3" data-bs-dismiss="modal">Thoát</button>
@@ -19,6 +27,7 @@
         </div>
     </div>
 </div>
+</th:block>
 <script>
     // http://localhost:8080/api/admin/suppliers/3/delete
         function deleteSupplier (idSupplier){
