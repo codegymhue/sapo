@@ -217,28 +217,6 @@ let str = `<div class="filter-item" filter-type="status" style="width:auto;">
     }
 }
 
-
-class Supplier {
-    constructor(id, supplierCode, name, email, phone, status, description, employeeId, employee,
-                paymentMethodId, paymentMethod, supGroupResult, supGroupTitle, createAt, updateAt) {
-        this.id = id;
-        this.supplierCode = supplierCode;
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.status = status;
-        this.description = description;
-        this.employeeId = employeeId;
-        this.employee = employee;
-        this.paymentMethodId = paymentMethodId;
-        this.paymentMethod = paymentMethod;
-        this.supGroupResult = supGroupResult;
-        this.supGroupTitle = supGroupTitle;
-        this.createAt = createAt;
-        this.updateAt = updateAt;
-    }
-}
-
 class SupplierFilter {
     constructor() {
         this.filter = null;

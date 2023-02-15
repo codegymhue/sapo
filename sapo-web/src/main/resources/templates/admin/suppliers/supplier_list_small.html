@@ -101,7 +101,7 @@
                             <p class="title" id="ptitle">Hiển thị nhà cung cấp theo:</p>
 
                             <div class="filter-item" filter-type="status" data-id="0" style="width:auto;float: left; display: block">
-                                <input type="hidden" class="choosed-single-id">
+                                <input type="hidden" class="choosed-single-id" value="loi">
                                 <div class="select__wrapper">
                                     <select class="sapo-select select-change-filter" data-id="0" bind-event-change="changeItemFilter(this)">
                                         <option value="status" selected="">Trạng thái</option>
@@ -112,10 +112,10 @@
                                     <svg class="next-icon next-icon--size-16"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use> </svg>
                                 </div>
                                 <div class="btn-group pull-left" data-toggle="buttons">
-                                    <label class="btn filter-button-tag " bind-event-click="setParamFilterActive('active',this)">
+                                    <label class="btn filter-button-tag" bind-event-click="setParamFilterActive('active',this)">
                                         <input type="checkbox" autocomplete="off"> Đang giao dịch
                                     </label>
-                                    <label class="btn filter-button-tag " bind-event-click="setParamFilterActive('disable',this)">
+                                    <label class="btn filter-button-tag" bind-event-click="setParamFilterActive('disable',this)">
                                         <input type="checkbox" autocomplete="off"> Ngừng giao dịch
                                     </label>
                                 </div>
@@ -123,7 +123,7 @@
                             </div><br>
 
                             <div class="filter-item" filter-type="assigneeIds" data-id="1" style="width:auto;float: left">
-                                <input type="hidden" class="choosed-single-id">
+                                <input type="hidden" class="choosed-single-id" >
                                 <div class="select__wrapper">
                                     <select class="sapo-select select-change-filter" data-id="1" bind-event-change="changeItemFilter(this)">
                                         <option value="status">Trạng thái</option>
@@ -467,12 +467,29 @@
 
 
         })
+
     }
 
+    function setParamFilterActive(str, element){
+        console.log($(element.parentElement.parentElement > "input").val())
+        console.log(element.closest(".choosed-single-id").val())
 
-
-    page.dialogs.commands.setParamFilterActive = () => {
-
+        if ($(element).hasClass("active")){
+            $(element).removeClass("active")
+            if(  $(".choosed-single-id").val().includes(str)){
+                $(".choosed-single-id").val()
+            }else {
+                $(".choosed-single-id").val(","+ str)
+            }
+        }else {
+            $(element).addClass("active");
+            if($(".choosed-single-id").val().isEmpty){
+                $(".choosed-single-id").val(str)
+            }else {
+                $(".choosed-single-id").val().concat(","+str)
+            }
+        }
+        console.log($(".choosed-single-id").val());
     }
 
 
