@@ -51,14 +51,14 @@ public class Supplier extends BaseEntity {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "employee_id", nullable = false,foreignKey = @ForeignKey(name = "fk_supplier_employee"))
+    @JoinColumn(name = "employee_id", nullable = false, foreignKey = @ForeignKey(name = "fk_supplier_employee"))
     private Employee employee;
 
     @Column(name = "employee_id", updatable = false, insertable = false)
     private Integer employeeId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "payment_method_id",foreignKey = @ForeignKey(name = "fk_supplier_payment_method"))
+    @JoinColumn(name = "payment_method_id", foreignKey = @ForeignKey(name = "fk_supplier_payment_method"))
     private PaymentMethod paymentMethod;
 
     @Column(name = "payment_method_id", updatable = false, insertable = false)
@@ -94,20 +94,26 @@ public class Supplier extends BaseEntity {
         return this;
     }
 
+    public <T> T getAttributeValue(String key) {
+        if (attributes == null)
+            return null;
+        return (T) attributes.get(key);
+    }
+
     public final static String WEBSITE_ATTRIBUTE_NAME = "website";
     public final static String FAX_ATTRIBUTE_NAME = "fax";
     public final static String TAX_CODE_ATTRIBUTE_NAME = "taxCode";
 
     public String getWebsite() {
-        return attributes.get(WEBSITE_ATTRIBUTE_NAME);
+        return getAttributeValue(WEBSITE_ATTRIBUTE_NAME);
     }
 
     public String getFax() {
-        return attributes.get(FAX_ATTRIBUTE_NAME);
+        return getAttributeValue(FAX_ATTRIBUTE_NAME);
     }
 
     public String getTaxCode() {
-        return attributes.get(TAX_CODE_ATTRIBUTE_NAME);
+        return getAttributeValue(TAX_CODE_ATTRIBUTE_NAME);
     }
 
     public Supplier setWebsite(String website) {
