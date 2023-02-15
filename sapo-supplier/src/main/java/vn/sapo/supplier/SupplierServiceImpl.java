@@ -35,7 +35,6 @@ public class SupplierServiceImpl implements SupplierService {
     private SupplierFilterRepository supplierFilterRepository;
 
 
-
     @Override
     @Transactional(readOnly = true)
     public List<SupplierResult> findAll() {
@@ -68,7 +67,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     @Transactional
-    public SupplierResult  update(UpdateSupplierParam updateSupplierParam) {
+    public SupplierResult update(UpdateSupplierParam updateSupplierParam) {
 //        System.out.println(updateSupplierParam.getId());
 //        Optional<Supplier> supplier = supplierRepository.findById(updateSupplierParam.getId());
 //        System.out.println(supplier.get());
@@ -95,30 +94,29 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     @Transactional
-    public Map<String, Object> getAllSupplierPage(Integer pageNo, Integer pageSize, String title,
-                                                     String status
-                                                    ) {
-        pageNo = pageNo - 1;
-        Pageable pageable;
+    public Map<String, Object> getAllSupplierPage(Integer pageNo,
+                                                  Integer pageSize,
+                                                  String title,
+                                                  String status) {
 
-        pageable = PageRequest.of(pageNo, pageSize);
+//        pageNo = pageNo - 1;
 
-        Page<Supplier> suppliers;
-        suppliers = supplierRepository.findAll(pageable);
-        if (suppliers.hasContent()) {
-            List<Supplier> supplierList = suppliers.getContent();
-            List<SupplierResult> supplierResults = new ArrayList<>();
-            for (Supplier supplier : supplierList) {
-                SupplierResult supplierResult = supplierMapper.toDTO(supplier);
-
-                supplierResults.add(supplierResult);
-            }
-
-            Map<String, Object> response = new HashMap<>();
-            response.put("suppliers", supplierResults);
-            response.put("totalItem", suppliers.getTotalElements());
-            response.put("totalPage", suppliers.getTotalPages());
-            return response;
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        Page<Supplier> page;
+        page = supplierRepository.findAll(pageable);
+        if (page.hasContent()) {
+            List<SupplierResult> supplierResults = page.getContent()
+                    .stream()
+                    .map(supplierMapper::toDTO)
+                    .collect(Collectors.toList());
+            return new HashMap<>() {{
+                put("suppliers", supplierResults);
+                put("totalItem", page.getTotalElements());
+                put("totalPage", page.getTotalPages());
+            }};
+//            response.put("suppliers", supplierResults);
+//            response.put("totalItem", suppliers.getTotalElements());
+//            response.put("totalPage", suppliers.getTotalPages());
         } else {
             return new HashMap<>();
         }
@@ -127,7 +125,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     @Transactional(readOnly = true)
     public Page<SupplierResult> findAllByFilters(SupplierFilter filter, Pageable pageable) {
-        return supplierFilterRepository.findAllByFilters(filter,pageable).map(supplierMapper::toDTO);
+        return supplierFilterRepository.findAllByFilters(filter, pageable).map(supplierMapper::toDTO);
     }
 
 }

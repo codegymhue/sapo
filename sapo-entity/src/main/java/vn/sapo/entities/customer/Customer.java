@@ -2,6 +2,7 @@ package vn.sapo.entities.customer;
 
 import com.vladmihalcea.hibernate.type.json.JsonType;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.hibernate.annotations.Type;
@@ -19,16 +20,14 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Table(name = "customer")
-@Entity
+@NoArgsConstructor
 @Accessors(chain = true)
+@Entity
+@Table(name = "customer")
 @TypeDef(
         name = "json",
         typeClass = JsonType.class)
 public class Customer extends BaseEntity {
-    public Customer() {
-        this.attributes = new HashMap<>();
-    }
 
     public Customer(Integer id) {
         this.id = id;
@@ -110,20 +109,26 @@ public class Customer extends BaseEntity {
         return opt.orElse(null);
     }
 
+    public <T> T getAttributeValue(String key) {
+        if (attributes == null)
+            return null;
+        return (T) attributes.get(key);
+    }
+
     public final static String WEBSITE_ATTRIBUTE_NAME = "website";
     public final static String FAX_ATTRIBUTE_NAME = "fax";
     public final static String TAX_CODE_ATTRIBUTE_NAME = "taxCode";
 
     public String getWebsite() {
-        return attributes.get(WEBSITE_ATTRIBUTE_NAME);
+        return getAttributeValue(WEBSITE_ATTRIBUTE_NAME);
     }
 
     public String getFax() {
-        return attributes.get(FAX_ATTRIBUTE_NAME);
+        return getAttributeValue(FAX_ATTRIBUTE_NAME);
     }
 
     public String getTaxCode() {
-        return attributes.get(TAX_CODE_ATTRIBUTE_NAME);
+        return getAttributeValue(TAX_CODE_ATTRIBUTE_NAME);
     }
 
     public Customer setWebsite(String website) {
