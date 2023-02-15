@@ -133,6 +133,16 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public List<CustomerResult> findAllEmployeeListId(List<Integer> employeeIds) {
+        return null;
+    }
+
+    @Override
+    public List<CustomerResult> findAllByGenderId(String genderId) {
+        return null;
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Page<CustomerResult> findAllByFilters(CustomerFilter filters, Pageable pageable) {
         return customerFilterRepository.findAllByFilters(filters, pageable).map(customerMapper::toDTO);
