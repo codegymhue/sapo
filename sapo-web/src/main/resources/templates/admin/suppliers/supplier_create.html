@@ -267,33 +267,14 @@
 <th:block th:replace="/layout/script :: script"/>
 
 <script src="/assets/admin/js/suppliers/supplier_create.js"></script>
+<script src="/assets/admin/js/suppliers/supplier_app.js"></script>
+<!--<script src="/assets/admin/js/suppliers/jquery/jquery.validate.min.js"></script>-->
 <script>Page();</script>
+
 
 </body>
 </html>
 <script>
-    class Supplier {
-        constructor(id, supplierCode, name, email, phone, description, employeeId, paymentMethodId, createAt, updatedAt, createAddressParam, status, fax, taxCode, Website, debtTotal) {
-            this.id = id;
-            this.supplierCode = supplierCode;
-            this.name = name;
-            this.email = email;
-            this.phone = phone;
-            this.description = description;
-            this.employeeId = employeeId;
-            this.Website = Website;
-            this.taxCode = taxCode;
-            this.fax = fax;
-            this.paymentMethodId = paymentMethodId;
-            this.createAt = createAt;
-            this.updatedAt = updatedAt;
-            this.createAddressParam = createAddressParam;
-            this.status = status;
-            this.debtTotal = debtTotal
-
-        }
-    }
-
     class CreateAddressParam {
         constructor(id, fullName, phoneNumber, line1, line2, email, districtId, districtName, provinceId, provinceName, wardId, wardName, zipCode, customerId, supplierId, isDefault, description) {
             this.id = id;
@@ -364,7 +345,7 @@
              })
                 .done((data) => {
                     console.log(data)
-                    App.IziToast.showSuccessAlert("tạo nhà cung cấp thành công !");
+                    App.IziToast.showSuccessAlert(" Thêm nhà cung cấp thành công ");
                     setTimeout(() => {
                     }, 2500)
                     $('#formCreate')[0].reset();
