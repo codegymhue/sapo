@@ -83,6 +83,11 @@ public class Supplier extends BaseEntity {
         setPaymentMethodId(paymentMethodId);
     }
 
+    public Supplier setGroupId(Integer groupId) {
+        this.group = new SupplierGroup(this.groupId = groupId);
+        return this;
+    }
+
     public Supplier setEmployeeId(Integer employeeId) {
         this.employee = new Employee(this.employeeId = employeeId);
         return this;

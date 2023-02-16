@@ -23,7 +23,7 @@ public class SupplierIntegrationTest {
     @BeforeEach
     public void setUp() {
         UpdateSupplierParam supplierParam = new UpdateSupplierParam()
-                .setId(1)
+                .setId(98)
                 .setFullName("Thanh Ngân")
                 .setEmail("thanhngan1002@gmail.com")
                 .setPhone("0989876565")
