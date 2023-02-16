@@ -277,7 +277,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: "http://localhost:8080/api/pricingPolicys"
+            url: origin +"/api/pricingPolicys"
         })
             .done((data) => {
                 console.log(data);
@@ -310,7 +310,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: "http://localhost:8080/api/admin/payment_methods"
+            url: origin +"/api/admin/payment_methods"
         })
             .done((data) => {
                 console.log(data);
@@ -352,7 +352,7 @@
                 "content-type": "application/json"
             },
             "type": "POST",
-            "url": "http://localhost:8080/api/customer_groups/update",
+            "url": origin +"/api/customer_groups/update",
             "data": JSON.stringify(updateCusGroupParam)
         })
             .done((data) => {
@@ -383,7 +383,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: "http://localhost:8080/api/customer_groups" + "/" + Id
+            url: origin +"/api/customer_groups" + "/" + Id
         })
             .done((data) => {
                 customerGroup = data;
@@ -417,7 +417,7 @@
                     "content-type": "application/json"
                 },
                 type: "DELETE",
-                url: "http://localhost:8080/api/customer_groups/delete/" + id,
+                url: origin +"/api/customer_groups/delete/" + id,
             })
                 .done((data) => {
                     CustomerGroup_App.IziToast.showSuccessAlert("Xoá nhóm khách hàng thành công  !!! ");

@@ -6,7 +6,7 @@ const deleteById = (supplierId) => {
             "content-type": "application/json"
         },
         "type": "delete",
-        "url": "http://localhost:8080/api/admin/suppliers/" + supplierId + "/delete"
+        "url": origin +"/api/admin/suppliers/" + supplierId + "/delete"
     })
     .done(() => {
         window.location.href="/admin/suppliers";

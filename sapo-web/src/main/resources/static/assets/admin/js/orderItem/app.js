@@ -1,5 +1,5 @@
 class App {
-    static DOMAIN_API = "http://localhost:8080";
+    static DOMAIN_API = origin;
     static BASE_URL_OrderItem = this.DOMAIN_API + "/api/orderItems";
 }
 class OrderItem {

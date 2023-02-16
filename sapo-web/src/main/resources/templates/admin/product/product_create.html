@@ -1097,7 +1097,7 @@
                 "content-type": "application/json"
             },
             "type": "POST",
-            "url": "http://localhost:8080/api/categories/create",
+            "url": origin +"/api/categories/create",
             "data": JSON.stringify(category)
         })
             .done((data) => {
@@ -1123,7 +1123,7 @@
                 "content-type": "application/json"
             },
             "type": "POST",
-            "url": "http://localhost:8080/api/brands/create",
+            "url": origin +"/api/brands/create",
             "data": JSON.stringify(brand)
         })
             .done((data) => {
@@ -1191,7 +1191,7 @@
                 "content-type": "application/json"
             },
             "type": "POST",
-            "url": "http://localhost:8080/api/taxes/create",
+            "url": origin +"/api/taxes/create",
             "data": JSON.stringify(tax)
         })
             .done((data) => {

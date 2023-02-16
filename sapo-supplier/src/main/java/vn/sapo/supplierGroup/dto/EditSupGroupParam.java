@@ -6,15 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Column;
-import java.time.Instant;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Accessors(chain = true)
-public class SupplierGroupResult {
+public class EditSupGroupParam {
     private Integer id;
 
     private String title;
@@ -22,6 +19,4 @@ public class SupplierGroupResult {
     private String supplierCode;
 
     private String description;
-    private String createdAt;
-
 }
