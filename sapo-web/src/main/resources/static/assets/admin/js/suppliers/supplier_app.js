@@ -1,9 +1,12 @@
 "use strict";
 
-class App {
+class SupplierApp {
     static DOMAIN_SERVER = origin;
     static SUPPLIER_API = this.DOMAIN_SERVER + "/api/suppliers";
     static EMPLOYEE_API = this.DOMAIN_SERVER + "/api/employees";
+    static SUPPLIER_GROUP_API = this.DOMAIN_SERVER + "/api/supplier_groups";
+
+
 
 
     static renderRowSupplier(item, showStatus) {
@@ -71,6 +74,20 @@ class App {
                     </span>
                     <label class="checkbox multiselect-label--sapo-checkbox"
                      for="${employee.id}"> ${employee.fullName}</label>
+                     </a>
+                     </li>`
+        return str;
+    }
+
+    static renderSupplierGroupOnFilter(supplierGroup) {
+        let str = ` <li class="multiselect--sapo-checkbox">
+                    <a tabindex="0" class="multiselect-a--sapo-checkbox">
+                    <span class="sapo-checkbox">
+                    <input type="checkbox" value="${supplierGroup.id}" id="${supplierGroup.id}" class="sapo-checkbox__input">
+                    <span class="sapo-checkbox__checkmark"></span>
+                    </span>
+                    <label class="checkbox multiselect-label--sapo-checkbox"
+                     for="${supplierGroup.id}"> ${supplierGroup.title}</label>
                      </a>
                      </li>`
         return str;

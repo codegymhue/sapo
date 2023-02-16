@@ -666,7 +666,7 @@
         "content-type": "application/json"
       },
       type: "GET",
-      url: 'http://localhost:8080/api/suppliers/' + idDelete
+      url: origin +'/api/suppliers/' + idDelete
     })
             .done(() => {
               $("#supplier-delete-modal").modal("show");
@@ -686,7 +686,7 @@
         "content-type": "application/json"
       },
       type: "DELETE",
-      url: 'http://localhost:8080/api/suppliers/' + idDelete
+      url: origin +'/api/suppliers/' + idDelete
     })
             .done(() => {
               $("#supplier-delete-modal").modal("hide");
