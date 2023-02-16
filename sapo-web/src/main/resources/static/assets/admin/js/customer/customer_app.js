@@ -1,4 +1,4 @@
-class App {
+class CustomerApp {
 
     static DOMAIN_API = origin;
     // static BASE_URL_Customer = this.DOMAIN_API + "/api/customers";
