@@ -373,7 +373,7 @@
              })
                 .done((data) => {
                     console.log(data)
-                    App.IziToast.showSuccessAlert(" Thêm nhà cung cấp thành công ");
+                    SupplierApp.IziToast.showSuccessAlert(" Thêm nhà cung cấp thành công ");
                     setTimeout(() => {
                     }, 2500)
                     $('#formCreate')[0].reset();
@@ -383,7 +383,7 @@
                 .fail((jqXHR) => {
                     console.log(jqXHR);
 
-                    // App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+                    // SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_400)
                 })
         });
     }

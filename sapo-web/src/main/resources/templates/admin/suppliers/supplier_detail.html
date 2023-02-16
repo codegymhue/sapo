@@ -690,13 +690,13 @@
     })
             .done(() => {
               $("#supplier-delete-modal").modal("hide");
-              App.IziToast.showSuccessAlert("Xoá nhà cung cấp thành công");
+              SupplierApp.IziToast.showSuccessAlert("Xoá nhà cung cấp thành công");
               setTimeout(() => {
               }, 1500)
               window.location.href = `/admin/suppliers`;
             })
             .fail((error) => {
-              App.IziToast.showErrorAlert("Xoá nhà cung cấp thất bại");
+              SupplierApp.IziToast.showErrorAlert("Xoá nhà cung cấp thất bại");
               setTimeout(() => {
               }, 1500)
             })

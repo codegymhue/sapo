@@ -406,7 +406,7 @@ function renderGroup(item) {
       "data": JSON.stringify(newGroupSup)
     })
             .done((data) => {
-              App.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
+              SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
               setTimeout(() => {
               }, 1500);
               let str= renderGroup(data)
@@ -414,7 +414,7 @@ function renderGroup(item) {
               page.dialogs.elements.showModalCreateGroupSupplier.modal('hide');
             })
             .fail((jqXHR) => {
-              App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+              SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_400)
             })
   }
 
@@ -459,7 +459,7 @@ function renderGroup(item) {
     })
             .done((data)=>{
               console.log("btn data : ", data)
-              App.IziToast.showSuccessAlert("Sửa nhóm nhà cung cấp thành công!");
+              SupplierApp.IziToast.showSuccessAlert("Sửa nhóm nhà cung cấp thành công!");
               setTimeout(() => {
               }, 500);
               $("#showModalEditGroupSupplier").modal('hide');
@@ -502,7 +502,7 @@ function renderGroup(item) {
     })
 
    .done(()=>{
-              App.IziToast.showSuccessAlert("Xoá nhóm nhà cung cấp thành công!");
+              SupplierApp.IziToast.showSuccessAlert("Xoá nhóm nhà cung cấp thành công!");
               setTimeout(() => {
               }, 500);
               window.location.href = `/admin/supplier_groups`;

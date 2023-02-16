@@ -725,9 +725,9 @@
             .done((data) => {
                 console.log("data", data.id);
                 let trSupplier = $("#tr_" + data.id);
-                let tr = App.renderRowSupplier(data);
+                let tr = SupplierApp.renderRowSupplier(data);
                 trSupplier.replaceWith(tr);
-                App.IziToast.showSuccessAlert("Sửa thông tin nhà cung cấp thành công!");
+                SupplierApp.IziToast.showSuccessAlert("Sửa thông tin nhà cung cấp thành công!");
                 setTimeout(() => {
                 }, 1500)
                 window.location.href = `/admin/suppliers/${data.id}/histories`;
@@ -735,7 +735,7 @@
             })
             .fail((jqXHR) => {
                 // console.log(jqXHR);
-                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+                SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_400)
             })
     })
 
@@ -775,7 +775,7 @@
     //         "data": JSON.stringify(newGroupSup)
     //     })
     //         .done((data) => {
-    //             App.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
+    //             SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
     //             setTimeout(() => {
     //             }, 1500);
     //
@@ -800,7 +800,7 @@
     //             // })
     //         })
     //         .fail((jqXHR) => {
-    //             App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+    //             SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_400)
     //         })
     // }
 
@@ -895,7 +895,7 @@
         // },
         // showErrors: function (errorMap, errorList) {
         //     if (this.numberOfInvalids() > 0) {
-        //         // App.IziToast.showErrorAlert("Tên nhóm nhà cung cấp không được để trống");
+        //         // SupplierApp.IziToast.showErrorAlert("Tên nhóm nhà cung cấp không được để trống");
         //         // setTimeout(() => {
         //         // }, 1500);
         //
