@@ -363,8 +363,6 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
-    <script src="/assets/admin/js/customer/customer_app.js"></script>
-    <script src="/assets/admin/js/product/app.js"></script>
     <script>
 
         var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -391,7 +389,7 @@
                 "bDestroy": true,
                 "bJQueryUI": true,
                 ajax: {
-                    url: origin/api/customers/filter',
+                    url: origin + '/api/customers/filter',
                     type: 'POST',
                     dataSrc: "content",
                     contentType: 'application/json',
@@ -455,39 +453,39 @@
             let checkCustomerFilterRoot = {
                 id: null,
                 customerCode: null,
-                groupIds : [],
-                gender : null,
-                dayOfBirthday : null,
-                monthOfBirthday : null,
-                employeeIds : [],
-                statusList : [],
-                createdFrom : null,
-                createdTo : null,
-                keyword : null
+                groupIds: [],
+                gender: null,
+                dayOfBirthday: null,
+                monthOfBirthday: null,
+                employeeIds: [],
+                statusList: [],
+                createdFrom: null,
+                createdTo: null,
+                keyword: null
             }
 
             console.log(checkCustomerFilterChange);
             let obj = getChanges(checkCustomerFilterRoot, checkCustomerFilterChange);
             if (isEmpty(obj)) {
                 console.log("Không có thay đổi");
-                $("#btn-save-search").attr( "disabled", "");
-                $("#btn-save-search").css("background-color","rgb(243, 244, 245)");
-                $("#btn-save-search").css("color","rgb(116, 124, 135)");
+                $("#btn-save-search").attr("disabled", "");
+                $("#btn-save-search").css("background-color", "rgb(243, 244, 245)");
+                $("#btn-save-search").css("color", "rgb(116, 124, 135)");
             } else {
-                $("#btn-save-search").removeAttr( "disabled" );
-                $("#btn-save-search").css("background-color","rgb(51, 160, 255)");
-                $("#btn-save-search").css("color","white");
+                $("#btn-save-search").removeAttr("disabled");
+                $("#btn-save-search").css("background-color", "rgb(51, 160, 255)");
+                $("#btn-save-search").css("color", "white");
                 console.log("Có thay đổi");
             }
         });
 
         // nút xóa bộ lọc
         $("#btnCloseFilter").on('click', () => {
-            $("#offcanvasExample input[type=checkbox]").each((index, item)=>{
+            $("#offcanvasExample input[type=checkbox]").each((index, item) => {
                 $(item).prop('checked', false);
             })
             customerFilter.groupIds = [];
-            $("#offcanvasExample input[type=radio]").each((index, item)=>{
+            $("#offcanvasExample input[type=radio]").each((index, item) => {
                 $(item).prop('checked', false);
             })
             customerFilter.groupIds = [];
@@ -499,23 +497,25 @@
             localStorage.removeItem(KEY_CUSTOMER_FILTER_SAVE);
             CustomerApp.IziToast.showSuccessAlert(CustomerApp.AlertMessageVi.SUCCESS_DELETE);
         })
-        function drawFilterLabel(){
-            if(document.getElementById("divDeleteFilterGroupLabel")!=null){
-                $( "#divDeleteFilterGroupLabel" ).remove();
+
+        function drawFilterLabel() {
+            if (document.getElementById("divDeleteFilterGroupLabel") != null) {
+                $("#divDeleteFilterGroupLabel").remove();
             }
             drawFilterLabelGroup();
 
         }
-        function drawFilterLabelGroup(){
-            if(customerFilter.groupIds.length !== 0){
+
+        function drawFilterLabelGroup() {
+            if (customerFilter.groupIds.length !== 0) {
                 let strNameFilterGroup = "";
-                for(let i=0;i<customerFilter.groupIds.length;i++){
+                for (let i = 0; i < customerFilter.groupIds.length; i++) {
                     for (let j = 0; j < customerGroups.length; j++) {
-                        if(customerFilter.groupIds[i]==customerGroups[j].id){
+                        if (customerFilter.groupIds[i] == customerGroups[j].id) {
                             strNameFilterGroup += customerGroups[i].title;
                         }
                     }
-                    if(i!== customerFilter.groupIds.length-1){
+                    if (i !== customerFilter.groupIds.length - 1) {
                         strNameFilterGroup += ", "
                     }
                 }
@@ -531,12 +531,12 @@
                         </div>
                 `;
 
-                $( "#filterLabel" ).append(labelGroups);
-                $("#btnDeleteFilterGroupLabel").click(function() {
+                $("#filterLabel").append(labelGroups);
+                $("#btnDeleteFilterGroupLabel").click(function () {
                     customerFilter.groupIds = [];
-                    $( "#divDeleteFilterGroupLabel" ).remove();
+                    $("#divDeleteFilterGroupLabel").remove();
                     drawDataTable();
-                    $("#customerGroupFilter input[type=checkbox]").each((index, item)=>{
+                    $("#customerGroupFilter input[type=checkbox]").each((index, item) => {
                         $(item).prop('checked', false);
                     })
                 });
@@ -550,7 +550,7 @@
                     "content-type": "application/json"
                 },
                 type: "GET",
-                url: origin +"/api/customers/customerGender"
+                url: origin + "/api/customers/customerGender"
             })
                 .done((data) => {
                     console.log(data)
@@ -580,7 +580,7 @@
                     "content-type": "application/json"
                 },
                 type: "Post",
-                url: origin +"/api/customers/findAllCustomerEmployee",
+                url: origin + "/api/customers/findAllCustomerEmployee",
                 data: JSON.stringify(arrEmployeeId)
             })
                 .done((data) => {
@@ -600,7 +600,7 @@
                     "content-type": "application/json"
                 },
                 type: "Post",
-                url: origin +"/api/customers/filter",
+                url: origin + "/api/customers/filter",
                 data: JSON.stringify(arrId)
             })
                 .done((data) => {
@@ -613,7 +613,6 @@
         }
 
 
-
         function getAllCustomerGroup() {
             return $.ajax({
                 headers: {
@@ -621,7 +620,7 @@
                     "content-type": "application/json"
                 },
                 type: "GET",
-                url: origin +"/api/customer_groups"
+                url: origin + "/api/customer_groups"
             })
                 .done((data) => {
                     // console.log(data)
@@ -646,7 +645,7 @@
                     "content-type": "application/json"
                 },
                 type: "GET",
-                url: origin +"/api/employees"
+                url: origin + "/api/employees"
             })
                 .done((data) => {
                     employees = data;
@@ -663,61 +662,7 @@
                 })
         }
 
-        // function getAllFilterCustomer(listData) {
-        //     $(document).ready(function () {
-        //         $("#tbCustomer").DataTable({
-        //             // chuyển tiếng việt cho datatable
-        //             dom: '<"toolbar">frtip',
-        //             ajax: {
-        //                 url: origin/api/customers/filter',
-        //                 type: 'POST',
-        //                 dataSrc: "content",
-        //                 data: {
-        //                         "gender":"NU",
-        //                             "statusList":["AVAILABLE"],
-        //                             "groupId": [1,3]
-        //
-        //                     }
-        //             },
-        //             lengthMenu: [
-        //                 [5, 10, 20, -1],
-        //                 ["5", "10", "20", "All"]
-        //             ],
-        //             searching: false,
-        //             destroy: true,
-        //             columns: [
-        //                 {data: 'id'},
-        //                 {data: 'customerCode'},
-        //                 {data: 'fullName'},
-        //                 {data: 'phoneNumber'},
-        //                 {data: 'group.title'},
-        //                 {data: 'debtTotal'},
-        //                 {data: 'spendTotal'},
-        //                 {data: "quantityItemOrder"}],
-        //             /**
-        //             columnDefs: [
-        //                 {
-        //                     targets: 0,
-        //                     render: function (data, type, row, meta) {
-        //                         return `
-        //                        <input type="checkbox" value="check_none" />
-        //                     `
-        //                     }
-        //                 },
-        //                 {
-        //                     targets: 1,
-        //                     render: function (data, type, row, meta) {
-        //                         return `<a href="/admin/customers/ ${row.id}">${row.customerCode}</a>`;
-        //                     }
-        //                 },
-        //
-        //
-        //             ],
-        //              **/
-        //         })
-        //     });
-        //
-        // }
+
         class CustomerFilter {
             constructor() {
                 this.id = null;
