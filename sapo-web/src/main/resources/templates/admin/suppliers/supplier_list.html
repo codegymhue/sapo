@@ -45,9 +45,6 @@
                         </div>
                         <div class="action-bar">
                             <div class="action-bar__top-links">
-                                <!--       Luong code o day                          -->
-<!--                                <a th:href="@{/admin/suppliers/modals/export_file.html}"-->
-<!--                                 id="exportFileSuppliers"-->
                                 <button class="btn sapo-btn-transparent action-bar__link export_product"
                                         bind-event-click="showExportSuppliers()" data-popover-index="1" type="button"
                                         name="button">
@@ -58,9 +55,6 @@
                                     </svg>
                                     Xuất file
                                 </button>
-                                                <!--      Luong code o day                          -->
-<!--                                <a th:href="@{/admin/suppliers/modals/import_file.html}"-->
-<!--                                 id="importFileSuppliers"-->
                                 <button class="btn sapo-btn-transparent action-bar__link import_product"
                                         bind-event-click="openFileImport()" data-popover-index="1" type="button"
                                         name="button">
@@ -99,7 +93,7 @@
                         <a href="/admin/suppliers/create" class="btn sapo-btn-default">Thêm nhà cung cấp</a>
 
                         <th:block th:replace="/layout/supplier/style :: style"></th:block>
-
+                        <th:block th:replace="/layout/script :: script"></th:block>
                     </div>
                 </div>
 
@@ -1215,6 +1209,12 @@
 
 </script>
 
-</body>
+<script>
+    $(".import_product").on("click", () => {
+        alert("hello")
+    })
+</script>
 
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </html>
