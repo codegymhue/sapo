@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/izitoast@1/dist/css/iziToast.min.css">
   <script>
     var CKEDITOR_BASEPATH = '/v2/lib/ckeditor/';
     var S_LANG = 'vi-VN';
@@ -238,7 +239,9 @@
                 <li>
                   <a th:href="'/admin/suppliers/'+${supplier.getId()}+'/edit'">Cập nhật thông tin</a>
                 </li>
+
                 <li><a id="showModalDelete"> Xoá nhà cung cấp </a></li>
+                <input type="hidden" id="modalDeleteId" th:value="${supplier.id}">
               </ul>
             </div>
             <th:bock th:replace="/admin/suppliers/modals/supplier_modal_delete :: supplier_modal_delete"/>
@@ -646,51 +649,57 @@
 
 
 </body>
+<script src="/assets/admin/js/suppliers/supplier_app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/izitoast@1/dist/js/iziToast.min.js" type="text/javascript"
+        crossorigin></script>
+
 
 <script>
 
-  // function showDelete() {
-  //
-  //   let idDelete = $("#idDelete").val()
-  //   console.log("idDelete : " ,idDelete);
-  //
-  //   $.ajax({
-  //     "headers": {
-  //       "accept": "application/json",
-  //       "content-type": "application/json"
-  //     },
-  //     type: "GET",
-  //     url: 'http://localhost:8080/api/suppliers/' + idDelete
-  //   })
-  //           .done(() => {
-  //             $("#supplier-delete-modal").modal("show");
-  //             // getAllCustomers;
-  //           })
-  //           .fail((error) => {
-  //             console.log(error);
-  //           })
-  // }
-  //
-  // $("#showModalDelete").on('click', ()=>{
-  //   let idDelete = $("#idDelete").val()
-  //   console.log("idDelete : " ,idDelete);
-  //
-  //   $.ajax({
-  //     "headers": {
-  //       "accept": "application/json",
-  //       "content-type": "application/json"
-  //     },
-  //     type: "GET",
-  //     url: 'http://localhost:8080/api/suppliers/' + idDelete
-  //   })
-  //           .done(() => {
-  //             $("#supplier-delete-modal").modal("show");
-  //             // getAllCustomers;
-  //           })
-  //           .fail((error) => {
-  //             console.log(error);
-  //           })
-  //
-  // })
+  $("#showModalDelete").on('click', ()=>{
+    let idDelete = $("#modalDeleteId").val()
+    console.log("idDelete : " ,idDelete);
+
+    $.ajax({
+      "headers": {
+        "accept": "application/json",
+        "content-type": "application/json"
+      },
+      type: "GET",
+      url: 'http://localhost:8080/api/suppliers/' + idDelete
+    })
+            .done(() => {
+              $("#supplier-delete-modal").modal("show");
+
+            })
+            .fail((error) => {
+              console.log(error);
+            })
+
+  })
+
+  $("#btn-supplier-delete").on('click', ()=>{
+    let idDelete = $("#modalDeleteId").val()
+    $.ajax({
+      "headers": {
+        "accept": "application/json",
+        "content-type": "application/json"
+      },
+      type: "DELETE",
+      url: 'http://localhost:8080/api/suppliers/' + idDelete
+    })
+            .done(() => {
+              $("#supplier-delete-modal").modal("hide");
+              App.IziToast.showSuccessAlert("Xoá nhà cung cấp thành công");
+              setTimeout(() => {
+              }, 1500)
+              window.location.href = `/admin/suppliers`;
+            })
+            .fail((error) => {
+              App.IziToast.showErrorAlert("Xoá nhà cung cấp thất bại");
+              setTimeout(() => {
+              }, 1500)
+            })
+  })
 </script>
 </html>
