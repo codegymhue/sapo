@@ -666,7 +666,7 @@
                 "content-type": "application/json"
             },
             "type": "GET",
-            "url": "http://localhost:8080/api/employees"
+            "url": origin +"/api/employees"
         })
             .done((data) => {
                 console.log("nhan viên", data)
@@ -684,7 +684,7 @@
                 "content-type": "application/json"
             },
             "type": "GET",
-            "url": "http://localhost:8080/api/admin/payment_methods"
+            "url": origin +"/api/admin/payment_methods"
         })
             .done((data) => {
                 console.log("method select", data)
@@ -719,7 +719,7 @@
                 "content-type": "application/json"
             },
             "type": "PATCH",
-            "url": "http://localhost:8080/api/suppliers/" + idSupp,
+            "url": origin +"/api/suppliers/" + idSupp,
             "data": JSON.stringify(newUpdateSupplierParam)
         })
             .done((data) => {
@@ -771,7 +771,7 @@
     //             "content-type": "application/json"
     //         },
     //         "type": "POST",
-    //         "url": "http://localhost:8080/api/supplier_groups/create",
+    //         "url": origin +"/api/supplier_groups/create",
     //         "data": JSON.stringify(newGroupSup)
     //     })
     //         .done((data) => {
@@ -811,7 +811,7 @@
     //             "content-type": "application/json"
     //         },
     //         type: "GET",
-    //         url: "http://localhost:8080/api/supplier_groups",
+    //         url: origin +"/api/supplier_groups",
     //     })
     //         .done((data) => {
     //             supplierGroups = data;

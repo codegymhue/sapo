@@ -595,7 +595,7 @@
                     "content-type": "application/json"
                 },
                 "type": "POST",
-                "url": "http://localhost:8080/api/customers/create",
+                "url": origin +"/api/customers/create",
                 "data": JSON.stringify(customer)
             })
                 .done((data) => {
@@ -750,7 +750,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: "http://localhost:8080/api/employees"
+            url: origin +"/api/employees"
         })
             .done((data) => {
                 $.each(data, (i, item) => {
@@ -771,7 +771,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: "http://localhost:8080/api/customer_groups/"
+            url: origin +"/api/customer_groups/"
         })
             .done((data) => {
                 console.log(data)
@@ -793,7 +793,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: "http://localhost:8080/api/customers/customerGender"
+            url: origin +"/api/customers/customerGender"
         })
             .done((data) => {
                 console.log(data)

@@ -723,7 +723,7 @@
                 "content-type": "application/json"
             },
             type: "DELETE",
-            url: "http://localhost:8080/api/product/" + productId
+            url: origin +"/api/product/" + productId
         })
             .done(() => {
                 App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_DELETE);

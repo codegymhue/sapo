@@ -1068,7 +1068,7 @@ function getQuantityOrderCustomer() {
     $.ajax({
         headers: {
             "accept": "application/json", "content-type": "application/json"
-        }, type: "GET", url: "http://localhost:8080/api/customers/getQuantityOrderByCustomer/" + idCustomer
+        }, type: "GET", url: origin +"/api/customers/getQuantityOrderByCustomer/" + idCustomer
     })
         .done((data) => {
             console.log(data)
@@ -1108,7 +1108,7 @@ function eventButtonPage() {
 //             "accept": "application/json", "content-type": "application/json"
 //         },
 //         type: "GET",
-//         url: "http://localhost:8080/api/customers/historyCustomerOrder/" + idCustomer + "/" + startIntPaging + "/" + endIntPaging
+//         url: origin +"/api/customers/historyCustomerOrder/" + idCustomer + "/" + startIntPaging + "/" + endIntPaging
 //     })
 //         .done((data) => {
 //             console.log(data)
@@ -1482,7 +1482,7 @@ function showCustomerInfoDebt() {
 //             "content-type": "application/json"
 //         },
 //         type: "GET",
-//         url: "http://localhost:8080/api/shippingAddress/findByCustomerId/" + idCustomer
+//         url: origin +"/api/shippingAddress/findByCustomerId/" + idCustomer
 //     })
 //         .done((data) => {
 //             console.log(data)

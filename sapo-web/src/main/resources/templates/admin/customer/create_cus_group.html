@@ -298,7 +298,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: "http://localhost:8080/api/pricingPolicys"
+            url: origin +"/api/pricingPolicys"
         })
             .done((data) => {
                 console.log(data);
@@ -333,7 +333,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: "http://localhost:8080/api/admin/payment_methods"
+            url: origin +"/api/admin/payment_methods"
         })
             .done((data) => {
                 console.log(data);
@@ -376,7 +376,7 @@
                 "content-type": "application/json"
             },
             "type": "POST",
-            "url": "http://localhost:8080/api/customer_groups/create",
+            "url": origin +"/api/customer_groups/create",
             "data": JSON.stringify(createCusGroupParam)
         })
             .done((data) => {

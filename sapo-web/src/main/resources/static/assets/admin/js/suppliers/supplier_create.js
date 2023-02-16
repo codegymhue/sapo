@@ -5,7 +5,7 @@
             "content-type": "application/json"
         },
         "type": "get",
-        "url": "http://localhost:8080/api/employees/findAll"
+        "url": origin +"/api/employees/findAll"
     })
     .done((data) => {
         $.each(data, (i, item) => {
@@ -24,7 +24,7 @@
             "content-type": "application/json"
         },
         "type": "get",
-        "url": "http://localhost:8080/api/admin/payment_methods"
+        "url": origin +"/api/payment_methods"
     })
     .done((data) => {
         $.each(data, (i, item) => {
