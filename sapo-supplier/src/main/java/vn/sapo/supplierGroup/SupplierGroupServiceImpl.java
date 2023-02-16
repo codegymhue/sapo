@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.entities.supplier.SupplierGroup;
+import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.supplierGroup.dto.CreateSupGroupParam;
 import vn.sapo.supplierGroup.dto.EditSupGroupParam;
@@ -30,9 +31,10 @@ public class SupplierGroupServiceImpl implements SupplierGroupService{
 //       }
         SupplierGroup supplierGroup = supplierGroupMapper.toModel(createSupGroupParam);
         supplierGroupRepository.save(supplierGroup);
-        if(supplierGroup.getSupplierCode().isEmpty()) {
-            supplierGroup.setSupplierCode("STN" + supplierGroup.getId());
-        }
+
+        String supplierCode = createSupGroupParam.getSupplierCode();
+        if (supplierCode == null)
+            supplierGroup.setSupplierCode(CodePrefix.SUPPLIER.generate(supplierGroup.getId()));
         return supplierGroupMapper.toDTO(supplierGroup);
     }
 
