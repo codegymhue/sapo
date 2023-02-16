@@ -365,7 +365,7 @@ function renderGroup(item) {
         "content-type": "application/json"
       },
       type: "GET",
-      url: "http://localhost:8080/api/supplier_groups",
+      url: origin +"/api/supplier_groups",
     })
             .done((data) => {
               supplierGroups = data;
@@ -402,7 +402,7 @@ function renderGroup(item) {
         "content-type": "application/json"
       },
       "type": "POST",
-      "url": "http://localhost:8080/api/supplier_groups/create",
+      "url": origin +"/api/supplier_groups/create",
       "data": JSON.stringify(newGroupSup)
     })
             .done((data) => {
@@ -426,7 +426,7 @@ function renderGroup(item) {
         "content-type": "application/json"
       },
       type: "GET",
-      url: "http://localhost:8080/api/supplier_groups/" + item,
+      url: origin +"/api/supplier_groups/" + item,
     })
             .done((data) => {
               $("#showModalEditGroupSupplier").modal('show');
@@ -454,7 +454,7 @@ function renderGroup(item) {
         "content-type": "application/json"
       },
       type: "PATCH",
-      url: "http://localhost:8080/api/supplier_groups/" + idEditGroup,
+      url: origin +"/api/supplier_groups/" + idEditGroup,
       data: JSON.stringify(editGroup)
     })
             .done((data)=>{
@@ -479,7 +479,7 @@ function renderGroup(item) {
                 "content-type": "application/json"
               },
               type: "GET",
-              url: "http://localhost:8080/api/supplier_groups/" + idDelete,
+              url: origin +"/api/supplier_groups/" + idDelete,
             })
                     .done((data) => {
                       console.log("data-delete : ", data)
@@ -498,7 +498,7 @@ function renderGroup(item) {
         "content-type": "application/json"
       },
       type: "DELETE",
-      url: "http://localhost:8080/api/supplier_groups/" + idDelete,
+      url: origin +"/api/supplier_groups/" + idDelete,
     })
 
    .done(()=>{
