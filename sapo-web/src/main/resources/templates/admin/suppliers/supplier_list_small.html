@@ -118,11 +118,11 @@
                                 <div class="btn-group pull-left" data-toggle="buttons">
                                     <label class="btn filter-button-tag"
                                            bind-event-click="setParamFilterActive('active',this)">
-                                        <input type="checkbox" autocomplete="off"> Đang giao dịch
+                                        <input type="checkbox"> Đang giao dịch
                                     </label>
                                     <label class="btn filter-button-tag"
                                            bind-event-click="setParamFilterActive('disable',this)">
-                                        <input type="checkbox" autocomplete="off"> Ngừng giao dịch
+                                        <input type="checkbox"> Ngừng giao dịch
                                     </label>
                                 </div>
                                 <a href="javascript" bind-event-click="removeItemFilter(this, 'status')"
@@ -132,7 +132,7 @@
                                     </svg>
                                 </a>
                             </div>
-                        
+
 
                             <div class="filter-item" filter-type="assigneeIds" style="width:auto;float: left">
                                 <input type="hidden" class="choosed-single-id">
@@ -151,10 +151,26 @@
                                 </div>
                                 <div class="btn-group pull-left">
                                     <div>
-                                        <select multiple="multiple" id="assigneeIds" class="form-control margin-select"
-                                                style="min-width: 300px; height: 36px;" placeholder="Chọn nhân viên">
-                                            <option value="999">Loi</option>
-                                        </select>
+                                        <div class="btn-group show">
+                                            <button type="button" bind-event-click="setParamFilterAssigneeIds(this)"
+                                                    class="multiselect dropdown-toggle btn sapo-btn-blank btn-default"
+                                                    id="dropdownMenuClickableInside"
+                                                    data-bs-toggle="dropdown" data-bs-auto-close="outside"
+                                                    aria-expanded="false"
+                                                    style="padding:0.8rem; min-width: 300px" title="Chọn nhân viên"
+                                            ><span class="multiselect-selected-text">Chọn nhân viên</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                     class="icon-dropdown-select">
+                                                    <path d="M10 16l-4-4h8l-4 4zm0-12L6 8h8l-4-4z"></path>
+                                                </svg>
+                                            </button>
+                                            <ul class="multiselect-container dropdown-menu"
+                                                aria-labelledby="dropdownMenuClickableInside"
+                                                style="width: 100%; max-height: 250px; overflow: hidden auto; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);"
+                                                x-placement="bottom-start">
+
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                                 <a href="javascript" bind-event-click="removeItemFilter(this, 'assigneeIds')"
@@ -164,7 +180,7 @@
                                     </svg>
                                 </a>
                             </div>
-                        
+
 
                             <div class="filter-item" filter-type="supplierGroupId" style="width:auto;float: left">
                                 <div class="select__wrapper">
@@ -209,7 +225,7 @@
                                     </svg>
                                 </a>
                             </div>
-                        
+
 
                             <div class="filter-item" filter-type="createdOn" style="width:auto; float: left">
                                 <div class="select__wrapper">
@@ -243,9 +259,10 @@
                                     </svg>
                                 </a>
                             </div>
-                        
+
                             <div class="select__wrapper">
-                                <select class="sapo-select select-change-filter--all "bind-event-change="resetFilter(this)">
+                                <select class="sapo-select select-change-filter--all "
+                                        bind-event-change="resetFilter(this)">
                                     <option value="">Chọn điều kiện lọc</option>
                                     <option value="status">Trạng thái</option>
                                     <option value="assigneeIds">Nhân viên</option>
@@ -393,7 +410,7 @@
         console.log(str)
         console.log(element)
     }
-    
+
     let employee;
 
     const page = {
@@ -423,6 +440,8 @@
     page.dialogs.elements.selectChangeFilter = $(".select-change-filter");
     page.dialogs.elements.filterItem = $(".filter-item");
     page.dialogs.elements.selectAssigneeIds = $("#assigneeIds");
+    page.dialogs.elements.filterEmployee = $(".multiselect-container")
+    page.dialogs.elements.checkboxInputEmployee = $(".sapo-checkbox__input")
 
 
     // seach
@@ -491,7 +510,7 @@
                 console.log(x)
                 if (x.style.display === "none" || x.style.display === "") {
                     x.style.display = "flex";
-                    $(x).css("flex-direction","column")
+                    $(x).css("flex-direction", "column")
                 } else {
                     x.style.display = "none";
                 }
@@ -511,8 +530,7 @@
         })
             .done((data) => {
                 $.each(data, (i, item) => {
-                    let str = `<option value="${item.id}">${item.fullName}</option>`;
-                    page.dialogs.elements.selectAssigneeIds.append(str);
+                    page.dialogs.elements.filterEmployee.append(App.renderEmployeeOnFilter(item));
                 });
 
             }).fail((jqXHR) => {
@@ -521,25 +539,45 @@
         })
 
     }
-    function resetFilter(element){
-       let ele = document.querySelector("[" + "filter-type" + "=" + $(element).val() + "]")
-        $(ele).css("display","block");
-        // $($(element)+ " option[value=" + $(element).val() + "]").hide()
-        console.log($(element))
-        $(element).find( "option[value=" + $(element).val() + "]").hide();
+
+    // filter tổng
+    function resetFilter(element) {
+        console.log(element)
+        let ele = document.querySelector("[" + "filter-type" + "=" + $(element).val() + "]")
+        $(ele).css("display", "block");
+        $(element).find("option[value=" + $(element).val() + "]").hide();
+        $(element).find("option[value=" + $(element).val() + "]").prop("disabled", true)
         $(element).val('').trigger('chosen:updated');
-        $(element).each(function() {
-            if (($(element).find('option:selected').not('[disabled]').length === 0) ) {
-                element.parentElement.hide();
-            }
-        });
-        console.log($(element).val() == null)
-        console.log($(element).closest('.hidden').length == 0)
-        console.log(($(element).find('option:selected').not('[hide]').length === 0))
+        if (($(element).find('option:disabled').length === 4)) {
+            $(element.parentElement).hide();
+        }
     }
 
+    // loại bỏ filter
+    function removeItemFilter(element, str) {
+        console.log(element)
+        let ele = document.querySelector("[" + "filter-type" + "=" + str + "]");
+        $(ele).css("display", "none");
+        $(".select-change-filter--all").find("option[value=" + str + "]").prop("disabled", false);
+        $(".select-change-filter--all").find("option[value=" + str + "]").show();
+        if (($(".select-change-filter--all").find('option:disabled').length < 4)) {
+            $(".select__wrapper").show();
+        }
+    }
+
+    // function changeItemFilter(element){
+    //     $('option').prop('disabled', false);
+    //     $('.select-change-filter').each(function() { //loop through all the select elements
+    //         let val = element.value;
+    //         $('.select-change-filter').not(element).find('option').filter(function() { //filter option elements having value as selected option
+    //             return element.value === val;
+    //         }).prop('disabled', true); //disable those option elements
+    //     });
+    // }
+
+    // tùy chọn filter status
     function setParamFilterActive(str, element) {
-        let status = $(element.parentElement.parentElement).find("input.choosed-single-id").val().split(',')
+        let status = $(element.parentElement.parentElement).find("input.choosed-single-id").val().split(',');
         if ($(element).hasClass("active")) {
             $(element).removeClass("active")
             if (status.indexOf(str) > -1) {
@@ -547,10 +585,35 @@
             }
         } else {
             $(element).addClass("active");
-           status.push(str)
+            status.push(str)
         }
+        console.log(str);
         $(element.parentElement.parentElement).find("input.choosed-single-id").val(status)
     }
+
+    function setParamFilterAssigneeIds(element) {
+        let assigneeIds = $(element.parentElement.parentElement.parentElement.parentElement).find("input.choosed-single-id").val().split(',');
+        $('input[type="checkbox"].sapo-checkbox__input').change(function () {
+            let checkbox = $(this)
+            if (checkbox.is(":checked")){
+                assigneeIds.push(checkbox.val())
+            }else{
+                if (assigneeIds.indexOf(checkbox.val()) > -1) {
+                    assigneeIds.splice(assigneeIds.indexOf(checkbox.val()), 1)
+                }
+            }
+            $(element.parentElement.parentElement.parentElement.parentElement).find("input.choosed-single-id").val(assigneeIds)
+        })
+    }
+
+    // $('#dropdownMenuClickableInside').click(function() {
+    //     $('input[type="checkbox"]').change(function (){
+    //         let $this = $(this)
+    //         if ($this.is(":checked")) {
+    //
+    //         }
+    //     })
+    // });
 
 
     page.commands.loadData = () => {

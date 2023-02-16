@@ -63,15 +63,16 @@ class App {
         }
     }
     static renderEmployeeOnFilter(employee) {
-        let str = `<li class="multiselect--sapo-checkbox">
-                        <a tabindex="0" class="multiselect-a--sapo-checkbox">
-                            <span class="sapo-checkbox">
-                                <input type="checkbox" value="${employee.id}" id="${employee.id}" class="sapo-checkbox__input">
-                                <span class="sapo-checkbox__checkmark"></span>
-                            </span>
-                            <label class="checkbox multiselect-label--sapo-checkbox" for="${employee.id}">${employee.fullName}</label>
-                        </a>
-                   </li>`
+        let str = ` <li class="multiselect--sapo-checkbox">
+                    <a tabindex="0" class="multiselect-a--sapo-checkbox">
+                    <span class="sapo-checkbox">
+                    <input type="checkbox" value="${employee.id}" id="${employee.id}" class="sapo-checkbox__input">
+                    <span class="sapo-checkbox__checkmark"></span>
+                    </span>
+                    <label class="checkbox multiselect-label--sapo-checkbox"
+                     for="${employee.id}"> ${employee.fullName}</label>
+                     </a>
+                     </li>`
         return str;
     }
 
