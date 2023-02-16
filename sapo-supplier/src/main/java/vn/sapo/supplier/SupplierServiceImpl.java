@@ -68,18 +68,16 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     @Transactional
-    public SupplierResult update(UpdateSupplierParam updateSupplierParam) {
+    public SupplierResult update(UpdateSupplierParam param) {
 
-        Supplier supplier = supplierRepository.findById(updateSupplierParam.getId())
+        Supplier supplier = supplierRepository.findById(param.getId())
                 .orElseThrow(() -> new NotFoundException("Not found supplier"));
-        SupplierGroup supplierGroup = supplierGroupRepository.findById(updateSupplierParam.getGroupId()).get();
+        if (param.getGroupId() != null && supplierRepository.existsById(param.getGroupId()))
+            throw new NotFoundException("");
 
         System.out.println(supplier);
-        supplierMapper.transferFields(updateSupplierParam, supplier);
-        supplier.setGroup(supplierGroup);
-        Supplier supplierResult = supplierRepository.save(supplier);
-        return supplierMapper.toDTO(supplierResult);
-
+        supplierMapper.transferFields(param, supplier);
+        return supplierMapper.toDTO(supplier);
     }
 
     @Override
