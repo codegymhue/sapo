@@ -7,6 +7,8 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import vn.sapo.address.dto.AddressResult;
+import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 
@@ -77,15 +79,47 @@ public class SupplierExcelExporterInventory {
     }
 
     private void writeDataLines() {
-        int rowCount = 1;
+        int  rowcount = 1;
 
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
         font.setFontHeight(14);
         style.setFont(font);
+        for (SupplierResult supplier : supplierList) {
+            for (AddressResult address : supplier.getAddresses()) {
+                String province = address.getProvinceName();
+                String district = address.getDistrictName();
+                Row row = sheet.createRow(rowcount++);
+                int columnCount = 0;
+
+                createCell(row, columnCount++, supplier.getFullName(), style);
+                createCell(row, columnCount++, supplier.getSupplierCode(), style);
+                createCell(row, columnCount++, supplier.getGroup().getTitle(), style);
+                createCell(row, columnCount++, "theo nhom khach hang", style);
+                createCell(row, columnCount++, supplier.getEmail(), style);
+                createCell(row, columnCount++, supplier.getPhone(), style);
+                createCell(row, columnCount++, supplier.getWebsite(), style);
+                createCell(row, columnCount++, supplier.getFax(), style);
+                createCell(row, columnCount++, supplier.getTaxCode(), style);
+                createCell(row, columnCount++, supplier.getDescription(), style);
+                createCell(row, columnCount++, "chính sách giá mặc định", style);
+                createCell(row, columnCount++, "kỳ hạn thanh toán mặc định", style);
+                createCell(row, columnCount++, supplier.getPaymentMethod(), style);
+                createCell(row, columnCount++, "chính sách giá mặc định", style);
+                createCell(row, columnCount++, address.getFullName(), style);
+                createCell(row, columnCount++, address.getPhoneNumber(), style);
+                createCell(row, columnCount++, address.getEmail(), style);
+                createCell(row, columnCount++, "nhãn", style);
+                createCell(row, columnCount++, address.getLine1(), style);
+                createCell(row, columnCount++, address.getLine2(), style);
+                createCell(row, columnCount++, province, style);
+                createCell(row, columnCount++, district, style);
+                createCell(row, columnCount++, "nợ hiện tại", style);
+                createCell(row, columnCount++, "tags", style);
+
+            }
+        }
     }
-
-
 
     public void export(HttpServletResponse response) throws IOException {
         writeHeaderLine();
