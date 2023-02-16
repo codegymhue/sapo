@@ -750,7 +750,7 @@
             //         },
             //     ajax: {
             //         contentType: 'application/json',
-            //         url: "http://localhost:8080/api/customers",
+            //         url: origin +"/api/customers",
             //         type: "GET",
             //         dataSrc: ''
             //     },
@@ -1345,7 +1345,7 @@
                 },
             ajax: {
                 contentType: 'application/json',
-                url: "http://localhost:8080/api/customers/findAllCustomerByGroupId/" + groupId,
+                url: origin +"/api/customers/findAllCustomerByGroupId/" + groupId,
                 type: "GET",
                 dataSrc: ''
             },
@@ -1635,7 +1635,7 @@
                 },
             ajax: {
                 contentType: 'application/json',
-                url: "http://localhost:8080/api/customers/findAllCustomerByGroupAndStatus/" + groupId + "," + status,
+                url: origin +"/api/customers/findAllCustomerByGroupAndStatus/" + groupId + "," + status,
                 type: "GET",
                 dataSrc: ''
             },
@@ -1922,7 +1922,7 @@
                 },
             ajax: {
                 contentType: 'application/json',
-                url: "http://localhost:8080/api/customers/findAllCustomerByStatus/" + status,
+                url: origin +"/api/customers/findAllCustomerByStatus/" + status,
                 type: "GET",
                 dataSrc: ''
             },
@@ -1973,7 +1973,7 @@
             },
             type: "GET",
 
-            url: "http://localhost:8080/api/customer_groups",
+            url: origin +"/api/customer_groups",
         })
             .done((data) => {
 

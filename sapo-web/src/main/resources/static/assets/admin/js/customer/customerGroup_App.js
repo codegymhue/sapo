@@ -1,6 +1,6 @@
 class CustomerGroup_App {
 
-    static DOMAIN_API = "http://localhost:8080";
+    static DOMAIN_API = origin;
     static BASE_URL_CUSTOMER_GROUP = this.DOMAIN_API + "/api/customer_groups";
 
     static AlertMessageVi = class {

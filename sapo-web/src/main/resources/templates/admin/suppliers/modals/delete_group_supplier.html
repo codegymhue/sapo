@@ -1,0 +1,28 @@
+
+<th:block th:fragment="delete_group_supplier">
+  <div class="modal fade" id="deleteGroupSup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="ui-dialog-title">Xóa nhà cung cấp</span>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body pull-center">
+
+          <p>
+            Bạn có chắc chắn muốn xóa nhà cung cấp
+            <!--                        <span style="font-weight: 500;" th:text="{supplier.}"></span>?-->
+          </p>
+          <p>Thao tác này không thể khôi phục.</p>
+
+
+        </div>
+        <div class="modal-footer">
+
+          <button type="button" class="btn right mr-3" data-bs-dismiss="modal">Thoát</button>
+          <button type="button" id="btn-group-sup-delete" class="btn sapo-btn-red right">Xóa</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</th:block>
