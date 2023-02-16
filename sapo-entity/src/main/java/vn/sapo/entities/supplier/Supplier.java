@@ -25,7 +25,6 @@ import java.util.HashMap;
         name = "json",
         typeClass = JsonType.class)
 public class Supplier extends BaseEntity {
-
     @Id
     @Column(name = "id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,7 +72,7 @@ public class Supplier extends BaseEntity {
 
     @Type(type = "json")
     @Column(name = "extension_attributes", columnDefinition = "JSON")
-    private HashMap<String, String> attributes;
+    private HashMap<String, String> attributes = new HashMap<>();
 
     public Supplier(Integer id) {
         this.id = id;
@@ -94,26 +93,20 @@ public class Supplier extends BaseEntity {
         return this;
     }
 
-    public <T> T getAttributeValue(String key) {
-        if (attributes == null)
-            return null;
-        return (T) attributes.get(key);
-    }
-
     public final static String WEBSITE_ATTRIBUTE_NAME = "website";
     public final static String FAX_ATTRIBUTE_NAME = "fax";
     public final static String TAX_CODE_ATTRIBUTE_NAME = "taxCode";
 
     public String getWebsite() {
-        return getAttributeValue(WEBSITE_ATTRIBUTE_NAME);
+        return attributes.get(WEBSITE_ATTRIBUTE_NAME);
     }
 
     public String getFax() {
-        return getAttributeValue(FAX_ATTRIBUTE_NAME);
+        return attributes.get(FAX_ATTRIBUTE_NAME);
     }
 
     public String getTaxCode() {
-        return getAttributeValue(TAX_CODE_ATTRIBUTE_NAME);
+        return attributes.get(TAX_CODE_ATTRIBUTE_NAME);
     }
 
     public Supplier setWebsite(String website) {
@@ -122,7 +115,7 @@ public class Supplier extends BaseEntity {
     }
 
     public Supplier setFax(String fax) {
-        attributes.put(WEBSITE_ATTRIBUTE_NAME, fax);
+        attributes.put(FAX_ATTRIBUTE_NAME, fax);
         return this;
     }
 
