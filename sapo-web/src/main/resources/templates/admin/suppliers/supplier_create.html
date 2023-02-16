@@ -360,31 +360,31 @@
             supplier.createAddressParam = createAddressParam;
 
             console.log(supplier);
-            console.log(JSON.stringify(supplier))
-            console.log(createAddressParam)
-            // $.ajax({
-            //     "headers": {
-            //         "accept": "application/json",
-            //         "content-type": "application/json"
-            //     },
-            //     "type": "POST",
-            //     "url": "http://localhost:8080/api/suppliers/create",
-            //     "data": JSON.stringify(supplier)
-            //  })
-            //     .done((data) => {
-            //         console.log(data)
-            //         App.IziToast.showSuccessAlert(" Thêm nhà cung cấp thành công ");
-            //         setTimeout(() => {
-            //         }, 2500)
-            //         $('#formCreate')[0].reset();
-            //         window.location.href = `/admin/suppliers/${data.id}`;
-            //
-            //     })
-            //     .fail((jqXHR) => {
-            //         console.log(jqXHR);
-            //
-            //         // App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
-            //     })
+            // console.log(JSON.stringify(supplier))
+            // console.log(createAddressParam)
+            $.ajax({
+                "headers": {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                "type": "POST",
+                "url": "http://localhost:8080/api/suppliers/create",
+                "data": JSON.stringify(supplier)
+             })
+                .done((data) => {
+                    console.log(data)
+                    App.IziToast.showSuccessAlert(" Thêm nhà cung cấp thành công ");
+                    setTimeout(() => {
+                    }, 2500)
+                    $('#formCreate')[0].reset();
+                    window.location.href = `/admin/suppliers/${data.id}`;
+
+                })
+                .fail((jqXHR) => {
+                    console.log(jqXHR);
+
+                    // App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+                })
         });
     }
 
