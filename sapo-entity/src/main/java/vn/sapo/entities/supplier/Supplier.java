@@ -1,25 +1,29 @@
 package vn.sapo.entities.supplier;
 
+import com.vladmihalcea.hibernate.type.json.JsonType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.sapo.entities.supplier.supplier_tag.Tag;
-
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 import vn.sapo.entities.BaseEntity;
 import vn.sapo.entities.Employee;
 import vn.sapo.entities.payment.PaymentMethod;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
 
-@Entity
+
 @Getter
 @Setter
-@NoArgsConstructor
-@Table(name = "supplier")
 @Accessors(chain = true)
+@NoArgsConstructor
+@Entity
+@Table(name = "supplier")
+@TypeDef(
+        name = "json",
+        typeClass = JsonType.class)
 public class Supplier extends BaseEntity {
 
     @Id
@@ -47,27 +51,29 @@ public class Supplier extends BaseEntity {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "employee_id", nullable = false)
+    @JoinColumn(name = "employee_id", nullable = false, foreignKey = @ForeignKey(name = "fk_supplier_employee"))
     private Employee employee;
 
     @Column(name = "employee_id", updatable = false, insertable = false)
     private Integer employeeId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "payment_method_id")
+    @JoinColumn(name = "payment_method_id", foreignKey = @ForeignKey(name = "fk_supplier_payment_method"))
     private PaymentMethod paymentMethod;
 
     @Column(name = "payment_method_id", updatable = false, insertable = false)
     private String paymentMethodId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "sup_group_id")
+    @JoinColumn(name = "supplier_group_id", foreignKey = @ForeignKey(name = "fk_supplier_supplier_group"))
     private SupplierGroup group;
 
-    @Column(name = "sup_group_id", insertable = false, updatable = false)
+    @Column(name = "supplier_group_id", insertable = false, updatable = false)
     private Integer groupId;
-    @ManyToMany(mappedBy = "suppliers")
-    private Set<Tag> tags = new HashSet<>();
+
+    @Type(type = "json")
+    @Column(name = "extension_attributes", columnDefinition = "JSON")
+    private HashMap<String, String> attributes;
 
     public Supplier(Integer id) {
         this.id = id;
@@ -88,4 +94,40 @@ public class Supplier extends BaseEntity {
         return this;
     }
 
+    public <T> T getAttributeValue(String key) {
+        if (attributes == null)
+            return null;
+        return (T) attributes.get(key);
+    }
+
+    public final static String WEBSITE_ATTRIBUTE_NAME = "website";
+    public final static String FAX_ATTRIBUTE_NAME = "fax";
+    public final static String TAX_CODE_ATTRIBUTE_NAME = "taxCode";
+
+    public String getWebsite() {
+        return getAttributeValue(WEBSITE_ATTRIBUTE_NAME);
+    }
+
+    public String getFax() {
+        return getAttributeValue(FAX_ATTRIBUTE_NAME);
+    }
+
+    public String getTaxCode() {
+        return getAttributeValue(TAX_CODE_ATTRIBUTE_NAME);
+    }
+
+    public Supplier setWebsite(String website) {
+        attributes.put(WEBSITE_ATTRIBUTE_NAME, website);
+        return this;
+    }
+
+    public Supplier setFax(String fax) {
+        attributes.put(WEBSITE_ATTRIBUTE_NAME, fax);
+        return this;
+    }
+
+    public Supplier setTaxCode(String taxCode) {
+        attributes.put(TAX_CODE_ATTRIBUTE_NAME, taxCode);
+        return this;
+    }
 }

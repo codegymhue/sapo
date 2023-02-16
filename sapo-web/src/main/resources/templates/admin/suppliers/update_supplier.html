@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
           crossorigin/>
     <link rel="stylesheet" type="text/css" href="https://sapo.dktcdn.net/sapo-frontend-x/e603c93.main.css" crossorigin/>
-    <!--  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>-->
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"
           crossorigin/>
@@ -30,41 +30,14 @@
         var S_LANG_RES = 'https://sapo.dktcdn.net/sapo-frontend-x/d9ad77d.i18n_vi-VN.json';
     </script>
     <script src="https://sapo.dktcdn.net/sapo-frontend-x/d852af0.client.bundle.js"></script>
-    <link rel="stylesheet" href="https://sapo.dktcdn.net/sapo-frontend-x/6386cc5.main.css"/>
-    <script src="https://sapo.dktcdn.net/fe-cdn-production/lib/wootric/wootric-sdk.js"></script>
-    <script src="https://sapo.dktcdn.net/fe-cdn-production/lib/upload-files/jquery.multifile.js"></script>
-
-    <link href="https://sapo.dktcdn.net/fe-cdn-production/lib/driver/driver.min.css?v=20220218" rel="stylesheet"/>
-    <title>C&#x1EAD;p nh&#x1EAD;t nh&#xE0; cung c&#x1EA5;p Nguyen Tan Luong</title>
-    <!-- Hotjar Tracking Code for mysapo.vn -->
-    <script>
-        (function (h, o, t, j, a, r) {
-            h.hj = h.hj || function () {
-                (h.hj.q = h.hj.q || []).push(arguments)
-            };
-            h._hjSettings = {hjid: 1081489, hjsv: 6};
-            a = o.getElementsByTagName('head')[0];
-            r = o.createElement('script');
-            r.async = 1;
-            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
-            a.appendChild(r);
-        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
-    </script>
     <style>
         #renderGroupLi > li:hover {
             background-color: #007bff;
         }
-
-        .feedback-account-sso {
-            display: none
+        .dropdown-menu>li>p:hover {
+            background-color: #007bff
         }
     </style>
-    <!-- Freshchat -->
-    <!-- LIVE -->
-    <!-- mix pannels tracking-->
-
-    <!-- end mix pannels tracking-->
-
 </head>
 
 <body class="body_dashboard partners suppliers edit">
@@ -94,17 +67,6 @@
                     </div>
 
                     <style>
-                        .info-account {
-                            position: relative;
-                        }
-
-                        .help-dashboard {
-                            position: absolute;
-                            top: -1px;
-                            right: -1px;
-                            z-index: 1;
-                        }
-
                         .help-dashboard .help-dropdown .btn-blank {
                             background: #fff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDplN2MwNTFiZi1lNGJiLTNjNDktOGM3YS00NTZmZTZlNGQ1NmYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjI5NDdDQ0NGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjI5NDdDQ0JGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjdkNDRhZTRlLTIzMTMtYTE0ZC1hNWQ4LTA5YTVjYTBmNmM0NCIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjk3N2NmYTliLThmZDctZGU0Mi1hNDFiLWIwOTJiYzRkYWM2MiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Po5ReOIAAAIxSURBVHjalJU9aFNRGIbTk+sSh0xiEKciaBF1culiA2IdOlQHaRBKqEurYJYOFn9Ql7iJghQcSqlDAop0yFIoWJcigouKKIROClWnomaQVHw+eAPxcs7J9cDDhXvP997vfH9naPbybC6wEpiASRiFYcjDLmzBJqxCa/HRYtcn4ALCFWjDQ/gGNRiB/XrW9N6+t+euzFV8IkMpzwuwDGNwDVagmwsvO9003IMNqHKKjs9zE16Dg3AclgYI2+oitqT9ZrfGKQo+8WXF9DRs5/5j8YNt2eWl8494RaE4Dx1f+OAwnIRi4Acd2Y/1cuAUt7pi7PP4GLyHj/AavsPNyAlMp84PEqdyc0qer5oa8AuOQAnuw10YD0RpRXYTTnXcDCTvBByVp5/gK1yH33Am4H1XepNODfIi4MUPuANv+t7tgz3wM5Jj0xtN1HntwCZ7fztVrk3F/XFE3OyGE5XPToaKs33PlOBT8CWy1/TyTrOimEH8IpyFc/BuwF7T23UaQocyiJfhA7zMsNf0tpymWzmDwROYz9i0prfpNDan1EyxtRcODFK15pHeqom34I+mW2xdglsZvJ6WXsupeRY0NksRoxvyKOZ1SToL1ky9wdXQPH6uWvYtmy+vIsIF2W8g3EiP3KrKcn3ACUIer8u+6pvnHQ2jz/AWZjIkOUF4RvvNbrz/Jkob24cLmu91tX5Ts6KtziuqjsvKgSWv1gtF+g70Ldv4tO/2fxC4/a/Gbv+/AgwA9q+ezeP4kToAAAAASUVORK5CYII=') no-repeat center center;
                             border: none;
@@ -271,7 +233,7 @@
                                 <div>
                                     <div class="btn-group">
                                         <button id="changeValueSup" class="btn secondary dropdown-toggle"
-                                                style="width: 300px; height: 30px; text-align: left" data-bs-toggle="dropdown"
+                                                style="width: 300px; height: 34px; text-align: left" data-bs-toggle="dropdown"
                                                 data-bs-auto-close="outside" aria-expanded="false" th:value="${supplier.group.id}" th:text="${supplier.group} ? ${supplier.group.title} : ${'---'}"
                                         >
 
@@ -285,14 +247,21 @@
 <!--                                            th:field="${supplier.supplierGroup.title} ? ${supplier.supplierGroup.title} : ${'-&#45;&#45;'} "-->
 <!--                                            Khác-->
                                         </button>
-                                        <ul id="renderGroupLi" class="dropdown-menu"
+
+                                        <ul class="dropdown-menu"
                                             aria-labelledby="dropdownMenuClickableInside" style="width: 300px">
                                             <li><input id="inputKey" type="text" placeholder="Tìm kiếm" oninput="searchGroup()"
-                                                       style="width: 296px; height: 35px;font-size: 13px;"></li>
+                                                       style="width: 296px; height:35px;font-size: 13px;">
+                                            </li>
 
-                                            <li> <i class="fa-solid fa-plus"></i><p id="showGroupSupplier"
-                                                   style="height: 30px; width: 300px; font-size: 13px; padding: 5px">
-                                                Thêm mới nhóm nhà cung cấp</p></li>
+                                            <li>
+                                                    <i class="fa-solid fa-plus" style="float: left; margin: 4px 2px 0 0"></i>
+                                                    <p id="showGroupSupplier"
+                                                       style="height: 30px; width: 300px; font-size: 13px;margin-top: 10px ">
+                                                             Thêm mới nhóm nhà cung cấp</p>
+                                            </li>
+                                            <li id="errorGroup" class="hidden">hihi</li>
+                                            <li id="renderGroupLi"></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -308,8 +277,7 @@
                                 <!--                  </div>-->
                                 <!--                </div>-->
                             </div>
-                            <th:bock
-                                    th:replace="/admin/suppliers/modals/create_group_supplier :: create_group_supplier"/>
+                            <th:bock th:replace="/admin/suppliers/modals/create_group_supplier :: create_group_supplier"/>
                             <div class="col-6 field pl-0">
                                 <div class="label mb-2">Số điện thoại</div>
                                 <input id="phoneUp" class="sapo-textbox w100" data-toggle="tooltip"
@@ -608,66 +576,6 @@
     Page();
     hj('trigger', 'split_test_b');
 </script>
-<script type='text/javascript'>
-    function showMenu() {
-        $(".col-left").css("margin-left", 0);
-        $(".col-left").addClass("is-mobile");
-    }
-
-    env = 'Production';
-    old_console_log = console.log;
-    console.log = function () {
-        if (env.toLowerCase() != "production") {
-            old_console_log.apply(this, arguments);
-        }
-    }
-    window.isAccountNonEmail = false
-    window.profileSso = 'https://profiles.sapo.vn';
-
-    function isAuthorized(authority) {
-        let accountRoles = [{"locationId": 0, "tenantRoleId": 1, "scopes": ["full"]}];
-        let accountOwner = true;
-        let check = false;
-        if (accountRoles == null || accountRoles == undefined)
-            accountRoles = [];
-        let accountRole;
-        if (accountOwner)
-            return true;
-        for (accountRole of accountRoles) {
-            if (accountRole.scopes.includes('full') || accountRole.scopes.includes(authority)) {
-                check = true;
-                break;
-            }
-        }
-        if (check)
-            return true;
-        else {
-            Sapo.Flash.error('Bạn không có quyền thực hiện chức năng này');
-            return false;
-        }
-    }
-
-    function hasPermission(authority) {
-        let accountRoles = [{"locationId": 0, "tenantRoleId": 1, "scopes": ["full"]}];
-        let accountOwner = true;
-        let check = false;
-        if (accountRoles == null || accountRoles == undefined)
-            accountRoles = [];
-        let accountRole;
-        if (accountOwner)
-            return true;
-        for (accountRole of accountRoles) {
-            if (accountRole.scopes.includes('full') || accountRole.scopes.includes(authority)) {
-                check = true;
-                break;
-            }
-        }
-        return check;
-    }
-</script>
-<!-- Freshchat -->
-
-
 <!-- End Freshchat -->
 
 <div context="notificationVNPay"
@@ -690,10 +598,12 @@
 </div>
 </body>
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
+<script src="/assets/admin/js/suppliers/supplier_group.js"></script>
 <script src="/assets/admin/js/suppliers/jquery/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/izitoast@1/dist/js/iziToast.min.js" type="text/javascript"
         crossorigin></script>
 <script>
+
     let supplierGroups= [];
     const page = {
         urls: {},
@@ -733,14 +643,13 @@
     page.elements.supplierCodeUp = $("#supplierCodeUp");
     page.elements.nameUp = $("#nameUp");
     page.elements.emailUp = $("#emailUp");
-    page.elements.phoneUp = $("#phoneUp")
+    page.elements.phoneUp = $("#phoneUp");
     page.elements.statusUp = $("#statusUp");
     page.elements.descriptionUp = $("#descriptionUp");
     page.elements.changeValueSup = $("#changeValueSup");
     page.elements.fulNameEmployeeUp = $("#fulNameEmployeeUp");
     page.elements.paymentMethod = $("#paymentMethod");
 
-    // page.dialogs.elements.createGroupSupp = $("#createGroupSupp")
 
     page.elements.showGroupSupplier= $("#showGroupSupplier");
     page.dialogs.elements.showModalGroupSupplier= $("#showModalGroupSupplier");
@@ -750,37 +659,6 @@
     page.dialogs.elements.groupCodeSup =  $("#groupCodeSup");
     page.dialogs.elements.groupDescriptionSup =  $("#groupDescriptionSup");
 
-
-    // function searchGroup(){
-    //     console.log("aaaaaaaa")
-//             let searchWord = $('#inputKey').val();
-//             console.log("key", searchWordbb);
-//
-//         let searchWord ;
-//             if(searchWord != null){
-//                 let arr = [];
-//                 supplierGroups.forEach(item => {
-//                     console.log("item", item)
-//                     if ((item.title).toLowerCase().includes(searchWord.toLowerCase())){
-//                         arr.push(item)
-//                     }
-//                 })
-//                 console.log(arr)
-//                 // render result item of searching
-//                 $.each(arr, (i, item) => {
-//                     console.log(item)
-//                     // let isSelected = item ===  $("#renderGroupLi").firstElementChild.innerText ? "selected" : "";
-//                     let result =  `
-//                       <li onclick="handleChangeGroupSupp(${item.id})">
-//                   <p  class="w-20 border-0 ${isSelected}" id="${item.id}" style="padding:7px; font-size: 11px; width: 300px;border: unset;" value="${item.id}">
-//                      ${item.title}</p>
-//                   </li>
-//
-// `;
-//                     $("#renderGroupLi").append(result);
-//                 })
-//             }
-//     }
     function getAllEmployeeSelect() {
         return $.ajax({
             "headers": {
@@ -791,6 +669,7 @@
             "url": "http://localhost:8080/api/employees"
         })
             .done((data) => {
+                console.log("nhan viên", data)
                 $.each(data, (i, item) => {
                     let str = `<option value="${item.id}">${item.fullName}</option>`;
                     page.elements.fulNameEmployeeUp.append(str);
@@ -805,7 +684,7 @@
                 "content-type": "application/json"
             },
             "type": "GET",
-            "url": "/api/admin/payment_methods"
+            "url": "http://localhost:8080/api/admin/payment_methods"
         })
             .done((data) => {
                 console.log("method select", data)
@@ -817,7 +696,6 @@
     }
 
     page.elements.btnUpdateSupplier.on('click', () => {
-
         let idSupp = page.elements.supplierId.val();
         console.log(idSupp);
         let newUpdateSupplierParam = {
@@ -858,134 +736,137 @@
             .fail((jqXHR) => {
                 // console.log(jqXHR);
                 App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
-
             })
     })
 
     page.elements.showGroupSupplier.on('click', () => {
-
-
         page.dialogs.elements.showModalGroupSupplier.modal('show');
+        page.dialogs.elements.groupId.val("");
+        page.dialogs.elements.groupTitleSup.val("");
+        page.dialogs.elements.groupCodeSup.val("");
+        page.dialogs.elements.groupDescriptionSup.val("");
+        // $("#modal-alert-danger").hide();
+        $("#groupTitleSup-error").hide();
     })
-
 
     page.dialogs.elements.createGroupSupplier.on('click', () => {
         $("#formCreateGroup").trigger("submit");
     })
-    function doCreateGroupSupplier() {
-        let newGroupSup = new createSupGroupParam();
-        newGroupSup.id =  page.dialogs.elements.groupId.val();
-        newGroupSup.title = page.dialogs.elements.groupTitleSup.val();
-        newGroupSup.supplierCode =  page.dialogs.elements.groupCodeSup.val();
-        newGroupSup.description =  page.dialogs.elements.groupDescriptionSup.val();
-        console.log("trc ajax", newGroupSup)
-        $.ajax({
-            "headers": {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            "type": "POST",
-            "url": "http://localhost:8080/api/supplier_groups/create",
-            "data": JSON.stringify(newGroupSup)
-        })
-            .done((data) => {
-                App.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
-                setTimeout(() => {
-                }, 1500);
 
-                page.dialogs.elements.groupId.val("");
-                page.dialogs.elements.groupTitleSup.val("");
-                page.dialogs.elements.groupCodeSup.val("");
-                page.dialogs.elements.groupDescriptionSup.val("");
-                page.dialogs.elements.showModalGroupSupplier.modal('hide');
-                location.reload();
+    getAllEmployeeSelect();
+    getAllPaymentMethodSelect();
+    getAllGroup();
+    searchGroup();
 
-                // console.log("group",data);
-                // alert("Thêm nhóm nhà cung cấp thành công")
-                // // console.log("data", data);
-                // let trSupplier = $("#tr_" + data.id);
-                // let tr = renderRowGroupSupplier(data);
-                // trSupplier.append(tr);
-                // alert("Thêm nhóm nhà cung ứng thành công")
+    // function doCreateGroupSupplier() {
+    //     let newGroupSup = new createSupGroupParam();
+    //     newGroupSup.id =  page.dialogs.elements.groupId.val();
+    //     newGroupSup.title = page.dialogs.elements.groupTitleSup.val();
+    //     newGroupSup.supplierCode =  page.dialogs.elements.groupCodeSup.val();
+    //     newGroupSup.description =  page.dialogs.elements.groupDescriptionSup.val();
+    //     console.log("trc ajax", newGroupSup)
+    //     $.ajax({
+    //         "headers": {
+    //             "accept": "application/json",
+    //             "content-type": "application/json"
+    //         },
+    //         "type": "POST",
+    //         "url": "http://localhost:8080/api/supplier_groups/create",
+    //         "data": JSON.stringify(newGroupSup)
+    //     })
+    //         .done((data) => {
+    //             App.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
+    //             setTimeout(() => {
+    //             }, 1500);
+    //
+    //             page.dialogs.elements.showModalGroupSupplier.modal('hide');
+    //             location.reload();
+    //
+    //             // console.log("group",data);
+    //             // alert("Thêm nhóm nhà cung cấp thành công")
+    //             // // console.log("data", data);
+    //             // let trSupplier = $("#tr_" + data.id);
+    //             // let tr = renderRowGroupSupplier(data);
+    //             // trSupplier.append(tr);
+    //             // alert("Thêm nhóm nhà cung ứng thành công")
+    //
+    //             // let renderGroup = $("#renderGroupLi");
+    //             // getAllGroup(renderGroup);
+    //             // $("#showModalGroupSupplier").modal('hide');
+    //
+    //             // $.each(data, (i, item) => {
+    //             //   let tr = renderRowGroupSupplier(item);
+    //             //  $("#renderGroupLi").append(tr);
+    //             // })
+    //         })
+    //         .fail((jqXHR) => {
+    //             App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+    //         })
+    // }
 
-                // let renderGroup = $("#renderGroupLi");
-                // getAllGroup(renderGroup);
-                // $("#showModalGroupSupplier").modal('hide');
+    // function getAllGroup() {
+    //     $.ajax({
+    //         "headers": {
+    //             "accept": "application/json",
+    //             "content-type": "application/json"
+    //         },
+    //         type: "GET",
+    //         url: "http://localhost:8080/api/supplier_groups",
+    //     })
+    //         .done((data) => {
+    //             supplierGroups = data;
+    //             $.each(data, function (index, value) {
+    //                 $("#renderGroupLi").append(
+    //                     `<li onclick="handleChangeGroupSupp(${value.id})">
+    //                     <p  class="w-20 border-0 " id="${value.id}" style="padding:7px; font-size: 12px;font-weight:450; width: 300px;border: unset;" value="${value.id}">
+    //                     ${value.title}</p>
+    //                     </li>`
+    //                 )
+    //             });
+    //         })
+    // }
 
-                // $.each(data, (i, item) => {
-                //   let tr = renderRowGroupSupplier(item);
-                //  $("#renderGroupLi").append(tr);
-                // })
-            })
-            .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
-            })
-    }
+    // let renderGroup = $("#renderGroupLi");
+    // getAllGroup(renderGroup);
 
-    function getAllGroup(element) {
-        $.ajax({
-            "headers": {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "GET",
-            url: "http://localhost:8080/api/supplier_groups",
-        })
-            .done((data) => {
-                supplierGroups = data;
-                $.each(data, function (index, value) {
-                    element.append(
-                        `<li onclick="handleChangeGroupSupp(${value.id})">
-                        <p  class="w-20 border-0 " id="${value.id}" style="padding:7px; font-size: 11px; width: 300px;border: unset;" value="${value.id}">
-                        ${value.title}</p>
-                        </li>`
-                    )
-                });
-            })
-    }
-
-    let renderGroup = $("#renderGroupLi");
-    getAllGroup(renderGroup);
-
-    function handleChangeGroupSupp(supplierGroupId) {
-        let supplierGroup = supplierGroups.find(supplierGroup => supplierGroup.id === supplierGroupId);
-        page.elements.changeValueSup.attr("data-id",supplierGroup.id);
-
-        page.elements.changeValueSup.val(supplierGroup.id);
-        page.elements.changeValueSup.text(supplierGroup.title);
-
-        var dropdown = new bootstrap.Dropdown(document.querySelector($("#changeValueSup")));
-        dropdown.hide();
-    }
-
+    // function handleChangeGroupSupp(supplierGroupId) {
+    //     let supplierGroup = supplierGroups.find(supplierGroup => supplierGroup.id === supplierGroupId);
+    //     page.elements.changeValueSup.attr("data-id",supplierGroup.id);
+    //
+    //     page.elements.changeValueSup.val(supplierGroup.id);
+    //     page.elements.changeValueSup.text(supplierGroup.title);
+    //
+    //     var dropdown = new bootstrap.Dropdown(document.querySelector($("#changeValueSup")));
+    //     dropdown.hide();
+    // }
+    //
     // page.elements.changeValueSup.on('click', ()=> {
     //     var dropdown = new bootstrap.Dropdown(document.querySelector($("#changeValueSup")));
     //     dropdown.show();
     // })
 
-
     // function searchGroup() {
     //
     //     let valueSearchInput = document.getElementById("inputKey").value
     //     console.log("valueSearchInput: ", valueSearchInput)
+    //     console.log("supplierGroups :", supplierGroups)
     //
     //     let groupSearch = supplierGroups.filter(group => {
     //         return group.title.toUpperCase().includes(valueSearchInput.toUpperCase());
     //     })
     //     console.log("nhom search", groupSearch)
     //
-    //     // $("#renderGroupLi").empty();
-    //
+    //     $("#renderGroupLi").empty();
     //     $.each(groupSearch, (i, item) => {
     //         $("#renderGroupLi").prepend (
     //             `<li onclick="handleChangeGroupSupp(${item.id})">
-    //                 <p  class="w-20 border-0 " id="${item.id}" style="padding:7px; font-size: 11px; width: 300px;border: unset;" value="${item.id}">
+    //                 <p  class="w-20 border-0 " id="${item.id}" style="padding:7px; font-size: 12px; font-weight: 500; width: 300px;border: unset;" value="${item.id}">
     //                 ${item.title}</p>
     //                 </li>`
     //         )
     //     });
     // }
-    // searchGroup();
+
 
     function renderRowGroupSupplier(item) {
         let str = `
@@ -995,32 +876,36 @@
         `;
         return str;
     }
-    let groupName
 
-
-
-    // document.getElementById("showGroupSupplier").value="";
-    // console.log("trước function")
-    // function showGroup() {
-    //     if (document.getElementById("showGroupSupplier").value="them") {
-    //         console.log("trong if")
-    //         $("#createGroupSupplier").modal('show');
-    //     }
-    //     console.log("ngoai if")
-    // }
     $("#formCreateGroup").validate({
         rules: {
             groupTitleSup: {
                 required: true,
-                minlength: 5,
+                // minlength: 5,
             },
         },
-        message: {
+        messages: {
             groupTitleSup: {
                 required: "Vui lòng nhập tên nhóm nhà cung cấp",
-                minlength: "Tên nhóm nhà cung cấp phải lớn hơn 5 ký tự",
             },
         },
+        // errorLabelContainer: "#modal-alert-danger",
+        // errorPlacement: function (error, element) {
+        //     error.appendTo("#modal-alert-danger");
+        // },
+        // showErrors: function (errorMap, errorList) {
+        //     if (this.numberOfInvalids() > 0) {
+        //         // App.IziToast.showErrorAlert("Tên nhóm nhà cung cấp không được để trống");
+        //         // setTimeout(() => {
+        //         // }, 1500);
+        //
+        //         $("#modal-alert-danger").removeClass("hide").addClass("show");
+        //     } else {
+        //         $("#modal-alert-danger").removeClass("show").addClass("hide").empty();
+        //         $("#formCreateGroup input.error").removeClass("error");
+        //     }
+        //     this.defaultShowErrors();
+        // },
         submitHandler:() => {
             doCreateGroupSupplier();
         }
@@ -1041,10 +926,9 @@
         }
     })
 
+
     $(() => {
-        searchGroup();
-        getAllEmployeeSelect();
-        getAllPaymentMethodSelect();
+
     })
 
 </script>

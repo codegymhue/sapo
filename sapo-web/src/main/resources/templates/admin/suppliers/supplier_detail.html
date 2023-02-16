@@ -238,10 +238,10 @@
                 <li>
                   <a th:href="'/admin/suppliers/'+${supplier.getId()}+'/edit'">Cập nhật thông tin</a>
                 </li>
-                <li><a href="javascript:" bind-event-click="showDeleteSupplier()">Xoá nhà cung
-                  cấp</a></li>
+                <li><a id="showModalDelete"> Xoá nhà cung cấp </a></li>
               </ul>
             </div>
+            <th:bock th:replace="/admin/suppliers/modals/supplier_modal_delete :: supplier_modal_delete"/>
 
           </div>
           <div class="page-info-body" id="supplier-info">
@@ -646,4 +646,51 @@
 
 
 </body>
+
+<script>
+
+  // function showDelete() {
+  //
+  //   let idDelete = $("#idDelete").val()
+  //   console.log("idDelete : " ,idDelete);
+  //
+  //   $.ajax({
+  //     "headers": {
+  //       "accept": "application/json",
+  //       "content-type": "application/json"
+  //     },
+  //     type: "GET",
+  //     url: 'http://localhost:8080/api/suppliers/' + idDelete
+  //   })
+  //           .done(() => {
+  //             $("#supplier-delete-modal").modal("show");
+  //             // getAllCustomers;
+  //           })
+  //           .fail((error) => {
+  //             console.log(error);
+  //           })
+  // }
+  //
+  // $("#showModalDelete").on('click', ()=>{
+  //   let idDelete = $("#idDelete").val()
+  //   console.log("idDelete : " ,idDelete);
+  //
+  //   $.ajax({
+  //     "headers": {
+  //       "accept": "application/json",
+  //       "content-type": "application/json"
+  //     },
+  //     type: "GET",
+  //     url: 'http://localhost:8080/api/suppliers/' + idDelete
+  //   })
+  //           .done(() => {
+  //             $("#supplier-delete-modal").modal("show");
+  //             // getAllCustomers;
+  //           })
+  //           .fail((error) => {
+  //             console.log(error);
+  //           })
+  //
+  // })
+</script>
 </html>

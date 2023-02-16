@@ -59,14 +59,14 @@ public class Address {
     private String zipCode;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id", foreignKey = @ForeignKey(name = "fk_address_customer"))
     private Customer customer;
 
     @Column(name = "customer_id", insertable = false, updatable = false)
     private Integer customerId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "supplier_id")
+    @JoinColumn(name = "supplier_id", foreignKey = @ForeignKey(name = "fk_address_supplier"))
     private Supplier supplier;
 
     @Column(name = "supplier_id", insertable = false, updatable = false)

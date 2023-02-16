@@ -9,20 +9,24 @@ import vn.sapo.entities.BaseEntity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.Instant;
-import java.util.LinkedHashSet;
-import java.util.Set;
+
 @NoArgsConstructor
 @Setter
 @Getter
 @Accessors(chain = true)
 @Entity
-@Table(name = "rbac_roles")
-public class RbacTenantRole extends BaseEntity {
+@Table(name = "rbac_permission")
+public class RbacPermission extends BaseEntity {
+    private static final long serialVersionUID = -4215962191690812169L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Integer id;
+
+    @Size(max = 75)
+    @NotNull
+    @Column(name = "permission_code", nullable = false, length = 75)
+    private String permissionCode;
 
     @Size(max = 75)
     @NotNull
@@ -40,10 +44,4 @@ public class RbacTenantRole extends BaseEntity {
     @Lob
     @Column(name = "content")
     private String content;
-
-    @OneToMany(mappedBy = "role")
-    private Set<RbacTenantRolePermission> rolePermissions = new LinkedHashSet<>();
-
-
-
 }

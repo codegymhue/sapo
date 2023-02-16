@@ -2,7 +2,9 @@ package vn.sapo.supplierGroup;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.entities.supplier.SupplierGroup;
+import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.supplierGroup.dto.CreateSupGroupParam;
 import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 
@@ -22,7 +24,6 @@ public class SupplierGroupServiceImpl implements SupplierGroupService{
 //        System.out.println("Nhóm nhà cung cấp" + supplierGroupList);
 //       for(int i = 0; i< supplierGroupList.size(); i++) {
 //           if(createSupGroupParam.getTitle().equalsIgnoreCase(supplierGroupList.get(i).getTitle())) {
-//               System.out.println("NHÓM NHÀ CUNG CẤP ĐÃ TỒN TẠI");
 //               break;
 //           }
 //       }
@@ -35,6 +36,7 @@ public class SupplierGroupServiceImpl implements SupplierGroupService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<SupplierGroupResult> finAll() {
         return supplierGroupRepository
                 .findAll()
