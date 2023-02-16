@@ -8,41 +8,21 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pull-center">
-            <form >
 
-                    <input id="idDelete" hidden>
                     <p>
                         Bạn có chắc chắn muốn xóa nhà cung cấp
-                        <span style="font-weight: 500;" th:text="*{name}"></span>?
+<!--                        <span style="font-weight: 500;" th:text="{supplier.}"></span>?-->
                     </p>
                     <p>Thao tác này không thể khôi phục.</p>
 
-            </form>
-            </div>
 
+            </div>
             <div class="modal-footer">
-                <button type="button" id="btn-supplier-delete" class="btn sapo-btn-red right" th:value="*{id}">Xóa</button>
-                <button type="button" class="btn sapo-btn-blank right mr-3" data-bs-dismiss="modal">Thoát</button>
+
+                <button type="button" class="btn right mr-3" data-bs-dismiss="modal">Thoát</button>
+                <button type="button" id="btn-supplier-delete" class="btn sapo-btn-red right">Xóa</button>
             </div>
         </div>
     </div>
 </div>
 </th:block>
-<script>
-    // http://localhost:8080/api/admin/suppliers/3/delete
-        function deleteSupplier (idSupplier){
-        $.ajax({
-            type: "DELETE",
-            url: 'http://localhost:8080/api/suppliers/' + idSupplier ,
-        })
-            .done((data) => {
-                console.log(" xóa thành công !")
-            })
-    }
-    ('#btnDeleteSupplier').on('click', () => {
-        let idSupplier =  ('inputDeleteSupplier').val();
-        console.log(idSupplier)
-        deleteSupplier(idSupplier)
-    });
-
-</script>
