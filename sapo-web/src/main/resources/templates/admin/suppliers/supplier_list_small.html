@@ -448,9 +448,9 @@
 
     const page = {
         urls: {
-            getAllSupplier: App.SUPPLIER_API,
-            getAllEmployee: App.EMPLOYEE_API,
-            getAllSupplierGroup: App.SUPPLIER_GROUP_API,
+            getAllSupplier: SupplierApp.SUPPLIER_API,
+            getAllEmployee: SupplierApp.EMPLOYEE_API,
+            getAllSupplierGroup: SupplierApp.SUPPLIER_GROUP_API,
         },
         elements: {},
         commands: {},
@@ -521,9 +521,9 @@
                 totalPage = data.totalPage;
                 data.suppliers.map(item => {
                     if (item.status == "AVAILABLE") {
-                        page.elements.tbSupplier_tbody.append(App.renderRowSupplier(item, 'available'))
+                        page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available'))
                     } else {
-                        page.elements.tbSupplier_tbody.append(App.renderRowSupplier(item, 'unavailable'))
+                        page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'unavailable'))
                     }
                 });
                 page.elements.totalPage.append(
@@ -565,7 +565,7 @@
         })
             .done((data) => {
                 $.each(data, (i, item) => {
-                    page.dialogs.elements.filterEmployee.append(App.renderEmployeeOnFilter(item));
+                    page.dialogs.elements.filterEmployee.append(SupplierApp.renderEmployeeOnFilter(item));
                 });
 
             }).fail((jqXHR) => {
@@ -586,7 +586,7 @@
         })
             .done((data) => {
                 $.each(data, (i, item) => {
-                    page.dialogs.elements.filterSupplierGroupId.append(App.renderSupplierGroupOnFilter(item));
+                    page.dialogs.elements.filterSupplierGroupId.append(SupplierApp.renderSupplierGroupOnFilter(item));
                 });
 
             }).fail((jqXHR) => {
@@ -663,15 +663,19 @@
     }
     function suggest(element){
         console.log(element)
-        console.log()
+
         let value = $(element).val().toLowerCase();
-        let $ul = $(element).closest('ul');
+        console.log($(element).val()," $(element).val()")
+        let ul = $(element).closest('ul');
+        console.log(ul," ul")
         //get all lis but not the one having search input
-        let $li = $ul.find('li:gt(0)');
+        let li = ul.find('li:gt(0)');
+        console.log(li," li")
         //hide all lis
-        $li.hide();
-        $li.filter(function() {
+        li.hide();
+        li.filter(function() {
             let text = $(element).text().toLowerCase();
+            console.log(text," text")
             return text.indexOf(value)>=0;
         }).show();
     }

@@ -1,6 +1,6 @@
 "use strict";
 
-class App {
+class SupplierApp {
     static DOMAIN_SERVER = origin;
     static SUPPLIER_API = this.DOMAIN_SERVER + "/api/suppliers";
     static EMPLOYEE_API = this.DOMAIN_SERVER + "/api/employees";
@@ -89,7 +89,7 @@ class App {
                     <label class="checkbox multiselect-label--sapo-checkbox"
                      for="${supplierGroup.id}"> ${supplierGroup.title}</label>
                      </a>
-                      ${supplierGroup.title}</li>`
+                     </li>`
         return str;
     }
 
