@@ -69,7 +69,7 @@ class SupplierApp {
         let str = ` <li class="multiselect--sapo-checkbox">
                     <a tabindex="0" class="multiselect-a--sapo-checkbox">
                     <span class="sapo-checkbox">
-                    <input type="checkbox" value="${employee.id}" id="${employee.id}" class="sapo-checkbox__input">
+                    <input type="checkbox" value="${employee.id}" id="${employee.id}" class="sapo-checkbox__input checkbox_employee">
                     <span class="sapo-checkbox__checkmark"></span>
                     </span>
                     <label class="checkbox multiselect-label--sapo-checkbox"
@@ -83,7 +83,7 @@ class SupplierApp {
         let str = ` <li class="multiselect--sapo-checkbox">
                     <a tabindex="0" class="multiselect-a--sapo-checkbox">
                     <span class="sapo-checkbox">
-                    <input type="checkbox" value="${supplierGroup.id}" id="${supplierGroup.id}" class="sapo-checkbox__input">
+                    <input type="checkbox" value="${supplierGroup.id}" id="${supplierGroup.id}" class="sapo-checkbox__input checkbox_supplier_group">
                     <span class="sapo-checkbox__checkmark"></span>
                     </span>
                     <label class="checkbox multiselect-label--sapo-checkbox"
