@@ -1048,7 +1048,7 @@
                     },
                 },
             ajax: {
-                url: 'http://localhost:8080/api/customers/filter',
+                url: origin +'/api/customers/filter',
                 type: 'POST',
                 // dataSrc: "content",
                 contentType: 'application/json',
@@ -2031,7 +2031,7 @@
         let file = $('#formFileCustomers')[0].files[0];
         data.append('file',file);
         $.ajax({
-            url: 'http://localhost:8080/api/customers/upload',
+            url: origin +'/api/customers/upload',
             processData: false,
             contentType: false,
             data: data,
