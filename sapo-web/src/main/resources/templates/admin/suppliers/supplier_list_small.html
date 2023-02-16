@@ -211,7 +211,7 @@
                                                 </svg>
                                             </button>
                                             <ul class="multiselect-container dropdown-menu"
-                                                id="ulSupplierGroupId"
+                                                id="ulSupplierGroupId" aria-labelledby="dropdownMenuClickableInside"
                                                 style="width: 100%; max-height: 250px; overflow: hidden auto; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);"
                                                 x-placement="bottom-start">
                                                 <li style="z-index: 999">
@@ -448,8 +448,9 @@
 
     const page = {
         urls: {
-            getAllSupplier: App.SUPPLIER_API,
-            getAllEmployee: App.EMPLOYEE_API,
+            getAllSupplier: SupplierApp.SUPPLIER_API,
+            getAllEmployee: SupplierApp.EMPLOYEE_API,
+            getAllSupplierGroup: SupplierApp.SUPPLIER_GROUP_API,
         },
         elements: {},
         commands: {},
@@ -520,9 +521,9 @@
                 totalPage = data.totalPage;
                 data.suppliers.map(item => {
                     if (item.status == "AVAILABLE") {
-                        page.elements.tbSupplier_tbody.append(App.renderRowSupplier(item, 'available'))
+                        page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available'))
                     } else {
-                        page.elements.tbSupplier_tbody.append(App.renderRowSupplier(item, 'unavailable'))
+                        page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'unavailable'))
                     }
                 });
                 page.elements.totalPage.append(
@@ -531,7 +532,7 @@
             })
 
         // .fail((jqXHR) => {
-        //     App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404)
+        //     SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_404)
         // })
     }
 
@@ -564,7 +565,7 @@
         })
             .done((data) => {
                 $.each(data, (i, item) => {
-                    page.dialogs.elements.filterEmployee.append(App.renderEmployeeOnFilter(item));
+                    page.dialogs.elements.filterEmployee.append(SupplierApp.renderEmployeeOnFilter(item));
                 });
 
             }).fail((jqXHR) => {
@@ -581,11 +582,11 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: page.urls.getAllEmployee,
+            url: page.urls.getAllSupplierGroup,
         })
             .done((data) => {
                 $.each(data, (i, item) => {
-                    page.dialogs.elements.filterSupplierGroupId.append(App.renderEmployeeOnFilter(item));
+                    page.dialogs.elements.filterSupplierGroupId.append(SupplierApp.renderSupplierGroupOnFilter(item));
                 });
 
             }).fail((jqXHR) => {
@@ -659,6 +660,24 @@
             }
             $(element.parentElement.parentElement.parentElement.parentElement).find("input.choosed-single-id").val(assigneeIds)
         })
+    }
+    function suggest(element){
+        console.log(element)
+
+        let value = $(element).val().toLowerCase();
+        console.log($(element).val()," $(element).val()")
+        let ul = $(element).closest('ul');
+        console.log(ul," ul")
+        //get all lis but not the one having search input
+        let li = ul.find('li:gt(0)');
+        console.log(li," li")
+        //hide all lis
+        li.hide();
+        li.filter(function() {
+            let text = $(element).text().toLowerCase();
+            console.log(text," text")
+            return text.indexOf(value)>=0;
+        }).show();
     }
 
     // $('#dropdownMenuClickableInside').click(function() {

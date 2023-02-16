@@ -567,65 +567,6 @@
   Page();
   hj('trigger', 'split_test_b');
 </script>
-<script type='text/javascript'>
-  function showMenu() {
-    $(".col-left").css("margin-left", 0);
-    $(".col-left").addClass("is-mobile");
-  }
-  env = 'Production';
-  old_console_log = console.log;
-  console.log = function () {
-    if (env.toLowerCase() != "production") {
-      old_console_log.apply(this, arguments);
-    }
-  }
-  window.isAccountNonEmail = false
-  window.profileSso = 'https://profiles.sapo.vn';
-
-  function isAuthorized(authority) {
-    let accountRoles = [{ "locationId": 0, "tenantRoleId": 1, "scopes": ["full"] }];
-    let accountOwner = true;
-    let check = false;
-    if (accountRoles == null || accountRoles == undefined)
-      accountRoles = [];
-    let accountRole;
-    if (accountOwner)
-      return true;
-    for (accountRole of accountRoles) {
-      if (accountRole.scopes.includes('full') || accountRole.scopes.includes(authority)) {
-        check = true;
-        break;
-      }
-    }
-    if (check)
-      return true;
-    else {
-      Sapo.Flash.error('Bạn không có quyền thực hiện chức năng này');
-      return false;
-    }
-  }
-  function hasPermission(authority) {
-    let accountRoles = [{ "locationId": 0, "tenantRoleId": 1, "scopes": ["full"] }];
-    let accountOwner = true;
-    let check = false;
-    if (accountRoles == null || accountRoles == undefined)
-      accountRoles = [];
-    let accountRole;
-    if (accountOwner)
-      return true;
-    for (accountRole of accountRoles) {
-      if (accountRole.scopes.includes('full') || accountRole.scopes.includes(authority)) {
-        check = true;
-        break;
-      }
-    }
-    return check;
-  }
-</script>
-<!-- Freshchat -->
-
-
-
 <!-- End Freshchat -->
 
 <div context="notificationVNPay"
@@ -666,7 +607,7 @@
         "content-type": "application/json"
       },
       type: "GET",
-      url: 'http://localhost:8080/api/suppliers/' + idDelete
+      url: origin +'/api/suppliers/' + idDelete
     })
             .done(() => {
               $("#supplier-delete-modal").modal("show");
@@ -686,17 +627,17 @@
         "content-type": "application/json"
       },
       type: "DELETE",
-      url: 'http://localhost:8080/api/suppliers/' + idDelete
+      url: origin +'/api/suppliers/' + idDelete
     })
             .done(() => {
               $("#supplier-delete-modal").modal("hide");
-              App.IziToast.showSuccessAlert("Xoá nhà cung cấp thành công");
+              SupplierApp.IziToast.showSuccessAlert("Xoá nhà cung cấp thành công");
               setTimeout(() => {
               }, 1500)
               window.location.href = `/admin/suppliers`;
             })
             .fail((error) => {
-              App.IziToast.showErrorAlert("Xoá nhà cung cấp thất bại");
+              SupplierApp.IziToast.showErrorAlert("Xoá nhà cung cấp thất bại");
               setTimeout(() => {
               }, 1500)
             })

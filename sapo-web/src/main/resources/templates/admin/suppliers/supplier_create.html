@@ -55,8 +55,8 @@
                                            placeholder="Nhập tên nhà cung cấp" title="Nhập tên nhà cung cấp" required/>
                                 </div>
                                 <div class="col-6 field pr-0">
-                                    <label for="#codeCreate" class="label-required mb-2">Mã nhà cung cấp</label>
-                                    <input id="#codeCreate" class="sapo-textbox w100" placeholder="Nhập mã nhà cung cấp"
+                                    <label for="codeCreate" class="label-required mb-2">Mã nhà cung cấp</label>
+                                    <input id="codeCreate" class="sapo-textbox w100" placeholder="Nhập mã nhà cung cấp"
                                            title="Nhập mã nhà cung cấp" required/>
                                 </div>
                                 <div class="col-6 field pl-0">
@@ -297,21 +297,24 @@
 
 
     class CreateAddressParam {
-        constructor(id, fullName, phoneNumber, line1, line2, email, districtId, districtName, provinceId, provinceName, wardId, wardName, zipCode, customerId, supplierId, isDefault, description) {
+        constructor(id, fullName, phoneNumber, line1, line2, email, districtId, districtName, provinceId, provinceName, wardId, wardName, zipCode,isReceiveBill,isShipping, customerId, supplierId, isDefault, description) {
             this.id = id;
             this.fullName = fullName;
-            this.line1 = line1;
-            this.line2 = line2;
             this.phoneNumber = phoneNumber;
             this.email = email;
+            this.line1 = line1;
+            this.line2 = line2;
+
+            this.wardId = wardId;
+            this.wardName = wardName;
             this.districtId = districtId;
             this.districtName = districtName;
             this.provinceId = provinceId;
             this.provinceName = provinceName;
-            this.wardId = wardId;
-            this.wardName = wardName;
             this.zipCode = zipCode;
-            this.customerId = customerId;
+            this.isShipping = isShipping;
+            this.isReceiveBill = isReceiveBill;
+
             this.isDefault = isDefault;
             this.supplierId = supplierId;
             this.description = description;
@@ -324,15 +327,17 @@
     function createSupplier() {
         $('.btn-create-supplier').on('click', () => {
             // alert("alo 1235689")
-            let supplier ={};
-
+            let supplier = {};
+            supplier.id = null;
             supplier.fullName = $('#nameCreate').val();
             supplier.fax = $('#faxCreate').val();
             supplier.taxCode = $('#taxCodeCreate').val();
             supplier.website = $('#websiteCreate').val();
+
             supplier.debtTotal = $('#debtTotalCreate').val();
 
             supplier.supplierCode = $('#codeCreate').val();
+
             // supplier.groupId = $('#supplierGroupCreate :selected').val();
             supplier.phone = $('#phoneCreate').val();
             supplier.email = $('#emailCreate').val();
@@ -354,7 +359,7 @@
             createAddressParam.phoneNumber = $('#phoneCreate').val();
             supplier.createAddressParam = createAddressParam;
 
-            console.log(supplier)
+            console.log(supplier);
             // console.log(JSON.stringify(supplier))
             // console.log(createAddressParam)
             $.ajax({
@@ -368,7 +373,7 @@
              })
                 .done((data) => {
                     console.log(data)
-                    App.IziToast.showSuccessAlert(" Thêm nhà cung cấp thành công ");
+                    SupplierApp.IziToast.showSuccessAlert(" Thêm nhà cung cấp thành công ");
                     setTimeout(() => {
                     }, 2500)
                     $('#formCreate')[0].reset();
@@ -378,7 +383,7 @@
                 .fail((jqXHR) => {
                     console.log(jqXHR);
 
-                    // App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+                    // SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_400)
                 })
         });
     }

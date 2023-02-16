@@ -600,7 +600,7 @@
             })
                 .done((data) => {
                     console.log(data)
-                    App.IziToast.showSuccessAlert("tạo khách hàng thành công !");
+                    CustomerApp.IziToast.showSuccessAlert("tạo khách hàng thành công !");
                     setTimeout(() => {
                     }, 2500)
                     $('#formCreate')[0].reset();
@@ -610,7 +610,7 @@
                 .fail((jqXHR) => {
                     console.log(jqXHR);
 
-                    App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+                    CustomerApp.IziToast.showErrorAlert(CustomerApp.AlertMessageVi.ERROR_400)
                 })
         });
     }
@@ -807,7 +807,7 @@
                 console.log(jqXHR);
                 if (jqXHR.responseJSON) {
                     $.each(jqXHR.responseJSON, (key, item) => {
-                        App.IziToast.showErrorAlert(item);
+                        CustomerApp.IziToast.showErrorAlert(item);
                     })
                 }
 

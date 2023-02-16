@@ -365,7 +365,7 @@ function renderGroup(item) {
         "content-type": "application/json"
       },
       type: "GET",
-      url: "http://localhost:8080/api/supplier_groups",
+      url: origin +"/api/supplier_groups",
     })
             .done((data) => {
               supplierGroups = data;
@@ -402,11 +402,11 @@ function renderGroup(item) {
         "content-type": "application/json"
       },
       "type": "POST",
-      "url": "http://localhost:8080/api/supplier_groups/create",
+      "url": origin +"/api/supplier_groups/create",
       "data": JSON.stringify(newGroupSup)
     })
             .done((data) => {
-              App.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
+              SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
               setTimeout(() => {
               }, 1500);
               let str= renderGroup(data)
@@ -414,7 +414,7 @@ function renderGroup(item) {
               page.dialogs.elements.showModalCreateGroupSupplier.modal('hide');
             })
             .fail((jqXHR) => {
-              App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+              SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_400)
             })
   }
 
@@ -426,7 +426,7 @@ function renderGroup(item) {
         "content-type": "application/json"
       },
       type: "GET",
-      url: "http://localhost:8080/api/supplier_groups/" + item,
+      url: origin +"/api/supplier_groups/" + item,
     })
             .done((data) => {
               $("#showModalEditGroupSupplier").modal('show');
@@ -454,12 +454,12 @@ function renderGroup(item) {
         "content-type": "application/json"
       },
       type: "PATCH",
-      url: "http://localhost:8080/api/supplier_groups/" + idEditGroup,
+      url: origin +"/api/supplier_groups/" + idEditGroup,
       data: JSON.stringify(editGroup)
     })
             .done((data)=>{
               console.log("btn data : ", data)
-              App.IziToast.showSuccessAlert("Sửa nhóm nhà cung cấp thành công!");
+              SupplierApp.IziToast.showSuccessAlert("Sửa nhóm nhà cung cấp thành công!");
               setTimeout(() => {
               }, 500);
               $("#showModalEditGroupSupplier").modal('hide');
@@ -479,7 +479,7 @@ function renderGroup(item) {
                 "content-type": "application/json"
               },
               type: "GET",
-              url: "http://localhost:8080/api/supplier_groups/" + idDelete,
+              url: origin +"/api/supplier_groups/" + idDelete,
             })
                     .done((data) => {
                       console.log("data-delete : ", data)
@@ -498,11 +498,11 @@ function renderGroup(item) {
         "content-type": "application/json"
       },
       type: "DELETE",
-      url: "http://localhost:8080/api/supplier_groups/" + idDelete,
+      url: origin +"/api/supplier_groups/" + idDelete,
     })
 
    .done(()=>{
-              App.IziToast.showSuccessAlert("Xoá nhóm nhà cung cấp thành công!");
+              SupplierApp.IziToast.showSuccessAlert("Xoá nhóm nhà cung cấp thành công!");
               setTimeout(() => {
               }, 500);
               window.location.href = `/admin/supplier_groups`;
