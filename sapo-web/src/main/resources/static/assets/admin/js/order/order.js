@@ -1245,7 +1245,7 @@ function showAllCategory() {
             "content-type": "application/json"
         },
         type: "GET",
-        url: "http://localhost:8080/api/categories"
+        url: origin +"/api/categories"
     })
         .done((data) => {
             $("#categoryCreate").empty();
@@ -1267,7 +1267,7 @@ function showAllEmployee(){
             "content-type": "application/json"
         },
         type: "GET",
-        url: "http://localhost:8080/api/employees"
+        url: origin +"/api/employees"
     })
         .done((data) => {
             $("#employeeCreate").empty();
@@ -1299,7 +1299,7 @@ function doCreateProductShort() {
             "content-type": "application/json",
         },
         type: "POST",
-        url: "http://localhost:8080/api/products/create-short",
+        url: origin +"/api/products/create-short",
         data: JSON.stringify(product),
     })
         .done((data) => {

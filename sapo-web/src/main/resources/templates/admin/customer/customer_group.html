@@ -233,7 +233,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: "http://localhost:8080/api/customer_groups/sortGroup"
+            url: origin +"/api/customer_groups/sortGroup"
         })
             .done((data) => {
                 $.each(data, (i, item) => {

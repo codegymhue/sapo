@@ -1526,7 +1526,7 @@
                         "content-type": "application/json"
                     },
                     type: "DELETE",
-                    url: "http://localhost:8080/api/customers/delete/" + idCustomer
+                    url: origin +"/api/customers/delete/" + idCustomer
                 })
                     .done((data) => {
                         App.IziToast.showSuccessAlert("Xoá khách hàng thành công  !!! ");
@@ -1587,7 +1587,7 @@
                     "content-type": "application/json"
                 },
                 "type": "POST",
-                "url": "http://localhost:8080/api/shippingAddress/create",
+                "url": origin +"/api/shippingAddress/create",
                 "data": JSON.stringify(address)
             })
                 .done((data) => {

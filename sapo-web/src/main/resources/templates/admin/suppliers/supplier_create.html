@@ -363,7 +363,7 @@
                     "content-type": "application/json"
                 },
                 "type": "POST",
-                "url": "http://localhost:8080/api/admin/suppliers/create",
+                "url": origin +"/api/admin/suppliers/create",
                 "data": JSON.stringify(supplier)
              })
                 .done((data) => {
@@ -520,7 +520,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: "http://localhost:8080/api/employees"
+            url: origin +"/api/employees"
         })
             .done((data) => {
                 $.each(data, (i, item) => {
@@ -542,7 +542,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: "http://localhost:8080/api/admin/payment_methods"
+            url: origin +"/api/admin/payment_methods"
         })
             .done((data) => {
                 $.each(data, (i, item) => {
@@ -564,7 +564,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: "http://localhost:8080/api/supplier_groups",
+            url: origin +"/api/supplier_groups",
         })
             .done((data) => {
                 supplierGroups = data;

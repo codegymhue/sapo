@@ -20,7 +20,7 @@ function doCreateGroupSupplier() {
             "content-type": "application/json"
         },
         "type": "POST",
-        "url": "http://localhost:8080/api/supplier_groups/create",
+        "url": origin +"/api/supplier_groups/create",
         "data": JSON.stringify(newGroupSup)
     })
         .done((data) => {
@@ -60,7 +60,7 @@ function getAllGroup() {
             "content-type": "application/json"
         },
         type: "GET",
-        url: "http://localhost:8080/api/supplier_groups",
+        url: origin +"/api/supplier_groups",
     })
         .done((data) => {
             supplierGroups = data;

@@ -1,6 +1,6 @@
 class App {
 
-    static DOMAIN_API = "http://localhost:8080";
+    static DOMAIN_API = origin;
     // static BASE_URL_Customer = this.DOMAIN_API + "/api/customers";
     static BASE_URL_CUSTOMER  = this.DOMAIN_API + "/api/customers";
     static BASE_URL_CUSTOMER_GROUP  = this.DOMAIN_API + "/api/customer_groups";

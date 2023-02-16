@@ -550,7 +550,7 @@
                     "content-type": "application/json"
                 },
                 type: "GET",
-                url: "http://localhost:8080/api/customers/customerGender"
+                url: origin +"/api/customers/customerGender"
             })
                 .done((data) => {
                     console.log(data)
@@ -580,7 +580,7 @@
                     "content-type": "application/json"
                 },
                 type: "Post",
-                url: "http://localhost:8080/api/customers/findAllCustomerEmployee",
+                url: origin +"/api/customers/findAllCustomerEmployee",
                 data: JSON.stringify(arrEmployeeId)
             })
                 .done((data) => {
@@ -600,7 +600,7 @@
                     "content-type": "application/json"
                 },
                 type: "Post",
-                url: "http://localhost:8080/api/customers/filter",
+                url: origin +"/api/customers/filter",
                 data: JSON.stringify(arrId)
             })
                 .done((data) => {
@@ -621,7 +621,7 @@
                     "content-type": "application/json"
                 },
                 type: "GET",
-                url: "http://localhost:8080/api/customer_groups"
+                url: origin +"/api/customer_groups"
             })
                 .done((data) => {
                     // console.log(data)
@@ -646,7 +646,7 @@
                     "content-type": "application/json"
                 },
                 type: "GET",
-                url: "http://localhost:8080/api/employees"
+                url: origin +"/api/employees"
             })
                 .done((data) => {
                     employees = data;

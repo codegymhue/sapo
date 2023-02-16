@@ -436,7 +436,7 @@ $("#btn_createCustomerShippingAddress").on('click', () => {
             "content-type": "application/json"
         },
         "type": "POST",
-        "url": "http://localhost:8080/api/shippingAddress/create",
+        "url": origin +"/api/shippingAddress/create",
         "data": JSON.stringify(shippingAddress)
     })
         .done((data) => {
@@ -506,7 +506,7 @@ $("#btn_createCustomerShippingAddress").on('click', () => {
     //             "content-type": "application/json"
     //         },
     //         type: "GET",
-    //         url: "http://localhost:8080/api/shippingAddress/findByCustomerId/" + idCustomer
+    //         url: origin +"/api/shippingAddress/findByCustomerId/" + idCustomer
     //     })
     //         .done((data) => {
     //             console.log(data)
@@ -564,7 +564,7 @@ $("#btn_createCustomerShippingAddress").on('click', () => {
                 "content-type": "application/json"
             },
             type: "GET",
-            url: "http://localhost:8080/api/customers/historyCustomerOrder/" + idCustomer
+            url: origin +"/api/customers/historyCustomerOrder/" + idCustomer
         })
             .done((data) => {
                 console.log(data)
@@ -629,7 +629,7 @@ function deleteCustomerHander(){
                 "content-type": "application/json"
             },
             type: "POST",
-            url: "http://localhost:8080/api/customers/delete/" + idCustomer
+            url: origin +"/api/customers/delete/" + idCustomer
         })
             .done((data) => {
                 App.IziToast.showSuccessAlert('Xoá khách hàng thành công  !!!')

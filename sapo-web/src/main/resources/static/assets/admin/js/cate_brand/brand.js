@@ -22,7 +22,7 @@ function showAllBrands(selectedBrand) {
             "content-type": "application/json"
         },
         type: "GET",
-        url: "http://localhost:8080/api/brands"
+        url: origin +"/api/brands"
     })
         .done((data) => {
             brands = data;
