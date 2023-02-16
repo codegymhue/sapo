@@ -38,8 +38,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     @Transactional(readOnly = true)
     public List<SupplierResult> findAll() {
-        return supplierRepository
-                .findAll()
+        return supplierRepository.findAll()
                 .stream()
                 .map(supplierMapper::toDTO)
                 .collect(Collectors.toList());
@@ -49,41 +48,36 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     @Transactional(readOnly = true)
     public SupplierResult findById(Integer id) {
-        Supplier supplier = supplierRepository.findById(id)
+        return supplierRepository.findById(id)
+                .map(supplierMapper::toDTO)
                 .orElseThrow(() -> new NotFoundException("Not found supplier with id: " + id));
-        return supplierMapper.toDTO(supplier);
     }
 
     @Override
     @Transactional
-    public SupplierResult create(CreateSupplierParam createSupplierParam) {
-        Supplier supplier = supplierMapper.toModel(createSupplierParam);
+    public SupplierResult create(CreateSupplierParam createParam) {
+        Supplier supplier = supplierMapper.toModel(createParam);
         supplier.setEmployeeId(1);
         supplier = supplierRepository.save(supplier);
-        String supplierCode = createSupplierParam.getSupplierCode();
-        if (supplierCode == null)
+        if (createParam.getSupplierCode() == null)
             supplier.setSupplierCode(CodePrefix.SUPPLIER.generate(supplier.getId()));
         return supplierMapper.toDTO(supplier);
     }
 
     @Override
     @Transactional
-    public SupplierResult update(UpdateSupplierParam param) {
-
-        Supplier supplier = supplierRepository.findById(param.getId())
+    public SupplierResult update(UpdateSupplierParam updateParam) {
+        Supplier supplier = supplierRepository.findById(updateParam.getId())
                 .orElseThrow(() -> new NotFoundException("Not found supplier"));
-        if (param.getGroupId() != null && supplierRepository.existsById(param.getGroupId()))
+        if (updateParam.getGroupId() != null && supplierRepository.existsById(updateParam.getGroupId()))
             throw new NotFoundException("");
-
-        System.out.println(supplier);
-        supplierMapper.transferFields(param, supplier);
+        supplierMapper.transferFields(updateParam, supplier);
         return supplierMapper.toDTO(supplier);
     }
 
     @Override
     @Transactional
     public void deleteById(Integer id) {
-        findById(id);
         supplierRepository.deleteById(id);
     }
 
@@ -94,25 +88,17 @@ public class SupplierServiceImpl implements SupplierService {
                                                   Integer pageSize,
                                                   String title,
                                                   String status) {
-
-//        pageNo = pageNo - 1;
-
-        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-        Page<Supplier> page;
-        page = supplierRepository.findAll(pageable);
+        Page<Supplier> page = supplierRepository.findAll(PageRequest.of(pageNo - 1, pageSize));
         if (page.hasContent()) {
-            List<SupplierResult> supplierResults = page.getContent()
+            List<SupplierResult> dtoList = page.getContent()
                     .stream()
                     .map(supplierMapper::toDTO)
                     .collect(Collectors.toList());
             return new HashMap<>() {{
-                put("suppliers", supplierResults);
+                put("suppliers", dtoList);
                 put("totalItem", page.getTotalElements());
                 put("totalPage", page.getTotalPages());
             }};
-//            response.put("suppliers", supplierResults);
-//            response.put("totalItem", suppliers.getTotalElements());
-//            response.put("totalPage", suppliers.getTotalPages());
         } else {
             return new HashMap<>();
         }
