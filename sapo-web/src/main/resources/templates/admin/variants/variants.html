@@ -432,17 +432,17 @@
 <script>
     let page = {
         urls: {
-            getAllProductVariant: App.BASE_URL_VARIANT,
-            getAllProducts: App.BASE_URL_PRODUCT,
-            getProductById: App.BASE_URL_PRODUCT,
-            getAllCategory: App.BASE_URL_PRODUCT + "/categories",
-            getAllBrand: App.BASE_URL_PRODUCT + "/brands",
-            getAllStatus: App.BASE_URL_PRODUCT + "/status",
-            updateStatusAvailable: App.BASE_URL_PRODUCT + "/updateStatusAvailable",
-            updateStatusUnavailable: App.BASE_URL_PRODUCT + "/updateStatusUnavailable",
-            deleteProduct: App.BASE_URL_PRODUCT + "/delete",
-            updateChangeApplyTax: App.BASE_URL_PRODUCT + "/updateApplyTax",
-            getAllCheckInventory: App.BASE_URL_PRODUCT + "/checkInventory"
+            getAllProductVariant: ProductApp.BASE_URL_VARIANT,
+            getAllProducts: ProductApp.BASE_URL_PRODUCT,
+            getProductById: ProductApp.BASE_URL_PRODUCT,
+            getAllCategory: ProductApp.BASE_URL_PRODUCT + "/categories",
+            getAllBrand: ProductApp.BASE_URL_PRODUCT + "/brands",
+            getAllStatus: ProductApp.BASE_URL_PRODUCT + "/status",
+            updateStatusAvailable: ProductApp.BASE_URL_PRODUCT + "/updateStatusAvailable",
+            updateStatusUnavailable: ProductApp.BASE_URL_PRODUCT + "/updateStatusUnavailable",
+            deleteProduct: ProductApp.BASE_URL_PRODUCT + "/delete",
+            updateChangeApplyTax: ProductApp.BASE_URL_PRODUCT + "/updateApplyTax",
+            getAllCheckInventory: ProductApp.BASE_URL_PRODUCT + "/checkInventory"
         },
         elements: {},
         loadData: {},
@@ -547,9 +547,9 @@
                 totalPage = data.totalPage;
                 data.products.map(item => {
                     if(item.status == "AVAILABLE"){
-                        page.elements.tbProduct.append(App.renderRowProductVariant(item, 'available'))
+                        page.elements.tbProduct.append(ProductApp.renderRowProductVariant(item, 'available'))
                     } else {
-                        page.elements.tbProduct.append(App.renderRowProductVariant(item, 'unavailable'))
+                        page.elements.tbProduct.append(ProductApp.renderRowProductVariant(item, 'unavailable'))
                     }
                 });
                 page.commands.resetInputCheckBox();
@@ -559,7 +559,7 @@
                 )
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404)
+                ProductApp.IziToast.showErrorAlert(ProductApp.AlertMessageVi.ERROR_404)
             })
     }
 
@@ -625,7 +625,7 @@
                 })
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404)
+                ProductApp.IziToast.showErrorAlert(ProductApp.AlertMessageVi.ERROR_404)
             })
 
     }
@@ -646,7 +646,7 @@
                 })
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404)
+                ProductApp.IziToast.showErrorAlert(ProductApp.AlertMessageVi.ERROR_404)
             })
     }
 
@@ -765,13 +765,13 @@
             data: JSON.stringify(arrayIdProduct)
         })
             .done(() => {
-                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED);
+                ProductApp.IziToast.showSuccessAlert(ProductApp.AlertMessageVi.SUCCESS_UPDATED);
                 page.elements.modalAvailable.modal("hide");
                 page.commands.getAllProducts();
                 page.commands.resetInputCheckBox();
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404);
+                ProductApp.IziToast.showErrorAlert(ProductApp.AlertMessageVi.ERROR_404);
             })
     }
 
@@ -786,13 +786,13 @@
             data: JSON.stringify(arrayIdProduct)
         })
             .done(() => {
-                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED);
+                ProductApp.IziToast.showSuccessAlert(ProductApp.AlertMessageVi.SUCCESS_UPDATED);
                 page.elements.modalUnavailable.modal("hide");
                 page.commands.getAllProducts();
                 page.commands.resetInputCheckBox();
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404);
+                ProductApp.IziToast.showErrorAlert(ProductApp.AlertMessageVi.ERROR_404);
             })
     }
 
@@ -807,13 +807,13 @@
             data: JSON.stringify(arrayIdProduct)
         })
             .done(() => {
-                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_DELETE);
+                ProductApp.IziToast.showSuccessAlert(ProductApp.AlertMessageVi.SUCCESS_DELETE);
                 page.elements.modalDelete.modal("hide");
                 page.commands.getAllProducts();
                 page.commands.resetInputCheckBox();
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404);
+                ProductApp.IziToast.showErrorAlert(ProductApp.AlertMessageVi.ERROR_404);
             })
     }
 
@@ -830,17 +830,17 @@
                 data: JSON.stringify(arrayIdProduct)
             })
                 .done(() => {
-                    App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED);
+                    ProductApp.IziToast.showSuccessAlert(ProductApp.AlertMessageVi.SUCCESS_UPDATED);
                     page.elements.modalApplyTax.modal("hide");
                     page.elements.selectApplyTax.val("")
                     page.commands.getAllProducts();
                     page.commands.resetInputCheckBox();
                 })
                 .fail((jqXHR) => {
-                    App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404)
+                    ProductApp.IziToast.showErrorAlert(ProductApp.AlertMessageVi.ERROR_404)
                 })
         } else {
-            App.IziToast.showErrorAlert("Vui lòng chọn trạng thái áp dụng thuế")
+            ProductApp.IziToast.showErrorAlert("Vui lòng chọn trạng thái áp dụng thuế")
         }
     }
 
@@ -857,12 +857,12 @@
             .done((data) => {
                 page.elements.tbinventoryProduct.empty();
                 data.map(item => {
-                    page.elements.tbinventoryProduct.append(App.renderRowProductInventory(item));
+                    page.elements.tbinventoryProduct.append(ProductApp.renderRowProductInventory(item));
                 });
                 page.elements.modalCheckInventory.modal("show");
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404);
+                ProductApp.IziToast.showErrorAlert(ProductApp.AlertMessageVi.ERROR_404);
             })
     }
 

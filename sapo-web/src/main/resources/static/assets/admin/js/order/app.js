@@ -185,7 +185,7 @@ class Address {
     }
 }
 
-class App {
+class OrderApp {
     static SweetAlert = class {
         static showSuccessAlert(t) {
             Swal.fire({

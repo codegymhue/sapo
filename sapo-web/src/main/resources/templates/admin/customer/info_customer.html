@@ -1529,7 +1529,7 @@
                     url: origin +"/api/customers/delete/" + idCustomer
                 })
                     .done((data) => {
-                        App.IziToast.showSuccessAlert("Xoá khách hàng thành công  !!! ");
+                        CustomerApp.IziToast.showSuccessAlert("Xoá khách hàng thành công  !!! ");
                         $('#modal_delete_customer').modal('hide');
 
                         setTimeout(() => {
@@ -1538,7 +1538,7 @@
                     })
                     .fail((jqXHR) => {
                         $.each(jqXHR.responseJSON, (key, item) => {
-                            App.IziToast.showErrorAlert(item);
+                            CustomerApp.IziToast.showErrorAlert(item);
                         })
                     })
             })
@@ -1591,13 +1591,13 @@
                 "data": JSON.stringify(address)
             })
                 .done((data) => {
-                    App.IziToast.showSuccessAlert('Thêm mới khách hàng thành công  !!!')
+                    CustomerApp.IziToast.showSuccessAlert('Thêm mới khách hàng thành công  !!!')
                     $('#modal_create_shippingAddress').off('show');
                     showCustomerInfoShippingAddressByCustomerId();
                 })
                 .fail((jqXHR) => {
                     $.each(jqXHR.responseJSON, (key, item) => {
-                        App.IziToast.showErrorAlert(item);
+                        CustomerApp.IziToast.showErrorAlert(item);
                     })
 
                 })
