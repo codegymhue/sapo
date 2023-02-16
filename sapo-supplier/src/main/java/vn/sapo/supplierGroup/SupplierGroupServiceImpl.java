@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.entities.supplier.SupplierGroup;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.supplierGroup.dto.CreateSupGroupParam;
+import vn.sapo.supplierGroup.dto.EditSupGroupParam;
 import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 
 import java.util.List;
@@ -43,5 +44,27 @@ public class SupplierGroupServiceImpl implements SupplierGroupService{
                 .stream()
                 .map(supplierGroupMapper::toDTO)
                 .collect(Collectors.toList());
+    }
+    @Override
+    @Transactional(readOnly = true)
+    public SupplierGroupResult findById(Integer id) {
+        SupplierGroup supplierGroup = supplierGroupRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Not found group supplier with id: " + id));
+        return supplierGroupMapper.toDTO(supplierGroup) ;
+    }
+
+    @Override
+    @Transactional
+    public SupplierGroupResult update(EditSupGroupParam editSupGroupParam) {
+        SupplierGroup supplierGroup = supplierGroupRepository.findById(editSupGroupParam.getId())
+                .orElseThrow(() -> new NotFoundException("Not found group supplier with id: " + editSupGroupParam.getId() ));
+        supplierGroupMapper.transferFields(editSupGroupParam, supplierGroup);
+        SupplierGroup supplierGroupResult = supplierGroupRepository.save(supplierGroup);
+        return supplierGroupMapper.toDTO(supplierGroupResult);
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        supplierGroupRepository.deleteById(id);
     }
 }

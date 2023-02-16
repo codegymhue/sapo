@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vn.sapo.supplierGroup.SupplierGroupService;
 import vn.sapo.supplierGroup.dto.CreateSupGroupParam;
+import vn.sapo.supplierGroup.dto.EditSupGroupParam;
 import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 
 import java.util.List;
@@ -25,4 +26,24 @@ public class SupplierGroupAPI {
         SupplierGroupResult dto = supplierGroupService.create(createSupGroupParam);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity <SupplierGroupResult> findById(@PathVariable Integer id) {
+        SupplierGroupResult dto = supplierGroupService.findById(id);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity <SupplierGroupResult> Update(@RequestBody EditSupGroupParam editSupGroupParam) {
+        SupplierGroupResult dto = supplierGroupService.update(editSupGroupParam);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity <?> deleteById(@PathVariable Integer id) {
+        supplierGroupService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
 }

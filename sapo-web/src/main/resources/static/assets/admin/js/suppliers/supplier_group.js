@@ -1,3 +1,12 @@
+
+class createSupGroupParam {
+    constructor(id, title, supplierCode, description) {
+        this.id = id;
+        this.title = title;
+        this.supplierCode = supplierCode;
+        this.description = description;
+    }
+}
 function doCreateGroupSupplier() {
     let newGroupSup = new createSupGroupParam();
     newGroupSup.id =  page.dialogs.elements.groupId.val();
@@ -20,7 +29,7 @@ function doCreateGroupSupplier() {
             }, 1500);
 
             page.dialogs.elements.showModalGroupSupplier.modal('hide');
-            location.reload();
+            // location.reload();
 
             // console.log("group",data);
             // alert("Thêm nhóm nhà cung cấp thành công")
@@ -65,23 +74,6 @@ function getAllGroup() {
             });
         })
 }
-
-function handleChangeGroupSupp(supplierGroupId) {
-    let supplierGroup = supplierGroups.find(supplierGroup => supplierGroup.id === supplierGroupId);
-    page.elements.changeValueSup.attr("data-id",supplierGroup.id);
-
-    page.elements.changeValueSup.val(supplierGroup.id);
-    page.elements.changeValueSup.text(supplierGroup.title);
-
-    var dropdown = new bootstrap.Dropdown(document.querySelector($("#changeValueSup")));
-    dropdown.hide();
-}
-
-page.elements.changeValueSup.on('click', ()=> {
-    var dropdown = new bootstrap.Dropdown(document.querySelector($("#changeValueSup")));
-    dropdown.show();
-})
-
 
 function searchGroup() {
 
