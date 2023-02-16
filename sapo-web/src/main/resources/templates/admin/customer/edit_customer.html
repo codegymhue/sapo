@@ -30,7 +30,7 @@
                         <path d="M14.298 5.99 8.288 12l6.01 6.01 1.414-1.414L11.116 12l4.596-4.596-1.414-1.414Z"
                               fill="currentColor"></path>
                     </svg>
-                    <h6 class="MuiTypography-root MuiTypography-subtitle1" >Quay lại danh sách khách hàng</h6></a>
+                    <h6 class="MuiTypography-root MuiTypography-subtitle1">Quay lại danh sách khách hàng</h6></a>
                     <th:block>
                         <h2 th:if="errors" th:text="${errors}" style="color: red"></h2>
                     </th:block>
@@ -39,7 +39,7 @@
                 <div class="MuiBox-root jss3581">
                     <button id="btnCloseUpdate" class="sc-kDDrLX kESDbN"
                             style="font-size: 14px; width: 65px; height: 36px;"><span
-                            class="sc-jqUVSM cMXJOk " th:href="'/admin/customers/'+${customer.id}" >Hủy</span></button>
+                            class="sc-jqUVSM cMXJOk " th:href="'/admin/customers/'+${customer.id}">Hủy</span></button>
                     <button id="btnUpdateCustomer" class="RthGc btnUpdateCustomer "
                             style="font-size: 14px; width: 65px; height: 36px;"><span
                             class="sc-jqUVSM cMXJOk">Lưu</span></button>
@@ -131,11 +131,15 @@
                                                                 name="group.id" id="customerGroupUp"
                                                                 style="height: 43px; margin-top: -2px; font-size: 14px;">
                                                             <th:block th:each="group : ${group}">
-                                                                <th:block th:if="${group.id}==${customer.getGroup().getId()}" >
-                                                                    <option th:value="${group.id}"  th:text="${group.title}" selected></option>
+                                                                <th:block
+                                                                        th:if="${group.id}==${customer.getGroup().getId()}">
+                                                                    <option th:value="${group.id}"
+                                                                            th:text="${group.title}" selected></option>
                                                                 </th:block>
-                                                                <th:block th:unless="${group.id}==${customer.getGroup().getId()}" >
-                                                                    <option th:value="${group.id}"  th:text="${group.title}" ></option>
+                                                                <th:block
+                                                                        th:unless="${group.id}==${customer.getGroup().getId()}">
+                                                                    <option th:value="${group.id}"
+                                                                            th:text="${group.title}"></option>
                                                                 </th:block>
                                                             </th:block>
                                                         </select>
@@ -230,23 +234,24 @@
                                                         class="sc-hAZoDl iocNjj">Ngày sinh</label>
                                                     <div class="sc-cCsOjp bwybwb Sapo-InputRoot">
                                                         <input
-                                                            id="birthdayUp" name="birthday"
-                                                            placeholder="Chọn ngày sinh"
-                                                            th:value="${#dates.format(customer.birthday, 'yyyy-MM-dd')}"
-                                                             type="date"
-                                                            class="sc-gXmSlM djQmoa" style="padding-right: 10px; font-size: 14px;">
+                                                                id="birthdayUp" name="birthday"
+                                                                placeholder="Chọn ngày sinh"
+                                                                th:value="${#dates.format(customer.birthday, 'yyyy-MM-dd')}"
+                                                                type="date"
+                                                                class="sc-gXmSlM djQmoa"
+                                                                style="padding-right: 10px; font-size: 14px;">
                                                         <fieldset class="sc-iIPllB iUBRZb"></fieldset>
-<!--                                                        <div class="sc-kLLXSd sc-jIZahH knmXYz dsyMcL">-->
-<!--                                                            <svg viewBox="0 0 24 25" fill="none"-->
-<!--                                                                 xmlns="http://www.w3.org/2000/svg" width="24"-->
-<!--                                                                 height="24" font-size="24" color="primary">-->
-<!--                                                                <path d="M7 12.5h2v2H7v-2ZM7 16.5h2v2H7v-2ZM13 12.5h-2v2h2v-2ZM11 16.5h2v2h-2v-2ZM17 12.5h-2v2h2v-2ZM15 16.5h2v2h-2v-2Z"-->
-<!--                                                                      fill="#0088FF"></path>-->
-<!--                                                                <path fill-rule="evenodd" clip-rule="evenodd"-->
-<!--                                                                      d="M19 22.5H5c-1.103 0-2-.897-2-2v-14c0-1.103.897-2 2-2h2v-2h2v2h6v-2h2v2h2c1.103 0 2 .897 2 2v14c0 1.103-.897 2-2 2Zm0-14v-2H5v2h14Zm0 2 .001 10H5v-10h14Z"-->
-<!--                                                                      fill="#0088FF"></path>-->
-<!--                                                            </svg>-->
-<!--                                                        </div>-->
+                                                        <!--                                                        <div class="sc-kLLXSd sc-jIZahH knmXYz dsyMcL">-->
+                                                        <!--                                                            <svg viewBox="0 0 24 25" fill="none"-->
+                                                        <!--                                                                 xmlns="http://www.w3.org/2000/svg" width="24"-->
+                                                        <!--                                                                 height="24" font-size="24" color="primary">-->
+                                                        <!--                                                                <path d="M7 12.5h2v2H7v-2ZM7 16.5h2v2H7v-2ZM13 12.5h-2v2h2v-2ZM11 16.5h2v2h-2v-2ZM17 12.5h-2v2h2v-2ZM15 16.5h2v2h-2v-2Z"-->
+                                                        <!--                                                                      fill="#0088FF"></path>-->
+                                                        <!--                                                                <path fill-rule="evenodd" clip-rule="evenodd"-->
+                                                        <!--                                                                      d="M19 22.5H5c-1.103 0-2-.897-2-2v-14c0-1.103.897-2 2-2h2v-2h2v2h6v-2h2v2h2c1.103 0 2 .897 2 2v14c0 1.103-.897 2-2 2Zm0-14v-2H5v2h14Zm0 2 .001 10H5v-10h14Z"-->
+                                                        <!--                                                                      fill="#0088FF"></path>-->
+                                                        <!--                                                            </svg>-->
+                                                        <!--                                                        </div>-->
 
                                                     </div>
 
@@ -310,7 +315,7 @@
                                                                    type="text"
                                                                    aria-label="Without label" style="font-size: 14px;"
                                                                    class="MuiInputBase-input MuiOutlinedInput-input"
-                                                                   >
+                                                            >
                                                             <fieldset aria-hidden="true"
                                                                       class="jss4023 MuiOutlinedInput-notchedOutline"
                                                                       style="padding-left: 8px;">
@@ -336,7 +341,7 @@
                                                                    th:value="${customer.taxCode}"
                                                                    type="text" aria-label="Without label"
                                                                    class="MuiInputBase-input MuiOutlinedInput-input"
-                                                                   >
+                                                            >
                                                             <fieldset aria-hidden="true"
                                                                       class="jss4023 MuiOutlinedInput-notchedOutline"
                                                                       style="padding-left: 8px;">
@@ -448,11 +453,16 @@
 
                                                         style="height:40px; font-size: 14px;">
                                                     <th:block th:each="employee :${employee}">
-                                                        <th:block th:if="${employee.id}==${customer.getEmployee().getId()}" >
-                                                            <option th:value="${employee.id}"  th:text="${employee.getFullName()}" selected></option>
+                                                        <th:block
+                                                                th:if="${employee.id}==${customer.getEmployee().getId()}">
+                                                            <option th:value="${employee.id}"
+                                                                    th:text="${employee.getFullName()}"
+                                                                    selected></option>
                                                         </th:block>
-                                                        <th:block th:unless="${employee.id}==${customer.getEmployee().getId()}" >
-                                                            <option th:value="${employee.id}"  th:text="${employee.getFullName()}" ></option>
+                                                        <th:block
+                                                                th:unless="${employee.id}==${customer.getEmployee().getId()}">
+                                                            <option th:value="${employee.id}"
+                                                                    th:text="${employee.getFullName()}"></option>
                                                         </th:block>
                                                     </th:block>
                                                 </select>
@@ -583,7 +593,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: origin +"/api/employees"
+            url: origin + "/api/employees"
         })
             .done((data) => {
                 $.each(data, (i, item) => {
@@ -648,7 +658,7 @@
                 "content-type": "application/json"
             },
             "type": "PUT",
-            "url": `http://localhost:8080/api/customers/${customer.id}`,
+            "url": origin + `/api/customers/${customer.id}`,
             "data": JSON.stringify(newCustomer)
         })
             .done((data) => {
@@ -661,7 +671,7 @@
             })
             .fail((jqXHR) => {
                 console.log(jqXHR);
-               App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
 
             })
     })
@@ -674,9 +684,6 @@
     // $("#btnCloseUpdate").on('click', () =>{
     //     alert("được")
     // }) // window.location.href = `/admin/customers/${customer.id}`)
-
-
-
 
 
 </script>

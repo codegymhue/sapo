@@ -5,7 +5,8 @@
 
     <th:block th:replace="/layout/header :: header"/>
     <title>Danh sách sản phẩm</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/admin/css/product/product_list.css"/>
 </head>
 
@@ -31,7 +32,8 @@
                             </div>
                         </div>
                     </div>
-                    <p class="MuiTypography-root jss445 MuiTypography-body1 MuiTypography-colorTextPrimary">Trúc Nguyễn</p>
+                    <p class="MuiTypography-root jss445 MuiTypography-body1 MuiTypography-colorTextPrimary">Trúc
+                        Nguyễn</p>
                 </div>
             </div>
         </div>
@@ -39,9 +41,9 @@
             <div class="MuiBox-root jss6755 jss6733">
                 <div class="MuiBox-root jss6756 jss6741">
                     <a th:href="@{/admin/products/export/excel}">
-                    <button class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
-                            tabindex="0"
-                            type="button">
+                        <button class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
+                                tabindex="0"
+                                type="button">
                       <span class="MuiButton-label">
                         <span class="MuiButton-startIcon MuiButton-iconSizeSmall">
                           <svg class="MuiSvgIcon-root jss6758"
@@ -57,14 +59,15 @@
                             </svg>
                         </span>Xuất file
                       </span>
-                        <span class="MuiTouchRipple-root">
+                            <span class="MuiTouchRipple-root">
                       </span>
-                    </button>
+                        </button>
                     </a>
                     <div class="MuiBox-root jss6793"
                          style="width: 1px; height: 20px; border-left: 1px solid rgb(211, 213, 215); margin: 0 8px;">
                     </div>
-                    <button id="importFile" class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
+                    <button id="importFile"
+                            class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
                             tabindex="0"
                             type="button">
                       <span class="MuiButton-label">
@@ -100,7 +103,8 @@
                                  viewBox="0 0 24 24"
                                  aria-hidden="true">
                                 <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
-                            </svg>Thêm sản phẩm
+                            </svg>
+                            Thêm sản phẩm
                         </a>
                     </div>
                 </div>
@@ -132,7 +136,7 @@
                                             </path>
                                         </svg>
                                     </div>
-                                    <label style="width: 100%" >
+                                    <label style="width: 100%">
                                         <input id="Sapo-TextField-1de6d6a6-f13f-4275-b1b2-a8487207509a"
                                                placeholder="Tìm kiếm theo tên sản phẩm"
                                                type="text"
@@ -145,13 +149,16 @@
                         </div>
                         <div role="group"
                              class="MuiButtonGroup-root jss6803">
-                            <select id="category" class="form-select me-2" aria-label="Default select example" style="width: 180px">
+                            <select id="category" class="form-select me-2" aria-label="Default select example"
+                                    style="width: 180px">
                                 <option selected value="-1">Loại sản phẩm</option>
                             </select>
-                            <select id="brand" class="form-select me-2" aria-label="Default select example" style="width: 180px">
+                            <select id="brand" class="form-select me-2" aria-label="Default select example"
+                                    style="width: 180px">
                                 <option selected value="-1">Nhãn hiệu</option>
                             </select>
-                            <select id="status" class="form-select" aria-label="Default select example" style="width: 180px">
+                            <select id="status" class="form-select" aria-label="Default select example"
+                                    style="width: 180px">
                                 <option selected value="">Trạng thái</option>
                                 <option value="AVAILABLE">Đang giao dịch</option>
                                 <option value="UNAVAILABLE">Ngừng giao dịch</option>
@@ -164,15 +171,17 @@
                 <div style="font-size:small" id="tableCheckbox">
                     <table id="tbProduct" class="table table-hover">
                         <thead style="background-color: #f4f6f8; height: 55px">
-                        <tr id="theadList" class="show" >
-                            <th class="align-middle" >
+                        <tr id="theadList" class="show">
+                            <th class="align-middle">
                                 <label for="checkAll" style="padding: 1rem; cursor:pointer">
-                                    <input  style="cursor:pointer" id="checkAll" type="checkbox" value="" data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả">
+                                    <input style="cursor:pointer" id="checkAll" type="checkbox" value=""
+                                           data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả">
                                 </label>
                             </th>
                             <th class="align-middle" scope="col">Ảnh</th>
                             <th class="align-middle" scope="col">
-                                <button class="sort" id="btnTitleSort">Sản phẩm <i class="fa-solid fa-sort"></i></button>
+                                <button class="sort" id="btnTitleSort">Sản phẩm <i class="fa-solid fa-sort"></i>
+                                </button>
                             </th>
                             <th class="align-middle" scope="col">Loại</th>
                             <th class="align-middle" scope="col">Nhãn hiệu</th>
@@ -180,38 +189,47 @@
                             <th class="align-middle" scope="col">Tồn kho</th>
                             <th class="align-middle" scope="col">Trạng thái</th>
                             <th class="align-middle" scope="col">
-                                <button class="sort" id="btnCreatAtSort">Ngày khởi tạo <i class="fa-solid fa-sort"></i></button>
+                                <button class="sort" id="btnCreatAtSort">Ngày khởi tạo <i class="fa-solid fa-sort"></i>
+                                </button>
                             </th>
                             <th class="align-middle" scope="col">
-                                <button class="sort" id="btnUpdateAtSort">Cập nhập cuối <i class="fa-solid fa-sort"></i></button>
+                                <button class="sort" id="btnUpdateAtSort">Cập nhập cuối <i class="fa-solid fa-sort"></i>
+                                </button>
                             </th>
                         </tr>
                         <tr class="hide" id="selectActionThead" style="border: snow">
                             <td class="align-middle" style="width: 20px">
                                 <label for="selectAction" style="padding: 1rem; cursor:pointer">
-                                    <input style="cursor:pointer" id="selectAction" type="checkbox" value="" >
+                                    <input style="cursor:pointer" id="selectAction" type="checkbox" value="">
                                 </label>
                             </td>
                             <td colspan="2" class="align-middle" id="numberSelectProductList" style="width: 24%">
                             </td>
                             <td class="align-middle" colspan="2">
                                 <div class="btn-group">
-                                    <button class="btn dropdown-toggle btnDropdown me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="btn dropdown-toggle btnDropdown me-2" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
                                         Chọn thao tác
                                         <i class="fa-solid fa-sort-down" style="padding-left: 2.3rem"></i>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                                         <li>
-                                            <button class="dropdown-item btnDropdown" id="btnCheckInventory">Kiểm tra tồn kho</button>
+                                            <button class="dropdown-item btnDropdown" id="btnCheckInventory">Kiểm tra
+                                                tồn kho
+                                            </button>
                                         </li>
                                         <li>
-                                            <button class="dropdown-item btnDropdown" id="btnAvailable">Đang giao dịch</button>
+                                            <button class="dropdown-item btnDropdown" id="btnAvailable">Đang giao dịch
+                                            </button>
                                         </li>
                                         <li>
-                                            <button class="dropdown-item btnDropdown" id="btnUnavailable">Ngừng giao dịch</button>
+                                            <button class="dropdown-item btnDropdown" id="btnUnavailable">Ngừng giao
+                                                dịch
+                                            </button>
                                         </li>
                                         <li>
-                                            <button class="dropdown-item btnDropdown" id="btnDelete">Xóa sản phẩm</button>
+                                            <button class="dropdown-item btnDropdown" id="btnDelete">Xóa sản phẩm
+                                            </button>
                                         </li>
                                     </ul>
                                 </div>
@@ -219,7 +237,7 @@
                             <td colspan="5"></td>
                         </tr>
                         </thead>
-                        <tbody >
+                        <tbody>
                         </tbody>
                     </table>
                 </div>
@@ -240,9 +258,10 @@
                         </div>
                         <div class="col-md-1">
                             <nav aria-label="Page navigation example ">
-                                <ul class="pagination" >
+                                <ul class="pagination">
                                     <li class="page-item">
-                                        <button class=" btn-outline-primary btn-sm me-2" id="previousPage" style="border: none">
+                                        <button class=" btn-outline-primary btn-sm me-2" id="previousPage"
+                                                style="border: none">
                                             <i class="fa-solid fa-angle-left"></i>
                                         </button>
                                     </li>
@@ -266,7 +285,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="modalAvailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modalAvailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content" style="width: max-content">
             <div class="modal-header">
@@ -276,14 +296,15 @@
             <div class="modal-body" id="statusChange">
             </div>
             <div class="modal-footer d-flex align-items-center">
-                <button class="btn btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
                 <button class="btn btn-primary btn-save" id="btnAvailableSave" type="button">Lưu</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="modalUnavailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modalUnavailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content" style="width: max-content">
             <div class="modal-header">
@@ -293,14 +314,15 @@
             <div class="modal-body" id="statusChangeUnavailable">
             </div>
             <div class="modal-footer d-flex align-items-center">
-                <button class="btn btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
                 <button class="btn btn-primary btn-save" id="btnUnavailableSave" type="button">Lưu</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content" style="width: max-content">
             <div class="modal-header">
@@ -310,21 +332,22 @@
             <div class="modal-body" id="statusChangeDelete">
             </div>
             <div class="modal-footer d-flex align-items-center">
-                <button class="btn  btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn  btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
                 <button class="btn btn-danger btn-save-delete" id="btnSubmitDelete" type="button">Xóa</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="modalCheckInventory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modalCheckInventory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content " style="width:max-content">
             <div class="modal-header">
-                <h4 class="modal-title" >Kiểm tra thông tin tồn kho</h4>
+                <h4 class="modal-title">Kiểm tra thông tin tồn kho</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" >
+            <div class="modal-body">
                 <table class="table table-hover table-bordered" id="tbInventoryProduct" style="font-size: small">
                     <thead style="background-color: #f4f6f8">
                     <tr>
@@ -348,7 +371,7 @@
                 </table>
             </div>
             <div class="modal-footer d-flex align-items-center">
-                <button class="btn btn-outline-warning btn-exit" type="button"  data-bs-dismiss="modal" >Thoát</button>
+                <button class="btn btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
             </div>
         </div>
     </div>
@@ -417,7 +440,7 @@
     page.elements.pageSize = $("#pageSize");
     page.elements.search = $(".searchTitle");
 
-    page.elements.checkAll =$("#checkAll");
+    page.elements.checkAll = $("#checkAll");
     page.elements.selectAction = $("#selectAction");
 
     page.elements.selectActionThead = $("#selectActionThead");
@@ -428,8 +451,8 @@
     page.elements.statusChangeForNumberDelete = $("#statusChangeDelete");
 
     page.elements.modalAvailable = $("#modalAvailable");
-    page.elements.modalUnavailable =$("#modalUnavailable");
-    page.elements.modalDelete =$("#modalDelete");
+    page.elements.modalUnavailable = $("#modalUnavailable");
+    page.elements.modalDelete = $("#modalDelete");
     page.elements.modalCheckInventory = $("#modalCheckInventory");
 
     page.dialogs.elements.category = $("#category");
@@ -441,13 +464,13 @@
 
     page.elements.importFile = $("#importFile");
 
-    page.elements.importFile.on("click", function (){
-            $("#modalImportFile").modal("show");
+    page.elements.importFile.on("click", function () {
+        $("#modalImportFile").modal("show");
     })
 
     page.commands.getAllProducts = () => {
         let pageNo = Number(page.elements.pageNo.text());
-        let pageSize =Number(page.elements.pageSize.val());
+        let pageSize = Number(page.elements.pageSize.val());
         let search = page.elements.search.val().trim();
 
         let categoryId = Number(page.dialogs.elements.category.val());
@@ -464,7 +487,7 @@
             },
             type: "GET",
             url: page.urls.getAllProducts + "/page",
-            data:({
+            data: ({
                 "pageNo": pageNo,
                 "pageSize": pageSize,
                 "search": search,
@@ -479,7 +502,7 @@
                 page.elements.totalPage.empty();
                 totalPage = data.totalPage;
                 data.products.map(item => {
-                    if(item.status == "AVAILABLE"){
+                    if (item.status == "AVAILABLE") {
                         page.elements.tbProduct.append(App.renderRowProduct(item, 'available'))
                     } else {
                         page.elements.tbProduct.append(App.renderRowProduct(item, 'unavailable'))
@@ -511,7 +534,7 @@
         page.commands.getAllProducts();
     })
 
-    page.dialogs.elements.status.on("change", () =>{
+    page.dialogs.elements.status.on("change", () => {
         page.elements.pageNo.text(1);
         page.commands.getAllProducts();
     })
@@ -519,7 +542,7 @@
 
     page.dialogs.elements.nextPage.on("click", () => {
         let pageNo = page.elements.pageNo.text();
-        if(Number(pageNo) < Number(totalPage)) {
+        if (Number(pageNo) < Number(totalPage)) {
             let pageNext = Number(pageNo) + 1;
             page.elements.pageNo.text(pageNext);
             page.commands.getAllProducts();
@@ -528,7 +551,7 @@
 
     page.dialogs.elements.previousPage.on("click", () => {
         let pageNo = page.elements.pageNo.text();
-        if(Number(pageNo) > 1) {
+        if (Number(pageNo) > 1) {
             let previousPage = Number(pageNo) - 1;
             page.elements.pageNo.text(previousPage);
             page.commands.getAllProducts();
@@ -583,25 +606,25 @@
     }
 
 
-    page.elements.checkAll.on("change", function (){
+    page.elements.checkAll.on("change", function () {
         page.elements.selectAction.prop("checked", true);
         arrayIdProduct = [];
-        if(this.checked){
-            $("#tbProduct > tbody input").each(function (){
+        if (this.checked) {
+            $("#tbProduct > tbody input").each(function () {
                 $(this).prop("checked", true);
                 arrayIdProduct.push($(this).val());
             })
         } else {
-            $("#tbProduct > tbody input").each(function (){
+            $("#tbProduct > tbody input").each(function () {
                 $(this).prop("checked", false);
             })
         }
         page.commands.showAction();
     })
 
-    page.commands.isCheckbox = () =>{
-        $(".selectCheckbox").on("change", function (){
-            if(this.checked){
+    page.commands.isCheckbox = () => {
+        $(".selectCheckbox").on("change", function () {
+            if (this.checked) {
                 $(this).prop("checked", true);
                 arrayIdProduct.push($(this).val());
             } else {
@@ -610,7 +633,7 @@
             }
             page.commands.showAction();
             let pageSize = page.elements.pageSize.val()
-            if(arrayIdProduct.length == pageSize){
+            if (arrayIdProduct.length == pageSize) {
                 page.elements.checkAll.prop("checked", true);
                 page.elements.selectAction.prop("checked", true);
             } else {
@@ -620,13 +643,13 @@
         })
     }
 
-    page.commands.deleteArrayId = (item) =>{
-        if(arrayIdProduct.length <= 0){
+    page.commands.deleteArrayId = (item) => {
+        if (arrayIdProduct.length <= 0) {
             return [];
         } else {
-            for(let i=0; i < arrayIdProduct.length; i++){
-                if(arrayIdProduct[i] === item ){
-                    arrayIdProduct.splice(i,1);
+            for (let i = 0; i < arrayIdProduct.length; i++) {
+                if (arrayIdProduct[i] === item) {
+                    arrayIdProduct.splice(i, 1);
                 }
             }
             return arrayIdProduct;
@@ -639,7 +662,7 @@
         page.elements.statusChangeForNumberToUnavailable.empty();
         page.elements.statusChangeForNumberDelete.empty();
 
-        if(arrayIdProduct.length > 0){
+        if (arrayIdProduct.length > 0) {
             page.elements.theadList.removeClass("show").addClass("hide");
             page.elements.numberSelectProductList.append(`<span>Đã chọn ${arrayIdProduct.length} sản phẩm trên trang này</span>`)
             page.elements.statusChangeForNumberProductList.append(`<span style="font-size: medium">Thao tác này sẽ cập nhật trạng thái giao dịch cho ${arrayIdProduct.length} sản phẩm bạn đã chọn.</span>`);
@@ -655,13 +678,13 @@
     page.elements.selectAction.on("change", function () {
         page.elements.checkAll.prop("checked", false);
         arrayIdProduct = [];
-        if(this.checked){
-            $("#tbProduct > tbody input").each(function (){
+        if (this.checked) {
+            $("#tbProduct > tbody input").each(function () {
                 $(this).prop("checked", true);
                 arrayIdProduct.push($(this).val());
             })
         } else {
-            $("#tbProduct > tbody input").each(function (){
+            $("#tbProduct > tbody input").each(function () {
                 $(this).prop("checked", false);
             })
         }
@@ -671,7 +694,7 @@
     page.elements.btnAvailable.on("click", () => {
         page.elements.modalAvailable.modal("show");
     })
-    page.elements.btnUnavailable.on("click", () =>{
+    page.elements.btnUnavailable.on("click", () => {
         page.elements.modalUnavailable.modal("show");
     })
     page.elements.btnDelete.on("click", () => {
@@ -769,15 +792,15 @@
     page.elements.btnAvailableSave.on("click", () => {
         page.commands.updateStatusToAvailable();
     })
-    page.elements.btnUnavailableSave.on("click", () =>{
+    page.elements.btnUnavailableSave.on("click", () => {
         page.commands.updateStatusToUnavailable();
     })
     page.elements.btnSubmitDelete.on("click", () => {
         page.commands.deleteProductSelect();
     })
 
-    page.commands.resetInputCheckBox = () =>{
-        $("#tbProduct input").each(function (){
+    page.commands.resetInputCheckBox = () => {
+        $("#tbProduct input").each(function () {
             $(this).prop("checked", false);
         })
         arrayIdProduct = [];
@@ -785,35 +808,35 @@
     }
 
     page.elements.btnTitleSort.on("click", () => {
-        sortPage.type==="des" ?
-            sortPage = {"type": "asc","value": "title"} :
-            sortPage = {"type": "des","value": "title"};
+        sortPage.type === "des" ?
+            sortPage = {"type": "asc", "value": "title"} :
+            sortPage = {"type": "des", "value": "title"};
         page.commands.getAllProducts();
     })
     page.elements.btnCreatAtSort.on("click", () => {
-        sortPage.type==="des" ?
-            sortPage = {"type": "asc","value": "createdAt"} :
-            sortPage = {"type": "des","value": "createdAt"};
+        sortPage.type === "des" ?
+            sortPage = {"type": "asc", "value": "createdAt"} :
+            sortPage = {"type": "des", "value": "createdAt"};
         page.commands.getAllProducts();
     })
     page.elements.btnUpdateAtSort.on("click", () => {
-        sortPage.type==="des" ?
-            sortPage = {"type": "asc","value": "createdAt"} :
-            sortPage = {"type": "des","value": "createdAt"};
+        sortPage.type === "des" ?
+            sortPage = {"type": "asc", "value": "createdAt"} :
+            sortPage = {"type": "des", "value": "createdAt"};
         page.commands.getAllProducts();
     })
 
     $('#btnImportFile').click(function () {
         let data = new FormData();
         let file = $('#formFile')[0].files[0];
-        data.append('file',file);
+        data.append('file', file);
         $.ajax({
-            url: 'http://localhost:8080/api/upload',
+            url: origin + '/api/upload',
             processData: false,
             contentType: false,
             data: data,
             type: 'POST'
-        }).done(function(result) {
+        }).done(function (result) {
             $("#modalImportFile").modal("hide");
             $("#frmFile")[0].reset();
             page.commands.getAllProducts();
