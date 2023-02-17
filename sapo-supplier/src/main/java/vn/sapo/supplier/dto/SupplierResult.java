@@ -29,14 +29,12 @@ public class SupplierResult {
     private SupplierStatus status;
     private SupEmployeeResult employee;
     private SupPaymentMethodResult paymentMethod;
-
-
-    private SupplierGroupResult group;
-    private Instant createAt;
-    private Instant updateAt;
+    private SupGroupResult group;
+    private Instant createdAt;
+    private Instant updatedAt;
     private BigDecimal debtTotal;
     private List<AddressResult> addresses;
-    private  String taxCode;
-    private  String fax;
+    private String taxCode;
+    private String fax;
     private String website;
 }

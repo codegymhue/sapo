@@ -1,17 +1,20 @@
 package vn.sapo.supplier;
 
+import org.hibernate.Session;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.provider.HibernateUtils;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import vn.sapo.entities.customer.Customer;
-import vn.sapo.entities.customer.CustomerGender;
 import vn.sapo.entities.supplier.Supplier;
+import vn.sapo.entities.supplier.SupplierGroup;
 import vn.sapo.supplier.dto.SupplierFilter;
+import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 
-import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -65,4 +68,5 @@ public interface SupplierFilterRepository extends JpaRepository<Supplier, Intege
         }, pageable);
 
     }
+
 }
