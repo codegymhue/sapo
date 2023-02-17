@@ -31,7 +31,6 @@ public class SupplierGroupServiceImpl implements SupplierGroupService{
 //       }
         SupplierGroup supplierGroup = supplierGroupMapper.toModel(createSupGroupParam);
         supplierGroupRepository.save(supplierGroup);
-
         String supplierCode = createSupGroupParam.getSupplierCode();
         if (supplierCode == null)
             supplierGroup.setSupplierCode(CodePrefix.SUPPLIER.generate(supplierGroup.getId()));
@@ -61,8 +60,7 @@ public class SupplierGroupServiceImpl implements SupplierGroupService{
         SupplierGroup supplierGroup = supplierGroupRepository.findById(editSupGroupParam.getId())
                 .orElseThrow(() -> new NotFoundException("Not found group supplier with id: " + editSupGroupParam.getId() ));
         supplierGroupMapper.transferFields(editSupGroupParam, supplierGroup);
-        SupplierGroup supplierGroupResult = supplierGroupRepository.save(supplierGroup);
-        return supplierGroupMapper.toDTO(supplierGroupResult);
+        return supplierGroupMapper.toDTO(supplierGroup);
     }
 
     @Override

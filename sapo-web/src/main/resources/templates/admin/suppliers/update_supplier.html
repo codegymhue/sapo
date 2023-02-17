@@ -414,7 +414,7 @@
                                     <div class="label mb-2">Hình thức thanh toán</div>
 
                                     <select style="width: 295px; height: 35px;" id="paymentMethod">
-                                        <option th:value="${supplier.paymentMethod} ? ${supplier.paymentMethod.id} : null"
+                                        <option th:value="${supplier.paymentMethod}"
                                                 th:text="${supplier.paymentMethod} ? ${supplier.paymentMethod.title} : ${'Chọn hình thức thanh toán '}"></option>
                                     </select>
                                 </div>
