@@ -414,7 +414,7 @@
                                     <div class="label mb-2">Hình thức thanh toán</div>
 
                                     <select style="width: 295px; height: 35px;" id="paymentMethod">
-                                        <option th:value="${supplier.paymentMethod}"
+                                        <option th:value="${supplier.paymentMethod} ? ${supplier.paymentMethod.id} : null"
                                                 th:text="${supplier.paymentMethod} ? ${supplier.paymentMethod.title} : ${'Chọn hình thức thanh toán '}"></option>
                                     </select>
                                 </div>
@@ -663,12 +663,13 @@
 
 
     page.elements.showGroupSupplier = $("#showGroupSupplier");
-    page.dialogs.elements.showModalCreateGroupSupplier = $("#showModalCreateGroupSupplier");
-    page.dialogs.elements.createGroupSupplier = $("#createGroupSupplier");
-    page.dialogs.elements.groupId = $("#groupId");
-    page.dialogs.elements.groupTitleSup = $("#groupTitleSup");
-    page.dialogs.elements.groupCodeSup = $("#groupCodeSup");
-    page.dialogs.elements.groupDescriptionSup = $("#groupDescriptionSup");
+    page.dialogs.elements.formCreateGroup = $("#formCreateGroup");
+    page.dialogs.elements.modalCreateGroupSupplier = $("#modalCreateGroupSupplier");
+    page.dialogs.elements.btnCreateGroupSupplier = $("#btnCreateGroupSupplier");
+    page.dialogs.elements.groupCreateId = $("#groupCreateId");
+    page.dialogs.elements.groupCreateTitleSup = $("#groupCreateTitleSup");
+    page.dialogs.elements.groupCreateCodeSup = $("#groupCreateCodeSup");
+    page.dialogs.elements.groupCreateDescriptionSup = $("#groupCreateDescriptionSup");
 
     function getAllEmployeeSelect() {
         return $.ajax({
@@ -752,17 +753,17 @@
     })
 
     page.elements.showGroupSupplier.on('click', () => {
-        page.dialogs.elements.showModalCreateGroupSupplier.modal('show');
-        page.dialogs.elements.groupId.val("");
-        page.dialogs.elements.groupTitleSup.val("");
-        page.dialogs.elements.groupCodeSup.val("");
-        page.dialogs.elements.groupDescriptionSup.val("");
+        page.dialogs.elements.modalCreateGroupSupplier.modal('show');
+        page.dialogs.elements.groupCreateId.val("");
+        page.dialogs.elements.groupCreateTitleSup.val("");
+        page.dialogs.elements.groupCreateCodeSup.val("");
+        page.dialogs.elements.groupCreateDescriptionSup.val("");
         // $("#modal-alert-danger").hide();
         $("#groupTitleSup-error").hide();
     })
 
-    page.dialogs.elements.createGroupSupplier.on('click', () => {
-        $("#formCreateGroup").trigger("submit");
+    page.dialogs.elements.btnCreateGroupSupplier.on('click', () => {
+        page.dialogs.elements.formCreateGroup.trigger("submit");
     })
 
     getAllEmployeeSelect();
@@ -770,11 +771,18 @@
     searchGroup();
 
     function doCreateGroupSupplier() {
-        let newGroupSup = new createSupGroupParam();
-        newGroupSup.id = page.dialogs.elements.groupId.val();
-        newGroupSup.title = page.dialogs.elements.groupTitleSup.val();
-        newGroupSup.supplierCode = page.dialogs.elements.groupCodeSup.val();
-        newGroupSup.description = page.dialogs.elements.groupDescriptionSup.val();
+
+        let supGroupCode = page.dialogs.elements.groupCreateCodeSup.val();
+        let supGroupTitle = page.dialogs.elements.groupCreateTitleSup.val();
+
+        let newGroupSup =
+            {
+                id: page.dialogs.elements.groupCreateId.val(),
+                title: supGroupTitle.length > 0 ? supGroupTitle : null,
+                supplierCode: supGroupCode.length > 0 ? supGroupCode : null,
+                description: page.dialogs.elements.groupCreateDescriptionSup.val(),
+            }
+
         console.log("trc ajax", newGroupSup)
         $.ajax({
             "headers": {
@@ -789,30 +797,13 @@
                 SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
                 setTimeout(() => {
                 }, 1500);
-
-
-                page.dialogs.elements.showModalCreateGroupSupplier.modal('hide');
+                page.dialogs.elements.modalCreateGroupSupplier.modal('hide');
                 location.reload();
-
-                // console.log("group",data);
-                // alert("Thêm nhóm nhà cung cấp thành công")
-                // // console.log("data", data);
-                // let trSupplier = $("#tr_" + data.id);
-                // let tr = renderRowGroupSupplier(data);
-                // trSupplier.append(tr);
-                // alert("Thêm nhóm nhà cung ứng thành công")
-
-                // let renderGroup = $("#renderGroupLi");
-                // getAllGroup(renderGroup);
-                // $("#showModalGroupSupplier").modal('hide');
-
-                // $.each(data, (i, item) => {
-                //   let tr = renderRowGroupSupplier(item);
-                //  $("#renderGroupLi").append(tr);
-                // })
             })
             .fail((jqXHR) => {
-                SupplierApp.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+                SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
+                setTimeout(() => {
+                }, 1500);
             })
     }
 
@@ -922,7 +913,7 @@
         }
     })
 
-    $("#nameUp").validate({
+    page.dialogs.elements.formCreateGroup.validate({
         rules: {
             nameUp: {
                 required: true,

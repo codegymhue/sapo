@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <th:block th:fragment="create_group_supplier">
 
-  <div class="modal" id="showModalCreateGroupSupplier" important data-bs-backdrop="static" tabindex="-1">
+  <div class="modal" id="modalCreateGroupSupplier" important data-bs-backdrop="static" tabindex="-1">
     <div class="modal-dialog modal-lg" style="width: 610px" >
       <div class="modal-content">
         <div class="modal-header">
@@ -13,20 +13,20 @@
            <form id="formCreateGroup">
              <div class="modal-body">
                <div class="row">
-                 <span hide id="groupId"></span>
+                 <span hide id="groupCreateId"></span>
                  <div class="col-6">
                    <div class="left field w-100">
                      <div class="label mb-2 label-required">Tên nhóm</div>
-                     <input required id="groupTitleSup" name="groupTitleSup" class="sapo-textbox w100 pull-left" bind="supplierGroup.name" data-toggle="tooltip" placeholder="Nhập tên nhóm nhà cung cấp">
+                     <input required id="groupCreateTitleSup" name="groupTitleSup" class="sapo-textbox w100 pull-left" bind="supplierGroup.name" data-toggle="tooltip" placeholder="Nhập tên nhóm nhà cung cấp">
                    </div>
                    <div class="left field w-100 mb-2">
                      <div class="label mb-2">Mã nhóm</div>
-                     <input id="groupCodeSup" class="sapo-textbox w100 pull-left" bind="supplierGroup.code" data-toggle="tooltip" placeholder="Nhập mã nhóm nhà cung cấp" data-original-title="" title="">
+                     <input id="groupCreateCodeSup" class="sapo-textbox w100 pull-left" bind="supplierGroup.code" data-toggle="tooltip" placeholder="Nhập mã nhóm nhà cung cấp" data-original-title="" title="">
                    </div>
                  </div>
                  <div class="col-6 field mb-2">
                    <div class="label mb-2">Ghi chú</div>
-                   <textarea id="groupDescriptionSup" bind="supplierGroup.note" class="sapo-textbox" style="height:113px"></textarea>
+                   <textarea id="groupCreateDescriptionSup" bind="supplierGroup.note" class="sapo-textbox" style="height:113px"></textarea>
                  </div>
                </div>
              </div>
@@ -34,7 +34,7 @@
          </div>
         <div class="modal-footer">
           <button class="btn secondary" data-bs-dismiss="modal">Thoát</button>
-          <button id="createGroupSupplier" style="margin-bottom: 3px;" class="btn primary">Thêm</button>
+          <button id="btnCreateGroupSupplier" style="margin-bottom: 3px;" class="btn primary">Thêm</button>
         </div>
 
 <!--        <div class="modal-footer">-->
