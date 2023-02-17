@@ -24,4 +24,5 @@ public class SupplierGroupResult {
     private String description;
     private String createdAt;
 
+
 }

@@ -1,18 +1,11 @@
 package vn.sapo.controllers.supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vn.sapo.address.AddressService;
 import vn.sapo.address.dto.CreateAddressParam;
-import vn.sapo.customer.dto.CustomerDataTable;
-import vn.sapo.customer.dto.CustomerFilter;
-import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.supplier.SupplierService;
 import vn.sapo.supplier.dto.CreateSupplierParam;
 import vn.sapo.supplier.dto.SupplierFilter;
@@ -20,7 +13,7 @@ import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.dto.UpdateSupplierParam;
 
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/suppliers")
@@ -68,14 +61,8 @@ public class SupplierAPI {
     }
 
     @PostMapping("/filter")
-    public ResponseEntity<?> testFilter(@RequestBody SupplierFilter supplierFilter
-    ) {
-        Pageable pageable;
-        pageable = PageRequest.of(0,10);
-//        SupplierFilter supplierFilter = new SupplierFilter();
-//        supplierFilter.setFilter("loi");
-        Page<SupplierResult> supplierResult = supplierService.findAllByFilters(supplierFilter, pageable);
-
+    public ResponseEntity<?> testFilter(@RequestBody SupplierFilter supplierFilter) {
+        Map<String, Object> supplierResult = supplierService.findAllByFilters2(supplierFilter);
         return new ResponseEntity<>(supplierResult, HttpStatus.OK);
     }
 

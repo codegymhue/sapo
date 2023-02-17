@@ -5,8 +5,7 @@ class SupplierApp {
     static SUPPLIER_API = this.DOMAIN_SERVER + "/api/suppliers";
     static EMPLOYEE_API = this.DOMAIN_SERVER + "/api/employees";
     static SUPPLIER_GROUP_API = this.DOMAIN_SERVER + "/api/supplier_groups";
-
-
+    static SUPPLIER_FILTER_API = this.DOMAIN_SERVER + this.SUPPLIER_API + "/filter"
 
 
     static renderRowSupplier(item, showStatus) {
@@ -20,24 +19,25 @@ class SupplierApp {
                 
                  <td class="align-middle"><a href="/admin/suppliers/${item.id}/histories" style="text-decoration: none">${item.supplierCode}</a></td>
                 <td class="align-middle">${item.fullName || ""}</td>
-                  <td class="align-middle">${item.groupId || ""}</td>
+                  <td class="align-middle">${item.group == null ? "" : item.group.title}</td>
                 <td class="align-middle">${item.email || ""}</td>
                 <td class="align-middle">${item.phone || ""}</td>
                  <td class="align-middle">
                     <span id="showStatus" class="${showStatus}">${item.status === "AVAILABLE" ? "Đang giao dịch" : "Ngừng giao dịch"}</span> 
                 </td>   
 <!--                <td class="align-middle text-end ">${new Intl.NumberFormat('de-DE').format(item.available)}</td>-->
-              <td class="align-middle">${item.employee.fullName || ""}</td>
-               
-                <td class="align-middle">${item.createAt === null ? "" : new Date(item.createAt).toLocaleDateString('en-GB')}</td>
-                <td class="align-middle">${item.updateAt === null ? "" : new Date(item.updateAt).toLocaleDateString('en-GB')}</td>
+              <td class="align-middle">${item.employee == null ? "" : item.employee.fullName}</td>
+              <td class="align-middle">${item.taxCode || ""}</td>
+               <td class="align-middle">${item.website || ""}</td>
+                <td class="align-middle">${item.createdAt === null ? "" : new Date(item.createdAt).toLocaleDateString('en-GB')}</td>
+                <td class="align-middle">${item.updatedAt === null ? "" : new Date(item.updatedAt).toLocaleDateString('en-GB')}</td>
             </tr>
         `;
         return str;
     }
 
 
-    static IziToast = class  {
+    static IziToast = class {
         static showSuccessAlert(m) {
             iziToast.success({
                 title: 'Thêm thành công',
@@ -46,6 +46,7 @@ class SupplierApp {
                 message: m,
             });
         }
+
         static showFilter(m) {
             iziToast.success({
                 title: 'lưu bộ lọc thành công',
@@ -65,6 +66,7 @@ class SupplierApp {
             });
         }
     }
+
     static renderEmployeeOnFilter(employee) {
         let str = ` <li class="multiselect--sapo-checkbox">
                     <a tabindex="0" class="multiselect-a--sapo-checkbox">
@@ -155,8 +157,8 @@ class SupplierApp {
 
     }
 
-    static renderStatusFilter(){
-let str = `<div class="filter-item" filter-type="status" style="width:auto;">
+    static renderStatusFilter() {
+        let str = `<div class="filter-item" filter-type="status" style="width:auto;">
         <input type="hidden" class="choosed-single-id">
         <div class="select__wrapper">
             <select class="sapo-select select-change-filter" bind-event-change="changeItemFilter(this)">
@@ -219,7 +221,7 @@ let str = `<div class="filter-item" filter-type="status" style="width:auto;">
     }
 
 
-    static selectChangeFilterAll(){
+    static selectChangeFilterAll() {
         let str = `<div class="select__wrapper">
                                 <select class="sapo-select select-change-filter--all" >
                                     <option value="">Chọn điều kiện lọc</option>
@@ -240,9 +242,11 @@ class SupplierFilter {
         this.filter = null;
         this.statuses = [];
         this.employeeIds = [];
-        this.supplierGroupId = [];
+        this.groupId = [];
         this.createdFrom = null;
         this.createdTo = null;
+        this.pageNo = null;
+        this.pageSize = null;
     }
 }
 
