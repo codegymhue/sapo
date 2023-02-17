@@ -70,7 +70,7 @@ public class SupplierServiceImpl implements SupplierService {
         Supplier supplier = supplierRepository.findById(param.getId())
                 .orElseThrow(() -> new NotFoundException("Not found supplier"));
         if (param.getGroupId() != null && supplierRepository.existsById(param.getGroupId()))
-            throw new NotFoundException("find group supplier");
+            throw new NotFoundException("Group supplier exist");
         supplierMapper.transferFields(param, supplier);
         return supplierMapper.toDTO(supplier);
     }

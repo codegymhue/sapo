@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import vn.sapo.shared.validation.constraints.NullOrNotBlank;
+
+import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,10 +16,12 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class CreateSupGroupParam {
     private Integer id;
-
+    @NullOrNotBlank
     private String title;
 
+    @NullOrNotBlank
     private String supplierCode;
 
+    @NullOrNotBlank
     private String description;
 }

@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 @Setter
 @Accessors(chain = true)
 public class CreateSupplierParam {
+    //TODO: thêm nhà cung cấp không cần dùng trường id
     private Integer id;
     @NullOrNotBlank(message = "supplierCode not blank")
     private String supplierCode;
