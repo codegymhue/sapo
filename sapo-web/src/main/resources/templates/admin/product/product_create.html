@@ -694,9 +694,9 @@
     let page = {
         cloudinary: {},
         urls: {
-            url_category: App.BASE_URL_Categories,
-            url_brand: App.BASE_URL_Brands,
-            url_product_create: App.BASE_URL_Product + "/create"
+            url_category: ProductApp.BASE_URL_Categories,
+            url_brand: ProductApp.BASE_URL_Brands,
+            url_product_create: ProductApp.BASE_URL_Product + "/create"
         },
         elements: {},
         loadData: {},
@@ -852,7 +852,7 @@
             console.log("page.dialogs.elements.frmCreateProduct.validate");
         },
         invalidHandler: () => {
-            App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400);
+            ProductApp.IziToast.showErrorAlert(ProductApp.AlertMessageVi.ERROR_400);
         }
     })
 
@@ -943,14 +943,14 @@
         })
             .done((data) => {
                 let productId = data.id
-                App.IziToast.showSuccessAlert("Tạo sản phẩm thành công!");
+                ProductApp.IziToast.showSuccessAlert("Tạo sản phẩm thành công!");
                 setTimeout(() => {
                     window.location.href = "/admin/product/" + data;
                 }, 1500)
             })
             .fail((jqXHR) => {
                 console.log(jqXHR)
-                App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
+                ProductApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
     }
 
@@ -1097,11 +1097,11 @@
                 "content-type": "application/json"
             },
             "type": "POST",
-            "url": "http://localhost:8080/api/categories/create",
+            "url": origin +"/api/categories/create",
             "data": JSON.stringify(category)
         })
             .done((data) => {
-                App.IziToast.showSuccessAlert("Tạo loại sản phẩm mới thành công!");
+                ProductApp.IziToast.showSuccessAlert("Tạo loại sản phẩm mới thành công!");
                 $(".showAllCategory #showAllCAt").empty();
                 showAllCategories();
                 $('#modalAddCategory').modal('hide');
@@ -1109,7 +1109,7 @@
 
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
+                ProductApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
     }
 
@@ -1123,11 +1123,11 @@
                 "content-type": "application/json"
             },
             "type": "POST",
-            "url": "http://localhost:8080/api/brands/create",
+            "url": origin +"/api/brands/create",
             "data": JSON.stringify(brand)
         })
             .done((data) => {
-                App.IziToast.showSuccessAlert("Tạo nhãn hiệu mới thành công!");
+                ProductApp.IziToast.showSuccessAlert("Tạo nhãn hiệu mới thành công!");
                 $(".showAllBrand #showAllBrand").empty();
                 showAllBrands();
                 $('#modalAddBrand').modal('hide');
@@ -1135,7 +1135,7 @@
 
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
+                ProductApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
     }
 
@@ -1191,11 +1191,11 @@
                 "content-type": "application/json"
             },
             "type": "POST",
-            "url": "http://localhost:8080/api/taxes/create",
+            "url": origin +"/api/taxes/create",
             "data": JSON.stringify(tax)
         })
             .done((data) => {
-                App.IziToast.showSuccessAlert("Tạo thuế thành công!")
+                ProductApp.IziToast.showSuccessAlert("Tạo thuế thành công!")
                 $(".showAllTax #showALlTax").empty();
                 $(".showAllTaxOut #showALlTaxOut").empty();
                 showAllTaxes()
@@ -1204,7 +1204,7 @@
 
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
+                ProductApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
     }
 

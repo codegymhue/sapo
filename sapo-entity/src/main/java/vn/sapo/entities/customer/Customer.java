@@ -66,7 +66,7 @@ public class Customer extends BaseEntity {
 
     @Type(type = "json")
     @Column(name = "extension_attributes", columnDefinition = "JSON")
-    private HashMap<String, String> attributes;
+    private HashMap<String, String> attributes = new HashMap<>();
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_group_id", nullable = false, foreignKey = @ForeignKey(name = "fk_customer_customer_group"))
     private CustomerGroup group;
@@ -137,7 +137,7 @@ public class Customer extends BaseEntity {
     }
 
     public Customer setFax(String fax) {
-        attributes.put(WEBSITE_ATTRIBUTE_NAME, fax);
+        attributes.put(FAX_ATTRIBUTE_NAME, fax);
         return this;
     }
 

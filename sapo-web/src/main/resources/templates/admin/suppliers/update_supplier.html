@@ -14,7 +14,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
           crossorigin/>
     <link rel="stylesheet" type="text/css" href="https://sapo.dktcdn.net/sapo-frontend-x/e603c93.main.css" crossorigin/>
-      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"
           crossorigin/>
@@ -34,7 +35,8 @@
         #renderGroupLi > li:hover {
             background-color: #007bff;
         }
-        .dropdown-menu>li>p:hover {
+
+        .dropdown-menu > li > p:hover {
             background-color: #007bff
         }
     </style>
@@ -233,32 +235,37 @@
                                 <div>
                                     <div class="btn-group">
                                         <button id="changeValueSup" class="btn secondary dropdown-toggle"
-                                                style="width: 300px; height: 34px; text-align: left" data-bs-toggle="dropdown"
-                                                data-bs-auto-close="outside" aria-expanded="false" th:value="${supplier.group.id}" th:text="${supplier.group} ? ${supplier.group.title} : ${'---'}"
-                                        >
+                                                style="width: 300px; height: 34px; text-align: left"
+                                                data-bs-toggle="dropdown"
+                                                data-bs-auto-close="outside" aria-expanded="false"
+                                                th:value="${supplier.group} ? ${supplier.group.id} : null"
+                                                th:text="${supplier.group} ? ${supplier.group.title} : ${'Chọn nhóm nhà cung cấp'}">
 
+                                            <!--                                            th:value="${supplier.group.id}" th:text="${supplier.group} ? ${supplier.group.title} : ${'-&#45;&#45;'}-->
 
-<!--                                            <th:block th:each="group : ${supplierGroup}">-->
-<!--                                                <th:block th:if="${group.id} == ${supplier.supplierGroup.id}">-->
-<!--                                                    <th:block   th:text="${group.title}"></th:block>-->
-<!--                                                </th:block>-->
-<!--                                            </th:block>-->
+                                            <!--                                            <th:block th:each="group : ${supplierGroup}">-->
+                                            <!--                                                <th:block th:if="${group.id} == ${supplier.supplierGroup.id}">-->
+                                            <!--                                                    <th:block   th:text="${group.title}"></th:block>-->
+                                            <!--                                                </th:block>-->
+                                            <!--                                            </th:block>-->
 
-<!--                                            th:field="${supplier.supplierGroup.title} ? ${supplier.supplierGroup.title} : ${'-&#45;&#45;'} "-->
-<!--                                            Khác-->
+                                            <!--                                            th:field="${supplier.supplierGroup.title} ? ${supplier.supplierGroup.title} : ${'-&#45;&#45;'} "-->
+                                            <!--                                            Khác-->
                                         </button>
 
                                         <ul class="dropdown-menu"
                                             aria-labelledby="dropdownMenuClickableInside" style="width: 300px">
-                                            <li><input id="inputKey" type="text" placeholder="Tìm kiếm" oninput="searchGroup()"
+                                            <li><input id="inputKey" type="text" placeholder="Tìm kiếm"
+                                                       oninput="searchGroup()"
                                                        style="width: 296px; height:35px;font-size: 13px;">
                                             </li>
 
                                             <li>
-                                                    <i class="fa-solid fa-plus" style="float: left; margin: 4px 2px 0 0"></i>
-                                                    <p id="showGroupSupplier"
-                                                       style="height: 30px; width: 300px; font-size: 13px;margin-top: 10px ">
-                                                             Thêm mới nhóm nhà cung cấp</p>
+                                                <i class="fa-solid fa-plus"
+                                                   style="float: left; margin: 4px 2px 0 0"></i>
+                                                <p id="showGroupSupplier"
+                                                   style="height: 30px; width: 300px; font-size: 13px;margin-top: 10px ">
+                                                    Thêm mới nhóm nhà cung cấp</p>
                                             </li>
                                             <li id="errorGroup" class="hidden">hihi</li>
                                             <li id="renderGroupLi"></li>
@@ -277,7 +284,8 @@
                                 <!--                  </div>-->
                                 <!--                </div>-->
                             </div>
-                            <th:bock th:replace="/admin/suppliers/modals/create_group_supplier :: create_group_supplier"/>
+                            <th:bock
+                                    th:replace="/admin/suppliers/modals/create_group_supplier :: create_group_supplier"/>
                             <div class="col-6 field pl-0">
                                 <div class="label mb-2">Số điện thoại</div>
                                 <input id="phoneUp" class="sapo-textbox w100" data-toggle="tooltip"
@@ -340,14 +348,15 @@
                                 <div class="select__wrapper " id="search-account-wrap">
                                     <a class="sapo-select select--a select-suggest" id="search-account"
                                        href="javascript:">
-                                        <select style="width: 282px; height: 25px;border: gray;" id="fulNameEmployeeUp" >
-                                            <option th:value="${supplier.employee.id}" th:text="${supplier.employee} ? ${supplier.employee.fullName} : ${'Chọn nhân viên phụ trách '}"></option>
+                                        <select style="width: 282px; height: 25px;border: gray;" id="fulNameEmployeeUp">
+                                            <option th:value="${supplier.employee.id}"
+                                                    th:text="${supplier.employee} ? ${supplier.employee.fullName} : ${'Chọn nhân viên phụ trách '}"></option>
 
-<!--                                            <th:block th:each="employee : ${employee}">-->
-<!--                                                <th:block th:if="${employee.id}== ${supplier.employee.id}">-->
-<!--                                                    <option th:text="${employee.fullName}"></option>-->
-<!--                                                </th:block>-->
-<!--                                            </th:block>-->
+                                            <!--                                            <th:block th:each="employee : ${employee}">-->
+                                            <!--                                                <th:block th:if="${employee.id}== ${supplier.employee.id}">-->
+                                            <!--                                                    <option th:text="${employee.fullName}"></option>-->
+                                            <!--                                                </th:block>-->
+                                            <!--                                            </th:block>-->
                                         </select>
                                     </a>
                                     <svg class="next-icon next-icon--size-16">
@@ -405,7 +414,8 @@
                                     <div class="label mb-2">Hình thức thanh toán</div>
 
                                     <select style="width: 295px; height: 35px;" id="paymentMethod">
-                                        <option th:value="${supplier.paymentMethod.id}"  th:text="${supplier.paymentMethod} ? ${supplier.paymentMethod.title} : ${'Chọn hình thức thanh toán '}"></option>
+                                        <option th:value="${supplier.paymentMethod}"
+                                                th:text="${supplier.paymentMethod} ? ${supplier.paymentMethod.title} : ${'Chọn hình thức thanh toán '}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -598,13 +608,13 @@
 </div>
 </body>
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
-<script src="/assets/admin/js/suppliers/supplier_group.js"></script>
+<!--<script src="/assets/admin/js/suppliers/supplier_group.js"></script>-->
 <script src="/assets/admin/js/suppliers/jquery/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/izitoast@1/dist/js/iziToast.min.js" type="text/javascript"
         crossorigin></script>
 <script>
 
-    let supplierGroups= [];
+    let supplierGroups = [];
     const page = {
         urls: {},
         elements: {},
@@ -623,6 +633,7 @@
             this.description = description;
         }
     }
+
     class UpdateSupplierParam {
         constructor(id, supplierCode, fullName, email, phone, description, paymentMethodId, groupId, employeeId, status) {
             this.id = id;
@@ -651,13 +662,13 @@
     page.elements.paymentMethod = $("#paymentMethod");
 
 
-    page.elements.showGroupSupplier= $("#showGroupSupplier");
-    page.dialogs.elements.showModalGroupSupplier= $("#showModalGroupSupplier");
+    page.elements.showGroupSupplier = $("#showGroupSupplier");
+    page.dialogs.elements.showModalCreateGroupSupplier = $("#showModalCreateGroupSupplier");
     page.dialogs.elements.createGroupSupplier = $("#createGroupSupplier");
-    page.dialogs.elements.groupId =  $("#groupId");
-    page.dialogs.elements.groupTitleSup =  $("#groupTitleSup");
-    page.dialogs.elements.groupCodeSup =  $("#groupCodeSup");
-    page.dialogs.elements.groupDescriptionSup =  $("#groupDescriptionSup");
+    page.dialogs.elements.groupId = $("#groupId");
+    page.dialogs.elements.groupTitleSup = $("#groupTitleSup");
+    page.dialogs.elements.groupCodeSup = $("#groupCodeSup");
+    page.dialogs.elements.groupDescriptionSup = $("#groupDescriptionSup");
 
     function getAllEmployeeSelect() {
         return $.ajax({
@@ -666,7 +677,7 @@
                 "content-type": "application/json"
             },
             "type": "GET",
-            "url": "http://localhost:8080/api/employees"
+            "url": origin + "/api/employees"
         })
             .done((data) => {
                 console.log("nhan viên", data)
@@ -684,7 +695,7 @@
                 "content-type": "application/json"
             },
             "type": "GET",
-            "url": "http://localhost:8080/api/admin/payment_methods"
+            "url": origin + "/api/admin/payment_methods"
         })
             .done((data) => {
                 console.log("method select", data)
@@ -698,6 +709,7 @@
     page.elements.btnUpdateSupplier.on('click', () => {
         let idSupp = page.elements.supplierId.val();
         console.log(idSupp);
+        let paymentMethodId = page.elements.paymentMethod.val()
         let newUpdateSupplierParam = {
             id: idSupp,
             supplierCode: page.elements.supplierCodeUp.val(),
@@ -707,11 +719,11 @@
             status: page.elements.statusUp.val(),
             description: page.elements.descriptionUp.val(),
             employeeId: page.elements.fulNameEmployeeUp.val(),
-            paymentMethodId: page.elements.paymentMethod.val(),
+            paymentMethodId: paymentMethodId.length > 0 ? paymentMethodId : null,
             // supGroupId: $("#changeValueSup").data("id"),
             groupId: page.elements.changeValueSup.val(),
         }
-        console.log("newUpdateSupplierParam : ",newUpdateSupplierParam)
+        console.log("newUpdateSupplierParam : ", newUpdateSupplierParam)
 
         $.ajax({
             "headers": {
@@ -719,15 +731,15 @@
                 "content-type": "application/json"
             },
             "type": "PATCH",
-            "url": "http://localhost:8080/api/suppliers/" + idSupp,
+            "url": origin + "/api/suppliers/" + idSupp,
             "data": JSON.stringify(newUpdateSupplierParam)
         })
             .done((data) => {
                 console.log("data", data.id);
                 let trSupplier = $("#tr_" + data.id);
-                let tr = App.renderRowSupplier(data);
+                let tr = SupplierApp.renderRowSupplier(data);
                 trSupplier.replaceWith(tr);
-                App.IziToast.showSuccessAlert("Sửa thông tin nhà cung cấp thành công!");
+                SupplierApp.IziToast.showSuccessAlert("Sửa thông tin nhà cung cấp thành công!");
                 setTimeout(() => {
                 }, 1500)
                 window.location.href = `/admin/suppliers/${data.id}/histories`;
@@ -735,12 +747,12 @@
             })
             .fail((jqXHR) => {
                 // console.log(jqXHR);
-                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+                SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_400)
             })
     })
 
     page.elements.showGroupSupplier.on('click', () => {
-        page.dialogs.elements.showModalGroupSupplier.modal('show');
+        page.dialogs.elements.showModalCreateGroupSupplier.modal('show');
         page.dialogs.elements.groupId.val("");
         page.dialogs.elements.groupTitleSup.val("");
         page.dialogs.elements.groupCodeSup.val("");
@@ -755,117 +767,116 @@
 
     getAllEmployeeSelect();
     getAllPaymentMethodSelect();
-    getAllGroup();
     searchGroup();
 
-    // function doCreateGroupSupplier() {
-    //     let newGroupSup = new createSupGroupParam();
-    //     newGroupSup.id =  page.dialogs.elements.groupId.val();
-    //     newGroupSup.title = page.dialogs.elements.groupTitleSup.val();
-    //     newGroupSup.supplierCode =  page.dialogs.elements.groupCodeSup.val();
-    //     newGroupSup.description =  page.dialogs.elements.groupDescriptionSup.val();
-    //     console.log("trc ajax", newGroupSup)
-    //     $.ajax({
-    //         "headers": {
-    //             "accept": "application/json",
-    //             "content-type": "application/json"
-    //         },
-    //         "type": "POST",
-    //         "url": "http://localhost:8080/api/supplier_groups/create",
-    //         "data": JSON.stringify(newGroupSup)
-    //     })
-    //         .done((data) => {
-    //             App.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
-    //             setTimeout(() => {
-    //             }, 1500);
-    //
-    //             page.dialogs.elements.showModalGroupSupplier.modal('hide');
-    //             location.reload();
-    //
-    //             // console.log("group",data);
-    //             // alert("Thêm nhóm nhà cung cấp thành công")
-    //             // // console.log("data", data);
-    //             // let trSupplier = $("#tr_" + data.id);
-    //             // let tr = renderRowGroupSupplier(data);
-    //             // trSupplier.append(tr);
-    //             // alert("Thêm nhóm nhà cung ứng thành công")
-    //
-    //             // let renderGroup = $("#renderGroupLi");
-    //             // getAllGroup(renderGroup);
-    //             // $("#showModalGroupSupplier").modal('hide');
-    //
-    //             // $.each(data, (i, item) => {
-    //             //   let tr = renderRowGroupSupplier(item);
-    //             //  $("#renderGroupLi").append(tr);
-    //             // })
-    //         })
-    //         .fail((jqXHR) => {
-    //             App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
-    //         })
-    // }
+    function doCreateGroupSupplier() {
+        let newGroupSup = new createSupGroupParam();
+        newGroupSup.id = page.dialogs.elements.groupId.val();
+        newGroupSup.title = page.dialogs.elements.groupTitleSup.val();
+        newGroupSup.supplierCode = page.dialogs.elements.groupCodeSup.val();
+        newGroupSup.description = page.dialogs.elements.groupDescriptionSup.val();
+        console.log("trc ajax", newGroupSup)
+        $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            "type": "POST",
+            "url": origin + "/api/supplier_groups/create",
+            "data": JSON.stringify(newGroupSup)
+        })
+            .done((data) => {
+                SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
+                setTimeout(() => {
+                }, 1500);
 
-    // function getAllGroup() {
-    //     $.ajax({
-    //         "headers": {
-    //             "accept": "application/json",
-    //             "content-type": "application/json"
-    //         },
-    //         type: "GET",
-    //         url: "http://localhost:8080/api/supplier_groups",
-    //     })
-    //         .done((data) => {
-    //             supplierGroups = data;
-    //             $.each(data, function (index, value) {
-    //                 $("#renderGroupLi").append(
-    //                     `<li onclick="handleChangeGroupSupp(${value.id})">
-    //                     <p  class="w-20 border-0 " id="${value.id}" style="padding:7px; font-size: 12px;font-weight:450; width: 300px;border: unset;" value="${value.id}">
-    //                     ${value.title}</p>
-    //                     </li>`
-    //                 )
-    //             });
-    //         })
-    // }
 
-    // let renderGroup = $("#renderGroupLi");
-    // getAllGroup(renderGroup);
+                page.dialogs.elements.showModalCreateGroupSupplier.modal('hide');
+                location.reload();
 
-    // function handleChangeGroupSupp(supplierGroupId) {
-    //     let supplierGroup = supplierGroups.find(supplierGroup => supplierGroup.id === supplierGroupId);
-    //     page.elements.changeValueSup.attr("data-id",supplierGroup.id);
-    //
-    //     page.elements.changeValueSup.val(supplierGroup.id);
-    //     page.elements.changeValueSup.text(supplierGroup.title);
-    //
-    //     var dropdown = new bootstrap.Dropdown(document.querySelector($("#changeValueSup")));
-    //     dropdown.hide();
-    // }
-    //
-    // page.elements.changeValueSup.on('click', ()=> {
-    //     var dropdown = new bootstrap.Dropdown(document.querySelector($("#changeValueSup")));
-    //     dropdown.show();
-    // })
+                // console.log("group",data);
+                // alert("Thêm nhóm nhà cung cấp thành công")
+                // // console.log("data", data);
+                // let trSupplier = $("#tr_" + data.id);
+                // let tr = renderRowGroupSupplier(data);
+                // trSupplier.append(tr);
+                // alert("Thêm nhóm nhà cung ứng thành công")
 
-    // function searchGroup() {
-    //
-    //     let valueSearchInput = document.getElementById("inputKey").value
-    //     console.log("valueSearchInput: ", valueSearchInput)
-    //     console.log("supplierGroups :", supplierGroups)
-    //
-    //     let groupSearch = supplierGroups.filter(group => {
-    //         return group.title.toUpperCase().includes(valueSearchInput.toUpperCase());
-    //     })
-    //     console.log("nhom search", groupSearch)
-    //
-    //     $("#renderGroupLi").empty();
-    //     $.each(groupSearch, (i, item) => {
-    //         $("#renderGroupLi").prepend (
-    //             `<li onclick="handleChangeGroupSupp(${item.id})">
-    //                 <p  class="w-20 border-0 " id="${item.id}" style="padding:7px; font-size: 12px; font-weight: 500; width: 300px;border: unset;" value="${item.id}">
-    //                 ${item.title}</p>
-    //                 </li>`
-    //         )
-    //     });
-    // }
+                // let renderGroup = $("#renderGroupLi");
+                // getAllGroup(renderGroup);
+                // $("#showModalGroupSupplier").modal('hide');
+
+                // $.each(data, (i, item) => {
+                //   let tr = renderRowGroupSupplier(item);
+                //  $("#renderGroupLi").append(tr);
+                // })
+            })
+            .fail((jqXHR) => {
+                SupplierApp.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+            })
+    }
+
+    function getAllGroup() {
+        $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: origin + "/api/supplier_groups",
+        })
+            .done((data) => {
+                supplierGroups = data;
+                $.each(data, function (index, value) {
+                    $("#renderGroupLi").append(
+                        `<li onclick="handleChangeGroupSupp(${value.id})">
+                        <p  class="w-20 border-0 " id="${value.id}" style="padding:7px; font-size: 12px;font-weight:450; width: 300px;border: unset;" value="${value.id}">
+                        ${value.title}</p>
+                        </li>`
+                    )
+                });
+            })
+    }
+
+    getAllGroup();
+
+    function handleChangeGroupSupp(supplierGroupId) {
+        let supplierGroup = supplierGroups.find(supplierGroup => supplierGroup.id === supplierGroupId);
+        page.elements.changeValueSup.attr("data-id", supplierGroup.id);
+
+        page.elements.changeValueSup.val(supplierGroup.id);
+        page.elements.changeValueSup.text(supplierGroup.title);
+
+        var dropdown = new bootstrap.Dropdown(document.querySelector($("#changeValueSup")));
+        dropdown.hide();
+    }
+
+    page.elements.changeValueSup.on('click', () => {
+        var dropdown = new bootstrap.Dropdown(document.querySelector($("#changeValueSup")));
+        dropdown.show();
+    })
+
+    function searchGroup() {
+
+        let valueSearchInput = document.getElementById("inputKey").value
+        console.log("valueSearchInput: ", valueSearchInput)
+        console.log("supplierGroups :", supplierGroups)
+
+        let groupSearch = supplierGroups.filter(group => {
+            return group.title.toUpperCase().includes(valueSearchInput.toUpperCase());
+        })
+        console.log("nhom search", groupSearch)
+
+        $("#renderGroupLi").empty();
+        $.each(groupSearch, (i, item) => {
+            $("#renderGroupLi").prepend(
+                `<li onclick="handleChangeGroupSupp(${item.id})">
+                    <p  class="w-20 border-0 " id="${item.id}" style="padding:7px; font-size: 12px; font-weight: 500; width: 300px;border: unset;" value="${item.id}">
+                    ${item.title}</p>
+                    </li>`
+            )
+        });
+    }
 
 
     function renderRowGroupSupplier(item) {
@@ -895,7 +906,7 @@
         // },
         // showErrors: function (errorMap, errorList) {
         //     if (this.numberOfInvalids() > 0) {
-        //         // App.IziToast.showErrorAlert("Tên nhóm nhà cung cấp không được để trống");
+        //         // SupplierApp.IziToast.showErrorAlert("Tên nhóm nhà cung cấp không được để trống");
         //         // setTimeout(() => {
         //         // }, 1500);
         //
@@ -906,7 +917,7 @@
         //     }
         //     this.defaultShowErrors();
         // },
-        submitHandler:() => {
+        submitHandler: () => {
             doCreateGroupSupplier();
         }
     })

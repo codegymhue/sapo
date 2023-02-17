@@ -723,10 +723,10 @@
                 "content-type": "application/json"
             },
             type: "DELETE",
-            url: "http://localhost:8080/api/product/" + productId
+            url: origin +"/api/product/" + productId
         })
             .done(() => {
-                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_DELETE);
+                ProductApp.IziToast.showSuccessAlert(ProductApp.AlertMessageVi.SUCCESS_DELETE);
                 $("#modalDelete").modal("hide");
 
                 setTimeout(() => {
@@ -735,7 +735,7 @@
 
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_403)
+                ProductApp.IziToast.showErrorAlert(ProductApp.AlertMessageVi.ERROR_403)
             })
     }
 

@@ -414,13 +414,13 @@
 
     let page = {
         urls: {
-            getAllCustomers: App.BASE_URL_CUSTOMER,
-            getGroupCustomerById: App.BASE_URL_CUSTOMER + "/groupCustomer",
-            getAllStatus: App.BASE_URL_CUSTOMER + "/status",
-            updateStatusAvailable: App.BASE_URL_CUSTOMER + "/updateStatusAvailable",
-            updateStatusUnavailable: App.BASE_URL_CUSTOMER + "/updateStatusUnavailable",
-            deleteProduct: App.BASE_URL_CUSTOMER + "/delete",
-            getAllCustomerGroup: App.BASE_URL_CUSTOMER_GROUP,
+            getAllCustomers: CustomerApp.BASE_URL_CUSTOMER,
+            getGroupCustomerById: CustomerApp.BASE_URL_CUSTOMER + "/groupCustomer",
+            getAllStatus: CustomerApp.BASE_URL_CUSTOMER + "/status",
+            updateStatusAvailable: CustomerApp.BASE_URL_CUSTOMER + "/updateStatusAvailable",
+            updateStatusUnavailable: CustomerApp.BASE_URL_CUSTOMER + "/updateStatusUnavailable",
+            deleteProduct: CustomerApp.BASE_URL_CUSTOMER + "/delete",
+            getAllCustomerGroup: CustomerApp.BASE_URL_CUSTOMER_GROUP,
 
 
         },
@@ -750,7 +750,7 @@
             //         },
             //     ajax: {
             //         contentType: 'application/json',
-            //         url: "http://localhost:8080/api/customers",
+            //         url: origin +"/api/customers",
             //         type: "GET",
             //         dataSrc: ''
             //     },
@@ -1048,7 +1048,7 @@
                     },
                 },
             ajax: {
-                url: 'http://localhost:8080/api/customers/filter',
+                url: origin +'/api/customers/filter',
                 type: 'POST',
                 // dataSrc: "content",
                 contentType: 'application/json',
@@ -1345,7 +1345,7 @@
                 },
             ajax: {
                 contentType: 'application/json',
-                url: "http://localhost:8080/api/customers/findAllCustomerByGroupId/" + groupId,
+                url: origin +"/api/customers/findAllCustomerByGroupId/" + groupId,
                 type: "GET",
                 dataSrc: ''
             },
@@ -1635,7 +1635,7 @@
                 },
             ajax: {
                 contentType: 'application/json',
-                url: "http://localhost:8080/api/customers/findAllCustomerByGroupAndStatus/" + groupId + "," + status,
+                url: origin +"/api/customers/findAllCustomerByGroupAndStatus/" + groupId + "," + status,
                 type: "GET",
                 dataSrc: ''
             },
@@ -1922,7 +1922,7 @@
                 },
             ajax: {
                 contentType: 'application/json',
-                url: "http://localhost:8080/api/customers/findAllCustomerByStatus/" + status,
+                url: origin +"/api/customers/findAllCustomerByStatus/" + status,
                 type: "GET",
                 dataSrc: ''
             },
@@ -1973,7 +1973,7 @@
             },
             type: "GET",
 
-            url: "http://localhost:8080/api/customer_groups",
+            url: origin +"/api/customer_groups",
         })
             .done((data) => {
 
@@ -1983,7 +1983,7 @@
                 });
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert("Lỗi tại customer Group")
+                CustomerApp.IziToast.showErrorAlert("Lỗi tại customer Group")
             })
     }
 
@@ -2031,7 +2031,7 @@
         let file = $('#formFileCustomers')[0].files[0];
         data.append('file',file);
         $.ajax({
-            url: 'http://localhost:8080/api/customers/upload',
+            url: origin +'/api/customers/upload',
             processData: false,
             contentType: false,
             data: data,
@@ -2041,9 +2041,9 @@
             $("#frmFileCustomers")[0].reset();
             page.commands.getAllCustomers();
             page.commands.closeLoading();
-            App.IziToast.showSuccessAlert("Tải file lên thành công!")
+            CustomerApp.IziToast.showSuccessAlert("Tải file lên thành công!")
         }).fail((jqXHR) => {
-            App.IziToast.showErrorAlert("Tải file lên không thành công!")
+            CustomerApp.IziToast.showErrorAlert("Tải file lên không thành công!")
             page.commands.closeLoading();
         })
 
@@ -2053,7 +2053,7 @@
     function handleSaveFilter(){
         $("#btn-save-search").on("click", ()=>{
             localStorage.setItem(KEY_CUSTOMER_FILTER_SAVE, JSON.stringify(customerFilter));
-            App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_FILTERED);
+            CustomerApp.IziToast.showSuccessAlert(CustomerApp.AlertMessageVi.SUCCESS_FILTERED);
         });
     }
 
@@ -2136,15 +2136,6 @@
             }
         }
     };
-
-
-
-
-
-
-
-
-
 </script>
 </div>
 </body>

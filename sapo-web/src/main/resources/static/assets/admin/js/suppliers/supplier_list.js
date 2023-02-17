@@ -7,7 +7,7 @@
             "content-type": "application/json"
         },
         "type": "GET",
-        "url": App.PRODUCT_API
+        "url": SupplierApp.PRODUCT_API
 
     })
     .done((data) => {

@@ -9,7 +9,7 @@ function showAllTaxes(selectedTax) {
             "content-type": "application/json"
         },
         type: "GET",
-        url: "http://localhost:8080/api/taxes"
+        url: origin +"/api/taxes"
     })
         .done((data) => {
             taxes = data;

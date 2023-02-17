@@ -631,7 +631,7 @@ function doCreateCustomer() {
                 customer = data;
                 customer.createShippingAddressParam = shippingAddress;
                 $("#create_order_customer").modal("hide");
-                App.IziToast.showSuccessAlert("Thêm khách hàng thành công!");
+                OrderApp.IziToast.showSuccessAlert("Thêm khách hàng thành công!");
                 searchCustomer();
                 $('#nameCreate').val("");
                 $('#codeCreate').val("");
@@ -1245,7 +1245,7 @@ function showAllCategory() {
             "content-type": "application/json"
         },
         type: "GET",
-        url: "http://localhost:8080/api/categories"
+        url: origin +"/api/categories"
     })
         .done((data) => {
             $("#categoryCreate").empty();
@@ -1267,7 +1267,7 @@ function showAllEmployee(){
             "content-type": "application/json"
         },
         type: "GET",
-        url: "http://localhost:8080/api/employees"
+        url: origin +"/api/employees"
     })
         .done((data) => {
             $("#employeeCreate").empty();
@@ -1299,18 +1299,18 @@ function doCreateProductShort() {
             "content-type": "application/json",
         },
         type: "POST",
-        url: "http://localhost:8080/api/products/create-short",
+        url: origin +"/api/products/create-short",
         data: JSON.stringify(product),
     })
         .done((data) => {
             // getProductList();
             $('#create_order_product').modal("hide");
             $('#modalProductShort')[0].reset();
-            App.SweetAlert.showSuccessAlert("Thêm thành công sản phẩm!");
+            OrderApp.SweetAlert.showSuccessAlert("Thêm thành công sản phẩm!");
         })
         .fail((jqXHR) => {
             console.log(jqXHR.message)
-            App.SweetAlert.showErrorAlert("Thêm không được");
+            OrderApp.SweetAlert.showErrorAlert("Thêm không được");
         })
 
 }
@@ -1329,11 +1329,11 @@ $(".btn_create_order").on("click", () => {
         "data": JSON.stringify(saleOrder)
     })
         .done((data) => {
-            App.IziToast.showSuccessAlert("Tạo đơn hàng thành công!");
+            OrderApp.IziToast.showSuccessAlert("Tạo đơn hàng thành công!");
             location.href = `${location.origin}/admin/orders/${data.id}`;
         })
         .fail((jqXHR) => {
-            App.IziToast.showErrorAlert("Không đủ số lượng cho đơn hàng, vui lòng kiểm tra lại");
+            OrderApp.IziToast.showErrorAlert("Không đủ số lượng cho đơn hàng, vui lòng kiểm tra lại");
         })
 });
 

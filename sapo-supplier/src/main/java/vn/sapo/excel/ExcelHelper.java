@@ -101,7 +101,7 @@ public class ExcelHelper {
 //                      Kỳ hạn thanh toán mặc định
                             break;
                         case 11:
-                         supplier.setPaymentMethodId(currentCell.getStringCellValue());
+                            supplier.setPaymentMethodId(currentCell.getStringCellValue());
                             break;
                         case 12:
                             address.setFullName(currentCell.getStringCellValue());
@@ -116,10 +116,10 @@ public class ExcelHelper {
 //                            nhãn
                             break;
                         case 16:
-//                            địa chỉ 1
+                            address.setLine1(currentCell.getStringCellValue());
                             break;
                         case 17:
-//                            địa chỉ 2
+                            address.setLine2(currentCell.getStringCellValue());
                             break;
                         case 18:
                             address.setProvinceName(currentCell.getStringCellValue());

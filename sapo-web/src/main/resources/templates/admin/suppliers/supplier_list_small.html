@@ -118,11 +118,11 @@
                                 <div class="btn-group pull-left" data-toggle="buttons">
                                     <label class="btn filter-button-tag"
                                            bind-event-click="setParamFilterActive('active',this)">
-                                        <input type="checkbox" autocomplete="off"> Đang giao dịch
+                                        <input type="checkbox"> Đang giao dịch
                                     </label>
                                     <label class="btn filter-button-tag"
                                            bind-event-click="setParamFilterActive('disable',this)">
-                                        <input type="checkbox" autocomplete="off"> Ngừng giao dịch
+                                        <input type="checkbox"> Ngừng giao dịch
                                     </label>
                                 </div>
                                 <a href="javascript" bind-event-click="removeItemFilter(this, 'status')"
@@ -132,7 +132,7 @@
                                     </svg>
                                 </a>
                             </div>
-                        
+
 
                             <div class="filter-item" filter-type="assigneeIds" style="width:auto;float: left">
                                 <input type="hidden" class="choosed-single-id">
@@ -151,10 +151,25 @@
                                 </div>
                                 <div class="btn-group pull-left">
                                     <div>
-                                        <select multiple="multiple" id="assigneeIds" class="form-control margin-select"
-                                                style="min-width: 300px; height: 36px;" placeholder="Chọn nhân viên">
-                                            <option value="999">Loi</option>
-                                        </select>
+                                        <div class="btn-group show">
+                                            <button type="button" bind-event-click="setParamFilterAssigneeIds(this)"
+                                                    class="multiselect dropdown-toggle btn sapo-btn-blank btn-default"
+                                                    data-bs-toggle="dropdown" data-bs-auto-close="outside"
+                                                    aria-expanded="false"
+                                                    style="padding:0.8rem; min-width: 300px" title="Chọn nhân viên"
+                                            ><span class="multiselect-selected-text">Chọn nhân viên</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                     class="icon-dropdown-select">
+                                                    <path d="M10 16l-4-4h8l-4 4zm0-12L6 8h8l-4-4z"></path>
+                                                </svg>
+                                            </button>
+                                            <ul class="multiselect-container dropdown-menu"
+                                                id="ulAssigneeIdsFilter"
+                                                style="width: 100%; max-height: 250px; overflow: hidden auto; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);"
+                                                x-placement="bottom-start">
+
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                                 <a href="javascript" bind-event-click="removeItemFilter(this, 'assigneeIds')"
@@ -164,9 +179,11 @@
                                     </svg>
                                 </a>
                             </div>
-                        
+
 
                             <div class="filter-item" filter-type="supplierGroupId" style="width:auto;float: left">
+                                <input type="hidden" class="sapo-textbox choosed-single-id"
+                                       id="supplierGroupId" value="" style="display: none;">
                                 <div class="select__wrapper">
                                     <select class="sapo-select select-change-filter"
                                             bind-event-change="changeItemFilter(this)">
@@ -180,28 +197,62 @@
                                              xlink:href="#select-chevron"></use>
                                     </svg>
                                 </div>
-                                <div class="autocomplete-suggestion-holder float-left position-relative"
-                                     style="max-width:600px">
-                                    <div class="w100" id="search-supplierGroupId-container">
-                                    </div>
-                                    <div class="hidden">
-                                        <div class="bootstrap-tagsinput"><input type="text" placeholder=""></div>
-                                        <input type="hidden" class="sapo-textbox choosed-single-id" id="supplierGroupId"
-                                               value="" style="display: none;">
-                                    </div>
-                                    <div class="select__wrapper" style="margin:0;width:300px;"
-                                         id="search-suggest-variant">
-                                        <a class="sapo-select select--a select-suggest" style="text-align:center"
-                                           href="javascript:" data-original-title="" title="">Chọn nhóm nhà cung cấp</a>
-                                        <svg class="next-icon next-icon--size-16">
-                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                 xlink:href="#select-chevron"></use>
-                                        </svg>
-                                        <div class="filter-body--variantIds filter-body--suggest">
 
+                                <div class="btn-group pull-left">
+                                    <div>
+                                        <div class="btn-group show">
+                                            <button type="button" bind-event-click="setParamFilterSupplierGroupId(this)"
+                                                    class="multiselect dropdown-toggle btn sapo-btn-blank btn-default"
+                                                    data-bs-toggle="dropdown" data-bs-auto-close="outside"
+                                                    aria-expanded="false"
+                                                    style="padding:0.8rem; min-width: 300px" title="Chọn nhóm nhà cung cấp"
+                                            ><span class="multiselect-selected-text">Chọn nhóm nhà cung cấp</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                     class="icon-dropdown-select">
+                                                    <path d="M10 16l-4-4h8l-4 4zm0-12L6 8h8l-4-4z"></path>
+                                                </svg>
+                                            </button>
+                                            <ul class="multiselect-container dropdown-menu"
+                                                id="ulSupplierGroupId" aria-labelledby="dropdownMenuClickableInside"
+                                                style="width: 100%; max-height: 250px; overflow: hidden auto; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 36px, 0px);"
+                                                x-placement="bottom-start">
+                                                <li style="z-index: 999">
+                                                    <div class="input--search"
+                                                         style="position: relative;">
+                                                    <span class="next-input__add-on"
+                                                          style=" top: 12px; position: absolute;left: 11px;">
+                                                        <svg class="next-icon next-icon--size-16"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-search-reverse"></use> </svg>
+                                                    </span>
+                                                        <input placeholder="Tìm kiếm" bind="query" type="text" class="single-query sapo-textbox" bind-event-keyup="suggest(this)"
+                                                               style=" font-size: 1.4rem;padding-left: 32px;height: 40px;width: 100%;">
+                                                    </div>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
+<!--                                <div class="autocomplete-suggestion-holder float-left position-relative"-->
+<!--                                     style="max-width:600px">-->
+<!--                                    <div class="w100" id="search-supplierGroupId-container">-->
+<!--                                    </div>-->
+<!--                                    <div class="hidden">-->
+<!--                                        <div class="bootstrap-tagsinput"><input type="text" placeholder=""></div>-->
+<!--                                        <input type="hidden" class="sapo-textbox choosed-single-id" id="supplierGroupId"-->
+<!--                                               value="" style="display: none;">-->
+<!--                                    </div>-->
+<!--                                    <div class="select__wrapper" style="margin:0;width:300px;"-->
+<!--                                         id="search-suggest-variant">-->
+<!--                                        <a class="sapo-select select&#45;&#45;a select-suggest" style="text-align:center"-->
+<!--                                           href="javascript:" data-original-title="" title="">Chọn nhóm nhà cung cấp</a>-->
+<!--                                        <svg class="next-icon next-icon&#45;&#45;size-16">-->
+<!--                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"-->
+<!--                                                 xlink:href="#select-chevron"></use>-->
+<!--                                        </svg>-->
+<!--                                        <div class="filter-body&#45;&#45;variantIds filter-body&#45;&#45;suggest">-->
+
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
                                 <a href="javascript" bind-event-click="removeItemFilter(this, 'supplierGroupId')"
                                    class="remove-item-filter">
                                     <svg class="next-icon next-icon--size-20">
@@ -209,7 +260,7 @@
                                     </svg>
                                 </a>
                             </div>
-                        
+
 
                             <div class="filter-item" filter-type="createdOn" style="width:auto; float: left">
                                 <div class="select__wrapper">
@@ -243,9 +294,10 @@
                                     </svg>
                                 </a>
                             </div>
-                        
+
                             <div class="select__wrapper">
-                                <select class="sapo-select select-change-filter--all "bind-event-change="resetFilter(this)">
+                                <select class="sapo-select select-change-filter--all "
+                                        bind-event-change="resetFilter(this)">
                                     <option value="">Chọn điều kiện lọc</option>
                                     <option value="status">Trạng thái</option>
                                     <option value="assigneeIds">Nhân viên</option>
@@ -393,13 +445,14 @@
         console.log(str)
         console.log(element)
     }
-    
+
     let employee;
 
     const page = {
         urls: {
-            getAllSupplier: App.SUPPLIER_API,
-            getAllEmployee: App.EMPLOYEE_API,
+            getAllSupplier: SupplierApp.SUPPLIER_API,
+            getAllEmployee: SupplierApp.EMPLOYEE_API,
+            getAllSupplierGroup: SupplierApp.SUPPLIER_GROUP_API,
         },
         elements: {},
         commands: {},
@@ -423,6 +476,9 @@
     page.dialogs.elements.selectChangeFilter = $(".select-change-filter");
     page.dialogs.elements.filterItem = $(".filter-item");
     page.dialogs.elements.selectAssigneeIds = $("#assigneeIds");
+    page.dialogs.elements.filterEmployee = $("#ulAssigneeIdsFilter");
+    page.dialogs.elements.checkboxInputEmployee = $(".sapo-checkbox__input");
+    page.dialogs.elements.filterSupplierGroupId = $("#ulSupplierGroupId");
 
 
     // seach
@@ -467,9 +523,9 @@
                 totalPage = data.totalPage;
                 data.suppliers.map(item => {
                     if (item.status == "AVAILABLE") {
-                        page.elements.tbSupplier_tbody.append(App.renderRowSupplier(item, 'available'))
+                        page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available'))
                     } else {
-                        page.elements.tbSupplier_tbody.append(App.renderRowSupplier(item, 'unavailable'))
+                        page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'unavailable'))
                     }
                 });
                 page.elements.totalPage.append(
@@ -478,7 +534,7 @@
             })
 
         // .fail((jqXHR) => {
-        //     App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_404)
+        //     SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_404)
         // })
     }
 
@@ -491,7 +547,7 @@
                 console.log(x)
                 if (x.style.display === "none" || x.style.display === "") {
                     x.style.display = "flex";
-                    $(x).css("flex-direction","column")
+                    $(x).css("flex-direction", "column")
                 } else {
                     x.style.display = "none";
                 }
@@ -511,8 +567,7 @@
         })
             .done((data) => {
                 $.each(data, (i, item) => {
-                    let str = `<option value="${item.id}">${item.fullName}</option>`;
-                    page.dialogs.elements.selectAssigneeIds.append(str);
+                    page.dialogs.elements.filterEmployee.append(SupplierApp.renderEmployeeOnFilter(item));
                 });
 
             }).fail((jqXHR) => {
@@ -521,25 +576,66 @@
         })
 
     }
-    function resetFilter(element){
-       let ele = document.querySelector("[" + "filter-type" + "=" + $(element).val() + "]")
-        $(ele).css("display","block");
-        // $($(element)+ " option[value=" + $(element).val() + "]").hide()
-        console.log($(element))
-        $(element).find( "option[value=" + $(element).val() + "]").hide();
-        $(element).val('').trigger('chosen:updated');
-        $(element).each(function() {
-            if (($(element).find('option:selected').not('[disabled]').length === 0) ) {
-                element.parentElement.hide();
-            }
-        });
-        console.log($(element).val() == null)
-        console.log($(element).closest('.hidden').length == 0)
-        console.log(($(element).find('option:selected').not('[hide]').length === 0))
+
+    page.commands.getAllSupplierGroup = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getAllSupplierGroup,
+        })
+            .done((data) => {
+                $.each(data, (i, item) => {
+                    page.dialogs.elements.filterSupplierGroupId.append(SupplierApp.renderSupplierGroupOnFilter(item));
+                });
+
+            }).fail((jqXHR) => {
+
+
+        })
+
     }
 
+    // filter tổng
+    function resetFilter(element) {
+        console.log(element)
+        let ele = document.querySelector("[" + "filter-type" + "=" + $(element).val() + "]")
+        $(ele).css("display", "block");
+        $(element).find("option[value=" + $(element).val() + "]").hide();
+        $(element).find("option[value=" + $(element).val() + "]").prop("disabled", true)
+        $(element).val('').trigger('chosen:updated');
+        if (($(element).find('option:disabled').length === 4)) {
+            $(element.parentElement).hide();
+        }
+    }
+
+    // loại bỏ filter
+    function removeItemFilter(element, str) {
+        console.log(element)
+        let ele = document.querySelector("[" + "filter-type" + "=" + str + "]");
+        $(ele).css("display", "none");
+        $(".select-change-filter--all").find("option[value=" + str + "]").prop("disabled", false);
+        $(".select-change-filter--all").find("option[value=" + str + "]").show();
+        if (($(".select-change-filter--all").find('option:disabled').length < 4)) {
+            $(".select__wrapper").show();
+        }
+    }
+
+    // function changeItemFilter(element){
+    //     $('option').prop('disabled', false);
+    //     $('.select-change-filter').each(function() { //loop through all the select elements
+    //         let val = element.value;
+    //         $('.select-change-filter').not(element).find('option').filter(function() { //filter option elements having value as selected option
+    //             return element.value === val;
+    //         }).prop('disabled', true); //disable those option elements
+    //     });
+    // }
+
+    // tùy chọn filter status
     function setParamFilterActive(str, element) {
-        let status = $(element.parentElement.parentElement).find("input.choosed-single-id").val().split(',')
+        let status = $(element.parentElement.parentElement).find("input.choosed-single-id").val().split(',');
         if ($(element).hasClass("active")) {
             $(element).removeClass("active")
             if (status.indexOf(str) > -1) {
@@ -547,15 +643,68 @@
             }
         } else {
             $(element).addClass("active");
-           status.push(str)
+            status.push(str)
         }
+        console.log(str);
         $(element.parentElement.parentElement).find("input.choosed-single-id").val(status)
     }
+
+    function setParamFilterAssigneeIds(element) {
+        let assigneeIds = $(element.parentElement.parentElement.parentElement.parentElement).find("input.choosed-single-id").val().split(',');
+        $('input[type="checkbox"].checkbox_employee').change(function () {
+            let checkbox = $(this)
+            if (checkbox.is(":checked")){
+                assigneeIds.push(checkbox.val())
+            }else{
+                if (assigneeIds.indexOf(checkbox.val()) > -1) {
+                    assigneeIds.splice(assigneeIds.indexOf(checkbox.val()), 1)
+                }
+            }
+            $(element.parentElement.parentElement.parentElement.parentElement).find("input.choosed-single-id").val(assigneeIds)
+        })
+    }
+
+    function setParamFilterSupplierGroupId(element) {
+        let supplierGroupId = $(element.parentElement.parentElement.parentElement.parentElement).find("input.choosed-single-id").val().split(',');
+        $('input[type="checkbox"].checkbox_supplier_group').change(function () {
+            let checkbox = $(this)
+            if (checkbox.is(":checked")){
+                supplierGroupId.push(checkbox.val())
+            }else{
+                if (supplierGroupId.indexOf(checkbox.val()) > -1) {
+                    supplierGroupId.splice(supplierGroupId.indexOf(checkbox.val()), 1)
+                }
+            }
+            $(element.parentElement.parentElement.parentElement.parentElement).find("input.choosed-single-id").val(supplierGroupId)
+        })
+    }
+    // tìm từ khóa trong filter SupplierGroup
+    function suggest(element){
+        let value = $(element).val().toLowerCase();
+        let ul = $(element).closest('ul');
+        let li = ul.find('li:gt(0)');
+        li.hide();
+        li.filter(function() {
+            let text = $(this).text().toLowerCase();
+            return text.indexOf(value)>=0;
+        }).show();
+    }
+
+    // $('#dropdownMenuClickableInside').click(function() {
+    //     $('input[type="checkbox"]').change(function (){
+    //         let $this = $(this)
+    //         if ($this.is(":checked")) {
+    //
+    //         }
+    //     })
+    // });
 
 
     page.commands.loadData = () => {
         page.commands.getAllSupplier();
         page.commands.getAllEmployee();
+        page.commands.getAllSupplierGroup();
+
 
     }
 
@@ -572,6 +721,17 @@
 
 
 </script>
-</body>
+<script>
+    $(".import_product").on("click", () => {
+        alert("hello")
+    })
+</script>
 
+<script>
+    $(".export_product").on("click",() => {
+        alert("chao xìn")
+    })
+</script>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </html>

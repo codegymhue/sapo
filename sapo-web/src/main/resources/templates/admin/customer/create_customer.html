@@ -595,12 +595,12 @@
                     "content-type": "application/json"
                 },
                 "type": "POST",
-                "url": "http://localhost:8080/api/customers/create",
+                "url": origin +"/api/customers/create",
                 "data": JSON.stringify(customer)
             })
                 .done((data) => {
                     console.log(data)
-                    App.IziToast.showSuccessAlert("tạo khách hàng thành công !");
+                    CustomerApp.IziToast.showSuccessAlert("tạo khách hàng thành công !");
                     setTimeout(() => {
                     }, 2500)
                     $('#formCreate')[0].reset();
@@ -610,7 +610,7 @@
                 .fail((jqXHR) => {
                     console.log(jqXHR);
 
-                    App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400)
+                    CustomerApp.IziToast.showErrorAlert(CustomerApp.AlertMessageVi.ERROR_400)
                 })
         });
     }
@@ -750,7 +750,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: "http://localhost:8080/api/employees"
+            url: origin +"/api/employees"
         })
             .done((data) => {
                 $.each(data, (i, item) => {
@@ -771,7 +771,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: "http://localhost:8080/api/customer_groups/"
+            url: origin +"/api/customer_groups/"
         })
             .done((data) => {
                 console.log(data)
@@ -793,7 +793,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: "http://localhost:8080/api/customers/customerGender"
+            url: origin +"/api/customers/customerGender"
         })
             .done((data) => {
                 console.log(data)
@@ -807,7 +807,7 @@
                 console.log(jqXHR);
                 if (jqXHR.responseJSON) {
                     $.each(jqXHR.responseJSON, (key, item) => {
-                        App.IziToast.showErrorAlert(item);
+                        CustomerApp.IziToast.showErrorAlert(item);
                     })
                 }
 

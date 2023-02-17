@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/izitoast@1/dist/css/iziToast.min.css">
   <script>
     var CKEDITOR_BASEPATH = '/v2/lib/ckeditor/';
     var S_LANG = 'vi-VN';
@@ -238,7 +239,9 @@
                 <li>
                   <a th:href="'/admin/suppliers/'+${supplier.getId()}+'/edit'">Cập nhật thông tin</a>
                 </li>
+
                 <li><a id="showModalDelete"> Xoá nhà cung cấp </a></li>
+                <input type="hidden" id="modalDeleteId" th:value="${supplier.id}">
               </ul>
             </div>
             <th:bock th:replace="/admin/suppliers/modals/supplier_modal_delete :: supplier_modal_delete"/>
@@ -564,65 +567,6 @@
   Page();
   hj('trigger', 'split_test_b');
 </script>
-<script type='text/javascript'>
-  function showMenu() {
-    $(".col-left").css("margin-left", 0);
-    $(".col-left").addClass("is-mobile");
-  }
-  env = 'Production';
-  old_console_log = console.log;
-  console.log = function () {
-    if (env.toLowerCase() != "production") {
-      old_console_log.apply(this, arguments);
-    }
-  }
-  window.isAccountNonEmail = false
-  window.profileSso = 'https://profiles.sapo.vn';
-
-  function isAuthorized(authority) {
-    let accountRoles = [{ "locationId": 0, "tenantRoleId": 1, "scopes": ["full"] }];
-    let accountOwner = true;
-    let check = false;
-    if (accountRoles == null || accountRoles == undefined)
-      accountRoles = [];
-    let accountRole;
-    if (accountOwner)
-      return true;
-    for (accountRole of accountRoles) {
-      if (accountRole.scopes.includes('full') || accountRole.scopes.includes(authority)) {
-        check = true;
-        break;
-      }
-    }
-    if (check)
-      return true;
-    else {
-      Sapo.Flash.error('Bạn không có quyền thực hiện chức năng này');
-      return false;
-    }
-  }
-  function hasPermission(authority) {
-    let accountRoles = [{ "locationId": 0, "tenantRoleId": 1, "scopes": ["full"] }];
-    let accountOwner = true;
-    let check = false;
-    if (accountRoles == null || accountRoles == undefined)
-      accountRoles = [];
-    let accountRole;
-    if (accountOwner)
-      return true;
-    for (accountRole of accountRoles) {
-      if (accountRole.scopes.includes('full') || accountRole.scopes.includes(authority)) {
-        check = true;
-        break;
-      }
-    }
-    return check;
-  }
-</script>
-<!-- Freshchat -->
-
-
-
 <!-- End Freshchat -->
 
 <div context="notificationVNPay"
@@ -646,51 +590,57 @@
 
 
 </body>
+<script src="/assets/admin/js/suppliers/supplier_app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/izitoast@1/dist/js/iziToast.min.js" type="text/javascript"
+        crossorigin></script>
+
 
 <script>
 
-  // function showDelete() {
-  //
-  //   let idDelete = $("#idDelete").val()
-  //   console.log("idDelete : " ,idDelete);
-  //
-  //   $.ajax({
-  //     "headers": {
-  //       "accept": "application/json",
-  //       "content-type": "application/json"
-  //     },
-  //     type: "GET",
-  //     url: 'http://localhost:8080/api/suppliers/' + idDelete
-  //   })
-  //           .done(() => {
-  //             $("#supplier-delete-modal").modal("show");
-  //             // getAllCustomers;
-  //           })
-  //           .fail((error) => {
-  //             console.log(error);
-  //           })
-  // }
-  //
-  // $("#showModalDelete").on('click', ()=>{
-  //   let idDelete = $("#idDelete").val()
-  //   console.log("idDelete : " ,idDelete);
-  //
-  //   $.ajax({
-  //     "headers": {
-  //       "accept": "application/json",
-  //       "content-type": "application/json"
-  //     },
-  //     type: "GET",
-  //     url: 'http://localhost:8080/api/suppliers/' + idDelete
-  //   })
-  //           .done(() => {
-  //             $("#supplier-delete-modal").modal("show");
-  //             // getAllCustomers;
-  //           })
-  //           .fail((error) => {
-  //             console.log(error);
-  //           })
-  //
-  // })
+  $("#showModalDelete").on('click', ()=>{
+    let idDelete = $("#modalDeleteId").val()
+    console.log("idDelete : " ,idDelete);
+
+    $.ajax({
+      "headers": {
+        "accept": "application/json",
+        "content-type": "application/json"
+      },
+      type: "GET",
+      url: origin +'/api/suppliers/' + idDelete
+    })
+            .done(() => {
+              $("#supplier-delete-modal").modal("show");
+
+            })
+            .fail((error) => {
+              console.log(error);
+            })
+
+  })
+
+  $("#btn-supplier-delete").on('click', ()=>{
+    let idDelete = $("#modalDeleteId").val()
+    $.ajax({
+      "headers": {
+        "accept": "application/json",
+        "content-type": "application/json"
+      },
+      type: "DELETE",
+      url: origin +'/api/suppliers/' + idDelete
+    })
+            .done(() => {
+              $("#supplier-delete-modal").modal("hide");
+              SupplierApp.IziToast.showSuccessAlert("Xoá nhà cung cấp thành công");
+              setTimeout(() => {
+              }, 1500)
+              window.location.href = `/admin/suppliers`;
+            })
+            .fail((error) => {
+              SupplierApp.IziToast.showErrorAlert("Xoá nhà cung cấp thất bại");
+              setTimeout(() => {
+              }, 1500)
+            })
+  })
 </script>
 </html>

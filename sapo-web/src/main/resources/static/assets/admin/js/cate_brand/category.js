@@ -20,7 +20,7 @@ function showAllCategories(selectedCategory) {
             "content-type": "application/json"
         },
         type: "GET",
-        url: "http://localhost:8080/api/categories"
+        url: origin +"/api/categories"
     })
         .done((data) => {
             categories = data;

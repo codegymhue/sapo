@@ -23,10 +23,10 @@ import java.util.*;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer>, JpaSpecificationExecutor<Customer> {
-
-
     List<Customer> findAllByGroupIdIn(List<Integer> groupIds);
+
     List<Customer> findAllByEmployeeIdIn(List<Integer> employeeIds);
+
     List<Customer> findAllByGender(String genderId);
 
 

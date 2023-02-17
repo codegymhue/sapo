@@ -3,11 +3,9 @@ package vn.sapo.customerGroup;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.customerGroup.dto.CreateCusGroupParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
-import vn.sapo.customerGroup.dto.UpdateCusGroupParam;
-import vn.sapo.entities.customer.Customer;
+import vn.sapo.customerGroup.dto.UpdateCustomerGroupParam;
 import vn.sapo.entities.customer.CustomerGroup;
 
 
@@ -24,7 +22,7 @@ public class CustomerGroupMapper {
         return modelMapper.map(customerGroup, CustomerGroupResult.class);
     }
 
-    public void transferFields(UpdateCusGroupParam updateCusGroupParam, CustomerGroup customerGroup) {
-        modelMapper.map(updateCusGroupParam, customerGroup);
+    public void transferFields(UpdateCustomerGroupParam updateCustomerGroupParam, CustomerGroup customerGroup) {
+        modelMapper.map(updateCustomerGroupParam, customerGroup);
     }
 }

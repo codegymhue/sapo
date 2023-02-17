@@ -818,9 +818,9 @@
     let page = {
         cloudinary: {},
         urls: {
-            url_category: App.BASE_URL_Categories,
-            url_brand: App.BASE_URL_Brands,
-            url_product_update: App.BASE_URL_Product + "/update"
+            url_category: ProductApp.BASE_URL_Categories,
+            url_brand: ProductApp.BASE_URL_Brands,
+            url_product_update: ProductApp.BASE_URL_Product + "/update"
         },
         elements: {},
         loadData: {},
@@ -911,14 +911,14 @@
         })
             .done((data) => {
                 let productId = data.id;
-                App.IziToast.showSuccessAlert(App.AlertMessageVi.SUCCESS_UPDATED);
+                ProductApp.IziToast.showSuccessAlert(ProductApp.AlertMessageVi.SUCCESS_UPDATED);
 
                 setTimeout(() => {
                     window.location.href = "/admin/product/" + productId;
                 }, 1000)
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
+                ProductApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
     }
 
@@ -1003,7 +1003,7 @@
             page.commands.updateProduct();
         },
         invalidHandler: () => {
-            App.IziToast.showErrorAlert(App.AlertMessageVi.ERROR_400);
+            ProductApp.IziToast.showErrorAlert(ProductApp.AlertMessageVi.ERROR_400);
         }
     })
 
@@ -1218,11 +1218,11 @@
                 "content-type": "application/json"
             },
             "type": "POST",
-            "url": "http://localhost:8080/api/categories/create",
+            "url": origin +"/api/categories/create",
             "data": JSON.stringify(category)
         })
             .done((data) => {
-                App.IziToast.showSuccessAlert("Tạo loại sản phẩm mới thành công!");
+                ProductApp.IziToast.showSuccessAlert("Tạo loại sản phẩm mới thành công!");
                 $(".showAllCategory #showAllCAt").empty();
                 showAllCategories();
                 $('#modalAddCategory').modal('hide');
@@ -1230,7 +1230,7 @@
 
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
+                ProductApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
     }
 
@@ -1244,18 +1244,18 @@
                 "content-type": "application/json"
             },
             "type": "POST",
-            "url": "http://localhost:8080/api/brands/create",
+            "url": origin +"/api/brands/create",
             "data": JSON.stringify(brand)
         })
             .done((data) => {
-                App.IziToast.showSuccessAlert("Tạo nhãn hiệu mới thành công!");
+                ProductApp.IziToast.showSuccessAlert("Tạo nhãn hiệu mới thành công!");
                 $(".showAllBrand #showAllBrand").empty();
                 showAllBrands();
                 $('#modalAddBrand').modal('hide');
                 $('#frmCreateBrand')[0].reset();
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
+                ProductApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
     }
 
@@ -1311,11 +1311,11 @@
                 "content-type": "application/json"
             },
             "type": "POST",
-            "url": "http://localhost:8080/api/taxes/create",
+            "url": origin +"/api/taxes/create",
             "data": JSON.stringify(tax)
         })
             .done((data) => {
-                App.IziToast.showSuccessAlert("Tạo thuế thành công!")
+                ProductApp.IziToast.showSuccessAlert("Tạo thuế thành công!")
                 $(".showAllTax #showALlTax").empty();
                 $(".showAllTaxOut #showALlTaxOut").empty();
                 showAllTaxes()
@@ -1324,7 +1324,7 @@
 
             })
             .fail((jqXHR) => {
-                App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
+                ProductApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
             })
     }
 

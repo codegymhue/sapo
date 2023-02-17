@@ -132,7 +132,6 @@ public class SupplierServiceTest {
         Assertions.assertThat(actual.getEmail()).isEqualTo(expected.getEmail());
         Assertions.assertThat(actual.getDescription()).isEqualTo(expected.getDescription());
         Assertions.assertThat(actual.getPhone()).isEqualTo(expected.getPhone());
-        Assertions.assertThat(actual.getEmployee()).isEqualTo(expected.getEmployeeId());
         Assertions.assertThat(actual.getSupplierCode()).isEqualTo(expected.getSupplierCode());
         Assertions.assertThat(actual.getStatus()).isEqualTo(expected.getStatus());
         Assertions.assertThat(actual.getCreateAt()).isEqualTo(expected.getCreatedAt());

@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<th:block th:fragment="edit_group_supplier">
+  <div class="modal" id="showModalEditGroupSupplier" important data-bs-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-lg" style="width: 610px" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Sửa nhóm nhà cung cấp</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div id="modal-alert-danger" class="hide mb-3"></div>
+        <div>
+          <form id="formEditGroup">
+            <div class="modal-body">
+              <div class="row">
+                <span hide id="editGroupId"></span>
+                <div class="col-6">
+                  <div class="left field w-100">
+                    <div class="label mb-2 label-required">Tên nhóm</div>
+                    <input required id="groupTitleEditSup" name="groupTitleEditSup" class="sapo-textbox w100 pull-left" bind="supplierGroup.name" data-toggle="tooltip" placeholder="Nhập tên nhóm nhà cung cấp">
+                  </div>
+                  <div class="left field w-100 mb-2">
+                    <div class="label mb-2">Mã nhóm</div>
+                    <input id="groupCodeEditSup" class="sapo-textbox w100 pull-left" bind="supplierGroup.code" data-toggle="tooltip" placeholder="Nhập mã nhóm nhà cung cấp" data-original-title="" title="">
+                  </div>
+                </div>
+                <div class="col-6 field mb-2">
+                  <div class="label mb-2">Ghi chú</div>
+                  <textarea id="groupDescriptionEditSup" bind="supplierGroup.note" class="sapo-textbox" style="height:113px"></textarea>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn secondary" id="deleteGroupSupplier" data-bs-toggle="modal">Xoá</button>
+          <button class="btn secondary" data-bs-dismiss="modal">Thoát</button>
+          <button id="editGroupSupplier" style="margin-bottom: 3px;" class="btn primary">Lưu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</th:block>
