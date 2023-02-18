@@ -13,8 +13,10 @@ import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.shared.configurations.CodePrefix;
+import vn.sapo.shared.exceptions.DataInputException;
 import vn.sapo.shared.exceptions.NotFoundException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,7 +65,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
-<<<<<<< HEAD
     public CustomerResult create(CreateCustomerParam createCustomerParam) {
         Customer customer = customerMapper.toModel(createCustomerParam);
         Customer newCustomer = customerRepository.save(customer);
@@ -73,12 +74,6 @@ public class CustomerServiceImpl implements CustomerService {
             throw new DataInputException("Tên khách hàng không được để trống");
         }
         if (cusCode == null || cusCode.trim().isEmpty())
-=======
-    public CustomerResult create(CreateCustomerParam createParam) {
-        Customer customer = customerMapper.toModel(createParam);
-        customer = customerRepository.save(customer);
-        if (createParam.getCustomerCode() == null)
->>>>>>> main
             customer.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
         return customerMapper.toDTO(customer);
     }
