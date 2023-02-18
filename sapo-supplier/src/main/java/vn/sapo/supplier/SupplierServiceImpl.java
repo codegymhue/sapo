@@ -7,13 +7,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.entities.supplier.Supplier;
-import vn.sapo.entities.supplier.SupplierGroup;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.supplier.dto.*;
 import vn.sapo.supplierGroup.SupplierGroupRepository;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,7 +68,7 @@ public class SupplierServiceImpl implements SupplierService {
         Supplier supplier = supplierRepository.findById(param.getId())
                 .orElseThrow(() -> new NotFoundException("Not found supplier"));
         if (param.getGroupId() != null && supplierRepository.existsById(param.getGroupId()))
-            throw new NotFoundException("find group supplier");
+            throw new NotFoundException("Group supplier exist");
         supplierMapper.transferFields(param, supplier);
         return supplierMapper.toDTO(supplier);
     }
@@ -104,10 +102,29 @@ public class SupplierServiceImpl implements SupplierService {
         }
     }
 
+
     @Override
     @Transactional(readOnly = true)
     public Page<SupplierResult> findAllByFilters(SupplierFilter filter, Pageable pageable) {
         return supplierFilterRepository.findAllByFilters(filter, pageable).map(supplierMapper::toDTO);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Map<String, Object> findAllByFilters2(SupplierFilter filter) {
+        Page<Supplier> page = supplierFilterRepository.findAllByFilters(filter, PageRequest.of(filter.getPageNo() - 1, filter.getPageSize()));
+        if (page.hasContent()) {
+            List<SupplierResult> dtoList = page.getContent()
+                    .stream()
+                    .map(supplierMapper::toDTO)
+                    .collect(Collectors.toList());
+            return new HashMap<>() {{
+                put("suppliers", dtoList);
+                put("totalItem", page.getTotalElements());
+                put("totalPage", page.getTotalPages());
+            }};
+        } else {
+            return new HashMap<>();
+        }
+    }
 }

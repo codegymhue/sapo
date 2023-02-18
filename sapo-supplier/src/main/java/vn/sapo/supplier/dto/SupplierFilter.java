@@ -26,7 +26,7 @@ public class SupplierFilter {
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern="yyyy-MM-dd", timezone = "UCT")
     private Date createdTo;
 
-//    private Integer pageNo;           //page hiện tại
-//    private Integer pageSize;            // số lượng trên 1 trang
+    private Integer pageNo;           //page hiện tại
+    private Integer pageSize;            // số lượng trên 1 trang
 //    private Integer start;
 }
