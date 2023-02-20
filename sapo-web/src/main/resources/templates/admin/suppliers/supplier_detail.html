@@ -3,16 +3,12 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/izitoast@1/dist/css/iziToast.min.css">
+  <th:block th:replace="/layout/supplier/header :: header"/>
   <script>
     var CKEDITOR_BASEPATH = '/v2/lib/ckeditor/';
     var S_LANG = 'vi-VN';
     var S_LANG_RES = 'https://sapo.dktcdn.net/sapo-frontend-x/d9ad77d.i18n_vi-VN.json';
   </script>
-  <script src="https://sapo.dktcdn.net/sapo-frontend-x/d852af0.client.bundle.js"></script>
-  <link rel="stylesheet" href="https://sapo.dktcdn.net/sapo-frontend-x/6386cc5.main.css" />
-  <script src="https://sapo.dktcdn.net/fe-cdn-production/lib/wootric/wootric-sdk.js"></script>
-  <script src="https://sapo.dktcdn.net/fe-cdn-production/lib/upload-files/jquery.multifile.js"></script>
 
   <link href="https://sapo.dktcdn.net/fe-cdn-production/lib/driver/driver.min.css?v=20220218" rel="stylesheet" />
   <title>Chi ti&#x1EBF;t nh&#xE0; cung c&#x1EA5;p</title>
@@ -590,7 +586,9 @@
 
 
 </body>
+<!--<th:block th:replace="/layout/script :: script"/>-->
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/izitoast@1/dist/js/iziToast.min.js" type="text/javascript"
         crossorigin></script>
 

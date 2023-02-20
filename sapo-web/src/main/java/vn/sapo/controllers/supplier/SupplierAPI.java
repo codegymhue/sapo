@@ -3,6 +3,7 @@ package vn.sapo.controllers.supplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import vn.sapo.address.AddressService;
 import vn.sapo.address.dto.CreateAddressParam;
@@ -74,9 +75,8 @@ public class SupplierAPI {
 
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody UpdateSupplierParam updateSupplierParam) {
+    public ResponseEntity<?> update(@Validated @RequestBody UpdateSupplierParam updateSupplierParam) {
         return new ResponseEntity<>(supplierService.update(updateSupplierParam), HttpStatus.OK);
     }
-
 
 }
