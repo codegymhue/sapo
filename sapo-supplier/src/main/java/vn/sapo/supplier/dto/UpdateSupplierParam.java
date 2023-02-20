@@ -34,9 +34,12 @@ public class UpdateSupplierParam {
     @NullOrNotBlank
     private String paymentMethodId;
 
-    @NullOrNotBlank
     private Integer groupId;
     private Integer employeeId;
     private SupplierStatus status;
+
+    private String taxCode;
+    private String fax;
+    private String website;
 
 }

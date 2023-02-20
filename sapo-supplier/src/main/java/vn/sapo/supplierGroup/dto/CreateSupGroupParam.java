@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @Accessors(chain = true)
 public class CreateSupGroupParam {
-    private Integer id;
+
     @NullOrNotBlank
     private String title;
 
