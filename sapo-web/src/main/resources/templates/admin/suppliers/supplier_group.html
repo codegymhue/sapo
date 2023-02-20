@@ -383,7 +383,6 @@ function renderGroup(item) {
               });
             })
   }
-
     page.elements.showCreateGroup.on('click', ()=> {
     page.dialogs.elements.modalCreateGroupSupplier.modal('show');
     page.dialogs.elements.groupCreateId.val("");
@@ -448,16 +447,21 @@ function renderGroup(item) {
               page.dialogs.elements.groupDescriptionEditSup.val(data.description)
             })
             .fail((jqXHR) => {
+
             })
   }
 
   $("#editGroupSupplier").on('click',()=> {
+    $("#formEditGroup").trigger("submit");
+  })
+
+  function doEditGroupSupplier() {
     let idEditGroup = $("#editGroupId").val();
     let editGroupTitle = page.dialogs.elements.groupTitleEditSup.val();
     let supplierCode = page.dialogs.elements.groupCodeEditSup.val();
     let editGroup = {
       id: idEditGroup,
-      title: editGroupTitle.length > 0 ? editGroupTitle : null ,
+      title: editGroupTitle.length > 0 ? editGroupTitle : null,
       supplierCode: supplierCode > 0 ? supplierCode : null,
       description: page.dialogs.elements.groupDescriptionEditSup.val()
     }
@@ -484,7 +488,7 @@ function renderGroup(item) {
               setTimeout(() => {
               }, 1500);
             })
-  })
+  }
 
   $("#deleteGroupSupplier").on('click', () => {
             let idDelete = $("#editGroupId").val()
@@ -544,6 +548,22 @@ function renderGroup(item) {
     },
     submitHandler:() => {
       doCreateGroupSupplier();
+    }
+  })
+
+  $("#formEditGroup").validate({
+    rules: {
+      groupTitleEditSup: {
+        required: true,
+      },
+    },
+    messages: {
+      groupTitleEditSup: {
+        required: "Vui lòng nhập tên nhóm nhà cung cấp",
+      }
+    },
+    submitHandler:() => {
+      doEditGroupSupplier();
     }
   })
 

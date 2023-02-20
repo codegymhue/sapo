@@ -548,7 +548,6 @@
                     </div>
                 </script>
             </div>
-
         </div>
         <div class="popup-box">
             <iframe scrolling="no" src="about:blank" name="myIframe" id="popupPrint"
@@ -708,13 +707,16 @@
     }
 
     page.elements.btnUpdateSupplier.on('click', () => {
+
         let idSupp = page.elements.supplierId.val();
+        let supplierCode = page.elements.supplierCodeUp.val();
+        let fullName = page.elements.nameUp.val();
         console.log(idSupp);
         let paymentMethodId = page.elements.paymentMethod.val()
         let newUpdateSupplierParam = {
             id: idSupp,
-            supplierCode: page.elements.supplierCodeUp.val(),
-            fullName: page.elements.nameUp.val(),
+            supplierCode: supplierCode.length>0 ? supplierCode : null,
+            fullName: fullName.length > 0 ? fullName : null,
             email: page.elements.emailUp.val(),
             phone: page.elements.phoneUp.val(),
             status: page.elements.statusUp.val(),
@@ -748,7 +750,7 @@
             })
             .fail((jqXHR) => {
                 // console.log(jqXHR);
-                SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_400)
+                SupplierApp.IziToast.showErrorAlert("Sửa thông tin nhà cung cấp thất bại")
             })
     })
 
@@ -774,7 +776,6 @@
 
         let supGroupCode = page.dialogs.elements.groupCreateCodeSup.val();
         let supGroupTitle = page.dialogs.elements.groupCreateTitleSup.val();
-
         let newGroupSup =
             {
                 id: page.dialogs.elements.groupCreateId.val(),

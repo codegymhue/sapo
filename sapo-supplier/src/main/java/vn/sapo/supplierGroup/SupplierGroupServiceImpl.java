@@ -24,6 +24,9 @@ public class SupplierGroupServiceImpl implements SupplierGroupService{
     @Transactional
     public SupplierGroupResult create(CreateSupGroupParam createSupGroupParam) {
 
+        if(createSupGroupParam.getTitle().isBlank()) {
+            throw new NotFoundException("Group supplier is not empty");
+        }
         List<SupplierGroup> supplierGroupList = supplierGroupRepository.findAll();
         System.out.println("Nhóm nhà cung cấp" + supplierGroupList);
 
@@ -62,25 +65,23 @@ public class SupplierGroupServiceImpl implements SupplierGroupService{
         return supplierGroupMapper.toDTO(supplierGroup) ;
     }
 
-
     @Override
     @Transactional
     public SupplierGroupResult update(EditSupGroupParam editSupGroupParam) {
+
         SupplierGroup supplierGroup = supplierGroupRepository.findById(editSupGroupParam.getId())
                 .orElseThrow(() -> new NotFoundException("Not found group supplier with id: " + editSupGroupParam.getId() ));
 
+        if(editSupGroupParam.getTitle().isBlank()) {
+            throw new NotFoundException("Group supplier is not empty");
+        }
         List<SupplierGroup> supplierGroupList = supplierGroupRepository.findAll();
-        System.out.println("Nhóm nhà cung cấp" + supplierGroupList);
+
         for(int i = 0; i < supplierGroupList.size(); i++) {
             if(editSupGroupParam.getTitle().trim().equalsIgnoreCase(supplierGroupList.get(i).getTitle())
             ) {
                 throw new NotFoundException("Group supplier exist");
             }
-            if(editSupGroupParam.getSupplierCode() != null) {
-                if(editSupGroupParam.getSupplierCode().trim().equalsIgnoreCase(supplierGroupList.get(i).getSupplierCode()))
-                    throw new NotFoundException("Group supplier code exist");
-            }
-
         }
         supplierGroupMapper.transferFields(editSupGroupParam, supplierGroup);
         return supplierGroupMapper.toDTO(supplierGroup);
