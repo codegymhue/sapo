@@ -7,18 +7,22 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import vn.sapo.address.AddressService;
 import vn.sapo.address.dto.CreateAddressParam;
+import vn.sapo.controllers.customer.CustomerAPI;
+import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.supplier.SupplierService;
 import vn.sapo.supplier.dto.CreateSupplierParam;
 import vn.sapo.supplier.dto.SupplierFilter;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.dto.UpdateSupplierParam;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/suppliers")
 public class SupplierAPI {
+
     @Autowired
     private SupplierService supplierService;
 
@@ -48,7 +52,7 @@ public class SupplierAPI {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody CreateSupplierParam createSupplierParam) {
+    public ResponseEntity<?> create(@Validated @RequestBody CreateSupplierParam createSupplierParam) {
         //TODO: xóa dòng sout
         System.out.println(createSupplierParam);
         SupplierResult dto = supplierService.create(createSupplierParam);
@@ -79,4 +83,45 @@ public class SupplierAPI {
         return new ResponseEntity<>(supplierService.update(updateSupplierParam), HttpStatus.OK);
     }
 
+<<<<<<< HEAD
+=======
+
+//    public void setData(SupplierResult supplier) {
+//        BigDecimal spendTotal = getSpendTotalBySupplierId(suppplier.getId());
+//        BigDecimal paidTotal = getPaidTotalBySupplierId(supplier.getId());
+//        supplier.setSpendTotal(spendTotal);
+//        supplier.setDebtTotal(spendTotal.subtract(paidTotal));
+//        supplier.setQuantityProductOrder(getQuantityProductOrderBySupplierId(supplier.getId()));
+//        supplier.setQuantityItemOrder(getQuantityItemSupplierOrderById(supplier.getId()));
+//        supplier.setLastDayOrder(getLastDayOrderBySupllierId(supplier.getId()));
+//    }
+//
+//    public BigDecimal getSpendTotalBySupplierId(Integer supplierId) {
+//        BigDecimal spendTotal = saleOrderService.getSpendTotalBySupplierId(supplierId);
+//        if (spendTotal == null)
+//            spendTotal = BigDecimal.valueOf(0);
+//        return spendTotal;
+//    }
+//
+//    public BigDecimal getPaidTotalBySupplierId(Integer supplierId) {
+//        BigDecimal paidTotal = paymentSaleOrderService.getPaidTotalBySupplierId(supplierId);
+//        if (paidTotal == null)
+//            paidTotal = BigDecimal.valueOf(0);
+//        return paidTotal;
+//    }
+//
+//    public Integer getQuantityProductOrderBySupplierId(Integer supplierId) {
+//        Integer quantityProductOrder = saleOrderService.getQuantityProductOrder(supplierId);
+//        if (quantityProductOrder == null)
+//            quantityProductOrder = 0;
+//        return quantityProductOrder;
+//    }
+//
+//    public Integer getQuantityItemSupplierOrderById(Integer supplierId) {
+//        Integer quantityItemOrder = orderItemService.getQuantityItemSupplierOrderById(supplierId);
+//        if (quantityItemOrder == null)
+//            quantityItemOrder = 0;
+//        return quantityItemOrder;
+//    }
+>>>>>>> tai_dev
 }

@@ -21,20 +21,37 @@ import java.util.List;
 @Accessors(chain = true)
 public class SupplierResult {
     private Integer id;
+
     private String supplierCode;
+
     private String fullName;
+
     private String email;
+
     private String phone;
+
     private String description;
+
     private SupplierStatus status;
+
     private SupEmployeeResult employee;
+
     private SupPaymentMethodResult paymentMethod;
+
     private SupGroupResult group;
+
     private Instant createdAt;
+
     private Instant updatedAt;
+
     private BigDecimal debtTotal;
+
     private List<AddressResult> addresses;
+
     private String taxCode;
+
     private String fax;
+
     private String website;
+
 }
