@@ -67,6 +67,12 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierResult update(UpdateSupplierParam param) {
         Supplier supplier = supplierRepository.findById(param.getId())
                 .orElseThrow(() -> new NotFoundException("Not found supplier"));
+        if(param.getFullName().isBlank()) {
+            throw new NotFoundException("FullName is not empty");
+        }
+        if(param.getSupplierCode().isBlank()) {
+            throw new NotFoundException("SupplierCode is not empty");
+        }
         if (param.getGroupId() != null && supplierRepository.existsById(param.getGroupId()))
             throw new NotFoundException("Group supplier exist");
         supplierMapper.transferFields(param, supplier);
