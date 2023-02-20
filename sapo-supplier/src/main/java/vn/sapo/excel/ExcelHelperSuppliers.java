@@ -11,12 +11,11 @@ import vn.sapo.supplier.dto.CreateSupplierParam;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ExcelHelper {
+public class ExcelHelperSuppliers {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
     static String[] HEADER = {"Tên nhà cung cấp", "Mã nhà cung cấp", "Mã nhóm nhà cung cấp", "Email", "Điện thoại", "Website",
@@ -68,9 +67,7 @@ public class ExcelHelper {
                             supplier.setFullName(currentCell.getStringCellValue());
                             break;
                         case 1:
-                            if (currentCell.getStringCellValue() == null)
-                                supplier.setSupplierCode("SPL000" + supplier.getId());
-                            supplier.setSupplierCode(currentCell.getStringCellValue());
+//                                ma nha cung cap
                             break;
                         case 2:
 //                                ma nhom nha cung cap
