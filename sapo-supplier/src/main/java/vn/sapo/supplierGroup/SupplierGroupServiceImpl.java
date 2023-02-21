@@ -41,9 +41,10 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
 //            }
 //        }
         if (supplierGroupRepository.existsByTitle(createParam.getTitle()))
-            throw new OperationException("");
+            throw new OperationException("Tên nhóm đã tồn tại");
         if (supplierGroupRepository.existsBySupGroupCode(createParam.getSupGroupCode()))
-            throw new OperationException("");
+            throw new OperationException("Mã nhóm đã tồn tại");
+
         SupplierGroup supplierGroup = supplierGroupMapper.toModel(createParam);
         supplierGroupRepository.save(supplierGroup);
         if (createParam.getSupGroupCode() == null)

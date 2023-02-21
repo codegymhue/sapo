@@ -20,7 +20,7 @@ public class SupplierGroupResult {
 
     private String title;
 
-    private String supplierCode;
+    private String supGroupCode;
 
     private String description;
     private String createdAt;
