@@ -8,14 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.address.AddressService;
 import vn.sapo.address.dto.CreateAddressParam;
-<<<<<<< HEAD
+
 import vn.sapo.excel.ExcelHelperSuppliers;
 import vn.sapo.excel.ExcelServiceSupplier;
 import vn.sapo.excel.ResponseMessage;
-=======
-import vn.sapo.controllers.customer.CustomerAPI;
-import vn.sapo.customer.dto.CustomerResult;
->>>>>>> supplier
+
 import vn.sapo.supplier.SupplierService;
 import vn.sapo.supplier.dto.CreateSupplierParam;
 import vn.sapo.supplier.dto.SupplierFilter;
@@ -94,7 +91,6 @@ public class SupplierAPI {
         return new ResponseEntity<>(supplierService.update(updateSupplierParam), HttpStatus.OK);
     }
 
-<<<<<<< HEAD
     @PostMapping("/upload")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
@@ -114,49 +110,4 @@ public class SupplierAPI {
         message = "Please upload an excel file!";
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
     }
-
-
-=======
-<<<<<<< HEAD
-=======
->>>>>>> supplier
-
-//    public void setData(SupplierResult supplier) {
-//        BigDecimal spendTotal = getSpendTotalBySupplierId(suppplier.getId());
-//        BigDecimal paidTotal = getPaidTotalBySupplierId(supplier.getId());
-//        supplier.setSpendTotal(spendTotal);
-//        supplier.setDebtTotal(spendTotal.subtract(paidTotal));
-//        supplier.setQuantityProductOrder(getQuantityProductOrderBySupplierId(supplier.getId()));
-//        supplier.setQuantityItemOrder(getQuantityItemSupplierOrderById(supplier.getId()));
-//        supplier.setLastDayOrder(getLastDayOrderBySupllierId(supplier.getId()));
-//    }
-//
-//    public BigDecimal getSpendTotalBySupplierId(Integer supplierId) {
-//        BigDecimal spendTotal = saleOrderService.getSpendTotalBySupplierId(supplierId);
-//        if (spendTotal == null)
-//            spendTotal = BigDecimal.valueOf(0);
-//        return spendTotal;
-//    }
-//
-//    public BigDecimal getPaidTotalBySupplierId(Integer supplierId) {
-//        BigDecimal paidTotal = paymentSaleOrderService.getPaidTotalBySupplierId(supplierId);
-//        if (paidTotal == null)
-//            paidTotal = BigDecimal.valueOf(0);
-//        return paidTotal;
-//    }
-//
-//    public Integer getQuantityProductOrderBySupplierId(Integer supplierId) {
-//        Integer quantityProductOrder = saleOrderService.getQuantityProductOrder(supplierId);
-//        if (quantityProductOrder == null)
-//            quantityProductOrder = 0;
-//        return quantityProductOrder;
-//    }
-//
-//    public Integer getQuantityItemSupplierOrderById(Integer supplierId) {
-//        Integer quantityItemOrder = orderItemService.getQuantityItemSupplierOrderById(supplierId);
-//        if (quantityItemOrder == null)
-//            quantityItemOrder = 0;
-//        return quantityItemOrder;
-//    }
->>>>>>> tai_dev
 }
