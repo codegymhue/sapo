@@ -1,15 +1,12 @@
 package vn.sapo.supplier;
 
-import org.modelmapper.*;
-import org.modelmapper.spi.DestinationSetter;
-import org.modelmapper.spi.SourceGetter;
+import org.modelmapper.Conditions;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
+import org.modelmapper.config.Configuration;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import vn.sapo.address.dto.AddressResult;
-import vn.sapo.address.dto.CreateAddressParam;
-import vn.sapo.entities.Address;
-import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.entities.supplier.SupplierStatus;
 import vn.sapo.supplier.dto.AbstractSupplierParam;
@@ -21,22 +18,15 @@ import vn.sapo.supplier.dto.UpdateSupplierParam;
 public class SupplierMapper implements InitializingBean {
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private Configuration inheritingModelMapperConfiguration;
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        TypeMap<AbstractSupplierParam, Supplier> dto2Model = modelMapper.createTypeMap(AbstractSupplierParam.class, Supplier.class);
-        dto2Model.addMappings(mapper -> {
-            mapper.map(AbstractSupplierParam::getGroupId, Supplier::setGroupId);
-            mapper.when(Conditions.isNotNull());
-        });
-        dto2Model.addMappings(mapper -> {
-            mapper.map(AbstractSupplierParam::getEmployeeId, Supplier::setEmployeeId);
-            mapper.when(Conditions.isNotNull());
-        });
-        dto2Model.addMappings(mapper -> {
-            mapper.map(AbstractSupplierParam::getPaymentMethodId, Supplier::setPaymentMethodId);
-            mapper.when(Conditions.isNotNull());
-        });
+        TypeMap<UpdateSupplierParam, Supplier> dto2Model = modelMapper.createTypeMap(UpdateSupplierParam.class, Supplier.class, inheritingModelMapperConfiguration);
+        dto2Model.addMappings(mapper -> mapper.when(Conditions.isNotNull()).map(AbstractSupplierParam::getGroupId, Supplier::setGroupId));
+        dto2Model.addMappings(mapper -> mapper.when(Conditions.isNotNull()).map(AbstractSupplierParam::getEmployeeId, Supplier::setEmployeeId));
+        dto2Model.addMappings(mapper -> mapper.when(Conditions.isNotNull()).map(AbstractSupplierParam::getPaymentMethodId, Supplier::setPaymentMethodId));
     }
 
     public SupplierResult toDTO(Supplier supplier) {
