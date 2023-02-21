@@ -304,8 +304,7 @@
     }
   }
   class CreateSupGroupParam {
-    constructor(id, title, supplierCode, description) {
-      this.id = id;
+    constructor(title, supplierCode, description) {
       this.title = title;
       this.supplierCode = supplierCode;
       this.description = description;
@@ -342,7 +341,6 @@
 
  page.dialogs.elements.deleteGroupSupplier = $("#deleteGroupSupplier");
  page.dialogs.elements.btnGroupSupDelete = $("#btn-group-sup-delete");
- // page.dialogs.elements.
 
 function renderGroup(item) {
   return `

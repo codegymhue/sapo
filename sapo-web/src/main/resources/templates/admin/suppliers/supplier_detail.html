@@ -262,7 +262,7 @@
                 <div class="line-info flex">
                   <label>Số điện thoại<span class="right">:</span></label>
                   <div class="content text-overflow-hiden div-pd-r-10" >
-                    <span th:text="${supplier.phone}"></span>
+                    <span th:text="${supplier.phone} ? ${supplier.phone} : ${'---'} "></span>
                    </div>
                 </div>
                 <div class="line-info flex">
@@ -282,13 +282,13 @@
                 <div class="line-info flex">
                   <label>Mô tả<span class="right">:</span></label>
                   <div class="content text-overflow-hiden div-pd-r-10">
-                    <span th:text="${supplier.description}"></span>
+                    <span th:text="${supplier.description} ? ${supplier.description} : '---'"></span>
                   </div>
                 </div>
                 <div class="line-info flex">
                   <label>Email<span class="right">:</span></label>
                   <div class="content text-overflow-hiden div-pd-r-10">
-                    <span th:text="${supplier.email}"></span>
+                    <span th:text="${supplier.email} ? ${supplier.email} : '---'"></span>
                   </div>
                 </div>
               </div>

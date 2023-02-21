@@ -28,6 +28,7 @@ public class UpdateSupplierParam {
 
     @NullOrNotBlank
     private String phone;
+
     @NullOrNotBlank
     private String description;
 
@@ -38,8 +39,11 @@ public class UpdateSupplierParam {
     private Integer employeeId;
     private SupplierStatus status;
 
+    @NullOrNotBlank
     private String taxCode;
+    @NullOrNotBlank
     private String fax;
+    @NullOrNotBlank
     private String website;
 
 }

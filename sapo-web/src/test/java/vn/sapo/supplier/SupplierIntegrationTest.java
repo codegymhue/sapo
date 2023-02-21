@@ -47,7 +47,7 @@ public class SupplierIntegrationTest {
         Assertions.assertThat(actual.getEmployee().getId()).isEqualTo(expected.getEmployee().getId());
         Assertions.assertThat(actual.getPaymentMethod().getId()).isEqualTo(expected.getPaymentMethod().getId());
         Assertions.assertThat(actual.getSupplierCode()).isEqualTo(expected.getSupplierCode());
-        Assertions.assertThat(actual.getCreateAt()).isEqualTo(expected.getCreateAt());
-        Assertions.assertThat(actual.getUpdateAt()).isEqualTo(expected.getUpdateAt());
+        Assertions.assertThat(actual.getCreatedAt()).isEqualTo(expected.getCreatedAt());
+        Assertions.assertThat(actual.getUpdatedAt()).isEqualTo(expected.getUpdatedAt());
     }
 }
