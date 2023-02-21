@@ -3,6 +3,7 @@ package vn.sapo.controllers.supplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import vn.sapo.address.AddressService;
 import vn.sapo.address.dto.CreateAddressParam;
@@ -47,7 +48,7 @@ public class SupplierAPI {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody CreateSupplierParam createSupplierParam) {
+    public ResponseEntity<?> create(@Validated @RequestBody CreateSupplierParam createSupplierParam) {
         //TODO: xóa dòng sout
         System.out.println(createSupplierParam);
         SupplierResult dto = supplierService.create(createSupplierParam);
