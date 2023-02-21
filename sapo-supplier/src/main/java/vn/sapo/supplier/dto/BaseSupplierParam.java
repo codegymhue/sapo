@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @Accessors(chain = true)
-public abstract class AbstractSupplierParam {
+public abstract class BaseSupplierParam {
 
     @NotBlank(message = "fullName not blank")
     private String fullName;

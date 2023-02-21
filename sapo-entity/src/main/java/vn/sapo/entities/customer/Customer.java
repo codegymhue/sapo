@@ -1,6 +1,6 @@
 package vn.sapo.entities.customer;
 
-import com.vladmihalcea.hibernate.type.json.JsonType;
+import io.hypersistence.utils.hibernate.type.json.JsonType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -84,8 +84,9 @@ public class Customer extends BaseEntity {
         return this;
     }
 
-    public void setGroupId(Integer groupId) {
+    public Customer setGroupId(Integer groupId) {
         this.group = new CustomerGroup(this.groupId = groupId);
+        return this;
     }
 
     @OneToMany(targetEntity = Address.class, mappedBy = "customer")

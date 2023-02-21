@@ -108,7 +108,7 @@ public class SupplierServiceTest {
 
     @Test
     public void testCreate () {
-        CreateSupplierParam createSupplierParam = new CreateSupplierParam()
+        CreateSupplierParam createSupplierParam = (CreateSupplierParam) new CreateSupplierParam()
                 .setFullName("Chị khánh vân")
                 .setEmail("thanhngan1002@gmail.com")
                 .setPhone("0989876565")

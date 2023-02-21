@@ -1,6 +1,6 @@
 package vn.sapo.entities.supplier;
 
-import com.vladmihalcea.hibernate.type.json.JsonType;
+import io.hypersistence.utils.hibernate.type.json.JsonType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -36,7 +36,7 @@ public class Supplier extends BaseEntity {
     @Column(name = "full_name", nullable = false)
     private String fullName;
 
-    @Column(name = "email",  length = 50)
+    @Column(name = "email", length = 50)
     private String email;
 
     @Column(name = "phone", nullable = false, length = 50)
@@ -71,7 +71,7 @@ public class Supplier extends BaseEntity {
     private Integer groupId;
 
     @Type(type = "json")
-    @Column(name = "extension_attributes", columnDefinition = "JSON")
+    @Column(name = "extension_attributes", nullable = false, columnDefinition = "JSON")
     private HashMap<String, String> attributes = new HashMap<>();
 
     public Supplier(Integer id) {
