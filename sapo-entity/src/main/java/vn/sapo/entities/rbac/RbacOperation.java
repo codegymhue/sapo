@@ -27,7 +27,7 @@ public class RbacOperation extends BaseEntity {
 
     @Size(max = 75)
     @NotNull
-    @Column(name = "operation_code", nullable = false, length = 75)
+    @Column(name = "operation_code", unique = true, nullable = false, length = 75)
     private String operationCode;
 
     @Size(max = 75)

@@ -26,7 +26,7 @@ public class RbacRole extends BaseEntity {
     private Integer id;
 
     @Size(max = 75)
-    @Column(name = "role_code", length = 75)
+    @Column(name = "role_code", unique = true, length = 75)
     private String roleCode;
 
     @Size(max = 75)

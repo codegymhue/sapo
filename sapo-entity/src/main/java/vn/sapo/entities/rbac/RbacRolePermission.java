@@ -20,12 +20,12 @@ public class RbacRolePermission extends BaseEntity {
     private RbacRolePermissionId id;
 
     @MapsId("roleId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "role_id", nullable = false, foreignKey = @ForeignKey(name = "fk_rp_role"))
     private RbacRole role;
 
     @MapsId("permissionId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "permission_id", nullable = false, foreignKey = @ForeignKey(name = "fk_rp_permission"))
     private RbacPermission permission;
 

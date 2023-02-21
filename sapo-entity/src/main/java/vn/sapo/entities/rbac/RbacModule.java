@@ -28,7 +28,7 @@ public class RbacModule extends BaseEntity {
 
     @Size(max = 75)
     @NotNull
-    @Column(name = "module_code", nullable = false, length = 75)
+    @Column(name = "module_code", unique = true, nullable = false, length = 75)
     private String moduleCode;
 
     @Size(max = 75)
