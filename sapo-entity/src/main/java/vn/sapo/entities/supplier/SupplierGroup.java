@@ -23,8 +23,8 @@ public class SupplierGroup extends BaseEntity {
     @Column(name = "title", nullable = false, length = 50)
     private String title;
 
-    @Column(name = "sup_grp_code",unique = true, length = 50)
-    private String supplierCode;
+    @Column(name = "sup_grp_code", unique = true, length = 50)
+    private String supGroupCode;
 
     @Column(name = "description")
     private String description;

@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class EditSupGroupParam {
+public class UpdateSupGroupParam {
     @NotNull
     private Integer id;
 
@@ -22,7 +22,7 @@ public class EditSupGroupParam {
     private String title;
 
     @NullOrNotBlank
-    private String supplierCode;
+    private String supGroupCode;
 
     @NullOrNotBlank
     private String description;

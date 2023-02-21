@@ -1,8 +1,7 @@
 package vn.sapo.supplierGroup;
 
-import vn.sapo.entities.supplier.SupplierGroup;
 import vn.sapo.supplierGroup.dto.CreateSupGroupParam;
-import vn.sapo.supplierGroup.dto.EditSupGroupParam;
+import vn.sapo.supplierGroup.dto.UpdateSupGroupParam;
 import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 
 import java.util.List;
@@ -12,7 +11,7 @@ public interface SupplierGroupService {
     List<SupplierGroupResult> finAll();
     SupplierGroupResult findById(Integer id);
 
-    SupplierGroupResult update(EditSupGroupParam editSupGroupParam);
+    SupplierGroupResult update(UpdateSupGroupParam updateSupGroupParam);
     void deleteById(Integer id);
 
 

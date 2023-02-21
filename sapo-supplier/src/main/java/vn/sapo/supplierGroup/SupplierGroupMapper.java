@@ -3,11 +3,9 @@ package vn.sapo.supplierGroup;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.entities.supplier.SupplierGroup;
-import vn.sapo.supplier.dto.UpdateSupplierParam;
 import vn.sapo.supplierGroup.dto.CreateSupGroupParam;
-import vn.sapo.supplierGroup.dto.EditSupGroupParam;
+import vn.sapo.supplierGroup.dto.UpdateSupGroupParam;
 import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 
 @Component
@@ -24,7 +22,7 @@ public class SupplierGroupMapper {
     }
 
 
-    public void transferFields(EditSupGroupParam editSupGroupParam, SupplierGroup supplierGroup) {
-        modelMapper.map(editSupGroupParam, supplierGroup);
+    public void transferFields(UpdateSupGroupParam updateSupGroupParam, SupplierGroup supplierGroup) {
+        modelMapper.map(updateSupGroupParam, supplierGroup);
     }
 }

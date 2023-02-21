@@ -304,18 +304,17 @@
     }
   }
   class CreateSupGroupParam {
-    constructor(id, title, supplierCode, description) {
-      this.id = id;
+    constructor(title, supGroupCode, description) {
       this.title = title;
-      this.supplierCode = supplierCode;
+      this.supGroupCode = supGroupCode;
       this.description = description;
     }
   }
   class EditSupGroupParam {
-    constructor(id, title, supplierCode, description) {
+    constructor(id, title, supGroupCode, description) {
       this.id = id;
       this.title = title;
-      this.supplierCode = supplierCode;
+      this.supGroupCode = supGroupCode;
       this.description = description;
     }
   }
@@ -342,7 +341,6 @@
 
  page.dialogs.elements.deleteGroupSupplier = $("#deleteGroupSupplier");
  page.dialogs.elements.btnGroupSupDelete = $("#btn-group-sup-delete");
- // page.dialogs.elements.
 
 function renderGroup(item) {
   return `
@@ -357,7 +355,7 @@ function renderGroup(item) {
                         <span>${item.title}</span>
                       </td>
                       <td class="cursor-pointer">
-                        <span>${item.supplierCode}</span>
+                        <span>${item.supGroupCode}</span>
                       </td>
                       <td class="cursor-pointer"
                       </td>
@@ -380,6 +378,7 @@ function renderGroup(item) {
       url: origin +"/api/supplier_groups",
     })
             .done((data) => {
+              console.log("da get all : " , data)
               supplierGroups = data;
               $.each(data, function (index, value) {
                 let str= renderGroup(value);
@@ -405,7 +404,7 @@ function renderGroup(item) {
     let newGroupSup =
     {
       title: supGroupTitle.length > 0 ? supGroupTitle : null,
-      supplierCode: supGroupCode.length > 0 ? supGroupCode : null,
+      supGroupCode: supGroupCode.length > 0 ? supGroupCode : null,
       description: description.length > 0 ? description : null,
     }
     console.log("trc ajax", newGroupSup)
@@ -447,7 +446,7 @@ function renderGroup(item) {
               page.elements.showModalEditGroupSupplier.modal('show');
               page.dialogs.elements.editGroupId.val(data.id)
               page.dialogs.elements.groupTitleEditSup.val(data.title)
-              page.dialogs.elements.groupCodeEditSup.val(data.supplierCode)
+              page.dialogs.elements.groupCodeEditSup.val(data.supGroupCode)
               page.dialogs.elements.groupDescriptionEditSup.val(data.description)
             })
             .fail((jqXHR) => {
@@ -462,12 +461,12 @@ function renderGroup(item) {
   function doEditGroupSupplier() {
     let idEditGroup = page.dialogs.elements.editGroupId.val();
     let editGroupTitle = page.dialogs.elements.groupTitleEditSup.val();
-    let supplierCode = page.dialogs.elements.groupCodeEditSup.val();
+    let supGroupCode = page.dialogs.elements.groupCodeEditSup.val();
     let description = page.dialogs.elements.groupDescriptionEditSup.val();
     let editGroup = {
       id: idEditGroup,
       title: editGroupTitle.length > 0 ? editGroupTitle : null,
-      supplierCode: supplierCode.length > 0 ? supplierCode : null,
+      supGroupCode: supGroupCode.length > 0 ? supGroupCode : null,
       description: description.length > 0 ? description : null
     }
     $.ajax({

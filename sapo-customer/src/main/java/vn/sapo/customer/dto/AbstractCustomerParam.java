@@ -1,47 +1,31 @@
 package vn.sapo.customer.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
+import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.entities.customer.CustomerGender;
-import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.shared.validation.constraints.NullOrNotBlank;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
 @Accessors(chain = true)
-public class UpdateCustomerParam {
-    @NotNull
-    private Integer id;
+public abstract class AbstractCustomerParam {
 
-    @NullOrNotBlank
-    private String customerCode;
-
-    @NullOrNotBlank
+    @NotBlank
     private String fullName;
-
     @NullOrNotBlank
     private String phoneNumber;
+    @NullOrNotBlank
+    private String description;
 
     private Integer groupId;
     @NullOrNotBlank
     private String email;
-
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date birthday;
-
-    private CustomerGender gender;
-
-    private CustomerStatus status;
-
-    @NullOrNotBlank
-    private String description;
     @NullOrNotBlank
     private String website;
     @NullOrNotBlank
@@ -49,4 +33,12 @@ public class UpdateCustomerParam {
     @NullOrNotBlank
     private String taxCode;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date birthday;
+
+    private CustomerGender gender;
+
+    private CustomerGroupResult group;
+
+    private Integer employeeId;
 }

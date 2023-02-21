@@ -10,31 +10,14 @@ import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
+import java.security.PrivateKey;
 
 @Getter
 @Setter
 @Accessors(chain = true)
-public class CreateSupplierParam {
-    private Integer id;
+public class CreateSupplierParam extends AbstractSupplierParam {
     @NullOrNotBlank(message = "supplierCode not blank")
     private String supplierCode;
-    @NotBlank(message = "fullName not blank")
-    private String fullName;
-    @NullOrNotBlank
-    private String email;
-    @NullOrNotBlank
-    private String phone;
-    private Integer groupId;
-    private String description;
-    private Integer employeeId;
-    @NullOrNotBlank
-    private String paymentMethodId;
-    @NullOrNotBlank
-    private String taxCode;
-    @NullOrNotBlank
-    private String fax;
-    @NullOrNotBlank
-    private String website;
     private BigDecimal debtTotal;
     private CreateAddressParam createAddressParam;
 
