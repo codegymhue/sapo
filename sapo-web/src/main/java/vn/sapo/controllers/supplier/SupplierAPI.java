@@ -8,14 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.address.AddressService;
 import vn.sapo.address.dto.CreateAddressParam;
-<<<<<<< HEAD
 import vn.sapo.excel.ExcelHelperSuppliers;
 import vn.sapo.excel.ExcelServiceSupplier;
 import vn.sapo.excel.ResponseMessage;
-=======
-import vn.sapo.controllers.customer.CustomerAPI;
-import vn.sapo.customer.dto.CustomerResult;
->>>>>>> supplier
 import vn.sapo.supplier.SupplierService;
 import vn.sapo.supplier.dto.CreateSupplierParam;
 import vn.sapo.supplier.dto.SupplierFilter;
@@ -94,7 +89,7 @@ public class SupplierAPI {
         return new ResponseEntity<>(supplierService.update(updateSupplierParam), HttpStatus.OK);
     }
 
-<<<<<<< HEAD
+
     @PostMapping("/upload")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
@@ -116,10 +111,7 @@ public class SupplierAPI {
     }
 
 
-=======
-<<<<<<< HEAD
-=======
->>>>>>> supplier
+
 
 //    public void setData(SupplierResult supplier) {
 //        BigDecimal spendTotal = getSpendTotalBySupplierId(suppplier.getId());
@@ -157,6 +149,5 @@ public class SupplierAPI {
 //        if (quantityItemOrder == null)
 //            quantityItemOrder = 0;
 //        return quantityItemOrder;
-//    }
->>>>>>> tai_dev
+//    }0
 }
