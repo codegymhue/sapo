@@ -36,7 +36,7 @@ public class Supplier extends BaseEntity {
     @Column(name = "full_name", nullable = false)
     private String fullName;
 
-    @Column(name = "email", nullable = false, length = 50)
+    @Column(name = "email",  length = 50)
     private String email;
 
     @Column(name = "phone", nullable = false, length = 50)
@@ -81,6 +81,11 @@ public class Supplier extends BaseEntity {
     public Supplier(Integer employeeId, String paymentMethodId) {
         setEmployeeId(employeeId);
         setPaymentMethodId(paymentMethodId);
+    }
+
+    public Supplier setGroupId(Integer groupId) {
+        this.group = new SupplierGroup(this.groupId = groupId);
+        return this;
     }
 
     public Supplier setEmployeeId(Integer employeeId) {

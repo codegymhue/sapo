@@ -23,36 +23,29 @@ import java.util.stream.Collectors;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
-
     @Autowired
     private CustomerMapper customerMapper;
-
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
     private CustomerFilterRepository customerFilterRepository;
-
     @Autowired
     private AddressService addressService;
-
 
     @Override
     @Transactional(readOnly = true)
     public CustomerResult findById(Integer id) {
-        Customer customer = customerRepository.findById(id)
+        return customerRepository.findById(id)
+                .map(customerMapper::toDTO)
                 .orElseThrow(() -> new NotFoundException("Không tìm thấy khách hàng"));
-        Integer customerId = customer.getId();
-        return customerMapper.toDTO(customer);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<CustomerResult> findAll() {
-        List<CustomerResult> customerResults = new ArrayList<>();
-        customerResults = customerRepository.findAll()
+        return customerRepository.findAll()
                 .stream()
                 .map(customerMapper::toDTO).collect(Collectors.toList());
-        return customerResults;
     }
 
 
@@ -70,13 +63,14 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.existsById(id);
     }
 
+    @Override
     @Transactional
     public CustomerResult create(CreateCustomerParam createCustomerParam) {
         Customer customer = customerMapper.toModel(createCustomerParam);
         Customer newCustomer = customerRepository.save(customer);
         String cusCode = newCustomer.getCustomerCode();
         //TODO: save DB roi getFullName ko dc de trong la sao?
-        if(createCustomerParam.getFullName()==null){
+        if (createCustomerParam.getFullName() == null) {
             throw new DataInputException("Tên khách hàng không được để trống");
         }
         if (cusCode == null || cusCode.trim().isEmpty())
@@ -86,31 +80,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
-    public CustomerResult update(UpdateCustomerParam updateCustomerParam) {
-        Customer customer = customerRepository.findById(updateCustomerParam.getId())
+    public CustomerResult update(UpdateCustomerParam updateParam) {
+        Customer customer = customerRepository.findById(updateParam.getId())
                 .orElseThrow(() -> new NotFoundException("Khách hàng không tồn tại hoặc đã bị xóa"));
-        if (updateCustomerParam.getFullName().isEmpty() || updateCustomerParam.getFullName().equals("")) {
-            updateCustomerParam.setFullName(customer.getFullName());
-        }
-
-        if (updateCustomerParam.getCustomerCode().equals("")) {
-            updateCustomerParam.setCustomerCode(customer.getCustomerCode());
-        }
-
-        customerMapper.transferFields(updateCustomerParam, customer);
-
-        Customer customerResult = customerRepository.save(customer);
-        return customerMapper.toDTO(customerResult);
+        customerMapper.transferFields(updateParam, customer);
+        return customerMapper.toDTO(customer);
     }
 
-    //
-//    @Override
-//    @Transactional(readOnly = true)
-//    public List<SaleOrderResult> findHistoryCustomerOrder(Integer id) {
-//        List<SaleOrderResult> saleOrderByCustomer = saleOrderService.findAllSaleOrderByCustomerId(id);
-//        return saleOrderByCustomer;
-//    }
-//
     @Override
     @Transactional
     public void changeStatusToAvailable(List<Integer> customerIds, boolean status) {
@@ -122,24 +98,58 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CustomerResult> findAllByGroupListId(List<Integer> groupIds) {
-        List<CustomerResult> customerResults = new ArrayList<>();
-        customerResults = customerRepository.findAllByGroupIdIn(groupIds)
+        return customerRepository.findAllByGroupIdIn(groupIds)
                 .stream()
                 .map(customerMapper::toDTO)
                 .collect(Collectors.toList());
-        return customerResults;
+    }
+
+    @Override
+    public List<CustomerResult> findAllEmployeeListId(List<Integer> employeeIds) {
+        return null;
+    }
+
+    @Override
+    public List<CustomerResult> findAllByGenderId(String genderId) {
+        return null;
     }
 
     @Override
     @Transactional(readOnly = true)
     public Page<CustomerResult> findAllByFilters(CustomerFilter filters, Pageable pageable) {
-        return customerFilterRepository.findAllByFilters(filters, pageable).map(customerMapper::toDTO);
+        return customerFilterRepository.
+                findAllByFilters(filters, pageable)
+                .map(customerMapper::toDTO);
     }
 
 
+//    @Override
+//    public List<CustomerResult> findAllByGroupId(Integer groupTitleId) {
+//        List<CustomerResult> customerResults = new ArrayList<>();
+//        customerResults = customerRepository.findAllByGroupId(groupTitleId)
+//                .stream()
+//                .map(customerMapper::toDTO)
+//                .collect(Collectors.toList());
+//        return customerResults;
+//    }
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CustomerResult> findAllCustomerByGroupAndStatus(Integer groupTitleId, String customerStatus) {
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAllByGroupIdAndStatus(groupTitleId, CustomerStatus.parseCustomerGroup(customerStatus))
+                .stream()
+                .map(customerMapper::toDTO)
+                .collect(Collectors.toList());
+
+        return customerResults;
+    }
+
 }
+
 
 
 

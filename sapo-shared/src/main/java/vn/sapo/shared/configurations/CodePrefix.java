@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum CodePrefix {
 
     SUPPLIER("SUPN"),
+    SUPPLIER_GROUP("STN"),
     CUSTOMER("CUZN"),
     SALE_ORDER("SON"),
     CUSTOMER_GROUP("CTN"),

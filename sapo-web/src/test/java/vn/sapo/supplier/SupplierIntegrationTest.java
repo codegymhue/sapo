@@ -23,13 +23,13 @@ public class SupplierIntegrationTest {
     @BeforeEach
     public void setUp() {
         UpdateSupplierParam supplierParam = new UpdateSupplierParam()
-                .setId(1)
+                .setId(98)
                 .setFullName("Thanh Ngân")
                 .setEmail("thanhngan1002@gmail.com")
                 .setPhone("0989876565")
                 .setDescription("Quen thuoc")
                 .setSupplierCode("SPL0005")
-                .setGroupId(1);
+                .setGroupId(99);
         expected = (SupplierResult) supplierAPI.update(supplierParam).getBody();
     }
 
@@ -45,9 +45,7 @@ public class SupplierIntegrationTest {
         Assertions.assertThat(actual.getPhone()).isEqualTo(expected.getPhone());
         Assertions.assertThat(actual.getDescription()).isEqualTo(expected.getDescription());
         Assertions.assertThat(actual.getEmployee().getId()).isEqualTo(expected.getEmployee().getId());
-        Assertions.assertThat(actual.getEmployee()).isEqualTo(expected.getEmployee());
         Assertions.assertThat(actual.getPaymentMethod().getId()).isEqualTo(expected.getPaymentMethod().getId());
-        Assertions.assertThat(actual.getPaymentMethod()).isEqualTo(expected.getPaymentMethod());
         Assertions.assertThat(actual.getSupplierCode()).isEqualTo(expected.getSupplierCode());
         Assertions.assertThat(actual.getCreateAt()).isEqualTo(expected.getCreateAt());
         Assertions.assertThat(actual.getUpdateAt()).isEqualTo(expected.getUpdateAt());

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html class="sapo-menu-expand sapo-menu-toggle-active" lang="vi-VN">
+<html xmlns:th="http://www.thymeleaf.org" class="sapo-menu-expand sapo-menu-toggle-active" lang="vi-VN">
 <head>
   <meta charset="utf-8" />
-
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/izitoast@1/dist/css/iziToast.min.css">
   <script>
     var CKEDITOR_BASEPATH = '/v2/lib/ckeditor/';
@@ -15,8 +15,10 @@
   <script src="https://sapo.dktcdn.net/fe-cdn-production/lib/upload-files/jquery.multifile.js"></script>
 
   <link href="https://sapo.dktcdn.net/fe-cdn-production/lib/driver/driver.min.css?v=20220218" rel="stylesheet" />
-  <title>Danh s&#xE1;ch nh&#xF3;m nh&#xE0; cung c&#x1EA5;p</title>
-  <!-- Hotjar Tracking Code for mysapo.vn -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+          crossorigin="anonymous"></script>
   <script>
     (function (h, o, t, j, a, r) {
       h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
@@ -28,9 +30,9 @@
     })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
   </script>
   <style>
-    .modal-backdrop {
-      position: unset!important;
-    }
+    /*.modal-backdrop {*/
+    /*  position: unset!important;*/
+    /*}*/
   </style>
 
 </head>
@@ -47,8 +49,6 @@
   <th:block th:replace="/layout/supplier/menu :: menu"/>
   <div class="col-right">
     <div class="col-right_content" id="content">
-
-
       <header class="ui-title-bar-container ui-title-bar-container--index">
         <div class="ui-title-bar" style="min-height:0px;" href="javascript:void(0)">
           <div class="ui-title-bar__navigation">
@@ -65,7 +65,6 @@
             <div class="ui-title-bar__heading-group">
               <h1 class="ui-title-bar__title" style="float:left; width: unset">Nhóm nhà cung cấp</h1>
               <div class="pull-right">
-
                 <style>
                   .help-dashboard .help-dropdown .btn-blank {
                     background: #fff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDplN2MwNTFiZi1lNGJiLTNjNDktOGM3YS00NTZmZTZlNGQ1NmYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjI5NDdDQ0NGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjI5NDdDQ0JGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjdkNDRhZTRlLTIzMTMtYTE0ZC1hNWQ4LTA5YTVjYTBmNmM0NCIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjk3N2NmYTliLThmZDctZGU0Mi1hNDFiLWIwOTJiYzRkYWM2MiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Po5ReOIAAAIxSURBVHjalJU9aFNRGIbTk+sSh0xiEKciaBF1culiA2IdOlQHaRBKqEurYJYOFn9Ql7iJghQcSqlDAop0yFIoWJcigouKKIROClWnomaQVHw+eAPxcs7J9cDDhXvP997vfH9naPbybC6wEpiASRiFYcjDLmzBJqxCa/HRYtcn4ALCFWjDQ/gGNRiB/XrW9N6+t+euzFV8IkMpzwuwDGNwDVagmwsvO9003IMNqHKKjs9zE16Dg3AclgYI2+oitqT9ZrfGKQo+8WXF9DRs5/5j8YNt2eWl8494RaE4Dx1f+OAwnIRi4Acd2Y/1cuAUt7pi7PP4GLyHj/AavsPNyAlMp84PEqdyc0qer5oa8AuOQAnuw10YD0RpRXYTTnXcDCTvBByVp5/gK1yH33Am4H1XepNODfIi4MUPuANv+t7tgz3wM5Jj0xtN1HntwCZ7fztVrk3F/XFE3OyGE5XPToaKs33PlOBT8CWy1/TyTrOimEH8IpyFc/BuwF7T23UaQocyiJfhA7zMsNf0tpymWzmDwROYz9i0prfpNDan1EyxtRcODFK15pHeqom34I+mW2xdglsZvJ6WXsupeRY0NksRoxvyKOZ1SToL1ky9wdXQPH6uWvYtmy+vIsIF2W8g3EiP3KrKcn3ACUIer8u+6pvnHQ2jz/AWZjIkOUF4RvvNbrz/Jkob24cLmu91tX5Ts6KtziuqjsvKgSWv1gtF+g70Ldv4tO/2fxC4/a/Gbv+/AgwA9q+ezeP4kToAAAAASUVORK5CYII=') no-repeat center center;
@@ -164,18 +163,17 @@
                 </div>
 
                 <a id="showCreateGroup" class="btn sapo-btn-default">Thêm nhóm nhà cung cấp</a>
-                <th:bock th:replace="/admin/suppliers/modals/create_group_supplier :: create_group_supplier"/>
+
               </div>
             </div>
           </div>
         </div>
       </header>
+      <th:bock th:replace="/admin/suppliers/modals/create_group_supplier :: create_group_supplier"/>
 
       <th:bock th:replace="/admin/suppliers/modals/edit_group_supplier :: edit_group_supplier"/>
 
       <th:bock th:replace="/admin/suppliers/modals/delete_group_supplier :: delete_group_supplier"/>
-
-
 
       <div class="gird-layout gird-layout--full-width">
         <section class="grid-card">
@@ -289,7 +287,7 @@
 </div>
 
 </body>
-
+<th:block th:replace="/layout/script :: script"/>
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
 <!--<script src="/assets/admin/js/suppliers/supplier_group.js"></script>-->
 <script src="/assets/admin/js/suppliers/jquery/jquery.validate.min.js"></script>
@@ -321,16 +319,30 @@
       this.description = description;
     }
   }
-  page.dialogs.elements.showModalCreateGroupSupplier= $("#showModalCreateGroupSupplier");
-  page.dialogs.elements.createGroupSupplier = $("#createGroupSupplier");
-  page.dialogs.elements.groupId =  $("#groupId");
-  page.dialogs.elements.groupTitleSup =  $("#groupTitleSup");
-  page.dialogs.elements.groupCodeSup =  $("#groupCodeSup");
-  page.dialogs.elements.groupDescriptionSup =  $("#groupDescriptionSup");
+
+  page.elements.tbListGroupSupplier = $("#tbListGroupSupplier")
+  page.elements.showCreateGroup = $("#showCreateGroup");
+  page.dialogs.elements.formCreateGroup = $("#formCreateGroup");
+
+  page.dialogs.elements.modalCreateGroupSupplier= $("#modalCreateGroupSupplier");
+  page.dialogs.elements.btnCreateGroupSupplier = $("#btnCreateGroupSupplier");
+  page.dialogs.elements.groupCreateId =  $("#groupCreateId");
+  page.dialogs.elements.groupCreateTitleSup =  $("#groupCreateTitleSup");
+  page.dialogs.elements.groupCreateCodeSup =  $("#groupCreateCodeSup");
+  page.dialogs.elements.groupCreateDescriptionSup =  $("#groupCreateDescriptionSup");
 
   page.dialogs.elements.groupTitleEditSup =  $("#groupTitleEditSup");
   page.dialogs.elements.groupCodeEditSup =  $("#groupCodeEditSup");
   page.dialogs.elements.groupDescriptionEditSup =  $("#groupDescriptionEditSup");
+
+  page.dialogs.elements.formEditGroup = $("#formEditGroup");
+  page.elements.showModalEditGroupSupplier = $("#showModalEditGroupSupplier");
+  page.dialogs.elements.editGroupId = $("#editGroupId");
+ page.dialogs.elements.editGroupSupplier =  $("#editGroupSupplier");
+
+ page.dialogs.elements.deleteGroupSupplier = $("#deleteGroupSupplier");
+ page.dialogs.elements.btnGroupSupDelete = $("#btn-group-sup-delete");
+ // page.dialogs.elements.
 
 function renderGroup(item) {
   return `
@@ -341,19 +353,19 @@ function renderGroup(item) {
                           <span class="next-checkbox--styled"><svg class="next-icon next-icon--size-10 checkmark"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-checkmark-thick"></use> </svg></span>
                         </div>
                       </td>
-                      <td class="cursor-pointer" bind-event-click="openPopupEdit(2671410)">
+                      <td class="cursor-pointer">
                         <span>${item.title}</span>
                       </td>
-                      <td class="cursor-pointer" bind-event-click="openPopupEdit(2671410)">
+                      <td class="cursor-pointer">
                         <span>${item.supplierCode}</span>
                       </td>
-                      <td class="cursor-pointer" bind-event-click="openPopupEdit(2671410)">
-                        <span>${item.description}</span>
+                      <td class="cursor-pointer"
                       </td>
-                      <td class="align-center cursor-pointer" bind-event-click="openPopupEdit(2671410)">
-                        1                                                    </td>
-                      <td class="cursor-pointer" bind-event-click="openPopupEdit(2671410)">
-                        ${item.createdAt}
+                      <td class="align-center cursor-pointer">
+                        1
+                        </td>
+                      <td class="cursor-pointer">
+                    ${moment(item.createdAt).format('L')}
                       </td>
                     </tr>
   `
@@ -371,30 +383,31 @@ function renderGroup(item) {
               supplierGroups = data;
               $.each(data, function (index, value) {
                 let str= renderGroup(value);
-                $("#tbListGroupSupplier").prepend(str);
-
+                page.elements.tbListGroupSupplier.prepend(str);
               });
             })
   }
-
-  getAllGroup();
-
-  $("#showCreateGroup").on('click', ()=> {
-    page.dialogs.elements.showModalCreateGroupSupplier.modal('show');
-    page.dialogs.elements.groupId.val("");
-    page.dialogs.elements.groupTitleSup.val("");
-    page.dialogs.elements.groupCodeSup.val("");
-    page.dialogs.elements.groupDescriptionSup.val("");
+    page.elements.showCreateGroup.on('click', ()=> {
+    page.dialogs.elements.modalCreateGroupSupplier.modal('show');
+    page.dialogs.elements.groupCreateId.val("");
+    page.dialogs.elements.groupCreateTitleSup.val("");
+    page.dialogs.elements.groupCreateCodeSup.val("");
+    page.dialogs.elements.groupCreateDescriptionSup.val("");
   })
-  page.dialogs.elements.createGroupSupplier.on('click', () => {
-    $("#formCreateGroup").trigger("submit");
+
+    page.dialogs.elements.btnCreateGroupSupplier.on('click', () => {
+    page.dialogs.elements.formCreateGroup.trigger("submit");
   })
   function doCreateGroupSupplier() {
-    let newGroupSup = new CreateSupGroupParam();
-    newGroupSup.id =  page.dialogs.elements.groupId.val();
-    newGroupSup.title = page.dialogs.elements.groupTitleSup.val();
-    newGroupSup.supplierCode =  page.dialogs.elements.groupCodeSup.val();
-    newGroupSup.description =  page.dialogs.elements.groupDescriptionSup.val();
+    let supGroupCode = page.dialogs.elements.groupCreateCodeSup.val();
+    let supGroupTitle = page.dialogs.elements.groupCreateTitleSup.val();
+    let description = page.dialogs.elements.groupCreateDescriptionSup.val();
+    let newGroupSup =
+    {
+      title: supGroupTitle.length > 0 ? supGroupTitle : null,
+      supplierCode: supGroupCode.length > 0 ? supGroupCode : null,
+      description: description.length > 0 ? description : null,
+    }
     console.log("trc ajax", newGroupSup)
     $.ajax({
       "headers": {
@@ -410,11 +423,13 @@ function renderGroup(item) {
               setTimeout(() => {
               }, 1500);
               let str= renderGroup(data)
-              $("#tbListGroupSupplier").prepend(str);
-              page.dialogs.elements.showModalCreateGroupSupplier.modal('hide');
+              page.elements.tbListGroupSupplier.prepend(str);
+              page.dialogs.elements.modalCreateGroupSupplier.modal('hide');
             })
             .fail((jqXHR) => {
-              SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_400)
+              SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
+              setTimeout(() => {
+              }, 1500);
             })
   }
 
@@ -429,24 +444,31 @@ function renderGroup(item) {
       url: origin +"/api/supplier_groups/" + item,
     })
             .done((data) => {
-              $("#showModalEditGroupSupplier").modal('show');
-              $("#editGroupId").val(data.id)
+              page.elements.showModalEditGroupSupplier.modal('show');
+              page.dialogs.elements.editGroupId.val(data.id)
               page.dialogs.elements.groupTitleEditSup.val(data.title)
               page.dialogs.elements.groupCodeEditSup.val(data.supplierCode)
               page.dialogs.elements.groupDescriptionEditSup.val(data.description)
             })
-            .fail(()=>{
+            .fail((jqXHR) => {
 
             })
   }
 
-  $("#editGroupSupplier").on('click',()=> {
-    let idEditGroup = $("#editGroupId").val();
+  page.dialogs.elements.editGroupSupplier.on('click',()=> {
+    page.dialogs.elements.formEditGroup.trigger("submit");
+  })
+
+  function doEditGroupSupplier() {
+    let idEditGroup = page.dialogs.elements.editGroupId.val();
+    let editGroupTitle = page.dialogs.elements.groupTitleEditSup.val();
+    let supplierCode = page.dialogs.elements.groupCodeEditSup.val();
+    let description = page.dialogs.elements.groupDescriptionEditSup.val();
     let editGroup = {
       id: idEditGroup,
-      title: page.dialogs.elements.groupTitleEditSup.val(),
-      supplierCode: page.dialogs.elements.groupCodeEditSup.val(),
-      description: page.dialogs.elements.groupDescriptionEditSup.val()
+      title: editGroupTitle.length > 0 ? editGroupTitle : null,
+      supplierCode: supplierCode.length > 0 ? supplierCode : null,
+      description: description.length > 0 ? description : null
     }
     $.ajax({
       "headers": {
@@ -462,17 +484,20 @@ function renderGroup(item) {
               SupplierApp.IziToast.showSuccessAlert("Sửa nhóm nhà cung cấp thành công!");
               setTimeout(() => {
               }, 500);
-              $("#showModalEditGroupSupplier").modal('hide');
+              page.elements.showModalEditGroupSupplier.modal('hide');
               $(`#tr_${data.id}`).replaceWith(renderGroup(data))
-
             })
-  })
 
-  $("#deleteGroupSupplier").on('click', () => {
-            let idDelete = $("#editGroupId").val()
+            .fail((jqXHR) => {
+              SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
+              setTimeout(() => {
+              }, 1500);
+            })
+  }
+
+  page.dialogs.elements.deleteGroupSupplier.on('click', () => {
+            let idDelete = page.dialogs.elements.editGroupId.val()
             console.log("idDelete: ", idDelete)
-
-
             $.ajax({
               "headers": {
                 "accept": "application/json",
@@ -483,15 +508,14 @@ function renderGroup(item) {
             })
                     .done((data) => {
                       console.log("data-delete : ", data)
-                      $("#showModalEditGroupSupplier").modal('hide');
+                      page.elements.showModalEditGroupSupplier.modal('hide');
                       $("#deleteGroupSup").modal('show');
                     })
           })
 
-  $("#btn-group-sup-delete").on('click', ()=> {
-    let idDelete = $("#editGroupId").val();
+  page.dialogs.elements.btnGroupSupDelete.on('click', ()=> {
+    let idDelete = page.dialogs.elements.editGroupId.val();
     console.log("idDelete btn :" , idDelete)
-
     $.ajax({
       "headers": {
         "accept": "application/json",
@@ -505,13 +529,18 @@ function renderGroup(item) {
               SupplierApp.IziToast.showSuccessAlert("Xoá nhóm nhà cung cấp thành công!");
               setTimeout(() => {
               }, 500);
+              // location.reload();
               window.location.href = `/admin/supplier_groups`;
+            })
+
+  .fail(()=> {
+              SupplierApp.IziToast.showErrorAlert("Xoá nhóm nhà cung cấp thất bại!");
+              setTimeout(() => {
+              }, 500);
             })
   })
 
-
-
-  $("#formCreateGroup").validate({
+  page.dialogs.elements.formCreateGroup.validate({
     rules: {
       groupTitleSup: {
         required: true,
@@ -526,6 +555,24 @@ function renderGroup(item) {
       doCreateGroupSupplier();
     }
   })
+
+  page.dialogs.elements.formEditGroup.validate({
+    rules: {
+      groupTitleEditSup: {
+        required: true,
+      },
+    },
+    messages: {
+      groupTitleEditSup: {
+        required: "Vui lòng nhập tên nhóm nhà cung cấp",
+      }
+    },
+    submitHandler:() => {
+      doEditGroupSupplier();
+    }
+  })
+
+  getAllGroup();
 
 </script>
 </html>

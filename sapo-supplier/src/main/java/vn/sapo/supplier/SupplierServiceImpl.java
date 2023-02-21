@@ -7,13 +7,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.entities.supplier.Supplier;
-import vn.sapo.entities.supplier.SupplierGroup;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.supplier.dto.*;
 import vn.sapo.supplierGroup.SupplierGroupRepository;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,8 +36,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     @Transactional(readOnly = true)
     public List<SupplierResult> findAll() {
-        return supplierRepository
-                .findAll()
+        return supplierRepository.findAll()
                 .stream()
                 .map(supplierMapper::toDTO)
                 .collect(Collectors.toList());
@@ -49,43 +46,38 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     @Transactional(readOnly = true)
     public SupplierResult findById(Integer id) {
-        Supplier supplier = supplierRepository.findById(id)
+        return supplierRepository.findById(id)
+                .map(supplierMapper::toDTO)
                 .orElseThrow(() -> new NotFoundException("Not found supplier with id: " + id));
-        return supplierMapper.toDTO(supplier);
     }
 
     @Override
     @Transactional
-    public SupplierResult create(CreateSupplierParam createSupplierParam) {
-        Supplier supplier = supplierMapper.toModel(createSupplierParam);
+    public SupplierResult create(CreateSupplierParam createParam) {
+        Supplier supplier = supplierMapper.toModel(createParam);
         supplier.setEmployeeId(1);
         supplier = supplierRepository.save(supplier);
-        String supplierCode = createSupplierParam.getSupplierCode();
-        if (supplierCode == null)
+        if (createParam.getSupplierCode() == null)
             supplier.setSupplierCode(CodePrefix.SUPPLIER.generate(supplier.getId()));
         return supplierMapper.toDTO(supplier);
     }
 
     @Override
     @Transactional
-    public SupplierResult update(UpdateSupplierParam updateSupplierParam) {
-
-        Supplier supplier = supplierRepository.findById(updateSupplierParam.getId())
+    public SupplierResult update(UpdateSupplierParam param) {
+        Supplier supplier = supplierRepository.findById(param.getId())
                 .orElseThrow(() -> new NotFoundException("Not found supplier"));
-        SupplierGroup supplierGroup = supplierGroupRepository.findById(updateSupplierParam.getGroupId()).get();
+//        if (param.getGroupId() != null && supplierRepository.existsById(param.getGroupId()))
+//            throw new NotFoundException("Group supplier exist");
 
-        System.out.println(supplier);
-        supplierMapper.transferFields(updateSupplierParam, supplier);
-        supplier.setGroup(supplierGroup);
-        Supplier supplierResult = supplierRepository.save(supplier);
-        return supplierMapper.toDTO(supplierResult);
+        supplierMapper.transferFields(param, supplier);
+        return supplierMapper.toDTO(supplier);
 
     }
 
     @Override
     @Transactional
     public void deleteById(Integer id) {
-        findById(id);
         supplierRepository.deleteById(id);
     }
 
@@ -96,29 +88,22 @@ public class SupplierServiceImpl implements SupplierService {
                                                   Integer pageSize,
                                                   String title,
                                                   String status) {
-
-//        pageNo = pageNo - 1;
-
-        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-        Page<Supplier> page;
-        page = supplierRepository.findAll(pageable);
+        Page<Supplier> page = supplierRepository.findAll(PageRequest.of(pageNo - 1, pageSize));
         if (page.hasContent()) {
-            List<SupplierResult> supplierResults = page.getContent()
+            List<SupplierResult> dtoList = page.getContent()
                     .stream()
                     .map(supplierMapper::toDTO)
                     .collect(Collectors.toList());
             return new HashMap<>() {{
-                put("suppliers", supplierResults);
+                put("suppliers", dtoList);
                 put("totalItem", page.getTotalElements());
                 put("totalPage", page.getTotalPages());
             }};
-//            response.put("suppliers", supplierResults);
-//            response.put("totalItem", suppliers.getTotalElements());
-//            response.put("totalPage", suppliers.getTotalPages());
         } else {
             return new HashMap<>();
         }
     }
+
 
     @Override
     @Transactional(readOnly = true)
@@ -126,4 +111,22 @@ public class SupplierServiceImpl implements SupplierService {
         return supplierFilterRepository.findAllByFilters(filter, pageable).map(supplierMapper::toDTO);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Map<String, Object> findAllByFilters2(SupplierFilter filter) {
+        Page<Supplier> page = supplierFilterRepository.findAllByFilters(filter, PageRequest.of(filter.getPageNo() - 1, filter.getPageSize()));
+        if (page.hasContent()) {
+            List<SupplierResult> dtoList = page.getContent()
+                    .stream()
+                    .map(supplierMapper::toDTO)
+                    .collect(Collectors.toList());
+            return new HashMap<>() {{
+                put("suppliers", dtoList);
+                put("totalItem", page.getTotalElements());
+                put("totalPage", page.getTotalPages());
+            }};
+        } else {
+            return new HashMap<>();
+        }
+    }
 }

@@ -13,7 +13,4 @@ public class SupplierGroupController {
     public ModelAndView showSupplierListPage() {
         return new ModelAndView("/admin/suppliers/supplier_group");
     }
-
-
-
 }

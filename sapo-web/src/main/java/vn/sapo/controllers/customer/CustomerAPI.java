@@ -40,9 +40,9 @@ public class CustomerAPI {
     @Autowired
     SaleOrderService saleOrderService;
     @Autowired
-    ExcelService excelService;
-    @Autowired
     CustomerGroupService customerGroupService;
+    @Autowired
+    ExcelService excelService;
 
     @GetMapping
     public ResponseEntity<?> findAll() {

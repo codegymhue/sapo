@@ -1,5 +1,6 @@
 package vn.sapo.supplierGroup;
 
+import vn.sapo.entities.supplier.SupplierGroup;
 import vn.sapo.supplierGroup.dto.CreateSupGroupParam;
 import vn.sapo.supplierGroup.dto.EditSupGroupParam;
 import vn.sapo.supplierGroup.dto.SupplierGroupResult;
@@ -13,4 +14,6 @@ public interface SupplierGroupService {
 
     SupplierGroupResult update(EditSupGroupParam editSupGroupParam);
     void deleteById(Integer id);
+
+
 }

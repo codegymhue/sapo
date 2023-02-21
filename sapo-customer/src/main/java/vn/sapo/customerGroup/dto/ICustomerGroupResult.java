@@ -2,7 +2,7 @@ package vn.sapo.customerGroup.dto;
 
 import java.time.Instant;
 
-public interface ICustomerGroup {
+public interface ICustomerGroupResult {
     Integer getId();
 
     String getTitle();

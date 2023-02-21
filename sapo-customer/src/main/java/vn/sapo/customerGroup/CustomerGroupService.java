@@ -1,28 +1,22 @@
 package vn.sapo.customerGroup;
 
-import vn.sapo.customer.dto.CreateCustomerParam;
-import vn.sapo.customer.dto.CustomerResult;
-import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.customerGroup.dto.CreateCusGroupParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
-import vn.sapo.customerGroup.dto.ICustomerGroup;
-import vn.sapo.customerGroup.dto.UpdateCusGroupParam;
+import vn.sapo.customerGroup.dto.ICustomerGroupResult;
+import vn.sapo.customerGroup.dto.UpdateCustomerGroupParam;
 
 import java.util.*;
 
 public interface CustomerGroupService {
-    CustomerGroupResult create(CreateCusGroupParam createCusGroupParam);
+    CustomerGroupResult create(CreateCusGroupParam createParam);
 
-    CustomerGroupResult update(UpdateCusGroupParam updateCusGroupParam);
+    CustomerGroupResult update(UpdateCustomerGroupParam updateParam);
 
     List<CustomerGroupResult> findAll();
 
-    List<ICustomerGroup> sortByGroup();
-
+    List<ICustomerGroupResult> sortByGroup();
 
     CustomerGroupResult findById(Integer id);
-
-
 
     void deleteById(Integer id);
 }

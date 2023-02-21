@@ -328,22 +328,39 @@
         $('.btn-create-supplier').on('click', () => {
             // alert("alo 1235689")
             let supplier = {};
-            supplier.id = null;
             supplier.fullName = $('#nameCreate').val();
-            supplier.fax = $('#faxCreate').val();
-            supplier.taxCode = $('#taxCodeCreate').val();
-            supplier.website = $('#websiteCreate').val();
 
-            supplier.debtTotal = $('#debtTotalCreate').val();
+            let fax = $('#faxCreate').val()
+            supplier.fax = fax.trim().length > 0 ? fax : null;
 
-            supplier.supplierCode = $('#codeCreate').val();
+            let taxCode = $('#taxCodeCreate').val();
+            supplier.taxCode = taxCode.trim().length > 0 ? fax : null;
 
+            let website = $('#websiteCreate').val();
+            supplier.website = website.trim().length > 0 ? fax : null;
+
+            let debtTotal = $('#debtTotalCreate').val();
+            supplier.debtTotal = debtTotal.trim().length > 0 ? fax : null;
+
+            let supplierCode = $('#codeCreate').val()
+            supplier.supplierCode = supplierCode.trim().length > 0 ? supplierCode : null;
             // supplier.groupId = $('#supplierGroupCreate :selected').val();
-            supplier.phone = $('#phoneCreate').val();
-            supplier.email = $('#emailCreate').val();
+
+
+           let phone = $('#phoneCreate').val();
+            supplier.phone = phone.trim().length > 0 ? fax : null;
+
+            let email = $('#emailCreate').val();
+            supplier.email = email.trim().length > 0 ? fax : null;
+
             supplier.employeeId = $('#employeeNameCreate :selected').val();
-            supplier.description = $('#descriptionCreate').val();
-            supplier.paymentMethodId = $('#paymentMethodCreate :selected').val();
+
+            let description = $('#descriptionCreate').val();
+            supplier.description = description.trim().length > 0 ? supplierCode : null;
+
+            let paymentMethodId = $('#paymentMethodCreate :selected').val();
+            supplier.paymentMethodId = paymentMethodId.trim().length > 0 ? paymentMethodId : null;
+
             supplier.GroupSupplier = $('#showGroupSupplier :selected').val();
 
 
@@ -368,16 +385,16 @@
                     "content-type": "application/json"
                 },
                 "type": "POST",
-                "url": origin +"/api/admin/suppliers/create",
+                "url": origin + "/api/suppliers",
                 "data": JSON.stringify(supplier)
-             })
+            })
                 .done((data) => {
                     console.log(data)
                     SupplierApp.IziToast.showSuccessAlert(" Thêm nhà cung cấp thành công ");
                     setTimeout(() => {
                     }, 2500)
                     $('#formCreate')[0].reset();
-                    window.location.href = `/admin/suppliers/${data.id}`;
+                    window.location.href = `/admin/suppliers/${data.id}/histories`;
 
                 })
                 .fail((jqXHR) => {
