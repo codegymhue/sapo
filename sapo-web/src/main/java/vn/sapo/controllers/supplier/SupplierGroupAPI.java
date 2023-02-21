@@ -7,7 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import vn.sapo.supplierGroup.SupplierGroupService;
 import vn.sapo.supplierGroup.dto.CreateSupGroupParam;
-import vn.sapo.supplierGroup.dto.EditSupGroupParam;
+import vn.sapo.supplierGroup.dto.UpdateSupGroupParam;
 import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 
 import java.util.List;
@@ -35,8 +35,8 @@ public class SupplierGroupAPI {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity <SupplierGroupResult> Update(@Validated @RequestBody EditSupGroupParam editSupGroupParam) {
-        SupplierGroupResult dto = supplierGroupService.update(editSupGroupParam);
+    public ResponseEntity <SupplierGroupResult> Update(@Validated @RequestBody UpdateSupGroupParam updateSupGroupParam) {
+        SupplierGroupResult dto = supplierGroupService.update(updateSupGroupParam);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
