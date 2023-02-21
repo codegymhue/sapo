@@ -5,25 +5,37 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.address.AddressService;
 import vn.sapo.address.dto.CreateAddressParam;
+
+import vn.sapo.excel.ExcelHelperSuppliers;
+import vn.sapo.excel.ExcelServiceSupplier;
+import vn.sapo.excel.ResponseMessage;
+
 import vn.sapo.supplier.SupplierService;
 import vn.sapo.supplier.dto.CreateSupplierParam;
 import vn.sapo.supplier.dto.SupplierFilter;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.dto.UpdateSupplierParam;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/suppliers")
 public class SupplierAPI {
+
     @Autowired
     private SupplierService supplierService;
 
     @Autowired
     private AddressService addressService;
+
+    @Autowired
+    ExcelServiceSupplier excelServiceSupplier;
 
     //    @GetMapping
 //    public ResponseEntity<List<SupplierResult>> findAll() {
@@ -75,9 +87,27 @@ public class SupplierAPI {
 
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody UpdateSupplierParam updateSupplierParam) {
+    public ResponseEntity<?> update(@Validated @RequestBody UpdateSupplierParam updateSupplierParam) {
         return new ResponseEntity<>(supplierService.update(updateSupplierParam), HttpStatus.OK);
     }
 
+    @PostMapping("/upload")
+    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
+        String message = "";
+        if (ExcelHelperSuppliers.hasExcelFormat(file)) {
+            try {
+                List<CreateSupplierParam> supplierParams = excelServiceSupplier.save(file);
+                supplierParams.forEach(param -> create(param));
+                message = "Uploaded the file successfully: " + file.getOriginalFilename();
+                return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+            } catch (Exception e) {
+                e.printStackTrace();
+                message = "Could not upload the file: " + file.getOriginalFilename() + "!";
+                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+            }
+        }
 
+        message = "Please upload an excel file!";
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
+    }
 }

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.employee.EmployeeService;
 import vn.sapo.payment.method.PaymentMethodService;
 import vn.sapo.supplier.SupplierExcelExporter;
@@ -26,6 +27,9 @@ import java.util.List;
 public class SupplierController {
 
     @Autowired
+    SupplierAPI supplierAPI;
+
+    @Autowired
     private SupplierService supplierService;
 
     @Autowired
@@ -43,7 +47,7 @@ public class SupplierController {
     }
     @GetMapping("/small")
     public ModelAndView showSupplierListPageSmall() {
-        return new ModelAndView("/admin/suppliers/supplier_list_small");
+        return new ModelAndView("/admin/suppliers/supplier_list_small2");
     }
 
 //    @GetMapping("SearchSupplierGroupV1")
@@ -71,6 +75,20 @@ public class SupplierController {
     public ModelAndView showSupplierCreatePage() {
         return new ModelAndView("/admin/suppliers/supplier_create");
     }
+//    @GetMapping("/{id}")
+//    public ModelAndView showSupplierInfoPage(@PathVariable Integer id) {
+//        ModelAndView modelAndView = new ModelAndView();
+//        try{
+//            SupplierResult supplier = supplierService.findById(id);
+//            supplierAPI.setData(supplier);
+//            modelAndView.addObject("supplier", supplier);
+//        }catch (Exception ex){
+//            modelAndView.addObject("errors", ex.getMessage());
+//        }
+//        modelAndView.setViewName("/admin/suppliers/supplier_detail");
+//        return modelAndView;
+//    }
+
 
     @GetMapping("/{id}/edit")
     public ModelAndView showSupplierEdit(@PathVariable Integer id) {

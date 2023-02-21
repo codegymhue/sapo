@@ -344,9 +344,10 @@
 
             let supplierCode = $('#codeCreate').val()
             supplier.supplierCode = supplierCode.trim().length > 0 ? supplierCode : null;
-
             // supplier.groupId = $('#supplierGroupCreate :selected').val();
-            let phone = $('#phoneCreate').val();
+
+
+           let phone = $('#phoneCreate').val();
             supplier.phone = phone.trim().length > 0 ? fax : null;
 
             let email = $('#emailCreate').val();
@@ -386,7 +387,7 @@
                 "type": "POST",
                 "url": origin + "/api/suppliers",
                 "data": JSON.stringify(supplier)
-             })
+            })
                 .done((data) => {
                     console.log(data)
                     SupplierApp.IziToast.showSuccessAlert(" Thêm nhà cung cấp thành công ");

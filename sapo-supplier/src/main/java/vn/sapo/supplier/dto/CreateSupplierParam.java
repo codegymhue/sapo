@@ -16,7 +16,6 @@ import java.security.PrivateKey;
 @Setter
 @Accessors(chain = true)
 public class CreateSupplierParam {
-    //TODO: thêm nhà cung cấp không cần dùng trường id
     private Integer id;
     @NullOrNotBlank(message = "supplierCode not blank")
     private String supplierCode;
@@ -33,6 +32,7 @@ public class CreateSupplierParam {
     private String paymentMethodId;
     @NullOrNotBlank
     private String taxCode;
+    @NullOrNotBlank
     private String fax;
     @NullOrNotBlank
     private String website;

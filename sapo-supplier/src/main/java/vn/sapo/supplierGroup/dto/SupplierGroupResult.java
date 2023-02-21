@@ -18,7 +18,6 @@ import java.time.Instant;
 public class SupplierGroupResult {
     private Integer id;
 
-
     private String title;
 
     private String supplierCode;
