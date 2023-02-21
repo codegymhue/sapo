@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.entities.rbac.RbacRole;
 
 import java.util.ArrayList;
@@ -36,6 +37,12 @@ public class RoleRepositoryIntegrationTest {
     @Test
     public void create() {
         rbacRoleRepository.saveAll(rbacRoles);
+    }
+    @Test
+    @Transactional
+    public void findAll() {
+        List<RbacRole> roles = rbacRoleRepository.findAll();
+        System.out.println("s");
     }
 
 

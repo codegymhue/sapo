@@ -21,12 +21,12 @@ public class RbacOperationPermission extends BaseEntity {
     private RbacOperationPermissionId id;
 
     @MapsId("permissionId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne( optional = false)
     @JoinColumn(name = "permission_id", nullable = false, foreignKey = @ForeignKey(name = "fk_op_permission"))
     private RbacPermission permission;
 
     @MapsId("operationId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "operation_id", nullable = false, foreignKey = @ForeignKey(name = "fk_op_operation"))
     private RbacOperation operation;
 

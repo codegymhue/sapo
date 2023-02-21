@@ -22,13 +22,8 @@ public class ModuleRepositoryIntegrationTest {
                     .setModuleCode("PRODUCT")
                     .setActive(true)
                     .setTitle("Sản phẩm")));
-
             add(new RbacModule()
-                    .setModuleCode("PURCHASE_ORDER")
-                    .setActive(true)
-                    .setTitle("Đặt hàng nhập"));
-            add(new RbacModule()
-                    .setModuleCode("SALE_ORDER")
+                    .setModuleCode("ORDER")
                     .setActive(true)
                     .setTitle("Đơn hàng"));
             add(new RbacModule()
