@@ -20,7 +20,7 @@ public class CreateSupGroupParam {
     private String title;
 
     @NullOrNotBlank
-    private String supplierCode;
+    private String supGroupCode;
 
     @NullOrNotBlank
     private String description;

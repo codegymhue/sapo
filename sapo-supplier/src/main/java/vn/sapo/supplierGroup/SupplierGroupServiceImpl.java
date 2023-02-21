@@ -6,42 +6,48 @@ import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.entities.supplier.SupplierGroup;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
+import vn.sapo.shared.exceptions.OperationException;
 import vn.sapo.supplierGroup.dto.CreateSupGroupParam;
-import vn.sapo.supplierGroup.dto.EditSupGroupParam;
 import vn.sapo.supplierGroup.dto.SupplierGroupResult;
+import vn.sapo.supplierGroup.dto.UpdateSupGroupParam;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class SupplierGroupServiceImpl implements SupplierGroupService{
+public class SupplierGroupServiceImpl implements SupplierGroupService {
     @Autowired
     SupplierGroupRepository supplierGroupRepository;
 
     @Autowired
     SupplierGroupMapper supplierGroupMapper;
+
     @Override
     @Transactional
-    public SupplierGroupResult create(CreateSupGroupParam createSupGroupParam) {
+    public SupplierGroupResult create(CreateSupGroupParam createParam) {
 
-        List<SupplierGroup> supplierGroupList = supplierGroupRepository.findAll();
-        System.out.println("Nhóm nhà cung cấp" + supplierGroupList);
+//        List<SupplierGroup> supplierGroupList = supplierGroupRepository.findAll();
+//        System.out.println("Nhóm nhà cung cấp" + supplierGroupList);
 
-       for(int i = 0; i < supplierGroupList.size(); i++) {
-
-           if(createSupGroupParam.getTitle().trim().equalsIgnoreCase(supplierGroupList.get(i).getTitle())
-           ) {
-               throw new NotFoundException("Group supplier exist");
-           }
-           if(createSupGroupParam.getSupplierCode() != null) {
-               if(createSupGroupParam.getSupplierCode().trim().equalsIgnoreCase(supplierGroupList.get(i).getSupplierCode()))
-                   throw new NotFoundException("Group supplier code exist");
-           }
-       }
-        SupplierGroup supplierGroup = supplierGroupMapper.toModel(createSupGroupParam);
+//        for (int i = 0; i < supplierGroupList.size(); i++) {
+//
+//            if (createParam.getTitle().trim().equalsIgnoreCase(supplierGroupList.get(i).getTitle())
+//            ) {
+//                throw new NotFoundException("Group supplier exist");
+//            }
+//            if (createParam.getSupplierCode() != null) {
+//                if (createParam.getSupplierCode().trim().equalsIgnoreCase(supplierGroupList.get(i).getSupGroupCode()))
+//                    throw new NotFoundException("Group supplier code exist");
+//            }
+//        }
+        if (supplierGroupRepository.existsByTitle(createParam.getTitle()))
+            throw new OperationException("");
+        if (supplierGroupRepository.existsBySupGroupCode(createParam.getSupGroupCode()))
+            throw new OperationException("");
+        SupplierGroup supplierGroup = supplierGroupMapper.toModel(createParam);
         supplierGroupRepository.save(supplierGroup);
-        if (supplierGroup.getSupplierCode() == null)
-            supplierGroup.setSupplierCode(CodePrefix.SUPPLIER_GROUP.generate(supplierGroup.getId()));
+        if (createParam.getSupGroupCode() == null)
+            supplierGroup.setSupGroupCode(CodePrefix.SUPPLIER_GROUP.generate(supplierGroup.getId()));
         return supplierGroupMapper.toDTO(supplierGroup);
     }
 
@@ -54,30 +60,34 @@ public class SupplierGroupServiceImpl implements SupplierGroupService{
                 .map(supplierGroupMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
     @Override
     @Transactional(readOnly = true)
     public SupplierGroupResult findById(Integer id) {
         SupplierGroup supplierGroup = supplierGroupRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Not found group supplier with id: " + id));
-        return supplierGroupMapper.toDTO(supplierGroup) ;
+        return supplierGroupMapper.toDTO(supplierGroup);
     }
 
     @Override
     @Transactional
-    public SupplierGroupResult update(EditSupGroupParam editSupGroupParam) {
+    public SupplierGroupResult update(UpdateSupGroupParam updateParam) {
+        SupplierGroup supplierGroup = supplierGroupRepository.findById(updateParam.getId())
+                .orElseThrow(() -> new NotFoundException("Not found group supplier with id: " + updateParam.getId()));
+        if (supplierGroupRepository.existsByTitle(updateParam.getTitle()))
+            throw new OperationException("");
+        if (updateParam.getSupGroupCode() != null && supplierGroupRepository.existsBySupGroupCode(updateParam.getSupGroupCode()))
+            throw new OperationException("");
 
-        SupplierGroup supplierGroup = supplierGroupRepository.findById(editSupGroupParam.getId())
-                .orElseThrow(() -> new NotFoundException("Not found group supplier with id: " + editSupGroupParam.getId() ));
-
-        List<SupplierGroup> supplierGroupList = supplierGroupRepository.findAll();
-        for(int i = 0; i < supplierGroupList.size(); i++) {
-            if(editSupGroupParam.getTitle().trim().equalsIgnoreCase(supplierGroupList.get(i).getTitle())
-            ) {
-                supplierGroupMapper.transferFields(editSupGroupParam, supplierGroup);
-                return supplierGroupMapper.toDTO(supplierGroup);
-            }
-        }
-        supplierGroupMapper.transferFields(editSupGroupParam, supplierGroup);
+//        List<SupplierGroup> supplierGroupList = supplierGroupRepository.findAll();
+//        for (int i = 0; i < supplierGroupList.size(); i++) {
+//            if (updateParam.getTitle().trim().equalsIgnoreCase(supplierGroupList.get(i).getTitle())
+//            ) {
+//                supplierGroupMapper.transferFields(updateParam, supplierGroup);
+//                return supplierGroupMapper.toDTO(supplierGroup);
+//            }
+//        }
+        supplierGroupMapper.transferFields(updateParam, supplierGroup);
         return supplierGroupMapper.toDTO(supplierGroup);
     }
 

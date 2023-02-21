@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8"/>
-<th:block th:replace="/layout/supplier/header :: header"></th:block>
+    <th:block th:replace="/layout/supplier/header :: header"></th:block>
 </head>
 
 <body class="body_dashboard partners suppliers index">
@@ -513,7 +513,7 @@
                         </div>
                         <div class="filter-body dropdown-menu"
                              style="background-color: #dfe4e8; float: left;position: absolute; z-index: 99">
-                            <div class="filter-content"
+                            <div class="filter-content "
                                  aria-labelledby="ClickableInside"
                                  style="position: relative; display: flex; flex-direction: column">
                                 <p class="title" id="ptitle">Hiển thị nhà cung cấp theo:</p>
@@ -522,7 +522,7 @@
                                     <input type="hidden" class="choosed-single-id">
                                     <div class="select__wrapper">
                                         <select class="sapo-select select-change-filter"
-                                                bind-event-change="changeItemFilter(this)">
+                                        >
                                             <option value="status" selected="">Trạng thái</option>
                                             <option value="assigneeIds">Nhân viên</option>
                                             <option value="supplierGroupId">Nhóm nhà cung cấp</option>
@@ -536,11 +536,13 @@
                                     <div class="btn-group pull-left" data-toggle="buttons">
                                         <label class="btn filter-button-tag"
                                                bind-event-click="setParamFilterActive('AVAILABLE',this)">
-                                            <input type="checkbox"> Đang giao dịch
+                                            <input type="checkbox" class="checkbox_status" id="AVAILABLE"> Đang giao
+                                            dịch
                                         </label>
                                         <label class="btn filter-button-tag"
                                                bind-event-click="setParamFilterActive('UNAVAILABLE',this)">
-                                            <input type="checkbox"> Ngừng giao dịch
+                                            <input type="checkbox" class="checkbox_status" id="UNAVAILABLE"> Ngừng giao
+                                            dịch
                                         </label>
                                     </div>
                                     <a href="javascript" bind-event-click="removeItemFilter(this, 'status')"
@@ -556,7 +558,7 @@
                                     <input type="hidden" class="choosed-single-id">
                                     <div class="select__wrapper">
                                         <select class="sapo-select select-change-filter"
-                                                bind-event-change="changeItemFilter(this)">
+                                        >
                                             <option value="status">Trạng thái</option>
                                             <option value="assigneeIds" selected="">Nhân viên</option>
                                             <option value="supplierGroupId">Nhóm nhà cung cấp</option>
@@ -604,7 +606,7 @@
                                            id="supplierGroupId" value="" style="display: none;">
                                     <div class="select__wrapper">
                                         <select class="sapo-select select-change-filter"
-                                                bind-event-change="changeItemFilter(this)">
+                                        >
                                             <option value="status">Trạng thái</option>
                                             <option value="assigneeIds">Nhân viên</option>
                                             <option value="supplierGroupId" selected="">Nhóm nhà cung cấp</option>
@@ -619,7 +621,8 @@
                                     <div class="btn-group pull-left">
                                         <div>
                                             <div class="btn-group show">
-                                                <button type="button" bind-event-click="setParamFilterSupplierGroupId(this)"
+                                                <button type="button"
+                                                        bind-event-click="setParamFilterSupplierGroupId(this)"
                                                         class="multiselect dropdown-toggle btn sapo-btn-blank btn-default"
                                                         data-bs-toggle="dropdown" data-bs-auto-close="outside"
                                                         aria-expanded="false"
@@ -688,7 +691,7 @@
                                 <div class="filter-item" filter-type="createdOn" style="width:auto; float: left">
                                     <div class="select__wrapper">
                                         <select class="sapo-select select-change-filter"
-                                                bind-event-change="changeItemFilter(this)">
+                                        >
                                             <option value="status">Trạng thái</option>
                                             <option value="assigneeIds">Nhân viên</option>
                                             <option value="supplierGroupId">Nhóm nhà cung cấp</option>
@@ -700,13 +703,15 @@
                                         </svg>
                                     </div>
                                     <div class="input-group input-daterange pull-left" style="width: 300px;">
-                                        <input type="text" onfocus="(this.type='date')" id="createMin"
+                                        <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                               id="createMin"
                                                bind-event-change="setParamFilterCreatedOn()"
                                                class="form-control from-date input-date sapo-textbox choosed-single-id"
                                                style="width: 120px;" name="createMin" value="" placeholder="Từ ngày"
                                                autocomplete="off">
                                         <div class="input-group-append"><span class="input-group-text"></span></div>
-                                        <input type="text" onfocus="(this.type='date')" id="createMax"
+                                        <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')"
+                                               id="createMax"
                                                bind-event-change="setParamFilterCreatedOn()"
                                                class="form-control to-date input-date sapo-textbox choosed-single-id"
                                                style="width: 120px;" name="createMax" value="" placeholder="Đến ngày"
@@ -730,7 +735,8 @@
                                         <option value="createdOn">Ngày tạo</option>
                                     </select>
                                     <svg class="next-icon next-icon--size-16">
-                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use>
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             xlink:href="#select-chevron"></use>
                                     </svg>
                                 </div>
                                 <div class="next-input-wrapper--vertical-block" style="order: 99999999;margin-top:7px">
@@ -773,7 +779,7 @@
                                             <input style="cursor:pointer" id="selectAction" type="checkbox" value="">
                                         </label>
                                     </td>
-                                    <td colspan="2" class="align-middle" id="numberSelectProductList"
+                                    <td colspan="2" class="align-middle" id="numberSelectSupplierList"
                                         style="width: 24%">
                                     </td>
                                     <td class="align-middle" colspan="2">
@@ -811,6 +817,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+
                                 </tbody>
                             </table>
                         </div>
@@ -861,13 +868,66 @@
         </div>
     </div>
 </div>
+
+<!--modal-->
+
+<div class="modal fade" id="modalAvailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: max-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="staticBackdropLabel">Cập nhật trạng thái !</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="statusChange">
+            </div>
+            <div class="modal-footer d-flex align-items-center">
+                <button class="btn btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
+                <button class="btn btn-primary btn-save" id="btnAvailableSave" type="button">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalUnavailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: max-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Ngừng giao dịch!</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="statusChangeUnavailable">
+            </div>
+            <div class="modal-footer d-flex align-items-center">
+                <button class="btn btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
+                <button class="btn btn-primary btn-save" id="btnUnavailableSave" type="button">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: max-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Xóa sản phẩm?</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="statusChangeDelete">
+            </div>
+            <div class="modal-footer d-flex align-items-center">
+                <button class="btn  btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
+                <button class="btn btn-danger btn-save-delete" id="btnSubmitDelete" type="button">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
 <th:block th:replace="/layout/script :: script"/>
-
-
-:
 <script>
-    let employee;
+    let arrayIdSupplier = [];
     const page = {
         urls: {
             getAllSupplier: SupplierApp.SUPPLIER_API,
@@ -883,23 +943,32 @@
             commands: {},
         },
     }
-
+    //table
     page.elements.tbSupplier = $("#tbSupplier")
     page.elements.tbSupplier_tbody = $("#tbSupplier tbody");
+    page.elements.tbSupplier_tbody_input = $("#tbSupplier>tbody input");
+    page.elements.checkAll = $("#checkAll");
+    page.elements.selectAction = $("#selectAction");
+    page.elements.selectActionThead = $("#selectActionThead");
+    page.elements.theadList = $("#theadList");
+    page.elements.numberSelectSupplierList = $("#numberSelectSupplierList");
+    page.elements.statusChangeForNumberSupplierList = $("#statusChange");
+    page.elements.statusChangeForNumberToUnavailable = $("#statusChangeUnavailable");
+    page.elements.statusChangeForNumberDelete = $("#statusChangeDelete");
 
     //filter
-    page.elements.btnFilter = $(".btn-filter");
-    page.elements.filterBody = $(".filter-content");
-    page.dialogs.elements.modalFilter = $("#modalFilter");
-    page.dialogs.elements.selectChangeFilterAll = $(".select-change-filter--all");
-    page.dialogs.elements.selectChangeFilterAllOption = $(".select-change-filter--all option");
-    page.dialogs.elements.selectChangeFilter = $(".select-change-filter");
-    page.dialogs.elements.filterItem = $(".filter-item");
-    page.dialogs.elements.selectAssigneeIds = $("#assigneeIds");
+    // page.elements.btnFilter = $(".btn-filter");
+    // page.elements.filterBody = $(".filter-content");
+    // page.dialogs.elements.modalFilter = $("#modalFilter");
+    // page.dialogs.elements.selectChangeFilterAll = $(".select-change-filter--all");
+    // page.dialogs.elements.selectChangeFilterAllOption = $(".select-change-filter--all option");
+    // page.dialogs.elements.selectChangeFilter = $(".select-change-filter");
+    // page.dialogs.elements.filterItem = $(".filter-item");
+    // page.dialogs.elements.selectAssigneeIds = $("#assigneeIds");
     page.dialogs.elements.filterEmployee = $("#ulAssigneeIdsFilter");
-    page.dialogs.elements.checkboxInputEmployee = $(".sapo-checkbox__input");
+    // page.dialogs.elements.checkboxInputEmployee = $(".sapo-checkbox__input");
     page.dialogs.elements.filterSupplierGroupId = $("#ulSupplierGroupId");
-    page.dialogs.elements.filterSubmit = $("#filterSubmit")
+    // page.dialogs.elements.filterSubmit = $("#filterSubmit")
 
 
     // seach
@@ -907,11 +976,8 @@
     page.elements.pageNo = $("#pageNo");
     page.elements.pageSize = $("#pageSize");
     page.elements.search = $(".searchTitle");
-
-
-    //code
-    let totalPage;
-    let supplierFilter = new SupplierFilter();
+    page.dialogs.elements.nextPage = $("#nextPage");
+    page.dialogs.elements.previousPage = $("#previousPage");
 
     page.commands.getAllSupplier = () => {
         let pageNo = Number(page.elements.pageNo.text());
@@ -948,6 +1014,8 @@
                         page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'unavailable'))
                     }
                 });
+                page.commands.resetInputCheckBox();
+                page.commands.isCheckbox();
                 page.elements.totalPage.append(
                     `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
                 )
@@ -956,6 +1024,31 @@
         //     SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_404)
         // })
     }
+
+    page.dialogs.elements.nextPage.on("click", () => {
+        let pageNo = page.elements.pageNo.text();
+        if (Number(pageNo) < Number(totalPage)) {
+            let pageNext = Number(pageNo) + 1;
+            page.elements.pageNo.text(pageNext);
+            page.commands.getAllSupplier();
+        }
+    })
+
+    page.dialogs.elements.previousPage.on("click", () => {
+        let pageNo = page.elements.pageNo.text();
+        if (Number(pageNo) > 1) {
+            let previousPage = Number(pageNo) - 1;
+            page.elements.pageNo.text(previousPage);
+            page.commands.getAllSupplier();
+        }
+
+    })
+
+    page.elements.pageSize.on("change", () => {
+        page.elements.pageNo.text(1);
+        console.log(page.elements.pageNo.text(1), "  1")
+        page.commands.getAllSupplier();
+    })
 
     page.commands.getAllEmployee = () => {
         $.ajax({
@@ -991,166 +1084,95 @@
         })
     }
 
-    page.commands.getAllSupplierByFilter = () => {
-        page.dialogs.elements.filterSubmit.on("click", () => {
-            page.commands.getAllSupplierUseFilter()
+    page.commands.resetInputCheckBox = () => {
+        $("#tbSupplier input").each(function () {
+            $(this).prop("checked", false);
         })
+        arrayIdSupplier = [];
+        page.commands.showAction();
     }
-
-    page.commands.getAllSupplierUseFilter = () => {
-        supplierFilter.pageNo = Number(page.elements.pageNo.text());
-        supplierFilter.pageSize = Number(page.elements.pageSize.val());
-        console.log(supplierFilter)
-        $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "POST",
-            url: origin + "/api/suppliers/filter",
-            data: JSON.stringify(supplierFilter)
-        })
-            .done((data) => {
-
-                page.elements.tbSupplier_tbody.empty();
-                page.elements.totalPage.empty();
-                totalPage = data.totalPage;
-                console.log(data, "  data")
-                data.suppliers.map(item => {
-                    if (item.status == "AVAILABLE") {
-                        page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available'))
-                    } else {
-                        page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'unavailable'))
-                    }
-                });
-                page.elements.totalPage.append(
-                    `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
-                )
+    page.elements.selectAction.on("change", function () {
+        page.elements.checkAll.prop("checked", true);
+        arrayIdSupplier = [];
+        console.log(this)
+        if (this.checked) {
+            $("#tbSupplier>tbody input").each(function () {
+                $(this).prop("checked", true);
+                arrayIdSupplier.push($(this).val());
             })
-    }
-
-    // page.commands.dropdownFilter = () => {
-    //     page.elements.btnFilter.on("click", () => {
-    //         let div = page.elements.filterBody
-    //         console.log(div, "div")
-    //         Array.from(div).forEach((x) => {
-    //
-    //             if (x.style.display === "none" || x.style.display === "") {
-    //                 x.style.display = "flex";
-    //                 $(x).css("flex-direction", "column")
-    //             } else {
-    //                 x.style.display = "none";
-    //             }
-    //             console.log(x," x")
-    //         })
-    //     })
-    // }
-
-    // filter tổng
-    function resetFilter(element) {
-        let ele = document.querySelector("[" + "filter-type" + "=" + $(element).val() + "]");
-        $(ele).css("display", "block");
-        $(element).find("option[value=" + $(element).val() + "]").hide();
-        $(element).find("option[value=" + $(element).val() + "]").prop("disabled", true)
-
-        if ($(element).find('option:enabled')){
-            $(ele).find("input[type=checkbox]").prop( "checked", false );
-            $(ele).find("input[type=text]").val("")
-        }
-        $(element).val('').trigger('chosen:updated');
-        if (($(element).find('option:disabled').length === 4)) {
-            $(element.parentElement).hide();
-        }
-    }
-
-    // loại bỏ filter
-    function removeItemFilter(element, str) {
-        console.log(element)
-        let ele = document.querySelector("[" + "filter-type" + "=" + str + "]");
-        $(ele).css("display", "none");
-        $(".select-change-filter--all").find("option[value=" + str + "]").prop("disabled", false);
-        $(".select-change-filter--all").find("option[value=" + str + "]").show();
-        if ($(".select-change-filter--all").find("option[value=" + str + "]").show() === false) {
-            console.log()
-        }
-        if (($(".select-change-filter--all").find('option:disabled').length < 4)) {
-            $(".select__wrapper").show();
-        }
-    }
-
-    // tùy chọn filter status
-    function setParamFilterActive(str, element) {
-        console.log(element,"element")
-        if ($(element).hasClass("active")) {
-            $(element).removeClass("active")
-            if (supplierFilter.statuses.indexOf(str) > -1) {
-                supplierFilter.statuses.splice(supplierFilter.statuses.indexOf(str), 1)
-            }
         } else {
-            $(element).addClass("active");
-            supplierFilter.statuses.push(str)
+                console.log("sai")
+                $("#tbSupplier>tbody input").each(function () {
+                    $(this).prop("checked", false);
+                })
+        }
+        console.log(arrayIdSupplier)
+        page.commands.showAction();
+    })
+
+    page.commands.isCheckbox = () => {
+        $(".selectCheckbox").on("change", function () {
+            if (this.checked) {
+                $(this).prop("checked", true);
+                arrayIdSupplier.push($(this).val());
+            } else {
+                $(this).prop("checked", false);
+                arrayIdSupplier = page.commands.deleteArrayId($(this).val());
+            }
+            page.commands.showAction();
+            let pageSize = page.elements.pageSize.val()
+            if (arrayIdSupplier.length == pageSize) {
+                page.elements.checkAll.prop("checked", true);
+                page.elements.selectAction.prop("checked", true);
+            } else {
+                page.elements.checkAll.prop("checked", false);
+                page.elements.selectAction.prop("checked", false);
+            }
+        })
+    }
+
+    page.commands.deleteArrayId = (item) => {
+        if (arrayIdSupplier.length <= 0) {
+            return [];
+        } else {
+            for (let i = 0; i < arrayIdSupplier.length; i++) {
+                if (arrayIdSupplier[i] === item) {
+                    arrayIdSupplier.splice(i, 1);
+                }
+            }
+            return arrayIdSupplier;
         }
     }
 
-    function setParamFilterAssigneeIds(element) {
-        $('input[type="checkbox"].checkbox_employee').change(function () {
-            let checkbox = $(this)
-            if (checkbox.is(":checked")) {
-                supplierFilter.employeeIds.push(checkbox.val())
-            } else {
-                if (supplierFilter.employeeIds.indexOf(checkbox.val()) > -1) {
-                    supplierFilter.employeeIds.splice(supplierFilter.employeeIds.indexOf(checkbox.val()), 1)
-                }
-            }
-        })
-    }
+    page.commands.showAction = () => {
+        page.elements.numberSelectSupplierList.empty();
+        page.elements.statusChangeForNumberSupplierList.empty();
+        page.elements.statusChangeForNumberToUnavailable.empty();
+        page.elements.statusChangeForNumberDelete.empty();
 
-    function setParamFilterSupplierGroupId(element) {
-        $('input[type="checkbox"].checkbox_supplier_group').change(function () {
-            let checkbox = $(this)
-            if (checkbox.is(":checked")) {
-                supplierFilter.groupId.push(checkbox.val())
-            } else {
-                if (supplierFilter.groupId.indexOf(checkbox.val()) > -1) {
-                    supplierFilter.groupId.splice(supplierFilter.groupId.indexOf(checkbox.val()), 1)
-                }
-            }
-        })
-    }
-
-    // tìm từ khóa trong filter SupplierGroup
-    function suggest(element) {
-        let value = $(element).val().toLowerCase();
-        let ul = $(element).closest('ul');
-        let li = ul.find('li:gt(0)');
-        li.hide();
-        li.filter(function () {
-            let text = $(this).text().toLowerCase();
-            return text.indexOf(value) >= 0;
-        }).show();
-    }
-
-    function setParamFilterCreatedOn() {
-        supplierFilter.createdFrom = $("#createMin").val();
-        supplierFilter.createdTo = $("#createMax").val();
-        if (supplierFilter.createdTo.length > 0)
-            supplierFilter.createdTo = null;
-        if (supplierFilter.createdFrom.length > 0)
-            supplierFilter.createdFrom = null;
-        document.getElementById("createMin").setAttribute("max", supplierFilter.createdTo);
-        document.getElementById("createMax").setAttribute("min", supplierFilter.createdFrom);
+        if (arrayIdSupplier.length > 0) {
+            page.elements.theadList.removeClass("show").addClass("hide");
+            page.elements.numberSelectSupplierList.append(`<span>Đã chọn ${arrayIdSupplier.length} sản phẩm trên trang này</span>`)
+            page.elements.statusChangeForNumberSupplierList.append(`<span style="font-size: medium">Thao tác này sẽ cập nhật trạng thái giao dịch cho ${arrayIdSupplier.length} sản phẩm bạn đã chọn.</span>`);
+            page.elements.statusChangeForNumberToUnavailable.append(`<span style="font-size: medium">Thao tác này sẽ ngừng giao dịch ${arrayIdSupplier.length} sản phẩm bạn đã chọn.</span>`);
+            page.elements.statusChangeForNumberDelete.append(`<span style="font-size: medium">Thao tác này sẽ xóa ${arrayIdSupplier.length} sản phẩm bạn đã chọn. Thao tác này không thể khôi phục.</span>`);
+            page.elements.selectActionThead.removeClass("hide").addClass("show");
+        } else {
+            page.elements.theadList.removeClass("hide").addClass("show");
+            page.elements.selectActionThead.removeClass("show").addClass("hide");
+        }
     }
 
     page.commands.loadData = () => {
         page.commands.getAllSupplier();
         page.commands.getAllEmployee();
         page.commands.getAllSupplierGroup();
-        page.commands.getAllSupplierByFilter();
-
+        // page.commands.getAllSupplierByFilter();
     }
 
     page.commands.initializeEventControl = () => {
         // page.commands.dropdownFilter();
+
     }
 
     $(() => {
@@ -1158,7 +1180,6 @@
 
         page.commands.initializeEventControl();
     })
-
 
 </script>
 </body>
