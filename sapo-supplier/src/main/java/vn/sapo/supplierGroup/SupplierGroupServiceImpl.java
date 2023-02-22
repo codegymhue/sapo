@@ -42,13 +42,15 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
 //        }
         if (supplierGroupRepository.existsByTitle(createParam.getTitle()))
             throw new OperationException("Tên nhóm đã tồn tại");
-        if (supplierGroupRepository.existsBySupGroupCode(createParam.getSupGroupCode()))
+
+        if (createParam.getSupGroupCode() != null && supplierGroupRepository.existsBySupGroupCode(createParam.getSupGroupCode()))
             throw new OperationException("Mã nhóm đã tồn tại");
 
         SupplierGroup supplierGroup = supplierGroupMapper.toModel(createParam);
         supplierGroupRepository.save(supplierGroup);
         if (createParam.getSupGroupCode() == null)
             supplierGroup.setSupGroupCode(CodePrefix.SUPPLIER_GROUP.generate(supplierGroup.getId()));
+
         return supplierGroupMapper.toDTO(supplierGroup);
     }
 
@@ -75,10 +77,6 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
     public SupplierGroupResult update(UpdateSupGroupParam updateParam) {
         SupplierGroup supplierGroup = supplierGroupRepository.findById(updateParam.getId())
                 .orElseThrow(() -> new NotFoundException("Not found group supplier with id: " + updateParam.getId()));
-        if (supplierGroupRepository.existsByTitle(updateParam.getTitle()))
-            throw new OperationException("");
-        if (updateParam.getSupGroupCode() != null && supplierGroupRepository.existsBySupGroupCode(updateParam.getSupGroupCode()))
-            throw new OperationException("");
 
 //        List<SupplierGroup> supplierGroupList = supplierGroupRepository.findAll();
 //        for (int i = 0; i < supplierGroupList.size(); i++) {
@@ -88,8 +86,18 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
 //                return supplierGroupMapper.toDTO(supplierGroup);
 //            }
 //        }
+        if(!supplierGroup.getTitle().equalsIgnoreCase(updateParam.getTitle())){
+            if(supplierGroupRepository.existsBySupGroupCode(updateParam.getSupGroupCode())){
+                throw new OperationException("Mã nhóm đã tồn tại");
+            }
+        }
+        if(!supplierGroup.getSupGroupCode().equalsIgnoreCase(updateParam.getSupGroupCode())){
+            if(supplierGroupRepository.existsByTitle(updateParam.getTitle())){
+                throw new OperationException("Tên nhóm đã tồn tại");
+            }
+        }
         supplierGroupMapper.transferFields(updateParam, supplierGroup);
-        return supplierGroupMapper.toDTO(supplierGroup);
+            return supplierGroupMapper.toDTO(supplierGroup);
     }
 
     @Override
