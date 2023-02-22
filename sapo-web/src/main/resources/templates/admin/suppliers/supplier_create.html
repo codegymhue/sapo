@@ -334,13 +334,13 @@
             supplier.fax = fax.trim().length > 0 ? fax : null;
 
             let taxCode = $('#taxCodeCreate').val();
-            supplier.taxCode = taxCode.trim().length > 0 ? fax : null;
+            supplier.taxCode = taxCode.trim().length > 0 ? taxCode : null;
 
             let website = $('#websiteCreate').val();
-            supplier.website = website.trim().length > 0 ? fax : null;
+            supplier.website = website.trim().length > 0 ? website : null;
 
             let debtTotal = $('#debtTotalCreate').val();
-            supplier.debtTotal = debtTotal.trim().length > 0 ? fax : null;
+            supplier.debtTotal = debtTotal.trim().length > 0 ? debtTotal : null;
 
             let supplierCode = $('#codeCreate').val()
             supplier.supplierCode = supplierCode.trim().length > 0 ? supplierCode : null;
@@ -348,15 +348,15 @@
 
 
            let phone = $('#phoneCreate').val();
-            supplier.phone = phone.trim().length > 0 ? fax : null;
+            supplier.phone = phone.trim().length > 0 ? phone : null;
 
             let email = $('#emailCreate').val();
-            supplier.email = email.trim().length > 0 ? fax : null;
+            supplier.email = email.trim().length > 0 ? email : null;
 
             supplier.employeeId = $('#employeeNameCreate :selected').val();
 
             let description = $('#descriptionCreate').val();
-            supplier.description = description.trim().length > 0 ? supplierCode : null;
+            supplier.description = description.trim().length > 0 ? description : null;
 
             let paymentMethodId = $('#paymentMethodCreate :selected').val();
             supplier.paymentMethodId = paymentMethodId.trim().length > 0 ? paymentMethodId : null;
