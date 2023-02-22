@@ -74,21 +74,9 @@ public class SupplierAPI {
     }
 
     @PostMapping("/filter")
-    public ResponseEntity<?> testFilter(@RequestBody SupplierFilter supplierFilter) {
+    public ResponseEntity<?> filterSupplier(@RequestBody SupplierFilter supplierFilter) {
         Map<String, Object> supplierResult = supplierService.findAllByFilters2(supplierFilter);
         return new ResponseEntity<>(supplierResult, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable Integer id) {
-        supplierService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-
-    @PatchMapping("/{id}")
-    public ResponseEntity<?> update(@Validated @RequestBody UpdateSupplierParam updateSupplierParam) {
-        return new ResponseEntity<>(supplierService.update(updateSupplierParam), HttpStatus.OK);
     }
 
     @PostMapping("/upload")
@@ -109,5 +97,20 @@ public class SupplierAPI {
 
         message = "Please upload an excel file!";
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
+    }
+
+
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> update(@Validated @RequestBody UpdateSupplierParam updateSupplierParam) {
+        return new ResponseEntity<>(supplierService.update(updateSupplierParam), HttpStatus.OK);
+    }
+
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable Integer id) {
+        supplierService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

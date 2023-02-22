@@ -242,7 +242,7 @@ class SupplierFilter {
         this.filter = null;
         this.statuses = [];
         this.employeeIds = [];
-        this.groupId = [];
+        this.groupIds = [];
         this.createdFrom = null;
         this.createdTo = null;
         this.pageNo = null;
