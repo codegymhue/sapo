@@ -20,7 +20,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class CreateCustomerParam {
+public class CreateCustomerParam  {
     @NotNull
     private Integer id;
 

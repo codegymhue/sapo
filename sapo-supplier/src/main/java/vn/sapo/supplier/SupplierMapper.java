@@ -3,30 +3,37 @@ package vn.sapo.supplier;
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
-import org.modelmapper.config.Configuration;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.entities.supplier.SupplierStatus;
-import vn.sapo.supplier.dto.AbstractSupplierParam;
+import vn.sapo.supplier.dto.BaseSupplierParam;
 import vn.sapo.supplier.dto.CreateSupplierParam;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.dto.UpdateSupplierParam;
 
+import static vn.sapo.shared.configurations.MapperConfigure.MODEL_MAPPER_SKIP_NULL_DISABLED;
+import static vn.sapo.shared.configurations.MapperConfigure.MODEL_MAPPER_SKIP_NULL_ENABLED;
+
 @Component
 public class SupplierMapper implements InitializingBean {
     @Autowired
+    @Qualifier(MODEL_MAPPER_SKIP_NULL_ENABLED)
     private ModelMapper modelMapper;
     @Autowired
-    private Configuration inheritingModelMapperConfiguration;
+    @Qualifier(MODEL_MAPPER_SKIP_NULL_DISABLED)
+    private ModelMapper modelMapperSkipNullDisabled;
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        TypeMap<UpdateSupplierParam, Supplier> dto2Model = modelMapper.createTypeMap(UpdateSupplierParam.class, Supplier.class, inheritingModelMapperConfiguration);
-        dto2Model.addMappings(mapper -> mapper.when(Conditions.isNotNull()).map(AbstractSupplierParam::getGroupId, Supplier::setGroupId));
-        dto2Model.addMappings(mapper -> mapper.when(Conditions.isNotNull()).map(AbstractSupplierParam::getEmployeeId, Supplier::setEmployeeId));
-        dto2Model.addMappings(mapper -> mapper.when(Conditions.isNotNull()).map(AbstractSupplierParam::getPaymentMethodId, Supplier::setPaymentMethodId));
+        TypeMap<UpdateSupplierParam, Supplier> dto2Model = modelMapperSkipNullDisabled.createTypeMap(UpdateSupplierParam.class, Supplier.class);
+        dto2Model.addMappings(mapper -> {
+            mapper.when(Conditions.isNotNull()).map(BaseSupplierParam::getGroupId, Supplier::setGroupId);
+            mapper.when(Conditions.isNotNull()).map(BaseSupplierParam::getEmployeeId, Supplier::setEmployeeId);
+            mapper.when(Conditions.isNotNull()).map(BaseSupplierParam::getPaymentMethodId, Supplier::setPaymentMethodId);
+        });
     }
 
     public SupplierResult toDTO(Supplier supplier) {
@@ -40,7 +47,7 @@ public class SupplierMapper implements InitializingBean {
     }
 
     public void transferFields(UpdateSupplierParam updateSupplierParam, Supplier supplier) {
-        modelMapper.map(updateSupplierParam, supplier);
+        modelMapperSkipNullDisabled.map(updateSupplierParam, supplier);
     }
 
 

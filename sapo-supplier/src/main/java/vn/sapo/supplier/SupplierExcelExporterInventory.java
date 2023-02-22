@@ -31,7 +31,7 @@ public class SupplierExcelExporterInventory {
     }
 
     private void writeHeaderLine() {
-        sheet = workbook.createSheet("Customers");
+        sheet = workbook.createSheet("Suppliers");
         Row row = sheet.createRow(0);
 
         CellStyle style = workbook.createCellStyle();
