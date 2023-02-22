@@ -42,13 +42,15 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
 //        }
         if (supplierGroupRepository.existsByTitle(createParam.getTitle()))
             throw new OperationException("Tên nhóm đã tồn tại");
-        if (supplierGroupRepository.existsBySupGroupCode(createParam.getSupGroupCode()))
+
+        if (createParam.getSupGroupCode() != null && supplierGroupRepository.existsBySupGroupCode(createParam.getSupGroupCode()))
             throw new OperationException("Mã nhóm đã tồn tại");
 
         SupplierGroup supplierGroup = supplierGroupMapper.toModel(createParam);
         supplierGroupRepository.save(supplierGroup);
         if (createParam.getSupGroupCode() == null)
             supplierGroup.setSupGroupCode(CodePrefix.SUPPLIER_GROUP.generate(supplierGroup.getId()));
+
         return supplierGroupMapper.toDTO(supplierGroup);
     }
 
