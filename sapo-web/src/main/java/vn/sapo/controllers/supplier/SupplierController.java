@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.employee.EmployeeService;
 import vn.sapo.payment.method.PaymentMethodService;
 import vn.sapo.supplier.SupplierExcelExporter;
@@ -102,7 +101,7 @@ public class SupplierController {
         } catch (Exception e) {
             modelAndView.addObject("error", e.getMessage());
         }
-        modelAndView.setViewName("/admin/suppliers/update_supplier");
+        modelAndView.setViewName("/admin/suppliers/supplier_update");
 //        modelAndView.setViewName("/admin/suppliers/cap");
         return modelAndView;
     }
@@ -133,6 +132,18 @@ public class SupplierController {
         excelExporter.export(response);
     }
 
+    @GetMapping("/{id}/addresses")
+    public ModelAndView showSupplierAddress(@PathVariable Integer id) {
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            SupplierResult supplier = supplierService.findById(id);
+            modelAndView.addObject("supplier", supplier);
+        } catch (Exception e) {
+            modelAndView.addObject("error", e.getMessage());
+        }
+        modelAndView.setViewName("/admin/suppliers/supplier_address");
 
+        return modelAndView;
+    }
 
 }

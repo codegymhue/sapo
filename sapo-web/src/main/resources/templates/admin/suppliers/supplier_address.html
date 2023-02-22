@@ -1,0 +1,531 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" class="sapo-menu-expand sapo-menu-toggle-active" lang="vi-VN">-->
+
+<!--<head>-->
+<!--  <meta charset="utf-8" />-->
+<!--  <th:block th:replace="/layout/supplier/header :: header"/>-->
+<!--  <script>-->
+<!--    var CKEDITOR_BASEPATH = '/v2/lib/ckeditor/';-->
+<!--    var S_LANG = 'vi-VN';-->
+<!--    var S_LANG_RES = 'https://sapo.dktcdn.net/sapo-frontend-x/d9ad77d.i18n_vi-VN.json';-->
+<!--  </script>-->
+
+<!--  <link href="https://sapo.dktcdn.net/fe-cdn-production/lib/driver/driver.min.css?v=20220218" rel="stylesheet" />-->
+<!--  <title>Chi ti&#x1EBF;t nh&#xE0; cung c&#x1EA5;p</title>-->
+<!--  &lt;!&ndash; Hotjar Tracking Code for mysapo.vn &ndash;&gt;-->
+<!--  <script>-->
+<!--    (function (h, o, t, j, a, r) {-->
+<!--      h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };-->
+<!--      h._hjSettings = { hjid: 1081489, hjsv: 6 };-->
+<!--      a = o.getElementsByTagName('head')[0];-->
+<!--      r = o.createElement('script'); r.async = 1;-->
+<!--      r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;-->
+<!--      a.appendChild(r);-->
+<!--    })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');-->
+<!--  </script>-->
+<!--  <style>-->
+<!--    .feedback-account-sso {-->
+<!--      display: none-->
+<!--    }-->
+<!--  </style>-->
+<!--  &lt;!&ndash; Freshchat &ndash;&gt;-->
+<!--  &lt;!&ndash; LIVE &ndash;&gt;-->
+<!--  &lt;!&ndash; mix pannels tracking&ndash;&gt;-->
+
+<!--</head>-->
+
+<!--<body class="body_dashboard partners suppliers detail">-->
+<!--<div id="container">-->
+<!--  <div class="hidden" context="tenantInfo"-->
+<!--       define="{tenantInfo: new Components.TenantInfo(this,{&quot;countries&quot;:{&quot;countryId&quot;:201}})}">-->
+<!--  </div>-->
+<!--  <div class="header-mobile">-->
+<!--    <a href="javascript:" class="icon-menu visible-xs visible-sm" onclick="showMenu()">-->
+<!--      <svg class="next-icon next-icon&#45;&#45;size-20">-->
+<!--        <use xlink:href="#icon-menu" xmlns:xlink="http://www.w3.org/1999/xlink"></use>-->
+<!--      </svg>-->
+<!--    </a>-->
+<!--  </div>-->
+<!--  <th:block th:replace="/layout/supplier/menu :: menu"/>-->
+<!--  <div class="col-right">-->
+<!--    <div class="col-right_content" id="content">-->
+
+<!--      <header class="ui-title-bar-container">-->
+<!--        <div class="ui-title-bar" style="display:inline-block;min-height:0px;">-->
+<!--          <div class="ui-title-bar__navigation w-50 left">-->
+<!--            <div class="ui-breadcrumbs">-->
+<!--              <a href="/admin/suppliers" id="link-index-shipper">-->
+<!--                <svg class="next-icon next-icon&#45;&#45;size-20 next-icon&#45;&#45;no-nudge">-->
+<!--                  <use xmlns:xlink="http://www.w3.org/1999/xlink"-->
+<!--                       xlink:href="#chevron-left-thinner"></use>-->
+<!--                </svg>-->
+<!--                <span class="ui-breadcrumb__item">Danh sách nhà cung cấp</span>-->
+<!--              </a>-->
+<!--            </div>-->
+
+<!--          </div>-->
+<!--          <div class="w-50 right detail-supplier">-->
+
+<!--            <style>-->
+<!--              .info-account {-->
+<!--                position: relative;-->
+<!--              }-->
+
+<!--              .help-dashboard {-->
+<!--                position: absolute;-->
+<!--                top: -1px;-->
+<!--                right: -1px;-->
+<!--                z-index: 1;-->
+<!--              }-->
+
+<!--              .help-dashboard .help-dropdown .btn-blank {-->
+<!--                background: #fff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDplN2MwNTFiZi1lNGJiLTNjNDktOGM3YS00NTZmZTZlNGQ1NmYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjI5NDdDQ0NGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjI5NDdDQ0JGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjdkNDRhZTRlLTIzMTMtYTE0ZC1hNWQ4LTA5YTVjYTBmNmM0NCIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjk3N2NmYTliLThmZDctZGU0Mi1hNDFiLWIwOTJiYzRkYWM2MiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Po5ReOIAAAIxSURBVHjalJU9aFNRGIbTk+sSh0xiEKciaBF1culiA2IdOlQHaRBKqEurYJYOFn9Ql7iJghQcSqlDAop0yFIoWJcigouKKIROClWnomaQVHw+eAPxcs7J9cDDhXvP997vfH9naPbybC6wEpiASRiFYcjDLmzBJqxCa/HRYtcn4ALCFWjDQ/gGNRiB/XrW9N6+t+euzFV8IkMpzwuwDGNwDVagmwsvO9003IMNqHKKjs9zE16Dg3AclgYI2+oitqT9ZrfGKQo+8WXF9DRs5/5j8YNt2eWl8494RaE4Dx1f+OAwnIRi4Acd2Y/1cuAUt7pi7PP4GLyHj/AavsPNyAlMp84PEqdyc0qer5oa8AuOQAnuw10YD0RpRXYTTnXcDCTvBByVp5/gK1yH33Am4H1XepNODfIi4MUPuANv+t7tgz3wM5Jj0xtN1HntwCZ7fztVrk3F/XFE3OyGE5XPToaKs33PlOBT8CWy1/TyTrOimEH8IpyFc/BuwF7T23UaQocyiJfhA7zMsNf0tpymWzmDwROYz9i0prfpNDan1EyxtRcODFK15pHeqom34I+mW2xdglsZvJ6WXsupeRY0NksRoxvyKOZ1SToL1ky9wdXQPH6uWvYtmy+vIsIF2W8g3EiP3KrKcn3ACUIer8u+6pvnHQ2jz/AWZjIkOUF4RvvNbrz/Jkob24cLmu91tX5Ts6KtziuqjsvKgSWv1gtF+g70Ldv4tO/2fxC4/a/Gbv+/AgwA9q+ezeP4kToAAAAASUVORK5CYII=') no-repeat center center;-->
+<!--                border: none;-->
+<!--                font-size: 0;-->
+<!--                box-shadow: none;-->
+<!--                margin-left: 0;-->
+<!--                height: 61px;-->
+<!--                width: 60px;-->
+<!--                border: 1px solid #dbdbdb;-->
+<!--                outline: none;-->
+<!--                border-radius: 0;-->
+<!--              }-->
+
+<!--              .help-dashboard .help-dropdown .btn-blank:focus {-->
+<!--                box-shadow: none;-->
+<!--              }-->
+
+<!--              .help-dashboard .help-dropdown .help-popup {-->
+<!--                top: 60px;-->
+<!--                box-shadow: #c6c6c6 0px 3px 5px 0px;-->
+<!--              }-->
+
+<!--              .help-dashboard .help-dropdown .help-popup:after {-->
+<!--                right: 20px;-->
+<!--              }-->
+
+<!--              .sapo-menu-expand .page-heading {-->
+<!--                z-index: 1001;-->
+<!--              }-->
+
+<!--              .help-dropdown {-->
+<!--                position: relative;-->
+<!--                margin-left: 10px;-->
+<!--                height: 36px;-->
+<!--              }-->
+
+
+<!--              .help-dropdown a {-->
+<!--                color: #686868;-->
+<!--                display: flex;-->
+<!--                height: 100%;-->
+<!--                border: none;-->
+<!--                flex-direction: row;-->
+<!--                justify-content: center;-->
+<!--                align-items: center;-->
+<!--                cursor: pointer;-->
+<!--                border: 1px solid #c4cdd5;-->
+<!--                float: right;-->
+<!--                width: auto;-->
+<!--              }-->
+
+<!--              .help-dropdown div:hover {-->
+<!--                background-color: #e7f2ff;-->
+<!--              }-->
+
+
+<!--              .help-dropdown .btn-blank:focus {-->
+<!--                box-shadow: none;-->
+<!--                border: 1px solid #c4cdd5;-->
+<!--              }-->
+
+<!--              .help-dropdown .help-popup {-->
+<!--                position: absolute;-->
+<!--                right: 0;-->
+<!--                z-index: 9999999;-->
+<!--                top: 45px;-->
+<!--                box-shadow: #c6c6c6 0 0 10px 5px;-->
+<!--                display: none;-->
+<!--                -webkit-transition: ease 0.5s;-->
+<!--                /* Safari */-->
+<!--                transition: ease 0.5s;-->
+<!--              }-->
+
+<!--              .help-dropdown .help-popup.shown {-->
+<!--                display: block;-->
+<!--                height: 560px;-->
+<!--                margin-top: 15px;-->
+<!--              }-->
+
+<!--              .help-dropdown .help-popup:after {-->
+<!--                content: "";-->
+<!--                display: block;-->
+<!--                width: 0px;-->
+<!--                height: 0px;-->
+<!--                border-left: 10px solid transparent;-->
+<!--                border-right: 10px solid transparent;-->
+<!--                border-bottom: 10px solid #f3f6f8;-->
+<!--                top: -9px;-->
+<!--                position: absolute;-->
+<!--                right: 25px;-->
+<!--              }-->
+<!--            </style>-->
+<!--            <div class="header-fr help-dropdown">-->
+<!--              <a class="btn sapo-btn-blank btn-help" onclick="showHelpPopup()"><img-->
+<!--                      src="/v2/images/dashboard/icons8-help-20.png"-->
+<!--                      style="padding-right: 5px;" /><span>Trợ giúp</span></a>-->
+<!--              <div class="help-popup">-->
+<!--                <iframe id="iframe-help" src=""-->
+<!--                        style="width: 400px; height: 560px;border:none"></iframe>-->
+<!--                <input type="hidden" id="iframe-help-src"-->
+<!--                       value="https://support.sapo.vn?ver=2&amp;view=pos&amp;url=http://anges.mysapogo.com/admin/suppliers/206718863/histories" />-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <script type="text/javascript">-->
+<!--              function showHelpPopup() {-->
+<!--                $("#iframe-help").attr("src", $("#iframe-help-src").val());-->
+<!--                $(".help-popup").toggleClass("shown");-->
+<!--                $(".favourite").css({ "z-index": "0" });-->
+<!--              }-->
+
+<!--              $(function () {-->
+<!--                $('body').on('click', function (e) {-->
+<!--                  if (!$('.help-dropdown .btn-help *').is(e.target) && !$('.help-dropdown .btn-help').is(e.target) && $('.help-popup').hasClass("shown")) {-->
+<!--                    $("#iframe-help").attr("src", "");-->
+<!--                    $(".help-popup").removeClass("shown");-->
+<!--                  }-->
+<!--                });-->
+<!--              });-->
+<!--            </script>-->
+
+<!--            <a href="javascript:" class="btn sapo-btn-default right" style="border-radius: 3px 0 0 3px;"-->
+<!--               data-toggle="dropdown">Tạo phiếu thu/chi</a>-->
+<!--            <ul class="dropdown-menu newscroll" style="font-size:13px">-->
+<!--              <li><a bind-event-click="detailSupplier.createReceiptVoucher()">Tạo phiếu thu</a></li>-->
+<!--              <li><a bind-event-click="detailSupplier.createPaymentVoucher()">Tạo phiếu chi</a></li>-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--          <div class="ui-title-bar__main-group">-->
+<!--            <div class="ui-title-bar__heading-group">-->
+<!--              <div class="ui-title-bar__title">-->
+<!--                <h1 class="text-overflow-hiden" th:value="${supplier.id}" th:text="${supplier.fullName}"> </h1>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </header>-->
+<!--      <div class="detail-supplier-container container mt-0" context="detailSupplier"-->
+<!--           define="{detailSupplier: new Components.Supplier.DetailSupplier(this,{&quot;id&quot;:206718863,&quot;tenantId&quot;:688746,&quot;name&quot;:&quot;Nguyen Tan Luong&quot;,&quot;groupName&quot;:&quot;Khác&quot;,&quot;actionRouting&quot;:&quot;histories&quot;,&quot;email&quot;:&quot;nguyentanluong0503@gmail.com&quot;,&quot;assigneeId&quot;:941587,&quot;assigneeName&quot;:null,&quot;defaultLedgerAccountId&quot;:null,&quot;defaultPaymentTermId&quot;:null,&quot;defaultStockLocationId&quot;:null,&quot;defaultTaxTypeId&quot;:null,&quot;code&quot;:&quot;SUPN00005&quot;,&quot;type&quot;:null,&quot;issuedOnMax&quot;:null,&quot;issuedOnMin&quot;:null,&quot;supplierGroupId&quot;:2650779,&quot;defaultDiscountRate&quot;:null,&quot;defaultPriceListId&quot;:null,&quot;description&quot;:&quot;jrhfjahf&quot;,&quot;fax&quot;:null,&quot;taxNumber&quot;:null,&quot;stringTags&quot;:null,&quot;phoneNumber&quot;:&quot;0977194578&quot;,&quot;website&quot;:null,&quot;createdOn&quot;:&quot;2023-01-30T09:50:16Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-31T10:14:50Z&quot;,&quot;tags&quot;:[&quot;fastfuasj&quot;],&quot;tagso&quot;:null,&quot;contryId&quot;:0,&quot;cityId&quot;:0,&quot;districtId&quot;:0,&quot;countryId&quot;:0,&quot;debt&quot;:0.0,&quot;defaultPaymentMethodId&quot;:3023200,&quot;accountId&quot;:0,&quot;status&quot;:&quot;active&quot;,&quot;page&quot;:0,&quot;tenant&quot;:{&quot;id&quot;:688746,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;name&quot;:&quot;anges&quot;,&quot;industryId&quot;:14,&quot;industry&quot;:&quot;Thời trang&quot;,&quot;mobile&quot;:&quot;0899624267&quot;,&quot;phoneNo&quot;:&quot;0899624267&quot;,&quot;email&quot;:&quot;nguyenthanhhoan3006@gmail.com&quot;,&quot;contactEmail&quot;:null,&quot;fax&quot;:&quot;&quot;,&quot;timezone&quot;:null,&quot;description&quot;:null,&quot;address1&quot;:&quot;Thừa Thiên Huế&quot;,&quot;address2&quot;:null,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;statusError&quot;:0,&quot;city&quot;:&quot;Thừa Thiên Huế&quot;,&quot;district&quot;:null,&quot;cityId&quot;:0,&quot;countryId&quot;:201,&quot;districtId&quot;:0,&quot;domain&quot;:&quot;anges&quot;,&quot;domainUri&quot;:&quot;anges.mysapogo.com&quot;,&quot;startDate&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;endDate&quot;:&quot;2023-02-04T17:00:00Z&quot;,&quot;imageUrl&quot;:null,&quot;packageId&quot;:46,&quot;packageName&quot;:&quot;RETAIL_PRO_TRIAL&quot;,&quot;status&quot;:&quot;active&quot;,&quot;createdOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-28T13:42:40Z&quot;,&quot;locationIds&quot;:[659422],&quot;accountIds&quot;:null,&quot;productLimit&quot;:500,&quot;accountLimit&quot;:3,&quot;locationLimit&quot;:1,&quot;frontendRestricts&quot;:null,&quot;apiRestricts&quot;:null,&quot;viewTutorial&quot;:false,&quot;createSampleDataStatus&quot;:&quot;success&quot;,&quot;registerCompleted&quot;:true,&quot;registerFrom&quot;:&quot;N/A&quot;,&quot;landingPageType&quot;:1},&quot;priceList&quot;:null,&quot;taxType&quot;:null,&quot;supplierCode&quot;:{&quot;tenantId&quot;:0,&quot;code&quot;:null,&quot;id&quot;:0},&quot;paymentTerm&quot;:null,&quot;paymentMethod&quot;:{&quot;id&quot;:3023200,&quot;tenantId&quot;:688746,&quot;name&quot;:&quot;COD&quot;,&quot;status&quot;:&quot;active&quot;,&quot;createdOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;init&quot;:true,&quot;integrated&quot;:false,&quot;type&quot;:&quot;cod&quot;,&quot;removable&quot;:true},&quot;account&quot;:{&quot;id&quot;:941587,&quot;tenantId&quot;:688746,&quot;createdOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;status&quot;:&quot;active&quot;,&quot;avatarUrl&quot;:null,&quot;email&quot;:&quot;nguyenthanhhoan3006@gmail.com&quot;,&quot;sex&quot;:null,&quot;password&quot;:null,&quot;firstName&quot;:&quot;Thanh&quot;,&quot;lastName&quot;:&quot;Hoan Nguyễn&quot;,&quot;fullName&quot;:&quot;Hoan Nguyễn Thanh&quot;,&quot;userName&quot;:&quot;nguyenthanhhoan3006@gmail.com&quot;,&quot;locationId&quot;:0,&quot;mobile&quot;:&quot;0899624267&quot;,&quot;countryCode&quot;:&quot;84&quot;,&quot;intlPhoneNo&quot;:&quot;84899624267&quot;,&quot;guideStatus&quot;:null,&quot;accountOwner&quot;:true,&quot;fakeLoginAccount&quot;:null,&quot;limitedAccess&quot;:false,&quot;permissions&quot;:[],&quot;startSession&quot;:null,&quot;lastLogin&quot;:null,&quot;description&quot;:null,&quot;address&quot;:&quot;&quot;,&quot;dob&quot;:null,&quot;hasPassword&quot;:false,&quot;isDuplicateMobile&quot;:null,&quot;globalSessionId&quot;:null,&quot;ssoLoginIdentity&quot;:null,&quot;hasUpgradedSSO&quot;:false,&quot;isAccountSSO&quot;:true,&quot;sapoAccountProfileUrl&quot;:null,&quot;isAccountAuthenticated&quot;:false,&quot;accountRoles&quot;:[{&quot;locationId&quot;:0,&quot;tenantRoleId&quot;:1,&quot;scopes&quot;:[&quot;full&quot;]}],&quot;languageCode&quot;:&quot;vi&quot;,&quot;dataPermissions&quot;:null},&quot;accounts&quot;:null,&quot;contries&quot;:null,&quot;cities&quot;:null,&quot;listCityDistrict&quot;:null,&quot;paymentMethods&quot;:null,&quot;priceLists&quot;:null,&quot;taxTypes&quot;:null,&quot;paymentTerms&quot;:null,&quot;supplierGroups&quot;:null,&quot;districts&quot;:null,&quot;address&quot;:null,&quot;addresses&quot;:[{&quot;id&quot;:179127841,&quot;tenantId&quot;:0,&quot;subjectId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-30T09:50:16Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-30T09:50:16Z&quot;,&quot;partnerId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;city&quot;:&quot;Đắk Lắk&quot;,&quot;district&quot;:&quot;Thành phố Buôn Ma Thuột&quot;,&quot;ward&quot;:&quot;Xã Hòa Khánh&quot;,&quot;zipCode&quot;:null,&quot;state&quot;:null,&quot;address1&quot;:&quot;fa&quot;,&quot;address2&quot;:null,&quot;email&quot;:&quot;nguyentanluong0503@gmail.com&quot;,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:null,&quot;phoneNumber&quot;:&quot;0977194578&quot;,&quot;status&quot;:&quot;active&quot;,&quot;countryId&quot;:0,&quot;cityId&quot;:0,&quot;districtId&quot;:0,&quot;cityDistrictIds&quot;:null,&quot;selectContries&quot;:null,&quot;selectCities&quot;:null,&quot;selectDistricts&quot;:null,&quot;selectWards&quot;:null,&quot;listCityDistrict&quot;:null,&quot;wardSapos&quot;:null,&quot;listDistrict&quot;:null,&quot;listCity&quot;:null}],&quot;contacts&quot;:[],&quot;ids&quot;:[],&quot;returnUrl&quot;:null,&quot;action&quot;:null,&quot;checkCreate&quot;:0})}">-->
+<!--        <div class="page-info page-info-order-detail w100">-->
+
+<!--          <div class="page-info-title">-->
+<!--            Thông tin cá nhân-->
+<!--            <span class="badge sapo-badge badge&#45;&#45;sushi position-absolute"-->
+<!--                  style="left: calc(100%/3)">-->
+<!--            <span th:text="*{supplier.status == supplier.status.AVAILABLE} ? 'Đang giao dịch' : 'Ngừng giao dịch'"></span>-->
+<!--            </span>-->
+
+
+<!--            <div class="order-sources">-->
+<!--              <a href="javascript:" data-toggle="dropdown" aria-expanded="false"-->
+<!--                 style="color:#212b35">Thao tác khác<i class="fa fa-caret-down ml-2"-->
+<!--                                                       aria-hidden="true"></i></a>-->
+<!--              <ul class="dropdown-menu newscroll" style="font-size:13px">-->
+<!--                <li>-->
+<!--                  <a th:href="'/admin/suppliers/'+${supplier.getId()}+'/edit'">Cập nhật thông tin</a>-->
+<!--                </li>-->
+
+<!--                <li><a id="showModalDelete"> Xoá nhà cung cấp </a></li>-->
+<!--                <input type="hidden" id="modalDeleteId" th:value="${supplier.id}">-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--            <th:bock th:replace="/admin/suppliers/modals/supplier_modal_delete :: supplier_modal_delete"/>-->
+
+<!--          </div>-->
+<!--          <input type="hidden" id="supplierId" th:value="${supplier.id}">-->
+<!--          <div class="page-info-body" id="supplier-info">-->
+<!--            <div class="page-info-body&#45;&#45;sub flex pb-0">-->
+<!--              <div class="col-4 p-0">-->
+<!--                <div class="line-info flex">-->
+<!--                  <label>Nhóm nhà cung cấp<span class="right">:</span></label>-->
+<!--                  <div class="content text-overflow-hiden div-pd-r-10" th:text="${supplier.group} ? ${supplier.group.title}: ${'-&#45;&#45;'}" >-->
+
+<!--                    &lt;!&ndash;                    <span th:tex="${supplier.supplierGroup} ? ${supplier.supplierGroup.title} : ${'-&#45;&#45;'}"></span>&ndash;&gt;-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="line-info flex">-->
+<!--                  <label>Mã<span class="right">:</span></label>-->
+<!--                  <div class="content">-->
+<!--                    <span class="content" th:text="${supplier.supplierCode}"> </span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="line-info flex">-->
+<!--                  <label>Số điện thoại<span class="right">:</span></label>-->
+<!--                  <div class="content text-overflow-hiden div-pd-r-10" >-->
+<!--                    <span th:text="${supplier.phone} ? ${supplier.phone} : ${'-&#45;&#45;'} "></span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="line-info flex">-->
+<!--                  <label>Nợ hiện tại<span class="right">:</span></label>-->
+<!--                  <div class="content" title="0">0</div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="col-4 p-0">-->
+<!--                <div class="line-info flex">-->
+<!--                  <label>Mã số thuế<span class="right">:</span></label>-->
+<!--                  <div class="content text-overflow-hiden div-pd-r-10" th:text="${supplier.taxCode} ? ${supplier.taxCode} : ${'-&#45;&#45;'} "></div>-->
+<!--                </div>-->
+<!--                <div class="line-info flex">-->
+<!--                  <label>Website<span class="right">:</span></label>-->
+<!--                  <a class="content text-overflow-hiden div-pd-r-10" target="_blank" th:text=" ${supplier.website} ? ${supplier.website} : ${'-&#45;&#45;'}">-&#45;&#45;</a>-->
+<!--                </div>-->
+<!--                <div class="line-info flex">-->
+<!--                  <label>Mô tả<span class="right">:</span></label>-->
+<!--                  <div class="content text-overflow-hiden div-pd-r-10">-->
+<!--                    <span th:text="${supplier.description} ? ${supplier.description} : '-&#45;&#45;'"></span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="line-info flex">-->
+<!--                  <label>Email<span class="right">:</span></label>-->
+<!--                  <div class="content text-overflow-hiden div-pd-r-10">-->
+<!--                    <span th:text="${supplier.email} ? ${supplier.email} : '-&#45;&#45;'"></span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="col-4 p-0">-->
+<!--                <div class="line-info flex">-->
+<!--                  <label>Người phụ trách<span class="right">:</span></label>-->
+<!--                  <div class="content text-overflow-hiden div-pd-r-10" title="">-->
+<!--                    <span th:text="${supplier.employee} ? ${supplier.employee.fullName} : ${'-&#45;&#45;'}"></span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="line-info flex">-->
+<!--                  <label>Giá mặc định<span class="right">:</span></label>-->
+<!--                  <div class="content text-overflow-hiden div-pd-r-10" title="">-->
+<!--                    <span>-&#45;&#45;</span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="line-info flex">-->
+<!--                  <label>Hình thức thanh toán<span class="right">:</span></label>-->
+<!--                  <div class="content text-overflow-hiden div-pd-r-10" title="">-->
+
+<!--                    <span th:text="${supplier.paymentMethod} ? ${supplier.paymentMethod.title} : ${'-&#45;&#45;'}"></span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="gird-layout gird-layout&#45;&#45;full-width" style="padding:0px;width:100%;">-->
+<!--          <section class="grid-card">-->
+<!--            <div class="filter-tab-container" style="border-bottom: 1px solid #dfe4e8; width: 100%;display: inline-block;">-->
+<!--              <ul class="filter-tab-list" id="filter-tab-list" style="width: 50%; float: left;border-bottom:none;" role="tablist" data-has-next-tab-controller="true">-->
+<!--                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('history',this)">-->
+<!--                  <a href="javascript:" id="filter-tab-history" class="filter-tab show-all-items">Lịch sử nhập hàng</a>-->
+<!--                </li>-->
+<!--                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('debt',this)">-->
+<!--                  <a href="javascript:" id="filter-tab-debt" class="filter-tab show-all-items">Công nợ</a>-->
+<!--                </li>-->
+<!--                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('contact',this)">-->
+<!--                  <a href="javascript:" id="filter-tab-contact" class="filter-tab show-all-items">Liên hệ</a>-->
+<!--                </li>-->
+<!--                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('address',this)">-->
+<!--                  <a href="javascript:" id="supplierAddress" class="filter-tab show-all-items filter-tab-active">Địa chỉ</a>-->
+<!--                </li>-->
+<!--                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('note',this)">-->
+<!--                  <a href="javascript:" id="filter-tab-note" class="filter-tab show-all-items">Ghi chú</a>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--              <div>-->
+<!--                <a href="javascript:" class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-contact" style="margin-top: 6px; margin-right: 15px; display: none;" bind-event-click="showPopupCreate('contact')">Thêm mới liên hệ</a>-->
+<!--                <a href="javascript:" class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-address" style="margin-top: 6px; margin-right: 15px;" bind-event-click="showPopupCreate('address')">Thêm mới địa chỉ</a>-->
+<!--                <a href="javascript:" class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-note" style="margin-top:6px;margin-right:15px;display:none;" bind-event-click="showPopupCreate('note')">Thêm mới ghi chú</a>-->
+<!--                <a class="btn sapo-btn-blank right btn-help btn-create btn-create-debt" bind-event-click="exportDebt()" style="margin-top:6px;margin-right:15px;display:none;">-->
+<!--                  <svg class="next-icon next-icon&#45;&#45;size-20 action-bar__link-icon next-icon&#45;&#45;no-nudge" style="padding-right: 5px; margin-top: 7px;">-->
+<!--                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-export-minor"></use>-->
+<!--                  </svg>-->
+<!--                  <span>Xuất file</span>-->
+<!--                </a>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </section>-->
+
+<!--          <div id="sapo-table_wrapper" class="dataTables_wrapper no-footer ps ps&#45;&#45;active-x" style="overflow-x: auto;"><table class="sapo-table bulk-action-context dataTable no-footer" id="sapo-table" role="grid">-->
+<!--            <thead class="thead">-->
+<!--            <tr class="tr" role="row"><th style="min-width:60px;" class="select th select&#45;&#45;bulk-action sorting_disabled" nameth="bulk_action" rowspan="1" colspan="1">-->
+<!--              <div class="bulk-actions-tooltip-wrapper bulk-actions-wrapper-main" data-toggle="tooltip" data-placement="right" title="" data-original-title="Chọn tất cả shipper">-->
+<!--                <div class="tooltip&#45;&#45;select-all">-->
+<!--                  <div class="next-input-wrapper bulk-actions&#45;&#45;select-all" style="left: auto;">-->
+<!--                    <label class="bulk-actions&#45;&#45;select-all-btn btn hidden" style="left: 2px;">-->
+<!--                    </label>-->
+<!--                    <input type="checkbox" class="next-checkbox bulk-actions&#45;&#45;select-all-checkbox" bind-event-click="addOrRemoveAllBulkActionItems(this,'address')">-->
+<!--                    <span class="next-checkbox&#45;&#45;styled" style="left: 12px;">-->
+<!--                                                <svg class="next-icon next-icon&#45;&#45;size-10 checkmark"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-checkmark-thick"></use> </svg>-->
+<!--                                                <svg class="next-icon next-icon&#45;&#45;size-10 indeterminate"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-minus"></use> </svg>-->
+<!--                                            </span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </th><th style="width: 15%;" class="sorting_disabled" rowspan="1" colspan="1">Nhãn</th><th style="width: 15%;" class="sorting_disabled" rowspan="1" colspan="1">Địa chỉ</th><th style="width: 15%;" class="sorting_disabled" rowspan="1" colspan="1">Phường xã</th><th style="width: 11%; " class="sorting_disabled" rowspan="1" colspan="1">Quận huyện</th><th style="width: 12%; " class="sorting_disabled" rowspan="1" colspan="1">Tỉnh thành phố</th><th style="width: 11%; " class="sorting_disabled" rowspan="1" colspan="1">Mã bưu điện</th><th style="width: 11%; " class="sorting_disabled" rowspan="1" colspan="1">Số điện thoại</th><th style="width: 11%; " class="sorting_disabled" rowspan="1" colspan="1">Email</th></tr>-->
+<!--            </thead>-->
+<!--            <tbody class="tbody">-->
+
+<!--            <tr role="row" class="odd">-->
+<!--              <td class="left-td t-td-height">-->
+<!--                                        <span class="sapo-checkbox" style="margin-left: 5px;">-->
+<!--                                            <input type="checkbox" value="188299383" name="product_ids" bind-event-change="addOrRemoveBulkActionItem(188299383,this,'address')" id="bulk-action-188299383" class="bulk-action-item sapo-checkbox__input">-->
+<!--                                            <span class="sapo-checkbox__checkmark"></span>-->
+<!--                                        </span>-->
+<!--              </td>-->
+<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)">-->
+<!--                <span data-toggle="tooltip" data-placement="right" title="" data-original-title="Kim Đồng Publishing House">Kim Đồng Publishing House</span>-->
+<!--              </td>-->
+<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)"><span data-toggle="tooltip" data-placement="right" title="" data-original-title="55 Quang Trung">55 Quang Trung</span></td>-->
+<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)"> </td>-->
+<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)">Quận Hai Bà Trưng </td>-->
+<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)">Hà Nội </td>-->
+<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)"> </td>-->
+<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)">(08)4 3943.4490 </td>-->
+<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)">kimdong@hn.vnn.vn </td>-->
+<!--            </tr></tbody>-->
+<!--          </table><div class="ps__rail-x" style="width: 996px; left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 891px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>-->
+
+
+
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="popup-box">-->
+<!--      <iframe scrolling="no" src="about:blank" name="myIframe" id="popupPrint"-->
+<!--              style="border:0;position:absolute;width:0px;height:0px;left:0px;top:0px;"></iframe>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div class='container-fluid-md notifications'>-->
+<!--  <div class='ajax-notification'><span class='ajax-notification-message'></span></div>-->
+<!--</div>-->
+<!--<div class="modal fade" id="sapo-modal-container" data-width="" tabindex="-1" role="dialog" data-backdrop="false">-->
+<!--</div>-->
+<!--<div class="modal-backdrop fade in" id="sapo-modal-backdrop"></div>-->
+
+
+<!--<style>-->
+<!--  #surveys {-->
+<!--    position: fixed;-->
+<!--    bottom: 0;-->
+<!--    width: calc(100% - 23rem);-->
+<!--    right: 0;-->
+<!--    z-index: 999999-->
+<!--  }-->
+
+<!--  .sapo-menu-collapse #surveys {-->
+<!--    width: calc(100% - 5.6rem) !important;-->
+<!--  }-->
+<!--</style>-->
+<!--<div id="surveys"></div>-->
+
+<!--<script>-->
+<!--  Page();-->
+<!--  hj('trigger', 'split_test_b');-->
+<!--</script>-->
+<!--&lt;!&ndash; End Freshchat &ndash;&gt;-->
+
+<!--<div context="notificationVNPay"-->
+<!--     define="{notificationVNPay: new Components.NotificationVNPay(this, {accountId:941587 })}">-->
+<!--  <div class="popup-notification">-->
+<!--    <a href="javascript:" bind-event-click="closeNoti()" class="close">-->
+<!--      <svg>-->
+<!--        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use>-->
+<!--      </svg>-->
+<!--    </a>-->
+<!--    <a href="" target="_blank" class="link-order">-->
+<!--      <img class="left" src="/v2/images/ico-sapo.png" />-->
+
+<!--    </a>-->
+<!--    <a href="" target="_blank" class="link-order">-->
+<!--      <div class="title left">Thanh toán đơn hàng</div>-->
+<!--      <div class="desc left"></div>-->
+<!--    </a>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<!--</body>-->
+<!--&lt;!&ndash;<th:block th:replace="/layout/script :: script"/>&ndash;&gt;-->
+<!--<script src="/assets/admin/js/suppliers/supplier_app.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/izitoast@1/dist/js/iziToast.min.js" type="text/javascript"-->
+<!--        crossorigin></script>-->
+
+
+<!--<script>-->
+
+<!--  $("#showModalDelete").on('click', ()=>{-->
+<!--    let idDelete = $("#modalDeleteId").val()-->
+<!--    console.log("idDelete : " ,idDelete);-->
+
+<!--    $.ajax({-->
+<!--      "headers": {-->
+<!--        "accept": "application/json",-->
+<!--        "content-type": "application/json"-->
+<!--      },-->
+<!--      type: "GET",-->
+<!--      url: origin +'/api/suppliers/' + idDelete-->
+<!--    })-->
+<!--            .done(() => {-->
+<!--              $("#supplier-delete-modal").modal("show");-->
+
+<!--            })-->
+<!--            .fail((error) => {-->
+<!--              console.log(error);-->
+<!--            })-->
+
+<!--  })-->
+
+<!--  $("#btn-supplier-delete").on('click', ()=>{-->
+<!--    let idDelete = $("#modalDeleteId").val()-->
+<!--    $.ajax({-->
+<!--      "headers": {-->
+<!--        "accept": "application/json",-->
+<!--        "content-type": "application/json"-->
+<!--      },-->
+<!--      type: "DELETE",-->
+<!--      url: origin +'/api/suppliers/' + idDelete-->
+<!--    })-->
+<!--            .done(() => {-->
+<!--              $("#supplier-delete-modal").modal("hide");-->
+<!--              SupplierApp.IziToast.showSuccessAlert("Xoá nhà cung cấp thành công");-->
+<!--              setTimeout(() => {-->
+<!--              }, 1500)-->
+<!--              window.location.href = `/admin/suppliers`;-->
+<!--            })-->
+<!--            .fail((error) => {-->
+<!--              SupplierApp.IziToast.showErrorAlert("Xoá nhà cung cấp thất bại");-->
+<!--              setTimeout(() => {-->
+<!--              }, 1500)-->
+<!--            })-->
+<!--  })-->
+
+<!-- function getAllAddressOfSupplier(){-->
+<!--    let supplierId = $("#supplierId").val();-->
+<!--   console.log("supplierId: ", supplierId)-->
+<!--   $.ajax({-->
+<!--     "headers": {-->
+<!--       "accept": "application/json",-->
+<!--       "content-type": "application/json"-->
+<!--     },-->
+<!--     type: "GET",-->
+<!--     url: origin + '/api/addresses/findBySupplierId/' + supplierId-->
+<!--   })-->
+<!--           .done((data) => {-->
+<!--             console.log("dataAdress: ", data)-->
+<!--           })-->
+<!--           .fail((error) => {-->
+
+<!--           })-->
+<!-- }-->
+<!--  getAllAddressOfSupplier();-->
+<!--</script>-->
+<!--</html>-->
