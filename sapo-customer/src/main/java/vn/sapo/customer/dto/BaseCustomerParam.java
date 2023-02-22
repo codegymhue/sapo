@@ -14,7 +14,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Accessors(chain = true)
-public abstract class AbstractCustomerParam {
+public abstract class BaseCustomerParam {
 
     @NotBlank
     private String fullName;
