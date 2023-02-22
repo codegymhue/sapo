@@ -102,7 +102,7 @@ public class SupplierAPI {
             } catch (Exception e) {
                 e.printStackTrace();
                 message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
             }
         }
 
@@ -110,46 +110,5 @@ public class SupplierAPI {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
     }
 
-
-
-
-
-//    public void setData(SupplierResult supplier) {
-//        BigDecimal spendTotal = getSpendTotalBySupplierId(suppplier.getId());
-//        BigDecimal paidTotal = getPaidTotalBySupplierId(supplier.getId());
-//        supplier.setSpendTotal(spendTotal);
-//        supplier.setDebtTotal(spendTotal.subtract(paidTotal));
-//        supplier.setQuantityProductOrder(getQuantityProductOrderBySupplierId(supplier.getId()));
-//        supplier.setQuantityItemOrder(getQuantityItemSupplierOrderById(supplier.getId()));
-//        supplier.setLastDayOrder(getLastDayOrderBySupllierId(supplier.getId()));
-//    }
-//
-//    public BigDecimal getSpendTotalBySupplierId(Integer supplierId) {
-//        BigDecimal spendTotal = saleOrderService.getSpendTotalBySupplierId(supplierId);
-//        if (spendTotal == null)
-//            spendTotal = BigDecimal.valueOf(0);
-//        return spendTotal;
-//    }
-//
-//    public BigDecimal getPaidTotalBySupplierId(Integer supplierId) {
-//        BigDecimal paidTotal = paymentSaleOrderService.getPaidTotalBySupplierId(supplierId);
-//        if (paidTotal == null)
-//            paidTotal = BigDecimal.valueOf(0);
-//        return paidTotal;
-//    }
-//
-//    public Integer getQuantityProductOrderBySupplierId(Integer supplierId) {
-//        Integer quantityProductOrder = saleOrderService.getQuantityProductOrder(supplierId);
-//        if (quantityProductOrder == null)
-//            quantityProductOrder = 0;
-//        return quantityProductOrder;
-//    }
-//
-//    public Integer getQuantityItemSupplierOrderById(Integer supplierId) {
-//        Integer quantityItemOrder = orderItemService.getQuantityItemSupplierOrderById(supplierId);
-//        if (quantityItemOrder == null)
-//            quantityItemOrder = 0;
-//        return quantityItemOrder;
-//    }0
 
 }

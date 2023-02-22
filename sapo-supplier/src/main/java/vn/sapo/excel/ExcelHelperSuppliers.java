@@ -38,7 +38,7 @@ public class ExcelHelperSuppliers {
         try {
             Workbook workbook = new XSSFWorkbook(is);
 
-            Sheet sheet = workbook.getSheet(SHEET);
+            Sheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rows = sheet.iterator();
             List<CreateSupplierParam> suppliers = new ArrayList<CreateSupplierParam>();
             int rowNumber = 0;
@@ -53,25 +53,22 @@ public class ExcelHelperSuppliers {
                 Iterator<Cell> cellsInRow = currentRow.iterator();
 
                 CreateSupplierParam supplier = new CreateSupplierParam();
-
                 CreateAddressParam address = new CreateAddressParam();
                 address.setProvinceId(-1);
                 address.setDistrictId(-1);
 //                address.setWardId(-1);
 
-                int cellIdx = 0;
                 while (cellsInRow.hasNext()) {
                     Cell currentCell = cellsInRow.next();
-                    switch (cellIdx) {
+                    switch (currentCell.getColumnIndex()) {
                         case 0:
                             supplier.setFullName(currentCell.getStringCellValue());
                             break;
                         case 1:
-//                                ma nha cung cap
+                               supplier.setSupplierCode(currentCell.getStringCellValue());
                             break;
                         case 2:
 //                                ma nhom nha cung cap
-
                             break;
                         case 3:
                             supplier.setEmail(currentCell.getStringCellValue());
@@ -86,7 +83,7 @@ public class ExcelHelperSuppliers {
                             supplier.setFax(currentCell.getStringCellValue());
                             break;
                         case 7:
-                            supplier.setTaxCode(currentCell.getStringCellValue());
+                            supplier.setTaxCode(String.valueOf(currentCell.getNumericCellValue()));
                             break;
                         case 8:
                             supplier.setDescription(currentCell.getStringCellValue());
@@ -133,7 +130,6 @@ public class ExcelHelperSuppliers {
                         default:
                             break;
                     }
-                    cellIdx++;
 
                 }
                 supplier.setCreateAddressParam(address);
@@ -146,7 +142,6 @@ public class ExcelHelperSuppliers {
             throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
 
         }
-
     }
 
 }
