@@ -36,6 +36,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     @Transactional(readOnly = true)
     public List<SupplierResult> findAll() {
+        
         return supplierRepository.findAll()
                 .stream()
                 .map(supplierMapper::toDTO)
