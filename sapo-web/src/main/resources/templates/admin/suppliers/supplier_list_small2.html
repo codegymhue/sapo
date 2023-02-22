@@ -5,6 +5,16 @@
 <head>
     <meta charset="utf-8"/>
     <th:block th:replace="/layout/supplier/header :: header"></th:block>
+   <style>
+       .btnDropdown {
+           font-size: 14px;
+           height: 2.5rem;
+           width: 12rem;
+           padding: 0;
+           padding-left: 1.5rem;
+           border-radius: 5px;
+       }
+   </style>
 </head>
 
 <body class="body_dashboard partners suppliers index">
@@ -725,7 +735,7 @@
                                     </a>
                                 </div>
 
-                                <div class="select__wrapper">
+                                <div class="select__wrapper" hidden="hidden">
                                     <select class="sapo-select select-change-filter--all "
                                             bind-event-change="resetFilter(this)">
                                         <option value="">Chọn điều kiện lọc</option>
@@ -782,7 +792,7 @@
                                     <td colspan="2" class="align-middle" id="numberSelectSupplierList"
                                         style="width: 24%">
                                     </td>
-                                    <td class="align-middle" colspan="2">
+                                    <td class="align-middle" colspan="3">
                                         <div class="btn-group">
                                             <button class="btn dropdown-toggle btnDropdown me-2" type="button"
                                                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -792,22 +802,22 @@
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                                                 <li>
                                                     <button class="dropdown-item btnDropdown" id="btnCheckInventory">
-                                                        Kiểm tra tồn kho
+                                                        Cập nhật nhà cung cấp
                                                     </button>
                                                 </li>
                                                 <li>
-                                                    <button class="dropdown-item btnDropdown" id="btnAvailable">Đang
-                                                        giao dịch
+                                                    <button class="dropdown-item btnDropdown" id="btnUnavailable">
+                                                        Ngừng giao dịch
                                                     </button>
                                                 </li>
                                                 <li>
-                                                    <button class="dropdown-item btnDropdown" id="btnUnavailable">Ngừng
-                                                        giao dịch
+                                                    <button class="dropdown-item btnDropdown" id="btnAvailable">
+                                                      Cập nhật trạng thái
                                                     </button>
                                                 </li>
                                                 <li>
-                                                    <button class="dropdown-item btnDropdown" id="btnDelete">Xóa sản
-                                                        phẩm
+                                                    <button class="dropdown-item btnDropdown" id="btnDelete">
+                                                        Xóa nhà cung cấp
                                                     </button>
                                                 </li>
                                             </ul>
@@ -927,7 +937,23 @@
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
 <th:block th:replace="/layout/script :: script"/>
 <script>
+
+    $(".filter-item").css("display","block");
+    $('.select-change-filter').on('change', function () {
+        $('option').prop('disabled', false);
+        $('.select-change-filter').each(function () {
+            let val = this.value;
+            console.log(val, " val")
+            $('.select-change-filter').not(this).find('option').filter(function () {
+                return this.value === val;
+            }).hide()
+        });
+    }).change();
+
+
+
     let arrayIdSupplier = [];
+    let supplierFilter = new SupplierFilter();
     const page = {
         urls: {
             getAllSupplier: SupplierApp.SUPPLIER_API,
@@ -956,8 +982,17 @@
     page.elements.statusChangeForNumberToUnavailable = $("#statusChangeUnavailable");
     page.elements.statusChangeForNumberDelete = $("#statusChangeDelete");
 
+    // modal
+    page.elements.btnAvailable = $("#btnAvailable");
+    page.elements.btnUnavailable = $("#btnUnavailable");
+    page.elements.btnDelete = $("#btnDelete");
+
+
+    page.elements.modalAvailable = $("#modalAvailable");
+    page.elements.modalUnavailable = $("#modalUnavailable");
+    page.elements.modalDelete = $("#modalDelete");
     //filter
-    // page.elements.btnFilter = $(".btn-filter");
+    page.elements.btnFilter = $(".btn-filter");
     // page.elements.filterBody = $(".filter-content");
     // page.dialogs.elements.modalFilter = $("#modalFilter");
     // page.dialogs.elements.selectChangeFilterAll = $(".select-change-filter--all");
@@ -979,28 +1014,32 @@
     page.dialogs.elements.nextPage = $("#nextPage");
     page.dialogs.elements.previousPage = $("#previousPage");
 
+    page.elements.btnFilter.on("click", function () {
+        $(".filter-button-tag").removeClass("active");
+        $('input[type=checkbox]').prop('checked', false);
+        $(".input-date").val("");
+        supplierFilter = null
+    })
+
     page.commands.getAllSupplier = () => {
-        let pageNo = Number(page.elements.pageNo.text());
-        let pageSize = Number(page.elements.pageSize.val());
-        let search = page.elements.search.val().trim();
-        // let status = page.dialogs.elements.status.val();
-        page.commands.getAllSupplierOnPageNo(pageNo, pageSize, search, status);
+       supplierFilter.pageNo = Number(page.elements.pageNo.text());
+        supplierFilter.pageSize = Number(page.elements.pageSize.val());
+        supplierFilter.filter = page.elements.search.val().trim();
+
+        page.commands.getAllSupplierOnPageNo(supplierFilter);
     }
 
-    page.commands.getAllSupplierOnPageNo = (pageNo, pageSize, search, status) => {
+    page.commands.getAllSupplierOnPageNo =(searchParams) => {
+        console.log("searchParams.toString()",searchParams.toString())
+
         $.ajax({
             headers: {
                 "accept": "application/json",
                 "content-type": "application/json"
             },
-            type: "GET",
-            url: page.urls.getAllSupplier,
-            data: ({
-                "pageNo": pageNo,
-                "pageSize": pageSize,
-                // "status": status,
-                "search": search,
-            })
+            type: "POST",
+            url: origin + "/api/suppliers/filter",
+            data: JSON.stringify(supplierFilter)
         })
             .done((data) => {
                 page.elements.tbSupplier_tbody.empty();
@@ -1091,8 +1130,24 @@
         arrayIdSupplier = [];
         page.commands.showAction();
     }
+    page.elements.checkAll.on("change", function () {
+        page.elements.selectAction.prop("checked", true);
+        arrayIdSupplier = [];
+        if (this.checked) {
+            $("#tbSupplier>tbody input").each(function () {
+                $(this).prop("checked", true);
+                arrayIdSupplier.push($(this).val());
+            })
+        } else {
+            $("#tbSupplier>tbody input").each(function () {
+                $(this).prop("checked", false);
+            })
+        }
+        page.commands.showAction();
+    })
+
     page.elements.selectAction.on("change", function () {
-        page.elements.checkAll.prop("checked", true);
+        page.elements.checkAll.prop("checked", false);
         arrayIdSupplier = [];
         console.log(this)
         if (this.checked) {
@@ -1101,10 +1156,10 @@
                 arrayIdSupplier.push($(this).val());
             })
         } else {
-                console.log("sai")
-                $("#tbSupplier>tbody input").each(function () {
-                    $(this).prop("checked", false);
-                })
+            console.log(this)
+            $("#tbSupplier>tbody input").each(function () {
+                $(this).prop("checked", false);
+            })
         }
         console.log(arrayIdSupplier)
         page.commands.showAction();
@@ -1153,14 +1208,109 @@
         if (arrayIdSupplier.length > 0) {
             page.elements.theadList.removeClass("show").addClass("hide");
             page.elements.numberSelectSupplierList.append(`<span>Đã chọn ${arrayIdSupplier.length} sản phẩm trên trang này</span>`)
-            page.elements.statusChangeForNumberSupplierList.append(`<span style="font-size: medium">Thao tác này sẽ cập nhật trạng thái giao dịch cho ${arrayIdSupplier.length} sản phẩm bạn đã chọn.</span>`);
-            page.elements.statusChangeForNumberToUnavailable.append(`<span style="font-size: medium">Thao tác này sẽ ngừng giao dịch ${arrayIdSupplier.length} sản phẩm bạn đã chọn.</span>`);
-            page.elements.statusChangeForNumberDelete.append(`<span style="font-size: medium">Thao tác này sẽ xóa ${arrayIdSupplier.length} sản phẩm bạn đã chọn. Thao tác này không thể khôi phục.</span>`);
+            page.elements.statusChangeForNumberSupplierList.append(`<span style="font-size: medium">Thao tác này sẽ cập nhật trạng thái giao dịch cho ${arrayIdSupplier.length} nhà cung cấp bạn đã chọn</span>`);
+            page.elements.statusChangeForNumberToUnavailable.append(`<span style="font-size: medium">Thao tác này sẽ ngừng giao dịch ${arrayIdSupplier.length} nhà cung cấp bạn đã chọn</span>`);
+            page.elements.statusChangeForNumberDelete.append(`<span style="font-size: medium">Thao tác này sẽ xóa ${arrayIdSupplier.length} nhà cung cấp bạn đã chọn. Thao tác này không thể khôi phục.</span>`);
             page.elements.selectActionThead.removeClass("hide").addClass("show");
         } else {
             page.elements.theadList.removeClass("hide").addClass("show");
             page.elements.selectActionThead.removeClass("show").addClass("hide");
         }
+    }
+
+    page.elements.btnAvailable.on("click", () => {
+        page.elements.modalAvailable.modal("show");
+    })
+    page.elements.btnUnavailable.on("click", () => {
+        page.elements.modalUnavailable.modal("show");
+    })
+    page.elements.btnDelete.on("click", () => {
+        page.elements.modalDelete.modal("show");
+    })
+
+    page.commands.updateStatusToAvailable = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "PUT",
+            url: page.urls.updateStatusAvailable,
+            data: JSON.stringify(arrayIdSupplier)
+        })
+            .done(() => {
+                console.log("done")
+                // ProductApp.IziToast.showSuccessAlert(ProductApp.AlertMessageVi.SUCCESS_UPDATED);
+                // page.elements.modalAvailable.modal("hide");
+                // page.commands.getAllProducts();
+                // page.commands.resetInputCheckBox();
+            })
+            .fail((jqXHR) => {
+                ProductApp.IziToast.showErrorAlert(ProductApp.AlertMessageVi.ERROR_403)
+            })
+    }
+
+    // tùy chọn filter status
+    function setParamFilterActive(str, element) {
+        console.log(element, "element")
+        if ($(element).hasClass("active")) {
+            $(element).removeClass("active")
+            if (supplierFilter.statuses.indexOf(str) > -1) {
+                supplierFilter.statuses.splice(supplierFilter.statuses.indexOf(str), 1)
+            }
+        } else {
+            $(element).addClass("active");
+            supplierFilter.statuses.push(str)
+        }
+    }
+
+    function setParamFilterAssigneeIds(element) {
+        $('input[type="checkbox"].checkbox_employee').change(function () {
+            let checkbox = $(this)
+            if (checkbox.is(":checked")) {
+                supplierFilter.employeeIds.push(checkbox.val())
+            } else {
+                if (supplierFilter.employeeIds.indexOf(checkbox.val()) > -1) {
+                    supplierFilter.employeeIds.splice(supplierFilter.employeeIds.indexOf(checkbox.val()), 1)
+                }
+            }
+        })
+    }
+
+    function setParamFilterSupplierGroupId(element) {
+        $('input[type="checkbox"].checkbox_supplier_group').change(function () {
+            let checkbox = $(this)
+            if (checkbox.is(":checked")) {
+                supplierFilter.groupIds.push(checkbox.val())
+            } else {
+                if (supplierFilter.groupIds.indexOf(checkbox.val()) > -1) {
+                    supplierFilter.groupIds.splice(supplierFilter.groupIds.indexOf(checkbox.val()), 1)
+                }
+            }
+        })
+    }
+
+    // tìm từ khóa trong filter SupplierGroup
+    function suggest(element) {
+        let value = $(element).val().toLowerCase();
+        let ul = $(element).closest('ul');
+        let li = ul.find('li:gt(0)');
+        li.hide();
+        li.filter(function () {
+            let text = $(this).text().toLowerCase();
+            return text.indexOf(value) >= 0;
+        }).show();
+    }
+
+    function setParamFilterCreatedOn() {
+        supplierFilter.createdFrom = $("#createMin").val();
+        supplierFilter.createdTo = $("#createMax").val();
+        if (supplierFilter.createdTo.length > 0)
+            supplierFilter.createdTo = null;
+        if (supplierFilter.createdFrom.length > 0)
+            supplierFilter.createdFrom = null;
+        document.getElementById("createMin").setAttribute("max", supplierFilter.createdTo);
+        document.getElementById("createMax").setAttribute("min", supplierFilter.createdFrom);
     }
 
     page.commands.loadData = () => {

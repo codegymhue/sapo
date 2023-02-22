@@ -73,21 +73,9 @@ public class SupplierAPI {
     }
 
     @PostMapping("/filter")
-    public ResponseEntity<?> testFilter(@RequestBody SupplierFilter supplierFilter) {
+    public ResponseEntity<?> filterSupplier(@RequestBody SupplierFilter supplierFilter) {
         Map<String, Object> supplierResult = supplierService.findAllByFilters2(supplierFilter);
         return new ResponseEntity<>(supplierResult, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable Integer id) {
-        supplierService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-
-    @PatchMapping("/{id}")
-    public ResponseEntity<?> update(@Validated @RequestBody UpdateSupplierParam updateSupplierParam) {
-        return new ResponseEntity<>(supplierService.update(updateSupplierParam), HttpStatus.OK);
     }
 
     @PostMapping("/upload")
@@ -110,8 +98,7 @@ public class SupplierAPI {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
     }
 
-
-
+    
 
 
 //    public void setData(SupplierResult supplier) {
@@ -152,4 +139,16 @@ public class SupplierAPI {
 //        return quantityItemOrder;
 //    }0
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> update(@Validated @RequestBody UpdateSupplierParam updateSupplierParam) {
+        return new ResponseEntity<>(supplierService.update(updateSupplierParam), HttpStatus.OK);
+    }
+
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable Integer id) {
+        supplierService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

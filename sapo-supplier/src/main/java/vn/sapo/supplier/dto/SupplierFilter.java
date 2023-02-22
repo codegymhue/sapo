@@ -19,14 +19,12 @@ public class SupplierFilter {
     private String filter;
     private List<SupplierStatus> statuses;
     private List<Integer> employeeIds;
-    private List<Integer> groupId;
+    private List<Integer> groupIds;
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern="yyyy-MM-dd", timezone = "UCT")
     private Date createdFrom;
-
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern="yyyy-MM-dd", timezone = "UCT")
     private Date createdTo;
+    private Integer pageNo;
+    private Integer pageSize;
 
-    private Integer pageNo;           //page hiện tại
-    private Integer pageSize;            // số lượng trên 1 trang
-//    private Integer start;
 }
