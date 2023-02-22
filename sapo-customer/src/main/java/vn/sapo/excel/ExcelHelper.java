@@ -8,7 +8,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customer.dto.CreateCustomerParam;
-import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.entities.customer.CustomerGender;
 
 import java.io.IOException;
@@ -25,7 +24,7 @@ public class ExcelHelper {
             "Điện thoại", "Ngày sinh", "Giới tính", "Website", "Fax", "Mã số thuế", "SĐT nhân viên phụ trách",
             "Mô tả", "Chính sách giá mặc định", "Chiết khấu mặc định (%)", "Phương thức thanh toán mặc định",
             "Người liên hệ", "Người liên hệ - SĐT", "Người liên hệ - Email", "Địa chỉ", "Tỉnh thành", "Quận huyện",
-            "Phường xã", "Nợ hiện tại", "Tổng chi tiêu", "Ghi chú", "Tags" };
+            "Phường xã", "Nợ hiện tại", "Tổng chi tiêu", "Ghi chú", "Tags"};
 
     static String SHEET = "FileNhapDSKhachHang";
 
@@ -78,8 +77,6 @@ public class ExcelHelper {
                             customer.setFullName(currentCell.getStringCellValue());
                             break;
                         case 1:
-                            if (currentCell.getStringCellValue() == null)
-                                customer.setCustomerCode("CUZN000" + customer.getId());
                             customer.setCustomerCode(currentCell.getStringCellValue());
                             break;
                         case 2:
@@ -106,7 +103,7 @@ public class ExcelHelper {
                             customer.setWebsite(currentCell.getStringCellValue());
                             break;
                         case 9:
-                             customer.setFax(currentCell.getStringCellValue());
+                            customer.setFax(currentCell.getStringCellValue());
                             break;
                         case 10:
                             customer.setTaxCode(currentCell.getStringCellValue());
@@ -121,7 +118,7 @@ public class ExcelHelper {
 //                            chính sách giá mặc định
                             break;
                         case 14:
-                            customer.setGroup(new CustomerGroupResult().setDiscount(0));
+                       //     customer.set(new CustomerGroupResult().setDiscount(0));
                             break;
                         case 15:
 //                            phương thức thanh toán mặc định

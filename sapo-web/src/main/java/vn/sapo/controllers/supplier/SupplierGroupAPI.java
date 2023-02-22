@@ -35,6 +35,7 @@ public class SupplierGroupAPI {
     }
 
     @PatchMapping("/{id}")
+    //TODO: JAVA co quy tac dat ten ham nhu the nay ak
     public ResponseEntity <SupplierGroupResult> Update(@Validated @RequestBody UpdateSupGroupParam updateSupGroupParam) {
         SupplierGroupResult dto = supplierGroupService.update(updateSupGroupParam);
         return new ResponseEntity<>(dto, HttpStatus.OK);

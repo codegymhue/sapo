@@ -395,19 +395,7 @@
                         </div>
 
                         <div id="chose-file">
-                            <div class="chose-file-import">
-                                <a class="btn-upload" bind-event-click="showImport()" href="javascript:void(0)"
-                                   data-original-title="" title=""><i style="padding-right: 4px;"
-                                                                      class="fa fa-cloud-download"
-                                                                      aria-hidden="true"></i><span>Kéo thả file vào
-                                            đây hoặc tải lên từ thiết bị</span></a>
-                                <input name="importProductsFile" type="file" size="30" class="hide"
-                                       id="importFileUpload"
-                                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                                       bind-event-change="enableButtonImport()" multiple="">
-                                <input id="overrideExistProducts" name="overrideExistProducts" type="hidden"
-                                       value="false">
-                            </div>
+                            <input class="form-control" type="file" id="formFileSuppliers">
                         </div>
 
                     </div>
@@ -1216,23 +1204,23 @@
     })
 </script>
 
-<script
->$('#btnImportFileSuppliers').on('click', () => {
-    // page.commands.showLoading();
+<script>
+$('#importBtn').on('click', () => {
     let data = new FormData();
     let file = $('#formFileSuppliers')[0].files[0];
-    data.append('file', file);
+    data.append('file',file);
     $.ajax({
-        url: origin + '/api/suppliers/upload',
+        url: origin +'/api/suppliers/upload',
         processData: false,
         contentType: false,
         data: data,
         type: 'POST'
-    }).done(function (result) {
-        $("#modalImportFileSuppliers").modal("hide");
-        $("#frmFileSuppliers")[0].reset();
-        page.commands.getAllSupplier();
-        // page.commands.closeLoading();
+    }).done(function(result) {
+        alert("voday")
+        $("#modalImportFileCustomers").modal("hide");
+        $("#frmFileCustomers")[0].reset();
+        page.commands.getAllCustomers();
+        page.commands.closeLoading();
         SupplierApp.IziToast.showSuccessAlert("Tải file lên thành công!")
     }).fail((jqXHR) => {
         SupplierApp.IziToast.showErrorAlert("Tải file lên không thành công!")

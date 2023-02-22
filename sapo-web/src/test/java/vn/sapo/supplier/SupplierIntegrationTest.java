@@ -5,10 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import vn.sapo.address.dto.AddressResult;
 import vn.sapo.controllers.supplier.SupplierAPI;
-import vn.sapo.supplier.dto.CreateSupplierParam;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.dto.UpdateSupplierParam;
 
@@ -19,16 +16,16 @@ public class SupplierIntegrationTest {
     SupplierAPI supplierAPI;
 
     private SupplierResult expected;
-    
+
     @BeforeEach
     public void setUp() {
-        UpdateSupplierParam supplierParam = new UpdateSupplierParam()
+        UpdateSupplierParam supplierParam = (UpdateSupplierParam) new UpdateSupplierParam()
                 .setId(98)
+                .setSupplierCode("SPL0005")
                 .setFullName("Thanh Ngân")
                 .setEmail("thanhngan1002@gmail.com")
                 .setPhone("0989876565")
                 .setDescription("Quen thuoc")
-                .setSupplierCode("SPL0005")
                 .setGroupId(99);
         expected = (SupplierResult) supplierAPI.update(supplierParam).getBody();
     }
@@ -38,6 +35,7 @@ public class SupplierIntegrationTest {
         SupplierResult actual = supplierAPI.findById(expected.getId()).getBody();
         assertSupplier(actual, expected);
     }
+
     public void assertSupplier(SupplierResult actual, SupplierResult expected) {
         Assertions.assertThat(actual.getId()).isEqualTo(expected.getId());
         Assertions.assertThat(actual.getFullName()).isEqualTo(expected.getFullName());
