@@ -57,7 +57,7 @@ public class ExcelHelperSuppliers {
                 CreateAddressParam address = new CreateAddressParam();
                 address.setProvinceId(-1);
                 address.setDistrictId(-1);
-                address.setWardId(-1);
+//                address.setWardId(-1);
 
                 int cellIdx = 0;
                 while (cellsInRow.hasNext()) {
