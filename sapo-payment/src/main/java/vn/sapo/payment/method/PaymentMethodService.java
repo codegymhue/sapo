@@ -15,6 +15,8 @@ public interface PaymentMethodService {
 
     PaymentMethodResult findById(Integer id);
 
+    PaymentMethodResult findByTitle(String title);
+
     PaymentMethodResult create(CreatePaymentMethodParam id);
 
     PaymentMethodResult update(UpdatePaymentMethodParam id);

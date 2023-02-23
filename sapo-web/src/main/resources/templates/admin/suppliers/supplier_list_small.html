@@ -1208,7 +1208,8 @@
 $('#importBtn').on('click', () => {
     let data = new FormData();
     let file = $('#formFileSuppliers')[0].files[0];
-    data.append('file',file);
+    data.append('file',file)
+
     $.ajax({
         url: origin +'/api/suppliers/upload',
         processData: false,
@@ -1216,11 +1217,10 @@ $('#importBtn').on('click', () => {
         data: data,
         type: 'POST'
     }).done(function(result) {
-        alert("voday")
         $("#modalImportFileCustomers").modal("hide");
         $("#frmFileCustomers")[0].reset();
         page.commands.getAllCustomers();
-        page.commands.closeLoading();
+        // page.commands.closeLoading();
         SupplierApp.IziToast.showSuccessAlert("Tải file lên thành công!")
     }).fail((jqXHR) => {
         SupplierApp.IziToast.showErrorAlert("Tải file lên không thành công!")

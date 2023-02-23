@@ -3,10 +3,10 @@ package vn.sapo.payment.method;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import vn.sapo.entities.payment.PaymentMethod;
 import vn.sapo.payment.method.dto.CreatePaymentMethodParam;
 import vn.sapo.payment.method.dto.PaymentMethodResult;
 import vn.sapo.payment.method.dto.UpdatePaymentMethodParam;
+import vn.sapo.shared.exceptions.NotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,8 +34,17 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
     @Override
     @Transactional
     public PaymentMethodResult findById(Integer id) {
-        PaymentMethod paymentMethod = paymentMethodRepository.findById(id).get();
-        return paymentMethodMapper.toDTO(paymentMethod);
+        return paymentMethodRepository.findById(id)
+                .map(paymentMethodMapper::toDTO)
+                .orElseThrow(() -> new NotFoundException("Not found paymentMethod with id: " + id));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PaymentMethodResult findByTitle(String title) {
+        return paymentMethodRepository.findByTitle(title)
+                .map(paymentMethodMapper::toDTO)
+                .orElseThrow(() -> new NotFoundException("Not found paymentMethod with title: " + title));
     }
 
     @Override

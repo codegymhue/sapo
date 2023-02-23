@@ -23,19 +23,14 @@ import java.util.stream.Collectors;
 
 @Service
 public class SupplierServiceImpl implements SupplierService {
-
     @Autowired
     private SupplierMapper supplierMapper;
-
     @Autowired
     private SupplierRepository supplierRepository;
     @Autowired
     private SupplierGroupRepository supplierGroupRepository;
-
-
     @Autowired
     private SupplierFilterRepository supplierFilterRepository;
-
 
     @Override
     @Transactional(readOnly = true)
@@ -65,6 +60,7 @@ public class SupplierServiceImpl implements SupplierService {
             supplier.setSupplierCode(CodePrefix.SUPPLIER.generate(supplier.getId()));
         return supplierMapper.toDTO(supplier);
     }
+
 
     @Override
     @Transactional

@@ -8,6 +8,7 @@ import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.supplier.Supplier;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 
 @Getter
@@ -25,6 +26,9 @@ public class Address {
     @Column(name = "full_name", length = 50)
     private String fullName;
 
+    @Column(name = "label", length = 50)
+    private String label;
+
     @Column(name = "phone_number", length = 50)
     private String phoneNumber;
 
@@ -37,22 +41,22 @@ public class Address {
     @Column(name = "line2", length = 50)
     private String line2;
 
-    @Column(name = "district_id", nullable = false)
+    @Column(name = "district_id")
     private Integer districtId;
 
-    @Column(name = "district_name", nullable = false, length = 50)
+    @Column(name = "district_name", length = 50)
     private String districtName;
 
-    @Column(name = "province_id", nullable = false)
+    @Column(name = "province_id")
     private Integer provinceId;
 
-    @Column(name = "province_name", nullable = false, length = 50)
+    @Column(name = "province_name", length = 50)
     private String provinceName;
 
-    @Column(name = "ward_id", nullable = false)
+    @Column(name = "ward_id")
     private Integer wardId;
 
-    @Column(name = "ward_name", nullable = false, length = 50)
+    @Column(name = "ward_name", length = 50)
     private String wardName;
 
     @Column(name = "zip_code", length = 10)
@@ -81,5 +85,23 @@ public class Address {
     public Address setCustomerId(Integer customerId) {
         this.customer = new Customer(this.customerId = customerId);
         return this;
+    }
+
+    public Address setSupplierId(Integer supplierId) {
+        this.supplier = new Supplier(this.supplierId = supplierId);
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address that = (Address) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

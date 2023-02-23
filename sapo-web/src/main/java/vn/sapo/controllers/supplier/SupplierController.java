@@ -125,7 +125,7 @@ public class SupplierController {
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         String currentDateTime = dateFormatter.format(new Date());
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=Supplier_" + currentDateTime + ".xlsx";
+        String headerValue = "attachment; filename=Suppliers_" + currentDateTime + ".xlsx";
         response.setHeader(headerKey, headerValue);
         List<SupplierResult> listSuppliers = supplierService.findAll();
         SupplierExcelExporterInventory excelExporter = new SupplierExcelExporterInventory(listSuppliers);

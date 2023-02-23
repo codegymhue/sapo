@@ -14,6 +14,8 @@ public interface AddressService {
 
     AddressResult create(CreateAddressParam createShippingAddressParam);
 
+    void create(List<CreateAddressParam> createShippingAddressParams);
+
     void deleteByCustomerId(Integer customerId);
 
     List<AddressResult> findAll();

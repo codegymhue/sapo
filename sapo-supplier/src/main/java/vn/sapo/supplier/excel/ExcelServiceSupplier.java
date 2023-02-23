@@ -1,4 +1,4 @@
-package vn.sapo.excel;
+package vn.sapo.supplier.excel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,8 +16,7 @@ public class ExcelServiceSupplier {
 
     public List<CreateSupplierParam> save (MultipartFile file){
         try {
-            List<CreateSupplierParam> suppliers = ExcelHelperSuppliers.excelToSuppliers(file.getInputStream());
-            return suppliers;
+            return ExcelHelperSuppliers.excelToSuppliers(file.getInputStream());
         } catch (IOException e) {
             throw new RuntimeException("fail to store excel data: " + e.getMessage());
         }
