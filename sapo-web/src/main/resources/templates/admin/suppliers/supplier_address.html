@@ -320,7 +320,7 @@
 
 <!--        <div class="gird-layout gird-layout&#45;&#45;full-width" style="padding:0px;width:100%;">-->
 <!--          <section class="grid-card">-->
-<!--            <div class="filter-tab-container" style="border-bottom: 1px solid #dfe4e8; width: 100%;display: inline-block;">-->
+<!--            <div class="filter-tab-container" style=" width: 100%;display: inline-block;">-->
 <!--              <ul class="filter-tab-list" id="filter-tab-list" style="width: 50%; float: left;border-bottom:none;" role="tablist" data-has-next-tab-controller="true">-->
 <!--                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('history',this)">-->
 <!--                  <a href="javascript:" id="filter-tab-history" class="filter-tab show-all-items">Lịch sử nhập hàng</a>-->
@@ -340,7 +340,7 @@
 <!--              </ul>-->
 <!--              <div>-->
 <!--                <a href="javascript:" class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-contact" style="margin-top: 6px; margin-right: 15px; display: none;" bind-event-click="showPopupCreate('contact')">Thêm mới liên hệ</a>-->
-<!--                <a href="javascript:" class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-address" style="margin-top: 6px; margin-right: 15px;" bind-event-click="showPopupCreate('address')">Thêm mới địa chỉ</a>-->
+<!--                <a href="javascript:" class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-address" style="margin-top: 6px; margin-right: 15px;" id="btnShowAddressSupplier">Thêm mới địa chỉ</a>-->
 <!--                <a href="javascript:" class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-note" style="margin-top:6px;margin-right:15px;display:none;" bind-event-click="showPopupCreate('note')">Thêm mới ghi chú</a>-->
 <!--                <a class="btn sapo-btn-blank right btn-help btn-create btn-create-debt" bind-event-click="exportDebt()" style="margin-top:6px;margin-right:15px;display:none;">-->
 <!--                  <svg class="next-icon next-icon&#45;&#45;size-20 action-bar__link-icon next-icon&#45;&#45;no-nudge" style="padding-right: 5px; margin-top: 7px;">-->
@@ -351,48 +351,98 @@
 <!--              </div>-->
 <!--            </div>-->
 <!--          </section>-->
+<!--          <th:block th:replace="/admin/suppliers/modals/create_address_supplier :: create_address_supplier"/>-->
+<!--          <th:block th:replace="/admin/suppliers/modals/edit_address_supplier :: edit_address_supplier"/>-->
 
-<!--          <div id="sapo-table_wrapper" class="dataTables_wrapper no-footer ps ps&#45;&#45;active-x" style="overflow-x: auto;"><table class="sapo-table bulk-action-context dataTable no-footer" id="sapo-table" role="grid">-->
-<!--            <thead class="thead">-->
-<!--            <tr class="tr" role="row"><th style="min-width:60px;" class="select th select&#45;&#45;bulk-action sorting_disabled" nameth="bulk_action" rowspan="1" colspan="1">-->
-<!--              <div class="bulk-actions-tooltip-wrapper bulk-actions-wrapper-main" data-toggle="tooltip" data-placement="right" title="" data-original-title="Chọn tất cả shipper">-->
-<!--                <div class="tooltip&#45;&#45;select-all">-->
-<!--                  <div class="next-input-wrapper bulk-actions&#45;&#45;select-all" style="left: auto;">-->
-<!--                    <label class="bulk-actions&#45;&#45;select-all-btn btn hidden" style="left: 2px;">-->
-<!--                    </label>-->
-<!--                    <input type="checkbox" class="next-checkbox bulk-actions&#45;&#45;select-all-checkbox" bind-event-click="addOrRemoveAllBulkActionItems(this,'address')">-->
-<!--                    <span class="next-checkbox&#45;&#45;styled" style="left: 12px;">-->
-<!--                                                <svg class="next-icon next-icon&#45;&#45;size-10 checkmark"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-checkmark-thick"></use> </svg>-->
-<!--                                                <svg class="next-icon next-icon&#45;&#45;size-10 indeterminate"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-minus"></use> </svg>-->
-<!--                                            </span>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </th><th style="width: 15%;" class="sorting_disabled" rowspan="1" colspan="1">Nhãn</th><th style="width: 15%;" class="sorting_disabled" rowspan="1" colspan="1">Địa chỉ</th><th style="width: 15%;" class="sorting_disabled" rowspan="1" colspan="1">Phường xã</th><th style="width: 11%; " class="sorting_disabled" rowspan="1" colspan="1">Quận huyện</th><th style="width: 12%; " class="sorting_disabled" rowspan="1" colspan="1">Tỉnh thành phố</th><th style="width: 11%; " class="sorting_disabled" rowspan="1" colspan="1">Mã bưu điện</th><th style="width: 11%; " class="sorting_disabled" rowspan="1" colspan="1">Số điện thoại</th><th style="width: 11%; " class="sorting_disabled" rowspan="1" colspan="1">Email</th></tr>-->
-<!--            </thead>-->
-<!--            <tbody class="tbody">-->
+<!--&lt;!&ndash;          <div id="sapo-table_wrapper" class="dataTables_wrapper no-footer ps ps&#45;&#45;active-x" style="overflow-x: auto;"><table class="sapo-table bulk-action-context dataTable no-footer" id="sapo-table" role="grid">&ndash;&gt;-->
+<!--&lt;!&ndash;            <thead class="thead">&ndash;&gt;-->
+<!--&lt;!&ndash;            <tr class="tr" role="row"><th style="min-width:60px;" class="select th select&#45;&#45;bulk-action sorting_disabled" nameth="bulk_action" rowspan="1" colspan="1">&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="bulk-actions-tooltip-wrapper bulk-actions-wrapper-main" data-toggle="tooltip" data-placement="right" title="" data-original-title="Chọn tất cả shipper">&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="tooltip&#45;&#45;select-all">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <div class="next-input-wrapper bulk-actions&#45;&#45;select-all" style="left: auto;">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <label class="bulk-actions&#45;&#45;select-all-btn btn hidden" style="left: 2px;">&ndash;&gt;-->
+<!--&lt;!&ndash;                    </label>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <input type="checkbox" class="next-checkbox bulk-actions&#45;&#45;select-all-checkbox" bind-event-click="addOrRemoveAllBulkActionItems(this,'address')">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <span class="next-checkbox&#45;&#45;styled" style="left: 12px;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <svg class="next-icon next-icon&#45;&#45;size-10 checkmark"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-checkmark-thick"></use> </svg>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <svg class="next-icon next-icon&#45;&#45;size-10 indeterminate"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-minus"></use> </svg>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </span>&ndash;&gt;-->
+<!--&lt;!&ndash;                  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </th>&ndash;&gt;-->
+<!--&lt;!&ndash;              <th style="width: 15%;" class="sorting_disabled" rowspan="1" colspan="1">Nhãn</th>&ndash;&gt;-->
+<!--&lt;!&ndash;              <th style="width: 15%;" class="sorting_disabled" rowspan="1" colspan="1">Địa chỉ</th>&ndash;&gt;-->
+<!--&lt;!&ndash;              <th style="width: 15%;" class="sorting_disabled" rowspan="1" colspan="1">Phường xã</th>&ndash;&gt;-->
+<!--&lt;!&ndash;              <th style="width: 11%; " class="sorting_disabled" rowspan="1" colspan="1">Quận huyện</th>&ndash;&gt;-->
+<!--&lt;!&ndash;              <th style="width: 12%; " class="sorting_disabled" rowspan="1" colspan="1">Tỉnh thành phố</th>&ndash;&gt;-->
+<!--&lt;!&ndash;              <th style="width: 11%; " class="sorting_disabled" rowspan="1" colspan="1">Mã bưu điện</th>&ndash;&gt;-->
+<!--&lt;!&ndash;              <th style="width: 11%; " class="sorting_disabled" rowspan="1" colspan="1">Số điện thoại</th>&ndash;&gt;-->
+<!--&lt;!&ndash;              <th style="width: 11%; " class="sorting_disabled" rowspan="1" colspan="1">Email</th></tr>&ndash;&gt;-->
+<!--&lt;!&ndash;            </thead>&ndash;&gt;-->
+<!--&lt;!&ndash;            <tbody id="bodyRenderAddressSupplier" class="tbody">&ndash;&gt;-->
 
-<!--            <tr role="row" class="odd">-->
-<!--              <td class="left-td t-td-height">-->
-<!--                                        <span class="sapo-checkbox" style="margin-left: 5px;">-->
-<!--                                            <input type="checkbox" value="188299383" name="product_ids" bind-event-change="addOrRemoveBulkActionItem(188299383,this,'address')" id="bulk-action-188299383" class="bulk-action-item sapo-checkbox__input">-->
-<!--                                            <span class="sapo-checkbox__checkmark"></span>-->
-<!--                                        </span>-->
-<!--              </td>-->
-<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)">-->
-<!--                <span data-toggle="tooltip" data-placement="right" title="" data-original-title="Kim Đồng Publishing House">Kim Đồng Publishing House</span>-->
-<!--              </td>-->
-<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)"><span data-toggle="tooltip" data-placement="right" title="" data-original-title="55 Quang Trung">55 Quang Trung</span></td>-->
-<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)"> </td>-->
-<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)">Quận Hai Bà Trưng </td>-->
-<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)">Hà Nội </td>-->
-<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)"> </td>-->
-<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)">(08)4 3943.4490 </td>-->
-<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)">kimdong@hn.vnn.vn </td>-->
-<!--            </tr></tbody>-->
-<!--          </table><div class="ps__rail-x" style="width: 996px; left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 891px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>-->
+<!--&lt;!&ndash;            <tr role="row" class="odd">&ndash;&gt;-->
+<!--&lt;!&ndash;              <td class="left-td t-td-height">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <span class="sapo-checkbox" style="margin-left: 5px;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <input type="checkbox" value="188299383" name="product_ids" bind-event-change="addOrRemoveBulkActionItem(188299383,this,'address')" id="bulk-action-188299383" class="bulk-action-item sapo-checkbox__input">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <span class="sapo-checkbox__checkmark"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </span>&ndash;&gt;-->
+<!--&lt;!&ndash;              </td>&ndash;&gt;-->
+<!--&lt;!&ndash;              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)">&ndash;&gt;-->
+<!--&lt;!&ndash;                <span data-toggle="tooltip" data-placement="right" title="" data-original-title="Kim Đồng Publishing House">Kim Đồng Publishing House</span>&ndash;&gt;-->
+<!--&lt;!&ndash;              </td>&ndash;&gt;-->
+<!--&lt;!&ndash;              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)"><span data-toggle="tooltip" data-placement="right" title="" data-original-title="55 Quang Trung">55 Quang Trung</span></td>&ndash;&gt;-->
+<!--&lt;!&ndash;              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)"> </td>&ndash;&gt;-->
+<!--&lt;!&ndash;              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)">Quận Hai Bà Trưng </td>&ndash;&gt;-->
+<!--&lt;!&ndash;              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)">Hà Nội </td>&ndash;&gt;-->
+<!--&lt;!&ndash;              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)"> </td>&ndash;&gt;-->
+<!--&lt;!&ndash;              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)">(08)4 3943.4490 </td>&ndash;&gt;-->
+<!--&lt;!&ndash;              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)">kimdong@hn.vnn.vn </td>&ndash;&gt;-->
+<!--&lt;!&ndash;            </tr></tbody>&ndash;&gt;-->
+<!--&lt;!&ndash;          </table><div class="ps__rail-x" style="width: 996px; left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 891px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>&ndash;&gt;-->
 
+<!--          <div style="font-size:small" id="tableCheckbox">-->
+<!--            <table id="tbProduct" class="table table-hover" style="background-color: white">-->
+<!--              <thead style="height: 55px">-->
+<!--              <tr id="theadList" class="show">-->
+<!--                <th class="align-middle">-->
+<!--                  <label for="checkAll" style="padding: 1rem; cursor:pointer">-->
+<!--                    <input style="cursor:pointer" id="checkAll" type="checkbox" value="" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Tất cả" aria-label="Tất cả">-->
+<!--                  </label>-->
+<!--                </th>-->
+<!--                <th class="align-middle" scope="col">Nhãn</th>-->
+<!--                <th class="align-middle" scope="col">Địa chỉ </th>-->
+<!--                <th class="align-middle" scope="col">Phường xã</th>-->
+<!--                <th class="align-middle" scope="col">Quận huyện</th>-->
+<!--                <th class="align-middle" scope="col">Tỉnh thành phố</th>-->
+<!--                <th class="align-middle" scope="col">Mã bưu điện </th>-->
+<!--                <th class="align-middle" scope="col">Số điện thoại</th>-->
+<!--                <th class="align-middle" scope="col">Email</th>-->
+<!--              </tr>-->
+<!--              </thead>-->
+<!--              <tbody id="bodyRenderAddressSupplier">-->
+<!--              <tr id="tr_53">-->
+<!--                <td class="align-middle">-->
+<!--                  <label for="53" style="padding: 1rem; cursor:pointer">-->
+<!--                    <input style="cursor:pointer" id="53" class="selectCheckbox" name="options[]" type="checkbox" value="53">-->
+<!--                  </label>-->
+<!--                </td>-->
+<!--                <td class="align-middle"><img width="50px" height="40px" src="http://res.cloudinary.com/ngdquochuy241/image/upload/v1671867654/brudncqea0zwx9m2jf4n.jpg" alt="image"></td>-->
+<!--                <td class="align-middle"><a href="/admin/product/53" style="text-decoration: none">Sổ Da</a></td>-->
+<!--                <td class="align-middle">Sách</td>-->
+<!--                <td class="align-middle">Thiên Long</td>-->
+<!--                <td class="align-middle text-end ">0</td>-->
+<!--                <td class="align-middle text-end">0</td>-->
+<!--                <td class="align-middle">-->
+<!--                  <span id="showStatus" class="available">Đang giao dịch</span>-->
+<!--                </td>-->
+<!--                <td class="align-middle">24/12/2022</td>-->
 
+<!--              </tr>-->
+<!--              </tbody>-->
+<!--            </table>-->
+<!--          </div>-->
 
 <!--        </div>-->
 <!--      </div>-->
@@ -453,7 +503,7 @@
 
 
 <!--</body>-->
-<!--&lt;!&ndash;<th:block th:replace="/layout/script :: script"/>&ndash;&gt;-->
+<!--<th:block th:replace="/layout/script :: script"/>-->
 <!--<script src="/assets/admin/js/suppliers/supplier_app.js"></script>-->
 <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>-->
 <!--<script src="https://cdn.jsdelivr.net/npm/izitoast@1/dist/js/iziToast.min.js" type="text/javascript"-->
@@ -461,11 +511,38 @@
 
 
 <!--<script>-->
+<!--  const page = {-->
+<!--    urls: {},-->
+<!--    elements: {},-->
+<!--    commands: {},-->
+<!--    dialogs: {-->
+<!--      elements: {},-->
+<!--      commands: {}-->
+<!--    }-->
+<!--  }-->
+<!-- class CreateAddressParam {-->
+<!--    constructor( supplierId, fullName,  phoneNumber,email,line1, line2, wardId, wardName, districtId, districtName,-->
+<!--                provinceId, provinceName, zipCode) {-->
+<!--      this.supplierId= supplierId;-->
+<!--      this.fullName = fullName;-->
+<!--      this.phoneNumber = phoneNumber;-->
+<!--      this.email = email;-->
+<!--      this.line1 = line1;-->
+<!--      this.line2 = line2;-->
+<!--      this.wardId = wardId;-->
+<!--      this.wardName = wardName;-->
+<!--      this.districtId = districtId;-->
+<!--      this.districtName =districtName;-->
+<!--      this.provinceId = provinceId;-->
+<!--      this.provinceName = provinceName;-->
+<!--      this.zipCode = zipCode;-->
+<!--    }-->
+<!-- }-->
+
 
 <!--  $("#showModalDelete").on('click', ()=>{-->
 <!--    let idDelete = $("#modalDeleteId").val()-->
 <!--    console.log("idDelete : " ,idDelete);-->
-
 <!--    $.ajax({-->
 <!--      "headers": {-->
 <!--        "accept": "application/json",-->
@@ -507,6 +584,28 @@
 <!--              }, 1500)-->
 <!--            })-->
 <!--  })-->
+<!--  function renderAddressSupplier(item) {-->
+<!--    console.log("item address : ", item)-->
+<!--    return `-->
+<!-- <tr id="tr_${item.id}" onclick="editAddressSup(${item.id})">-->
+<!--                <td class="align-middle">-->
+<!--                  <label for="53" style="padding: 1rem; cursor:pointer">-->
+<!--                    <input style="cursor:pointer" id="53" class="selectCheckbox" name="options[]" type="checkbox" value="53">-->
+<!--                  </label>-->
+<!--                </td>-->
+<!--                  <td class="align-middle">Nhãn</td>-->
+<!--                <td class="align-middle">${item.line1}</td>-->
+<!--                <td class="align-middle" ${item.wardId}>${item.wardName}</td>-->
+<!--                <td class="align-middle" ${item.districtId}>${item.districtName}</td>-->
+<!--                <td class="align-middle" ${item.provinceId} >${item.provinceName}</td>-->
+<!--                <td class="align-middle text-end ">${item.zipCode ? item.zipCode : ""}</td>-->
+<!--                <td class="align-middle text-end">${item.phoneNumber ? item.phoneNumber : ""}</td>-->
+<!--                <td class="align-middle">-->
+<!--                  ${item.email ? item.email : ""}-->
+<!--                </td>-->
+<!--              </tr>-->
+<!--    `-->
+<!--  }-->
 
 <!-- function getAllAddressOfSupplier(){-->
 <!--    let supplierId = $("#supplierId").val();-->
@@ -520,12 +619,179 @@
 <!--     url: origin + '/api/addresses/findBySupplierId/' + supplierId-->
 <!--   })-->
 <!--           .done((data) => {-->
-<!--             console.log("dataAdress: ", data)-->
+<!--             console.log("dataAdress: ", data);-->
+<!--             $.each(data, function (index, item) {-->
+<!--               let str = renderAddressSupplier(item);-->
+<!--               $("#bodyRenderAddressSupplier").prepend(str);-->
+<!--             })-->
 <!--           })-->
 <!--           .fail((error) => {-->
 
 <!--           })-->
 <!-- }-->
+
+<!--  function getAllProvince(element) {-->
+<!--    return $.ajax({-->
+<!--      type: "GET",-->
+<!--      url: "https://vapi.vnappmob.com/api/province/"-->
+<!--    })-->
+<!--            .done((data) => {-->
+<!--              element.append('<option value="-1">Tỉnh/Thành phố</option>')-->
+<!--              $.each(data.results, function (index, value) {-->
+<!--                element.append(`<option value="${value.province_id}">${value.province_name}</option>`)-->
+<!--              });-->
+<!--            })-->
+<!--  }-->
+
+<!--  function getAllDistrictsByProvinceId(element, provinceId) {-->
+<!--    $.ajax({-->
+<!--      "url": "https://vapi.vnappmob.com/api/province/district/" + provinceId,-->
+<!--      "method": "GET"-->
+<!--    }).done(function (response) {-->
+<!--      $.each(response.results, function (index, value) {-->
+<!--        element.append(`<option value="${value.district_id}">${value.district_name}</option>`)-->
+<!--      });-->
+
+<!--    });-->
+<!--  }-->
+
+<!--  function getAllWardsByDistrictId(element, districtId) {-->
+<!--    $.ajax({-->
+<!--      "url": "https://vapi.vnappmob.com/api/province/ward/" + districtId,-->
+<!--      "method": "GET"-->
+<!--    }).done(function (data) {-->
+
+<!--      $.each(data.results, function (index, value) {-->
+<!--        element.append(`<option value="${value.ward_id}">${value.ward_name}</option>`)-->
+<!--      });-->
+<!--    });-->
+<!--  }-->
+
+<!--  let provinceIdCre = $("#province");-->
+<!--  let districtIdCre = $("#district");-->
+<!--  let wardIdCre = $("#ward");-->
+
+<!--  let provinceIdUp = $("#provinceUp");-->
+<!--  let districIdUp = $("#districtUp");-->
+<!--  let wardIdUp = $("#wardUp");-->
+
+<!--  getAllProvince(provinceIdCre);-->
+<!--  getAllProvince(provinceIdUp);-->
+<!--  provinceIdCre.on("change", function () {-->
+<!--    districtIdCre.empty();-->
+<!--    districtIdCre.append('<option>Quận Huyện</option>');-->
+<!--    wardIdCre.empty();-->
+<!--    wardIdCre.append('<option>Phường Xã</option>');-->
+<!--    getAllDistrictsByProvinceId(districtIdCre, provinceIdCre.val());-->
+<!--  });-->
+
+<!--  districtIdCre.on("change", function () {-->
+<!--    wardIdCre.empty();-->
+<!--    wardIdCre.append('<option>Phường Xã</option>');-->
+<!--    getAllWardsByDistrictId(wardIdCre, districtIdCre.val());-->
+<!--  });-->
+
+<!--  provinceIdUp.on("change", function () {-->
+<!--    districIdUp.empty();-->
+<!--    districIdUp.append('<option>Quận Huyện </option>');-->
+<!--    wardIdUp.empty();-->
+<!--    wardIdUp.append('<option>Phường Xã</option>');-->
+<!--    getAllDistrictsByProvinceId(districIdUp, provinceIdUp.val());-->
+<!--  })-->
+
+<!--  districIdUp.on("change", function(){-->
+<!--    wardIdUp.empty();-->
+<!--    wardIdUp.append('<option>Phường Xã</option>');-->
+<!--    getAllWardsByDistrictId(wardIdUp, districIdUp.val());-->
+<!--  })-->
+
+
+<!--  $("#btnShowAddressSupplier").on('click', () => {-->
+<!--    $("#modalCreateAddressSupplier").modal('show');-->
+<!--    $("#fullNameCrAddressSup").val("");-->
+<!--    $("#address1CrAddressSup").val("");-->
+<!--    $("#address2CrAddressSup").val("");-->
+<!--    $("#emailCrAddressSup").val("");-->
+<!--    $("#phoneNumberCrAddressSup").val("");-->
+<!--    $("#province").val("");-->
+<!--    $("#district").val("");-->
+<!--    $("#ward").val("");-->
+<!--    $("#zipCodeCrAddressSup").val("");-->
+<!-- })-->
+
+<!--  $("#btnCreateAddressSup").on('click', ()=> {-->
+<!--    // let idSupplier = $("#supplierId").val();-->
+<!--    let fullName = $("#fullNameCrAddressSup").val();-->
+<!--    let phoneNumber = $("#phoneNumberCrAddressSup").val();-->
+<!--    let email = $("#emailCrAddressSup").val();-->
+<!--    let line1 = $("#address1CrAddressSup").val();-->
+<!--    let line2 = $("#address2CrAddressSup").val();-->
+<!--    let zipCode = $("#zipCodeCrAddressSup").val();-->
+<!--    let createAddressParam = {-->
+<!--      supplierId: $("#supplierId").val(),-->
+<!--      fullName: fullName.length > 0 ? fullName : null,-->
+<!--      phoneNumber:  phoneNumber.length > 0 ? phoneNumber : null,-->
+<!--      email: email.length>0 ? email : null,-->
+<!--      line1: line1.length >0 ? line1 : null ,-->
+<!--      line2:  line2.length > 0 ? line2 : null,-->
+<!--      zipCode:  zipCode,-->
+<!--      wardId:  $("#ward").val(),-->
+<!--      wardName:  $("#ward").find("option:selected").text(),-->
+<!--      districtId:  $("#district").val(),-->
+<!--      districtName: $("#district").find("option:selected").text(),-->
+<!--      provinceId : $("#province").val(),-->
+<!--      provinceName : $("#province").find("option:selected").text(),-->
+
+<!--    }-->
+<!--    $.ajax({-->
+<!--      "headers": {-->
+<!--        "accept": "application/json",-->
+<!--        "content-type": "application/json"-->
+<!--      },-->
+<!--      type: "POST",-->
+<!--      url: origin +'/api/addresses',-->
+<!--      data: JSON.stringify(createAddressParam)-->
+<!--    })-->
+<!--            .done(() => {-->
+<!--              SupplierApp.IziToast.showSuccessAlert("Thêm địa chỉ nhà cung cấp thành công!");-->
+<!--              setTimeout(() => {-->
+<!--              }, 1500);-->
+<!--            })-->
+<!--            .fail((error) => {-->
+<!--              console.log(error);-->
+<!--            })-->
+<!--  })-->
+<!--  function editAddressSup(item){-->
+<!--    console.log("item", item)-->
+<!--    $.ajax({-->
+<!--      "headers": {-->
+<!--        "accept": "application/json",-->
+<!--        "content-type": "application/json"-->
+<!--      },-->
+<!--      type: "GET",-->
+<!--      url: origin +"/api/addresses/" + item,-->
+<!--    })-->
+<!--            .done((data) => {-->
+<!--              $("#modalUpdateAddressSupplier").modal('show');-->
+<!--              $("#fullNameUpAddressSup").val(data.fullName);-->
+<!--              $("#phoneNumberUpAddressSup").val(data.phoneNumber);-->
+<!--              $("#emailUpAddressSup").val(data.email);-->
+<!--              $("#address1UpAddressSup").val(data.line1);-->
+<!--              $("#address2UpAddressSup").val(data.line2);-->
+<!--              $("#zipCodeUpAddressSup").val(data.zipCode);-->
+<!--              console.log("province id:", $("#provinceUp").val(data.provinceId));-->
+<!--              $("#provinceUp").val(data.provinceId);-->
+
+<!--              (getAllDistrictsByProvinceId($("#districtUp"), data.provinceId)).then(() =>{-->
+<!--                $("#districtUp").val(data.districtId);-->
+<!--              });-->
+<!--              $("#districtUp").val(data.districtId);-->
+<!--              $("#wardUp").val(data.wardId);-->
+
+<!--              console.log("data update :", data)-->
+<!--            })-->
+<!--  }-->
+
 <!--  getAllAddressOfSupplier();-->
 <!--</script>-->
 <!--</html>-->
