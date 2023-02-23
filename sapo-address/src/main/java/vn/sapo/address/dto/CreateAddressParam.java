@@ -22,7 +22,6 @@ public class CreateAddressParam {
     @NullOrNotBlank
     private String email;
     @NullOrNotBlank
-
     private String line1;
     @NullOrNotBlank
     private String line2;
