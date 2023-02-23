@@ -62,6 +62,14 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
+    public List<AddressResult> findBySupplierId(Integer supplierId) {
+        return addressRepository.findAllBySupplierId(supplierId)
+                .stream()
+                .map(addressMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     @Transactional
     public AddressResult create(CreateAddressParam createAddressParam) {
         Address address = addressRepository.save(addressMapper.toModel(createAddressParam));

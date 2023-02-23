@@ -101,7 +101,7 @@ public class SupplierController {
         } catch (Exception e) {
             modelAndView.addObject("error", e.getMessage());
         }
-        modelAndView.setViewName("/admin/suppliers/update_supplier");
+        modelAndView.setViewName("/admin/suppliers/supplier_update");
 //        modelAndView.setViewName("/admin/suppliers/cap");
         return modelAndView;
     }
@@ -132,6 +132,18 @@ public class SupplierController {
         excelExporter.export(response);
     }
 
+    @GetMapping("/{id}/addresses")
+    public ModelAndView showSupplierAddress(@PathVariable Integer id) {
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            SupplierResult supplier = supplierService.findById(id);
+            modelAndView.addObject("supplier", supplier);
+        } catch (Exception e) {
+            modelAndView.addObject("error", e.getMessage());
+        }
+        modelAndView.setViewName("/admin/suppliers/supplier_address");
 
+        return modelAndView;
+    }
 
 }

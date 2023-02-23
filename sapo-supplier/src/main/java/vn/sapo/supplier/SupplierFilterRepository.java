@@ -33,8 +33,8 @@ public interface SupplierFilterRepository extends JpaRepository<Supplier, Intege
                 Predicate predicateKw = criteriaBuilder.or(predicateSupplierCode, predicatePhone,predicateName);
                 predicates.add(predicateKw);
             }
-            if (!filter.getGroupId().isEmpty()) {
-                Predicate predicate = criteriaBuilder.or(root.get("group").get("id").in(filter.getGroupId()));
+            if (!filter.getGroupIds().isEmpty()) {
+                Predicate predicate = criteriaBuilder.or(root.get("group").get("id").in(filter.getGroupIds()));
                 predicates.add(predicate);
             }
 

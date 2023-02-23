@@ -10,4 +10,5 @@ public interface SupplierGroupRepository extends JpaRepository<SupplierGroup, In
     boolean existsBySupGroupCode(String supGroupCode);
 
     boolean existsByTitle(String title);
+
 }

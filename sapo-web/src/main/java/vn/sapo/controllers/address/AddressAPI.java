@@ -25,6 +25,12 @@ public class AddressAPI {
         return new ResponseEntity<>(addresses, HttpStatus.OK);
     }
 
+    @GetMapping("/findBySupplierId/{supplierId}")
+    public ResponseEntity<?> findBySupplierId(@PathVariable Integer supplierId) {
+        List<AddressResult> addresses = addressService.findBySupplierId(supplierId);
+        return new ResponseEntity<>(addresses, HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
         return new ResponseEntity<>(addressService.findById(id), HttpStatus.OK);

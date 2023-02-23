@@ -21,4 +21,6 @@ public interface AddressService {
     List<AddressResult> findAll();
 
     AddressResult update(UpdateAddressParam updateAddressParam);
+
+    List<AddressResult> findBySupplierId(Integer supplierId);
 }
