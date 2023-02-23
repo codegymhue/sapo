@@ -35,6 +35,26 @@ class SupplierApp {
         `;
         return str;
     }
+    static renderFilterTab(tab){
+        let str = `<li class="filter-tab-item" style="opacity: 1; padding-bottom: 3.5px;">
+                       <a href="/admin/suppliers?savedSearchId=${tab.id}" class="filter-tab">${tab.title}</a>
+                   </li>`
+        return str;
+    }
+
+    static renderEmptySearchResults(){
+        let str = `<div class="ui-type-container clearfix">
+                        <div class="empty-search-results" illustration="next-discounts-detailed">
+                            <svg class="next-icon next-icon--color-sky-darker next-icon--size-80 empty-search-results__illustration">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-search-reverse">
+                                </use>
+                            </svg>
+                            <h2 class="empty-search-results__title">Không tìm thấy nhà cung cấp phù hợp với điều kiện tìm kiếm</h2>
+                            <p class="empty-search-results__message">Thử thay đổi điều kiện lọc hoặc từ khóa tìm kiếm</p>
+                        </div>
+                </div>`
+        return str;
+    }
 
 
     static IziToast = class {

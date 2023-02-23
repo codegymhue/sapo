@@ -917,41 +917,41 @@
         page.commands.getAllSupplierOnPageNo(pageNo, pageSize, search, status);
     }
 
-    page.commands.getAllSupplierOnPageNo = (pageNo, pageSize, search, status) => {
-        $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "GET",
-            url: page.urls.getAllSupplier,
-            data: ({
-                "pageNo": pageNo,
-                "pageSize": pageSize,
-                // "status": status,
-                "search": search,
-            })
-        })
-            .done((data) => {
-                page.elements.tbSupplier_tbody.empty();
-                page.elements.totalPage.empty();
-                totalPage = data.totalPage;
-                console.log(data)
-                data.suppliers.map(item => {
-                    if (item.status == "AVAILABLE") {
-                        page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available'))
-                    } else {
-                        page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'unavailable'))
-                    }
-                });
-                page.elements.totalPage.append(
-                    `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
-                )
-            })
-        // .fail((jqXHR) => {
-        //     SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_404)
-        // })
-    }
+    // page.commands.getAllSupplierOnPageNo = (pageNo, pageSize, search, status) => {
+    //     $.ajax({
+    //         headers: {
+    //             "accept": "application/json",
+    //             "content-type": "application/json"
+    //         },
+    //         type: "GET",
+    //         url: page.urls.getAllSupplier,
+    //         data: ({
+    //             "pageNo": pageNo,
+    //             "pageSize": pageSize,
+    //             // "status": status,
+    //             "search": search,
+    //         })
+    //     })
+    //         .done((data) => {
+    //             page.elements.tbSupplier_tbody.empty();
+    //             page.elements.totalPage.empty();
+    //             totalPage = data.totalPage;
+    //             console.log(data)
+    //             data.suppliers.map(item => {
+    //                 if (item.status == "AVAILABLE") {
+    //                     page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available'))
+    //                 } else {
+    //                     page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'unavailable'))
+    //                 }
+    //             });
+    //             page.elements.totalPage.append(
+    //                 `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
+    //             )
+    //         })
+    //     // .fail((jqXHR) => {
+    //     //     SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_404)
+    //     // })
+    // }
     page.commands.getAllEmployee = () => {
         $.ajax({
             headers: {

@@ -24,7 +24,7 @@ public interface SupplierService {
 
     void deleteById(Integer id);
 
-    Map<String, Object> getAllSupplierPage(Integer pageNo, Integer pageSize, String title,
+    Map<String, Object> getAllSupplierPage(Integer pageNo, Integer pageSize,
                                                String status
                                               );
     @Transactional(readOnly = true)
@@ -32,4 +32,6 @@ public interface SupplierService {
 
 
     Page<SupplierResult> findAllByFilters(SupplierFilter filter, Pageable pageable);
+
+    void changeStatusToAvailable(Integer id,boolean status);
 }

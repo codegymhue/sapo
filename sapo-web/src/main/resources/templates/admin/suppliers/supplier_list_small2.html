@@ -5,16 +5,16 @@
 <head>
     <meta charset="utf-8"/>
     <th:block th:replace="/layout/supplier/header :: header"></th:block>
-   <style>
-       .btnDropdown {
-           font-size: 14px;
-           height: 2.5rem;
-           width: 12rem;
-           padding: 0;
-           padding-left: 1.5rem;
-           border-radius: 5px;
-       }
-   </style>
+    <style>
+        .btnDropdown {
+            font-size: 14px;
+            height: 2.5rem;
+            width: 12rem;
+            padding: 0;
+            padding-left: 1.5rem;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 
 <body class="body_dashboard partners suppliers index">
@@ -500,7 +500,7 @@
                                 <a href="/admin/suppliers" class="filter-tab filter-tab-active">Tất cả nhà cung cấp</a>
                             </li>
                             <li class="filter-tab-item" style="opacity: 1; padding-bottom: 3.5px;">
-                                <a href="/admin/suppliers?status=available" class="filter-tab">Đang giao dịch</a>
+                                <button class="filter-tab" id="statusAvailable">Đang giao dịch</button>
                             </li>
                         </ul>
                     </div>
@@ -517,7 +517,8 @@
                             <svg class="next-icon next-icon--size-16">
                                 <use xlink:href="#next-search-reverse" xmlns:xlink="http://www.w3.org/1999/xlink"/>
                             </svg>
-                            <input type="text" class="input-query sapo-textbox searchTitle"
+                            <input type="text" class="input-query sapo-textbox searchKey"
+                                   bind-event-change="searchKey()"
                                    title="Tìm kiếm theo mã nhà cung cấp, SĐT, tên nhà cung cấp"
                                    placeholder="Tìm kiếm theo mã nhà cung cấp, SĐT, tên nhà cung cấp"/>
                         </div>
@@ -812,7 +813,7 @@
                                                 </li>
                                                 <li>
                                                     <button class="dropdown-item btnDropdown" id="btnAvailable">
-                                                      Cập nhật trạng thái
+                                                        Cập nhật trạng thái
                                                     </button>
                                                 </li>
                                                 <li>
@@ -831,7 +832,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="container-fluid " style="height: 50px">
+                        <div class="container-fluid" style="height: 50px">
                             <div class="row col-md-12 d-flex align-items-center" style="font-size: small">
                                 <div class="col-md-5"></div>
                                 <div class="col-md-3 text-end">
@@ -871,6 +872,18 @@
                                 </div>
                             </div>
 
+                        </div>
+                        <div class="ui-type-container clearfix">
+                            <div class="empty-search-results" illustration="next-discounts-detailed">
+                                <svg class="next-icon next-icon--color-sky-darker next-icon--size-80 empty-search-results__illustration">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-search-reverse">
+                                    </use>
+                                </svg>
+                                <h2 class="empty-search-results__title">Không tìm thấy nhà cung cấp phù hợp với điều
+                                    kiện tìm kiếm</h2>
+                                <p class="empty-search-results__message">Thử thay đổi điều kiện lọc hoặc từ khóa tìm
+                                    kiếm</p>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -938,7 +951,7 @@
 <th:block th:replace="/layout/script :: script"/>
 <script>
 
-    $(".filter-item").css("display","block");
+    $(".filter-item").css("display", "block");
     $('.select-change-filter').on('change', function () {
         $('option').prop('disabled', false);
         $('.select-change-filter').each(function () {
@@ -946,14 +959,17 @@
             console.log(val, " val")
             $('.select-change-filter').not(this).find('option').filter(function () {
                 return this.value === val;
-            }).hide()
+            }).hide();
+            $('.select-change-filter').not(this).find('option').filter(function () {
+                return this.value === val;
+            }).prop('disabled', true)
         });
     }).change();
 
 
-
     let arrayIdSupplier = [];
     let supplierFilter = new SupplierFilter();
+    let checkSupplierFilterChange;
     const page = {
         urls: {
             getAllSupplier: SupplierApp.SUPPLIER_API,
@@ -993,6 +1009,7 @@
     page.elements.modalDelete = $("#modalDelete");
     //filter
     page.elements.btnFilter = $(".btn-filter");
+    page.elements.btnStatusAvailable = $("#statusAvailable")
     // page.elements.filterBody = $(".filter-content");
     // page.dialogs.elements.modalFilter = $("#modalFilter");
     // page.dialogs.elements.selectChangeFilterAll = $(".select-change-filter--all");
@@ -1003,14 +1020,26 @@
     page.dialogs.elements.filterEmployee = $("#ulAssigneeIdsFilter");
     // page.dialogs.elements.checkboxInputEmployee = $(".sapo-checkbox__input");
     page.dialogs.elements.filterSupplierGroupId = $("#ulSupplierGroupId");
-    // page.dialogs.elements.filterSubmit = $("#filterSubmit")
 
+    page.dialogs.elements.filterSubmit = $("#filterSubmit")
+
+    function resetSupplierFilter() {
+        supplierFilter.filter = null;
+        supplierFilter.statuses = [];
+        supplierFilter.employeeIds = [];
+        supplierFilter.groupIds = [];
+        supplierFilter.createdFrom = null;
+        supplierFilter.createdTo = null;
+        supplierFilter.pageNo = null;
+        supplierFilter.pageSize = null;
+        // page.commands.getAllSupplier();
+    }
 
     // seach
     page.elements.totalPage = $("#totalPage");
     page.elements.pageNo = $("#pageNo");
     page.elements.pageSize = $("#pageSize");
-    page.elements.search = $(".searchTitle");
+    page.elements.searchKey = $(".searchKey");
     page.dialogs.elements.nextPage = $("#nextPage");
     page.dialogs.elements.previousPage = $("#previousPage");
 
@@ -1018,28 +1047,31 @@
         $(".filter-button-tag").removeClass("active");
         $('input[type=checkbox]').prop('checked', false);
         $(".input-date").val("");
-        supplierFilter = null
     })
 
-    page.commands.getAllSupplier = () => {
-       supplierFilter.pageNo = Number(page.elements.pageNo.text());
-        supplierFilter.pageSize = Number(page.elements.pageSize.val());
-        supplierFilter.filter = page.elements.search.val().trim();
 
-        page.commands.getAllSupplierOnPageNo(supplierFilter);
+    page.commands.getAllSupplier = () => {
+        let pageNo = Number(page.elements.pageNo.text());
+        let pageSize = Number(page.elements.pageSize.val());
+        let status = ""
+
+        page.commands.getAllSupplierOnPageNo(pageNo, pageSize, status);
     }
 
-    page.commands.getAllSupplierOnPageNo =(searchParams) => {
-        console.log("searchParams.toString()",searchParams.toString())
+    page.commands.getAllSupplierOnPageNo = (pageNo, pageSize, status) => {
 
         $.ajax({
             headers: {
                 "accept": "application/json",
                 "content-type": "application/json"
             },
-            type: "POST",
-            url: origin + "/api/suppliers/filter",
-            data: JSON.stringify(supplierFilter)
+            type: "GET",
+            url: page.urls.getAllSupplier,
+            data: ({
+                "pageNo": pageNo,
+                "pageSize": pageSize,
+                "status": status
+            })
         })
             .done((data) => {
                 page.elements.tbSupplier_tbody.empty();
@@ -1062,6 +1094,69 @@
         // .fail((jqXHR) => {
         //     SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_404)
         // })
+    }
+
+    page.elements.btnStatusAvailable.on("click", () => {
+        console.log("in to function")
+        let pageNo = Number(page.elements.pageNo.text());
+        let pageSize = Number(page.elements.pageSize.val());
+        let status = "AVAILABLE";
+
+        page.commands.getAllSupplierOnPageNo(pageNo, pageSize, status);
+    })
+
+    function searchKey() {
+        supplierFilter.pageNo = Number(page.elements.pageNo.text());
+        supplierFilter.pageSize = Number(page.elements.pageSize.val());
+        supplierFilter.filter = page.elements.searchKey.val().trim();
+        console.log(supplierFilter)
+        page.commands.getAllSupplierUseFilter(supplierFilter);
+        resetSupplierFilter()
+    }
+
+    page.dialogs.elements.filterSubmit.on("click", () => {
+        supplierFilter.pageNo = Number(page.elements.pageNo.text());
+        supplierFilter.pageSize = Number(page.elements.pageSize.val());
+        console.log(supplierFilter, " supplierFilter truoc rết")
+        page.commands.getAllSupplierUseFilter(supplierFilter);
+        resetSupplierFilter();
+    })
+
+    page.commands.getAllSupplierUseFilter = (supplierFilter) => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "POST",
+            url: origin + "/api/suppliers/filter",
+            data: JSON.stringify(supplierFilter)
+        })
+            .done((data) => {
+
+                page.elements.tbSupplier_tbody.empty();
+                page.elements.totalPage.empty();
+                totalPage = data.totalPage;
+                if (data.suppliers != null) {
+                    $(".ui-type-container").hide();
+                    $("#sapo-table_wrapper").show();
+                    $(".container-fluid").show();
+                    data.suppliers.map(item => {
+                        if (item.status == "AVAILABLE") {
+                            page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available'))
+                        } else {
+                            page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'unavailable'))
+                        }
+                    });
+                    page.elements.totalPage.append(
+                        `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
+                    )
+                } else {
+                    $(".ui-type-container").show();
+                    $("#sapo-table_wrapper").hide();
+                    $(".container-fluid").hide();
+                }
+            })
     }
 
     page.dialogs.elements.nextPage.on("click", () => {
@@ -1207,7 +1302,7 @@
 
         if (arrayIdSupplier.length > 0) {
             page.elements.theadList.removeClass("show").addClass("hide");
-            page.elements.numberSelectSupplierList.append(`<span>Đã chọn ${arrayIdSupplier.length} sản phẩm trên trang này</span>`)
+            page.elements.numberSelectSupplierList.append(`<span>Đã chọn ${arrayIdSupplier.length} nhà cung cấp trên trang này.</span>`)
             page.elements.statusChangeForNumberSupplierList.append(`<span style="font-size: medium">Thao tác này sẽ cập nhật trạng thái giao dịch cho ${arrayIdSupplier.length} nhà cung cấp bạn đã chọn</span>`);
             page.elements.statusChangeForNumberToUnavailable.append(`<span style="font-size: medium">Thao tác này sẽ ngừng giao dịch ${arrayIdSupplier.length} nhà cung cấp bạn đã chọn</span>`);
             page.elements.statusChangeForNumberDelete.append(`<span style="font-size: medium">Thao tác này sẽ xóa ${arrayIdSupplier.length} nhà cung cấp bạn đã chọn. Thao tác này không thể khôi phục.</span>`);
@@ -1228,26 +1323,112 @@
         page.elements.modalDelete.modal("show");
     })
 
-    page.commands.updateStatusToAvailable = () => {
+    page.elements.btnAvailableSave = $("#btnAvailableSave");
+    page.elements.btnAvailableSave.on("click", () => {
+        console.log(arrayIdSupplier[0])
+        page.commands.updateStatusToAvailable(arrayIdSupplier[0]);
+        // console.log("start")
+        // arrayIdSupplier.forEach(async id=>{
+        //     const kq = await page.commands.updateStatusToAvailable(id);
+        //     console.log(kq," kq")
+        // })
+        // console.log("end")
+
+    })
+    page.elements.btnUnavailableSave = $("#btnUnavailableSave");
+    page.elements.btnUnavailableSave.on("click", () => {
+        // console.log( arrayIdSupplier[0])
+        // page.commands.updateStatusUnavailable( arrayIdSupplier[0]);
+        // console.log("start")
+        // arrayIdSupplier.forEach(async id=>{
+        //     const promises = await page.commands.updateStatusUnavailable(id);
+        //     console.log(promises," promises")
+        //     console.log(id," id")
+        // })
+        // console.log("end")
+        console.log("start")
+        arrayIdSupplier.forEach(async id => {
+
+            try {
+                const result = await asyncAjax(id);
+                console.log(result," result")
+                console.log(Promise.resolve()," Promise.resolve()")
+                console.log(Promise.reject(), " rệct")
+            } catch (e) {
+                console.log(e, " e");
+            }
+        })
+        console.log("end")
+
+
+    })
+
+    function asyncAjax(id) {
+        return new Promise(function (resolve, reject) {
+            $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "POST",
+                url: origin + "/api/suppliers/disableBulk",
+                data: JSON.stringify(id),
+                beforeSend: function () {
+                },
+                success: function (data) {
+                    resolve(data) // Resolve promise and when success
+                },
+                error: function (err) {
+                    reject(err) // Reject the promise and go to catch()
+                }
+            });
+        });
+    }
+
+    page.commands.updateStatusToAvailable = (id) => {
         $.ajax({
             headers: {
                 "accept": "application/json",
                 "content-type": "application/json"
             },
-            type: "PUT",
-            url: page.urls.updateStatusAvailable,
-            data: JSON.stringify(arrayIdSupplier)
+            type: "POST",
+            url: origin + "/api/suppliers/activeBulk",
+            data: id
         })
-            .done(() => {
-                console.log("done")
+            .done((data) => {
+                console.log(data, " data")
                 // ProductApp.IziToast.showSuccessAlert(ProductApp.AlertMessageVi.SUCCESS_UPDATED);
                 // page.elements.modalAvailable.modal("hide");
                 // page.commands.getAllProducts();
                 // page.commands.resetInputCheckBox();
             })
             .fail((jqXHR) => {
-                ProductApp.IziToast.showErrorAlert(ProductApp.AlertMessageVi.ERROR_403)
+                // ProductApp.IziToast.showErrorAlert(ProductApp.AlertMessageVi.ERROR_403)
             })
+    }
+
+    page.commands.updateStatusUnavailable = (id) => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "POST",
+            url: origin + "/api/suppliers/disableBulk",
+            data: JSON.stringify(id)
+        }).then((data) => {
+            console.log(data, " data")
+        })
+        // .done((data) => {
+        //     console.log(data," data")
+        //     // ProductApp.IziToast.showSuccessAlert(ProductApp.AlertMessageVi.SUCCESS_UPDATED);
+        //     // page.elements.modalAvailable.modal("hide");
+        //     // page.commands.getAllProducts();
+        //     // page.commands.resetInputCheckBox();
+        // })
+        // .fail((jqXHR) => {
+        //     // ProductApp.IziToast.showErrorAlert(ProductApp.AlertMessageVi.ERROR_403)
+        // })
     }
 
     // tùy chọn filter status
@@ -1262,6 +1443,11 @@
             $(element).addClass("active");
             supplierFilter.statuses.push(str)
         }
+        console.log(supplierFilter.statuses)
+    }
+
+    function query() {
+        supplierFilter.filter = page.elements.search.val().trim();
     }
 
     function setParamFilterAssigneeIds(element) {
@@ -1305,9 +1491,9 @@
     function setParamFilterCreatedOn() {
         supplierFilter.createdFrom = $("#createMin").val();
         supplierFilter.createdTo = $("#createMax").val();
-        if (supplierFilter.createdTo.length > 0)
+        if (supplierFilter.createdTo.length < 0)
             supplierFilter.createdTo = null;
-        if (supplierFilter.createdFrom.length > 0)
+        if (supplierFilter.createdFrom.length < 0)
             supplierFilter.createdFrom = null;
         document.getElementById("createMin").setAttribute("max", supplierFilter.createdTo);
         document.getElementById("createMax").setAttribute("min", supplierFilter.createdFrom);

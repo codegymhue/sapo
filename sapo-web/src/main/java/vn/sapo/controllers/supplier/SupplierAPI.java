@@ -45,7 +45,6 @@ public class SupplierAPI {
         return new ResponseEntity<>(supplierService.getAllSupplierPage(
                 Integer.valueOf(hashMap.get("pageNo")),
                 Integer.valueOf(hashMap.get("pageSize")),
-                hashMap.get("search"),
                 hashMap.get("status")
         ),
                 HttpStatus.OK
@@ -98,7 +97,35 @@ public class SupplierAPI {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
     }
 
-    
+    @PostMapping("/activeBulk")
+    public ResponseEntity<?> updateStatusToAvailable(@RequestBody Integer id) {
+        String message;
+        try {
+            supplierService.changeStatusToAvailable(id, true);
+            message = String.format(" '%s'- Đã ngừng giao dịch thành công", id);
+            return new ResponseEntity<>(message, HttpStatus.OK);
+
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            message = String.format(" '%s'- Nhà cung cấp cập nhật không thành công", id);
+            return new ResponseEntity<>(message, HttpStatus.EXPECTATION_FAILED);
+        }
+    }
+
+    @PostMapping("/disableBulk")
+    public ResponseEntity<?> updateStatusUnavailable(@RequestBody Integer id) {
+        String message;
+        try {
+            supplierService.changeStatusToAvailable(id, false);
+            message = String.format(" '%s'- Đã ngừng giao dịch thành công", id);
+            return new ResponseEntity<>(message, HttpStatus.OK);
+
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            message = String.format(" '%s'- Nhà cung cấp cập nhật không thành công", id);
+            return new ResponseEntity<>(message, HttpStatus.EXPECTATION_FAILED);
+        }
+    }
 
 
 //    public void setData(SupplierResult supplier) {
@@ -143,7 +170,6 @@ public class SupplierAPI {
     public ResponseEntity<?> update(@Validated @RequestBody UpdateSupplierParam updateSupplierParam) {
         return new ResponseEntity<>(supplierService.update(updateSupplierParam), HttpStatus.OK);
     }
-
 
 
     @DeleteMapping("/{id}")

@@ -6,7 +6,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import vn.sapo.entities.product.Product;
+import vn.sapo.entities.product.ProductStatus;
 import vn.sapo.entities.supplier.Supplier;
+import vn.sapo.entities.supplier.SupplierStatus;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.supplier.dto.*;
@@ -15,6 +18,7 @@ import vn.sapo.supplierGroup.SupplierGroupRepository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -103,9 +107,13 @@ public class SupplierServiceImpl implements SupplierService {
     @Transactional
     public Map<String, Object> getAllSupplierPage(Integer pageNo,
                                                   Integer pageSize,
-                                                  String title,
                                                   String status) {
-        Page<Supplier> page = supplierRepository.findAll(PageRequest.of(pageNo - 1, pageSize));
+        Page<Supplier> page;
+        if (status.equals("")) {
+            page = supplierRepository.findAll(PageRequest.of(pageNo - 1, pageSize));
+        } else {
+            page = supplierRepository.findAllByStatus(SupplierStatus.parseSupplierStatus(status), PageRequest.of(pageNo - 1, pageSize));
+        }
         if (page.hasContent()) {
             List<SupplierResult> dtoList = page.getContent()
                     .stream()
@@ -145,5 +153,13 @@ public class SupplierServiceImpl implements SupplierService {
         } else {
             return new HashMap<>();
         }
+    }
+
+    @Override
+    @Transactional()
+    public void changeStatusToAvailable(Integer id, boolean status) {
+        Supplier supplier = supplierRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Supplier not found"));
+        supplier.setStatus(status ? SupplierStatus.AVAILABLE : SupplierStatus.UNAVAILABLE);
     }
 }
