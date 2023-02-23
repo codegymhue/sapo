@@ -70,6 +70,13 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     @Transactional
+    public void create(List<CreateAddressParam> createShippingAddressParams) {
+        List<Address> addresses = createShippingAddressParams.stream().map(addressMapper::toModel).collect(Collectors.toList());
+        addressRepository.saveAll(addresses);
+    }
+
+    @Override
+    @Transactional
     public void deleteByCustomerId(Integer customerId) {
         addressRepository.deleteByCustomerId(customerId);
     }

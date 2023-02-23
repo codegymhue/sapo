@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.employee.EmployeeService;
 import vn.sapo.payment.method.PaymentMethodService;
 import vn.sapo.supplier.SupplierExcelExporter;
@@ -126,7 +125,7 @@ public class SupplierController {
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         String currentDateTime = dateFormatter.format(new Date());
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=Supplier_" + currentDateTime + ".xlsx";
+        String headerValue = "attachment; filename=Suppliers_" + currentDateTime + ".xlsx";
         response.setHeader(headerKey, headerValue);
         List<SupplierResult> listSuppliers = supplierService.findAll();
         SupplierExcelExporterInventory excelExporter = new SupplierExcelExporterInventory(listSuppliers);

@@ -7,12 +7,14 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
+import vn.sapo.entities.Address;
 import vn.sapo.entities.BaseEntity;
 import vn.sapo.entities.Employee;
 import vn.sapo.entities.payment.PaymentMethod;
 
 import javax.persistence.*;
 import java.util.HashMap;
+import java.util.Set;
 
 
 @Getter
@@ -73,6 +75,8 @@ public class Supplier extends BaseEntity {
     @Type(type = "json")
     @Column(name = "extension_attributes", nullable = false, columnDefinition = "JSON")
     private HashMap<String, String> attributes = new HashMap<>();
+    @OneToMany(targetEntity = Address.class, mappedBy = "supplier")
+    private Set<Address> addresses;
 
     public Supplier(Integer id) {
         this.id = id;

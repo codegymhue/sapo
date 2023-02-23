@@ -1,4 +1,4 @@
-package vn.sapo.excel;
+package vn.sapo.supplier.excel;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -18,10 +18,7 @@ import java.util.List;
 public class ExcelHelperSuppliers {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
-    static String[] HEADER = {"Tên nhà cung cấp", "Mã nhà cung cấp", "Mã nhóm nhà cung cấp", "Email", "Điện thoại", "Website",
-            "FAX", "Mã số thuế", "Mô tả", "Chính sách giá mặc định", "Kỳ hạn thanh toán mặc định", "Phương thức thanh toán mặc định",
-            "Người liên hệ", "SDT người liên hệ", "Email người liên hệ", "Nhãn", "Địa chỉ 1", "Địa chỉ 2", "Tỉnh/Thành Phố",
-            "Quận/Huyện", "Nợ hiện tại", "Tags"};
+    static String[] HEADER = {"Tên nhà cung cấp", "Mã nhà cung cấp", "Mã nhóm nhà cung cấp", "Email", "Điện thoại", "Website", "FAX", "Mã số thuế", "Mô tả", "Chính sách giá mặc định", "Kỳ hạn thanh toán mặc định", "Phương thức thanh toán mặc định", "Người liên hệ", "SDT người liên hệ", "Email người liên hệ", "Nhãn", "Địa chỉ 1", "Địa chỉ 2", "Tỉnh/Thành Phố", "Quận/Huyện", "Nợ hiện tại", "Tags"};
 
     static String SHEET = "DuLieuNhap";
 
@@ -35,29 +32,22 @@ public class ExcelHelperSuppliers {
     }
 
     public static List<CreateSupplierParam> excelToSuppliers(InputStream is) {
+        List<CreateSupplierParam> suppliers = new ArrayList<CreateSupplierParam>();
         try {
             Workbook workbook = new XSSFWorkbook(is);
-
             Sheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rows = sheet.iterator();
-            List<CreateSupplierParam> suppliers = new ArrayList<CreateSupplierParam>();
-            int rowNumber = 0;
-            while (rows.hasNext()) {
-                Row currentRow = rows.next();
-
-                // skip header
-                if (rowNumber == 0) {
-                    rowNumber++;
-                    continue;
-                }
-                Iterator<Cell> cellsInRow = currentRow.iterator();
-
+            // skip header start =1
+            rows.next();
+            int count = 0;
+            while (count <= 5000 && rows.hasNext()) {
                 CreateSupplierParam supplier = new CreateSupplierParam();
                 CreateAddressParam address = new CreateAddressParam();
                 address.setProvinceId(-1);
                 address.setDistrictId(-1);
 //                address.setWardId(-1);
-
+                Row currentRow = rows.next();
+                Iterator<Cell> cellsInRow = currentRow.iterator();
                 while (cellsInRow.hasNext()) {
                     Cell currentCell = cellsInRow.next();
                     switch (currentCell.getColumnIndex()) {
@@ -65,10 +55,10 @@ public class ExcelHelperSuppliers {
                             supplier.setFullName(currentCell.getStringCellValue());
                             break;
                         case 1:
-                               supplier.setSupplierCode(currentCell.getStringCellValue());
+                            supplier.setSupplierCode(currentCell.getStringCellValue());
                             break;
                         case 2:
-//                                ma nhom nha cung cap
+//  ma nhom nha cung cap
                             break;
                         case 3:
                             supplier.setEmail(currentCell.getStringCellValue());
@@ -95,8 +85,12 @@ public class ExcelHelperSuppliers {
 //                      Kỳ hạn thanh toán mặc định
                             break;
                         case 11:
-                            supplier.setPaymentMethodId(currentCell.getStringCellValue());
+                            String paymentMethod = currentCell.getStringCellValue();
+                            if (paymentMethod != null && !paymentMethod.isBlank())
+                                supplier.setPaymentMethodId(paymentMethod);
+
                             break;
+
                         case 12:
                             address.setFullName(currentCell.getStringCellValue());
                             break;
@@ -132,15 +126,16 @@ public class ExcelHelperSuppliers {
                     }
 
                 }
-                supplier.setCreateAddressParam(address);
-                suppliers.add(supplier);
+                if (supplier.getFullName() != null) {
+                    supplier.setCreateAddressParam(address);
+                    suppliers.add(supplier);
+                }
+                count++;
             }
             workbook.close();
             return suppliers;
-
         } catch (IOException e) {
             throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
-
         }
     }
 

@@ -3,6 +3,7 @@ package vn.sapo.address.dto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import vn.sapo.shared.validation.constraints.NullOrNotBlank;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -19,6 +20,9 @@ public class UpdateAddressParam {
     private Integer supplierId;
     @NotBlank(message = "Tên khách hàng không được để trống")
     private String fullName;
+    @NullOrNotBlank
+    private String label;
+
     private String phoneNumber;
     private String email;
 

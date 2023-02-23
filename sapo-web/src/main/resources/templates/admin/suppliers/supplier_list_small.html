@@ -1209,8 +1209,6 @@ $('#importBtn').on('click', () => {
     let data = new FormData();
     let file = $('#formFileSuppliers')[0].files[0];
     data.append('file',file)
-    console.log(data, "   data")
-    console.log(file, ' file')
 
     $.ajax({
         url: origin +'/api/suppliers/upload',
@@ -1219,7 +1217,6 @@ $('#importBtn').on('click', () => {
         data: data,
         type: 'POST'
     }).done(function(result) {
-        alert("voday")
         $("#modalImportFileCustomers").modal("hide");
         $("#frmFileCustomers")[0].reset();
         page.commands.getAllCustomers();

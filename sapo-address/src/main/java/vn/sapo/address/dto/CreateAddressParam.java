@@ -18,6 +18,8 @@ public class CreateAddressParam {
     @NotBlank(message = "Tên khách hàng không được để trống")
     private String fullName;
     @NullOrNotBlank
+    private String label;
+    @NullOrNotBlank
     private String phoneNumber;
     @NullOrNotBlank
     private String email;
