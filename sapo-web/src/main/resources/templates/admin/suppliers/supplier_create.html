@@ -49,8 +49,8 @@
                         <div class="page-info">
                             <div class="page-info-title">Thông tin cá nhân</div>
                             <div class="page-info-body">
-                                <div class="col-6 field pl-0">
-                                    <label for="nameCreate" class="label-required mb-2">Tên nhà cung cấp</label>
+                                <div class="col-12 field pl-0">
+                                    <label for="nameCreate" class="label-required* mb-2">Tên nhà cung cấp</label>
                                     <input id="nameCreate" class="sapo-textbox w100"
                                            placeholder="Nhập tên nhà cung cấp" title="Nhập tên nhà cung cấp" required/>
                                 </div>
@@ -58,6 +58,7 @@
                                     <label for="codeCreate" class="label-required mb-2">Mã nhà cung cấp</label>
                                     <input id="codeCreate" class="sapo-textbox w100" placeholder="Nhập mã nhà cung cấp"
                                            title="Nhập mã nhà cung cấp" required/>
+
                                 </div>
                                 <div class="col-6 field pl-0">
                                     <label for="phoneCreate" class="label-required mb-2">Số điện thoại</label>
@@ -69,36 +70,14 @@
                                     <input id="emailCreate" class="sapo-textbox w100" placeholder="Nhập email"
                                            title="Nhập email" required/>
                                 </div>
-
-                                <!--                                <div class="MuiBox-root jss20574 jss21252">-->
-                                <!--                                    <div class="MuiBox-root jss20575 jss21262">-->
-                                <!--                                        <label for="customerGroupCreate" class="MuiTypography-root MuiTypography-body1" style="color: rgb(70, 81, 95);">Nhóm-->
-                                <!--                                            khách hàng</label>-->
-                                <!--                                    </div>-->
-                                <!--                                    <select classname="jss87874" class="form-select" name="customerGroupCreate" id="customerGroupCreate"><option value="1">VIP</option><option value="2">Bán buôn</option><option value="3">Bán Lẻ</option><option value="78">abc</option></select>-->
-                                <!--                                </div>-->
-
-
-<!--                                <div class="col-6 field pr-0">-->
-<!--                                    <div class="label mb-2">Nhóm nhà cung cấp</div>-->
-<!--                                    <div class="select__wrapper " id="search-supplier-group-wrap">-->
-<!--                                        <a class="sapo-select select&#45;&#45;a select-suggest" id="search-supplier-group" href="javascript:" data-original-title="" title="">Chọn nhóm nhà cung cấp</a>-->
-<!--                                        <svg class="next-icon next-icon&#45;&#45;size-16"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use> </svg>-->
-<!--                                        <div class="filter-body&#45;&#45;suggest">-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-
-
-
                                 <div class="col-6 field pr-0">
                                     <div class="label mb-2">Nhóm nhà cung cấp</div>
                                     <div>
                                         <div class="btn-group">
                                             <button id="changeValueSup" class="btn secondary dropdown-toggle"
-                                                    style="width: 300px; height: 30px; text-align: left" data-bs-toggle="dropdown"
+                                                    style="width: 249px; height: 34px; text-align: left"
+                                                    data-bs-toggle="dropdown"
                                                     data-bs-auto-close="outside" aria-expanded="false" >
-
                                             </button>
                                             <ul class="dropdown-menu"
                                                 aria-labelledby="dropdownMenuClickableInside" style="width: 300px">
@@ -364,7 +343,8 @@
 
             let supplierCode = $('#codeCreate').val()
             supplier.supplierCode = supplierCode.trim().length > 0 ? supplierCode : null;
-            // supplier.groupId = $('#supplierGroupCreate :selected').val();
+
+            supplier.groupId = $('#changeValueSup').val();
 
 
            let phone = $('#phoneCreate').val();
@@ -381,7 +361,10 @@
             let paymentMethodId = $('#paymentMethodCreate :selected').val();
             supplier.paymentMethodId = paymentMethodId.trim().length > 0 ? paymentMethodId : null;
 
-            supplier.GroupSupplier = $('#showGroupSupplier :selected').val();
+
+            // supplier.GroupSupplier = $('#changeValueSup :selected').val();
+            page.elements.GroupSupplier = $("#ChangeValueSup");
+
 
             page.elements.supplierId = $("#supplierId");
 
