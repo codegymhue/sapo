@@ -14,6 +14,11 @@
             padding-left: 1.5rem;
             border-radius: 5px;
         }
+
+        .modal-dialog {
+            width: 600px;
+            max-width: unset;
+        }
     </style>
 </head>
 
@@ -802,7 +807,7 @@
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                                                 <li>
-                                                    <button class="dropdown-item btnDropdown" id="btnCheckInventory">
+                                                    <button class="dropdown-item btnDropdown" id="btnUpdateSup">
                                                         Cập nhật nhà cung cấp
                                                     </button>
                                                 </li>
@@ -838,9 +843,9 @@
                                 <div class="col-md-3 text-end">
                                     <label class="me-2">Hiển thị</label>
                                     <select class="me-2 " id="pageSize">
-                                        <option value="7">7</option>
-                                        <option value="14">14</option>
                                         <option value="20">20</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
                                     </select>
                                     <span>Kết quả</span>
                                 </div>
@@ -894,6 +899,76 @@
 
 <!--modal-->
 
+<!-- Modal -->
+
+<div class="modal fade" id="modalUpdateBulk" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="ui-dialog-title">Cập nhật thông tin nhà cung cấp</span>
+                <span class="modal-close-wrapper" role="button" aria-label="Close"
+                      data-bs-dismiss="modal">
+                    <svg class="ui-icon-x ui-icon-x-20">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use> </svg>
+                </span>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <div class="label mb-2">Nhân viên phụ trách</div>
+                        <select class="w100 input-dropdown sapo-btn-blank select-padding left" style="width:250px;"
+                                bind="accountIdBulk" id="accountIdBulk">
+                            <option value="0" selected="">Chọn nhân viên phụ trách</option>
+
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <div class="label mb-2">Hình thức thanh toán</div>
+                        <select class="w100 input-dropdown sapo-btn-blank select-padding left" style="width:250px;"
+                                bind="paymentMethodIdBulk" id="paymentMethodIdBulk">
+                            <option value="0" selected="">Chọn hình thức thanh toán</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <!--                    <div class="col-6">-->
+                    <!--                        <div class="label mb-2">Chiết khấu (%)</div>-->
+                    <!--                        <div class="input-wrap"><input autocomplete="off" placeholder="0" bind="discountPercentBulk_txt"-->
+                    <!--                                                       define="{ numberInput: new Components.NumberInput(this, 'indexSupplier','3','999999','','','False')}"-->
+                    <!--                                                       context="numberInput" class="sapo-textbox align-right"-->
+                    <!--                                                       maximum-value="999999" style="width:250px;" value=""><input-->
+                    <!--                                type="hidden" bind="discountPercentBulk" class="sapo-textbox align-right" id="" name=""-->
+                    <!--                                value="0"></div>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="col-6">-->
+                    <!--                        <div class="label mb-2">Giá mặc định</div>-->
+                    <!--                        <select class="w100 input-dropdown sapo-btn-blank select-padding left" style="width:250px;"-->
+                    <!--                                bind="priceIdBulk" id="priceIdBulk">-->
+                    <!--                            <option value="0" selected="">Chọn giá mặc định</option>-->
+                    <!--                            <option value="2017107">Giá nhập</option>-->
+                    <!--                        </select>-->
+                    <!--                    </div>-->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="action-btn clearfix">
+                    <button class="btn pull-right margin-left-5 sapo-btn-default" type="button"
+                            id="updateBulkaction"
+                            data-bs-target="#update_bulkaction_modal" data-bs-toggle="modal" data-bs-dismiss="modal">Lưu
+                    </button>
+                    <button class="close-modal btn btn-blank pull-right" id="close-popup" data-bs-dismiss="modal"
+                            type="button">Thoát
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modalAvailable -->
+
 <div class="modal fade" id="modalAvailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -905,12 +980,16 @@
             <div class="modal-body" id="statusChange">
             </div>
             <div class="modal-footer d-flex align-items-center">
-                <button class="btn btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
-                <button class="btn btn-primary btn-save" id="btnAvailableSave" type="button">Lưu</button>
+                <button class="btn btn-blank btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
+                <button class="btn btn-save sapo-btn-default" id="btnAvailableSave" type="button"
+                        data-bs-target="#update_bulkaction_modal" data-bs-toggle="modal" data-bs-dismiss="modal">Lưu
+                </button>
             </div>
         </div>
     </div>
 </div>
+
+<!-- modalUnavailable -->
 
 <div class="modal fade" id="modalUnavailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -923,8 +1002,61 @@
             <div class="modal-body" id="statusChangeUnavailable">
             </div>
             <div class="modal-footer d-flex align-items-center">
-                <button class="btn btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
-                <button class="btn btn-primary btn-save" id="btnUnavailableSave" type="button">Lưu</button>
+                <button class="btn btn-blank btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
+                <button class="btn sapo-btn-default btn-save" id="btnUnavailableSave" type="button"
+                        data-bs-target="#update_bulkaction_modal" data-bs-toggle="modal" data-bs-dismiss="modal">Lưu
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="update_bulkaction_modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="ui-dialog-title">Ngừng giao dịch</span>
+            </div>
+            <div class="modal-body pull-center">
+                <h2>Xử lý dữ liệu hoàn tất!</h2>
+                <div>
+                    <div>
+                    </div>
+                </div>
+                <div class="info-update">
+                    <div class="info-update-title">
+                        <span id="label-countOrderComplete">Nhà cung cấp cập nhật thành công: </span>
+                        <span id="countOrderComplete" style="color:#0088ff">0</span>
+                        <a href="javascript:" bind-event-click="showListOrderUpdate(this)" style="display: inline;">
+                            Chi tiết
+                            <i class="fa fa-angle-double-down" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="info-update-body" id="listOrderComplete">
+                    </div>
+                </div>
+                <div class="info-update">
+                    <div class="info-update-title"><span id="label-countOrderFail">Nhà cung cấp cập nhật không thành công: </span><span
+                            id="countOrderFail" style="color:#ff0000">0</span><a href="javascript:"
+                                                                                 bind-event-click="showListOrderUpdate(this)">Chi
+                        tiết<i class="fa fa-angle-double-down" aria-hidden="true"></i></a></div>
+                    <div class="info-update-body" id="listOrderFail">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="action-btn clearfix">
+                    <button class="btn pull-right sapo-btn-blank" type="button" id="buttonPrintAfterPacking"
+                            bind-event-click="showPrintAfterPackingModal()" style="margin-left:10px;display:none;">In
+                        hướng dẫn đóng gói
+                    </button>
+                </div>
+                <div class="action-btn clearfix">
+                    <button class="btn pull-right sapo-btn-default btn--reload-page" type="button"
+                            bind-event-click="window.location.href = window.location.href"
+                            style="float:right; margin-left:10px;">Xác nhận
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -941,8 +1073,10 @@
             <div class="modal-body" id="statusChangeDelete">
             </div>
             <div class="modal-footer d-flex align-items-center">
-                <button class="btn  btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
-                <button class="btn btn-danger btn-save-delete" id="btnSubmitDelete" type="button">Xóa</button>
+                <button class="btn  btn-blank btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
+                <button class="btn sapo-btn-red btn-save-delete" id="btnSubmitDelete" type="button"
+                        data-bs-target="#update_bulkaction_modal" data-bs-toggle="modal" data-bs-dismiss="modal">Xóa
+                </button>
             </div>
         </div>
     </div>
@@ -999,11 +1133,16 @@
     page.elements.statusChangeForNumberDelete = $("#statusChangeDelete");
 
     // modal
+    page.elements.btnUpdateSup = $("#btnUpdateSup")
     page.elements.btnAvailable = $("#btnAvailable");
     page.elements.btnUnavailable = $("#btnUnavailable");
     page.elements.btnDelete = $("#btnDelete");
 
+    page.elements.btnAvailableSave = $("#btnAvailableSave");
+    page.elements.btnUnavailableSave = $("#btnUnavailableSave");
+    page.elements.btnSubmitDelete = $("#btnSubmitDelete");
 
+    page.elements.modalUpdateBulk = $("#modalUpdateBulk")
     page.elements.modalAvailable = $("#modalAvailable");
     page.elements.modalUnavailable = $("#modalUnavailable");
     page.elements.modalDelete = $("#modalDelete");
@@ -1078,18 +1217,27 @@
                 page.elements.totalPage.empty();
                 totalPage = data.totalPage;
                 console.log(data)
-                data.suppliers.map(item => {
-                    if (item.status == "AVAILABLE") {
-                        page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available'))
-                    } else {
-                        page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'unavailable'))
-                    }
-                });
-                page.commands.resetInputCheckBox();
-                page.commands.isCheckbox();
-                page.elements.totalPage.append(
-                    `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
-                )
+                if (data.suppliers != null) {
+                    $(".ui-type-container").hide();
+                    $("#sapo-table_wrapper").show();
+                    $(".container-fluid").show();
+                    data.suppliers.map(item => {
+                        if (item.status == "AVAILABLE") {
+                            page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available'))
+                        } else {
+                            page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'unavailable'))
+                        }
+                    });
+                    page.commands.resetInputCheckBox();
+                    page.commands.isCheckbox();
+                    page.elements.totalPage.append(
+                        `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
+                    )
+                } else {
+                    $(".ui-type-container").show();
+                    $("#sapo-table_wrapper").hide();
+                    $(".container-fluid").hide();
+                }
             })
         // .fail((jqXHR) => {
         //     SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_404)
@@ -1195,10 +1343,29 @@
         })
             .done((data) => {
                 $.each(data, (i, item) => {
+                    let str = `<option value="${item.id}">${item.fullName}</option>`;
                     page.dialogs.elements.filterEmployee.append(SupplierApp.renderEmployeeOnFilter(item));
+                    $("#accountIdBulk").append(str);
                 });
             }).fail((jqXHR) => {
         })
+    }
+
+    page.commands.getAllPaymentMethodSelect = () => {
+        $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            "type": "GET",
+            "url": origin + "/api/admin/payment_methods"
+        })
+            .done((data) => {
+                $.each(data, (i, item) => {
+                    let str = `<option value="${item.id}">${item.title}</option>`;
+                    $("#paymentMethodIdBulk").append(str)
+                })
+            })
     }
 
     page.commands.getAllSupplierGroup = () => {
@@ -1313,6 +1480,10 @@
         }
     }
 
+
+    page.elements.btnUpdateSup.on("click", () => {
+        page.elements.modalUpdateBulk.modal("show");
+    })
     page.elements.btnAvailable.on("click", () => {
         page.elements.modalAvailable.modal("show");
     })
@@ -1323,47 +1494,53 @@
         page.elements.modalDelete.modal("show");
     })
 
-    page.elements.btnAvailableSave = $("#btnAvailableSave");
-    page.elements.btnAvailableSave.on("click", () => {
-        console.log(arrayIdSupplier[0])
-        page.commands.updateStatusToAvailable(arrayIdSupplier[0]);
-        // console.log("start")
-        // arrayIdSupplier.forEach(async id=>{
-        //     const kq = await page.commands.updateStatusToAvailable(id);
-        //     console.log(kq," kq")
-        // })
-        // console.log("end")
-
-    })
-    page.elements.btnUnavailableSave = $("#btnUnavailableSave");
-    page.elements.btnUnavailableSave.on("click", () => {
-        // console.log( arrayIdSupplier[0])
-        // page.commands.updateStatusUnavailable( arrayIdSupplier[0]);
-        // console.log("start")
-        // arrayIdSupplier.forEach(async id=>{
-        //     const promises = await page.commands.updateStatusUnavailable(id);
-        //     console.log(promises," promises")
-        //     console.log(id," id")
-        // })
-        // console.log("end")
-        console.log("start")
+    page.elements.updateBulkaction = $("#updateBulkaction")
+    page.elements.updateBulkaction.on("click", () => {
+        let empId = $("#accountIdBulk").val();
+        if (empId == 0)
+            empId = null
+        console.log(empId)
+        let paymentId = $("#paymentMethodIdBulk").val();
+        if (paymentId == 0)
+            paymentId = null
+        console.log(paymentId, " paymentId")
+        $(".ui-dialog-title").text("Cập nhật thông tin nhà cung cấp")
+        let countOrderComplete = 0;
+        let countOrderFail = 0;
         arrayIdSupplier.forEach(async id => {
-
             try {
-                const result = await asyncAjax(id);
-                console.log(result," result")
-                console.log(Promise.resolve()," Promise.resolve()")
-                console.log(Promise.reject(), " rệct")
+                const result = await updateBulkaction(id, empId, paymentId);
+                if (result.message.includes("Đã được cập nhật thành công")) {
+                    countOrderComplete += 1
+                    let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a>
+                                    <span> - Đã được cập nhật thành công</span>
+                                </div>`
+                    $("#countOrderComplete").text(countOrderComplete)
+                    $("#listOrderComplete").append(str)
+                } else if (result.message.includes("Có lỗi xảy ra")) {
+                    countOrderFail += 1
+                    let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
+                    $("#countOrderFail").text(countOrderFail)
+                    $("#listOrderFail").append(str)
+                }
             } catch (e) {
-                console.log(e, " e");
+                countOrderFail += 1
+                let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
+                $("#countOrderFail").text(countOrderFail);
+                $("#listOrderFail").append(str);
+                console.log(e, " err")
             }
         })
-        console.log("end")
-
-
     })
 
-    function asyncAjax(id) {
+    function updateBulkaction(supId, empId, paymentId) {
+        let updateSupplierParam = {};
+        updateSupplierParam.id = supId;
+        updateSupplierParam.employeeId = empId;
+        updateSupplierParam.paymentMethodId = paymentId;
+        console.log(empId, " empId in");
+        console.log(paymentId, " paymentId in");
+        console.log(supId, " supId in");
         return new Promise(function (resolve, reject) {
             $.ajax({
                 headers: {
@@ -1371,8 +1548,8 @@
                     "content-type": "application/json"
                 },
                 type: "POST",
-                url: origin + "/api/suppliers/disableBulk",
-                data: JSON.stringify(id),
+                url: origin + "/api/suppliers/updateBulk",
+                data: JSON.stringify(updateSupplierParam),
                 beforeSend: function () {
                 },
                 success: function (data) {
@@ -1385,50 +1562,165 @@
         });
     }
 
-    page.commands.updateStatusToAvailable = (id) => {
-        $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "POST",
-            url: origin + "/api/suppliers/activeBulk",
-            data: id
+    page.elements.btnAvailableSave.on("click", () => {
+        $(".ui-dialog-title").text("Cập nhật trạng thái")
+        let countOrderComplete = 0;
+        let countOrderFail = 0;
+        arrayIdSupplier.forEach(async id => {
+            try {
+                const result = await activeBulk(id);
+                console.log(result)
+                if (result.message.includes("Đã được cập nhật trạng thái thành công")) {
+                    countOrderComplete += 1
+                    let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a>
+                                    <span> - Đã được cập nhật trạng thái thành công</span>
+                                </div>`
+                    $("#countOrderComplete").text(countOrderComplete)
+                    $("#listOrderComplete").append(str)
+                } else if (result.message.includes("Có lỗi xảy ra")) {
+                    countOrderFail += 1
+                    let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
+                    $("#countOrderFail").text(countOrderFail)
+                    $("#listOrderFail").append(str)
+                }
+            } catch (e) {
+                console.log(e, " err")
+                countOrderFail += 1
+                let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
+                $("#countOrderFail").text(countOrderFail)
+                $("#listOrderFail").append(str)
+            }
         })
-            .done((data) => {
-                console.log(data, " data")
-                // ProductApp.IziToast.showSuccessAlert(ProductApp.AlertMessageVi.SUCCESS_UPDATED);
-                // page.elements.modalAvailable.modal("hide");
-                // page.commands.getAllProducts();
-                // page.commands.resetInputCheckBox();
-            })
-            .fail((jqXHR) => {
-                // ProductApp.IziToast.showErrorAlert(ProductApp.AlertMessageVi.ERROR_403)
-            })
+
+    })
+
+    function activeBulk(id) {
+        return new Promise(function (resolve, reject) {
+            $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "POST",
+                url: origin + "/api/suppliers/activeBulk",
+                data: id,
+                beforeSend: function () {
+                },
+                success: function (data) {
+                    resolve(data) // Resolve promise and when success
+                },
+                error: function (err) {
+                    reject(err) // Reject the promise and go to catch()
+                }
+            });
+        });
     }
 
-    page.commands.updateStatusUnavailable = (id) => {
-        $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "POST",
-            url: origin + "/api/suppliers/disableBulk",
-            data: JSON.stringify(id)
-        }).then((data) => {
-            console.log(data, " data")
+    page.elements.btnUnavailableSave.on("click", () => {
+        $(".ui-dialog-title").text("Ngừng giao dịch")
+        let countOrderComplete = 0;
+        let countOrderFail = 0;
+        arrayIdSupplier.forEach(async id => {
+            try {
+                const result = await disableBulk(id);
+                console.log(result, " res")
+                if (result.message.includes("Đã ngừng giao dịch thành công")) {
+                    countOrderComplete += 1
+                    let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a>
+                                    <span> - Đã ngừng giao dịch thành công</span>
+                                </div>`
+                    $("#countOrderComplete").text(countOrderComplete)
+                    $("#listOrderComplete").append(str)
+                } else if (result.message.includes("Có lỗi xảy ra")) {
+                    countOrderFail += 1
+                    let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
+                    $("#countOrderFail").text(countOrderFail)
+                    $("#listOrderFail").append(str)
+                }
+            } catch (e) {
+                console.log(e, " err")
+                countOrderFail += 1
+                let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
+                $("#countOrderFail").text(countOrderFail)
+                $("#listOrderFail").append(str)
+            }
         })
-        // .done((data) => {
-        //     console.log(data," data")
-        //     // ProductApp.IziToast.showSuccessAlert(ProductApp.AlertMessageVi.SUCCESS_UPDATED);
-        //     // page.elements.modalAvailable.modal("hide");
-        //     // page.commands.getAllProducts();
-        //     // page.commands.resetInputCheckBox();
-        // })
-        // .fail((jqXHR) => {
-        //     // ProductApp.IziToast.showErrorAlert(ProductApp.AlertMessageVi.ERROR_403)
-        // })
+    })
+
+    function disableBulk(id) {
+        return new Promise(function (resolve, reject) {
+            $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "POST",
+                url: origin + "/api/suppliers/disableBulk",
+                data: id,
+                beforeSend: function () {
+                },
+                success: function (data) {
+                    resolve(data) // Resolve promise and when success
+                },
+                error: function (err) {
+                    reject(err) // Reject the promise and go to catch()
+                }
+            });
+        });
+    }
+
+    page.elements.btnSubmitDelete.on("click", () => {
+        $(".ui-dialog-title").text("Xóa nhà cung cấp")
+        let countOrderComplete = 0;
+        let countOrderFail = 0;
+        arrayIdSupplier.forEach(async id => {
+            try {
+                const result = await deleteBulk(id);
+                console.log(result, " res")
+                console.log(Promise, " promise")
+                if (result.message.includes("Đã được xóa thành công")) {
+                    countOrderComplete += 1
+                    let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a>
+                                    <span> - Đã được xóa thành công</span>
+                                </div>`
+                    $("#countOrderComplete").text(countOrderComplete)
+                    $("#listOrderComplete").append(str)
+                } else if (result.message.includes("Có lỗi xảy ra")) {
+                    countOrderFail += 1
+                    let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
+                    $("#countOrderFail").text(countOrderFail)
+                    $("#listOrderFail").append(str)
+                }
+            } catch (e) {
+                console.log(e, " err")
+                countOrderFail += 1
+                let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
+                $("#countOrderFail").text(countOrderFail)
+                $("#listOrderFail").append(str)
+            }
+        })
+    })
+
+    function deleteBulk(id) {
+        return new Promise(function (resolve, reject) {
+            $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "DELETE",
+                url: origin + "/api/suppliers/deleteBulk",
+                data: id,
+                beforeSend: function () {
+                },
+                success: function (data) {
+                    resolve(data) // Resolve promise and when success
+                },
+                error: function (err) {
+                    reject(err) // Reject the promise and go to catch()
+                }
+            });
+        });
     }
 
     // tùy chọn filter status
@@ -1502,6 +1794,7 @@
     page.commands.loadData = () => {
         page.commands.getAllSupplier();
         page.commands.getAllEmployee();
+        page.commands.getAllPaymentMethodSelect();
         page.commands.getAllSupplierGroup();
         // page.commands.getAllSupplierByFilter();
     }

@@ -22,8 +22,7 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-import static vn.sapo.supplier.excel.ExcelHeaderSupplier.FULL_NAME;
-import static vn.sapo.supplier.excel.ExcelHeaderSupplier.LINE1;
+import static vn.sapo.supplier.excel.ExcelHeaderSupplier.*;
 
 @Service
 public class SupplierExcelServiceImpl implements SupplierExcelService {
@@ -57,9 +56,9 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
                 Cell cell = row.getCell(FULL_NAME);
                 String fullName = cell == null ? null : cell.getStringCellValue();
                 if (fullName != null && !fullName.isBlank()) {
-                    Iterator<Cell> cellsInRow = row.iterator();
-                    ImportExcelSupplierParam importExcel = extractSupplier(cellsInRow);
-                    CreateAddressParam addressParam = extractAddress(cellsInRow);
+                    //lưu ý iterator next supplier đã hết
+                    ImportExcelSupplierParam importExcel = extractSupplier(row.iterator());
+                    CreateAddressParam addressParam = extractAddress(row.iterator());
                     if (addressParam.getLine1() != null)
                         importExcel.getCreateAddressParams().add(addressParam);
                     importExcelList.add(importExcel);
@@ -90,26 +89,25 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
         CreateAddressParam param = new CreateAddressParam();
         cells.forEachRemaining(cell -> {
             switch (cell.getColumnIndex()) {
-                case 15:
+                case LABEL:
                     param.setLabel(cell.getStringCellValue());
                     break;
-                case 16:
+                case LINE1:
                     param.setLine1(cell.getStringCellValue());
                     break;
-                case 17:
+                case LINE2:
                     param.setLine2(cell.getStringCellValue());
                     break;
-                case 18:
+                case PROVINCENAME:
                     param.setProvinceName(cell.getStringCellValue());
                     break;
-                case 19:
+                case DISTRICTNAME:
                     param.setDistrictName(cell.getStringCellValue());
                     break;
                 default:
                     break;
             }
         });
-
         return param;
 
     }
@@ -121,37 +119,37 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
                 case FULL_NAME:
                     param.setFullName(cell.getStringCellValue());
                     break;
-                case 1:
+                case SUPPLIERCODE:
                     param.setSupplierCode(cell.getStringCellValue());
                     break;
                 case 2:
-//  ma nhom nha cung cap
+                            //  ma nhom nha cung cap
                     break;
-                case 3:
+                case EMAIL:
                     param.setEmail(cell.getStringCellValue());
                     break;
-                case 4:
+                case PHONE:
                     param.setPhone(cell.getStringCellValue());
                     break;
-                case 5:
+                case WEBSITE:
                     param.setWebsite(cell.getStringCellValue());
                     break;
-                case 6:
+                case FAX:
                     param.setFax(cell.getStringCellValue());
                     break;
-                case 7:
+                case TAXCODE:
                     param.setTaxCode(String.valueOf(cell.getNumericCellValue()));
                     break;
-                case 8:
+                case DESCIPTION:
                     param.setDescription(cell.getStringCellValue());
                     break;
                 case 9:
-//                     chính sách giá mặc định
+//                          chính sách giá mặc định
                     break;
                 case 10:
 //                      Kỳ hạn thanh toán mặc định
                     break;
-                case 11:
+                case PAYMENTMETHODTITLE:
                     param.setPaymentMethodTitle(cell.getStringCellValue());
                     break;
                 case 20:

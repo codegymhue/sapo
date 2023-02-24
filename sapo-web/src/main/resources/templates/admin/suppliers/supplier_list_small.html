@@ -440,14 +440,14 @@
                 </div>
                 <div class="action-bar">
                     <div class="action-bar__top-links">
-                        <button class="btn sapo-btn-transparent action-bar__link export_product" type="button"
+                        <button class="btn sapo-btn-transparent action-bar__link export_supplier" type="button"
                                 name="button">
                             <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-export-minor"></use>
                             </svg>
                             Xuất file
                         </button>
-                        <button class="btn sapo-btn-transparent action-bar__link import_product" type="button"
+                        <button class="btn sapo-btn-transparent action-bar__link import_supplier" type="button"
                                 name="button">
                             <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-import-minor"></use>
@@ -905,6 +905,7 @@
     page.elements.search = $(".searchTitle");
 
 
+
     //code
     let totalPage;
     let supplierFilter = new SupplierFilter();
@@ -914,7 +915,7 @@
         let pageSize = Number(page.elements.pageSize.val());
         let search = page.elements.search.val().trim();
         // let status = page.dialogs.elements.status.val();
-        page.commands.getAllSupplierOnPageNo(pageNo, pageSize, search, status);
+        // page.commands.getAllSupplierOnPageNo(pageNo, pageSize, search, status);
     }
 
     // page.commands.getAllSupplierOnPageNo = (pageNo, pageSize, search, status) => {
@@ -1188,7 +1189,7 @@
 
 <!--Nhap file -->
 <script>
-    $(".import_product").on("click", () => {
+    $(".import_supplier").on("click", () => {
         let myModal = new bootstrap.Modal(document.getElementById('importModal'))
         myModal.show()
 
@@ -1198,7 +1199,7 @@
 
 <!--Xuat file-->
 <script>
-    $(".export_product").on("click", () => {
+    $(".export_supplier").on("click", () => {
         let myModal = new bootstrap.Modal(document.getElementById('exportModal'))
         myModal.show()
     })
@@ -1217,11 +1218,11 @@ $('#importBtn').on('click', () => {
         data: data,
         type: 'POST'
     }).done(function(result) {
-        $("#modalImportFileCustomers").modal("hide");
-        $("#frmFileCustomers")[0].reset();
-        page.commands.getAllCustomers();
-        // page.commands.closeLoading();
+        $("#modalImportFileSuppliers").modal("hide");
+        $("#frmFileSuppliers");
+        page.commands.getAllSupplier();
         SupplierApp.IziToast.showSuccessAlert("Tải file lên thành công!")
+        // page.commands.closeLoading();
     }).fail((jqXHR) => {
         SupplierApp.IziToast.showErrorAlert("Tải file lên không thành công!")
         // page.commands.closeLoading();

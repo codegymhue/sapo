@@ -158,4 +158,16 @@ public class SupplierServiceImpl implements SupplierService {
                 .orElseThrow(() -> new NotFoundException("Supplier not found"));
         supplier.setStatus(status ? SupplierStatus.AVAILABLE : SupplierStatus.UNAVAILABLE);
     }
+
+    @Override
+    @Transactional()
+    public void changeEmpIdAndPaymentMethod(Integer supId, Integer empId, String paymentId) {
+        Supplier supplier = supplierRepository.findById(supId)
+                .orElseThrow(() -> new NotFoundException("Supplier not found"));
+
+        if (empId != null)
+            supplier.setEmployeeId(empId);
+        if (paymentId != null)
+        supplier.setPaymentMethodId(paymentId);
+    }
 }
