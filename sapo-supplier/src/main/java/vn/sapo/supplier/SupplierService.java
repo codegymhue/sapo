@@ -34,4 +34,5 @@ public interface SupplierService {
     Page<SupplierResult> findAllByFilters(SupplierFilter filter, Pageable pageable);
 
     void changeStatusToAvailable(Integer id,boolean status);
+     void changeEmpIdAndPaymentMethod(Integer supId, Integer empId, String paymentId);
 }
