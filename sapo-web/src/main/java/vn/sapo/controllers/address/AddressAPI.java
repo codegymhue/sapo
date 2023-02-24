@@ -11,6 +11,7 @@ import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.address.dto.UpdateAddressParam;
 
+import javax.persistence.Index;
 import java.util.List;
 
 @RestController
@@ -52,5 +53,10 @@ public class AddressAPI {
     public ResponseEntity<?> update(@RequestBody UpdateAddressParam updateAddressParam) {
         AddressResult address = addressService.update(updateAddressParam);
         return new ResponseEntity<>(address, HttpStatus.OK);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteByAddressSupplierId(@PathVariable Integer id) {
+         addressService.deleteByAddressSupplierId(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

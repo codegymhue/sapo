@@ -265,7 +265,7 @@
                                     </div>
                                 </div>
                                 <th:bock
-                                        th:replace="/admin/suppliers/modals/create_group_supplier :: create_group_supplier"/>
+                                        th:replace="/admin/suppliers/modals/groups/create_group_supplier :: create_group_supplier"/>
                                 <div class="col-6 field pl-0">
                                     <div class="label mb-2">Số điện thoại</div>
                                     <input id="phoneUp" class="sapo-textbox w100" data-toggle="tooltip"
@@ -715,18 +715,18 @@
 
         let newUpdateSupplierParam = {
             id: idSupp,
-            supplierCode: supplierCode.length > 0 ? supplierCode : null,
-            fullName: fullName.length > 0 ? fullName : null,
-            email: email.length > 0 ? email : null,
-            phone: phone.length > 0 ? phone : null,
+            supplierCode: supplierCode.length > 0 ? supplierCode : undefined,
+            fullName: fullName.length > 0 ? fullName : undefined,
+            email: email.length > 0 ? email : undefined,
+            phone: phone.length > 0 ? phone : undefined,
             status: status,
-            description: description.length > 0 ? description : null ,
+            description: description.length > 0 ? description : undefined ,
             employeeId: employeeId,
-            paymentMethodId: paymentMethodId.length > 0 ? paymentMethodId : null,
+            paymentMethodId: paymentMethodId.length > 0 ? paymentMethodId : undefined,
             groupId: groupId,
-            taxCode: taxCode.length > 0 ? taxCode : null,
-            fax: fax.length > 0 ? fax : null,
-            website : website.length > 0 ? website : null,
+            taxCode: taxCode.length > 0 ? taxCode : undefined,
+            fax: fax.length > 0 ? fax : undefined,
+            website : website.length > 0 ? website : undefined,
         }
         console.log("newUpdateSupplierParam : ", newUpdateSupplierParam)
 
@@ -827,9 +827,9 @@
         let description = page.dialogs.elements.groupCreateDescriptionSup.val();
         let newGroupSup =
             {
-                title: supGroupTitle.length > 0 ? supGroupTitle : null,
-                supplierCode: supGroupCode.length > 0 ? supGroupCode : null,
-                description: description.length > 0 ? description : null
+                title: supGroupTitle.length > 0 ? supGroupTitle : undefined,
+                supplierCode: supGroupCode.length > 0 ? supGroupCode : undefined,
+                description: description.length > 0 ? description : undefined
             }
 
         console.log("trc ajax", newGroupSup)
@@ -954,29 +954,29 @@
             )
         });
     }
-    page.elements.formUpdateSupplier.validate({
-        rules: {
-            fullName: {
-                required: true,
-            },
-            supplierCode: {
-                required: true,
-            },
-        },
-        messages: {
-            fullName: {
-                required: "Tên nhà cung cấp không được để trống",
-            },
-            supplierCode: {
-                required: "Mã nhà cung cấp không được để trống",
-            },
-        },
-        submitHandler: () => {
-            doUpdateSupplier();
-        }
-    })
+    // page.elements.formUpdateSupplier.validate({
+    //     rules: {
+    //         fullName: {
+    //             required: true,
+    //         },
+    //         supplierCode: {
+    //             required: true,
+    //         },
+    //     },
+    //     messages: {
+    //         fullName: {
+    //             required: "Tên nhà cung cấp không được để trống",
+    //         },
+    //         supplierCode: {
+    //             required: "Mã nhà cung cấp không được để trống",
+    //         },
+    //     },
+    //     submitHandler: () => {
+    //         doUpdateSupplier();
+    //     }
+    // })
 
-
+    //
     // page.dialogs.elements.formCreateGroup.validate({
     //     rules: {
     //         groupTitleSup: {
