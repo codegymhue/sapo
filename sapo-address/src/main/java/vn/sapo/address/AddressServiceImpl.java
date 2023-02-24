@@ -70,6 +70,11 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
+    public void deleteByAddressSupplierId(Integer idAddressSupplier) {
+        addressRepository.deleteById(idAddressSupplier);
+    }
+
+    @Override
     @Transactional
     public AddressResult create(CreateAddressParam createAddressParam) {
         Address address = addressRepository.save(addressMapper.toModel(createAddressParam));
@@ -88,6 +93,8 @@ public class AddressServiceImpl implements AddressService {
     public void deleteByCustomerId(Integer customerId) {
         addressRepository.deleteByCustomerId(customerId);
     }
+
+
 }
 
 

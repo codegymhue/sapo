@@ -1,0 +1,113 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<th:block th:fragment="create_address_supplier">
+  <div class="modal fade"  id="modalCreateAddressSupplier" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" style="width: 600px">
+        <div>
+          <div class="modal-header">
+                <span class="ui-dialog-title" id="ui-dialog-title-1">
+                    Thêm mới địa chỉ
+                </span>
+            <span class="modal-close-wrapper" role="button" aria-label="Close dialog">
+                    <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use> </svg>
+                </span>
+          </div>
+          <form method="post" id="formCreateAddressSup">
+            <div class="modal-body">
+
+              <div class="row">
+                <div class="col-6 field">
+                  <div class="label mb-2">
+                    Nhãn
+                  </div>
+                  <input class="form-control sapo-textbox" id="labelCrAddressSup" name="fullNameCrAddressSup" type="text" value="">
+                </div>
+                <div class="col-6 field">
+                  <div class="label mb-2">
+                    Họ tên
+                  </div>
+                  <input class="form-control sapo-textbox" id="fullNameCrAddressSup" name="fullNameCrAddressSup" type="text" value="">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-6 field">
+                  <div class="label mb-2 label-required">
+                    Địa chỉ
+                  </div>
+                  <input  class="form-control sapo-textbox" id="address1CrAddressSup" name="address1CrAddressSup" placeholder="Địa chỉ 1" type="text" value="">
+                </div>
+                <div class="col-6 field">
+                  <div class="label mb-2">
+                    Địa chỉ 2
+                  </div>
+                  <input  class="form-control sapo-textbox" id="address2CrAddressSup" name="Address2" placeholder="Địa chỉ 2" type="text" value="">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 field">
+                  <div class="label mb-2">
+                    Email
+                  </div>
+                  <input class="form-control sapo-textbox" id="emailCrAddressSup" name="Email" type="text" value="">
+                </div>
+                <div class="col-6 field">
+                  <div class="label mb-2">
+                    Số điện thoại
+                  </div>
+                  <input class="form-control sapo-textbox" id="phoneNumberCrAddressSup" name="PhoneNumber" type="text" value="">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 field pr-0">
+                  <label for="provinceCr" class="label-required mb-2">Tỉnh thành phố</label>
+                  <select id="provinceCr" name="provinceCr" class="w100 input-dropdown sapo-btn-blank select-padding"
+                          title="Tỉnh thành phố">
+                    <option value="" disabled selected>Chọn tỉnh thành phố</option>
+                  </select>
+                </div>
+                <div class="col-6 field pl-0">
+                  <label for="districtCr" class="label-required mb-2">Quận huyện</label>
+                  <select id="districtCr" name="districtCr" class="w100 input-dropdown sapo-btn-blank select-padding"
+                          title="Chọn quận huyện">
+                    <option value="" disabled selected>Chọn quận huyện</option>
+                  </select>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-6 field pr-0">
+                  <label for="wardCr" class="label-required mb-2">Phường xã</label>
+                  <select id="wardCr" name="wardCr" class="w100 input-dropdown sapo-btn-blank select-padding"
+                          title="Chọn phường xã">
+                    <option value="" disabled selected>Chọn phường xã</option>
+                  </select>
+                </div>
+                <div class="col-6 field">
+                  <div class="label mb-2">
+                    Mã bưu điện
+                  </div>
+                  <input class="form-control sapo-textbox" id="zipCodeCrAddressSup" name="ZipCode" type="text" value="">
+                </div>
+              </div>
+              <div class="row contact-reset-row">
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-6">
+
+                  <span class="help-block"></span>
+                </div>
+              </div>
+            </div>
+          </form>
+
+        <div class="modal-footer">
+          <button id="btnCreateAddressSup" class="btn btn-primary pull-right margin-left-5 sapo-btn-default">Thêm</button>
+          <button type="button" class="btn btn-secondary btn-blank pull-right" id="close-popup" style="color: black" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+</th:block>

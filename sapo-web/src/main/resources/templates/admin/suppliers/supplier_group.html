@@ -169,11 +169,11 @@
           </div>
         </div>
       </header>
-      <th:bock th:replace="/admin/suppliers/modals/create_group_supplier :: create_group_supplier"/>
+      <th:bock th:replace="/admin/suppliers/modals/groups/create_group_supplier :: create_group_supplier"/>
 
-      <th:bock th:replace="/admin/suppliers/modals/edit_group_supplier :: edit_group_supplier"/>
+      <th:bock th:replace="/admin/suppliers/modals/groups/edit_group_supplier :: edit_group_supplier"/>
 
-      <th:bock th:replace="/admin/suppliers/modals/delete_group_supplier :: delete_group_supplier"/>
+      <th:bock th:replace="/admin/suppliers/modals/groups/delete_group_supplier :: delete_group_supplier"/>
 
       <div class="gird-layout gird-layout--full-width">
         <section class="grid-card">
@@ -402,9 +402,9 @@ function renderGroup(item) {
     let description = page.dialogs.elements.groupCreateDescriptionSup.val();
     let newGroupSup =
     {
-      title: supGroupTitle.length > 0 ? supGroupTitle : null,
-      supGroupCode: supGroupCode.length > 0 ? supGroupCode : null,
-      description: description.length > 0 ? description : null,
+      title: supGroupTitle.length > 0 ? supGroupTitle : undefined,
+      supGroupCode: supGroupCode.length > 0 ? supGroupCode : undefined,
+      description: description.length > 0 ? description : undefined,
     }
     console.log("trc ajax", newGroupSup)
     $.ajax({
@@ -464,9 +464,9 @@ function renderGroup(item) {
     let description = page.dialogs.elements.groupDescriptionEditSup.val();
     let editGroup = {
       id: idEditGroup,
-      title: editGroupTitle.length > 0 ? editGroupTitle : null,
-      supGroupCode: supGroupCode.length > 0 ? supGroupCode : null,
-      description: description.length > 0 ? description : null
+      title: editGroupTitle.length > 0 ? editGroupTitle : undefined,
+      supGroupCode: supGroupCode.length > 0 ? supGroupCode : undefined,
+      description: description.length > 0 ? description : undefined
     }
     $.ajax({
       "headers": {

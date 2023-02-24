@@ -23,4 +23,5 @@ public interface AddressService {
     AddressResult update(UpdateAddressParam updateAddressParam);
 
     List<AddressResult> findBySupplierId(Integer supplierId);
+    void deleteByAddressSupplierId(Integer idAddressSupplier);
 }
