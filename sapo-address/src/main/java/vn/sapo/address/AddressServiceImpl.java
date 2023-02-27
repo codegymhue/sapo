@@ -2,6 +2,10 @@ package vn.sapo.address;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.address.dto.AddressResult;
@@ -9,9 +13,12 @@ import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.address.dto.UpdateAddressParam;
 import vn.sapo.entities.Address;
 import vn.sapo.entities.customer.Customer;
+import vn.sapo.entities.product.Product;
 import vn.sapo.shared.exceptions.NotFoundException;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -73,6 +80,31 @@ public class AddressServiceImpl implements AddressService {
     public void deleteByAddressSupplierId(Integer idAddressSupplier) {
         addressRepository.deleteById(idAddressSupplier);
     }
+
+//    @Override
+//    public void deleteSoftSupplier(List<Integer> supplierAddressIds) {
+//        for (Integer supplierId : supplierAddressIds) {
+//            Optional<Address> address = addressRepository.findById(supplierId);
+//            if(address.isPresent()) {
+//                addressRepository.deleteById(address.get().getId());
+//            }else {
+//                throw new NotFoundException("Address not found");
+//            }
+//        }
+//    }
+
+//    @Override
+//    public Map<String, Object> getAllAddressSupplierPage(Integer pageNo, Integer pageSize, Integer supplierId) {
+//        pageNo = pageNo - 1;
+//        Pageable pageable = PageRequest.of(pageNo, pageSize);
+////        Page<Address> addresses = addressRepository;
+//
+//        List<Address> addressList = addressRepository.findAllBySupplierId(supplierId);
+//        for(Address address : addressList){
+//        }
+//
+//        return null;
+//    }
 
     @Override
     @Transactional

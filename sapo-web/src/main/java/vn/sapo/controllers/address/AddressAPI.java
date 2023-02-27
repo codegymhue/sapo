@@ -59,4 +59,10 @@ public class AddressAPI {
          addressService.deleteByAddressSupplierId(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+//    @DeleteMapping("/deleteAddress")
+//    public ResponseEntity<?> deleteAddressSupplier(@RequestBody List<Integer> arrayIdSupplier) {
+//        addressService.deleteSoftSupplier(arrayIdSupplier);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 }

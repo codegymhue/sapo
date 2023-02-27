@@ -341,8 +341,9 @@
                 </li>
                 <li class="filter-tab-item" style="opacity:1;"
                     bind-event-click="loadTab('address',this)">
+
                   <a href="javascript:" id="filter-tab-address"
-                     class="filter-tab show-all-items ">Địa chỉ</a>
+                     class="filter-tab show-all-items" th:href="'/admin/suppliers/'+${supplier.getId()}+ '/addresses'" >Địa chỉ</a>
                 </li>
                 <li class="filter-tab-item" style="opacity:1;"
                     bind-event-click="loadTab('note',this)">

@@ -408,7 +408,7 @@
               <tr id="theadList" class="show">
                 <th class="align-middle">
                   <label for="checkAll" style="padding: 1rem; cursor:pointer">
-                    <input style="cursor:pointer" id="checkAll" type="checkbox" value="" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Tất cả" aria-label="Tất cả">
+                    <input style="cursor:pointer" id="checkAll" type="checkbox" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Tất cả" aria-label="Tất cả">
                   </label>
                 </th>
                 <th class="align-middle" scope="col">Nhãn</th>
@@ -438,21 +438,7 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                       <li>
-                        <button class="dropdown-item btnDropdown" id="btnCheckInventory">Kiểm tra
-                          tồn kho
-                        </button>
-                      </li>
-                      <li>
-                        <button class="dropdown-item btnDropdown" id="btnAvailable">Đang giao dịch
-                        </button>
-                      </li>
-                      <li>
-                        <button class="dropdown-item btnDropdown" id="btnUnavailable">Ngừng giao
-                          dịch
-                        </button>
-                      </li>
-                      <li>
-                        <button class="dropdown-item btnDropdown" id="btnDelete">Xóa sản phẩm
+                        <button style="width: 155px; font-size: 13px" class="dropdown-item btnDropdown btnShowDeleteAddressSupplier">Xoá địa chỉ
                         </button>
                       </li>
                     </ul>
@@ -558,17 +544,46 @@
   page.dialogs.elements.formCreateAddressSup = $("#formCreateAddressSup");
 
 
-  page.elements.modalUpdateAddressSupplier = $("#modalUpdateAddressSupplier");
+  page.dialogs.elements.idUpAddressSup =  $("#idUpAddressSup");
+  page.dialogs.elements.modalUpdateAddressSupplier = $("#modalUpdateAddressSupplier");
+  page.dialogs.elements.fullNameUpAddressSup = $("#fullNameUpAddressSup");
+  page.dialogs.elements.labelUpAddressSup = $("#labelUpAddressSup");
+  page.dialogs.elements.phoneNumberUpAddressSup = $("#phoneNumberUpAddressSup");
+  page.dialogs.elements.emailUpAddressSup = $("#emailUpAddressSup");
+  page.dialogs.elements.address1UpAddressSup = $("#address1UpAddressSup");
+  page.dialogs.elements.address2UpAddressSup = $("#address2UpAddressSup");
+  page.dialogs.elements.zipCodeUpAddressSup = $("#zipCodeUpAddressSup");
+  page.dialogs.elements.provinceUp  = $("#provinceUp");
+  page.dialogs.elements.districtUp = $("#districtUp");
+  page.dialogs.elements.wardUp = $("#wardUp") ;
+
+  page.dialogs.elements.btnUpAddressSup =  $("#btnUpAddressSup");
+  page.dialogs.elements.formUpdateAddressSup= $("#formUpdateAddressSup");
 
 
-  page.elements.btnShowDeleteAddressSupplier = $("#btnShowDeleteAddressSupplier");
+
+  page.elements.btnShowDeleteAddressSupplier = $(".btnShowDeleteAddressSupplier");
   page.dialogs.elements.modalDeleteAddressSup = $("#modalDeleteAddressSup");
-  page.dialogs.elements.btnDeleteAddressSup = $("#btnDeleteAddressSup");
-
+  page.dialogs.elements.btnDeleteAddressSup = $(".btnDeleteAddressSup");
+  let arrayIdAddressSup = [];
 
   page.elements.checkAll = $("#checkAll");
+  page.elements.selectAction = $("#selectAction");
 
- class CreateAddressParam {
+  page.elements.selectActionThead = $("#selectActionThead");
+
+  page.elements.theadList = $("#theadList");
+  page.elements.numberSelectProductList = $("#numberSelectProductList");
+  page.elements.statusChangeForNumberProductList = $("#statusChange");
+  page.elements.statusChangeForNumberToUnavailable = $("#statusChangeUnavailable");
+  page.elements.statusChangeForNumberDelete = $("#statusChangeDelete");
+
+  page.elements.modalAvailable = $("#modalAvailable");
+  page.elements.modalUnavailable = $("#modalUnavailable");
+  page.elements.modalDelete = $("#modalDelete");
+  page.elements.modalCheckInventory = $("#modalCheckInventory");
+
+  class CreateAddressParam {
     constructor( supplierId,label, fullName,  phoneNumber,email,line1, line2, wardId, wardName, districtId, districtName,
                 provinceId, provinceName, zipCode) {
       this.supplierId= supplierId;
@@ -621,7 +636,6 @@
     })
             .done(() => {
               $("#supplier-delete-modal").modal("show");
-
             })
             .fail((error) => {
               console.log(error);
@@ -652,16 +666,20 @@
               }, 1500)
             })
   })
+
+
   function renderAddressSupplier(item) {
     console.log("item address : ", item)
     return `
  <tr id="tr_${item.id}" onclick="editAddressSup(${item.id})" data-id="${item.id}">
                 <td class="align-middle">
-                  <label for="53" style="padding: 1rem; cursor:pointer">
-                    <input style="cursor:pointer" id="53" class="selectCheckbox" name="options[]" type="checkbox" value="53">
-                  </label>
+                <label for="${item.id}" style="padding: 1rem; cursor:pointer">
+                    <input style="cursor:pointer" id ="${item.id}" class="selectCheckbox"  name="options[]" type="checkbox" value="${item.id}">
+                </label>
                 </td>
-                  <td class="align-middle">${item.label ? item.label : "" }</td>
+
+
+                 <td class="align-middle">${item.label ? item.label : "" }</td>
                 <td class="align-middle">${item.line1}</td>
                 <td class="align-middle" ${item.wardId}>${item.wardName}</td>
                 <td class="align-middle" ${item.districtId}>${item.districtName}</td>
@@ -674,43 +692,6 @@
               </tr>
     `
   }
-
-
-  // page.elements.checkAll.on("change", function () {
-  //   page.elements.selectAction.prop("checked", true);
-  //   arrayIdProduct = [];
-  //   if (this.checked) {
-  //     $("#tbProduct > tbody input").each(function () {
-  //       $(this).prop("checked", true);
-  //       arrayIdProduct.push($(this).val());
-  //     })
-  //   } else {
-  //     $("#tbProduct > tbody input").each(function () {
-  //       $(this).prop("checked", false);
-  //     })
-  //   }
-  //   page.commands.showAction();
-  // })
-  //
-  // page.commands.showAction = () => {
-  //   page.elements.numberSelectProductList.empty();
-  //   page.elements.statusChangeForNumberProductList.empty();
-  //   page.elements.statusChangeForNumberToUnavailable.empty();
-  //   page.elements.statusChangeForNumberDelete.empty();
-  //
-  //   if (arrayIdProduct.length > 0) {
-  //     page.elements.theadList.removeClass("show").addClass("hide");
-  //     page.elements.numberSelectProductList.append(`<span>Đã chọn ${arrayIdProduct.length} sản phẩm trên trang này</span>`)
-  //     page.elements.statusChangeForNumberProductList.append(`<span style="font-size: medium">Thao tác này sẽ cập nhật trạng thái giao dịch cho ${arrayIdProduct.length} sản phẩm bạn đã chọn.</span>`);
-  //     page.elements.statusChangeForNumberToUnavailable.append(`<span style="font-size: medium">Thao tác này sẽ ngừng giao dịch ${arrayIdProduct.length} sản phẩm bạn đã chọn.</span>`);
-  //     page.elements.statusChangeForNumberDelete.append(`<span style="font-size: medium">Thao tác này sẽ xóa ${arrayIdProduct.length} sản phẩm bạn đã chọn. Thao tác này không thể khôi phục.</span>`);
-  //     page.elements.selectActionThead.removeClass("hide").addClass("show");
-  //   } else {
-  //     page.elements.theadList.removeClass("hide").addClass("show");
-  //     page.elements.selectActionThead.removeClass("show").addClass("hide");
-  //   }
-  // }
-
 
   function getAllAddressOfSupplier(){
     let supplierId = $("#supplierId").val();
@@ -809,6 +790,129 @@
     getAllWardsByDistrictId(wardIdUp, districIdUp.val());
   })
 
+  page.elements.checkAll.on("change", function () {
+    page.elements.selectAction.prop("checked", true);
+    arrayIdAddressSup = [];
+    if (this.checked) {
+      $("#tbProduct > tbody input").each(function () {
+        $(this).prop("checked", true);
+        arrayIdAddressSup.push($(this).val());
+      })
+    } else {
+      $("#tbProduct > tbody input").each(function () {
+        $(this).prop("checked", false);
+      })
+    }
+    page.commands.showAction();
+  })
+
+  page.commands.isCheckbox = () => {
+    $(".selectCheckbox").on("change", function () {
+      if (this.checked) {
+        $(this).prop("checked", true);
+        arrayIdAddressSup.push($(this).val());
+      } else {
+        $(this).prop("checked", false);
+        arrayIdAddressSup = page.commands.deleteArrayId($(this).val());
+      }
+      page.commands.showAction();
+      // let pageSize = page.elements.pageSize.val()
+      // if (arrayIdAddressSup.length == pageSize) {
+      //   page.elements.checkAll.prop("checked", true);
+      //   page.elements.selectAction.prop("checked", true);
+      // } else {
+      //   page.elements.checkAll.prop("checked", false);
+      //   page.elements.selectAction.prop("checked", false);
+      // }
+    })
+  }
+
+
+  page.commands.deleteArrayId = (item) => {
+    if (arrayIdAddressSup.length <= 0) {
+      return [];
+    } else {
+      for (let i = 0; i < arrayIdAddressSup.length; i++) {
+        if (arrayIdAddressSup[i] === item) {
+          arrayIdAddressSup.splice(i, 1);
+        }
+      }
+      return arrayIdAddressSup;
+    }
+  }
+  page.commands.showAction = () => {
+    page.elements.numberSelectProductList.empty();
+    page.elements.statusChangeForNumberProductList.empty();
+    page.elements.statusChangeForNumberToUnavailable.empty();
+    page.elements.statusChangeForNumberDelete.empty();
+
+    if (arrayIdAddressSup.length > 0) {
+      page.elements.theadList.removeClass("show").addClass("hide");
+      page.elements.numberSelectProductList.append(`<span>Đã chọn ${arrayIdAddressSup.length} sản phẩm trên trang này</span>`)
+      page.elements.statusChangeForNumberDelete.append(`<span style="font-size: medium">Thao tác này sẽ xóa ${arrayIdAddressSup.length} sản phẩm bạn đã chọn. Thao tác này không thể khôi phục.</span>`);
+      page.elements.selectActionThead.removeClass("hide").addClass("show");
+    } else {
+      page.elements.theadList.removeClass("hide").addClass("show");
+      page.elements.selectActionThead.removeClass("show").addClass("hide");
+    }
+  }
+  page.elements.selectAction.on("change", function () {
+    page.elements.checkAll.prop("checked", false);
+    arrayIdAddressSup = [];
+    if (this.checked) {
+      $("#tbProduct > tbody input").each(function () {
+        $(this).prop("checked", true);
+        arrayIdAddressSup.push($(this).val());
+      })
+    } else {
+      console.log(this)
+      $("#tbProduct > tbody input").each(function () {
+        $(this).prop("checked", false);
+      })
+    }
+    page.commands.showAction();
+  })
+
+  page.commands.resetInputCheckBox = () => {
+    $("#tbProduct input").each(function () {
+      $(this).prop("checked", false);
+    })
+    arrayIdProduct = [];
+    page.commands.showAction();
+  }
+
+  page.elements.btnShowDeleteAddressSupplier.on('click', ()=>{
+    page.dialogs.elements.modalDeleteAddressSup.modal('show');
+  })
+
+  // page.dialogs.elements.btnDeleteAddressSup.on('click', ()=>{
+  //   page.commands.deleteProductSelect();
+  // })
+  $("#btnDeleteSupAddress").on('click', ()=>{
+      page.commands.deleteProductSelect();
+  })
+
+  page.commands.deleteProductSelect = () => {
+    $.ajax({
+      headers: {
+        "accept": "application/json",
+        "content-type": "application/json"
+      },
+      type: "DELETE",
+      url: origin +'/api/addresses/deleteAddress' ,
+      data: JSON.stringify(arrayIdAddressSup)
+    })
+            .done(() => {
+              SupplierApp.IziToast.showSuccessAlert("Xoá địa chỉ nhà cung cấp thành công!");
+              setTimeout(() => {
+              }, 1500);
+              page.dialogs.elements.modalDeleteAddressSup.modal('hide');
+              // location.reload();
+            })
+            .fail((jqXHR) => {
+              console.log(jqXHR)
+            })
+  }
 
   page.elements.btnShowCrAddressSupplier.on('click', () => {
     page.dialogs.elements.modalCreateAddressSupplier.modal('show');
@@ -910,7 +1014,7 @@
   })
 
   function editAddressSup(item){
-    $("#idUpAddressSup").val(item);
+    page.dialogs.elements.idUpAddressSup.val(item);
     console.log("item", item)
     $.ajax({
       "headers": {
@@ -922,43 +1026,40 @@
     })
             .done((data) => {
               console.log("data get update : ", data)
-              $("#modalUpdateAddressSupplier").modal('show');
-              $("#fullNameUpAddressSup").val(data.fullName);
-              $("#labelUpAddressSup").val(data.label);
-              $("#phoneNumberUpAddressSup").val(data.phoneNumber);
-              $("#emailUpAddressSup").val(data.email);
-              $("#address1UpAddressSup").val(data.line1);
-              $("#address2UpAddressSup").val(data.line2);
-              $("#zipCodeUpAddressSup").val(data.zipCode);
-              console.log("province id:", $("#provinceUp").val(data.provinceId));
-              $("#provinceUp").val(data.provinceId);
+              page.dialogs.elements.modalUpdateAddressSupplier.modal('show');
+              page.dialogs.elements.fullNameUpAddressSup.val(data.fullName);
+              page.dialogs.elements.labelUpAddressSup.val(data.label);
+              page.dialogs.elements.phoneNumberUpAddressSup.val(data.phoneNumber);
+              page.dialogs.elements.emailUpAddressSup.val(data.email);
+              page.dialogs.elements.address1UpAddressSup.val(data.line1);
+              page.dialogs.elements.address2UpAddressSup.val(data.line2);
+              page.dialogs.elements.zipCodeUpAddressSup.val(data.zipCode);
+              console.log("province id:", page.dialogs.elements.provinceUp.val(data.provinceId));
+              page.dialogs.elements.provinceUp.val(data.provinceId);
 
-              getAllDistrictsByProvinceId($("#districtUp"),data.provinceId).then(()=>{
-                $("#districtUp").val(data.districtId);
+              getAllDistrictsByProvinceId(page.dialogs.elements.districtUp,data.provinceId).then(()=>{
+                page.dialogs.elements.districtUp.val(data.districtId);
               });
-              getAllWardsByDistrictId($("#wardUp"), data.districtId).then(()=>{
-                $("#wardUp").val(data.wardId);
+              getAllWardsByDistrictId(page.dialogs.elements.wardUp , data.districtId).then(()=>{
+                page.dialogs.elements.wardUp.val(data.wardId);
               })
-              // console.log("huyen id : ",  $("#districtUp").val(data.districtId));
-              // $("#wardUp").val(data.wardId);
-
-              console.log("data update :", data)
             })
   }
-  $("#btnUpAddressSup").on('click', ()=>{
-    $("#formUpdateAddressSup").trigger('submit');
+
+  page.dialogs.elements.btnUpAddressSup.on('click', ()=>{
+    page.dialogs.elements.formUpdateAddressSup.trigger('submit');
   })
 
   function doUpdateAddressSup(){
-    let idAddressSupNow = $("#idUpAddressSup").val();
+    let idAddressSupNow = page.dialogs.elements.idUpAddressSup.val();
     console.log("id update: ", idAddressSupNow);
-    let label = $("#labelUpAddressSup").val();
-    let fullName = $("#fullNameUpAddressSup").val();
-    let phoneNumber =  $("#phoneNumberUpAddressSup").val();
-    let email = $("#emailUpAddressSup").val();
-    let line1 = $("#address1UpAddressSup").val();
-    let line2  = $("#address2UpAddressSup").val();
-    let zipCode = $("#zipCodeUpAddressSup").val();
+    let label = page.dialogs.elements.labelUpAddressSup.val();
+    let fullName = page.dialogs.elements.fullNameUpAddressSup.val();
+    let phoneNumber =  page.dialogs.elements.phoneNumberUpAddressSup.val();
+    let email = page.dialogs.elements.emailUpAddressSup.val();
+    let line1 = page.dialogs.elements.address1UpAddressSup.val();
+    let line2  = page.dialogs.elements.address2UpAddressSup.val();
+    let zipCode = page.dialogs.elements.zipCodeUpAddressSup.val();
 
     let updateAddressSup = {
       id: idAddressSupNow,
@@ -969,12 +1070,12 @@
       email:email.length > 0 ? email : undefined,
       line1: line1.length > 0 ? line1 : undefined,
       line2:  line2.length > 0 ? line2 : undefined,
-      wardId:  $("#wardUp").val(),
-      wardName: $("#wardUp").find("option:selected").text(),
-      districtId: $("#districtUp").val(),
-      districtName: $("#districtUp").find("option:selected").text(),
-      provinceId:  $("#provinceUp").val(),
-      provinceName: $("#provinceUp").find("option:selected").text(),
+      wardId:  page.dialogs.elements.wardUp.val(),
+      wardName: page.dialogs.elements.wardUp.find("option:selected").text(),
+      districtId: page.dialogs.elements.districtUp.val(),
+      districtName: page.dialogs.elements.districtUp.find("option:selected").text(),
+      provinceId:  page.dialogs.elements.provinceUp.val(),
+      provinceName: page.dialogs.elements.provinceUp.find("option:selected").text(),
       zipCode:  zipCode
     }
     $.ajax({
@@ -990,12 +1091,12 @@
               SupplierApp.IziToast.showSuccessAlert("Sửa địa chỉ nhà cung cấp thành công!");
               setTimeout(() => {
               }, 1500);
-              $("#modalUpdateAddressSupplier").modal('hide');
+              page.dialogs.elements.modalUpdateAddressSupplier.modal('hide');
               location.reload();
             })
   }
 
-  $("#formUpdateAddressSup").validate({
+  page.dialogs.elements.formUpdateAddressSup.validate({
     rules: {
       address1UpAddressSup: {
         required: true,
@@ -1063,7 +1164,7 @@
               SupplierApp.IziToast.showSuccessAlert("Xoá địa chỉ nhà cung cấp thành công!");
               setTimeout(() => {
               }, 1500);
-              location.reload()
+              // location.reload()
             })
   })
 

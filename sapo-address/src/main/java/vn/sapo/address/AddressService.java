@@ -6,6 +6,7 @@ import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.address.dto.UpdateAddressParam;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AddressService {
     AddressResult findById(Integer id);
@@ -24,4 +25,9 @@ public interface AddressService {
 
     List<AddressResult> findBySupplierId(Integer supplierId);
     void deleteByAddressSupplierId(Integer idAddressSupplier);
+
+//    void deleteSoftSupplier(List<Integer> supplierIds);
+
+
+//    Map<String, Object> getAllAddressSupplierPage(Integer pageNo, Integer pageSize, Integer supplierId);
 }
