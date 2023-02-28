@@ -264,7 +264,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <th:bock th:replace="/admin/suppliers/modals/groups/create_group_supplier :: create_group_supplier"/>
                                 <div class="col-6 field pl-0">
                                     <div class="label mb-2">Số điện thoại</div>
                                     <input id="phoneUp" class="sapo-textbox w100" data-toggle="tooltip"
@@ -546,6 +545,8 @@
 <div class="modal fade" id="sapo-modal-container" data-width="" tabindex="-1" role="dialog" data-backdrop="false">
 </div>
 <div class="modal-backdrop fade in" id="sapo-modal-backdrop"></div>
+<th:bock th:replace="/admin/suppliers/modals/groups/create_group_supplier :: create_group_supplier"/>
+
 
 
 <style>
@@ -697,6 +698,10 @@
     }
 
     page.elements.btnUpdateSupplier.on('click', () => {
+        page.elements.formUpdateSupplier.trigger('submit');
+    })
+
+    function doUpdateSupplier() {
         let idSupp = page.elements.supplierId.val();
         let supplierCode = page.elements.supplierCode.val();
         let fullName = page.elements.fullName.val();
@@ -714,18 +719,18 @@
 
         let newUpdateSupplierParam = {
             id: idSupp,
-            supplierCode: supplierCode.length > 0 ? supplierCode : undefined,
-            fullName: fullName.length > 0 ? fullName : undefined,
-            email: email.length > 0 ? email : undefined,
-            phone: phone.length > 0 ? phone : undefined,
+            supplierCode: supplierCode.length > 0 ? supplierCode : null,
+            fullName: fullName.length > 0 ? fullName : null,
+            email: email.length > 0 ? email : null,
+            phone: phone.length > 0 ? phone : null,
             status: status,
-            description: description.length > 0 ? description : undefined ,
+            description: description.length > 0 ? description : null ,
             employeeId: employeeId,
-            paymentMethodId: paymentMethodId.length > 0 ? paymentMethodId : undefined,
+            paymentMethodId: paymentMethodId.length > 0 ? paymentMethodId : null,
             groupId: groupId,
-            taxCode: taxCode.length > 0 ? taxCode : undefined,
-            fax: fax.length > 0 ? fax : undefined,
-            website : website.length > 0 ? website : undefined,
+            taxCode: taxCode.length > 0 ? taxCode : null,
+            fax: fax.length > 0 ? fax : null,
+            website : website.length > 0 ? website : null,
         }
         console.log("newUpdateSupplierParam : ", newUpdateSupplierParam)
 
@@ -739,75 +744,20 @@
             "data": JSON.stringify(newUpdateSupplierParam)
         })
             .done((data) => {
+                console.log("data", data.id);
+                // let trSupplier = $("#tr_" + data.id);
+                // let tr = SupplierApp.renderRowSupplier(data);
+                // trSupplier.replaceWith(tr);
                 SupplierApp.IziToast.showSuccessAlert("Sửa thông tin nhà cung cấp thành công!");
                 setTimeout(() => {
-                }, 1500);
+                }, 1500)
                 window.location.href = `/admin/suppliers/${data.id}/histories`;
             })
             .fail((jqXHR) => {
                 // console.log(jqXHR);
                 SupplierApp.IziToast.showErrorAlert("Sửa thông tin nhà cung cấp thất bại")
             })
-        // page.elements.formUpdateSupplier.trigger('submit');
-    })
-
-    // function doUpdateSupplier() {
-    //     let idSupp = page.elements.supplierId.val();
-    //     let supplierCode = page.elements.supplierCode.val();
-    //     let fullName = page.elements.fullName.val();
-    //     let email = page.elements.emailUp.val();
-    //     let phone = page.elements.phoneUp.val();
-    //     let status = page.elements.statusUp.val();
-    //     let description = page.elements.descriptionUp.val();
-    //     let employeeId = page.elements.fulNameEmployeeUp.val();
-    //     let paymentMethodId = page.elements.paymentMethod.val();
-    //     let groupId = page.elements.changeValueSup.val();
-    //     let taxCode =  page.elements.taxCodeUp.val();
-    //     let fax = page.elements.faxUp.val();
-    //     let website = page.elements.websiteUp.val();
-    //
-    //
-    //     let newUpdateSupplierParam = {
-    //         id: idSupp,
-    //         supplierCode: supplierCode.length > 0 ? supplierCode : null,
-    //         fullName: fullName.length > 0 ? fullName : null,
-    //         email: email.length > 0 ? email : null,
-    //         phone: phone.length > 0 ? phone : null,
-    //         status: status,
-    //         description: description.length > 0 ? description : null ,
-    //         employeeId: employeeId,
-    //         paymentMethodId: paymentMethodId.length > 0 ? paymentMethodId : null,
-    //         groupId: groupId,
-    //         taxCode: taxCode.length > 0 ? taxCode : null,
-    //         fax: fax.length > 0 ? fax : null,
-    //         website : website.length > 0 ? website : null,
-    //     }
-    //     console.log("newUpdateSupplierParam : ", newUpdateSupplierParam)
-    //
-    //     $.ajax({
-    //         "headers": {
-    //             "accept": "application/json",
-    //             "content-type": "application/json"
-    //         },
-    //         "type": "PATCH",
-    //         "url": origin + "/api/suppliers/" + idSupp,
-    //         "data": JSON.stringify(newUpdateSupplierParam)
-    //     })
-    //         .done((data) => {
-    //             console.log("data", data.id);
-    //             // let trSupplier = $("#tr_" + data.id);
-    //             // let tr = SupplierApp.renderRowSupplier(data);
-    //             // trSupplier.replaceWith(tr);
-    //             SupplierApp.IziToast.showSuccessAlert("Sửa thông tin nhà cung cấp thành công!");
-    //             setTimeout(() => {
-    //             }, 1500)
-    //             window.location.href = `/admin/suppliers/${data.id}/histories`;
-    //         })
-    //         .fail((jqXHR) => {
-    //             // console.log(jqXHR);
-    //             SupplierApp.IziToast.showErrorAlert("Sửa thông tin nhà cung cấp thất bại")
-    //         })
-    // }
+    }
 
     page.elements.showGroupSupplier.on('click', () => {
         page.dialogs.elements.modalCreateGroupSupplier.modal('show');
@@ -904,42 +854,42 @@
 
 
 
-    // function doCreateGroupSupplier(){
-    //     console.log("vao ham do create group : ")
-    //     let supGroupCode = page.dialogs.elements.groupCreateCodeSup.val();
-    //     let supGroupTitle = page.dialogs.elements.groupCreateTitleSup.val();
-    //     let description = page.dialogs.elements.groupCreateDescriptionSup.val();
-    //     let newGroupSup =
-    //         {
-    //             title: supGroupTitle.length > 0 ? supGroupTitle : null,
-    //             supplierCode: supGroupCode.length > 0 ? supGroupCode : null,
-    //             description: description.length > 0 ? description : null
-    //         }
-    //
-    //     console.log("trc ajax", newGroupSup)
-    //     $.ajax({
-    //         "headers": {
-    //             "accept": "application/json",
-    //             "content-type": "application/json"
-    //         },
-    //         "type": "POST",
-    //         "url": origin + "/api/supplier_groups/create",
-    //         "data": JSON.stringify(newGroupSup)
-    //     })
-    //         .done((data) => {
-    //             console.log("data: ",data)
-    //             SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
-    //             setTimeout(() => {
-    //             }, 1500);
-    //             page.dialogs.elements.modalCreateGroupSupplier.modal('hide');
-    //             location.reload();
-    //         })
-    //         .fail((jqXHR) => {
-    //             SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
-    //             setTimeout(() => {
-    //             }, 1500);
-    //         })
-    // }
+    function doCreateGroupSupplier(){
+        console.log("vao ham do create group : ")
+        let supGroupCode = page.dialogs.elements.groupCreateCodeSup.val();
+        let supGroupTitle = page.dialogs.elements.groupCreateTitleSup.val();
+        let description = page.dialogs.elements.groupCreateDescriptionSup.val();
+        let newGroupSup =
+            {
+                title: supGroupTitle.length > 0 ? supGroupTitle : null,
+                supplierCode: supGroupCode.length > 0 ? supGroupCode : null,
+                description: description.length > 0 ? description : null
+            }
+
+        console.log("trc ajax", newGroupSup)
+        $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            "type": "POST",
+            "url": origin + "/api/supplier_groups/create",
+            "data": JSON.stringify(newGroupSup)
+        })
+            .done((data) => {
+                console.log("data: ",data)
+                SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
+                setTimeout(() => {
+                }, 1500);
+                page.dialogs.elements.modalCreateGroupSupplier.modal('hide');
+                location.reload();
+            })
+            .fail((jqXHR) => {
+                SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
+                setTimeout(() => {
+                }, 1500);
+            })
+    }
 
     function getAllGroup() {
         $.ajax({
@@ -1000,44 +950,44 @@
             )
         });
     }
-    // page.elements.formUpdateSupplier.validate({
-    //     rules: {
-    //         fullName: {
-    //             required: true,
-    //         },
-    //         supplierCode: {
-    //             required: true,
-    //         },
-    //     },
-    //     messages: {
-    //         fullName: {
-    //             required: "Tên nhà cung cấp không được để trống",
-    //         },
-    //         supplierCode: {
-    //             required: "Mã nhà cung cấp không được để trống",
-    //         },
-    //     },
-    //     submitHandler: () => {
-    //         doUpdateSupplier();
-    //     }
-    // })
+    page.elements.formUpdateSupplier.validate({
+        rules: {
+            fullName: {
+                required: true,
+            },
+            supplierCode: {
+                required: true,
+            },
+        },
+        messages: {
+            fullName: {
+                required: "Tên nhà cung cấp không được để trống",
+            },
+            supplierCode: {
+                required: "Mã nhà cung cấp không được để trống",
+            },
+        },
+        submitHandler: () => {
+            doUpdateSupplier();
+        }
+    })
 
 
-    // page.dialogs.elements.formCreateGroup.validate({
-    //     rules: {
-    //         groupTitleSup: {
-    //             required: true,
-    //         },
-    //     },
-    //     messages: {
-    //         groupTitleSup: {
-    //             required: "Tên nhóm nhà cung cấp không được để trống",
-    //         },
-    //     },
-    //     submitHandler: () => {
-    //         doCreateGroupSupplier();
-    //     }
-    // })
+    page.dialogs.elements.formCreateGroup.validate({
+        rules: {
+            groupCreateTitleSup: {
+                required: true,
+            },
+        },
+        messages: {
+            groupCreateTitleSup: {
+                required: "Tên nhóm nhà cung cấp không được để trống",
+            },
+        },
+        submitHandler: () => {
+            doCreateGroupSupplier();
+        }
+    })
 
     getAllEmployeeSelect();
     getAllPaymentMethodSelect();

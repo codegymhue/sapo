@@ -907,7 +907,7 @@
               setTimeout(() => {
               }, 1500);
               page.dialogs.elements.modalDeleteAddressSup.modal('hide');
-              // location.reload();
+              location.reload();
             })
             .fail((jqXHR) => {
               console.log(jqXHR)
@@ -956,7 +956,6 @@
       districtName: page.dialogs.elements.districtCr.find("option:selected").text(),
       provinceId : page.dialogs.elements.provinceCr.val(),
       provinceName : page.dialogs.elements.provinceCr.find("option:selected").text(),
-
     }
     $.ajax({
       "headers": {
@@ -1040,9 +1039,10 @@
               getAllDistrictsByProvinceId(page.dialogs.elements.districtUp,data.provinceId).then(()=>{
                 page.dialogs.elements.districtUp.val(data.districtId);
               });
-              getAllWardsByDistrictId(page.dialogs.elements.wardUp , data.districtId).then(()=>{
+              getAllWardsByDistrictId(page.dialogs.elements.wardUp,data.districtId).then(()=>{
                 page.dialogs.elements.wardUp.val(data.wardId);
-              })
+              });
+
             })
   }
 
@@ -1164,7 +1164,7 @@
               SupplierApp.IziToast.showSuccessAlert("Xoá địa chỉ nhà cung cấp thành công!");
               setTimeout(() => {
               }, 1500);
-              // location.reload()
+              location.reload()
             })
   })
 
