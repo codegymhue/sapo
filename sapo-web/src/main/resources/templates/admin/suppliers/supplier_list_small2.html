@@ -54,7 +54,6 @@
                                 Nhà cung cấp trên trang này
                             </label>
                         </div>
-
                         <div class="sapo-radio-wrapper">
                             <label class="flex">
                                     <span class="sapo-radiobox" style="margin-right: 7px;">
@@ -408,19 +407,7 @@
                         </div>
 
                         <div id="chose-file">
-                            <div class="chose-file-import">
-                                <a class="btn-upload" bind-event-click="showImport()" href="javascript:void(0)"
-                                   data-original-title="" title=""><i style="padding-right: 4px;"
-                                                                      class="fa fa-cloud-download"
-                                                                      aria-hidden="true"></i><span>Kéo thả file vào
-                                            đây hoặc tải lên từ thiết bị</span></a>
-                                <input name="importProductsFile" type="file" size="30" class="hide"
-                                       id="importFileUpload"
-                                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                                       bind-event-change="enableButtonImport()" multiple="">
-                                <input id="overrideExistProducts" name="overrideExistProducts" type="hidden"
-                                       value="false">
-                            </div>
+                            <input class="form-control" type="file" id="formFileSuppliers">
                         </div>
 
                     </div>
@@ -465,14 +452,14 @@
                 </div>
                 <div class="action-bar">
                     <div class="action-bar__top-links">
-                        <button class="btn sapo-btn-transparent action-bar__link export_product" type="button"
-                                name="button">
+                        <button class="btn sapo-btn-transparent action-bar__link export_supplier" type="button"
+                                name="button" >
                             <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-export-minor"></use>
                             </svg>
                             Xuất file
                         </button>
-                        <button class="btn sapo-btn-transparent action-bar__link import_product" type="button"
+                        <button class="btn sapo-btn-transparent action-bar__link import_supplier" type="button"
                                 name="button">
                             <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-import-minor"></use>
@@ -1091,7 +1078,7 @@
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
 <th:block th:replace="/layout/script :: script"/>
 <th:block th:replace="/layout/supplier/script_export_import.html"/>
-<th:block th:replace="/layout/supplier/modal_export_import.html"/>
+<!--<th:block th:replace="/layout/supplier/modal_export_import.html"/>-->
 <script>
 
     $(".filter-item").css("display", "block");
