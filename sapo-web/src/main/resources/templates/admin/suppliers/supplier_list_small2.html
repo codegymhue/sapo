@@ -479,7 +479,8 @@
                             </svg>
                             Nhập file
                         </button>
-                        <a class="btn sapo-btn-transparent action-bar__link" href="#" data-popover-index="1">
+                        <a class="btn sapo-btn-transparent action-bar__link" href="/admin/supplier_groups"
+                           data-popover-index="1">
                             <img src="/v2/images/icon/friends.svg"
                                  style="width: 18px; height: 18px; position: relative; top: -0.6rem; margin-top: -1.1rem; margin-bottom: -1.1rem; margin-right: 3px;">
                             Nhóm nhà cung cấp
@@ -839,42 +840,48 @@
                         </div>
                         <div class="container-fluid" style="height: 50px">
                             <div class="row col-md-12 d-flex align-items-center" style="font-size: small">
-                                <div class="col-md-5"></div>
-                                <div class="col-md-3 text-end">
-                                    <label class="me-2">Hiển thị</label>
-                                    <select class="me-2 " id="pageSize">
-                                        <option value="20">20</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select>
-                                    <span>Kết quả</span>
-                                </div>
-                                <div class="col-md-3 text-center" id="totalPage" style="padding: initial">
+                                <div class="col-md-4" id="totalPage" style="padding: initial">
 
                                 </div>
-                                <div class="col-md-1">
-                                    <nav aria-label="Page navigation example ">
-                                        <ul class="pagination">
-                                            <li class="page-item">
-                                                <button class=" btn-outline-primary btn-sm me-2" id="previousPage"
-                                                        style="border: none">
-                                                    <i class="fa-solid fa-angle-left"></i>
-                                                </button>
-                                            </li>
-                                            <li class="page-item">
-                                                <button class="pageNumber btn-primary btn-sm me-2">
-                                                    <span id="pageNo">1</span>
-                                                </button>
-                                            </li>
-                                            <li class="page-item">
-                                                <button class=" btn-outline-primary btn-sm " id="nextPage"
-                                                        style="border: none">
-                                                    <i class="fa-solid fa-angle-right"></i>
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    </nav>
+                                <div class="col-md-8">
+                                    <div class="text-end" style="    width: 200px;
+    float: left;
+    display: inline-flex;">
+                                        <label class="me-2">Hiển thị</label>
+                                        <select class="me-2 " id="pageSize">
+                                            <option value="20">20</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                        <span>Kết quả</span>
+                                    </div>
+
+                                    <div class="" style="    float: right;padding: 0 0 0 20px;">
+
+                                        <nav aria-label="Page navigation example ">
+                                            <ul class="pagination">
+                                                <li class="page-item">
+                                                    <button class=" btn-outline-primary btn-sm me-2" id="previousPage"
+                                                            style="border: none">
+                                                        <i class="fa-solid fa-angle-left"></i>
+                                                    </button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button class="pageNumber btn-primary btn-sm me-2">
+                                                        <span id="pageNo">1</span>
+                                                    </button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button class=" btn-outline-primary btn-sm " id="nextPage"
+                                                            style="border: none">
+                                                        <i class="fa-solid fa-angle-right"></i>
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
                                 </div>
+
                             </div>
 
                         </div>
@@ -1141,6 +1148,7 @@
     page.elements.btnAvailableSave = $("#btnAvailableSave");
     page.elements.btnUnavailableSave = $("#btnUnavailableSave");
     page.elements.btnSubmitDelete = $("#btnSubmitDelete");
+    page.elements.updateBulkaction = $("#updateBulkaction")
 
     page.elements.modalUpdateBulk = $("#modalUpdateBulk")
     page.elements.modalAvailable = $("#modalAvailable");
@@ -1494,7 +1502,7 @@
         page.elements.modalDelete.modal("show");
     })
 
-    page.elements.updateBulkaction = $("#updateBulkaction")
+
     page.elements.updateBulkaction.on("click", () => {
         let empId = $("#accountIdBulk").val();
         if (empId == 0)
@@ -1745,6 +1753,7 @@
     function setParamFilterAssigneeIds(element) {
         $('input[type="checkbox"].checkbox_employee').change(function () {
             let checkbox = $(this)
+            console.log(checkbox)
             if (checkbox.is(":checked")) {
                 supplierFilter.employeeIds.push(checkbox.val())
             } else {
