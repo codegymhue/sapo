@@ -76,7 +76,7 @@ public class SupplierAPI {
 
     @PostMapping("/filter")
     public ResponseEntity<?> filterSupplier(@RequestBody SupplierFilter supplierFilter) {
-        Map<String, Object> supplierResult = supplierService.findAllByFilters2(supplierFilter);
+        Map<String, Object> supplierResult = supplierService.findAllByFilters(supplierFilter);
         return new ResponseEntity<>(supplierResult, HttpStatus.OK);
     }
 

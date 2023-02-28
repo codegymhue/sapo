@@ -28,7 +28,7 @@ public interface SupplierService {
                                                String status
                                               );
     @Transactional(readOnly = true)
-    Map<String, Object> findAllByFilters2(SupplierFilter filter);
+    Map<String, Object> findAllByFilters(SupplierFilter filter);
 
 
     Page<SupplierResult> findAllByFilters(SupplierFilter filter, Pageable pageable);
