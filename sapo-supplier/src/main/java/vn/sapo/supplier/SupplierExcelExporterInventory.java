@@ -8,7 +8,6 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import vn.sapo.address.dto.AddressResult;
-import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 
@@ -132,5 +131,4 @@ public class SupplierExcelExporterInventory {
         outputStream.close();
 
     }
-
 }

@@ -7,6 +7,5 @@ import java.util.List;
 
 public interface SupplierExcelService {
     List<ImportExcelSupplierParam> extractExcel(MultipartFile excelFile);
-
     void importSupplier(List<ImportExcelSupplierParam> importExcelSupplierParams);
 }

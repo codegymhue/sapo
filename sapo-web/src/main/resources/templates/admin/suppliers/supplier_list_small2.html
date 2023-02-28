@@ -54,7 +54,6 @@
                                 Nhà cung cấp trên trang này
                             </label>
                         </div>
-
                         <div class="sapo-radio-wrapper">
                             <label class="flex">
                                     <span class="sapo-radiobox" style="margin-right: 7px;">
@@ -408,19 +407,7 @@
                         </div>
 
                         <div id="chose-file">
-                            <div class="chose-file-import">
-                                <a class="btn-upload" bind-event-click="showImport()" href="javascript:void(0)"
-                                   data-original-title="" title=""><i style="padding-right: 4px;"
-                                                                      class="fa fa-cloud-download"
-                                                                      aria-hidden="true"></i><span>Kéo thả file vào
-                                            đây hoặc tải lên từ thiết bị</span></a>
-                                <input name="importProductsFile" type="file" size="30" class="hide"
-                                       id="importFileUpload"
-                                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                                       bind-event-change="enableButtonImport()" multiple="">
-                                <input id="overrideExistProducts" name="overrideExistProducts" type="hidden"
-                                       value="false">
-                            </div>
+                            <input class="form-control" type="file" id="formFileSuppliers">
                         </div>
 
                     </div>
@@ -465,14 +452,14 @@
                 </div>
                 <div class="action-bar">
                     <div class="action-bar__top-links">
-                        <button class="btn sapo-btn-transparent action-bar__link export_product" type="button"
+                        <button class="btn sapo-btn-transparent action-bar__link export_supplier" type="button"
                                 name="button">
                             <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-export-minor"></use>
                             </svg>
                             Xuất file
                         </button>
-                        <button class="btn sapo-btn-transparent action-bar__link import_product" type="button"
+                        <button class="btn sapo-btn-transparent action-bar__link import_supplier" type="button"
                                 name="button">
                             <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-import-minor"></use>
@@ -589,12 +576,12 @@
                                     <div class="btn-group pull-left">
                                         <div>
                                             <div class="btn-group show">
-                                                <button type="button" bind-event-click="setParamFilterAssigneeIds(this)"
+                                                <button type="button" id="setParamFilterAssigneeIds"
                                                         class="multiselect dropdown-toggle btn sapo-btn-blank btn-default"
                                                         data-bs-toggle="dropdown" data-bs-auto-close="outside"
                                                         aria-expanded="false"
                                                         style="padding:0.8rem; min-width: 300px" title="Chọn nhân viên"
-                                                ><span class="multiselect-selected-text">Chọn nhân viên</span>
+                                                ><span class="multiselect-selected-text multiselect-employee">Chọn nhân viên</span>
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                          class="icon-dropdown-select">
                                                         <path d="M10 16l-4-4h8l-4 4zm0-12L6 8h8l-4-4z"></path>
@@ -637,6 +624,9 @@
 
                                     <div class="btn-group pull-left">
                                         <div>
+                                            <div class="w100" id="search-supplierGroupId-container">
+
+                                            </div>
                                             <div class="btn-group show">
                                                 <button type="button"
                                                         bind-event-click="setParamFilterSupplierGroupId(this)"
@@ -857,28 +847,59 @@
                                     </div>
 
                                     <div class="" style="    float: right;padding: 0 0 0 20px;">
-
-                                        <nav aria-label="Page navigation example ">
+                                        <div class="dataTables_paginate paging_bootstrap">
                                             <ul class="pagination">
-                                                <li class="page-item">
-                                                    <button class=" btn-outline-primary btn-sm me-2" id="previousPage"
-                                                            style="border: none">
-                                                        <i class="fa-solid fa-angle-left"></i>
-                                                    </button>
+                                                <li><a class="t-link"><span
+                                                        class="t-icon t-arrow-first">← Trang đầu</span></a></li>
+                                                <li><a class="t-link" id="previousPage"
+                                                >4</a></li>
+
+                                                <li><a class="t-link" id="pageNo">1</a>
                                                 </li>
-                                                <li class="page-item">
-                                                    <button class="pageNumber btn-primary btn-sm me-2">
-                                                        <span id="pageNo">1</span>
-                                                    </button>
-                                                </li>
-                                                <li class="page-item">
-                                                    <button class=" btn-outline-primary btn-sm " id="nextPage"
-                                                            style="border: none">
-                                                        <i class="fa-solid fa-angle-right"></i>
-                                                    </button>
+                                                <li><a class="t-link" id="nextPage"
+                                                >2</a></li>
+
+                                                <!--                                                <li class="active"><span class="t-state-active">3</span></li>-->
+                                                <!--                                                <li><a class="t-link"-->
+                                                <!--                                                      >5</a></li>-->
+                                                <li><a class="t-link"
+                                                ><span class="t-icon t-arrow-last">Trang cuối →</span></a>
                                                 </li>
                                             </ul>
-                                        </nav>
+                                        </div>
+                                        <!--                                        <nav aria-label="Page navigation example ">-->
+                                        <!--                                            <ul class="pagination">-->
+                                        <!--                                                <li class="page-item">-->
+                                        <!--                                                    <button class=" btn-outline-primary btn-sm me-2"-->
+                                        <!--                                                            style="border: none">-->
+                                        <!--                                                        ← Trang đầu-->
+                                        <!--                                                    </button>-->
+                                        <!--                                                </li>-->
+                                        <!--                                                <li class="page-item">-->
+                                        <!--                                                    <button class=" btn-outline-primary btn-sm me-2" id="previousPage"-->
+                                        <!--                                                            style="border: none">-->
+
+                                        <!--                                                    </button>-->
+                                        <!--                                                </li>-->
+                                        <!--                                                <li class="page-item">-->
+                                        <!--                                                    <button class="pageNumber btn-primary btn-sm me-2">-->
+                                        <!--                                                        <span id="pageNo">1</span>-->
+                                        <!--                                                    </button>-->
+                                        <!--                                                </li>-->
+                                        <!--                                                <li class="page-item">-->
+                                        <!--                                                    <button class=" btn-outline-primary btn-sm " id="nextPage"-->
+                                        <!--                                                            style="border: none">-->
+
+                                        <!--                                                    </button>-->
+                                        <!--                                                </li>-->
+                                        <!--                                                <li class="page-item">-->
+                                        <!--                                                    <button class=" btn-outline-primary btn-sm "-->
+                                        <!--                                                            style="border: none">-->
+                                        <!--                                                        Trang cuối →-->
+                                        <!--                                                    </button>-->
+                                        <!--                                                </li>-->
+                                        <!--                                            </ul>-->
+                                        <!--                                        </nav>-->
                                     </div>
                                 </div>
 
@@ -925,7 +946,7 @@
                     <div class="col-6">
                         <div class="label mb-2">Nhân viên phụ trách</div>
                         <select class="w100 input-dropdown sapo-btn-blank select-padding left" style="width:250px;"
-                                bind="accountIdBulk" id="accountIdBulk">
+                                id="accountIdBulk">
                             <option value="0" selected="">Chọn nhân viên phụ trách</option>
 
                         </select>
@@ -933,7 +954,7 @@
                     <div class="col-6">
                         <div class="label mb-2">Hình thức thanh toán</div>
                         <select class="w100 input-dropdown sapo-btn-blank select-padding left" style="width:250px;"
-                                bind="paymentMethodIdBulk" id="paymentMethodIdBulk">
+                                id="paymentMethodIdBulk">
                             <option value="0" selected="">Chọn hình thức thanh toán</option>
 
                         </select>
@@ -1090,6 +1111,8 @@
 </div>
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
 <th:block th:replace="/layout/script :: script"/>
+<th:block th:replace="/layout/supplier/script_export_import.html"/>
+<!--<th:block th:replace="/layout/supplier/modal_export_import.html"/>-->
 <script>
 
     $(".filter-item").css("display", "block");
@@ -1194,6 +1217,9 @@
         $(".filter-button-tag").removeClass("active");
         $('input[type=checkbox]').prop('checked', false);
         $(".input-date").val("");
+        $(".multiselect-employee").text("Chọn nhân viên")
+        $("#search-supplierGroupId-container").empty()
+        resetSupplierFilter()
     })
 
 
@@ -1273,6 +1299,7 @@
     page.dialogs.elements.filterSubmit.on("click", () => {
         supplierFilter.pageNo = Number(page.elements.pageNo.text());
         supplierFilter.pageSize = Number(page.elements.pageSize.val());
+        g
         console.log(supplierFilter, " supplierFilter truoc rết")
         page.commands.getAllSupplierUseFilter(supplierFilter);
         resetSupplierFilter();
@@ -1319,17 +1346,32 @@
         let pageNo = page.elements.pageNo.text();
         if (Number(pageNo) < Number(totalPage)) {
             let pageNext = Number(pageNo) + 1;
+            page.dialogs.elements.nextPage.show()
             page.elements.pageNo.text(pageNext);
+            $(page.elements.pageNo.parentElement).addClass("active")
+            page.dialogs.elements.previousPage.removeClass("active")
+            page.dialogs.elements.nextPage.text(pageNext + 1)
+            page.dialogs.elements.previousPage.text(pageNext - 1)
             page.commands.getAllSupplier();
+            console.log($("#pageNo").parentElement, " page.elements.pageNo.parentElement")
+        } else {
+            page.elements.pageNo.text(Number(pageNo) + 1);
+            page.dialogs.elements.nextPage.hide()
         }
     })
+
 
     page.dialogs.elements.previousPage.on("click", () => {
         let pageNo = page.elements.pageNo.text();
         if (Number(pageNo) > 1) {
             let previousPage = Number(pageNo) - 1;
             page.elements.pageNo.text(previousPage);
+            page.dialogs.elements.previousPage.text(previousPage - 1)
+            page.dialogs.elements.nextPage.text(previousPage + 1)
             page.commands.getAllSupplier();
+        } else {
+            page.elements.pageNo.text(Number(pageNo) + 1);
+            page.dialogs.elements.nextPage.hide()
         }
 
     })
@@ -1750,32 +1792,76 @@
         supplierFilter.filter = page.elements.search.val().trim();
     }
 
-    function setParamFilterAssigneeIds(element) {
+
+    $("setParamFilterAssigneeIds").on("click", function (element){
+        $(element).off("click")
         $('input[type="checkbox"].checkbox_employee').change(function () {
+
             let checkbox = $(this)
-            console.log(checkbox)
+            let checkboxText = $(`label[for="${$(this).val()}"]`).text();
+            let checkboxCheckedLength = $('input[type="checkbox"].checkbox_employee:checked').length;
+            let checkboxAll = $('input[type="checkbox"].checkbox_employee').length;
+
             if (checkbox.is(":checked")) {
                 supplierFilter.employeeIds.push(checkbox.val())
+                if (checkboxCheckedLength < 1)
+                    $(element).find("span").text("Chọn nhân viên")
+                else if (checkboxCheckedLength === 1) {
+                    $('input[type="checkbox"].checkbox_employee').each(function () {
+                        if ($(this).is(":checked"))
+                            $(element).find("span").text($(`label[for="${$(this).val()}"]`).text())
+                    })
+                } else if (checkboxCheckedLength > 1 && checkboxCheckedLength < checkboxAll)
+                    $(element).find("span").text(`${checkboxCheckedLength} nhân viên được chọn`)
+                else if (checkboxCheckedLength === checkboxAll)
+                    $(element).find("span").text(`Tất cả (${checkboxCheckedLength})`)
             } else {
                 if (supplierFilter.employeeIds.indexOf(checkbox.val()) > -1) {
                     supplierFilter.employeeIds.splice(supplierFilter.employeeIds.indexOf(checkbox.val()), 1)
                 }
+                if (checkboxCheckedLength < 1)
+                    $(element).find("span").text("Chọn nhân viên")
+                else if (checkboxCheckedLength === 1) {
+                    $('input[type="checkbox"].checkbox_employee').each(function () {
+                        if ($(this).is(":checked"))
+                            $(element).find("span").text($(`label[for="${$(this).val()}"]`).text())
+                    })
+                } else if (checkboxCheckedLength > 1 && checkboxCheckedLength < checkboxAll)
+                    $(element).find("span").text(`${checkboxCheckedLength} nhân viên được chọn`)
+                else if (checkboxCheckedLength === checkboxAll)
+                    $(element).find("span").text(`Tất cả (${checkboxCheckedLength})`)
             }
+            console.log(supplierFilter.employeeIds)
         })
-    }
+
+    })
 
     function setParamFilterSupplierGroupId(element) {
+        element.removeEventListener("click", setParamFilterSupplierGroupId)
         $('input[type="checkbox"].checkbox_supplier_group').change(function () {
+
             let checkbox = $(this)
+            let checkboxText = $(`label[for="${$(this).val()}"]`).text();
+            let str = `<span class="tm-tag tm-tag-small tm-serial tm-overflow"
+                                                      id="tag-variant-${checkbox.val()}" title="${checkboxText}">
+                            <span>${checkboxText}</span>
+
+                       </span>`
+            // < a className = "tm-tag-remove tag-variant-remove" variant - id = "${checkbox.val()}" > x < /a>
             if (checkbox.is(":checked")) {
                 supplierFilter.groupIds.push(checkbox.val())
+                $("#search-supplierGroupId-container").append(str)
             } else {
                 if (supplierFilter.groupIds.indexOf(checkbox.val()) > -1) {
                     supplierFilter.groupIds.splice(supplierFilter.groupIds.indexOf(checkbox.val()), 1)
                 }
+                $("span[" + "id" + "^=" + "tag-variant-" + $(element).val() + "]").remove()
+
             }
+            console.log(supplierFilter.groupIds)
         })
     }
+
 
     // tìm từ khóa trong filter SupplierGroup
     function suggest(element) {
@@ -1800,11 +1886,13 @@
         document.getElementById("createMax").setAttribute("min", supplierFilter.createdFrom);
     }
 
+
     page.commands.loadData = () => {
         page.commands.getAllSupplier();
         page.commands.getAllEmployee();
         page.commands.getAllPaymentMethodSelect();
         page.commands.getAllSupplierGroup();
+
         // page.commands.getAllSupplierByFilter();
     }
 

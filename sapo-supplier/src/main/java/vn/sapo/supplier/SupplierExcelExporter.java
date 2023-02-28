@@ -122,20 +122,15 @@ public class SupplierExcelExporter {
                     createCell(row, columnCount++, adr.getPhoneNumber() != null ? adr.getPhoneNumber() : "", style);
                     createCell(row, columnCount++, adr.getEmail() != null ? adr.getEmail() : "", style);
                     createCell(row, columnCount++, adr.getLine1() != null ? adr.getLine1() : "", style);
+                    createCell(row, columnCount++, adr.getLabel() != null ? adr.getLabel() : "", style);
                     if (adr.getLine2() != null)
                         createCell(sheet.createRow(rowCount++),columnCount-1,adr.getLine2(),style);
                     createCell(row, columnCount++, adr.getProvinceName() != null ?  adr.getProvinceName() : "", style);
                     createCell(row, columnCount++, adr.getDistrictName() != null ? adr.getDistrictName() : "", style);
-                    createCell(row, columnCount++, adr.getWardName() != null ? adr.getWardName() : "", style);
                 }
-
-
             }
         }
-
-
     }
-
 
     public void export(HttpServletResponse response) throws IOException {
         writeHeaderLine();
@@ -146,8 +141,6 @@ public class SupplierExcelExporter {
         workbook.close();
 
         outputStream.close();
-
     }
-
 }
 
