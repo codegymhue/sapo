@@ -1,0 +1,51 @@
+<th:block th:fragment="script_export_import">
+    <!--Nhap file -->
+    <script>
+        $(".import_supplier").on("click", () => {
+            let myModal = new bootstrap.Modal(document.getElementById('importModal'))
+            myModal.show()
+
+        })
+    </script>
+
+
+    <!--Xuat file-->
+    <script>
+        $(".export_supplier").on("click", () => {
+            let myModal = new bootstrap.Modal(document.getElementById('exportModal'))
+            myModal.show()
+        })
+    </script>
+
+    <script>
+        $('#importBtn').on('click', () => {
+            let data = new FormData();
+            let file = $('#formFileSuppliers')[0].files[0];
+            data.append('file',file)
+
+            $.ajax({
+                url: origin +'/api/suppliers/upload',
+                processData: false,
+                contentType: false,
+                data: data,
+                type: 'POST'
+            }).done(function(result) {
+                $("#modalImportFileSuppliers").modal("hide");
+                $("#frmFileSuppliers");
+                page.commands.getAllSupplier();
+                SupplierApp.IziToast.showSuccessAlert("Tải file lên thành công!")
+                // page.commands.closeLoading();
+            }).fail((jqXHR) => {
+                SupplierApp.IziToast.showErrorAlert("Tải file lên không thành công!")
+                // page.commands.closeLoading();
+            })
+
+
+
+
+
+        });
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</th:block>

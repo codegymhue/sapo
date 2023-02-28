@@ -39,13 +39,9 @@ public class SupplierController {
 
     @Autowired
     PaymentMethodService paymentMethodService;
-
+    
     @GetMapping
     public ModelAndView showSupplierListPage() {
-        return new ModelAndView("/admin/suppliers/supplier_list_small");
-    }
-    @GetMapping("/small")
-    public ModelAndView showSupplierListPageSmall() {
         return new ModelAndView("/admin/suppliers/supplier_list_small2");
     }
 
@@ -144,5 +140,6 @@ public class SupplierController {
 
         return modelAndView;
     }
+
 
 }

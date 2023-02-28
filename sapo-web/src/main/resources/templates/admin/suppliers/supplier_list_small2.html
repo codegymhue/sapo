@@ -54,7 +54,6 @@
                                 Nhà cung cấp trên trang này
                             </label>
                         </div>
-
                         <div class="sapo-radio-wrapper">
                             <label class="flex">
                                     <span class="sapo-radiobox" style="margin-right: 7px;">
@@ -408,19 +407,7 @@
                         </div>
 
                         <div id="chose-file">
-                            <div class="chose-file-import">
-                                <a class="btn-upload" bind-event-click="showImport()" href="javascript:void(0)"
-                                   data-original-title="" title=""><i style="padding-right: 4px;"
-                                                                      class="fa fa-cloud-download"
-                                                                      aria-hidden="true"></i><span>Kéo thả file vào
-                                            đây hoặc tải lên từ thiết bị</span></a>
-                                <input name="importProductsFile" type="file" size="30" class="hide"
-                                       id="importFileUpload"
-                                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                                       bind-event-change="enableButtonImport()" multiple="">
-                                <input id="overrideExistProducts" name="overrideExistProducts" type="hidden"
-                                       value="false">
-                            </div>
+                            <input class="form-control" type="file" id="formFileSuppliers">
                         </div>
 
                     </div>
@@ -465,21 +452,22 @@
                 </div>
                 <div class="action-bar">
                     <div class="action-bar__top-links">
-                        <button class="btn sapo-btn-transparent action-bar__link export_product" type="button"
-                                name="button">
+                        <button class="btn sapo-btn-transparent action-bar__link export_supplier" type="button"
+                                name="button" >
                             <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-export-minor"></use>
                             </svg>
                             Xuất file
                         </button>
-                        <button class="btn sapo-btn-transparent action-bar__link import_product" type="button"
+                        <button class="btn sapo-btn-transparent action-bar__link import_supplier" type="button"
                                 name="button">
                             <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-import-minor"></use>
                             </svg>
                             Nhập file
                         </button>
-                        <a class="btn sapo-btn-transparent action-bar__link" href="#" data-popover-index="1">
+                        <a class="btn sapo-btn-transparent action-bar__link" href="/admin/supplier_groups"
+                           data-popover-index="1">
                             <img src="/v2/images/icon/friends.svg"
                                  style="width: 18px; height: 18px; position: relative; top: -0.6rem; margin-top: -1.1rem; margin-bottom: -1.1rem; margin-right: 3px;">
                             Nhóm nhà cung cấp
@@ -839,42 +827,48 @@
                         </div>
                         <div class="container-fluid" style="height: 50px">
                             <div class="row col-md-12 d-flex align-items-center" style="font-size: small">
-                                <div class="col-md-5"></div>
-                                <div class="col-md-3 text-end">
-                                    <label class="me-2">Hiển thị</label>
-                                    <select class="me-2 " id="pageSize">
-                                        <option value="20">20</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select>
-                                    <span>Kết quả</span>
-                                </div>
-                                <div class="col-md-3 text-center" id="totalPage" style="padding: initial">
+                                <div class="col-md-4" id="totalPage" style="padding: initial">
 
                                 </div>
-                                <div class="col-md-1">
-                                    <nav aria-label="Page navigation example ">
-                                        <ul class="pagination">
-                                            <li class="page-item">
-                                                <button class=" btn-outline-primary btn-sm me-2" id="previousPage"
-                                                        style="border: none">
-                                                    <i class="fa-solid fa-angle-left"></i>
-                                                </button>
-                                            </li>
-                                            <li class="page-item">
-                                                <button class="pageNumber btn-primary btn-sm me-2">
-                                                    <span id="pageNo">1</span>
-                                                </button>
-                                            </li>
-                                            <li class="page-item">
-                                                <button class=" btn-outline-primary btn-sm " id="nextPage"
-                                                        style="border: none">
-                                                    <i class="fa-solid fa-angle-right"></i>
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    </nav>
+                                <div class="col-md-8">
+                                    <div class="text-end" style="    width: 200px;
+    float: left;
+    display: inline-flex;">
+                                        <label class="me-2">Hiển thị</label>
+                                        <select class="me-2 " id="pageSize">
+                                            <option value="20">20</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                        <span>Kết quả</span>
+                                    </div>
+
+                                    <div class="" style="    float: right;padding: 0 0 0 20px;">
+                                       
+                                        <nav aria-label="Page navigation example ">
+                                            <ul class="pagination">
+                                                <li class="page-item">
+                                                    <button class=" btn-outline-primary btn-sm me-2" id="previousPage"
+                                                            style="border: none">
+                                                        ← Trang đầu
+                                                    </button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button class="pageNumber btn-primary btn-sm me-2">
+                                                        <span id="pageNo">1</span>
+                                                    </button>
+                                                </li>
+                                                <li class="page-item">
+                                                    <button class=" btn-outline-primary btn-sm " id="nextPage"
+                                                            style="border: none">
+                                                        Trang cuối →
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
                                 </div>
+
                             </div>
 
                         </div>
@@ -1083,6 +1077,8 @@
 </div>
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
 <th:block th:replace="/layout/script :: script"/>
+<th:block th:replace="/layout/supplier/script_export_import.html"/>
+<!--<th:block th:replace="/layout/supplier/modal_export_import.html"/>-->
 <script>
 
     $(".filter-item").css("display", "block");
@@ -1141,6 +1137,7 @@
     page.elements.btnAvailableSave = $("#btnAvailableSave");
     page.elements.btnUnavailableSave = $("#btnUnavailableSave");
     page.elements.btnSubmitDelete = $("#btnSubmitDelete");
+    page.elements.updateBulkaction = $("#updateBulkaction")
 
     page.elements.modalUpdateBulk = $("#modalUpdateBulk")
     page.elements.modalAvailable = $("#modalAvailable");
@@ -1494,7 +1491,7 @@
         page.elements.modalDelete.modal("show");
     })
 
-    page.elements.updateBulkaction = $("#updateBulkaction")
+
     page.elements.updateBulkaction.on("click", () => {
         let empId = $("#accountIdBulk").val();
         if (empId == 0)
@@ -1745,12 +1742,40 @@
     function setParamFilterAssigneeIds(element) {
         $('input[type="checkbox"].checkbox_employee').change(function () {
             let checkbox = $(this)
+            let checkboxText = $(`label[for="${$(this).val()}"]`).text();
+            let checkboxCheckedLength = $('input[type="checkbox"].checkbox_employee:checked').length;
+            let checkboxAll = $('input[type="checkbox"].checkbox_employee').length;
+
             if (checkbox.is(":checked")) {
                 supplierFilter.employeeIds.push(checkbox.val())
+                if (checkboxCheckedLength < 1)
+                    $(element).children(".multiselect-selected-text").text("Chọn nhân viên")
+                else if (checkboxCheckedLength === 1){
+                    $('input[type="checkbox"].checkbox_employee').each(function (){
+                        if($(this).is(":checked"))
+                            $(element).children(".multiselect-selected-text").text($(`label[for="${$(this).val()}"]`).text())
+                    })
+                }
+                else if (checkboxCheckedLength > 1 && checkboxCheckedLength < checkboxAll)
+                    $(element).children(".multiselect-selected-text").text(`${checkboxCheckedLength} nhân viên được chọn`)
+                else if (checkboxCheckedLength === checkboxAll)
+                    $(element).children(".multiselect-selected-text").text(`Tất cả (${checkboxCheckedLength})`)
             } else {
                 if (supplierFilter.employeeIds.indexOf(checkbox.val()) > -1) {
                     supplierFilter.employeeIds.splice(supplierFilter.employeeIds.indexOf(checkbox.val()), 1)
                 }
+                if (checkboxCheckedLength < 1)
+                    $(element).children(".multiselect-selected-text").text("Chọn nhân viên")
+                else if (checkboxCheckedLength === 1){
+                    $('input[type="checkbox"].checkbox_employee').each(function (){
+                        if($(this).is(":checked"))
+                            $(element).children(".multiselect-selected-text").text($(`label[for="${$(this).val()}"]`).text())
+                    })
+                }
+                else if (checkboxCheckedLength > 1 && checkboxCheckedLength < checkboxAll)
+                    $(element).children(".multiselect-selected-text").text(`${checkboxCheckedLength} nhân viên được chọn`)
+                else if (checkboxCheckedLength === checkboxAll)
+                    $(element).children(".multiselect-selected-text").text(`Tất cả (${checkboxCheckedLength})`)
             }
         })
     }
