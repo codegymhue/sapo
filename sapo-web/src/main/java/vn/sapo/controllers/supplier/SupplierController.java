@@ -102,7 +102,6 @@ public class SupplierController {
             modelAndView.addObject("error", e.getMessage());
         }
         modelAndView.setViewName("/admin/suppliers/supplier_update");
-//        modelAndView.setViewName("/admin/suppliers/cap");
         return modelAndView;
     }
 
