@@ -126,7 +126,6 @@ public class SupplierExcelExporter {
                         createCell(sheet.createRow(rowCount++),columnCount-1,adr.getLine2(),style);
                     createCell(row, columnCount++, adr.getProvinceName() != null ?  adr.getProvinceName() : "", style);
                     createCell(row, columnCount++, adr.getDistrictName() != null ? adr.getDistrictName() : "", style);
-                    createCell(row, columnCount++, adr.getWardName() != null ? adr.getWardName() : "", style);
                 }
 
 
