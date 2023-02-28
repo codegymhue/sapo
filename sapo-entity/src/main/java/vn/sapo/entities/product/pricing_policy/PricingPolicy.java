@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.sapo.entities.customer.CustomerGroup;
 
 import javax.persistence.*;
 

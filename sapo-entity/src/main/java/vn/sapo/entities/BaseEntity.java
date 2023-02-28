@@ -10,7 +10,10 @@ import java.time.Instant;
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
     @Setter(AccessLevel.NONE)
-    @Column(name = "created_at", nullable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "created_at",
+            nullable = false,
+            columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP"
+    )
     private Instant createdAt;
 
     @Setter(AccessLevel.NONE)

@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vn.sapo.customerGroup.CustomerGroupMapper;
-import vn.sapo.customerGroup.CustomerGroupRepository;
 import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.customerGroup.dto.CreateCusGroupParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
@@ -18,9 +17,6 @@ import vn.sapo.customerGroup.dto.UpdateCustomerGroupParam;
 public class CustomerGroupAPI {
     @Autowired
     CustomerGroupService customerGroupService;
-
-    @Autowired
-    CustomerGroupRepository customerGroupRepository;
 
     @Autowired
     CustomerGroupMapper customerGroupMapper;

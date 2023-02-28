@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import vn.sapo.customer.dto.CustomerFilter;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerGender;
-import vn.sapo.entities.customer.CustomerStatus;
 
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Path;

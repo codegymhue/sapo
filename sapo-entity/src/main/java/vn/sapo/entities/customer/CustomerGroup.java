@@ -25,12 +25,16 @@ public class CustomerGroup extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
+
     @Column(name = "title", nullable = false, length = 50)
     private String title;
+
     @Column(name = "cus_grp_code", nullable = false, length = 50)
     private String cusGrpCode;
+
     @Column(name = "description", nullable = false)
     private String description;
+
     @Column(name = "discount", nullable = false)
     private Integer discount;
 

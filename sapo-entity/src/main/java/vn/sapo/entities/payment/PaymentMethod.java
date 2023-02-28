@@ -23,6 +23,7 @@ public class PaymentMethod {
     @Id
     @Column(nullable = false, length = 50)
     private String id;
+
     @Column(name = "title", unique = true, nullable = false, length = 50)
     private String title;
 
