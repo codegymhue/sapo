@@ -185,6 +185,8 @@ public class SupplierAPI {
     }
 
 
+
+
 //    @DeleteMapping("/suppliers/DeleteAddress")
 //    public ResponseEntity<?> deleteAddressSupplier(@RequestBody List<Integer> arrayIdSupplier) {
 //        addressService.deleteSoftSupplier(arrayIdSupplier);
