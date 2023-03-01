@@ -9,11 +9,10 @@
     right: 0;
     bottom: 0;
     margin: 0;
-    padding: 0;
     position: absolute;
     border-style: solid;
     border-width: 1px;
-    padding-left: 8px;
+    padding: 0 0 0 8px;
     border-radius: inherit;
     pointer-events: none;
 }
@@ -31,7 +30,7 @@
     display: block;
     padding: 0;
     font-size: 0.75em;
-    max-width: 0.01px;
+    max-width: 0;
     text-align: left;
     transition: max-width 50ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
     visibility: hidden;
@@ -172,11 +171,10 @@
 
 .jss18158 {
     height: 328px;
-    /* display: flex; */
 }
 
 .jss17718 {
-    box-shadow: 0px 4px 8px rgba(168, 168, 168, 0.25);
+    box-shadow: 0 4px 8px rgba(168, 168, 168, 0.25);
 }
 
 .jss17719 {
@@ -204,12 +202,6 @@
 .jss18046.borderBottom {
     border-bottom: 1px solid #E8EAEB;
 }
-
-
-/*.jss18081 .MuiOutlinedInput-root {*/
-/*    height: 36px;*/
-
-/*}*/
 
 .jss18081 .MuiOutlinedInput-input {
     color: #0F1824;
@@ -319,7 +311,7 @@
 .jss18028 {
     height: 100%;
     padding: 16px 16px 0;
-    box-shadow: 0px 2px 4px rgba(168, 168, 168, 0.25);
+    box-shadow: 0 2px 4px rgba(168, 168, 168, 0.25);
 }
 
 .jss18029 {
@@ -477,7 +469,6 @@
     padding: 5px 5px 5px 5px;
     min-height: 72px;
     align-items: flex-start;
-    padding-right: 5px !important;
     justify-content: flex-start;
 }
 
@@ -494,7 +485,6 @@
     display: flex;
     padding: 5px 5px 5px 5px;
     align-items: flex-start;
-    padding-right: 5px !important;
     justify-content: flex-start;
 }
 
@@ -509,7 +499,7 @@
 
 .jss18358 {
     margin: 0;
-    box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
+    box-shadow: 0 5px 5px -3px rgb(0 0 0 / 20%), 0 8px 10px 1px rgb(0 0 0 / 14%), 0 3px 14px 2px rgb(0 0 0 / 12%);
 }
 
 .jss18358 .MuiAutocomplete-option {
@@ -597,7 +587,7 @@
     color: #2B4263;
     height: unset;
     margin: 4px;
-    padding: 2px 0px;
+    padding: 2px 0;
     min-height: 24px;
     user-select: auto;
     white-space: normal;
@@ -728,7 +718,6 @@
 
 
 .jss18263 {
-    border: 1px solid #E8EAEB;
     display: flex;
     padding: 0 16px;
     min-height: 42px;
@@ -829,7 +818,7 @@
     z-index: 2000 !important;
     font-size: 12px !important;
     max-width: 220px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     overflow-wrap: break-word;
 }
@@ -860,7 +849,7 @@
     color: rgba(0, 0, 0, 0.38);
     border: 1px solid rgba(0, 0, 0, 0.12);
     height: 48px;
-    padding: 0px 12px;
+    padding: 0 12px;
     font-size: 0.875rem;
     box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -912,13 +901,13 @@
 
 .MuiToggleButton-sizeSmall {
     height: 40px;
-    padding: 0px 8px;
+    padding: 0 8px;
     font-size: 0.8125rem;
 }
 
 .MuiToggleButton-sizeLarge {
     height: 56px;
-    padding: 0px 16px;
+    padding: 0 16px;
     font-size: 0.9375rem;
 }
 
@@ -1185,10 +1174,7 @@
 .jss18414 {
     height: 30px;
     align-items: flex-end;
-    padding-top: 1px;
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: 1px;
+    padding: 1px 0;
 }
 
 .jss18414 .MuiListItemText-root {
@@ -1267,12 +1253,11 @@
     width: 103px;
     cursor: pointer;
     height: 30px;
-    padding: 0;
     min-height: 0;
     text-align: right;
     font-weight: 400;
     margin-left: auto;
-    padding-top: 4px;
+    padding: 4px 0 0;
     border-bottom: 1px solid #D3D5D7;
     justify-content: flex-end;
     border-bottom-left-radius: 0;
@@ -1331,7 +1316,7 @@
 
 .jss18406 {
     width: calc(100% - 16px);
-    margin: 12px 0px 5px 16px;
+    margin: 12px 0 5px 16px;
     display: block;
     border-bottom: 1px dashed #E8EAEB;
 }
@@ -1345,7 +1330,7 @@
 
 .jss18417 {
     display: flex;
-    box-shadow: 0px 2px 4px rgba(168, 168, 168, 0.25);
+    box-shadow: 0 2px 4px rgba(168, 168, 168, 0.25);
     flex-direction: column;
 }
 
@@ -1385,12 +1370,11 @@
 
 .jss18419 {
     width: 100%;
-    border: 1px dashed;
     height: 100%;
     padding: 16px 24px;
     background: #F4F4F5;
     box-sizing: border-box;
-    border-color: #A3A8AF;
+    border: 1px dashed #A3A8AF;
     border-radius: 5px;
 }
 
@@ -1451,18 +1435,18 @@
     flex: 0 0 auto;
     -webkit-box-align: center;
     align-items: center;
-    outline: 0px;
+    outline: 0;
     border-radius: 3px;
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px 16px 0px 0px;
+    margin: 0 16px 0 0;
     overflow: hidden;
     position: relative;
     height: 2.57143rem;
-    padding: 0px 1.14286rem;
+    padding: 0 1.14286rem;
     min-width: 4.57143rem;
     color: rgb(0, 136, 255);
     border: 1px solid rgb(0, 136, 255);
@@ -1475,7 +1459,7 @@
     justify-content: center;
     -webkit-box-align: center;
     align-items: center;
-    padding: 0px;
+    padding: 0;
     z-index: 2;
     font-size: inherit;
     font-weight: inherit;
@@ -1497,7 +1481,7 @@
 
 .cKOfva > * {
     position: relative;
-    border-radius: 0px;
+    border-radius: 0;
 }
 
 .cHdopB {
@@ -1507,18 +1491,18 @@
     flex: 0 0 auto;
     -webkit-box-align: center;
     align-items: center;
-    outline: 0px;
+    outline: 0;
     border-radius: 3px;
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     overflow: hidden;
     position: relative;
     height: 2.57143rem;
-    padding: 0px 1.14286rem;
+    padding: 0 1.14286rem;
     min-width: 4.57143rem;
     color: rgb(255, 255, 255);
     background: rgb(0, 136, 255);
@@ -1533,7 +1517,7 @@
 
 .cKOfva > * {
     position: relative;
-    border-radius: 0px;
+    border-radius: 0;
 }
 
 .flQQLB {
@@ -1543,18 +1527,18 @@
     flex: 0 0 auto;
     -webkit-box-align: center;
     align-items: center;
-    outline: 0px;
+    outline: 0;
     border-radius: 3px;
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     overflow: hidden;
     position: relative;
     height: 2.57143rem;
-    padding: 0px 1.14286rem;
+    padding: 0 1.14286rem;
     min-width: 40px;
     width: 40px;
     color: rgb(255, 255, 255);
@@ -1615,8 +1599,8 @@
     font-size: 1rem;
     line-height: 1.42857rem;
     box-sizing: border-box;
-    padding: 0px;
-    margin: 0px 0px 0.285714rem;
+    padding: 0;
+    margin: 0 0 0.285714rem;
     color: rgb(70, 81, 95);
 }
 
@@ -1637,17 +1621,17 @@
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     color: rgb(15, 24, 36);
 }
 
 .iUBRZb {
     pointer-events: none;
     position: absolute;
-    inset: 0px;
+    inset: 0;
     width: 100%;
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     border-radius: 3px;
     border: 1px solid rgb(211, 213, 215);
     overflow: hidden;
@@ -1676,7 +1660,7 @@
     pointer-events: none;
     z-index: 8000;
     border: 1px solid rgb(211, 213, 215);
-    box-shadow: rgb(168 168 168 / 25%) 0px 0.571429rem 1.14286rem;
+    box-shadow: rgb(168 168 168 / 25%) 0 0.571429rem 1.14286rem;
     border-radius: 3px;
     background: rgb(255, 255, 255);
     box-sizing: border-box;
@@ -1706,7 +1690,7 @@
     justify-content: space-between;
     -webkit-box-align: center;
     align-items: center;
-    padding: 0px 1.14286rem;
+    padding: 0 1.14286rem;
     height: 3.42857rem;
 }
 
@@ -1736,7 +1720,7 @@
     font-weight: 500;
     font-size: 1.14286rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     color: rgb(15, 24, 36);
     text-align: inherit;
 }
@@ -1763,7 +1747,7 @@
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     display: block;
     padding: 0.571429rem 2.57143rem 0.571429rem 0.857143rem;
     height: 2.85714rem;
@@ -1794,7 +1778,7 @@
     width: 6.14286rem;
     overflow: hidden auto;
     border-radius: 3px;
-    padding: 0px 0.285714rem;
+    padding: 0 0.285714rem;
     box-sizing: border-box;
 }
 
@@ -1816,18 +1800,18 @@
     min-height: 2.28571rem;
     cursor: pointer;
     border: none;
-    padding: 0px 0.571429rem;
+    padding: 0 0.571429rem;
     border-radius: 3px;
     outline: none;
     background: transparent;
     box-sizing: border-box;
-    margin: 0.285714rem 0px;
+    margin: 0.285714rem 0;
 }
 
 .cJgWoO {
     height: 0.142857rem;
     width: 1rem;
-    margin: 0px 0.928571rem;
+    margin: 0 0.928571rem;
     background: rgb(163, 168, 175);
 }
 
@@ -1837,7 +1821,7 @@
 
 .ittoYJ {
     width: 100%;
-    border-spacing: 0px 0.571429rem;
+    border-spacing: 0 0.571429rem;
 }
 
 .evOKgu {
@@ -1845,16 +1829,16 @@
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     text-align: center;
     height: 2rem;
-    padding: 0px;
+    padding: 0;
 }
 
 .ifYRgQ {
     position: relative;
     text-align: center;
-    padding: 0px;
+    padding: 0;
 }
 
 .hlXpXC {
@@ -1869,7 +1853,7 @@
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     color: rgb(15, 24, 36);
 }
 
@@ -1880,18 +1864,18 @@
     flex: 0 0 auto;
     -webkit-box-align: center;
     align-items: center;
-    outline: 0px;
+    outline: 0;
     border-radius: 3px;
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     overflow: hidden;
     position: relative;
     height: 2.57143rem;
-    padding: 0px 1.14286rem;
+    padding: 0 1.14286rem;
     min-width: 4.57143rem;
     color: rgb(0, 136, 255);
     border: 1px solid rgb(0, 136, 255);
@@ -1910,7 +1894,7 @@
 
 .jss18325 {
     display: flex;
-    padding: 0px 16px 16px;
+    padding: 0 16px 16px;
 }
 
 .hSHiv {
@@ -1920,18 +1904,18 @@
     flex: 0 0 auto;
     -webkit-box-align: center;
     align-items: center;
-    outline: 0px;
+    outline: 0;
     border-radius: 3px;
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 16px 0px 0px;
+    margin: 16px 0 0;
     overflow: hidden;
     position: relative;
     height: 2.57143rem;
-    padding: 0px 1.14286rem;
+    padding: 0 1.14286rem;
     min-width: 4.57143rem;
     color: rgb(0, 136, 255);
     border: 1px solid rgb(0, 136, 255);
@@ -1961,14 +1945,14 @@
     flex: 0 0 auto;
     -webkit-box-align: center;
     align-items: center;
-    outline: 0px;
+    outline: 0;
     border-radius: 3px;
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     overflow: hidden;
     position: relative;
     height: 2.57143rem;
@@ -1976,7 +1960,7 @@
     color: rgb(0, 136, 255);
     border: none;
     background: transparent;
-    padding: 0px;
+    padding: 0;
 }
 
 .eAvhdO {
@@ -1986,14 +1970,14 @@
     flex: 0 0 auto;
     -webkit-box-align: center;
     align-items: center;
-    outline: 0px;
+    outline: 0;
     border-radius: 3px;
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     overflow: hidden;
     position: relative;
     height: 2.57143rem;
@@ -2001,7 +1985,7 @@
     color: rgb(0, 136, 255);
     border: none;
     background: transparent;
-    padding: 0px;
+    padding: 0;
 }
 
 .jss18421 {
@@ -2010,7 +1994,7 @@
 
 .jss18423 {
     display: flex;
-    padding: 0px 16px 16px;
+    padding: 0 16px 16px;
 }
 
 .jss18563 {
@@ -2023,12 +2007,11 @@
 .jss18393 {
     color: #0F1824;
     width: 100%;
-    border: 1px solid;
     resize: none;
     padding: 10px;
     font-size: 14px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    border-color: #D3D5D7;
+    border: 1px solid #D3D5D7;
     border-radius: 3px;
 }
 
@@ -2036,7 +2019,6 @@
     font: inherit;
     color: currentColor;
     width: 100%;
-    /*border: 0;*/
     height: 1.1876em;
     margin: 0;
     display: block;
@@ -2127,7 +2109,7 @@
 
 .jss1235 {
     display: flex;
-    padding: 0px 16px 16px;
+    padding: 0 16px 16px;
 }
 
 .jss1236 {
@@ -2211,18 +2193,18 @@
     flex: 0 0 auto;
     -webkit-box-align: center;
     align-items: center;
-    outline: 0px;
+    outline: 0;
     border-radius: 3px;
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     overflow: hidden;
     position: relative;
     height: 2.57143rem;
-    padding: 0px 1.14286rem;
+    padding: 0 1.14286rem;
     min-width: 4.57143rem;
     color: rgb(0, 136, 255);
     border: 1px solid rgb(0, 136, 255);
@@ -2285,7 +2267,6 @@
     position: absolute;
     border-style: solid;
     border-width: 1px;
-    /*padding-left: 8px;*/
     border-radius: inherit;
     pointer-events: none;
 }
@@ -2405,24 +2386,11 @@
     visibility: hidden;
     z-index: 999;
 }
-
-/*.jss1258 {*/
-/*    opacity: 1 !important;*/
-/*    padding: 5px 8px !important;*/
-/*    z-index: 2000 !important;*/
-/*    font-size: 12px !important;*/
-/*    max-width: 220px;*/
-/*    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);*/
-/*    font-weight: 400;*/
-/*    overflow-wrap: break-word;*/
-/*}*/
 .jss1173 {
-    border: 1px solid #E8EAEB;
     display: flex;
     padding: 0 16px;
     min-height: 42px;
     align-items: center;
-    border-width: 1px 0;
 }
 
 .MuiButton-textSizeSmall {
@@ -2463,8 +2431,8 @@
     font-size: 1rem;
     line-height: 1.42857rem;
     box-sizing: border-box;
-    padding: 0px;
-    margin: 0px 0px 0.285714rem;
+    padding: 0;
+    margin: 0 0 0.285714rem;
     color: rgb(70, 81, 95);
 }
 
@@ -2492,10 +2460,10 @@
 .fCFLbv {
     pointer-events: none;
     position: absolute;
-    inset: 0px;
+    inset: 0;
     width: 100%;
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     border-radius: 3px;
     border: 1px solid rgb(211, 213, 215);
     overflow: hidden;
@@ -2507,8 +2475,8 @@
     font-weight: 400;
     font-size: 0.928571rem;
     line-height: 1.14286rem;
-    margin: 0px;
-    padding: 0.285714rem 0.857143rem 0px;
+    margin: 0;
+    padding: 0.285714rem 0.857143rem 0;
     color: rgb(116, 124, 135);
 }
 
@@ -2536,12 +2504,11 @@
 .jss1267 {
     color: #0F1824;
     width: 100%;
-    border: 1px solid;
     resize: none;
     padding: 10px;
     font-size: 14px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    border-color: #D3D5D7;
+    border: 1px solid #D3D5D7;
     border-radius: 3px;
 }
 
@@ -2559,7 +2526,7 @@
 
 .jss1280 {
     width: calc(100% - 16px);
-    margin: 12px 0px 5px 16px;
+    margin: 12px 0 5px 16px;
     display: block;
     border-bottom: 1px dashed #E8EAEB;
 }
@@ -2571,10 +2538,7 @@
 .jss1287 {
     height: 30px;
     align-items: flex-end;
-    padding-top: 1px;
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: 1px;
+    padding: 1px 0;
 }
 
 .jss1287 .MuiListItemText-root {
@@ -2588,14 +2552,14 @@
     flex: 0 0 auto;
     -webkit-box-align: center;
     align-items: center;
-    outline: 0px;
+    outline: 0;
     border-radius: 3px;
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     overflow: hidden;
     position: relative;
     height: 2.57143rem;
@@ -2603,7 +2567,7 @@
     color: rgb(0, 136, 255);
     border: none;
     background: transparent;
-    padding: 0px;
+    padding: 0;
 }
 
 .jocTuY svg {
@@ -2617,7 +2581,7 @@
     justify-content: center;
     -webkit-box-align: center;
     align-items: center;
-    padding: 0px 0px 0px 0.571429rem;
+    padding: 0 0 0 0.571429rem;
     z-index: 2;
     font-size: inherit;
     font-weight: inherit;
@@ -2633,7 +2597,7 @@ MuiGrid-spacing-xs-3 > .MuiGrid-item {
 
 .jss18417 {
     display: flex;
-    box-shadow: 0px 2px 4px rgb(168 168 168 / 25%);
+    box-shadow: 0 2px 4px rgb(168 168 168 / 25%);
     flex-direction: column;
 }
 
@@ -2671,18 +2635,18 @@ MuiGrid-spacing-xs-3 > .MuiGrid-item {
     flex: 0 0 auto;
     -webkit-box-align: center;
     align-items: center;
-    outline: 0px;
+    outline: 0;
     border-radius: 3px;
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 16px 0px 0px;
+    margin: 16px 0 0;
     overflow: hidden;
     position: relative;
     height: 2.57143rem;
-    padding: 0px 1.14286rem;
+    padding: 0 1.14286rem;
     min-width: 4.57143rem;
     color: rgb(0, 136, 255);
     border: 1px solid rgb(0, 136, 255);
@@ -2694,7 +2658,7 @@ MuiGrid-spacing-xs-3 > .MuiGrid-item {
 }
 
 .MuiPaper-elevation3 {
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
 }
 
 .MuiPaper-rounded {
@@ -2720,15 +2684,12 @@ MuiGrid-spacing-xs-3 > .MuiGrid-item {
 
 jss8611 {
     display: flex;
-    /*padding: 0 16px;*/
     font-size: 14px;
     box-shadow: none;
-    /*min-height: 36px;*/
     align-items: center;
     font-weight: 500;
     border-radius: 3px;
     text-transform: none;
-    /*justify-content: center;*/
 }
 
 .jss4971 {

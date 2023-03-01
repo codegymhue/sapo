@@ -61,7 +61,10 @@ public class CustomerAPI {
 
     @PostMapping("/filter")
     public ResponseEntity<?> testFilter(@RequestBody CustomerFilter customerFilter,
-                                        @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
+                                        @RequestParam(name = "sort",
+                                                required = false,
+                                                defaultValue = "ASC"
+                                        ) String sort) {
         // start = 10; length = 5;
         int start = customerFilter.getStart();
         int length = customerFilter.getLength();
@@ -78,13 +81,13 @@ public class CustomerAPI {
 
 
         Pageable pageable = PageRequest.of(page - 1, length, sortable);
-        Page<CustomerResult> pagealeCustomers = customerService.findAllByFilters(customerFilter, pageable);
+        Page<CustomerResult> pageableCustomers = customerService.findAllByFilters(customerFilter, pageable);
 
         CustomerDataTable customerDataTable = new CustomerDataTable();
-        if (pagealeCustomers != null) {
-            customerDataTable.setRecordsTotal(pagealeCustomers.getTotalElements());
-            customerDataTable.setRecordsFiltered(pagealeCustomers.getTotalElements());
-            customerDataTable.setData(pagealeCustomers.getContent());
+        if (pageableCustomers != null) {
+            customerDataTable.setRecordsTotal(pageableCustomers.getTotalElements());
+            customerDataTable.setRecordsFiltered(pageableCustomers.getTotalElements());
+            customerDataTable.setData(pageableCustomers.getContent());
             customerDataTable.setDraw(customerFilter.getDraw());
         }
         return new ResponseEntity<>(customerDataTable, HttpStatus.OK);

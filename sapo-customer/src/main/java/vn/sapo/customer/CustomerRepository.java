@@ -10,7 +10,9 @@ import vn.sapo.entities.customer.CustomerStatus;
 import java.util.*;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, Integer>, JpaSpecificationExecutor<Customer> {
+public interface CustomerRepository
+        extends JpaRepository<Customer, Integer>, JpaSpecificationExecutor<Customer> {
+
     List<Customer> findAllByGroupIdIn(List<Integer> groupIds);
 
     List<Customer> findAllByGroupIdAndStatus(Integer groupTitleId, CustomerStatus parseCustomerGroup);

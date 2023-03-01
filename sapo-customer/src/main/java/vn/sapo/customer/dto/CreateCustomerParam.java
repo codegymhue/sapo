@@ -29,18 +29,24 @@ public class CreateCustomerParam  {
 
     @NotBlank
     private String fullName;
+
     @NullOrNotBlank
     private String phoneNumber;
+
     @NullOrNotBlank
     private String description;
 
     private Integer groupId;
+
     @NullOrNotBlank
     private String email;
+
     @NullOrNotBlank
     private String website;
+
     @NullOrNotBlank
     private String fax;
+
     @NullOrNotBlank
     private String taxCode;
 
@@ -58,5 +64,6 @@ public class CreateCustomerParam  {
     private BigDecimal debtTotal;
 
     private BigDecimal spendTotal;
+
     private CustomerStatus status;
 }

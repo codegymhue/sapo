@@ -12,6 +12,7 @@ import vn.sapo.entities.BaseEntity;
 import vn.sapo.entities.Employee;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Optional;

@@ -74,7 +74,7 @@ class CustomerApp {
     }
 
     static renderRowCustomer(item) {
-        let str = `
+        return `
              <tr id="tr_${item.id}" >
                 <td class="align-middle">
                     <label for="${item.id}" style="padding: 0.5rem; cursor:pointer">
@@ -92,7 +92,6 @@ class CustomerApp {
                 <td class="align-middle text-end">${item.quantityItemOrder}</td>
             </tr>
         `;
-        return str;
     }
 
 

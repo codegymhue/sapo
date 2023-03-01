@@ -15,14 +15,14 @@
             flex: 0 0 auto;
             -webkit-box-align: center;
             align-items: center;
-            outline: 0px;
+            outline: 0;
             border-radius: 3px;
             cursor: pointer;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
             font-weight: 500;
             font-size: 1rem;
             line-height: 1.42857rem;
-            margin: 0px;
+            margin: 0;
             overflow: hidden;
             position: relative;
             height: 2.57143rem;
@@ -30,7 +30,7 @@
             color: rgb(0, 136, 255);
             border: none;
             background: transparent;
-            padding: 0px;
+            padding: 0;
         }
 
         .sidenav {
@@ -110,8 +110,9 @@
                     <path d="m13 12-6.01 6.01-1.415-1.414L10.172 12 5.575 7.404 6.99 5.99 13 12Z"
                           fill="currentColor"></path>
                 </svg>
-                <span class="sc-papXJ fCIlZX"><h6
-                        class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorPrimary">Bộ lọc nâng cao</h6></span>
+                <span class="sc-papXJ fCIlZX">
+                    <h6 class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorPrimary">Bộ lọc nâng cao</h6>
+                </span>
             </button>
         </div>
 
@@ -381,7 +382,7 @@
         }
 
 
-        function drawDataTable() {
+        drawDataTable = () => {
             $("#tbCustomer").DataTable({
                 // chuyển tiếng việt cho datatable
                 "processing": true,
@@ -593,7 +594,7 @@
                 })
         }
 
-        function getAllFilter(arrId) {
+        getAllFilter = (arrId) => {
             $.ajax({
                 headers: {
                     "accept": "application/json",
@@ -605,15 +606,15 @@
             })
                 .done((data) => {
 
-                    getAllFilterCustomer(data)
+                    // getAllFilterCustomer(data)
                 })
                 .fail((jqXHR) => {
-
+                    console.log(jqXHR)
                 })
         }
 
 
-        function getAllCustomerGroup() {
+        getAllCustomerGroup = () => {
             return $.ajax({
                 headers: {
                     "accept": "application/json",
@@ -634,7 +635,7 @@
                     });
                 })
                 .fail((jqXHR) => {
-
+                    console.log(jqXHR)
                 })
         }
 
@@ -653,6 +654,7 @@
                         let str = `<div value="${item.id}">
                         <input type="checkbox" class="customerEmployee-input" data-id=${item.id}>
                         ${item.fullName}</div>`;
+
                         $("#employeeNameFilter").append(str);
                     });
                 })
@@ -701,7 +703,7 @@
         });
 
         getAllCustomerGroup();
-        getAllCustomerGender();
+        // getAllCustomerGender();
         getAllEmployeeSelect();
 
 
@@ -711,15 +713,15 @@
             $.each(elements, (index, item) => {
                 $(item).change(() => {
                     let idSelected = item.getAttribute("data-id");
-                    if (customerFilter.groupIds.length == 0) {
+                    if (customerFilter.groupIds.length === 0) {
                         customerFilter.groupIds.push(idSelected);
                     } else {
                         let check = customerFilter.groupIds.includes(idSelected);
-                        if (check == false) {
+                        if (check === false) {
                             customerFilter.groupIds.push(item.getAttribute("data-id"));
                         } else {
                             let indexSelectedValue = customerFilter.groupIds.findIndex((value, item) => {
-                                if (value == idSelected) {
+                                if (value === idSelected) {
                                     return true;
                                 }
                             })
@@ -733,8 +735,7 @@
 
             // Gender filter
             $('input[name=flexRadioDefault]').change(function () {
-                var value = $('input[name=flexRadioDefault]:checked').val();
-                customerFilter.gender = value;
+                customerFilter.gender = $('input[name=flexRadioDefault]:checked').val();
             });
 
             // Keyword: Mã khách hàng, fullname, SDT
@@ -754,15 +755,15 @@
             $.each(elements, (index, item) => {
                 $(item).change(() => {
                     let idSelected = item.getAttribute("data-id");
-                    if (customerFilter.employeeIds.length == 0) {
+                    if (customerFilter.employeeIds.length === 0) {
                         customerFilter.employeeIds.push(idSelected);
                     } else {
                         let check = customerFilter.employeeIds.includes(idSelected);
-                        if (check == false) {
+                        if (check === false) {
                             customerFilter.employeeIds.push(item.getAttribute("data-id"));
                         } else {
                             let indexSelectedValue = customerFilter.employeeIds.findIndex((value, item) => {
-                                if (value == idSelected) {
+                                if (value === idSelected) {
                                     return true;
                                 }
                             })
@@ -775,20 +776,19 @@
 
             // Status filter
             $('input[name=Status]').change(function () {
-                var value = $('input[name=Status]:checked').val();
-                customerFilter.statusList = value;
+                customerFilter.statusList = $('input[name=Status]:checked').val();
             });
         })
 
         // ngày sinh nhật
-        function handleClickDay(day) {
+        handleClickDay = (day) => {
             customerFilter.dayOfBirthday = day;
 
             $("#allDay").text(day)
         }
 
         // tháng sinh nhật
-        function handleClickYear(month) {
+        handleClickYear = (month) => {
             customerFilter.monthOfBirthday = month;
 
             $("#allYear").text(month)

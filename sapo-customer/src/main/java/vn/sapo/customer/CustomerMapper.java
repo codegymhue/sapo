@@ -27,10 +27,16 @@ public class CustomerMapper implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        TypeMap<CreateCustomerParam, Customer> createDTO2Model = modelMapper.createTypeMap(CreateCustomerParam.class, Customer.class);
+        TypeMap<CreateCustomerParam, Customer> createDTO2Model
+                = modelMapper.createTypeMap(CreateCustomerParam.class, Customer.class);
+
         createDTO2Model.addMapping(source -> source.getBirthday().toInstant(), Customer::setBirthday);
-        TypeMap<UpdateCustomerParam, Customer> updateDTO2Model = modelMapperSkipNullDisabled.createTypeMap(UpdateCustomerParam.class, Customer.class);
+
+        TypeMap<UpdateCustomerParam, Customer> updateDTO2Model
+                = modelMapperSkipNullDisabled.createTypeMap(UpdateCustomerParam.class, Customer.class);
+
         updateDTO2Model.addMapping(source -> source.getBirthday().toInstant(), Customer::setBirthday);
+
         updateDTO2Model.addMappings(mapper -> {
             mapper.when(Conditions.isNotNull()).map(UpdateCustomerParam::getGroupId, Customer::setGroupId);
         });
@@ -41,7 +47,8 @@ public class CustomerMapper implements InitializingBean {
     }
 
     public Customer toModel(CreateCustomerParam createCustomerParam) {
-        return modelMapper.map(createCustomerParam, Customer.class)
+        return modelMapper
+                .map(createCustomerParam, Customer.class)
                 .setStatus(CustomerStatus.AVAILABLE);
     }
 

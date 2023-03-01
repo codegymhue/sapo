@@ -315,9 +315,7 @@
 }
 
 .jss6736 {
-    display: flex;
     padding: 16px;
-    align-items: center;
     flex-direction: row;
 }
 
@@ -1920,6 +1918,10 @@
     align-items: center;
 }
 
+div.jss442 p {
+    margin: auto;
+}
+
 .jss442 svg {
     color: #A2A8AF;
 }
@@ -2222,11 +2224,6 @@ input:disabled~.jss7174:before {
     background-color: white;
 }
 
-
-.jss6803 {
-    margin: 0 16px;
-}
-
 .jss6803 .MuiButtonBase-root {
     min-width: 119px;
     font-weight: 400;
@@ -2257,6 +2254,10 @@ input:disabled~.jss7174:before {
     justify-content: space-between;
 }
 
+div.jss6803 button {
+    height: 34px;
+    border-radius: 3px;
+}
 
 .jss6828.active {
     border-color: #0088FF !important;
@@ -4355,9 +4356,6 @@ input:disabled~.jss7174:before {
     box-sizing: border-box;
     -webkit-box-align: center;
     align-items: center;
-    border-top: none;
-    border-right: none;
-    border-left: none;
     border-image: initial;
     background-color: transparent;
     overflow: hidden;
@@ -4367,11 +4365,17 @@ input:disabled~.jss7174:before {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     height: 3.42857rem;
     color: rgb(0, 136, 255);
     font-weight: 500;
+}
+
+div.ieIWRo button.dvtKJo {
+    border-top: none;
+    border-right: none;
     border-bottom: 2px solid rgb(0, 136, 255);
+    border-left: none;
 }
 
 .elNOYP {
@@ -4390,7 +4394,6 @@ input:disabled~.jss7174:before {
 
 .hISLMV {
     position: relative;
-    height: 2.85714rem;
 }
 
 .kZUaKd {
@@ -4430,9 +4433,6 @@ input:disabled~.jss7174:before {
     box-sizing: border-box;
     padding: 0.714286rem 0.857143rem 0.714286rem 2.85714rem;
     width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: 3px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 400;
     font-size: 1rem;
@@ -4634,10 +4634,8 @@ html {
     justify-content: center;
 }
 #inp-search {
-    border: solid;
     height: 34px;
-    border-color: lightgrey;
-    border-width: thin;
+    border: thin solid lightgrey;
     border-radius: 5px
 }
 .btnDropdown {
@@ -4802,4 +4800,23 @@ html {
 }
 .jss4171 .view-more-text:hover {
     color: #0088FF;
+}
+
+#tableCheckbox{
+    font-size: small;
+}
+
+#tbCustomer{
+    width: 100%; !important;
+}
+
+#tbCustomer thead{
+    background-color: #f4f6f8;
+    height: 55px
+}
+
+button.btnGear{
+    background: #f4f6f8 !important;
+    border: none;
+    box-shadow: none;
 }

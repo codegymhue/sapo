@@ -169,7 +169,7 @@
                                                         display: flex;
                                                         justify-content: space-between;
                                                         align-items: center; ">
-                                                <span id="upPricingType" th:text="*{customerGroup.pricingPolicyId != null} ? *{customerGroup.getPricingPolicyId()} : 'Chọn giá mặc định' ">/span>
+                                                <span id="upPricingType" th:text="*{customerGroup.pricingPolicyId != null} ? *{customerGroup.getPricingPolicyId()} : 'Chọn giá mặc định' "></span>
                                             </div>
                                             <ul class="dropdown-menu w-100 pricingPolicyIdCreate showAllPricingPolicy">
                                                 <div style="border-bottom: 1px solid #e3e3e3;">
@@ -400,7 +400,6 @@
 
     function showModalDelete() {
         $('#btnSowModalDelete').click(function () {
-                // alert("modal dele")
             $('#modal_dele_cus_grp').modal('show');
         });
     }
@@ -409,7 +408,6 @@
        let id = $("#cusGrpId").text();
 
         $('#btn_deleteCustomer').click(function () {
-            // alert(" ok")
             console.log(id)
             return $.ajax({
                 headers: {
