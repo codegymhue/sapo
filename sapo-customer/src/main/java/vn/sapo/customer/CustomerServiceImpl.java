@@ -11,11 +11,13 @@ import vn.sapo.customer.dto.CustomerFilter;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.entities.customer.Customer;
+import vn.sapo.entities.customer.CustomerGender;
 import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.DataInputException;
 import vn.sapo.shared.exceptions.NotFoundException;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,29 +25,36 @@ import java.util.stream.Collectors;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
+
     @Autowired
     private CustomerMapper customerMapper;
+
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
     private CustomerFilterRepository customerFilterRepository;
+
     @Autowired
     private AddressService addressService;
+
 
     @Override
     @Transactional(readOnly = true)
     public CustomerResult findById(Integer id) {
-        return customerRepository.findById(id)
-                .map(customerMapper::toDTO)
+        Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Không tìm thấy khách hàng"));
+        Integer customerId = customer.getId();
+        return customerMapper.toDTO(customer);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<CustomerResult> findAll() {
-        return customerRepository.findAll()
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAll()
                 .stream()
                 .map(customerMapper::toDTO).collect(Collectors.toList());
+        return customerResults;
     }
 
 
@@ -63,16 +72,17 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.existsById(id);
     }
 
-    @Override
     @Transactional
     public CustomerResult create(CreateCustomerParam createCustomerParam) {
-        Customer customer = customerMapper.toModel(createCustomerParam);
-        Customer newCustomer = customerRepository.save(customer);
-        String cusCode = newCustomer.getCustomerCode();
-        //TODO: save DB roi getFullName ko dc de trong la sao?
-        if (createCustomerParam.getFullName() == null) {
+        Instant birthday = createCustomerParam.getBirthday().toInstant();
+        if(createCustomerParam.getFullName()==null){
             throw new DataInputException("Tên khách hàng không được để trống");
         }
+        Customer customer = customerMapper.toModel(createCustomerParam);
+        customer.setBirthday(birthday);
+
+        Customer newCustomer = customerRepository.save(customer);
+        String cusCode = newCustomer.getCustomerCode();
         if (cusCode == null || cusCode.trim().isEmpty())
             customer.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
         return customerMapper.toDTO(customer);
@@ -80,13 +90,31 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
-    public CustomerResult update(UpdateCustomerParam updateParam) {
-        Customer customer = customerRepository.findById(updateParam.getId())
+    public CustomerResult update(UpdateCustomerParam updateCustomerParam) {
+        Customer customer = customerRepository.findById(updateCustomerParam.getId())
                 .orElseThrow(() -> new NotFoundException("Khách hàng không tồn tại hoặc đã bị xóa"));
-        customerMapper.transferFields(updateParam, customer);
-        return customerMapper.toDTO(customer);
+        if (updateCustomerParam.getFullName().isEmpty() || updateCustomerParam.getFullName().equals("")) {
+            updateCustomerParam.setFullName(customer.getFullName());
+        }
+
+        if (updateCustomerParam.getCustomerCode().equals("")) {
+            updateCustomerParam.setCustomerCode(customer.getCustomerCode());
+        }
+
+        customerMapper.transferFields(updateCustomerParam, customer);
+
+        Customer customerResult = customerRepository.save(customer);
+        return customerMapper.toDTO(customerResult);
     }
 
+    //
+//    @Override
+//    @Transactional(readOnly = true)
+//    public List<SaleOrderResult> findHistoryCustomerOrder(Integer id) {
+//        List<SaleOrderResult> saleOrderByCustomer = saleOrderService.findAllSaleOrderByCustomerId(id);
+//        return saleOrderByCustomer;
+//    }
+//
     @Override
     @Transactional
     public void changeStatusToAvailable(List<Integer> customerIds, boolean status) {
@@ -98,58 +126,24 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public List<CustomerResult> findAllByGroupListId(List<Integer> groupIds) {
-        return customerRepository.findAllByGroupIdIn(groupIds)
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAllByGroupIdIn(groupIds)
                 .stream()
                 .map(customerMapper::toDTO)
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<CustomerResult> findAllEmployeeListId(List<Integer> employeeIds) {
-        return null;
-    }
-
-    @Override
-    public List<CustomerResult> findAllByGenderId(String genderId) {
-        return null;
+        return customerResults;
     }
 
     @Override
     @Transactional(readOnly = true)
     public Page<CustomerResult> findAllByFilters(CustomerFilter filters, Pageable pageable) {
-        return customerFilterRepository.
-                findAllByFilters(filters, pageable)
-                .map(customerMapper::toDTO);
+        return customerFilterRepository.findAllByFilters(filters, pageable).map(customerMapper::toDTO);
     }
 
-
-//    @Override
-//    public List<CustomerResult> findAllByGroupId(Integer groupTitleId) {
-//        List<CustomerResult> customerResults = new ArrayList<>();
-//        customerResults = customerRepository.findAllByGroupId(groupTitleId)
-//                .stream()
-//                .map(customerMapper::toDTO)
-//                .collect(Collectors.toList());
-//        return customerResults;
-//    }
-
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<CustomerResult> findAllCustomerByGroupAndStatus(Integer groupTitleId, String customerStatus) {
-        List<CustomerResult> customerResults = new ArrayList<>();
-        customerResults = customerRepository.findAllByGroupIdAndStatus(groupTitleId, CustomerStatus.parseCustomerGroup(customerStatus))
-                .stream()
-                .map(customerMapper::toDTO)
-                .collect(Collectors.toList());
-
-        return customerResults;
-    }
 
 }
-
 
 
 

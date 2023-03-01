@@ -98,14 +98,10 @@ public class CustomerAPI {
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CreateCustomerParam createCustomerParam) {
-        System.out.println(createCustomerParam);
-
         CustomerResult dto = customerService.create(createCustomerParam);
         CreateAddressParam createAddressParam = createCustomerParam.getCreateAddressParam();
 
-
-        if (createAddressParam == null)
-            return new ResponseEntity<>(dto, HttpStatus.OK);
+        if (createAddressParam == null) return new ResponseEntity<>(dto, HttpStatus.OK);
         createAddressParam.setCustomerId(dto.getId());
         addressService.create(createAddressParam);
         dto = customerService.findById(dto.getId());

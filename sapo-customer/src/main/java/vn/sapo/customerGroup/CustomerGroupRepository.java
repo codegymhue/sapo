@@ -3,7 +3,7 @@ package vn.sapo.customerGroup;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import vn.sapo.customerGroup.dto.ICustomerGroupResult;
+import vn.sapo.customerGroup.dto.ICustomerGroup;
 import vn.sapo.entities.customer.CustomerGroup;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public interface CustomerGroupRepository  extends JpaRepository<CustomerGroup, I
             "left join Customer as c " +
             "on g.id = c.groupId " +
             "group by g.id")
-    List<ICustomerGroupResult> sortByGroup();
+    List<ICustomerGroup> sortByGroup();
 }
 
 

@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import vn.sapo.address.dto.AddressResult;
-import vn.sapo.entities.customer.CustomerGender;
-import vn.sapo.entities.customer.CustomerStatus;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -63,9 +62,40 @@ public class CustomerResult {
 
     private Instant lastDayOrder;
 
-    private CusPayment payment;
+    private PaymentMethod payment;
     private  String taxCode;
     private  String fax;
     private String website;
+
+    @Override
+    public String toString() {
+        return "CustomerResult{" +
+                "id=" + id +
+                ", customerCode='" + customerCode + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", birthday=" + birthday +
+                ", group=" + group +
+                ", gender=" + gender +
+                ", description='" + description + '\'' +
+                ", debtTotal=" + debtTotal +
+                ", spendTotal=" + spendTotal +
+                ", status=" + status +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", employee=" + employee +
+                ", shippingAddress=" + shippingAddress +
+                ", billAddress=" + billAddress +
+                ", addresses=" + addresses +
+                ", quantityProductOrder=" + quantityProductOrder +
+                ", quantityItemOrder=" + quantityItemOrder +
+                ", lastDayOrder=" + lastDayOrder +
+                ", payment=" + payment +
+                ", taxCode='" + taxCode + '\'' +
+                ", fax='" + fax + '\'' +
+                ", website='" + website + '\'' +
+                '}';
+    }
 }
 

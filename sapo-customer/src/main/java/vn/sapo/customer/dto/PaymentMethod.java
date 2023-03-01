@@ -1,14 +1,13 @@
 package vn.sapo.customer.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-@Getter
 @Setter
+@Getter
 @Accessors(chain = true)
-public class CusEmployeeResult {
-    private Integer id;
-    private String fullName;
+public class PaymentMethod {
+    private String id;
+    private String title;
 }

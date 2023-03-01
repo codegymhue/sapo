@@ -1,6 +1,6 @@
-package vn.sapo.customer.dto;
+package vn.sapo.customerGroup.dto;
 
-import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -8,10 +8,18 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class CusGroupResult {
+public class UpdateCusGroupParam {
     private Integer id;
-    private String cusGrpCode;
+
     private String title;
+
+    private String cusGrpCode;
+
+    private Integer pricingPolicyId;
+
+    private String paymentMethodId;
+
     private String description;
+
     private Integer discount;
 }

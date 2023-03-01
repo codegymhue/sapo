@@ -5,10 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.customerGroup.dto.CreateCusGroupParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
-import vn.sapo.customerGroup.dto.ICustomerGroupResult;
-import vn.sapo.customerGroup.dto.UpdateCustomerGroupParam;
+import vn.sapo.customerGroup.dto.ICustomerGroup;
+import vn.sapo.customerGroup.dto.UpdateCusGroupParam;
 import vn.sapo.entities.customer.CustomerGroup;
-import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 
 import java.util.List;
@@ -25,21 +24,33 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
 
     @Override
     @Transactional
-    public CustomerGroupResult create(CreateCusGroupParam createParam) {
-        CustomerGroup customerGroup = customerGroupMapper.toModel(createParam);
+    public CustomerGroupResult create(CreateCusGroupParam createCusGroupParam) {
+        CustomerGroup customerGroup = customerGroupMapper.toModel(createCusGroupParam);
         customerGroup = customerGroupRepository.save(customerGroup);
+//TODO: CODE ben duoi la sao?
+        // ID: 9
+        String result = "CTN";
+        String number = customerGroup.getId().toString();       // "9"
+        int numberZero = 5 - number.length();
+        String strNumberZero = "";
+        for (int i = 0; i < numberZero; i++) {
+            strNumberZero+= "0";
+
+        }
+        result += result + strNumberZero;
+        System.out.println(result);
         if (customerGroup.getCusGrpCode() == null)
-            customerGroup.setCusGrpCode(CodePrefix.CUSTOMER_GROUP.generate(customerGroup.getId()));
+            customerGroup.setCusGrpCode(result);
         return customerGroupMapper.toDTO(customerGroup);
 
     }
 
     @Override
     @Transactional
-    public CustomerGroupResult update(UpdateCustomerGroupParam updateParam) {
-        CustomerGroup customerGroup = customerGroupRepository.findById(updateParam.getId())
+    public CustomerGroupResult update(UpdateCusGroupParam updateCusGroupParam) {
+        CustomerGroup customerGroup = customerGroupRepository.findById(updateCusGroupParam.getId())
                 .orElseThrow(() -> new NotFoundException("Customer Group not found"));
-        customerGroupMapper.transferFields(updateParam, customerGroup);
+        customerGroupMapper.transferFields(updateCusGroupParam, customerGroup);
         return customerGroupMapper.toDTO(customerGroup);
     }
 
@@ -54,7 +65,7 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ICustomerGroupResult> sortByGroup() {
+    public List<ICustomerGroup> sortByGroup() {
         return customerGroupRepository.sortByGroup();
     }
 

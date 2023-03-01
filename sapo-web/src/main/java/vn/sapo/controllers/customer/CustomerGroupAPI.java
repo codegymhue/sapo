@@ -10,6 +10,7 @@ import vn.sapo.customerGroup.CustomerGroupRepository;
 import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.customerGroup.dto.CreateCusGroupParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
+import vn.sapo.customerGroup.dto.UpdateCusGroupParam;
 import vn.sapo.customerGroup.dto.UpdateCustomerGroupParam;
 
 
@@ -50,8 +51,8 @@ public class CustomerGroupAPI {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateCusGroup(@RequestBody UpdateCustomerGroupParam updateCustomerGroupParam) {
-        CustomerGroupResult dto = customerGroupService.update(updateCustomerGroupParam);
+    public ResponseEntity<?> updateCusGroup(@RequestBody UpdateCusGroupParam updateCusGroupParam) {
+        CustomerGroupResult dto = customerGroupService.update(updateCusGroupParam);
         dto = customerGroupService.findById(dto.getId());
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }

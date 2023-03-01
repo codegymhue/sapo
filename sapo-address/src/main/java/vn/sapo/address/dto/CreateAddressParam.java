@@ -27,7 +27,7 @@ public class CreateAddressParam {
     private String line1;
     @NullOrNotBlank
     private String line2;
-
+    private String description;
     private Integer wardId;
     @NullOrNotBlank
     private String wardName;

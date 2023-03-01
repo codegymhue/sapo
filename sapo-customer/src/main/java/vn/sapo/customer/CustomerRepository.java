@@ -13,24 +13,26 @@ import vn.sapo.entities.Address;
 import vn.sapo.entities.Employee;
 
 import vn.sapo.entities.customer.Customer;
-import vn.sapo.entities.customer.CustomerStatus;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.*;
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+
+import java.util.List;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer>, JpaSpecificationExecutor<Customer> {
+
+
     List<Customer> findAllByGroupIdIn(List<Integer> groupIds);
-
     List<Customer> findAllByEmployeeIdIn(List<Integer> employeeIds);
-
     List<Customer> findAllByGender(String genderId);
 
 
-    List<Customer> findAllByGroupIdAndStatus(Integer groupTitleId, CustomerStatus parseCustomerGroup);
 }
 
 
