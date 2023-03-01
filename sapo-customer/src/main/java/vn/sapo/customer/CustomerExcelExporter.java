@@ -89,7 +89,7 @@ public class CustomerExcelExporter {
     }
 
 
-    private void writeDataLines() {
+    private void writeDataLines1() {
         int rowCount = 1;
 
 
@@ -157,7 +157,7 @@ public class CustomerExcelExporter {
 
     public void export(HttpServletResponse response) throws IOException {
         writeHeaderLine();
-        writeDataLines();
+        writeDataLines1();
 
         ServletOutputStream outputStream = response.getOutputStream();
         workbook.write(outputStream);
