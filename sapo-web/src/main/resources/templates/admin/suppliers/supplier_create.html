@@ -101,8 +101,7 @@
                                 </div>
                             </div>
                         </div>
-                        <th:bock
-                                th:replace="/admin/suppliers/modals/create_group_supplier :: create_group_supplier"/>
+
                         <div class="page-info">
                             <div class="page-info-title">Thông tin địa chỉ</div>
                             <div class="page-info-body">
@@ -229,12 +228,13 @@
         </div>
     </div>
 </div>
-
+<th:bock th:replace="/admin/suppliers/modals/groups/create_group_supplier :: create_group_supplier"/>
 <th:block th:replace="/layout/script :: script"/>
 
 <script src="/assets/admin/js/suppliers/supplier_create.js"></script>
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
 <script src="/assets/admin/js/suppliers/jquery/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 <script>Page();</script>
 
 
@@ -330,36 +330,36 @@
             supplier.fullName = $('#nameCreate').val();
 
             let fax = $('#faxCreate').val()
-            supplier.fax = fax.trim().length > 0 ? fax : null;
+            supplier.fax = fax.trim().length > 0 ? fax : undefined;
 
             let taxCode = $('#taxCodeCreate').val();
-            supplier.taxCode = taxCode.trim().length > 0 ? taxCode : null;
+            supplier.taxCode = taxCode.trim().length > 0 ? taxCode : undefined;
 
             let website = $('#websiteCreate').val();
-            supplier.website = website.trim().length > 0 ? website : null;
+            supplier.website = website.trim().length > 0 ? website : undefined;
 
             let debtTotal = $('#debtTotalCreate').val();
-            supplier.debtTotal = debtTotal.trim().length > 0 ? debtTotal : null;
+            supplier.debtTotal = debtTotal.trim().length > 0 ? debtTotal : undefined;
 
             let supplierCode = $('#codeCreate').val()
-            supplier.supplierCode = supplierCode.trim().length > 0 ? supplierCode : null;
+            supplier.supplierCode = supplierCode.trim().length > 0 ? supplierCode : undefined;
 
             supplier.groupId = $('#changeValueSup').val();
 
 
            let phone = $('#phoneCreate').val();
-            supplier.phone = phone.trim().length > 0 ? phone : null;
+            supplier.phone = phone.trim().length > 0 ? phone : undefined;
 
             let email = $('#emailCreate').val();
-            supplier.email = email.trim().length > 0 ? email : null;
+            supplier.email = email.trim().length > 0 ? email : undefined;
 
             supplier.employeeId = $('#employeeNameCreate :selected').val();
 
             let description = $('#descriptionCreate').val();
-            supplier.description = description.trim().length > 0 ? description : null;
+            supplier.description = description.trim().length > 0 ? description : undefined;
 
             let paymentMethodId = $('#paymentMethodCreate :selected').val();
-            supplier.paymentMethodId = paymentMethodId.trim().length > 0 ? paymentMethodId : null;
+            supplier.paymentMethodId = paymentMethodId.trim().length > 0 ? paymentMethodId : undefined;
 
 
             // supplier.GroupSupplier = $('#changeValueSup :selected').val();
@@ -690,7 +690,7 @@
             "url": origin + "/api/supplier_groups/create",
             "data": JSON.stringify(newGroupSup)
         })
-            .done((data) => {
+                .done((data) => {
                 console.log("data: ",data)
                 SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
                 setTimeout(() => {
@@ -734,6 +734,58 @@
             createSupplier();
         }
     });
+
+    // $("#formCreate").validate({
+    //     rules: {
+    //         nameCreate: {
+    //             required: true,
+    //             minlength: 3,
+    //             maxlength: 50
+    //         },
+    //         emailCreate: {
+    //             required: true,
+    //             minlength: 5,
+    //             maxlength: 50,
+    //             email: true
+    //         },
+    //         phoneCreate: {
+    //             // phone_valid: true,
+    //             required: true,
+    //         }
+    //     },
+    //     messages: {
+    //         nameCreate: {
+    //             required: "Vui lòng nhập tên đầy đủ",
+    //             minlength: "Độ dài tối thiểu là 5 ký tự",
+    //             maxlength: "Độ dài tối đa là 100 ký tự"
+    //         },
+    //         emailCreate: {
+    //             required: "Vui lòng nhập email đầy đủ",
+    //             minlength: "Độ dài tối thiểu là 5 ký tự",
+    //             maxlength: "Độ dài tối đa là 100 ký tự",
+    //             email: "Định dạng email không đúng"
+    //         },
+    //         phoneCreate: {
+    //             // phone_valid: "Định dạng số điện thoại không đúng",
+    //             required: "Vui lòng nhập số điện thoại đầy đủ"
+    //         }
+    //     },
+    //     submitHandler: function () {
+    //         page.commands.formCreate();
+    //         console.log("page.dialogs.elements.formCreate.validate");
+    //     },
+    //     // invalidHandler: () => {
+    //     //     SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_400);
+    //     // }
+    // })
+    //
+    // $('#formCreate').on("click", function () {
+    //     $("#formCreate").trigger("submit");
+    // })
+
+
+
+
 
 </script>
 
