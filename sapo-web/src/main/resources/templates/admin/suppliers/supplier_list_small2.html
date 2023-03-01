@@ -19,6 +19,19 @@
             width: 600px;
             max-width: unset;
         }
+
+        .disable {
+            pointer-events: none;
+        !important;
+            opacity: 0.6;
+        !important;
+        }
+
+        table {
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
     </style>
 </head>
 
@@ -54,7 +67,6 @@
                                 Nhà cung cấp trên trang này
                             </label>
                         </div>
-
                         <div class="sapo-radio-wrapper">
                             <label class="flex">
                                     <span class="sapo-radiobox" style="margin-right: 7px;">
@@ -408,19 +420,7 @@
                         </div>
 
                         <div id="chose-file">
-                            <div class="chose-file-import">
-                                <a class="btn-upload" bind-event-click="showImport()" href="javascript:void(0)"
-                                   data-original-title="" title=""><i style="padding-right: 4px;"
-                                                                      class="fa fa-cloud-download"
-                                                                      aria-hidden="true"></i><span>Kéo thả file vào
-                                            đây hoặc tải lên từ thiết bị</span></a>
-                                <input name="importProductsFile" type="file" size="30" class="hide"
-                                       id="importFileUpload"
-                                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                                       bind-event-change="enableButtonImport()" multiple="">
-                                <input id="overrideExistProducts" name="overrideExistProducts" type="hidden"
-                                       value="false">
-                            </div>
+                            <input class="form-control" type="file" id="formFileSuppliers">
                         </div>
 
                     </div>
@@ -465,14 +465,14 @@
                 </div>
                 <div class="action-bar">
                     <div class="action-bar__top-links">
-                        <button class="btn sapo-btn-transparent action-bar__link export_product" type="button"
+                        <button class="btn sapo-btn-transparent action-bar__link export_supplier" type="button"
                                 name="button">
                             <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-export-minor"></use>
                             </svg>
                             Xuất file
                         </button>
-                        <button class="btn sapo-btn-transparent action-bar__link import_product" type="button"
+                        <button class="btn sapo-btn-transparent action-bar__link import_supplier" type="button"
                                 name="button">
                             <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-import-minor"></use>
@@ -506,7 +506,7 @@
                                 <a href="/admin/suppliers" class="filter-tab filter-tab-active">Tất cả nhà cung cấp</a>
                             </li>
                             <li class="filter-tab-item" style="opacity: 1; padding-bottom: 3.5px;">
-                                <button class="filter-tab" id="statusAvailable">Đang giao dịch</button>
+                                <a class="filter-tab" href="#" id="statusAvailable">Đang giao dịch</a>
                             </li>
                         </ul>
                     </div>
@@ -524,7 +524,6 @@
                                 <use xlink:href="#next-search-reverse" xmlns:xlink="http://www.w3.org/1999/xlink"/>
                             </svg>
                             <input type="text" class="input-query sapo-textbox searchKey"
-                                   bind-event-change="searchKey()"
                                    title="Tìm kiếm theo mã nhà cung cấp, SĐT, tên nhà cung cấp"
                                    placeholder="Tìm kiếm theo mã nhà cung cấp, SĐT, tên nhà cung cấp"/>
                         </div>
@@ -551,7 +550,7 @@
                                         </svg>
                                     </div>
                                     <div class="btn-group pull-left" data-toggle="buttons">
-                                        <label class="btn filter-button-tag"
+                                        <label class="btn filter-button-tag" id="lableAVAILABLE"
                                                bind-event-click="setParamFilterActive('AVAILABLE',this)">
                                             <input type="checkbox" class="checkbox_status" id="AVAILABLE"> Đang giao
                                             dịch
@@ -589,12 +588,12 @@
                                     <div class="btn-group pull-left">
                                         <div>
                                             <div class="btn-group show">
-                                                <button type="button" bind-event-click="setParamFilterAssigneeIds(this)"
+                                                <button type="button" id="setParamFilterAssigneeIds"
                                                         class="multiselect dropdown-toggle btn sapo-btn-blank btn-default"
                                                         data-bs-toggle="dropdown" data-bs-auto-close="outside"
                                                         aria-expanded="false"
                                                         style="padding:0.8rem; min-width: 300px" title="Chọn nhân viên"
-                                                ><span class="multiselect-selected-text">Chọn nhân viên</span>
+                                                ><span class="multiselect-selected-text multiselect-employee">Chọn nhân viên</span>
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                          class="icon-dropdown-select">
                                                         <path d="M10 16l-4-4h8l-4 4zm0-12L6 8h8l-4-4z"></path>
@@ -637,15 +636,18 @@
 
                                     <div class="btn-group pull-left">
                                         <div>
+                                            <div class="w100" id="search-supplierGroupId-container">
+
+                                            </div>
                                             <div class="btn-group show">
                                                 <button type="button"
-                                                        bind-event-click="setParamFilterSupplierGroupId(this)"
+                                                        id="setParamFilterSupplierGroupId"
                                                         class="multiselect dropdown-toggle btn sapo-btn-blank btn-default"
                                                         data-bs-toggle="dropdown" data-bs-auto-close="outside"
                                                         aria-expanded="false"
                                                         style="padding:0.8rem; min-width: 300px"
                                                         title="Chọn nhóm nhà cung cấp"
-                                                ><span class="multiselect-selected-text">Chọn nhóm nhà cung cấp</span>
+                                                ><span class="multiselect-selected-text multiselect_supplier_groupId">Chọn nhóm nhà cung cấp</span>
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                          class="icon-dropdown-select">
                                                         <path d="M10 16l-4-4h8l-4 4zm0-12L6 8h8l-4-4z"></path>
@@ -857,28 +859,59 @@
                                     </div>
 
                                     <div class="" style="    float: right;padding: 0 0 0 20px;">
-
-                                        <nav aria-label="Page navigation example ">
+                                        <div class="dataTables_paginate paging_bootstrap">
                                             <ul class="pagination">
-                                                <li class="page-item">
-                                                    <button class=" btn-outline-primary btn-sm me-2" id="previousPage"
-                                                            style="border: none">
-                                                        <i class="fa-solid fa-angle-left"></i>
-                                                    </button>
+                                                <!--                                                <li><a class="t-link"><span-->
+                                                <!--                                                        class="t-icon t-arrow-first">← Trang đầu</span></a></li>-->
+                                                <li><a class="t-link" id="previousPage"
+                                                >← Trang trước</a></li>
+
+                                                <li><a class="t-link" id="pageNo">1</a>
                                                 </li>
-                                                <li class="page-item">
-                                                    <button class="pageNumber btn-primary btn-sm me-2">
-                                                        <span id="pageNo">1</span>
-                                                    </button>
-                                                </li>
-                                                <li class="page-item">
-                                                    <button class=" btn-outline-primary btn-sm " id="nextPage"
-                                                            style="border: none">
-                                                        <i class="fa-solid fa-angle-right"></i>
-                                                    </button>
-                                                </li>
+                                                <li><a class="t-link" id="nextPage"
+                                                >Trang sau →</a></li>
+
+                                                <!--                                                <li class="active"><span class="t-state-active">3</span></li>-->
+                                                <!--                                                <li><a class="t-link"-->
+                                                <!--                                                      >5</a></li>-->
+                                                <!--                                                <li><a class="t-link"-->
+                                                <!--                                                ><span class="t-icon t-arrow-last">Trang cuối →</span></a>-->
+                                                <!--                                                </li>-->
                                             </ul>
-                                        </nav>
+                                        </div>
+                                        <!--                                        <nav aria-label="Page navigation example ">-->
+                                        <!--                                            <ul class="pagination">-->
+                                        <!--                                                <li class="page-item">-->
+                                        <!--                                                    <button class=" btn-outline-primary btn-sm me-2"-->
+                                        <!--                                                            style="border: none">-->
+                                        <!--                                                        ← Trang đầu-->
+                                        <!--                                                    </button>-->
+                                        <!--                                                </li>-->
+                                        <!--                                                <li class="page-item">-->
+                                        <!--                                                    <button class=" btn-outline-primary btn-sm me-2" id="previousPage"-->
+                                        <!--                                                            style="border: none">-->
+
+                                        <!--                                                    </button>-->
+                                        <!--                                                </li>-->
+                                        <!--                                                <li class="page-item">-->
+                                        <!--                                                    <button class="pageNumber btn-primary btn-sm me-2">-->
+                                        <!--                                                        <span id="pageNo">1</span>-->
+                                        <!--                                                    </button>-->
+                                        <!--                                                </li>-->
+                                        <!--                                                <li class="page-item">-->
+                                        <!--                                                    <button class=" btn-outline-primary btn-sm " id="nextPage"-->
+                                        <!--                                                            style="border: none">-->
+
+                                        <!--                                                    </button>-->
+                                        <!--                                                </li>-->
+                                        <!--                                                <li class="page-item">-->
+                                        <!--                                                    <button class=" btn-outline-primary btn-sm "-->
+                                        <!--                                                            style="border: none">-->
+                                        <!--                                                        Trang cuối →-->
+                                        <!--                                                    </button>-->
+                                        <!--                                                </li>-->
+                                        <!--                                            </ul>-->
+                                        <!--                                        </nav>-->
                                     </div>
                                 </div>
 
@@ -925,7 +958,7 @@
                     <div class="col-6">
                         <div class="label mb-2">Nhân viên phụ trách</div>
                         <select class="w100 input-dropdown sapo-btn-blank select-padding left" style="width:250px;"
-                                bind="accountIdBulk" id="accountIdBulk">
+                                id="accountIdBulk">
                             <option value="0" selected="">Chọn nhân viên phụ trách</option>
 
                         </select>
@@ -933,7 +966,7 @@
                     <div class="col-6">
                         <div class="label mb-2">Hình thức thanh toán</div>
                         <select class="w100 input-dropdown sapo-btn-blank select-padding left" style="width:250px;"
-                                bind="paymentMethodIdBulk" id="paymentMethodIdBulk">
+                                id="paymentMethodIdBulk">
                             <option value="0" selected="">Chọn hình thức thanh toán</option>
 
                         </select>
@@ -1090,6 +1123,8 @@
 </div>
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
 <th:block th:replace="/layout/script :: script"/>
+<th:block th:replace="/layout/supplier/script_export_import.html"/>
+<!--<th:block th:replace="/layout/supplier/modal_export_import.html"/>-->
 <script>
 
     $(".filter-item").css("display", "block");
@@ -1097,7 +1132,6 @@
         $('option').prop('disabled', false);
         $('.select-change-filter').each(function () {
             let val = this.value;
-            console.log(val, " val")
             $('.select-change-filter').not(this).find('option').filter(function () {
                 return this.value === val;
             }).hide();
@@ -1110,7 +1144,6 @@
 
     let arrayIdSupplier = [];
     let supplierFilter = new SupplierFilter();
-    let checkSupplierFilterChange;
     const page = {
         urls: {
             getAllSupplier: SupplierApp.SUPPLIER_API,
@@ -1167,8 +1200,17 @@
     page.dialogs.elements.filterEmployee = $("#ulAssigneeIdsFilter");
     // page.dialogs.elements.checkboxInputEmployee = $(".sapo-checkbox__input");
     page.dialogs.elements.filterSupplierGroupId = $("#ulSupplierGroupId");
-
     page.dialogs.elements.filterSubmit = $("#filterSubmit")
+
+    //fillter status
+    page.elements.filter_button_tag = $(".filter-button-tag");
+
+    //filter employee
+    page.elements.multiselect_employee = $(".multiselect-employee")
+
+    //filter supplier_groupId
+    page.elements.multiselect_supplier_groupId = $(".multiselect_supplier_groupId")
+
 
     function resetSupplierFilter() {
         supplierFilter.filter = null;
@@ -1180,7 +1222,9 @@
         supplierFilter.pageNo = null;
         supplierFilter.pageSize = null;
         // page.commands.getAllSupplier();
+        console.log("resetSupplierFilter done")
     }
+
 
     // seach
     page.elements.totalPage = $("#totalPage");
@@ -1190,19 +1234,22 @@
     page.dialogs.elements.nextPage = $("#nextPage");
     page.dialogs.elements.previousPage = $("#previousPage");
 
-    page.elements.btnFilter.on("click", function () {
-        $(".filter-button-tag").removeClass("active");
-        $('input[type=checkbox]').prop('checked', false);
-        $(".input-date").val("");
-    })
+    // page.elements.btnFilter.on("click", function () {
+    //     page.elements.filter_button_tag.removeClass("active");
+    //     $('input[type=checkbox]').prop('checked', false);
+    //     $(".input-date").val("");
+    //     page.elements.multiselect_employee.text("Chọn nhân viên")
+    //     $("#search-supplierGroupId-container").empty()
+    //     resetSupplierFilter()
+    // })
 
 
     page.commands.getAllSupplier = () => {
-        let pageNo = Number(page.elements.pageNo.text());
-        let pageSize = Number(page.elements.pageSize.val());
-        let status = ""
 
-        page.commands.getAllSupplierOnPageNo(pageNo, pageSize, status);
+        supplierFilter.pageNo = Number(page.elements.pageNo.text());
+        supplierFilter.pageSize = Number(page.elements.pageSize.val());
+
+        page.commands.getAllSupplierUseFilter(supplierFilter);
     }
 
     page.commands.getAllSupplierOnPageNo = (pageNo, pageSize, status) => {
@@ -1253,32 +1300,33 @@
     }
 
     page.elements.btnStatusAvailable.on("click", () => {
-        console.log("in to function")
-        let pageNo = Number(page.elements.pageNo.text());
-        let pageSize = Number(page.elements.pageSize.val());
-        let status = "AVAILABLE";
-
-        page.commands.getAllSupplierOnPageNo(pageNo, pageSize, status);
+        resetSupplierFilter();
+        $("#lableAVAILABLE").addClass("active")
+        supplierFilter.statuses.push("AVAILABLE")
+        page.commands.getAllSupplierUseFilter(supplierFilter);
     })
 
-    function searchKey() {
+    page.elements.searchKey.on("change", () => {
         supplierFilter.pageNo = Number(page.elements.pageNo.text());
         supplierFilter.pageSize = Number(page.elements.pageSize.val());
         supplierFilter.filter = page.elements.searchKey.val().trim();
         console.log(supplierFilter)
         page.commands.getAllSupplierUseFilter(supplierFilter);
-        resetSupplierFilter()
-    }
+        // page.elements.searchKey.val("");
+
+    })
 
     page.dialogs.elements.filterSubmit.on("click", () => {
-        supplierFilter.pageNo = Number(page.elements.pageNo.text());
-        supplierFilter.pageSize = Number(page.elements.pageSize.val());
+        page.elements.pageNo.text(1);
+        supplierFilter.pageNo = 1;
         console.log(supplierFilter, " supplierFilter truoc rết")
         page.commands.getAllSupplierUseFilter(supplierFilter);
-        resetSupplierFilter();
+        page.elements.btnFilter.click()
+        console.log(supplierFilter)
     })
 
     page.commands.getAllSupplierUseFilter = (supplierFilter) => {
+        console.log(supplierFilter, " supplierFilter")
         $.ajax({
             headers: {
                 "accept": "application/json",
@@ -1312,26 +1360,44 @@
                     $("#sapo-table_wrapper").hide();
                     $(".container-fluid").hide();
                 }
+                page.elements.pageNo.parent().addClass("active")
+                if (Number(page.elements.pageNo.text()) === 1)
+                    page.dialogs.elements.previousPage.parent().addClass("disable")
+                if (Number(page.elements.pageNo.text()) === Number(totalPage))
+                    page.dialogs.elements.nextPage.parent().addClass("disable")
+                else
+                    page.dialogs.elements.nextPage.parent().removeClass("disable")
+
             })
     }
 
     page.dialogs.elements.nextPage.on("click", () => {
         let pageNo = page.elements.pageNo.text();
         if (Number(pageNo) < Number(totalPage)) {
+            page.dialogs.elements.previousPage.parent().removeClass("disable")
             let pageNext = Number(pageNo) + 1;
             page.elements.pageNo.text(pageNext);
+            page.elements.pageNo.parent().addClass("active")
             page.commands.getAllSupplier();
         }
+        // page.elements.pageNo.text(Number(pageNo) + 1);
+        if (Number(page.elements.pageNo.text()) === Number(totalPage))
+            page.dialogs.elements.nextPage.parent().addClass("disable")
     })
+
 
     page.dialogs.elements.previousPage.on("click", () => {
         let pageNo = page.elements.pageNo.text();
         if (Number(pageNo) > 1) {
+            page.dialogs.elements.nextPage.parent().removeClass("disable")
             let previousPage = Number(pageNo) - 1;
             page.elements.pageNo.text(previousPage);
+            page.elements.pageNo.parent().addClass("active")
             page.commands.getAllSupplier();
         }
-
+        // page.elements.pageNo.text(Number(pageNo) + 1);
+        if (Number(page.elements.pageNo.text()) === 1)
+            page.dialogs.elements.previousPage.parent().addClass("disable")
     })
 
     page.elements.pageSize.on("change", () => {
@@ -1750,32 +1816,71 @@
         supplierFilter.filter = page.elements.search.val().trim();
     }
 
-    function setParamFilterAssigneeIds(element) {
+
+    page.elements.multiselect_employee.on("click", function () {
         $('input[type="checkbox"].checkbox_employee').change(function () {
+            page.elements.multiselect_employee.off("click")
             let checkbox = $(this)
-            console.log(checkbox)
+            let checkboxText = $(`label[for="${$(this).val()}"]`).text();
+            let checkboxCheckedLength = $('input[type="checkbox"].checkbox_employee:checked').length;
+            let checkboxAll = $('input[type="checkbox"].checkbox_employee').length;
+
             if (checkbox.is(":checked")) {
                 supplierFilter.employeeIds.push(checkbox.val())
+                if (checkboxCheckedLength < 1)
+                    page.elements.multiselect_employee.text("Chọn nhân viên")
+                else if (checkboxCheckedLength === 1) {
+                    $('input[type="checkbox"].checkbox_employee').each(function () {
+                        if ($(this).is(":checked"))
+                            page.elements.multiselect_employee.text($(`label[for="${$(this).val()}"]`).text())
+                    })
+                } else if (checkboxCheckedLength > 1 && checkboxCheckedLength < checkboxAll)
+                    page.elements.multiselect_employee.text(`${checkboxCheckedLength} nhân viên được chọn`)
+                else if (checkboxCheckedLength === checkboxAll)
+                    page.elements.multiselect_employee.text(`Tất cả (${checkboxCheckedLength})`)
             } else {
                 if (supplierFilter.employeeIds.indexOf(checkbox.val()) > -1) {
                     supplierFilter.employeeIds.splice(supplierFilter.employeeIds.indexOf(checkbox.val()), 1)
                 }
+                if (checkboxCheckedLength < 1)
+                    page.elements.multiselect_employee.text("Chọn nhân viên")
+                else if (checkboxCheckedLength === 1) {
+                    $('input[type="checkbox"].checkbox_employee').each(function () {
+                        if ($(this).is(":checked"))
+                            page.elements.multiselect_employee.text($(`label[for="${$(this).val()}"]`).text())
+                    })
+                } else if (checkboxCheckedLength > 1 && checkboxCheckedLength < checkboxAll)
+                    page.elements.multiselect_employee.text(`${checkboxCheckedLength} nhân viên được chọn`)
+                else if (checkboxCheckedLength === checkboxAll)
+                    page.elements.multiselect_employee.text(`Tất cả (${checkboxCheckedLength})`)
             }
+            console.log(supplierFilter.employeeIds)
         })
-    }
+    })
 
-    function setParamFilterSupplierGroupId(element) {
+    page.elements.multiselect_supplier_groupId.on("click", () => {
         $('input[type="checkbox"].checkbox_supplier_group').change(function () {
+            page.elements.multiselect_supplier_groupId.off("click")
             let checkbox = $(this)
+            let checkboxText = $(`label[for="${$(this).val()}"]`).text();
+            let str = `<span class="tm-tag tm-tag-small tm-serial tm-overflow"
+                                                      id="tag-variant-${checkbox.val()}" title="${checkboxText}">
+                            <span>${checkboxText}</span>
+
+                       </span>`
+            // < a className = "tm-tag-remove tag-variant-remove" variant - id = "${checkbox.val()}" > x < /a>
             if (checkbox.is(":checked")) {
                 supplierFilter.groupIds.push(checkbox.val())
+                $("#search-supplierGroupId-container").append(str)
             } else {
                 if (supplierFilter.groupIds.indexOf(checkbox.val()) > -1) {
                     supplierFilter.groupIds.splice(supplierFilter.groupIds.indexOf(checkbox.val()), 1)
+                    $("span[" + "id" + "*=" + "tag-variant-" + checkbox.val() + "]").remove()
                 }
             }
+            console.log(supplierFilter.groupIds)
         })
-    }
+    })
 
     // tìm từ khóa trong filter SupplierGroup
     function suggest(element) {
@@ -1798,13 +1903,17 @@
             supplierFilter.createdFrom = null;
         document.getElementById("createMin").setAttribute("max", supplierFilter.createdTo);
         document.getElementById("createMax").setAttribute("min", supplierFilter.createdFrom);
+        console.log(supplierFilter.createdFrom, "supplierFilter.createdFrom")
+        console.log(supplierFilter.createdTo, "supplierFilter.createdTo")
     }
+
 
     page.commands.loadData = () => {
         page.commands.getAllSupplier();
         page.commands.getAllEmployee();
         page.commands.getAllPaymentMethodSelect();
         page.commands.getAllSupplierGroup();
+
         // page.commands.getAllSupplierByFilter();
     }
 

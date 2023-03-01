@@ -56,6 +56,21 @@ class SupplierApp {
         return str;
     }
 
+    static AlertMessageVi = class {
+        static SUCCESS_CREATED = "Tạo dữ liệu thành công !";
+
+        static SUCCESS_UPDATED = "Cập nhật dữ liệu thành công !";
+        static SUCCESS_DELETE = "Xóa dữ liệu thành công";
+
+        static ERROR_TITLE = "Thao tác không thành công, Tên nhà cung cấp không được để trống.";
+        static ERROR_400 = "Thao tác không thành công, vui lòng kiểm tra lại dữ liệu.";
+        static ERROR_401 = "Unauthorized - Access Token của bạn hết hạn hoặc không hợp lệ.";
+        static ERROR_403 = "Forbidden - Bạn không được quyền truy cập tài nguyên này.";
+        static ERROR_404 = "Not Found - Tài nguyên này đã bị xóa hoặc không tồn tại";
+        static ERROR_500 = "Internal Server Error - Hệ thống Server đang có vấn đề hoặc không truy cập được.";
+
+    }
+
 
     static IziToast = class {
         static showSuccessAlert(m) {

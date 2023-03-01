@@ -1,43 +1,53 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <th:block th:fragment="create_group_supplier">
 
-  <div class="modal" id="modalCreateGroupSupplier" important data-bs-backdrop="static" tabindex="-1">
-    <div class="modal-dialog modal-lg" style="width: 610px" >
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="modal-title">Thêm mới nhóm nhà cung cấp</h3>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal" id="modalCreateGroupSupplier" important data-bs-backdrop="static" tabindex="-1">
+        <div class="modal-dialog modal-lg" style="width: 610px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Thêm mới nhóm nhà cung cấp</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="modal-alert-danger" class="hide mb-3"></div>
+                <div>
+
+                    <div class="modal-body">
+                        <form id="formCreateGroup">
+                            <div class="row">
+                                <span hide id="groupCreateId"></span>
+                                <div class="col-6">
+                                    <div class="left field w-100">
+                                        <div class="label mb-2 label-required">Tên nhóm</div>
+                                        <input id="groupCreateTitleSup" name="groupCreateTitleSup"
+                                               class="sapo-textbox w100 pull-left"
+                                               placeholder="Nhập tên nhóm nhà cung cấp">
+                                    </div>
+                                    <div class="left field w-100 mb-2">
+                                        <div class="label mb-2">Mã nhóm</div>
+                                        <input id="groupCreateCodeSup" class="sapo-textbox w100 pull-left"
+                                               bind="supplierGroup.code" data-toggle="tooltip"
+                                               placeholder="Nhập mã nhóm nhà cung cấp" data-original-title="">
+                                    </div>
+                                </div>
+                                <div class="col-6 field mb-2">
+                                    <div class="label mb-2">Ghi chú</div>
+                                    <textarea id="groupCreateDescriptionSup" bind="supplierGroup.note"
+                                              class="sapo-textbox" style="height:113px"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn secondary" data-bs-dismiss="modal">Thoát</button>
+                    <button id="btnCreateGroupSupplier"
+                            class="btn btn-default pull-right margin-left-5 sapo-btn-default"
+                            style="margin-bottom: 3px;">Thêm
+                    </button>
+                </div>
+            </div>
         </div>
-        <div id="modal-alert-danger" class="hide mb-3"></div>
-         <div>
-           <form id="formCreateGroup">
-             <div class="modal-body">
-               <div class="row">
-                 <span hide id="groupCreateId"></span>
-                 <div class="col-6">
-                   <div class="left field w-100">
-                     <div class="label mb-2 label-required">Tên nhóm</div>
-                     <input required id="groupCreateTitleSup" name="groupCreateTitleSup" class="sapo-textbox w100 pull-left" bind="supplierGroup.name" data-toggle="tooltip" placeholder="Nhập tên nhóm nhà cung cấp">
-                   </div>
-                   <div class="left field w-100 mb-2">
-                     <div class="label mb-2">Mã nhóm</div>
-                     <input id="groupCreateCodeSup" class="sapo-textbox w100 pull-left" bind="supplierGroup.code" data-toggle="tooltip" placeholder="Nhập mã nhóm nhà cung cấp" data-original-title="">
-                   </div>
-                 </div>
-                 <div class="col-6 field mb-2">
-                   <div class="label mb-2">Ghi chú</div>
-                   <textarea id="groupCreateDescriptionSup" bind="supplierGroup.note" class="sapo-textbox" style="height:113px"></textarea>
-                 </div>
-               </div>
-             </div>
-           </form>
-         </div>
-        <div class="modal-footer">
-          <button class="btn secondary" data-bs-dismiss="modal">Thoát</button>
-          <button id="btnCreateGroupSupplier" class="btn btn-default pull-right margin-left-5 sapo-btn-default" style="margin-bottom: 3px;">Thêm</button>
-        </div>
-      </div>
     </div>
-  </div>
 </th:block>
 </html>

@@ -54,7 +54,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Transactional
     public SupplierResult create(CreateSupplierParam createParam) {
         Supplier supplier = supplierMapper.toModel(createParam);
-        supplier.setEmployeeId(1);
+//        supplier.setEmployeeId(1);
         supplier = supplierRepository.save(supplier);
         if (createParam.getSupplierCode() == null)
             supplier.setSupplierCode(CodePrefix.SUPPLIER.generate(supplier.getId()));
@@ -134,8 +134,13 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     @Transactional(readOnly = true)
-    public Map<String, Object> findAllByFilters2(SupplierFilter filter) {
+    public Map<String, Object> findAllByFilters(SupplierFilter filter) {
+        if(filter.getPageNo() == null)
+            filter.setPageNo(1);
+        if(filter.getPageSize()== null)
+            filter.setPageSize(20);
         Page<Supplier> page = supplierFilterRepository.findAllByFilters(filter, PageRequest.of(filter.getPageNo() - 1, filter.getPageSize()));
+
         if (page.hasContent()) {
             List<SupplierResult> dtoList = page.getContent()
                     .stream()

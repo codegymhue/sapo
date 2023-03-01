@@ -3,11 +3,9 @@
 
 <head>
   <meta charset="utf-8" />
-<!--  <th:block th:replace="/layout/header :: header"/>-->
+  <link rel="icon" type="image/x-icon" href="/assets/admin/images/favicon.ico"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/izitoast@1/dist/css/iziToast.min.css">
-<!--  <th:block th:replace="/layout/supplier/header :: header"/>-->
-
   <script>
     var CKEDITOR_BASEPATH = '/v2/lib/ckeditor/';
     var S_LANG = 'vi-VN';
@@ -47,11 +45,7 @@
       display: none
     }
   </style>
-  <!-- Freshchat -->
-  <!-- LIVE -->
-  <!-- mix pannels tracking-->
-
-</head>
+  </head>
 
 <body class="body_dashboard partners suppliers detail">
 <div id="container">
@@ -68,7 +62,6 @@
   <th:block th:replace="/layout/supplier/menu :: menu"/>
   <div class="col-right">
     <div class="col-right_content" id="content">
-
       <header class="ui-title-bar-container">
         <div class="ui-title-bar" style="display:inline-block;min-height:0px;">
           <div class="ui-title-bar__navigation w-50 left">
@@ -81,10 +74,8 @@
                 <span class="ui-breadcrumb__item">Danh sách nhà cung cấp</span>
               </a>
             </div>
-
           </div>
           <div class="w-50 right detail-supplier">
-
             <style>
               .help-dashboard .help-dropdown .btn-blank {
                 background: #fff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDplN2MwNTFiZi1lNGJiLTNjNDktOGM3YS00NTZmZTZlNGQ1NmYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjI5NDdDQ0NGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjI5NDdDQ0JGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjdkNDRhZTRlLTIzMTMtYTE0ZC1hNWQ4LTA5YTVjYTBmNmM0NCIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjk3N2NmYTliLThmZDctZGU0Mi1hNDFiLWIwOTJiYzRkYWM2MiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Po5ReOIAAAIxSURBVHjalJU9aFNRGIbTk+sSh0xiEKciaBF1culiA2IdOlQHaRBKqEurYJYOFn9Ql7iJghQcSqlDAop0yFIoWJcigouKKIROClWnomaQVHw+eAPxcs7J9cDDhXvP997vfH9naPbybC6wEpiASRiFYcjDLmzBJqxCa/HRYtcn4ALCFWjDQ/gGNRiB/XrW9N6+t+euzFV8IkMpzwuwDGNwDVagmwsvO9003IMNqHKKjs9zE16Dg3AclgYI2+oitqT9ZrfGKQo+8WXF9DRs5/5j8YNt2eWl8494RaE4Dx1f+OAwnIRi4Acd2Y/1cuAUt7pi7PP4GLyHj/AavsPNyAlMp84PEqdyc0qer5oa8AuOQAnuw10YD0RpRXYTTnXcDCTvBByVp5/gK1yH33Am4H1XepNODfIi4MUPuANv+t7tgz3wM5Jj0xtN1HntwCZ7fztVrk3F/XFE3OyGE5XPToaKs33PlOBT8CWy1/TyTrOimEH8IpyFc/BuwF7T23UaQocyiJfhA7zMsNf0tpymWzmDwROYz9i0prfpNDan1EyxtRcODFK15pHeqom34I+mW2xdglsZvJ6WXsupeRY0NksRoxvyKOZ1SToL1ky9wdXQPH6uWvYtmy+vIsIF2W8g3EiP3KrKcn3ACUIer8u+6pvnHQ2jz/AWZjIkOUF4RvvNbrz/Jkob24cLmu91tX5Ts6KtziuqjsvKgSWv1gtF+g70Ldv4tO/2fxC4/a/Gbv+/AgwA9q+ezeP4kToAAAAASUVORK5CYII=') no-repeat center center;
@@ -180,24 +171,6 @@
                        value="https://support.sapo.vn?ver=2&amp;view=pos&amp;url=http://anges.mysapogo.com/admin/suppliers/206718863/histories" />
               </div>
             </div>
-
-            <script type="text/javascript">
-              function showHelpPopup() {
-                $("#iframe-help").attr("src", $("#iframe-help-src").val());
-                $(".help-popup").toggleClass("shown");
-                $(".favourite").css({ "z-index": "0" });
-              }
-
-              $(function () {
-                $('body').on('click', function (e) {
-                  if (!$('.help-dropdown .btn-help *').is(e.target) && !$('.help-dropdown .btn-help').is(e.target) && $('.help-popup').hasClass("shown")) {
-                    $("#iframe-help").attr("src", "");
-                    $(".help-popup").removeClass("shown");
-                  }
-                });
-              });
-            </script>
-
             <a href="javascript:" class="btn sapo-btn-default right" style="border-radius: 3px 0 0 3px;"
                data-toggle="dropdown">Tạo phiếu thu/chi</a>
             <ul class="dropdown-menu newscroll" style="font-size:13px">
@@ -217,15 +190,12 @@
       <div class="detail-supplier-container container mt-0" context="detailSupplier"
            define="{detailSupplier: new Components.Supplier.DetailSupplier(this,{&quot;id&quot;:206718863,&quot;tenantId&quot;:688746,&quot;name&quot;:&quot;Nguyen Tan Luong&quot;,&quot;groupName&quot;:&quot;Khác&quot;,&quot;actionRouting&quot;:&quot;histories&quot;,&quot;email&quot;:&quot;nguyentanluong0503@gmail.com&quot;,&quot;assigneeId&quot;:941587,&quot;assigneeName&quot;:null,&quot;defaultLedgerAccountId&quot;:null,&quot;defaultPaymentTermId&quot;:null,&quot;defaultStockLocationId&quot;:null,&quot;defaultTaxTypeId&quot;:null,&quot;code&quot;:&quot;SUPN00005&quot;,&quot;type&quot;:null,&quot;issuedOnMax&quot;:null,&quot;issuedOnMin&quot;:null,&quot;supplierGroupId&quot;:2650779,&quot;defaultDiscountRate&quot;:null,&quot;defaultPriceListId&quot;:null,&quot;description&quot;:&quot;jrhfjahf&quot;,&quot;fax&quot;:null,&quot;taxNumber&quot;:null,&quot;stringTags&quot;:null,&quot;phoneNumber&quot;:&quot;0977194578&quot;,&quot;website&quot;:null,&quot;createdOn&quot;:&quot;2023-01-30T09:50:16Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-31T10:14:50Z&quot;,&quot;tags&quot;:[&quot;fastfuasj&quot;],&quot;tagso&quot;:null,&quot;contryId&quot;:0,&quot;cityId&quot;:0,&quot;districtId&quot;:0,&quot;countryId&quot;:0,&quot;debt&quot;:0.0,&quot;defaultPaymentMethodId&quot;:3023200,&quot;accountId&quot;:0,&quot;status&quot;:&quot;active&quot;,&quot;page&quot;:0,&quot;tenant&quot;:{&quot;id&quot;:688746,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;name&quot;:&quot;anges&quot;,&quot;industryId&quot;:14,&quot;industry&quot;:&quot;Thời trang&quot;,&quot;mobile&quot;:&quot;0899624267&quot;,&quot;phoneNo&quot;:&quot;0899624267&quot;,&quot;email&quot;:&quot;nguyenthanhhoan3006@gmail.com&quot;,&quot;contactEmail&quot;:null,&quot;fax&quot;:&quot;&quot;,&quot;timezone&quot;:null,&quot;description&quot;:null,&quot;address1&quot;:&quot;Thừa Thiên Huế&quot;,&quot;address2&quot;:null,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;statusError&quot;:0,&quot;city&quot;:&quot;Thừa Thiên Huế&quot;,&quot;district&quot;:null,&quot;cityId&quot;:0,&quot;countryId&quot;:201,&quot;districtId&quot;:0,&quot;domain&quot;:&quot;anges&quot;,&quot;domainUri&quot;:&quot;anges.mysapogo.com&quot;,&quot;startDate&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;endDate&quot;:&quot;2023-02-04T17:00:00Z&quot;,&quot;imageUrl&quot;:null,&quot;packageId&quot;:46,&quot;packageName&quot;:&quot;RETAIL_PRO_TRIAL&quot;,&quot;status&quot;:&quot;active&quot;,&quot;createdOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-28T13:42:40Z&quot;,&quot;locationIds&quot;:[659422],&quot;accountIds&quot;:null,&quot;productLimit&quot;:500,&quot;accountLimit&quot;:3,&quot;locationLimit&quot;:1,&quot;frontendRestricts&quot;:null,&quot;apiRestricts&quot;:null,&quot;viewTutorial&quot;:false,&quot;createSampleDataStatus&quot;:&quot;success&quot;,&quot;registerCompleted&quot;:true,&quot;registerFrom&quot;:&quot;N/A&quot;,&quot;landingPageType&quot;:1},&quot;priceList&quot;:null,&quot;taxType&quot;:null,&quot;supplierCode&quot;:{&quot;tenantId&quot;:0,&quot;code&quot;:null,&quot;id&quot;:0},&quot;paymentTerm&quot;:null,&quot;paymentMethod&quot;:{&quot;id&quot;:3023200,&quot;tenantId&quot;:688746,&quot;name&quot;:&quot;COD&quot;,&quot;status&quot;:&quot;active&quot;,&quot;createdOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;init&quot;:true,&quot;integrated&quot;:false,&quot;type&quot;:&quot;cod&quot;,&quot;removable&quot;:true},&quot;account&quot;:{&quot;id&quot;:941587,&quot;tenantId&quot;:688746,&quot;createdOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;status&quot;:&quot;active&quot;,&quot;avatarUrl&quot;:null,&quot;email&quot;:&quot;nguyenthanhhoan3006@gmail.com&quot;,&quot;sex&quot;:null,&quot;password&quot;:null,&quot;firstName&quot;:&quot;Thanh&quot;,&quot;lastName&quot;:&quot;Hoan Nguyễn&quot;,&quot;fullName&quot;:&quot;Hoan Nguyễn Thanh&quot;,&quot;userName&quot;:&quot;nguyenthanhhoan3006@gmail.com&quot;,&quot;locationId&quot;:0,&quot;mobile&quot;:&quot;0899624267&quot;,&quot;countryCode&quot;:&quot;84&quot;,&quot;intlPhoneNo&quot;:&quot;84899624267&quot;,&quot;guideStatus&quot;:null,&quot;accountOwner&quot;:true,&quot;fakeLoginAccount&quot;:null,&quot;limitedAccess&quot;:false,&quot;permissions&quot;:[],&quot;startSession&quot;:null,&quot;lastLogin&quot;:null,&quot;description&quot;:null,&quot;address&quot;:&quot;&quot;,&quot;dob&quot;:null,&quot;hasPassword&quot;:false,&quot;isDuplicateMobile&quot;:null,&quot;globalSessionId&quot;:null,&quot;ssoLoginIdentity&quot;:null,&quot;hasUpgradedSSO&quot;:false,&quot;isAccountSSO&quot;:true,&quot;sapoAccountProfileUrl&quot;:null,&quot;isAccountAuthenticated&quot;:false,&quot;accountRoles&quot;:[{&quot;locationId&quot;:0,&quot;tenantRoleId&quot;:1,&quot;scopes&quot;:[&quot;full&quot;]}],&quot;languageCode&quot;:&quot;vi&quot;,&quot;dataPermissions&quot;:null},&quot;accounts&quot;:null,&quot;contries&quot;:null,&quot;cities&quot;:null,&quot;listCityDistrict&quot;:null,&quot;paymentMethods&quot;:null,&quot;priceLists&quot;:null,&quot;taxTypes&quot;:null,&quot;paymentTerms&quot;:null,&quot;supplierGroups&quot;:null,&quot;districts&quot;:null,&quot;address&quot;:null,&quot;addresses&quot;:[{&quot;id&quot;:179127841,&quot;tenantId&quot;:0,&quot;subjectId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-30T09:50:16Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-30T09:50:16Z&quot;,&quot;partnerId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;city&quot;:&quot;Đắk Lắk&quot;,&quot;district&quot;:&quot;Thành phố Buôn Ma Thuột&quot;,&quot;ward&quot;:&quot;Xã Hòa Khánh&quot;,&quot;zipCode&quot;:null,&quot;state&quot;:null,&quot;address1&quot;:&quot;fa&quot;,&quot;address2&quot;:null,&quot;email&quot;:&quot;nguyentanluong0503@gmail.com&quot;,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:null,&quot;phoneNumber&quot;:&quot;0977194578&quot;,&quot;status&quot;:&quot;active&quot;,&quot;countryId&quot;:0,&quot;cityId&quot;:0,&quot;districtId&quot;:0,&quot;cityDistrictIds&quot;:null,&quot;selectContries&quot;:null,&quot;selectCities&quot;:null,&quot;selectDistricts&quot;:null,&quot;selectWards&quot;:null,&quot;listCityDistrict&quot;:null,&quot;wardSapos&quot;:null,&quot;listDistrict&quot;:null,&quot;listCity&quot;:null}],&quot;contacts&quot;:[],&quot;ids&quot;:[],&quot;returnUrl&quot;:null,&quot;action&quot;:null,&quot;checkCreate&quot;:0})}">
         <div class="page-info page-info-order-detail w100">
-
           <div class="page-info-title">
             Thông tin cá nhân
             <span class="badge sapo-badge badge--sushi position-absolute"
                   style="left: calc(100%/3)">
             <span th:text="*{supplier.status == supplier.status.AVAILABLE} ? 'Đang giao dịch' : 'Ngừng giao dịch'"></span>
             </span>
-
-
             <div class="order-sources">
               <a href="javascript:" data-toggle="dropdown" aria-expanded="false"
                  style="color:#212b35">Thao tác khác<i class="fa fa-caret-down ml-2"
@@ -234,9 +204,8 @@
                 <li>
                   <a th:href="'/admin/suppliers/'+${supplier.getId()}+'/edit'">Cập nhật thông tin</a>
                 </li>
-
                 <li><a id="showModalDelete"> Xoá nhà cung cấp </a></li>
-                <input type="hidden" id="modalDeleteId" th:value="${supplier.id}">
+                <input type="hidden" id="idDeleteSupplier" th:value="${supplier.id}">
               </ul>
             </div>
             <th:bock th:replace="/admin/suppliers/modals/supplier_modal_delete :: supplier_modal_delete"/>
@@ -350,58 +319,6 @@
               </div>
             </div>
           </section>
-          <th:block th:replace="/admin/suppliers/modals/addresses/create_address_supplier :: create_address_supplier"/>
-          <th:block th:replace="/admin/suppliers/modals/addresses/edit_address_supplier :: edit_address_supplier"/>
-          <th:block th:replace="/admin/suppliers/modals/addresses/delete_address_supplier :: delete_address_supplier"/>
-
-<!--          <div id="sapo-table_wrapper" class="dataTables_wrapper no-footer ps ps--active-x" style="overflow-x: auto;"><table class="sapo-table bulk-action-context dataTable no-footer" id="sapo-table" role="grid">-->
-<!--            <thead class="thead">-->
-<!--            <tr class="tr" role="row"><th style="min-width:60px;" class="select th select--bulk-action sorting_disabled" nameth="bulk_action" rowspan="1" colspan="1">-->
-<!--              <div class="bulk-actions-tooltip-wrapper bulk-actions-wrapper-main" data-toggle="tooltip" data-placement="right" title="" data-original-title="Chọn tất cả shipper">-->
-<!--                <div class="tooltip--select-all">-->
-<!--                  <div class="next-input-wrapper bulk-actions--select-all" style="left: auto;">-->
-<!--                    <label class="bulk-actions--select-all-btn btn hidden" style="left: 2px;">-->
-<!--                    </label>-->
-<!--                    <input type="checkbox" class="next-checkbox bulk-actions--select-all-checkbox" bind-event-click="addOrRemoveAllBulkActionItems(this,'address')">-->
-<!--                    <span class="next-checkbox--styled" style="left: 12px;">-->
-<!--                                                <svg class="next-icon next-icon--size-10 checkmark"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-checkmark-thick"></use> </svg>-->
-<!--                                                <svg class="next-icon next-icon--size-10 indeterminate"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-minus"></use> </svg>-->
-<!--                                            </span>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </th>-->
-<!--              <th style="width: 15%;" class="sorting_disabled" rowspan="1" colspan="1">Nhãn</th>-->
-<!--              <th style="width: 15%;" class="sorting_disabled" rowspan="1" colspan="1">Địa chỉ</th>-->
-<!--              <th style="width: 15%;" class="sorting_disabled" rowspan="1" colspan="1">Phường xã</th>-->
-<!--              <th style="width: 11%; " class="sorting_disabled" rowspan="1" colspan="1">Quận huyện</th>-->
-<!--              <th style="width: 12%; " class="sorting_disabled" rowspan="1" colspan="1">Tỉnh thành phố</th>-->
-<!--              <th style="width: 11%; " class="sorting_disabled" rowspan="1" colspan="1">Mã bưu điện</th>-->
-<!--              <th style="width: 11%; " class="sorting_disabled" rowspan="1" colspan="1">Số điện thoại</th>-->
-<!--              <th style="width: 11%; " class="sorting_disabled" rowspan="1" colspan="1">Email</th></tr>-->
-<!--            </thead>-->
-<!--            <tbody id="bodyRenderAddressSupplier" class="tbody">-->
-
-<!--            <tr role="row" class="odd">-->
-<!--              <td class="left-td t-td-height">-->
-<!--                                        <span class="sapo-checkbox" style="margin-left: 5px;">-->
-<!--                                            <input type="checkbox" value="188299383" name="product_ids" bind-event-change="addOrRemoveBulkActionItem(188299383,this,'address')" id="bulk-action-188299383" class="bulk-action-item sapo-checkbox__input">-->
-<!--                                            <span class="sapo-checkbox__checkmark"></span>-->
-<!--                                        </span>-->
-<!--              </td>-->
-<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)">-->
-<!--                <span data-toggle="tooltip" data-placement="right" title="" data-original-title="Kim Đồng Publishing House">Kim Đồng Publishing House</span>-->
-<!--              </td>-->
-<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)"><span data-toggle="tooltip" data-placement="right" title="" data-original-title="55 Quang Trung">55 Quang Trung</span></td>-->
-<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)"> </td>-->
-<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)">Quận Hai Bà Trưng </td>-->
-<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)">Hà Nội </td>-->
-<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)"> </td>-->
-<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)">(08)4 3943.4490 </td>-->
-<!--              <td class="left-td cursor-pointer" bind-event-click="supplierEditAddress(188299383)">kimdong@hn.vnn.vn </td>-->
-<!--            </tr></tbody>-->
-<!--          </table><div class="ps__rail-x" style="width: 996px; left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 891px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>-->
-
           <div style="font-size:small" id="tableCheckbox">
             <table id="tbProduct" class="table table-hover" style="background-color: white">
               <thead style="height: 55px">
@@ -452,7 +369,6 @@
               </tbody>
             </table>
           </div>
-
         </div>
       </div>
     </div>
@@ -462,14 +378,16 @@
     </div>
   </div>
 </div>
+<th:block th:replace="/admin/suppliers/modals/addresses/create_address_supplier :: create_address_supplier"/>
+<th:block th:replace="/admin/suppliers/modals/addresses/edit_address_supplier :: edit_address_supplier"/>
+<th:block th:replace="/admin/suppliers/modals/addresses/delete_address_supplier :: delete_address_supplier"/>
+
 <div class='container-fluid-md notifications'>
   <div class='ajax-notification'><span class='ajax-notification-message'></span></div>
 </div>
 <div class="modal fade" id="sapo-modal-container" data-width="" tabindex="-1" role="dialog" data-backdrop="false">
 </div>
 <div class="modal-backdrop fade in" id="sapo-modal-backdrop"></div>
-
-
 <style>
   #surveys {
     position: fixed;
@@ -489,7 +407,6 @@
   Page();
   hj('trigger', 'split_test_b');
 </script>
-<!-- End Freshchat -->
 
 <div context="notificationVNPay"
      define="{notificationVNPay: new Components.NotificationVNPay(this, {accountId:941587 })}">
@@ -509,17 +426,22 @@
     </a>
   </div>
 </div>
-
-
 </body>
 <th:block th:replace="/layout/script :: script"/>
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
 <script src="/assets/admin/js/suppliers/jquery/jquery.validate.min.js"></script>
-
-
 <script>
   const page = {
-    urls: {},
+    urls: {
+      showModalDelete: origin +'/api/suppliers/',
+      btnSupplierDelete: origin +'/api/suppliers/',
+      getAllProvince:"https://vapi.vnappmob.com/api/province/",
+      getAllDistricts: "https://vapi.vnappmob.com/api/province/district/",
+      getAllWards: "https://vapi.vnappmob.com/api/province/ward/",
+      getAllAddressOfSupplier: origin + '/api/addresses/findBySupplierId/',
+      doCreateAddressSup: origin +'/api/addresses',
+
+    },
     elements: {},
     commands: {},
     dialogs: {
@@ -527,6 +449,14 @@
       commands: {}
     }
   }
+  page.elements.bodyRenderAddressSupplier = $("#bodyRenderAddressSupplier")
+  page.elements.showModalDelete = $("#showModalDelete");
+  page.elements.idDeleteSupplier = $("#idDeleteSupplier");
+  page.elements.modalDeleteSupplier = $("#supplier-delete-modal");
+  page.elements.btnSupplierDelete = $("#btn-supplier-delete");
+  page.elements.supplierId = $("#supplierId");
+
+
   page.elements.btnShowCrAddressSupplier = $("#btnShowCrAddressSupplier");
   page.dialogs.elements.modalCreateAddressSupplier = $("#modalCreateAddressSupplier");
   page.dialogs.elements.labelCrAddressSup = $("#labelCrAddressSup");
@@ -543,7 +473,6 @@
   page.dialogs.elements.btnCreateAddressSup =$("#btnCreateAddressSup");
   page.dialogs.elements.formCreateAddressSup = $("#formCreateAddressSup");
 
-
   page.dialogs.elements.idUpAddressSup =  $("#idUpAddressSup");
   page.dialogs.elements.modalUpdateAddressSupplier = $("#modalUpdateAddressSupplier");
   page.dialogs.elements.fullNameUpAddressSup = $("#fullNameUpAddressSup");
@@ -557,21 +486,18 @@
   page.dialogs.elements.districtUp = $("#districtUp");
   page.dialogs.elements.wardUp = $("#wardUp") ;
 
+
   page.dialogs.elements.btnUpAddressSup =  $("#btnUpAddressSup");
   page.dialogs.elements.formUpdateAddressSup= $("#formUpdateAddressSup");
-
-
 
   page.elements.btnShowDeleteAddressSupplier = $(".btnShowDeleteAddressSupplier");
   page.dialogs.elements.modalDeleteAddressSup = $("#modalDeleteAddressSup");
   page.dialogs.elements.btnDeleteAddressSup = $(".btnDeleteAddressSup");
-  let arrayIdAddressSup = [];
 
+  let arrayIdAddressSup = [];
   page.elements.checkAll = $("#checkAll");
   page.elements.selectAction = $("#selectAction");
-
   page.elements.selectActionThead = $("#selectActionThead");
-
   page.elements.theadList = $("#theadList");
   page.elements.numberSelectProductList = $("#numberSelectProductList");
   page.elements.statusChangeForNumberProductList = $("#statusChange");
@@ -583,48 +509,8 @@
   page.elements.modalDelete = $("#modalDelete");
   page.elements.modalCheckInventory = $("#modalCheckInventory");
 
-  class CreateAddressParam {
-    constructor( supplierId,label, fullName,  phoneNumber,email,line1, line2, wardId, wardName, districtId, districtName,
-                provinceId, provinceName, zipCode) {
-      this.supplierId= supplierId;
-      this.label = label;
-      this.fullName = fullName;
-      this.phoneNumber = phoneNumber;
-      this.email = email;
-      this.line1 = line1;
-      this.line2 = line2;
-      this.wardId = wardId;
-      this.wardName = wardName;
-      this.districtId = districtId;
-      this.districtName =districtName;
-      this.provinceId = provinceId;
-      this.provinceName = provinceName;
-      this.zipCode = zipCode;
-    }
- }
- class UpdateAddressPara {
-    constructor(id,supplierId,fullName,label,phoneNumber,email,line1, line2,wardId,
-                wardName,districtId,districtName, provinceId, provinceName, zipCode) {
-      this.id = id;
-      this.supplierId = supplierId;
-      this.fullName = fullName;
-      this.label = label;
-      this.phoneNumber =phoneNumber;
-      this.email = email;
-      this.line1 =line1;
-      this.line2 = line2;
-      this.wardId = wardId;
-      this.wardName = wardName;
-      this.districtId = districtId;
-      this.districtName = districtName;
-      this.provinceId = provinceId;
-      this.provinceName = provinceName;
-      this.zipCode= zipCode
-    }
- }
-
-  $("#showModalDelete").on('click', ()=>{
-    let idDelete = $("#modalDeleteId").val()
+  page.elements.showModalDelete.on('click', ()=>{
+    let idDelete = page.elements.idDeleteSupplier.val()
     console.log("idDelete : " ,idDelete);
     $.ajax({
       "headers": {
@@ -632,10 +518,10 @@
         "content-type": "application/json"
       },
       type: "GET",
-      url: origin +'/api/suppliers/' + idDelete
+      url: page.urls.showModalDelete + idDelete
     })
             .done(() => {
-              $("#supplier-delete-modal").modal("show");
+              page.elements.modalDeleteSupplier.modal("show");
             })
             .fail((error) => {
               console.log(error);
@@ -643,30 +529,25 @@
 
   })
 
-  $("#btn-supplier-delete").on('click', ()=>{
-    let idDelete = $("#modalDeleteId").val()
+  page.elements.btnSupplierDelete.on('click', ()=>{
+    let idDelete = page.elements.idDeleteSupplier.val()
     $.ajax({
       "headers": {
         "accept": "application/json",
         "content-type": "application/json"
       },
       type: "DELETE",
-      url: origin +'/api/suppliers/' + idDelete
+      url: page.urls.btnSupplierDelete + idDelete
     })
             .done(() => {
-              $("#supplier-delete-modal").modal("hide");
+              page.elements.modalDeleteSupplier.modal("hide");
               SupplierApp.IziToast.showSuccessAlert("Xoá nhà cung cấp thành công");
-              setTimeout(() => {
-              }, 1500)
               window.location.href = `/admin/suppliers`;
             })
             .fail((error) => {
               SupplierApp.IziToast.showErrorAlert("Xoá nhà cung cấp thất bại");
-              setTimeout(() => {
-              }, 1500)
             })
   })
-
 
   function renderAddressSupplier(item) {
     console.log("item address : ", item)
@@ -677,8 +558,6 @@
                     <input style="cursor:pointer" id ="${item.id}" class="selectCheckbox"  name="options[]" type="checkbox" value="${item.id}">
                 </label>
                 </td>
-
-
                  <td class="align-middle">${item.label ? item.label : "" }</td>
                 <td class="align-middle">${item.line1}</td>
                 <td class="align-middle" ${item.wardId}>${item.wardName}</td>
@@ -692,34 +571,59 @@
               </tr>
     `
   }
+  let pageable;
+  function getAllAddressOfSupplierPage(){
+    console.log("debug" , pageable)
 
-  function getAllAddressOfSupplier(){
-    let supplierId = $("#supplierId").val();
-   console.log("supplierId: ", supplierId)
-   $.ajax({
-     "headers": {
-       "accept": "application/json",
-       "content-type": "application/json"
-     },
-     type: "GET",
-     url: origin + '/api/addresses/findBySupplierId/' + supplierId
-   })
-           .done((data) => {
-             console.log("dataAdress: ", data);
-             $.each(data, function (index, item) {
-               let str = renderAddressSupplier(item);
-               $("#bodyRenderAddressSupplier").prepend(str);
-             })
-           })
-           .fail((error) => {
+    $.ajax({
+      headers: {
+        "accept": "application/json",
+        "content-type": "application/json"
+      },
+      type: "GET",
+      url: origin + '/api/addresses/findBySupplierId',
+      data: jQuery.param(pageable)
 
-           })
- }
+      // data: ({
+      //   "pageNo": pageNo,
+      //   "pageSize": pageSize,
+      //   "supplierId" :supplierId,
+      // })
+    })
+            // .done(()=>{
+            //
+            // })
+
+
+  }
+
+
+  // function getAllAddressOfSupplier(){
+  // let supplierId = page.elements.supplierId.val();
+  // console.log("supplierId: ", supplierId)
+  // $.ajax({
+  //   "headers": {
+  //     "accept": "application/json",
+  //     "content-type": "application/json"
+  //   },
+  //   type: "GET",
+  //   url: page.urls.getAllAddressOfSupplier + supplierId
+  // })
+  //         .done((data) => {
+  //           console.log("dataAdress: ", data);
+  //           $.each(data, function (index, item) {
+  //             let str = renderAddressSupplier(item);
+  //             page.elements.bodyRenderAddressSupplier.prepend(str);
+  //           })
+  //         })
+  //         .fail((error) => {
+  //         })
+  // }
 
   function getAllProvince(element) {
     return $.ajax({
       type: "GET",
-      url: "https://vapi.vnappmob.com/api/province/"
+      url: page.urls.getAllProvince
     })
             .done((data) => {
               element.append('<option value="-1">Tỉnh/Thành phố</option>')
@@ -731,7 +635,7 @@
 
   function getAllDistrictsByProvinceId(element, provinceId) {
    return  $.ajax({
-      "url": "https://vapi.vnappmob.com/api/province/district/" + provinceId,
+      "url": page.urls.getAllDistricts + provinceId,
       "method": "GET"
     }).done(function (response) {
       $.each(response.results, function (index, value) {
@@ -742,10 +646,9 @@
 
   function getAllWardsByDistrictId(element, districtId) {
     return $.ajax({
-      "url": "https://vapi.vnappmob.com/api/province/ward/" + districtId,
+      "url": page.urls.getAllWards + districtId,
       "method": "GET"
-    }).done(function (data) {
-
+    }).done(function(data){
       $.each(data.results, function (index, value) {
         element.append(`<option value="${value.ward_id}">${value.ward_name}</option>`)
       });
@@ -756,9 +659,9 @@
   let districtIdCre = page.dialogs.elements.districtCr;
   let wardIdCre = page.dialogs.elements.wardCr;
 
-  let provinceIdUp = $("#provinceUp");
-  let districIdUp = $("#districtUp");
-  let wardIdUp = $("#wardUp");
+  let provinceIdUp = page.dialogs.elements.provinceUp;
+  let districIdUp = page.dialogs.elements.districtUp;
+  let wardIdUp = page.dialogs.elements.wardUp;
 
   getAllProvince(provinceIdCre);
   getAllProvince(provinceIdUp);
@@ -808,7 +711,7 @@
 
   page.commands.isCheckbox = () => {
     $(".selectCheckbox").on("change", function () {
-      if (this.checked) {
+      if(this.checked) {
         $(this).prop("checked", true);
         arrayIdAddressSup.push($(this).val());
       } else {
@@ -885,10 +788,7 @@
     page.dialogs.elements.modalDeleteAddressSup.modal('show');
   })
 
-  // page.dialogs.elements.btnDeleteAddressSup.on('click', ()=>{
-  //   page.commands.deleteProductSelect();
-  // })
-  $("#btnDeleteSupAddress").on('click', ()=>{
+  page.dialogs.elements.btnDeleteAddressSup.on('click', ()=>{
       page.commands.deleteProductSelect();
   })
 
@@ -903,11 +803,9 @@
       data: JSON.stringify(arrayIdAddressSup)
     })
             .done(() => {
-              SupplierApp.IziToast.showSuccessAlert("Xoá địa chỉ nhà cung cấp thành công!");
-              setTimeout(() => {
-              }, 1500);
+              // SupplierApp.IziToast.showSuccessAlert("Xoá địa chỉ nhà cung cấp thành công!");
               page.dialogs.elements.modalDeleteAddressSup.modal('hide');
-              // location.reload();
+              location.reload();
             })
             .fail((jqXHR) => {
               console.log(jqXHR)
@@ -942,7 +840,7 @@
     let label = page.dialogs.elements.labelCrAddressSup.val();
 
     let createAddressParam = {
-      supplierId: $("#supplierId").val(),
+      supplierId: page.elements.supplierId.val(),
       label : label.length > 0 ? label : undefined,
       fullName: fullName.length > 0 ? fullName : undefined,
       phoneNumber:  phoneNumber.length > 0 ? phoneNumber : undefined,
@@ -956,7 +854,6 @@
       districtName: page.dialogs.elements.districtCr.find("option:selected").text(),
       provinceId : page.dialogs.elements.provinceCr.val(),
       provinceName : page.dialogs.elements.provinceCr.find("option:selected").text(),
-
     }
     $.ajax({
       "headers": {
@@ -969,8 +866,6 @@
     })
             .done(() => {
               SupplierApp.IziToast.showSuccessAlert("Thêm địa chỉ nhà cung cấp thành công!");
-              setTimeout(() => {
-              }, 1500);
               page.dialogs.elements.modalCreateAddressSupplier.modal('hide');
               location.reload();
             })
@@ -1040,9 +935,10 @@
               getAllDistrictsByProvinceId(page.dialogs.elements.districtUp,data.provinceId).then(()=>{
                 page.dialogs.elements.districtUp.val(data.districtId);
               });
-              getAllWardsByDistrictId(page.dialogs.elements.wardUp , data.districtId).then(()=>{
+              getAllWardsByDistrictId(page.dialogs.elements.wardUp,data.districtId).then(()=>{
                 page.dialogs.elements.wardUp.val(data.wardId);
-              })
+              });
+
             })
   }
 
@@ -1065,7 +961,7 @@
       id: idAddressSupNow,
       label: label.length>0 ? label : undefined,
       fullName: fullName.length>0 ? fullName : undefined ,
-      supplierId: $("#supplierId").val(),
+      supplierId: page.elements.supplierId.val(),
       phoneNumber: phoneNumber.length>0 ? phoneNumber : undefined,
       email:email.length > 0 ? email : undefined,
       line1: line1.length > 0 ? line1 : undefined,
@@ -1089,8 +985,6 @@
     })
             .done((data) => {
               SupplierApp.IziToast.showSuccessAlert("Sửa địa chỉ nhà cung cấp thành công!");
-              setTimeout(() => {
-              }, 1500);
               page.dialogs.elements.modalUpdateAddressSupplier.modal('hide');
               location.reload();
             })
@@ -1162,13 +1056,23 @@
             .done((data) => {
               page.dialogs.elements.modalDeleteAddressSup.modal('hide');
               SupplierApp.IziToast.showSuccessAlert("Xoá địa chỉ nhà cung cấp thành công!");
-              setTimeout(() => {
-              }, 1500);
-              // location.reload()
+              location.reload()
+            })
+            .fail(()=>{
+              SupplierApp.IziToast.showSuccessAlert("Xoá địa chỉ nhà cung cấp thành công!");
+
             })
   })
 
+  // getAllAddressOfSupplier();
 
-  getAllAddressOfSupplier();
+  $(function() {
+    pageable = {
+      pageNo : 1,
+      pageSize: 10,
+      supplierId: $("#supplierId").val()
+    }
+    getAllAddressOfSupplierPage();
+  });
 </script>
 </html>
