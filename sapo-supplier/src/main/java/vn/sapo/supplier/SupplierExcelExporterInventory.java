@@ -60,6 +60,7 @@ public class SupplierExcelExporterInventory {
         createCell(row, 19, "Quận/Huyện", style);
         createCell(row, 20, "Nợ hiện tại", style);
         createCell(row, 21, "Tags", style);
+
     }
 
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
@@ -78,7 +79,7 @@ public class SupplierExcelExporterInventory {
     }
 
     private void writeDataLines() {
-        int  rowcount = 1;
+        int rowcount = 1;
 
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
@@ -91,10 +92,9 @@ public class SupplierExcelExporterInventory {
                 Row row = sheet.createRow(rowcount++);
                 int columnCount = 0;
 
-                createCell(row, columnCount++, supplier.getFullName(), style);
+                createCell(row, columnCount++, supplier.getFullName() != null ? supplier.getFullName() : "", style);
                 createCell(row, columnCount++, supplier.getSupplierCode(), style);
                 createCell(row, columnCount++, supplier.getGroup().getTitle(), style);
-                createCell(row, columnCount++, "theo nhom khach hang", style);
                 createCell(row, columnCount++, supplier.getEmail(), style);
                 createCell(row, columnCount++, supplier.getPhone(), style);
                 createCell(row, columnCount++, supplier.getWebsite(), style);
@@ -104,7 +104,6 @@ public class SupplierExcelExporterInventory {
                 createCell(row, columnCount++, "chính sách giá mặc định", style);
                 createCell(row, columnCount++, "kỳ hạn thanh toán mặc định", style);
                 createCell(row, columnCount++, supplier.getPaymentMethod(), style);
-                createCell(row, columnCount++, "chính sách giá mặc định", style);
                 createCell(row, columnCount++, address.getFullName(), style);
                 createCell(row, columnCount++, address.getPhoneNumber(), style);
                 createCell(row, columnCount++, address.getEmail(), style);
