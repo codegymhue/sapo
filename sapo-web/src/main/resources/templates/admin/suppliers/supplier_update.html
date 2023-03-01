@@ -2,12 +2,24 @@
 <html class="sapo-menu-expand sapo-menu-toggle-active" lang="vi-VN">
 <head>
     <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1.0"/>
+
+    <link rel="icon" type="image/x-icon" href="/assets/admin/images/favicon.ico"/>
+
+<!--    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/izitoast@1/dist/css/iziToast.min.css" crossorigin/>-->
+<!--    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" crossorigin/>-->
+<!--    <link rel="stylesheet" type="text/css" href="https://sapo.dktcdn.net/sapo-frontend-x/e603c93.main.css" crossorigin/>-->
+<!--    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>-->
+
+<!--    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" crossorigin/>-->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/izitoast@1/dist/css/iziToast.min.css"
-          crossorigin/>
+    <link rel="icon" type="image/x-icon" href="/assets/admin/images/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/izitoast@1/dist/css/iziToast.min.css" crossorigin/>
     <script>
         var CKEDITOR_BASEPATH = '/v2/lib/ckeditor/';
         var S_LANG = 'vi-VN';
@@ -21,6 +33,7 @@
     <link href="https://sapo.dktcdn.net/fe-cdn-production/lib/driver/driver.min.css?v=20220218" rel="stylesheet"/>
     <title>C&#x1EAD;p nh&#x1EAD;t nh&#xE0; cung c&#x1EA5;p Non nisi est reicien</title>
 </head>
+
 <body class="body_dashboard partners suppliers edit">
 <div id="container">
     <div class="hidden" context="tenantInfo"
@@ -76,6 +89,9 @@
                         .help-dropdown div:hover {
                             background-color: #e7f2ff;
                         }
+                        .btn-group>ul>li p:hover{
+                            background-color: #007bff;
+                        }
                     </style>
                 </div>
             </div>
@@ -119,6 +135,8 @@
                                     <input id="supplierCode" name="supplierCode" class="sapo-textbox w100"
                                            data-toggle="tooltip" th:value="${supplier.supplierCode}">
                                 </div>
+
+
                                 <div class="col-6 field pr-0">
                                     <div class="label mb-2">Nhóm nhà cung cấp</div>
                                     <div>
@@ -156,7 +174,6 @@
                                                        style="height: 30px; width: 300px; font-size: 13px; padding-top: 8px">
                                                         Thêm mới nhóm nhà cung cấp</p>
                                                 </li>
-                                                <li id="errorGroup" class="hidden">hihi</li>
                                                 <li id="renderGroupLi"></li>
                                             </ul>
                                         </div>
@@ -441,7 +458,13 @@
 <script>
     let supplierGroups = [];
     const page = {
-        urls: {},
+        urls: {
+            getAllEmployeeSelect:  origin + "/api/employees",
+            getAllPaymentMethodSelect: origin + "/api/admin/payment_methods",
+            doCreateGroupSupplier: origin + "/api/supplier_groups/create",
+            doUpdateSupplier: origin + "/api/suppliers/",
+            getAllGroup: origin + "/api/supplier_groups",
+        },
         elements: {},
         commands: {},
         dialogs: {
@@ -449,10 +472,32 @@
             commands: {}
         }
     }
-
+    page.elements.renderGroupLi = $("#renderGroupLi");
     page.elements.fulNameEmployeeUp = $("#fulNameEmployeeUp");
-    page.elements.paymentMethod = $("#paymentMethod")
+    page.elements.paymentMethod = $("#paymentMethod");
 
+    page.elements.showGroupSupplier = $("#showGroupSupplier");
+    page.dialogs.elements.modalCreateGroupSupplier = $("#modalCreateGroupSupplier");
+    page.dialogs.elements.groupCreateTitleSup = $("#groupCreateTitleSup");
+    page.dialogs.elements.groupCreateCodeSup = $("#groupCreateCodeSup");
+    page.dialogs.elements.groupCreateDescriptionSup = $("#groupCreateDescriptionSup");
+    page.dialogs.elements.btnCreateGroupSupplier = $("#btnCreateGroupSupplier");
+    page.dialogs.elements.formCreateGroup = $("#formCreateGroup");
+
+    page.elements.btnUpdateSupplier = $(".btnUpdateSupplier");
+    page.elements.formUpdateSupplier = $("#formUpdateSupplier");
+    page.elements.supplierId = $("#supplierId");
+    page.elements.supplierCode = $("#supplierCode");
+    page.elements.fullName = $("#fullName");
+    page.elements.emailUp = $("#emailUp");
+    page.elements.phoneUp = $("#phoneUp");
+    page.elements.statusUp = $("#statusUp");
+    page.elements.descriptionUp = $("#descriptionUp");
+    page.elements.paymentMethod = $("#paymentMethod");
+    page.elements.changeValueSup = $("#changeValueSup");
+    page.elements.taxCodeUp = $("#taxCodeUp");
+    page.elements.faxUp = $("#faxUp");
+    page.elements.websiteUp = $("#websiteUp");
 
     function getAllEmployeeSelect() {
         return $.ajax({
@@ -461,11 +506,10 @@
                 "content-type": "application/json"
             },
             "type": "GET",
-            "url": origin + "/api/employees"
+            "url": page.urls.getAllEmployeeSelect
         })
             .done((data) => {
-                console.log("nhan viên", data)
-
+                console.log("Nhân viên : ", data)
                 $.each(data, (i, item) => {
                     let str = `<option value="${item.id}">${item.fullName}</option>`;
                     page.elements.fulNameEmployeeUp.append(str);
@@ -480,7 +524,7 @@
                 "content-type": "application/json"
             },
             "type": "GET",
-            "url": origin + "/api/admin/payment_methods"
+            "url": page.urls.getAllPaymentMethodSelect
         })
             .done((data) => {
                 console.log("method select", data)
@@ -491,22 +535,22 @@
             })
     }
 
-    $("#showGroupSupplier").on('click', () => {
-        $("#modalCreateGroupSupplier").modal('show');
-        $("#groupCreateTitleSup").val("");
-        $("#groupCreateCodeSup").val("");
-        $("#groupCreateDescriptionSup").val("")
+    page.elements.showGroupSupplier.on('click', () => {
+        page.dialogs.elements.modalCreateGroupSupplier.modal('show');
+        page.dialogs.elements.groupCreateTitleSup.val("");
+        page.dialogs.elements.groupCreateCodeSup.val("");
+        page.dialogs.elements.groupCreateDescriptionSup.val("")
     })
 
-    $("#btnCreateGroupSupplier").on('click', () => {
-        $("#formCreateGroup").trigger('submit');
+    page.dialogs.elements.btnCreateGroupSupplier.on('click', () => {
+        page.dialogs.elements.formCreateGroup.trigger('submit');
     })
 
     function doCreateGroupSupplier() {
         console.log("vao ham roi ne");
-        let title = $("#groupCreateTitleSup").val();
-        let supGroupCode = $("#groupCreateCodeSup").val();
-        let description = $("#groupCreateDescriptionSup").val()
+        let title = page.dialogs.elements.groupCreateTitleSup.val();
+        let supGroupCode = page.dialogs.elements.groupCreateCodeSup.val();
+        let description = page.dialogs.elements.groupCreateDescriptionSup.val()
         let newGroupSupplier = {
             title: title.length > 0 ? title : undefined,
             supGroupCode: supGroupCode.length > 0 ? supGroupCode : undefined,
@@ -518,20 +562,21 @@
                 "content-type": "application/json"
             },
             "type": "POST",
-            "url": origin + "/api/supplier_groups/create",
+            "url": page.urls.doCreateGroupSupplier,
             "data": JSON.stringify(newGroupSupplier)
         })
             .done((data) => {
                 console.log("data: ", data)
                 SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
-                $("#modalCreateGroupSupplier").modal('hide');
+                page.dialogs.elements.modalCreateGroupSupplier.modal('hide');
+                location.reload();
             })
             .fail(() => {
                 SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại !");
             })
     }
 
-    $("#formCreateGroup").validate({
+    page.dialogs.elements.formCreateGroup.validate({
         rules: {
             groupCreateTitleSup: {
                 required: true,
@@ -547,26 +592,25 @@
         }
     })
 
-    $(".btnUpdateSupplier").on('click', () => {
-        $("#formUpdateSupplier").trigger('submit');
+    page.elements.btnUpdateSupplier.on('click', () => {
+        page.elements.formUpdateSupplier.trigger('submit');
     })
 
     function doUpdateSupplier() {
         console.log("goi vao ham update Supplier")
-        let idSupp = $("#supplierId").val();
-
-        let supplierCode = $("#supplierCode").val();
-        let fullName = $("#fullName").val();
-        let email = $("#emailUp").val();
-        let phone = $("#phoneUp").val();
-        let status = $("#statusUp").val();
-        let description = $("#descriptionUp").val();
-        let employeeId = $("#fulNameEmployeeUp").val();
-        let paymentMethodId = $("#paymentMethod").val();
-        let groupId = $("#changeValueSup").val();
-        let taxCode = $("#taxCodeUp").val();
-        let fax = $("#faxUp").val();
-        let website = $("#websiteUp").val();
+        let idSupp = page.elements.supplierId.val();
+        let supplierCode = page.elements.supplierCode.val();
+        let fullName = page.elements.fullName.val();
+        let email = page.elements.emailUp.val();
+        let phone = page.elements.phoneUp.val();
+        let status = page.elements.statusUp.val();
+        let description = page.elements.descriptionUp.val();
+        let employeeId = page.elements.fulNameEmployeeUp.val();
+        let paymentMethodId = page.elements.paymentMethod.val();
+        let groupId = page.elements.changeValueSup.val();
+        let taxCode = page.elements.taxCodeUp.val();
+        let fax = page.elements.faxUp.val();
+        let website = page.elements.websiteUp.val();
 
         let newUpdateSupplierParam = {
             id: idSupp,
@@ -589,21 +633,19 @@
                 "content-type": "application/json"
             },
             "type": "PATCH",
-            "url": origin + "/api/suppliers/" + idSupp,
+            "url": page.urls.doUpdateSupplier + idSupp,
             "data": JSON.stringify(newUpdateSupplierParam)
         })
             .done((data) => {
                 SupplierApp.IziToast.showSuccessAlert("Sửa thông tin nhà cung cấp thành công!");
-
                 location.href = `/admin/suppliers/${data.id}/histories`;
             })
-            .fail((jqXHR) => {
-                // console.log(jqXHR);
+            .fail(() => {
                 SupplierApp.IziToast.showErrorAlert("Sửa thông tin nhà cung cấp thất bại")
             })
     }
 
-    $("#formUpdateSupplier").validate({
+    page.elements.formUpdateSupplier.validate({
         rules: {
             fullName: {
                 required: true,
@@ -625,7 +667,6 @@
         }
     })
 
-
     function getAllGroup() {
         $.ajax({
             "headers": {
@@ -633,14 +674,14 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: origin + "/api/supplier_groups",
+            url: page.urls.getAllGroup,
         })
             .done((data) => {
                 supplierGroups = data;
                 $.each(data, function (index, value) {
-                    $("#renderGroupLi").append(
+                    page.elements.renderGroupLi.append(
                         `<li onclick="handleChangeGroupSupp(${value.id})">
-                        <p  class="w-20 border-0 " id="${value.id}" style="padding:7px; font-size: 12px;font-weight:450; width: 300px;border: unset;" value="${value.id}">
+                        <p  class="w-80 border-0 " id="${value.id}" style="padding:7px; font-size: 12px;font-weight:450; width: 300px;border: unset;" value="${value.id}">
                         ${value.title}</p>
                         </li>`
                     )
@@ -650,10 +691,10 @@
 
     function handleChangeGroupSupp(supplierGroupId) {
         let supplierGroup = supplierGroups.find(supplierGroup => supplierGroup.id === supplierGroupId);
-        $("#changeValueSup").attr("data-id", supplierGroup.id);
+        page.elements.changeValueSup.attr("data-id", supplierGroup.id);
 
-        $("#changeValueSup").val(supplierGroup.id);
-        $("#changeValueSup").text(supplierGroup.title);
+        page.elements.changeValueSup.val(supplierGroup.id);
+        page.elements.changeValueSup.text(supplierGroup.title);
 
         var dropdown = new bootstrap.Dropdown(document.querySelector($("#changeValueSup")));
         dropdown.hide();
@@ -668,23 +709,19 @@
         let groupSearch = supplierGroups.filter(group => {
             return group.title.toUpperCase().includes(valueSearchInput.toUpperCase());
         })
-        console.log("nhom search", groupSearch)
-
-        $("#renderGroupLi").empty();
+        page.elements.renderGroupLi.empty();
         $.each(groupSearch, (i, item) => {
-            $("#renderGroupLi").prepend(
+            page.elements.renderGroupLi.prepend(
                 `<li onclick="handleChangeGroupSupp(${item.id})">
-                    <p  class="w-20 border-0 " id="${item.id}" style="padding:7px; font-size: 12px; font-weight: 500; width: 300px;border: unset;" value="${item.id}">
+                    <p  class="w-80 border-0 " id="${item.id}" style="padding:7px; font-size: 12px; font-weight: 500; width: 300px;border: unset;" value="${item.id}">
                     ${item.title}</p>
                     </li>`
             )
         });
     }
-
     getAllGroup();
     getAllEmployeeSelect();
     getAllPaymentMethodSelect();
-
 
 </script>
 </html>
