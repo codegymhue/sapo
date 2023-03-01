@@ -340,10 +340,12 @@
 
       <div class="modal-footer">
         <div class="action-btn clearfix">
+          <a th:href="@{/admin/suppliers/export/excel}" style="text-decoration: none; color: rgba(0,0,0,0.89)">
           <button class="btn sapo-btn-default pull-right" id="exportBtn"
                   bind-event-click="confirmImport(this)">Xuất
             file
           </button>
+          </a>
           <button class="btn btn-blank pull-right mr-2" bind-event-click="closePopup()"
                   data-bs-dismiss="modal" type="button">Thoát
           </button>

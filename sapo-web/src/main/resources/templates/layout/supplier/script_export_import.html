@@ -15,6 +15,10 @@
             let myModal = new bootstrap.Modal(document.getElementById('exportModal'))
             myModal.show()
         })
+        function confirmImport(element){
+            console.log(element);
+            window.location.href = 'http://localhost:8080/admin/suppliers/export/excel';
+        }
     </script>
 
     <script>
