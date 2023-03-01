@@ -1,6 +1,8 @@
 package vn.sapo.address;
 
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.address.dto.UpdateAddressParam;
@@ -24,10 +26,11 @@ public interface AddressService {
     AddressResult update(UpdateAddressParam updateAddressParam);
 
     List<AddressResult> findBySupplierId(Integer supplierId);
+
     void deleteByAddressSupplierId(Integer idAddressSupplier);
 
-//    void deleteSoftSupplier(List<Integer> supplierIds);
+    void deleteSoftSupplier(List<Integer> supplierIds);
 
 
-//    Map<String, Object> getAllAddressSupplierPage(Integer pageNo, Integer pageSize, Integer supplierId);
+    Map<String, Object> getAllAddressSupplierPage(Integer pageNo, Integer pageSize, Integer supplierId);
 }

@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" class="sapo-menu-expand sapo-menu-toggle-active" lang="vi-VN">
 <head>
   <meta charset="utf-8" />
+  <link rel="icon" type="image/x-icon" href="/assets/admin/images/favicon.ico"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/izitoast@1/dist/css/iziToast.min.css">
   <script>
@@ -79,10 +80,6 @@
                     border-radius: 0;
                   }
 
-                  .help-dashboard .help-dropdown .btn-blank:focus {
-                    box-shadow: none;
-                  }
-
                   .help-dashboard .help-dropdown .help-popup {
                     top: 60px;
                     box-shadow: #c6c6c6 0px 3px 5px 0px;
@@ -90,10 +87,6 @@
 
                   .help-dashboard .help-dropdown .help-popup:after {
                     right: 20px;
-                  }
-
-                  .sapo-menu-expand .page-heading {
-                    z-index: 1001;
                   }
 
                   .help-dropdown {
@@ -267,9 +260,6 @@
   hj('trigger', 'split_test_b');
 </script>
 
-
-<!-- End Freshchat -->
-
 <div context="notificationVNPay" define="{notificationVNPay: new Components.NotificationVNPay(this, {accountId:951061 })}">
   <div class="popup-notification">
     <a href="javascript:" bind-event-click="closeNoti()" class="close">
@@ -292,29 +282,22 @@
 <script src="/assets/admin/js/suppliers/jquery/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/izitoast@1/dist/js/iziToast.min.js" type="text/javascript"
         crossorigin></script>
+
 <script>
   const page = {
-    urls: {},
+    urls: {
+      getAllGroup : origin +"/api/supplier_groups",
+      doCreateGroupSupplier: origin +"/api/supplier_groups/create",
+      showEditGroupSup: origin +"/api/supplier_groups/",
+      doEditGroupSupplier: origin +"/api/supplier_groups/",
+      btnShowDeleteGroupSupplier: origin +"/api/supplier_groups/",
+      btnGroupSupDelete: origin +"/api/supplier_groups/",
+    },
     elements: {},
     commands: {},
     dialogs: {
       elements: {},
       commands: {}
-    }
-  }
-  class CreateSupGroupParam {
-    constructor(title, supGroupCode, description) {
-      this.title = title;
-      this.supGroupCode = supGroupCode;
-      this.description = description;
-    }
-  }
-  class EditSupGroupParam {
-    constructor(id, title, supGroupCode, description) {
-      this.id = id;
-      this.title = title;
-      this.supGroupCode = supGroupCode;
-      this.description = description;
     }
   }
 
@@ -338,7 +321,8 @@
   page.dialogs.elements.editGroupId = $("#editGroupId");
  page.dialogs.elements.editGroupSupplier =  $("#editGroupSupplier");
 
- page.dialogs.elements.deleteGroupSupplier = $("#deleteGroupSupplier");
+ page.dialogs.elements.btnShowModalDeleteGroupSupplier = $("#btnShowModalDeleteGroupSupplier");
+ page.dialogs.elements.modalDeleteGroupSup  = $("#modalDeleteGroupSup")
  page.dialogs.elements.btnGroupSupDelete = $("#btn-group-sup-delete");
 
 function renderGroup(item) {
@@ -374,7 +358,7 @@ function renderGroup(item) {
         "content-type": "application/json"
       },
       type: "GET",
-      url: origin +"/api/supplier_groups",
+      url: page.urls.getAllGroup,
     })
             .done((data) => {
               console.log("da get all : " , data)
@@ -413,21 +397,17 @@ function renderGroup(item) {
         "content-type": "application/json"
       },
       "type": "POST",
-      "url": origin +"/api/supplier_groups/create",
+      "url": page.urls.doCreateGroupSupplier,
       "data": JSON.stringify(newGroupSup)
     })
             .done((data) => {
               SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
-              setTimeout(() => {
-              }, 1500);
               let str= renderGroup(data)
               page.elements.tbListGroupSupplier.prepend(str);
               page.dialogs.elements.modalCreateGroupSupplier.modal('hide');
             })
             .fail((jqXHR) => {
               SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
-              setTimeout(() => {
-              }, 1500);
             })
   }
 
@@ -439,17 +419,29 @@ function renderGroup(item) {
         "content-type": "application/json"
       },
       type: "GET",
-      url: origin +"/api/supplier_groups/" + item,
+      url: page.urls.showEditGroupSup + item,
     })
             .done((data) => {
-              page.elements.showModalEditGroupSupplier.modal('show');
-              page.dialogs.elements.editGroupId.val(data.id)
-              page.dialogs.elements.groupTitleEditSup.val(data.title)
-              page.dialogs.elements.groupCodeEditSup.val(data.supGroupCode)
-              page.dialogs.elements.groupDescriptionEditSup.val(data.description)
+              let idGroupMacDinh = 252;
+              if (data.id == idGroupMacDinh){
+                page.elements.showModalEditGroupSupplier.modal('show');
+                page.dialogs.elements.btnShowModalDeleteGroupSupplier.hide(),
+                page.dialogs.elements.editGroupId.val(data.id),
+                page.dialogs.elements.groupTitleEditSup.val(data.title),
+                page.dialogs.elements.groupCodeEditSup.val(data.supGroupCode),
+                page.dialogs.elements.groupDescriptionEditSup.val(data.description)
+              }else {
+                console.log("data show edit: ", data)
+                page.elements.showModalEditGroupSupplier.modal('show');
+                page.dialogs.elements.btnShowModalDeleteGroupSupplier.show(),
+                page.dialogs.elements.editGroupId.val(data.id),
+                page.dialogs.elements.groupTitleEditSup.val(data.title),
+                page.dialogs.elements.groupCodeEditSup.val(data.supGroupCode),
+                page.dialogs.elements.groupDescriptionEditSup.val(data.description)
+              }
             })
-            .fail((jqXHR) => {
-
+            .fail(()=>{
+              SupplierApp.IziToast.showErrorAlert("Không tìm thấy nhóm nhà cung cấp!");
             })
   }
 
@@ -474,27 +466,23 @@ function renderGroup(item) {
         "content-type": "application/json"
       },
       type: "PATCH",
-      url: origin +"/api/supplier_groups/" + idEditGroup,
+      url: page.urls.doEditGroupSupplier + idEditGroup,
       data: JSON.stringify(editGroup)
     })
             .done((data)=>{
               console.log("btn data : ", data)
               SupplierApp.IziToast.showSuccessAlert("Sửa nhóm nhà cung cấp thành công!");
-              setTimeout(() => {
-              }, 500);
               page.elements.showModalEditGroupSupplier.modal('hide');
               $(`#tr_${data.id}`).replaceWith(renderGroup(data))
             })
-
             .fail((jqXHR) => {
               SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
-              setTimeout(() => {
-              }, 1500);
+
             })
   }
 
-  page.dialogs.elements.deleteGroupSupplier.on('click', () => {
-            let idDelete = page.dialogs.elements.editGroupId.val()
+  page.dialogs.elements.btnShowModalDeleteGroupSupplier.on('click', () => {
+            let idDelete = page.dialogs.elements.editGroupId.val();
             console.log("idDelete: ", idDelete)
             $.ajax({
               "headers": {
@@ -502,12 +490,12 @@ function renderGroup(item) {
                 "content-type": "application/json"
               },
               type: "GET",
-              url: origin +"/api/supplier_groups/" + idDelete,
+              url: page.urls.btnShowDeleteGroupSupplier + idDelete,
             })
                     .done((data) => {
                       console.log("data-delete : ", data)
                       page.elements.showModalEditGroupSupplier.modal('hide');
-                      $("#deleteGroupSup").modal('show');
+                      page.dialogs.elements.modalDeleteGroupSup.modal('show');
                     })
           })
 
@@ -520,21 +508,17 @@ function renderGroup(item) {
         "content-type": "application/json"
       },
       type: "DELETE",
-      url: origin +"/api/supplier_groups/" + idDelete,
+      url: page.urls.btnGroupSupDelete + idDelete,
     })
 
    .done(()=>{
               SupplierApp.IziToast.showSuccessAlert("Xoá nhóm nhà cung cấp thành công!");
-              setTimeout(() => {
-              }, 500);
               // location.reload();
               window.location.href = `/admin/supplier_groups`;
             })
 
   .fail(()=> {
               SupplierApp.IziToast.showErrorAlert("Xoá nhóm nhà cung cấp thất bại!");
-              setTimeout(() => {
-              }, 500);
             })
   })
 

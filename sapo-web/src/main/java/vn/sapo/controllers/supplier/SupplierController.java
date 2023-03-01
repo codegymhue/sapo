@@ -60,9 +60,7 @@ public class SupplierController {
         } catch (Exception e) {
             modelAndView.addObject("error", e.getMessage());
         }
-//        modelAndView.setViewName("/admin/suppliers/detail_suppliers");
         modelAndView.setViewName("/admin/suppliers/supplier_detail");
-
         return modelAndView;
     }
 
