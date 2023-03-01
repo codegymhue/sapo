@@ -135,6 +135,10 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     @Transactional(readOnly = true)
     public Map<String, Object> findAllByFilters(SupplierFilter filter) {
+        if(filter.getPageNo() == null)
+            filter.setPageNo(1);
+        if(filter.getPageSize()== null)
+            filter.setPageSize(20);
         Page<Supplier> page = supplierFilterRepository.findAllByFilters(filter, PageRequest.of(filter.getPageNo() - 1, filter.getPageSize()));
 
         if (page.hasContent()) {

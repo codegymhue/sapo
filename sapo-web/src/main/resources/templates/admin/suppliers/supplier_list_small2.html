@@ -19,6 +19,19 @@
             width: 600px;
             max-width: unset;
         }
+
+        .disable {
+            pointer-events: none;
+        !important;
+            opacity: 0.6;
+        !important;
+        }
+
+        table {
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
     </style>
 </head>
 
@@ -493,7 +506,7 @@
                                 <a href="/admin/suppliers" class="filter-tab filter-tab-active">Tất cả nhà cung cấp</a>
                             </li>
                             <li class="filter-tab-item" style="opacity: 1; padding-bottom: 3.5px;">
-                                <button class="filter-tab" id="statusAvailable">Đang giao dịch</button>
+                                <a class="filter-tab" href="#" id="statusAvailable">Đang giao dịch</a>
                             </li>
                         </ul>
                     </div>
@@ -511,7 +524,6 @@
                                 <use xlink:href="#next-search-reverse" xmlns:xlink="http://www.w3.org/1999/xlink"/>
                             </svg>
                             <input type="text" class="input-query sapo-textbox searchKey"
-                                   bind-event-change="searchKey()"
                                    title="Tìm kiếm theo mã nhà cung cấp, SĐT, tên nhà cung cấp"
                                    placeholder="Tìm kiếm theo mã nhà cung cấp, SĐT, tên nhà cung cấp"/>
                         </div>
@@ -538,7 +550,7 @@
                                         </svg>
                                     </div>
                                     <div class="btn-group pull-left" data-toggle="buttons">
-                                        <label class="btn filter-button-tag"
+                                        <label class="btn filter-button-tag" id="lableAVAILABLE"
                                                bind-event-click="setParamFilterActive('AVAILABLE',this)">
                                             <input type="checkbox" class="checkbox_status" id="AVAILABLE"> Đang giao
                                             dịch
@@ -629,13 +641,13 @@
                                             </div>
                                             <div class="btn-group show">
                                                 <button type="button"
-                                                        bind-event-click="setParamFilterSupplierGroupId(this)"
+                                                        id="setParamFilterSupplierGroupId"
                                                         class="multiselect dropdown-toggle btn sapo-btn-blank btn-default"
                                                         data-bs-toggle="dropdown" data-bs-auto-close="outside"
                                                         aria-expanded="false"
                                                         style="padding:0.8rem; min-width: 300px"
                                                         title="Chọn nhóm nhà cung cấp"
-                                                ><span class="multiselect-selected-text">Chọn nhóm nhà cung cấp</span>
+                                                ><span class="multiselect-selected-text multiselect_supplier_groupId">Chọn nhóm nhà cung cấp</span>
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                          class="icon-dropdown-select">
                                                         <path d="M10 16l-4-4h8l-4 4zm0-12L6 8h8l-4-4z"></path>
@@ -849,22 +861,22 @@
                                     <div class="" style="    float: right;padding: 0 0 0 20px;">
                                         <div class="dataTables_paginate paging_bootstrap">
                                             <ul class="pagination">
-                                                <li><a class="t-link"><span
-                                                        class="t-icon t-arrow-first">← Trang đầu</span></a></li>
+                                                <!--                                                <li><a class="t-link"><span-->
+                                                <!--                                                        class="t-icon t-arrow-first">← Trang đầu</span></a></li>-->
                                                 <li><a class="t-link" id="previousPage"
-                                                >4</a></li>
+                                                >← Trang trước</a></li>
 
                                                 <li><a class="t-link" id="pageNo">1</a>
                                                 </li>
                                                 <li><a class="t-link" id="nextPage"
-                                                >2</a></li>
+                                                >Trang sau →</a></li>
 
                                                 <!--                                                <li class="active"><span class="t-state-active">3</span></li>-->
                                                 <!--                                                <li><a class="t-link"-->
                                                 <!--                                                      >5</a></li>-->
-                                                <li><a class="t-link"
-                                                ><span class="t-icon t-arrow-last">Trang cuối →</span></a>
-                                                </li>
+                                                <!--                                                <li><a class="t-link"-->
+                                                <!--                                                ><span class="t-icon t-arrow-last">Trang cuối →</span></a>-->
+                                                <!--                                                </li>-->
                                             </ul>
                                         </div>
                                         <!--                                        <nav aria-label="Page navigation example ">-->
@@ -1120,7 +1132,6 @@
         $('option').prop('disabled', false);
         $('.select-change-filter').each(function () {
             let val = this.value;
-            console.log(val, " val")
             $('.select-change-filter').not(this).find('option').filter(function () {
                 return this.value === val;
             }).hide();
@@ -1133,7 +1144,6 @@
 
     let arrayIdSupplier = [];
     let supplierFilter = new SupplierFilter();
-    let checkSupplierFilterChange;
     const page = {
         urls: {
             getAllSupplier: SupplierApp.SUPPLIER_API,
@@ -1190,8 +1200,17 @@
     page.dialogs.elements.filterEmployee = $("#ulAssigneeIdsFilter");
     // page.dialogs.elements.checkboxInputEmployee = $(".sapo-checkbox__input");
     page.dialogs.elements.filterSupplierGroupId = $("#ulSupplierGroupId");
-
     page.dialogs.elements.filterSubmit = $("#filterSubmit")
+
+    //fillter status
+    page.elements.filter_button_tag = $(".filter-button-tag");
+
+    //filter employee
+    page.elements.multiselect_employee = $(".multiselect-employee")
+
+    //filter supplier_groupId
+    page.elements.multiselect_supplier_groupId = $(".multiselect_supplier_groupId")
+
 
     function resetSupplierFilter() {
         supplierFilter.filter = null;
@@ -1203,7 +1222,9 @@
         supplierFilter.pageNo = null;
         supplierFilter.pageSize = null;
         // page.commands.getAllSupplier();
+        console.log("resetSupplierFilter done")
     }
+
 
     // seach
     page.elements.totalPage = $("#totalPage");
@@ -1213,22 +1234,22 @@
     page.dialogs.elements.nextPage = $("#nextPage");
     page.dialogs.elements.previousPage = $("#previousPage");
 
-    page.elements.btnFilter.on("click", function () {
-        $(".filter-button-tag").removeClass("active");
-        $('input[type=checkbox]').prop('checked', false);
-        $(".input-date").val("");
-        $(".multiselect-employee").text("Chọn nhân viên")
-        $("#search-supplierGroupId-container").empty()
-        resetSupplierFilter()
-    })
+    // page.elements.btnFilter.on("click", function () {
+    //     page.elements.filter_button_tag.removeClass("active");
+    //     $('input[type=checkbox]').prop('checked', false);
+    //     $(".input-date").val("");
+    //     page.elements.multiselect_employee.text("Chọn nhân viên")
+    //     $("#search-supplierGroupId-container").empty()
+    //     resetSupplierFilter()
+    // })
 
 
     page.commands.getAllSupplier = () => {
-        let pageNo = Number(page.elements.pageNo.text());
-        let pageSize = Number(page.elements.pageSize.val());
-        let status = ""
 
-        page.commands.getAllSupplierOnPageNo(pageNo, pageSize, status);
+        supplierFilter.pageNo = Number(page.elements.pageNo.text());
+        supplierFilter.pageSize = Number(page.elements.pageSize.val());
+
+        page.commands.getAllSupplierUseFilter(supplierFilter);
     }
 
     page.commands.getAllSupplierOnPageNo = (pageNo, pageSize, status) => {
@@ -1279,33 +1300,33 @@
     }
 
     page.elements.btnStatusAvailable.on("click", () => {
-        console.log("in to function")
-        let pageNo = Number(page.elements.pageNo.text());
-        let pageSize = Number(page.elements.pageSize.val());
-        let status = "AVAILABLE";
-
-        page.commands.getAllSupplierOnPageNo(pageNo, pageSize, status);
+        resetSupplierFilter();
+        $("#lableAVAILABLE").addClass("active")
+        supplierFilter.statuses.push("AVAILABLE")
+        page.commands.getAllSupplierUseFilter(supplierFilter);
     })
 
-    function searchKey() {
+    page.elements.searchKey.on("change", () => {
         supplierFilter.pageNo = Number(page.elements.pageNo.text());
         supplierFilter.pageSize = Number(page.elements.pageSize.val());
         supplierFilter.filter = page.elements.searchKey.val().trim();
         console.log(supplierFilter)
         page.commands.getAllSupplierUseFilter(supplierFilter);
-        resetSupplierFilter()
-    }
+        // page.elements.searchKey.val("");
+
+    })
 
     page.dialogs.elements.filterSubmit.on("click", () => {
-        supplierFilter.pageNo = Number(page.elements.pageNo.text());
-        supplierFilter.pageSize = Number(page.elements.pageSize.val());
-        g
+        page.elements.pageNo.text(1);
+        supplierFilter.pageNo = 1;
         console.log(supplierFilter, " supplierFilter truoc rết")
         page.commands.getAllSupplierUseFilter(supplierFilter);
-        resetSupplierFilter();
+        page.elements.btnFilter.click()
+        console.log(supplierFilter)
     })
 
     page.commands.getAllSupplierUseFilter = (supplierFilter) => {
+        console.log(supplierFilter, " supplierFilter")
         $.ajax({
             headers: {
                 "accept": "application/json",
@@ -1339,41 +1360,44 @@
                     $("#sapo-table_wrapper").hide();
                     $(".container-fluid").hide();
                 }
+                page.elements.pageNo.parent().addClass("active")
+                if (Number(page.elements.pageNo.text()) === 1)
+                    page.dialogs.elements.previousPage.parent().addClass("disable")
+                if (Number(page.elements.pageNo.text()) === Number(totalPage))
+                    page.dialogs.elements.nextPage.parent().addClass("disable")
+                else
+                    page.dialogs.elements.nextPage.parent().removeClass("disable")
+
             })
     }
 
     page.dialogs.elements.nextPage.on("click", () => {
         let pageNo = page.elements.pageNo.text();
         if (Number(pageNo) < Number(totalPage)) {
+            page.dialogs.elements.previousPage.parent().removeClass("disable")
             let pageNext = Number(pageNo) + 1;
-            page.dialogs.elements.nextPage.show()
             page.elements.pageNo.text(pageNext);
-            $(page.elements.pageNo.parentElement).addClass("active")
-            page.dialogs.elements.previousPage.removeClass("active")
-            page.dialogs.elements.nextPage.text(pageNext + 1)
-            page.dialogs.elements.previousPage.text(pageNext - 1)
+            page.elements.pageNo.parent().addClass("active")
             page.commands.getAllSupplier();
-            console.log($("#pageNo").parentElement, " page.elements.pageNo.parentElement")
-        } else {
-            page.elements.pageNo.text(Number(pageNo) + 1);
-            page.dialogs.elements.nextPage.hide()
         }
+        // page.elements.pageNo.text(Number(pageNo) + 1);
+        if (Number(page.elements.pageNo.text()) === Number(totalPage))
+            page.dialogs.elements.nextPage.parent().addClass("disable")
     })
 
 
     page.dialogs.elements.previousPage.on("click", () => {
         let pageNo = page.elements.pageNo.text();
         if (Number(pageNo) > 1) {
+            page.dialogs.elements.nextPage.parent().removeClass("disable")
             let previousPage = Number(pageNo) - 1;
             page.elements.pageNo.text(previousPage);
-            page.dialogs.elements.previousPage.text(previousPage - 1)
-            page.dialogs.elements.nextPage.text(previousPage + 1)
+            page.elements.pageNo.parent().addClass("active")
             page.commands.getAllSupplier();
-        } else {
-            page.elements.pageNo.text(Number(pageNo) + 1);
-            page.dialogs.elements.nextPage.hide()
         }
-
+        // page.elements.pageNo.text(Number(pageNo) + 1);
+        if (Number(page.elements.pageNo.text()) === 1)
+            page.dialogs.elements.previousPage.parent().addClass("disable")
     })
 
     page.elements.pageSize.on("change", () => {
@@ -1793,10 +1817,9 @@
     }
 
 
-    $("setParamFilterAssigneeIds").on("click", function (element){
-        $(element).off("click")
+    page.elements.multiselect_employee.on("click", function () {
         $('input[type="checkbox"].checkbox_employee').change(function () {
-
+            page.elements.multiselect_employee.off("click")
             let checkbox = $(this)
             let checkboxText = $(`label[for="${$(this).val()}"]`).text();
             let checkboxCheckedLength = $('input[type="checkbox"].checkbox_employee:checked').length;
@@ -1805,41 +1828,39 @@
             if (checkbox.is(":checked")) {
                 supplierFilter.employeeIds.push(checkbox.val())
                 if (checkboxCheckedLength < 1)
-                    $(element).find("span").text("Chọn nhân viên")
+                    page.elements.multiselect_employee.text("Chọn nhân viên")
                 else if (checkboxCheckedLength === 1) {
                     $('input[type="checkbox"].checkbox_employee').each(function () {
                         if ($(this).is(":checked"))
-                            $(element).find("span").text($(`label[for="${$(this).val()}"]`).text())
+                            page.elements.multiselect_employee.text($(`label[for="${$(this).val()}"]`).text())
                     })
                 } else if (checkboxCheckedLength > 1 && checkboxCheckedLength < checkboxAll)
-                    $(element).find("span").text(`${checkboxCheckedLength} nhân viên được chọn`)
+                    page.elements.multiselect_employee.text(`${checkboxCheckedLength} nhân viên được chọn`)
                 else if (checkboxCheckedLength === checkboxAll)
-                    $(element).find("span").text(`Tất cả (${checkboxCheckedLength})`)
+                    page.elements.multiselect_employee.text(`Tất cả (${checkboxCheckedLength})`)
             } else {
                 if (supplierFilter.employeeIds.indexOf(checkbox.val()) > -1) {
                     supplierFilter.employeeIds.splice(supplierFilter.employeeIds.indexOf(checkbox.val()), 1)
                 }
                 if (checkboxCheckedLength < 1)
-                    $(element).find("span").text("Chọn nhân viên")
+                    page.elements.multiselect_employee.text("Chọn nhân viên")
                 else if (checkboxCheckedLength === 1) {
                     $('input[type="checkbox"].checkbox_employee').each(function () {
                         if ($(this).is(":checked"))
-                            $(element).find("span").text($(`label[for="${$(this).val()}"]`).text())
+                            page.elements.multiselect_employee.text($(`label[for="${$(this).val()}"]`).text())
                     })
                 } else if (checkboxCheckedLength > 1 && checkboxCheckedLength < checkboxAll)
-                    $(element).find("span").text(`${checkboxCheckedLength} nhân viên được chọn`)
+                    page.elements.multiselect_employee.text(`${checkboxCheckedLength} nhân viên được chọn`)
                 else if (checkboxCheckedLength === checkboxAll)
-                    $(element).find("span").text(`Tất cả (${checkboxCheckedLength})`)
+                    page.elements.multiselect_employee.text(`Tất cả (${checkboxCheckedLength})`)
             }
             console.log(supplierFilter.employeeIds)
         })
-
     })
 
-    function setParamFilterSupplierGroupId(element) {
-        element.removeEventListener("click", setParamFilterSupplierGroupId)
+    page.elements.multiselect_supplier_groupId.on("click", () => {
         $('input[type="checkbox"].checkbox_supplier_group').change(function () {
-
+            page.elements.multiselect_supplier_groupId.off("click")
             let checkbox = $(this)
             let checkboxText = $(`label[for="${$(this).val()}"]`).text();
             let str = `<span class="tm-tag tm-tag-small tm-serial tm-overflow"
@@ -1854,14 +1875,12 @@
             } else {
                 if (supplierFilter.groupIds.indexOf(checkbox.val()) > -1) {
                     supplierFilter.groupIds.splice(supplierFilter.groupIds.indexOf(checkbox.val()), 1)
+                    $("span[" + "id" + "*=" + "tag-variant-" + checkbox.val() + "]").remove()
                 }
-                $("span[" + "id" + "^=" + "tag-variant-" + $(element).val() + "]").remove()
-
             }
             console.log(supplierFilter.groupIds)
         })
-    }
-
+    })
 
     // tìm từ khóa trong filter SupplierGroup
     function suggest(element) {
@@ -1884,6 +1903,8 @@
             supplierFilter.createdFrom = null;
         document.getElementById("createMin").setAttribute("max", supplierFilter.createdTo);
         document.getElementById("createMax").setAttribute("min", supplierFilter.createdFrom);
+        console.log(supplierFilter.createdFrom, "supplierFilter.createdFrom")
+        console.log(supplierFilter.createdTo, "supplierFilter.createdTo")
     }
 
 
