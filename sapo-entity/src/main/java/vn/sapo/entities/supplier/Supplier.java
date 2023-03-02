@@ -38,10 +38,10 @@ public class Supplier extends BaseEntity {
     @Column(name = "full_name", nullable = false)
     private String fullName;
 
-    @Column(name = "email", length = 50)
+    @Column(name = "email", length = 30)
     private String email;
 
-    @Column(name = "phone", nullable = false, length = 15)
+    @Column(name = "phone", nullable = false, length = 12)
     private String phone;
 
     @Column(name = "status", nullable = false)
