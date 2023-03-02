@@ -58,7 +58,14 @@ public class SupplierServiceImpl implements SupplierService {
         supplier = supplierRepository.save(supplier);
         if (createParam.getSupplierCode() == null)
             supplier.setSupplierCode(CodePrefix.SUPPLIER.generate(supplier.getId()));
+
+        if (createParam.getGroupId() == null)
+            supplier.setGroupId(252);
         return supplierMapper.toDTO(supplier);
+
+
+
+
     }
 
 

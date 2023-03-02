@@ -159,6 +159,9 @@
                 position: absolute;
                 right: 25px;
               }
+              #bodyRenderAddressSupplier>tr{
+                cursor: pointer;
+              }
             </style>
             <div class="header-fr help-dropdown">
               <a class="btn sapo-btn-blank btn-help" onclick="showHelpPopup()"><img
@@ -320,7 +323,7 @@
             </div>
           </section>
           <div style="font-size:small" id="tableCheckbox">
-            <table id="tbProduct" class="table table-hover" style="background-color: white">
+            <table id="tbAddress" class="table table-hover" style="background-color: white">
               <thead style="height: 55px">
               <tr id="theadList" class="show">
                 <th class="align-middle">
@@ -368,6 +371,46 @@
 
               </tbody>
             </table>
+          </div>
+          <div class="container-fluid " style="height: 50px">
+            <div class="row col-md-12 d-flex align-items-center" style="font-size: small">
+              <div class="col-md-5"></div>
+              <div class="col-md-3" id="totalPage" style="padding: initial">
+
+              </div>
+              <div class="col-md-3 text-end">
+                <label class="me-2">Hiển thị</label>
+                <select class="me-2 " id="pageSize">
+<!--                  <option value="7">7</option>-->
+<!--                  <option value="14">14</option>-->
+                  <option value="20">20</option>
+                </select>
+                <span>Kết quả</span>
+              </div>
+
+              <div class="col-md-1">
+                <nav aria-label="Page navigation example ">
+                  <ul class="pagination">
+                    <li class="page-item">
+                      <button class=" btn-outline-primary btn-sm me-2" id="previousPage"
+                              style="border: none">
+                        <i class="fa-solid fa-angle-left"></i>
+                      </button>
+                    </li>
+                    <li class="page-item">
+                      <button class="pageNumber btn-primary btn-sm me-2">
+                        <span id="pageNo">1</span>
+                      </button>
+                    </li>
+                    <li class="page-item">
+                      <button class=" btn-outline-primary btn-sm " id="nextPage" style="border: none">
+                        <i class="fa-solid fa-angle-right"></i>
+                      </button>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -495,6 +538,7 @@
   page.dialogs.elements.btnDeleteAddressSup = $(".btnDeleteAddressSup");
 
   let arrayIdAddressSup = [];
+  let totalPage;
   page.elements.checkAll = $("#checkAll");
   page.elements.selectAction = $("#selectAction");
   page.elements.selectActionThead = $("#selectActionThead");
@@ -508,6 +552,10 @@
   page.elements.modalUnavailable = $("#modalUnavailable");
   page.elements.modalDelete = $("#modalDelete");
   page.elements.modalCheckInventory = $("#modalCheckInventory");
+  page.elements.tbAddress = $("#tbAddress");
+  page.elements.totalPage = $("#totalPage");
+  page.dialogs.elements.nextPage = $("#nextPage");
+
 
   page.elements.showModalDelete.on('click', ()=>{
     let idDelete = page.elements.idDeleteSupplier.val()
@@ -552,20 +600,20 @@
   function renderAddressSupplier(item) {
     console.log("item address : ", item)
     return `
- <tr id="tr_${item.id}" onclick="editAddressSup(${item.id})" data-id="${item.id}">
+ <tr id="tr_${item.id}" data-id="${item.id}">
                 <td class="align-middle">
                 <label for="${item.id}" style="padding: 1rem; cursor:pointer">
                     <input style="cursor:pointer" id ="${item.id}" class="selectCheckbox"  name="options[]" type="checkbox" value="${item.id}">
                 </label>
                 </td>
-                 <td class="align-middle">${item.label ? item.label : "" }</td>
-                <td class="align-middle">${item.line1}</td>
-                <td class="align-middle" ${item.wardId}>${item.wardName}</td>
-                <td class="align-middle" ${item.districtId}>${item.districtName}</td>
-                <td class="align-middle" ${item.provinceId} >${item.provinceName}</td>
-                <td class="align-middle text-end ">${item.zipCode ? item.zipCode : ""}</td>
-                <td class="align-middle text-end">${item.phoneNumber ? item.phoneNumber : ""}</td>
-                <td class="align-middle">
+                 <td onclick="editAddressSup(${item.id})" class="align-middle">${item.label ? item.label : "" }</td>
+                <td onclick="editAddressSup(${item.id})" class="align-middle">${item.line1}</td>
+                <td onclick="editAddressSup(${item.id})" class="align-middle" ${item.wardId}>${item.wardName}</td>
+                <td onclick="editAddressSup(${item.id})" class="align-middle" ${item.districtId}>${item.districtName}</td>
+                <td onclick="editAddressSup(${item.id})" class="align-middle" ${item.provinceId} >${item.provinceName}</td>
+                <td onclick="editAddressSup(${item.id})" class="align-middle text-end ">${item.zipCode ? item.zipCode : ""}</td>
+                <td onclick="editAddressSup(${item.id})" class="align-middle text-end">${item.phoneNumber ? item.phoneNumber : ""}</td>
+                <td onclick="editAddressSup(${item.id})" class="align-middle">
                   ${item.email ? item.email : ""}
                 </td>
               </tr>
@@ -590,13 +638,19 @@
       //   "supplierId" :supplierId,
       // })
     })
-            // .done(()=>{
-            //
-            // })
-
-
+            .done((data)=>{
+              page.elements.bodyRenderAddressSupplier.empty();
+              page.elements.totalPage.empty();
+              totalPage = data.totalPage;
+              data.addresses.map(item => {
+                  page.elements.bodyRenderAddressSupplier.append(renderAddressSupplier(item))
+              });
+              page.commands.isCheckbox();
+              page.elements.totalPage.prepend(
+                      `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
+              )
+            })
   }
-
 
   // function getAllAddressOfSupplier(){
   // let supplierId = page.elements.supplierId.val();
@@ -697,12 +751,12 @@
     page.elements.selectAction.prop("checked", true);
     arrayIdAddressSup = [];
     if (this.checked) {
-      $("#tbProduct > tbody input").each(function () {
+      $("#tbAddress > tbody input").each(function () {
         $(this).prop("checked", true);
         arrayIdAddressSup.push($(this).val());
       })
     } else {
-      $("#tbProduct > tbody input").each(function () {
+      $("#tbAddress > tbody input").each(function () {
         $(this).prop("checked", false);
       })
     }
@@ -719,14 +773,14 @@
         arrayIdAddressSup = page.commands.deleteArrayId($(this).val());
       }
       page.commands.showAction();
-      // let pageSize = page.elements.pageSize.val()
-      // if (arrayIdAddressSup.length == pageSize) {
-      //   page.elements.checkAll.prop("checked", true);
-      //   page.elements.selectAction.prop("checked", true);
-      // } else {
-      //   page.elements.checkAll.prop("checked", false);
-      //   page.elements.selectAction.prop("checked", false);
-      // }
+      let pageSize = page.elements.pageSize.val()
+      if (arrayIdAddressSup.length == pageSize) {
+        page.elements.checkAll.prop("checked", true);
+        page.elements.selectAction.prop("checked", true);
+      } else {
+        page.elements.checkAll.prop("checked", false);
+        page.elements.selectAction.prop("checked", false);
+      }
     })
   }
 
@@ -763,13 +817,13 @@
     page.elements.checkAll.prop("checked", false);
     arrayIdAddressSup = [];
     if (this.checked) {
-      $("#tbProduct > tbody input").each(function () {
+      $("#tbAddress > tbody input").each(function () {
         $(this).prop("checked", true);
         arrayIdAddressSup.push($(this).val());
       })
     } else {
       console.log(this)
-      $("#tbProduct > tbody input").each(function () {
+      $("#tbAddress > tbody input").each(function () {
         $(this).prop("checked", false);
       })
     }
@@ -777,7 +831,7 @@
   })
 
   page.commands.resetInputCheckBox = () => {
-    $("#tbProduct input").each(function () {
+    $("#tbAddress input").each(function () {
       $(this).prop("checked", false);
     })
     arrayIdProduct = [];
@@ -1069,7 +1123,7 @@
   $(function() {
     pageable = {
       pageNo : 1,
-      pageSize: 10,
+      pageSize: 20,
       supplierId: $("#supplierId").val()
     }
     getAllAddressOfSupplierPage();

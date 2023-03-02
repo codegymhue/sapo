@@ -14,24 +14,34 @@
             padding-left: 1.5rem;
             border-radius: 5px;
         }
-
         .modal-dialog {
             width: 600px;
             max-width: unset;
         }
-
         .disable {
             pointer-events: none;
         !important;
             opacity: 0.6;
         !important;
         }
-
         table {
             display: block;
             overflow-x: auto;
             white-space: nowrap;
         }
+        .available{
+            color: #20a917;
+        }
+        .unavailable{
+            color: #ea1a1a;
+        }
+        table>tbody>tr {
+            cursor: pointer;
+        }
+        .filter-body{
+            overflow-y: visible;
+        }
+
     </style>
 </head>
 
@@ -481,7 +491,7 @@
                         </button>
                         <a class="btn sapo-btn-transparent action-bar__link" href="/admin/supplier_groups"
                            data-popover-index="1">
-                            <img src="/v2/images/icon/friends.svg"
+                            <img src="../../../static/assets/admin/images/friends.svg"
                                  style="width: 18px; height: 18px; position: relative; top: -0.6rem; margin-top: -1.1rem; margin-bottom: -1.1rem; margin-right: 3px;">
                             Nhóm nhà cung cấp
                         </a>
@@ -1250,6 +1260,7 @@
         supplierFilter.pageSize = Number(page.elements.pageSize.val());
 
         page.commands.getAllSupplierUseFilter(supplierFilter);
+        // page.commands.getAllSupplierOnPageNo(1, 20, status)
     }
 
     page.commands.getAllSupplierOnPageNo = (pageNo, pageSize, status) => {
@@ -1286,7 +1297,7 @@
                     page.commands.resetInputCheckBox();
                     page.commands.isCheckbox();
                     page.elements.totalPage.append(
-                        `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
+                        `<span class="me-2">Tổng nhà cung cấp ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
                     )
                 } else {
                     $(".ui-type-container").show();
@@ -1352,8 +1363,10 @@
                             page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'unavailable'))
                         }
                     });
+                    page.commands.resetInputCheckBox();
+                    page.commands.isCheckbox();
                     page.elements.totalPage.append(
-                        `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
+                        `<span class="me-2">Tổng nhà cung cấp ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
                     )
                 } else {
                     $(".ui-type-container").show();
@@ -1421,7 +1434,7 @@
                     page.dialogs.elements.filterEmployee.append(SupplierApp.renderEmployeeOnFilter(item));
                     $("#accountIdBulk").append(str);
                 });
-            }).fail((jqXHR) => {
+            }).fail((  ) => {
         })
     }
 
@@ -1913,7 +1926,6 @@
         page.commands.getAllEmployee();
         page.commands.getAllPaymentMethodSelect();
         page.commands.getAllSupplierGroup();
-
         // page.commands.getAllSupplierByFilter();
     }
 

@@ -249,10 +249,10 @@
                                                         th:text="${supplier.employee} ? ${supplier.employee.fullName} : ${'Chọn nhân viên phụ trách '}"></option>
                                             </select>
                                         </a>
-                                        <svg class="next-icon next-icon--size-16">
-                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                 xlink:href="#select-chevron"></use>
-                                        </svg>
+<!--                                        <svg class="next-icon next-icon&#45;&#45;size-16">-->
+<!--                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"-->
+<!--                                                 xlink:href="#select-chevron"></use>-->
+<!--                                        </svg>-->
                                         <div class="filter-body--suggest">
                                         </div>
                                     </div>
@@ -569,7 +569,8 @@
                 console.log("data: ", data)
                 SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
                 page.dialogs.elements.modalCreateGroupSupplier.modal('hide');
-                location.reload();
+                getAllGroup();
+                // location.reload();
             })
             .fail(() => {
                 SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại !");
@@ -719,9 +720,12 @@
             )
         });
     }
-    getAllGroup();
-    getAllEmployeeSelect();
-    getAllPaymentMethodSelect();
+
+    $(function() {
+        getAllGroup();
+        getAllEmployeeSelect();
+        getAllPaymentMethodSelect();
+    })
 
 </script>
 </html>
