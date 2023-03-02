@@ -1250,6 +1250,7 @@
         supplierFilter.pageSize = Number(page.elements.pageSize.val());
 
         page.commands.getAllSupplierUseFilter(supplierFilter);
+        // page.commands.getAllSupplierOnPageNo(1, 20, status)
     }
 
     page.commands.getAllSupplierOnPageNo = (pageNo, pageSize, status) => {
@@ -1286,7 +1287,7 @@
                     page.commands.resetInputCheckBox();
                     page.commands.isCheckbox();
                     page.elements.totalPage.append(
-                        `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
+                        `<span class="me-2">Tổng nhà cung cấp ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
                     )
                 } else {
                     $(".ui-type-container").show();
@@ -1352,8 +1353,10 @@
                             page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'unavailable'))
                         }
                     });
+                    page.commands.resetInputCheckBox();
+                    page.commands.isCheckbox();
                     page.elements.totalPage.append(
-                        `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
+                        `<span class="me-2">Tổng nhà cung cấp ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
                     )
                 } else {
                     $(".ui-type-container").show();
@@ -1500,11 +1503,9 @@
         console.log(arrayIdSupplier)
         page.commands.showAction();
     })
-    page.elements.selectCheckbox = $(".selectCheckbox")
-    // $('input[type="checkbox"].selectCheckbox')
+
     page.commands.isCheckbox = () => {
-        page.elements.selectCheckbox.on("change", function () {
-            console.log("checkbox")
+        $(".selectCheckbox").on("change", function () {
             if (this.checked) {
                 $(this).prop("checked", true);
                 arrayIdSupplier.push($(this).val());
