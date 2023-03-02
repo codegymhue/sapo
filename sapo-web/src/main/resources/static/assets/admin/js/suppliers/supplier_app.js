@@ -18,19 +18,19 @@ class SupplierApp {
                 </td>
                 
                  <td class="align-middle"><a href="/admin/suppliers/${item.id}/histories" style="text-decoration: none">${item.supplierCode}</a></td>
-                <td class="align-middle">${item.fullName || ""}</td>
-                  <td class="align-middle">${item.group == null ? "" : item.group.title}</td>
-                <td class="align-middle">${item.email || ""}</td>
-                <td class="align-middle">${item.phone || ""}</td>
-                 <td class="align-middle">
+                <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.fullName || ""}</td>
+                  <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.group == null ? "" : item.group.title}</td>
+                <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.email || ""}</td>
+                <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.phone || ""}</td>
+                 <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">
                     <span id="showStatus" class="${showStatus}">${item.status === "AVAILABLE" ? "Đang giao dịch" : "Ngừng giao dịch"}</span> 
                 </td>   
 <!--                <td class="align-middle text-end ">${new Intl.NumberFormat('de-DE').format(item.available)}</td>-->
-              <td class="align-middle">${item.employee == null ? "" : item.employee.fullName}</td>
-              <td class="align-middle">${item.taxCode || ""}</td>
-               <td class="align-middle">${item.website || ""}</td>
-                <td class="align-middle">${item.createdAt === null ? "" : new Date(item.createdAt).toLocaleDateString('en-GB')}</td>
-                <td class="align-middle">${item.updatedAt === null ? "" : new Date(item.updatedAt).toLocaleDateString('en-GB')}</td>
+              <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.employee == null ? "" : item.employee.fullName}</td>
+              <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.taxCode || ""}</td>
+               <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.website || ""}</td>
+                <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.createdAt === null ? "" : new Date(item.createdAt).toLocaleDateString('en-GB')}</td>
+                <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.updatedAt === null ? "" : new Date(item.updatedAt).toLocaleDateString('en-GB')}</td>
             </tr>
         `;
         return str;
