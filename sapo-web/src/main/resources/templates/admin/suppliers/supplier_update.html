@@ -569,7 +569,8 @@
                 console.log("data: ", data)
                 SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
                 page.dialogs.elements.modalCreateGroupSupplier.modal('hide');
-                location.reload();
+                getAllGroup();
+                // location.reload();
             })
             .fail(() => {
                 SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại !");
@@ -719,9 +720,12 @@
             )
         });
     }
-    getAllGroup();
-    getAllEmployeeSelect();
-    getAllPaymentMethodSelect();
+
+    $(function() {
+        getAllGroup();
+        getAllEmployeeSelect();
+        getAllPaymentMethodSelect();
+    })
 
 </script>
 </html>
