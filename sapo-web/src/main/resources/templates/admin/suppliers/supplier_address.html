@@ -159,6 +159,9 @@
                 position: absolute;
                 right: 25px;
               }
+              #bodyRenderAddressSupplier>tr{
+                cursor: pointer;
+              }
             </style>
             <div class="header-fr help-dropdown">
               <a class="btn sapo-btn-blank btn-help" onclick="showHelpPopup()"><img
@@ -597,20 +600,20 @@
   function renderAddressSupplier(item) {
     console.log("item address : ", item)
     return `
- <tr id="tr_${item.id}" onclick="editAddressSup(${item.id})" data-id="${item.id}">
+ <tr id="tr_${item.id}" data-id="${item.id}">
                 <td class="align-middle">
                 <label for="${item.id}" style="padding: 1rem; cursor:pointer">
                     <input style="cursor:pointer" id ="${item.id}" class="selectCheckbox"  name="options[]" type="checkbox" value="${item.id}">
                 </label>
                 </td>
-                 <td class="align-middle">${item.label ? item.label : "" }</td>
-                <td class="align-middle">${item.line1}</td>
-                <td class="align-middle" ${item.wardId}>${item.wardName}</td>
-                <td class="align-middle" ${item.districtId}>${item.districtName}</td>
-                <td class="align-middle" ${item.provinceId} >${item.provinceName}</td>
-                <td class="align-middle text-end ">${item.zipCode ? item.zipCode : ""}</td>
-                <td class="align-middle text-end">${item.phoneNumber ? item.phoneNumber : ""}</td>
-                <td class="align-middle">
+                 <td onclick="editAddressSup(${item.id})" class="align-middle">${item.label ? item.label : "" }</td>
+                <td onclick="editAddressSup(${item.id})" class="align-middle">${item.line1}</td>
+                <td onclick="editAddressSup(${item.id})" class="align-middle" ${item.wardId}>${item.wardName}</td>
+                <td onclick="editAddressSup(${item.id})" class="align-middle" ${item.districtId}>${item.districtName}</td>
+                <td onclick="editAddressSup(${item.id})" class="align-middle" ${item.provinceId} >${item.provinceName}</td>
+                <td onclick="editAddressSup(${item.id})" class="align-middle text-end ">${item.zipCode ? item.zipCode : ""}</td>
+                <td onclick="editAddressSup(${item.id})" class="align-middle text-end">${item.phoneNumber ? item.phoneNumber : ""}</td>
+                <td onclick="editAddressSup(${item.id})" class="align-middle">
                   ${item.email ? item.email : ""}
                 </td>
               </tr>
@@ -643,32 +646,11 @@
                   page.elements.bodyRenderAddressSupplier.append(renderAddressSupplier(item))
               });
               page.commands.isCheckbox();
-              page.elements.totalPage.append(
+              page.elements.totalPage.prepend(
                       `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
               )
             })
   }
-
-  // page.dialogs.elements.nextPage.on("click", () => {
-  //   let pageNo = page.elements.pageNo.text();
-  //   if (Number(pageNo) < Number(totalPage)) {
-  //     let pageNext = Number(pageNo) + 1;
-  //     page.elements.pageNo.text(pageNext);
-  //     page.commands.getAllProducts();
-  //   }
-  // })
-  //
-  // page.dialogs.elements.previousPage.on("click", () => {
-  //   let pageNo = page.elements.pageNo.text();
-  //   if (Number(pageNo) > 1) {
-  //     let previousPage = Number(pageNo) - 1;
-  //     page.elements.pageNo.text(previousPage);
-  //     page.commands.getAllProducts();
-  //   }
-  //
-  // })
-
-
 
   // function getAllAddressOfSupplier(){
   // let supplierId = page.elements.supplierId.val();
