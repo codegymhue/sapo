@@ -1500,9 +1500,11 @@
         console.log(arrayIdSupplier)
         page.commands.showAction();
     })
-
+    page.elements.selectCheckbox = $(".selectCheckbox")
+    // $('input[type="checkbox"].selectCheckbox')
     page.commands.isCheckbox = () => {
-        $(".selectCheckbox").on("change", function () {
+        page.elements.selectCheckbox.on("change", function () {
+            console.log("checkbox")
             if (this.checked) {
                 $(this).prop("checked", true);
                 arrayIdSupplier.push($(this).val());
@@ -1913,7 +1915,6 @@
         page.commands.getAllEmployee();
         page.commands.getAllPaymentMethodSelect();
         page.commands.getAllSupplierGroup();
-
         // page.commands.getAllSupplierByFilter();
     }
 

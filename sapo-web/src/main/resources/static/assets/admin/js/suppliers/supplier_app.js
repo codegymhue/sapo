@@ -12,8 +12,8 @@ class SupplierApp {
         let str = `
              <tr id="tr_${item.id}" >
                 <td class="align-middle">
-                <label for="${item.id}" style="padding: 1rem; cursor:pointer">
-                    <input style="cursor:pointer" id ="${item.id}" class="selectCheckbox"  name="options[]" type="checkbox" value="${item.id}">
+                <label for="sup_${item.id}" style="padding: 1rem; cursor:pointer">
+                    <input style="cursor:pointer" id="sup_${item.id}" class="selectCheckbox" name="sup_${item.id}" type="checkbox" value="${item.id}">
                 </label>
                 </td>
                 
