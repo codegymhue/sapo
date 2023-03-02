@@ -96,8 +96,7 @@ public class SupplierExcelExporter {
             String fullName = supplier.getFullName();
             createCell(row, columnCount++, fullName != null ? fullName : "", style);
             createCell(row, columnCount++, supplier.getSupplierCode(), style);
-            createCell(row, columnCount++, supplier.getGroup().getTitle(), style);
-            createCell(row, columnCount++, supplier.getGroup().getTitle(), style);
+            createCell(row, columnCount++, supplier.getGroup().getTitle() !=null , style);
             String email = supplier.getEmail();
             createCell(row, columnCount++, email != null ? email : "", style);
             String phone = supplier.getPhone();
