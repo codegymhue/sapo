@@ -1,4 +1,4 @@
-package vn.sapo.entities.payment.sale;
+package vn.sapo.entities.voucher;
 
 
 import lombok.Getter;
@@ -7,9 +7,9 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import vn.sapo.entities.BaseEntity;
 import vn.sapo.entities.Employee;
+import vn.sapo.entities.PaymentMethod;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.order.sale.SaleOrder;
-import vn.sapo.entities.payment.PaymentMethod;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -19,8 +19,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Accessors(chain = true)
 @Entity
-@Table(name = "payment_sale_order")
-public class PaymentSaleOrder extends BaseEntity {
+@Table(name = "vo_receipt_voucher")
+public class ReceiptVoucher extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,22 +61,22 @@ public class PaymentSaleOrder extends BaseEntity {
     private Integer customerId;
 
 
-    public PaymentSaleOrder setEmployeeId(Integer employeeId) {
+    public ReceiptVoucher setEmployeeId(Integer employeeId) {
         this.employee = new Employee(this.employeeId = employeeId);
         return this;
     }
 
-    public PaymentSaleOrder setCustomerId(Integer customerId) {
+    public ReceiptVoucher setCustomerId(Integer customerId) {
         this.customer = new Customer(this.customerId = customerId);
         return this;
     }
 
-    public PaymentSaleOrder setPaymentMethodId(String paymentMethodId) {
+    public ReceiptVoucher setPaymentMethodId(String paymentMethodId) {
         this.paymentMethod = new PaymentMethod(this.paymentMethodId = paymentMethodId);
         return this;
     }
 
-    public PaymentSaleOrder setOrderId(Integer orderId) {
+    public ReceiptVoucher setOrderId(Integer orderId) {
         this.order = new SaleOrder(this.orderId = orderId);
         return this;
     }
