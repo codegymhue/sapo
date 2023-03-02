@@ -10,16 +10,13 @@ import vn.sapo.address.AddressService;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.payment.method.PaymentMethodService;
 import vn.sapo.supplier.SupplierExcelService;
+import vn.sapo.supplier.dto.*;
 import vn.sapo.supplier.excel.ExcelHelperSuppliers;
 import vn.sapo.supplier.excel.ExcelServiceSupplier;
 import vn.sapo.supplier.excel.ImportExcelSupplierParam;
 import vn.sapo.supplier.excel.ResponseMessage;
 
 import vn.sapo.supplier.SupplierService;
-import vn.sapo.supplier.dto.CreateSupplierParam;
-import vn.sapo.supplier.dto.SupplierFilter;
-import vn.sapo.supplier.dto.SupplierResult;
-import vn.sapo.supplier.dto.UpdateSupplierParam;
 
 import java.util.HashMap;
 import java.util.List;
@@ -66,8 +63,7 @@ public class SupplierAPI {
 
     @PostMapping
     public ResponseEntity<?> create(@Validated @RequestBody CreateSupplierParam createSupplierParam) {
-        //TODO: xóa dòng sout
-        System.out.println(createSupplierParam);
+//        System.out.println(createSupplierParam);
         SupplierResult dto = supplierService.create(createSupplierParam);
         CreateAddressParam createAddressParam = createSupplierParam.getCreateAddressParam();
         if (createAddressParam == null)
@@ -80,7 +76,7 @@ public class SupplierAPI {
 
     @PostMapping("/filter")
     public ResponseEntity<?> filterSupplier(@RequestBody SupplierFilter supplierFilter) {
-        Map<String, Object> supplierResult = supplierService.findAllByFilters2(supplierFilter);
+        Map<String, Object> supplierResult = supplierService.findAllByFilters(supplierFilter);
         return new ResponseEntity<>(supplierResult, HttpStatus.OK);
     }
 
@@ -99,36 +95,67 @@ public class SupplierAPI {
         message = "Uploaded the file successfully: " + file.getOriginalFilename();
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
     }
-    
+
     @PostMapping("/activeBulk")
     public ResponseEntity<?> updateStatusToAvailable(@RequestBody Integer id) {
-        String message;
         try {
             supplierService.changeStatusToAvailable(id, true);
-            message = String.format(" '%s'- Đã ngừng giao dịch thành công", id);
-            return new ResponseEntity<>(message, HttpStatus.OK);
+            String finalMessage = String.format(" '%s'- Đã được cập nhật trạng thái thành công", id);
+            return new ResponseEntity<>(new HashMap<>() {{
+                put("message", finalMessage);
+            }}
+                    , HttpStatus.OK);
 
         } catch (RuntimeException e) {
             e.printStackTrace();
-            message = String.format(" '%s'- Nhà cung cấp cập nhật không thành công", id);
-            return new ResponseEntity<>(message, HttpStatus.EXPECTATION_FAILED);
+            String finalMessage = String.format(" '%s'- Có lỗi xảy ra", id);
+            return new ResponseEntity<>(new HashMap<>() {{
+                put("message", finalMessage);
+            }},
+                    HttpStatus.EXPECTATION_FAILED);
         }
     }
-
     @PostMapping("/disableBulk")
     public ResponseEntity<?> updateStatusUnavailable(@RequestBody Integer id) {
-        String message;
+
         try {
             supplierService.changeStatusToAvailable(id, false);
-            message = String.format(" '%s'- Đã ngừng giao dịch thành công", id);
-            return new ResponseEntity<>(message, HttpStatus.OK);
+            String finalMessage = String.format(" %s - Đã ngừng giao dịch thành công", id);
+            return new ResponseEntity<>(new HashMap<>() {{
+                put("message", finalMessage);
+            }}
+                    , HttpStatus.OK);
 
         } catch (RuntimeException e) {
             e.printStackTrace();
-            message = String.format(" '%s'- Nhà cung cấp cập nhật không thành công", id);
-            return new ResponseEntity<>(message, HttpStatus.EXPECTATION_FAILED);
+            String finalMessage = String.format(" %s - Có lỗi xảy ra", id);
+            return new ResponseEntity<>(new HashMap<>() {{
+                put("message", finalMessage);
+            }},
+                    HttpStatus.EXPECTATION_FAILED);
         }
     }
+
+    @PostMapping("/updateBulk")
+    public ResponseEntity<?> updateBulkaction(@RequestBody UpdateMultiSupParam updateMultiSupParam){
+        try {
+            supplierService.changeEmpIdAndPaymentMethod(updateMultiSupParam.getId(),updateMultiSupParam.getEmployeeId() ,updateMultiSupParam.getPaymentMethodId());
+            String finalMessage = String.format(" '%s'- Đã được cập nhật thành công", updateMultiSupParam.getId());
+            return new ResponseEntity<>(new HashMap<>() {{
+                put("message", finalMessage);
+            }}
+                    , HttpStatus.OK);
+
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            String finalMessage = String.format(" '%s'- Có lỗi xảy ra", updateMultiSupParam.getId());
+            return new ResponseEntity<>(new HashMap<>() {{
+                put("message", finalMessage);
+            }},
+                    HttpStatus.EXPECTATION_FAILED);
+        }
+
+    };
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> update(@Validated @RequestBody UpdateSupplierParam updateSupplierParam) {
@@ -136,10 +163,34 @@ public class SupplierAPI {
     }
 
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable Integer id) {
-        supplierService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @DeleteMapping("/deleteBulk")
+    public ResponseEntity<?> deleteById(@RequestBody Integer id) {
+        try {
+            supplierService.deleteById(id);
+            String finalMessage = String.format(" %s - Đã được xóa thành công", id);
+            return new ResponseEntity<>(new HashMap<>() {{
+                put("message", finalMessage);
+            }},
+                    HttpStatus.OK);
+
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            String finalMessage = String.format(" %s - Có lỗi xảy ra", id);
+            return new ResponseEntity<>(new HashMap<>() {{
+                put("message", finalMessage);
+            }},
+                    HttpStatus.EXPECTATION_FAILED);
+        }
+
     }
+
+
+
+
+//    @DeleteMapping("/suppliers/DeleteAddress")
+//    public ResponseEntity<?> deleteAddressSupplier(@RequestBody List<Integer> arrayIdSupplier) {
+//        addressService.deleteSoftSupplier(arrayIdSupplier);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
 }

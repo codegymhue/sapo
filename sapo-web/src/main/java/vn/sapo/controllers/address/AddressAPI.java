@@ -10,6 +10,8 @@ import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.address.dto.UpdateAddressParam;
 
+import javax.persistence.Index;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -28,6 +30,17 @@ public class AddressAPI {
     public ResponseEntity<?> findBySupplierId(@PathVariable Integer supplierId) {
         List<AddressResult> addresses = addressService.findBySupplierId(supplierId);
         return new ResponseEntity<>(addresses, HttpStatus.OK);
+    }
+
+    @GetMapping("/findBySupplierId")
+    public ResponseEntity<?> findBySupplierIdForPage(@RequestParam HashMap<String, String> hashMap) {
+        return new ResponseEntity<>(addressService.getAllAddressSupplierPage(
+                Integer.valueOf(hashMap.get("pageNo")),
+                Integer.valueOf(hashMap.get("pageSize")),
+                Integer.valueOf(hashMap.get("supplierId"))
+        ),
+                HttpStatus.OK
+        );
     }
 
     @GetMapping("/{id}")
@@ -51,5 +64,16 @@ public class AddressAPI {
     public ResponseEntity<?> update(@RequestBody UpdateAddressParam updateAddressParam) {
         AddressResult address = addressService.update(updateAddressParam);
         return new ResponseEntity<>(address, HttpStatus.OK);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteByAddressSupplierId(@PathVariable Integer id) {
+         addressService.deleteByAddressSupplierId(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/deleteAddress")
+    public ResponseEntity<?> deleteAddressSupplier(@RequestBody List<Integer> arrayIdSupplier) {
+        addressService.deleteSoftSupplier(arrayIdSupplier);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

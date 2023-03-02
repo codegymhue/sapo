@@ -5272,6 +5272,7 @@ select.form-control-lg:not([size]):not([multiple]) {
 }
 .btn:not(:disabled):not(.disabled) {
   cursor: pointer;
+
 }
 .btn:not(:disabled):not(.disabled).active,
 .btn:not(:disabled):not(.disabled):active {
@@ -5917,6 +5918,7 @@ input[type="submit"].btn-block {
   bottom: 100%;
   margin-top: 0;
   margin-bottom: 0.125rem;
+
 }
 .dropup .dropdown-toggle:after {
   display: inline-block;
@@ -6090,6 +6092,8 @@ input[type="submit"].btn-block {
 }
 .btn-group > .btn:first-child {
   margin-left: 0;
+
+
 }
 .btn-group > .btn-group:not(:last-child) > .btn,
 .btn-group > .btn:not(:last-child):not(.dropdown-toggle) {
@@ -14668,6 +14672,7 @@ h1 {
 }
 .form-group {
   text-align: left;
+
 }
 .red {
   color: red;
@@ -16425,6 +16430,8 @@ table.sapo-table-line-item tbody tr:last-child {
 }
 .field {
   margin-bottom: 20px;
+    padding-right:20px !important; ;
+    padding-left: 20px !important;
 }
 .field label {
   margin-bottom: 7px;
@@ -16435,7 +16442,7 @@ table.sapo-table-line-item tbody tr:last-child {
 }
 .field .label.label-required:after {
   content: "*";
-  color: white;
+  color: red;
   margin: 0 0.2em;
 }
 .field .select__wrapper .sapo-select {
@@ -20788,12 +20795,14 @@ h1 {
 }
 .product-unit__item .align-right::-webkit-input-placeholder {
   text-align: left;
+
 }
 .product-unit__item .align-right::-moz-placeholder {
   text-align: left;
 }
 .product-unit__item .align-right:-ms-input-placeholder {
   text-align: left;
+
 }
 .removeOption {
   background-color: #fff;
@@ -41558,6 +41567,7 @@ delivery-parameter-none {
 }
 .setting_account .btn-group .btn {
   text-align: left;
+
 }
 .setting_account .removeOption {
   border: none;
@@ -41783,7 +41793,7 @@ delivery-parameter-none {
 .label-required:after
 {
   content: "*";
-  color: white ;
+  color:white;
   margin: 0 0.2em;
 }
 .flex-end-container {
@@ -42884,6 +42894,7 @@ input:disabled {
 }
 .preview-info .left-column {
   text-align: left;
+
 }
 .preview-info .right-column {
   text-align: right;
@@ -52718,3 +52729,4 @@ tr[id^="orderLineItems-show-packize-"] td {
 .sapo-menu-list{
 
 }
+

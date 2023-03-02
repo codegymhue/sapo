@@ -28,10 +28,11 @@ public interface SupplierService {
                                                String status
                                               );
     @Transactional(readOnly = true)
-    Map<String, Object> findAllByFilters2(SupplierFilter filter);
+    Map<String, Object> findAllByFilters(SupplierFilter filter);
 
 
     Page<SupplierResult> findAllByFilters(SupplierFilter filter, Pageable pageable);
 
     void changeStatusToAvailable(Integer id,boolean status);
+     void changeEmpIdAndPaymentMethod(Integer supId, Integer empId, String paymentId);
 }

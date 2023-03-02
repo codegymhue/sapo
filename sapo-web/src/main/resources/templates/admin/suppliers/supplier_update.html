@@ -1,42 +1,43 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" class="sapo-menu-expand sapo-menu-toggle-active" lang="vi-VN">
-
+<html class="sapo-menu-expand sapo-menu-toggle-active" lang="vi-VN">
 <head>
     <meta charset="utf-8"/>
-    <th:block th:replace="/layout/supplier/header :: header"/>
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1.0"/>
+
+    <link rel="icon" type="image/x-icon" href="/assets/admin/images/favicon.ico"/>
+
+<!--    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/izitoast@1/dist/css/iziToast.min.css" crossorigin/>-->
+<!--    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" crossorigin/>-->
+<!--    <link rel="stylesheet" type="text/css" href="https://sapo.dktcdn.net/sapo-frontend-x/e603c93.main.css" crossorigin/>-->
+<!--    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>-->
+
+<!--    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" crossorigin/>-->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+
+    <link rel="icon" type="image/x-icon" href="/assets/admin/images/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/izitoast@1/dist/css/iziToast.min.css" crossorigin/>
     <script>
         var CKEDITOR_BASEPATH = '/v2/lib/ckeditor/';
         var S_LANG = 'vi-VN';
         var S_LANG_RES = 'https://sapo.dktcdn.net/sapo-frontend-x/d9ad77d.i18n_vi-VN.json';
     </script>
-    <script src="https://sapo.dktcdn.net/sapo-frontend-x/ab0f3c2.client.bundle.js"></script>
-    <link rel="stylesheet" href="https://sapo.dktcdn.net/sapo-frontend-x/6386cc5.main.css" />
+    <script src="https://sapo.dktcdn.net/sapo-frontend-x/ad78972.client.bundle.js"></script>
+    <link rel="stylesheet" href="https://sapo.dktcdn.net/sapo-frontend-x/6386cc5.main.css"/>
     <script src="https://sapo.dktcdn.net/fe-cdn-production/lib/wootric/wootric-sdk.js"></script>
     <script src="https://sapo.dktcdn.net/fe-cdn-production/lib/upload-files/jquery.multifile.js"></script>
 
-    <link href="https://sapo.dktcdn.net/fe-cdn-production/lib/driver/driver.min.css?v=20220218" rel="stylesheet" />
-    <script>
-        var CKEDITOR_BASEPATH = '/v2/lib/ckeditor/';
-        var S_LANG = 'vi-VN';
-        var S_LANG_RES = 'https://sapo.dktcdn.net/sapo-frontend-x/d9ad77d.i18n_vi-VN.json';
-    </script>
-    <script src="https://sapo.dktcdn.net/sapo-frontend-x/d852af0.client.bundle.js"></script>
-    <style>
-        #renderGroupLi > li:hover {
-            background-color: #007bff;
-        }
-
-        .dropdown-menu > li > p:hover {
-            background-color: #007bff
-        }
-    </style>
+    <link href="https://sapo.dktcdn.net/fe-cdn-production/lib/driver/driver.min.css?v=20220218" rel="stylesheet"/>
+    <title>C&#x1EAD;p nh&#x1EAD;t nh&#xE0; cung c&#x1EA5;p Non nisi est reicien</title>
 </head>
 
 <body class="body_dashboard partners suppliers edit">
 <div id="container">
     <div class="hidden" context="tenantInfo"
-         define="{tenantInfo: new Components.TenantInfo(this,{&quot;countries&quot;:{&quot;countryId&quot;:201}})}">
-    </div>
+         define="{tenantInfo: new Components.TenantInfo(this,{&quot;countries&quot;:{&quot;countryId&quot;:201}})}"></div>
     <div class="header-mobile">
         <a href="javascript:" class="icon-menu visible-xs visible-sm" onclick="showMenu()">
             <svg class="next-icon next-icon--size-20">
@@ -44,6 +45,7 @@
             </svg>
         </a>
     </div>
+
     <th:block th:replace="/layout/supplier/menu :: menu"/>
 
     <div class="col-right">
@@ -53,29 +55,14 @@
                     <div class="w-50" style="padding-top:5px">
                     </div>
                     <div class="w-50" style="position:relative">
-                        <a href="#" class="btn sapo-btn-default right btn-update-supplier btnUpdateSupplier">Lưu</a>
+                        <a class="btn sapo-btn-default right  btnUpdateSupplier">Lưu</a>
                         <a th:href="'/admin/suppliers/' + ${supplier.id} + '/histories'"
                            class="btn sapo-btn-blank right mr-3">Huỷ</a>
+
                     </div>
+                    <input type="hidden" id="supplierId" th:value="${supplier.id}">
 
                     <style>
-                        .help-dashboard .help-dropdown .btn-blank {
-                            background: #fff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDplN2MwNTFiZi1lNGJiLTNjNDktOGM3YS00NTZmZTZlNGQ1NmYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjI5NDdDQ0NGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjI5NDdDQ0JGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjdkNDRhZTRlLTIzMTMtYTE0ZC1hNWQ4LTA5YTVjYTBmNmM0NCIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjk3N2NmYTliLThmZDctZGU0Mi1hNDFiLWIwOTJiYzRkYWM2MiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Po5ReOIAAAIxSURBVHjalJU9aFNRGIbTk+sSh0xiEKciaBF1culiA2IdOlQHaRBKqEurYJYOFn9Ql7iJghQcSqlDAop0yFIoWJcigouKKIROClWnomaQVHw+eAPxcs7J9cDDhXvP997vfH9naPbybC6wEpiASRiFYcjDLmzBJqxCa/HRYtcn4ALCFWjDQ/gGNRiB/XrW9N6+t+euzFV8IkMpzwuwDGNwDVagmwsvO9003IMNqHKKjs9zE16Dg3AclgYI2+oitqT9ZrfGKQo+8WXF9DRs5/5j8YNt2eWl8494RaE4Dx1f+OAwnIRi4Acd2Y/1cuAUt7pi7PP4GLyHj/AavsPNyAlMp84PEqdyc0qer5oa8AuOQAnuw10YD0RpRXYTTnXcDCTvBByVp5/gK1yH33Am4H1XepNODfIi4MUPuANv+t7tgz3wM5Jj0xtN1HntwCZ7fztVrk3F/XFE3OyGE5XPToaKs33PlOBT8CWy1/TyTrOimEH8IpyFc/BuwF7T23UaQocyiJfhA7zMsNf0tpymWzmDwROYz9i0prfpNDan1EyxtRcODFK15pHeqom34I+mW2xdglsZvJ6WXsupeRY0NksRoxvyKOZ1SToL1ky9wdXQPH6uWvYtmy+vIsIF2W8g3EiP3KrKcn3ACUIer8u+6pvnHQ2jz/AWZjIkOUF4RvvNbrz/Jkob24cLmu91tX5Ts6KtziuqjsvKgSWv1gtF+g70Ldv4tO/2fxC4/a/Gbv+/AgwA9q+ezeP4kToAAAAASUVORK5CYII=') no-repeat center center;
-                            border: none;
-                            font-size: 0;
-                            box-shadow: none;
-                            margin-left: 0;
-                            height: 61px;
-                            width: 60px;
-                            border: 1px solid #dbdbdb;
-                            outline: none;
-                            border-radius: 0;
-                        }
-
-                        .help-dashboard .help-dropdown .btn-blank:focus {
-                            box-shadow: none;
-                        }
-
                         .help-dashboard .help-dropdown .help-popup {
                             top: 60px;
                             box-shadow: #c6c6c6 0px 3px 5px 0px;
@@ -84,17 +71,6 @@
                         .help-dashboard .help-dropdown .help-popup:after {
                             right: 20px;
                         }
-
-                        .sapo-menu-expand .page-heading {
-                            z-index: 1001;
-                        }
-
-                        .help-dropdown {
-                            position: relative;
-                            margin-left: 10px;
-                            height: 36px;
-                        }
-
 
                         .help-dropdown a {
                             color: #686868;
@@ -113,73 +89,10 @@
                         .help-dropdown div:hover {
                             background-color: #e7f2ff;
                         }
-
-
-                        .help-dropdown .btn-blank:focus {
-                            box-shadow: none;
-                            border: 1px solid #c4cdd5;
-                        }
-
-                        .help-dropdown .help-popup {
-                            position: absolute;
-                            right: 0;
-                            z-index: 9999999;
-                            top: 45px;
-                            box-shadow: #c6c6c6 0 0 10px 5px;
-                            display: none;
-                            -webkit-transition: ease 0.5s;
-                            /* Safari */
-                            transition: ease 0.5s;
-                        }
-
-                        .help-dropdown .help-popup.shown {
-                            display: block;
-                            height: 560px;
-                            margin-top: 15px;
-                        }
-
-                        .help-dropdown .help-popup:after {
-                            content: "";
-                            display: block;
-                            width: 0px;
-                            height: 0px;
-                            border-left: 10px solid transparent;
-                            border-right: 10px solid transparent;
-                            border-bottom: 10px solid #f3f6f8;
-                            top: -9px;
-                            position: absolute;
-                            right: 25px;
+                        .btn-group>ul>li p:hover{
+                            background-color: #007bff;
                         }
                     </style>
-                    <div class="header-fr help-dropdown">
-                        <a class="btn sapo-btn-blank btn-help" onclick="showHelpPopup()"><img
-                                src="/v2/images/dashboard/icons8-help-20.png"
-                                style="padding-right: 5px;"/><span>Trợ giúp</span></a>
-                        <div class="help-popup">
-                            <iframe id="iframe-help" src=""
-                                    style="width: 400px; height: 560px;border:none"></iframe>
-                            <input type="hidden" id="iframe-help-src"
-                                   value="https://support.sapo.vn?ver=2&amp;view=pos&amp;url=http://anges.mysapogo.com/admin/suppliers/206718863/edit"/>
-                        </div>
-                    </div>
-
-                    <script type="text/javascript">
-                        function showHelpPopup() {
-                            $("#iframe-help").attr("src", $("#iframe-help-src").val());
-                            $(".help-popup").toggleClass("shown");
-                            $(".favourite").css({"z-index": "0"});
-                        }
-
-                        $(function () {
-                            $('body').on('click', function (e) {
-                                if (!$('.help-dropdown .btn-help *').is(e.target) && !$('.help-dropdown .btn-help').is(e.target) && $('.help-popup').hasClass("shown")) {
-                                    $("#iframe-help").attr("src", "");
-                                    $(".help-popup").removeClass("shown");
-                                }
-                            });
-                        });
-                    </script>
-
                 </div>
             </div>
             <header class="ui-title-bar-container" style="margin-top: 55px;">
@@ -191,7 +104,9 @@
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink"
                                          xlink:href="#chevron-left-thinner"></use>
                                 </svg>
-                                <span class="ui-breadcrumb__item">Danh sách nhà cung cấp</span>
+                                <span class="ui-breadcrumb__item">Danh sách nhà cung cấp
+
+                </span>
                             </a>
                         </div>
                     </div>
@@ -205,22 +120,23 @@
                 </div>
             </header>
             <form id="formUpdateSupplier">
-                <div class="customer-container container" id="form-create-supplier" context="editSupplier">
+                <div class="customer-container container" context="editSupplier">
                     <div class="customer-create--left">
                         <div class="page-info">
                             <div class="page-info-body">
                                 <div class="col-12 field p-0">
                                     <div class="label mb-2 label-required">Tên nhà cung cấp</div>
-                                    <input required id="fullName" name="fullName" class="sapo-textbox w100" data-toggle="tooltip"
-                                           placeholder="Nhập tên nhà cung cấp"
-                                           th:field="${supplier.fullName}"
-                                    >
+                                    <input id="fullName" name="fullName" class="sapo-textbox w100"
+                                           th:value="${supplier.fullName}" data-toggle="tooltip"
+                                           placeholder="Nhập tên nhà cung cấp">
                                 </div>
                                 <div class="col-6 field pl-0">
                                     <div class="label mb-2">Mã nhà cung cấp</div>
-                                    <input required id="supplierCode" class="sapo-textbox w100" data-toggle="tooltip"
-                                           th:field="${supplier.supplierCode}">
+                                    <input id="supplierCode" name="supplierCode" class="sapo-textbox w100"
+                                           data-toggle="tooltip" th:value="${supplier.supplierCode}">
                                 </div>
+
+
                                 <div class="col-6 field pr-0">
                                     <div class="label mb-2">Nhóm nhà cung cấp</div>
                                     <div>
@@ -258,25 +174,22 @@
                                                        style="height: 30px; width: 300px; font-size: 13px; padding-top: 8px">
                                                         Thêm mới nhóm nhà cung cấp</p>
                                                 </li>
-                                                <li id="errorGroup" class="hidden">hihi</li>
                                                 <li id="renderGroupLi"></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                                <th:bock
-                                        th:replace="/admin/suppliers/modals/create_group_supplier :: create_group_supplier"/>
                                 <div class="col-6 field pl-0">
                                     <div class="label mb-2">Số điện thoại</div>
-                                    <input id="phoneUp" class="sapo-textbox w100" data-toggle="tooltip"
-                                           th:value="${supplier.phone}">
-                                    <div id="warning-dubble-phone" style="display:none;font-size:13px;color:#f6574d">
-                                    </div>
+                                    <input id="phoneUp" th:value="${supplier.phone}" class="sapo-textbox w100"
+                                           data-toggle="tooltip">
+                                    <div id="warning-dubble-phone"
+                                         style="display:none;font-size:13px;color:#f6574d"></div>
                                 </div>
                                 <div class="col-6 field pr-0">
                                     <div class="label mb-2">Email</div>
-                                    <input id="emailUp" class="sapo-textbox w100" data-toggle="tooltip"
-                                           th:value="${supplier.email}">
+                                    <input id="emailUp" th:value="${supplier.email}" class="sapo-textbox w100"
+                                           data-toggle="tooltip">
                                 </div>
                             </div>
                         </div>
@@ -288,15 +201,13 @@
                             <div class="page-info-body">
                                 <div class="col-6 field pl-0">
                                     <div class="label mb-2">Số fax</div>
-                                    <input id="faxUp" class="sapo-textbox w100" data-toggle="tooltip"
-                                           th:value="${supplier.fax}">
+                                    <input id="faxUp" th:value="${supplier.fax}" class="sapo-textbox w100"
+                                           data-toggle="tooltip">
                                 </div>
                                 <div class="col-6 field pr-0">
                                     <div class="label mb-2">Mã số thuế</div>
-                                    <input id="taxCodeUp" class="sapo-textbox w100" data-toggle="tooltip" th:value="${supplier.taxCode}"
-
-                                    >
-
+                                    <input id="taxCodeUp" th:value="${supplier.taxCode}" class="sapo-textbox w100"
+                                           data-toggle="tooltip">
                                 </div>
                                 <div class="col-6 field pl-0">
                                     <div class="label mb-2">Website</div>
@@ -307,10 +218,12 @@
                                     <div class="label mb-2">Trạng thái nhà cung cấp</div>
                                     <select id="statusUp" class="w100 input-dropdown sapo-btn-blank select-padding"
                                             th:field="${supplier.status}">
-                                        <option th:seleted="${supplier.status == 'AVAILABLE'}" value="AVAILABLE">Đang giao
+                                        <option th:seleted="${supplier.status == 'AVAILABLE'}" value="AVAILABLE">Đang
+                                            giao
                                             dịch
                                         </option>
-                                        <option th:seleted="${supplier.status == 'UNAVAILABLE'}" value="UNAVAILABLE">Ngừng
+                                        <option th:seleted="${supplier.status == 'UNAVAILABLE'}" value="UNAVAILABLE">
+                                            Ngừng
                                             giao dịch
                                         </option>
                                     </select>
@@ -318,6 +231,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="customer-create--right">
                         <div class="page-info">
                             <div class="page-info-title">
@@ -329,21 +243,16 @@
                                     <div class="select__wrapper " id="search-account-wrap">
                                         <a class="sapo-select select--a select-suggest" id="search-account"
                                            href="javascript:">
-                                            <select style="width: 282px; height: 25px;border: gray;" id="fulNameEmployeeUp">
+                                            <select style="width: 282px; height: 25px;border: gray;"
+                                                    id="fulNameEmployeeUp">
                                                 <option th:value="${supplier.employee.id}"
                                                         th:text="${supplier.employee} ? ${supplier.employee.fullName} : ${'Chọn nhân viên phụ trách '}"></option>
-
-                                                <!--                                            <th:block th:each="employee : ${employee}">-->
-                                                <!--                                                <th:block th:if="${employee.id}== ${supplier.employee.id}">-->
-                                                <!--                                                    <option th:text="${employee.fullName}"></option>-->
-                                                <!--                                                </th:block>-->
-                                                <!--                                            </th:block>-->
                                             </select>
                                         </a>
-                                        <svg class="next-icon next-icon--size-16">
-                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                 xlink:href="#select-chevron"></use>
-                                        </svg>
+<!--                                        <svg class="next-icon next-icon&#45;&#45;size-16">-->
+<!--                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"-->
+<!--                                                 xlink:href="#select-chevron"></use>-->
+<!--                                        </svg>-->
                                         <div class="filter-body--suggest">
                                         </div>
                                     </div>
@@ -363,7 +272,7 @@
                                         <i class="fa fa-info" data-toggle="tooltip" data-placement="top"
                                            title="Chọn hoặc thêm thẻ sẽ cho phép bạn tìm kiếm và lọc nhà cung cấp ở trang danh sách dễ dàng hơn"></i>
                                     </div>
-                                    <input class="sapo-textbox tags" bind="tagso" value="fastfuasj"/>
+                                    <input class="sapo-textbox tags" bind="tagso" value="Adipisicing nihil ea"/>
                                 </div>
                             </div>
                         </div>
@@ -394,7 +303,8 @@
                                     <div class="col-12 field p-0">
                                         <div class="label mb-2">Hình thức thanh toán</div>
 
-                                        <select style="width: 295px; height: 35px; border:1px solid #95a7b7; border-radius: 3px" id="paymentMethod">
+                                        <select style="width: 295px; height: 35px; border:1px solid #95a7b7; border-radius: 3px"
+                                                id="paymentMethod">
                                             <option th:value="${supplier.paymentMethod} ? ${supplier.paymentMethod.id} : null"
                                                     th:text="${supplier.paymentMethod} ? ${supplier.paymentMethod.title} : ${'Chọn hình thức'}"></option>
                                         </select>
@@ -405,130 +315,14 @@
                         </div>
                     </div>
                     <div class="ui-title-bottom-bar">
-                        <a href="javascript:"
-                           class="btn sapo-btn-default right btn-update-supplier btnUpdateSupplier">Lưu</a>
+                        <a class="btn sapo-btn-default right btnUpdateSupplier">
+                            Lưu
+                        </a>
                         <a th:href="'/admin/suppliers/' + ${supplier.id} + '/histories'"
                            class="btn sapo-btn-blank right mr-3">Huỷ</a>
                     </div>
-                    <input type="hidden" id="supplierId" th:value="${supplier.id}">
-                    <script class="modal_source" define="{createSupplierGroupModal: new Components.Modal(this)}"
-                            type="text/html">
-                        <div class="modal-dialog modal-dialog-new form-create-customer-group">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                    <span class="ui-dialog-title">
-                        Thêm mới nhóm nhà cung cấp
-                    </span>
-                                    <span class="modal-close-wrapper">
-                        <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                  xlink:href="#cancel-small-minor"></use> </svg>
-                    </span>
-
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="left field w-100">
-                                                <div class="label mb-2 label-required">Tên nhóm</div>
-                                                <input class="sapo-textbox w100 pull-left" bind="supplierGroup.name"
-                                                       bind-event-input="checkValidateDataSupplierGroup(this)"
-                                                       data-toggle="tooltip" placeholder="Nhập tên nhóm nhà cung cấp">
-                                            </div>
-                                            <div class="left field w-100 mb-2">
-                                                <div class="label mb-2">Mã nhóm</div>
-                                                <input class="sapo-textbox w100 pull-left" bind="supplierGroup.code"
-                                                       bind-event-input="checkValidateDataSupplierGroup(this)"
-                                                       data-toggle="tooltip" placeholder="Nhập mã nhóm nhà cung cấp">
-                                            </div>
-                                        </div>
-                                        <div class="col-6 field mb-2">
-                                            <div class="label mb-2">Ghi chú</div>
-                                            <textarea bind="supplierGroup.note" class="sapo-textbox"
-                                                      style="height:113px"></textarea>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="modal-footer">
-                                    <div class="action-btn clearfix">
-                                        <button class="btn btn-default pull-right margin-left-5 sapo-btn-default"
-                                                href="javascript:void(0)" bind-event-click="createSupplierGroup(this)">Thêm
-                                        </button>
-                                        <button class="close-modal btn btn-blank pull-right" type="button">
-                                            Thoát
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </script>
-                    <script class="modal_source" define="{createPriceListModal: new Components.Modal(this)}"
-                            type="text/html">
-                        <div class="modal-dialog modal-dialog-new form-create-price-list">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                    <span class="ui-dialog-title">
-                        Thêm chính sách giá
-                    </span>
-                                    <span class="modal-close-wrapper">
-                        <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                  xlink:href="#cancel-small-minor"></use> </svg>
-                    </span>
-
-                                </div>
-                                <div class="modal-body newscroll" id="body-price-list">
-                                    <div class="row">
-                                        <div class="col-12 col-md-6 field">
-                                            <div class="label mb-2 label-required">Tên chính sách giá</div>
-                                            <input class="sapo-textbox w100 pull-left" bind="priceList.name"
-                                                   bind-event-input="checkValidateDataPriceList(this)" data-toggle="tooltip"
-                                                   placeholder="Ví dụ: Giá bán lẻ">
-                                        </div>
-                                        <div class="col-12 col-md-6 field">
-                                            <div class="label mb-2 label-required">Mã chính sách giá</div>
-                                            <input class="sapo-textbox w100 pull-left" bind="priceList.code"
-                                                   bind-event-input="checkValidateDataPriceList(this)" data-toggle="tooltip"
-                                                   placeholder="Ví dụ: BANLE">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 field m-0">
-                                            <div class="label mb-2">Áp dụng cho:</div>
-                                            <div class="group-radiobox flex">
-                                                <label class="flex cursor-pointer" style="width: 150px;">
-                                    <span class="sapo-radiobox mr-2">
-                                        <input bind="priceList.isCost" autocomplete="off" class="sapo-radiobox__input"
-                                               type="radio" name="priceList.isCost" value="False" checked>
-                                        <span class="sapo-radiobox__icon"></span>
-                                    </span>
-                                                    Bán hàng
-                                                </label>
-                                                <label class="flex cursor-pointer" style="width: auto;">
-                                    <span class="sapo-radiobox mr-2">
-                                        <input bind="priceList.isCost" autocomplete="off" class="sapo-radiobox__input"
-                                               type="radio" name="priceList.isCost" value="True">
-                                        <span class="sapo-radiobox__icon"></span>
-                                    </span>
-                                                    Nhập hàng
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <div class="action-btn clearfix">
-                                        <button class="btn btn-default pull-right margin-left-5 sapo-btn-default"
-                                                href="javascript:void(0)" bind-event-click="createPriceList(this)">Thêm
-                                        </button>
-                                        <button class="close-modal btn btn-blank pull-right" type="button">
-                                            Thoát
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </script>
                 </div>
+
             </form>
 
         </div>
@@ -544,10 +338,11 @@
 <div class='container-fluid-md notifications'>
     <div class='ajax-notification'><span class='ajax-notification-message'></span></div>
 </div>
-<div class="modal fade" id="sapo-modal-container" data-width="" tabindex="-1" role="dialog" data-backdrop="false">
-</div>
+<div class="modal fade" id="sapo-modal-container" data-width="" tabindex="-1" role="dialog" data-backdrop="false"></div>
 <div class="modal-backdrop fade in" id="sapo-modal-backdrop"></div>
 
+<th:bock
+        th:replace="/admin/suppliers/modals/groups/create_group_supplier :: create_group_supplier"/>
 
 <style>
     #surveys {
@@ -568,37 +363,108 @@
     Page();
     hj('trigger', 'split_test_b');
 </script>
-<!-- End Freshchat -->
+<script type='text/javascript'>
+    function showMenu() {
+        $(".col-left").css("margin-left", 0);
+        $(".col-left").addClass("is-mobile");
+    }
 
-<div context="notificationVNPay"
-     define="{notificationVNPay: new Components.NotificationVNPay(this, {accountId:941587 })}">
-    <div class="popup-notification">
-        <a href="javascript:" bind-event-click="closeNoti()" class="close">
-            <svg>
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use>
-            </svg>
-        </a>
-        <a href="" target="_blank" class="link-order">
-            <img class="left" src="/v2/images/ico-sapo.png"/>
+    function isAuthorized(authority) {
+        let accountRoles = [{"locationId": 0, "tenantRoleId": 1, "scopes": ["full"]}];
+        let accountOwner = true;
+        let check = false;
+        if (accountRoles == null || accountRoles == undefined)
+            accountRoles = [];
+        let accountRole;
+        if (accountOwner)
+            return true;
+        for (accountRole of accountRoles) {
+            if (accountRole.scopes.includes('full') || accountRole.scopes.includes(authority)) {
+                check = true;
+                break;
+            }
+        }
+        if (check)
+            return true;
+        else {
+            Sapo.Flash.error('Bạn không có quyền thực hiện chức năng này');
+            return false;
+        }
+    }
 
-        </a>
-        <a href="" target="_blank" class="link-order">
-            <div class="title left">Thanh toán đơn hàng</div>
-            <div class="desc left"></div>
-        </a>
-    </div>
-</div>
+    function hasPermission(authority) {
+        let accountRoles = [{"locationId": 0, "tenantRoleId": 1, "scopes": ["full"]}];
+        let accountOwner = true;
+        let check = false;
+        if (accountRoles == null || accountRoles == undefined)
+            accountRoles = [];
+        let accountRole;
+        if (accountOwner)
+            return true;
+        for (accountRole of accountRoles) {
+            if (accountRole.scopes.includes('full') || accountRole.scopes.includes(authority)) {
+                check = true;
+                break;
+            }
+        }
+        return check;
+    }
+</script>
+
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-66880228-3');
+</script>
+<!-- Google Tag Manager -->
+<script>
+    (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push(
+            {'gtm.start': new Date().getTime(), event: 'gtm.js'}
+        );
+        var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-WQ8HRN');</script>
+<!-- End Google Tag Manager -->
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQ8HRN" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
 </body>
+
 <th:block th:replace="/layout/script :: script"/>
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
 <script src="/assets/admin/js/suppliers/jquery/jquery.validate.min.js"></script>
+<!--<script src="/assets/admin/js/suppliers/jquery/jquery-3.6.1.min.js"></script>-->
 <script src="https://cdn.jsdelivr.net/npm/izitoast@1/dist/js/iziToast.min.js" type="text/javascript"
-        crossorigin></script>
-<script>
+        crossorigin>
+</script>
 
+
+<script>
     let supplierGroups = [];
     const page = {
-        urls: {},
+        urls: {
+            getAllEmployeeSelect:  origin + "/api/employees",
+            getAllPaymentMethodSelect: origin + "/api/admin/payment_methods",
+            doCreateGroupSupplier: origin + "/api/supplier_groups/create",
+            doUpdateSupplier: origin + "/api/suppliers/",
+            getAllGroup: origin + "/api/supplier_groups",
+        },
         elements: {},
         commands: {},
         dialogs: {
@@ -606,37 +472,20 @@
             commands: {}
         }
     }
-
-    class createSupGroupParam {
-        constructor( title, supplierCode, description) {
-            this.title = title;
-            this.supplierCode = supplierCode;
-            this.description = description;
-        }
-    }
-
-    class UpdateSupplierParam {
-        constructor(id, supplierCode, fullName, email, phone, description, paymentMethodId, groupId, employeeId, status, taxCode, fax,website) {
-            this.id = id;
-            this.supplierCode = supplierCode;
-            this.fullName = fullName;
-            this.email = email;
-            this.phone = phone;
-            this.desription = description;
-            this.paymentMethodId = paymentMethodId;
-            this.groupId = groupId;
-            this.employeeId = employeeId;
-            this.status = status;
-            this.taxCode = taxCode;
-            this.fax = fax;
-            this.website = website
-        }
-    }
-
     page.elements.renderGroupLi = $("#renderGroupLi");
+    page.elements.fulNameEmployeeUp = $("#fulNameEmployeeUp");
+    page.elements.paymentMethod = $("#paymentMethod");
 
-    page.elements.formUpdateSupplier = $("#formUpdateSupplier");
+    page.elements.showGroupSupplier = $("#showGroupSupplier");
+    page.dialogs.elements.modalCreateGroupSupplier = $("#modalCreateGroupSupplier");
+    page.dialogs.elements.groupCreateTitleSup = $("#groupCreateTitleSup");
+    page.dialogs.elements.groupCreateCodeSup = $("#groupCreateCodeSup");
+    page.dialogs.elements.groupCreateDescriptionSup = $("#groupCreateDescriptionSup");
+    page.dialogs.elements.btnCreateGroupSupplier = $("#btnCreateGroupSupplier");
+    page.dialogs.elements.formCreateGroup = $("#formCreateGroup");
+
     page.elements.btnUpdateSupplier = $(".btnUpdateSupplier");
+    page.elements.formUpdateSupplier = $("#formUpdateSupplier");
     page.elements.supplierId = $("#supplierId");
     page.elements.supplierCode = $("#supplierCode");
     page.elements.fullName = $("#fullName");
@@ -644,21 +493,11 @@
     page.elements.phoneUp = $("#phoneUp");
     page.elements.statusUp = $("#statusUp");
     page.elements.descriptionUp = $("#descriptionUp");
-    page.elements.changeValueSup = $("#changeValueSup");
-    page.elements.fulNameEmployeeUp = $("#fulNameEmployeeUp");
     page.elements.paymentMethod = $("#paymentMethod");
+    page.elements.changeValueSup = $("#changeValueSup");
     page.elements.taxCodeUp = $("#taxCodeUp");
     page.elements.faxUp = $("#faxUp");
     page.elements.websiteUp = $("#websiteUp");
-
-    page.elements.showGroupSupplier = $("#showGroupSupplier");
-    page.dialogs.elements.formCreateGroup = $("#formCreateGroup");
-    page.dialogs.elements.modalCreateGroupSupplier = $("#modalCreateGroupSupplier");
-    page.dialogs.elements.btnCreateGroupSupplier = $("#btnCreateGroupSupplier");
-    page.dialogs.elements.groupCreateId = $("#groupCreateId");
-    page.dialogs.elements.groupCreateTitleSup = $("#groupCreateTitleSup");
-    page.dialogs.elements.groupCreateCodeSup = $("#groupCreateCodeSup");
-    page.dialogs.elements.groupCreateDescriptionSup = $("#groupCreateDescriptionSup");
 
     function getAllEmployeeSelect() {
         return $.ajax({
@@ -667,11 +506,10 @@
                 "content-type": "application/json"
             },
             "type": "GET",
-            "url": origin + "/api/employees"
+            "url": page.urls.getAllEmployeeSelect
         })
             .done((data) => {
-                console.log("nhan viên", data)
-
+                console.log("Nhân viên : ", data)
                 $.each(data, (i, item) => {
                     let str = `<option value="${item.id}">${item.fullName}</option>`;
                     page.elements.fulNameEmployeeUp.append(str);
@@ -686,7 +524,7 @@
                 "content-type": "application/json"
             },
             "type": "GET",
-            "url": origin + "/api/admin/payment_methods"
+            "url": page.urls.getAllPaymentMethodSelect
         })
             .done((data) => {
                 console.log("method select", data)
@@ -697,7 +535,70 @@
             })
     }
 
+    page.elements.showGroupSupplier.on('click', () => {
+        page.dialogs.elements.modalCreateGroupSupplier.modal('show');
+        page.dialogs.elements.groupCreateTitleSup.val("");
+        page.dialogs.elements.groupCreateCodeSup.val("");
+        page.dialogs.elements.groupCreateDescriptionSup.val("")
+    })
+
+    page.dialogs.elements.btnCreateGroupSupplier.on('click', () => {
+        page.dialogs.elements.formCreateGroup.trigger('submit');
+    })
+
+    function doCreateGroupSupplier() {
+        console.log("vao ham roi ne");
+        let title = page.dialogs.elements.groupCreateTitleSup.val();
+        let supGroupCode = page.dialogs.elements.groupCreateCodeSup.val();
+        let description = page.dialogs.elements.groupCreateDescriptionSup.val()
+        let newGroupSupplier = {
+            title: title.length > 0 ? title : undefined,
+            supGroupCode: supGroupCode.length > 0 ? supGroupCode : undefined,
+            description: description.length > 0 ? description : undefined,
+        }
+        $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            "type": "POST",
+            "url": page.urls.doCreateGroupSupplier,
+            "data": JSON.stringify(newGroupSupplier)
+        })
+            .done((data) => {
+                console.log("data: ", data)
+                SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
+                page.dialogs.elements.modalCreateGroupSupplier.modal('hide');
+                getAllGroup();
+                // location.reload();
+            })
+            .fail(() => {
+                SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại !");
+            })
+    }
+
+    page.dialogs.elements.formCreateGroup.validate({
+        rules: {
+            groupCreateTitleSup: {
+                required: true,
+            },
+        },
+        messages: {
+            groupCreateTitleSup: {
+                required: "Vui lòng nhập tên nhóm nhà cung cấp",
+            },
+        },
+        submitHandler: () => {
+            doCreateGroupSupplier();
+        }
+    })
+
     page.elements.btnUpdateSupplier.on('click', () => {
+        page.elements.formUpdateSupplier.trigger('submit');
+    })
+
+    function doUpdateSupplier() {
+        console.log("goi vao ham update Supplier")
         let idSupp = page.elements.supplierId.val();
         let supplierCode = page.elements.supplierCode.val();
         let fullName = page.elements.fullName.val();
@@ -708,192 +609,64 @@
         let employeeId = page.elements.fulNameEmployeeUp.val();
         let paymentMethodId = page.elements.paymentMethod.val();
         let groupId = page.elements.changeValueSup.val();
-        let taxCode =  page.elements.taxCodeUp.val();
+        let taxCode = page.elements.taxCodeUp.val();
         let fax = page.elements.faxUp.val();
         let website = page.elements.websiteUp.val();
 
-
         let newUpdateSupplierParam = {
             id: idSupp,
-            supplierCode: supplierCode.length > 0 ? supplierCode : null,
-            fullName: fullName.length > 0 ? fullName : null,
-            email: email.length > 0 ? email : null,
-            phone: phone.length > 0 ? phone : null,
+            supplierCode: supplierCode.length > 0 ? supplierCode : undefined,
+            fullName: fullName.length > 0 ? fullName : undefined,
+            email: email.length > 0 ? email : undefined,
+            phone: phone.length > 0 ? phone : undefined,
             status: status,
-            description: description.length > 0 ? description : null ,
+            description: description.length > 0 ? description : undefined,
             employeeId: employeeId,
-            paymentMethodId: paymentMethodId.length > 0 ? paymentMethodId : null,
+            paymentMethodId: paymentMethodId.length > 0 ? paymentMethodId : undefined,
             groupId: groupId,
-            taxCode: taxCode.length > 0 ? taxCode : null,
-            fax: fax.length > 0 ? fax : null,
-            website : website.length > 0 ? website : null,
+            taxCode: taxCode.length > 0 ? taxCode : undefined,
+            fax: fax.length > 0 ? fax : undefined,
+            website: website.length > 0 ? website : undefined,
         }
-        console.log("newUpdateSupplierParam : ", newUpdateSupplierParam)
-
         $.ajax({
             "headers": {
                 "accept": "application/json",
                 "content-type": "application/json"
             },
             "type": "PATCH",
-            "url": origin + "/api/suppliers/" + idSupp,
+            "url": page.urls.doUpdateSupplier + idSupp,
             "data": JSON.stringify(newUpdateSupplierParam)
         })
             .done((data) => {
                 SupplierApp.IziToast.showSuccessAlert("Sửa thông tin nhà cung cấp thành công!");
-                setTimeout(() => {
-                }, 1500);
-                window.location.href = `/admin/suppliers/${data.id}/histories`;
+                location.href = `/admin/suppliers/${data.id}/histories`;
             })
-            .fail((jqXHR) => {
-                // console.log(jqXHR);
+            .fail(() => {
                 SupplierApp.IziToast.showErrorAlert("Sửa thông tin nhà cung cấp thất bại")
             })
-        // page.elements.formUpdateSupplier.trigger('submit');
-    })
+    }
 
-    // function doUpdateSupplier() {
-    //     let idSupp = page.elements.supplierId.val();
-    //     let supplierCode = page.elements.supplierCode.val();
-    //     let fullName = page.elements.fullName.val();
-    //     let email = page.elements.emailUp.val();
-    //     let phone = page.elements.phoneUp.val();
-    //     let status = page.elements.statusUp.val();
-    //     let description = page.elements.descriptionUp.val();
-    //     let employeeId = page.elements.fulNameEmployeeUp.val();
-    //     let paymentMethodId = page.elements.paymentMethod.val();
-    //     let groupId = page.elements.changeValueSup.val();
-    //     let taxCode =  page.elements.taxCodeUp.val();
-    //     let fax = page.elements.faxUp.val();
-    //     let website = page.elements.websiteUp.val();
-    //
-    //
-    //     let newUpdateSupplierParam = {
-    //         id: idSupp,
-    //         supplierCode: supplierCode.length > 0 ? supplierCode : null,
-    //         fullName: fullName.length > 0 ? fullName : null,
-    //         email: email.length > 0 ? email : null,
-    //         phone: phone.length > 0 ? phone : null,
-    //         status: status,
-    //         description: description.length > 0 ? description : null ,
-    //         employeeId: employeeId,
-    //         paymentMethodId: paymentMethodId.length > 0 ? paymentMethodId : null,
-    //         groupId: groupId,
-    //         taxCode: taxCode.length > 0 ? taxCode : null,
-    //         fax: fax.length > 0 ? fax : null,
-    //         website : website.length > 0 ? website : null,
-    //     }
-    //     console.log("newUpdateSupplierParam : ", newUpdateSupplierParam)
-    //
-    //     $.ajax({
-    //         "headers": {
-    //             "accept": "application/json",
-    //             "content-type": "application/json"
-    //         },
-    //         "type": "PATCH",
-    //         "url": origin + "/api/suppliers/" + idSupp,
-    //         "data": JSON.stringify(newUpdateSupplierParam)
-    //     })
-    //         .done((data) => {
-    //             console.log("data", data.id);
-    //             // let trSupplier = $("#tr_" + data.id);
-    //             // let tr = SupplierApp.renderRowSupplier(data);
-    //             // trSupplier.replaceWith(tr);
-    //             SupplierApp.IziToast.showSuccessAlert("Sửa thông tin nhà cung cấp thành công!");
-    //             setTimeout(() => {
-    //             }, 1500)
-    //             window.location.href = `/admin/suppliers/${data.id}/histories`;
-    //         })
-    //         .fail((jqXHR) => {
-    //             // console.log(jqXHR);
-    //             SupplierApp.IziToast.showErrorAlert("Sửa thông tin nhà cung cấp thất bại")
-    //         })
-    // }
-
-    page.elements.showGroupSupplier.on('click', () => {
-        page.dialogs.elements.modalCreateGroupSupplier.modal('show');
-        page.dialogs.elements.groupCreateId.val("");
-        page.dialogs.elements.groupCreateTitleSup.val("");
-        page.dialogs.elements.groupCreateCodeSup.val("");
-        page.dialogs.elements.groupCreateDescriptionSup.val("");
-        // $("#modal-alert-danger").hide();
-        // $("#groupTitleSup-error").hide();
-    })
-
-    page.dialogs.elements.btnCreateGroupSupplier.on('click', () => {
-        console.log("vao ham do create group : ")
-        let supGroupCode = page.dialogs.elements.groupCreateCodeSup.val();
-        let supGroupTitle = page.dialogs.elements.groupCreateTitleSup.val();
-        let description = page.dialogs.elements.groupCreateDescriptionSup.val();
-        let newGroupSup =
-            {
-                title: supGroupTitle.length > 0 ? supGroupTitle : null,
-                supplierCode: supGroupCode.length > 0 ? supGroupCode : null,
-                description: description.length > 0 ? description : null
-            }
-
-        console.log("trc ajax", newGroupSup)
-        $.ajax({
-            "headers": {
-                "accept": "application/json",
-                "content-type": "application/json"
+    page.elements.formUpdateSupplier.validate({
+        rules: {
+            fullName: {
+                required: true,
             },
-            "type": "POST",
-            "url": origin + "/api/supplier_groups/create",
-            "data": JSON.stringify(newGroupSup)
-        })
-            .done((data) => {
-                console.log("data: ",data)
-                SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
-                setTimeout(() => {
-                }, 1500);
-                page.dialogs.elements.modalCreateGroupSupplier.modal('hide');
-                location.reload();
-            })
-            .fail((jqXHR) => {
-                SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
-                setTimeout(() => {
-                }, 1500);
-            })
-        // page.dialogs.elements.formCreateGroup.trigger("submit");
+            supplierCode: {
+                required: true,
+            }
+        },
+        messages: {
+            fullName: {
+                required: "Vui lòng nhập tên nhà cung cấp",
+            },
+            supplierCode: {
+                required: "Vui lòng nhập mã nhà cung cấp",
+            }
+        },
+        submitHandler: () => {
+            doUpdateSupplier();
+        }
     })
-
-    // function doCreateGroupSupplier(){
-    //     console.log("vao ham do create group : ")
-    //     let supGroupCode = page.dialogs.elements.groupCreateCodeSup.val();
-    //     let supGroupTitle = page.dialogs.elements.groupCreateTitleSup.val();
-    //     let description = page.dialogs.elements.groupCreateDescriptionSup.val();
-    //     let newGroupSup =
-    //         {
-    //             title: supGroupTitle.length > 0 ? supGroupTitle : null,
-    //             supplierCode: supGroupCode.length > 0 ? supGroupCode : null,
-    //             description: description.length > 0 ? description : null
-    //         }
-    //
-    //     console.log("trc ajax", newGroupSup)
-    //     $.ajax({
-    //         "headers": {
-    //             "accept": "application/json",
-    //             "content-type": "application/json"
-    //         },
-    //         "type": "POST",
-    //         "url": origin + "/api/supplier_groups/create",
-    //         "data": JSON.stringify(newGroupSup)
-    //     })
-    //         .done((data) => {
-    //             console.log("data: ",data)
-    //             // SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
-    //             // setTimeout(() => {
-    //             // }, 1500);
-    //             // page.dialogs.elements.modalCreateGroupSupplier.modal('hide');
-    //             // location.reload();
-    //         })
-    //         .fail((jqXHR) => {
-    //             SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
-    //             setTimeout(() => {
-    //             }, 1500);
-    //         })
-    // }
 
     function getAllGroup() {
         $.ajax({
@@ -902,14 +675,14 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: origin + "/api/supplier_groups",
+            url: page.urls.getAllGroup,
         })
             .done((data) => {
                 supplierGroups = data;
                 $.each(data, function (index, value) {
                     page.elements.renderGroupLi.append(
                         `<li onclick="handleChangeGroupSupp(${value.id})">
-                        <p  class="w-20 border-0 " id="${value.id}" style="padding:7px; font-size: 12px;font-weight:450; width: 300px;border: unset;" value="${value.id}">
+                        <p  class="w-80 border-0 " id="${value.id}" style="padding:7px; font-size: 12px;font-weight:450; width: 300px;border: unset;" value="${value.id}">
                         ${value.title}</p>
                         </li>`
                     )
@@ -928,11 +701,6 @@
         dropdown.hide();
     }
 
-    page.elements.changeValueSup.on('click', () => {
-        var dropdown = new bootstrap.Dropdown(document.querySelector($("#changeValueSup")));
-        dropdown.show();
-    })
-
     function searchGroup() {
 
         let valueSearchInput = document.getElementById("inputKey").value
@@ -942,65 +710,22 @@
         let groupSearch = supplierGroups.filter(group => {
             return group.title.toUpperCase().includes(valueSearchInput.toUpperCase());
         })
-        console.log("nhom search", groupSearch)
-
         page.elements.renderGroupLi.empty();
         $.each(groupSearch, (i, item) => {
             page.elements.renderGroupLi.prepend(
                 `<li onclick="handleChangeGroupSupp(${item.id})">
-                    <p  class="w-20 border-0 " id="${item.id}" style="padding:7px; font-size: 12px; font-weight: 500; width: 300px;border: unset;" value="${item.id}">
+                    <p  class="w-80 border-0 " id="${item.id}" style="padding:7px; font-size: 12px; font-weight: 500; width: 300px;border: unset;" value="${item.id}">
                     ${item.title}</p>
                     </li>`
             )
         });
     }
-    page.elements.formUpdateSupplier.validate({
-        rules: {
-            fullName: {
-                required: true,
-            },
-            supplierCode: {
-                required: true,
-            },
-        },
-        messages: {
-            fullName: {
-                required: "Tên nhà cung cấp không được để trống",
-            },
-            supplierCode: {
-                required: "Mã nhà cung cấp không được để trống",
-            },
-        },
-        submitHandler: () => {
-            doUpdateSupplier();
-        }
-    })
 
-
-    // page.dialogs.elements.formCreateGroup.validate({
-    //     rules: {
-    //         groupTitleSup: {
-    //             required: true,
-    //         },
-    //     },
-    //     messages: {
-    //         groupTitleSup: {
-    //             required: "Tên nhóm nhà cung cấp không được để trống",
-    //         },
-    //     },
-    //     submitHandler: () => {
-    //         doCreateGroupSupplier();
-    //     }
-    // })
-
-    getAllEmployeeSelect();
-    getAllPaymentMethodSelect();
-    getAllGroup();
-    searchGroup();
-    $(() => {
-
+    $(function() {
+        getAllGroup();
+        getAllEmployeeSelect();
+        getAllPaymentMethodSelect();
     })
 
 </script>
-
 </html>

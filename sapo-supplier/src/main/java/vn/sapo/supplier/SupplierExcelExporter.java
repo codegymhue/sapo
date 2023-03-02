@@ -90,11 +90,14 @@ public class SupplierExcelExporter {
         style.setFont(font);
 
         for (SupplierResult supplier : supplierList) {
+
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
             String fullName = supplier.getFullName();
             createCell(row, columnCount++, fullName != null ? fullName : "", style);
             createCell(row, columnCount++, supplier.getSupplierCode(), style);
+            createCell(row, columnCount++, supplier.getGroup().getTitle(), style);
+            createCell(row, columnCount++, supplier.getGroup().getTitle(), style);
             String email = supplier.getEmail();
             createCell(row, columnCount++, email != null ? email : "", style);
             String phone = supplier.getPhone();
@@ -103,9 +106,11 @@ public class SupplierExcelExporter {
             createCell(row, columnCount++, website != null ? website : "", style);
             createCell(row, columnCount++, supplier.getFax(), style);
             createCell(row, columnCount++, supplier.getTaxCode(), style);
-            String description = supplier.getDescription();
-            createCell(row, columnCount++, description != null ? description : "", style);
-            String paymentMethodId = supplier.getPaymentMethod().getId();
+            createCell(row, columnCount++, supplier.getDescription(), style);
+            String paymentMethodId = "";
+            if (supplier.getPaymentMethod() != null) {
+                paymentMethodId = supplier.getPaymentMethod().getId();
+            }
             createCell(row, columnCount++, paymentMethodId != null ? paymentMethodId : "", style);
 
             if (supplier.getAddresses().size() == 0) {
@@ -116,26 +121,22 @@ public class SupplierExcelExporter {
                 createCell(row, columnCount++, "", style);
                 createCell(row, columnCount++, "", style);
                 createCell(row, columnCount++, "", style);
-            }else {
+            } else {
                 for (AddressResult adr : supplier.getAddresses()) {
                     createCell(row, columnCount++, adr.getFullName() != null ? adr.getFullName() : "", style);
                     createCell(row, columnCount++, adr.getPhoneNumber() != null ? adr.getPhoneNumber() : "", style);
                     createCell(row, columnCount++, adr.getEmail() != null ? adr.getEmail() : "", style);
+                    createCell(row, columnCount++, adr.getLabel() != null ? adr.getLabel() : "", style);
                     createCell(row, columnCount++, adr.getLine1() != null ? adr.getLine1() : "", style);
                     if (adr.getLine2() != null)
-                        createCell(sheet.createRow(rowCount++),columnCount-1,adr.getLine2(),style);
-                    createCell(row, columnCount++, adr.getProvinceName() != null ?  adr.getProvinceName() : "", style);
+                        createCell(sheet.createRow(rowCount++), columnCount - 1, adr.getLine2(), style);
+                    createCell(row, columnCount++, adr.getProvinceName() != null ? adr.getProvinceName() : "", style);
                     createCell(row, columnCount++, adr.getDistrictName() != null ? adr.getDistrictName() : "", style);
-                    createCell(row, columnCount++, adr.getWardName() != null ? adr.getWardName() : "", style);
                 }
-
-
             }
+            createCell(row, rowCount++, supplier.getDebtTotal(), style);
         }
-
-
     }
-
 
     public void export(HttpServletResponse response) throws IOException {
         writeHeaderLine();
@@ -146,8 +147,6 @@ public class SupplierExcelExporter {
         workbook.close();
 
         outputStream.close();
-
     }
-
 }
 

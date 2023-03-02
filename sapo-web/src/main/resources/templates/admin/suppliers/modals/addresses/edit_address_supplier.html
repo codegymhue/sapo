@@ -1,0 +1,112 @@
+<th:block th:fragment="edit_address_supplier">
+  <div class="modal fade"  id="modalUpdateAddressSupplier" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" style="width: 600px">
+        <div>
+          <div class="modal-header">
+                <span class="ui-dialog-title" id="ui-dialog-title-1">
+                    Sửa địa chỉ
+                </span>
+            <span class="modal-close-wrapper" role="button" aria-label="Close dialog">
+                    <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use> </svg>
+                </span>
+          </div>
+          <form id="formUpdateAddressSup">
+            <div class="modal-body">
+              <input type="hidden" id="idUpAddressSup">
+              <div class="row">
+                <div class="col-6 field">
+                  <div class="label mb-2">
+                    Nhãn
+                  </div>
+                  <input  class="form-control sapo-textbox" id="labelUpAddressSup" name="Label" placeholder="Ví du: Nơi thanh toán, nơi giao hàng" type="text" value="">
+                </div>
+                <div class="col-6 field">
+                  <div class="label mb-2">
+                    Họ tên
+                  </div>
+                  <input  class="form-control sapo-textbox" id="fullNameUpAddressSup" name="FullName" type="text" value="">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-6 field">
+                  <div class="label mb-2 label-required">
+                    Địa chỉ
+                  </div>
+                  <input  class="form-control sapo-textbox" id="address1UpAddressSup" name="address1UpAddressSup" placeholder="Địa chỉ 1" type="text" value="">
+                </div>
+                <div class="col-6 field">
+                  <div class="label mb-2">
+                    Địa chỉ 2
+                  </div>
+                  <input  class="form-control sapo-textbox" id="address2UpAddressSup" name="address2UpAddressSup" placeholder="Địa chỉ 2" type="text" value="">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 field">
+                  <div class="label mb-2">
+                    Email
+                  </div>
+                  <input  class="form-control sapo-textbox" id="emailUpAddressSup" name="Email" type="text" value="">
+                </div>
+                <div class="col-6 field">
+                  <div class="label mb-2">
+                    Số điện thoại
+                  </div>
+                  <input  class="form-control sapo-textbox" id="phoneNumberUpAddressSup" name="PhoneNumber" type="text" value="">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 field">
+                  <label for="provinceUp" class="label-required mb-2">Tỉnh thành phố</label>
+                  <select id="provinceUp" name="provinceUp" class="w100 input-dropdown sapo-btn-blank select-padding"
+                          title="Tỉnh thành phố" required>
+                    <option selected>Chọn tỉnh thành phố</option>
+                  </select>
+                </div>
+                <div class="col-6 field">
+                  <label for="districtUp" class="label-required mb-2">Quận huyện</label>
+                  <select id="districtUp" name="districtUp" class="w100 input-dropdown sapo-btn-blank select-padding"
+                          title="Chọn quận huyện" required>
+                    <option selected>Chọn quận huyện</option>
+                  </select>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-6 field">
+                  <label for="wardUp" class="label-required mb-2">Phường xã</label>
+                  <select id="wardUp" name="wardUp" class="w100 input-dropdown sapo-btn-blank select-padding"
+                          title="Chọn phường xã" required>
+                    <option selected>Chọn phường xã</option>
+                  </select>
+                </div>
+                <div class="col-6 field">
+                  <div class="label mb-2">
+                    Mã bưu điện
+                  </div>
+                  <input  class="form-control sapo-textbox" id="zipCodeUpAddressSup" name="zipCodeUpAddressSup" type="text" value="">
+                </div>
+              </div>
+              <div class="row contact-reset-row">
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-6">
+
+                  <span class="help-block"></span>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div class="modal-footer">
+            <button class="btn secondary  sapo-btn-red btnShowDeleteAddressSupplier" style="margin-right: 355px" data-bs-toggle="modal">Xoá</button>
+            <button class="btn secondary" data-bs-dismiss="modal">Thoát</button>
+            <button id="btnUpAddressSup" style="margin-bottom: 3px;" class="btn sapo-btn-default">Lưu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</th:block>

@@ -54,11 +54,18 @@ public class SupplierServiceImpl implements SupplierService {
     @Transactional
     public SupplierResult create(CreateSupplierParam createParam) {
         Supplier supplier = supplierMapper.toModel(createParam);
-        supplier.setEmployeeId(1);
+//        supplier.setEmployeeId(1);
         supplier = supplierRepository.save(supplier);
         if (createParam.getSupplierCode() == null)
             supplier.setSupplierCode(CodePrefix.SUPPLIER.generate(supplier.getId()));
+
+        if (createParam.getGroupId() == null)
+            supplier.setGroupId(252);
         return supplierMapper.toDTO(supplier);
+
+
+
+
     }
 
 
@@ -67,8 +74,8 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierResult update(UpdateSupplierParam param) {
         Supplier supplier = supplierRepository.findById(param.getId())
                 .orElseThrow(() -> new NotFoundException("Not found supplier"));
-        if (param.getGroupId() != null && !supplierRepository.existsById(param.getGroupId()))
-            throw new NotFoundException("Group supplier exist");
+//        if (param.getGroupId() != null && !supplierRepository.existsById(param.getGroupId()))
+//            throw new NotFoundException("Group supplier exist");
 
 //        if(supplier.getPhone().isEmpty() || supplier.getPhone().isBlank()){
 //            supplier.setPhone(null);
@@ -134,8 +141,13 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     @Transactional(readOnly = true)
-    public Map<String, Object> findAllByFilters2(SupplierFilter filter) {
+    public Map<String, Object> findAllByFilters(SupplierFilter filter) {
+        if(filter.getPageNo() == null)
+            filter.setPageNo(1);
+        if(filter.getPageSize()== null)
+            filter.setPageSize(20);
         Page<Supplier> page = supplierFilterRepository.findAllByFilters(filter, PageRequest.of(filter.getPageNo() - 1, filter.getPageSize()));
+
         if (page.hasContent()) {
             List<SupplierResult> dtoList = page.getContent()
                     .stream()
@@ -157,5 +169,17 @@ public class SupplierServiceImpl implements SupplierService {
         Supplier supplier = supplierRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Supplier not found"));
         supplier.setStatus(status ? SupplierStatus.AVAILABLE : SupplierStatus.UNAVAILABLE);
+    }
+
+    @Override
+    @Transactional()
+    public void changeEmpIdAndPaymentMethod(Integer supId, Integer empId, String paymentId) {
+        Supplier supplier = supplierRepository.findById(supId)
+                .orElseThrow(() -> new NotFoundException("Supplier not found"));
+
+        if (empId != null)
+            supplier.setEmployeeId(empId);
+        if (paymentId != null)
+        supplier.setPaymentMethodId(paymentId);
     }
 }

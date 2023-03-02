@@ -11,6 +11,7 @@ import lombok.experimental.Accessors;
 public class AddressResult {
 
     private Integer id;
+    private String label;
 
     private String fullName;
 

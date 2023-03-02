@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
+  <link rel="icon" type="image/x-icon" href="/assets/admin/images/favicon.ico"/>
   <th:block th:replace="/layout/supplier/header :: header"/>
   <script>
     var CKEDITOR_BASEPATH = '/v2/lib/ckeditor/';
@@ -237,7 +238,7 @@
                 </li>
 
                 <li><a id="showModalDelete"> Xoá nhà cung cấp </a></li>
-                <input type="hidden" id="modalDeleteId" th:value="${supplier.id}">
+                <input type="hidden" id="idDeleteSupplier" th:value="${supplier.id}">
               </ul>
             </div>
             <th:bock th:replace="/admin/suppliers/modals/supplier_modal_delete :: supplier_modal_delete"/>
@@ -341,8 +342,9 @@
                 </li>
                 <li class="filter-tab-item" style="opacity:1;"
                     bind-event-click="loadTab('address',this)">
+
                   <a href="javascript:" id="filter-tab-address"
-                     class="filter-tab show-all-items ">Địa chỉ</a>
+                     class="filter-tab show-all-items" th:href="'/admin/suppliers/'+${supplier.getId()}+ '/addresses'" >Địa chỉ</a>
                 </li>
                 <li class="filter-tab-item" style="opacity:1;"
                     bind-event-click="loadTab('note',this)">
@@ -470,71 +472,15 @@
             </div>
           </section>
         </div>
-        <script class="modal_source" define="{deleteSupplierModal: new Components.Modal(this)}"
-                type="text/html">
-          <div class="modal-dialog modal-dialog-new">
-            <div class="modal-content">
-              <div class="modal-header">
-                    <span class="ui-dialog-title">
-                        Xóa nhà cung cấp
-                    </span>
-                <span class="modal-close-wrapper">
-                        <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use> </svg>
-                    </span>
-              </div>
-              <div class="modal-body pull-center">
-                <p>Bạn có chắc chắn muốn xóa nhà cung cấp <span style="font-weight:500;">Nguyen Tan Luong</span>? Thao tác này không thể khôi phục.</p>
-              </div>
-              <div class="modal-footer">
-                <div class="action-btn clearfix">
-                  <button class="btn sapo-btn-red right" type="button" bind-event-click="deleteSupplier(this)">Xóa</button>
-                  <button class="close-modal btn sapo-btn-blank right mr-3" type="button">Thoát</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </script>
-        <script class="modal_source" define="{showMessagePopup: new Components.Modal(this)}"
-                type="text/html">
-          <div class="modal-dialog modal-dialog-new">
-            <div class="modal-content">
-              <div class="modal-header">
-                    <span class="ui-dialog-title" id="ui-dialog-title-empty">
-                    </span>
-                <span class="modal-close-wrapper">
-                        <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use> </svg>
-                    </span>
-              </div>
-
-              <div id="modal-body-empty" class="modal-body product-option-edit pull-center w100" style="padding:0px;">
-
-              </div>
-              <div class="modal-footer">
-                <div class="action-btn clearfix" id="modal-footer-empty">
-                  <button class="close-modal btn btn-blank pull-right" type="button">Thoát</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </script>
-        <a class="modal_source display-popUp" type="text/html" style="display: none"
-           define="{showDisplayPopUp: new Components.Modal(this)}"></a>
-        <a class="modal_source display-popUp" type="text/html" style="display: none"
-           define="{showDisplayContactPopUp: new Components.Modal(this)}"></a>
-        <a class="modal_source display-popUp" type="text/html" style="display: none"
-           define="{showDisplayAddressPopUp: new Components.Modal(this)}"></a>
-        <a class="modal_source display-popUp" type="text/html" style="display: none"
-           define="{showDisplayNotePopUp: new Components.Modal(this)}"></a>
       </div>
     </div>
     <div class="popup-box">
-      <iframe scrolling="no" src="about:blank" name="myIframe" id="popupPrint"
+      <iframe src="about:blank" name="myIframe" id="popupPrint"
               style="border:0;position:absolute;width:0px;height:0px;left:0px;top:0px;"></iframe>
     </div>
   </div>
 </div>
 <div class="section-footer">
-
 </div>
 <div class='container-fluid-md notifications'>
   <div class='ajax-notification'><span class='ajax-notification-message'></span></div>
@@ -542,29 +488,10 @@
 <div class="modal fade" id="sapo-modal-container" data-width="" tabindex="-1" role="dialog" data-backdrop="false">
 </div>
 <div class="modal-backdrop fade in" id="sapo-modal-backdrop"></div>
-
-
-<style>
-  #surveys {
-    position: fixed;
-    bottom: 0;
-    width: calc(100% - 23rem);
-    right: 0;
-    z-index: 999999
-  }
-
-  .sapo-menu-collapse #surveys {
-    width: calc(100% - 5.6rem) !important;
-  }
-</style>
-<div id="surveys"></div>
-
 <script>
   Page();
   hj('trigger', 'split_test_b');
 </script>
-<!-- End Freshchat -->
-
 <div context="notificationVNPay"
      define="{notificationVNPay: new Components.NotificationVNPay(this, {accountId:941587 })}">
   <div class="popup-notification">
@@ -575,7 +502,6 @@
     </a>
     <a href="" target="_blank" class="link-order">
       <img class="left" src="/v2/images/ico-sapo.png" />
-
     </a>
     <a href="" target="_blank" class="link-order">
       <div class="title left">Thanh toán đơn hàng</div>
@@ -583,8 +509,6 @@
     </a>
   </div>
 </div>
-
-
 </body>
 <!--<th:block th:replace="/layout/script :: script"/>-->
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
@@ -592,11 +516,10 @@
 <script src="https://cdn.jsdelivr.net/npm/izitoast@1/dist/js/iziToast.min.js" type="text/javascript"
         crossorigin></script>
 
-
 <script>
 
   $("#showModalDelete").on('click', ()=>{
-    let idDelete = $("#modalDeleteId").val()
+    let idDelete = $("#idDeleteSupplier").val()
     console.log("idDelete : " ,idDelete);
 
     $.ajax({
@@ -618,7 +541,8 @@
   })
 
   $("#btn-supplier-delete").on('click', ()=>{
-    let idDelete = $("#modalDeleteId").val()
+    let idDelete = $("#idDeleteSupplier").val()
+
     $.ajax({
       "headers": {
         "accept": "application/json",
