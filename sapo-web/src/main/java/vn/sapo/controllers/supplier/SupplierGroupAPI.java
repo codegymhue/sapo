@@ -27,14 +27,14 @@ public class SupplierGroupAPI {
     }
     @PostMapping("/create")
     public ResponseEntity<SupplierGroupResult> create(@Validated @RequestBody CreateSupGroupParam createSupGroupParam, BindingResult bindingResult) {
-//        List<String> allErrors = new ArrayList<>();
-//        List<ObjectError> errors;
-//        if (bindingResult.hasFieldErrors()) {
-//            errors = bindingResult.getAllErrors();
-//            for (ObjectError error : errors) {
-//                allErrors.add(error.getDefaultMessage());
-//            }
-//        }
+        List<String> allErrors = new ArrayList<>();
+        List<ObjectError> errors;
+        if (bindingResult.hasFieldErrors()) {
+            errors = bindingResult.getAllErrors();
+            for (ObjectError error : errors) {
+                allErrors.add(error.getDefaultMessage());
+            }
+        }
         SupplierGroupResult dto = supplierGroupService.create(createSupGroupParam);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }

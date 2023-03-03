@@ -686,7 +686,7 @@
             .done((data) => {
                 supplierGroups = data;
                 $.each(data, function (index, value) {
-                    page.elements.renderGroupLi.append(
+                    page.elements.renderGroupLi.prepend(
                         `<li onclick="handleChangeGroupSupp(${value.id})">
                         <p  class="w-80 border-0 " id="${value.id}" style="padding:7px; font-size: 12px;font-weight:450; width: 300px;border: unset;" value="${value.id}">
                         ${value.title}</p>
