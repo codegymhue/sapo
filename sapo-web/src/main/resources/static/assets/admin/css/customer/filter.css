@@ -4,3 +4,91 @@
     font-size: 16px;
     font-weight: 500;
 }
+
+.jss1745 {
+    color: #0088FF;
+    padding: 8px 24px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.deudDf {
+    display: inline-flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    -webkit-box-align: center;
+    align-items: center;
+    outline: 0;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.42857rem;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    height: 2.57143rem;
+    min-width: unset;
+    color: rgb(0, 136, 255);
+    border: none;
+    background: transparent;
+    padding: 0;
+}
+
+.sidenav a, .dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+
+.dropdown-container {
+    display: none;
+    background-color: white;
+    padding-left: 8px;
+}
+
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+p.MuiTypography-body1 {
+    float: left;
+    margin-top: 12px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+#btnFilter{
+    width: 70px;
+    color: rgb(255, 255, 255);
+    background: rgb(0, 136, 255);
+    border: none;
+}
+
+#btnCloseFilter{
+    width: 90px;
+    border: 1px solid rgb(255, 77, 77);
+    background: rgb(255, 255, 255);
+    color: rgb(255, 77, 77);
+}
