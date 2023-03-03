@@ -3,12 +3,15 @@ package vn.sapo.controllers.supplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.address.AddressService;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.payment.method.PaymentMethodService;
+import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.supplier.SupplierExcelService;
 import vn.sapo.supplier.dto.*;
 import vn.sapo.supplier.excel.ExcelHelperSuppliers;
@@ -18,6 +21,8 @@ import vn.sapo.supplier.excel.ResponseMessage;
 
 import vn.sapo.supplier.SupplierService;
 
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -158,7 +163,16 @@ public class SupplierAPI {
     };
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> update(@Validated @RequestBody UpdateSupplierParam updateSupplierParam) {
+    public ResponseEntity<?> update(@Valid @RequestBody UpdateSupplierParam updateSupplierParam, BindingResult bindingResult) {
+        List<String> allError = new ArrayList<>();
+        List<ObjectError>errors;
+        if (bindingResult.hasFieldErrors()){
+            errors = bindingResult.getAllErrors();
+            for(ObjectError error : errors){
+                allError.add(error.getDefaultMessage());
+            }
+            throw new NotFoundException(allError.toString());
+        }
         return new ResponseEntity<>(supplierService.update(updateSupplierParam), HttpStatus.OK);
     }
 
