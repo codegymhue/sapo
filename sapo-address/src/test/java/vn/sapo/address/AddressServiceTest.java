@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.util.Assert;
 import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.address.dto.UpdateAddressParam;
@@ -101,6 +102,7 @@ public class AddressServiceTest {
 //                a.add(address);
 //        }
         when(addressRepository.findAllByCustomerId(anyInt())).thenReturn(newList);
+        when(addressRepository.findAllByCustomerId(7)).thenReturn(new ArrayList<>());
         when(addressRepository.findAll()).thenReturn(addresses);
         when(addressRepository.findById(1)).thenReturn(Optional.of(addresses.get(1)));
         when(addressRepository.existsById(1)).thenReturn(false);
@@ -113,12 +115,8 @@ public class AddressServiceTest {
         List<AddressResult> dtoList = addressService.findByCustomerId(2);
         assertAddress(dtoList.get(0), addresses.get(2));
         assertAddress(dtoList.get(1), addresses.get(3));
-        try {
-            addressService.findByCustomerId(7);
-        } catch (Exception e) {
-            assertThat(e, instanceOf(IndexOutOfBoundsException.class));
-            assertEquals(e.getMessage(), "Customer not found");
-        }
+        dtoList = addressService.findByCustomerId(7);
+        Assert.notEmpty(dtoList, "Mang khong duoc null");
     }
 
 

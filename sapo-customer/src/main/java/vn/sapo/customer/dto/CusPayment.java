@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import vn.sapo.entities.payment.PaymentMethod;
+import vn.sapo.entities.PaymentMethod;
 
 @Getter
 @Setter
