@@ -35,8 +35,8 @@ public class CustomerAPI {
     private AddressService addressService;
     @Autowired
     OrderItemService orderItemService;
-    @Autowired
-    PaymentSaleOrderService paymentSaleOrderService;
+//    @Autowired
+//    PaymentSaleOrderService paymentSaleOrderService;
     @Autowired
     SaleOrderService saleOrderService;
     @Autowired
@@ -44,19 +44,19 @@ public class CustomerAPI {
     @Autowired
     ExcelService excelService;
 
-    @GetMapping
-    public ResponseEntity<?> findAll() {
-        List<CustomerResult> customers = customerService.findAll();
-        customers.forEach(this::setData);
-        return new ResponseEntity<>(customers, HttpStatus.OK);
-    }
+//    @GetMapping
+//    public ResponseEntity<?> findAll() {
+//        List<CustomerResult> customers = customerService.findAll();
+//        customers.forEach(this::setData);
+//        return new ResponseEntity<>(customers, HttpStatus.OK);
+//    }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable Integer id) {
-        CustomerResult dto = customerService.findById(id);
-        setData(dto);
-        return new ResponseEntity<>(dto, HttpStatus.OK);
-    }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<?> findById(@PathVariable Integer id) {
+//        CustomerResult dto = customerService.findById(id);
+//        setData(dto);
+//        return new ResponseEntity<>(dto, HttpStatus.OK);
+//    }
 
 
     @PostMapping("/filter")
@@ -151,15 +151,15 @@ public class CustomerAPI {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
     }
 
-    public void setData(CustomerResult customer) {
-        BigDecimal spendTotal = getSpendTotalByCustomerId(customer.getId());
-        BigDecimal paidTotal = getPaidTotalByCustomerId(customer.getId());
-        customer.setSpendTotal(spendTotal);
-        customer.setDebtTotal(spendTotal.subtract(paidTotal));
-        customer.setQuantityProductOrder(getQuantityProductOrderByCustomerId(customer.getId()));
-        customer.setQuantityItemOrder(getQuantityItemCustomerOrderById(customer.getId()));
-        customer.setLastDayOrder(getLastDayOrderByCustomerId(customer.getId()));
-    }
+//    public void setData(CustomerResult customer) {
+//        BigDecimal spendTotal = getSpendTotalByCustomerId(customer.getId());
+//        BigDecimal paidTotal = getPaidTotalByCustomerId(customer.getId());
+//        customer.setSpendTotal(spendTotal);
+//        customer.setDebtTotal(spendTotal.subtract(paidTotal));
+//        customer.setQuantityProductOrder(getQuantityProductOrderByCustomerId(customer.getId()));
+//        customer.setQuantityItemOrder(getQuantityItemCustomerOrderById(customer.getId()));
+//        customer.setLastDayOrder(getLastDayOrderByCustomerId(customer.getId()));
+//    }
 
     public BigDecimal getSpendTotalByCustomerId(Integer customerId) {
         BigDecimal spendTotal = saleOrderService.getSpendTotalByCustomerId(customerId);
@@ -168,12 +168,12 @@ public class CustomerAPI {
         return spendTotal;
     }
 
-    public BigDecimal getPaidTotalByCustomerId(Integer customerId) {
-        BigDecimal paidTotal = paymentSaleOrderService.getPaidTotalByCustomerId(customerId);
-        if (paidTotal == null)
-            paidTotal = BigDecimal.valueOf(0);
-        return paidTotal;
-    }
+//    public BigDecimal getPaidTotalByCustomerId(Integer customerId) {
+//        BigDecimal paidTotal = paymentSaleOrderService.getPaidTotalByCustomerId(customerId);
+//        if (paidTotal == null)
+//            paidTotal = BigDecimal.valueOf(0);
+//        return paidTotal;
+//    }
 
     public Integer getQuantityProductOrderByCustomerId(Integer customerId) {
         Integer quantityProductOrder = saleOrderService.getQuantityProductOrder(customerId);
@@ -200,18 +200,18 @@ public class CustomerAPI {
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/address")
-    public ResponseEntity<?> shippingAddress(@PathVariable Integer id) {
-        CustomerResult dto = customerService.findById(id);
-        setData(dto);
-
-        CustomerResultDataTable customerResultDataTable = new CustomerResultDataTable();
-        List<CustomerResult> customerResults = new ArrayList<>();
-        customerResults.add(dto);
-        customerResultDataTable.setData(customerResults);
-
-        return new ResponseEntity<>(customerResultDataTable, HttpStatus.OK);
-    }
+//    @GetMapping("/{id}/address")
+//    public ResponseEntity<?> shippingAddress(@PathVariable Integer id) {
+//        CustomerResult dto = customerService.findById(id);
+//        setData(dto);
+//
+//        CustomerResultDataTable customerResultDataTable = new CustomerResultDataTable();
+//        List<CustomerResult> customerResults = new ArrayList<>();
+//        customerResults.add(dto);
+//        customerResultDataTable.setData(customerResults);
+//
+//        return new ResponseEntity<>(customerResultDataTable, HttpStatus.OK);
+//    }
 
 }
 
