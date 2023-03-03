@@ -4831,13 +4831,23 @@ button.btnGear{
 
 #checkAll{
     cursor:pointer;
-    padding: 6px !important;
+    padding: 6px;
     border: 2px solid lightgray;
-    margin-left: 3px;
 }
 
 .checkboxes{
     cursor:pointer;
-    padding: 6px;
+    padding: 6px !important;
     border: 2px solid lightgray;
+}
+
+.jss6793{
+    width: 1px;
+    height: 20px;
+    border-left: 1px solid rgb(211, 213, 215);
+    margin: 0 8px;
+}
+
+#tbCustomer thead tr:first-child th {
+    width: 40px;
 }
