@@ -124,7 +124,7 @@
                     <li>loi1</li>
                 </ul>
             </div>
-            <form id="formUpdateSupplier">
+            <form id="formUpdateSupplier" class=".needs-validation">
                 <div class="customer-container container" context="editSupplier">
                     <div class="customer-create--left">
                         <div class="page-info">
@@ -133,7 +133,7 @@
                                     <div class="label mb-2 label-required">Tên nhà cung cấp</div>
                                     <input id="fullName" name="fullName" class="sapo-textbox w100"
                                            th:value="${supplier.fullName}" data-toggle="tooltip"
-                                           placeholder="Nhập tên nhà cung cấp">
+                                           placeholder="Nhập tên nhà cung cấp" required>
                                 </div>
                                 <div class="col-6 field pl-0">
                                     <div class="label mb-2">Mã nhà cung cấp</div>
@@ -578,7 +578,12 @@
                 // location.reload();
             })
             .fail((jqXHR) =>{
-                SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại !");
+                if (jqXHR.responseJSON) {
+                    if (jqXHR.responseJSON.message) {
+                        SupplierApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
+                    }
+                }
+                // SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại !");
             })
     }
 
@@ -646,9 +651,14 @@
                 SupplierApp.IziToast.showSuccessAlert("Sửa thông tin nhà cung cấp thành công!");
                 location.href = `/admin/suppliers/${data.id}/histories`;
             })
-            .fail(() => {
+            .fail((jqXHR) => {
+                if (jqXHR.responseJSON) {
+                    if (jqXHR.responseJSON.message) {
+                        SupplierApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
+                    }
+                }
 
-                SupplierApp.IziToast.showErrorAlert("Sửa thông tin nhà cung cấp thất bại")
+                // SupplierApp.IziToast.showErrorAlert("Sửa thông tin nhà cung cấp thất bại")
             })
     }
 

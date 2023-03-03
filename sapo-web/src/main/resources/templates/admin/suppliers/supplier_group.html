@@ -102,6 +102,7 @@
 
 </head>
 <body class="body_dashboard partners suppliergroups index">
+
 <div id="container">
     <div class="hidden" context="tenantInfo"
          define="{tenantInfo: new Components.TenantInfo(this,{&quot;countries&quot;:{&quot;countryId&quot;:201}})}"></div>
@@ -114,6 +115,23 @@
     </div>
     <th:block th:replace="/layout/supplier/menu :: menu"/>
     <div class="col-right">
+<!--        <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>-->
+
+
+
+<!--        <div class="toast-container position-static">-->
+<!--            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">-->
+<!--                <div class="toast-header">-->
+<!--                    <img src="..." class="rounded me-2" alt="...">-->
+<!--                    <strong class="me-auto">Bootstrap</strong>-->
+<!--                    <small>11 mins ago</small>-->
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>-->
+<!--                </div>-->
+<!--                <div class="toast-body">-->
+<!--                    Hello, world! This is a toast message.-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
         <div class="col-right_content" id="content">
             <header class="ui-title-bar-container ui-title-bar-container--index">
                 <div class="ui-title-bar" style="min-height:0px;" href="javascript:void(0)">
@@ -151,6 +169,10 @@
                     </div>
                 </div>
             </header>
+            <div id="showError" class="hide">
+                <h1>hello</h1>
+                <!--            <span id="error"></span>-->
+            </div>
             <th:bock th:replace="/admin/suppliers/modals/groups/create_group_supplier :: create_group_supplier"/>
 
             <th:bock th:replace="/admin/suppliers/modals/groups/edit_group_supplier :: edit_group_supplier"/>
@@ -247,6 +269,7 @@
 <div class="section-footer">
 
 </div>
+
 <div class='container-fluid-md notifications'>
     <div class='ajax-notification'><span class='ajax-notification-message'></span></div>
 </div>
@@ -301,6 +324,16 @@
         crossorigin></script>
 
 <script>
+
+    const toastTrigger = document.getElementById('liveToastBtn')
+    const toastLiveExample = document.getElementById('liveToast')
+    if (toastTrigger) {
+        toastTrigger.addEventListener('click', () => {
+            const toast = new bootstrap.Toast(toastLiveExample)
+
+            toast.show()
+        })
+    }
     const page = {
         urls: {
             getAllGroup: origin + "/api/supplier_groups",
@@ -421,6 +454,16 @@
             "url": page.urls.doCreateGroupSupplier,
             "data": JSON.stringify(newGroupSup)
         })
+
+        // const toastTrigger = document.getElementById('liveToastBtn')
+        // const toastLiveExample = document.getElementById('liveToast')
+        // if (toastTrigger) {
+        //     toastTrigger.addEventListener('click', () => {
+        //         const toast = new bootstrap.Toast(toastLiveExample)
+        //
+        //         toast.show()
+        //     })
+        // },
             .done((data) => {
                 SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
                 let str = renderGroup(data)
@@ -430,19 +473,29 @@
             .fail((jqXHR) => {
                 let str =``
                 if (jqXHR.responseJSON){
-                    if (jqXHR.responseJSON.messages){
-                        str += `<label id="message-error" class="error" for="message">${jqXHR.responseJSON.message}</label>`
+                    if (jqXHR.responseJSON.message){
+                        SupplierApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
+                            //         str += `<label id="${key}-error" class="error" for="message">${jqXHR.responseJSON.message}</label>`
+                            //         $("#" + key).addClass("error");
+                            //     })
+                        // str += `<label id="message-error" class="error" for="message">${jqXHR.responseJSON.message}</label>`
                     }
-                    else {
-                        $.each(jqXHR.responseJSON, function (key, value){
-                            str += `<label id="${key}-error" class="error" for="message">${jqXHR.responseJSON.message}</label>`
-                            $("#" + key).addClass("error");
-                        })
-                    }
-                    SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
+                    // else {
+                    //     $.each(jqXHR.responseJSON, function (key, value){
+                    //         str += `<label id="${key}-error" class="error" for="message">${jqXHR.responseJSON.message}</label>`
+                    //         $("#" + key).addClass("error");
+                    //     })
+                    // }
+                    // page.dialogs.elements.modalCreateGroupSupplier.modal('hide');
+                    // $("#showError").removeClass("hide").addClass("show");
+                    //
+                    // $("#showError").append(str);
+
+
+                    // SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
 
                 }
-                SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
+                // SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
             })
     }
 
@@ -511,7 +564,13 @@
                 $(`#tr_${data.id}`).replaceWith(renderGroup(data))
             })
             .fail((jqXHR) => {
-                SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
+                if (jqXHR.responseJSON) {
+                    if (jqXHR.responseJSON.message) {
+                        SupplierApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
+                        // str += `<label id="message-error" class="error" for="message">${jqXHR.responseJSON.message}</label>`
+                    }
+                }
+                    // SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
 
             })
     }
@@ -560,12 +619,12 @@
 
     page.dialogs.elements.formCreateGroup.validate({
         rules: {
-            groupTitleSup: {
+            groupCreateTitleSup: {
                 required: true,
             },
         },
         messages: {
-            groupTitleSup: {
+            groupCreateTitleSup: {
                 required: "Vui lòng nhập tên nhóm nhà cung cấp",
             },
         },

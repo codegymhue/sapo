@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 @Accessors(chain = true)
 public class CreateSupGroupParam {
 
-    @NullOrNotBlank
+    @NullOrNotBlank(message = "Tên nhóm nhà cung cấp không được để trống")
     private String title;
 
     @NullOrNotBlank

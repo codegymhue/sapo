@@ -11,6 +11,7 @@ import vn.sapo.supplierGroup.dto.CreateSupGroupParam;
 import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 import vn.sapo.supplierGroup.dto.UpdateSupGroupParam;
 
+import java.security.UnresolvedPermission;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,12 +26,14 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
     @Override
     @Transactional
     public SupplierGroupResult create(CreateSupGroupParam createParam) {
-
+        if (createParam.getTitle()==null){
+            throw new OperationException("Tên nhóm nhà cung cấp không được để trống");
+        }
         if (supplierGroupRepository.existsByTitle(createParam.getTitle()))
-            throw new OperationException("Tên nhóm đã tồn tại");
+            throw new OperationException("Tên nhóm " + createParam.getTitle() + " đã tồn tại");
 
         if (createParam.getSupGroupCode() != null && supplierGroupRepository.existsBySupGroupCode(createParam.getSupGroupCode()))
-            throw new OperationException("Mã nhóm đã tồn tại");
+            throw new OperationException("Mã nhóm nhà cung cấp đã tồn tại");
 
         SupplierGroup supplierGroup = supplierGroupMapper.toModel(createParam);
         supplierGroupRepository.save(supplierGroup);
@@ -65,10 +68,10 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
                 .orElseThrow(() -> new NotFoundException("Not found group supplier with id: " + updateParam.getId()));
 
         if (supplierGroupRepository.existsBySupGroupCode(updateParam.getSupGroupCode()) && !supplierGroup.getSupGroupCode().equalsIgnoreCase(updateParam.getSupGroupCode())) {
-            throw new OperationException("Mã nhóm đã tồn tại");
+            throw new OperationException("Mã nhóm nhà cung cấp đã tồn tại");
         }
         if (supplierGroupRepository.existsByTitle(updateParam.getTitle()) && !supplierGroup.getTitle().equalsIgnoreCase(updateParam.getTitle())) {
-            throw new OperationException("Tên nhóm đã tồn tại");
+            throw new OperationException("Tên nhóm " +  updateParam.getTitle() + " đã tồn tại");
         }
         if(updateParam.getSupGroupCode() != null && !supplierGroup.getSupGroupCode().equalsIgnoreCase(updateParam.getSupGroupCode())) {
             if (updateParam.getSupGroupCode().startsWith("STN")) {
