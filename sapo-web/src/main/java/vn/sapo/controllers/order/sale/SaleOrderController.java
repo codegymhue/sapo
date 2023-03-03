@@ -16,8 +16,8 @@ public class SaleOrderController {
     @Autowired
     private SaleOrderService orderService;
 
-    @Autowired
-    private PaymentSaleOrderService paymentSaleOrderService;
+//    @Autowired
+//    private PaymentSaleOrderService paymentSaleOrderService;
 
     @GetMapping("/orders")
     public ModelAndView showListOrderPage() {
@@ -42,13 +42,13 @@ public class SaleOrderController {
         return modelAndView;
     }
 
-    @GetMapping("/orders/{id}")
-    public ModelAndView showOrderDetail(@PathVariable Integer id) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/admin/order/order_id");
-        modelAndView.addObject("orders", orderService.findById(id));
-        modelAndView.addObject("payment_sale_order", paymentSaleOrderService.findAllByOrderId(id));
-        return modelAndView;
-    }
+//    @GetMapping("/orders/{id}")
+//    public ModelAndView showOrderDetail(@PathVariable Integer id) {
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("/admin/order/order_id");
+//        modelAndView.addObject("orders", orderService.findById(id));
+//        modelAndView.addObject("payment_sale_order", paymentSaleOrderService.findAllByOrderId(id));
+//        return modelAndView;
+//    }
 
 }
