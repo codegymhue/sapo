@@ -1,5 +1,6 @@
 package vn.sapo.entities.voucher;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,8 +34,11 @@ public class Voucher extends BaseEntity {
     @Column(name = "reference")
     private Integer reference;
 
-    @Column(name = "amount",nullable = false)
+    @Column(name = "amount", nullable = false)
     private BigDecimal amount;
+
+    @Column(name = "status", nullable = false)
+    private String status;
 
     @Column(name = "note")
     private Integer note;
