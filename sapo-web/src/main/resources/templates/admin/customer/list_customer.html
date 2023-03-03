@@ -1,17 +1,18 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="vi-VN" class="sapo-menu-expand sapo-menu-toggle-active">
 <head>
-    <th:block th:replace="/layout/header.html"/>
     <title>Danh sách khách hàng</title>
+
+    <th:block th:replace="/layout/header"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/admin/css/customer/customer.css"/>
     <link rel="stylesheet" href="/assets/admin/css/customer/filter.css"/>
 </head>
-<body style="font-size: 12px">
+<body>
 <div>
-    <th:block th:replace="/layout/menu :: menu"/>
-    <th:block th:replace="/admin/customer/modal_importFile.html"/>
+    <th:block th:replace="/layout/menu"/>
+    <th:block th:replace="/admin/customer/modal_importFile"/>
 
     <div class="col-right  MuiBox-root jss64 jss40">
         <div class="MuiBox-root jss6915 jss440 "
@@ -113,7 +114,7 @@
                     </div>
                     <button id="importFileCustomers" tabindex="0" type="button"
                             class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
-                            >
+                    >
                       <span class="MuiButton-label">
                         <span class="MuiButton-startIcon MuiButton-iconSizeSmall">
                           <svg class="MuiSvgIcon-root jss6758"
@@ -216,23 +217,26 @@
                         </div>
                     </div>
                 </div>
-                <div id="tableCheckbox" class="table-responsive">
-                    <table id="tbCustomer" class="table table-hover" style="width: 100%;">
+                <div class="table-responsive font-sm">
+                    <table id="tbCustomer" class="table table-hover mt-2" style="width: 100%;">
                         <thead>
-                        <tr id="theadList" class="show">
+                        <tr class="show">
                             <th class="align-middle">
-                                <div class="d-flex">
+                                <div class="d-flex justify-content-center">
                                     <button type="button" class="btn btnGear">
                                         <i class="fa-solid fa-gear"></i>
                                     </button>
-                                    <label for="checkAll" style="padding: 0.5rem; cursor:pointer">
-                                        <input id="checkAll" type="checkbox"
-                                               data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả"/>
+                                    <label for="checkAll" class="checkAll">
+                                        <input id="checkAll" type="checkbox" data-bs-toggle="tooltip"
+                                               data-bs-placement="top" title="Tất cả"
+                                               data-kt-check="true"
+                                               data-kt-check-target="#tbCustomer .form-check-input" value="1"
+                                               class="form-check-input"/>
                                     </label>
                                 </div>
                             </th>
-                            <th class="align-middle" scope="col">Mã khách hàng</th>
                             <th class="align-middle" scope="col">Tên khách hàng</th>
+                            <th class="align-middle" scope="col">Mã khách hàng</th>
                             <th class="align-middle" scope="col">Số điện thoại</th>
                             <th class="align-middle" scope="col">Nhóm khách hàng</th>
                             <th class="align-middle" scope="col">Công nợ hiện tại</th>
@@ -289,102 +293,28 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalAvailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content" style="width: max-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="staticBackdropLabel">Cập nhật trạng thái !</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="statusChange">
-                </div>
-                <div class="modal-footer d-flex align-items-center">
-                    <button class="btn btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát
-                    </button>
-                    <button class="btn btn-primary btn-save" id="btnAvailableSave" type="button">Lưu</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <th:block th:replace="/admin/customer/modal_available"/>
+    <th:block th:replace="/admin/customer/modal_unavailable"/>
+    <th:block th:replace="/admin/customer/modal_delete"/>
+    <th:block th:replace="/admin/customer/modal_check_inventory"/>
+    <th:block th:replace="/admin/customer/modal_filter"/>
+    <th:block th:replace="/layout/script"/>
 
-    <div class="modal fade" id="modalUnavailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content" style="width: max-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Ngừng giao dịch!</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="statusChangeUnavailable">
-                </div>
-                <div class="modal-footer d-flex align-items-center">
-                    <button class="btn btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát
-                    </button>
-                    <button class="btn btn-primary btn-save" id="btnUnavailableSave" type="button">Lưu</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content" style="width: max-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Xóa sản phẩm?</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="statusChangeDelete">
-                </div>
-                <div class="modal-footer d-flex align-items-center">
-                    <button class="btn  btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát
-                    </button>
-                    <button class="btn btn-danger btn-save-delete" id="btnSubmitDelete" type="button">Xóa</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modalCheckInventory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content " style="width:max-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Kiểm tra thông tin tồn kho</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                </div>
-                <div class="modal-footer d-flex align-items-center">
-                    <button class="btn btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <th:block th:replace="/admin/customer/modal_filter::modal_filter"/>
-    <th:block th:replace="/layout/script :: script"/>
-
-
+    <script href="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="/assets/admin/js/customer/customer_app.js"></script>
     <script src="/assets/admin/js/product/app.js"></script>
     <script>
-        let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
+        // let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        // let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        //     return new bootstrap.Tooltip(tooltipTriggerEl)
+        // })
     </script>
 
     <script>
-        var myOffcanvas = document.getElementById('offcanvasExample')
-        var bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
+        // const myOffcanvas = document.getElementById('offcanvasExample');
+        // const bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
 
-        let page = {
+        const page = {
             urls: {
                 getAllCustomers: CustomerApp.BASE_URL_CUSTOMER,
                 getGroupCustomerById: CustomerApp.BASE_URL_CUSTOMER + "/groupCustomer",
@@ -405,7 +335,7 @@
             initializeEventControl: {}
         }
 
-        const dataTable = {
+        const dataTableDetails = {
             language: {
                 "processing": "Đang xử lý...",
                 "aria": {
@@ -652,36 +582,77 @@
             destroy: true,
             columns: [
                 {data: 'id'},
-                {data: 'customerCode'},
                 {data: 'fullName'},
+                {data: 'customerCode'},
                 {data: 'phoneNumber'},
+                // { data: 'email' },
+                // { data: 'birthday' },
+                // { data: 'group.cusGrpCode' },
                 {data: 'group.title'},
+                // { data: 'group.discount' },
+                // { data: 'gender' },
+                // { data: 'description' },
                 {data: 'debtTotal'},
                 {data: 'spendTotal'},
-                {data: "quantityItemOrder"}],
+                {data: 'quantityProductOrder'},
+            ],
             columnDefs: [
                 {
                     targets: 0,
-                    render: function (data, type, row, meta) {
+                    orderable: false,
+                    render: (data) => {
                         return `
-                               <input type="checkbox" value="check_none" />
-                            `
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                <input class="form-check-input checkboxes" type="checkbox" value="${data}" />
+                            </div>`;
                     }
                 },
                 {
-                    targets: 1,
-                    render: function (data, type, row, meta) {
-                        return `<a href="/admin/customers/${row.id}" style="text-decoration: none">${row.customerCode}</a>`;
+                    targets: 2,
+                    render: (data, type, row) => {
+                        return `
+                                    <a href="/admin/customers/${row.id}" style="text-decoration: none" class="hover">
+                                        ${row.customerCode}
+                                    </a>
+                                `;
                     }
                 },
-
-
+                // {
+                //     targets: 2,
+                //     render: (data, type, row, meta) => {
+                //         return `<p>${row.fullName}</p>`;
+                //     }
+                // },
+                // {
+                //     targets: 3,
+                //     render: (data, type, row, meta) => {
+                //         return `<p>${row.phoneNumber}</p>`;
+                //     }
+                // },
+                // {
+                //     targets: 4,
+                //     render: (data, type, row, meta) => {
+                //         return `<p>${row.group.title}</p>`;
+                //     }
+                // },
+                // {
+                //     targets: 5,
+                //     render: (data, type, row, meta) => {
+                //         return `<p>${row.debtTotal}</p>`;
+                //     }
+                // },
+                // {
+                //     targets: 6,
+                //     render: (data, type, row, meta) => {
+                //         return `<p>${row.spendTotal}</p>`;
+                //     }
+                // },
             ],
         }
-        const changes = [];
-        let totalPage;
-        let sortPage = {"type": "des", "value": "id"};
-        let arrayIdCustomer = [];
+        // const changes = [];
+        // let totalPage;
+        // let sortPage = {"type": "des", "value": "id"};
+        // let arrayIdCustomer = [];
 
         page.elements.tbCustomer = $("#tbCustomer");
 
@@ -701,10 +672,10 @@
         page.elements.search = $("#inp-search");
 
         page.elements.checkAll = $("#checkAll");
+        page.elements.checkboxes = $(".checkboxes")
         page.elements.selectAction = $("#selectAction");
 
         page.elements.selectActionThead = $("#selectActionThead");
-        page.elements.theadList = $("#theadList");
         page.elements.numberSelectCustomerList = $("#numberSelectCustomerList");
         page.elements.statusChangeForNumberCustomerList = $("#statusChange");
         page.elements.statusChangeForNumberToUnavailable = $("#statusChangeUnavailable");
@@ -728,25 +699,276 @@
 
         page.elements.loading = $(".modal-content .modal-header .loader");
 
-        page.elements.importFile.on("click", function () {
-            page.elements.modalImportFileCustomers.modal("show");
-        })
+        let dataTable;
 
-        page.commands.showLoading = () => {
-            page.elements.loading.css('z-index', 1);
-            page.elements.btnImportFileCustomers.prop('disabled', true);
+        // page.elements.importFile.on("click", function () {
+        //     page.elements.modalImportFileCustomers.modal("show");
+        // })
+        //
+        // page.commands.showLoading = () => {
+        //     page.elements.loading.css('z-index', 1);
+        //     page.elements.btnImportFileCustomers.prop('disabled', true);
+        //
+        // }
+        //
+        // page.commands.closeLoading = () => {
+        //     page.elements.loading.css('z-index', -1);
+        //     page.elements.btnImportFileCustomers.prop('disabled', false);
+        // }
 
-        }
 
-        page.commands.closeLoading = () => {
-            page.elements.loading.css('z-index', -1);
-            page.elements.btnImportFileCustomers.prop('disabled', false);
-        }
+        // page.commands.findCustomerByGroup = (groupId) => {
+        //     page.elements.tbCustomer.DataTable({
+        //         // chuyển tiếng việt cho datatable
+        //         language: dataTable.language,
+        //         ajax: {
+        //             contentType: 'application/json',
+        //             url: origin + "/api/customers/findAllCustomerByGroupId/" + groupId,
+        //             type: "GET",
+        //             dataSrc: ''
+        //         },
+        //         lengthMenu: dataTable.lengthMenu,
+        //         searching: dataTable.searching,
+        //         destroy: dataTable.destroy,
+        //         columns: dataTable.columns,
+        //         columnDefs: dataTable.columnDefs,
+        //     })
+        // }
+        //
+        // page.commands.findCustomerByGroupAndStatus = (groupId, status) => {
+        //     page.elements.tbCustomer.DataTable({
+        //         // chuyển tiếng việt cho datatable
+        //         language: dataTable.language,
+        //         ajax: {
+        //             contentType: 'application/json',
+        //             url: origin + "/api/customers/findAllCustomerByGroupAndStatus/" + groupId + "," + status,
+        //             type: "GET",
+        //             dataSrc: ''
+        //         },
+        //         lengthMenu: dataTable.lengthMenu,
+        //         searching: dataTable.searching,
+        //         destroy: dataTable.destroy,
+        //         columns: dataTable.columns,
+        //         columnDefs: dataTable.columnDefs,
+        //     })
+        //
+        // }
+        //
+        // page.commands.findCustomerByStatus = (status) => {
+        //     page.elements.tbCustomer.DataTable({
+        //         // chuyển tiếng việt cho datatable
+        //         language: dataTable.language,
+        //         ajax: {
+        //             contentType: 'application/json',
+        //             url: origin + "/api/customers/findAllCustomerByStatus/" + status,
+        //             type: "GET",
+        //             dataSrc: ''
+        //         },
+        //         lengthMenu: dataTable.lengthMenu,
+        //         searching: dataTable.searching,
+        //         //mỗi khi thay đổi dữ liệu nó sẻ xoá cái cũ tạo cái mới á
+        //         destroy: dataTable.destroy,
+        //         columns: dataTable.columns,
+        //         // columnDefs đếm từ o tới á
+        //         columnDefs: dataTable.columnDefs,
+        //     })
+        //
+        // }
+        //
+        // page.commands.showAllCustomerGroup = () => {
+        //     return $.ajax({
+        //         headers: {
+        //             "accept": "application/json",
+        //             "content-type": "application/json"
+        //         },
+        //         type: "GET",
+        //         url: origin + "/api/customer_groups",
+        //     })
+        //         .done((data) => {
+        //
+        //             $.each(data, (i, item) => {
+        //                 let str = `<option value="${item.id}">${item.title}</option>`;
+        //                 page.dialogs.elements.groupCustomer.append(str);
+        //             });
+        //         })
+        //         .fail((jqXHR) => {
+        //             console.log(jqXHR)
+        //             CustomerApp.IziToast.showErrorAlert("Lỗi tại customer Group")
+        //         })
+        // }
+        //
+        // page.commands.checkAllCheckBoxes = () => {
+        //     page.elements.checkAll.click(function () {
+        //         if (this.checked) {
+        //             page.elements.checkboxes.prop("checked", true);
+        //         } else {
+        //             page.elements.checkboxes.prop("checked", false);
+        //         }
+        //     });
+        //
+        //     $(".checkboxes").click(function () {
+        //         console.log('checkboxes checked')
+        //         let numberOfCheckboxes = page.elements.checkboxes.length;
+        //         console.log(numberOfCheckboxes)
+        //         let numberOfCheckboxesChecked = $('.checkboxes:checked').length;
+        //         console.log(numberOfCheckboxesChecked)
+        //
+        //         if (numberOfCheckboxes === numberOfCheckboxesChecked) {
+        //             page.elements.checkAll.prop("checked", true);
+        //         } else {
+        //             page.elements.checkAll.prop("checked", false);
+        //         }
+        //         console.log(dataTable.lengthMenu)
+        //     });
+        // }
+
+        // page.elements.checkAll.click(() => {
+        //     $("input[type=checkbox]").prop("checked", $(this).prop("checked"));
+        // });
+        //
+        // $("input[type=checkbox]").click(() => {
+        //     if (!$(this).prop("checked")) {
+        //         $("#selectAll").prop("checked", false);
+        //     }
+        // });
+
+        // page.elements.checkAll.on("change", () => {
+        //     page.elements.selectAction.prop("checked", true);
+        //     arrayIdCustomer = [];
+        //     if (this.checked) {
+        //         $("#tbCustomer > tbody input").each(function () {
+        //             $(this).prop("checked", true);
+        //             arrayIdCustomer.push($(this).val());
+        //         })
+        //     } else {
+        //         $("#tbCustomer > tbody input").each(function () {
+        //             $(this).prop("checked", false);
+        //         })
+        //     }
+        //
+        // })
+
+        // page.dialogs.elements.groupCustomer.on('change', () => {
+        //     let groupId = $("#ddl-group-customer :selected").val();
+        //     let status = $("#ddl-status :selected").val();
+        //
+        //     page.commands.findCustomerByGroup(groupId)
+        //     if (status === -1 || groupId === -1) {
+        //         page.commands.getAllCustomers();
+        //     }
+        // });
+        //
+        // page.dialogs.elements.status.on('change', () => {
+        //     let groupId = $("#ddl-group-customer :selected").val();
+        //     let status = $("#ddl-status :selected").val();
+        //     console.log(status)
+        //     page.commands.findCustomerByStatus(status)
+        //     if (status === -1 || groupId === -1) {
+        //         page.commands.getAllCustomers();
+        //     }
+        // });
+        //
+        // page.elements.btnImportFileCustomers.on('click', () => {
+        //     page.commands.showLoading();
+        //     let data = new FormData();
+        //     let file = page.elements.formFileCustomers[0].files[0];
+        //     data.append('file', file);
+        //     $.ajax({
+        //         url: origin + '/api/customers/upload',
+        //         processData: false,
+        //         contentType: false,
+        //         data: data,
+        //         type: 'POST'
+        //     }).done(function (result) {
+        //         page.elements.modalImportFileCustomers.modal("hide");
+        //         page.elements.frmFileCustomers[0].reset();
+        //         page.commands.getAllCustomers();
+        //         page.commands.closeLoading();
+        //         CustomerApp.IziToast.showSuccessAlert("Tải file lên thành công!")
+        //     }).fail((jqXHR) => {
+        //         console.log(jqXHR)
+        //         CustomerApp.IziToast.showErrorAlert("Tải file lên không thành công!")
+        //         page.commands.closeLoading();
+        //     })
+        //
+        //
+        // });
+        //
+        // page.commands.handleSaveFilter = () => {
+        //     page.elements.btnSaveSearch.on("click", () => {
+        //         localStorage.setItem(KEY_CUSTOMER_FILTER_SAVE, JSON.stringify(customerFilter));
+        //         CustomerApp.IziToast.showSuccessAlert(CustomerApp.AlertMessageVi.SUCCESS_FILTERED);
+        //     });
+        // }
+
+
+        // const getChanges = (previous, current) => {
+        //     if (isPrimitive(previous) && isPrimitive(current)) {
+        //         if (previous === current) {
+        //             return "";
+        //         }
+        //
+        //         return current;
+        //     }
+        //
+        //     if (isObject(previous) && isObject(current)) {
+        //         const diff = getChanges(Object.entries(previous), Object.entries(current));
+        //
+        //         return diff.reduce((merged, [key, value]) => {
+        //             return {
+        //                 ...merged,
+        //                 [key]: value
+        //             }
+        //         }, {});
+        //     }
+        //
+        //
+        //     if (JSON.stringify(previous) === JSON.stringify(current)) {
+        //         return changes;
+        //     }
+        //
+        //     for (let i = 0; i < current.length; i++) {
+        //         const item = current[i];
+        //
+        //         if (JSON.stringify(item) !== JSON.stringify(previous[i])) {
+        //             changes.push(item);
+        //         }
+        //     }
+        //
+        //     return changes;
+        // };
+        //
+        // isEmpty = (obj) => {
+        //     for (var prop in obj) {
+        //         if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+        //             return false;
+        //         }
+        //     }
+        //
+        //     return JSON.stringify(obj) === JSON.stringify({});
+        // }
+        //
+        // const typeOf = o => Object.prototype.toString.call(o);
+        // const isObject = o => o !== null && !Array.isArray(o) && typeOf(o).split(" ")[1].slice(0, -1) === "Object";
+        //
+        // const isPrimitive = o => {
+        //     switch (typeof o) {
+        //         case "object": {
+        //             return false;
+        //         }
+        //         case "function": {
+        //             return false;
+        //         }
+        //         default: {
+        //             return true;
+        //         }
+        //     }
+        // };
 
 
         page.commands.getAllCustomers = () => {
-            $(document).ready(function () {
-                if (localStorage.getItem(KEY_CUSTOMER_FILTER_SAVE) == null) {
+            $(document).ready(() => {
+                if (!localStorage.getItem(KEY_CUSTOMER_FILTER_SAVE)) {
                     customerFilter = new CustomerFilter();
                     localStorage.setItem(KEY_CUSTOMER_FILTER_SAVE, JSON.stringify(customerFilter));
                 } else {
@@ -754,269 +976,56 @@
                 }
                 page.commands.drawDataTable();
             })
-
         }
 
         page.commands.drawDataTable = () => {
-
-            page.elements.tbCustomer.DataTable({
-                // chuyển tiếng Việt cho datatable
-                "processing": true,
-                "serverSide": true,
-                "paging": true,
-                language: dataTable.language,
+            dataTable = page.elements.tbCustomer.DataTable({
+                processing: true,
+                serverSide: true,
+                select: {
+                    style: 'multi',
+                    selector: 'td:first-child input[type="checkbox"]',
+                    className: 'row-selected'
+                },
                 ajax: {
                     url: origin + '/api/customers/filter',
                     type: 'POST',
-                    // dataSrc: "content",
                     contentType: 'application/json',
-                    "data": function (d) {
+                    data: (d) => {
+                        d.keyword = customerFilter.keyword;
                         d.groupIds = customerFilter.groupIds;
                         d.gender = customerFilter.gender;
                         d.dayOfBirthday = customerFilter.dayOfBirthday;
                         d.monthOfBirthday = customerFilter.monthOfBirthday;
                         d.employeeIds = customerFilter.employeeIds;
-                        d.keyword = customerFilter.keyword;
                         d.statusList = [];
+                        console.log(d)
                         return JSON.stringify(d)
                     }
                 },
-                lengthMenu: dataTable.lengthMenu,
-                searching: false,
-                destroy: true,
-                columns: dataTable.columns,
-                columnDefs: dataTable.columnDefs,
+                language: dataTableDetails.language,
+                lengthMenu: dataTableDetails.lengthMenu,
+                searching: dataTableDetails.searching,
+                destroy: dataTableDetails.destroy,
+                columns: dataTableDetails.columns,
+                columnDefs: dataTableDetails.columnDefs,
             })
-        }
-
-        page.commands.findCustomerByGroup = (groupId) => {
-            page.elements.tbCustomer.DataTable({
-                // chuyển tiếng việt cho datatable
-                language: dataTable.language,
-                ajax: {
-                    contentType: 'application/json',
-                    url: origin + "/api/customers/findAllCustomerByGroupId/" + groupId,
-                    type: "GET",
-                    dataSrc: ''
-                },
-                lengthMenu: dataTable.lengthMenu,
-                searching: false,
-                destroy: true,
-                columns: dataTable.columns,
-                columnDefs: dataTable.columnDefs,
-            })
-        }
-
-        page.commands.findCustomerByGroupAndStatus = (groupId, status) => {
-
-            page.elements.tbCustomer.DataTable({
-                // chuyển tiếng việt cho datatable
-                language: dataTable.language,
-                ajax: {
-                    contentType: 'application/json',
-                    url: origin + "/api/customers/findAllCustomerByGroupAndStatus/" + groupId + "," + status,
-                    type: "GET",
-                    dataSrc: ''
-                },
-                lengthMenu: dataTable.lengthMenu,
-                searching: false,
-                destroy: true,
-                columns: dataTable.columns,
-                columnDefs: dataTable.columnDefs,
-            })
-
-        }
-
-        page.commands.findCustomerByStatus = (status) => {
-
-            page.elements.tbCustomer.DataTable({
-                // chuyển tiếng việt cho datatable
-                language: dataTable.language,
-                ajax: {
-                    contentType: 'application/json',
-                    url: origin + "/api/customers/findAllCustomerByStatus/" + status,
-                    type: "GET",
-                    dataSrc: ''
-                },
-                lengthMenu: dataTable.lengthMenu,
-                searching: false,
-                //mỗi khi thay đổi dữ liệu nó sẻ xoá cái cũ tạo cái mới á
-                destroy: true,
-                columns: dataTable.columns,
-                // columnDefs đếm từ o tới á
-                columnDefs: dataTable.columnDefs,
-            })
-
-        }
-
-        page.commands.showAllCustomerGroup = () => {
-            return $.ajax({
-                headers: {
-                    "accept": "application/json",
-                    "content-type": "application/json"
-                },
-                type: "GET",
-                url: origin + "/api/customer_groups",
-            })
-                .done((data) => {
-
-                    $.each(data, (i, item) => {
-                        let str = `<option value="${item.id}">${item.title}</option>`;
-                        page.dialogs.elements.groupCustomer.append(str);
-                    });
-                })
-                .fail((jqXHR) => {
-                    console.log(jqXHR)
-                    CustomerApp.IziToast.showErrorAlert("Lỗi tại customer Group")
-                })
-        }
-
-        page.elements.checkAll.on("change", () => {
-            page.elements.selectAction.prop("checked", true);
-            arrayIdCustomer = [];
-            if (this.checked) {
-                $("#tbCustomer > tbody input").each(function () {
-                    $(this).prop("checked", true);
-                    arrayIdCustomer.push($(this).val());
-                })
-            } else {
-                $("#tbCustomer > tbody input").each(function () {
-                    $(this).prop("checked", false);
-                })
-            }
-
-        })
-
-        page.dialogs.elements.groupCustomer.on('change', () => {
-            let groupId = $("#ddl-group-customer :selected").val();
-            let status = $("#ddl-status :selected").val();
-
-            page.commands.findCustomerByGroup(groupId)
-            if (status === -1 || groupId === -1) {
-                page.commands.getAllCustomers();
-            }
-        });
-
-        page.dialogs.elements.status.on('change', () => {
-            let groupId = $("#ddl-group-customer :selected").val();
-            let status = $("#ddl-status :selected").val();
-            console.log(status)
-            page.commands.findCustomerByStatus(status)
-            if (status === -1 || groupId === -1) {
-                page.commands.getAllCustomers();
-            }
-        });
-
-        page.elements.btnImportFileCustomers.on('click', () => {
-            page.commands.showLoading();
-            let data = new FormData();
-            let file = page.elements.formFileCustomers[0].files[0];
-            data.append('file', file);
-            $.ajax({
-                url: origin + '/api/customers/upload',
-                processData: false,
-                contentType: false,
-                data: data,
-                type: 'POST'
-            }).done(function (result) {
-                page.elements.modalImportFileCustomers.modal("hide");
-                page.elements.frmFileCustomers[0].reset();
-                page.commands.getAllCustomers();
-                page.commands.closeLoading();
-                CustomerApp.IziToast.showSuccessAlert("Tải file lên thành công!")
-            }).fail((jqXHR) => {
-                console.log(jqXHR)
-                CustomerApp.IziToast.showErrorAlert("Tải file lên không thành công!")
-                page.commands.closeLoading();
-            })
-
-
-        });
-
-        page.commands.handleSaveFilter = () => {
-            page.elements.btnSaveSearch.on("click", () => {
-                localStorage.setItem(KEY_CUSTOMER_FILTER_SAVE, JSON.stringify(customerFilter));
-                CustomerApp.IziToast.showSuccessAlert(CustomerApp.AlertMessageVi.SUCCESS_FILTERED);
-            });
         }
 
         page.loadData = () => {
-            page.commands.getAllCustomers();
+            page.commands.getAllCustomers()
 
-            page.commands.showAllCustomerGroup()
-
-            page.commands.handleSaveFilter();
+            // page.commands.showAllCustomerGroup()
+            //
+            // page.commands.handleSaveFilter();
+            //
+            // page.commands.checkAllCheckBoxes();
         }
 
         $(() => {
-
             page.loadData()
-
         });
 
-
-        const getChanges = (previous, current) => {
-            if (isPrimitive(previous) && isPrimitive(current)) {
-                if (previous === current) {
-                    return "";
-                }
-
-                return current;
-            }
-
-            if (isObject(previous) && isObject(current)) {
-                const diff = getChanges(Object.entries(previous), Object.entries(current));
-
-                return diff.reduce((merged, [key, value]) => {
-                    return {
-                        ...merged,
-                        [key]: value
-                    }
-                }, {});
-            }
-
-
-            if (JSON.stringify(previous) === JSON.stringify(current)) {
-                return changes;
-            }
-
-            for (let i = 0; i < current.length; i++) {
-                const item = current[i];
-
-                if (JSON.stringify(item) !== JSON.stringify(previous[i])) {
-                    changes.push(item);
-                }
-            }
-
-            return changes;
-        };
-
-        isEmpty = (obj) => {
-            for (var prop in obj) {
-                if (Object.prototype.hasOwnProperty.call(obj, prop)) {
-                    return false;
-                }
-            }
-
-            return JSON.stringify(obj) === JSON.stringify({});
-        }
-
-        const typeOf = o => Object.prototype.toString.call(o);
-        const isObject = o => o !== null && !Array.isArray(o) && typeOf(o).split(" ")[1].slice(0, -1) === "Object";
-
-        const isPrimitive = o => {
-            switch (typeof o) {
-                case "object": {
-                    return false;
-                }
-                case "function": {
-                    return false;
-                }
-                default: {
-                    return true;
-                }
-            }
-        };
     </script>
 </div>
 </body>

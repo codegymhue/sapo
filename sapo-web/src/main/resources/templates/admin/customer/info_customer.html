@@ -3,37 +3,42 @@
       th:object="${customer}">
 
 <head>
-    <th:block th:replace="/layout/header.html"/>
     <title>Chi tiết khách hàng</title>
+
+    <th:block th:replace="/layout/header"/>
     <link rel="stylesheet" href="/assets/admin/css/customer/info.css"/>
 </head>
 <body data-new-gr-c-s-check-loaded="14.1085.0">
 <div id="root" style="overflow: auto;">
-    <th:block th:replace="/layout/menu.html"/>
+    <th:block th:replace="/layout/menu"/>
     <div class="MuiBox-root jss64 jss40">
         <div class="MuiBox-root jss642 jss638 jss639">
             <div class="MuiBox-root jss643 jss641">
-                <div class="MuiBox-root jss644"><a
-                        class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss2114 MuiTypography-colorSecondary"
-                        href="/admin/customers">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                         style="width: 24px; height: 24px; margin-left: -9px; margin-right: 6px;">
-                        <path d="M14.298 5.99 8.288 12l6.01 6.01 1.414-1.414L11.116 12l4.596-4.596-1.414-1.414Z"
-                              fill="currentColor"></path>
-                    </svg>
-                    <h6 class="MuiTypography-root MuiTypography-subtitle1">Quay lại danh sách khách hàng</h6></a></div>
+                <div class="MuiBox-root jss644">
+                    <a class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss2114 MuiTypography-colorSecondary"
+                       href="/admin/customers">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                             style="width: 24px; height: 24px; margin-left: -9px; margin-right: 6px;">
+                            <path d="M14.298 5.99 8.288 12l6.01 6.01 1.414-1.414L11.116 12l4.596-4.596-1.414-1.414Z"
+                                  fill="currentColor">
+                            </path>
+                        </svg>
+                        <h6 class="MuiTypography-root MuiTypography-subtitle1">
+                            Quay lại danh sách khách hàng
+                        </h6>
+                    </a>
+                </div>
                 <th:block>
                     <h2 th:if="errors" th:text="${errors}" style="color: red"></h2>
                 </th:block>
                 <input type="hidden" id="customerId" th:value="*{id}">
                 <div class="MuiBox-root jss2119">
-
                     <button id="btnSowModalDelete" class="sc-jqUVSM gYRFmk">
-
-                        <span
-                                class="sc-papXJ jcEYKF">Xóa khách hàng</span></button>
+                        <span class="sc-papXJ jcEYKF">Xóa khách hàng</span>
+                    </button>
                     <a th:value="*{id}" th:href="@{/admin/customer/modal_delete_customer.html/__${customer.getId()}__}">
-                        <button id="btn-create-voucher" class="sc-jqUVSM FmJDc"><span class="sc-papXJ ffDJGn">Tạo phiếu thu/chi</span>
+                        <button id="btn-create-voucher" class="sc-jqUVSM FmJDc">
+                            <span class="sc-papXJ ffDJGn">Tạo phiếu thu/chi</span>
                             <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
                                 <path d="M7 10l5 5 5-5z"></path>
                             </svg>
@@ -61,63 +66,76 @@
                                             style="padding-right: 16px;">Thông tin cá nhân</h6>
                                         <div th:class="*{status == status.AVAILABLE} ? 'hlxtkG':'csJERM ' ">
                                     <span th:text="*{status == status.AVAILABLE} ? 'Đang giao dịch' : 'Ngừng giao dịch'"
-                                          th:class="*{status == status.AVAILABLE} ? 'gIZkwA' : 'ccQLIN'"></span>
+                                          th:class="*{status == status.AVAILABLE} ? 'gIZkwA' : 'ccQLIN'">
+                                    </span>
                                         </div>
                                     </div>
-                                    <a class="jss2101" th:href="'/admin/customers/'+ ${customer.getId()} + '/edit'">Cập
-                                        nhật</a></div>
-
+                                    <a class="jss2101" th:href="'/admin/customers/'+ ${customer.getId()} + '/edit'">
+                                        Cập nhật
+                                    </a>
+                                </div>
 
                                 <div class="MuiBox-root jss762 jss623">
-
                                     <div class="MuiGrid-root MuiGrid-container">
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3">
                                             <div class="MuiPaper-root jss624 jss625 MuiPaper-elevation1 MuiPaper-rounded">
                                                 <h6 class="MuiTypography-root jss626 jss628 MuiTypography-subtitle1">
-                                                    Ngày sinh</h6><h6
-                                                    class="MuiTypography-root jss626 jss628 MuiTypography-subtitle1">
-                                                Giới tính</h6><h6
-                                                    class="MuiTypography-root jss626 jss628 MuiTypography-subtitle1">
-                                                Số điện thoại</h6><h6
-                                                    class="MuiTypography-root jss626 jss628 MuiTypography-subtitle1">
-                                                Email</h6><h6
-                                                    class="MuiTypography-root jss626 jss628 MuiTypography-subtitle1">
-                                                Nhân viên phụ trách</h6><h6
-                                                    class="MuiTypography-root  jss626 jss628 MuiTypography-subtitle1">
-                                                Tags</h6></div>
+                                                    Ngày sinh
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss626 jss628 MuiTypography-subtitle1">
+                                                    Giới tính
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss626 jss628 MuiTypography-subtitle1">
+                                                    Số điện thoại
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss626 jss628 MuiTypography-subtitle1">
+                                                    Email
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss626 jss628 MuiTypography-subtitle1">
+                                                    Nhân viên phụ trách
+                                                </h6>
+                                                <h6 class="MuiTypography-root  jss626 jss628 MuiTypography-subtitle1">
+                                                    Tags
+                                                </h6>
+                                            </div>
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3">
-                                            <div class="MuiPaper-root jss624 MuiPaper-elevation1 MuiPaper-rounded"><h6
-                                                    class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    th:text="${': ' +  #dates.format(customer.birthday, 'dd/MM/yyyy')}"
-                                            ></h6>
-                                                <h6
-                                                        class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                        th:text="*{': ' + gender}"></h6>
-                                                <h6
-                                                        class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                        th:utext="${customer.getPhoneNumber()} ? ${': '+ customer.getPhoneNumber()} : ${': --- '}"
-                                                ></h6>
+                                            <div class="MuiPaper-root jss624 MuiPaper-elevation1 MuiPaper-rounded">
                                                 <h6 class="MuiTypography-root jss626 MuiTypography-subtitle1"
-
-                                                    th:utext="${customer.getEmail()} ? ${': '+ customer.getEmail()} : ${': --- '}"
-                                                ></h6><h6
-                                                        class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                        th:text="${': '+customer.getEmployee().getFullName()}"></h6>
-                                                <span></span></div>
+                                                    th:text="${': ' +  #dates.format(customer.birthday, 'dd/MM/yyyy')}">
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss626 MuiTypography-subtitle1"
+                                                    th:text="*{': ' + gender}">
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss626 MuiTypography-subtitle1"
+                                                    th:utext="${customer.getPhoneNumber()} ? ${': '+ customer.getPhoneNumber()} : ${': --- '}">
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss626 MuiTypography-subtitle1"
+                                                    th:utext="${customer.getEmail()} ? ${': '+ customer.getEmail()} : ${': --- '}">
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss626 MuiTypography-subtitle1"
+                                                    th:text="${': '+customer.getEmployee().getFullName()}">
+                                                </h6>
+                                            </div>
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3">
                                             <div class="MuiPaper-root jss624 jss625 MuiPaper-elevation1 MuiPaper-rounded">
                                                 <h6 class="MuiTypography-root jss626 jss628 MuiTypography-subtitle1">
-                                                    Nhóm khách hàng</h6><h6
-                                                    class="MuiTypography-root jss626 jss628 MuiTypography-subtitle1">
-                                                Mã khách hàng</h6><h6
-                                                    class="MuiTypography-root jss626 jss628 MuiTypography-subtitle1">
-                                                Mã số thuế</h6><h6
-                                                    class="MuiTypography-root jss626 jss628 MuiTypography-subtitle1">
-                                                Website</h6><h6
-                                                    class="MuiTypography-root jss626 jss628 MuiTypography-subtitle1">
-                                                Mô tả</h6></div>
+                                                    Nhóm khách hàng
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss626 jss628 MuiTypography-subtitle1">
+                                                Mã khách hàng
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss626 jss628 MuiTypography-subtitle1">
+                                                Mã số thuế
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss626 jss628 MuiTypography-subtitle1">
+                                                Website
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss626 jss628 MuiTypography-subtitle1">
+                                                Mô tả
+                                                </h6>
+                                            </div>
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3">
                                             <div class="MuiPaper-root jss624  MuiPaper-elevation1 MuiPaper-rounded">
@@ -125,25 +143,28 @@
                                                    th:href="'/admin/customer_groups/'+ ${customer.getGroup().getId()}"
                                                    style="padding-left: 0px;">
                                                     <h6 class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                        th:text="${': '+customer.getGroup().getTitle()}"
-                                                    >
-
+                                                        th:text="${': '+customer.getGroup().getTitle()}">
                                                     </h6>
                                                 </a>
-                                                <h6
-                                                        class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                        th:text="*{': '+ customerCode}"></h6><h6
-                                                    class="MuiTypography-root jss626 MuiTypography-subtitle1"
+                                                <h6 class="MuiTypography-root jss626 MuiTypography-subtitle1"
+                                                        th:text="*{': '+ customerCode}">
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss626 MuiTypography-subtitle1"
                                                     itemid="display-tax-number "
-                                                    th:text="*{': ' + taxCode}"></h6><h6
+                                                    th:text="*{': ' + taxCode}">
+                                                </h6>
+                                                <h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
-                                                    itemid="display-website" title=""><a
+                                                    itemid="display-website" title="">
+                                                    <a
                                                     class="jss2101"
                                                     th:text="*{': '+ website}"
-                                                    style="padding-left: 0px; text-decoration: none"></a></h6><h6
+                                                    style="padding-left: 0; text-decoration: none">
+                                                    </a>
+                                                </h6>
+                                                <h6
                                                     class="MuiTypography-root jss626 MuiTypography-subtitle1"
                                                     th:utext="${customer.getDescription()} ? ${': '+ customer.Description} : ${': --- '}">
-
                                             </h6>
                                             </div>
                                         </div>
@@ -151,51 +172,76 @@
                                 </div>
                             </div>
                             <div class="MuiBox-root jss791 jss622 jss618">
-                                <div class="MuiBox-root jss792 jss621"><h6
-                                        class="MuiTypography-root MuiTypography-subtitle1">Thông tin mua hàng</h6><a
+                                <div class="MuiBox-root jss792 jss621">
+                                    <h6 class="MuiTypography-root MuiTypography-subtitle1">Thông tin mua hàng</h6>
+                                    <a
                                         class="jss627" href="/admin/analytic_customers/customer_by_activity"
-                                        style="padding-left: 0px;">Chi tiết</a></div>
+                                        style="padding-left: 0px;">
+                                        Chi tiết
+                                    </a>
+                                </div>
                                 <div class="MuiBox-root jss793 jss623 ">
                                     <div class="MuiGrid-root MuiGrid-container">
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3">
                                             <div class="MuiPaper-root jss2098 jss2099 MuiPaper-elevation1 MuiPaper-rounded">
                                                 <h6 class="MuiTypography-root jss2100 jss2102 MuiTypography-subtitle1">
-                                                    Tổng chi tiêu</h6><h6
-                                                    class="MuiTypography-root jss2100 jss2102 MuiTypography-subtitle1">
-                                                Tổng SL đơn hàng</h6><h6
-                                                    class="MuiTypography-root jss2100 jss2102 MuiTypography-subtitle1">
-                                                Ngày cuối cùng mua hàng</h6></div>
+                                                    Tổng chi tiêu
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss2100 jss2102 MuiTypography-subtitle1">
+                                                Tổng SL đơn hàng
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss2100 jss2102 MuiTypography-subtitle1">
+                                                Ngày cuối cùng mua hàng
+                                                </h6>
+                                            </div>
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3">
-                                            <div class="MuiPaper-root jss2098 MuiPaper-elevation1 MuiPaper-rounded"><h6
+                                            <div class="MuiPaper-root jss2098 MuiPaper-elevation1 MuiPaper-rounded">
+                                                <h6 class="MuiTypography-root jss2100 MuiTypography-subtitle1"
+                                                    th:text="${ ': '  + customer.spendTotal}">
+                                                </h6>
+                                                <h6
                                                     class="MuiTypography-root jss2100 MuiTypography-subtitle1"
-                                                    th:text="${ ': '  + customer.spendTotal}"></h6><h6
-
-                                                    class="MuiTypography-root jss2100 MuiTypography-subtitle1"
-                                                    itemid="display-order-purchases">: 0</h6><h6
-                                                    class="MuiTypography-root jss2100 MuiTypography-subtitle1"
-                                                    th:utext="${customer.lastDayOrder} ? ${': ' +  #dates.format(customer.lastDayOrder, 'dd/MM/yyyy')} : ${': --- '}"
-                                            >: ---</h6></div>
+                                                    itemid="display-order-purchases">
+                                                    : 0
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss2100 MuiTypography-subtitle1"
+                                                    th:utext="${customer.lastDayOrder} ? ${': ' +  #dates.format(customer.lastDayOrder, 'dd/MM/yyyy')} : ${': --- '}">
+                                                    : ---
+                                                </h6>
+                                            </div>
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3">
                                             <div class="MuiPaper-root jss2098 jss2099 MuiPaper-elevation1 MuiPaper-rounded">
                                                 <h6 class="MuiTypography-root jss2100 jss2102 MuiTypography-subtitle1">
-                                                    Tổng SL sản phẩm đã mua</h6><h6
-                                                    class="MuiTypography-root jss2100 jss2102 MuiTypography-subtitle1">
-                                                Tổng SL sản phẩm hoàn trả</h6><h6
-                                                    class="MuiTypography-root jss2100 jss2102 MuiTypography-subtitle1">
-                                                Công nợ hiện tại</h6></div>
+                                                    Tổng SL sản phẩm đã mua
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss2100 jss2102 MuiTypography-subtitle1">
+                                                Tổng SL sản phẩm hoàn trả
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss2100 jss2102 MuiTypography-subtitle1">
+                                                Công nợ hiện tại
+                                                </h6>
+                                            </div>
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3">
-                                            <div class="MuiPaper-root jss2098 MuiPaper-elevation1 MuiPaper-rounded"><h6
+                                            <div class="MuiPaper-root jss2098 MuiPaper-elevation1 MuiPaper-rounded">
+                                                <h6
                                                     class="MuiTypography-root jss2100 MuiTypography-subtitle1"
-                                                    itemid="display-net-quantity">: 0</h6><h6
+                                                    itemid="display-net-quantity">
+                                                    : 0
+                                                </h6>
+                                                <h6
                                                     class="MuiTypography-root jss2100 MuiTypography-subtitle1"
-                                                    itemid="display-returned-item-quantity">: 0 </h6><h6
+                                                    itemid="display-returned-item-quantity">
+                                                    : 0
+                                                </h6>
+                                                <h6
                                                     class="MuiTypography-root jss2100 MuiTypography-subtitle1"
                                                     itemid="display-returned-item-debts"
-                                                    th:utext="${debtTotal} ? ${': '+ debtTotal} : ${': 0 '}"
-                                            ></h6></div>
+                                                    th:utext="${debtTotal} ? ${': '+ debtTotal} : ${': 0 '}">
+                                                </h6>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -205,36 +251,44 @@
                     <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4">
                         <div class="MuiBox-root jss2268 jss2090">
                             <div class="MuiBox-root jss2269 jss2096 jss2093">
-                                <div class="MuiBox-root jss2270 jss2095"><h6
-                                        class="MuiTypography-root MuiTypography-subtitle1">Thông tin gợi ý khi bán
-                                    hàng</h6><a class="jss2101"
-                                                th:href="'/admin/customers/'+ ${customer.getId()}+ '/edit'">Cập nhật</a>
+                                <div class="MuiBox-root jss2270 jss2095">
+                                    <h6 class="MuiTypography-root MuiTypography-subtitle1">
+                                        Thông tin gợi ý khi bán hàng
+                                    </h6>
+                                    <a class="jss2101" th:href="'/admin/customers/'+ ${customer.getId()}+ '/edit'">
+                                        Cập nhật
+                                    </a>
                                 </div>
                                 <div class="MuiBox-root jss2271 jss2097">
                                     <div class="MuiGrid-root MuiGrid-container">
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-7">
                                             <div class="MuiPaper-root jss2098 jss2099 MuiPaper-elevation1 MuiPaper-rounded">
                                                 <h6 class="MuiTypography-root jss2100 jss2102 MuiTypography-subtitle1">
-                                                    Chính sách giá mặc định</h6><h6
-                                                    class="MuiTypography-root jss2100 jss2102 MuiTypography-subtitle1">
-                                                Chiết khấu khách hàng</h6><h6
-                                                    class="MuiTypography-root jss2100 jss2102 MuiTypography-subtitle1">
-                                                Hình thức thanh toán mặc định</h6></div>
+                                                    Chính sách giá mặc định
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss2100 jss2102 MuiTypography-subtitle1">
+                                                Chiết khấu khách hàng
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss2100 jss2102 MuiTypography-subtitle1">
+                                                Hình thức thanh toán mặc định
+                                                </h6>
+                                            </div>
                                         </div>
                                         <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-5">
-                                            <div class="MuiPaper-root jss2098 MuiPaper-elevation1 MuiPaper-rounded"><h6
-                                                    class="MuiTypography-root jss2100 MuiTypography-subtitle1"
-                                                    title="Giá nhập" itemid="display-default-price-list-name">: Giá
-                                                nhập</h6>
+                                            <div class="MuiPaper-root jss2098 MuiPaper-elevation1 MuiPaper-rounded">
+                                                <h6 class="MuiTypography-root jss2100 MuiTypography-subtitle1"
+                                                    title="Giá nhập" itemid="display-default-price-list-name">
+                                                    : Giá nhập
+                                                </h6>
                                                 <h6 class="MuiTypography-root jss2100 MuiTypography-subtitle1"
                                                     itemid="display-default-discount-rate"
-                                                    th:text="*{': '+getGroup().getDiscount() + ' %'}"></h6>
-
-                                                <h6
-                                                        class="MuiTypography-root jss2100 MuiTypography-subtitle1"
-                                                        title="Tiền mặt" itemid="display-default-payment-method-name">:
-                                                    Tiền
-                                                    mặt</h6></div>
+                                                    th:text="*{': '+getGroup().getDiscount() + ' %'}">
+                                                </h6>
+                                                <h6 class="MuiTypography-root jss2100 MuiTypography-subtitle1"
+                                                        title="Tiền mặt" itemid="display-default-payment-method-name">
+                                                    : Tiền mặt
+                                                </h6>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -284,13 +338,10 @@
 </div>
 
 </body>
-<th:block th:replace="/admin/customer/modal_delete_customer::modal_delete_customer"/>
-<th:block th:replace="/layout/script.html"/>
+<th:block th:replace="/admin/customer/modal_delete_customer"/>
+<th:block th:replace="/layout/script"/>
 <script src="/assets/admin/js/customer/customerHistory.js"></script>
 <script src="/assets/admin/js/customer/customer_app.js"></script>
-<script>
-    Page();
-</script>
 <script>
 
     // liên hệ
