@@ -119,6 +119,11 @@
                     </div>
                 </div>
             </header>
+            <div hidden="hidden" id="error">
+                <ul>
+                    <li>loi1</li>
+                </ul>
+            </div>
             <form id="formUpdateSupplier">
                 <div class="customer-container container" context="editSupplier">
                     <div class="customer-create--left">
@@ -572,7 +577,7 @@
                 getAllGroup();
                 // location.reload();
             })
-            .fail(() => {
+            .fail((jqXHR) =>{
                 SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại !");
             })
     }
@@ -642,6 +647,7 @@
                 location.href = `/admin/suppliers/${data.id}/histories`;
             })
             .fail(() => {
+
                 SupplierApp.IziToast.showErrorAlert("Sửa thông tin nhà cung cấp thất bại")
             })
     }

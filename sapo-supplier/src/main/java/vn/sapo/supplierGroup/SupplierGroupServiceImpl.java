@@ -26,20 +26,6 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
     @Transactional
     public SupplierGroupResult create(CreateSupGroupParam createParam) {
 
-//        List<SupplierGroup> supplierGroupList = supplierGroupRepository.findAll();
-//        System.out.println("Nhóm nhà cung cấp" + supplierGroupList);
-
-//        for (int i = 0; i < supplierGroupList.size(); i++) {
-//
-//            if (createParam.getTitle().trim().equalsIgnoreCase(supplierGroupList.get(i).getTitle())
-//            ) {
-//                throw new NotFoundException("Group supplier exist");
-//            }
-//            if (createParam.getSupplierCode() != null) {
-//                if (createParam.getSupplierCode().trim().equalsIgnoreCase(supplierGroupList.get(i).getSupGroupCode()))
-//                    throw new NotFoundException("Group supplier code exist");
-//            }
-//        }
         if (supplierGroupRepository.existsByTitle(createParam.getTitle()))
             throw new OperationException("Tên nhóm đã tồn tại");
 
