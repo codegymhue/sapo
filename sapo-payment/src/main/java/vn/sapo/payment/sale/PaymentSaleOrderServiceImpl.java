@@ -4,7 +4,7 @@ package vn.sapo.payment.sale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import vn.sapo.entities.payment.sale.PaymentSaleOrder;
+import vn.sapo.entities.voucher.sale.PaymentSaleOrder;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.order.sale.SaleOrderRepository;
 import vn.sapo.payment.sale.dto.CreatePaymentSaleOrderParam;

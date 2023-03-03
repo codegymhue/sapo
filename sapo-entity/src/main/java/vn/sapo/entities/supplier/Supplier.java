@@ -10,7 +10,7 @@ import org.hibernate.annotations.TypeDef;
 import vn.sapo.entities.Address;
 import vn.sapo.entities.BaseEntity;
 import vn.sapo.entities.Employee;
-import vn.sapo.entities.payment.PaymentMethod;
+import vn.sapo.entities.PaymentMethod;
 
 import javax.persistence.*;
 import java.util.HashMap;

@@ -3,7 +3,7 @@ package vn.sapo.payment.sale;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import vn.sapo.entities.payment.sale.PaymentSaleOrder;
+import vn.sapo.entities.voucher.sale.PaymentSaleOrder;
 
 import java.math.BigDecimal;
 import java.util.List;

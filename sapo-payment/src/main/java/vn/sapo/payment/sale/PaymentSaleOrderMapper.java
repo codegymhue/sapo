@@ -3,7 +3,7 @@ package vn.sapo.payment.sale;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import vn.sapo.entities.payment.sale.PaymentSaleOrder;
+import vn.sapo.entities.voucher.sale.PaymentSaleOrder;
 import vn.sapo.payment.sale.dto.CreatePaymentSaleOrderParam;
 import vn.sapo.payment.sale.dto.PaymentSaleOrderResult;
 

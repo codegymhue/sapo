@@ -9,7 +9,7 @@ import vn.sapo.entities.Employee;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.order.OrderStatus;
 import vn.sapo.entities.order.OrderStatusCode;
-import vn.sapo.entities.payment.sale.PaymentSaleOrder;
+import vn.sapo.entities.voucher.sale.PaymentSaleOrder;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

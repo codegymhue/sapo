@@ -3,7 +3,7 @@ package vn.sapo.payment.method;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import vn.sapo.entities.payment.PaymentMethod;
+import vn.sapo.entities.PaymentMethod;
 import vn.sapo.payment.method.dto.CreatePaymentMethodParam;
 import vn.sapo.payment.method.dto.PaymentMethodResult;
 import vn.sapo.payment.method.dto.UpdatePaymentMethodParam;
