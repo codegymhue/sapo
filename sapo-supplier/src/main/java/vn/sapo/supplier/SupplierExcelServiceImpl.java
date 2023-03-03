@@ -89,6 +89,14 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
         CreateAddressParam param = new CreateAddressParam();
         cells.forEachRemaining(cell -> {
             switch (cell.getColumnIndex()) {
+
+                case CONTACTNAME:
+                    param.setFullName(cell.getStringCellValue());
+                    break;
+                case CONTACTPHONE:
+                    param.setPhoneNumber(cell.getStringCellValue());
+                case CONTACTEMAIL:
+                    param.setEmail(cell.getStringCellValue());
                 case LABEL:
                     param.setLabel(cell.getStringCellValue());
                     break;
@@ -122,8 +130,8 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
                 case SUPPLIERCODE:
                     param.setSupplierCode(cell.getStringCellValue());
                     break;
-                case 2:
-                            //  ma nhom nha cung cap
+                case GROUP:
+                    param.setGroupId(Integer.valueOf(cell.getStringCellValue()));
                     break;
                 case EMAIL:
                     param.setEmail(cell.getStringCellValue());

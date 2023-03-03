@@ -58,7 +58,7 @@ public class ExcelHelperSuppliers {
                             supplier.setSupplierCode(currentCell.getStringCellValue());
                             break;
                         case 2:
-//  ma nhom nha cung cap
+                            supplier.setGroupId(Integer.valueOf(currentCell.getStringCellValue()));
                             break;
                         case 3:
                             supplier.setEmail(currentCell.getStringCellValue());
@@ -101,7 +101,7 @@ public class ExcelHelperSuppliers {
                             address.setEmail(currentCell.getStringCellValue());
                             break;
                         case 15:
-//                            nhãn
+                            address.setLabel(currentCell.getStringCellValue());
                             break;
                         case 16:
                             address.setLine1(currentCell.getStringCellValue());
