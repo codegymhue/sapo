@@ -14,419 +14,39 @@
             padding-left: 1.5rem;
             border-radius: 5px;
         }
-
         .modal-dialog {
             width: 600px;
             max-width: unset;
         }
+        .disable {
+            pointer-events: none;
+        !important;
+            opacity: 0.6;
+        !important;
+        }
+        table {
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .available{
+            color: #20a917;
+        }
+        .unavailable{
+            color: #ea1a1a;
+        }
+        table>tbody>tr {
+            cursor: pointer;
+        }
+        .filter-body{
+            overflow-y: visible;
+        }
+
     </style>
 </head>
 
 <body class="body_dashboard partners suppliers index">
-<div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title" id="exportModalLabel">Xuất file danh sách nhà cung cấp</h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" style="max-height: calc(100vh - 200px);overflow-y: auto;">
-                <form id="formExportSuppliers">
-                    <div style="padding-left: 10px;">
-                        <div style="font-weight:500;padding:5px 0">Giới hạn kết quả xuất</div>
-                        <div class="sapo-radio-wrapper">
-                            <label class="flex">
-                                    <span class="sapo-radiobox" style="margin-right: 7px;">
-                                        <input class="sapo-radiobox__input" type="radio" name="formExportType"
-                                               id="allSuppliers" value="allSuppliers" checked="">
-                                        <span class="sapo-radiobox__icon"></span>
-                                    </span>
-                                Tất cả nhà cung cấp
-                            </label>
-                        </div>
-                        <div class="sapo-radio-wrapper">
-                            <label class="flex">
-                                    <span class="sapo-radiobox" style="margin-right: 7px;">
-                                        <input class="sapo-radiobox__input" type="radio" name="formExportType"
-                                               id="currentPage" value="currentPage">
-                                        <span class="sapo-radiobox__icon"></span>
-                                    </span>
-                                Nhà cung cấp trên trang này
-                            </label>
-                        </div>
-                        <div class="sapo-radio-wrapper">
-                            <label class="flex">
-                                    <span class="sapo-radiobox" style="margin-right: 7px;">
-                                        <input class="sapo-radiobox__input" type="radio" name="formExportType"
-                                               id="selectedSuppliers" value="selectedSuppliers" disabled="disabled">
-                                        <span class="sapo-radiobox__icon"></span>
-                                    </span>
-                                Các nhà cung cấp được chọn
-                            </label>
-                        </div>
-                        <div class="sapo-radio-wrapper">
-                            <label class="flex">
-                                    <span class="sapo-radiobox" style="margin-right: 7px;">
-                                        <input class="sapo-radiobox__input" type="radio" name="formExportType"
-                                               id="currentSearch" value="currentSearch">
-                                        <span class="sapo-radiobox__icon"></span>
-                                    </span>
-                                <span id="order-match-current-search">5</span>&nbsp;nhà cung cấp phù hợp với kết quả
-                                tìm kiếm hiện
-                                tại
-                            </label>
-                        </div>
-
-                        <div style="font-weight:500;padding:10px 0 5px">Loại file xuất</div>
-                        <div class="export-field-group--header modal-setting-column pb-3">
-                            <label class="border-checkmark1">
-                                <input type="checkbox" class="export-field-group--toggle-all"
-                                       bind-event-change="toggleGroupFormImport(this)"><span>Xuất dữ liệu theo mẫu file
-                                        nhập</span>
-                                <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                            </label>
-                        </div>
-
-                        <a id="export-field-group--show-export-supplier" href="javascript:"
-                           bind-event-click="showExportForm()"
-                           style="color: #0088ff;margin: 5px 0 5px;display: inline-block;">Tuỳ chọn trường hiển
-                            thị</a>
-                    </div>
-                </form>
-                <div id="formExportSuppliers-supplier_overview" style="display:none">
-
-
-                    <div class="export-field-group export-field-group--order export-field-row"
-                         id="export-field-group--supplier_overview">
-                        <div class="export-field-group--content d-flex">
-                            <div class="export-field-col" style="width: calc(100%/3)">
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-name"
-                                               hidden="" type="checkbox" value="name" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Tên nhà cung cấp </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked="" disabled=""
-                                               class="export-field-group--toggle-item export-field-group--value-code"
-                                               hidden="" type="checkbox" value="code" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1 disable"
-                                              style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Mã nhà cung cấp </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-group"
-                                               hidden="" type="checkbox" value="group" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Nhóm nhà cung cấp </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-email"
-                                               hidden="" type="checkbox" value="email" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Email </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-phone"
-                                               hidden="" type="checkbox" value="phone" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Số điện thoại </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input
-                                                class="export-field-group--toggle-item export-field-group--value-website"
-                                                hidden="" type="checkbox" value="website" field-group="SupplierFields"
-                                                bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Website </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input class="export-field-group--toggle-item export-field-group--value-fax"
-                                               hidden="" type="checkbox" value="fax" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Fax </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input
-                                                class="export-field-group--toggle-item export-field-group--value-taxNumber"
-                                                hidden="" type="checkbox" value="taxNumber" field-group="SupplierFields"
-                                                bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Mã số thuế </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-assigneeName"
-                                               hidden="" type="checkbox" value="assigneeName"
-                                               field-group="SupplierFields" bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Nhân viên phụ trách </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="export-field-col" style="width: calc(100%/3)">
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input
-                                                class="export-field-group--toggle-item export-field-group--value-priceListDefault"
-                                                hidden="" type="checkbox" value="priceListDefault"
-                                                field-group="SupplierFields" bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Chính sách giá mặc định </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input
-                                                class="export-field-group--toggle-item export-field-group--value-paymentTermDefault"
-                                                hidden="" type="checkbox" value="paymentTermDefault"
-                                                field-group="SupplierFields" bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Kỳ hạn thanh toán mặc định </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input
-                                                class="export-field-group--toggle-item export-field-group--value-paymentMethodDefault"
-                                                hidden="" type="checkbox" value="paymentMethodDefault"
-                                                field-group="SupplierFields" bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Hình thức thanh toán mặc định </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-contact"
-                                               hidden="" type="checkbox" value="contact" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Người liên hệ </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-contactNumber"
-                                               hidden="" type="checkbox" value="contactNumber"
-                                               field-group="SupplierFields" bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>SĐT người liên hệ </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-contactEmail"
-                                               hidden="" type="checkbox" value="contactEmail"
-                                               field-group="SupplierFields" bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Email người liên hệ </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-address"
-                                               hidden="" type="checkbox" value="address" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Nhãn </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-address1"
-                                               hidden="" type="checkbox" value="address1" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Địa chỉ 1 </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input
-                                                class="export-field-group--toggle-item export-field-group--value-address2"
-                                                hidden="" type="checkbox" value="address2" field-group="SupplierFields"
-                                                bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Địa chỉ 2 </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="export-field-col" style="width: calc(100%/3)">
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-city"
-                                               hidden="" type="checkbox" value="city" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Tỉnh thành </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-district"
-                                               hidden="" type="checkbox" value="district" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Quận huyện </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-ward"
-                                               hidden="" type="checkbox" value="ward" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Phường xã </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-debt"
-                                               hidden="" type="checkbox" value="debt" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Nợ hiện tại </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input
-                                                class="export-field-group--toggle-item export-field-group--value-status"
-                                                hidden="" type="checkbox" value="status" field-group="SupplierFields"
-                                                bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Trạng thái </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input
-                                                class="export-field-group--toggle-item export-field-group--value-description"
-                                                hidden="" type="checkbox" value="description"
-                                                field-group="SupplierFields" bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Mô tả </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input
-                                                class="export-field-group--toggle-item export-field-group--value-tags"
-                                                hidden="" type="checkbox" value="tags" field-group="SupplierFields"
-                                                bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Tags </span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <div class="action-btn clearfix">
-                    <button class="btn sapo-btn-default pull-right" id="exportBtn"
-                            bind-event-click="confirmImport(this)">Xuất
-                        file
-                    </button>
-                    <button class="btn btn-blank pull-right mr-2" bind-event-click="closePopup()"
-                            data-bs-dismiss="modal" type="button">Thoát
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Nhập dữ liệu nhà cung cấp</h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="form-import" action="/suppliers/import?area=Suppliers" method="post"
-                      enctype="multipart/form-data">
-                    <div>
-                        <div id="load-status-import"></div>
-                        <div id="empty-success">
-                            <div>
-                                Chú ý:
-                            </div>
-                            <div class="empty-success__text">
-                                - Mã nhà cung cấp phải là duy nhất đối với các nhà cung cấp độc lập
-                            </div>
-                            <div class="empty-success__text">
-                                - Chuyển đổi file nhập dưới dạng .XLS trước tải dữ liệu.
-                            </div>
-                            <div class="empty-success__text">
-                                - Tải file mẫu nhà cung cấp <a
-                                    href="/v2/file/sapo_mau_nhap_nha_cung_cap_17052022.xlsx"
-                                    style="color:#0088ff">tại đây</a>
-                            </div>
-                            <div class="empty-success__text">
-                                - File nhập có dung lượng tối đa là 2MB và 5000 bản ghi.
-                            </div>
-                        </div>
-
-                        <div id="chose-file">
-                            <input class="form-control" type="file" id="formFileSuppliers">
-                        </div>
-
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <div class="action-btn clearfix">
-                    <button class="btn sapo-btn-default pull-right" id="importBtn"
-                            bind-event-click="confirmImport(this)">Nhập
-                        file
-                    </button>
-                    <button class="btn btn-blank pull-right mr-2" bind-event-click="closePopup()"
-                            data-bs-dismiss="modal" type="button">Thoát
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<th:block th:replace="/layout/supplier/modal_export_import.html"/>
 <div id="container">
     <div class="hidden" context="tenantInfo"
          define="{tenantInfo: new Components.TenantInfo(this,{&quot;countries&quot;:{&quot;countryId&quot;:201}})}">
@@ -468,7 +88,7 @@
                         </button>
                         <a class="btn sapo-btn-transparent action-bar__link" href="/admin/supplier_groups"
                            data-popover-index="1">
-                            <img src="/v2/images/icon/friends.svg"
+                            <img src="../../../static/assets/admin/images/friends.svg"
                                  style="width: 18px; height: 18px; position: relative; top: -0.6rem; margin-top: -1.1rem; margin-bottom: -1.1rem; margin-right: 3px;">
                             Nhóm nhà cung cấp
                         </a>
@@ -493,7 +113,7 @@
                                 <a href="/admin/suppliers" class="filter-tab filter-tab-active">Tất cả nhà cung cấp</a>
                             </li>
                             <li class="filter-tab-item" style="opacity: 1; padding-bottom: 3.5px;">
-                                <button class="filter-tab" id="statusAvailable">Đang giao dịch</button>
+                                <a class="filter-tab" href="#" id="statusAvailable">Đang giao dịch</a>
                             </li>
                         </ul>
                     </div>
@@ -511,7 +131,6 @@
                                 <use xlink:href="#next-search-reverse" xmlns:xlink="http://www.w3.org/1999/xlink"/>
                             </svg>
                             <input type="text" class="input-query sapo-textbox searchKey"
-                                   bind-event-change="searchKey()"
                                    title="Tìm kiếm theo mã nhà cung cấp, SĐT, tên nhà cung cấp"
                                    placeholder="Tìm kiếm theo mã nhà cung cấp, SĐT, tên nhà cung cấp"/>
                         </div>
@@ -538,7 +157,7 @@
                                         </svg>
                                     </div>
                                     <div class="btn-group pull-left" data-toggle="buttons">
-                                        <label class="btn filter-button-tag"
+                                        <label class="btn filter-button-tag" id="lableAVAILABLE"
                                                bind-event-click="setParamFilterActive('AVAILABLE',this)">
                                             <input type="checkbox" class="checkbox_status" id="AVAILABLE"> Đang giao
                                             dịch
@@ -629,13 +248,13 @@
                                             </div>
                                             <div class="btn-group show">
                                                 <button type="button"
-                                                        bind-event-click="setParamFilterSupplierGroupId(this)"
+                                                        id="setParamFilterSupplierGroupId"
                                                         class="multiselect dropdown-toggle btn sapo-btn-blank btn-default"
                                                         data-bs-toggle="dropdown" data-bs-auto-close="outside"
                                                         aria-expanded="false"
                                                         style="padding:0.8rem; min-width: 300px"
                                                         title="Chọn nhóm nhà cung cấp"
-                                                ><span class="multiselect-selected-text">Chọn nhóm nhà cung cấp</span>
+                                                ><span class="multiselect-selected-text multiselect_supplier_groupId">Chọn nhóm nhà cung cấp</span>
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                          class="icon-dropdown-select">
                                                         <path d="M10 16l-4-4h8l-4 4zm0-12L6 8h8l-4-4z"></path>
@@ -849,22 +468,22 @@
                                     <div class="" style="    float: right;padding: 0 0 0 20px;">
                                         <div class="dataTables_paginate paging_bootstrap">
                                             <ul class="pagination">
-                                                <li><a class="t-link"><span
-                                                        class="t-icon t-arrow-first">← Trang đầu</span></a></li>
+                                                <!--                                                <li><a class="t-link"><span-->
+                                                <!--                                                        class="t-icon t-arrow-first">← Trang đầu</span></a></li>-->
                                                 <li><a class="t-link" id="previousPage"
-                                                >4</a></li>
+                                                >← Trang trước</a></li>
 
                                                 <li><a class="t-link" id="pageNo">1</a>
                                                 </li>
                                                 <li><a class="t-link" id="nextPage"
-                                                >2</a></li>
+                                                >Trang sau →</a></li>
 
                                                 <!--                                                <li class="active"><span class="t-state-active">3</span></li>-->
                                                 <!--                                                <li><a class="t-link"-->
                                                 <!--                                                      >5</a></li>-->
-                                                <li><a class="t-link"
-                                                ><span class="t-icon t-arrow-last">Trang cuối →</span></a>
-                                                </li>
+                                                <!--                                                <li><a class="t-link"-->
+                                                <!--                                                ><span class="t-icon t-arrow-last">Trang cuối →</span></a>-->
+                                                <!--                                                </li>-->
                                             </ul>
                                         </div>
                                         <!--                                        <nav aria-label="Page navigation example ">-->
@@ -1112,7 +731,7 @@
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
 <th:block th:replace="/layout/script :: script"/>
 <th:block th:replace="/layout/supplier/script_export_import.html"/>
-<!--<th:block th:replace="/layout/supplier/modal_export_import.html"/>-->
+
 <script>
 
     $(".filter-item").css("display", "block");
@@ -1120,7 +739,6 @@
         $('option').prop('disabled', false);
         $('.select-change-filter').each(function () {
             let val = this.value;
-            console.log(val, " val")
             $('.select-change-filter').not(this).find('option').filter(function () {
                 return this.value === val;
             }).hide();
@@ -1133,7 +751,6 @@
 
     let arrayIdSupplier = [];
     let supplierFilter = new SupplierFilter();
-    let checkSupplierFilterChange;
     const page = {
         urls: {
             getAllSupplier: SupplierApp.SUPPLIER_API,
@@ -1190,8 +807,17 @@
     page.dialogs.elements.filterEmployee = $("#ulAssigneeIdsFilter");
     // page.dialogs.elements.checkboxInputEmployee = $(".sapo-checkbox__input");
     page.dialogs.elements.filterSupplierGroupId = $("#ulSupplierGroupId");
-
     page.dialogs.elements.filterSubmit = $("#filterSubmit")
+
+    //fillter status
+    page.elements.filter_button_tag = $(".filter-button-tag");
+
+    //filter employee
+    page.elements.multiselect_employee = $(".multiselect-employee")
+
+    //filter supplier_groupId
+    page.elements.multiselect_supplier_groupId = $(".multiselect_supplier_groupId")
+
 
     function resetSupplierFilter() {
         supplierFilter.filter = null;
@@ -1203,7 +829,9 @@
         supplierFilter.pageNo = null;
         supplierFilter.pageSize = null;
         // page.commands.getAllSupplier();
+        console.log("resetSupplierFilter done")
     }
+
 
     // seach
     page.elements.totalPage = $("#totalPage");
@@ -1213,22 +841,23 @@
     page.dialogs.elements.nextPage = $("#nextPage");
     page.dialogs.elements.previousPage = $("#previousPage");
 
-    page.elements.btnFilter.on("click", function () {
-        $(".filter-button-tag").removeClass("active");
-        $('input[type=checkbox]').prop('checked', false);
-        $(".input-date").val("");
-        $(".multiselect-employee").text("Chọn nhân viên")
-        $("#search-supplierGroupId-container").empty()
-        resetSupplierFilter()
-    })
+    // page.elements.btnFilter.on("click", function () {
+    //     page.elements.filter_button_tag.removeClass("active");
+    //     $('input[type=checkbox]').prop('checked', false);
+    //     $(".input-date").val("");
+    //     page.elements.multiselect_employee.text("Chọn nhân viên")
+    //     $("#search-supplierGroupId-container").empty()
+    //     resetSupplierFilter()
+    // })
 
 
     page.commands.getAllSupplier = () => {
-        let pageNo = Number(page.elements.pageNo.text());
-        let pageSize = Number(page.elements.pageSize.val());
-        let status = ""
 
-        page.commands.getAllSupplierOnPageNo(pageNo, pageSize, status);
+        supplierFilter.pageNo = Number(page.elements.pageNo.text());
+        supplierFilter.pageSize = Number(page.elements.pageSize.val());
+
+        page.commands.getAllSupplierUseFilter(supplierFilter);
+        // page.commands.getAllSupplierOnPageNo(1, 20, status)
     }
 
     page.commands.getAllSupplierOnPageNo = (pageNo, pageSize, status) => {
@@ -1265,7 +894,7 @@
                     page.commands.resetInputCheckBox();
                     page.commands.isCheckbox();
                     page.elements.totalPage.append(
-                        `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
+                        `<span class="me-2">Tổng nhà cung cấp ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
                     )
                 } else {
                     $(".ui-type-container").show();
@@ -1279,33 +908,33 @@
     }
 
     page.elements.btnStatusAvailable.on("click", () => {
-        console.log("in to function")
-        let pageNo = Number(page.elements.pageNo.text());
-        let pageSize = Number(page.elements.pageSize.val());
-        let status = "AVAILABLE";
-
-        page.commands.getAllSupplierOnPageNo(pageNo, pageSize, status);
+        resetSupplierFilter();
+        $("#lableAVAILABLE").addClass("active")
+        supplierFilter.statuses.push("AVAILABLE")
+        page.commands.getAllSupplierUseFilter(supplierFilter);
     })
 
-    function searchKey() {
+    page.elements.searchKey.on("change", () => {
         supplierFilter.pageNo = Number(page.elements.pageNo.text());
         supplierFilter.pageSize = Number(page.elements.pageSize.val());
         supplierFilter.filter = page.elements.searchKey.val().trim();
         console.log(supplierFilter)
         page.commands.getAllSupplierUseFilter(supplierFilter);
-        resetSupplierFilter()
-    }
+        // page.elements.searchKey.val("");
+
+    })
 
     page.dialogs.elements.filterSubmit.on("click", () => {
-        supplierFilter.pageNo = Number(page.elements.pageNo.text());
-        supplierFilter.pageSize = Number(page.elements.pageSize.val());
-        g
+        page.elements.pageNo.text(1);
+        supplierFilter.pageNo = 1;
         console.log(supplierFilter, " supplierFilter truoc rết")
         page.commands.getAllSupplierUseFilter(supplierFilter);
-        resetSupplierFilter();
+        page.elements.btnFilter.click()
+        console.log(supplierFilter)
     })
 
     page.commands.getAllSupplierUseFilter = (supplierFilter) => {
+        console.log(supplierFilter, " supplierFilter")
         $.ajax({
             headers: {
                 "accept": "application/json",
@@ -1331,49 +960,54 @@
                             page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'unavailable'))
                         }
                     });
+                    page.commands.resetInputCheckBox();
+                    page.commands.isCheckbox();
                     page.elements.totalPage.append(
-                        `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
+                        `<span class="me-2">Tổng nhà cung cấp ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
                     )
                 } else {
                     $(".ui-type-container").show();
                     $("#sapo-table_wrapper").hide();
                     $(".container-fluid").hide();
                 }
+                page.elements.pageNo.parent().addClass("active")
+                if (Number(page.elements.pageNo.text()) === 1)
+                    page.dialogs.elements.previousPage.parent().addClass("disable")
+                if (Number(page.elements.pageNo.text()) === Number(totalPage))
+                    page.dialogs.elements.nextPage.parent().addClass("disable")
+                else
+                    page.dialogs.elements.nextPage.parent().removeClass("disable")
+
             })
     }
 
     page.dialogs.elements.nextPage.on("click", () => {
         let pageNo = page.elements.pageNo.text();
         if (Number(pageNo) < Number(totalPage)) {
+            page.dialogs.elements.previousPage.parent().removeClass("disable")
             let pageNext = Number(pageNo) + 1;
-            page.dialogs.elements.nextPage.show()
             page.elements.pageNo.text(pageNext);
-            $(page.elements.pageNo.parentElement).addClass("active")
-            page.dialogs.elements.previousPage.removeClass("active")
-            page.dialogs.elements.nextPage.text(pageNext + 1)
-            page.dialogs.elements.previousPage.text(pageNext - 1)
+            page.elements.pageNo.parent().addClass("active")
             page.commands.getAllSupplier();
-            console.log($("#pageNo").parentElement, " page.elements.pageNo.parentElement")
-        } else {
-            page.elements.pageNo.text(Number(pageNo) + 1);
-            page.dialogs.elements.nextPage.hide()
         }
+        // page.elements.pageNo.text(Number(pageNo) + 1);
+        if (Number(page.elements.pageNo.text()) === Number(totalPage))
+            page.dialogs.elements.nextPage.parent().addClass("disable")
     })
 
 
     page.dialogs.elements.previousPage.on("click", () => {
         let pageNo = page.elements.pageNo.text();
         if (Number(pageNo) > 1) {
+            page.dialogs.elements.nextPage.parent().removeClass("disable")
             let previousPage = Number(pageNo) - 1;
             page.elements.pageNo.text(previousPage);
-            page.dialogs.elements.previousPage.text(previousPage - 1)
-            page.dialogs.elements.nextPage.text(previousPage + 1)
+            page.elements.pageNo.parent().addClass("active")
             page.commands.getAllSupplier();
-        } else {
-            page.elements.pageNo.text(Number(pageNo) + 1);
-            page.dialogs.elements.nextPage.hide()
         }
-
+        // page.elements.pageNo.text(Number(pageNo) + 1);
+        if (Number(page.elements.pageNo.text()) === 1)
+            page.dialogs.elements.previousPage.parent().addClass("disable")
     })
 
     page.elements.pageSize.on("change", () => {
@@ -1397,7 +1031,7 @@
                     page.dialogs.elements.filterEmployee.append(SupplierApp.renderEmployeeOnFilter(item));
                     $("#accountIdBulk").append(str);
                 });
-            }).fail((jqXHR) => {
+            }).fail((  ) => {
         })
     }
 
@@ -1793,10 +1427,9 @@
     }
 
 
-    $("setParamFilterAssigneeIds").on("click", function (element){
-        $(element).off("click")
+    page.elements.multiselect_employee.on("click", function () {
         $('input[type="checkbox"].checkbox_employee').change(function () {
-
+            page.elements.multiselect_employee.off("click")
             let checkbox = $(this)
             let checkboxText = $(`label[for="${$(this).val()}"]`).text();
             let checkboxCheckedLength = $('input[type="checkbox"].checkbox_employee:checked').length;
@@ -1805,41 +1438,39 @@
             if (checkbox.is(":checked")) {
                 supplierFilter.employeeIds.push(checkbox.val())
                 if (checkboxCheckedLength < 1)
-                    $(element).find("span").text("Chọn nhân viên")
+                    page.elements.multiselect_employee.text("Chọn nhân viên")
                 else if (checkboxCheckedLength === 1) {
                     $('input[type="checkbox"].checkbox_employee').each(function () {
                         if ($(this).is(":checked"))
-                            $(element).find("span").text($(`label[for="${$(this).val()}"]`).text())
+                            page.elements.multiselect_employee.text($(`label[for="${$(this).val()}"]`).text())
                     })
                 } else if (checkboxCheckedLength > 1 && checkboxCheckedLength < checkboxAll)
-                    $(element).find("span").text(`${checkboxCheckedLength} nhân viên được chọn`)
+                    page.elements.multiselect_employee.text(`${checkboxCheckedLength} nhân viên được chọn`)
                 else if (checkboxCheckedLength === checkboxAll)
-                    $(element).find("span").text(`Tất cả (${checkboxCheckedLength})`)
+                    page.elements.multiselect_employee.text(`Tất cả (${checkboxCheckedLength})`)
             } else {
                 if (supplierFilter.employeeIds.indexOf(checkbox.val()) > -1) {
                     supplierFilter.employeeIds.splice(supplierFilter.employeeIds.indexOf(checkbox.val()), 1)
                 }
                 if (checkboxCheckedLength < 1)
-                    $(element).find("span").text("Chọn nhân viên")
+                    page.elements.multiselect_employee.text("Chọn nhân viên")
                 else if (checkboxCheckedLength === 1) {
                     $('input[type="checkbox"].checkbox_employee').each(function () {
                         if ($(this).is(":checked"))
-                            $(element).find("span").text($(`label[for="${$(this).val()}"]`).text())
+                            page.elements.multiselect_employee.text($(`label[for="${$(this).val()}"]`).text())
                     })
                 } else if (checkboxCheckedLength > 1 && checkboxCheckedLength < checkboxAll)
-                    $(element).find("span").text(`${checkboxCheckedLength} nhân viên được chọn`)
+                    page.elements.multiselect_employee.text(`${checkboxCheckedLength} nhân viên được chọn`)
                 else if (checkboxCheckedLength === checkboxAll)
-                    $(element).find("span").text(`Tất cả (${checkboxCheckedLength})`)
+                    page.elements.multiselect_employee.text(`Tất cả (${checkboxCheckedLength})`)
             }
             console.log(supplierFilter.employeeIds)
         })
-
     })
 
-    function setParamFilterSupplierGroupId(element) {
-        element.removeEventListener("click", setParamFilterSupplierGroupId)
+    page.elements.multiselect_supplier_groupId.on("click", () => {
         $('input[type="checkbox"].checkbox_supplier_group').change(function () {
-
+            page.elements.multiselect_supplier_groupId.off("click")
             let checkbox = $(this)
             let checkboxText = $(`label[for="${$(this).val()}"]`).text();
             let str = `<span class="tm-tag tm-tag-small tm-serial tm-overflow"
@@ -1854,14 +1485,12 @@
             } else {
                 if (supplierFilter.groupIds.indexOf(checkbox.val()) > -1) {
                     supplierFilter.groupIds.splice(supplierFilter.groupIds.indexOf(checkbox.val()), 1)
+                    $("span[" + "id" + "*=" + "tag-variant-" + checkbox.val() + "]").remove()
                 }
-                $("span[" + "id" + "^=" + "tag-variant-" + $(element).val() + "]").remove()
-
             }
             console.log(supplierFilter.groupIds)
         })
-    }
-
+    })
 
     // tìm từ khóa trong filter SupplierGroup
     function suggest(element) {
@@ -1884,6 +1513,8 @@
             supplierFilter.createdFrom = null;
         document.getElementById("createMin").setAttribute("max", supplierFilter.createdTo);
         document.getElementById("createMax").setAttribute("min", supplierFilter.createdFrom);
+        console.log(supplierFilter.createdFrom, "supplierFilter.createdFrom")
+        console.log(supplierFilter.createdTo, "supplierFilter.createdTo")
     }
 
 
@@ -1892,7 +1523,6 @@
         page.commands.getAllEmployee();
         page.commands.getAllPaymentMethodSelect();
         page.commands.getAllSupplierGroup();
-
         // page.commands.getAllSupplierByFilter();
     }
 

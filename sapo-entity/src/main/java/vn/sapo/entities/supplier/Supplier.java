@@ -10,7 +10,7 @@ import org.hibernate.annotations.TypeDef;
 import vn.sapo.entities.Address;
 import vn.sapo.entities.BaseEntity;
 import vn.sapo.entities.Employee;
-import vn.sapo.entities.payment.PaymentMethod;
+import vn.sapo.entities.PaymentMethod;
 
 import javax.persistence.*;
 import java.util.HashMap;
@@ -38,10 +38,10 @@ public class Supplier extends BaseEntity {
     @Column(name = "full_name", nullable = false)
     private String fullName;
 
-    @Column(name = "email", length = 50)
+    @Column(name = "email", length = 30)
     private String email;
 
-    @Column(name = "phone", nullable = false, length = 50)
+    @Column(name = "phone", nullable = false, length = 12)
     private String phone;
 
     @Column(name = "status", nullable = false)

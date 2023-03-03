@@ -12,25 +12,25 @@ class SupplierApp {
         let str = `
              <tr id="tr_${item.id}" >
                 <td class="align-middle">
-                <label for="${item.id}" style="padding: 1rem; cursor:pointer">
-                    <input style="cursor:pointer" id ="${item.id}" class="selectCheckbox"  name="options[]" type="checkbox" value="${item.id}">
+                <label for="sup_${item.id}" style="padding: 1rem; cursor:pointer">
+                    <input style="cursor:pointer" id="sup_${item.id}" class="selectCheckbox" name="sup_${item.id}" type="checkbox" value="${item.id}">
                 </label>
                 </td>
                 
                  <td class="align-middle"><a href="/admin/suppliers/${item.id}/histories" style="text-decoration: none">${item.supplierCode}</a></td>
-                <td class="align-middle">${item.fullName || ""}</td>
-                  <td class="align-middle">${item.group == null ? "" : item.group.title}</td>
-                <td class="align-middle">${item.email || ""}</td>
-                <td class="align-middle">${item.phone || ""}</td>
-                 <td class="align-middle">
+                <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.fullName || ""}</td>
+                  <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.group == null ? "" : item.group.title}</td>
+                <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.email || ""}</td>
+                <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.phone || ""}</td>
+                 <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">
                     <span id="showStatus" class="${showStatus}">${item.status === "AVAILABLE" ? "Đang giao dịch" : "Ngừng giao dịch"}</span> 
                 </td>   
 <!--                <td class="align-middle text-end ">${new Intl.NumberFormat('de-DE').format(item.available)}</td>-->
-              <td class="align-middle">${item.employee == null ? "" : item.employee.fullName}</td>
-              <td class="align-middle">${item.taxCode || ""}</td>
-               <td class="align-middle">${item.website || ""}</td>
-                <td class="align-middle">${item.createdAt === null ? "" : new Date(item.createdAt).toLocaleDateString('en-GB')}</td>
-                <td class="align-middle">${item.updatedAt === null ? "" : new Date(item.updatedAt).toLocaleDateString('en-GB')}</td>
+              <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.employee == null ? "" : item.employee.fullName}</td>
+              <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.taxCode || ""}</td>
+               <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.website || ""}</td>
+                <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.createdAt === null ? "" : new Date(item.createdAt).toLocaleDateString('en-GB')}</td>
+                <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.updatedAt === null ? "" : new Date(item.updatedAt).toLocaleDateString('en-GB')}</td>
             </tr>
         `;
         return str;
@@ -54,6 +54,21 @@ class SupplierApp {
                         </div>
                 </div>`
         return str;
+    }
+
+    static AlertMessageVi = class {
+        static SUCCESS_CREATED = "Tạo dữ liệu thành công !";
+
+        static SUCCESS_UPDATED = "Cập nhật dữ liệu thành công !";
+        static SUCCESS_DELETE = "Xóa dữ liệu thành công";
+
+        static ERROR_TITLE = "Thao tác không thành công, Tên nhà cung cấp không được để trống.";
+        static ERROR_400 = "Thao tác không thành công, vui lòng kiểm tra lại dữ liệu.";
+        static ERROR_401 = "Unauthorized - Access Token của bạn hết hạn hoặc không hợp lệ.";
+        static ERROR_403 = "Forbidden - Bạn không được quyền truy cập tài nguyên này.";
+        static ERROR_404 = "Not Found - Tài nguyên này đã bị xóa hoặc không tồn tại";
+        static ERROR_500 = "Internal Server Error - Hệ thống Server đang có vấn đề hoặc không truy cập được.";
+
     }
 
 

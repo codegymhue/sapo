@@ -1,15 +1,11 @@
 package vn.sapo.entities.customer;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import vn.sapo.entities.BaseEntity;
-import vn.sapo.entities.Employee;
-import vn.sapo.entities.payment.PaymentMethod;
+import vn.sapo.entities.PaymentMethod;
 import vn.sapo.entities.product.pricing_policy.PricingPolicy;
 
 import javax.persistence.*;

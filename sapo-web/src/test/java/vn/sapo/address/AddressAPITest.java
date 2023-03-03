@@ -48,6 +48,7 @@ public class AddressAPITest {
 
     @BeforeEach
     public void init() {
+        when(addressService.findByCustomerId(0)).thenReturn(new ArrayList<>());
         when(addressService.findByCustomerId(1)).thenReturn(addresses);
         when(addressService.create(isA(CreateAddressParam.class))).thenReturn(addresses.get(0));
         when(addressService.update(isA(UpdateAddressParam.class))).thenReturn(addresses.get(0));
@@ -56,12 +57,7 @@ public class AddressAPITest {
 
     @Test
     public void testFindByCustomerId() throws Exception {
-        mockMvc.perform(
-                        get("/api/addresses/findByCustomerId/1")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .accept(MediaType.APPLICATION_JSON)
-
-                )
+        mockMvc.perform(get("/api/addresses/findByCustomerId/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(1)));
@@ -79,13 +75,13 @@ public class AddressAPITest {
                         post("/api/addresses")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(JacksonParser.INSTANCE.toJson(createAddressParam))
-                                .accept(MediaType.APPLICATION_JSON)
 
                 )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)));
 
     }
+
     @Test
     public void testUpdateAddress() throws Exception {
         UpdateAddressParam updateAddressParam = new UpdateAddressParam()
