@@ -1,12 +1,10 @@
 package vn.sapo.address;
 
-import org.springframework.stereotype.Component;
 import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.entities.customer.Customer;
-import vn.sapo.entities.customer.CustomerGender;
 import vn.sapo.entities.customer.CustomerStatus;
 
 import java.math.BigDecimal;

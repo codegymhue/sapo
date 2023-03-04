@@ -2,15 +2,8 @@ package vn.sapo.address;
 
 import org.assertj.core.api.Assertions;
 import vn.sapo.address.dto.CreateAddressParam;
-import vn.sapo.customer.dto.CreateCustomerParam;
-import vn.sapo.customer.dto.CustomerGender;
 import vn.sapo.customer.dto.CustomerResult;
-import vn.sapo.customer.dto.CustomerStatus;
-import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.entities.customer.Customer;
-
-import java.math.BigDecimal;
-import java.util.Date;
 
 public class CustomerAssertTest {
     public static void assertCustomer(CustomerResult expected,  Customer actual){

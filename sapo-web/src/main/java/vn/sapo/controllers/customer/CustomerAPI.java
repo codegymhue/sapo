@@ -28,6 +28,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/customers")
+@CrossOrigin(origins = "*")
 public class CustomerAPI {
     @Autowired
     private CustomerService customerService;
@@ -63,6 +64,7 @@ public class CustomerAPI {
     public ResponseEntity<?> testFilter(@RequestBody CustomerFilter customerFilter,
                                         @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
         // start = 10; length = 5;
+        System.out.println(customerFilter);
         int start = customerFilter.getStart();
         int length = customerFilter.getLength();
 

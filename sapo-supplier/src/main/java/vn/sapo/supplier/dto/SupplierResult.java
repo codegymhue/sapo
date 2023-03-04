@@ -6,9 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import vn.sapo.address.dto.AddressResult;
-import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.entities.supplier.SupplierStatus;
-import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 
 import java.math.BigDecimal;
 import java.time.Instant;

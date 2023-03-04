@@ -1,8 +1,6 @@
 package vn.sapo.address;
 
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.address.dto.UpdateAddressParam;

@@ -29,6 +29,23 @@ public class CustomerFilter {
     private Integer length;            // số lượng trên 1 trang
     private Integer start;             // lấy bắt đầu từ
 
-
-
+    @Override
+    public String toString() {
+        return "CustomerFilter{" +
+                "keyword='" + keyword + '\'' +
+                ", id=" + id +
+                ", customerCode='" + customerCode + '\'' +
+                ", groupIds=" + groupIds +
+                ", gender='" + gender + '\'' +
+                ", dayOfBirthday=" + dayOfBirthday +
+                ", monthOfBirthday=" + monthOfBirthday +
+                ", employeeIds=" + employeeIds +
+                ", statusList=" + statusList +
+                ", createdFrom=" + createdFrom +
+                ", createdTo=" + createdTo +
+                ", draw=" + draw +
+                ", length=" + length +
+                ", start=" + start +
+                '}';
+    }
 }
