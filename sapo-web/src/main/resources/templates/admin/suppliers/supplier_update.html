@@ -119,7 +119,12 @@
                     </div>
                 </div>
             </header>
-            <form id="formUpdateSupplier">
+            <div hidden="hidden" id="error">
+                <ul>
+                    <li>loi1</li>
+                </ul>
+            </div>
+            <form id="formUpdateSupplier" class=".needs-validation">
                 <div class="customer-container container" context="editSupplier">
                     <div class="customer-create--left">
                         <div class="page-info">
@@ -128,7 +133,7 @@
                                     <div class="label mb-2 label-required">Tên nhà cung cấp</div>
                                     <input id="fullName" name="fullName" class="sapo-textbox w100"
                                            th:value="${supplier.fullName}" data-toggle="tooltip"
-                                           placeholder="Nhập tên nhà cung cấp">
+                                           placeholder="Nhập tên nhà cung cấp" required>
                                 </div>
                                 <div class="col-6 field pl-0">
                                     <div class="label mb-2">Mã nhà cung cấp</div>
@@ -572,8 +577,13 @@
                 getAllGroup();
                 // location.reload();
             })
-            .fail(() => {
-                SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại !");
+            .fail((jqXHR) =>{
+                if (jqXHR.responseJSON) {
+                    if (jqXHR.responseJSON.message) {
+                        SupplierApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
+                    }
+                }
+                // SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại !");
             })
     }
 
@@ -641,8 +651,14 @@
                 SupplierApp.IziToast.showSuccessAlert("Sửa thông tin nhà cung cấp thành công!");
                 location.href = `/admin/suppliers/${data.id}/histories`;
             })
-            .fail(() => {
-                SupplierApp.IziToast.showErrorAlert("Sửa thông tin nhà cung cấp thất bại")
+            .fail((jqXHR) => {
+                if (jqXHR.responseJSON) {
+                    if (jqXHR.responseJSON.message) {
+                        SupplierApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
+                    }
+                }
+
+                // SupplierApp.IziToast.showErrorAlert("Sửa thông tin nhà cung cấp thất bại")
             })
     }
 
@@ -680,7 +696,7 @@
             .done((data) => {
                 supplierGroups = data;
                 $.each(data, function (index, value) {
-                    page.elements.renderGroupLi.append(
+                    page.elements.renderGroupLi.prepend(
                         `<li onclick="handleChangeGroupSupp(${value.id})">
                         <p  class="w-80 border-0 " id="${value.id}" style="padding:7px; font-size: 12px;font-weight:450; width: 300px;border: unset;" value="${value.id}">
                         ${value.title}</p>

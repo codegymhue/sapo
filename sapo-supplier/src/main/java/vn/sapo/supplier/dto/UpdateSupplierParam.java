@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class UpdateSupplierParam extends BaseSupplierParam {
     @NotNull
     private Integer id;
-    @NotBlank(message = "supplierCode not blank")
+    @NotBlank(message = "Mã nhà cung cấp không được để trống")
     private String supplierCode;
     private SupplierStatus status;
 

@@ -9,6 +9,7 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import vn.sapo.address.dto.AddressResult;
+import vn.sapo.supplier.dto.SupGroupResult;
 import vn.sapo.supplier.dto.SupplierResult;
 
 import javax.servlet.ServletOutputStream;
@@ -86,7 +87,7 @@ public class SupplierExcelExporter {
 
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
-        font.setFontHeight(14);
+        font.setFontHeight(22);
         style.setFont(font);
 
         for (SupplierResult supplier : supplierList) {
@@ -96,8 +97,11 @@ public class SupplierExcelExporter {
             String fullName = supplier.getFullName();
             createCell(row, columnCount++, fullName != null ? fullName : "", style);
             createCell(row, columnCount++, supplier.getSupplierCode(), style);
-            createCell(row, columnCount++, supplier.getGroup().getTitle(), style);
-            createCell(row, columnCount++, supplier.getGroup().getTitle(), style);
+            SupGroupResult group = supplier.getGroup();
+            if (group != null) {
+                String title = group.getSupGroupCode();
+                createCell(row, columnCount++, null ,style);
+            }
             String email = supplier.getEmail();
             createCell(row, columnCount++, email != null ? email : "", style);
             String phone = supplier.getPhone();
@@ -119,8 +123,6 @@ public class SupplierExcelExporter {
                 createCell(row, columnCount++, "", style);
                 createCell(row, columnCount++, "", style);
                 createCell(row, columnCount++, "", style);
-                createCell(row, columnCount++, "", style);
-                createCell(row, columnCount++, "", style);
             } else {
                 for (AddressResult adr : supplier.getAddresses()) {
                     createCell(row, columnCount++, adr.getFullName() != null ? adr.getFullName() : "", style);
@@ -134,7 +136,7 @@ public class SupplierExcelExporter {
                     createCell(row, columnCount++, adr.getDistrictName() != null ? adr.getDistrictName() : "", style);
                 }
             }
-            createCell(row, rowCount++, supplier.getDebtTotal(), style);
+            createCell(row,columnCount++,supplier.getDebtTotal() != null ? supplier.getDebtTotal():"",style);
         }
     }
 

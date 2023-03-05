@@ -1,3 +1,11 @@
+body {
+    data-new-gr-c-s-check-loaded: 14.1085 .0;
+    cz-shortcut-listen: true;
+}
+
+#root {
+    overflow: auto;
+}
 
 .MuiPaper-root {
     color: #0F1824;
@@ -1402,7 +1410,7 @@ body::backdrop {
     min-height: 56px;
 }
 
-@media (min-width: 0px) and (orientation: landscape) {
+@media (min-width: 0) and (orientation: landscape) {
     .jss51 {
         min-height: 48px;
     }
@@ -2202,7 +2210,7 @@ body::backdrop {
 .MuiLinearProgress-dashedColorPrimary {
     background-size: 10px 10px;
     background-image: radial-gradient(rgb(158, 209, 255) 0%, rgb(158, 209, 255) 16%, transparent 42%);
-    background-position: 0px -23px;
+    background-position: 0 -23px;
 }
 
 .MuiLinearProgress-dashedColorSecondary {
@@ -2600,11 +2608,10 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     right: 0;
     bottom: 0;
     margin: 0;
-    padding: 0;
     position: absolute;
     border-style: solid;
     border-width: 1px;
-    padding-left: 8px;
+    padding: 0 0 0 8px;
     border-radius: inherit;
     pointer-events: none;
 }
@@ -3127,7 +3134,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
 }
 
 .jss449 {
-    box-shadow: 0px 4px 8px rgba(168, 168, 168, 0.25);
+    box-shadow: 0 4px 8px rgba(168, 168, 168, 0.25);
 }
 
 .jss450 {
@@ -3298,7 +3305,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
 .jss20482.MuiInputLabel-shrink {
     font-size: 14px;
     transform: none;
-    line-height: 17px;
+    line-height: 17px;;
 }
 
 .jss20482.Mui-error {
@@ -3311,6 +3318,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
 
 .jss20483 {
     height: 40px;
+    margin-top: 5px;
 }
 
 .jss20483 input {
@@ -3722,10 +3730,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     box-sizing: border-box;
     min-height: 48px;
     align-items: center;
-    padding-top: 6px;
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-bottom: 6px;
+    padding: 6px 16px;
     justify-content: flex-start;
     -webkit-tap-highlight-color: transparent;
 }
@@ -3975,7 +3980,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4002,7 +4007,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4029,7 +4034,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4056,7 +4061,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4083,7 +4088,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4110,7 +4115,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4137,7 +4142,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4164,7 +4169,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4191,7 +4196,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4218,7 +4223,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4245,7 +4250,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4272,7 +4277,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4299,7 +4304,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4326,7 +4331,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4353,7 +4358,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4380,7 +4385,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4407,7 +4412,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4434,7 +4439,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4461,7 +4466,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4488,7 +4493,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4515,7 +4520,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4542,7 +4547,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4569,7 +4574,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4596,7 +4601,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4623,7 +4628,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4650,7 +4655,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4677,7 +4682,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4704,7 +4709,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4731,7 +4736,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4758,7 +4763,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4785,7 +4790,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4812,7 +4817,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4839,7 +4844,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4866,7 +4871,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4893,7 +4898,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4920,7 +4925,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4947,7 +4952,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4974,7 +4979,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -5001,7 +5006,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -5028,7 +5033,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -5055,7 +5060,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -5082,7 +5087,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -5109,7 +5114,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -5136,7 +5141,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -5163,7 +5168,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -5190,7 +5195,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -5326,11 +5331,10 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
 .jss20870 .paging-btn {
     color: #0088FF;
     width: 20px;
-    border: 1px solid;
     height: 20px;
     padding: 0;
     box-sizing: border-box;
-    border-color: #0088FF;
+    border: 1px solid #0088FF;
     border-radius: 1px;
 }
 
@@ -5632,11 +5636,10 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
 .jss20885 .paging-btn {
     color: #0088FF;
     width: 20px;
-    border: 1px solid;
     height: 20px;
     padding: 0;
     box-sizing: border-box;
-    border-color: #0088FF;
+    border: 1px solid #0088FF;
     border-radius: 1px;
 }
 
@@ -5679,13 +5682,12 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
 
 .jss20887 {
     width: 100%;
-    border: 1px solid #D3D5D7;
     cursor: pointer;
     height: 40px;
     display: flex;
     padding: 0 12px;
     align-items: center;
-    border-color: #D3D5D7;
+    border: 1px solid #D3D5D7;
     border-radius: 3px;
     justify-content: space-between;
     background-color: #fff;
@@ -6411,7 +6413,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -6438,7 +6440,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -6465,7 +6467,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -6492,7 +6494,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -7122,7 +7124,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -7149,7 +7151,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -7176,7 +7178,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -7203,7 +7205,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -7524,7 +7526,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -7551,7 +7553,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -7578,7 +7580,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -7605,7 +7607,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -8238,23 +8240,24 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     flex: 0 0 auto;
     -webkit-box-align: center;
     align-items: center;
-    outline: 0px;
+    outline: 0;
     border-radius: 3px;
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px 16px 0px 0px;
+    margin: 0 16px 0 0;
     overflow: hidden;
     position: relative;
     height: 2.57143rem;
-    padding: 0px 1.14286rem;
+    padding: 0 1.14286rem;
     min-width: 4.57143rem;
     color: rgb(0, 136, 255);
     border: 1px solid rgb(0, 136, 255);
     background: rgb(255, 255, 255);
 }
+
 .RthGc {
     display: inline-flex;
     -webkit-box-pack: center;
@@ -8262,41 +8265,43 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     flex: 0 0 auto;
     -webkit-box-align: center;
     align-items: center;
-    outline: 0px;
+    outline: 0;
     border-radius: 3px;
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     overflow: hidden;
     position: relative;
     height: 2.57143rem;
-    padding: 0px 1.14286rem;
+    padding: 0 1.14286rem;
     min-width: 4.57143rem;
     color: rgb(255, 255, 255);
     background: rgb(0, 136, 255);
     border: none;
 }
+
 .cMXJOk {
     display: flex;
     -webkit-box-pack: center;
     justify-content: center;
     -webkit-box-align: center;
     align-items: center;
-    padding: 0px;
+    padding: 0;
     z-index: 2;
     font-size: inherit;
     font-weight: inherit;
 }
+
 .jcEYKF {
     display: flex;
     -webkit-box-pack: center;
     justify-content: center;
     -webkit-box-align: center;
     align-items: center;
-    padding: 0px;
+    padding: 0;
     z-index: 2;
     font-size: inherit;
     font-weight: inherit;
@@ -8309,24 +8314,23 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     flex: 0 0 auto;
     -webkit-box-align: center;
     align-items: center;
-    outline: 0px;
+    outline: 0;
     border-radius: 3px;
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     overflow: hidden;
     position: relative;
     height: 2.57143rem;
-    padding: 0px 1.14286rem;
+    padding: 0 1.14286rem;
     min-width: 4.57143rem;
     color: rgb(255, 255, 255);
     background: rgb(0, 136, 255);
     border: none;
 }
-
 
 
 .hISLMV {
@@ -8346,17 +8350,17 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     color: rgb(15, 24, 36);
 }
 
 .iUBRZb {
     pointer-events: none;
     position: absolute;
-    inset: 0px;
+    inset: 0;
     width: 100%;
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     border-radius: 3px;
     border: 1px solid rgb(211, 213, 215);
     overflow: hidden;
@@ -8366,11 +8370,13 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
 .nysSE {
     right: 0.857143rem;
 }
-.error{
+
+.error {
     color: red;
 }
+
 .bqqjdk {
-    transform: translate(0px, -50%);
+    transform: translate(0, -50%);
     position: absolute;
     top: 50%;
     color: rgb(163, 168, 175);
@@ -8387,7 +8393,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     pointer-events: none;
     z-index: 8000;
     border: 1px solid rgb(211, 213, 215);
-    box-shadow: rgb(168 168 168 / 25%) 0px 0.571429rem 1.14286rem;
+    box-shadow: rgb(168 168 168 / 25%) 0 0.571429rem 1.14286rem;
     border-radius: 3px;
     background: rgb(255, 255, 255);
     box-sizing: border-box;
@@ -8487,6 +8493,7 @@ html {
     padding: 2px 0;
     text-align: center;
 }
+
 .bXIMjH {
     display: inline-block;
     -webkit-box-pack: center;
@@ -8507,7 +8514,7 @@ html {
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     height: 4.57143rem;
     color: rgb(0, 136, 255);
     text-transform: uppercase;
@@ -8537,7 +8544,7 @@ html {
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     height: 4.57143rem;
     font-weight: 500;
     color: rgb(15, 24, 36);
@@ -8602,6 +8609,7 @@ html {
     animation-name: mui-auto-fill-cancel;
     -webkit-tap-highlight-color: transparent;
 }
+
 .jss4778 {
     color: rgba(0, 0, 0, 0.87);
     cursor: pointer;
@@ -8625,49 +8633,62 @@ html {
 .MuiTypography-root {
     font-size: 14px;
 }
+
 .jss20478 {
     height: 48px;
 }
+
 .jss20680 {
     height: 48px;
 }
+
 .jss20629 {
     height: 48px;
 }
-.jss87874{
+
+.jss87874 {
     width: 100%;
-    height: 38px;
+    height: 42px;
+    padding: 0 12px;
 }
-.sapo-menu-list-item-link--secondary{
-    text-decoration: none
-}
-.sapo-menu-list-item-label{
+
+.sapo-menu-list-item-link--secondary {
     text-decoration: none
 }
 
-#SapoNavScroll{
+.sapo-menu-list-item-label {
+    text-decoration: none
+}
+
+#SapoNavScroll {
     margin-left: -33px;
 }
+
 .jss4838.borderBottom {
     border-bottom: 1px solid #E8EAEB;
 }
+
 .jss4838 {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
 .jss5018 {
     height: 48px;
 }
+
 .MuiTypography-h6 {
     font-size: 1.125rem;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-weight: 500;
     line-height: 20px;
 }
+
 .iFpFap {
     width: 100%;
 }
+
 .fqUehn {
     background: transparent;
     box-sizing: border-box;
@@ -8680,16 +8701,17 @@ html {
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     color: rgb(15, 24, 36);
 }
+
 .iKmOWq {
     pointer-events: none;
     position: absolute;
-    inset: 0px;
+    inset: 0;
     width: 100%;
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     border-radius: 3px;
     border: 1px solid rgb(211, 213, 215);
     overflow: hidden;
@@ -8703,10 +8725,11 @@ html {
     font-size: 1rem;
     line-height: 1.42857rem;
     box-sizing: border-box;
-    padding: 0px;
-    margin: 0px 0px 0.285714rem;
+    padding: 0;
+    margin: 0 0 0.285714rem;
     color: rgb(70, 81, 95);
 }
+
 .jCEjwI {
     background: transparent;
     box-sizing: border-box;
@@ -8719,26 +8742,16 @@ html {
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     color: rgb(15, 24, 36);
 }
-.iKmOWq {
-    pointer-events: none;
-    position: absolute;
-    inset: 0px;
-    width: 100%;
-    padding: 0px;
-    margin: 0px;
-    border-radius: 3px;
-    border: 1px solid rgb(211, 213, 215);
-    overflow: hidden;
-    box-sizing: border-box;
-}
+
 .GjLGP {
     right: 0.857143rem;
 }
+
 .jnFnDD {
-    transform: translate(0px, -50%);
+    transform: translate(0, -50%);
     position: absolute;
     top: 50%;
     color: rgb(163, 168, 175);
@@ -8748,122 +8761,130 @@ html {
     -webkit-box-pack: center;
     justify-content: center;
 }
-.MuiGrid-grid-xs-6 {
-    flex-grow: 0;
-    max-width: 50%;
-    flex-basis: 50%;
-}
+
 .jss5021 {
     max-width: 100%;
     align-self: center;
 }
+
 .jss5026 {
     height: 20px;
     display: flex;
     margin-bottom: 4px;
 }
+
 .jss5024.MuiInputLabel-shrink {
     font-size: 14px;
     transform: none;
     line-height: 17px;
 }
+
 .jss5022 {
     overflow: hidden;
     font-size: 14px;
     box-sizing: border-box;
 }
+
 .jss5023 {
     line-height: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
 .jss5022 .MuiOutlinedInput-notchedOutline {
     top: -5px;
     border-color: #D3D5D7;
 }
+
 .jss4870 {
     align-self: center;
     padding-top: 24px;
 }
+
 .jss4871.MuiInputLabel-shrink {
     font-size: 14px;
     transform: none;
     line-height: 17px;
 }
+
 .jss4871 {
     top: 0;
     color: #46515F;
     display: flex;
     align-items: center;
 }
+
 .jss4872 {
     height: 40px;
 }
+
 .jss4872 .MuiInputBase-root {
     height: 100%;
 }
+
 .jss4872 input {
     color: #0F1824;
     height: 40px;
     padding: 0 12px;
 }
+
 .jss4872 .MuiOutlinedInput-notchedOutline {
     padding: 0;
     border-color: #D3D5D7;
 }
+
 .jss4871.MuiInputLabel-shrink {
     font-size: 14px;
     transform: none;
     line-height: 17px;
 }
+
 .jss4872 {
     height: 40px;
 }
+
 .jss4872 .MuiInputBase-root {
     height: 100%;
 }
+
 .jss4872 input {
     color: #0F1824;
     height: 40px;
     padding: 0 12px;
 }
+
 .jss4872 .MuiOutlinedInput-notchedOutline {
     padding: 0;
     border-color: #D3D5D7;
 }
+
 .jss4871.MuiInputLabel-shrink {
     font-size: 14px;
     transform: none;
     line-height: 17px;
 }
+
 .jss4871 {
     top: 0;
     color: #46515F;
     display: flex;
     align-items: center;
 }
+
 .jss4872 {
     height: 40px;
 }
+
 .jss4872 .MuiInputBase-root {
     height: 100%;
 }
+
 .jss4872 input {
     color: #0F1824;
     height: 40px;
     padding: 0 12px;
 }
-.dGcxKm {
-    display: inline-flex;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.42857rem;
-    box-sizing: border-box;
-    padding: 0px;
-    margin: 0px 0px 0.285714rem;
-    color: rgb(70, 81, 95);
-}
+
 .kodYnA {
     background: rgb(255, 255, 255);
     box-sizing: border-box;
@@ -8876,56 +8897,34 @@ html {
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     color: rgb(15, 24, 36);
 }
-.iKmOWq {
-    pointer-events: none;
-    position: absolute;
-    inset: 0px;
-    width: 100%;
-    padding: 0px;
-    margin: 0px;
-    border-radius: 3px;
-    border: 1px solid rgb(211, 213, 215);
-    overflow: hidden;
-    box-sizing: border-box;
-}
+
 .MuiGrid-spacing-xs-3 > .MuiGrid-item {
     padding: 12px;
 }
+
 .MuiGrid-grid-xs-12 {
     flex-grow: 0;
     max-width: 100%;
     flex-basis: 100%;
 }
+
 .MuiPaper-root {
     color: #0F1824;
     transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     background-color: #fff;
 }
+
 .MuiPaper-rounded {
     border-radius: 3px;
 }
+
 .jss5013.borderBottom {
     border-bottom: 1px solid #E8EAEB;
 }
-.jss5013 {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.jss5100 {
-    height: 48px;
-}
-.MuiPaper-root {
-    color: #0F1824;
-    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    background-color: #fff;
-}
-.MuiPaper-rounded {
-    border-radius: 3px;
-}
+
 .jss5013 {
     display: flex;
     align-items: center;
@@ -8935,50 +8934,111 @@ html {
 .jss5100 {
     height: 48px;
 }
+
+.MuiPaper-root {
+    color: #0F1824;
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    background-color: #fff;
+}
+
+.MuiPaper-rounded {
+    border-radius: 3px;
+}
+
 .MuiTypography-h6 {
     font-size: 1.125rem;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-weight: 500;
     line-height: 20px;
 }
+
 .MuiGrid-container {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
 }
+
 .MuiGrid-grid-xs-12 {
     flex-grow: 0;
     max-width: 100%;
     flex-basis: 100%;
 }
+
 .MuiGrid-spacing-xs-2 > .MuiGrid-item {
     padding: 8px;
 }
+
 .MuiGrid-spacing-xs-3 {
     width: calc(100% + 24px);
     margin: -12px;
 }
-.MuiGrid-grid-xs-6 {
-    flex-grow: 0;
-    max-width: 50%;
-    flex-basis: 50%;
-}
-.iFpFap {
-    width: 100%;
-}
-.dGcxKm {
-    display: inline-flex;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.42857rem;
-    box-sizing: border-box;
-    padding: 0px;
-    margin: 0px 0px 0.285714rem;
-    color: rgb(70, 81, 95);
-}
+
 .bPMzLG {
     position: relative;
     height: 2.85714rem;
+}
+
+.svg-back{
+    width: 24px;
+    height: 24px;
+    margin-left: -9px;
+    margin-right: 6px;
+}
+
+.jss20448{
+    box-shadow: rgba(168, 168, 168, 0.25) 0 2px 4px;
+    height: 100%;
+}
+
+.jss21051{
+    margin-left: 24px;
+}
+
+.jss20480{
+    padding: 16px 24px 24px;
+}
+
+.inputName{
+    margin: auto;
+}
+
+#birthdayCreate{
+    height: 41px;
+}
+
+div.jss21097 label {
+    color: rgb(70, 81, 95);
+}
+
+.jss20622{
+    padding-top: 0 !important;
+}
+
+.jss20623{
+    height: 50px;
+}
+
+.info_container{
+    padding: 3px 6px;
+    margin-bottom: 6px;
+}
+
+.address_container{
+    padding-bottom: 24px !important;
+}
+
+.jss9675{
+    margin-left: 24px;
+}
+
+.jss5102{
+    padding: 16px 24px 24px;
+}
+
+.jss20682{
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    margin-left: 6px;
 }

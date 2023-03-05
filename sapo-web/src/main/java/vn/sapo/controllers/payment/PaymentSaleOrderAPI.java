@@ -11,24 +11,24 @@ import vn.sapo.payment.sale.dto.CreatePaymentSaleOrderParam;
 @RestController
 @RequestMapping("/api/payment/paymentOrder")
 public class PaymentSaleOrderAPI {
-    @Autowired
-    private PaymentSaleOrderService paymentSaleOrderService;
+//    @Autowired
+//    private PaymentSaleOrderService paymentSaleOrderService;
 
-    @GetMapping("")
-    public ResponseEntity<?> findAll() {
-        return new ResponseEntity<>(paymentSaleOrderService.findAll(), HttpStatus.OK);
-    }
+//    @GetMapping("")
+//    public ResponseEntity<?> findAll() {
+//        return new ResponseEntity<>(paymentSaleOrderService.findAll(), HttpStatus.OK);
+//    }
 
-    @PostMapping("/create")
-    public ResponseEntity<?> createPaymentOrder(@RequestBody CreatePaymentSaleOrderParam paymentOrderParam) {
-
-        return new ResponseEntity<>(paymentSaleOrderService.create(paymentOrderParam), HttpStatus.OK);
-    }
-
-    @GetMapping("/{id}")
-    @Transactional(readOnly = true)
-    public ResponseEntity<?> findAllByOrderId(@PathVariable Integer orderId) {
-        return new ResponseEntity<>(paymentSaleOrderService.findAllByOrderId(orderId), HttpStatus.OK);
-    }
+//    @PostMapping("/create")
+//    public ResponseEntity<?> createPaymentOrder(@RequestBody CreatePaymentSaleOrderParam paymentOrderParam) {
+//
+//        return new ResponseEntity<>(paymentSaleOrderService.create(paymentOrderParam), HttpStatus.OK);
+//    }
+//
+//    @GetMapping("/{id}")
+//    @Transactional(readOnly = true)
+//    public ResponseEntity<?> findAllByOrderId(@PathVariable Integer orderId) {
+//        return new ResponseEntity<>(paymentSaleOrderService.findAllByOrderId(orderId), HttpStatus.OK);
+//    }
 }
 

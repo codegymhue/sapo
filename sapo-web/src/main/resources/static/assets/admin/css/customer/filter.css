@@ -1,3 +1,23 @@
+.filter-title{
+    float: left;
+    margin-top: 12px;
+    margin-right: 5px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+span.MuiIconButton-label svg {
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    fill: none;
+    viewBox: 0 0 24px 24px;
+    color: #A3A8AF;
+}
+
+#Sapo-Button-70cf5262-5927-4383-98a0-897d1ccf81f1 svg{
+    float: left;
+}
 .jss663 {
     color: #0088FF;
     padding: 8px 24px;
@@ -10,6 +30,7 @@
     padding: 8px 24px;
     font-size: 16px;
     font-weight: 500;
+    margin-left: -23px;
 }
 
 .deudDf {
@@ -40,7 +61,7 @@
 .sidenav a, .dropdown-btn {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 1rem;
     color: #818181;
     display: block;
     border: none;
@@ -80,15 +101,45 @@ p.MuiTypography-body1 {
 }
 
 #btnFilter{
-    width: 70px;
+    height: 36px;
+    width: 64px;
     color: rgb(255, 255, 255);
     background: rgb(0, 136, 255);
     border: none;
+    border-radius: 3px;
 }
 
 #btnCloseFilter{
+    height: 36px;
     width: 90px;
     border: 1px solid rgb(255, 77, 77);
+    border-radius: 3px;
     background: rgb(255, 255, 255);
     color: rgb(255, 77, 77);
+}
+
+.fa-magnifying-glass{
+    margin-left: 16px;
+    margin-right: 4px;
+    color: #828282
+}
+
+#inputSearchCat{
+    margin: 2px;
+}
+
+#customerGroupFilter{
+    padding: 5px;
+}
+
+#searchEmployee{
+    margin: 2px;
+}
+
+#datepicker, #datepicker2, #datepicker3, #datepicker4{
+    width: 170px;
+}
+
+#datepicker5{
+    width: 370px;
 }

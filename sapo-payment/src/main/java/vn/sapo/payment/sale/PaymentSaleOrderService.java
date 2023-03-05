@@ -1,7 +1,5 @@
 package vn.sapo.payment.sale;
 
-
-import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.payment.sale.dto.CreatePaymentSaleOrderParam;
 import vn.sapo.payment.sale.dto.PaymentSaleOrderResult;
 
