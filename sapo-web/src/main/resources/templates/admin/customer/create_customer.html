@@ -31,7 +31,7 @@
                     <button type="button" id="btnCloseCustomer" class="ldZiUT" href="/admin/customers">
                         Hủy
                     </button>
-                    <button id="btnCreateCustomer" class="RthGc">
+                    <button id="btnCreateCustomer" class="RthGc" type="button">
                         <span class="cMXJOk">
                             Lưu
                         </span>
@@ -40,22 +40,22 @@
             </div>
         </div>
         <form id="formCreate">
-            <div class=" jss20286">
+            <div class="jss20286">
                 <div class="MuiGrid-container MuiGrid-spacing-xs-3">
                     <div class="MuiGrid-item MuiGrid-grid-xs-8">
                         <div class="MuiGrid-container MuiGrid-spacing-xs-3 info_container">
-                            <div class=" MuiGrid-item MuiGrid-grid-xs-12">
+                            <div class="MuiGrid-item MuiGrid-grid-xs-12">
                                 <div class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded">
-                                    <div class=" jss20478 jss20449 borderBottom">
-                                        <div class="">
+                                    <div class="jss20478 jss20449 borderBottom">
+                                        <div>
                                             <h6 class="MuiTypography-root MuiTypography-h6 jss21051">
                                                 Thông tin chung
                                             </h6>
                                         </div>
                                     </div>
-                                    <div class=" jss21051 mt-3">
-                                        <div class=" MuiGrid-container MuiGrid-spacing-xs-2">
-                                            <div class=" MuiGrid-item MuiGrid-grid-xs-12">
+                                    <div class="jss21051 mt-3">
+                                        <div class="MuiGrid-container MuiGrid-spacing-xs-2">
+                                            <div class="MuiGrid-item MuiGrid-grid-xs-12">
                                                 <div class="MuiFormControl-root jss20481 MuiFormControl-fullWidth">
                                                     <label data-shrink="true" for="nameCreate"
                                                            class="MuiFormLabel-root MuiInputLabel-root jss20482 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink Mui-required Mui-required">
@@ -77,11 +77,12 @@
                                                             </fieldset>
                                                         </div>
                                                     </div>
+                                                    <div class="name_create_error hidden"></div>
                                                 </div>
                                             </div>
-                                            <div class=" MuiGrid-item MuiGrid-grid-xs-12">
-                                                <div class=" MuiGrid-container MuiGrid-spacing-xs-3">
-                                                    <div class=" MuiGrid-item MuiGrid-grid-xs-6">
+                                            <div class="MuiGrid-item MuiGrid-grid-xs-12">
+                                                <div class="MuiGrid-container MuiGrid-spacing-xs-3">
+                                                    <div class="MuiGrid-item MuiGrid-grid-xs-6">
                                                         <div class="MuiFormControl-root jss20481 MuiFormControl-fullWidth">
                                                             <label data-shrink="true" for="codeCreate"
                                                                    class="MuiFormLabel-root MuiInputLabel-root jss20482 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink">
@@ -442,7 +443,8 @@
                                         name="descriptionCreate" placeholder="Nhập mô tả" rows="3"
                                         class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline jss20623">
                               </textarea>
-                                                            <fieldset aria-hidden="true" class="jss20550 MuiOutlinedInput-notchedOutline">
+                                                            <fieldset aria-hidden="true"
+                                                                      class="jss20550 MuiOutlinedInput-notchedOutline">
                                                                 <legend class="jss20551">
                                                                     <span>​</span>
                                                                 </legend>
@@ -477,11 +479,68 @@
                                         aria-label="Without label"
                                         class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline">
                               </textarea>
-                                                            <fieldset aria-hidden="true" class="jss20550 MuiOutlinedInput-notchedOutline">
+                                                            <fieldset aria-hidden="true"
+                                                                      class="jss20550 MuiOutlinedInput-notchedOutline">
                                                                 <legend class="jss20551">
                                                                     <span>​</span>
                                                                 </legend>
                                                             </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="MuiGrid-item MuiGrid-grid-xs-12">
+                                <div class="MuiPaper-root jss20448 MuiPaper-elevation1 MuiPaper-rounded">
+                                    <div class="jss20680 jss20449 borderBottom">
+                                        <div class="jss21138">
+                                            <h6 class="MuiTypography-root MuiTypography-h6 jss21051">
+                                                Cài đặt nâng cao
+                                                <span class="MuiTypography-root MuiTypography-caption"
+                                                      title="Thiết lập các thông số tự động dùng trong các giao dịch">
+                                                            <svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary jss20682"
+                                                                 focusable="false" viewBox="0 0 12 12"
+                                                                 aria-hidden="true">
+                                <path d="M5.4 3V4.2H6.6V3H5.4Z" fill="currenColor"></path>
+                                <path d="M5.4 6.6V9H7.2V7.8H6.6V5.4H4.8V6.6H5.4Z" fill="currenColor"></path>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                      d="M6 0C2.688 0 0 2.688 0 6C0 9.312 2.688 12 6 12C9.312 12 12 9.312 12 6C12 2.688 9.312 0 6 0ZM1.2 6C1.2 8.646 3.354 10.8 6 10.8C8.646 10.8 10.8 8.646 10.8 6C10.8 3.354 8.646 1.2 6 1.2C3.354 1.2 1.2 3.354 1.2 6Z"
+                                      fill="currenColor">
+                                </path>
+                              </svg>
+                                                        </span>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <div class="jss20480">
+                                        <div class="MuiGrid-container MuiGrid-spacing-xs-2">
+                                            <div class="MuiGrid-item MuiGrid-grid-xs-12">
+                                                <div>
+                                                    <div class="jss21149">
+                                                        <label class="MuiTypography-root MuiTypography-body1"
+                                                               for="employeeNameCreate">
+                                                            Áp dụng ưu đãi
+                                                        </label>
+                                                    </div>
+                                                    <div class="jss20683">
+                                                        <div class="jss20684">
+                                                            <div class="jss20685">
+                                                                <input type="radio" checked="checked" id="customerGroupRadio" name="radio">
+                                                            </div>
+                                                            <label for="customerGroupRadio" class="MuiTypography-root MuiTypography-body1">
+                                                                Theo nhóm khách hàng
+                                                            </label>
+                                                        </div>
+                                                        <div class="jss20684">
+                                                            <div class="jss20685">
+                                                                <input type="radio" id="customerRadio" name="radio">
+                                                            </div>
+                                                            <label for="customerRadio" class="MuiTypography-root MuiTypography-body1">
+                                                                Theo khách hàng
+                                                            </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -590,6 +649,8 @@
     CustomerApp.page.elements.provinceUpdate = $("#provinceUpdate");
     CustomerApp.page.elements.wardUpdate = $("#wardUpdate");
     CustomerApp.page.elements.btnCloseCustomer = $("#btnCloseCustomer");
+    CustomerApp.page.elements.nameCreateError = $("#formCreate .name_create_error");
+    CustomerApp.page.elements.inputError = $("#formCreate  input.error");
 
     CustomerApp.page.commands.createCustomer = () => {
         CustomerApp.page.elements.btnCreateCustomer.on('click', () => {
@@ -628,11 +689,13 @@
                 "data": JSON.stringify(customer)
             })
                 .done((data) => {
-                    console.log(data)
-                    CustomerApp.IziToast.showSuccessAlert("tạo khách hàng thành công !");
+                    CustomerApp.IziToast.showSuccessAlert("tạo khách hàng thành công!");
+
                     setTimeout(() => {
                     }, 2500)
+
                     CustomerApp.page.elements.formCreate[0].reset();
+
                     window.location.href = `/admin/customers/${data.id}`;
                 })
                 .fail((jqXHR) => {
@@ -804,10 +867,9 @@
             url: origin + "/api/customer_groups/"
         })
             .done((data) => {
-                console.log(data)
                 $.each(data, (i, item) => {
-                    console.log(item)
                     let str = `<option value="${item.id}">${item.title}</option>`;
+
                     CustomerApp.page.elements.customerGroupCreate.append(str);
                 });
             })
@@ -819,26 +881,59 @@
 
     CustomerApp.page.elements.btnCloseCustomer.on('click', () => window.location.href = ("/admin/customers"))
 
+    CustomerApp.page.elements.btnCreateCustomer.on("click", () => {
+        CustomerApp.page.elements.formCreate.trigger("submit");
+    })
 
-    CustomerApp.page.commands.createCustomer();
-    CustomerApp.page.commands.getAllCustomerGroup();
-    CustomerApp.page.commands.getAllEmployeeSelect();
+    CustomerApp.page.initializeEventControl = () => {
 
-    CustomerApp.page.elements.formCreate.validate({
-        rules: {
-            nameCreate: {
-                required: true
+        CustomerApp.page.commands.createCustomer();
+        CustomerApp.page.commands.getAllCustomerGroup();
+        CustomerApp.page.commands.getAllEmployeeSelect();
+    }
+
+    $(() => {
+        CustomerApp.page.initializeEventControl();
+
+        CustomerApp.page.elements.formCreate.validate({
+            rules: {
+                nameCreate: {
+                    required: true
+                },
+                phoneCreate: {
+                    required: false
+                }
+            },
+            messages: {
+                nameCreate: {
+                    required: "Tên khách hàng không được để trống",
+                },
+                phoneCreate: {
+                    required: "Số điện thoại không đúng định dạng"
+                }
+            },
+            errorLabelContainer: "#formCreate .name_create_error",
+            errorPlacement: (error) => {
+                error.appendTo(".name_create_error");
+            },
+            showErrors: function () {
+                if (this.numberOfInvalids() > 0) {
+                    CustomerApp.page.elements.nameCreateError.removeClass("hidden").addClass("show");
+                } else {
+                    CustomerApp.page.elements.nameCreateError.removeClass("show").addClass("hidden").empty();
+                    CustomerApp.page.elements.inputError.removeClass("error");
+                }
+                this.defaultShowErrors();
+            },
+            submitHandler: () => {
+                CustomerApp.page.commands.createCustomer();
             }
-        },
-        messages: {
-            nameCreate: {
-                required: "Vui lòng nhập tên khách hàng",
-            }
-        },
-        submitHandler: () => {
-            CustomerApp.page.commands.createCustomer();
-        }
-    });
+        });
+    })
+
+    $.validator.addMethod("isValidPhone", function (value, element) {
+        return this.optional(element) || /^(((\+|)84)|0|)(3|5|7|8|9)+([0-9]{8})\b$/i.test(value);
+    }, "Số điện thoại không đúng định dạng");
 
 </script>
 </html>

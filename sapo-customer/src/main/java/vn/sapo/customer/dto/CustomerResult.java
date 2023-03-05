@@ -64,8 +64,11 @@ public class CustomerResult {
     private Instant lastDayOrder;
 
     private CusPayment payment;
+
     private  String taxCode;
+
     private  String fax;
+
     private String website;
 }
 

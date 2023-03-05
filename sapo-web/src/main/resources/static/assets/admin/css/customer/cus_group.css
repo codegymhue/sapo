@@ -242,11 +242,10 @@
      right: 0;
      bottom: 0;
      margin: 0;
-     padding: 0;
      position: absolute;
      border-style: solid;
      border-width: 1px;
-     padding-left: 8px;
+     padding: 0 0 0 8px;
      border-radius: inherit;
      pointer-events: none;
  }
@@ -281,11 +280,10 @@
     right: 0;
     bottom: 0;
     margin: 0;
-    padding: 0;
     position: absolute;
     border-style: solid;
     border-width: 1px;
-    padding-left: 8px;
+    padding: 0 0 0 8px;
     border-radius: inherit;
     pointer-events: none;
 }
@@ -326,7 +324,6 @@
 }
 .jss1785 {
     color: #46515F;
-    /*display: flex;*/
     font-size: 14px;
     margin-top: 0;
     line-height: 17px;
@@ -335,12 +332,11 @@
 
 .jss1784 {
     width: 100%;
-    border: 1px solid #D3D5D7;
     cursor: pointer;
     height: 40px;
     padding: 0 12px;
     align-items: center;
-    border-color: #D3D5D7;
+    border: 1px solid #D3D5D7;
     border-radius: 3px;
     justify-content: space-between;
     background-color: #fff;
@@ -381,9 +377,8 @@
  }
  .MuiFormHelperText-root {
      color: rgba(0, 0, 0, 0.54);
-     margin: 0;
      font-size: 0.75rem;
-     margin-top: 3px;
+     margin: 3px 0 0;
      text-align: left;
      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
      font-weight: 400;
