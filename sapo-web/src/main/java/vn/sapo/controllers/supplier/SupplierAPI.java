@@ -93,6 +93,8 @@ public class SupplierAPI {
             try {
                 String paymentMethodId = paymentMethodService.findByTitle(dto.getPaymentMethodTitle()).getId();
                 dto.setPaymentMethodId(paymentMethodId);
+                String supGroupCode =  supplierService.findById(dto.getGroupId()).getSupplierCode();
+                dto.setSupGroupCode(supGroupCode);
             } catch (Exception ignored) {
             }
         });

@@ -19,8 +19,6 @@ import vn.sapo.supplier.excel.ImportExcelSupplierParam;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 import static vn.sapo.supplier.excel.ExcelHeaderSupplier.*;
 
@@ -130,9 +128,9 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
                 case SUPPLIERCODE:
                     param.setSupplierCode(cell.getStringCellValue());
                     break;
-                case GROUP:
-                    param.setGroupId(Integer.valueOf(cell.getStringCellValue()));
-                    break;
+                case SUPGROUPCODE:
+                    param.setSupGroupCode(cell.getStringCellValue());
+                break;
                 case EMAIL:
                     param.setEmail(cell.getStringCellValue());
                     break;

@@ -39,7 +39,7 @@ public class SupplierExcelExporter {
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
         font.setBold(true);
-        font.setFontHeight(16);
+        font.setFontHeight(14);
         style.setFont(font);
 
         createCell(row, 0, "Tên nhà cung cấp ", style);
@@ -87,7 +87,7 @@ public class SupplierExcelExporter {
 
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
-        font.setFontHeight(22);
+        font.setFontHeight(14);
         style.setFont(font);
 
         for (SupplierResult supplier : supplierList) {
@@ -113,7 +113,7 @@ public class SupplierExcelExporter {
             createCell(row, columnCount++, supplier.getDescription(), style);
             String paymentMethodId = "";
             if (supplier.getPaymentMethod() != null) {
-                paymentMethodId = supplier.getPaymentMethod().getId();
+                paymentMethodId = supplier.getPaymentMethod().getTitle();
             }
             createCell(row, columnCount++, paymentMethodId != null ? paymentMethodId : "", style);
 
