@@ -19,7 +19,6 @@ public interface CustomerGroupService {
 
     List<ICustomerGroup> sortByGroup();
 
-
     CustomerGroupResult findById(Integer id);
 
     void deleteById(Integer id);

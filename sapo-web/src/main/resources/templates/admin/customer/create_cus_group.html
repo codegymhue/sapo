@@ -6,8 +6,6 @@
     <th:block th:replace="/layout/header"/>
 
     <link rel="stylesheet" href="/assets/admin/css/customer/cus_group.css"/>
-    <!--    <link rel="stylesheet" href="/assets/admin/css/product/selectMenu.css">-->
-    <!--    <link rel="stylesheet" href="/assets/admin/css/w3school/w3.css">-->
 </head>
 <body>
 <th:block th:replace="/layout/menu"/>
@@ -80,7 +78,6 @@
                                                 <fieldset aria-hidden="true"
                                                           class="jss823 MuiOutlinedInput-notchedOutline">
                                                     <legend class="jss824">
-                                                        <span>&ZeroWidthSpace;</span>
                                                     </legend>
                                                 </fieldset>
                                             </div>
@@ -199,8 +196,7 @@
                                                         </div>
                                                     </li>
                                                     <li class="text-primary dropdown-item jss761">
-                                                            <i class="fa-solid fa-circle-plus">
-                                                            </i>
+                                                            <i class="fa-solid fa-circle-plus"></i>
                                                             Thêm mới loại sản phẩm
                                                     </li>
                                                 </div>
@@ -245,7 +241,9 @@
                                             <div class="dropdown-toggle select-btn-pay jss759"
                                                  type="button" data-bs-toggle="dropdown"
                                                  aria-expanded="false">
-                                                <span id="paymentType">Chọn hình thức thanh toán</span>
+                                                <span id="paymentType">
+                                                    Chọn hình thức thanh toán
+                                                </span>
                                             </div>
                                             <ul class="dropdown-menu w-100 showAllPaymentMethod">
                                                 <li class="jss760 jss761">Chọn hình thức thanh toán</li>
@@ -367,7 +365,6 @@
         createCusGroupParam.discount = CustomerApp.page.elements.discount.val().trim();
         createCusGroupParam.paymentMethodId = CustomerApp.page.elements.paymentType.data("id");
 
-        console.log(createCusGroupParam)
         $.ajax({
             "headers": {
                 "accept": "application/json",

@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static vn.sapo.entities.customer.CustomerGroupType.FIXED;
+
 @Service
 public class CustomerGroupServiceImpl implements CustomerGroupService {
 
@@ -29,22 +31,29 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     @Override
     @Transactional
     public CustomerGroupResult create(CreateCusGroupParam createCusGroupParam) {
-        CustomerGroup customerGroup = customerGroupMapper.toModel(createCusGroupParam);
-        customerGroup = customerGroupRepository.save(customerGroup);
-//TODO: CODE ben duoi la sao?
-        // ID: 9
-        String result = "CTN";
-        String number = customerGroup.getId().toString();       // "9"
-        int numberZero = 5 - number.length();
-        String strNumberZero = "";
-        for (int i = 0; i < numberZero; i++) {
-            strNumberZero+= "0";
+        String cusGrpCode = createCusGroupParam.getCusGrpCode().trim();
 
+        if (createCusGroupParam.getTitle().trim().length() == 0) {
+            throw new IllegalArgumentException("Tên nhóm khách hàng không được để trống!");
         }
-        result += result + strNumberZero;
-        System.out.println(result);
-        if (customerGroup.getCusGrpCode() == null)
-            customerGroup.setCusGrpCode(result);
+
+        if (cusGrpCode.trim().length() == 0) {
+            String maxSystemCustomerGroupCode = getMaxSystemCustomerGroupCode();
+
+            createCusGroupParam.setCusGrpCode(maxSystemCustomerGroupCode);
+        } else {
+            if (customerGroupRepository.existsByCusGrpCode(cusGrpCode)) {
+                throw new IllegalArgumentException("Tên nhóm khách hàng này đã tồn tại!");
+            } else {
+                createCusGroupParam.setCusGrpCode(cusGrpCode);
+            }
+        }
+
+        CustomerGroup customerGroup = customerGroupMapper.toModel(createCusGroupParam);
+        customerGroup.setCusGrpType(FIXED);
+
+        customerGroup = customerGroupRepository.save(customerGroup);
+
         return customerGroupMapper.toDTO(customerGroup);
 
     }
@@ -78,7 +87,7 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     public CustomerGroupResult findById(Integer id) {
         Optional<CustomerGroup> optionalCustomerGroup = customerGroupRepository.findById(id);
 
-        if (optionalCustomerGroup.isEmpty()){
+        if (optionalCustomerGroup.isEmpty()) {
             throw new NotFoundException("Customer id = " + id + "not found!");
         }
 
@@ -103,5 +112,37 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
         return customerGroupFilterRepository.
                 findAllByFilters(filters, pageable)
                 .map(customerGroupMapper::toDTO);
+    }
+
+    private String getMaxSystemCustomerGroupCode() {
+        String prefix = "CTN";
+        String maxSystemCustomerGroupCode;
+
+        String currentMaxSystemCustomerGroupCode = customerGroupRepository.getMaxSystemCustomerGroupCode();
+
+        if (currentMaxSystemCustomerGroupCode == null) {
+            maxSystemCustomerGroupCode = "CTN00001";
+        } else {
+
+            String[] a = currentMaxSystemCustomerGroupCode.split(prefix);
+            String suffix = a[1];
+
+            int currentCodeSuffix = Integer.parseInt(suffix);
+            currentCodeSuffix++;
+
+            if (currentCodeSuffix < 10) {
+                maxSystemCustomerGroupCode = prefix.concat("0000").concat(String.valueOf(currentCodeSuffix));
+            } else if (currentCodeSuffix < 100) {
+                maxSystemCustomerGroupCode = prefix.concat("000").concat(String.valueOf(currentCodeSuffix));
+            } else if (currentCodeSuffix < 1000) {
+                maxSystemCustomerGroupCode = prefix.concat("00").concat(String.valueOf(currentCodeSuffix));
+            } else if (currentCodeSuffix < 10000) {
+                maxSystemCustomerGroupCode = prefix.concat("0").concat(String.valueOf(currentCodeSuffix));
+            } else {
+                maxSystemCustomerGroupCode = prefix.concat(String.valueOf(currentCodeSuffix));
+            }
+        }
+
+        return maxSystemCustomerGroupCode;
     }
 }
