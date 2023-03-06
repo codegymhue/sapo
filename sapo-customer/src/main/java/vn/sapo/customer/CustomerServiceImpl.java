@@ -3,19 +3,24 @@ package vn.sapo.customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import vn.sapo.address.AddressService;
+
+import vn.sapo.customers.AddressService;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerFilter;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
+import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.DataInputException;
 import vn.sapo.shared.exceptions.NotFoundException;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,29 +28,36 @@ import java.util.stream.Collectors;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
+
     @Autowired
     private CustomerMapper customerMapper;
+
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
     private CustomerFilterRepository customerFilterRepository;
+
     @Autowired
     private AddressService addressService;
+
 
     @Override
     @Transactional(readOnly = true)
     public CustomerResult findById(Integer id) {
-        return customerRepository.findById(id)
-                .map(customerMapper::toDTO)
+        Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Không tìm thấy khách hàng"));
+        Integer customerId = customer.getId();
+        return customerMapper.toDTO(customer);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<CustomerResult> findAll() {
-        return customerRepository.findAll()
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAll()
                 .stream()
                 .map(customerMapper::toDTO).collect(Collectors.toList());
+        return customerResults;
     }
 
 
@@ -63,9 +75,9 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.existsById(id);
     }
 
-    @Override
     @Transactional
     public CustomerResult create(CreateCustomerParam createCustomerParam) {
+<<<<<<< HEAD
         Customer customer = customerMapper.toModel(createCustomerParam);
         Customer newCustomer = customerRepository.save(customer);
         String cusCode = newCustomer.getCustomerCode();
@@ -78,17 +90,63 @@ public class CustomerServiceImpl implements CustomerService {
             customer.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
 
         return customerMapper.toDTO(customer);
+=======
+        Instant birthday = createCustomerParam.getBirthday().toInstant();
+        String cusCode =createCustomerParam.getCustomerCode();
+        String randomString = String.valueOf(Math.random()*1000000+1);
+        if(cusCode == null || cusCode.trim().isEmpty()){
+            createCustomerParam.setCustomerCode(randomString);
+        }
+        if(createCustomerParam.getFullName()==null){
+            throw new DataInputException("Tên khách hàng không được để trống");
+        }
+        Customer customer = customerMapper.toModel(createCustomerParam);
+        customer.setBirthday(birthday);
+        Customer customerResult = customerRepository.save(customer);
+        CreateAddressParam createAddressParam = createCustomerParam.getCreateAddressParam();
+        if (createAddressParam == null) throw new DataInputException("Tên address không được để trống");
+        createAddressParam.setCustomerId(customer.getId());
+        createAddressParam.setSupplierId(null);
+        addressService.create(createAddressParam);
+
+        if (customerResult.getCustomerCode().equals(randomString)) {
+            createCustomerParam.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
+            customerResult.setCustomerCode(createCustomerParam.getCustomerCode());
+            Customer newCustomer = customerRepository.saveAndFlush(customerResult);
+            return customerMapper.toDTO(newCustomer);
+        }
+
+        return customerMapper.toDTO(customerResult);
+>>>>>>> cf9e56958713b8ee99a298cabdf1ddcf9488ab60
     }
 
     @Override
     @Transactional
-    public CustomerResult update(UpdateCustomerParam updateParam) {
-        Customer customer = customerRepository.findById(updateParam.getId())
+    public CustomerResult update(UpdateCustomerParam updateCustomerParam) {
+        Customer customer = customerRepository.findById(updateCustomerParam.getId())
                 .orElseThrow(() -> new NotFoundException("Khách hàng không tồn tại hoặc đã bị xóa"));
-        customerMapper.transferFields(updateParam, customer);
-        return customerMapper.toDTO(customer);
+        if (updateCustomerParam.getFullName().isEmpty() || updateCustomerParam.getFullName().equals("")) {
+            updateCustomerParam.setFullName(customer.getFullName());
+        }
+
+        if (updateCustomerParam.getCustomerCode().equals("")) {
+            updateCustomerParam.setCustomerCode(customer.getCustomerCode());
+        }
+
+        customerMapper.transferFields(updateCustomerParam, customer);
+
+        Customer customerResult = customerRepository.save(customer);
+        return customerMapper.toDTO(customerResult);
     }
 
+    //
+//    @Override
+//    @Transactional(readOnly = true)
+//    public List<SaleOrderResult> findHistoryCustomerOrder(Integer id) {
+//        List<SaleOrderResult> saleOrderByCustomer = saleOrderService.findAllSaleOrderByCustomerId(id);
+//        return saleOrderByCustomer;
+//    }
+//
     @Override
     @Transactional
     public void changeStatusToAvailable(List<Integer> customerIds, boolean status) {
@@ -100,58 +158,24 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public List<CustomerResult> findAllByGroupListId(List<Integer> groupIds) {
-        return customerRepository.findAllByGroupIdIn(groupIds)
+        List<CustomerResult> customerResults = new ArrayList<>();
+        customerResults = customerRepository.findAllByGroupIdIn(groupIds)
                 .stream()
                 .map(customerMapper::toDTO)
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<CustomerResult> findAllEmployeeListId(List<Integer> employeeIds) {
-        return null;
-    }
-
-    @Override
-    public List<CustomerResult> findAllByGenderId(String genderId) {
-        return null;
+        return customerResults;
     }
 
     @Override
     @Transactional(readOnly = true)
     public Page<CustomerResult> findAllByFilters(CustomerFilter filters, Pageable pageable) {
-        return customerFilterRepository.
-                findAllByFilters(filters, pageable)
-                .map(customerMapper::toDTO);
+        return customerFilterRepository.findAllByFilters(filters, pageable).map(customerMapper::toDTO);
     }
 
-
-//    @Override
-//    public List<CustomerResult> findAllByGroupId(Integer groupTitleId) {
-//        List<CustomerResult> customerResults = new ArrayList<>();
-//        customerResults = customerRepository.findAllByGroupId(groupTitleId)
-//                .stream()
-//                .map(customerMapper::toDTO)
-//                .collect(Collectors.toList());
-//        return customerResults;
-//    }
-
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<CustomerResult> findAllCustomerByGroupAndStatus(Integer groupTitleId, String customerStatus) {
-        List<CustomerResult> customerResults = new ArrayList<>();
-        customerResults = customerRepository.findAllByGroupIdAndStatus(groupTitleId, CustomerStatus.parseCustomerGroup(customerStatus))
-                .stream()
-                .map(customerMapper::toDTO)
-                .collect(Collectors.toList());
-
-        return customerResults;
-    }
 
 }
-
 
 
 

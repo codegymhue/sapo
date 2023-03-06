@@ -3,7 +3,7 @@ package vn.sapo.supplier.excel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.sapo.address.dto.CreateAddressParam;
+import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.supplier.dto.CreateSupplierParam;
 
 import java.util.ArrayList;

@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.address.AddressService;
+import vn.sapo.customers.AddressService;
 
 @SpringBootTest
 @OverrideAutoConfiguration(enabled = false)

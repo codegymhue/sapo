@@ -150,4 +150,25 @@ public class Customer extends BaseEntity {
         attributes.put(TAX_CODE_ATTRIBUTE_NAME, taxCode);
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", customerCode='" + customerCode + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", birthday=" + birthday +
+                ", status=" + status +
+                ", gender=" + gender +
+                ", description='" + description + '\'' +
+                ", attributes=" + attributes +
+                ", group=" + group +
+                ", groupId=" + groupId +
+                ", employee=" + employee +
+                ", employeeId=" + employeeId +
+                ", addresses=" + addresses +
+                '}';
+    }
 }

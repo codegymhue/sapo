@@ -9,8 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import vn.sapo.address.AddressService;
-import vn.sapo.address.dto.CreateAddressParam;
+import vn.sapo.customers.AddressService;
+import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customerGroup.CustomerGroupService;
@@ -28,7 +28,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/customers")
+<<<<<<< HEAD
 @CrossOrigin("*")
+=======
+@CrossOrigin(origins = "*")
+>>>>>>> cf9e56958713b8ee99a298cabdf1ddcf9488ab60
 public class CustomerAPI {
 
     @Autowired
@@ -76,6 +80,7 @@ public class CustomerAPI {
                                         @RequestParam(name = "sort", required = false, defaultValue = "ASC" ) String sort
     ) {
         // start = 10; length = 5;
+        System.out.println(customerFilter);
         int start = customerFilter.getStart();
         int length = customerFilter.getLength();
 
@@ -110,16 +115,7 @@ public class CustomerAPI {
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CreateCustomerParam createCustomerParam) {
-        System.out.println(createCustomerParam);
-
         CustomerResult dto = customerService.create(createCustomerParam);
-        CreateAddressParam createAddressParam = createCustomerParam.getCreateAddressParam();
-
-
-        if (createAddressParam == null)
-            return new ResponseEntity<>(dto, HttpStatus.OK);
-        createAddressParam.setCustomerId(dto.getId());
-        addressService.create(createAddressParam);
         dto = customerService.findById(dto.getId());
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
