@@ -1,4 +1,4 @@
-package vn.sapo.address;
+package vn.sapo.customers;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

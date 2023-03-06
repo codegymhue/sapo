@@ -1,7 +1,7 @@
-package vn.sapo.address;
+package vn.sapo.customers;
 
-import vn.sapo.address.dto.AddressResult;
-import vn.sapo.address.dto.CreateAddressParam;
+import vn.sapo.customers.dto.AddressResult;
+import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.entities.customer.Customer;

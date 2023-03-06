@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.sapo.address.dto.CreateAddressParam;
+import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
 //import vn.sapo.customer.dto.CustomerGender;
 //import vn.sapo.entities.customer.CustomerStatus;

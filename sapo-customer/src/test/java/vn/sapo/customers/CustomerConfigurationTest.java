@@ -1,4 +1,4 @@
-package vn.sapo.address;
+package vn.sapo.customers;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;

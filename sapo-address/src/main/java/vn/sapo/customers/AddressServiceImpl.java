@@ -1,4 +1,4 @@
-package vn.sapo.address;
+package vn.sapo.customers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +7,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import vn.sapo.address.dto.AddressResult;
-import vn.sapo.address.dto.CreateAddressParam;
-import vn.sapo.address.dto.UpdateAddressParam;
+import vn.sapo.customers.dto.AddressResult;
+import vn.sapo.customers.dto.CreateAddressParam;
+import vn.sapo.customers.dto.UpdateAddressParam;
 import vn.sapo.entities.Address;
 import vn.sapo.shared.exceptions.NotFoundException;
 

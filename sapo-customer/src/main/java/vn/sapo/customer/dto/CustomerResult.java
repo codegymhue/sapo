@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.sapo.address.dto.AddressResult;
+import vn.sapo.customers.dto.AddressResult;
 
 import java.math.BigDecimal;
 import java.time.Instant;

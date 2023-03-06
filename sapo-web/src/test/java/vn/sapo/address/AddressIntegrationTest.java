@@ -5,8 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import vn.sapo.address.dto.AddressResult;
-import vn.sapo.address.dto.CreateAddressParam;
+import vn.sapo.customers.dto.AddressResult;
+import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.controllers.address.AddressAPI;
 
 @SpringBootTest
@@ -29,7 +29,7 @@ public class AddressIntegrationTest {
                 .setDistrictName("An Cuu")
                 .setProvinceId(75)
                 .setProvinceName("Thanh Pho Hue")
-                .setCustomerId(385)
+                .setCustomerId(7965)
                 .setPhoneNumber("0899624654")
                 .setReceiveBill(true)
                 .setShipping(true);

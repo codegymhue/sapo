@@ -1,8 +1,8 @@
 package vn.sapo.customer;
 
 import org.springframework.stereotype.Component;
-import vn.sapo.address.dto.AddressResult;
-import vn.sapo.address.dto.CreateAddressParam;
+import vn.sapo.customers.dto.AddressResult;
+import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
 
@@ -139,8 +139,8 @@ public class CustomerParamTest {
     }
     public static CreateCustomerParam getCreateCustomerParam(){
         return new CreateCustomerParam()
-                .setId(1)
-                .setCustomerCode("CustomerCode")
+//                .setId(1)
+//                .setCustomerCode("")
                 .setCreateAddressParam(getCreateAddressParam())
                 .setFullName("trung")
                 .setPhoneNumber("0809809809")

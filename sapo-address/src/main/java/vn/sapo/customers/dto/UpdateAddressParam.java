@@ -1,45 +1,46 @@
-package vn.sapo.address.dto;
+package vn.sapo.customers.dto;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import vn.sapo.shared.validation.constraints.NullOrNotBlank;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
 @Accessors(chain = true)
-@EqualsAndHashCode
-public class CreateAddressParam {
+public class UpdateAddressParam {
+    @NotNull
+    private Integer id;
+
     private Integer customerId;
+
     private Integer supplierId;
     @NotBlank(message = "Tên khách hàng không được để trống")
     private String fullName;
     @NullOrNotBlank
     private String label;
-    @NullOrNotBlank
-    private String phoneNumber;
-    @NullOrNotBlank
-    private String email;
-    @NullOrNotBlank
-    private String line1;
-    @NullOrNotBlank
-    private String line2;
-    private String description;
-    private Integer wardId;
-    @NullOrNotBlank
-    private String wardName;
-    private Integer districtId;
-    @NullOrNotBlank
-    private String districtName;
-    private Integer provinceId;
-    @NullOrNotBlank
-    private String provinceName;
-    @NullOrNotBlank
-    private String zipCode;
 
-    private boolean isReceiveBill;
-    private boolean isShipping;
+    private String phoneNumber;
+    private String email;
+
+    private String line1;
+
+    private String line2;
+
+    private Integer wardId;
+
+    private String wardName;
+
+    private Integer districtId;
+
+    private String districtName;
+
+    private Integer provinceId;
+
+    private String provinceName;
+
+    private String zipCode;
 }

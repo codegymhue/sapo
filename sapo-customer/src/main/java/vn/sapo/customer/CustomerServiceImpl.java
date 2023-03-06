@@ -3,14 +3,17 @@ package vn.sapo.customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import vn.sapo.address.AddressService;
+import vn.sapo.customers.AddressService;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerFilter;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
+import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.shared.configurations.CodePrefix;
@@ -75,17 +78,31 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public CustomerResult create(CreateCustomerParam createCustomerParam) {
         Instant birthday = createCustomerParam.getBirthday().toInstant();
+        String cusCode =createCustomerParam.getCustomerCode();
+        String randomString = String.valueOf(Math.random()*1000000+1);
+        if(cusCode == null || cusCode.trim().isEmpty()){
+            createCustomerParam.setCustomerCode(randomString);
+        }
         if(createCustomerParam.getFullName()==null){
             throw new DataInputException("Tên khách hàng không được để trống");
         }
         Customer customer = customerMapper.toModel(createCustomerParam);
         customer.setBirthday(birthday);
+        Customer customerResult = customerRepository.save(customer);
+        CreateAddressParam createAddressParam = createCustomerParam.getCreateAddressParam();
+        if (createAddressParam == null) throw new DataInputException("Tên address không được để trống");
+        createAddressParam.setCustomerId(customer.getId());
+        createAddressParam.setSupplierId(null);
+        addressService.create(createAddressParam);
 
-        Customer newCustomer = customerRepository.save(customer);
-        String cusCode = newCustomer.getCustomerCode();
-        if (cusCode == null || cusCode.trim().isEmpty())
-            customer.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
-        return customerMapper.toDTO(customer);
+        if (customerResult.getCustomerCode().equals(randomString)) {
+            createCustomerParam.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
+            customerResult.setCustomerCode(createCustomerParam.getCustomerCode());
+            Customer newCustomer = customerRepository.saveAndFlush(customerResult);
+            return customerMapper.toDTO(newCustomer);
+        }
+
+        return customerMapper.toDTO(customerResult);
     }
 
     @Override

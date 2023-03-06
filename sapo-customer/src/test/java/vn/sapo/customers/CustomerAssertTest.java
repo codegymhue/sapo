@@ -1,7 +1,7 @@
-package vn.sapo.address;
+package vn.sapo.customers;
 
 import org.assertj.core.api.Assertions;
-import vn.sapo.address.dto.CreateAddressParam;
+import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.entities.customer.Customer;
 

@@ -1,9 +1,9 @@
-package vn.sapo.address;
+package vn.sapo.customers;
 
 
-import vn.sapo.address.dto.AddressResult;
-import vn.sapo.address.dto.CreateAddressParam;
-import vn.sapo.address.dto.UpdateAddressParam;
+import vn.sapo.customers.dto.AddressResult;
+import vn.sapo.customers.dto.CreateAddressParam;
+import vn.sapo.customers.dto.UpdateAddressParam;
 
 import java.util.List;
 import java.util.Map;
