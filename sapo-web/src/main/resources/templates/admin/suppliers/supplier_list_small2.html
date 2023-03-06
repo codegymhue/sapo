@@ -48,7 +48,8 @@
         .filter-body {
             overflow-y: visible;
         }
-        .ui-sortable-handle.dragging{
+
+        .ui-sortable-handle.dragging {
             opacity: 1;
         }
 
@@ -390,23 +391,23 @@
                                 <tr id="theadList" class="show">
                                     <th class="align-middle">
                                         <label for="checkAll" style="padding: 1rem; cursor:pointer">
-                                            <input style="cursor:pointer" id="checkAll" type="checkbox" value=""
+                                            <input style="cursor:pointer" id="checkAll" type="checkbox" value="" nameth="bulk_action"
                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả">
                                         </label>
                                     </th>
-                                    <th class="align-middle" scope="col">Mã nhà cung cấp</th>
-                                    <th class="align-middle" scope="col">Tên nhà cung cấp</th>
-                                    <th class="align-middle" scope="col">Nhóm nhà cung cấp</th>
-                                    <th class="align-middle" scope="col">Email</th>
-                                    <th class="align-middle" scope="col">Số điện thoại</th>
-                                    <th class="align-middle" scope="col">Trạng thái</th>
-                                    <th class="align-middle" scope="col">Nhân viên phụ trách</th>
-                                    <th class="align-middle" scope="col">Mã số thuế</th>
-                                    <th class="align-middle" scope="col">Website</th>
-                                    <th class="align-middle" scope="col">Ngày tạo</th>
-                                    <th class="align-middle" scope="col">Lần cập nhật cuối</th>
+                                    <th class="align-middle" nameth="code" scope="col">Mã nhà cung cấp</th>
+                                    <th class="align-middle" nameth="supplier_name" scope="col">Tên nhà cung cấp</th>
+                                    <th class="align-middle" nameth="supplier_group" scope="col">Nhóm nhà cung cấp</th>
+                                    <th class="align-middle" nameth="email" scope="col">Email</th>
+                                    <th class="align-middle" nameth="phone_number" scope="col">Số điện thoại</th>
+                                    <th class="align-middle" nameth="status" scope="col">Trạng thái</th>
+                                    <th class="align-middle" nameth="assignee_name" scope="col">Nhân viên phụ trách</th>
+                                    <th class="align-middle" nameth="tax_number" scope="col">Mã số thuế</th>
+                                    <th class="align-middle" nameth="website" scope="col">Website</th>
+                                    <th class="align-middle" nameth="created_on" scope="col">Ngày tạo</th>
+                                    <th class="align-middle" nameth="modified_on" scope="col">Lần cập nhật cuối</th>
                                     <!--                                    <th class="align-middle" scope="col">Nợ hiện tại</th>-->
-                                    <!--                                    <th class="align-middle" scope="col">Số fax</th>-->
+                                    <th class="align-middle" nameth="fax" scope="col" >Số fax</th>
                                 </tr>
                                 <tr class="hide" id="selectActionThead" style="border: snow">
                                     <td class="align-middle" style="width: 20px">
@@ -771,7 +772,7 @@
             data: JSON.stringify(supplierFilter)
         })
             .done((data) => {
-
+                console.log(data.suppliers," datasup")
                 page.elements.tbSupplier_tbody.empty();
                 page.elements.totalPage.empty();
                 totalPage = data.totalPage;
@@ -782,6 +783,7 @@
                     data.suppliers.map(item => {
                         if (item.status == "AVAILABLE") {
                             page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available'))
+                            // page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available', configDisplays))
                         } else {
                             page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'unavailable'))
                         }
@@ -1343,15 +1345,49 @@
         console.log(supplierFilter.createdTo, "supplierFilter.createdTo")
     }
 
+
+    const defaultFields = ["code", "supplier_name", "supplier_group", "email", "phone_number", "status"];
+
+
     function toggleItem(element) {
-        console.log(element)
-        if ($(element).is(":checked"))
-            $('#tbSupplier tr > *:nth-child(' + $(element).val() + ')').toggle();
+
     }
 
     function confirmSave(str, element) {
-        console.log(element)
+        let sList = [];
+        if($("#defaultSettings").is(":checked")){
+            $("#list-row-default").find('input[type="checkbox"].export-field-group--toggle-item').each(function () {
+                if (this.checked)
+                    sList.push($(this).val())
+            });
+            console.log(sList, " list-row-default")
+            return sList;
+        }else {
+            $("#list-row-settings").find('input[type="checkbox"].export-field-group--toggle-item').each(function () {
+                if (this.checked)
+                    sList.push($(this).val())
+            });
+            console.log(sList,  ' list-row-settings')
+            return sList;
+        }
     }
+
+    $("#defaultSettings").change(function () {
+        if ($("#defaultSettings").prop('checked')) {
+            $("#list-row-settings").hide();
+            $("#list-row-default").show();
+            $("#list-row-default").find(".export-field-group--toggle-item").each(function (index, item) {
+                $(item).attr('checked', false);
+            });
+            if (defaultFields != null)
+                for (let i = 0; i < defaultFields.length; i++) {
+                    $("#list-row-default").find('.export-field-group--toggle-item[value="' + defaultFields[i] + '"]').attr('checked', true);
+                }
+        } else {
+            $("#list-row-settings").show();
+            $("#list-row-default").hide();
+        }
+    });
 
     // drag vs drop
     const draggables = document.querySelectorAll(".ui-sortable-handle");
@@ -1388,13 +1424,58 @@
             const box = child.getBoundingClientRect()
             const offset = y - box.top - box.height / 2
             if (offset < 0 && offset > closest.offset) {
-                return { offset: offset, element: child }
+                return {offset: offset, element: child}
             } else {
                 return closest
             }
-        }, { offset: Number.NEGATIVE_INFINITY }).element
+        }, {offset: Number.NEGATIVE_INFINITY}).element
     }
 
+    function swapColumnsByName(tableId, columnName1, columnName2) {
+        // Get the table element
+        const table = document.getElementById(tableId);
+
+        // Get the header row and find the column indices
+        const headerRow = table.rows[0];
+        let column1 = -1;
+        let column2 = -1;
+        for (let i = 0; i < headerRow.cells.length; i++) {
+            if (headerRow.cells[i].getAttribute("nameth") === columnName1) {
+                column1 = i;
+            }
+            if (headerRow.cells[i].getAttribute("nameth") === columnName2) {
+                column2 = i;
+            }
+        }
+
+        // Swap the columns if both were found
+        if (column1 !== -1 && column2 !== -1) {
+            // Swap the column names in the header row
+            const temp = headerRow.cells[column1].innerHTML;
+            headerRow.cells[column1].innerHTML = headerRow.cells[column2].innerHTML;
+            headerRow.cells[column2].innerHTML = temp;
+
+            // Swap the data in the table cells for each row
+            for (let i = 1; i < table.rows.length; i++) {
+                const row = table.rows[i];
+                const temp = row.cells[column1].innerHTML;
+                row.cells[column1].innerHTML = row.cells[column2].innerHTML;
+                row.cells[column2].innerHTML = temp;
+            }
+        }
+    }
+    function fields(tableId){
+        // Get the table element
+        const table = document.getElementById(tableId);
+
+        // Get the header row and find the column indices
+        const headerRow = table.rows[0];
+        let arrayFieldsNow = []
+        for (let i = 0; i < headerRow.cells.length; i++) {
+            arrayFieldsNow.push(headerRow.cells[i].getAttribute("nameth"))
+        }
+        return arrayFieldsNow;
+    }
 
     page.commands.loadData = () => {
         page.commands.getAllSupplier();

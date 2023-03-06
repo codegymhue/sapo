@@ -59,9 +59,10 @@
                     <div class="action-btn clearfix">
                         <button class="btn pull-right margin-left-5 sapo-btn-default" type="button"
                                 id="updateBulkaction"
-                                data-bs-target="#update_bulkaction_modal" data-bs-toggle="modal" data-bs-dismiss="modal">Lưu
+                                data-bs-target="#update_bulkaction_modal" data-bs-toggle="modal"
+                                data-bs-dismiss="modal">Lưu
                         </button>
-                        <button class="close-modal btn btn-blank pull-right"  data-bs-dismiss="modal"
+                        <button class="close-modal btn btn-blank pull-right" data-bs-dismiss="modal"
                                 type="button">Thoát
                         </button>
                     </div>
@@ -150,7 +151,8 @@
                 <div class="modal-footer">
                     <div class="action-btn clearfix">
                         <button class="btn pull-right sapo-btn-blank" type="button" id="buttonPrintAfterPacking"
-                                bind-event-click="showPrintAfterPackingModal()" style="margin-left:10px;display:none;">In
+                                bind-event-click="showPrintAfterPackingModal()" style="margin-left:10px;display:none;">
+                            In
                             hướng dẫn đóng gói
                         </button>
                     </div>
@@ -185,18 +187,20 @@
         </div>
     </div>
 
-<!--    modal-setting-column-->
+    <!--    modal-setting-column-->
 
 
     <!-- Modal -->
-    <div class="modal fade" id="modal-setting-column" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal-setting-column" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-setting-column">
             <div class="modal-dialog modal-dialog-new">
                 <div class="modal-content">
                     <div class="modal-header">
                         <span class="ui-dialog-title" id="ui-dialog-title-1">Điều chỉnh cột hiển thị trên trang danh sách</span>
                         <span class="modal-close-wrapper1" data-bs-dismiss="modal">
-                    <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use> </svg>
+                    <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                              xlink:href="#cancel-small-minor"></use> </svg>
                 </span>
                     </div>
                     <div class="modal-body">
@@ -204,7 +208,8 @@
                             <div class="export-field-group field-group-order" id="field-group-order">
                                 <div class="export-field-item order-field-col-left" style="float: none;border: none;">
                                     <label class="border-checkmark" style="border: none; ">Quay về mặc định
-                                        <input class="export-field-group--toggle-item" hidden="" type="checkbox" id="defaultSettings" bind-event-change="toggleItem(this)">
+                                        <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                               id="defaultSettings" bind-event-change="toggleItem(this)">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
@@ -212,47 +217,59 @@
                                     <div class="order-field-col ui-sortable" id="list-row-settings">
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input checked="" class="export-field-group--toggle-item" hidden="" type="checkbox" value="code" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="code" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Mã</span>
                                             </label>
                                             <i class="fa fa-bars"></i>
                                         </div>
-                                        <div class="export-field-item order-field-col-left ui-sortable-handle" >
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input checked="" class="export-field-group--toggle-item" hidden="" type="checkbox" value="supplier_name" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="supplier_name" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Tên nhà cung cấp</span>
                                             </label>
                                             <i class="fa fa-bars"></i>
                                         </div>
-                                        <div class="export-field-item order-field-col-left ui-sortable-handle " >
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle ">
                                             <label class="border-checkmark1">
-                                                <input checked="" class="export-field-group--toggle-item" hidden="" type="checkbox" value="supplier_group" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="supplier_group"
+                                                       field-group="PaymentFields" bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Nhóm nhà cung cấp</span>
                                             </label>
                                             <i class="fa fa-bars"></i>
                                         </div>
-                                        <div class="export-field-item order-field-col-left ui-sortable-handle" >
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input checked="" class="export-field-group--toggle-item" hidden="" type="checkbox" value="email" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="email" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Email</span>
                                             </label>
                                             <i class="fa fa-bars"></i>
                                         </div>
-                                        <div class="export-field-item order-field-col-left ui-sortable-handle" >
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input checked="" class="export-field-group--toggle-item" hidden="" type="checkbox" value="phone_number" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="phone_number" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Số điện thoại</span>
                                             </label>
                                             <i class="fa fa-bars"></i>
                                         </div>
-                                        <div class="export-field-item order-field-col-left ui-sortable-handle" >
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input checked="" class="export-field-group--toggle-item" hidden="" type="checkbox" value="status" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="status" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Trạng thái</span>
                                             </label>
@@ -260,7 +277,9 @@
                                         </div>
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox" value="debt" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="debt" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Nợ hiện tại</span>
                                             </label>
@@ -268,7 +287,9 @@
                                         </div>
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox" value="fax" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="fax" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Số Fax</span>
                                             </label>
@@ -276,7 +297,9 @@
                                         </div>
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox" value="tax_number" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="tax_number" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Mã số thuế</span>
                                             </label>
@@ -284,7 +307,9 @@
                                         </div>
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox" value="website" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="website" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Website</span>
                                             </label>
@@ -292,7 +317,9 @@
                                         </div>
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox" value="assignee_name" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="assignee_name" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Nhân viên phụ trách</span>
                                             </label>
@@ -300,7 +327,9 @@
                                         </div>
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox" value="created_on" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="created_on" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Ngày tạo</span>
                                             </label>
@@ -308,17 +337,22 @@
                                         </div>
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox" value="modified_on" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="modified_on" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Cập nhật cuối</span>
                                             </label>
                                             <i class="fa fa-bars"></i>
                                         </div>
                                     </div>
-                                    <div class="order-field-col ui-sortable" id="list-row-default" style="display: none;">
+                                    <div class="order-field-col ui-sortable" id="list-row-default"
+                                         style="display: none;">
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input checked="" class="export-field-group--toggle-item" hidden="" type="checkbox" value="code" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="code" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Mã</span>
                                             </label>
@@ -326,7 +360,9 @@
                                         </div>
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input checked="" class="export-field-group--toggle-item" hidden="" type="checkbox" value="supplier_name" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="supplier_name" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Tên nhà cung cấp</span>
                                             </label>
@@ -334,7 +370,9 @@
                                         </div>
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input checked="" class="export-field-group--toggle-item" hidden="" type="checkbox" value="supplier_group" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="supplier_group"
+                                                       field-group="PaymentFields" bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Nhóm nhà cung cấp</span>
                                             </label>
@@ -342,7 +380,9 @@
                                         </div>
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input checked="" class="export-field-group--toggle-item" hidden="" type="checkbox" value="email" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="email" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Email</span>
                                             </label>
@@ -350,7 +390,9 @@
                                         </div>
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input checked="" class="export-field-group--toggle-item" hidden="" type="checkbox" value="phone_number" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="phone_number" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Số điện thoại</span>
                                             </label>
@@ -358,7 +400,9 @@
                                         </div>
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input checked="" class="export-field-group--toggle-item" hidden="" type="checkbox" value="status" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="status" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Trạng thái</span>
                                             </label>
@@ -366,7 +410,9 @@
                                         </div>
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox" value="debt" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="debt" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Nợ hiện tại</span>
                                             </label>
@@ -374,7 +420,9 @@
                                         </div>
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox" value="fax" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="fax" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Số Fax</span>
                                             </label>
@@ -382,7 +430,9 @@
                                         </div>
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox" value="tax_number" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="tax_number" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Mã số thuế</span>
                                             </label>
@@ -390,7 +440,9 @@
                                         </div>
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox" value="website" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="website" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Website</span>
                                             </label>
@@ -398,7 +450,9 @@
                                         </div>
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox" value="assignee_name" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="assignee_name" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Nhân viên phụ trách</span>
                                             </label>
@@ -406,7 +460,9 @@
                                         </div>
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox" value="created_on" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="created_on" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Ngày tạo</span>
                                             </label>
@@ -414,7 +470,9 @@
                                         </div>
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
-                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox" value="modified_on" field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="modified_on" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
                                                 <span class="checkmark1"></span>
                                                 <span>Cập nhật cuối</span>
                                             </label>
@@ -423,30 +481,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="note"><span style="font-weight:700">Lưu ý:</span> Di chuột vào và kéo thả các ô để thay đổi thứ tự vị trí các cột hiển thị trên trang danh sách .</div>
+                            <div class="note"><span style="font-weight:700">Lưu ý:</span> Di chuột vào và kéo thả các ô
+                                để thay đổi thứ tự vị trí các cột hiển thị trên trang danh sách .
+                            </div>
                             <input type="hidden" name="SavedSearchId" id="save-search-id" value="3226803">
                         </div>
 
                         <script>
-                            var defaultFields = ["code","supplier_name","supplier_group","email","phone_number","status"];
-                            $("#defaultSettings").change(function () {
-                                if( $("#defaultSettings").prop('checked'))
-                                {
-                                    $("#list-row-settings").hide();
-                                    $("#list-row-default").show();
-                                    $("#list-row-default").find(".export-field-group--toggle-item").each(function(index,item){
-                                        $(item).attr('checked', false);
-                                    });
-                                    if(defaultFields != null)
-                                        for(var i=0;i<defaultFields.length;i++)
-                                        {
-                                            $("#list-row-default").find('.export-field-group--toggle-item[value="'+defaultFields[i]+'"]').attr('checked', true);
-                                        }
-                                } else {
-                                    $("#list-row-settings").show();
-                                    $("#list-row-default").hide();
-                                }
-                            });
+
                             // $("#list-row-default").sortable({
                             //     revert: true,
                             //     stop: function () {
@@ -473,8 +515,11 @@
                     </div>
                     <div class="modal-footer">
                         <div class="action-btn clearfix">
-                            <a class="btn btn-default pull-right sapo-btn-default margin-left-5" href="javascript:void(0)" bind-event-click="confirmSave('supplier',this)">Lưu</a>
-                            <button class="btn btn-blank pull-right" id="close-popup" type="button" data-bs-dismiss="modal">Thoát</button>
+                            <a class="btn btn-default pull-right sapo-btn-default margin-left-5"
+                               bind-event-click="confirmSave('supplier',this)">Lưu</a>
+                            <button class="btn btn-blank pull-right" id="close-popup" type="button"
+                                    data-bs-dismiss="modal">Thoát
+                            </button>
                         </div>
                     </div>
                 </div>
