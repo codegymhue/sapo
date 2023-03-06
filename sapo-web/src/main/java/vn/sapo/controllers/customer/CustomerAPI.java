@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.customers.AddressService;
-import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customerGroup.CustomerGroupService;
@@ -19,20 +18,14 @@ import vn.sapo.excel.ExcelService;
 import vn.sapo.supplier.excel.ResponseMessage;
 import vn.sapo.order.sale.SaleOrderService;
 import vn.sapo.order.sale.item.OrderItemService;
-import vn.sapo.payment.sale.PaymentSaleOrderService;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/customers")
-<<<<<<< HEAD
 @CrossOrigin("*")
-=======
-@CrossOrigin(origins = "*")
->>>>>>> cf9e56958713b8ee99a298cabdf1ddcf9488ab60
 public class CustomerAPI {
 
     @Autowired

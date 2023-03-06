@@ -1,5 +1,6 @@
 package vn.sapo.customer;
 
+import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.InitializingBean;
@@ -18,26 +19,19 @@ public class CustomerMapper implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-<<<<<<< HEAD
         TypeMap<CreateCustomerParam, Customer> createDTO2Model
                 = modelMapper.createTypeMap(CreateCustomerParam.class, Customer.class);
 
         createDTO2Model.addMapping(source -> source.getBirthday().toInstant(), Customer::setBirthday);
 
         TypeMap<UpdateCustomerParam, Customer> updateDTO2Model
-                = modelMapperSkipNullDisabled.createTypeMap(UpdateCustomerParam.class, Customer.class);
+                = modelMapper.createTypeMap(UpdateCustomerParam.class, Customer.class);
 
         updateDTO2Model.addMapping(source -> source.getBirthday().toInstant(), Customer::setBirthday);
 
         updateDTO2Model.addMappings(mapper -> {
             mapper.when(Conditions.isNotNull()).map(UpdateCustomerParam::getGroupId, Customer::setGroupId);
         });
-=======
-//        TypeMap<CreateCustomerParam, Customer> createDTO2Model = modelMapper.createTypeMap(CreateCustomerParam.class, Customer.class);
-//        createDTO2Model.addMapping(source -> source.getBirthday().toInstant(), Customer::setBirthday);
-//        TypeMap<UpdateCustomerParam, Customer> updateDTO2Model = modelMapper.createTypeMap(UpdateCustomerParam.class, Customer.class);
-//        updateDTO2Model.addMapping(source -> source.getBirthday().toInstant(), Customer::setBirthday);
->>>>>>> cf9e56958713b8ee99a298cabdf1ddcf9488ab60
     }
 
     public CustomerResult toDTO(Customer customer) {

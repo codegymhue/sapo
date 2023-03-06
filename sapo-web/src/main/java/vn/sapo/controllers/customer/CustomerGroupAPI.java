@@ -10,15 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vn.sapo.customerGroup.CustomerGroupMapper;
 import vn.sapo.customerGroup.CustomerGroupService;
-<<<<<<< HEAD
 import vn.sapo.customerGroup.dto.*;
-=======
-import vn.sapo.customerGroup.dto.CreateCusGroupParam;
-import vn.sapo.customerGroup.dto.CustomerGroupResult;
-import vn.sapo.customerGroup.dto.UpdateCusGroupParam;
-import vn.sapo.customerGroup.dto.UpdateCustomerGroupParam;
-
->>>>>>> cf9e56958713b8ee99a298cabdf1ddcf9488ab60
 
 @RestController
 @RequestMapping("/api/customer_groups")
@@ -84,7 +76,9 @@ public class CustomerGroupAPI {
     public ResponseEntity<?> create(@RequestBody CreateCusGroupParam createCusGroupParam) {
         System.out.println(createCusGroupParam);
         CustomerGroupResult dto = customerGroupService.create(createCusGroupParam);
+
         dto = customerGroupService.findById(dto.getId());
+
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 

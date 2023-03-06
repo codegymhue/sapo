@@ -81,19 +81,19 @@ class CustomerGroupFilter {
     }
 }
 
-// class CustomerGroup{
-//     constructor(id,title,cusGrpCode,createdAt,countCus,pricingPolicyId,paymentMethodId, description, discount) {
-//         this.id = id;
-//         this.title = title;
-//         this.cusGrpCode = cusGrpCode;
-//         this.createdAt = createdAt;
-//         this.countCus = countCus;
-//         this.pricingPolicyId = pricingPolicyId;
-//         this.paymentMethodId = paymentMethodId;
-//         this.description = description;
-//         this.discount = discount
-//     }
-// }
+class CustomerGroup{
+    constructor(title, cusGrpCode, pricingPolicyId, paymentMethodId, description, discount) {
+        this.title = title;
+        this.cusGrpCode = cusGrpCode;
+        this.description = description;
+        this.pricingPolicyId = pricingPolicyId;
+        this.discount = discount
+        this.paymentMethodId = paymentMethodId;
+        // this.customerGroupType = customerGroupType;
+        // this.createdAt = createdAt;
+        // this.countCus = countCus;
+    }
+}
 
 
 // class CreateCusGroupParam {

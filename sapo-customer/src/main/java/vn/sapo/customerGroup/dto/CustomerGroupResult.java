@@ -1,11 +1,5 @@
 package vn.sapo.customerGroup.dto;
 
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.InstantSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,20 +22,18 @@ public class CustomerGroupResult {
 
     private String cusGrpCode;
 
-<<<<<<< HEAD
-    private String customerGroupType;
-=======
+    private String description;
+
     private Integer pricingPolicyId;
+
+    private Integer discount;
 
     private String paymentMethodId;
 
-    private Instant createdAt;
+
+    private String customerGroupType;
+
     private Date createAtDate;
-
-    private Long countCus;
->>>>>>> cf9e56958713b8ee99a298cabdf1ddcf9488ab60
-
-    private String description;
 
     private Long countCus;
 
@@ -51,7 +43,6 @@ public class CustomerGroupResult {
 //
 //    private Integer pricingPolicyId;
 
-//    private Integer discount;
 
     public CustomerGroupResult(Integer id, String title, String cusGrpCode, Integer pricingPolicyId, String paymentMethodId, Date createAtDate, Long countCus, String description, Integer discount) {
         this.id = id;

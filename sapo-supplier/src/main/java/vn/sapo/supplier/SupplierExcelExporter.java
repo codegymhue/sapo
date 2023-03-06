@@ -1,5 +1,3 @@
-
-
 package vn.sapo.supplier;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -8,12 +6,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-<<<<<<< HEAD
-import vn.sapo.address.dto.AddressResult;
 import vn.sapo.supplier.dto.SupGroupResult;
-=======
 import vn.sapo.customers.dto.AddressResult;
->>>>>>> cf9e56958713b8ee99a298cabdf1ddcf9488ab60
 import vn.sapo.supplier.dto.SupplierResult;
 
 import javax.servlet.ServletOutputStream;

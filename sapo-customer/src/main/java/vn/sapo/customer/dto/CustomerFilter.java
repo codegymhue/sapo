@@ -40,8 +40,6 @@ public class CustomerFilter {
     private Integer length;            // số lượng trên 1 trang
 
     private Integer start;             // lấy bắt đầu từ
-<<<<<<< HEAD
-=======
 
     @Override
     public String toString() {
@@ -62,5 +60,4 @@ public class CustomerFilter {
                 ", start=" + start +
                 '}';
     }
->>>>>>> cf9e56958713b8ee99a298cabdf1ddcf9488ab60
 }

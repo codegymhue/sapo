@@ -29,11 +29,13 @@
                 </a>
             </div>
             <div class="jss20296">
-                <button id="Sapo-Button-b07b3814-cc54-436f-95b3-3dc5c028fe16" class="hFrEkh btn" fdprocessedid="mh7x7">
-                    <span>Hủy</span>
+                <button type="button" class="ldZiUT ldZabc" href="/admin/customer_groups">
+                    Hủy
                 </button>
-                <button id="btnCreateCustomerGroup" class="btn FmJDc" fdprocessedid="ct2jmq">
-                    <span>Lưu</span>
+                <button id="btnCreateCustomerGroup" class="RthGc ldZabc" type="button">
+                        <span class="cMXJOk">
+                            Lưu
+                        </span>
                 </button>
             </div>
         </div>
@@ -45,7 +47,7 @@
                     <div class="MuiPaper-root jss23708 MuiPaper-elevation1 MuiPaper-rounded">
                         <div class="jss751 jss722 borderBottom">
                             <div>
-                                <h6 class="MuiTypography-root MuiTypography-h6 jss24250">
+                                <h6 class="MuiTypography-root jss24250 ">
                                     Thông tin chung
                                 </h6>
                             </div>
@@ -56,7 +58,7 @@
                                     <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth">
                                         <label class="MuiFormLabel-root MuiInputLabel-root jss755
                                         MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-                                               data-shrink="true" for="titleGroup">
+                                               data-shrink="true" for="titleGroupCre">
                                             Tên nhóm
                                             <span class="MuiFormLabel-asterisk MuiInputLabel-asterisk">
                                                 &thinsp;*
@@ -67,11 +69,12 @@
                                             <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth">
                                                 <div>
                                                     <input aria-invalid="false"
-                                                           id="titleGroup"
+                                                           id="titleGroupCre"
+                                                           name="titleGroupCre"
                                                            placeholder="Nhập tên nhóm khách hàng"
                                                            type="text"
                                                            aria-label="Without label"
-                                                           class="MuiInputBase-input MuiOutlinedInput-input"
+                                                           class="MuiInputBase-input MuiOutlinedInput-input placeholder_text"
                                                            fdprocessedid="7i85i6">
                                                 </div>
                                                 <fieldset aria-hidden="true"
@@ -96,7 +99,7 @@
                                                        id="cusGrpCode"
                                                        placeholder="Nhập mã nhóm khách hàng" type="text"
                                                        aria-label="Without label"
-                                                       class="MuiInputBase-input MuiOutlinedInput-input"
+                                                       class="MuiInputBase-input MuiOutlinedInput-input placeholder_text"
                                                        fdprocessedid="sytfp">
                                                 <fieldset aria-hidden="true"
                                                           class="jss823 MuiOutlinedInput-notchedOutline">
@@ -150,7 +153,7 @@
                     <div class="MuiPaper-root jss721 MuiPaper-elevation1 MuiPaper-rounded">
                         <div class="jss751 jss722 borderBottom">
                             <div class="jss1769">
-                                <h6 class="MuiTypography-root MuiTypography-h6 jss24250">
+                                <h6 class="MuiTypography-root jss24250">
                                     Cài đặt nâng cao
                                 </h6>
                                 <button class="MuiButtonBase-root MuiIconButton-root jss723" tabindex="0" type="button"
@@ -171,7 +174,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="jss23767">
+                        <div class="jss23712">
                             <div class="MuiGrid-container MuiGrid-spacing-xs-2">
                                 <div class="MuiGrid-item MuiGrid-grid-xs-12">
                                     <div class="jss865 jss1785">
@@ -186,25 +189,22 @@
                                             <ul class="dropdown-menu w-100 showAllPricingPolicy">
                                                 <div class="jss23768">
                                                     <li>
-                                                        <div class="d-flex align-items-center">
+                                                        <div class="d-flex align-items-center jss761">
                                                             <i class="fa-solid fa-magnifying-glass jss23769"></i>
                                                             <label for="inputSearchCat">
                                                                 <input id="inputSearchCat"
-                                                                       class="w-100 form-control border border-0 jss23770"
+                                                                       class="w-100 form-control border border-0"
                                                                        placeholder="Tìm kiếm hoặc nhập mới"/>
                                                             </label>
                                                         </div>
                                                     </li>
-                                                    <li class="text-primary dropdown-item">
-                                                        <button id="btnCreatePri" type="button"
-                                                                class="bg-white w-100 jss23771">
-                                                            <i class="fa-solid fa-circle-plus jss23772">
+                                                    <li class="text-primary dropdown-item jss761">
+                                                            <i class="fa-solid fa-circle-plus">
                                                             </i>
                                                             Thêm mới loại sản phẩm
-                                                        </button>
                                                     </li>
                                                 </div>
-                                                <div id="showAllPricing">
+                                                <div id="dropdownDefaultPrice">
 
                                                 </div>
                                             </ul>
@@ -223,7 +223,7 @@
                                                 <input aria-invalid="false"
                                                        id="discount"
                                                        type="text" aria-label="Without label"
-                                                       class="MuiInputBase-input MuiOutlinedInput-input jss758"
+                                                       class="MuiInputBase-input MuiOutlinedInput-input jss758 placeholder_text"
                                                        value="0"
                                                        fdprocessedid="16ju8f">
                                                 <fieldset aria-hidden="true"
@@ -248,8 +248,8 @@
                                                 <span id="paymentType">Chọn hình thức thanh toán</span>
                                             </div>
                                             <ul class="dropdown-menu w-100 showAllPaymentMethod">
-                                                <li class="jss760">Chọn hình thức thanh toán</li>
-                                                <div id="showAllPay">
+                                                <li class="jss760 jss761">Chọn hình thức thanh toán</li>
+                                                <div id="dropdownPaymentMethod">
 
                                                 </div>
                                             </ul>
@@ -274,29 +274,24 @@
 <script>
     let pricingPolicy;
     let paymentMethod;
-    const selectBtnPri = document.querySelector('.select-btn-pri');
-    const selectBtnPay = document.querySelector('.select-btn-pay');
     let createCusGroupParam = new CustomerGroup();
 
-    let page = {
-        urls: {},
-        elements: {},
-        loadData: {},
-        commands: {},
-        dialogs: {
-            elements: {},
-            loadData: {},
-            commands: {},
-        },
-        initializeEventControl: {}
-    }
-    page.dialogs.elements.titleGroupCre = $("#titleGroup");
-    page.dialogs.elements.cusGrpCodeCre = $("#cusGrpCode");
-    page.dialogs.elements.descriptionCre = $("#description");
+    CustomerApp.page.dialogs.elements.titleGroupCre = $("#titleGroupCre");
+    CustomerApp.page.elements.selectBtnPri = $('.select-btn-pri');
+    CustomerApp.page.elements.selectBtnPay = $('.select-btn-pay');
+    CustomerApp.page.elements.pricingType = $("#pricingType");
+    CustomerApp.page.elements.btnCreateCustomerGroup = $("#btnCreateCustomerGroup");
+    CustomerApp.page.elements.frmCreateCusGrp = $("#frmCreateCusGrp");
+    CustomerApp.page.elements.dropdownDefaultPrice = $("#dropdownDefaultPrice");
+    CustomerApp.page.elements.dropdownPaymentMethod = $("#dropdownPaymentMethod");
+    CustomerApp.page.elements.cusGrpCode = $("#cusGrpCode");
+    CustomerApp.page.elements.description = $("#description");
+    CustomerApp.page.elements.discount = $("#discount");
+    CustomerApp.page.elements.paymentType = $("#paymentType");
 
 
     // Lấy List Pricing Policy
-    function getAllPricingPolicy(selectedPricing) {
+    CustomerApp.page.commands.getAllPricingPolicy = (selectedPricing) => {
         return $.ajax({
             headers: {
                 "accept": "application/json",
@@ -306,32 +301,30 @@
             url: origin + "/api/pricingPolicys"
         })
             .done((data) => {
-                console.log(data);
                 pricingPolicy = data;
                 pricingPolicy.forEach(item => {
                     let isSelected = item === selectedPricing ? "selected" : "";
-                    let str = `<li id="${item.id}" data-id="${item.id}" onclick="updateNamePri(${item.id})" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
-                    $(".showAllPricingPolicy #showAllPricing").append(str);
+                    let str = `<li class="jss761" id="${item.id}" data-id="${item.id}" onclick="CustomerApp.page.commands.updateNamePri(${item.id})" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
+                    CustomerApp.page.elements.dropdownDefaultPrice.append(str);
                 });
             })
             .fail((jqXHR) => {
-
+                console.log(jqXHR)
             })
     }
 
     //show select pricing policy
-    function updateNamePri(id) {
+    CustomerApp.page.commands.updateNamePri = (id) => {
         const arrayCat = pricingPolicy.filter(item => item.id === id)
-        const val = arrayCat[0].title;
-        console.log("is", id, val)
-        selectBtnPri.firstElementChild.innerText = val;
-        $("#pricingType").data("id", id);
-        let idValue = $("#pricingType").data("id");
-        console.log(idValue);
+
+        CustomerApp.page.elements.selectBtnPri.firstElementChild.innerText = arrayCat[0].title;
+        CustomerApp.page.elements.pricingType.data("id", id);
+
+        let idValue = CustomerApp.page.elements.pricingType.data("id");
     }
 
     // Lấy List Payment Method
-    function getAllPaymentMethod(selectedPayment) {
+    CustomerApp.page.commands.getAllPaymentMethod = (selectedPayment) => {
         return $.ajax({
             headers: {
                 "accept": "application/json",
@@ -345,34 +338,34 @@
                 paymentMethod = data;
                 paymentMethod.forEach(item => {
                     let isSelected = item === selectedPayment ? "selected" : "";
-                    let str = `<li id="${item.id}" data-id="${item.id}" onclick="updateNamePay('${item.id}')" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
-                    $(".showAllPaymentMethod #showAllPay").append(str);
+
+                    let str = `<li id="${item.id}" data-id="${item.id}" onclick="CustomerApp.page.commands.updateNamePay('${item.id}')" class="${isSelected} catItem dropdown-item jss761">${item.title}</li>`;
+
+                    CustomerApp.page.elements.dropdownPaymentMethod.append(str);
                 });
             })
             .fail((jqXHR) => {
-
+                console.log(jqXHR)
             })
     }
 
     //show select payment method
-    function updateNamePay(id) {
+    CustomerApp.page.commands.updateNamePay = (id) => {
         const arrayCat = paymentMethod.filter(item => item.id === id)
-        const val = arrayCat[0].title;
-        console.log("is", id, val)
-        selectBtnPay.firstElementChild.innerText = val;
-        $("#paymentType").data("id", id);
-        let idValue = $("#paymentType").data("id");
-        console.log(idValue);
+
+        CustomerApp.page.elements.selectBtnPay.firstElementChild.innerText = arrayCat[0].title;
+        CustomerApp.page.elements.paymentType.data("id", id);
+
+        let idValue = CustomerApp.page.elements.paymentType.data("id");
     }
 
-    function createCusGrp() {
-        createCusGroupParam.id = null;
-        createCusGroupParam.title = $('#titleGroup').val();
-        createCusGroupParam.cusGrpCode = $('#cusGrpCode').val();
-        createCusGroupParam.description = $('#description').val();
-        createCusGroupParam.pricingPolicyId = $('#pricingType').data("id");
-        createCusGroupParam.discount = $('#discount').val();
-        createCusGroupParam.paymentMethodId = $('#paymentType').data("id");
+    CustomerApp.page.commands.createCusGrp = () => {
+        createCusGroupParam.title = CustomerApp.page.dialogs.elements.titleGroupCre.val().trim();
+        createCusGroupParam.cusGrpCode = CustomerApp.page.elements.cusGrpCode.val().trim();
+        createCusGroupParam.description = CustomerApp.page.elements.description.val().trim();
+        createCusGroupParam.pricingPolicyId = CustomerApp.page.elements.pricingType.data("id");
+        createCusGroupParam.discount = CustomerApp.page.elements.discount.val().trim();
+        createCusGroupParam.paymentMethodId = CustomerApp.page.elements.paymentType.data("id");
 
         console.log(createCusGroupParam)
         $.ajax({
@@ -402,11 +395,11 @@
             })
     }
 
-    $('#btnCreateCustomerGroup').on("click", function () {
-        $("#frmCreateCusGrp").trigger("submit");
+    CustomerApp.page.elements.btnCreateCustomerGroup.on("click", () => {
+        CustomerApp.page.elements.frmCreateCusGrp.trigger("submit");
     })
 
-    $("#frmCreateCusGrp").validate({
+    CustomerApp.page.elements.frmCreateCusGrp.validate({
         rules: {
             titleGroupCre: {
                 required: true,
@@ -431,22 +424,17 @@
                 maxlength: "Mô tả không quá 255 ký tự",
             },
         },
-        submitHandler: function () {
-            createCusGrp();
+        submitHandler: () => {
+            CustomerApp.page.commands.createCusGrp();
         },
         invalidHandler: () => {
             CustomerGroup_App.IziToast.showErrorAlert(CustomerGroup_App.AlertMessageVi.ERROR_400);
         }
     })
 
-
-    $(".black").on('click', () => {
-        window.location.href = "/admin/customer_groups";
-    })
-
     $(() => {
-        getAllPricingPolicy();
-        getAllPaymentMethod();
+        CustomerApp.page.commands.getAllPricingPolicy();
+        CustomerApp.page.commands.getAllPaymentMethod();
     })
 </script>
 </html>

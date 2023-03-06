@@ -5,14 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-<<<<<<< HEAD
+
 import vn.sapo.customerGroup.dto.*;
-=======
-import vn.sapo.customerGroup.dto.CreateCusGroupParam;
-import vn.sapo.customerGroup.dto.CustomerGroupResult;
-import vn.sapo.customerGroup.dto.ICustomerGroup;
-import vn.sapo.customerGroup.dto.UpdateCusGroupParam;
->>>>>>> cf9e56958713b8ee99a298cabdf1ddcf9488ab60
 import vn.sapo.entities.customer.CustomerGroup;
 import vn.sapo.shared.exceptions.NotFoundException;
 
@@ -98,6 +92,11 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     public void deleteById(Integer id) {
         customerGroupRepository.deleteById(id);
     }
+
+//    @Override
+//    public Page<CustomerGroup> findAllByFilters(CustomerGroupFilter filters, Pageable pageable) {
+//        return customerGroupRepository.sortByGroup();
+//    }
 
     @Override
     public Page<CustomerGroupResult> findAllByFilters(CustomerGroupFilter filters, Pageable pageable) {

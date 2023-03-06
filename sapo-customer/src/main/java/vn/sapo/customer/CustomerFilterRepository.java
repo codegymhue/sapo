@@ -44,16 +44,11 @@ public interface CustomerFilterRepository extends JpaRepository<Customer, Intege
             }
 
             Path<Instant> birthdayPath = root.get("birthday");
-<<<<<<< HEAD
 
             Integer dayOfBirthDay = filter.getDayOfBirthday();
 
             Expression<Integer> dayOfBirthDayFunction = criteriaBuilder.function("day", Integer.class, birthdayPath);
 
-=======
-            Expression<Integer> dayOfBirthDayFunction = criteriaBuilder.function("day", Integer.class, birthdayPath);
-            Integer dayOfBirthDay = filter.getDayOfBirthday();
->>>>>>> cf9e56958713b8ee99a298cabdf1ddcf9488ab60
             if (dayOfBirthDay != null) {
                 Predicate predicate = criteriaBuilder.equal(dayOfBirthDayFunction, dayOfBirthDay);
                 predicates.add(predicate);

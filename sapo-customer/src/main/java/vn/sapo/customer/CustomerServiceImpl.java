@@ -77,20 +77,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Transactional
     public CustomerResult create(CreateCustomerParam createCustomerParam) {
-<<<<<<< HEAD
-        Customer customer = customerMapper.toModel(createCustomerParam);
-        Customer newCustomer = customerRepository.save(customer);
-        String cusCode = newCustomer.getCustomerCode();
 
-        //TODO: save DB roi getFullName ko dc de trong la sao?
-        if (createCustomerParam.getFullName() == null) {
-            throw new DataInputException("Tên khách hàng không được để trống");
-        }
-        if (cusCode == null || cusCode.trim().isEmpty())
-            customer.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
-
-        return customerMapper.toDTO(customer);
-=======
         Instant birthday = createCustomerParam.getBirthday().toInstant();
         String cusCode =createCustomerParam.getCustomerCode();
         String randomString = String.valueOf(Math.random()*1000000+1);
@@ -117,7 +104,6 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         return customerMapper.toDTO(customerResult);
->>>>>>> cf9e56958713b8ee99a298cabdf1ddcf9488ab60
     }
 
     @Override

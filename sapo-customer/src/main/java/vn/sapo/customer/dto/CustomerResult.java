@@ -61,12 +61,8 @@ public class CustomerResult {
 
     private Instant lastDayOrder;
 
-<<<<<<< HEAD
-    private CusPayment payment;
-
-=======
     private PaymentMethod payment;
->>>>>>> cf9e56958713b8ee99a298cabdf1ddcf9488ab60
+
     private  String taxCode;
 
     private  String fax;

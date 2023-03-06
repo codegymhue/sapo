@@ -12,18 +12,18 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 public class CreateCusGroupParam {
-    private Integer id;
+//    private Integer id;
 
     private String title;
 
     private String cusGrpCode;
 
-    private Integer pricingPolicyId;
-
-    private String paymentMethodId;
-
     private String description;
 
+    private Integer pricingPolicyId;
+
     private Integer discount;
+
+    private String paymentMethodId;
 
 }

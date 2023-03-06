@@ -24,27 +24,7 @@ public class CreateCustomerParam {
     private String customerCode;
     @NotEmpty(message = "Tên khách hàng không đuợc để trống")
     private String fullName;
-<<<<<<< HEAD
 
-    @NullOrNotBlank
-    private String phoneNumber;
-
-    @NullOrNotBlank
-    private String description;
-
-    private Integer groupId;
-
-    @NullOrNotBlank
-    private String email;
-
-    @NullOrNotBlank
-    private String website;
-
-    @NullOrNotBlank
-    private String fax;
-
-    @NullOrNotBlank
-=======
     @NotEmpty(message = "Số điện thoại không được để trống")
     private String phoneNumber;
 
@@ -55,7 +35,6 @@ public class CreateCustomerParam {
     private String email;
     private String website;
     private String fax;
->>>>>>> cf9e56958713b8ee99a298cabdf1ddcf9488ab60
     private String taxCode;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
