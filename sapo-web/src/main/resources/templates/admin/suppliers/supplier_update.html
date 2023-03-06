@@ -32,6 +32,40 @@
 
     <link href="https://sapo.dktcdn.net/fe-cdn-production/lib/driver/driver.min.css?v=20220218" rel="stylesheet"/>
     <title>C&#x1EAD;p nh&#x1EAD;t nh&#xE0; cung c&#x1EA5;p Non nisi est reicien</title>
+    <style>
+        .help-dashboard .help-dropdown .help-popup {
+            top: 60px;
+            box-shadow: #c6c6c6 0px 3px 5px 0px;
+        }
+
+        .help-dashboard .help-dropdown .help-popup:after {
+            right: 20px;
+        }
+
+        .help-dropdown a {
+            color: #686868;
+            display: flex;
+            height: 100%;
+            border: none;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border: 1px solid #c4cdd5;
+            float: right;
+            width: auto;
+        }
+
+        .help-dropdown div:hover {
+            background-color: #e7f2ff;
+        }
+        .btn-group>ul>li p:hover{
+            background-color: #007bff;
+        }
+        .error{
+            color: #b93c3c;
+        }
+    </style>
 </head>
 
 <body class="body_dashboard partners suppliers edit">
@@ -62,37 +96,6 @@
                     </div>
                     <input type="hidden" id="supplierId" th:value="${supplier.id}">
 
-                    <style>
-                        .help-dashboard .help-dropdown .help-popup {
-                            top: 60px;
-                            box-shadow: #c6c6c6 0px 3px 5px 0px;
-                        }
-
-                        .help-dashboard .help-dropdown .help-popup:after {
-                            right: 20px;
-                        }
-
-                        .help-dropdown a {
-                            color: #686868;
-                            display: flex;
-                            height: 100%;
-                            border: none;
-                            flex-direction: row;
-                            justify-content: center;
-                            align-items: center;
-                            cursor: pointer;
-                            border: 1px solid #c4cdd5;
-                            float: right;
-                            width: auto;
-                        }
-
-                        .help-dropdown div:hover {
-                            background-color: #e7f2ff;
-                        }
-                        .btn-group>ul>li p:hover{
-                            background-color: #007bff;
-                        }
-                    </style>
                 </div>
             </div>
             <header class="ui-title-bar-container" style="margin-top: 55px;">
@@ -544,7 +547,8 @@
         page.dialogs.elements.modalCreateGroupSupplier.modal('show');
         page.dialogs.elements.groupCreateTitleSup.val("");
         page.dialogs.elements.groupCreateCodeSup.val("");
-        page.dialogs.elements.groupCreateDescriptionSup.val("")
+        page.dialogs.elements.groupCreateDescriptionSup.val("");
+
     })
 
     page.dialogs.elements.btnCreateGroupSupplier.on('click', () => {

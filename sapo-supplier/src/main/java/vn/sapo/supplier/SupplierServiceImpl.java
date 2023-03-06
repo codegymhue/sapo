@@ -74,27 +74,11 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierResult update(UpdateSupplierParam param) {
         Supplier supplier = supplierRepository.findById(param.getId())
                 .orElseThrow(() -> new NotFoundException("Not found supplier"));
-//        if (param.getGroupId() != null && !supplierRepository.existsById(param.getGroupId()))
-//            throw new NotFoundException("Group supplier exist");
-
-//        if(supplier.getPhone().isEmpty() || supplier.getPhone().isBlank()){
-//            supplier.setPhone(null);
-//        }
-//        if(supplier.getEmail().isEmpty() || supplier.getEmail().isBlank()) {
-//            supplier.setEmail(null);
-//        }
-//        if (supplier.getDescription().isEmpty() || supplier.getDescription().isBlank()) {
-//            supplier.setDescription(null);
-//        }
-//        if (supplier.getTaxCode().isEmpty() || supplier.getTaxCode().isBlank()) {
-//            supplier.setTaxCode(null);
-//        }
-//        if(supplier.getFax().isEmpty() || supplier.getFax().isBlank()) {
-//            supplier.setFax(null);
-//        }
-//        if(supplier.getWebsite().isEmpty() || supplier.getWebsite().isBlank()) {
-//            supplier.setWebsite(null);
-//        }
+        if(param.getSupplierCode() !=null && !supplier.getSupplierCode().equalsIgnoreCase(param.getSupplierCode())) {
+            if (param.getSupplierCode().startsWith("SUPN")) {
+                throw new NotFoundException("Mã không được có tiền tố của hệ thống SUPN");
+            }
+        }
         supplierMapper.transferFields(param, supplier);
         return supplierMapper.toDTO(supplier);
     }
