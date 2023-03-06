@@ -182,6 +182,7 @@ public class SupplierAPI {
     @DeleteMapping("/deleteBulk")
     public ResponseEntity<?> deleteById(@RequestBody Integer id) {
         try {
+            addressService.deleteByAddressSupplierId(id);
             supplierService.deleteById(id);
             String finalMessage = String.format(" %s - Đã được xóa thành công", id);
             return new ResponseEntity<>(new HashMap<>() {{
