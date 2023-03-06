@@ -136,7 +136,6 @@ public class SupplierExcelExporter {
                     createCell(row, columnCount++, adr.getDistrictName() != null ? adr.getDistrictName() : "", style);
                 }
             }
-            createCell(row,columnCount++,supplier.getDebtTotal() != null ? supplier.getDebtTotal():"",style);
         }
     }
 
