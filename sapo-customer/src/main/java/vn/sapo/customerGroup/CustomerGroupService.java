@@ -1,9 +1,8 @@
 package vn.sapo.customerGroup;
 
-import vn.sapo.customerGroup.dto.CreateCusGroupParam;
-import vn.sapo.customerGroup.dto.CustomerGroupResult;
-import vn.sapo.customerGroup.dto.ICustomerGroupResult;
-import vn.sapo.customerGroup.dto.UpdateCustomerGroupParam;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import vn.sapo.customerGroup.dto.*;
 
 import java.util.*;
 
@@ -19,4 +18,6 @@ public interface CustomerGroupService {
     CustomerGroupResult findById(Integer id);
 
     void deleteById(Integer id);
+
+    Page<CustomerGroupResult> findAllByFilters(CustomerGroupFilter filters, Pageable pageable);
 }

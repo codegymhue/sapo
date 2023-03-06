@@ -8,16 +8,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import vn.sapo.customer.dto.CustomerDataTable;
-import vn.sapo.customer.dto.CustomerFilter;
-import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customerGroup.CustomerGroupMapper;
 import vn.sapo.customerGroup.CustomerGroupService;
-import vn.sapo.customerGroup.dto.CreateCusGroupParam;
-import vn.sapo.customerGroup.dto.CustomerGroupDataTable;
-import vn.sapo.customerGroup.dto.CustomerGroupResult;
-import vn.sapo.customerGroup.dto.UpdateCustomerGroupParam;
-
+import vn.sapo.customerGroup.dto.*;
 
 @RestController
 @RequestMapping("/api/customer_groups")
@@ -46,43 +39,35 @@ public class CustomerGroupAPI {
     }
 
     @PostMapping("/filter")
-    public ResponseEntity<?> filter(@RequestBody CustomerFilter customerFilter,
+    public ResponseEntity<?> filter(@RequestBody CustomerGroupFilter customerGroupFilter,
                                         @RequestParam(name = "sort", required = false, defaultValue = "ASC" ) String sort
     ) {
 
+        int start = customerGroupFilter.getStart();
+        int length = customerGroupFilter.getLength();
+
+        int page = start / length + 1;
+
+        Sort sortable = null;
+
+        if (sort.equals("ASC")) {
+            sortable = Sort.by("title").ascending();
+        }
+
+        if (sort.equals("DESC")) {
+            sortable = Sort.by("title").descending();
+        }
+
+        Pageable pageable = PageRequest.of(page - 1, length, sortable);
+
+        Page<CustomerGroupResult> pageableCustomerGroups = customerGroupService.findAllByFilters(customerGroupFilter, pageable);
+
         CustomerGroupDataTable customerGroupDataTable = new CustomerGroupDataTable()
-//                .setDraw()
-//                .setRecordsTotal()
-//                .setRecordsFiltered()
-//                .setData()
+                .setDraw(customerGroupFilter.getDraw())
+                .setRecordsTotal(pageableCustomerGroups.getTotalElements())
+                .setRecordsFiltered(pageableCustomerGroups.getTotalElements())
+                .setData(pageableCustomerGroups.getContent())
                 ;
-
-
-        // start = 10; length = 5;
-//        int start = customerFilter.getStart();
-//        int length = customerFilter.getLength();
-//
-//
-//        int page = start / length + 1;
-//        Sort sortable = null;
-//        if (sort.equals("ASC")) {
-//            sortable = Sort.by("id").ascending();
-//        }
-//        if (sort.equals("DESC")) {
-//            sortable = Sort.by("id").descending();
-//        }
-//
-//        Pageable pageable = PageRequest.of(page - 1, length, sortable);
-//        Page<CustomerResult> pageableCustomers = customerService.findAllByFilters(customerFilter, pageable);
-//
-//        CustomerDataTable customerDataTable = new CustomerDataTable();
-//
-//        if (pageableCustomers != null) {
-//            customerDataTable.setRecordsTotal(pageableCustomers.getTotalElements());
-//            customerDataTable.setRecordsFiltered(pageableCustomers.getTotalElements());
-//            customerDataTable.setData(pageableCustomers.getContent());
-//            customerDataTable.setDraw(customerFilter.getDraw());
-//        }
 
         return new ResponseEntity<>(customerGroupDataTable, HttpStatus.OK);
     }

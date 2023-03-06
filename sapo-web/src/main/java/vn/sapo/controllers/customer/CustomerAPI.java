@@ -79,7 +79,6 @@ public class CustomerAPI {
         int start = customerFilter.getStart();
         int length = customerFilter.getLength();
 
-
         int page = start / length + 1;
         Sort sortable = null;
         if (sort.equals("ASC")) {

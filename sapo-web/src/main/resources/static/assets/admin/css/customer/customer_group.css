@@ -2,6 +2,23 @@
     overflow: auto;
     font-size: 15px;
 }
+
+#tbCustomerGroup {
+    width: 100%;
+}
+
+#tbCustomerGroup thead {
+    background: #f4f6f8;
+}
+
+#tbCustomerGroup tbody tr:hover {
+    cursor: pointer;
+}
+
+.table > :not(:last-child) > :last-child > * {
+    border-color: transparent;
+}
+
 .feedback-account-sso {
     display: none
 }
@@ -885,6 +902,7 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     display: flex;
     padding: 0 32px 40px;
     flex-direction: column;
+    background: #f0f1f1;
 }
 
 .jss24473 {

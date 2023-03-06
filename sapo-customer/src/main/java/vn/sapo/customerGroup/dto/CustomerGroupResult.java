@@ -15,22 +15,25 @@ import java.time.Instant;
 @Setter
 @Accessors(chain = true)
 public class CustomerGroupResult {
+
     private Integer id;
 
     private String title;
 
     private String cusGrpCode;
 
-    private Integer pricingPolicyId;
-
-    private String paymentMethodId;
-
-    private Instant createdAt;
-
-    private Long countCus;
+    private String customerGroupType;
 
     private String description;
 
-    private Integer discount;
+    private Long countCus;
+
+    private Instant createdAt;
+
+    //    private String paymentMethodId;
+//
+//    private Integer pricingPolicyId;
+
+//    private Integer discount;
 
 }

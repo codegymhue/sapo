@@ -49,7 +49,7 @@ class CustomerGroup_App {
         }
 
     }
-    static IziToast = class  {
+    static IziToast = class {
         static showSuccessAlert(m) {
             iziToast.success({
                 title: 'Success',
@@ -69,19 +69,31 @@ class CustomerGroup_App {
         }
     }
 }
-class CustomerGroup{
-    constructor(id,title,cusGrpCode,createdAt,countCus,pricingPolicyId,paymentMethodId, description, discount) {
-        this.id = id;
-        this.title = title;
-        this.cusGrpCode = cusGrpCode;
-        this.createdAt = createdAt;
-        this.countCus = countCus;
-        this.pricingPolicyId = pricingPolicyId;
-        this.paymentMethodId = paymentMethodId;
-        this.description = description;
-        this.discount = discount
+
+class CustomerGroupFilter {
+    constructor() {
+        this.title = null;
+        this.cusGrpCode = null;
+        this.customerGroupType = null;
+        this.description = null;
+        this.countCus = null;
+        this.createdAt = null;
     }
 }
+
+// class CustomerGroup{
+//     constructor(id,title,cusGrpCode,createdAt,countCus,pricingPolicyId,paymentMethodId, description, discount) {
+//         this.id = id;
+//         this.title = title;
+//         this.cusGrpCode = cusGrpCode;
+//         this.createdAt = createdAt;
+//         this.countCus = countCus;
+//         this.pricingPolicyId = pricingPolicyId;
+//         this.paymentMethodId = paymentMethodId;
+//         this.description = description;
+//         this.discount = discount
+//     }
+// }
 
 
 // class CreateCusGroupParam {
