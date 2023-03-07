@@ -1,5 +1,60 @@
 "use strict";
 
+'code', 'supplier_name', 'supplier_group', 'email', 'phone_number', 'status', 'debt', 'fax',
+    'tax_number', 'website', 'assignee_name', 'created_on', 'modified_on'
+let configDisplays = [
+    {
+        name: "supplier_name",
+        status: true
+    },
+    {
+        name: "supplier_group",
+        status: true
+    },
+    {
+        name: "code",
+        status: true
+    },
+
+
+    {
+        name: "email",
+        status: false
+    },
+    {
+        name: "phone_number",
+        status: true
+    },
+    {
+        name: "status",
+        status: true
+    },
+    {
+        name: "fax",
+        status: true
+    },
+    {
+        name: "tax_number",
+        status: true
+    },
+    {
+        name: "website",
+        status: true
+    },
+    {
+        name: "assignee_name",
+        status: true
+    },
+    {
+        name: "created_on",
+        status: true
+    },
+    {
+        name: "modified_on",
+        status: true
+    },
+];
+
 class SupplierApp {
     static DOMAIN_SERVER = origin;
     static SUPPLIER_API = this.DOMAIN_SERVER + "/api/suppliers";
@@ -8,7 +63,49 @@ class SupplierApp {
     static SUPPLIER_FILTER_API = this.DOMAIN_SERVER + this.SUPPLIER_API + "/filter"
 
 
-    static renderRowSupplier(item, showStatus) {
+    static getTD(index, item, configDisplays) {
+        for (let i = 0; i < configDisplays.length; i++) {
+            if (index == i && configDisplays[i].status == true) {
+
+                let tdItem = `<td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'"
+                           className="align-middle">${SupplierApp.getTDValue(configDisplays[i].name, item) || ""}</td>`;
+                console.log(tdItem)
+                return tdItem;
+            }
+        }
+    }
+
+    static getTDValue(key, item) {
+        switch (key) {
+            case "code":
+                return item.supplierCode;
+            case "supplier_name":
+                return item.fullName;
+            case "supplier_group":
+                return item.group == null ? "" : item.group.title;
+            case "email":
+                return item.email;
+            case "phone_number":
+                return item.phone;
+            case "status":
+                return item.status === "AVAILABLE" ? "Đang giao dịch" : "Ngừng giao dịch";
+            case "fax":
+                return item.fax;
+            case "tax_number":
+                return item.taxCode;
+            case "website":
+                return item.website;
+            case "assignee_name":
+                return item.code;
+            case "created_on":
+                return item.createdAt === null ? "" : new Date(item.createdAt).toLocaleDateString('en-GB');
+            case "modified_on":
+                return item.updatedAt === null ? "" : new Date(item.updatedAt).toLocaleDateString('en-GB');
+        }
+    }
+
+    static renderRowSupplier(item, showStatus, configDisplay) {
+        console.log(item)
         let str = `
              <tr id="tr_${item.id}" >
                 <td class="align-middle">
@@ -16,34 +113,37 @@ class SupplierApp {
                     <input style="cursor:pointer" id="sup_${item.id}" class="selectCheckbox" name="sup_${item.id}" type="checkbox" value="${item.id}">
                 </label>
                 </td>
-                
-                 <td class="align-middle"><a href="/admin/suppliers/${item.id}/histories" style="text-decoration: none">${item.supplierCode}</a></td>
-                <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.fullName || ""}</td>
-                  <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.group == null ? "" : item.group.title}</td>
-                <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.email || ""}</td>
-                <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.phone || ""}</td>
-                 <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">
+                 ${SupplierApp.getTD(0, item, configDisplays)}
+                ${SupplierApp.getTD(1, item, configDisplays)}
+                ${SupplierApp.getTD(2, item, configDisplays)}
+                ${SupplierApp.getTD(3, item, configDisplays)}
+                ${SupplierApp.getTD(4, item, configDisplays)}
+                  <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.group == null ? "" : item.group.title}</td>
+                <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.email || ""}</td>
+                <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.phone || ""}</td>
+                 <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">
                     <span id="showStatus" class="${showStatus}">${item.status === "AVAILABLE" ? "Đang giao dịch" : "Ngừng giao dịch"}</span> 
                 </td>   
 <!--                <td class="align-middle text-end ">${new Intl.NumberFormat('de-DE').format(item.available)}</td>-->
-              <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.employee == null ? "" : item.employee.fullName}</td>
-              <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.taxCode || ""}</td>
-               <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.website || ""}</td>
-                <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.createdAt === null ? "" : new Date(item.createdAt).toLocaleDateString('en-GB')}</td>
-                <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.updatedAt === null ? "" : new Date(item.updatedAt).toLocaleDateString('en-GB')}</td>
-                    <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.fax || ""}</td>
+              <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.employee == null ? "" : item.employee.fullName}</td>
+              <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.taxCode || ""}</td>
+               <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.website || ""}</td>
+                <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.createdAt === null ? "" : new Date(item.createdAt).toLocaleDateString('en-GB')}</td>
+                <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.updatedAt === null ? "" : new Date(item.updatedAt).toLocaleDateString('en-GB')}</td>
+                 <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.fax || ""}</td>
             </tr>
         `;
         return str;
     }
-    static renderFilterTab(tab){
+
+    static renderFilterTab(tab) {
         let str = `<li class="filter-tab-item" style="opacity: 1; padding-bottom: 3.5px;">
                        <a href="/admin/suppliers?savedSearchId=${tab.id}" class="filter-tab">${tab.title}</a>
                    </li>`
         return str;
     }
 
-    static renderEmptySearchResults(){
+    static renderEmptySearchResults() {
         let str = `<div class="ui-type-container clearfix">
                         <div class="empty-search-results" illustration="next-discounts-detailed">
                             <svg class="next-icon next-icon--color-sky-darker next-icon--size-80 empty-search-results__illustration">

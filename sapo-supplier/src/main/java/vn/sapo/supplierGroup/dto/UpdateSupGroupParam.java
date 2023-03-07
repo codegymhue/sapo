@@ -18,10 +18,10 @@ public class UpdateSupGroupParam {
     @NotNull
     private Integer id;
 
-    @NullOrNotBlank
+    @NullOrNotBlank(message = "Tên nhóm nhà cung cấp không được để trống")
     private String title;
 
-    @NullOrNotBlank
+    @NullOrNotBlank(message = "Mã nhóm nhà cung cấp không được để trống")
     private String supGroupCode;
 
     @NullOrNotBlank

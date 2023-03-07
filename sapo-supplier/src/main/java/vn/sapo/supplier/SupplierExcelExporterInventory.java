@@ -36,11 +36,11 @@ public class SupplierExcelExporterInventory {
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
         font.setBold(true);
-        font.setFontHeight(16);
+        font.setFontHeight(14);
         style.setFont(font);
         createCell(row, 0, "Tên nhà cung cấp ", style);
         createCell(row, 1, "Mã nhà cung cấp", style);
-        createCell(row, 2, "Mã nhóm nhà cung cấp", style);
+        createCell(row, 2, "Mã nhóm nhà cung cấp", style );
         createCell(row, 3, "Email", style);
         createCell(row, 4, "Điện thoại", style);
         createCell(row, 5, "Website", style);
@@ -94,7 +94,7 @@ public class SupplierExcelExporterInventory {
 
                 createCell(row, columnCount++, supplier.getFullName() != null ? supplier.getFullName() : "", style);
                 createCell(row, columnCount++, supplier.getSupplierCode(), style);
-                createCell(row, columnCount++, supplier.getGroup().getTitle(), style);
+                createCell(row, columnCount++, supplier.getGroup().getSupGroupCode() , style);
                 createCell(row, columnCount++, supplier.getEmail(), style);
                 createCell(row, columnCount++, supplier.getPhone(), style);
                 createCell(row, columnCount++, supplier.getWebsite(), style);
@@ -107,7 +107,7 @@ public class SupplierExcelExporterInventory {
                 createCell(row, columnCount++, address.getFullName(), style);
                 createCell(row, columnCount++, address.getPhoneNumber(), style);
                 createCell(row, columnCount++, address.getEmail(), style);
-                createCell(row, columnCount++, "nhãn", style);
+                createCell(row, columnCount++, address.getLabel(), style);
                 createCell(row, columnCount++, address.getLine1(), style);
                 createCell(row, columnCount++, address.getLine2(), style);
                 createCell(row, columnCount++, province, style);

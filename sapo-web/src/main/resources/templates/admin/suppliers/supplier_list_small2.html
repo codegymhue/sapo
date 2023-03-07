@@ -14,32 +14,43 @@
             padding-left: 1.5rem;
             border-radius: 5px;
         }
+
         .modal-dialog {
             width: 600px;
             max-width: unset;
         }
+
         .disable {
             pointer-events: none;
         !important;
             opacity: 0.6;
         !important;
         }
+
         table {
             display: block;
             overflow-x: auto;
             white-space: nowrap;
         }
-        .available{
+
+        .available {
             color: #20a917;
         }
-        .unavailable{
+
+        .unavailable {
             color: #ea1a1a;
         }
-        table>tbody>tr {
+
+        table > tbody > tr {
             cursor: pointer;
         }
-        .filter-body{
+
+        .filter-body {
             overflow-y: visible;
+        }
+
+        .ui-sortable-handle.dragging {
+            opacity: 1;
         }
 
     </style>
@@ -92,15 +103,14 @@
                                  style="width: 18px; height: 18px; position: relative; top: -0.6rem; margin-top: -1.1rem; margin-bottom: -1.1rem; margin-right: 3px;">
                             Nhóm nhà cung cấp
                         </a>
-                        <button class="btn sapo-btn-transparent action-bar__link">
+                        <button class="btn sapo-btn-transparent action-bar__link" type="button" data-bs-toggle="modal"
+                                data-bs-target="#modal-setting-column">
                             <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-setting"></use>
                             </svg>
                             Điều chỉnh cột hiển thị
-                            <script class="modal_source"
-                                    define="{settingsColumnSuppliersModal: new Components.Modal(this)}"
-                                    type="text/html">
-                        </script>
+                            <!--                            <script class="modal_source" define="{settingsColumnSuppliersModal: new Components.Modal(this)}" type="text/html">-->
+                            <!--                        </script>-->
                         </button>
                     </div>
                 </div>
@@ -381,23 +391,23 @@
                                 <tr id="theadList" class="show">
                                     <th class="align-middle">
                                         <label for="checkAll" style="padding: 1rem; cursor:pointer">
-                                            <input style="cursor:pointer" id="checkAll" type="checkbox" value=""
+                                            <input style="cursor:pointer" id="checkAll" type="checkbox" value="" nameth="bulk_action"
                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả">
                                         </label>
                                     </th>
-                                    <th class="align-middle" scope="col">Mã nhà cung cấp</th>
-                                    <th class="align-middle" scope="col">Tên nhà cung cấp</th>
-                                    <th class="align-middle" scope="col">Nhóm nhà cung cấp</th>
-                                    <th class="align-middle" scope="col">Email</th>
-                                    <th class="align-middle" scope="col">Số điện thoại</th>
-                                    <th class="align-middle" scope="col">Trạng thái</th>
-                                    <th class="align-middle" scope="col">Nhân viên phụ trách</th>
-                                    <th class="align-middle" scope="col">Mã số thuế</th>
-                                    <th class="align-middle" scope="col">Website</th>
-                                    <th class="align-middle" scope="col">Ngày tạo</th>
-                                    <th class="align-middle" scope="col">Lần cập nhật cuối</th>
+                                    <th class="align-middle" nameth="code" scope="col">Mã nhà cung cấp</th>
+                                    <th class="align-middle" nameth="supplier_name" scope="col">Tên nhà cung cấp</th>
+                                    <th class="align-middle" nameth="supplier_group" scope="col">Nhóm nhà cung cấp</th>
+                                    <th class="align-middle" nameth="email" scope="col">Email</th>
+                                    <th class="align-middle" nameth="phone_number" scope="col">Số điện thoại</th>
+                                    <th class="align-middle" nameth="status" scope="col">Trạng thái</th>
+                                    <th class="align-middle" nameth="assignee_name" scope="col">Nhân viên phụ trách</th>
+                                    <th class="align-middle" nameth="tax_number" scope="col">Mã số thuế</th>
+                                    <th class="align-middle" nameth="website" scope="col">Website</th>
+                                    <th class="align-middle" nameth="created_on" scope="col">Ngày tạo</th>
+                                    <th class="align-middle" nameth="modified_on" scope="col">Lần cập nhật cuối</th>
                                     <!--                                    <th class="align-middle" scope="col">Nợ hiện tại</th>-->
-                                    <!--                                    <th class="align-middle" scope="col">Số fax</th>-->
+                                    <th class="align-middle" nameth="fax" scope="col" >Số fax</th>
                                 </tr>
                                 <tr class="hide" id="selectActionThead" style="border: snow">
                                     <td class="align-middle" style="width: 20px">
@@ -544,190 +554,7 @@
     </div>
 </div>
 
-<!--modal-->
-
-<!-- Modal -->
-
-<div class="modal fade" id="modalUpdateBulk" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="ui-dialog-title">Cập nhật thông tin nhà cung cấp</span>
-                <span class="modal-close-wrapper" role="button" aria-label="Close"
-                      data-bs-dismiss="modal">
-                    <svg class="ui-icon-x ui-icon-x-20">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use> </svg>
-                </span>
-            </div>
-            <div class="modal-body">
-                <div class="row mb-3">
-                    <div class="col-6">
-                        <div class="label mb-2">Nhân viên phụ trách</div>
-                        <select class="w100 input-dropdown sapo-btn-blank select-padding left" style="width:250px;"
-                                id="accountIdBulk">
-                            <option value="0" selected="">Chọn nhân viên phụ trách</option>
-
-                        </select>
-                    </div>
-                    <div class="col-6">
-                        <div class="label mb-2">Hình thức thanh toán</div>
-                        <select class="w100 input-dropdown sapo-btn-blank select-padding left" style="width:250px;"
-                                id="paymentMethodIdBulk">
-                            <option value="0" selected="">Chọn hình thức thanh toán</option>
-
-                        </select>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <!--                    <div class="col-6">-->
-                    <!--                        <div class="label mb-2">Chiết khấu (%)</div>-->
-                    <!--                        <div class="input-wrap"><input autocomplete="off" placeholder="0" bind="discountPercentBulk_txt"-->
-                    <!--                                                       define="{ numberInput: new Components.NumberInput(this, 'indexSupplier','3','999999','','','False')}"-->
-                    <!--                                                       context="numberInput" class="sapo-textbox align-right"-->
-                    <!--                                                       maximum-value="999999" style="width:250px;" value=""><input-->
-                    <!--                                type="hidden" bind="discountPercentBulk" class="sapo-textbox align-right" id="" name=""-->
-                    <!--                                value="0"></div>-->
-                    <!--                    </div>-->
-                    <!--                    <div class="col-6">-->
-                    <!--                        <div class="label mb-2">Giá mặc định</div>-->
-                    <!--                        <select class="w100 input-dropdown sapo-btn-blank select-padding left" style="width:250px;"-->
-                    <!--                                bind="priceIdBulk" id="priceIdBulk">-->
-                    <!--                            <option value="0" selected="">Chọn giá mặc định</option>-->
-                    <!--                            <option value="2017107">Giá nhập</option>-->
-                    <!--                        </select>-->
-                    <!--                    </div>-->
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="action-btn clearfix">
-                    <button class="btn pull-right margin-left-5 sapo-btn-default" type="button"
-                            id="updateBulkaction"
-                            data-bs-target="#update_bulkaction_modal" data-bs-toggle="modal" data-bs-dismiss="modal">Lưu
-                    </button>
-                    <button class="close-modal btn btn-blank pull-right" id="close-popup" data-bs-dismiss="modal"
-                            type="button">Thoát
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- modalAvailable -->
-
-<div class="modal fade" id="modalAvailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="width: max-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="staticBackdropLabel">Cập nhật trạng thái !</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="statusChange">
-            </div>
-            <div class="modal-footer d-flex align-items-center">
-                <button class="btn btn-blank btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
-                <button class="btn btn-save sapo-btn-default" id="btnAvailableSave" type="button"
-                        data-bs-target="#update_bulkaction_modal" data-bs-toggle="modal" data-bs-dismiss="modal">Lưu
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- modalUnavailable -->
-
-<div class="modal fade" id="modalUnavailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="width: max-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Ngừng giao dịch!</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="statusChangeUnavailable">
-            </div>
-            <div class="modal-footer d-flex align-items-center">
-                <button class="btn btn-blank btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
-                <button class="btn sapo-btn-default btn-save" id="btnUnavailableSave" type="button"
-                        data-bs-target="#update_bulkaction_modal" data-bs-toggle="modal" data-bs-dismiss="modal">Lưu
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="update_bulkaction_modal" tabindex="-1" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="ui-dialog-title">Ngừng giao dịch</span>
-            </div>
-            <div class="modal-body pull-center">
-                <h2>Xử lý dữ liệu hoàn tất!</h2>
-                <div>
-                    <div>
-                    </div>
-                </div>
-                <div class="info-update">
-                    <div class="info-update-title">
-                        <span id="label-countOrderComplete">Nhà cung cấp cập nhật thành công: </span>
-                        <span id="countOrderComplete" style="color:#0088ff">0</span>
-                        <a href="javascript:" bind-event-click="showListOrderUpdate(this)" style="display: inline;">
-                            Chi tiết
-                            <i class="fa fa-angle-double-down" aria-hidden="true"></i></a>
-                    </div>
-                    <div class="info-update-body" id="listOrderComplete">
-                    </div>
-                </div>
-                <div class="info-update">
-                    <div class="info-update-title"><span id="label-countOrderFail">Nhà cung cấp cập nhật không thành công: </span><span
-                            id="countOrderFail" style="color:#ff0000">0</span><a href="javascript:"
-                                                                                 bind-event-click="showListOrderUpdate(this)">Chi
-                        tiết<i class="fa fa-angle-double-down" aria-hidden="true"></i></a></div>
-                    <div class="info-update-body" id="listOrderFail">
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="action-btn clearfix">
-                    <button class="btn pull-right sapo-btn-blank" type="button" id="buttonPrintAfterPacking"
-                            bind-event-click="showPrintAfterPackingModal()" style="margin-left:10px;display:none;">In
-                        hướng dẫn đóng gói
-                    </button>
-                </div>
-                <div class="action-btn clearfix">
-                    <button class="btn pull-right sapo-btn-default btn--reload-page" type="button"
-                            bind-event-click="window.location.href = window.location.href"
-                            style="float:right; margin-left:10px;">Xác nhận
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="width: max-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Xóa sản phẩm?</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="statusChangeDelete">
-            </div>
-            <div class="modal-footer d-flex align-items-center">
-                <button class="btn  btn-blank btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
-                <button class="btn sapo-btn-red btn-save-delete" id="btnSubmitDelete" type="button"
-                        data-bs-target="#update_bulkaction_modal" data-bs-toggle="modal" data-bs-dismiss="modal">Xóa
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+<th:block th:replace="/layout/supplier/supplier_list_modal.html"/>
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
 <th:block th:replace="/layout/script :: script"/>
 <th:block th:replace="/layout/supplier/script_export_import.html"/>
@@ -945,7 +772,7 @@
             data: JSON.stringify(supplierFilter)
         })
             .done((data) => {
-
+                console.log(data.suppliers," datasup")
                 page.elements.tbSupplier_tbody.empty();
                 page.elements.totalPage.empty();
                 totalPage = data.totalPage;
@@ -956,6 +783,7 @@
                     data.suppliers.map(item => {
                         if (item.status == "AVAILABLE") {
                             page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available'))
+                            // page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available', configDisplays))
                         } else {
                             page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'unavailable'))
                         }
@@ -1031,7 +859,7 @@
                     page.dialogs.elements.filterEmployee.append(SupplierApp.renderEmployeeOnFilter(item));
                     $("#accountIdBulk").append(str);
                 });
-            }).fail((  ) => {
+            }).fail(() => {
         })
     }
 
@@ -1426,7 +1254,6 @@
         supplierFilter.filter = page.elements.search.val().trim();
     }
 
-
     page.elements.multiselect_employee.on("click", function () {
         $('input[type="checkbox"].checkbox_employee').change(function () {
             page.elements.multiselect_employee.off("click")
@@ -1467,6 +1294,7 @@
             console.log(supplierFilter.employeeIds)
         })
     })
+
 
     page.elements.multiselect_supplier_groupId.on("click", () => {
         $('input[type="checkbox"].checkbox_supplier_group').change(function () {
@@ -1517,6 +1345,137 @@
         console.log(supplierFilter.createdTo, "supplierFilter.createdTo")
     }
 
+
+    const defaultFields = ["code", "supplier_name", "supplier_group", "email", "phone_number", "status"];
+
+
+    function toggleItem(element) {
+
+    }
+
+    function confirmSave(str, element) {
+        let sList = [];
+        if($("#defaultSettings").is(":checked")){
+            $("#list-row-default").find('input[type="checkbox"].export-field-group--toggle-item').each(function () {
+                if (this.checked)
+                    sList.push($(this).val())
+            });
+            console.log(sList, " list-row-default")
+            return sList;
+        }else {
+            $("#list-row-settings").find('input[type="checkbox"].export-field-group--toggle-item').each(function () {
+                if (this.checked)
+                    sList.push($(this).val())
+            });
+            console.log(sList,  ' list-row-settings')
+            return sList;
+        }
+    }
+
+    $("#defaultSettings").change(function () {
+        if ($("#defaultSettings").prop('checked')) {
+            $("#list-row-settings").hide();
+            $("#list-row-default").show();
+            $("#list-row-default").find(".export-field-group--toggle-item").each(function (index, item) {
+                $(item).attr('checked', false);
+            });
+            if (defaultFields != null)
+                for (let i = 0; i < defaultFields.length; i++) {
+                    $("#list-row-default").find('.export-field-group--toggle-item[value="' + defaultFields[i] + '"]').attr('checked', true);
+                }
+        } else {
+            $("#list-row-settings").show();
+            $("#list-row-default").hide();
+        }
+    });
+
+    // drag vs drop
+    const draggables = document.querySelectorAll(".ui-sortable-handle");
+    const containers = document.querySelectorAll(".ui-sortable")
+
+    draggables.forEach(draggable => {
+        draggable.setAttribute("draggable", true)
+        draggable.addEventListener('dragstart', () => {
+            draggable.classList.add('dragging')
+        })
+
+        draggable.addEventListener('dragend', () => {
+            draggable.classList.remove('dragging')
+        })
+    })
+
+    containers.forEach(container => {
+        container.addEventListener('dragover', e => {
+            e.preventDefault()
+            const afterElement = getDragAfterElement(container, e.clientY)
+            const draggable = document.querySelector('.dragging')
+            if (afterElement == null) {
+                container.appendChild(draggable)
+            } else {
+                container.insertBefore(draggable, afterElement)
+            }
+        })
+    })
+
+    function getDragAfterElement(container, y) {
+        const draggableElements = [...container.querySelectorAll('.ui-sortable-handle:not(.dragging)')]
+
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect()
+            const offset = y - box.top - box.height / 2
+            if (offset < 0 && offset > closest.offset) {
+                return {offset: offset, element: child}
+            } else {
+                return closest
+            }
+        }, {offset: Number.NEGATIVE_INFINITY}).element
+    }
+
+    function swapColumnsByName(tableId, columnName1, columnName2) {
+        // Get the table element
+        const table = document.getElementById(tableId);
+
+        // Get the header row and find the column indices
+        const headerRow = table.rows[0];
+        let column1 = -1;
+        let column2 = -1;
+        for (let i = 0; i < headerRow.cells.length; i++) {
+            if (headerRow.cells[i].getAttribute("nameth") === columnName1) {
+                column1 = i;
+            }
+            if (headerRow.cells[i].getAttribute("nameth") === columnName2) {
+                column2 = i;
+            }
+        }
+
+        // Swap the columns if both were found
+        if (column1 !== -1 && column2 !== -1) {
+            // Swap the column names in the header row
+            const temp = headerRow.cells[column1].innerHTML;
+            headerRow.cells[column1].innerHTML = headerRow.cells[column2].innerHTML;
+            headerRow.cells[column2].innerHTML = temp;
+
+            // Swap the data in the table cells for each row
+            for (let i = 1; i < table.rows.length; i++) {
+                const row = table.rows[i];
+                const temp = row.cells[column1].innerHTML;
+                row.cells[column1].innerHTML = row.cells[column2].innerHTML;
+                row.cells[column2].innerHTML = temp;
+            }
+        }
+    }
+    function fields(tableId){
+        // Get the table element
+        const table = document.getElementById(tableId);
+
+        // Get the header row and find the column indices
+        const headerRow = table.rows[0];
+        let arrayFieldsNow = []
+        for (let i = 0; i < headerRow.cells.length; i++) {
+            arrayFieldsNow.push(headerRow.cells[i].getAttribute("nameth"))
+        }
+        return arrayFieldsNow;
+    }
 
     page.commands.loadData = () => {
         page.commands.getAllSupplier();
