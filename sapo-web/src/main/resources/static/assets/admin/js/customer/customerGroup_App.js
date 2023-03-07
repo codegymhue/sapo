@@ -78,6 +78,7 @@ class CustomerGroupFilter {
         this.description = null;
         this.countCus = null;
         this.createdAt = null;
+        this.draw = null;
     }
 }
 

@@ -257,14 +257,15 @@
                     d.description = customerGroupFilter.description;
                     d.countCus = customerGroupFilter.countCus;
                     d.createdAt = customerGroupFilter.createdAt;
+                    d.draw = customerGroupFilter.draw;
                     console.log(d);
                     return JSON.stringify(d);
                 }
             },
             language: CustomerApp.dataTableDetails.language,
             lengthMenu: [
-                [20, 50, 100],
-                ["20", "50", "100"]
+                [5, 20, 50, 100, -1],
+                ["5", "20", "50", "100", "All"]
             ],
             searching: false,
             columns: [
@@ -273,12 +274,34 @@
                 {data: 'customerGroupType'},
                 {data: 'description'},
                 {data: 'countCus'},
-                {data: 'createdAt'}
+                {
+                    data: 'createdAt',
+                    render: (data) => {
+                        let date = CustomerApp.page.commands.formatDatePattern(data);
+                        return `<td>${date}</td>`
+                    }
+                }
             ],
         })
     }
 
-    CustomerApp.page.commands.drawDataTable();
+    $(() => {
+        CustomerApp.page.commands.drawDataTable();
+    })
+
+    $('a.paginate_button').on('click', function () {
+        let id = $(this).attr("data-dt-idx");
+    })
+
+
+    CustomerApp.page.commands.formatDatePattern = (date) => {
+        let fullYear = date.split('-');
+        let yyyy = fullYear[0];
+        let mm = fullYear[1];
+        let dd = fullYear[2].split('T')[0];
+
+        return dd + '/' + mm + '/' + yyyy;
+    }
 
     // CustomerApp.page.commands.getAllCustomerGroupByGroup = () => {
     //     return $.ajax({

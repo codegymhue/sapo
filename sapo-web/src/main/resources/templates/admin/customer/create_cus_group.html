@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-    <form id="frmCreateCusGrp" method="post">
+    <form id="frmCreateCusGrp">
         <div class="jss608">
             <div class="MuiGrid-container MuiGrid-spacing-xs-3">
                 <div class="MuiGrid-item MuiGrid-grid-xs-6">
@@ -65,7 +65,7 @@
                                         <div class="MuiFormControl-root jss756 MuiFormControl-fullWidth"
                                              field="[object Object]" form="[object Object]">
                                             <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth">
-                                                <div>
+                                                <div class="MuiInputBase-fullWidth">
                                                     <input aria-invalid="false"
                                                            id="titleGroupCre"
                                                            name="titleGroupCre"
@@ -130,7 +130,7 @@
                                             <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-multiline MuiOutlinedInput-multiline">
                                                 <textarea aria-invalid="false" id="description" rows="3"
                                                           aria-label="Without label"
-                                                          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline">
+                                                          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline placeholder_text">
                                                 </textarea>
                                                 <fieldset aria-hidden="true"
                                                           class="jss823 MuiOutlinedInput-notchedOutline">
@@ -174,12 +174,25 @@
                         <div class="jss23712">
                             <div class="MuiGrid-container MuiGrid-spacing-xs-2">
                                 <div class="MuiGrid-item MuiGrid-grid-xs-12">
-                                    <div class="jss865 jss1785">
-                                        <span class="MuiTypography-root title MuiTypography-subtitle1">
+                                    <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth">
+                                        <label class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl
+                                        MuiInputLabel-animated MuiInputLabel-shrink" data-shrink="true" for="pricingType">
                                             Giá Mặc Định
-                                        </span>
-                                        <div class="dropdown jss1784">
-                                            <div class="dropdown-toggle select-btn-pri"
+                                        </label>
+                                        <div class="dropdown jss1784" onclick="CustomerApp.page.commands.showDefaultPriceDropdown()">
+<!--                                        <div class="jss23773">-->
+<!--                                            <select id="dropdownDefaultPrice" class="jss23774">-->
+<!--                                                <option disabled selected>Chọn giá mặc định</option>-->
+<!--                                                <option>-->
+<!--&lt;!&ndash;                                                    <i class="fa-solid fa-magnifying-glass jss23769"></i>&ndash;&gt;-->
+<!--                                                    <label for="inputSearchCat">-->
+<!--                                                        <input id="inputSearchCat"-->
+<!--                                                               class="w-100 form-control border border-0"-->
+<!--                                                               placeholder="Tìm kiếm"/>-->
+<!--                                                    </label>-->
+<!--                                                </option>-->
+<!--                                            </select>-->
+                                            <div class="dropdown-toggle select-btn-pri jss759"
                                                  type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <span id="pricingType">Chọn giá mặc định</span>
                                             </div>
@@ -225,7 +238,6 @@
                                                 <fieldset aria-hidden="true"
                                                           class="jss823 MuiOutlinedInput-notchedOutline">
                                                     <legend class="jss824">
-                                                        <span>&ZeroWidthSpace;</span>
                                                     </legend>
                                                 </fieldset>
                                             </div>
@@ -233,10 +245,11 @@
                                     </div>
                                 </div>
                                 <div class="MuiGrid-item MuiGrid-grid-xs-12">
-                                    <div class="jss865 jss1785">
-                                        <span class="MuiTypography-root title MuiTypography-subtitle1">
+                                    <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth">
+                                        <label class="MuiFormLabel-root MuiInputLabel-root jss755
+                                               MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink" data-shrink="true" for="paymentType">
                                             Hình Thức Thanh Toán
-                                        </span>
+                                        </label>
                                         <div class="dropdown jss1784">
                                             <div class="dropdown-toggle select-btn-pay jss759"
                                                  type="button" data-bs-toggle="dropdown"
@@ -288,7 +301,7 @@
     CustomerApp.page.elements.paymentType = $("#paymentType");
 
 
-    // Lấy List Pricing Policy
+    // Lấy List Pricing default
     CustomerApp.page.commands.getAllPricingPolicy = (selectedPricing) => {
         return $.ajax({
             headers: {
@@ -302,7 +315,9 @@
                 pricingPolicy = data;
                 pricingPolicy.forEach(item => {
                     let isSelected = item === selectedPricing ? "selected" : "";
-                    let str = `<li class="jss761" id="${item.id}" data-id="${item.id}" onclick="CustomerApp.page.commands.updateNamePri(${item.id})" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
+                    // let str = `<li class="jss761" id="${item.id}" data-id="${item.id}" onclick="CustomerApp.page.commands.updateNamePri(${item.id})" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
+
+                    let str = `<option value=${item.id} class="jss761">${item.title}</option>`;
                     CustomerApp.page.elements.dropdownDefaultPrice.append(str);
                 });
             })
@@ -365,6 +380,8 @@
         createCusGroupParam.discount = CustomerApp.page.elements.discount.val().trim();
         createCusGroupParam.paymentMethodId = CustomerApp.page.elements.paymentType.data("id");
 
+        console.log(createCusGroupParam);
+
         $.ajax({
             "headers": {
                 "accept": "application/json",
@@ -378,7 +395,7 @@
                 console.log(data.id);
                 CustomerGroup_App.IziToast.showSuccessAlert('Thêm mới nhóm khách hàng thành công  !!!')
                 let id = data.id;
-                window.location.href = "/admin/customer_groups/" + id;
+                // window.location.href = "/admin/customer_groups/" + id;
 
             })
             .fail((jqXHR) => {
@@ -433,5 +450,9 @@
         CustomerApp.page.commands.getAllPricingPolicy();
         CustomerApp.page.commands.getAllPaymentMethod();
     })
+
+    CustomerApp.page.commands.showDefaultPriceDropdown = () => {
+
+    }
 </script>
 </html>
