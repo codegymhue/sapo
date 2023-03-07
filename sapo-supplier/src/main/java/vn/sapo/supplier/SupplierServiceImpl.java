@@ -11,6 +11,7 @@ import vn.sapo.entities.product.ProductStatus;
 import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.entities.supplier.SupplierStatus;
 import vn.sapo.shared.configurations.CodePrefix;
+import vn.sapo.shared.exceptions.DataInputException;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.supplier.dto.*;
 import vn.sapo.supplierGroup.SupplierGroupRepository;
@@ -55,6 +56,13 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierResult create(CreateSupplierParam createParam) {
         Supplier supplier = supplierMapper.toModel(createParam);
 //        supplier.setEmployeeId(1);
+        if (createParam.getFullName() == null) {
+            throw new DataInputException("Tên nhà cung cấp không được để trống");
+        }
+        if (createParam.getCreateAddressParam() == null) {
+            throw new DataInputException("Địa chỉ không được để trống");
+        }
+
         supplier = supplierRepository.save(supplier);
         if (createParam.getSupplierCode() == null)
             supplier.setSupplierCode(CodePrefix.SUPPLIER.generate(supplier.getId()));
@@ -62,9 +70,6 @@ public class SupplierServiceImpl implements SupplierService {
         if (createParam.getGroupId() == null)
             supplier.setGroupId(252);
         return supplierMapper.toDTO(supplier);
-
-
-
 
     }
 
@@ -74,27 +79,11 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierResult update(UpdateSupplierParam param) {
         Supplier supplier = supplierRepository.findById(param.getId())
                 .orElseThrow(() -> new NotFoundException("Not found supplier"));
-//        if (param.getGroupId() != null && !supplierRepository.existsById(param.getGroupId()))
-//            throw new NotFoundException("Group supplier exist");
-
-//        if(supplier.getPhone().isEmpty() || supplier.getPhone().isBlank()){
-//            supplier.setPhone(null);
-//        }
-//        if(supplier.getEmail().isEmpty() || supplier.getEmail().isBlank()) {
-//            supplier.setEmail(null);
-//        }
-//        if (supplier.getDescription().isEmpty() || supplier.getDescription().isBlank()) {
-//            supplier.setDescription(null);
-//        }
-//        if (supplier.getTaxCode().isEmpty() || supplier.getTaxCode().isBlank()) {
-//            supplier.setTaxCode(null);
-//        }
-//        if(supplier.getFax().isEmpty() || supplier.getFax().isBlank()) {
-//            supplier.setFax(null);
-//        }
-//        if(supplier.getWebsite().isEmpty() || supplier.getWebsite().isBlank()) {
-//            supplier.setWebsite(null);
-//        }
+        if(param.getSupplierCode() !=null && !supplier.getSupplierCode().equalsIgnoreCase(param.getSupplierCode())) {
+            if (param.getSupplierCode().startsWith("SUPN")) {
+                throw new NotFoundException("Mã không được có tiền tố của hệ thống SUPN");
+            }
+        }
         supplierMapper.transferFields(param, supplier);
         return supplierMapper.toDTO(supplier);
     }
@@ -164,7 +153,7 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    @Transactional()
+    @Transactional
     public void changeStatusToAvailable(Integer id, boolean status) {
         Supplier supplier = supplierRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Supplier not found"));
@@ -172,7 +161,7 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    @Transactional()
+    @Transactional
     public void changeEmpIdAndPaymentMethod(Integer supId, Integer empId, String paymentId) {
         Supplier supplier = supplierRepository.findById(supId)
                 .orElseThrow(() -> new NotFoundException("Supplier not found"));
@@ -181,5 +170,13 @@ public class SupplierServiceImpl implements SupplierService {
             supplier.setEmployeeId(empId);
         if (paymentId != null)
         supplier.setPaymentMethodId(paymentId);
+    }
+    @Override
+    @Transactional
+   public String findSupplierCodeById(Integer id){
+        Supplier supplier = supplierRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Supplier not found"));;
+        String supplierCode = supplier.getSupplierCode();
+        return supplierCode;
     }
 }

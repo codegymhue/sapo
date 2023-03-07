@@ -18,20 +18,20 @@ class SupplierApp {
                 </td>
                 
                  <td class="align-middle"><a href="/admin/suppliers/${item.id}/histories" style="text-decoration: none">${item.supplierCode}</a></td>
-                <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.fullName || ""}</td>
-                  <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.group == null ? "" : item.group.title}</td>
-                <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.email || ""}</td>
-                <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.phone || ""}</td>
-                 <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">
+                <td onclick="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.fullName || ""}</td>
+                  <td onclick="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.group == null ? "" : item.group.title}</td>
+                <td onclick="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.email || ""}</td>
+                <td onclick="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.phone || ""}</td>
+                 <td onclick="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">
                     <span id="showStatus" class="${showStatus}">${item.status === "AVAILABLE" ? "Đang giao dịch" : "Ngừng giao dịch"}</span> 
                 </td>   
 <!--                <td class="align-middle text-end ">${new Intl.NumberFormat('de-DE').format(item.available)}</td>-->
-              <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.employee == null ? "" : item.employee.fullName}</td>
-              <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.taxCode || ""}</td>
-               <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.website || ""}</td>
-                <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.createdAt === null ? "" : new Date(item.createdAt).toLocaleDateString('en-GB')}</td>
-                <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.updatedAt === null ? "" : new Date(item.updatedAt).toLocaleDateString('en-GB')}</td>
-                    <td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.fax || ""}</td>
+              <td onclick="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.employee == null ? "" : item.employee.fullName}</td>
+              <td onclick="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.taxCode || ""}</td>
+               <td onclick="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.website || ""}</td>
+                <td onclick="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.createdAt === null ? "" : new Date(item.createdAt).toLocaleDateString('en-GB')}</td>
+                <td onclick="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.updatedAt === null ? "" : new Date(item.updatedAt).toLocaleDateString('en-GB')}</td>
+                    <td onclick="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.fax || ""}</td>
             </tr>
         `;
         return str;

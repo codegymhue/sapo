@@ -8,9 +8,10 @@
                 <span class="ui-dialog-title" id="ui-dialog-title-1">
                     Thêm mới địa chỉ
                 </span>
-            <span class="modal-close-wrapper" role="button" aria-label="Close dialog">
-                    <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use> </svg>
-                </span>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!--            <span class="modal-close-wrapper" role="button" aria-label="Close dialog">-->
+<!--                    <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use> </svg>-->
+<!--                </span>-->
           </div>
           <form method="post" id="formCreateAddressSup">
             <div class="modal-body">
@@ -60,16 +61,17 @@
               </div>
               <div class="row">
                 <div class="col-6 field">
-                  <label for="provinceCr" class="label-required mb-2">Tỉnh thành phố</label>
+                  <lable for="provinceCr">Tỉnh thành phố</lable>
+<!--                  <label for="provinceCr" class="label-required mb-2">Tỉnh thành phố</label>-->
                   <select id="provinceCr" name="provinceCr" class="w100 input-dropdown sapo-btn-blank select-padding"
-                          title="Tỉnh thành phố">
+                          >
                     <option value="" disabled selected>Chọn tỉnh thành phố</option>
                   </select>
                 </div>
                 <div class="col-6 field">
-                  <label for="districtCr" class="label-required mb-2">Quận huyện</label>
+                  <lable for="districtCr">Quận huyện</lable>
                   <select id="districtCr" name="districtCr" class="w100 input-dropdown sapo-btn-blank select-padding"
-                          title="Chọn quận huyện">
+                          >
                     <option value="" disabled selected>Chọn quận huyện</option>
                   </select>
                 </div>
@@ -77,16 +79,15 @@
               </div>
               <div class="row">
                 <div class="col-6 field">
-                  <label for="wardCr" class="label-required mb-2">Phường xã</label>
+                  <lable for="wardCr">Phường xã</lable>
                   <select id="wardCr" name="wardCr" class="w100 input-dropdown sapo-btn-blank select-padding"
-                          title="Chọn phường xã">
+                          >
                     <option value="" disabled selected>Chọn phường xã</option>
                   </select>
                 </div>
                 <div class="col-6 field">
-                  <div class="label mb-2">
-                    Mã bưu điện
-                  </div>
+
+                  <lable for="zipCodeCrAddressSup" >Mã bưu điện</lable>
                   <input class="form-control sapo-textbox" id="zipCodeCrAddressSup" name="ZipCode" type="text" value="">
                 </div>
               </div>
@@ -100,14 +101,12 @@
               </div>
             </div>
           </form>
-
         <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-blank pull-right" id="close-popup" style="color: black" data-bs-dismiss="modal">Thoát</button>
           <button id="btnCreateAddressSup" class="btn btn-primary pull-right margin-left-5 sapo-btn-default">Thêm</button>
-          <button type="button" class="btn btn-secondary btn-blank pull-right" id="close-popup" style="color: black" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
   </div>
   </div>
-
 </th:block>

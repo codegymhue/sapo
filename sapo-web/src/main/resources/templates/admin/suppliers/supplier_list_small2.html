@@ -52,6 +52,30 @@
         .ui-sortable-handle.dragging {
             opacity: 1;
         }
+/*loading*/
+        /* Create a spinner animation */
+        @keyframes spinner {
+            to {transform: rotate(360deg);}
+        }
+
+        /* Add the spinner to the button */
+        #myButton:active::after {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+            vertical-align: middle;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spinner 0.6s linear infinite;
+        }
+        /* Style the button when it's in the loading state */
+        #myButton.loading {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
 
     </style>
 </head>
@@ -391,7 +415,8 @@
                                 <tr id="theadList" class="show">
                                     <th class="align-middle">
                                         <label for="checkAll" style="padding: 1rem; cursor:pointer">
-                                            <input style="cursor:pointer" id="checkAll" type="checkbox" value="" nameth="bulk_action"
+                                            <input style="cursor:pointer" id="checkAll" type="checkbox" value=""
+                                                   nameth="bulk_action"
                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả">
                                         </label>
                                     </th>
@@ -407,7 +432,7 @@
                                     <th class="align-middle" nameth="created_on" scope="col">Ngày tạo</th>
                                     <th class="align-middle" nameth="modified_on" scope="col">Lần cập nhật cuối</th>
                                     <!--                                    <th class="align-middle" scope="col">Nợ hiện tại</th>-->
-                                    <th class="align-middle" nameth="fax" scope="col" >Số fax</th>
+                                    <th class="align-middle" nameth="fax" scope="col">Số fax</th>
                                 </tr>
                                 <tr class="hide" id="selectActionThead" style="border: snow">
                                     <td class="align-middle" style="width: 20px">
@@ -475,25 +500,25 @@
                                         <span>Kết quả</span>
                                     </div>
 
-                                    <div class="" style="    float: right;padding: 0 0 0 20px;">
+                                    <div class="" style="float: right;padding: 0 0 0 20px;">
                                         <div class="dataTables_paginate paging_bootstrap">
-                                            <ul class="pagination">
-                                                <!--                                                <li><a class="t-link"><span-->
-                                                <!--                                                        class="t-icon t-arrow-first">← Trang đầu</span></a></li>-->
-                                                <li><a class="t-link" id="previousPage"
-                                                >← Trang trước</a></li>
+                                            <ul class="pagination" style="display: none">
+                                                <li><a class="t-link"  id="fistPage"><span
+                                                        class="t-icon t-arrow-first">← Trang đầu</span></a></li>
+                                                <li><a class="t-link" id="previousPage" style="display: none"
+                                                ></a></li>
 
                                                 <li><a class="t-link" id="pageNo">1</a>
                                                 </li>
                                                 <li><a class="t-link" id="nextPage"
-                                                >Trang sau →</a></li>
+                                                >2</a></li>
 
                                                 <!--                                                <li class="active"><span class="t-state-active">3</span></li>-->
                                                 <!--                                                <li><a class="t-link"-->
                                                 <!--                                                      >5</a></li>-->
-                                                <!--                                                <li><a class="t-link"-->
-                                                <!--                                                ><span class="t-icon t-arrow-last">Trang cuối →</span></a>-->
-                                                <!--                                                </li>-->
+                                                <li><a class="t-link" id="lastPage"
+                                                ><span class="t-icon t-arrow-last">Trang cuối →</span></a>
+                                                </li>
                                             </ul>
                                         </div>
                                         <!--                                        <nav aria-label="Page navigation example ">-->
@@ -667,6 +692,8 @@
     page.elements.searchKey = $(".searchKey");
     page.dialogs.elements.nextPage = $("#nextPage");
     page.dialogs.elements.previousPage = $("#previousPage");
+    page.dialogs.elements.fistPage = $("#fistPage");
+    page.dialogs.elements.lastPage = $("#lastPage");
 
     // page.elements.btnFilter.on("click", function () {
     //     page.elements.filter_button_tag.removeClass("active");
@@ -772,7 +799,7 @@
             data: JSON.stringify(supplierFilter)
         })
             .done((data) => {
-                console.log(data.suppliers," datasup")
+                console.log(data.suppliers, " datasup")
                 page.elements.tbSupplier_tbody.empty();
                 page.elements.totalPage.empty();
                 totalPage = data.totalPage;
@@ -798,13 +825,20 @@
                     $("#sapo-table_wrapper").hide();
                     $(".container-fluid").hide();
                 }
-                page.elements.pageNo.parent().addClass("active")
-                if (Number(page.elements.pageNo.text()) === 1)
-                    page.dialogs.elements.previousPage.parent().addClass("disable")
-                if (Number(page.elements.pageNo.text()) === Number(totalPage))
-                    page.dialogs.elements.nextPage.parent().addClass("disable")
-                else
-                    page.dialogs.elements.nextPage.parent().removeClass("disable")
+                // if (data.totalPage !== 1) {
+                //     console.log(data.totalPage)
+                //     $(".pagination").css("display", "block");
+                // }
+                page.elements.pageNo.parent().addClass("active");
+                if (Number(page.elements.pageNo.text()) === 1) {
+                    page.dialogs.elements.previousPage.parent().css("display", "none");
+                    page.dialogs.elements.fistPage.parent().addClass("disable");
+                }
+                if (Number(page.elements.pageNo.text()) === Number(totalPage)) {
+                    page.dialogs.elements.lastPage.parent().addClass("disable");
+                    page.dialogs.elements.nextPage.parent().parent().css("display", "none");
+                } else
+                    page.dialogs.elements.lastPage.parent().removeClass("disable");
 
             })
     }
@@ -812,35 +846,62 @@
     page.dialogs.elements.nextPage.on("click", () => {
         let pageNo = page.elements.pageNo.text();
         if (Number(pageNo) < Number(totalPage)) {
-            page.dialogs.elements.previousPage.parent().removeClass("disable")
+            page.dialogs.elements.fistPage.parent().removeClass("disable")
+            page.dialogs.elements.previousPage.parent().css("display", "block")
             let pageNext = Number(pageNo) + 1;
             page.elements.pageNo.text(pageNext);
             page.elements.pageNo.parent().addClass("active")
+            page.dialogs.elements.nextPage.text(pageNext + 1)
+            page.dialogs.elements.previousPage.text(pageNo)
             page.commands.getAllSupplier();
         }
         // page.elements.pageNo.text(Number(pageNo) + 1);
-        if (Number(page.elements.pageNo.text()) === Number(totalPage))
-            page.dialogs.elements.nextPage.parent().addClass("disable")
+        if (Number(page.elements.pageNo.text()) === Number(totalPage)) {
+            page.dialogs.elements.nextPage.parent().css("display", "none")
+            page.dialogs.elements.lastPage.parent().addClass("disable")
+        }
     })
-
 
     page.dialogs.elements.previousPage.on("click", () => {
         let pageNo = page.elements.pageNo.text();
         if (Number(pageNo) > 1) {
-            page.dialogs.elements.nextPage.parent().removeClass("disable")
+            page.dialogs.elements.lastPage.parent().removeClass("disable")
+            page.dialogs.elements.nextPage.parent().css("display", "block")
             let previousPage = Number(pageNo) - 1;
             page.elements.pageNo.text(previousPage);
             page.elements.pageNo.parent().addClass("active")
+            page.dialogs.elements.previousPage.text(previousPage - 1)
+            page.dialogs.elements.nextPage.text(pageNo)
             page.commands.getAllSupplier();
         }
         // page.elements.pageNo.text(Number(pageNo) + 1);
-        if (Number(page.elements.pageNo.text()) === 1)
-            page.dialogs.elements.previousPage.parent().addClass("disable")
+        if (Number(page.elements.pageNo.text()) === 1) {
+            page.dialogs.elements.previousPage.parent().css("display", "none")
+            page.dialogs.elements.fistPage.parent().addClass("disable")
+        }
+
+    })
+
+    page.dialogs.elements.fistPage.on("click", () => {
+        page.dialogs.elements.previousPage.parent().css("display", "none")
+        page.elements.pageNo.text(1);
+        page.dialogs.elements.nextPage.parent().css("display", "block")
+        page.dialogs.elements.nextPage.text(2);
+        page.commands.getAllSupplier();
+    })
+
+    page.dialogs.elements.lastPage.on("click", () => {
+        page.dialogs.elements.nextPage.parent().css("display", "none")
+        page.dialogs.elements.fistPage.parent().removeClass("disable")
+        page.elements.pageNo.text(totalPage);
+        page.dialogs.elements.previousPage.parent().css("display", "block")
+        page.dialogs.elements.previousPage.text(totalPage - 1);
+        debugger
+        page.commands.getAllSupplier();
     })
 
     page.elements.pageSize.on("change", () => {
         page.elements.pageNo.text(1);
-        console.log(page.elements.pageNo.text(1), "  1")
         page.commands.getAllSupplier();
     })
 
@@ -1024,14 +1085,14 @@
                 const result = await updateBulkaction(id, empId, paymentId);
                 if (result.message.includes("Đã được cập nhật thành công")) {
                     countOrderComplete += 1
-                    let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a>
+                    let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${result.supplierCode}</a>
                                     <span> - Đã được cập nhật thành công</span>
                                 </div>`
                     $("#countOrderComplete").text(countOrderComplete)
                     $("#listOrderComplete").append(str)
                 } else if (result.message.includes("Có lỗi xảy ra")) {
                     countOrderFail += 1
-                    let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
+                    let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${result.supplierCode}</a><span> - Có lỗi xảy ra</span></div>`
                     $("#countOrderFail").text(countOrderFail)
                     $("#listOrderFail").append(str)
                 }
@@ -1063,8 +1124,10 @@
                 url: origin + "/api/suppliers/updateBulk",
                 data: JSON.stringify(updateSupplierParam),
                 beforeSend: function () {
+                    $(".btn--reload-page").addClass("loading")
                 },
                 success: function (data) {
+                    $(".btn--reload-page").removeClass("loading")
                     resolve(data) // Resolve promise and when success
                 },
                 error: function (err) {
@@ -1084,14 +1147,14 @@
                 console.log(result)
                 if (result.message.includes("Đã được cập nhật trạng thái thành công")) {
                     countOrderComplete += 1
-                    let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a>
+                    let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${result.supplierCode}</a>
                                     <span> - Đã được cập nhật trạng thái thành công</span>
                                 </div>`
                     $("#countOrderComplete").text(countOrderComplete)
                     $("#listOrderComplete").append(str)
                 } else if (result.message.includes("Có lỗi xảy ra")) {
                     countOrderFail += 1
-                    let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
+                    let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${result.supplierCode}</a><span> - Có lỗi xảy ra</span></div>`
                     $("#countOrderFail").text(countOrderFail)
                     $("#listOrderFail").append(str)
                 }
@@ -1138,14 +1201,14 @@
                 console.log(result, " res")
                 if (result.message.includes("Đã ngừng giao dịch thành công")) {
                     countOrderComplete += 1
-                    let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a>
+                    let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${result.supplierCode}</a>
                                     <span> - Đã ngừng giao dịch thành công</span>
                                 </div>`
                     $("#countOrderComplete").text(countOrderComplete)
                     $("#listOrderComplete").append(str)
                 } else if (result.message.includes("Có lỗi xảy ra")) {
                     countOrderFail += 1
-                    let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
+                    let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${result.supplierCode}</a><span> - Có lỗi xảy ra</span></div>`
                     $("#countOrderFail").text(countOrderFail)
                     $("#listOrderFail").append(str)
                 }
@@ -1188,18 +1251,16 @@
         arrayIdSupplier.forEach(async id => {
             try {
                 const result = await deleteBulk(id);
-                console.log(result, " res")
-                console.log(Promise, " promise")
                 if (result.message.includes("Đã được xóa thành công")) {
                     countOrderComplete += 1
-                    let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a>
+                    let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${result.supplierCode}</a>
                                     <span> - Đã được xóa thành công</span>
                                 </div>`
                     $("#countOrderComplete").text(countOrderComplete)
                     $("#listOrderComplete").append(str)
                 } else if (result.message.includes("Có lỗi xảy ra")) {
                     countOrderFail += 1
-                    let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
+                    let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${result.supplierCode}</a><span> - Có lỗi xảy ra</span></div>`
                     $("#countOrderFail").text(countOrderFail)
                     $("#listOrderFail").append(str)
                 }
@@ -1304,7 +1365,7 @@
             let str = `<span class="tm-tag tm-tag-small tm-serial tm-overflow"
                                                       id="tag-variant-${checkbox.val()}" title="${checkboxText}">
                             <span>${checkboxText}</span>
-
+                       <a class="tm-tag-remove tag-variant-remove" onclick="tagVariantRemove(this)" variant-id="${checkbox.val()}">x</a>
                        </span>`
             // < a className = "tm-tag-remove tag-variant-remove" variant - id = "${checkbox.val()}" > x < /a>
             if (checkbox.is(":checked")) {
@@ -1319,6 +1380,16 @@
             console.log(supplierFilter.groupIds)
         })
     })
+
+    function tagVariantRemove(element) {
+        let variantId = element.getAttribute('variant-id')
+        let inputId = document.getElementById(variantId)
+        supplierFilter.groupIds.splice(supplierFilter.groupIds.indexOf(variantId), 1)
+        $("span[" + "id" + "*=" + "tag-variant-" + variantId + "]").remove()
+        if ($(inputId).is(":checked"))
+            $(inputId).prop("checked",false)
+    }
+
 
     // tìm từ khóa trong filter SupplierGroup
     function suggest(element) {
@@ -1349,25 +1420,25 @@
     const defaultFields = ["code", "supplier_name", "supplier_group", "email", "phone_number", "status"];
 
 
-    function toggleItem(element) {
-
-    }
+    // function toggleItem(element) {
+    //
+    // }
 
     function confirmSave(str, element) {
         let sList = [];
-        if($("#defaultSettings").is(":checked")){
+        if ($("#defaultSettings").is(":checked")) {
             $("#list-row-default").find('input[type="checkbox"].export-field-group--toggle-item').each(function () {
                 if (this.checked)
                     sList.push($(this).val())
             });
             console.log(sList, " list-row-default")
             return sList;
-        }else {
+        } else {
             $("#list-row-settings").find('input[type="checkbox"].export-field-group--toggle-item').each(function () {
                 if (this.checked)
                     sList.push($(this).val())
             });
-            console.log(sList,  ' list-row-settings')
+            console.log(sList, ' list-row-settings')
             return sList;
         }
     }
@@ -1464,7 +1535,8 @@
             }
         }
     }
-    function fields(tableId){
+
+    function fields(tableId) {
         // Get the table element
         const table = document.getElementById(tableId);
 
