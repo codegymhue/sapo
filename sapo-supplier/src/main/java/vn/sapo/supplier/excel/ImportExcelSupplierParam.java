@@ -8,10 +8,13 @@ import vn.sapo.supplier.dto.CreateSupplierParam;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Getter
 @Setter
 @Accessors(chain = true)
 public class ImportExcelSupplierParam extends CreateSupplierParam {
     private String paymentMethodTitle;
     List<CreateAddressParam> createAddressParams = new ArrayList<>();
+    private String supGroupCode;
+    List<CreateAddressParam> createAddressParams1 = new ArrayList<>();
 }

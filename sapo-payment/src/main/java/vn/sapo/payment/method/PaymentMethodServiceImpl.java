@@ -3,12 +3,16 @@ package vn.sapo.payment.method;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import vn.sapo.entities.PaymentMethod;
 import vn.sapo.payment.method.dto.CreatePaymentMethodParam;
 import vn.sapo.payment.method.dto.PaymentMethodResult;
 import vn.sapo.payment.method.dto.UpdatePaymentMethodParam;
 import vn.sapo.shared.exceptions.NotFoundException;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
@@ -57,5 +61,12 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
     @Transactional
     public PaymentMethodResult update(UpdatePaymentMethodParam id) {
         return null;
+    }
+
+    @Override
+    public Map<String, String> findByTitles(Set<String> titles) {
+        return paymentMethodRepository.findByTitleIn(titles)
+                .stream()
+                .collect(Collectors.toMap(PaymentMethod::getTitle, PaymentMethod::getId));
     }
 }

@@ -31,4 +31,6 @@ public interface AddressService {
 
 
     Map<String, Object> getAllAddressSupplierPage(Integer pageNo, Integer pageSize, Integer supplierId);
+
+    void deleteAllBySupplierId(Integer id);
 }

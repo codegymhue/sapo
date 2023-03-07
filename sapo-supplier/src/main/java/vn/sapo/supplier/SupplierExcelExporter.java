@@ -37,7 +37,7 @@ public class SupplierExcelExporter {
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
         font.setBold(true);
-        font.setFontHeight(16);
+        font.setFontHeight(14);
         style.setFont(font);
 
         createCell(row, 0, "Tên nhà cung cấp ", style);
@@ -85,7 +85,7 @@ public class SupplierExcelExporter {
 
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
-        font.setFontHeight(22);
+        font.setFontHeight(14);
         style.setFont(font);
 
         for (SupplierResult supplier : supplierList) {
@@ -95,7 +95,7 @@ public class SupplierExcelExporter {
             String fullName = supplier.getFullName();
             createCell(row, columnCount++, fullName != null ? fullName : "", style);
             createCell(row, columnCount++, supplier.getSupplierCode(), style);
-            SupGroupResult group = supplier.getGroup();
+            SupGroupResult group = supplier.getGroup().setSupGroupCode(supplier.getSupplierCode());
             if (group != null) {
                 String title = group.getSupGroupCode();
                 createCell(row, columnCount++, null ,style);
@@ -111,7 +111,7 @@ public class SupplierExcelExporter {
             createCell(row, columnCount++, supplier.getDescription(), style);
             String paymentMethodId = "";
             if (supplier.getPaymentMethod() != null) {
-                paymentMethodId = supplier.getPaymentMethod().getId();
+                paymentMethodId = supplier.getPaymentMethod().getTitle();
             }
             createCell(row, columnCount++, paymentMethodId != null ? paymentMethodId : "", style);
 
@@ -134,7 +134,6 @@ public class SupplierExcelExporter {
                     createCell(row, columnCount++, adr.getDistrictName() != null ? adr.getDistrictName() : "", style);
                 }
             }
-            createCell(row,columnCount++,supplier.getDebtTotal() != null ? supplier.getDebtTotal():"",style);
         }
     }
 
