@@ -97,7 +97,7 @@ public class SupplierExcelExporter {
             String fullName = supplier.getFullName();
             createCell(row, columnCount++, fullName != null ? fullName : "", style);
             createCell(row, columnCount++, supplier.getSupplierCode(), style);
-            SupGroupResult group = supplier.getGroup();
+            SupGroupResult group = supplier.getGroup().setSupGroupCode(supplier.getSupplierCode());
             if (group != null) {
                 String title = group.getSupGroupCode();
                 createCell(row, columnCount++, null ,style);

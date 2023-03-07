@@ -42,4 +42,5 @@ public class CreateAddressParam {
 
     private boolean isReceiveBill;
     private boolean isShipping;
+
 }

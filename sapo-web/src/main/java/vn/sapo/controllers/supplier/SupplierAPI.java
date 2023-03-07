@@ -14,12 +14,11 @@ import vn.sapo.payment.method.PaymentMethodService;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.supplier.SupplierExcelService;
 import vn.sapo.supplier.dto.*;
-import vn.sapo.supplier.excel.ExcelHelperSuppliers;
-import vn.sapo.supplier.excel.ExcelServiceSupplier;
 import vn.sapo.supplier.excel.ImportExcelSupplierParam;
 import vn.sapo.supplier.excel.ResponseMessage;
 
 import vn.sapo.supplier.SupplierService;
+import vn.sapo.supplierGroup.SupplierGroupService;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -33,6 +32,7 @@ public class SupplierAPI {
 
     @Autowired
     private SupplierService supplierService;
+
 
     @Autowired
     private AddressService addressService;
@@ -89,15 +89,7 @@ public class SupplierAPI {
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
         List<ImportExcelSupplierParam> dtoList = supplierExcelService.extractExcel(file);
-        dtoList.forEach(dto -> {
-            try {
-                String paymentMethodId = paymentMethodService.findByTitle(dto.getPaymentMethodTitle()).getId();
-                dto.setPaymentMethodId(paymentMethodId);
-                String supGroupCode =  supplierService.findById(dto.getGroupId()).getSupplierCode();
-                dto.setSupGroupCode(supGroupCode);
-            } catch (Exception ignored) {
-            }
-        });
+        supplierExcelService.fillFieldDto(dtoList);
         supplierExcelService.importSupplier(dtoList);
         message = "Uploaded the file successfully: " + file.getOriginalFilename();
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
@@ -122,6 +114,7 @@ public class SupplierAPI {
                     HttpStatus.EXPECTATION_FAILED);
         }
     }
+
     @PostMapping("/disableBulk")
     public ResponseEntity<?> updateStatusUnavailable(@RequestBody Integer id) {
 
@@ -144,9 +137,9 @@ public class SupplierAPI {
     }
 
     @PostMapping("/updateBulk")
-    public ResponseEntity<?> updateBulkaction(@RequestBody UpdateMultiSupParam updateMultiSupParam){
+    public ResponseEntity<?> updateBulkaction(@RequestBody UpdateMultiSupParam updateMultiSupParam) {
         try {
-            supplierService.changeEmpIdAndPaymentMethod(updateMultiSupParam.getId(),updateMultiSupParam.getEmployeeId() ,updateMultiSupParam.getPaymentMethodId());
+            supplierService.changeEmpIdAndPaymentMethod(updateMultiSupParam.getId(), updateMultiSupParam.getEmployeeId(), updateMultiSupParam.getPaymentMethodId());
             String finalMessage = String.format(" '%s'- Đã được cập nhật thành công", updateMultiSupParam.getId());
             return new ResponseEntity<>(new HashMap<>() {{
                 put("message", finalMessage);
@@ -162,15 +155,17 @@ public class SupplierAPI {
                     HttpStatus.EXPECTATION_FAILED);
         }
 
-    };
+    }
+
+    ;
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> update(@Valid @RequestBody UpdateSupplierParam updateSupplierParam, BindingResult bindingResult) {
         List<String> allError = new ArrayList<>();
-        List<ObjectError>errors;
-        if (bindingResult.hasFieldErrors()){
+        List<ObjectError> errors;
+        if (bindingResult.hasFieldErrors()) {
             errors = bindingResult.getAllErrors();
-            for(ObjectError error : errors){
+            for (ObjectError error : errors) {
                 allError.add(error.getDefaultMessage());
             }
             throw new NotFoundException(allError.toString());
@@ -200,8 +195,6 @@ public class SupplierAPI {
         }
 
     }
-
-
 
 
 //    @DeleteMapping("/suppliers/DeleteAddress")
