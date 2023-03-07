@@ -20,5 +20,4 @@ public interface SupplierRepository extends JpaRepository<Supplier, Integer> {
     @Query("SELECT s FROM Supplier AS s WHERE s.status = :status")
     Page<Supplier> findAllByStatus(@Param("status")SupplierStatus status, Pageable pageable);
 
-
 }

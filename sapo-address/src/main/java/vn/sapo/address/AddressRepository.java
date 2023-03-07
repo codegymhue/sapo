@@ -18,5 +18,6 @@ public interface AddressRepository extends JpaRepository<Address, Integer> {
     List<Address> findAllBySupplierId(Integer supplierId);
 
     Page<Address> findAllBySupplierId(Pageable pageable, Integer supplierId);
+    void deleteAllBySupplierId(Integer id);
 
 }

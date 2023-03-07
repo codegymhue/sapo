@@ -153,7 +153,7 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    @Transactional()
+    @Transactional
     public void changeStatusToAvailable(Integer id, boolean status) {
         Supplier supplier = supplierRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Supplier not found"));
@@ -161,7 +161,7 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    @Transactional()
+    @Transactional
     public void changeEmpIdAndPaymentMethod(Integer supId, Integer empId, String paymentId) {
         Supplier supplier = supplierRepository.findById(supId)
                 .orElseThrow(() -> new NotFoundException("Supplier not found"));
@@ -170,5 +170,13 @@ public class SupplierServiceImpl implements SupplierService {
             supplier.setEmployeeId(empId);
         if (paymentId != null)
         supplier.setPaymentMethodId(paymentId);
+    }
+    @Override
+    @Transactional
+   public String findSupplierCodeById(Integer id){
+        Supplier supplier = supplierRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Supplier not found"));;
+        String supplierCode = supplier.getSupplierCode();
+        return supplierCode;
     }
 }
