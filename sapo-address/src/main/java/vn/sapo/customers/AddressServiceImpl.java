@@ -137,8 +137,11 @@ public class AddressServiceImpl implements AddressService {
     public void deleteByCustomerId(Integer customerId) {
         addressRepository.deleteByCustomerId(customerId);
     }
-
-
+    @Override
+    @Transactional
+   public void deleteAllBySupplierId(Integer id){
+        addressRepository.deleteAllBySupplierId(id);
+    };
 }
 
 

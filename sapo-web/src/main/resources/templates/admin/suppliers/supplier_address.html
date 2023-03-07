@@ -129,6 +129,9 @@
     #bodyRenderAddressSupplier>tr{
       cursor: pointer;
     }
+    .error{
+      color: #b93c3c;
+    }
 
   </style>
   </head>
@@ -195,10 +198,12 @@
         <div class="page-info page-info-order-detail w100">
           <div class="page-info-title">
             Thông tin cá nhân
-            <span class="badge sapo-badge badge--sushi position-absolute"
-                  style="left: calc(100%/3)">
-            <span th:text="*{supplier.status == supplier.status.AVAILABLE} ? 'Đang giao dịch' : 'Ngừng giao dịch'"></span>
-            </span>
+            <th:block th:if="${supplier.status} == ${supplier.status.AVAILABLE}">
+              <span class="badge sapo-badge badge--sushi position-absolute" style="left: calc(100%/3)">Đang giao dịch</span>
+            </th:block>
+            <th:block th:if="${supplier.status} == ${supplier.status.UNAVAILABLE}">
+              <span class="badge sapo-badge badge--status badge--flamingo position-absolute" style="left: calc(100%/3)">Ngừng giao dịch</span>
+            </th:block>
             <div class="order-sources">
               <a href="javascript:" data-toggle="dropdown" aria-expanded="false"
                  style="color:#212b35">Thao tác khác<i class="fa fa-caret-down ml-2"
@@ -431,21 +436,6 @@
 <div class="modal fade" id="sapo-modal-container" data-width="" tabindex="-1" role="dialog" data-backdrop="false">
 </div>
 <div class="modal-backdrop fade in" id="sapo-modal-backdrop"></div>
-<style>
-  #surveys {
-    position: fixed;
-    bottom: 0;
-    width: calc(100% - 23rem);
-    right: 0;
-    z-index: 999999
-  }
-
-  .sapo-menu-collapse #surveys {
-    width: calc(100% - 5.6rem) !important;
-  }
-</style>
-<div id="surveys"></div>
-
 <script>
   Page();
   hj('trigger', 'split_test_b');
@@ -647,7 +637,7 @@
               });
               page.commands.isCheckbox();
               page.elements.totalPage.prepend(
-                      `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
+                      `<span class="me-2">Hiển thị kết quả từ ${data.totalPage} - ${data.totalItem} trên tổng ${data.totalItem}</span>`
               )
             })
   }
@@ -680,7 +670,7 @@
       url: page.urls.getAllProvince
     })
             .done((data) => {
-              element.append('<option value="-1">Tỉnh/Thành phố</option>')
+              // element.append('<option value="-1">Tỉnh/Thành phố</option>')
               $.each(data.results, function (index, value) {
                 element.append(`<option value="${value.province_id}">${value.province_name}</option>`)
               });
@@ -721,29 +711,29 @@
   getAllProvince(provinceIdUp);
   provinceIdCre.on("change", function () {
     districtIdCre.empty();
-    districtIdCre.append('<option>Quận Huyện</option>');
+    districtIdCre.append('<option>Chọn quận huyện</option>');
     wardIdCre.empty();
-    wardIdCre.append('<option>Phường Xã</option>');
+    wardIdCre.append('<option>Chọn phường xã</option>');
     getAllDistrictsByProvinceId(districtIdCre, provinceIdCre.val());
   });
 
   districtIdCre.on("change", function () {
     wardIdCre.empty();
-    wardIdCre.append('<option>Phường Xã</option>');
+    wardIdCre.append('<option>Chọn phường xã</option>');
     getAllWardsByDistrictId(wardIdCre, districtIdCre.val());
   });
 
   provinceIdUp.on("change", function () {
     districIdUp.empty();
-    districIdUp.append('<option>Quận Huyện </option>');
+    districIdUp.append('<option>Chọn quận huyện </option>');
     wardIdUp.empty();
-    wardIdUp.append('<option>Phường Xã</option>');
+    wardIdUp.append('<option>Chọn phường xã</option>');
     getAllDistrictsByProvinceId(districIdUp, provinceIdUp.val());
   })
 
   districIdUp.on("change", function(){
     wardIdUp.empty();
-    wardIdUp.append('<option>Phường Xã</option>');
+    wardIdUp.append('<option>Chọn phường xã</option>');
     getAllWardsByDistrictId(wardIdUp, districIdUp.val());
   })
 
@@ -892,7 +882,21 @@
     let line2 = page.dialogs.elements.address2CrAddressSup.val();
     let zipCode = page.dialogs.elements.zipCodeCrAddressSup.val();
     let label = page.dialogs.elements.labelCrAddressSup.val();
+    let wardName = page.dialogs.elements.wardCr.find("option:selected").text();
+    console.log("ward Name : " , wardName);
+    if (wardName.includes("Chọn phường xã")){
+      wardName = undefined;
+    }
 
+    let districtName = page.dialogs.elements.districtCr.find("option:selected").text();
+    if(districtName.includes("Chọn quận huyện")){
+      districtName = undefined;
+    }
+
+    let provinceName = page.dialogs.elements.provinceCr.find("option:selected").text()
+    if(provinceName.includes("Chọn tỉnh thành phố")){
+      provinceName = undefined;
+    }
     let createAddressParam = {
       supplierId: page.elements.supplierId.val(),
       label : label.length > 0 ? label : undefined,
@@ -903,11 +907,11 @@
       line2:  line2.length > 0 ? line2 : undefined,
       zipCode:  zipCode.length > 0 ? zipCode : undefined,
       wardId:  page.dialogs.elements.wardCr.val(),
-      wardName: page.dialogs.elements.wardCr.find("option:selected").text(),
+      wardName: wardName,
       districtId:  page.dialogs.elements.districtCr.val(),
-      districtName: page.dialogs.elements.districtCr.find("option:selected").text(),
+      districtName: districtName,
       provinceId : page.dialogs.elements.provinceCr.val(),
-      provinceName : page.dialogs.elements.provinceCr.find("option:selected").text(),
+      provinceName : provinceName,
     }
     $.ajax({
       "headers": {
@@ -933,29 +937,29 @@
       address1CrAddressSup: {
         required: true,
       },
-      wardCr: {
-        required: true,
-      },
-      districtCr: {
-        required: true,
-      },
-      provinceCr: {
-        required:true,
-      }
+      // wardCr: {
+      //   required: true,
+      // },
+      // districtCr: {
+      //   required: true,
+      // },
+      // provinceCr: {
+      //   required:true,
+      // }
     },
     messages: {
       address1CrAddressSup: {
         required: "Vui lòng nhập địa chỉ nhà cung cấp",
       },
-      wardCr: {
-        required: "Vui lòng chọn Phường xã",
-      },
-      districtCr: {
-        required: "Vui lòng chọn Quận huyện",
-      },
-      provinceCr: {
-        required:"Vui lòng chọn Tỉnh thành phố",
-      }
+      // wardCr: {
+      //   required: "Vui lòng chọn Phường xã",
+      // },
+      // districtCr: {
+      //   required: "Vui lòng chọn Quận huyện",
+      // },
+      // provinceCr: {
+      //   required:"Vui lòng chọn Tỉnh thành phố",
+      // }
     },
     submitHandler:() => {
       doCreateAddressSup()
@@ -983,9 +987,15 @@
               page.dialogs.elements.address1UpAddressSup.val(data.line1);
               page.dialogs.elements.address2UpAddressSup.val(data.line2);
               page.dialogs.elements.zipCodeUpAddressSup.val(data.zipCode);
+              let province = data.provinceId;
+              if(province == undefined){
+                $("#provinceUp").remove(`<option value="" disabled="" selected="">Chọn tỉnh thành phố</option>`)
+              } else {
+                page.dialogs.elements.provinceUp.val(data.provinceId);
+              }
               console.log("province id:", page.dialogs.elements.provinceUp.val(data.provinceId));
-              page.dialogs.elements.provinceUp.val(data.provinceId);
 
+              page.dialogs.elements.provinceUp.val(data.provinceId);
               getAllDistrictsByProvinceId(page.dialogs.elements.districtUp,data.provinceId).then(()=>{
                 page.dialogs.elements.districtUp.val(data.districtId);
               });
@@ -1010,6 +1020,8 @@
     let line1 = page.dialogs.elements.address1UpAddressSup.val();
     let line2  = page.dialogs.elements.address2UpAddressSup.val();
     let zipCode = page.dialogs.elements.zipCodeUpAddressSup.val();
+    let wardName = page.dialogs.elements.wardUp.find("option:selected").text();
+    console.log("ward Name : " , wardName);
 
     let updateAddressSup = {
       id: idAddressSupNow,
@@ -1049,29 +1061,29 @@
       address1UpAddressSup: {
         required: true,
       },
-      wardUp: {
-        required: true,
-      },
-      districtUp: {
-        required: true,
-      },
-      provinceUp: {
-        required:true,
-      }
+      // wardUp: {
+      //   required: true,
+      // },
+      // districtUp: {
+      //   required: true,
+      // },
+      // provinceUp: {
+      //   required:true,
+      // }
     },
     messages: {
       address1UpAddressSup: {
         required: "Vui lòng nhập địa chỉ nhà cung cấp",
       },
-      wardUp: {
-        required: "Vui lòng chọn Phường xã",
-      },
-      districtUp: {
-        required: "Vui lòng chọn Quận huyện",
-      },
-      provinceUp: {
-        required:"Vui lòng chọn Tỉnh thành phố",
-      }
+      // wardUp: {
+      //   required: "Vui lòng chọn Phường xã",
+      // },
+      // districtUp: {
+      //   required: "Vui lòng chọn Quận huyện",
+      // },
+      // provinceUp: {
+      //   required:"Vui lòng chọn Tỉnh thành phố",
+      // }
     },
     submitHandler:() => {
       doUpdateAddressSup()
@@ -1118,7 +1130,6 @@
             })
   })
 
-  // getAllAddressOfSupplier();
 
   $(function() {
     pageable = {

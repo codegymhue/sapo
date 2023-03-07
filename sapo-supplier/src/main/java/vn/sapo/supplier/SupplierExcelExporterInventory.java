@@ -36,7 +36,7 @@ public class SupplierExcelExporterInventory {
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
         font.setBold(true);
-        font.setFontHeight(16);
+        font.setFontHeight(14);
         style.setFont(font);
         createCell(row, 0, "Tên nhà cung cấp ", style);
         createCell(row, 1, "Mã nhà cung cấp", style);
@@ -83,7 +83,7 @@ public class SupplierExcelExporterInventory {
 
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
-        font.setFontHeight(22);
+        font.setFontHeight(14);
         style.setFont(font);
         for (SupplierResult supplier : supplierList) {
             for (AddressResult address : supplier.getAddresses()) {
