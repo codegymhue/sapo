@@ -702,7 +702,8 @@
                 setTimeout(() => {
                 }, 1500);
                 page.dialogs.elements.modalCreateGroupSupplier.modal('hide');
-                location.reload();
+
+                    getAllGroup();
             })
             .fail((jqXHR) => {
                 SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
@@ -744,50 +745,42 @@
     $("#formCreate").validate({
         rules: {
             nameCreate: {
+                required: true
+            },
+            phoneCreate: {
                 required: true,
-                minlength: 5,
-                maxlength: 50
+                digits: true,
+                minlength: 10,
+                maxlength: 11
             },
             emailCreate: {
                 required: true,
-                minlength: 5,
-                maxlength: 50,
                 email: true
-            },
-            phoneCreate: {
-                // phone_valid: true,
-                required: true,
             }
         },
         messages: {
             nameCreate: {
-                required: "Vui lòng nhập tên đầy đủ",
-                minlength: "Độ dài tối thiểu là 5 ký tự",
-                maxlength: "Độ dài tối đa là 100 ký tự"
-            },
-            emailCreate: {
-                required: "Vui lòng nhập email đầy đủ",
-                minlength: "Độ dài tối thiểu là 5 ký tự",
-                maxlength: "Độ dài tối đa là 100 ký tự",
-                email: "Định dạng email không đúng"
+                required: "Vui lòng nhập tên nhà cung cấp",
             },
             phoneCreate: {
-                // phone_valid: "Định dạng số điện thoại không đúng",
-                required: "Vui lòng nhập số điện thoại đầy đủ"
+                required: "Vui lòng nhập số điện thoại",
+                digits: "Số điện thoại phải là số",
+                minlength: "Số điện thoại phải có ít nhất 10 chữ số",
+                maxlength: "Số điện thoại không được vượt quá 11 chữ số"
+            },
+            emailCreate: {
+                required: "Vui lòng nhập địa chỉ email",
+                email: "Định dạng địa chỉ email không hợp lệ"
             }
         },
         submitHandler: function () {
-            page.commands.formCreate();
-            console.log("page.dialogs.elements.formCreate.validate");
-        },
-        // invalidHandler: () => {
-        //     SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_400);
-        // }
-    })
-
-    $('#formCreate').on("click", function () {
-        $("#formCreate").trigger("submit");
-    })
+            createSupplier();
+        }
+    });
+    //
+    // $('#formCreate').on("click", function () {
+    //     // $("#formCreate").trigger("submit");
+    //     })
 
 </script>
 

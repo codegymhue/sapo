@@ -59,6 +59,10 @@ public class SupplierServiceImpl implements SupplierService {
         if (createParam.getFullName() == null) {
             throw new DataInputException("Tên nhà cung cấp không được để trống");
         }
+        if (createParam.getCreateAddressParam() == null) {
+            throw new DataInputException("Địa chỉ không được để trống");
+        }
+
         supplier = supplierRepository.save(supplier);
         if (createParam.getSupplierCode() == null)
             supplier.setSupplierCode(CodePrefix.SUPPLIER.generate(supplier.getId()));
