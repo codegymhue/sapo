@@ -723,71 +723,71 @@
     getAllEmployeeSelect();
     getAllPaymentMethodSelect();
 
-    $("#formCreate").validate({
-        rules: {
-            nameCreate: {
-                required: true
-
-            }
-        },
-        messages: {
-            nameCreate: {
-                required: "Vui lòng nhập tên nhà cung cấp",
-
-            }
-        },
-        submitHandler: function () {
-            createSupplier();
-        }
-    });
-
     // $("#formCreate").validate({
     //     rules: {
     //         nameCreate: {
-    //             required: true,
-    //             minlength: 3,
-    //             maxlength: 50
-    //         },
-    //         emailCreate: {
-    //             required: true,
-    //             minlength: 5,
-    //             maxlength: 50,
-    //             email: true
-    //         },
-    //         phoneCreate: {
-    //             // phone_valid: true,
-    //             required: true,
+    //             required: true
+    //
     //         }
     //     },
     //     messages: {
     //         nameCreate: {
-    //             required: "Vui lòng nhập tên đầy đủ",
-    //             minlength: "Độ dài tối thiểu là 5 ký tự",
-    //             maxlength: "Độ dài tối đa là 100 ký tự"
-    //         },
-    //         emailCreate: {
-    //             required: "Vui lòng nhập email đầy đủ",
-    //             minlength: "Độ dài tối thiểu là 5 ký tự",
-    //             maxlength: "Độ dài tối đa là 100 ký tự",
-    //             email: "Định dạng email không đúng"
-    //         },
-    //         phoneCreate: {
-    //             // phone_valid: "Định dạng số điện thoại không đúng",
-    //             required: "Vui lòng nhập số điện thoại đầy đủ"
+    //             required: "Vui lòng nhập tên nhà cung cấp",
+    //
     //         }
     //     },
     //     submitHandler: function () {
-    //         page.commands.formCreate();
-    //         console.log("page.dialogs.elements.formCreate.validate");
-    //     },
-    //     // invalidHandler: () => {
-    //     //     SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_400);
-    //     // }
-    // })
-    //
-    // $('#formCreate').on("click", function () {
-    //     $("#formCreate").trigger("submit");
-    // })
+    //         createSupplier();
+    //     }
+    // });
+
+    $("#formCreate").validate({
+        rules: {
+            nameCreate: {
+                required: true,
+                minlength: 5,
+                maxlength: 50
+            },
+            emailCreate: {
+                required: true,
+                minlength: 5,
+                maxlength: 50,
+                email: true
+            },
+            phoneCreate: {
+                // phone_valid: true,
+                required: true,
+            }
+        },
+        messages: {
+            nameCreate: {
+                required: "Vui lòng nhập tên đầy đủ",
+                minlength: "Độ dài tối thiểu là 5 ký tự",
+                maxlength: "Độ dài tối đa là 100 ký tự"
+            },
+            emailCreate: {
+                required: "Vui lòng nhập email đầy đủ",
+                minlength: "Độ dài tối thiểu là 5 ký tự",
+                maxlength: "Độ dài tối đa là 100 ký tự",
+                email: "Định dạng email không đúng"
+            },
+            phoneCreate: {
+                // phone_valid: "Định dạng số điện thoại không đúng",
+                required: "Vui lòng nhập số điện thoại đầy đủ"
+            }
+        },
+        submitHandler: function () {
+            page.commands.formCreate();
+            console.log("page.dialogs.elements.formCreate.validate");
+        },
+        // invalidHandler: () => {
+        //     SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_400);
+        // }
+    })
+
+    $('#formCreate').on("click", function () {
+        $("#formCreate").trigger("submit");
+    })
 
 </script>
 

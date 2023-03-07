@@ -11,6 +11,7 @@ import vn.sapo.entities.product.ProductStatus;
 import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.entities.supplier.SupplierStatus;
 import vn.sapo.shared.configurations.CodePrefix;
+import vn.sapo.shared.exceptions.DataInputException;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.supplier.dto.*;
 import vn.sapo.supplierGroup.SupplierGroupRepository;
@@ -55,6 +56,9 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierResult create(CreateSupplierParam createParam) {
         Supplier supplier = supplierMapper.toModel(createParam);
 //        supplier.setEmployeeId(1);
+        if (createParam.getFullName() == null) {
+            throw new DataInputException("Tên nhà cung cấp không được để trống");
+        }
         supplier = supplierRepository.save(supplier);
         if (createParam.getSupplierCode() == null)
             supplier.setSupplierCode(CodePrefix.SUPPLIER.generate(supplier.getId()));
@@ -62,9 +66,6 @@ public class SupplierServiceImpl implements SupplierService {
         if (createParam.getGroupId() == null)
             supplier.setGroupId(252);
         return supplierMapper.toDTO(supplier);
-
-
-
 
     }
 
