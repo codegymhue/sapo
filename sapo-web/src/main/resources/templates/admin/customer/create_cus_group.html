@@ -176,47 +176,31 @@
                                 <div class="MuiGrid-item MuiGrid-grid-xs-12">
                                     <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth">
                                         <label class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl
-                                        MuiInputLabel-animated MuiInputLabel-shrink" data-shrink="true" for="pricingType">
+                                        MuiInputLabel-animated MuiInputLabel-shrink" data-shrink="true"
+                                               for="searchDefaultPriceDropdown">
                                             Giá Mặc Định
                                         </label>
-                                        <div class="dropdown jss1784" onclick="CustomerApp.page.commands.showDefaultPriceDropdown()">
-<!--                                        <div class="jss23773">-->
-<!--                                            <select id="dropdownDefaultPrice" class="jss23774">-->
-<!--                                                <option disabled selected>Chọn giá mặc định</option>-->
-<!--                                                <option>-->
-<!--&lt;!&ndash;                                                    <i class="fa-solid fa-magnifying-glass jss23769"></i>&ndash;&gt;-->
-<!--                                                    <label for="inputSearchCat">-->
-<!--                                                        <input id="inputSearchCat"-->
-<!--                                                               class="w-100 form-control border border-0"-->
-<!--                                                               placeholder="Tìm kiếm"/>-->
-<!--                                                    </label>-->
-<!--                                                </option>-->
-<!--                                            </select>-->
-                                            <div class="dropdown-toggle select-btn-pri jss759"
-                                                 type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <span id="pricingType">Chọn giá mặc định</span>
+                                        <div class="dropdown jss1784 jss1769"
+                                             onclick="CustomerApp.page.commands.showDefaultPriceDropdown()"
+                                             id="defaultPriceContainer">
+                                            <p id="test">Chọn giá mặc định</p>
+                                        </div>
+                                        <div id="defaultPriceDropdown" class="dropdown-content">
+                                            <div class="jss23775">
+                                                <div class="d-flex">
+                                                    <i class="fa-solid fa-magnifying-glass jss23769"></i>
+                                                    <input type="text" placeholder="Tìm kiếm"
+                                                           id="searchDefaultPriceDropdown"
+                                                           onkeyup="CustomerApp.page.commands.searchDefaultPriceDropdown()">
+                                                </div>
                                             </div>
-                                            <ul class="dropdown-menu w-100 showAllPricingPolicy">
-                                                <div class="jss23768">
-                                                    <li>
-                                                        <div class="d-flex align-items-center jss761">
-                                                            <i class="fa-solid fa-magnifying-glass jss23769"></i>
-                                                            <label for="inputSearchCat">
-                                                                <input id="inputSearchCat"
-                                                                       class="w-100 form-control border border-0"
-                                                                       placeholder="Tìm kiếm hoặc nhập mới"/>
-                                                            </label>
-                                                        </div>
-                                                    </li>
-                                                    <li class="text-primary dropdown-item jss761">
-                                                            <i class="fa-solid fa-circle-plus"></i>
-                                                            Thêm mới loại sản phẩm
-                                                    </li>
+                                            <div class="jss23775"
+                                                 onclick="CustomerApp.page.commands.showModalCreatePricePolicy()">
+                                                <div class="d-flex">
+                                                    <i class="fa-solid fa-circle-plus jss23769 jss760"></i>
+                                                    <span class="jss760">Thêm mới chính sách giá</span>
                                                 </div>
-                                                <div id="dropdownDefaultPrice">
-
-                                                </div>
-                                            </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -247,7 +231,8 @@
                                 <div class="MuiGrid-item MuiGrid-grid-xs-12">
                                     <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth">
                                         <label class="MuiFormLabel-root MuiInputLabel-root jss755
-                                               MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink" data-shrink="true" for="paymentType">
+                                               MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
+                                               data-shrink="true" for="paymentType">
                                             Hình Thức Thanh Toán
                                         </label>
                                         <div class="dropdown jss1784">
@@ -275,8 +260,9 @@
         </div>
     </form>
 </div>
-</body>
 
+</body>
+<th:block th:replace="/admin/customer/modal_createPricePolicy"/>
 <th:block th:replace="/layout/script"/>
 <script src="/assets/admin/js/customer/customerGroup_App.js"></script>
 
@@ -299,7 +285,22 @@
     CustomerApp.page.elements.description = $("#description");
     CustomerApp.page.elements.discount = $("#discount");
     CustomerApp.page.elements.paymentType = $("#paymentType");
+    CustomerApp.page.elements.defaultPriceDropdown = $("#defaultPriceDropdown");
+    CustomerApp.page.elements.searchDefaultPriceDropdown = $("#searchDefaultPriceDropdown");
 
+    CustomerApp.page.commands.showModalCreatePricePolicy = () => {
+        $("#createPricePolicy").modal("show");
+    }
+
+    CustomerApp.page.commands.selectPriceDefault = () => {
+        $(".selectPriceDefault").on('click', function () {
+            let id = $(this).data('id');
+            let value = $(this).data('value');
+            console.log(value)
+            $("#test").text(value);
+            CustomerApp.page.elements.defaultPriceDropdown[0].classList.toggle("show")
+        })
+    }
 
     // Lấy List Pricing default
     CustomerApp.page.commands.getAllPricingPolicy = (selectedPricing) => {
@@ -317,9 +318,11 @@
                     let isSelected = item === selectedPricing ? "selected" : "";
                     // let str = `<li class="jss761" id="${item.id}" data-id="${item.id}" onclick="CustomerApp.page.commands.updateNamePri(${item.id})" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
 
-                    let str = `<option value=${item.id} class="jss761">${item.title}</option>`;
-                    CustomerApp.page.elements.dropdownDefaultPrice.append(str);
+
+                    let str = `<a class="jss23775 selectPriceDefault" data-id="${item.id}" data-value="${item.title}">${item.title}</a>`;
+                    CustomerApp.page.elements.defaultPriceDropdown.append(str);
                 });
+                CustomerApp.page.commands.selectPriceDefault();
             })
             .fail((jqXHR) => {
                 console.log(jqXHR)
@@ -452,7 +455,27 @@
     })
 
     CustomerApp.page.commands.showDefaultPriceDropdown = () => {
+        CustomerApp.page.elements.defaultPriceDropdown[0].classList.toggle("show")
+    }
 
+    CustomerApp.page.commands.searchDefaultPriceDropdown = () => {
+        let filter, input, div, a, i;
+
+        input = CustomerApp.page.elements.searchDefaultPriceDropdown;
+
+        filter = input.val().toUpperCase();
+
+        div = document.getElementById("defaultPriceDropdown");
+
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            let txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
     }
 </script>
 </html>
