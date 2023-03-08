@@ -56,17 +56,12 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierResult create(CreateSupplierParam createParam) {
         Supplier supplier = supplierMapper.toModel(createParam);
 //        supplier.setEmployeeId(1);
-        if (createParam.getFullName() == null) {
-            throw new DataInputException("Tên nhà cung cấp không được để trống");
-        }
-        if (createParam.getCreateAddressParam() == null) {
-            throw new DataInputException("Địa chỉ không được để trống");
-        }
 
         supplier = supplierRepository.save(supplier);
         if (createParam.getSupplierCode() == null)
             supplier.setSupplierCode(CodePrefix.SUPPLIER.generate(supplier.getId()));
 
+//        supplierGroupRepository.findBySupGroupCodeIn()
         if (createParam.getGroupId() == null)
             supplier.setGroupId(252);
         return supplierMapper.toDTO(supplier);
