@@ -41,7 +41,6 @@ public class SupplierExcelExporter {
         font.setBold(true);
         font.setFontHeight(14);
         style.setFont(font);
-
         createCell(row, 0, "Tên nhà cung cấp ", style);
         createCell(row, 1, "Mã nhà cung cấp", style);
         createCell(row, 2, "Mã nhóm nhà cung cấp", style);
@@ -64,6 +63,7 @@ public class SupplierExcelExporter {
         createCell(row, 19, "Tags", style);
         createCell(row, 20, "Chính sách giá mặc định", style);
         createCell(row, 21, "Kỳ hạn thanh toán mặc định", style);
+
     }
 
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
@@ -100,9 +100,10 @@ public class SupplierExcelExporter {
             SupGroupResult group = supplier.getGroup();
             if (group != null) {
                 String title = group.getSupGroupCode();
-                createCell(row, columnCount++, null ,style);
-            }else if (group == null){
-                createCell(row, columnCount++, "",style);
+                createCell(row, columnCount++, null, style);
+            }
+            if (group == null) {
+                createCell(row, columnCount++, "", style);
 
             }
 

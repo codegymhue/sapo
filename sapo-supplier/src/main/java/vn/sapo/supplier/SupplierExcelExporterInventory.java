@@ -40,27 +40,26 @@ public class SupplierExcelExporterInventory {
         style.setFont(font);
         createCell(row, 0, "Tên nhà cung cấp ", style);
         createCell(row, 1, "Mã nhà cung cấp", style);
-        createCell(row, 2, "Mã nhóm nhà cung cấp", style );
+        createCell(row, 2, "Mã nhóm nhà cung cấp", style);
         createCell(row, 3, "Email", style);
         createCell(row, 4, "Điện thoại", style);
         createCell(row, 5, "Website", style);
         createCell(row, 6, "FAX", style);
         createCell(row, 7, "Mã số thuế", style);
         createCell(row, 8, "Mô tả", style);
-        createCell(row, 9, "Chính sách giá mặc định", style);
-        createCell(row, 10, "Kỳ hạn thanh toán mặc định", style);
-        createCell(row, 11, "Phương thức thanh toán mặc định", style);
-        createCell(row, 12, "Người liên hệ ", style);
-        createCell(row, 13, "SDT người liên hệ ", style);
-        createCell(row, 14, "Email người liên hệ", style);
-        createCell(row, 15, "Nhãn", style);
-        createCell(row, 16, "Địa chỉ 1", style);
-        createCell(row, 17, "Địa chỉ 2", style);
-        createCell(row, 18, "Tỉnh/Thành Phố", style);
-        createCell(row, 19, "Quận/Huyện", style);
-        createCell(row, 20, "Nợ hiện tại", style);
-        createCell(row, 21, "Tags", style);
-
+        createCell(row, 9, "Phương thức thanh toán mặc định", style);
+        createCell(row, 10, "Người liên hệ ", style);
+        createCell(row, 11, "SDT người liên hệ ", style);
+        createCell(row, 12, "Email người liên hệ", style);
+        createCell(row, 13, "Nhãn", style);
+        createCell(row, 14, "Địa chỉ 1", style);
+        createCell(row, 15, "Địa chỉ 2", style);
+        createCell(row, 16, "Tỉnh/Thành Phố", style);
+        createCell(row, 17, "Quận/Huyện", style);
+        createCell(row, 18, "Nợ hiện tại", style);
+        createCell(row, 19, "Tags", style);
+        createCell(row, 20, "Chính sách giá mặc định", style);
+        createCell(row, 21, "Kỳ hạn thanh toán mặc định", style);
     }
 
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
@@ -114,7 +113,6 @@ public class SupplierExcelExporterInventory {
                 createCell(row, columnCount++, "tags", style);
                 createCell(row, columnCount++, "chính sách giá mặc định", style);
                 createCell(row, columnCount++, "kỳ hạn thanh toán mặc định", style);
-
             }
         }
     }
