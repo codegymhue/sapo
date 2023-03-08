@@ -1,7 +1,5 @@
 "use strict";
 
-'code', 'supplier_name', 'supplier_group', 'email', 'phone_number', 'status', 'debt', 'fax',
-    'tax_number', 'website', 'assignee_name', 'created_on', 'modified_on'
 let configDisplays = [
     {
         name: "supplier_name",
@@ -75,6 +73,17 @@ class SupplierApp {
         }
     }
 
+    static getTh(index, configDisplays) {
+        for (let i = 0; i < configDisplays.length; i++) {
+            if (index == i && configDisplays[i].status == true) {
+
+                let tdItem = `<th class="align-middle" nameth="code" scope="col">${SupplierApp.getThValue(configDisplays[i].name) || ""}</th>`;
+                console.log(tdItem)
+                return tdItem;
+            }
+        }
+    }
+
     static getTDValue(key, item) {
         switch (key) {
             case "code":
@@ -89,18 +98,47 @@ class SupplierApp {
                 return item.phone;
             case "status":
                 return item.status === "AVAILABLE" ? "Đang giao dịch" : "Ngừng giao dịch";
-            case "fax":
-                return item.fax;
+            case "assignee_name":
+                return item.employee == null ? "" : item.employee.fullName;
             case "tax_number":
                 return item.taxCode;
             case "website":
                 return item.website;
-            case "assignee_name":
-                return item.code;
             case "created_on":
                 return item.createdAt === null ? "" : new Date(item.createdAt).toLocaleDateString('en-GB');
             case "modified_on":
                 return item.updatedAt === null ? "" : new Date(item.updatedAt).toLocaleDateString('en-GB');
+            case "fax":
+                return item.fax;
+        }
+    }
+
+    static getThValue(key) {
+        switch (key) {
+            case "code":
+                return "Mã nhà cung cấp";
+            case "supplier_name":
+                return "Tên nhà cung cấp";
+            case "supplier_group":
+                return "Nhóm nhà cung cấp";
+            case "email":
+                return "Email";
+            case "phone_number":
+                return "Số điện thoại";
+            case "status":
+                return "Trạng thái";
+            case "assignee_name":
+                return "Nhân viên phụ trách";
+            case "tax_number":
+                return "Mã số thuế";
+            case "website":
+                return "Website";
+            case "created_on":
+                return "Ngày tạo";
+            case "modified_on":
+                return "Lần cập nhật cuối";
+            case "fax":
+                return "Số fax";
         }
     }
 
@@ -118,20 +156,32 @@ class SupplierApp {
                 ${SupplierApp.getTD(2, item, configDisplays)}
                 ${SupplierApp.getTD(3, item, configDisplays)}
                 ${SupplierApp.getTD(4, item, configDisplays)}
-                  <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.group == null ? "" : item.group.title}</td>
-                <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.email || ""}</td>
-                <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.phone || ""}</td>
-                 <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">
-                    <span id="showStatus" class="${showStatus}">${item.status === "AVAILABLE" ? "Đang giao dịch" : "Ngừng giao dịch"}</span> 
-                </td>   
-<!--                <td class="align-middle text-end ">${new Intl.NumberFormat('de-DE').format(item.available)}</td>-->
-              <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.employee == null ? "" : item.employee.fullName}</td>
-              <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.taxCode || ""}</td>
-               <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.website || ""}</td>
-                <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.createdAt === null ? "" : new Date(item.createdAt).toLocaleDateString('en-GB')}</td>
-                <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.updatedAt === null ? "" : new Date(item.updatedAt).toLocaleDateString('en-GB')}</td>
-                 <td bind-event-click="window.location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">${item.fax || ""}</td>
+                 ${SupplierApp.getTD(5, item, configDisplays)}
+                ${SupplierApp.getTD(6, item, configDisplays)}
+                ${SupplierApp.getTD(7, item, configDisplays)}
+                ${SupplierApp.getTD(8, item, configDisplays)}
+                ${SupplierApp.getTD(9, item, configDisplays)}
+                 ${SupplierApp.getTD(10, item, configDisplays)}
+                ${SupplierApp.getTD(11, item, configDisplays)}
             </tr>
+        `;
+        return str;
+    }
+
+    static renderThSupplier(configDisplay) {
+        let str = `
+                ${SupplierApp.getTh(0, configDisplays)}
+                 ${SupplierApp.getTh(1, configDisplays)}
+                ${SupplierApp.getTh(2, configDisplays)}
+                ${SupplierApp.getTh(3, configDisplays)}
+                ${SupplierApp.getTh(4, configDisplays)}
+                 ${SupplierApp.getTh(5, configDisplays)}
+                ${SupplierApp.getTh(6, configDisplays)}
+                ${SupplierApp.getTh(7, configDisplays)}
+                ${SupplierApp.getTh(8, configDisplays)}
+                ${SupplierApp.getTh(9, configDisplays)}
+                 ${SupplierApp.getTh(10, configDisplays)}
+                ${SupplierApp.getTh(11, configDisplays)}
         `;
         return str;
     }
