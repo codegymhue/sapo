@@ -52,4 +52,6 @@ public class SupplierResult {
 
     private String website;
 
+    private List<String> tags;
+
 }

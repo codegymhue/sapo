@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.customers.AddressService;
 import vn.sapo.customers.dto.CreateAddressParam;
-import vn.sapo.payment.method.PaymentMethodService;
+import vn.sapo.payment_method.PaymentMethodService;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.supplier.SupplierExcelService;
 import vn.sapo.supplier.dto.*;
@@ -18,7 +18,6 @@ import vn.sapo.supplier.excel.ImportExcelSupplierParam;
 import vn.sapo.supplier.excel.ResponseMessage;
 
 import vn.sapo.supplier.SupplierService;
-import vn.sapo.supplierGroup.SupplierGroupService;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -90,15 +89,6 @@ public class SupplierAPI {
         String message = "";
         List<ImportExcelSupplierParam> dtoList = supplierExcelService.extractExcel(file);
         supplierExcelService.fillFieldDto(dtoList);
-        dtoList.forEach(dto -> {
-            try {
-                String paymentMethodId = paymentMethodService.findByTitle(dto.getPaymentMethodTitle()).getId();
-                dto.setPaymentMethodId(paymentMethodId);
-                String supGroupCode = supplierService.findById(dto.getGroupId()).getSupplierCode();
-                dto.setSupGroupCode(supGroupCode);
-            } catch (Exception ignored) {
-            }
-        });
         supplierExcelService.importSupplier(dtoList);
         message = "Uploaded the file successfully: " + file.getOriginalFilename();
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import vn.sapo.entities.BaseEntity;
 
@@ -29,6 +30,9 @@ import java.util.UUID;
         typeClass = JsonType.class,
         defaultForType = PolicyPriceConfig.class
 )
+@TypeDef(
+        name = "json",
+        typeClass = JsonType.class)
 public class Configuration extends BaseEntity {
     @Id
     @Column(name = "app_key")

@@ -10,6 +10,7 @@ import java.time.Instant;
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
     private static final long serialVersionUID = -6305026811763181957L;
+    public static final String DATETIME_DEFAULT_CURRENT_TIMESTAMP = "DATETIME DEFAULT CURRENT_TIMESTAMP";
     @Setter(AccessLevel.NONE)
     @Column(name = "created_at",
             nullable = false,

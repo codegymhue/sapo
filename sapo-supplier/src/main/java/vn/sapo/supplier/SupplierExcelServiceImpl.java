@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.customers.AddressService;
 import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.entities.supplier.Supplier;
-import vn.sapo.payment.method.PaymentMethodService;
+import vn.sapo.payment_method.PaymentMethodService;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.supplier.excel.ImportExcelSupplierParam;
 import vn.sapo.supplierGroup.SupplierGroupService;
@@ -171,20 +171,20 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
                 case DESCIPTION:
                     param.setDescription(cell.getStringCellValue());
                     break;
-                case 9:
-//                          chính sách giá mặc định
-                    break;
-                case 10:
-//                      Kỳ hạn thanh toán mặc định
-                    break;
                 case PAYMENTMETHODTITLE:
                     param.setPaymentMethodTitle(cell.getStringCellValue());
                     break;
-                case 20:
+                case 18:
 //                            nợ hiện tại
                     break;
-                case 21:
+                case 19:
 //                              tags
+                    break;
+                case 20:
+//                    Chinh sach gia mac dinh
+                    break;
+                case 21:
+//                      Kỳ hạn thanh toán mặc định
                     break;
                 default:
                     break;

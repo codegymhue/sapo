@@ -16,5 +16,4 @@ public class ImportExcelSupplierParam extends CreateSupplierParam {
     private String paymentMethodTitle;
     List<CreateAddressParam> createAddressParams = new ArrayList<>();
     private String supGroupCode;
-    List<CreateAddressParam> createAddressParams1 = new ArrayList<>();
 }

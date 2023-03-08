@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import vn.sapo.employee.EmployeeService;
-import vn.sapo.payment.method.PaymentMethodService;
+import vn.sapo.payment_method.PaymentMethodService;
 import vn.sapo.supplier.SupplierExcelExporter;
 import vn.sapo.supplier.SupplierExcelExporterInventory;
 import vn.sapo.supplier.SupplierService;
