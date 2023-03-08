@@ -33,11 +33,11 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     public CustomerGroupResult create(CreateCusGroupParam createCusGroupParam) {
         String cusGrpCode = createCusGroupParam.getCusGrpCode().trim();
 
-        if (createCusGroupParam.getTitle().trim().length() == 0) {
+        if (createCusGroupParam.getTitle().trim().isEmpty()) {
             throw new IllegalArgumentException("Tên nhóm khách hàng không được để trống!");
         }
 
-        if (cusGrpCode.trim().length() == 0) {
+        if (cusGrpCode.trim().isEmpty()) {
             String maxSystemCustomerGroupCode = getMaxSystemCustomerGroupCode();
 
             createCusGroupParam.setCusGrpCode(maxSystemCustomerGroupCode);

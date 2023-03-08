@@ -26,8 +26,8 @@ public class ProductPricingId implements Serializable {
     private PricingPolicy pricingPolicy;
 
     public ProductPricingId(Integer productId, Integer pricingPolicyId) {
-        product = new Product(productId);
-        pricingPolicy = new PricingPolicy(pricingPolicyId);
+        this.product = new Product(productId);
+        this.pricingPolicy = new PricingPolicy(pricingPolicyId);
     }
 
     @Override

@@ -56,14 +56,14 @@ public class CustomerGroup extends BaseEntity {
         this.id = id;
     }
 
-    public CustomerGroup setPricingPolicyId(Integer pricingPolicyId) {
-        this.pricingPolicy = new PricingPolicy(this.pricingPolicyId = pricingPolicyId);
-        return this;
-    }
-
-    public CustomerGroup setPaymentMethodId(String paymentMethodId) {
-        this.paymentMethod = new PaymentMethod(this.paymentMethodId = paymentMethodId);
-        return this;
-    }
+//    public CustomerGroup setPricingPolicyId(Integer pricingPolicyId) {
+//        this.pricingPolicy = new PricingPolicy(this.pricingPolicyId = pricingPolicyId);
+//        return this;
+//    }
+//
+//    public CustomerGroup setPaymentMethodId(String paymentMethodId) {
+//        this.paymentMethod = new PaymentMethod(this.paymentMethodId = paymentMethodId);
+//        return this;
+//    }
 
 }

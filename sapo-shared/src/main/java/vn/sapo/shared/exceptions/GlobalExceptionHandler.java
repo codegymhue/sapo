@@ -76,4 +76,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(DataInputValidateException.class)
+    public ResponseEntity<?> dataFieldsException(DataInputValidateException ex) {
+        Map<String, Map> body = new HashMap<>();
+
+        body.put("message", ex.getErrors());
+
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
 }
