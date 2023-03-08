@@ -52,30 +52,27 @@
         .ui-sortable-handle.dragging {
             opacity: 1;
         }
-/*loading*/
-        /* Create a spinner animation */
-        @keyframes spinner {
-            to {transform: rotate(360deg);}
+
+        /*loading*/
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+            margin: 0 auto;
         }
 
-        /* Add the spinner to the button */
-        #myButton:active::after {
-            content: "";
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            margin-left: 10px;
-            vertical-align: middle;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-top-color: #fff;
-            border-radius: 50%;
-            animation: spinner 0.6s linear infinite;
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
-        /* Style the button when it's in the loading state */
-        #myButton.loading {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
+
 
     </style>
 </head>
@@ -420,19 +417,19 @@
                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả">
                                         </label>
                                     </th>
-                                    <th class="align-middle" nameth="code" scope="col">Mã nhà cung cấp</th>
-                                    <th class="align-middle" nameth="supplier_name" scope="col">Tên nhà cung cấp</th>
-                                    <th class="align-middle" nameth="supplier_group" scope="col">Nhóm nhà cung cấp</th>
-                                    <th class="align-middle" nameth="email" scope="col">Email</th>
-                                    <th class="align-middle" nameth="phone_number" scope="col">Số điện thoại</th>
-                                    <th class="align-middle" nameth="status" scope="col">Trạng thái</th>
-                                    <th class="align-middle" nameth="assignee_name" scope="col">Nhân viên phụ trách</th>
-                                    <th class="align-middle" nameth="tax_number" scope="col">Mã số thuế</th>
-                                    <th class="align-middle" nameth="website" scope="col">Website</th>
-                                    <th class="align-middle" nameth="created_on" scope="col">Ngày tạo</th>
-                                    <th class="align-middle" nameth="modified_on" scope="col">Lần cập nhật cuối</th>
-                                    <!--                                    <th class="align-middle" scope="col">Nợ hiện tại</th>-->
-                                    <th class="align-middle" nameth="fax" scope="col">Số fax</th>
+<!--                                    <th class="align-middle" nameth="code" scope="col">Mã nhà cung cấp</th>-->
+<!--                                    <th class="align-middle" nameth="supplier_name" scope="col">Tên nhà cung cấp</th>-->
+<!--                                    <th class="align-middle" nameth="supplier_group" scope="col">Nhóm nhà cung cấp</th>-->
+<!--                                    <th class="align-middle" nameth="email" scope="col">Email</th>-->
+<!--                                    <th class="align-middle" nameth="phone_number" scope="col">Số điện thoại</th>-->
+<!--                                    <th class="align-middle" nameth="status" scope="col">Trạng thái</th>-->
+<!--                                    <th class="align-middle" nameth="assignee_name" scope="col">Nhân viên phụ trách</th>-->
+<!--                                    <th class="align-middle" nameth="tax_number" scope="col">Mã số thuế</th>-->
+<!--                                    <th class="align-middle" nameth="website" scope="col">Website</th>-->
+<!--                                    <th class="align-middle" nameth="created_on" scope="col">Ngày tạo</th>-->
+<!--                                    <th class="align-middle" nameth="modified_on" scope="col">Lần cập nhật cuối</th>-->
+<!--                                    &lt;!&ndash;                                    <th class="align-middle" scope="col">Nợ hiện tại</th>&ndash;&gt;-->
+<!--                                    <th class="align-middle" nameth="fax" scope="col">Số fax</th>-->
                                 </tr>
                                 <tr class="hide" id="selectActionThead" style="border: snow">
                                     <td class="align-middle" style="width: 20px">
@@ -502,12 +499,11 @@
 
                                     <div class="" style="float: right;padding: 0 0 0 20px;">
                                         <div class="dataTables_paginate paging_bootstrap">
-                                            <ul class="pagination" style="display: none">
-                                                <li><a class="t-link"  id="fistPage"><span
+                                            <ul class="pagination">
+                                                <li><a class="t-link" id="fistPage"><span
                                                         class="t-icon t-arrow-first">← Trang đầu</span></a></li>
-                                                <li><a class="t-link" id="previousPage" style="display: none"
+                                                <li><a class="t-link" id="previousPage"
                                                 ></a></li>
-
                                                 <li><a class="t-link" id="pageNo">1</a>
                                                 </li>
                                                 <li><a class="t-link" id="nextPage"
@@ -578,9 +574,10 @@
         </div>
     </div>
 </div>
-
+<div class="loader" style="display: none"></div>
 <th:block th:replace="/layout/supplier/supplier_list_modal.html"/>
-<script src="/assets/admin/js/suppliers/supplier_app.js"></script>
+<!--<script src="/assets/admin/js/suppliers/supplier_app.js"></script>-->
+<script src="/assets/admin/js/suppliers/supplier_app22.js"></script>
 <th:block th:replace="/layout/script :: script"/>
 <th:block th:replace="/layout/supplier/script_export_import.html"/>
 
@@ -809,9 +806,11 @@
                     $(".container-fluid").show();
                     data.suppliers.map(item => {
                         if (item.status == "AVAILABLE") {
-                            page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available'))
-                            // page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available', configDisplays))
+                            // page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available'))
+                            page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available', configDisplays));
+                            page.elements.theadList.append(SupplierApp.renderThSupplier(configDisplays))
                         } else {
+                            page.elements.theadList.append(SupplierApp.renderThSupplier(configDisplays))
                             page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'unavailable'))
                         }
                     });
@@ -820,23 +819,27 @@
                     page.elements.totalPage.append(
                         `<span class="me-2">Tổng nhà cung cấp ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
                     )
+                    if (totalPage === 1) {
+                        $(".pagination").hide();
+                    }else {
+                        $(".pagination").show();
+                    }
                 } else {
                     $(".ui-type-container").show();
                     $("#sapo-table_wrapper").hide();
                     $(".container-fluid").hide();
                 }
-                // if (data.totalPage !== 1) {
-                //     console.log(data.totalPage)
-                //     $(".pagination").css("display", "block");
-                // }
+
                 page.elements.pageNo.parent().addClass("active");
                 if (Number(page.elements.pageNo.text()) === 1) {
                     page.dialogs.elements.previousPage.parent().css("display", "none");
                     page.dialogs.elements.fistPage.parent().addClass("disable");
+                }else {
+                    page.dialogs.elements.previousPage.parent().css("display", "block");
                 }
                 if (Number(page.elements.pageNo.text()) === Number(totalPage)) {
                     page.dialogs.elements.lastPage.parent().addClass("disable");
-                    page.dialogs.elements.nextPage.parent().parent().css("display", "none");
+                    page.dialogs.elements.nextPage.parent().css("display", "none");
                 } else
                     page.dialogs.elements.lastPage.parent().removeClass("disable");
 
@@ -874,7 +877,6 @@
             page.dialogs.elements.nextPage.text(pageNo)
             page.commands.getAllSupplier();
         }
-        // page.elements.pageNo.text(Number(pageNo) + 1);
         if (Number(page.elements.pageNo.text()) === 1) {
             page.dialogs.elements.previousPage.parent().css("display", "none")
             page.dialogs.elements.fistPage.parent().addClass("disable")
@@ -896,12 +898,13 @@
         page.elements.pageNo.text(totalPage);
         page.dialogs.elements.previousPage.parent().css("display", "block")
         page.dialogs.elements.previousPage.text(totalPage - 1);
-        debugger
         page.commands.getAllSupplier();
     })
 
     page.elements.pageSize.on("change", () => {
         page.elements.pageNo.text(1);
+        page.dialogs.elements.nextPage.parent().css("display", "block")
+        page.dialogs.elements.nextPage.text(2)
         page.commands.getAllSupplier();
     })
 
@@ -1069,6 +1072,7 @@
 
 
     page.elements.updateBulkaction.on("click", () => {
+
         let empId = $("#accountIdBulk").val();
         if (empId == 0)
             empId = null
@@ -1080,6 +1084,11 @@
         $(".ui-dialog-title").text("Cập nhật thông tin nhà cung cấp")
         let countOrderComplete = 0;
         let countOrderFail = 0;
+
+        $("#btn-confirm").attr("disabled");
+        let loading = document.getElementsByClassName("loader");
+        $(loading).css("display"," block")
+        // $("#btn-confirm").addClass('loader')
         arrayIdSupplier.forEach(async id => {
             try {
                 const result = await updateBulkaction(id, empId, paymentId);
@@ -1103,6 +1112,11 @@
                 $("#listOrderFail").append(str);
                 console.log(e, " err")
             }
+            if((countOrderComplete+ countOrderFail)===arrayIdSupplier.length){
+                $("#btn-confirm").attr("disabled" , false);
+                // $("#btn-confirm").removeClass('loader')
+                $(loading).css("display"," none")
+            }
         })
     })
 
@@ -1111,9 +1125,7 @@
         updateSupplierParam.id = supId;
         updateSupplierParam.employeeId = empId;
         updateSupplierParam.paymentMethodId = paymentId;
-        console.log(empId, " empId in");
-        console.log(paymentId, " paymentId in");
-        console.log(supId, " supId in");
+
         return new Promise(function (resolve, reject) {
             $.ajax({
                 headers: {
@@ -1124,10 +1136,9 @@
                 url: origin + "/api/suppliers/updateBulk",
                 data: JSON.stringify(updateSupplierParam),
                 beforeSend: function () {
-                    $(".btn--reload-page").addClass("loading")
                 },
                 success: function (data) {
-                    $(".btn--reload-page").removeClass("loading")
+                        // All requests have completed, hide loading
                     resolve(data) // Resolve promise and when success
                 },
                 error: function (err) {
@@ -1387,7 +1398,7 @@
         supplierFilter.groupIds.splice(supplierFilter.groupIds.indexOf(variantId), 1)
         $("span[" + "id" + "*=" + "tag-variant-" + variantId + "]").remove()
         if ($(inputId).is(":checked"))
-            $(inputId).prop("checked",false)
+            $(inputId).prop("checked", false)
     }
 
 
@@ -1500,53 +1511,6 @@
                 return closest
             }
         }, {offset: Number.NEGATIVE_INFINITY}).element
-    }
-
-    function swapColumnsByName(tableId, columnName1, columnName2) {
-        // Get the table element
-        const table = document.getElementById(tableId);
-
-        // Get the header row and find the column indices
-        const headerRow = table.rows[0];
-        let column1 = -1;
-        let column2 = -1;
-        for (let i = 0; i < headerRow.cells.length; i++) {
-            if (headerRow.cells[i].getAttribute("nameth") === columnName1) {
-                column1 = i;
-            }
-            if (headerRow.cells[i].getAttribute("nameth") === columnName2) {
-                column2 = i;
-            }
-        }
-
-        // Swap the columns if both were found
-        if (column1 !== -1 && column2 !== -1) {
-            // Swap the column names in the header row
-            const temp = headerRow.cells[column1].innerHTML;
-            headerRow.cells[column1].innerHTML = headerRow.cells[column2].innerHTML;
-            headerRow.cells[column2].innerHTML = temp;
-
-            // Swap the data in the table cells for each row
-            for (let i = 1; i < table.rows.length; i++) {
-                const row = table.rows[i];
-                const temp = row.cells[column1].innerHTML;
-                row.cells[column1].innerHTML = row.cells[column2].innerHTML;
-                row.cells[column2].innerHTML = temp;
-            }
-        }
-    }
-
-    function fields(tableId) {
-        // Get the table element
-        const table = document.getElementById(tableId);
-
-        // Get the header row and find the column indices
-        const headerRow = table.rows[0];
-        let arrayFieldsNow = []
-        for (let i = 0; i < headerRow.cells.length; i++) {
-            arrayFieldsNow.push(headerRow.cells[i].getAttribute("nameth"))
-        }
-        return arrayFieldsNow;
     }
 
     page.commands.loadData = () => {
