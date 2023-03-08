@@ -13,7 +13,9 @@ import vn.sapo.entities.Employee;
 import vn.sapo.entities.PaymentMethod;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 
@@ -24,7 +26,10 @@ import java.util.Set;
 @Entity
 @Table(name = "supplier")
 @TypeDef(
-        name = "json",
+        name = "extension_attributes",
+        typeClass = JsonType.class)
+@TypeDef(
+        name = "tags",
         typeClass = JsonType.class)
 public class Supplier extends BaseEntity {
     @Id
@@ -72,9 +77,14 @@ public class Supplier extends BaseEntity {
     @Column(name = "supplier_group_id", insertable = false, updatable = false)
     private Integer groupId;
 
-    @Type(type = "json")
+    @Type(type = "extension_attributes")
     @Column(name = "extension_attributes", nullable = false, columnDefinition = "JSON")
     private HashMap<String, String> attributes = new HashMap<>();
+
+    @Type(type = "tags")
+    @Column(name = "tags", nullable = false, columnDefinition = "JSON")
+    private List<String> tags = new ArrayList<>();
+
     @OneToMany(targetEntity = Address.class, mappedBy = "supplier")
     private Set<Address> addresses;
 

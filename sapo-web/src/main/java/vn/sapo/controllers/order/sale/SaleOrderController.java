@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import vn.sapo.order.sale.SaleOrderService;
-import vn.sapo.payment.sale.PaymentSaleOrderService;
+import vn.sapo.voucher.receipt.ReceiptVoucherService;
 
 @Controller
 @RequestMapping("/admin")
@@ -17,7 +17,7 @@ public class SaleOrderController {
     private SaleOrderService orderService;
 
     @Autowired
-    private PaymentSaleOrderService paymentSaleOrderService;
+    private ReceiptVoucherService paymentSaleOrderService;
 
     @GetMapping("/orders")
     public ModelAndView showListOrderPage() {

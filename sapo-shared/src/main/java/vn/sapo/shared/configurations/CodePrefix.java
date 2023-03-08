@@ -10,7 +10,11 @@ public enum CodePrefix {
     CUSTOMER("CUZN"),
     SALE_ORDER("SON"),
     CUSTOMER_GROUP("CTN"),
+    RECEIPT_VOUCHER("RVGN"),
+    PAYMENT_VOUCHER("PVGN"),
+
     ANONYMOUS("ANONYMOUS");
+
 
     private final String value;
 

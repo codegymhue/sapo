@@ -20,7 +20,7 @@ public enum TaxType {
     }
 
     @JsonCreator
-    public static TaxType parseTypeTax(String value) {
+    public static TaxType parseTaxType(String value) {
         TaxType[] values = values();
         for (TaxType typeTax : values) {
             if (typeTax.value.equals(value)) return typeTax;

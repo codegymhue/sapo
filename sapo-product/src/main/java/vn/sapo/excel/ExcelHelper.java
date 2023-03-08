@@ -109,10 +109,10 @@ public class ExcelHelper {
                             taxOut.setTaxId((int) currentCell.getNumericCellValue());
                             break;
                         case 15:
-                            taxIn.setTaxType(TaxType.parseTypeTax(currentCell.getStringCellValue()));
+                            taxIn.setTaxType(TaxType.parseTaxType(currentCell.getStringCellValue()));
                             break;
                         case 16:
-                            taxOut.setTaxType(TaxType.parseTypeTax(currentCell.getStringCellValue()));
+                            taxOut.setTaxType(TaxType.parseTaxType(currentCell.getStringCellValue()));
                             break;
                         case 17:
                             product.setDescription(currentCell.getStringCellValue());

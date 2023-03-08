@@ -16,10 +16,10 @@ import vn.sapo.customer.dto.*;
 import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.excel.ExcelHelper;
 import vn.sapo.excel.ExcelService;
-import vn.sapo.supplier.excel.ResponseMessage;
 import vn.sapo.order.sale.SaleOrderService;
 import vn.sapo.order.sale.item.OrderItemService;
-import vn.sapo.payment.sale.PaymentSaleOrderService;
+import vn.sapo.voucher.receipt.ReceiptVoucherService;
+import vn.sapo.supplier.excel.ResponseMessage;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -36,7 +36,7 @@ public class CustomerAPI {
     @Autowired
     OrderItemService orderItemService;
     @Autowired
-    PaymentSaleOrderService paymentSaleOrderService;
+    ReceiptVoucherService receiptVoucherService;
     @Autowired
     SaleOrderService saleOrderService;
     @Autowired
@@ -169,7 +169,7 @@ public class CustomerAPI {
     }
 
     public BigDecimal getPaidTotalByCustomerId(Integer customerId) {
-        BigDecimal paidTotal = paymentSaleOrderService.getPaidTotalByCustomerId(customerId);
+        BigDecimal paidTotal = new BigDecimal(0);//= paymentSaleOrderService.getPaidTotalByCustomerId(customerId);
         if (paidTotal == null)
             paidTotal = BigDecimal.valueOf(0);
         return paidTotal;
