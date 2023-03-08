@@ -2,7 +2,6 @@ package vn.sapo.payment.sale.dto;
 
 import lombok.*;
 import lombok.experimental.Accessors;
-import vn.sapo.order.sale.dto.SaleOrderResult;
 
 import java.math.BigDecimal;
 import java.time.Instant;

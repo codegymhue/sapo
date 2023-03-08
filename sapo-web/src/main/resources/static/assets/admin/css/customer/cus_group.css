@@ -85,13 +85,6 @@
     margin: -8px;
 }
 
-.MuiGrid-container {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    box-sizing: border-box;
-}
-
 .MuiGrid-spacing-xs-2 > .MuiGrid-item {
     padding: 8px;
 }
@@ -565,8 +558,7 @@
 }
 
 .jss23775 {
-    color: black;
-    padding: 12px 16px;
+    padding: 12px 8px 12px 16px;
     text-decoration: none;
     display: block;
 }
@@ -632,12 +624,26 @@ form .error{
     color: red;
 }
 
-/*label-select.error{*/
-/*    margin-left: 12px;*/
-/*    font-size: 14px;*/
-/*}*/
-
 div.error{
     margin-left: 12px;
     font-size: 14px;
+    margin-top: 5px;
+}
+
+.jss23783{
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    max-height: 220px;
+}
+
+.jss23784{
+    border: none !important;
+    width: 99%;
+    align-self: center;
+    height: 90%;
+}
+
+div.jss23596:hover{
+    cursor: pointer;
+    background: #f2f9ff;
 }

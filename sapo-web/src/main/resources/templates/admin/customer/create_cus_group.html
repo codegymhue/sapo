@@ -187,21 +187,28 @@
                                             <p id="selectedPriceDefault">Chọn giá mặc định</p>
                                         </div>
                                         <div id="defaultPriceDropdown" class="dropdown-content">
-                                            <div class="jss23775">
-                                                <div class="d-flex">
-                                                    <i class="fa-solid fa-magnifying-glass jss23769"></i>
-                                                    <input type="text" placeholder="Tìm kiếm"
-                                                           id="searchDefaultPriceDropdown"
-                                                           onkeyup="CustomerApp.page.commands.searchDefaultPriceDropdown()">
+                                            <div>
+                                                <div class="jss23596">
+                                                    <div class="jss23775 jss23769">
+                                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                                    </div>
+                                                    <div class="MuiGrid-container">
+                                                        <input type="text" placeholder="Tìm kiếm" class="jss23784"
+                                                               id="searchDefaultPriceDropdown"
+                                                               onkeyup="CustomerApp.page.commands.searchDefaultPriceDropdown()">
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="jss23775"
+                                            <div
                                                  onclick="CustomerApp.page.commands.showModalCreatePricePolicy()">
-                                                <div class="d-flex">
-                                                    <i class="fa-solid fa-circle-plus jss23769 jss760"></i>
-                                                    <span class="jss760">Thêm mới chính sách giá</span>
+                                                <div class="jss23596">
+                                                    <div class="jss23775 jss23769 jss760">
+                                                        <i class="fa-solid fa-circle-plus"></i>
+                                                    </div>
+                                                    <span class="jss760 jss754">Thêm mới chính sách giá</span>
                                                 </div>
                                             </div>
+                                            <div id="listPricePolicy" class=" jss23783"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -302,7 +309,12 @@
     CustomerApp.page.elements.titlePricePolicyCre = $("#titlePricePolicyCre");
     CustomerApp.page.elements.pricingPolicyCodeCre = $("#pricingPolicyCodeCre");
     CustomerApp.page.elements.selectedPriceDefault = $("#selectedPriceDefault");
+    CustomerApp.page.elements.listPricePolicy = $("#listPricePolicy");
+
     CustomerApp.page.elements.error = $(".error");
+    CustomerApp.page.elements.titleError = $(".title-error.error");
+    CustomerApp.page.elements.pricingPolicyCodeError = $(".pricingPolicyCode-error.error");
+    CustomerApp.page.elements.pricingPolicyTypeError = $(".pricingPolicyType-error.error");
 
 
     CustomerApp.page.commands.showModalCreatePricePolicy = () => {
@@ -330,13 +342,12 @@
             url: origin + "/api/pricingPolicys"
         })
             .done((data) => {
-                pricingPolicy = data;
-                pricingPolicy.forEach(item => {
+                data.forEach(item => {
                     let str = `<a class="jss23775 selectPriceDefault" data-id="${item.id}" data-value="${item.title}">
                                     ${item.title}
                                 </a>`;
 
-                    CustomerApp.page.elements.defaultPriceDropdown.append(str);
+                    CustomerApp.page.elements.listPricePolicy.prepend(str);
                 });
                 CustomerApp.page.commands.selectPriceDefault();
             })
@@ -346,7 +357,7 @@
     }
 
     // Lấy List Payment Method
-    CustomerApp.page.commands.getAllPaymentMethod = (selectedPayment) => {
+    CustomerApp.page.commands.getAllPaymentMethod = () => {
         return $.ajax({
             headers: {
                 "accept": "application/json",
@@ -392,11 +403,20 @@
             data: JSON.stringify(pricingPolicy)
         }).done((data) => {
             console.log(data)
+            CustomerApp.IziToast.showSuccessAlert("Thêm mới chính sách giá thành công")
         })
             .fail((jqXHR) => {
-                console.log(jqXHR)
-                CustomerApp.page.elements.error.text(jqXHR.responseJSON.message)
-                CustomerApp.page.elements.error.addClass('show').removeClass('hidden');
+                let errors = jqXHR.responseJSON.message;
+
+                if (errors.title) {
+                    CustomerApp.page.commands.showErrorValidateFromBE(CustomerApp.page.elements.titleError, errors.title)
+                }
+                if (errors.pricingPolicyCode) {
+                    CustomerApp.page.commands.showErrorValidateFromBE(CustomerApp.page.elements.pricingPolicyCodeError, errors.pricingPolicyCode)
+                }
+                if (errors.pricingPolicyType) {
+                    CustomerApp.page.commands.showErrorValidateFromBE(CustomerApp.page.elements.pricingPolicyTypeError, errors.pricingPolicyType)
+                }
             })
     }
 
@@ -431,6 +451,8 @@
 
     CustomerApp.page.elements.btnCloseCreatePricePolicyModal.click(() => {
         CustomerApp.page.elements.frmCreatePricePolicy.validate().resetForm();
+        CustomerApp.page.elements.frmCreatePricePolicy[0].reset();
+        CustomerApp.page.elements.error.removeClass('show').addClass('hidden')
     })
 
     CustomerApp.page.elements.btnCreatePricePolicy.on("click", () => {
@@ -466,6 +488,17 @@
             },
             policyStyle: {
                 required: "Vui lòng chọn loại chính sách giá"
+            }
+        },
+        showErrors: (error) => {
+            if (error.titlePricePolicyCre) {
+                CustomerApp.page.commands.showErrorValidateFromBE(CustomerApp.page.elements.titleError, error.titlePricePolicyCre);
+            }
+            if (error.pricingPolicyCodeCre) {
+                CustomerApp.page.commands.showErrorValidateFromBE(CustomerApp.page.elements.pricingPolicyCodeError, error.pricingPolicyCodeCre);
+            }
+            if (error.policyStyle) {
+                CustomerApp.page.commands.showErrorValidateFromBE(CustomerApp.page.elements.pricingPolicyTypeError, error.policyStyle);
             }
         },
         submitHandler: () => {
@@ -507,7 +540,6 @@
                 CustomerApp.page.elements.error.removeClass("hidden").addClass("show");
             } else {
                 CustomerApp.page.elements.error.removeClass("show").addClass("hidden").empty();
-                // CustomerApp.page.elements.inputError.removeClass("error");
             }
             this.defaultShowErrors();
         },
@@ -526,6 +558,12 @@
 
     CustomerApp.page.commands.showDefaultPriceDropdown = () => {
         CustomerApp.page.elements.defaultPriceDropdown[0].classList.toggle("show")
+    }
+
+    CustomerApp.page.commands.showErrorValidateFromBE = (element, error) => {
+        element.addClass('show').removeClass('hidden');
+        element.text(error);
+        CustomerApp.IziToast.showErrorAlert(error);
     }
 
     CustomerApp.page.commands.searchDefaultPriceDropdown = () => {
