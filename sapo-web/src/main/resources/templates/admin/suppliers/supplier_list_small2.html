@@ -806,11 +806,11 @@
                     $(".container-fluid").show();
                     data.suppliers.map(item => {
                         if (item.status == "AVAILABLE") {
-                            // page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available'))
-                            page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available', configDisplays));
-                            page.elements.theadList.append(SupplierApp.renderThSupplier(configDisplays))
+                            page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available'))
+                            // page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available', configDisplays));
+                            // page.elements.theadList.append(SupplierApp.renderThSupplier(configDisplays))
                         } else {
-                            page.elements.theadList.append(SupplierApp.renderThSupplier(configDisplays))
+                            // page.elements.theadList.append(SupplierApp.renderThSupplier(configDisplays))
                             page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'unavailable'))
                         }
                     });
