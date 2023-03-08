@@ -90,15 +90,6 @@ public class SupplierAPI {
         String message = "";
         List<ImportExcelSupplierParam> dtoList = supplierExcelService.extractExcel(file);
         supplierExcelService.fillFieldDto(dtoList);
-        dtoList.forEach(dto -> {
-            try {
-                String paymentMethodId = paymentMethodService.findByTitle(dto.getPaymentMethodTitle()).getId();
-                dto.setPaymentMethodId(paymentMethodId);
-                String supGroupCode = supplierService.findById(dto.getGroupId()).getSupplierCode();
-                dto.setSupGroupCode(supGroupCode);
-            } catch (Exception ignored) {
-            }
-        });
         supplierExcelService.importSupplier(dtoList);
         message = "Uploaded the file successfully: " + file.getOriginalFilename();
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
