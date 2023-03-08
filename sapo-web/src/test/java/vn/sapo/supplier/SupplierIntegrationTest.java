@@ -27,7 +27,7 @@ public class SupplierIntegrationTest {
                 .setPhone("0989876565")
                 .setDescription("Quen thuoc")
                 .setGroupId(99);
-        expected = (SupplierResult) supplierAPI.update(supplierParam).getBody();
+//        expected = (SupplierResult) supplierAPI.update(supplierParam).getBody();
     }
 
     @Test

@@ -12,7 +12,9 @@ repositories {
 }
 
 dependencies {
+    implementation project(':sapo-address')
     implementation project(':sapo-customer')
+    implementation project(':sapo-supplier')
     implementation project(':sapo-configuration')
     implementation project(':sapo-product')
     implementation project(':sapo-supplier')

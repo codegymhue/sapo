@@ -7,6 +7,8 @@ import vn.sapo.payment_method.dto.UpdatePaymentMethodParam;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Service
 public interface PaymentMethodService {
@@ -20,5 +22,7 @@ public interface PaymentMethodService {
     PaymentMethodResult create(CreatePaymentMethodParam id);
 
     PaymentMethodResult update(UpdatePaymentMethodParam id);
+
+    Map<String, String> findByTitles(Set<String> titles);
 
 }

@@ -1,5 +1,6 @@
 package vn.sapo.payment_method;
 
+import vn.sapo.entities.PaymentMethod;
 import vn.sapo.payment_method.dto.CreatePaymentMethodParam;
 import vn.sapo.payment_method.dto.PaymentMethodResult;
 import vn.sapo.payment_method.dto.UpdatePaymentMethodParam;
@@ -9,6 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.shared.exceptions.NotFoundException;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
@@ -57,5 +61,12 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
     @Transactional
     public PaymentMethodResult update(UpdatePaymentMethodParam id) {
         return null;
+    }
+
+    @Override
+    public Map<String, String> findByTitles(Set<String> titles) {
+        return paymentMethodRepository.findByTitleIn(titles)
+                .stream()
+                .collect(Collectors.toMap(PaymentMethod::getTitle, PaymentMethod::getId));
     }
 }

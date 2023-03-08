@@ -45,7 +45,6 @@ public class ExcelHelperSuppliers {
                 CreateAddressParam address = new CreateAddressParam();
                 address.setProvinceId(-1);
                 address.setDistrictId(-1);
-//                address.setWardId(-1);
                 Row currentRow = rows.next();
                 Iterator<Cell> cellsInRow = currentRow.iterator();
                 while (cellsInRow.hasNext()) {
@@ -58,7 +57,9 @@ public class ExcelHelperSuppliers {
                             supplier.setSupplierCode(currentCell.getStringCellValue());
                             break;
                         case 2:
-//  ma nhom nha cung cap
+                            String group = currentCell.getStringCellValue();
+                            if (group != null && !group.isBlank())
+                                supplier.setGroupId(Integer.valueOf(group));
                             break;
                         case 3:
                             supplier.setEmail(currentCell.getStringCellValue());
@@ -101,7 +102,7 @@ public class ExcelHelperSuppliers {
                             address.setEmail(currentCell.getStringCellValue());
                             break;
                         case 15:
-//                            nhãn
+                            address.setLabel(currentCell.getStringCellValue());
                             break;
                         case 16:
                             address.setLine1(currentCell.getStringCellValue());

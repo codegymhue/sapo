@@ -9,6 +9,7 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import vn.sapo.address.dto.AddressResult;
+import vn.sapo.supplier.dto.SupGroupResult;
 import vn.sapo.supplier.dto.SupplierResult;
 
 import javax.servlet.ServletOutputStream;
@@ -38,7 +39,7 @@ public class SupplierExcelExporter {
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
         font.setBold(true);
-        font.setFontHeight(16);
+        font.setFontHeight(14);
         style.setFont(font);
 
         createCell(row, 0, "Tên nhà cung cấp ", style);
@@ -96,8 +97,11 @@ public class SupplierExcelExporter {
             String fullName = supplier.getFullName();
             createCell(row, columnCount++, fullName != null ? fullName : "", style);
             createCell(row, columnCount++, supplier.getSupplierCode(), style);
-            createCell(row, columnCount++, supplier.getGroup().getTitle(), style);
-            createCell(row, columnCount++, supplier.getGroup().getTitle(), style);
+            SupGroupResult group = supplier.getGroup().setSupGroupCode(supplier.getSupplierCode());
+            if (group != null) {
+                String title = group.getSupGroupCode();
+                createCell(row, columnCount++, null ,style);
+            }
             String email = supplier.getEmail();
             createCell(row, columnCount++, email != null ? email : "", style);
             String phone = supplier.getPhone();
@@ -109,13 +113,11 @@ public class SupplierExcelExporter {
             createCell(row, columnCount++, supplier.getDescription(), style);
             String paymentMethodId = "";
             if (supplier.getPaymentMethod() != null) {
-                paymentMethodId = supplier.getPaymentMethod().getId();
+                paymentMethodId = supplier.getPaymentMethod().getTitle();
             }
             createCell(row, columnCount++, paymentMethodId != null ? paymentMethodId : "", style);
 
             if (supplier.getAddresses().size() == 0) {
-                createCell(row, columnCount++, "", style);
-                createCell(row, columnCount++, "", style);
                 createCell(row, columnCount++, "", style);
                 createCell(row, columnCount++, "", style);
                 createCell(row, columnCount++, "", style);
@@ -134,7 +136,6 @@ public class SupplierExcelExporter {
                     createCell(row, columnCount++, adr.getDistrictName() != null ? adr.getDistrictName() : "", style);
                 }
             }
-            createCell(row, rowCount++, supplier.getDebtTotal(), style);
         }
     }
 

@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 @Accessors(chain = true)
 public abstract class BaseSupplierParam {
 
-    @NotBlank(message = "fullName not blank")
+    @NotBlank(message = "Tên nhà cung cấp không được để trống")
     private String fullName;
     @NullOrNotBlank
     private String email;

@@ -11,9 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTypeExcludeFilter;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.transaction.annotation.Transactional;
-import vn.sapo.address.AddressService;
 
 @SpringBootTest
 @OverrideAutoConfiguration(enabled = false)
@@ -25,10 +23,8 @@ import vn.sapo.address.AddressService;
 @ImportAutoConfiguration
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class AccountApplicationTests {
-    @MockBean
-    private AddressService addressService;
+
     @Test
     public void testContextLoaded() {
-        Assertions.assertThat(addressService).isNotNull();
     }
 }

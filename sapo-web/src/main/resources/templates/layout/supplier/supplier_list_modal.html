@@ -1,0 +1,530 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<th:block th:fragment="modalAll">
+    <!--modal-->
+
+    <!-- Modal -->
+
+    <div class="modal fade" id="modalUpdateBulk" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="ui-dialog-title">Cập nhật thông tin nhà cung cấp</span>
+                    <span class="modal-close-wrapper" role="button" aria-label="Close"
+                          data-bs-dismiss="modal">
+                    <svg class="ui-icon-x ui-icon-x-20">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use> </svg>
+                </span>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <div class="label mb-2">Nhân viên phụ trách</div>
+                            <select class="w100 input-dropdown sapo-btn-blank select-padding left" style="width:250px;"
+                                    id="accountIdBulk">
+                                <option value="0" selected="">Chọn nhân viên phụ trách</option>
+
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <div class="label mb-2">Hình thức thanh toán</div>
+                            <select class="w100 input-dropdown sapo-btn-blank select-padding left" style="width:250px;"
+                                    id="paymentMethodIdBulk">
+                                <option value="0" selected="">Chọn hình thức thanh toán</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <!--                    <div class="col-6">-->
+                        <!--                        <div class="label mb-2">Chiết khấu (%)</div>-->
+                        <!--                        <div class="input-wrap"><input autocomplete="off" placeholder="0" bind="discountPercentBulk_txt"-->
+                        <!--                                                       define="{ numberInput: new Components.NumberInput(this, 'indexSupplier','3','999999','','','False')}"-->
+                        <!--                                                       context="numberInput" class="sapo-textbox align-right"-->
+                        <!--                                                       maximum-value="999999" style="width:250px;" value=""><input-->
+                        <!--                                type="hidden" bind="discountPercentBulk" class="sapo-textbox align-right" id="" name=""-->
+                        <!--                                value="0"></div>-->
+                        <!--                    </div>-->
+                        <!--                    <div class="col-6">-->
+                        <!--                        <div class="label mb-2">Giá mặc định</div>-->
+                        <!--                        <select class="w100 input-dropdown sapo-btn-blank select-padding left" style="width:250px;"-->
+                        <!--                                bind="priceIdBulk" id="priceIdBulk">-->
+                        <!--                            <option value="0" selected="">Chọn giá mặc định</option>-->
+                        <!--                            <option value="2017107">Giá nhập</option>-->
+                        <!--                        </select>-->
+                        <!--                    </div>-->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="action-btn clearfix">
+                        <button class="btn pull-right margin-left-5 sapo-btn-default" type="button"
+                                id="updateBulkaction"
+                                data-bs-target="#update_bulkaction_modal" data-bs-toggle="modal"
+                                data-bs-dismiss="modal">Lưu
+                        </button>
+                        <button class="close-modal btn btn-blank pull-right" data-bs-dismiss="modal"
+                                type="button">Thoát
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modalAvailable -->
+
+    <div class="modal fade" id="modalAvailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: max-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="staticBackdropLabel">Cập nhật trạng thái !</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="statusChange">
+                </div>
+                <div class="modal-footer d-flex align-items-center">
+                    <button class="btn btn-blank btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
+                    <button class="btn btn-save sapo-btn-default" id="btnAvailableSave" type="button"
+                            data-bs-target="#update_bulkaction_modal" data-bs-toggle="modal" data-bs-dismiss="modal">Lưu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modalUnavailable -->
+
+    <div class="modal fade" id="modalUnavailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: max-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Ngừng giao dịch!</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="statusChangeUnavailable">
+                </div>
+                <div class="modal-footer d-flex align-items-center">
+                    <button class="btn btn-blank btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
+                    <button class="btn sapo-btn-default btn-save" id="btnUnavailableSave" type="button"
+                            data-bs-target="#update_bulkaction_modal" data-bs-toggle="modal" data-bs-dismiss="modal">Lưu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="update_bulkaction_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="ui-dialog-title">Ngừng giao dịch</span>
+                </div>
+                <div class="modal-body pull-center">
+                    <h2>Xử lý dữ liệu hoàn tất!</h2>
+                    <div>
+                        <div>
+                        </div>
+                    </div>
+                    <div class="info-update">
+                        <div class="info-update-title">
+                            <span id="label-countOrderComplete">Nhà cung cấp cập nhật thành công: </span>
+                            <span id="countOrderComplete" style="color:#0088ff">0</span>
+                            <a href="javascript:" bind-event-click="showListOrderUpdate(this)" style="display: inline;">
+                                Chi tiết
+                                <i class="fa fa-angle-double-down" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="info-update-body" id="listOrderComplete">
+                        </div>
+                    </div>
+                    <div class="info-update">
+                        <div class="info-update-title"><span id="label-countOrderFail">Nhà cung cấp cập nhật không thành công: </span><span
+                                id="countOrderFail" style="color:#ff0000">0</span><a href="javascript:"
+                                                                                     bind-event-click="showListOrderUpdate(this)">Chi
+                            tiết<i class="fa fa-angle-double-down" aria-hidden="true"></i></a></div>
+                        <div class="info-update-body" id="listOrderFail">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="action-btn clearfix">
+                        <button class="btn pull-right sapo-btn-blank" type="button" id="buttonPrintAfterPacking"
+                                bind-event-click="showPrintAfterPackingModal()" style="margin-left:10px;display:none;">
+                            In
+                            hướng dẫn đóng gói
+                        </button>
+                    </div>
+                    <div class="action-btn clearfix">
+                        <button class="btn pull-right sapo-btn-default btn--reload-page" type="button"
+                                bind-event-click="window.location.href = window.location.href"
+                                style="float:right; margin-left:10px;">Xác nhận
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: max-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Xóa sản phẩm?</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="statusChangeDelete">
+                </div>
+                <div class="modal-footer d-flex align-items-center">
+                    <button class="btn  btn-blank btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
+                    <button class="btn sapo-btn-red btn-save-delete" id="btnSubmitDelete" type="button"
+                            data-bs-target="#update_bulkaction_modal" data-bs-toggle="modal" data-bs-dismiss="modal">Xóa
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--    modal-setting-column-->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal-setting-column" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-setting-column">
+            <div class="modal-dialog modal-dialog-new">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="ui-dialog-title" id="ui-dialog-title-1">Điều chỉnh cột hiển thị trên trang danh sách</span>
+                        <span class="modal-close-wrapper1" data-bs-dismiss="modal">
+                    <svg class="ui-icon-x ui-icon-x-20"> <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                              xlink:href="#cancel-small-minor"></use> </svg>
+                </span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="clearfix export-field-row">
+                            <div class="export-field-group field-group-order" id="field-group-order">
+                                <div class="export-field-item order-field-col-left" style="float: none;border: none;">
+                                    <label class="border-checkmark" style="border: none; ">Quay về mặc định
+                                        <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                               id="defaultSettings" bind-event-change="toggleItem(this)">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="export-field-group--content clearfix newscroll" id="scroll-order-row">
+                                    <div class="order-field-col ui-sortable" id="list-row-settings">
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="code" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Mã</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="supplier_name" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Tên nhà cung cấp</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle ">
+                                            <label class="border-checkmark1">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="supplier_group"
+                                                       field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Nhóm nhà cung cấp</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="email" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Email</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="phone_number" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Số điện thoại</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="status" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Trạng thái</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="debt" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Nợ hiện tại</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="fax" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Số Fax</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="tax_number" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Mã số thuế</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="website" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Website</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="assignee_name" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Nhân viên phụ trách</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="created_on" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Ngày tạo</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="modified_on" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Cập nhật cuối</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                    </div>
+                                    <div class="order-field-col ui-sortable" id="list-row-default"
+                                         style="display: none;">
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="code" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Mã</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="supplier_name" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Tên nhà cung cấp</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="supplier_group"
+                                                       field-group="PaymentFields" bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Nhóm nhà cung cấp</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="email" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Email</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="phone_number" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Số điện thoại</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input checked="" class="export-field-group--toggle-item" hidden=""
+                                                       type="checkbox" value="status" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Trạng thái</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="debt" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Nợ hiện tại</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="fax" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Số Fax</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="tax_number" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Mã số thuế</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="website" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Website</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="assignee_name" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Nhân viên phụ trách</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="created_on" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Ngày tạo</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
+                                            <label class="border-checkmark1">
+                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
+                                                       value="modified_on" field-group="PaymentFields"
+                                                       bind-event-change="toggleItem(this)">
+                                                <span class="checkmark1"></span>
+                                                <span>Cập nhật cuối</span>
+                                            </label>
+                                            <i class="fa fa-bars"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="note"><span style="font-weight:700">Lưu ý:</span> Di chuột vào và kéo thả các ô
+                                để thay đổi thứ tự vị trí các cột hiển thị trên trang danh sách .
+                            </div>
+                            <input type="hidden" name="SavedSearchId" id="save-search-id" value="3226803">
+                        </div>
+
+                        <script>
+
+                            // $("#list-row-default").sortable({
+                            //     revert: true,
+                            //     stop: function () {
+                            //         $('#list-row-default').trigger('dom-change');
+                            //     }
+                            // });
+                            // $('#list-row-default').on('dom-change', function () {
+                            //     $('#list-row-default').find(".export-field-item").each(function (count, item) {
+                            //         $(item).find(".count-index").html(count + 1);
+                            //     })
+                            // });
+                            // $("#list-row-settings").sortable({
+                            //     revert: true,
+                            //     stop: function () {
+                            //         $('#list-row-settings').trigger('dom-change');
+                            //     }
+                            // });
+                            // $('#list-row-settings').on('dom-change', function () {
+                            //     $('#list-row-settings').find(".export-field-item").each(function (count, item) {
+                            //         $(item).find(".count-index").html(count + 1);
+                            //     })
+                            // });
+                        </script>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="action-btn clearfix">
+                            <a class="btn btn-default pull-right sapo-btn-default margin-left-5"
+                               bind-event-click="confirmSave('supplier',this)">Lưu</a>
+                            <button class="btn btn-blank pull-right" id="close-popup" type="button"
+                                    data-bs-dismiss="modal">Thoát
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</th:block>

@@ -31,17 +31,10 @@ allprojects { proj ->
         switch (proj.name) {
             case 'sapo-shared': break
             case 'sapo-entity': break
-            case 'sapo-address': {
-                implementation project(':sapo-entity')
-                implementation project(':sapo-shared')
-                break
-            }
-            case 'sapo-web':
             default: {
                 if (proj.name != 'sapo-web')
                     implementation project(':sapo-entity')
                 implementation project(':sapo-shared')
-                implementation project(':sapo-address')
                 break
             }
         }
