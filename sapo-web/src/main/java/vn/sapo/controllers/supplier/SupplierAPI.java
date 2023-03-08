@@ -32,9 +32,9 @@ public class SupplierAPI {
     @Autowired
     private SupplierService supplierService;
 
-
     @Autowired
     private AddressService addressService;
+
     @Autowired
     private PaymentMethodService paymentMethodService;
 
