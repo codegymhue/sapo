@@ -215,22 +215,6 @@
                                 </svg>
                             </button>
                             <button disabled="" id="btn-save-search" class="sc-jqUVSM gMKSKz"><span class="sc-papXJ jcEYKF">Lưu bộ lọc</span></button>
-
-<!--                            <select id="ddl-group-customer" class="form-select" aria-label="Default select example"-->
-<!--                                    style="width: 180px">-->
-<!--                                <option selected value="-1" id="showAllCustomerGroup">Nhóm khách hàng</option>-->
-
-<!--                            </select>-->
-<!--                            &lt;!&ndash;                            <select id="brand" class="form-select" aria-label="Default select example" style="width: 180px">&ndash;&gt;-->
-<!--                            &lt;!&ndash;                                <option selected value="-1">Nhãn hiệu</option>&ndash;&gt;-->
-<!--                            &lt;!&ndash;                            </select>&ndash;&gt;-->
-<!--                            <select id="ddl-status" class="form-select" aria-label="Default select example"-->
-<!--                                    style="width: 180px">-->
-<!--                                <option selected value="">Trạng thái</option>-->
-<!--                                <option value="AVAILABLE">Đang giao dịch</option>-->
-<!--                                <option value="UNAVAILABLE">Ngừng giao dịch</option>-->
-<!--                            </select>-->
-
                         </div>
                     </div>
                     <div class="MuiBox-root jss6842"></div>
@@ -244,34 +228,26 @@
                 <div style="font-size:small" id="tableCheckbox">
                     <table id="tbCustomer" class="table table-hover" style="width: 100%;">
                         <thead style="background-color: #f4f6f8; height: 55px">
-                        <tr id="theadList" class="show">
-                            <th class="align-middle">
-                                <i class="fa-solid fa-gear" style="float: left;"></i>
+                        <tr>
+                            <th class="align-middle" style="width:30px">
+                                <i class="fa-solid fa-gear" style="float: left;" data-toggle="modal" data-target="#modal-config-table"></i>
                                 <!-- <input style="cursor:pointer" id="checkAll" type="checkbox" value=""
                                 data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả" style="float: right;"/ -->
 
                                 <label for="checkAll" style="cursor:pointer; float: right;">
                                     <input style="cursor:pointer" id="checkAll" type="checkbox" value=""
-                                           data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả">
+                                           data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả" onchange="checkAllSelect()">
                                 </label>
                             </th>
                             <th class="align-middle" scope="col">Mã khách hàng</th>
-                            <th class="align-middle" scope="col">
-                                <button class="sort" id="btnTitleSort">Tên khách hàng
-                                </button>
-                            </th>
+                            <th class="align-middle" scope="col">Tên khách hàng</th>
                             <th class="align-middle" scope="col">Số điện thoại</th>
                             <th class="align-middle" scope="col">Nhóm khách hàng</th>
-                            <th class="align-middle" scope="col">
-                                <button class="sort" id="btnCreatAtSort">Công nợ hiện tại</button>
-                            </th>
-                            <th class="align-middle" scope="col">
-                                <button class="sort" id="btnUpdateAtSort">Tổng chi tiêu
-                                </button>
-                            </th>
+                            <th class="align-middle" scope="col">Công nợ hiện tại</th>
+                            <th class="align-middle" scope="col">Tổng chi tiêu</th>
                             <th class="align-middle" scope="col">Tổng SL đơn hàng</th>
                         </tr>
-                        <tr class="hide" id="selectActionThead" style="border: snow">
+                        <!-- <tr class="hide" id="selectActionThead" style="border: snow">
                             <td class="align-middle" style="width: 20px">
                                 <label for="selectAction" style="padding: 0.5rem; cursor:pointer">
                                     <input style="cursor:pointer" id="selectAction" type="checkbox" value="">
@@ -279,125 +255,19 @@
                             </td>
                             <td colspan="2" class="align-middle" id="numberSelectProductList" style="width: 24%">
                             </td>
-                            <!-- <td class="align-middle" colspan="2">
-                                <div class="btn-group">
-                                    <button class="btn dropdown-toggle btnDropdown me-2" type="button"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                        Chọn thao tác
-                                        <i class="fa-solid fa-sort-down" style="padding-left: 2.3rem"></i>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                        <li>
-                                            <button class="dropdown-item btnDropdown" id="btnCheckInventory">Kiểm tra
-                                                tồn kho
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button class="dropdown-item btnDropdown" id="btnAvailable">Đang giao dịch
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button class="dropdown-item btnDropdown" id="btnUnavailable">Ngừng giao
-                                                dịch
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button class="dropdown-item btnDropdown" id="btnDelete">Xóa sản phẩm
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td> -->
                             <td colspan="5"></td>
-                        </tr>
+                        </tr> -->
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
-
-
             </div>
         </div>
     </div>
 </div>
 
-<!-- <div class="modal fade" id="modalAvailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="width: max-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="staticBackdropLabel">Cập nhật trạng thái !</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="statusChange">
-            </div>
-            <div class="modal-footer d-flex align-items-center">
-                <button class="btn btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
-                <button class="btn btn-primary btn-save" id="btnAvailableSave" type="button">Lưu</button>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-<!-- <div class="modal fade" id="modalUnavailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="width: max-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Ngừng giao dịch!</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="statusChangeUnavailable">
-            </div>
-            <div class="modal-footer d-flex align-items-center">
-                <button class="btn btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
-                <button class="btn btn-primary btn-save" id="btnUnavailableSave" type="button">Lưu</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="width: max-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Xóa sản phẩm?</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="statusChangeDelete">
-            </div>
-            <div class="modal-footer d-flex align-items-center">
-                <button class="btn  btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
-                <button class="btn btn-danger btn-save-delete" id="btnSubmitDelete" type="button">Xóa</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="modalCheckInventory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content " style="width:max-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Kiểm tra thông tin tồn kho</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
-            </div>
-            <div class="modal-footer d-flex align-items-center">
-                <button class="btn btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-
-
-
-
-<script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<!-- <script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
+<th:block th:replace="/admin/customer/modal-config-table.html"/>
 <th:block th:replace="/admin/customer/modal_filter::modal_filter"/>
 <th:block th:replace="/layout/script :: script"/>
 
@@ -436,7 +306,8 @@
             loadData: {},
             commands: {},
         },
-        initializeEventControl: {}
+        initializeEventControl: {},
+        util:{}
     }
 
 
@@ -486,7 +357,9 @@
     page.elements.importFile = $("#importFileCustomers");
 
     page.elements.loading = $(".modal-content .modal-header .loader");
-
+    //duoc lay tu modal-config-table.html
+    page.util.nameColumn = column;
+    
     page.elements.importFile.on("click", function (){
         $("#modalImportFileCustomers").modal("show");
     })
@@ -510,16 +383,15 @@
                 localStorage.setItem(KEY_CUSTOMER_FILTER_SAVE, JSON.stringify(customerFilter));
             }else{
                 customerFilter = JSON.parse(localStorage.getItem(KEY_CUSTOMER_FILTER_SAVE));
-                console.log("Get customer filter from localstorage: ")
-                console.log(customerFilter)
             }
             drawDataTable();
         })
-
     }
+    
     function drawDataTable(){
         $("#tbCustomer").DataTable({
             // chuyển tiếng việt cho datatable
+            "destroy": true,
             "processing": true,
             "serverSide": true,
             "paging": true,
@@ -775,7 +647,6 @@
                     d.employeeIds = customerFilter.employeeIds;
                     d.keyword = customerFilter.keyword;
                     d.statusList = [];
-                    console.log(d);
                     return JSON.stringify(d)
                 }
             },
@@ -787,9 +658,9 @@
             destroy: true,
             columns: [
                 {data: 'id'},
+                {data: 'phoneNumber'},
                 {data: 'customerCode'},
                 {data: 'fullName'},
-                {data: 'phoneNumber'},
                 {data: 'group.title'},
                 {data: 'debtTotal'},
                 {data: 'spendTotal'},
@@ -797,6 +668,7 @@
              columnDefs: [
              {
                             targets: 0,
+                            "orderable": false,
                             render: function (data, type, row, meta) {
                                 return `
                                <input type="checkbox" value="check_none" style="float:right"/>
@@ -813,7 +685,14 @@
 
              ],
         })
-        }
+        let theadFirst = $("#tbCustomer thead tr th");
+        let removeSorting = setInterval(()=>{
+            if($(theadFirst[0]).hasClass("sorting_asc")){
+                $(theadFirst[0]).removeClass('sorting_asc');
+                clearInterval(removeSorting);
+            }
+        })
+    }
 
     function findCustomerByGroup(groupId) {
         $("#tbCustomer").DataTable({
@@ -1700,10 +1579,10 @@
     }
 
 
-    page.elements.checkAll.on("change", function () {
-        page.elements.selectAction.prop("checked", true);
+    function checkAllSelect(){
+        let checkAll = $("#checkAll");
         arrayIdCustomer = [];
-        if (this.checked) {
+        if (checkAll.is(":checked")) {
             $("#tbCustomer > tbody input").each(function () {
                 $(this).prop("checked", true);
                 arrayIdCustomer.push($(this).val());
@@ -1714,7 +1593,8 @@
             })
         }
 
-    })
+    }
+    
 
     $("#ddl-group-customer").on('change', () => {
         let groupId = $("#ddl-group-customer :selected").val();
