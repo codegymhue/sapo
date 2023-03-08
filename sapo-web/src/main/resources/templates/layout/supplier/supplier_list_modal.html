@@ -148,21 +148,41 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="modal-footer">
                     <div class="action-btn clearfix">
                         <button class="btn pull-right sapo-btn-blank" type="button" id="buttonPrintAfterPacking"
                                 bind-event-click="showPrintAfterPackingModal()" style="margin-left:10px;display:none;">
-                            In
-                            hướng dẫn đóng gói
+                            In hướng dẫn đóng gói
                         </button>
                     </div>
                     <div class="action-btn clearfix">
+
                         <button class="btn pull-right sapo-btn-default btn--reload-page" type="button"
                                 bind-event-click="window.location.href = window.location.href"
-                                style="float:right; margin-left:10px;">Xác nhận
-                        </button>
+                                style="float:right; margin-left:10px;"
+                                id="btn-confirm"
+                                disabled>Xác nhận</button>
+                        <div class="loader" style="display: none;"></div>
                     </div>
                 </div>
+
+
+<!--                <div class="modal-footer">-->
+<!--                    <div class="action-btn clearfix">-->
+<!--                        <button class="btn pull-right sapo-btn-blank" type="button" id="buttonPrintAfterPacking"-->
+<!--                                bind-event-click="showPrintAfterPackingModal()" style="margin-left:10px;display:none;">-->
+<!--                            In-->
+<!--                            hướng dẫn đóng gói-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                    <div class="action-btn clearfix">-->
+<!--                        <button class="btn pull-right sapo-btn-default btn&#45;&#45;reload-page" type="button"-->
+<!--                                bind-event-click="window.location.href = window.location.href"-->
+<!--                                style="float:right; margin-left:10px;">Xác nhận-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
     </div>
@@ -275,16 +295,16 @@
                                             </label>
                                             <i class="fa fa-bars"></i>
                                         </div>
-                                        <div class="export-field-item order-field-col-left ui-sortable-handle">
-                                            <label class="border-checkmark1">
-                                                <input class="export-field-group--toggle-item" hidden="" type="checkbox"
-                                                       value="debt" field-group="PaymentFields"
-                                                       bind-event-change="toggleItem(this)">
-                                                <span class="checkmark1"></span>
-                                                <span>Nợ hiện tại</span>
-                                            </label>
-                                            <i class="fa fa-bars"></i>
-                                        </div>
+<!--                                        <div class="export-field-item order-field-col-left ui-sortable-handle">-->
+<!--                                            <label class="border-checkmark1">-->
+<!--                                                <input class="export-field-group&#45;&#45;toggle-item" hidden="" type="checkbox"-->
+<!--                                                       value="debt" field-group="PaymentFields"-->
+<!--                                                       bind-event-change="toggleItem(this)">-->
+<!--                                                <span class="checkmark1"></span>-->
+<!--                                                <span>Nợ hiện tại</span>-->
+<!--                                            </label>-->
+<!--                                            <i class="fa fa-bars"></i>-->
+<!--                                        </div>-->
                                         <div class="export-field-item order-field-col-left ui-sortable-handle">
                                             <label class="border-checkmark1">
                                                 <input class="export-field-group--toggle-item" hidden="" type="checkbox"
