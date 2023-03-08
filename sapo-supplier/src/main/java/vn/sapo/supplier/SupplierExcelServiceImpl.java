@@ -9,11 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+<<<<<<< HEAD
 import vn.sapo.customers.AddressService;
 import vn.sapo.customers.dto.CreateAddressParam;
+=======
+import vn.sapo.address.AddressService;
+import vn.sapo.address.dto.CreateAddressParam;
+>>>>>>> main
 import vn.sapo.entities.supplier.Supplier;
+import vn.sapo.payment_method.PaymentMethodService;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.supplier.excel.ImportExcelSupplierParam;
+import vn.sapo.supplierGroup.SupplierGroupService;
 
 import java.io.IOException;
 import java.util.*;
@@ -26,7 +33,10 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
     private SupplierMapper supplierMapper;
     @Autowired
     private SupplierRepository supplierRepository;
-
+    @Autowired
+    private SupplierGroupService supplierGroupService;
+    @Autowired
+    private PaymentMethodService paymentMethodService;
     @Autowired
     AddressService addressService;
 
@@ -46,8 +56,9 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
             Iterator<Row> rows = sheet.iterator();
             // skip header start =1
             rows.next();
+            final int ROW_IMPORT_MAX = 5000;
             int count = 0;
-            while (count <= 5000 && rows.hasNext()) {
+            while (count <= ROW_IMPORT_MAX && rows.hasNext()) {
                 Row row = rows.next();
                 Cell cell = row.getCell(FULL_NAME);
                 String fullName = cell == null ? null : cell.getStringCellValue();
@@ -81,10 +92,36 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
         return importExcelList;
     }
 
+    @Override
+    public void fillFieldDto(List<ImportExcelSupplierParam> dtoList) {
+        Set<String> pmTitles = new HashSet<>();
+        Set<String> supGroupCodes = new HashSet<>();
+        dtoList.forEach(param -> {
+            pmTitles.add(param.getPaymentMethodTitle());
+            supGroupCodes.add(param.getSupGroupCode());
+        });
+
+        Map<String, String> pmMap = paymentMethodService.findByTitles(pmTitles);
+        Map<String, Integer> supGroupMap = supplierGroupService.findByGroupCodes(supGroupCodes);
+        dtoList.forEach(dto -> {
+            String id = pmMap.get(dto.getPaymentMethodTitle());
+            dto.setPaymentMethodId(id);
+            dto.setGroupId(supGroupMap.get(dto.getSupGroupCode()));
+        });
+    }
+
     public CreateAddressParam extractAddress(Iterator<Cell> cells) {
         CreateAddressParam param = new CreateAddressParam();
         cells.forEachRemaining(cell -> {
             switch (cell.getColumnIndex()) {
+
+                case CONTACTNAME:
+                    param.setFullName(cell.getStringCellValue());
+                    break;
+                case CONTACTPHONE:
+                    param.setPhoneNumber(cell.getStringCellValue());
+                case CONTACTEMAIL:
+                    param.setEmail(cell.getStringCellValue());
                 case LABEL:
                     param.setLabel(cell.getStringCellValue());
                     break;
@@ -118,8 +155,8 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
                 case SUPPLIERCODE:
                     param.setSupplierCode(cell.getStringCellValue());
                     break;
-                case 2:
-                            //  ma nhom nha cung cap
+                case SUPGROUPCODE:
+                    param.setSupGroupCode(cell.getStringCellValue());
                     break;
                 case EMAIL:
                     param.setEmail(cell.getStringCellValue());
@@ -139,20 +176,20 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
                 case DESCIPTION:
                     param.setDescription(cell.getStringCellValue());
                     break;
-                case 9:
-//                          chính sách giá mặc định
-                    break;
-                case 10:
-//                      Kỳ hạn thanh toán mặc định
-                    break;
                 case PAYMENTMETHODTITLE:
                     param.setPaymentMethodTitle(cell.getStringCellValue());
                     break;
-                case 20:
+                case 18:
 //                            nợ hiện tại
                     break;
-                case 21:
+                case 19:
 //                              tags
+                    break;
+                case 20:
+//                    Chinh sach gia mac dinh
+                    break;
+                case 21:
+//                      Kỳ hạn thanh toán mặc định
                     break;
                 default:
                     break;

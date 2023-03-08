@@ -50,9 +50,11 @@
                             <div class="page-info-title">Thông tin cá nhân</div>
                             <div class="page-info-body">
                                 <div class="col-12 field pl-0">
-                                    <label for="nameCreate" class="label-required* mb-2">Tên nhà cung cấp</label>
+                                    <label for="nameCreate" class="label mb-2 label-required">Tên nhà cung cấp</label>
+<!--                                    <label for="nameCreate" class="label-required* mb-2">Tên nhà cung cấp</label>-->
                                     <input id="nameCreate" class="sapo-textbox w100"
-                                           placeholder="Nhập tên nhà cung cấp" title="Nhập tên nhà cung cấp" required/>
+                                           placeholder="Nhập tên nhà cung cấp">
+<!--                                           title="Nhập tên nhà cung cấp" required/>-->
                                 </div>
                                 <div class="col-6 field pr-0">
                                     <label for="codeCreate" class="label-required mb-2">Mã nhà cung cấp</label>
@@ -129,10 +131,14 @@
                             </div>
 
                             <div class="col-12 field pl-0">
-                                <label for="addressCreate"><div class="label mb-2">Địa chỉ</div></label>
+                                <label for="addressCreate"><div class="label mb-2 label-required">Địa chỉ</div></label>
                                 <input id="addressCreate" bind="address2" class="sapo-textbox w100" placeholder="Nhập địa chỉ" data-toggle="tooltip"
                                        bind-event-input="checkValidateDataSupplier(this)" data-original-title=""
                                        title="">
+
+
+
+<!--                                <div class="label mb-2 label-required">Địa chỉ</div>-->
 
                             </div>
 
@@ -696,7 +702,8 @@
                 setTimeout(() => {
                 }, 1500);
                 page.dialogs.elements.modalCreateGroupSupplier.modal('hide');
-                location.reload();
+
+                    getAllGroup();
             })
             .fail((jqXHR) => {
                 SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
@@ -717,75 +724,63 @@
     getAllEmployeeSelect();
     getAllPaymentMethodSelect();
 
+    // $("#formCreate").validate({
+    //     rules: {
+    //         nameCreate: {
+    //             required: true
+    //
+    //         }
+    //     },
+    //     messages: {
+    //         nameCreate: {
+    //             required: "Vui lòng nhập tên nhà cung cấp",
+    //
+    //         }
+    //     },
+    //     submitHandler: function () {
+    //         createSupplier();
+    //     }
+    // });
+
     $("#formCreate").validate({
         rules: {
             nameCreate: {
                 required: true
-
+            },
+            phoneCreate: {
+                required: true,
+                digits: true,
+                minlength: 10,
+                maxlength: 11
+            },
+            emailCreate: {
+                required: true,
+                email: true
             }
         },
         messages: {
             nameCreate: {
                 required: "Vui lòng nhập tên nhà cung cấp",
-
+            },
+            phoneCreate: {
+                required: "Vui lòng nhập số điện thoại",
+                digits: "Số điện thoại phải là số",
+                minlength: "Số điện thoại phải có ít nhất 10 chữ số",
+                maxlength: "Số điện thoại không được vượt quá 11 chữ số"
+            },
+            emailCreate: {
+                required: "Vui lòng nhập địa chỉ email",
+                email: "Định dạng địa chỉ email không hợp lệ"
             }
         },
         submitHandler: function () {
             createSupplier();
         }
     });
-
-    // $("#formCreate").validate({
-    //     rules: {
-    //         nameCreate: {
-    //             required: true,
-    //             minlength: 3,
-    //             maxlength: 50
-    //         },
-    //         emailCreate: {
-    //             required: true,
-    //             minlength: 5,
-    //             maxlength: 50,
-    //             email: true
-    //         },
-    //         phoneCreate: {
-    //             // phone_valid: true,
-    //             required: true,
-    //         }
-    //     },
-    //     messages: {
-    //         nameCreate: {
-    //             required: "Vui lòng nhập tên đầy đủ",
-    //             minlength: "Độ dài tối thiểu là 5 ký tự",
-    //             maxlength: "Độ dài tối đa là 100 ký tự"
-    //         },
-    //         emailCreate: {
-    //             required: "Vui lòng nhập email đầy đủ",
-    //             minlength: "Độ dài tối thiểu là 5 ký tự",
-    //             maxlength: "Độ dài tối đa là 100 ký tự",
-    //             email: "Định dạng email không đúng"
-    //         },
-    //         phoneCreate: {
-    //             // phone_valid: "Định dạng số điện thoại không đúng",
-    //             required: "Vui lòng nhập số điện thoại đầy đủ"
-    //         }
-    //     },
-    //     submitHandler: function () {
-    //         page.commands.formCreate();
-    //         console.log("page.dialogs.elements.formCreate.validate");
-    //     },
-    //     // invalidHandler: () => {
-    //     //     SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_400);
-    //     // }
-    // })
     //
     // $('#formCreate').on("click", function () {
-    //     $("#formCreate").trigger("submit");
-    // })
-
-
-
-
+    //     // $("#formCreate").trigger("submit");
+    //     })
 
 </script>
 

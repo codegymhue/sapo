@@ -23,7 +23,7 @@ public class CreateAddressParam {
     private String phoneNumber;
     @NullOrNotBlank
     private String email;
-    @NullOrNotBlank
+    @NotBlank
     private String line1;
     @NullOrNotBlank
     private String line2;
@@ -42,4 +42,5 @@ public class CreateAddressParam {
 
     private boolean isReceiveBill;
     private boolean isShipping;
+
 }

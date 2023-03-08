@@ -32,414 +32,53 @@
             overflow-x: auto;
             white-space: nowrap;
         }
+
+        .available {
+            color: #20a917;
+        }
+
+        .unavailable {
+            color: #ea1a1a;
+        }
+
+        table > tbody > tr {
+            cursor: pointer;
+        }
+
+        .filter-body {
+            overflow-y: visible;
+        }
+
+        .ui-sortable-handle.dragging {
+            opacity: 1;
+        }
+
+        /*loading*/
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+
     </style>
 </head>
 
 <body class="body_dashboard partners suppliers index">
-<div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title" id="exportModalLabel">Xuất file danh sách nhà cung cấp</h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" style="max-height: calc(100vh - 200px);overflow-y: auto;">
-                <form id="formExportSuppliers">
-                    <div style="padding-left: 10px;">
-                        <div style="font-weight:500;padding:5px 0">Giới hạn kết quả xuất</div>
-                        <div class="sapo-radio-wrapper">
-                            <label class="flex">
-                                    <span class="sapo-radiobox" style="margin-right: 7px;">
-                                        <input class="sapo-radiobox__input" type="radio" name="formExportType"
-                                               id="allSuppliers" value="allSuppliers" checked="">
-                                        <span class="sapo-radiobox__icon"></span>
-                                    </span>
-                                Tất cả nhà cung cấp
-                            </label>
-                        </div>
-                        <div class="sapo-radio-wrapper">
-                            <label class="flex">
-                                    <span class="sapo-radiobox" style="margin-right: 7px;">
-                                        <input class="sapo-radiobox__input" type="radio" name="formExportType"
-                                               id="currentPage" value="currentPage">
-                                        <span class="sapo-radiobox__icon"></span>
-                                    </span>
-                                Nhà cung cấp trên trang này
-                            </label>
-                        </div>
-                        <div class="sapo-radio-wrapper">
-                            <label class="flex">
-                                    <span class="sapo-radiobox" style="margin-right: 7px;">
-                                        <input class="sapo-radiobox__input" type="radio" name="formExportType"
-                                               id="selectedSuppliers" value="selectedSuppliers" disabled="disabled">
-                                        <span class="sapo-radiobox__icon"></span>
-                                    </span>
-                                Các nhà cung cấp được chọn
-                            </label>
-                        </div>
-                        <div class="sapo-radio-wrapper">
-                            <label class="flex">
-                                    <span class="sapo-radiobox" style="margin-right: 7px;">
-                                        <input class="sapo-radiobox__input" type="radio" name="formExportType"
-                                               id="currentSearch" value="currentSearch">
-                                        <span class="sapo-radiobox__icon"></span>
-                                    </span>
-                                <span id="order-match-current-search">5</span>&nbsp;nhà cung cấp phù hợp với kết quả
-                                tìm kiếm hiện
-                                tại
-                            </label>
-                        </div>
-
-                        <div style="font-weight:500;padding:10px 0 5px">Loại file xuất</div>
-                        <div class="export-field-group--header modal-setting-column pb-3">
-                            <label class="border-checkmark1">
-                                <input type="checkbox" class="export-field-group--toggle-all"
-                                       bind-event-change="toggleGroupFormImport(this)"><span>Xuất dữ liệu theo mẫu file
-                                        nhập</span>
-                                <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                            </label>
-                        </div>
-
-                        <a id="export-field-group--show-export-supplier" href="javascript:"
-                           bind-event-click="showExportForm()"
-                           style="color: #0088ff;margin: 5px 0 5px;display: inline-block;">Tuỳ chọn trường hiển
-                            thị</a>
-                    </div>
-                </form>
-                <div id="formExportSuppliers-supplier_overview" style="display:none">
-
-
-                    <div class="export-field-group export-field-group--order export-field-row"
-                         id="export-field-group--supplier_overview">
-                        <div class="export-field-group--content d-flex">
-                            <div class="export-field-col" style="width: calc(100%/3)">
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-name"
-                                               hidden="" type="checkbox" value="name" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Tên nhà cung cấp </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked="" disabled=""
-                                               class="export-field-group--toggle-item export-field-group--value-code"
-                                               hidden="" type="checkbox" value="code" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1 disable"
-                                              style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Mã nhà cung cấp </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-group"
-                                               hidden="" type="checkbox" value="group" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Nhóm nhà cung cấp </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-email"
-                                               hidden="" type="checkbox" value="email" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Email </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-phone"
-                                               hidden="" type="checkbox" value="phone" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Số điện thoại </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input
-                                                class="export-field-group--toggle-item export-field-group--value-website"
-                                                hidden="" type="checkbox" value="website" field-group="SupplierFields"
-                                                bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Website </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input class="export-field-group--toggle-item export-field-group--value-fax"
-                                               hidden="" type="checkbox" value="fax" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Fax </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input
-                                                class="export-field-group--toggle-item export-field-group--value-taxNumber"
-                                                hidden="" type="checkbox" value="taxNumber" field-group="SupplierFields"
-                                                bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Mã số thuế </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-assigneeName"
-                                               hidden="" type="checkbox" value="assigneeName"
-                                               field-group="SupplierFields" bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Nhân viên phụ trách </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="export-field-col" style="width: calc(100%/3)">
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input
-                                                class="export-field-group--toggle-item export-field-group--value-priceListDefault"
-                                                hidden="" type="checkbox" value="priceListDefault"
-                                                field-group="SupplierFields" bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Chính sách giá mặc định </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input
-                                                class="export-field-group--toggle-item export-field-group--value-paymentTermDefault"
-                                                hidden="" type="checkbox" value="paymentTermDefault"
-                                                field-group="SupplierFields" bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Kỳ hạn thanh toán mặc định </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input
-                                                class="export-field-group--toggle-item export-field-group--value-paymentMethodDefault"
-                                                hidden="" type="checkbox" value="paymentMethodDefault"
-                                                field-group="SupplierFields" bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Hình thức thanh toán mặc định </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-contact"
-                                               hidden="" type="checkbox" value="contact" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Người liên hệ </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-contactNumber"
-                                               hidden="" type="checkbox" value="contactNumber"
-                                               field-group="SupplierFields" bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>SĐT người liên hệ </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-contactEmail"
-                                               hidden="" type="checkbox" value="contactEmail"
-                                               field-group="SupplierFields" bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Email người liên hệ </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-address"
-                                               hidden="" type="checkbox" value="address" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Nhãn </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-address1"
-                                               hidden="" type="checkbox" value="address1" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Địa chỉ 1 </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input
-                                                class="export-field-group--toggle-item export-field-group--value-address2"
-                                                hidden="" type="checkbox" value="address2" field-group="SupplierFields"
-                                                bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Địa chỉ 2 </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="export-field-col" style="width: calc(100%/3)">
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-city"
-                                               hidden="" type="checkbox" value="city" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Tỉnh thành </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-district"
-                                               hidden="" type="checkbox" value="district" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Quận huyện </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-ward"
-                                               hidden="" type="checkbox" value="ward" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Phường xã </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input checked=""
-                                               class="export-field-group--toggle-item export-field-group--value-debt"
-                                               hidden="" type="checkbox" value="debt" field-group="SupplierFields"
-                                               bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Nợ hiện tại </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input
-                                                class="export-field-group--toggle-item export-field-group--value-status"
-                                                hidden="" type="checkbox" value="status" field-group="SupplierFields"
-                                                bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Trạng thái </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input
-                                                class="export-field-group--toggle-item export-field-group--value-description"
-                                                hidden="" type="checkbox" value="description"
-                                                field-group="SupplierFields" bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Mô tả </span>
-                                    </label>
-                                </div>
-                                <div class="export-field-item modal-setting-column py-2">
-                                    <label class="border-checkmark1">
-                                        <input
-                                                class="export-field-group--toggle-item export-field-group--value-tags"
-                                                hidden="" type="checkbox" value="tags" field-group="SupplierFields"
-                                                bind-event-change="toggleItem(this)">
-                                        <span class="checkmark1" style="top: 3px;left: 3px;z-index:12"></span>
-                                        <span>Tags </span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <div class="action-btn clearfix">
-                    <button class="btn sapo-btn-default pull-right" id="exportBtn"
-                            bind-event-click="confirmImport(this)">Xuất
-                        file
-                    </button>
-                    <button class="btn btn-blank pull-right mr-2" bind-event-click="closePopup()"
-                            data-bs-dismiss="modal" type="button">Thoát
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Nhập dữ liệu nhà cung cấp</h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="form-import" action="/suppliers/import?area=Suppliers" method="post"
-                      enctype="multipart/form-data">
-                    <div>
-                        <div id="load-status-import"></div>
-                        <div id="empty-success">
-                            <div>
-                                Chú ý:
-                            </div>
-                            <div class="empty-success__text">
-                                - Mã nhà cung cấp phải là duy nhất đối với các nhà cung cấp độc lập
-                            </div>
-                            <div class="empty-success__text">
-                                - Chuyển đổi file nhập dưới dạng .XLS trước tải dữ liệu.
-                            </div>
-                            <div class="empty-success__text">
-                                - Tải file mẫu nhà cung cấp <a
-                                    href="/v2/file/sapo_mau_nhap_nha_cung_cap_17052022.xlsx"
-                                    style="color:#0088ff">tại đây</a>
-                            </div>
-                            <div class="empty-success__text">
-                                - File nhập có dung lượng tối đa là 2MB và 5000 bản ghi.
-                            </div>
-                        </div>
-
-                        <div id="chose-file">
-                            <input class="form-control" type="file" id="formFileSuppliers">
-                        </div>
-
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <div class="action-btn clearfix">
-                    <button class="btn sapo-btn-default pull-right" id="importBtn"
-                            bind-event-click="confirmImport(this)">Nhập
-                        file
-                    </button>
-                    <button class="btn btn-blank pull-right mr-2" bind-event-click="closePopup()"
-                            data-bs-dismiss="modal" type="button">Thoát
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<th:block th:replace="/layout/supplier/modal_export_import.html"/>
 <div id="container">
     <div class="hidden" context="tenantInfo"
          define="{tenantInfo: new Components.TenantInfo(this,{&quot;countries&quot;:{&quot;countryId&quot;:201}})}">
@@ -481,19 +120,18 @@
                         </button>
                         <a class="btn sapo-btn-transparent action-bar__link" href="/admin/supplier_groups"
                            data-popover-index="1">
-                            <img src="/v2/images/icon/friends.svg"
+                            <img src="../../../static/assets/admin/images/friends.svg"
                                  style="width: 18px; height: 18px; position: relative; top: -0.6rem; margin-top: -1.1rem; margin-bottom: -1.1rem; margin-right: 3px;">
                             Nhóm nhà cung cấp
                         </a>
-                        <button class="btn sapo-btn-transparent action-bar__link">
+                        <button class="btn sapo-btn-transparent action-bar__link" type="button" data-bs-toggle="modal"
+                                data-bs-target="#modal-setting-column">
                             <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-setting"></use>
                             </svg>
                             Điều chỉnh cột hiển thị
-                            <script class="modal_source"
-                                    define="{settingsColumnSuppliersModal: new Components.Modal(this)}"
-                                    type="text/html">
-                        </script>
+                            <!--                            <script class="modal_source" define="{settingsColumnSuppliersModal: new Components.Modal(this)}" type="text/html">-->
+                            <!--                        </script>-->
                         </button>
                     </div>
                 </div>
@@ -775,22 +413,23 @@
                                     <th class="align-middle">
                                         <label for="checkAll" style="padding: 1rem; cursor:pointer">
                                             <input style="cursor:pointer" id="checkAll" type="checkbox" value=""
+                                                   nameth="bulk_action"
                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả">
                                         </label>
                                     </th>
-                                    <th class="align-middle" scope="col">Mã nhà cung cấp</th>
-                                    <th class="align-middle" scope="col">Tên nhà cung cấp</th>
-                                    <th class="align-middle" scope="col">Nhóm nhà cung cấp</th>
-                                    <th class="align-middle" scope="col">Email</th>
-                                    <th class="align-middle" scope="col">Số điện thoại</th>
-                                    <th class="align-middle" scope="col">Trạng thái</th>
-                                    <th class="align-middle" scope="col">Nhân viên phụ trách</th>
-                                    <th class="align-middle" scope="col">Mã số thuế</th>
-                                    <th class="align-middle" scope="col">Website</th>
-                                    <th class="align-middle" scope="col">Ngày tạo</th>
-                                    <th class="align-middle" scope="col">Lần cập nhật cuối</th>
-                                    <!--                                    <th class="align-middle" scope="col">Nợ hiện tại</th>-->
-                                    <!--                                    <th class="align-middle" scope="col">Số fax</th>-->
+<!--                                    <th class="align-middle" nameth="code" scope="col">Mã nhà cung cấp</th>-->
+<!--                                    <th class="align-middle" nameth="supplier_name" scope="col">Tên nhà cung cấp</th>-->
+<!--                                    <th class="align-middle" nameth="supplier_group" scope="col">Nhóm nhà cung cấp</th>-->
+<!--                                    <th class="align-middle" nameth="email" scope="col">Email</th>-->
+<!--                                    <th class="align-middle" nameth="phone_number" scope="col">Số điện thoại</th>-->
+<!--                                    <th class="align-middle" nameth="status" scope="col">Trạng thái</th>-->
+<!--                                    <th class="align-middle" nameth="assignee_name" scope="col">Nhân viên phụ trách</th>-->
+<!--                                    <th class="align-middle" nameth="tax_number" scope="col">Mã số thuế</th>-->
+<!--                                    <th class="align-middle" nameth="website" scope="col">Website</th>-->
+<!--                                    <th class="align-middle" nameth="created_on" scope="col">Ngày tạo</th>-->
+<!--                                    <th class="align-middle" nameth="modified_on" scope="col">Lần cập nhật cuối</th>-->
+<!--                                    &lt;!&ndash;                                    <th class="align-middle" scope="col">Nợ hiện tại</th>&ndash;&gt;-->
+<!--                                    <th class="align-middle" nameth="fax" scope="col">Số fax</th>-->
                                 </tr>
                                 <tr class="hide" id="selectActionThead" style="border: snow">
                                     <td class="align-middle" style="width: 20px">
@@ -858,25 +497,24 @@
                                         <span>Kết quả</span>
                                     </div>
 
-                                    <div class="" style="    float: right;padding: 0 0 0 20px;">
+                                    <div class="" style="float: right;padding: 0 0 0 20px;">
                                         <div class="dataTables_paginate paging_bootstrap">
                                             <ul class="pagination">
-                                                <!--                                                <li><a class="t-link"><span-->
-                                                <!--                                                        class="t-icon t-arrow-first">← Trang đầu</span></a></li>-->
+                                                <li><a class="t-link" id="fistPage"><span
+                                                        class="t-icon t-arrow-first">← Trang đầu</span></a></li>
                                                 <li><a class="t-link" id="previousPage"
-                                                >← Trang trước</a></li>
-
+                                                ></a></li>
                                                 <li><a class="t-link" id="pageNo">1</a>
                                                 </li>
                                                 <li><a class="t-link" id="nextPage"
-                                                >Trang sau →</a></li>
+                                                >2</a></li>
 
                                                 <!--                                                <li class="active"><span class="t-state-active">3</span></li>-->
                                                 <!--                                                <li><a class="t-link"-->
                                                 <!--                                                      >5</a></li>-->
-                                                <!--                                                <li><a class="t-link"-->
-                                                <!--                                                ><span class="t-icon t-arrow-last">Trang cuối →</span></a>-->
-                                                <!--                                                </li>-->
+                                                <li><a class="t-link" id="lastPage"
+                                                ><span class="t-icon t-arrow-last">Trang cuối →</span></a>
+                                                </li>
                                             </ul>
                                         </div>
                                         <!--                                        <nav aria-label="Page navigation example ">-->
@@ -936,195 +574,13 @@
         </div>
     </div>
 </div>
-
-<!--modal-->
-
-<!-- Modal -->
-
-<div class="modal fade" id="modalUpdateBulk" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="ui-dialog-title">Cập nhật thông tin nhà cung cấp</span>
-                <span class="modal-close-wrapper" role="button" aria-label="Close"
-                      data-bs-dismiss="modal">
-                    <svg class="ui-icon-x ui-icon-x-20">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use> </svg>
-                </span>
-            </div>
-            <div class="modal-body">
-                <div class="row mb-3">
-                    <div class="col-6">
-                        <div class="label mb-2">Nhân viên phụ trách</div>
-                        <select class="w100 input-dropdown sapo-btn-blank select-padding left" style="width:250px;"
-                                id="accountIdBulk">
-                            <option value="0" selected="">Chọn nhân viên phụ trách</option>
-
-                        </select>
-                    </div>
-                    <div class="col-6">
-                        <div class="label mb-2">Hình thức thanh toán</div>
-                        <select class="w100 input-dropdown sapo-btn-blank select-padding left" style="width:250px;"
-                                id="paymentMethodIdBulk">
-                            <option value="0" selected="">Chọn hình thức thanh toán</option>
-
-                        </select>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <!--                    <div class="col-6">-->
-                    <!--                        <div class="label mb-2">Chiết khấu (%)</div>-->
-                    <!--                        <div class="input-wrap"><input autocomplete="off" placeholder="0" bind="discountPercentBulk_txt"-->
-                    <!--                                                       define="{ numberInput: new Components.NumberInput(this, 'indexSupplier','3','999999','','','False')}"-->
-                    <!--                                                       context="numberInput" class="sapo-textbox align-right"-->
-                    <!--                                                       maximum-value="999999" style="width:250px;" value=""><input-->
-                    <!--                                type="hidden" bind="discountPercentBulk" class="sapo-textbox align-right" id="" name=""-->
-                    <!--                                value="0"></div>-->
-                    <!--                    </div>-->
-                    <!--                    <div class="col-6">-->
-                    <!--                        <div class="label mb-2">Giá mặc định</div>-->
-                    <!--                        <select class="w100 input-dropdown sapo-btn-blank select-padding left" style="width:250px;"-->
-                    <!--                                bind="priceIdBulk" id="priceIdBulk">-->
-                    <!--                            <option value="0" selected="">Chọn giá mặc định</option>-->
-                    <!--                            <option value="2017107">Giá nhập</option>-->
-                    <!--                        </select>-->
-                    <!--                    </div>-->
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="action-btn clearfix">
-                    <button class="btn pull-right margin-left-5 sapo-btn-default" type="button"
-                            id="updateBulkaction"
-                            data-bs-target="#update_bulkaction_modal" data-bs-toggle="modal" data-bs-dismiss="modal">Lưu
-                    </button>
-                    <button class="close-modal btn btn-blank pull-right" id="close-popup" data-bs-dismiss="modal"
-                            type="button">Thoát
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- modalAvailable -->
-
-<div class="modal fade" id="modalAvailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="width: max-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="staticBackdropLabel">Cập nhật trạng thái !</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="statusChange">
-            </div>
-            <div class="modal-footer d-flex align-items-center">
-                <button class="btn btn-blank btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
-                <button class="btn btn-save sapo-btn-default" id="btnAvailableSave" type="button"
-                        data-bs-target="#update_bulkaction_modal" data-bs-toggle="modal" data-bs-dismiss="modal">Lưu
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- modalUnavailable -->
-
-<div class="modal fade" id="modalUnavailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="width: max-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Ngừng giao dịch!</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="statusChangeUnavailable">
-            </div>
-            <div class="modal-footer d-flex align-items-center">
-                <button class="btn btn-blank btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
-                <button class="btn sapo-btn-default btn-save" id="btnUnavailableSave" type="button"
-                        data-bs-target="#update_bulkaction_modal" data-bs-toggle="modal" data-bs-dismiss="modal">Lưu
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="update_bulkaction_modal" tabindex="-1" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="ui-dialog-title">Ngừng giao dịch</span>
-            </div>
-            <div class="modal-body pull-center">
-                <h2>Xử lý dữ liệu hoàn tất!</h2>
-                <div>
-                    <div>
-                    </div>
-                </div>
-                <div class="info-update">
-                    <div class="info-update-title">
-                        <span id="label-countOrderComplete">Nhà cung cấp cập nhật thành công: </span>
-                        <span id="countOrderComplete" style="color:#0088ff">0</span>
-                        <a href="javascript:" bind-event-click="showListOrderUpdate(this)" style="display: inline;">
-                            Chi tiết
-                            <i class="fa fa-angle-double-down" aria-hidden="true"></i></a>
-                    </div>
-                    <div class="info-update-body" id="listOrderComplete">
-                    </div>
-                </div>
-                <div class="info-update">
-                    <div class="info-update-title"><span id="label-countOrderFail">Nhà cung cấp cập nhật không thành công: </span><span
-                            id="countOrderFail" style="color:#ff0000">0</span><a href="javascript:"
-                                                                                 bind-event-click="showListOrderUpdate(this)">Chi
-                        tiết<i class="fa fa-angle-double-down" aria-hidden="true"></i></a></div>
-                    <div class="info-update-body" id="listOrderFail">
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="action-btn clearfix">
-                    <button class="btn pull-right sapo-btn-blank" type="button" id="buttonPrintAfterPacking"
-                            bind-event-click="showPrintAfterPackingModal()" style="margin-left:10px;display:none;">In
-                        hướng dẫn đóng gói
-                    </button>
-                </div>
-                <div class="action-btn clearfix">
-                    <button class="btn pull-right sapo-btn-default btn--reload-page" type="button"
-                            bind-event-click="window.location.href = window.location.href"
-                            style="float:right; margin-left:10px;">Xác nhận
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="width: max-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Xóa sản phẩm?</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="statusChangeDelete">
-            </div>
-            <div class="modal-footer d-flex align-items-center">
-                <button class="btn  btn-blank btn-exit" type="button" data-bs-dismiss="modal">Thoát</button>
-                <button class="btn sapo-btn-red btn-save-delete" id="btnSubmitDelete" type="button"
-                        data-bs-target="#update_bulkaction_modal" data-bs-toggle="modal" data-bs-dismiss="modal">Xóa
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="loader" style="display: none"></div>
+<th:block th:replace="/layout/supplier/supplier_list_modal.html"/>
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
+<!--<script src="/assets/admin/js/suppliers/supplier_app22.js"></script>-->
 <th:block th:replace="/layout/script :: script"/>
 <th:block th:replace="/layout/supplier/script_export_import.html"/>
-<!--<th:block th:replace="/layout/supplier/modal_export_import.html"/>-->
+
 <script>
 
     $(".filter-item").css("display", "block");
@@ -1233,6 +689,8 @@
     page.elements.searchKey = $(".searchKey");
     page.dialogs.elements.nextPage = $("#nextPage");
     page.dialogs.elements.previousPage = $("#previousPage");
+    page.dialogs.elements.fistPage = $("#fistPage");
+    page.dialogs.elements.lastPage = $("#lastPage");
 
     // page.elements.btnFilter.on("click", function () {
     //     page.elements.filter_button_tag.removeClass("active");
@@ -1250,6 +708,7 @@
         supplierFilter.pageSize = Number(page.elements.pageSize.val());
 
         page.commands.getAllSupplierUseFilter(supplierFilter);
+        // page.commands.getAllSupplierOnPageNo(1, 20, status)
     }
 
     page.commands.getAllSupplierOnPageNo = (pageNo, pageSize, status) => {
@@ -1286,7 +745,7 @@
                     page.commands.resetInputCheckBox();
                     page.commands.isCheckbox();
                     page.elements.totalPage.append(
-                        `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
+                        `<span class="me-2">Tổng nhà cung cấp ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
                     )
                 } else {
                     $(".ui-type-container").show();
@@ -1337,7 +796,7 @@
             data: JSON.stringify(supplierFilter)
         })
             .done((data) => {
-
+                console.log(data.suppliers, " datasup")
                 page.elements.tbSupplier_tbody.empty();
                 page.elements.totalPage.empty();
                 totalPage = data.totalPage;
@@ -1348,25 +807,41 @@
                     data.suppliers.map(item => {
                         if (item.status == "AVAILABLE") {
                             page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available'))
+                            // page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available', configDisplays));
+                            // page.elements.theadList.append(SupplierApp.renderThSupplier(configDisplays))
                         } else {
+                            // page.elements.theadList.append(SupplierApp.renderThSupplier(configDisplays))
                             page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'unavailable'))
                         }
                     });
+                    page.commands.resetInputCheckBox();
+                    page.commands.isCheckbox();
                     page.elements.totalPage.append(
-                        `<span class="me-2">Tổng sản phẩm ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
+                        `<span class="me-2">Tổng nhà cung cấp ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
                     )
+                    if (totalPage === 1) {
+                        $(".pagination").hide();
+                    }else {
+                        $(".pagination").show();
+                    }
                 } else {
                     $(".ui-type-container").show();
                     $("#sapo-table_wrapper").hide();
                     $(".container-fluid").hide();
                 }
-                page.elements.pageNo.parent().addClass("active")
-                if (Number(page.elements.pageNo.text()) === 1)
-                    page.dialogs.elements.previousPage.parent().addClass("disable")
-                if (Number(page.elements.pageNo.text()) === Number(totalPage))
-                    page.dialogs.elements.nextPage.parent().addClass("disable")
-                else
-                    page.dialogs.elements.nextPage.parent().removeClass("disable")
+
+                page.elements.pageNo.parent().addClass("active");
+                if (Number(page.elements.pageNo.text()) === 1) {
+                    page.dialogs.elements.previousPage.parent().css("display", "none");
+                    page.dialogs.elements.fistPage.parent().addClass("disable");
+                }else {
+                    page.dialogs.elements.previousPage.parent().css("display", "block");
+                }
+                if (Number(page.elements.pageNo.text()) === Number(totalPage)) {
+                    page.dialogs.elements.lastPage.parent().addClass("disable");
+                    page.dialogs.elements.nextPage.parent().css("display", "none");
+                } else
+                    page.dialogs.elements.lastPage.parent().removeClass("disable");
 
             })
     }
@@ -1374,35 +849,62 @@
     page.dialogs.elements.nextPage.on("click", () => {
         let pageNo = page.elements.pageNo.text();
         if (Number(pageNo) < Number(totalPage)) {
-            page.dialogs.elements.previousPage.parent().removeClass("disable")
+            page.dialogs.elements.fistPage.parent().removeClass("disable")
+            page.dialogs.elements.previousPage.parent().css("display", "block")
             let pageNext = Number(pageNo) + 1;
             page.elements.pageNo.text(pageNext);
             page.elements.pageNo.parent().addClass("active")
+            page.dialogs.elements.nextPage.text(pageNext + 1)
+            page.dialogs.elements.previousPage.text(pageNo)
             page.commands.getAllSupplier();
         }
         // page.elements.pageNo.text(Number(pageNo) + 1);
-        if (Number(page.elements.pageNo.text()) === Number(totalPage))
-            page.dialogs.elements.nextPage.parent().addClass("disable")
+        if (Number(page.elements.pageNo.text()) === Number(totalPage)) {
+            page.dialogs.elements.nextPage.parent().css("display", "none")
+            page.dialogs.elements.lastPage.parent().addClass("disable")
+        }
     })
-
 
     page.dialogs.elements.previousPage.on("click", () => {
         let pageNo = page.elements.pageNo.text();
         if (Number(pageNo) > 1) {
-            page.dialogs.elements.nextPage.parent().removeClass("disable")
+            page.dialogs.elements.lastPage.parent().removeClass("disable")
+            page.dialogs.elements.nextPage.parent().css("display", "block")
             let previousPage = Number(pageNo) - 1;
             page.elements.pageNo.text(previousPage);
             page.elements.pageNo.parent().addClass("active")
+            page.dialogs.elements.previousPage.text(previousPage - 1)
+            page.dialogs.elements.nextPage.text(pageNo)
             page.commands.getAllSupplier();
         }
-        // page.elements.pageNo.text(Number(pageNo) + 1);
-        if (Number(page.elements.pageNo.text()) === 1)
-            page.dialogs.elements.previousPage.parent().addClass("disable")
+        if (Number(page.elements.pageNo.text()) === 1) {
+            page.dialogs.elements.previousPage.parent().css("display", "none")
+            page.dialogs.elements.fistPage.parent().addClass("disable")
+        }
+
+    })
+
+    page.dialogs.elements.fistPage.on("click", () => {
+        page.dialogs.elements.previousPage.parent().css("display", "none")
+        page.elements.pageNo.text(1);
+        page.dialogs.elements.nextPage.parent().css("display", "block")
+        page.dialogs.elements.nextPage.text(2);
+        page.commands.getAllSupplier();
+    })
+
+    page.dialogs.elements.lastPage.on("click", () => {
+        page.dialogs.elements.nextPage.parent().css("display", "none")
+        page.dialogs.elements.fistPage.parent().removeClass("disable")
+        page.elements.pageNo.text(totalPage);
+        page.dialogs.elements.previousPage.parent().css("display", "block")
+        page.dialogs.elements.previousPage.text(totalPage - 1);
+        page.commands.getAllSupplier();
     })
 
     page.elements.pageSize.on("change", () => {
         page.elements.pageNo.text(1);
-        console.log(page.elements.pageNo.text(1), "  1")
+        page.dialogs.elements.nextPage.parent().css("display", "block")
+        page.dialogs.elements.nextPage.text(2)
         page.commands.getAllSupplier();
     })
 
@@ -1421,7 +923,7 @@
                     page.dialogs.elements.filterEmployee.append(SupplierApp.renderEmployeeOnFilter(item));
                     $("#accountIdBulk").append(str);
                 });
-            }).fail((jqXHR) => {
+            }).fail(() => {
         })
     }
 
@@ -1570,6 +1072,7 @@
 
 
     page.elements.updateBulkaction.on("click", () => {
+
         let empId = $("#accountIdBulk").val();
         if (empId == 0)
             empId = null
@@ -1581,19 +1084,24 @@
         $(".ui-dialog-title").text("Cập nhật thông tin nhà cung cấp")
         let countOrderComplete = 0;
         let countOrderFail = 0;
+
+        $("#btn-confirm").attr("disabled");
+        let loading = document.getElementsByClassName("loader");
+        $(loading).css("display"," block")
+        // $("#btn-confirm").addClass('loader')
         arrayIdSupplier.forEach(async id => {
             try {
                 const result = await updateBulkaction(id, empId, paymentId);
                 if (result.message.includes("Đã được cập nhật thành công")) {
                     countOrderComplete += 1
-                    let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a>
+                    let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${result.supplierCode}</a>
                                     <span> - Đã được cập nhật thành công</span>
                                 </div>`
                     $("#countOrderComplete").text(countOrderComplete)
                     $("#listOrderComplete").append(str)
                 } else if (result.message.includes("Có lỗi xảy ra")) {
                     countOrderFail += 1
-                    let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
+                    let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${result.supplierCode}</a><span> - Có lỗi xảy ra</span></div>`
                     $("#countOrderFail").text(countOrderFail)
                     $("#listOrderFail").append(str)
                 }
@@ -1604,6 +1112,11 @@
                 $("#listOrderFail").append(str);
                 console.log(e, " err")
             }
+            if((countOrderComplete+ countOrderFail)===arrayIdSupplier.length){
+                $("#btn-confirm").attr("disabled" , false);
+                // $("#btn-confirm").removeClass('loader')
+                $(loading).css("display"," none")
+            }
         })
     })
 
@@ -1612,9 +1125,7 @@
         updateSupplierParam.id = supId;
         updateSupplierParam.employeeId = empId;
         updateSupplierParam.paymentMethodId = paymentId;
-        console.log(empId, " empId in");
-        console.log(paymentId, " paymentId in");
-        console.log(supId, " supId in");
+
         return new Promise(function (resolve, reject) {
             $.ajax({
                 headers: {
@@ -1627,6 +1138,7 @@
                 beforeSend: function () {
                 },
                 success: function (data) {
+                        // All requests have completed, hide loading
                     resolve(data) // Resolve promise and when success
                 },
                 error: function (err) {
@@ -1646,14 +1158,14 @@
                 console.log(result)
                 if (result.message.includes("Đã được cập nhật trạng thái thành công")) {
                     countOrderComplete += 1
-                    let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a>
+                    let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${result.supplierCode}</a>
                                     <span> - Đã được cập nhật trạng thái thành công</span>
                                 </div>`
                     $("#countOrderComplete").text(countOrderComplete)
                     $("#listOrderComplete").append(str)
                 } else if (result.message.includes("Có lỗi xảy ra")) {
                     countOrderFail += 1
-                    let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
+                    let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${result.supplierCode}</a><span> - Có lỗi xảy ra</span></div>`
                     $("#countOrderFail").text(countOrderFail)
                     $("#listOrderFail").append(str)
                 }
@@ -1700,14 +1212,14 @@
                 console.log(result, " res")
                 if (result.message.includes("Đã ngừng giao dịch thành công")) {
                     countOrderComplete += 1
-                    let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a>
+                    let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${result.supplierCode}</a>
                                     <span> - Đã ngừng giao dịch thành công</span>
                                 </div>`
                     $("#countOrderComplete").text(countOrderComplete)
                     $("#listOrderComplete").append(str)
                 } else if (result.message.includes("Có lỗi xảy ra")) {
                     countOrderFail += 1
-                    let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
+                    let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${result.supplierCode}</a><span> - Có lỗi xảy ra</span></div>`
                     $("#countOrderFail").text(countOrderFail)
                     $("#listOrderFail").append(str)
                 }
@@ -1750,18 +1262,16 @@
         arrayIdSupplier.forEach(async id => {
             try {
                 const result = await deleteBulk(id);
-                console.log(result, " res")
-                console.log(Promise, " promise")
                 if (result.message.includes("Đã được xóa thành công")) {
                     countOrderComplete += 1
-                    let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a>
+                    let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${result.supplierCode}</a>
                                     <span> - Đã được xóa thành công</span>
                                 </div>`
                     $("#countOrderComplete").text(countOrderComplete)
                     $("#listOrderComplete").append(str)
                 } else if (result.message.includes("Có lỗi xảy ra")) {
                     countOrderFail += 1
-                    let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
+                    let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${result.supplierCode}</a><span> - Có lỗi xảy ra</span></div>`
                     $("#countOrderFail").text(countOrderFail)
                     $("#listOrderFail").append(str)
                 }
@@ -1816,7 +1326,6 @@
         supplierFilter.filter = page.elements.search.val().trim();
     }
 
-
     page.elements.multiselect_employee.on("click", function () {
         $('input[type="checkbox"].checkbox_employee').change(function () {
             page.elements.multiselect_employee.off("click")
@@ -1858,6 +1367,7 @@
         })
     })
 
+
     page.elements.multiselect_supplier_groupId.on("click", () => {
         $('input[type="checkbox"].checkbox_supplier_group').change(function () {
             page.elements.multiselect_supplier_groupId.off("click")
@@ -1866,7 +1376,7 @@
             let str = `<span class="tm-tag tm-tag-small tm-serial tm-overflow"
                                                       id="tag-variant-${checkbox.val()}" title="${checkboxText}">
                             <span>${checkboxText}</span>
-
+                       <a class="tm-tag-remove tag-variant-remove" onclick="tagVariantRemove(this)" variant-id="${checkbox.val()}">x</a>
                        </span>`
             // < a className = "tm-tag-remove tag-variant-remove" variant - id = "${checkbox.val()}" > x < /a>
             if (checkbox.is(":checked")) {
@@ -1881,6 +1391,16 @@
             console.log(supplierFilter.groupIds)
         })
     })
+
+    function tagVariantRemove(element) {
+        let variantId = element.getAttribute('variant-id')
+        let inputId = document.getElementById(variantId)
+        supplierFilter.groupIds.splice(supplierFilter.groupIds.indexOf(variantId), 1)
+        $("span[" + "id" + "*=" + "tag-variant-" + variantId + "]").remove()
+        if ($(inputId).is(":checked"))
+            $(inputId).prop("checked", false)
+    }
+
 
     // tìm từ khóa trong filter SupplierGroup
     function suggest(element) {
@@ -1908,12 +1428,96 @@
     }
 
 
+    const defaultFields = ["code", "supplier_name", "supplier_group", "email", "phone_number", "status"];
+
+
+    // function toggleItem(element) {
+    //
+    // }
+
+    function confirmSave(str, element) {
+        let sList = [];
+        if ($("#defaultSettings").is(":checked")) {
+            $("#list-row-default").find('input[type="checkbox"].export-field-group--toggle-item').each(function () {
+                if (this.checked)
+                    sList.push($(this).val())
+            });
+            console.log(sList, " list-row-default")
+            return sList;
+        } else {
+            $("#list-row-settings").find('input[type="checkbox"].export-field-group--toggle-item').each(function () {
+                if (this.checked)
+                    sList.push($(this).val())
+            });
+            console.log(sList, ' list-row-settings')
+            return sList;
+        }
+    }
+
+    $("#defaultSettings").change(function () {
+        if ($("#defaultSettings").prop('checked')) {
+            $("#list-row-settings").hide();
+            $("#list-row-default").show();
+            $("#list-row-default").find(".export-field-group--toggle-item").each(function (index, item) {
+                $(item).attr('checked', false);
+            });
+            if (defaultFields != null)
+                for (let i = 0; i < defaultFields.length; i++) {
+                    $("#list-row-default").find('.export-field-group--toggle-item[value="' + defaultFields[i] + '"]').attr('checked', true);
+                }
+        } else {
+            $("#list-row-settings").show();
+            $("#list-row-default").hide();
+        }
+    });
+
+    // drag vs drop
+    const draggables = document.querySelectorAll(".ui-sortable-handle");
+    const containers = document.querySelectorAll(".ui-sortable")
+
+    draggables.forEach(draggable => {
+        draggable.setAttribute("draggable", true)
+        draggable.addEventListener('dragstart', () => {
+            draggable.classList.add('dragging')
+        })
+
+        draggable.addEventListener('dragend', () => {
+            draggable.classList.remove('dragging')
+        })
+    })
+
+    containers.forEach(container => {
+        container.addEventListener('dragover', e => {
+            e.preventDefault()
+            const afterElement = getDragAfterElement(container, e.clientY)
+            const draggable = document.querySelector('.dragging')
+            if (afterElement == null) {
+                container.appendChild(draggable)
+            } else {
+                container.insertBefore(draggable, afterElement)
+            }
+        })
+    })
+
+    function getDragAfterElement(container, y) {
+        const draggableElements = [...container.querySelectorAll('.ui-sortable-handle:not(.dragging)')]
+
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect()
+            const offset = y - box.top - box.height / 2
+            if (offset < 0 && offset > closest.offset) {
+                return {offset: offset, element: child}
+            } else {
+                return closest
+            }
+        }, {offset: Number.NEGATIVE_INFINITY}).element
+    }
+
     page.commands.loadData = () => {
         page.commands.getAllSupplier();
         page.commands.getAllEmployee();
         page.commands.getAllPaymentMethodSelect();
         page.commands.getAllSupplierGroup();
-
         // page.commands.getAllSupplierByFilter();
     }
 

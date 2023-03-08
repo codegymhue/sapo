@@ -18,8 +18,11 @@ public class AddressMapper implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         TypeMap<Address, AddressResult> model2Dto = modelMapper.createTypeMap(Address.class, AddressResult.class);
+
         model2Dto.addMapping(Address::isShippingAddress, AddressResult::setShipping);
+
         TypeMap<CreateAddressParam, Address> dto2Model = modelMapper.createTypeMap(CreateAddressParam.class, Address.class);
+
         dto2Model.addMapping(CreateAddressParam::isShipping, Address::setShippingAddress);
     }
 

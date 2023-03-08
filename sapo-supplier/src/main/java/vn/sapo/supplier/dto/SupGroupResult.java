@@ -10,4 +10,5 @@ import lombok.experimental.Accessors;
 public class SupGroupResult {
     private Integer id;
     private String title;
+    private String supGroupCode;
 }

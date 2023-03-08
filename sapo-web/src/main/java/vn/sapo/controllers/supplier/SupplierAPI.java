@@ -3,19 +3,31 @@ package vn.sapo.controllers.supplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+<<<<<<< HEAD
 import vn.sapo.customers.AddressService;
 import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.payment.method.PaymentMethodService;
+=======
+import vn.sapo.address.AddressService;
+import vn.sapo.address.dto.CreateAddressParam;
+import vn.sapo.payment_method.PaymentMethodService;
+import vn.sapo.shared.exceptions.NotFoundException;
+>>>>>>> main
 import vn.sapo.supplier.SupplierExcelService;
 import vn.sapo.supplier.dto.*;
 import vn.sapo.supplier.excel.ImportExcelSupplierParam;
 import vn.sapo.supplier.excel.ResponseMessage;
 
 import vn.sapo.supplier.SupplierService;
+import vn.sapo.supplierGroup.SupplierGroupService;
 
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +38,7 @@ public class SupplierAPI {
 
     @Autowired
     private SupplierService supplierService;
+
 
     @Autowired
     private AddressService addressService;
@@ -82,13 +95,7 @@ public class SupplierAPI {
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
         List<ImportExcelSupplierParam> dtoList = supplierExcelService.extractExcel(file);
-        dtoList.forEach(dto -> {
-            try {
-                String paymentMethodId = paymentMethodService.findByTitle(dto.getPaymentMethodTitle()).getId();
-                dto.setPaymentMethodId(paymentMethodId);
-            } catch (Exception ignored) {
-            }
-        });
+        supplierExcelService.fillFieldDto(dtoList);
         supplierExcelService.importSupplier(dtoList);
         message = "Uploaded the file successfully: " + file.getOriginalFilename();
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
@@ -96,59 +103,68 @@ public class SupplierAPI {
 
     @PostMapping("/activeBulk")
     public ResponseEntity<?> updateStatusToAvailable(@RequestBody Integer id) {
+        String supplierCode = supplierService.findSupplierCodeById(id);
         try {
             supplierService.changeStatusToAvailable(id, true);
-            String finalMessage = String.format(" '%s'- Đã được cập nhật trạng thái thành công", id);
+            String finalMessage = String.format(" '%s'- Đã được cập nhật trạng thái thành công", supplierCode);
             return new ResponseEntity<>(new HashMap<>() {{
                 put("message", finalMessage);
+                put("supplierCode", supplierCode);
             }}
                     , HttpStatus.OK);
 
         } catch (RuntimeException e) {
             e.printStackTrace();
-            String finalMessage = String.format(" '%s'- Có lỗi xảy ra", id);
+            String finalMessage = String.format(" '%s'- Có lỗi xảy ra", supplierCode);
             return new ResponseEntity<>(new HashMap<>() {{
                 put("message", finalMessage);
+                put("supplierCode", supplierCode);
             }},
                     HttpStatus.EXPECTATION_FAILED);
         }
     }
+
     @PostMapping("/disableBulk")
     public ResponseEntity<?> updateStatusUnavailable(@RequestBody Integer id) {
-
+        String supplierCode = supplierService.findSupplierCodeById(id);
         try {
             supplierService.changeStatusToAvailable(id, false);
-            String finalMessage = String.format(" %s - Đã ngừng giao dịch thành công", id);
+            String finalMessage = String.format(" %s - Đã ngừng giao dịch thành công", supplierCode);
             return new ResponseEntity<>(new HashMap<>() {{
                 put("message", finalMessage);
+                put("supplierCode", supplierCode);
             }}
                     , HttpStatus.OK);
 
         } catch (RuntimeException e) {
             e.printStackTrace();
-            String finalMessage = String.format(" %s - Có lỗi xảy ra", id);
+            String finalMessage = String.format(" %s - Có lỗi xảy ra", supplierCode);
             return new ResponseEntity<>(new HashMap<>() {{
                 put("message", finalMessage);
+                put("supplierCode", supplierCode);
             }},
                     HttpStatus.EXPECTATION_FAILED);
         }
     }
 
     @PostMapping("/updateBulk")
-    public ResponseEntity<?> updateBulkaction(@RequestBody UpdateMultiSupParam updateMultiSupParam){
+    public ResponseEntity<?> updateBulkaction(@RequestBody UpdateMultiSupParam updateMultiSupParam) {
+        String supplierCode = supplierService.findSupplierCodeById(updateMultiSupParam.getId());
         try {
-            supplierService.changeEmpIdAndPaymentMethod(updateMultiSupParam.getId(),updateMultiSupParam.getEmployeeId() ,updateMultiSupParam.getPaymentMethodId());
-            String finalMessage = String.format(" '%s'- Đã được cập nhật thành công", updateMultiSupParam.getId());
+            supplierService.changeEmpIdAndPaymentMethod(updateMultiSupParam.getId(), updateMultiSupParam.getEmployeeId(), updateMultiSupParam.getPaymentMethodId());
+            String finalMessage = String.format(" '%s'- Đã được cập nhật thành công", supplierCode);
             return new ResponseEntity<>(new HashMap<>() {{
                 put("message", finalMessage);
+                put("supplierCode", supplierCode);
             }}
                     , HttpStatus.OK);
 
         } catch (RuntimeException e) {
             e.printStackTrace();
-            String finalMessage = String.format(" '%s'- Có lỗi xảy ra", updateMultiSupParam.getId());
+            String finalMessage = String.format(" '%s'- Có lỗi xảy ra", supplierCode);
             return new ResponseEntity<>(new HashMap<>() {{
                 put("message", finalMessage);
+                put("supplierCode", supplierCode);
             }},
                     HttpStatus.EXPECTATION_FAILED);
         }
@@ -156,33 +172,45 @@ public class SupplierAPI {
     };
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> update(@Validated @RequestBody UpdateSupplierParam updateSupplierParam) {
+    public ResponseEntity<?> update(@Valid @RequestBody UpdateSupplierParam updateSupplierParam, BindingResult bindingResult) {
+        List<String> allError = new ArrayList<>();
+        List<ObjectError> errors;
+        if (bindingResult.hasFieldErrors()) {
+            errors = bindingResult.getAllErrors();
+            for (ObjectError error : errors) {
+                allError.add(error.getDefaultMessage());
+            }
+            throw new NotFoundException(allError.toString());
+        }
         return new ResponseEntity<>(supplierService.update(updateSupplierParam), HttpStatus.OK);
     }
 
 
     @DeleteMapping("/deleteBulk")
     public ResponseEntity<?> deleteById(@RequestBody Integer id) {
+        String supplierCode = supplierService.findSupplierCodeById(id);
         try {
+            if (!addressService.findBySupplierId(id).isEmpty())
+                addressService.deleteAllBySupplierId(id);
             supplierService.deleteById(id);
-            String finalMessage = String.format(" %s - Đã được xóa thành công", id);
+            String finalMessage = String.format(" %s - Đã được xóa thành công", supplierCode);
             return new ResponseEntity<>(new HashMap<>() {{
                 put("message", finalMessage);
+                put("supplierCode", supplierCode);
             }},
                     HttpStatus.OK);
 
         } catch (RuntimeException e) {
             e.printStackTrace();
-            String finalMessage = String.format(" %s - Có lỗi xảy ra", id);
+            String finalMessage = String.format(" %s - Có lỗi xảy ra", supplierCode);
             return new ResponseEntity<>(new HashMap<>() {{
                 put("message", finalMessage);
+                put("supplierCode", supplierCode);
             }},
                     HttpStatus.EXPECTATION_FAILED);
         }
 
     }
-
-
 
 
 //    @DeleteMapping("/suppliers/DeleteAddress")

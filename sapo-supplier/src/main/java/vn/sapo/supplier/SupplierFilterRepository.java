@@ -11,10 +11,7 @@ import vn.sapo.entities.supplier.SupplierGroup;
 import vn.sapo.supplier.dto.SupplierFilter;
 import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,11 +23,11 @@ public interface SupplierFilterRepository extends JpaRepository<Supplier, Intege
         return findAll((root, criteriaQuery, criteriaBuilder) -> {
 
             List<Predicate> predicates = new ArrayList<>();
-            if(filter.getFilter() != null){
-                Predicate predicateSupplierCode = criteriaBuilder.like(root.get("supplierCode"),'%' + filter.getFilter() + '%');
-                Predicate predicatePhone = criteriaBuilder.like(root.get("phone"),'%' + filter.getFilter() + '%');
-                Predicate predicateName = criteriaBuilder.like(root.get("fullName"),'%' + filter.getFilter() + '%');
-                Predicate predicateKw = criteriaBuilder.or(predicateSupplierCode, predicatePhone,predicateName);
+            if (filter.getFilter() != null) {
+                Predicate predicateSupplierCode = criteriaBuilder.like(root.get("supplierCode"), '%' + filter.getFilter() + '%');
+                Predicate predicatePhone = criteriaBuilder.like(root.get("phone"), '%' + filter.getFilter() + '%');
+                Predicate predicateName = criteriaBuilder.like(root.get("fullName"), '%' + filter.getFilter() + '%');
+                Predicate predicateKw = criteriaBuilder.or(predicateSupplierCode, predicatePhone, predicateName);
                 predicates.add(predicateKw);
             }
             if (!filter.getGroupIds().isEmpty()) {
@@ -38,12 +35,75 @@ public interface SupplierFilterRepository extends JpaRepository<Supplier, Intege
                 predicates.add(predicate);
             }
 
-            if (!filter.getEmployeeIds().isEmpty()){
+            if (!filter.getEmployeeIds().isEmpty()) {
                 Predicate predicate = criteriaBuilder.or(root.get("employee").get("id").in(filter.getEmployeeIds()));
                 predicates.add(predicate);
             }
 
-            if(!filter.getStatuses().isEmpty()){
+            //hàm này xài được
+//            Predicate inJsonNumbers = criteriaBuilder
+//                    .function("JSON_EXTRACT",
+//                            String.class,
+//                            root.get("tags"),
+//                            criteriaBuilder.literal("$[*]")
+//                          )
+//                    .in(filter.getTags());
+//            predicates.add(inJsonNumbers);
+//
+//            Predicate containsTag = (Predicate) criteriaBuilder
+//                    .function(
+//                            "JSON_CONTAINS",
+//                            Boolean.class,
+//                            root.get("tags"),
+//                            criteriaBuilder.literal("\"" + filter.getTags() + "\"")
+//                    );
+//            predicates.add(containsTag);
+
+
+//            Predicate likeJsonNumbers = criteriaBuilder
+//                    .like(
+//                            criteriaBuilder.function(
+//                                    "JSON_EXTRACT",
+//                                    String.class,
+//                                    root.get("tags"),
+//                                    criteriaBuilder.literal("$[*]")
+//                            ),
+//                            "%" + filter.getTags() + "%"
+//                    );
+//            predicates.add(likeJsonNumbers);
+
+
+
+//            // Tìm kiếm theo tags
+//            if (!filter.getTags().isEmpty()) {
+//                Expression<String> jsonExpr = root.get("tags");
+//                for (String tag : filter.getTags()) {
+//                    Predicate predicate = criteriaBuilder.like(jsonExpr.as(String.class), "%\"" + tag + "\"%");
+//                    predicates.add(predicate);
+//                }
+//            }
+//            Predicate tagsPredicate = null;
+//            if (!filter.getTags().isEmpty()) {
+//                tagsPredicate = criteriaBuilder.or(root.get("tags").in(filter.getTags())) ;
+//            }
+//
+//            if (tagsPredicate != null) {
+//                predicates.add(tagsPredicate);
+//            }
+
+//            Predicate tagsPredicate = criteriaBuilder.like(
+//                    criteriaBuilder.function("JSON_EXTRACT", String.class, root.get("tags"), criteriaBuilder.literal("$.tags")),
+//                    "%" + filter.getTags() + "%");
+//
+//            for (int i = 1; i < tagsToSearch.size(); i++) {
+//                String tag = tagsToSearch.get(i);
+//                tagsPredicate = builder.or(tagsPredicate, builder.like(
+//                        builder.function("JSON_EXTRACT", String.class, root.get("tags"), builder.literal("$.tags")),
+//                        "%" + tag + "%"));
+//            }
+
+
+            if (!filter.getStatuses().isEmpty()) {
                 Predicate predicate = criteriaBuilder.or(root.get("status").in(filter.getStatuses()));
                 predicates.add(predicate);
             }
@@ -54,11 +114,12 @@ public interface SupplierFilterRepository extends JpaRepository<Supplier, Intege
             if (createdFrom != null && createdTo != null) {
                 createdAtPredicate = criteriaBuilder.between(createdAtPath, createdFrom.toInstant(), createdTo.toInstant());
 
-            }else {
+            } else {
                 if (createdFrom != null) {
                     createdAtPredicate = criteriaBuilder.greaterThan(createdAtPath, createdFrom.toInstant());
 
-                }if (createdTo != null) {
+                }
+                if (createdTo != null) {
                     createdAtPredicate = criteriaBuilder.lessThan(createdAtPath, createdTo.toInstant());
                 }
             }

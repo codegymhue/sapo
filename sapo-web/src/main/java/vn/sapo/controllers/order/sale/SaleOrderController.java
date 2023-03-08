@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import vn.sapo.order.sale.SaleOrderService;
-import vn.sapo.payment.sale.PaymentSaleOrderService;
+import vn.sapo.voucher.receipt.ReceiptVoucherService;
 
 @Controller
 @RequestMapping("/admin")
@@ -17,7 +17,8 @@ public class SaleOrderController {
     private SaleOrderService orderService;
 
     @Autowired
-    private PaymentSaleOrderService paymentSaleOrderService;
+    private ReceiptVoucherService paymentSaleOrderService;
+
 
     @GetMapping("/orders")
     public ModelAndView showListOrderPage() {
@@ -42,13 +43,13 @@ public class SaleOrderController {
         return modelAndView;
     }
 
-    @GetMapping("/orders/{id}")
-    public ModelAndView showOrderDetail(@PathVariable Integer id) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/admin/order/order_id");
-        modelAndView.addObject("orders", orderService.findById(id));
-        modelAndView.addObject("payment_sale_order", paymentSaleOrderService.findAllByOrderId(id));
-        return modelAndView;
-    }
+//    @GetMapping("/orders/{id}")
+//    public ModelAndView showOrderDetail(@PathVariable Integer id) {
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("/admin/order/order_id");
+//        modelAndView.addObject("orders", orderService.findById(id));
+//        modelAndView.addObject("payment_sale_order", paymentSaleOrderService.findAllByOrderId(id));
+//        return modelAndView;
+//    }
 
 }

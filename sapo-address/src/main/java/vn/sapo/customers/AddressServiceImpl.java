@@ -99,17 +99,21 @@ public class AddressServiceImpl implements AddressService {
             List<Address> addressList = addresses.getContent();
             System.out.println("page: " + addressList);
             List<AddressResult> addressResultList = new ArrayList<>();
+
             for (Address address : addressList) {
                 AddressResult addressResult = addressMapper.toDTO(address);
                 addressResultList.add(addressResult);
             }
 
             Map<String, Object> response = new HashMap<>();
+
             response.put("addresses", addressResultList);
             response.put("totalItem", addresses.getTotalElements());
             response.put("totalPage", addresses.getTotalPages());
+
             return response;
-        } else {
+        }
+        else {
             return new HashMap<>();
         }
     }
@@ -133,8 +137,11 @@ public class AddressServiceImpl implements AddressService {
     public void deleteByCustomerId(Integer customerId) {
         addressRepository.deleteByCustomerId(customerId);
     }
-
-
+    @Override
+    @Transactional
+   public void deleteAllBySupplierId(Integer id){
+        addressRepository.deleteAllBySupplierId(id);
+    };
 }
 
 

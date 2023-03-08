@@ -32,6 +32,40 @@
 
     <link href="https://sapo.dktcdn.net/fe-cdn-production/lib/driver/driver.min.css?v=20220218" rel="stylesheet"/>
     <title>C&#x1EAD;p nh&#x1EAD;t nh&#xE0; cung c&#x1EA5;p Non nisi est reicien</title>
+    <style>
+        .help-dashboard .help-dropdown .help-popup {
+            top: 60px;
+            box-shadow: #c6c6c6 0px 3px 5px 0px;
+        }
+
+        .help-dashboard .help-dropdown .help-popup:after {
+            right: 20px;
+        }
+
+        .help-dropdown a {
+            color: #686868;
+            display: flex;
+            height: 100%;
+            border: none;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border: 1px solid #c4cdd5;
+            float: right;
+            width: auto;
+        }
+
+        .help-dropdown div:hover {
+            background-color: #e7f2ff;
+        }
+        .btn-group>ul>li p:hover{
+            background-color: #007bff;
+        }
+        .error{
+            color: #b93c3c;
+        }
+    </style>
 </head>
 
 <body class="body_dashboard partners suppliers edit">
@@ -62,37 +96,6 @@
                     </div>
                     <input type="hidden" id="supplierId" th:value="${supplier.id}">
 
-                    <style>
-                        .help-dashboard .help-dropdown .help-popup {
-                            top: 60px;
-                            box-shadow: #c6c6c6 0px 3px 5px 0px;
-                        }
-
-                        .help-dashboard .help-dropdown .help-popup:after {
-                            right: 20px;
-                        }
-
-                        .help-dropdown a {
-                            color: #686868;
-                            display: flex;
-                            height: 100%;
-                            border: none;
-                            flex-direction: row;
-                            justify-content: center;
-                            align-items: center;
-                            cursor: pointer;
-                            border: 1px solid #c4cdd5;
-                            float: right;
-                            width: auto;
-                        }
-
-                        .help-dropdown div:hover {
-                            background-color: #e7f2ff;
-                        }
-                        .btn-group>ul>li p:hover{
-                            background-color: #007bff;
-                        }
-                    </style>
                 </div>
             </div>
             <header class="ui-title-bar-container" style="margin-top: 55px;">
@@ -119,7 +122,12 @@
                     </div>
                 </div>
             </header>
-            <form id="formUpdateSupplier">
+            <div hidden="hidden" id="error">
+                <ul>
+                    <li>loi1</li>
+                </ul>
+            </div>
+            <form id="formUpdateSupplier" class=".needs-validation">
                 <div class="customer-container container" context="editSupplier">
                     <div class="customer-create--left">
                         <div class="page-info">
@@ -128,7 +136,7 @@
                                     <div class="label mb-2 label-required">Tên nhà cung cấp</div>
                                     <input id="fullName" name="fullName" class="sapo-textbox w100"
                                            th:value="${supplier.fullName}" data-toggle="tooltip"
-                                           placeholder="Nhập tên nhà cung cấp">
+                                           placeholder="Nhập tên nhà cung cấp" required>
                                 </div>
                                 <div class="col-6 field pl-0">
                                     <div class="label mb-2">Mã nhà cung cấp</div>
@@ -249,10 +257,10 @@
                                                         th:text="${supplier.employee} ? ${supplier.employee.fullName} : ${'Chọn nhân viên phụ trách '}"></option>
                                             </select>
                                         </a>
-                                        <svg class="next-icon next-icon--size-16">
-                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                 xlink:href="#select-chevron"></use>
-                                        </svg>
+<!--                                        <svg class="next-icon next-icon&#45;&#45;size-16">-->
+<!--                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"-->
+<!--                                                 xlink:href="#select-chevron"></use>-->
+<!--                                        </svg>-->
                                         <div class="filter-body--suggest">
                                         </div>
                                     </div>
@@ -539,7 +547,8 @@
         page.dialogs.elements.modalCreateGroupSupplier.modal('show');
         page.dialogs.elements.groupCreateTitleSup.val("");
         page.dialogs.elements.groupCreateCodeSup.val("");
-        page.dialogs.elements.groupCreateDescriptionSup.val("")
+        page.dialogs.elements.groupCreateDescriptionSup.val("");
+
     })
 
     page.dialogs.elements.btnCreateGroupSupplier.on('click', () => {
@@ -569,10 +578,16 @@
                 console.log("data: ", data)
                 SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
                 page.dialogs.elements.modalCreateGroupSupplier.modal('hide');
-                location.reload();
+                getAllGroup();
+                // location.reload();
             })
-            .fail(() => {
-                SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại !");
+            .fail((jqXHR) =>{
+                if (jqXHR.responseJSON) {
+                    if (jqXHR.responseJSON.message) {
+                        SupplierApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
+                    }
+                }
+                // SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại !");
             })
     }
 
@@ -640,8 +655,14 @@
                 SupplierApp.IziToast.showSuccessAlert("Sửa thông tin nhà cung cấp thành công!");
                 location.href = `/admin/suppliers/${data.id}/histories`;
             })
-            .fail(() => {
-                SupplierApp.IziToast.showErrorAlert("Sửa thông tin nhà cung cấp thất bại")
+            .fail((jqXHR) => {
+                if (jqXHR.responseJSON) {
+                    if (jqXHR.responseJSON.message) {
+                        SupplierApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
+                    }
+                }
+
+                // SupplierApp.IziToast.showErrorAlert("Sửa thông tin nhà cung cấp thất bại")
             })
     }
 
@@ -679,7 +700,7 @@
             .done((data) => {
                 supplierGroups = data;
                 $.each(data, function (index, value) {
-                    page.elements.renderGroupLi.append(
+                    page.elements.renderGroupLi.prepend(
                         `<li onclick="handleChangeGroupSupp(${value.id})">
                         <p  class="w-80 border-0 " id="${value.id}" style="padding:7px; font-size: 12px;font-weight:450; width: 300px;border: unset;" value="${value.id}">
                         ${value.title}</p>
@@ -719,9 +740,12 @@
             )
         });
     }
-    getAllGroup();
-    getAllEmployeeSelect();
-    getAllPaymentMethodSelect();
+
+    $(function() {
+        getAllGroup();
+        getAllEmployeeSelect();
+        getAllPaymentMethodSelect();
+    })
 
 </script>
 </html>

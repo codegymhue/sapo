@@ -45,7 +45,6 @@ public class ExcelHelperSuppliers {
                 CreateAddressParam address = new CreateAddressParam();
                 address.setProvinceId(-1);
                 address.setDistrictId(-1);
-//                address.setWardId(-1);
                 Row currentRow = rows.next();
                 Iterator<Cell> cellsInRow = currentRow.iterator();
                 while (cellsInRow.hasNext()) {
@@ -58,7 +57,9 @@ public class ExcelHelperSuppliers {
                             supplier.setSupplierCode(currentCell.getStringCellValue());
                             break;
                         case 2:
-//  ma nhom nha cung cap
+                            String group = currentCell.getStringCellValue();
+                            if (group != null && !group.isBlank())
+                                supplier.setGroupId(Integer.valueOf(group));
                             break;
                         case 3:
                             supplier.setEmail(currentCell.getStringCellValue());
@@ -79,47 +80,45 @@ public class ExcelHelperSuppliers {
                             supplier.setDescription(currentCell.getStringCellValue());
                             break;
                         case 9:
-//                     chính sách giá mặc định
-                            break;
-                        case 10:
-//                      Kỳ hạn thanh toán mặc định
-                            break;
-                        case 11:
                             String paymentMethod = currentCell.getStringCellValue();
                             if (paymentMethod != null && !paymentMethod.isBlank())
                                 supplier.setPaymentMethodId(paymentMethod);
-
                             break;
-
-                        case 12:
+                        case 10:
                             address.setFullName(currentCell.getStringCellValue());
                             break;
-                        case 13:
+                        case 11:
                             address.setPhoneNumber(currentCell.getStringCellValue());
                             break;
-                        case 14:
+                        case 12:
                             address.setEmail(currentCell.getStringCellValue());
                             break;
-                        case 15:
-//                            nhãn
+                        case 13:
+                            address.setLabel(currentCell.getStringCellValue());
                             break;
-                        case 16:
+                        case 14:
                             address.setLine1(currentCell.getStringCellValue());
                             break;
-                        case 17:
+                        case 15:
                             address.setLine2(currentCell.getStringCellValue());
                             break;
-                        case 18:
+                        case 16:
                             address.setProvinceName(currentCell.getStringCellValue());
                             break;
-                        case 19:
+                        case 17:
                             address.setDistrictName(currentCell.getStringCellValue());
                             break;
-                        case 20:
+                        case 18:
 //                            nợ hiện tại
                             break;
-                        case 21:
+                        case 19:
 //                              tags
+                            break;
+                        case 20:
+//                     chính sách giá mặc định
+                            break;
+                        case 21:
+//                      Kỳ hạn thanh toán mặc định
                             break;
                         default:
                             break;

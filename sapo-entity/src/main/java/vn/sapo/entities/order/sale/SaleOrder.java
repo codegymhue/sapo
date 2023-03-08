@@ -9,11 +9,9 @@ import vn.sapo.entities.Employee;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.order.OrderStatus;
 import vn.sapo.entities.order.OrderStatusCode;
-import vn.sapo.entities.payment.sale.PaymentSaleOrder;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Set;
 
 @Setter
 @Getter
@@ -96,9 +94,9 @@ public class SaleOrder extends BaseEntity {
 
     @Column(name = "discount", precision = 10, scale = 2)
     private BigDecimal discount;
-
-    @OneToMany(targetEntity = PaymentSaleOrder.class, mappedBy = "order")
-    private Set<PaymentSaleOrder> paymentOrderSet;
+//
+//    @OneToMany(targetEntity = PaymentSaleOrder.class, mappedBy = "order")
+//    private Set<PaymentSaleOrder> paymentOrderSet;
 
 
     public SaleOrder(Integer id) {
