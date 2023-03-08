@@ -75,9 +75,10 @@ public class CustomerGroupAPI {
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CreateCusGroupParam createCusGroupParam) {
         System.out.println(createCusGroupParam);
+
         CustomerGroupResult dto = customerGroupService.create(createCusGroupParam);
 
-        dto = customerGroupService.findById(dto.getId());
+//        dto = customerGroupService.findById(dto.getId());
 
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }

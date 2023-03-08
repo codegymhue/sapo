@@ -1,91 +1,100 @@
 <th:block th:fragment="createPricePolicy">
-    <div class="modal fade" id="createPricePolicy" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="createPricePolicy" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="jss23776">
                     <h5 class="modal-title" id="staticBackdropLabel">Thêm mới chính sách giá</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btnCloseCreatePricePolicyModal" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="jss23777">
-                    <div class="row-cols-6">
-                        <div class="MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-container">
-                            <div class="MuiFormControl-root MuiGrid-grid-xs-6 jss754 jss23779">
-                                <label class="MuiFormLabel-root MuiInputLabel-root jss755
+                    <form id="frmCreatePricePolicy">
+                        <div class="row-cols-6">
+                            <div class="MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-container">
+                                <div class="MuiFormControl-root MuiGrid-grid-xs-6 jss754 jss23779">
+                                    <label class="MuiFormLabel-root MuiInputLabel-root jss755
                                         MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-                                       data-shrink="true" for="titleGroupCre">
-                                    Tên chính sách giá
-                                    <span class="MuiFormLabel-asterisk MuiInputLabel-asterisk">
+                                           data-shrink="true" for="titlePricePolicyCre">
+                                        Tên chính sách giá
+                                        <span class="MuiFormLabel-asterisk MuiInputLabel-asterisk">
                                                 &thinsp;*
                                             </span>
-                                </label>
-                                <div class="MuiFormControl-root jss756"
-                                     field="[object Object]" form="[object Object]">
-                                    <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth">
-                                        <div class="MuiInputBase-fullWidth">
-                                            <input aria-invalid="false"
-                                                   id="titleGroupCre1"
-                                                   name="titleGroupCre"
-                                                   placeholder="VD: Giá bán lẻ"
-                                                   type="text"
-                                                   aria-label="Without label"
-                                                   class="MuiInputBase-input MuiOutlinedInput-input placeholder_text"
-                                                   fdprocessedid="7i85i6">
+                                    </label>
+                                    <div class="MuiFormControl-root jss756"
+                                         field="[object Object]" form="[object Object]">
+                                        <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth">
+                                            <div class="MuiInputBase-fullWidth">
+                                                <input aria-invalid="false"
+                                                       id="titlePricePolicyCre"
+                                                       name="titlePricePolicyCre"
+                                                       placeholder="VD: Giá bán lẻ"
+                                                       type="text"
+                                                       aria-label="Without label"
+                                                       class="MuiInputBase-input MuiOutlinedInput-input placeholder_text"
+                                                       fdprocessedid="7i85i6">
+                                            </div>
+                                            <fieldset aria-hidden="true"
+                                                      class="jss823 MuiOutlinedInput-notchedOutline">
+                                                <legend class="jss824">
+                                                </legend>
+                                            </fieldset>
+                                            <div class="error hidden"></div>
                                         </div>
-                                        <fieldset aria-hidden="true"
-                                                  class="jss823 MuiOutlinedInput-notchedOutline">
-                                            <legend class="jss824">
-                                            </legend>
-                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div class="MuiFormControl-root MuiGrid-grid-xs-6 jss754 jss23780">
+                                    <label class="MuiFormLabel-root MuiInputLabel-root jss755
+                                        MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
+                                           data-shrink="true" for="pricingPolicyCodeCre">
+                                        Mã nhóm
+                                        <span class="MuiFormLabel-asterisk MuiInputLabel-asterisk">
+                                                &thinsp;*
+                                            </span>
+                                    </label>
+                                    <div class="MuiFormControl-root jss756" field="[object Object]" form="[object Object]">
+                                        <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth">
+                                            <div class="MuiInputBase-fullWidth">
+                                                <input aria-invalid="false"
+                                                       id="pricingPolicyCodeCre"
+                                                       name="pricingPolicyCodeCre"
+                                                       placeholder="VD: BANLE"
+                                                       type="text"
+                                                       aria-label="Without label"
+                                                       class="MuiInputBase-input MuiOutlinedInput-input placeholder_text"
+                                                       fdprocessedid="7i85i6">
+                                            </div>
+                                            <fieldset aria-hidden="true"
+                                                      class="jss823 MuiOutlinedInput-notchedOutline">
+                                                <legend class="jss824">
+                                                </legend>
+                                            </fieldset>
+                                            <div class="error hidden"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="MuiFormControl-root MuiGrid-grid-xs-6 jss754 jss23780">
-                                <label class="MuiFormLabel-root MuiInputLabel-root jss755
-                                        MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-                                       data-shrink="true" for="titleGroupCre">
-                                    Mã nhóm
-                                    <span class="MuiFormLabel-asterisk MuiInputLabel-asterisk">
-                                                &thinsp;*
-                                            </span>
-                                </label>
-                                <div class="MuiFormControl-root jss756"
-                                     field="[object Object]" form="[object Object]">
-                                    <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth">
-                                        <div class="MuiInputBase-fullWidth">
-                                            <input aria-invalid="false"
-                                                   id="titleGroupCre"
-                                                   name="titleGroupCre"
-                                                   placeholder="VD: BANLE"
-                                                   type="text"
-                                                   aria-label="Without label"
-                                                   class="MuiInputBase-input MuiOutlinedInput-input placeholder_text"
-                                                   fdprocessedid="7i85i6">
-                                        </div>
-                                        <fieldset aria-hidden="true"
-                                                  class="jss823 MuiOutlinedInput-notchedOutline">
-                                            <legend class="jss824">
-                                            </legend>
-                                        </fieldset>
-                                    </div>
+                            <div class="jss23781">
+                                <div class="jss23782">
+                                    <input type="radio" name="policyStyle" id="customer" value="SALE" />
+                                    <label for="customer">Bán hàng</label>
+                                    <p class="error"></p>
                                 </div>
+                                <div class="jss23782">
+                                    <input type="radio" name="policyStyle" id="supplier" value="PURCHASE"/>
+                                    <label for="supplier">Nhập hàng</label>
+                                </div>
+                                <div class="error hidden"></div>
                             </div>
                         </div>
-                        <div>
-                            <div class="jss759">
-                                <input type="radio" name="policyStyle" id="customer"/>
-                                <label for="customer">Bán hàng</label>
-                            </div>
-
-                            <div class="jss759">
-                                <input type="radio" name="policyStyle" id="supplier"/>
-                                <label for="supplier">Nhập hàng</label>
-                            </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
+                    <button type="button" class="ldZiUT ldZiUTA btnCloseCreatePricePolicyModal" data-bs-dismiss="modal">
+                        Thoát
+                    </button>
+                    <button id="btnCreatePricePolicy" class="RthGc ldZiUTA" type="button">
+                        Thêm
+                    </button>
                 </div>
             </div>
         </div>

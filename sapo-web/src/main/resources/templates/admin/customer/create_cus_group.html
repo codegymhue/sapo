@@ -81,6 +81,7 @@
                                                     </legend>
                                                 </fieldset>
                                             </div>
+                                            <div class="error hidden"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +102,6 @@
                                                 <fieldset aria-hidden="true"
                                                           class="jss823 MuiOutlinedInput-notchedOutline">
                                                     <legend class="jss824">
-                                                        <span>&ZeroWidthSpace;</span>
                                                     </legend>
                                                 </fieldset>
                                             </div>
@@ -113,7 +113,8 @@
                                         <label data-shrink="true" for="description"
                                                class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink">
                                             Mô tả
-                                            <span class="MuiTypography-root MuiTypography-caption">
+                                            <span class="MuiTypography-root MuiTypography-caption"
+                                                  title="Mô tả khách hàng của bạn để phục vụ cho việc chăm sóc khách hàng tốt hơn">
                                                 <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
                                                      width="16" height="16" color="primary" class="jss23713">
                                                     <path fill="#0088FF"
@@ -183,7 +184,7 @@
                                         <div class="dropdown jss1784 jss1769"
                                              onclick="CustomerApp.page.commands.showDefaultPriceDropdown()"
                                              id="defaultPriceContainer">
-                                            <p id="test">Chọn giá mặc định</p>
+                                            <p id="selectedPriceDefault">Chọn giá mặc định</p>
                                         </div>
                                         <div id="defaultPriceDropdown" class="dropdown-content">
                                             <div class="jss23775">
@@ -269,24 +270,40 @@
 <script src="/assets/admin/js/customer/customer_app.js"></script>
 
 <script>
-    let pricingPolicy;
+    let pricingPolicy = {
+        title: '',
+        pricingPolicyCode: '',
+        pricingPolicyType: ''
+    };
     let paymentMethod;
     let createCusGroupParam = new CustomerGroup();
 
-    CustomerApp.page.dialogs.elements.titleGroupCre = $("#titleGroupCre");
+    CustomerApp.page.elements.titleGroupCre = $("#titleGroupCre");
     CustomerApp.page.elements.selectBtnPri = $('.select-btn-pri');
     CustomerApp.page.elements.selectBtnPay = $('.select-btn-pay');
     CustomerApp.page.elements.pricingType = $("#pricingType");
+
     CustomerApp.page.elements.btnCreateCustomerGroup = $("#btnCreateCustomerGroup");
+    CustomerApp.page.elements.btnCreatePricePolicy = $("#btnCreatePricePolicy");
+    CustomerApp.page.elements.btnCloseCreatePricePolicyModal = $(".btnCloseCreatePricePolicyModal");
+
     CustomerApp.page.elements.frmCreateCusGrp = $("#frmCreateCusGrp");
+    CustomerApp.page.elements.frmCreatePricePolicy = $("#frmCreatePricePolicy");
+
     CustomerApp.page.elements.dropdownDefaultPrice = $("#dropdownDefaultPrice");
     CustomerApp.page.elements.dropdownPaymentMethod = $("#dropdownPaymentMethod");
+
     CustomerApp.page.elements.cusGrpCode = $("#cusGrpCode");
     CustomerApp.page.elements.description = $("#description");
     CustomerApp.page.elements.discount = $("#discount");
     CustomerApp.page.elements.paymentType = $("#paymentType");
     CustomerApp.page.elements.defaultPriceDropdown = $("#defaultPriceDropdown");
     CustomerApp.page.elements.searchDefaultPriceDropdown = $("#searchDefaultPriceDropdown");
+    CustomerApp.page.elements.titlePricePolicyCre = $("#titlePricePolicyCre");
+    CustomerApp.page.elements.pricingPolicyCodeCre = $("#pricingPolicyCodeCre");
+    CustomerApp.page.elements.selectedPriceDefault = $("#selectedPriceDefault");
+    CustomerApp.page.elements.error = $(".error");
+
 
     CustomerApp.page.commands.showModalCreatePricePolicy = () => {
         $("#createPricePolicy").modal("show");
@@ -294,16 +311,16 @@
 
     CustomerApp.page.commands.selectPriceDefault = () => {
         $(".selectPriceDefault").on('click', function () {
-            let id = $(this).data('id');
+            createCusGroupParam.pricingPolicyId = $(this).data('id');
             let value = $(this).data('value');
-            console.log(value)
-            $("#test").text(value);
+
+            CustomerApp.page.elements.selectedPriceDefault.text(value);
             CustomerApp.page.elements.defaultPriceDropdown[0].classList.toggle("show")
         })
     }
 
     // Lấy List Pricing default
-    CustomerApp.page.commands.getAllPricingPolicy = (selectedPricing) => {
+    CustomerApp.page.commands.getAllPricingPolicy = () => {
         return $.ajax({
             headers: {
                 "accept": "application/json",
@@ -315,11 +332,10 @@
             .done((data) => {
                 pricingPolicy = data;
                 pricingPolicy.forEach(item => {
-                    let isSelected = item === selectedPricing ? "selected" : "";
-                    // let str = `<li class="jss761" id="${item.id}" data-id="${item.id}" onclick="CustomerApp.page.commands.updateNamePri(${item.id})" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
+                    let str = `<a class="jss23775 selectPriceDefault" data-id="${item.id}" data-value="${item.title}">
+                                    ${item.title}
+                                </a>`;
 
-
-                    let str = `<a class="jss23775 selectPriceDefault" data-id="${item.id}" data-value="${item.title}">${item.title}</a>`;
                     CustomerApp.page.elements.defaultPriceDropdown.append(str);
                 });
                 CustomerApp.page.commands.selectPriceDefault();
@@ -327,16 +343,6 @@
             .fail((jqXHR) => {
                 console.log(jqXHR)
             })
-    }
-
-    //show select pricing policy
-    CustomerApp.page.commands.updateNamePri = (id) => {
-        const arrayCat = pricingPolicy.filter(item => item.id === id)
-
-        CustomerApp.page.elements.selectBtnPri.firstElementChild.innerText = arrayCat[0].title;
-        CustomerApp.page.elements.pricingType.data("id", id);
-
-        let idValue = CustomerApp.page.elements.pricingType.data("id");
     }
 
     // Lấy List Payment Method
@@ -350,40 +356,55 @@
             url: origin + "/api/admin/payment_methods"
         })
             .done((data) => {
-                console.log(data);
-                paymentMethod = data;
-                paymentMethod.forEach(item => {
-                    let isSelected = item === selectedPayment ? "selected" : "";
-
-                    let str = `<li id="${item.id}" data-id="${item.id}" onclick="CustomerApp.page.commands.updateNamePay('${item.id}')" class="${isSelected} catItem dropdown-item jss761">${item.title}</li>`;
+                data.forEach(item => {
+                    let str = `<li data-id="${item.id}" class="catItem dropdown-item jss761 selectedPaymentMethod">${item.title}</li>`;
 
                     CustomerApp.page.elements.dropdownPaymentMethod.append(str);
                 });
+                CustomerApp.page.commands.selectPaymentMethod();
             })
             .fail((jqXHR) => {
                 console.log(jqXHR)
             })
     }
 
-    //show select payment method
-    CustomerApp.page.commands.updateNamePay = (id) => {
-        const arrayCat = paymentMethod.filter(item => item.id === id)
+    CustomerApp.page.commands.selectPaymentMethod = () => {
+        $(".selectedPaymentMethod").click(function () {
+            createCusGroupParam.paymentMethodId = $(this).data('id');
+        })
+    }
 
-        CustomerApp.page.elements.selectBtnPay.firstElementChild.innerText = arrayCat[0].title;
-        CustomerApp.page.elements.paymentType.data("id", id);
+    //create price policy
+    CustomerApp.page.commands.createPricePolicy = () => {
+        pricingPolicy = {
+            title: CustomerApp.page.elements.titlePricePolicyCre.val().trim(),
+            pricingPolicyCode: CustomerApp.page.elements.pricingPolicyCodeCre.val().trim(),
+            pricingPolicyType: $('input[name="policyStyle"]:checked').val()
+        }
 
-        let idValue = CustomerApp.page.elements.paymentType.data("id");
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "POST",
+            url: origin + "/api/pricingPolicys",
+            data: JSON.stringify(pricingPolicy)
+        }).done((data) => {
+            console.log(data)
+        })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+                CustomerApp.page.elements.error.text(jqXHR.responseJSON.message)
+                CustomerApp.page.elements.error.addClass('show').removeClass('hidden');
+            })
     }
 
     CustomerApp.page.commands.createCusGrp = () => {
-        createCusGroupParam.title = CustomerApp.page.dialogs.elements.titleGroupCre.val().trim();
+        createCusGroupParam.title = CustomerApp.page.elements.titleGroupCre.val().trim();
         createCusGroupParam.cusGrpCode = CustomerApp.page.elements.cusGrpCode.val().trim();
         createCusGroupParam.description = CustomerApp.page.elements.description.val().trim();
-        createCusGroupParam.pricingPolicyId = CustomerApp.page.elements.pricingType.data("id");
         createCusGroupParam.discount = CustomerApp.page.elements.discount.val().trim();
-        createCusGroupParam.paymentMethodId = CustomerApp.page.elements.paymentType.data("id");
-
-        console.log(createCusGroupParam);
 
         $.ajax({
             "headers": {
@@ -394,12 +415,8 @@
             "url": origin + "/api/customer_groups/create",
             "data": JSON.stringify(createCusGroupParam)
         })
-            .done((data) => {
-                console.log(data.id);
+            .done(() => {
                 CustomerGroup_App.IziToast.showSuccessAlert('Thêm mới nhóm khách hàng thành công  !!!')
-                let id = data.id;
-                // window.location.href = "/admin/customer_groups/" + id;
-
             })
             .fail((jqXHR) => {
                 console.log(jqXHR);
@@ -412,9 +429,49 @@
             })
     }
 
+    CustomerApp.page.elements.btnCloseCreatePricePolicyModal.click(() => {
+        CustomerApp.page.elements.frmCreatePricePolicy.validate().resetForm();
+    })
+
+    CustomerApp.page.elements.btnCreatePricePolicy.on("click", () => {
+        CustomerApp.page.elements.frmCreatePricePolicy.trigger("submit");
+    })
+
     CustomerApp.page.elements.btnCreateCustomerGroup.on("click", () => {
         CustomerApp.page.elements.frmCreateCusGrp.trigger("submit");
     })
+
+    CustomerApp.page.elements.frmCreatePricePolicy.validate({
+        rules: {
+            titlePricePolicyCre: {
+                required: true,
+                maxlength: 50,
+            },
+            pricingPolicyCodeCre: {
+                required: true,
+                maxlength: 50,
+            },
+            policyStyle: {
+                required: true,
+            }
+        },
+        messages: {
+            titlePricePolicyCre: {
+                required: "Tên chính sách giá không được để trống",
+                maxlength: "Tên chính sách giá không được vượt quá 50 ký tự"
+            },
+            pricingPolicyCodeCre: {
+                required: "Mã chính sách giá không được để trống",
+                maxlength: "Mã chính sách giá không được vượt quá 50 ký tự"
+            },
+            policyStyle: {
+                required: "Vui lòng chọn loại chính sách giá"
+            }
+        },
+        submitHandler: () => {
+            CustomerApp.page.commands.createPricePolicy();
+        },
+    });
 
     CustomerApp.page.elements.frmCreateCusGrp.validate({
         rules: {
@@ -422,24 +479,37 @@
                 required: true,
                 maxlength: 50,
             },
-            cusGrpCodeCre: {
-                maxlength: 50,
-            },
-            descriptionCre: {
-                maxlength: 255,
-            },
+            // cusGrpCodeCre: {
+            //     maxlength: 50,
+            // },
+            // descriptionCre: {
+            //     maxlength: 255,
+            // },
         },
         messages: {
             titleGroupCre: {
-                required: "Vui lòng nhập tên nhóm (ví dụ: Bán Chẳn)",
-                maxlength: "Tên sản phẩm không quá 50 ký tự."
+                required: "Tên nhóm khách hàng không được để trống",
+                maxlength: "Tên nhóm khách hàng không quá 50 ký tự"
             },
-            cusGrpCodeCre: {
-                maxlength: "Mã nhóm không quá 50 ký tự",
-            },
-            descriptionCre: {
-                maxlength: "Mô tả không quá 255 ký tự",
-            },
+            // cusGrpCodeCre: {
+            //     maxlength: "Mã nhóm không quá 50 ký tự",
+            // },
+            // descriptionCre: {
+            //     maxlength: "Mô tả không quá 255 ký tự",
+            // },
+        },
+        // errorLabelContainer: "#formCreate .error",
+        errorPlacement: (error) => {
+            error.appendTo(".error");
+        },
+        showErrors: function () {
+            if (this.numberOfInvalids() > 0) {
+                CustomerApp.page.elements.error.removeClass("hidden").addClass("show");
+            } else {
+                CustomerApp.page.elements.error.removeClass("show").addClass("hidden").empty();
+                // CustomerApp.page.elements.inputError.removeClass("error");
+            }
+            this.defaultShowErrors();
         },
         submitHandler: () => {
             CustomerApp.page.commands.createCusGrp();

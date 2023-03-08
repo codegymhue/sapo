@@ -24,6 +24,6 @@ public class CreateCusGroupParam {
 
     private Integer discount;
 
-    private String paymentMethodId;
+    private Integer paymentMethodId;
 
 }

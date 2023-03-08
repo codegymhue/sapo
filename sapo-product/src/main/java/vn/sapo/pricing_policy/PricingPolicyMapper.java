@@ -5,6 +5,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import vn.sapo.entities.product.pricing_policy.PricingPolicy;
+import vn.sapo.entities.product.pricing_policy.PricingPolicyType;
+import vn.sapo.pricing_policy.dto.PricingPolicyParam;
 import vn.sapo.pricing_policy.dto.PricingPolicyResult;
 
 @Component
@@ -18,6 +20,15 @@ public class PricingPolicyMapper {
     }
 
     public PricingPolicy toModel(PricingPolicyResult pricingPolicyResult){
-        return modelMapper.map(pricingPolicyResult,PricingPolicy.class);
+        return modelMapper.map(pricingPolicyResult, PricingPolicy.class);
+    }
+
+    public PricingPolicy toModel(PricingPolicyParam pricingPolicyParam){
+        return new PricingPolicy()
+                .setTitle(pricingPolicyParam.getTitle())
+                .setPricingPolicyCode(pricingPolicyParam.getPricingPolicyCode())
+                .setPricingPolicyType(PricingPolicyType
+                        .parsePricingPolicyType(pricingPolicyParam
+                                .getPricingPolicyType()));
     }
 }

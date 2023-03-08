@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.entities.product.pricing_policy.PricingPolicy;
 import vn.sapo.entities.product.pricing_policy.PricingPolicyType;
+import vn.sapo.pricing_policy.dto.PricingPolicyParam;
 import vn.sapo.pricing_policy.dto.PricingPolicyResult;
+import vn.sapo.shared.exceptions.DataInputException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +20,28 @@ public class PricingPolicyServiceImpl implements PricingPolicyService{
 
     @Autowired
     private PricingPolicyRepository pricingPolicyRepository;
+
+    @Override
+    public PricingPolicyResult create(PricingPolicyParam pricingPolicyParam) {
+        String title = pricingPolicyParam.getTitle().trim();
+        String pricingPolicyCode = pricingPolicyParam.getPricingPolicyCode().trim();
+        String pricingPolicyType = pricingPolicyParam.getPricingPolicyType().trim();
+
+        if (title.isEmpty()) {
+            throw new DataInputException("Tên chính sách giá không được để trống");
+        }
+        if (pricingPolicyCode.isEmpty()) {
+            throw new DataInputException("Mã chính sách giá không được để trống");
+        }
+        if (pricingPolicyType.isEmpty()) {
+            throw new DataInputException("Loại chính sách giá không được để trống");
+        }
+
+        PricingPolicy pricingPolicy = pricingPolicyMapper.toModel(pricingPolicyParam);
+
+        pricingPolicyRepository.save(pricingPolicy);
+        return pricingPolicyMapper.toDTO(pricingPolicy);
+    }
 
     @Override
     @Transactional
