@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import vn.sapo.employee.EmployeeService;
 import vn.sapo.payment_method.PaymentMethodService;
-import vn.sapo.supplier.SupplierExcelExporter;
+//import vn.sapo.supplier.SupplierExcelExporter;
 import vn.sapo.supplier.SupplierExcelExporterInventory;
 import vn.sapo.supplier.SupplierService;
 import vn.sapo.supplier.dto.SupplierResult;
@@ -108,8 +108,8 @@ public class SupplierController {
         String headerValue = "attachment; filename=Suppliers_" + currentDateTime + ".xlsx";
         response.setHeader(headerKey, headerValue);
         List<SupplierResult> listSuppliers = supplierService.findAll();
-        SupplierExcelExporter excelExporter = new SupplierExcelExporter(listSuppliers);
-        excelExporter.export(response);
+//        SupplierExcelExporter excelExporter = new SupplierExcelExporter(listSuppliers);
+//        excelExporter.export(response);
     }
 
     @GetMapping("/excel")
