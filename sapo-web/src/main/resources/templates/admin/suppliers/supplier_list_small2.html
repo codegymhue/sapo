@@ -28,7 +28,11 @@
         }
 
         table {
-            display: block;
+            display: table;
+
+        }
+
+        #sapo-table_wrapper {
             overflow-x: auto;
             white-space: nowrap;
         }
@@ -41,12 +45,21 @@
             color: #ea1a1a;
         }
 
-        table > tbody > tr {
+        table tbody tr td {
             cursor: pointer;
+            border-bottom: 1px solid #ebeef0;
+            padding: 6px 8px;
+            vertical-align: middle;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            min-width: 120px;
+            background: #fff;
+            line-height: 1.6;
         }
 
         .filter-body {
             overflow-y: visible;
+            max-height: 315px !important;
         }
 
         .ui-sortable-handle.dragging {
@@ -54,30 +67,92 @@
         }
 
         /*loading*/
-        .loader {
-            border: 8px solid #f3f3f3;
-            border-top: 8px solid #3498db;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 2s linear infinite;
-            margin: 0 auto;
+        .loader.hide {
+            display: none;
         }
 
-        @keyframes spin {
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1070;
+        }
+
+        #loading {
+            display: block;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #9370DB;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+        #loading:before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #BA55D3;
+            -webkit-animation: spin 3s linear infinite;
+            animation: spin 3s linear infinite;
+        }
+
+        #loading:after {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #FF00FF;
+            -webkit-animation: spin 1.5s linear infinite;
+            animation: spin 1.5s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
             0% {
+                -webkit-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
                 transform: rotate(0deg);
             }
             100% {
+                -webkit-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
                 transform: rotate(360deg);
             }
         }
 
-
+        @keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 
 <body class="body_dashboard partners suppliers index">
+
 <th:block th:replace="/layout/supplier/modal_export_import.html"/>
 <div id="container">
     <div class="hidden" context="tenantInfo"
@@ -254,6 +329,61 @@
                                     </a>
                                 </div>
 
+                                <div class="filter-item" filter-type="tags"
+                                     style="width: auto; display: block; order: 0;">
+                                    <div class="select__wrapper">
+                                        <select class="sapo-select select-change-filter"
+                                                bind-event-change="changeItemFilter(this)">
+                                            <option value="status">Trạng thái</option>
+                                            <option value="assigneeIds">Nhân viên</option>
+                                            <option value="tags" selected="">Tags</option>
+                                            <option value="supplierGroupId">Nhóm nhà cung cấp</option>
+                                            <option value="createdOn">Ngày tạo</option>
+                                        </select>
+                                        <svg class="next-icon next-icon--size-16">
+                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                 xlink:href="#select-chevron"></use>
+                                        </svg>
+                                    </div>
+                                    <div class="autocomplete-suggestion-holder float-left position-relative">
+                                        <div class="bootstrap-tagsinput"><input type="text" placeholder=""
+                                                                                autocomplete="off"></div>
+                                        <input type="text" class="sapo-textbox choosed-single-id" id="tags"
+                                               style="display: none;">
+                                        <div class="autocomplete-suggestions"
+                                             style="position: absolute; width: 250px; max-height: 300px; z-index: 9999; top: 36px; display: none;">
+                                            <div class="autocomplete-suggestion suggestion-product suggestion-tag"
+                                                 style="padding:4px 8px" data-index="0">
+                                                <div class="search-product-content-refactor item-supplier"
+                                                     style="width:100%;">
+                                                    <div class="search-product-content-name"><span>NCC phía Nam</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="autocomplete-suggestion suggestion-product suggestion-tag"
+                                                 style="padding:4px 8px" data-index="1">
+                                                <div class="search-product-content-refactor item-supplier"
+                                                     style="width:100%;">
+                                                    <div class="search-product-content-name">
+                                                        <span>NCC nguyên liệu</span></div>
+                                                </div>
+                                            </div>
+                                            <div class="autocomplete-suggestion suggestion-product suggestion-tag"
+                                                 style="padding:4px 8px" data-index="2">
+                                                <div class="search-product-content-refactor item-supplier"
+                                                     style="width:100%;">
+                                                    <div class="search-product-content-name"><span>NCC hộp</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="javascript" bind-event-click="removeItemFilter(this, 'tags')"
+                                       class="remove-item-filter">
+                                        <svg class="next-icon next-icon--size-20">
+                                            <use xlink:href="#delete-minor"></use>
+                                        </svg>
+                                    </a>
+                                </div>
 
                                 <div class="filter-item" filter-type="supplierGroupId" style="width:auto;float: left">
                                     <input type="hidden" class="sapo-textbox choosed-single-id"
@@ -406,73 +536,52 @@
                     </div>
 
                     <div class="table-wrapper">
+                        <div class="hide" id="selectActionThead"
+                             style="border: snow;display: inline-flex;left: 10px;position: relative;align-items: center;justify-content: space-between;">
+                            <div class="align-middle" style="margin-right: 10px">
+                                <label for="selectAction" style="padding: 1rem; cursor:pointer">
+                                    <input style="cursor:pointer" id="selectAction" type="checkbox" value="">
+                                </label>
+                            </div>
+                            <div class="align-middle" id="numberSelectSupplierList"
+                                 style="width: 100%; margin-right: 10px">
+                            </div>
+                            <div class="align-middle" colspan="3">
+                                <div class="btn-group">
+                                    <button class="btn dropdown-toggle btnDropdown me-2" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        Chọn thao tác
+                                        <i class="fa-solid fa-sort-down" style="padding-left: 2.3rem"></i>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                        <li>
+                                            <button class="dropdown-item btnDropdown" id="btnUpdateSup">
+                                                Cập nhật nhà cung cấp
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button class="dropdown-item btnDropdown" id="btnUnavailable">
+                                                Ngừng giao dịch
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button class="dropdown-item btnDropdown" id="btnAvailable">
+                                                Cập nhật trạng thái
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button class="dropdown-item btnDropdown" id="btnDelete">
+                                                Xóa nhà cung cấp
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                         <div id="sapo-table_wrapper">
                             <table id="tbSupplier" class="table table-hover">
                                 <thead style="background-color: #f4f6f8; height: 55px">
-                                <tr id="theadList" class="show">
-                                    <th class="align-middle">
-                                        <label for="checkAll" style="padding: 1rem; cursor:pointer">
-                                            <input style="cursor:pointer" id="checkAll" type="checkbox" value=""
-                                                   nameth="bulk_action"
-                                                   data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả">
-                                        </label>
-                                    </th>
-<!--                                    <th class="align-middle" nameth="code" scope="col">Mã nhà cung cấp</th>-->
-<!--                                    <th class="align-middle" nameth="supplier_name" scope="col">Tên nhà cung cấp</th>-->
-<!--                                    <th class="align-middle" nameth="supplier_group" scope="col">Nhóm nhà cung cấp</th>-->
-<!--                                    <th class="align-middle" nameth="email" scope="col">Email</th>-->
-<!--                                    <th class="align-middle" nameth="phone_number" scope="col">Số điện thoại</th>-->
-<!--                                    <th class="align-middle" nameth="status" scope="col">Trạng thái</th>-->
-<!--                                    <th class="align-middle" nameth="assignee_name" scope="col">Nhân viên phụ trách</th>-->
-<!--                                    <th class="align-middle" nameth="tax_number" scope="col">Mã số thuế</th>-->
-<!--                                    <th class="align-middle" nameth="website" scope="col">Website</th>-->
-<!--                                    <th class="align-middle" nameth="created_on" scope="col">Ngày tạo</th>-->
-<!--                                    <th class="align-middle" nameth="modified_on" scope="col">Lần cập nhật cuối</th>-->
-<!--                                    &lt;!&ndash;                                    <th class="align-middle" scope="col">Nợ hiện tại</th>&ndash;&gt;-->
-<!--                                    <th class="align-middle" nameth="fax" scope="col">Số fax</th>-->
-                                </tr>
-                                <tr class="hide" id="selectActionThead" style="border: snow">
-                                    <td class="align-middle" style="width: 20px">
-                                        <label for="selectAction" style="padding: 1rem; cursor:pointer">
-                                            <input style="cursor:pointer" id="selectAction" type="checkbox" value="">
-                                        </label>
-                                    </td>
-                                    <td colspan="2" class="align-middle" id="numberSelectSupplierList"
-                                        style="width: 24%">
-                                    </td>
-                                    <td class="align-middle" colspan="3">
-                                        <div class="btn-group">
-                                            <button class="btn dropdown-toggle btnDropdown me-2" type="button"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                Chọn thao tác
-                                                <i class="fa-solid fa-sort-down" style="padding-left: 2.3rem"></i>
-                                            </button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                                <li>
-                                                    <button class="dropdown-item btnDropdown" id="btnUpdateSup">
-                                                        Cập nhật nhà cung cấp
-                                                    </button>
-                                                </li>
-                                                <li>
-                                                    <button class="dropdown-item btnDropdown" id="btnUnavailable">
-                                                        Ngừng giao dịch
-                                                    </button>
-                                                </li>
-                                                <li>
-                                                    <button class="dropdown-item btnDropdown" id="btnAvailable">
-                                                        Cập nhật trạng thái
-                                                    </button>
-                                                </li>
-                                                <li>
-                                                    <button class="dropdown-item btnDropdown" id="btnDelete">
-                                                        Xóa nhà cung cấp
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                    <td colspan="5"></td>
-                                </tr>
+
                                 </thead>
                                 <tbody>
 
@@ -574,16 +683,20 @@
         </div>
     </div>
 </div>
-<div class="loader" style="display: none"></div>
+<div class="loader hide">
+    <div id="loading"></div>
+</div>
+
 <th:block th:replace="/layout/supplier/supplier_list_modal.html"/>
-<script src="/assets/admin/js/suppliers/supplier_app.js"></script>
-<!--<script src="/assets/admin/js/suppliers/supplier_app22.js"></script>-->
+<!--<script src="/assets/admin/js/suppliers/supplier_app.js"></script>-->
+<script src="/assets/admin/js/suppliers/supplier_app22.js"></script>
 <th:block th:replace="/layout/script :: script"/>
 <th:block th:replace="/layout/supplier/script_export_import.html"/>
 
 <script>
 
     $(".filter-item").css("display", "block");
+    $(".remove-item-filter").css("display", "none");
     $('.select-change-filter').on('change', function () {
         $('option').prop('disabled', false);
         $('.select-change-filter').each(function () {
@@ -597,6 +710,7 @@
         });
     }).change();
 
+    const defaultFields = ["code", "supplier_name", "supplier_group", "email", "phone_number", "status"];
 
     let arrayIdSupplier = [];
     let supplierFilter = new SupplierFilter();
@@ -622,6 +736,7 @@
     page.elements.checkAll = $("#checkAll");
     page.elements.selectAction = $("#selectAction");
     page.elements.selectActionThead = $("#selectActionThead");
+    page.elements.tbSupplier_thead = $("#tbSupplier thead");
     page.elements.theadList = $("#theadList");
     page.elements.numberSelectSupplierList = $("#numberSelectSupplierList");
     page.elements.statusChangeForNumberSupplierList = $("#statusChange");
@@ -667,6 +782,17 @@
     //filter supplier_groupId
     page.elements.multiselect_supplier_groupId = $(".multiselect_supplier_groupId")
 
+
+    page.elements.loader = $(".loader");
+    page.commands.showLoading = () => {
+        page.elements.loader.removeClass("hide");
+
+    }
+
+    page.commands.closeLoading = () => {
+        page.elements.loader.addClass("hide");
+
+    }
 
     function resetSupplierFilter() {
         supplierFilter.filter = null;
@@ -744,6 +870,7 @@
                     });
                     page.commands.resetInputCheckBox();
                     page.commands.isCheckbox();
+                    page.commands.selectAllCheckBox();
                     page.elements.totalPage.append(
                         `<span class="me-2">Tổng nhà cung cấp ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
                     )
@@ -785,7 +912,10 @@
     })
 
     page.commands.getAllSupplierUseFilter = (supplierFilter) => {
+        let fields = JSON.parse(localStorage.getItem("fields")) || ["code", "supplier_name", "supplier_group", "email", "phone_number", "status"];
         console.log(supplierFilter, " supplierFilter")
+        console.log(fields, "fields getAllSupplierUseFilter")
+        page.commands.showLoading();
         $.ajax({
             headers: {
                 "accept": "application/json",
@@ -796,32 +926,33 @@
             data: JSON.stringify(supplierFilter)
         })
             .done((data) => {
+
                 console.log(data.suppliers, " datasup")
                 page.elements.tbSupplier_tbody.empty();
+                page.elements.tbSupplier_thead.empty()
                 page.elements.totalPage.empty();
                 totalPage = data.totalPage;
                 if (data.suppliers != null) {
                     $(".ui-type-container").hide();
                     $("#sapo-table_wrapper").show();
                     $(".container-fluid").show();
+                    page.elements.tbSupplier_thead.append(SupplierApp.renderTheadFieldsSupplier(fields))
                     data.suppliers.map(item => {
                         if (item.status == "AVAILABLE") {
-                            page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available'))
-                            // page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'available', configDisplays));
-                            // page.elements.theadList.append(SupplierApp.renderThSupplier(configDisplays))
+                            page.elements.tbSupplier_tbody.append(SupplierApp.renderTbodyFieldsSupplier(item, 'available', fields));
                         } else {
-                            // page.elements.theadList.append(SupplierApp.renderThSupplier(configDisplays))
-                            page.elements.tbSupplier_tbody.append(SupplierApp.renderRowSupplier(item, 'unavailable'))
+                            page.elements.tbSupplier_tbody.append(SupplierApp.renderTbodyFieldsSupplier(item, 'unavailable', fields));
                         }
                     });
                     page.commands.resetInputCheckBox();
                     page.commands.isCheckbox();
+                    page.commands.selectAllCheckBox();
                     page.elements.totalPage.append(
                         `<span class="me-2">Tổng nhà cung cấp ${data.totalItem} - Tổng số trang ${data.totalPage}</span>`
                     )
                     if (totalPage === 1) {
                         $(".pagination").hide();
-                    }else {
+                    } else {
                         $(".pagination").show();
                     }
                 } else {
@@ -834,7 +965,7 @@
                 if (Number(page.elements.pageNo.text()) === 1) {
                     page.dialogs.elements.previousPage.parent().css("display", "none");
                     page.dialogs.elements.fistPage.parent().addClass("disable");
-                }else {
+                } else {
                     page.dialogs.elements.previousPage.parent().css("display", "block");
                 }
                 if (Number(page.elements.pageNo.text()) === Number(totalPage)) {
@@ -842,7 +973,7 @@
                     page.dialogs.elements.nextPage.parent().css("display", "none");
                 } else
                     page.dialogs.elements.lastPage.parent().removeClass("disable");
-
+                page.commands.closeLoading()
             })
     }
 
@@ -968,40 +1099,43 @@
         arrayIdSupplier = [];
         page.commands.showAction();
     }
-    page.elements.checkAll.on("change", function () {
-        page.elements.selectAction.prop("checked", true);
-        arrayIdSupplier = [];
-        if (this.checked) {
-            $("#tbSupplier>tbody input").each(function () {
-                $(this).prop("checked", true);
-                arrayIdSupplier.push($(this).val());
-            })
-        } else {
-            $("#tbSupplier>tbody input").each(function () {
-                $(this).prop("checked", false);
-            })
-        }
-        page.commands.showAction();
-    })
+    page.commands.selectAllCheckBox = () => {
+        $("#checkAll").on("change", function () {
+            page.elements.selectAction.prop("checked", true);
+            arrayIdSupplier = [];
+            if (this.checked) {
+                $("#tbSupplier>tbody input").each(function () {
+                    $(this).prop("checked", true);
+                    arrayIdSupplier.push($(this).val());
+                })
+            } else {
+                $("#tbSupplier>tbody input").each(function () {
+                    $(this).prop("checked", false);
+                })
+            }
+            page.commands.showAction();
+        })
 
-    page.elements.selectAction.on("change", function () {
-        page.elements.checkAll.prop("checked", false);
-        arrayIdSupplier = [];
-        console.log(this)
-        if (this.checked) {
-            $("#tbSupplier>tbody input").each(function () {
-                $(this).prop("checked", true);
-                arrayIdSupplier.push($(this).val());
-            })
-        } else {
+        page.elements.selectAction.on("change", function () {
+            $("#checkAll").prop("checked", false);
+            arrayIdSupplier = [];
             console.log(this)
-            $("#tbSupplier>tbody input").each(function () {
-                $(this).prop("checked", false);
-            })
-        }
-        console.log(arrayIdSupplier)
-        page.commands.showAction();
-    })
+            if (this.checked) {
+                $("#tbSupplier>tbody input").each(function () {
+                    $(this).prop("checked", true);
+                    arrayIdSupplier.push($(this).val());
+                })
+            } else {
+                console.log(this)
+                $("#tbSupplier>tbody input").each(function () {
+                    $(this).prop("checked", false);
+                })
+            }
+            console.log(arrayIdSupplier)
+            page.commands.showAction();
+        })
+    }
+
 
     page.commands.isCheckbox = () => {
         $(".selectCheckbox").on("change", function () {
@@ -1014,11 +1148,11 @@
             }
             page.commands.showAction();
             let pageSize = page.elements.pageSize.val()
-            if (arrayIdSupplier.length == pageSize) {
-                page.elements.checkAll.prop("checked", true);
+            if (arrayIdSupplier.length === $(".selectCheckbox").length) {
+                $("#checkAll").prop("checked", true);
                 page.elements.selectAction.prop("checked", true);
             } else {
-                page.elements.checkAll.prop("checked", false);
+                $("#checkAll").prop("checked", false);
                 page.elements.selectAction.prop("checked", false);
             }
         })
@@ -1044,14 +1178,14 @@
         page.elements.statusChangeForNumberDelete.empty();
 
         if (arrayIdSupplier.length > 0) {
-            page.elements.theadList.removeClass("show").addClass("hide");
+            page.elements.tbSupplier_thead.removeClass("show").addClass("hide");
             page.elements.numberSelectSupplierList.append(`<span>Đã chọn ${arrayIdSupplier.length} nhà cung cấp trên trang này.</span>`)
             page.elements.statusChangeForNumberSupplierList.append(`<span style="font-size: medium">Thao tác này sẽ cập nhật trạng thái giao dịch cho ${arrayIdSupplier.length} nhà cung cấp bạn đã chọn</span>`);
             page.elements.statusChangeForNumberToUnavailable.append(`<span style="font-size: medium">Thao tác này sẽ ngừng giao dịch ${arrayIdSupplier.length} nhà cung cấp bạn đã chọn</span>`);
             page.elements.statusChangeForNumberDelete.append(`<span style="font-size: medium">Thao tác này sẽ xóa ${arrayIdSupplier.length} nhà cung cấp bạn đã chọn. Thao tác này không thể khôi phục.</span>`);
             page.elements.selectActionThead.removeClass("hide").addClass("show");
         } else {
-            page.elements.theadList.removeClass("hide").addClass("show");
+            page.elements.tbSupplier_thead.removeClass("hide").addClass("show");
             page.elements.selectActionThead.removeClass("show").addClass("hide");
         }
     }
@@ -1086,9 +1220,7 @@
         let countOrderFail = 0;
 
         $("#btn-confirm").attr("disabled");
-        let loading = document.getElementsByClassName("loader");
-        $(loading).css("display"," block")
-        // $("#btn-confirm").addClass('loader')
+        $("#btn-confirm").text("Xin chờ ...")
         arrayIdSupplier.forEach(async id => {
             try {
                 const result = await updateBulkaction(id, empId, paymentId);
@@ -1112,10 +1244,9 @@
                 $("#listOrderFail").append(str);
                 console.log(e, " err")
             }
-            if((countOrderComplete+ countOrderFail)===arrayIdSupplier.length){
-                $("#btn-confirm").attr("disabled" , false);
-                // $("#btn-confirm").removeClass('loader')
-                $(loading).css("display"," none")
+            if ((countOrderComplete + countOrderFail) === arrayIdSupplier.length) {
+                $("#btn-confirm").attr("disabled", false);
+                $("#btn-confirm").text("Xác nhận")
             }
         })
     })
@@ -1138,7 +1269,7 @@
                 beforeSend: function () {
                 },
                 success: function (data) {
-                        // All requests have completed, hide loading
+                    // All requests have completed, hide loading
                     resolve(data) // Resolve promise and when success
                 },
                 error: function (err) {
@@ -1152,6 +1283,8 @@
         $(".ui-dialog-title").text("Cập nhật trạng thái")
         let countOrderComplete = 0;
         let countOrderFail = 0;
+        $("#btn-confirm").attr("disabled");
+        $("#btn-confirm").text("Xin chờ ...")
         arrayIdSupplier.forEach(async id => {
             try {
                 const result = await activeBulk(id);
@@ -1176,8 +1309,11 @@
                 $("#countOrderFail").text(countOrderFail)
                 $("#listOrderFail").append(str)
             }
+            if ((countOrderComplete + countOrderFail) === arrayIdSupplier.length) {
+                $("#btn-confirm").attr("disabled", false);
+                $("#btn-confirm").text("Xác nhận")
+            }
         })
-
     })
 
     function activeBulk(id) {
@@ -1206,6 +1342,8 @@
         $(".ui-dialog-title").text("Ngừng giao dịch")
         let countOrderComplete = 0;
         let countOrderFail = 0;
+        $("#btn-confirm").attr("disabled");
+        $("#btn-confirm").text("Xin chờ ...")
         arrayIdSupplier.forEach(async id => {
             try {
                 const result = await disableBulk(id);
@@ -1229,6 +1367,10 @@
                 let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
                 $("#countOrderFail").text(countOrderFail)
                 $("#listOrderFail").append(str)
+            }
+            if ((countOrderComplete + countOrderFail) === arrayIdSupplier.length) {
+                $("#btn-confirm").attr("disabled", false);
+                $("#btn-confirm").text("Xác nhận")
             }
         })
     })
@@ -1259,6 +1401,8 @@
         $(".ui-dialog-title").text("Xóa nhà cung cấp")
         let countOrderComplete = 0;
         let countOrderFail = 0;
+        $("#btn-confirm").attr("disabled");
+        $("#btn-confirm").text("Xin chờ ...")
         arrayIdSupplier.forEach(async id => {
             try {
                 const result = await deleteBulk(id);
@@ -1281,6 +1425,10 @@
                 let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
                 $("#countOrderFail").text(countOrderFail)
                 $("#listOrderFail").append(str)
+            }
+            if ((countOrderComplete + countOrderFail) === arrayIdSupplier.length) {
+                $("#btn-confirm").attr("disabled", false);
+                $("#btn-confirm").text("Xác nhận")
             }
         })
     })
@@ -1428,9 +1576,6 @@
     }
 
 
-    const defaultFields = ["code", "supplier_name", "supplier_group", "email", "phone_number", "status"];
-
-
     // function toggleItem(element) {
     //
     // }
@@ -1443,15 +1588,19 @@
                     sList.push($(this).val())
             });
             console.log(sList, " list-row-default")
-            return sList;
+            localStorage.setItem("fields", JSON.stringify(sList));
+            page.commands.getAllSupplier();
+
         } else {
             $("#list-row-settings").find('input[type="checkbox"].export-field-group--toggle-item').each(function () {
                 if (this.checked)
                     sList.push($(this).val())
             });
             console.log(sList, ' list-row-settings')
-            return sList;
+            localStorage.setItem("fields", JSON.stringify(sList));
+            page.commands.getAllSupplier();
         }
+        $("#modal-setting-column").modal("hide")
     }
 
     $("#defaultSettings").change(function () {
