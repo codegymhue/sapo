@@ -3,7 +3,7 @@ package vn.sapo.supplier.dto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.sapo.customers.dto.CreateAddressParam;
+import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.shared.validation.constraints.NullOrNotBlank;
 
 import java.math.BigDecimal;

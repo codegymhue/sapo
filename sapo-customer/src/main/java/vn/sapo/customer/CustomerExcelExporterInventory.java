@@ -7,7 +7,7 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import vn.sapo.customers.dto.AddressResult;
+import vn.sapo.address.dto.AddressResult;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
 

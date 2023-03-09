@@ -10,19 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-<<<<<<< HEAD
-import vn.sapo.customers.AddressMapper;
-import vn.sapo.customers.AddressRepository;
-import vn.sapo.customers.AddressService;
-import vn.sapo.customers.dto.AddressResult;
-import vn.sapo.customers.dto.CreateAddressParam;
-import vn.sapo.customers.dto.UpdateAddressParam;
-=======
 import org.springframework.util.Assert;
 import vn.sapo.address.dto.AddressResult;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.address.dto.UpdateAddressParam;
->>>>>>> main
 import vn.sapo.entities.Address;
 import vn.sapo.shared.exceptions.NotFoundException;
 

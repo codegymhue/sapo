@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-//import vn.sapo.entities.customer.CustomerGender;
-//import vn.sapo.entities.customer.CustomerStatus;
+import vn.sapo.entities.customer.CustomerGender;
+import vn.sapo.entities.customer.CustomerStatus;
+import vn.sapo.shared.validation.constraints.NullOrNotBlank;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
@@ -15,17 +17,20 @@ import java.util.Date;
 @AllArgsConstructor
 @Accessors(chain = true)
 public class UpdateCustomerParam {
-
+    @NotNull
     private Integer id;
 
+    @NullOrNotBlank
     private String customerCode;
 
+    @NullOrNotBlank
     private String fullName;
 
+    @NullOrNotBlank
     private String phoneNumber;
 
     private Integer groupId;
-
+    @NullOrNotBlank
     private String email;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -33,15 +38,15 @@ public class UpdateCustomerParam {
 
     private CustomerGender gender;
 
-    private Integer employeeId;
-
     private CustomerStatus status;
 
+    @NullOrNotBlank
     private String description;
+    @NullOrNotBlank
     private String website;
+    @NullOrNotBlank
     private String fax;
+    @NullOrNotBlank
     private String taxCode;
-
-
 
 }

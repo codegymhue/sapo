@@ -24,6 +24,21 @@ public interface CustomerService {
 
     void changeStatusToAvailable(List<Integer> customerIds, boolean status);
 
+
+    List<CustomerResult> findAllCustomerByGroupAndStatus(Integer groupTitleId, String customerStatus);
+
+
     List<CustomerResult> findAllByGroupListId(List<Integer> groupIds);
+
+    List<CustomerResult> findAllEmployeeListId(List<Integer> employeeIds);
+
+    List<CustomerResult> findAllByGenderId(String genderId);
+
+
+
+
+//    List<CustomerResult> findAllByStatusListId(List<String> statusIds);
+
     Page<CustomerResult> findAllByFilters(CustomerFilter filters, Pageable pageable);
+
 }

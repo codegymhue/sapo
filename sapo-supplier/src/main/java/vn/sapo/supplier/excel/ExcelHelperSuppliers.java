@@ -6,7 +6,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
-import vn.sapo.customers.dto.CreateAddressParam;
+import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.supplier.dto.CreateSupplierParam;
 
 import java.io.IOException;

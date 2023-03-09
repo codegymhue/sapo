@@ -8,12 +8,9 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-<<<<<<< HEAD
-import vn.sapo.customers.dto.AddressResult;
-=======
+
 import vn.sapo.address.dto.AddressResult;
 import vn.sapo.supplier.dto.SupGroupResult;
->>>>>>> main
 import vn.sapo.supplier.dto.SupplierResult;
 
 import javax.servlet.ServletOutputStream;

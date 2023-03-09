@@ -9,13 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-<<<<<<< HEAD
-import vn.sapo.customers.AddressService;
-import vn.sapo.customers.dto.CreateAddressParam;
-=======
 import vn.sapo.address.AddressService;
 import vn.sapo.address.dto.CreateAddressParam;
->>>>>>> main
 import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.payment_method.PaymentMethodService;
 import vn.sapo.shared.configurations.CodePrefix;

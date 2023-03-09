@@ -8,16 +8,10 @@ import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-<<<<<<< HEAD
-import vn.sapo.customers.AddressService;
-import vn.sapo.customers.dto.CreateAddressParam;
-import vn.sapo.payment.method.PaymentMethodService;
-=======
 import vn.sapo.address.AddressService;
 import vn.sapo.address.dto.CreateAddressParam;
 import vn.sapo.payment_method.PaymentMethodService;
 import vn.sapo.shared.exceptions.NotFoundException;
->>>>>>> main
 import vn.sapo.supplier.SupplierExcelService;
 import vn.sapo.supplier.dto.*;
 import vn.sapo.supplier.excel.ImportExcelSupplierParam;

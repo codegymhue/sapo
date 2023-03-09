@@ -6,7 +6,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import vn.sapo.customers.dto.AddressResult;
+import vn.sapo.address.dto.AddressResult;
 import vn.sapo.customer.dto.CustomerResult;
 
 import javax.servlet.ServletOutputStream;

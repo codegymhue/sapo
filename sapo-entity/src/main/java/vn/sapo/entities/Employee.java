@@ -38,16 +38,4 @@ public class Employee extends BaseEntity {
     public Employee(Integer id) {
         this.id = id;
     }
-
-    @Override
-    public String toString() {
-        return "{" +
-                "id=" + id +
-                ", fullName='" + fullName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", birthday=" + birthday +
-                ", gender='" + gender + '\'' +
-                '}';
-    }
 }

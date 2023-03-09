@@ -1,4 +1,4 @@
-package vn.sapo.customers;
+package vn.sapo.address;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

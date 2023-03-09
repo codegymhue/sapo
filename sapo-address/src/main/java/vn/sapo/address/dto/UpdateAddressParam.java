@@ -1,4 +1,4 @@
-package vn.sapo.customers.dto;
+package vn.sapo.address.dto;
 
 import lombok.Getter;
 import lombok.Setter;
