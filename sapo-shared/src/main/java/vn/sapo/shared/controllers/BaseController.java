@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import vn.sapo.shared.Result;
-import vn.sapo.shared.exceptions.ValidationException;
 
 import java.util.HashMap;
 import java.util.Map;
