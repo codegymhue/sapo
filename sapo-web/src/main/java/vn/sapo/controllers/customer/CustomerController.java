@@ -42,19 +42,19 @@ public class CustomerController {
         return "/admin/customer/create_customer";
     }
 
-//    @GetMapping("/{id}")
-//    public ModelAndView showCustomerInfoPage(@PathVariable Integer id) {
-//        ModelAndView modelAndView = new ModelAndView();
-//        try{
-//            CustomerResult customer = customerService.findById(id);
-////            customerAPI.setData(customer);
-//            modelAndView.addObject("customer", customer);
-//        }catch (Exception ex){
-//            modelAndView.addObject("errors", ex.getMessage());
-//        }
-//        modelAndView.setViewName("/admin/customer/info_customer");
-//        return modelAndView;
-//    }
+    @GetMapping("/{id}")
+    public ModelAndView showCustomerInfoPage(@PathVariable Integer id) {
+        ModelAndView modelAndView = new ModelAndView();
+        try{
+            CustomerResult customer = customerService.findById(id);
+//            customerAPI.setData(customer);
+            modelAndView.addObject("customer", customer);
+        }catch (Exception ex){
+            modelAndView.addObject("errors", ex.getMessage());
+        }
+        modelAndView.setViewName("/admin/customer/info_customer");
+        return modelAndView;
+    }
 
     @GetMapping("/{id}/edit")
     public ModelAndView showCustomerEditPage(@PathVariable Integer id) {
