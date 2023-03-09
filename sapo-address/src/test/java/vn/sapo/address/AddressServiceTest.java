@@ -10,19 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-<<<<<<< HEAD
 import org.springframework.util.Assert;
-import vn.sapo.address.dto.AddressResult;
-import vn.sapo.address.dto.CreateAddressParam;
-import vn.sapo.address.dto.UpdateAddressParam;
-=======
 import vn.sapo.customers.AddressMapper;
 import vn.sapo.customers.AddressRepository;
 import vn.sapo.customers.AddressService;
 import vn.sapo.customers.dto.AddressResult;
 import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.customers.dto.UpdateAddressParam;
->>>>>>> cf9e56958713b8ee99a298cabdf1ddcf9488ab60
 import vn.sapo.entities.Address;
 import vn.sapo.shared.exceptions.NotFoundException;
 
@@ -34,7 +28,8 @@ import java.util.stream.Collectors;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.willDoNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;

@@ -7,4 +7,7 @@ import vn.sapo.entities.product.pricing_policy.PricingPolicy;
 @Repository
 public interface PricingPolicyRepository extends JpaRepository<PricingPolicy, Integer> {
 
+    boolean existsByTitle(String title);
+
+    boolean existsByPricingPolicyCode(String code);
 }

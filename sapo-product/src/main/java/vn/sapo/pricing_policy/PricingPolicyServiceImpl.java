@@ -7,8 +7,10 @@ import vn.sapo.entities.product.pricing_policy.PricingPolicy;
 import vn.sapo.entities.product.pricing_policy.PricingPolicyType;
 import vn.sapo.pricing_policy.dto.PricingPolicyParam;
 import vn.sapo.pricing_policy.dto.PricingPolicyResult;
-import vn.sapo.shared.exceptions.DataInputValidateException;
+import vn.sapo.shared.exceptions.DataInputException;
+import vn.sapo.shared.exceptions.ValidationException;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,27 +27,22 @@ public class PricingPolicyServiceImpl implements PricingPolicyService {
 
     @Override
     public PricingPolicyResult create(PricingPolicyParam pricingPolicyParam) {
-        String title = pricingPolicyParam.getTitle().trim();
-        String pricingPolicyCode = pricingPolicyParam.getPricingPolicyCode().trim();
-        Map<String, String> errors = new HashMap<>();
+        Map<String, String> errors= new HashMap<>();
 
-        if (pricingPolicyParam.getPricingPolicyType() == null) {
-            errors.put("pricingPolicyType", "Loại chính sách giá không được để trống");
-        } else if (!pricingPolicyParam.getPricingPolicyType().trim().equalsIgnoreCase("sale")
-                || !pricingPolicyParam.getPricingPolicyType().trim().equalsIgnoreCase("purchase")
-        ) {
-            errors.put("pricingPolicyType", "Loại chính sách không đúng định dạng");
+        if (!checkPricingPolicyType(pricingPolicyParam.getPricingPolicyType())) {
+            errors.put("pricingPolicyType", "Loại chính sách giá không đúng định dạng");
         }
 
-        if (title.isEmpty()) {
-            errors.put("title", "Tên chính sách giá không được để trống");
+        if (checkPricingPolicyTitle(pricingPolicyParam.getTitle())) {
+                errors.put("title", "Tên chính sách giá đã tồn tại");
         }
-        if (pricingPolicyCode.isEmpty()) {
-            errors.put("pricingPolicyCode", "Mã chính sách giá không được để trống");
+
+        if (checkPricingPolicyCode(pricingPolicyParam.getPricingPolicyCode())) {
+            errors.put("pricingPolicyCode", "Mã chính sách giá đã tồn tại");
         }
 
         if (!errors.isEmpty()) {
-            throw new DataInputValidateException(errors);
+                throw new ValidationException(errors);
         }
 
         PricingPolicy pricingPolicy = pricingPolicyMapper.toModel(pricingPolicyParam);
@@ -86,7 +83,8 @@ public class PricingPolicyServiceImpl implements PricingPolicyService {
     @Override
     @Transactional
     public PricingPolicyResult findById(Integer id) {
-        PricingPolicy pricingPolicy = pricingPolicyRepository.findById(id).get();
+        PricingPolicy pricingPolicy = pricingPolicyRepository.findById(id).orElseThrow(
+                () -> new DataInputException("Không tìm thấy chính sách giá có id = " + id));
         return pricingPolicyMapper.toDTO(pricingPolicy);
     }
 
@@ -94,5 +92,20 @@ public class PricingPolicyServiceImpl implements PricingPolicyService {
     @Transactional
     public void deleteById(Integer id) {
         pricingPolicyRepository.deleteById(id);
+    }
+
+    private boolean checkPricingPolicyCode(String code) {
+        return pricingPolicyRepository.existsByPricingPolicyCode(code.trim());
+    }
+
+    private boolean checkPricingPolicyTitle(String title) {
+        return pricingPolicyRepository.existsByTitle(title.trim());
+    }
+
+    private boolean checkPricingPolicyType(String type) {
+        if (type.trim().equalsIgnoreCase("SALE")) {
+            return true;
+        }
+        return type.trim().equalsIgnoreCase("PURCHASE");
     }
 }

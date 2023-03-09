@@ -37,6 +37,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity<?> validationException(ValidationException ve) {
+
+        return new ResponseEntity<>(ve, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(BaseException.class)
+    public ResponseEntity<?> baseException(BaseException be) {
+
+        return new ResponseEntity<>(be.getErrors(), HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> resourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
         Map<String, String> body = new HashMap<>();
@@ -75,14 +87,4 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
     }
-
-    @ExceptionHandler(DataInputValidateException.class)
-    public ResponseEntity<?> dataFieldsException(DataInputValidateException ex) {
-        Map<String, Map> body = new HashMap<>();
-
-        body.put("message", ex.getErrors());
-
-        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
-    }
-
 }

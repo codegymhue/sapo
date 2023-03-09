@@ -7,15 +7,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import vn.sapo.customerGroup.CustomerGroupMapper;
 import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.customerGroup.dto.*;
+import vn.sapo.shared.controllers.BaseController;
 
 @RestController
 @RequestMapping("/api/customer_groups")
-@CrossOrigin("*")
-public class CustomerGroupAPI {
+public class CustomerGroupAPI extends BaseController {
     @Autowired
     CustomerGroupService customerGroupService;
 
@@ -38,9 +39,16 @@ public class CustomerGroupAPI {
         return new ResponseEntity<>(customerGroupResult, HttpStatus.OK);
     }
 
+    @PostMapping
+    public ResponseEntity<?> create(@RequestBody @Validated CreateCusGroupParam createCusGroupParam) {
+        CustomerGroupResult dto = customerGroupService.create(createCusGroupParam);
+
+        return new ResponseEntity<>(dto, HttpStatus.CREATED);
+    }
+
     @PostMapping("/filter")
     public ResponseEntity<?> filter(@RequestBody CustomerGroupFilter customerGroupFilter,
-                                        @RequestParam(name = "sort", required = false, defaultValue = "ASC" ) String sort
+                                    @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort
     ) {
 
         int start = customerGroupFilter.getStart();
@@ -66,21 +74,9 @@ public class CustomerGroupAPI {
                 .setDraw(customerGroupFilter.getDraw())
                 .setRecordsTotal(pageableCustomerGroups.getTotalElements())
                 .setRecordsFiltered(pageableCustomerGroups.getTotalElements())
-                .setData(pageableCustomerGroups.getContent())
-                ;
+                .setData(pageableCustomerGroups.getContent());
 
         return new ResponseEntity<>(customerGroupDataTable, HttpStatus.OK);
-    }
-
-    @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody CreateCusGroupParam createCusGroupParam) {
-        System.out.println(createCusGroupParam);
-
-        CustomerGroupResult dto = customerGroupService.create(createCusGroupParam);
-
-//        dto = customerGroupService.findById(dto.getId());
-
-        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @PutMapping("/update")

@@ -8,11 +8,8 @@ import java.util.Map;
 
 @Getter
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class DataInputValidateException extends RuntimeException {
-
-    private Map errors;
-
-    public DataInputValidateException(Map errors) {
-        this.errors = errors;
+public class ValidationException extends BaseException {
+    public ValidationException(Map<String, String> errors) {
+        super(errors);
     }
 }

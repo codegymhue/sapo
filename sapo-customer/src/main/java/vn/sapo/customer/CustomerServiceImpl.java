@@ -19,9 +19,11 @@ import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.DataInputException;
 import vn.sapo.shared.exceptions.NotFoundException;
+import vn.sapo.shared.exceptions.ValidationException;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,7 +48,6 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerResult findById(Integer id) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Không tìm thấy khách hàng"));
-        Integer customerId = customer.getId();
         return customerMapper.toDTO(customer);
     }
 
@@ -76,34 +77,32 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Transactional
-    public CustomerResult create(CreateCustomerParam createCustomerParam) {
+    public CustomerResult create(CreateCustomerParam createParam) {
 
-        Instant birthday = createCustomerParam.getBirthday().toInstant();
-        String cusCode =createCustomerParam.getCustomerCode();
-        String randomString = String.valueOf(Math.random()*1000000+1);
-        if(cusCode == null || cusCode.trim().isEmpty()){
-            createCustomerParam.setCustomerCode(randomString);
-        }
-        if(createCustomerParam.getFullName()==null){
-            throw new DataInputException("Tên khách hàng không được để trống");
-        }
-        Customer customer = customerMapper.toModel(createCustomerParam);
-        customer.setBirthday(birthday);
-        Customer customerResult = customerRepository.save(customer);
-        CreateAddressParam createAddressParam = createCustomerParam.getCreateAddressParam();
-        if (createAddressParam == null) throw new DataInputException("Tên address không được để trống");
+//        Instant birthday = createCustomerParam.getBirthday().toInstant();
+//        String cusCode =createCustomerParam.getCustomerCode();
+//        String randomString = String.valueOf(Math.random()*1000000+1);
+//        if(cusCode == null || cusCode.trim().isEmpty()){
+//            createCustomerParam.setCustomerCode(randomString);
+//        }
+//        if(createCustomerParam.getFullName()==null){
+//            throw new DataInputException("Tên khách hàng không được để trống");
+//        }
+//        Customer customer = customerMapper.toModel(createCustomerParam);
+//        customer.setBirthday(birthday);
+//        Customer customerResult = customerRepository.save(customer);
+        CreateAddressParam createAddressParam = createParam.getCreateAddressParam();
+        if (createAddressParam == null)
+            throw new ValidationException(new HashMap<>() {{
+                put("line1", "Dia chi khong duoc de trong");
+            }});
+        Customer customer = customerMapper.toModel(createParam);
+        customer = customerRepository.save(customer);
+        if (createParam.getCustomerCode() == null)
+            customer.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
         createAddressParam.setCustomerId(customer.getId());
-        createAddressParam.setSupplierId(null);
         addressService.create(createAddressParam);
-
-        if (customerResult.getCustomerCode().equals(randomString)) {
-            createCustomerParam.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
-            customerResult.setCustomerCode(createCustomerParam.getCustomerCode());
-            Customer newCustomer = customerRepository.saveAndFlush(customerResult);
-            return customerMapper.toDTO(newCustomer);
-        }
-
-        return customerMapper.toDTO(customerResult);
+        return customerMapper.toDTO(customer);
     }
 
     @Override

@@ -17,6 +17,7 @@ import vn.sapo.excel.ExcelHelper;
 import vn.sapo.excel.ExcelService;
 import vn.sapo.order.sale.SaleOrderService;
 import vn.sapo.order.sale.item.OrderItemService;
+import vn.sapo.shared.controllers.BaseController;
 import vn.sapo.voucher.receipt.ReceiptVoucherService;
 import vn.sapo.supplier.excel.ResponseMessage;
 
@@ -27,7 +28,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/customers")
 @CrossOrigin("*")
-public class CustomerAPI {
+public class CustomerAPI extends BaseController {
 
     @Autowired
     private CustomerService customerService;
@@ -43,7 +44,6 @@ public class CustomerAPI {
 
     @Autowired
     SaleOrderService saleOrderService;
-
 
     @Autowired
     CustomerGroupService customerGroupService;

@@ -10,6 +10,7 @@ import vn.sapo.controllers.customer.CustomerAPI;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customers.dto.CreateAddressParam;
+import vn.sapo.shared.parsers.JacksonParser;
 
 @SpringBootTest
 public class CustomerIntegration {

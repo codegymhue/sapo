@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import vn.sapo.shared.validation.constraints.NullOrNotBlank;
+
+import javax.validation.constraints.NotBlank;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,18 +15,21 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 public class CreateCusGroupParam {
-//    private Integer id;
 
+    @NotBlank(message = "title khoong trong")
     private String title;
 
+    @NullOrNotBlank
     private String cusGrpCode;
 
+    @NullOrNotBlank
     private String description;
 
     private Integer pricingPolicyId;
 
     private Integer discount;
 
-    private Integer paymentMethodId;
+    @NullOrNotBlank
+    private String paymentMethodId;
 
 }

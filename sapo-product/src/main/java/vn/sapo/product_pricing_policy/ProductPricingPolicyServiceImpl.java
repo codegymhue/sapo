@@ -2,15 +2,12 @@ package vn.sapo.product_pricing_policy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import vn.sapo.entities.product.Product;
 import vn.sapo.entities.product.pricing_policy.ProductPricingPolicy;
 import vn.sapo.pricing_policy.PricingPolicyRepository;
 import vn.sapo.product_pricing_policy.dto.ProductPriceCreParam;
 import vn.sapo.product_pricing_policy.dto.ProductPriceResult;
-import vn.sapo.pricing_policy.PricingPolicyService;
 import vn.sapo.shared.exceptions.NotFoundException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
