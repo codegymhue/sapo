@@ -1,12 +1,5 @@
 package vn.sapo.customer;
 
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//
-//import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-<<<<<<< HEAD
-
-=======
->>>>>>> vt_dev
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-<<<<<<< HEAD
+
 import vn.sapo.controllers.customer.CustomerAPI;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
@@ -35,21 +28,13 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.isA;
-=======
-import vn.sapo.payment.sale.PaymentSaleOrderService;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.mock;
->>>>>>> vt_dev
+
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> vt_dev
 @WebMvcTest(CustomerAPI.class)
 public class CustomerAPITest {
 
@@ -58,11 +43,8 @@ public class CustomerAPITest {
     @MockBean
     private SaleOrderService saleOrderService;
     @MockBean
-<<<<<<< HEAD
     private ReceiptVoucherService receiptVoucherService;
-=======
-    private PaymentSaleOrderService paymentSaleOrderService;
->>>>>>> vt_dev
+
     @MockBean
     private OrderItemService orderItemService;
     @MockBean
@@ -78,78 +60,24 @@ public class CustomerAPITest {
     private static UpdateCustomerParam updateCustomerParam;
     private static List<AddressResult> addressResultList;
     private static List<CustomerResult> customerResultList;
-<<<<<<< HEAD
 
     @BeforeAll
-    static void init() {
-=======
-    @BeforeAll
     static void init(){
->>>>>>> vt_dev
         createAddressParam = CustomerParamTest.getCreateAddressParam();
         createCustomerParam = CustomerParamTest.getCreateCustomerParam();
         updateCustomerParam = CustomerParamTest.getUpdateCustomerParam();
         addressResultList = CustomerParamTest.getListAddressResult();
         customerResultList = CustomerParamTest.getListCustomerResult();
     }
-<<<<<<< HEAD
 
     @BeforeEach
-    public void setUp() {
-=======
-    @BeforeEach
     public void setUp(){
->>>>>>> vt_dev
         Mockito.when(customerService.findAll()).thenReturn(customerResultList);
         Mockito.when(customerService.findById(1)).thenReturn(customerResultList.get(0));
         Mockito.when(customerService.create(isA(CreateCustomerParam.class))).thenReturn(customerResultList.get(0));
         Mockito.when(customerService.update(isA(UpdateCustomerParam.class))).thenReturn(customerResultList.get(0));
     }
-<<<<<<< HEAD
 
-    @Test
-    public void findAllCustomer() throws Exception {
-        mockMvc.perform(get("/api/customers")
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
-    }
-
-    @Test
-    public void findByCustomerById() throws Exception {
-        mockMvc.perform(get("/api/customers/1")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(1)));
-    }
-
-    @Test
-    public void createCustomer() throws Exception {
-        mockMvc.perform(post("/api/customers/create")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(JacksonParser.INSTANCE.toJson(createCustomerParam))
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id", is(1)));
-    }
-
-    @Test
-    public void updateCustomer() throws Exception {
-        mockMvc.perform(put("/api/customers/1")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(JacksonParser.INSTANCE.toJson(updateCustomerParam))
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(1)));
-    }
-
-    @Test
-    public void deleteCustomer() throws Exception {
-        mockMvc.perform(delete("/api/customers/delete/1")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-=======
     @Test
     public void findAllCustomer() throws Exception {
         mockMvc.perform(get("/api/customers")
@@ -188,6 +116,5 @@ public class CustomerAPITest {
                             .contentType(MediaType.APPLICATION_JSON)
                             .accept(MediaType.APPLICATION_JSON))
                             .andExpect(status().isOk());
->>>>>>> vt_dev
     }
 }

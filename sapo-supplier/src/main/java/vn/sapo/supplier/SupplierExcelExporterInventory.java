@@ -100,6 +100,8 @@ public class SupplierExcelExporterInventory {
                 createCell(row, columnCount++, supplier.getFax(), style);
                 createCell(row, columnCount++, supplier.getTaxCode(), style);
                 createCell(row, columnCount++, supplier.getDescription(), style);
+                createCell(row, columnCount++, "chính sách giá mặc định", style);
+                createCell(row, columnCount++, "kỳ hạn thanh toán mặc định", style);
                 createCell(row, columnCount++, supplier.getPaymentMethod(), style);
                 createCell(row, columnCount++, address.getFullName(), style);
                 createCell(row, columnCount++, address.getPhoneNumber(), style);
@@ -111,8 +113,7 @@ public class SupplierExcelExporterInventory {
                 createCell(row, columnCount++, district, style);
                 createCell(row, columnCount++, "nợ hiện tại", style);
                 createCell(row, columnCount++, "tags", style);
-                createCell(row, columnCount++, "chính sách giá mặc định", style);
-                createCell(row, columnCount++, "kỳ hạn thanh toán mặc định", style);
+
             }
         }
     }

@@ -14,6 +14,7 @@ import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.payment_method.PaymentMethodService;
 import vn.sapo.shared.configurations.CodePrefix;
+import vn.sapo.supplier.excel.ExportExcelSupplierParam;
 import vn.sapo.supplier.excel.ImportExcelSupplierParam;
 import vn.sapo.supplierGroup.SupplierGroupService;
 
@@ -110,12 +111,12 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
         cells.forEachRemaining(cell -> {
             switch (cell.getColumnIndex()) {
 
-                case CONTACTNAME:
+                case CONTACT_NAME:
                     param.setFullName(cell.getStringCellValue());
                     break;
-                case CONTACTPHONE:
+                case CONTACT_PHONE:
                     param.setPhoneNumber(cell.getStringCellValue());
-                case CONTACTEMAIL:
+                case CONTACT_EMAIL:
                     param.setEmail(cell.getStringCellValue());
                 case LABEL:
                     param.setLabel(cell.getStringCellValue());
@@ -126,10 +127,10 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
                 case LINE2:
                     param.setLine2(cell.getStringCellValue());
                     break;
-                case PROVINCENAME:
+                case PROVINCE_NAME:
                     param.setProvinceName(cell.getStringCellValue());
                     break;
-                case DISTRICTNAME:
+                case DISTRICT_NAME:
                     param.setDistrictName(cell.getStringCellValue());
                     break;
                 default:
@@ -147,10 +148,10 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
                 case FULL_NAME:
                     param.setFullName(cell.getStringCellValue());
                     break;
-                case SUPPLIERCODE:
+                case SUPPLIER_CODE:
                     param.setSupplierCode(cell.getStringCellValue());
                     break;
-                case SUPGROUPCODE:
+                case SUP_GROUP_CODE:
                     param.setSupGroupCode(cell.getStringCellValue());
                     break;
                 case EMAIL:
@@ -165,26 +166,27 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
                 case FAX:
                     param.setFax(cell.getStringCellValue());
                     break;
-                case TAXCODE:
+                case TAX_CODE:
                     param.setTaxCode(String.valueOf(cell.getNumericCellValue()));
                     break;
-                case DESCIPTION:
+                case DESCRIPTION:
                     param.setDescription(cell.getStringCellValue());
                     break;
-                case PAYMENTMETHODTITLE:
+                case 9:
+//                    PRICEPOLICY :
+//
+                    break;
+                case 10:
+//                    PAYMENTTERN :
+                    break;
+                case PAYMENT_METHOD_TITLE:
                     param.setPaymentMethodTitle(cell.getStringCellValue());
                     break;
-                case 18:
+                case 20:
 //                            nợ hiện tại
                     break;
-                case 19:
-//                              tags
-                    break;
-                case 20:
-//                    Chinh sach gia mac dinh
-                    break;
                 case 21:
-//                      Kỳ hạn thanh toán mặc định
+//                              tags
                     break;
                 default:
                     break;
@@ -220,6 +222,34 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
             }
         });
     }
+
+
+//public void export (List<ExportExcelSupplierParam> exportExcelSupplierParams)
+//    List<Supplier> suppliers = new ArrayList<>();
+//        exportExcelSupplierParams.forEach(param -> {
+//        Supplier supplier = supplierMapper.toModel(param);
+//        supplier.setEmployeeId(1);
+//        suppliers.add(supplier);
+//    });
+//        supplierRepository.saveAllAndFlush(suppliers).forEach(supplier -> {
+//        if (supplier.getSupplierCode() == null)
+//            supplier.setSupplierCode(CodePrefix.SUPPLIER.generate(supplier.getId()));
+//        for (ImportExcelSupplierParam param : importExcelSupplierParams) {
+//            boolean matchFullName = param.getFullName().equals(supplier.getFullName());
+//            String phone = param.getPhone();
+//            boolean matchPhone = phone != null && phone.equals(supplier.getPhone());
+//            if (matchFullName && matchPhone) {
+//                List<CreateAddressParam> addressParams = param.getCreateAddressParams();
+//                addressParams.forEach(addressParam -> {
+//                    addressParam.setSupplierId(supplier.getId());
+//                });
+//                addressService.create(addressParams);
+//            }
+//        }
+//    });
+//}
+
+
 
 
 }

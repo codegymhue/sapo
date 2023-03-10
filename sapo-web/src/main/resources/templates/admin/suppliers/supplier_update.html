@@ -578,8 +578,7 @@
                 console.log("data: ", data)
                 SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
                 page.dialogs.elements.modalCreateGroupSupplier.modal('hide');
-                getAllGroup();
-                // location.reload();
+                
             })
             .fail((jqXHR) =>{
                 if (jqXHR.responseJSON) {
@@ -661,7 +660,6 @@
                         SupplierApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
                     }
                 }
-
                 // SupplierApp.IziToast.showErrorAlert("Sửa thông tin nhà cung cấp thất bại")
             })
     }

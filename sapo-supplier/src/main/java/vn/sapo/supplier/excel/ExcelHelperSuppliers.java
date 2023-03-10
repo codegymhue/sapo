@@ -80,45 +80,45 @@ public class ExcelHelperSuppliers {
                             supplier.setDescription(currentCell.getStringCellValue());
                             break;
                         case 9:
+                            //              chính sách giá mặc định
+                            break;
+                        case 10:
+                         //              Kỳ hạn thanh toán mặc định
+                            break;
+                        case 11:
                             String paymentMethod = currentCell.getStringCellValue();
                             if (paymentMethod != null && !paymentMethod.isBlank())
                                 supplier.setPaymentMethodId(paymentMethod);
                             break;
-                        case 10:
+                        case 12:
                             address.setFullName(currentCell.getStringCellValue());
                             break;
-                        case 11:
+                        case 13:
                             address.setPhoneNumber(currentCell.getStringCellValue());
                             break;
-                        case 12:
+                        case 14:
                             address.setEmail(currentCell.getStringCellValue());
                             break;
-                        case 13:
+                        case 15:
                             address.setLabel(currentCell.getStringCellValue());
                             break;
-                        case 14:
+                        case 16:
                             address.setLine1(currentCell.getStringCellValue());
                             break;
-                        case 15:
+                        case 17:
                             address.setLine2(currentCell.getStringCellValue());
                             break;
-                        case 16:
+                        case 18:
                             address.setProvinceName(currentCell.getStringCellValue());
                             break;
-                        case 17:
+                        case 19:
                             address.setDistrictName(currentCell.getStringCellValue());
                             break;
-                        case 18:
+                        case 20:
 //                            nợ hiện tại
                             break;
-                        case 19:
-//                              tags
-                            break;
-                        case 20:
-//                     chính sách giá mặc định
-                            break;
                         case 21:
-//                      Kỳ hạn thanh toán mặc định
+//                              tags
                             break;
                         default:
                             break;
