@@ -1,5 +1,6 @@
 package vn.sapo.supplier;
 
+import org.apache.poi.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,10 +18,7 @@ import vn.sapo.shared.parsers.JacksonParser;
 import vn.sapo.supplier.dto.*;
 import vn.sapo.supplierGroup.SupplierGroupRepository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -176,12 +174,24 @@ public class SupplierServiceImpl implements SupplierService {
         String supplierCode = supplier.getSupplierCode();
         return supplierCode;
     }
+    @Override
+    @Transactional
+    public List<String> findTags() {
+        List<List<String>> a = supplierRepository.findTags().stream()
+                .map(json -> {
+                    if (json != null) {
+                        String trimmedJson = json.trim();
+                        if (!trimmedJson.isEmpty()) {
+                            return Arrays.asList(trimmedJson.split(","));
+                        }
+                    }
+                    return null;
+                })
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
 
-//    public void findTags(){
-//        List<List<String>> a = supplierRepository.findTags().stream()
-//                .map(json -> JacksonParser.INSTANCE.toList(json, String.class))
-//                .collect(Collectors.toList());
-//
-//        a.stream().flatMap(json -> json.stream().collect(Collectors.toList()))
-//    }
+        return a.stream()
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
+    }
 }
