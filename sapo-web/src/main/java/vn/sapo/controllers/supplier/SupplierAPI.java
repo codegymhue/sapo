@@ -49,15 +49,22 @@ public class SupplierAPI {
 //    public ResponseEntity<List<SupplierResult>> findAll() {
 //        return new ResponseEntity<>(supplierService.findAll(), HttpStatus.OK);
 //    }
+//    @GetMapping
+//    public ResponseEntity<?> getAllSupplierPage(@RequestParam HashMap<String, String> hashMap) {
+//        return new ResponseEntity<>(supplierService.getAllSupplierPage(
+//                Integer.valueOf(hashMap.get("pageNo")),
+//                Integer.valueOf(hashMap.get("pageSize")),
+//                hashMap.get("status")
+//        ),
+//                HttpStatus.OK
+//        );
+//    }
+
     @GetMapping
-    public ResponseEntity<?> getAllSupplierPage(@RequestParam HashMap<String, String> hashMap) {
-        return new ResponseEntity<>(supplierService.getAllSupplierPage(
-                Integer.valueOf(hashMap.get("pageNo")),
-                Integer.valueOf(hashMap.get("pageSize")),
-                hashMap.get("status")
-        ),
-                HttpStatus.OK
-        );
+    public ResponseEntity<?> getAllSupplierTags() {
+       List<String> listTags =  supplierService.findTags();
+        return new ResponseEntity<>(listTags,HttpStatus.OK);
+
     }
 
     @GetMapping("/{id}")
