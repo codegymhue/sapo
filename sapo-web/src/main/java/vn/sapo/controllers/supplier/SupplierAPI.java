@@ -67,7 +67,7 @@ public class SupplierAPI {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Validated @RequestBody CreateSupplierParam createSupplierParam) {
+    public ResponseEntity<?> create(@Valid @RequestBody CreateSupplierParam createSupplierParam) {
 //        System.out.println(createSupplierParam);
         SupplierResult dto = supplierService.create(createSupplierParam);
         CreateAddressParam createAddressParam = createSupplierParam.getCreateAddressParam();
