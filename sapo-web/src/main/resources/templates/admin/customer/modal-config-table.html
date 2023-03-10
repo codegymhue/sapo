@@ -40,9 +40,8 @@
                
             </div>
             <div class="modal-footer">
-                <button type="button" id="btn-cancel-config-table" class="btn btn-outline-primary modal-change-column" onclick="reset()">Quay về mặc định</button>
-              <button type="button" id="btn-cancel-config-table" class="btn btn-outline-danger modal-change-column" data-dismiss="modal">Thoát</button>
-              <button type="button" id="btn-submit-config-table" class="btn btn-outline-primary" onclick="changeColumn()">Lưu</button>
+              <button type="button" id="btn-cancel-config-table" class="btn btn-outline-danger modal-change-column" data-dismiss="modal">Close</button>
+              <button type="button" id="btn-submit-config-table" class="btn btn-outline-primary" onclick="changeColumn()">Save changes</button>
             </div>
           </div>
         </div>
@@ -95,18 +94,16 @@
             return inputCheckbox;
         }
          //tạo các list để drag và drop trong modal
-        function createElement(){
-            $(theadElement).html("");
-            thead.map((item, index)=>{
-                let headLabel = `
-                <div class="label-column" id="${thead[index]}" data-item-sortable-id="0" draggable="true" role="option" aria-grabbed="false" style="">
-                    ${addCheckboxInLabelColumn(thead[index])} ${nameThead[thead[index]]}
-                </div>`;
-                $(theadElement).append(headLabel);
-                $('.checkbox-change-column').prop('checked', true);
-            })
-        };
-        createElement();
+        (function createElement(){
+        thead.map((item, index)=>{
+            let headLabel = `
+            <div class="label-column" id="${thead[index]}" data-item-sortable-id="0" draggable="true" role="option" aria-grabbed="false" style="">
+                ${addCheckboxInLabelColumn(thead[index])} ${nameThead[thead[index]]}
+            </div>`;
+            $(theadElement).append(headLabel);
+            $('.checkbox-change-column').prop('checked', true);
+        })
+        })();
         //changeColumn() thực hiện khi click save ở modal để chuyển cột
     function changeColumn(){
         let listLabelColumn = document.querySelectorAll(".label-column");
@@ -154,7 +151,7 @@
             "paging": true,
             language:
                 {
-                    "processing": "Đang xử lý...",
+                    "processing": "<i class='fa fa-refresh fa-spin' style='font-size: 100pt; z-index: 100000'></i>",
                     "aria": {
                         "sortAscending": ": Sắp xếp thứ tự tăng dần",
                         "sortDescending": ": Sắp xếp thứ tự giảm dần"
@@ -443,21 +440,5 @@
             $(".close").click();
             $(".modal-backdrop").remove();
     }
-    function reset(){
-        thead = [
-            'customerCode',
-            'fullName',
-            'phoneNumber',
-            'group.title',
-            'debtTotal',
-            'spendTotal',
-            "quantityItemOrder"
-        ];
-        createElement();
-        let listLabelColumn = document.querySelectorAll(".label-column");
-        for(let i=0; i<listLabelColumn.length; i++){
-            checkedCheckbox[listLabelColumn[i].id] = true;
-        }
-    }
-    </script>
+      </script>
 </th:block>
