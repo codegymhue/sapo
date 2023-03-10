@@ -43,12 +43,12 @@ public class SupplierController {
 
     @GetMapping
     public ModelAndView showSupplierListPage() {
-        return new ModelAndView("/admin/suppliers/supplier_list_small");
-    }
-    @GetMapping("/small")
-    public ModelAndView showSupplierListPageSmall() {
         return new ModelAndView("/admin/suppliers/supplier_list_small2");
     }
+//    @GetMapping("/small")
+//    public ModelAndView showSupplierListPageSmall() {
+//        return new ModelAndView("/admin/suppliers/supplier_list_small2");
+//    }
 
 //    @GetMapping("SearchSupplierGroupV1")
 //    public ResponseEntity<?> showSupplierListPage1() {
