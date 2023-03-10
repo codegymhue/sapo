@@ -164,6 +164,10 @@ public class CustomerParamTest {
                 .setFullName("trung")
                 .setPhoneNumber("089898989989")
                 .setEmail("trung@gmail.com")
+<<<<<<< HEAD
+=======
+                .setSupplierId(1)
+>>>>>>> vt_dev
                 .setLine1("Line1")
                 .setLine2("Line2")
                 .setWardId(1)

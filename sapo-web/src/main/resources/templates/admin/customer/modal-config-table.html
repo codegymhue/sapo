@@ -1,0 +1,463 @@
+<th:block th:fragment="modal-config-table">
+    <style>
+        #btn-cancel-config-table:hover{
+            color: red;
+        }
+        #btn-submit-config-table{
+            color: #0d6efd !important;
+        }
+        .label-column{
+            border: 1px solid rgb(224, 219, 219);
+            padding: 10px 0px;
+            margin-bottom: 10px;
+            width: 100%;
+            padding-left: 1%;
+        }
+        .label-column input:hover{
+            cursor: pointer;
+        }
+        .label-dragStart{
+            background-color: cyan;
+            border: 2px solid black;
+        }
+        .label-dragging{
+            background-color: rgb(241, 235, 235);
+        }
+    </style>
+    <div class="modal fade" id="modal-config-table" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"  style="overflow-x: hidden">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Điều chỉnh cột trên trang danh sách
+                <p style="font-size: 10pt;">Tích chọn cột để hiển thị. Kéo thả để thay đổi nhanh vị trí các cột hiển thị</p>
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body change-column" id="sortable">
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btn-cancel-config-table" class="btn btn-outline-primary modal-change-column" onclick="reset()">Quay về mặc định</button>
+              <button type="button" id="btn-cancel-config-table" class="btn btn-outline-danger modal-change-column" data-dismiss="modal">Thoát</button>
+              <button type="button" id="btn-submit-config-table" class="btn btn-outline-primary" onclick="changeColumn()">Lưu</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        alert = ()=>{}
+        $( function() {
+            $( "#sortable" ).sortable();
+            $( "#sortable" ).disableSelection();
+        });
+        const theadElement = document.querySelector('.change-column');
+        let thead = [
+            'customerCode',
+            'fullName',
+            'phoneNumber',
+            'group.title',
+            'debtTotal',
+            'spendTotal',
+            "quantityItemOrder"
+        ];
+        let column = [];
+        let nameThead = {
+            "customerCode": "Mã khách hàng",
+            "fullName": "Tên khách hàng",
+            "phoneNumber": "Số điện thoại",
+            'group.title':"Nhóm khách hàng",
+            'debtTotal':"Tổng công nợ",
+            'spendTotal': "Tổng chi tiêu",
+            'quantityItemOrder': "Tổng SL đơn hàng"
+        }
+        if(localStorage.getItem("config-dataTable")===null){
+            localStorage.setItem("config-dataTable", JSON.stringify(column));
+        }else{
+            let arrColumn = JSON.parse(localStorage.getItem("config-dataTable"));
+            for(let i=1; i<arrColumn.length; i++){
+                column.push({data: arrColumn[i]});
+            }
+        }
+        let checkedCheckbox = {};
+        for(item of thead){
+            checkedCheckbox[item] = true;
+        }
+        // sử dụng để thay đổi check box, được inline ở input checkbox ở hàm addCheckboxInLabelColumn(index)
+        function changeCheckbox(e){
+            checkedCheckbox[e.target.id] = e.target.checked;
+        }
+        //do khi drop xóa toàn bộ element con nên hàm này được viết ra để thêm input type checkbox
+        function addCheckboxInLabelColumn(index){
+            let inputCheckbox = `<input type="checkbox" class="checkbox-change-column" onchange=changeCheckbox(event) id="${index}">`;
+            return inputCheckbox;
+        }
+         //tạo các list để drag và drop trong modal
+        function createElement(){
+            $(theadElement).html("");
+            thead.map((item, index)=>{
+                let headLabel = `
+                <div class="label-column" id="${thead[index]}" data-item-sortable-id="0" draggable="true" role="option" aria-grabbed="false" style="">
+                    ${addCheckboxInLabelColumn(thead[index])} ${nameThead[thead[index]]}
+                </div>`;
+                $(theadElement).append(headLabel);
+                $('.checkbox-change-column').prop('checked', true);
+            })
+        };
+        createElement();
+        //changeColumn() thực hiện khi click save ở modal để chuyển cột
+    function changeColumn(){
+        let listLabelColumn = document.querySelectorAll(".label-column");
+        thead = [];
+        for(let i=0; i<listLabelColumn.length; i++){
+            if(checkedCheckbox[listLabelColumn[i].id]){
+                thead.push(listLabelColumn[i].id);
+            }
+        }
+        column = [{data: "id"}];
+        for(let i=0; i<thead.length; i++){
+            let data = {data: thead[i]}
+            column.push(data);
+        }
+        let elementCheckBox = `<input type="checkbox" value="check_none" style="float:right"/>`;
+        let elementCheckBoxAll = `<input style="cursor:pointer" id="checkAll" type="checkbox" value=""
+                                 data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả" onchange="checkAllSelect()">`
+        if(thead.length===0){
+            elementCheckBox = ""
+        }
+            $('#tbCustomer_wrapper').remove();
+            let newTable = 
+                `<table id="tbCustomer" class="table table-hover" style="width: 100%;">
+                        <thead style="background-color: #f4f6f8; height: 55px">
+                        <tr>
+                            <th class="align-middle" style="width:30px">
+                                <i class="fa-solid fa-gear" style="float: left;" data-toggle="modal" data-target="#modal-config-table"></i>
+                                <label for="checkAll" style="cursor:pointer; float: right;">
+                                    ${thead.length > 0 ? elementCheckBoxAll:""}
+                                </label>
+                            </th>
+                        </tr>
+                        </thead>
+                </table>`;
+            $("#tableCheckbox").append(newTable);
+            let trHead = $("#tbCustomer thead tr");
+            for(let i=0; i < thead.length; i++){
+                let tcolumn = `<th class="align-middle" scope="col">${nameThead[thead[i]]}</th>`;
+                trHead.append(tcolumn);
+            }
+            $("#tbCustomer").DataTable({
+            // chuyển tiếng việt cho datatable
+            "processing": true,
+            "serverSide": true,
+            "paging": true,
+            language:
+                {
+                    "processing": "Đang xử lý...",
+                    "aria": {
+                        "sortAscending": ": Sắp xếp thứ tự tăng dần",
+                        "sortDescending": ": Sắp xếp thứ tự giảm dần"
+                    },
+                    "autoFill": {
+                        "cancel": "Hủy",
+                        "fill": "Điền tất cả ô với <i>%d<\/i>",
+                        "fillHorizontal": "Điền theo hàng ngang",
+                        "fillVertical": "Điền theo hàng dọc"
+                    },
+                    "buttons": {
+                        "collection": "Chọn lọc <span class=\"ui-button-icon-primary ui-icon ui-icon-triangle-1-s\"><\/span>",
+                        "colvis": "Hiển thị theo cột",
+                        "colvisRestore": "Khôi phục hiển thị",
+                        "copy": "Sao chép",
+                        "copyKeys": "Nhấn Ctrl hoặc u2318 + C để sao chép bảng dữ liệu vào clipboard.<br \/><br \/>Để hủy, click vào thông báo này hoặc nhấn ESC",
+                        "copySuccess": {
+                            "1": "Đã sao chép 1 dòng dữ liệu vào clipboard",
+                            "_": "Đã sao chép %d dòng vào clipboard"
+                        },
+                        "copyTitle": "Sao chép vào clipboard",
+                        "pageLength": {
+                            "-1": "Xem tất cả các dòng",
+                            "_": "Hiển thị %d dòng",
+                            "1": "Hiển thị 1 dòng"
+                        },
+                        "print": "In ấn",
+                        "createState": "Tạo trạng thái",
+                        "csv": "CSV",
+                        "excel": "Excel",
+                        "pdf": "PDF",
+                        "removeAllStates": "Xóa hết trạng thái",
+                        "removeState": "Xóa",
+                        "renameState": "Đổi tên",
+                        "savedStates": "Trạng thái đã lưu",
+                        "stateRestore": "Trạng thái %d",
+                        "updateState": "Cập nhật"
+                    },
+                    "select": {
+                        "cells": {
+                            "1": "1 ô đang được chọn",
+                            "_": "%d ô đang được chọn"
+                        },
+                        "columns": {
+                            "1": "1 cột đang được chọn",
+                            "_": "%d cột đang được được chọn"
+                        },
+                        "rows": {
+                            "1": "1 dòng đang được chọn",
+                            "_": "%d dòng đang được chọn"
+                        }
+                    },
+                    "searchBuilder": {
+                        "title": {
+                            "_": "Thiết lập tìm kiếm (%d)",
+                            "0": "Thiết lập tìm kiếm"
+                        },
+                        "button": {
+                            "0": "Thiết lập tìm kiếm",
+                            "_": "Thiết lập tìm kiếm (%d)"
+                        },
+                        "value": "Giá trị",
+                        "clearAll": "Xóa hết",
+                        "condition": "Điều kiện",
+                        "conditions": {
+                            "date": {
+                                "after": "Sau",
+                                "before": "Trước",
+                                "between": "Nằm giữa",
+                                "empty": "Rỗng",
+                                "equals": "Bằng với",
+                                "not": "Không phải",
+                                "notBetween": "Không nằm giữa",
+                                "notEmpty": "Không rỗng"
+                            },
+                            "number": {
+                                "between": "Nằm giữa",
+                                "empty": "Rỗng",
+                                "equals": "Bằng với",
+                                "gt": "Lớn hơn",
+                                "gte": "Lớn hơn hoặc bằng",
+                                "lt": "Nhỏ hơn",
+                                "lte": "Nhỏ hơn hoặc bằng",
+                                "not": "Không phải",
+                                "notBetween": "Không nằm giữa",
+                                "notEmpty": "Không rỗng"
+                            },
+                            "string": {
+                                "contains": "Chứa",
+                                "empty": "Rỗng",
+                                "endsWith": "Kết thúc bằng",
+                                "equals": "Bằng",
+                                "not": "Không phải",
+                                "notEmpty": "Không rỗng",
+                                "startsWith": "Bắt đầu với",
+                                "notContains": "Không chứa",
+                                "notEndsWith": "Không kết thúc với",
+                                "notStartsWith": "Không bắt đầu với"
+                            },
+                            "array": {
+                                "equals": "Bằng",
+                                "empty": "Trống",
+                                "contains": "Chứa",
+                                "not": "Không",
+                                "notEmpty": "Không được rỗng",
+                                "without": "không chứa"
+                            }
+                        },
+                        "logicAnd": "Và",
+                        "logicOr": "Hoặc",
+                        "add": "Thêm điều kiện",
+                        "data": "Dữ liệu",
+                        "deleteTitle": "Xóa quy tắc lọc",
+                        "leftTitle": "Giảm thụt lề",
+                        "rightTitle": "Tăng thụt lề"
+                    },
+                    "searchPanes": {
+                        "countFiltered": "{shown} ({total})",
+                        "emptyPanes": "Không có phần tìm kiếm",
+                        "clearMessage": "Xóa hết",
+                        "loadMessage": "Đang load phần tìm kiếm",
+                        "collapse": {
+                            "0": "Phần tìm kiếm",
+                            "_": "Phần tìm kiếm (%d)"
+                        },
+                        "title": "Bộ lọc đang hoạt động - %d",
+                        "count": "{total}",
+                        "collapseMessage": "Thu gọn tất cả",
+                        "showMessage": "Hiện tất cả"
+                    },
+                    "datetime": {
+                        "hours": "Giờ",
+                        "minutes": "Phút",
+                        "next": "Sau",
+                        "previous": "Trước",
+                        "seconds": "Giây",
+                        "amPm": [
+                            "am",
+                            "pm"
+                        ],
+                        "unknown": "-",
+                        "weekdays": [
+                            "Chủ nhật"
+                        ],
+                        "months": [
+                            "Tháng Một",
+                            "Tháng Hai",
+                            "Tháng Ba",
+                            "Tháng Tư",
+                            "Tháng Năm",
+                            "Tháng Sáu",
+                            "Tháng Bảy",
+                            "Tháng Tám",
+                            "Tháng Chín",
+                            "Tháng Mười",
+                            "Tháng Mười Một",
+                            "Tháng Mười Hai"
+                        ]
+                    },
+                    "emptyTable": "Không có dữ liệu",
+                    "info": "Hiển thị _START_ tới _END_ của _TOTAL_ dữ liệu",
+                    "infoEmpty": "Hiển thị 0 tới 0 của 0 dữ liệu",
+                    "lengthMenu": "Hiển thị _MENU_ dữ liệu",
+                    "loadingRecords": "Đang tải...",
+                    "paginate": {
+                        "first": "Đầu tiên",
+                        "last": "Cuối cùng",
+                        "next": "Sau",
+                        "previous": "Trước"
+                    },
+                    "search": "Tìm kiếm:",
+                    "zeroRecords": "Không tìm thấy kết quả",
+                    "decimal": ",",
+                    "editor": {
+                        "close": "Đóng",
+                        "create": {
+                            "button": "Thêm",
+                            "submit": "Thêm",
+                            "title": "Thêm mục mới"
+                        },
+                        "edit": {
+                            "button": "Sửa",
+                            "submit": "Cập nhật",
+                            "title": "Sửa mục"
+                        },
+                        "error": {
+                            "system": "Đã xảy ra lỗi hệ thống (&lt;a target=\"\\\" rel=\"nofollow\" href=\"\\\"&gt;Thêm thông tin&lt;\/a&gt;)."
+                        },
+                        "multi": {
+                            "info": "Các mục đã chọn chứa các giá trị khác nhau cho đầu vào này. Để chỉnh sửa và đặt tất cả các mục cho đầu vào này thành cùng một giá trị, hãy nhấp hoặc nhấn vào đây, nếu không chúng sẽ giữ lại các giá trị riêng lẻ của chúng.",
+                            "noMulti": "Đầu vào này có thể được chỉnh sửa riêng lẻ, nhưng không phải là một phần của một nhóm.",
+                            "restore": "Hoàn tác thay đổi",
+                            "title": "Nhiều giá trị"
+                        },
+                        "remove": {
+                            "button": "Xóa",
+                            "confirm": {
+                                "_": "Bạn có chắc chắn muốn xóa %d hàng không?",
+                                "1": "Bạn có chắc chắn muốn xóa 1 hàng không?"
+                            },
+                            "submit": "Xóa",
+                            "title": "Xóa"
+                        }
+                    },
+                    "infoFiltered": "(được lọc từ _MAX_ dữ liệu)",
+                    "searchPlaceholder": "Nhập tìm kiếm...",
+                    "stateRestore": {
+                        "creationModal": {
+                            "button": "Thêm",
+                            "columns": {
+                                "search": "Tìm kiếm cột",
+                                "visible": "Khả năng hiển thị cột"
+                            },
+                            "name": "Tên:",
+                            "order": "Sắp xếp",
+                            "paging": "Phân trang",
+                            "scroller": "Cuộn vị trí",
+                            "search": "Tìm kiếm",
+                            "searchBuilder": "Trình tạo tìm kiếm",
+                            "select": "Chọn",
+                            "title": "Thêm trạng thái",
+                            "toggleLabel": "Bao gồm:"
+                        },
+                        "duplicateError": "Trạng thái có tên này đã tồn tại.",
+                        "emptyError": "Tên không được để trống.",
+                        "emptyStates": "Không có trạng thái đã lưu",
+                        "removeConfirm": "Bạn có chắc chắn muốn xóa %s không?",
+                        "removeError": "Không xóa được trạng thái.",
+                        "removeJoiner": "và",
+                        "removeSubmit": "Xóa",
+                        "removeTitle": "Xóa trạng thái",
+                        "renameButton": "Đổi tên",
+                        "renameLabel": "Tên mới cho %s:",
+                        "renameTitle": "Đổi tên trạng thái"
+                    },
+                },
+            ajax: {
+                url: origin +'/api/customers/filter',
+                type: 'POST',
+                // dataSrc: "content",
+                contentType: 'application/json',
+                data: function (d) {
+                    d.groupIds = customerFilter.groupIds;
+                    d.gender = customerFilter.gender;
+                    d.dayOfBirthday = customerFilter.dayOfBirthday;
+                    d.monthOfBirthday = customerFilter.monthOfBirthday;
+                    d.employeeIds = customerFilter.employeeIds;
+                    d.keyword = customerFilter.keyword;
+                    d.statusList = [];
+                    console.log(d);
+                    return JSON.stringify(d)
+                }
+            },
+            lengthMenu: [
+                [10, 30, 50,1000000000],
+                ["10", "30", "50", "All"]
+            ],
+            searching: false,
+            destroy: true,
+            columns: column,
+             columnDefs: [
+             {
+                            targets: 0,
+                            "orderable": false,
+                            render: function (data, type, row, meta) {
+                                return elementCheckBox;
+                            }
+                        },
+             {
+                            targets: thead.indexOf("customerCode")+1,
+                            render: function (data, type, row, meta) {
+                                return `<a href="/admin/customers/${row.id}" style="text-decoration: none">${row.customerCode}</a>`;
+                            }
+                        },
+
+
+             ],
+        });
+        let theadFirst = $("#tbCustomer thead tr th");
+        let removeSorting = setInterval(()=>{
+            if($(theadFirst[0]).hasClass("sorting_asc")){
+                $(theadFirst[0]).removeClass('sorting_asc');
+                clearInterval(removeSorting);
+            }
+        })
+            $(".close").click();
+            $(".modal-backdrop").remove();
+    }
+    function reset(){
+        thead = [
+            'customerCode',
+            'fullName',
+            'phoneNumber',
+            'group.title',
+            'debtTotal',
+            'spendTotal',
+            "quantityItemOrder"
+        ];
+        createElement();
+        let listLabelColumn = document.querySelectorAll(".label-column");
+        for(let i=0; i<listLabelColumn.length; i++){
+            checkedCheckbox[listLabelColumn[i].id] = true;
+        }
+    }
+    </script>
+</th:block>
