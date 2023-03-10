@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.customers.AddressService;
 import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.payment_method.PaymentMethodService;
+import vn.sapo.shared.controllers.BaseController;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.supplier.SupplierExcelService;
 import vn.sapo.supplier.dto.*;
@@ -27,7 +28,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/suppliers")
-public class SupplierAPI {
+public class SupplierAPI extends BaseController {
 
     @Autowired
     private SupplierService supplierService;

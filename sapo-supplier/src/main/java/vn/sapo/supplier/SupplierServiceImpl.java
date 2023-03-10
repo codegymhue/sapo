@@ -45,7 +45,7 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierResult findById(Integer id) {
         return supplierRepository.findById(id)
                 .map(supplierMapper::toDTO)
-                .orElseThrow(() -> new NotFoundException("{e.notFound}"));
+                .orElseThrow(() -> new NotFoundException("supplier.exception.notFound"));
     }
 
     @Override
