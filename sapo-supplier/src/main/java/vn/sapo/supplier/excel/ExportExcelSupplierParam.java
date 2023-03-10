@@ -13,7 +13,10 @@ import java.util.List;
 @Setter
 @Accessors(chain = true)
 public class ExportExcelSupplierParam extends CreateSupplierParam {
+
     private String paymentMethodTitle;
+
     List<CreateAddressParam> createAddressParams = new ArrayList<>();
+
     private String supGroupCode;
 }
