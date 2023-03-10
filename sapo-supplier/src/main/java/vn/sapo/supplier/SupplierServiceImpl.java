@@ -6,23 +6,18 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import vn.sapo.entities.product.Product;
-import vn.sapo.entities.product.ProductStatus;
 import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.entities.supplier.SupplierStatus;
 import vn.sapo.shared.configurations.CodePrefix;
-import vn.sapo.shared.exceptions.DataInputException;
 import vn.sapo.shared.exceptions.NotFoundException;
-import vn.sapo.shared.parsers.JacksonParser;
-import vn.sapo.supplier.dto.*;
+import vn.sapo.supplier.dto.CreateSupplierParam;
+import vn.sapo.supplier.dto.SupplierFilter;
+import vn.sapo.supplier.dto.SupplierResult;
+import vn.sapo.supplier.dto.UpdateSupplierParam;
 import vn.sapo.supplierGroup.SupplierGroupRepository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class SupplierServiceImpl implements SupplierService {
@@ -50,7 +45,7 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierResult findById(Integer id) {
         return supplierRepository.findById(id)
                 .map(supplierMapper::toDTO)
-                .orElseThrow(() -> new NotFoundException("Not found supplier with id: " + id));
+                .orElseThrow(() -> new NotFoundException("{e.notFound}"));
     }
 
     @Override
@@ -176,12 +171,24 @@ public class SupplierServiceImpl implements SupplierService {
         String supplierCode = supplier.getSupplierCode();
         return supplierCode;
     }
+    @Override
+    @Transactional
+    public List<String> findTags() {
+        List<List<String>> a = supplierRepository.findTags().stream()
+                .map(json -> {
+                    if (json != null) {
+                        String trimmedJson = json.trim();
+                        if (!trimmedJson.isEmpty()) {
+                            return Arrays.asList(trimmedJson.split(","));
+                        }
+                    }
+                    return null;
+                })
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
 
-//    public void findTags(){
-//        List<List<String>> a = supplierRepository.findTags().stream()
-//                .map(json -> JacksonParser.INSTANCE.toList(json, String.class))
-//                .collect(Collectors.toList());
-//
-//        a.stream().flatMap(json -> json.stream().collect(Collectors.toList()))
-//    }
+        return a.stream()
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
+    }
 }

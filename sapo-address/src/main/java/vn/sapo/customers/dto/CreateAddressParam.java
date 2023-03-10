@@ -23,7 +23,7 @@ public class CreateAddressParam {
     private String phoneNumber;
     @NullOrNotBlank
     private String email;
-    @NotBlank
+    @NotBlank(message = "no.hgdf")
     private String line1;
     @NullOrNotBlank
     private String line2;
