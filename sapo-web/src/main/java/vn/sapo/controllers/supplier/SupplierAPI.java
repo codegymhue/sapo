@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.customers.AddressService;
 import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.payment_method.PaymentMethodService;
+import vn.sapo.shared.controllers.BaseController;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.supplier.SupplierExcelService;
 import vn.sapo.supplier.dto.*;
@@ -27,7 +28,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/suppliers")
-public class SupplierAPI {
+public class SupplierAPI extends BaseController {
 
     @Autowired
     private SupplierService supplierService;
@@ -48,15 +49,22 @@ public class SupplierAPI {
 //    public ResponseEntity<List<SupplierResult>> findAll() {
 //        return new ResponseEntity<>(supplierService.findAll(), HttpStatus.OK);
 //    }
+//    @GetMapping
+//    public ResponseEntity<?> getAllSupplierPage(@RequestParam HashMap<String, String> hashMap) {
+//        return new ResponseEntity<>(supplierService.getAllSupplierPage(
+//                Integer.valueOf(hashMap.get("pageNo")),
+//                Integer.valueOf(hashMap.get("pageSize")),
+//                hashMap.get("status")
+//        ),
+//                HttpStatus.OK
+//        );
+//    }
+
     @GetMapping
-    public ResponseEntity<?> getAllSupplierPage(@RequestParam HashMap<String, String> hashMap) {
-        return new ResponseEntity<>(supplierService.getAllSupplierPage(
-                Integer.valueOf(hashMap.get("pageNo")),
-                Integer.valueOf(hashMap.get("pageSize")),
-                hashMap.get("status")
-        ),
-                HttpStatus.OK
-        );
+    public ResponseEntity<?> getAllSupplierTags() {
+       List<String> listTags =  supplierService.findTags();
+        return new ResponseEntity<>(listTags,HttpStatus.OK);
+
     }
 
     @GetMapping("/{id}")
@@ -66,7 +74,7 @@ public class SupplierAPI {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Validated @RequestBody CreateSupplierParam createSupplierParam) {
+    public ResponseEntity<?> create(@Valid @RequestBody CreateSupplierParam createSupplierParam) {
 //        System.out.println(createSupplierParam);
         SupplierResult dto = supplierService.create(createSupplierParam);
         CreateAddressParam createAddressParam = createSupplierParam.getCreateAddressParam();
