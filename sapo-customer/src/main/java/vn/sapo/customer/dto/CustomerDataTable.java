@@ -12,8 +12,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomerDataTable {
+
     private Integer draw;
+
     private Long recordsTotal;
+
     private Long recordsFiltered;
+
     private List<CustomerResult> data;
 }

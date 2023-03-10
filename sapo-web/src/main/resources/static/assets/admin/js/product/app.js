@@ -77,7 +77,7 @@ class ProductApp {
     }
 
     static renderRowProductVariant(item, showStatus){
-        let str = `
+        return `
              <tr id="tr_${item.id}" >
                 <td class="align-middle sticky-col first-col" style="background-color: white !important">
                      <label for="${item.id}" style="padding: 1rem; cursor:pointer">
@@ -96,7 +96,7 @@ class ProductApp {
                 <td class="align-middle">
                     <span id="showStatus" class="${showStatus}">${item.status === "AVAILABLE" ? "Đang giao dịch" : "Ngừng giao dịch"}</span> 
                 </td>
-                <td class="align-middle">${ item.createAt === null ? "" : new Date(item.createAt).toLocaleDateString('en-GB')}</td>
+                <td class="align-middle">${item.createAt === null ? "" : new Date(item.createAt).toLocaleDateString('en-GB')}</td>
                 <td class="align-middle">${item.updateAt === null ? "" : new Date(item.updateAt).toLocaleDateString('en-GB')}</td>
                 <td class="align-middle">${item.applyTax === true ? "Có" : "Không"}</td>
                 <td class="align-middle text-end">${new Intl.NumberFormat('de-DE').format(item.retailPrice)}</td>
@@ -109,11 +109,10 @@ class ProductApp {
                 <td class="align-middle text-end">${new Intl.NumberFormat('de-DE').format(item.trading)}</td>
             </tr>
         `;
-        return str;
     }
 
     static renderRowProductInventory(item) {
-        let str = `
+        return `
         <tr>
             <td>${item.sku}</td>
             <td>
@@ -127,7 +126,6 @@ class ProductApp {
             <td class="align-middle text-end">${new Intl.NumberFormat('de-DE').format(item.shipping)}</td>
         </tr>
         `;
-        return str;
     }
 
 }

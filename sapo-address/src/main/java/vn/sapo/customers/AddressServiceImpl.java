@@ -1,21 +1,16 @@
-package vn.sapo.address;
+package vn.sapo.customers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import vn.sapo.address.dto.AddressResult;
-import vn.sapo.address.dto.CreateAddressParam;
-import vn.sapo.address.dto.UpdateAddressParam;
+import vn.sapo.customers.dto.AddressResult;
+import vn.sapo.customers.dto.CreateAddressParam;
+import vn.sapo.customers.dto.UpdateAddressParam;
 import vn.sapo.entities.Address;
-import vn.sapo.entities.customer.Customer;
-import vn.sapo.entities.product.Product;
-import vn.sapo.entities.supplier.Supplier;
-import vn.sapo.entities.supplier.SupplierStatus;
 import vn.sapo.shared.exceptions.NotFoundException;
 
 import java.util.*;

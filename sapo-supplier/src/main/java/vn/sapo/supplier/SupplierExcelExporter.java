@@ -1,5 +1,4 @@
 
-
 package vn.sapo.supplier;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -8,17 +7,17 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import vn.sapo.address.dto.AddressResult;
 import vn.sapo.supplier.dto.SupGroupResult;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.excel.ExcelHeaderSupplier;
-
+import vn.sapo.supplier.dto.SupGroupResult;
+import vn.sapo.customers.dto.AddressResult;
+import vn.sapo.supplier.dto.SupplierResult;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import static vn.sapo.supplier.excel.ExcelHeaderSupplier.*;
 
 
 public class SupplierExcelExporter {
@@ -66,7 +65,6 @@ public class SupplierExcelExporter {
         createCell(row, 19, "Quận/Huyện", style);
         createCell(row, 20, "Nợ hiện tại", style);
         createCell(row, 21, "Tags", style);
-
     }
 
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
@@ -120,8 +118,8 @@ public class SupplierExcelExporter {
             String paymentMethodId = "";
             if (supplier.getPaymentMethod() != null) {
                 paymentMethodId = supplier.getPaymentMethod().getTitle();
-                createCell(row, columnCount++, paymentMethodId != null ? paymentMethodId : "", style);
             }
+            createCell(row, columnCount++, paymentMethodId != null ? paymentMethodId : "", style);
             if (supplier.getAddresses().size() == 0) {
                 createCell(row, columnCount++, "", style);
                 createCell(row, columnCount++, "", style);
@@ -137,16 +135,14 @@ public class SupplierExcelExporter {
                     createCell(row, columnCount++, adr.getEmail() != null ? adr.getEmail() : "", style);
                     createCell(row, columnCount++, adr.getLabel() != null ? adr.getLabel() : "", style);
                     createCell(row, columnCount++, adr.getLine1() != null ? adr.getLine1() : "", style);
-
                     if (adr.getLine2() != null)
                         createCell(sheet.createRow(rowCount++), columnCount - 1, adr.getLine2(), style);
-                    createCell(row, columnCount++, province != null ? province : "", style);
-                    createCell(row, columnCount++, district != null ? district : "", style);
+                    createCell(row, columnCount++, adr.getProvinceName() != null ? adr.getProvinceName() : "", style);
+                    createCell(row, columnCount++, adr.getDistrictName() != null ? adr.getDistrictName() : "", style);
                 }
             }
         }
     }
-
 
     public void export(HttpServletResponse response) throws IOException {
         writeHeaderLine();
@@ -158,5 +154,6 @@ public class SupplierExcelExporter {
 
         outputStream.close();
     }
+
 }
 
