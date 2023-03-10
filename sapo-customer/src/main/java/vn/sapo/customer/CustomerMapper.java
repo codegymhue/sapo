@@ -13,8 +13,8 @@ import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerStatus;
 
-import static vn.sapo.shared.configurations.MapperConfigure.MODEL_MAPPER_SKIP_NULL_DISABLED;
-import static vn.sapo.shared.configurations.MapperConfigure.MODEL_MAPPER_SKIP_NULL_ENABLED;
+import static vn.sapo.shared.configurations.MapperConfiguration.MODEL_MAPPER_SKIP_NULL_DISABLED;
+import static vn.sapo.shared.configurations.MapperConfiguration.MODEL_MAPPER_SKIP_NULL_ENABLED;
 
 @Component
 public class CustomerMapper implements InitializingBean {

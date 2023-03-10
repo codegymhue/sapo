@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Setter
 @Accessors(chain = true)
 public class CreateSupplierParam extends BaseSupplierParam {
-    @NullOrNotBlank(message = "supplierCode not blank")
+    @NullOrNotBlank(message = "supplier.supplierCode.notblank")
     private String supplierCode;
     private BigDecimal debtTotal;
     private CreateAddressParam createAddressParam;

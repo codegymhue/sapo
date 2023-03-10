@@ -1,33 +1,28 @@
 package vn.sapo.shared.configurations;
 
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @Configuration
 public class I18nConfiguration {
-
-    public static final String MODEL_MAPPER_SKIP_NULL_ENABLED = "MODEL_MAPPER_SKIP_NULL_ENABLED";
-    public static final String MODEL_MAPPER_SKIP_NULL_DISABLED = "MODEL_MAPPER_SKIP_NULL_DISABLED";
-
-    @Bean(MODEL_MAPPER_SKIP_NULL_ENABLED)
-    @Primary
-    public ModelMapper getModelMapperSkipNullEnabled() {
-        ModelMapper mapper = new ModelMapper();
-        mapper.getConfiguration()
-                .setSkipNullEnabled(true)
-                .setMatchingStrategy(MatchingStrategies.STRICT);
-        return mapper;
+    @Bean
+    public MessageSource messageSource() {
+        ReloadableResourceBundleMessageSource messageSource =
+                new ReloadableResourceBundleMessageSource();
+        messageSource.setBasenames("classpath:/i18n/supplier_messages_vi");
+        return messageSource;
     }
 
-    @Bean(MODEL_MAPPER_SKIP_NULL_DISABLED)
-    public ModelMapper getModelMapperSkipNullDisabled() {
-        ModelMapper mapper = new ModelMapper();
-        mapper.getConfiguration()
-                .setMatchingStrategy(MatchingStrategies.STRICT);
-        return mapper;
+    @Bean
+    public LocalValidatorFactoryBean getValidator() {
+        LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+        bean.setValidationMessageSource(messageSource());
+        return bean;
     }
+//TODO: CUA ANH DUNG XOA
+    //https://stackoverflow.com/questions/40165151/how-to-handle-multiple-files-and-messages-for-internationalization-in-spring
 
 }

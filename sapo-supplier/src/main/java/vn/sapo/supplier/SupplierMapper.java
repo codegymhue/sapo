@@ -14,8 +14,8 @@ import vn.sapo.supplier.dto.CreateSupplierParam;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.dto.UpdateSupplierParam;
 
-import static vn.sapo.shared.configurations.MapperConfigure.MODEL_MAPPER_SKIP_NULL_DISABLED;
-import static vn.sapo.shared.configurations.MapperConfigure.MODEL_MAPPER_SKIP_NULL_ENABLED;
+import static vn.sapo.shared.configurations.MapperConfiguration.MODEL_MAPPER_SKIP_NULL_DISABLED;
+import static vn.sapo.shared.configurations.MapperConfiguration.MODEL_MAPPER_SKIP_NULL_ENABLED;
 
 @Component
 public class SupplierMapper implements InitializingBean {
