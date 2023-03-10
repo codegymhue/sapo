@@ -3,8 +3,6 @@ package vn.sapo.customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,11 +15,9 @@ import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.shared.configurations.CodePrefix;
-import vn.sapo.shared.exceptions.DataInputException;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
