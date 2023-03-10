@@ -224,32 +224,6 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
     }
 
 
-//public void export (List<ExportExcelSupplierParam> exportExcelSupplierParams)
-//    List<Supplier> suppliers = new ArrayList<>();
-//        exportExcelSupplierParams.forEach(param -> {
-//        Supplier supplier = supplierMapper.toModel(param);
-//        supplier.setEmployeeId(1);
-//        suppliers.add(supplier);
-//    });
-//        supplierRepository.saveAllAndFlush(suppliers).forEach(supplier -> {
-//        if (supplier.getSupplierCode() == null)
-//            supplier.setSupplierCode(CodePrefix.SUPPLIER.generate(supplier.getId()));
-//        for (ImportExcelSupplierParam param : importExcelSupplierParams) {
-//            boolean matchFullName = param.getFullName().equals(supplier.getFullName());
-//            String phone = param.getPhone();
-//            boolean matchPhone = phone != null && phone.equals(supplier.getPhone());
-//            if (matchFullName && matchPhone) {
-//                List<CreateAddressParam> addressParams = param.getCreateAddressParams();
-//                addressParams.forEach(addressParam -> {
-//                    addressParam.setSupplierId(supplier.getId());
-//                });
-//                addressService.create(addressParams);
-//            }
-//        }
-//    });
-//}
-
-
 
 
 }

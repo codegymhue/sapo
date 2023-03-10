@@ -21,15 +21,16 @@
 //
 //        Session session = Session.getInstance(props,
 //                new javax.mail.Authenticator() {
-//                    protected PasswordAuthentication getPasswordAuthentication() {
-//                        return new PasswordAuthentication(username, password);
+//                    private PasswordAuthentication getPasswordAuthentication() {
+//                        return new PasswordAuthentication(username, password.toCharArray());
 //                    }
 //                });
 //
 //        try {
 //            Message message = new MimeMessage(session);
 //            message.setFrom(new InternetAddress("nguyentanluong0503@gmail.com"));
-//            message.setRecipients(Message.RecipientType.TO,
+//
+//            message.setRecipients(RecipientType.TO,
 //                    InternetAddress.parse("nguyentanluong0503@gmail.com"));
 //            message.setSubject("");
 //            message.setText("Hello");
