@@ -163,7 +163,7 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
         }
     }
 
-    String getMaxSystemCustomerGroupCode() {
+    public String getMaxSystemCustomerGroupCode() {
         String prefix = CodePrefix.CUSTOMER_GROUP.getValue();
         String maxSystemCustomerGroupCode;
 

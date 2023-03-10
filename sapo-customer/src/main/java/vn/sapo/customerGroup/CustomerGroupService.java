@@ -11,6 +11,9 @@ import vn.sapo.customerGroup.dto.UpdateCusGroupParam;
 import java.util.*;
 
 public interface CustomerGroupService {
+
+    String getMaxSystemCustomerGroupCode();
+
     CustomerGroupResult create(CreateCusGroupParam createCusGroupParam);
 
     CustomerGroupResult update(UpdateCusGroupParam updateCusGroupParam);
