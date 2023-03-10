@@ -9,7 +9,6 @@
 }
 
 .available {
-    border-width: 1px;
     background-color: rgb(255, 247, 231);
     border-radius: 10px;
     display: block;
@@ -18,7 +17,6 @@
     border: 1px solid rgb(255, 223, 155);
 }
 .unavailable {
-    border-width: 1px;
     background-color: rgb(255, 246, 246);
     border-radius: 10px;
     display: block;
@@ -38,12 +36,12 @@
     text-overflow: ellipsis;
     padding-bottom: 0;
 }
+
 .jss1218 {
     display: flex;
     flex-direction: row;
 }
-.jss3835 {
-}
+
 .jss1211 {
     color: inherit;
     height: 52px;
@@ -303,7 +301,7 @@
 }
 
 .jss6734 {
-    box-shadow: 0px 2px 4px rgba(168, 168, 168, 0.25);
+    box-shadow: 0 2px 4px rgba(168, 168, 168, 0.25);
     background-color: white;
 }
 
@@ -315,9 +313,7 @@
 }
 
 .jss6736 {
-    display: flex;
     padding: 16px;
-    align-items: center;
     flex-direction: row;
 }
 
@@ -429,7 +425,7 @@
     z-index: 2000 !important;
     font-size: 12px !important;
     max-width: 220px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     overflow-wrap: break-word;
 }
@@ -709,7 +705,7 @@
 }
 
 .MuiButtonGroup-contained {
-    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
 .MuiButtonGroup-fullWidth {
@@ -874,7 +870,7 @@
 
 .MuiTableCell-sizeSmall.MuiTableCell-paddingCheckbox {
     width: 24px;
-    padding: 0px 12px 0 16px;
+    padding: 0 12px 0 16px;
 }
 
 .MuiTableCell-sizeSmall.MuiTableCell-paddingCheckbox:last-child {
@@ -974,95 +970,95 @@
 }
 
 .MuiPaper-elevation2 {
-    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation3 {
-    box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation4 {
-    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation5 {
-    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 14px 0 rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation6 {
-    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation7 {
-    box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 5px -2px rgba(0, 0, 0, 0.2), 0 7px 10px 1px rgba(0, 0, 0, 0.14), 0 2px 16px 1px rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation8 {
-    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation9 {
-    box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.2), 0px 9px 12px 1px rgba(0, 0, 0, 0.14), 0px 3px 16px 2px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 5px 6px -3px rgba(0, 0, 0, 0.2), 0 9px 12px 1px rgba(0, 0, 0, 0.14), 0 3px 16px 2px rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation10 {
-    box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.2), 0 10px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation11 {
-    box-shadow: 0px 6px 7px -4px rgba(0, 0, 0, 0.2), 0px 11px 15px 1px rgba(0, 0, 0, 0.14), 0px 4px 20px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2), 0 11px 15px 1px rgba(0, 0, 0, 0.14), 0 4px 20px 3px rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation12 {
-    box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 12px 17px 2px rgba(0, 0, 0, 0.14), 0 5px 22px 4px rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation13 {
-    box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 13px 19px 2px rgba(0, 0, 0, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation14 {
-    box-shadow: 0px 7px 9px -4px rgba(0, 0, 0, 0.2), 0px 14px 21px 2px rgba(0, 0, 0, 0.14), 0px 5px 26px 4px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 7px 9px -4px rgba(0, 0, 0, 0.2), 0 14px 21px 2px rgba(0, 0, 0, 0.14), 0 5px 26px 4px rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation15 {
-    box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.2), 0px 15px 22px 2px rgba(0, 0, 0, 0.14), 0px 6px 28px 5px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 9px -5px rgba(0, 0, 0, 0.2), 0 15px 22px 2px rgba(0, 0, 0, 0.14), 0 6px 28px 5px rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation16 {
-    box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 10px -5px rgba(0, 0, 0, 0.2), 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation17 {
-    box-shadow: 0px 8px 11px -5px rgba(0, 0, 0, 0.2), 0px 17px 26px 2px rgba(0, 0, 0, 0.14), 0px 6px 32px 5px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 11px -5px rgba(0, 0, 0, 0.2), 0 17px 26px 2px rgba(0, 0, 0, 0.14), 0 6px 32px 5px rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation18 {
-    box-shadow: 0px 9px 11px -5px rgba(0, 0, 0, 0.2), 0px 18px 28px 2px rgba(0, 0, 0, 0.14), 0px 7px 34px 6px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 9px 11px -5px rgba(0, 0, 0, 0.2), 0 18px 28px 2px rgba(0, 0, 0, 0.14), 0 7px 34px 6px rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation19 {
-    box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2), 0px 19px 29px 2px rgba(0, 0, 0, 0.14), 0px 7px 36px 6px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 9px 12px -6px rgba(0, 0, 0, 0.2), 0 19px 29px 2px rgba(0, 0, 0, 0.14), 0 7px 36px 6px rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation20 {
-    box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 20px 31px 3px rgba(0, 0, 0, 0.14), 0px 8px 38px 7px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 20px 31px 3px rgba(0, 0, 0, 0.14), 0 8px 38px 7px rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation21 {
-    box-shadow: 0px 10px 13px -6px rgba(0, 0, 0, 0.2), 0px 21px 33px 3px rgba(0, 0, 0, 0.14), 0px 8px 40px 7px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 10px 13px -6px rgba(0, 0, 0, 0.2), 0 21px 33px 3px rgba(0, 0, 0, 0.14), 0 8px 40px 7px rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation22 {
-    box-shadow: 0px 10px 14px -6px rgba(0, 0, 0, 0.2), 0px 22px 35px 3px rgba(0, 0, 0, 0.14), 0px 8px 42px 7px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 10px 14px -6px rgba(0, 0, 0, 0.2), 0 22px 35px 3px rgba(0, 0, 0, 0.14), 0 8px 42px 7px rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation23 {
-    box-shadow: 0px 11px 14px -7px rgba(0, 0, 0, 0.2), 0px 23px 36px 3px rgba(0, 0, 0, 0.14), 0px 9px 44px 8px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 11px 14px -7px rgba(0, 0, 0, 0.2), 0 23px 36px 3px rgba(0, 0, 0, 0.14), 0 9px 44px 8px rgba(0, 0, 0, 0.12);
 }
 
 .MuiPaper-elevation24 {
-    box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
 }
 
 .MuiCheckbox-root {
@@ -1493,7 +1489,7 @@
     min-height: 56px;
 }
 
-@media (min-width:0px) and (orientation: landscape) {
+@media (min-width:0) and (orientation: landscape) {
     .jss51 {
         min-height: 48px;
     }
@@ -1897,7 +1893,7 @@
     z-index: 1001;
     position: sticky;
     background: #fff;
-    box-shadow: 0px 2px 4px rgba(168, 168, 168, 0.25);
+    box-shadow: 0 2px 4px rgba(168, 168, 168, 0.25);
     align-items: center;
     justify-content: space-between;
 }
@@ -1918,6 +1914,10 @@
     display: flex;
     padding: 16px 13px;
     align-items: center;
+}
+
+div.jss442 p {
+    margin: auto;
 }
 
 .jss442 svg {
@@ -1971,7 +1971,7 @@
 }
 
 .jss449 {
-    box-shadow: 0px 4px 8px rgba(168, 168, 168, 0.25);
+    box-shadow: 0 4px 8px rgba(168, 168, 168, 0.25);
 }
 
 .jss450 {
@@ -2120,7 +2120,7 @@
 
 .jss7205 li:not(:first-child):not(:last-child) .MuiPaginationItem-sizeSmall {
     height: 20px;
-    margin: 0px 4px;
+    margin: 0 4px;
     font-size: 14px;
     min-width: 20px;
     border-radius: 10px;
@@ -2222,11 +2222,6 @@ input:disabled~.jss7174:before {
     background-color: white;
 }
 
-
-.jss6803 {
-    margin: 0 16px;
-}
-
 .jss6803 .MuiButtonBase-root {
     min-width: 119px;
     font-weight: 400;
@@ -2257,6 +2252,10 @@ input:disabled~.jss7174:before {
     justify-content: space-between;
 }
 
+div.jss6803 button {
+    height: 34px;
+    border-radius: 3px;
+}
 
 .jss6828.active {
     border-color: #0088FF !important;
@@ -2784,7 +2783,7 @@ input:disabled~.jss7174:before {
     z-index: 2000 !important;
     font-size: 12px !important;
     max-width: 220px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     overflow-wrap: break-word;
 }
@@ -2899,7 +2898,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -2937,7 +2936,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -2964,7 +2963,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -2991,7 +2990,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3018,7 +3017,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3045,7 +3044,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3072,7 +3071,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3099,7 +3098,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3126,7 +3125,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3153,7 +3152,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3180,7 +3179,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3207,7 +3206,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3234,7 +3233,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3261,7 +3260,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3288,7 +3287,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3315,7 +3314,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3342,7 +3341,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3369,7 +3368,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3396,7 +3395,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3423,7 +3422,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3450,7 +3449,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3477,7 +3476,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3504,7 +3503,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3531,7 +3530,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3558,7 +3557,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3585,7 +3584,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3612,7 +3611,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3639,7 +3638,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3666,7 +3665,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3693,7 +3692,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3720,7 +3719,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3747,7 +3746,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3774,7 +3773,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3801,7 +3800,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3828,7 +3827,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3855,7 +3854,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3882,7 +3881,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3909,7 +3908,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3936,7 +3935,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3963,7 +3962,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -3990,7 +3989,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4017,7 +4016,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4044,7 +4043,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4071,7 +4070,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4098,7 +4097,7 @@ input:disabled~.jss7174:before {
     color: #182537;
     font-size: 12px;
     max-width: 280px;
-    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
     font-weight: 400;
     border-radius: 3px;
     background-color: #fff;
@@ -4256,7 +4255,7 @@ input:disabled~.jss7174:before {
 
 .cKOfva>* {
     position: relative;
-    border-radius: 0px;
+    border-radius: 0;
 }
 
 .fEHNKi {
@@ -4266,22 +4265,23 @@ input:disabled~.jss7174:before {
     flex: 0 0 auto;
     -webkit-box-align: center;
     align-items: center;
-    outline: 0px;
+    outline: 0;
     border-radius: 3px;
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px 0px 0px 16px;
+    margin: 0 0 0 16px;
     overflow: hidden;
     position: relative;
     height: 2.57143rem;
-    padding: 0px 1.14286rem;
+    padding: 0 1.14286rem;
     min-width: 4.57143rem;
     color: rgb(255, 255, 255);
     background: rgb(0, 136, 255);
     border: none;
+    text-decoration: none;
 }
 
 .MuiSvgIcon-root {
@@ -4302,14 +4302,14 @@ input:disabled~.jss7174:before {
     flex: 0 0 auto;
     -webkit-box-align: center;
     align-items: center;
-    outline: 0px;
+    outline: 0;
     border-radius: 3px;
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     overflow: hidden;
     position: relative;
     height: 2.57143rem;
@@ -4317,7 +4317,7 @@ input:disabled~.jss7174:before {
     color: rgb(15, 24, 36);
     border: none;
     background: transparent;
-    padding: 0px;
+    padding: 0;
 }
 
 .dfbErd {
@@ -4327,18 +4327,18 @@ input:disabled~.jss7174:before {
     flex: 0 0 auto;
     -webkit-box-align: center;
     align-items: center;
-    outline: 0px;
+    outline: 0;
     border-radius: 3px;
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     overflow: hidden;
     position: relative;
     height: 2.57143rem;
-    padding: 0px 1.14286rem;
+    padding: 0 1.14286rem;
     min-width: 40px;
     width: 40px;
     color: rgb(255, 255, 255);
@@ -4355,9 +4355,6 @@ input:disabled~.jss7174:before {
     box-sizing: border-box;
     -webkit-box-align: center;
     align-items: center;
-    border-top: none;
-    border-right: none;
-    border-left: none;
     border-image: initial;
     background-color: transparent;
     overflow: hidden;
@@ -4367,17 +4364,23 @@ input:disabled~.jss7174:before {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     height: 3.42857rem;
     color: rgb(0, 136, 255);
     font-weight: 500;
+}
+
+div.ieIWRo button.dvtKJo {
+    border-top: none;
+    border-right: none;
     border-bottom: 2px solid rgb(0, 136, 255);
+    border-left: none;
 }
 
 .elNOYP {
     display: flex;
     width: 100%;
-    flex: 1 1 0%;
+    flex: 1 1 0;
 }
 
 .gTRFtW {
@@ -4390,7 +4393,6 @@ input:disabled~.jss7174:before {
 
 .hISLMV {
     position: relative;
-    height: 2.85714rem;
 }
 
 .kZUaKd {
@@ -4398,7 +4400,7 @@ input:disabled~.jss7174:before {
 }
 
 .bqqjdk {
-    transform: translate(0px, -50%);
+    transform: translate(0, -50%);
     position: absolute;
     top: 50%;
     color: rgb(163, 168, 175);
@@ -4412,7 +4414,7 @@ input:disabled~.jss7174:before {
 .elNOYP {
     display: flex;
     width: 100%;
-    flex: 1 1 0%;
+    flex: 1 1 0;
 }
 
 .gTRFtW {
@@ -4430,14 +4432,11 @@ input:disabled~.jss7174:before {
     box-sizing: border-box;
     padding: 0.714286rem 0.857143rem 0.714286rem 2.85714rem;
     width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: 3px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     color: rgb(15, 24, 36);
 }
 
@@ -4448,18 +4447,18 @@ input:disabled~.jss7174:before {
     flex: 0 0 auto;
     -webkit-box-align: center;
     align-items: center;
-    outline: 0px;
+    outline: 0;
     border-radius: 3px;
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     overflow: hidden;
     position: relative;
     height: 2.57143rem;
-    padding: 0px 1.14286rem;
+    padding: 0 1.14286rem;
     min-width: 4.57143rem;
     border: none;
     background: rgb(243, 244, 245);
@@ -4472,7 +4471,7 @@ input:disabled~.jss7174:before {
     justify-content: center;
     -webkit-box-align: center;
     align-items: center;
-    padding: 0px;
+    padding: 0;
     z-index: 2;
     font-size: inherit;
     font-weight: inherit;
@@ -4488,7 +4487,7 @@ html {
     justify-content: center;
     -webkit-box-align: center;
     align-items: center;
-    padding: 0px 0px 0px 0.571429rem;
+    padding: 0 0 0 0.571429rem;
     z-index: 2;
     font-size: inherit;
     font-weight: inherit;
@@ -4518,7 +4517,7 @@ html {
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     height: 4.57143rem;
     color: rgb(0, 136, 255);
     text-transform: uppercase;
@@ -4548,7 +4547,7 @@ html {
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     height: 4.57143rem;
     font-weight: 500;
     color: rgb(15, 24, 36);
@@ -4634,10 +4633,8 @@ html {
     justify-content: center;
 }
 #inp-search {
-    border: solid;
     height: 34px;
-    border-color: lightgrey;
-    border-width: thin;
+    border: thin solid lightgrey;
     border-radius: 5px
 }
 .btnDropdown {
@@ -4697,7 +4694,7 @@ html {
     flex: 0 0 auto;
     -webkit-box-align: center;
     align-items: center;
-    outline: 0px;
+    outline: 0;
     border-radius: 3px;
     cursor: pointer;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
@@ -4707,12 +4704,12 @@ html {
     overflow: hidden;
     position: relative;
     height: 2.57143rem;
-    padding: 0px 1.14286rem;
+    padding: 0 1.14286rem;
     min-width: 4.57143rem;
     color: rgb(15, 24, 36);
     border: 1px solid rgb(211, 213, 215);
     background: rgb(255, 255, 255);
-    margin: 0px 16px;
+    margin: 0 16px;
 }
 .gMKSKz {
     display: inline-flex;
@@ -4721,17 +4718,17 @@ html {
     flex: 0 0 auto;
     -webkit-box-align: center;
     align-items: center;
-    outline: 0px;
+    outline: 0;
     border-radius: 3px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.42857rem;
-    margin: 0px;
+    margin: 0;
     overflow: hidden;
     position: relative;
     height: 2.57143rem;
-    padding: 0px 1.14286rem;
+    padding: 0 1.14286rem;
     min-width: 4.57143rem;
     cursor: not-allowed;
     border: none;
@@ -4802,4 +4799,91 @@ html {
 }
 .jss4171 .view-more-text:hover {
     color: #0088FF;
+}
+
+.font-sm{
+    font-size: small;
+}
+
+#tbCustomer{
+    width: 100%; !important;
+}
+
+#tbCustomer thead{
+    background-color: #f4f6f8;
+    height: 55px
+}
+
+#tbCustomer tbody tr{
+    cursor: pointer;
+}
+
+a.hover:hover{
+    text-decoration: underline !important;
+}
+
+button.btnGear{
+    background: #f4f6f8 !important;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+#checkAll{
+    cursor:pointer;
+    padding: 6px;
+    border: 2px solid lightgray;
+}
+
+.checkboxes{
+    cursor:pointer;
+    padding: 6px !important;
+    border: 2px solid lightgray;
+}
+
+.jss6793{
+    width: 1px;
+    height: 20px;
+    border-left: 1px solid rgb(211, 213, 215);
+    margin: 0 8px;
+}
+
+#tbCustomer thead tr:first-child th {
+    width: 40px;
+}
+
+.jss24476{
+    color: rgb(24, 37, 55);
+}
+
+.jss24477{
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.jss24478{
+    width: 30px; height: 30px;
+    line-height: initial;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    border-radius: 20px;
+    background: rgb(215, 61, 50);
+}
+
+.jss24479{
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    height: 100%;
+    font-size: 10px;
+}
+
+.jss24480{
+    display: table-cell;
+    vertical-align: middle;
+    white-space: nowrap;
 }

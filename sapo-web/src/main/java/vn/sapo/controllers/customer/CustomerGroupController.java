@@ -35,10 +35,12 @@ public class CustomerGroupController {
     @GetMapping("/{id}")
     public ModelAndView showUpCusGrpPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView();
-        Optional<CustomerGroupResult> cusGrpOptional = Optional.ofNullable(customerGroupService.findById(id));
-        System.out.println(cusGrpOptional.get());
-        modelAndView.addObject("customerGroup", cusGrpOptional.get());
+
+        CustomerGroupResult cusGrpOptional = customerGroupService.findById(id);
+
         modelAndView.setViewName("/admin/customer/up_cus_Group");
+        modelAndView.addObject("customerGroup", cusGrpOptional);
+
         return modelAndView;
     }
 }

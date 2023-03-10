@@ -6,9 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.sapo.address.dto.AddressResult;
-import vn.sapo.entities.customer.CustomerGender;
-import vn.sapo.entities.customer.CustomerStatus;
+import vn.sapo.customers.dto.AddressResult;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -63,9 +61,12 @@ public class CustomerResult {
 
     private Instant lastDayOrder;
 
-    private CusPayment payment;
+    private PaymentMethod payment;
+
     private  String taxCode;
+
     private  String fax;
+
     private String website;
 
     @Override

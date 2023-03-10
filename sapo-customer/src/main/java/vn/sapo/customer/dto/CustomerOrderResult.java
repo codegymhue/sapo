@@ -3,7 +3,7 @@ package vn.sapo.customer.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import vn.sapo.address.dto.AddressResult;
+import vn.sapo.customers.dto.AddressResult;
 
 import java.util.List;
 

@@ -13,8 +13,8 @@ import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerStatus;
 
-import static vn.sapo.shared.configurations.MapperConfigure.MODEL_MAPPER_SKIP_NULL_DISABLED;
-import static vn.sapo.shared.configurations.MapperConfigure.MODEL_MAPPER_SKIP_NULL_ENABLED;
+import static vn.sapo.shared.configurations.MapperConfiguration.MODEL_MAPPER_SKIP_NULL_DISABLED;
+import static vn.sapo.shared.configurations.MapperConfiguration.MODEL_MAPPER_SKIP_NULL_ENABLED;
 
 @Component
 public class CustomerMapper implements InitializingBean {
@@ -27,21 +27,28 @@ public class CustomerMapper implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        TypeMap<CreateCustomerParam, Customer> createDTO2Model = modelMapper.createTypeMap(CreateCustomerParam.class, Customer.class);
+        TypeMap<CreateCustomerParam, Customer> createDTO2Model
+                = modelMapper.createTypeMap(CreateCustomerParam.class, Customer.class);
+
         createDTO2Model.addMapping(source -> source.getBirthday().toInstant(), Customer::setBirthday);
-        TypeMap<UpdateCustomerParam, Customer> updateDTO2Model = modelMapperSkipNullDisabled.createTypeMap(UpdateCustomerParam.class, Customer.class);
+
+        TypeMap<UpdateCustomerParam, Customer> updateDTO2Model
+                = modelMapperSkipNullDisabled.createTypeMap(UpdateCustomerParam.class, Customer.class);
+
         updateDTO2Model.addMapping(source -> source.getBirthday().toInstant(), Customer::setBirthday);
+
         updateDTO2Model.addMappings(mapper -> {
             mapper.when(Conditions.isNotNull()).map(UpdateCustomerParam::getGroupId, Customer::setGroupId);
         });
     }
 
     public CustomerResult toDTO(Customer customer) {
-        return modelMapper.map(customer, CustomerResult.class);
+            return modelMapper.map(customer, CustomerResult.class);
     }
 
     public Customer toModel(CreateCustomerParam createCustomerParam) {
-        return modelMapper.map(createCustomerParam, Customer.class)
+        return modelMapper
+                .map(createCustomerParam, Customer.class)
                 .setStatus(CustomerStatus.AVAILABLE);
     }
 

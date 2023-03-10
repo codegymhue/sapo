@@ -22,6 +22,6 @@ public enum PricingPolicyType {
         for (PricingPolicyType type : values) {
             if (type.value.equals(value)) return type;
         }
-        throw new IllegalArgumentException(value + "invalid");
+        throw new IllegalArgumentException(value + " invalid");
     }
 }

@@ -1,8 +1,5 @@
 package vn.sapo.customer;
 
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//
-//import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,27 +9,31 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
+import vn.sapo.controllers.customer.CustomerAPI;
+import vn.sapo.customer.dto.CreateCustomerParam;
+import vn.sapo.customer.dto.CustomerResult;
+import vn.sapo.customer.dto.UpdateCustomerParam;
+import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.customers.AddressService;
 import vn.sapo.customers.dto.AddressResult;
 import vn.sapo.customers.dto.CreateAddressParam;
-import vn.sapo.controllers.customer.CustomerAPI;
-import vn.sapo.customer.dto.*;
-import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.excel.ExcelService;
 import vn.sapo.order.sale.SaleOrderService;
 import vn.sapo.order.sale.item.OrderItemService;
-import vn.sapo.payment.sale.PaymentSaleOrderService;
 import vn.sapo.shared.parsers.JacksonParser;
+import vn.sapo.voucher.receipt.ReceiptVoucherService;
 
-import static org.hamcrest.Matchers.hasSize;
+import java.util.List;
+
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.isA;
-import static org.mockito.Mockito.mock;
+
+
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.List;
 
 @WebMvcTest(CustomerAPI.class)
 public class CustomerAPITest {
@@ -42,7 +43,8 @@ public class CustomerAPITest {
     @MockBean
     private SaleOrderService saleOrderService;
     @MockBean
-    private PaymentSaleOrderService paymentSaleOrderService;
+    private ReceiptVoucherService receiptVoucherService;
+
     @MockBean
     private OrderItemService orderItemService;
     @MockBean
@@ -58,6 +60,7 @@ public class CustomerAPITest {
     private static UpdateCustomerParam updateCustomerParam;
     private static List<AddressResult> addressResultList;
     private static List<CustomerResult> customerResultList;
+
     @BeforeAll
     static void init(){
         createAddressParam = CustomerParamTest.getCreateAddressParam();
@@ -66,6 +69,7 @@ public class CustomerAPITest {
         addressResultList = CustomerParamTest.getListAddressResult();
         customerResultList = CustomerParamTest.getListCustomerResult();
     }
+
     @BeforeEach
     public void setUp(){
         Mockito.when(customerService.findAll()).thenReturn(customerResultList);
@@ -73,6 +77,7 @@ public class CustomerAPITest {
         Mockito.when(customerService.create(isA(CreateCustomerParam.class))).thenReturn(customerResultList.get(0));
         Mockito.when(customerService.update(isA(UpdateCustomerParam.class))).thenReturn(customerResultList.get(0));
     }
+
     @Test
     public void findAllCustomer() throws Exception {
         mockMvc.perform(get("/api/customers")

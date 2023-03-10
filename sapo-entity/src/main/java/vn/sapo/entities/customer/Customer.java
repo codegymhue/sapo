@@ -12,6 +12,7 @@ import vn.sapo.entities.BaseEntity;
 import vn.sapo.entities.Employee;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Optional;
@@ -67,15 +68,18 @@ public class Customer extends BaseEntity {
     @Type(type = "json")
     @Column(name = "extension_attributes", columnDefinition = "JSON")
     private HashMap<String, String> attributes = new HashMap<>();
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_group_id", nullable = false, foreignKey = @ForeignKey(name = "fk_customer_customer_group"))
     private CustomerGroup group;
 
     @Column(name = "customer_group_id", insertable = false, updatable = false)
     private Integer groupId;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "employee_id", nullable = false, foreignKey = @ForeignKey(name = "fk_customer_employee"))
     private Employee employee;
+
     @Column(name = "employee_id", insertable = false, updatable = false)
     private Integer employeeId;
 
@@ -145,5 +149,26 @@ public class Customer extends BaseEntity {
     public Customer setTaxCode(String taxCode) {
         attributes.put(TAX_CODE_ATTRIBUTE_NAME, taxCode);
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", customerCode='" + customerCode + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", birthday=" + birthday +
+                ", status=" + status +
+                ", gender=" + gender +
+                ", description='" + description + '\'' +
+                ", attributes=" + attributes +
+                ", group=" + group +
+                ", groupId=" + groupId +
+                ", employee=" + employee +
+                ", employeeId=" + employeeId +
+                ", addresses=" + addresses +
+                '}';
     }
 }

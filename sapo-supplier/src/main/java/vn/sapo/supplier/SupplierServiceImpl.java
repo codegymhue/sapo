@@ -1,26 +1,23 @@
 package vn.sapo.supplier;
 
-import org.apache.poi.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import vn.sapo.entities.product.Product;
-import vn.sapo.entities.product.ProductStatus;
 import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.entities.supplier.SupplierStatus;
 import vn.sapo.shared.configurations.CodePrefix;
-import vn.sapo.shared.exceptions.DataInputException;
 import vn.sapo.shared.exceptions.NotFoundException;
-import vn.sapo.shared.parsers.JacksonParser;
-import vn.sapo.supplier.dto.*;
+import vn.sapo.supplier.dto.CreateSupplierParam;
+import vn.sapo.supplier.dto.SupplierFilter;
+import vn.sapo.supplier.dto.SupplierResult;
+import vn.sapo.supplier.dto.UpdateSupplierParam;
 import vn.sapo.supplierGroup.SupplierGroupRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class SupplierServiceImpl implements SupplierService {
@@ -48,7 +45,7 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierResult findById(Integer id) {
         return supplierRepository.findById(id)
                 .map(supplierMapper::toDTO)
-                .orElseThrow(() -> new NotFoundException("Not found supplier with id: " + id));
+                .orElseThrow(() -> new NotFoundException("supplier.exception.notFound"));
     }
 
     @Override
