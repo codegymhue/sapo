@@ -13,6 +13,7 @@ import vn.sapo.entities.supplier.SupplierStatus;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.DataInputException;
 import vn.sapo.shared.exceptions.NotFoundException;
+import vn.sapo.shared.parsers.JacksonParser;
 import vn.sapo.supplier.dto.*;
 import vn.sapo.supplierGroup.SupplierGroupRepository;
 
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class SupplierServiceImpl implements SupplierService {
@@ -174,4 +176,12 @@ public class SupplierServiceImpl implements SupplierService {
         String supplierCode = supplier.getSupplierCode();
         return supplierCode;
     }
+
+//    public void findTags(){
+//        List<List<String>> a = supplierRepository.findTags().stream()
+//                .map(json -> JacksonParser.INSTANCE.toList(json, String.class))
+//                .collect(Collectors.toList());
+//
+//        a.stream().flatMap(json -> json.stream().collect(Collectors.toList()))
+//    }
 }
