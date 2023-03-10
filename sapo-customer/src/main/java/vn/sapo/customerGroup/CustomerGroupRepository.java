@@ -35,6 +35,8 @@ public interface CustomerGroupRepository  extends JpaRepository<CustomerGroup, I
     String getMaxSystemCustomerGroupCode();
 
     boolean existsByCusGrpCode(String code);
+
+    boolean existsByTitle(String title);
 }
 
 
