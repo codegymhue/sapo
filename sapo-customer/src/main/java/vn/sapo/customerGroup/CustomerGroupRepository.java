@@ -25,15 +25,18 @@ public interface CustomerGroupRepository  extends JpaRepository<CustomerGroup, I
     List<ICustomerGroup> sortByGroup();
 
     @Query(value = "SELECT cus_grp_code AS cgc " +
-            "FROM customer_group AS cg " +
-            "WHERE cg.cus_grp_code " +
-            "LIKE 'CTN%' " +
-            "ORDER BY cgc " +
-            "DESC LIMIT 1;",
+                   "FROM customer_group AS cg " +
+                   "WHERE cg.cus_grp_code " +
+                   "LIKE 'CTN%' " +
+                   "ORDER BY cgc " +
+                   "DESC LIMIT 1;"
+            ,
             nativeQuery = true)
     String getMaxSystemCustomerGroupCode();
 
     boolean existsByCusGrpCode(String code);
+
+    boolean existsByTitle(String title);
 }
 
 

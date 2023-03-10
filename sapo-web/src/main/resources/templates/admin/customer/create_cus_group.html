@@ -1,249 +1,262 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="vi-VN" class="sapo-menu-expand sapo-menu-toggle-active">
 <head>
-    <th:block th:replace="/layout/header :: header"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="/assets/admin/css/customer/cus_group.css"/>
     <title>Thêm Nhóm khách hàng</title>
-    <link rel="stylesheet" href="/assets/admin/css/product/selectMenu.css">
-    <link rel="stylesheet" href="/assets/admin/css/w3school/w3.css">
+
+    <th:block th:replace="/layout/header"/>
+
+    <link rel="stylesheet" href="/assets/admin/css/customer/cus_group.css"/>
 </head>
 <body>
-<th:block th:replace="/layout/menu :: menu"/>
-<div class="MuiBox-root jss64 jss40">
-    <div class="MuiBox-root jss23598 jss23594 ">
-        <div class="MuiBox-root jss23599 jss10118">
-            <div class="MuiBox-root jss10121"><a
-                    class="MuiTypography-root MuiLink-root MuiLink-underlineNone jss23596 MuiTypography-colorSecondary"
-                    href="/admin/customer_groups" style="display: flex">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                     style="width: 24px; height: 24px; margin-left: -9px; margin-right: 6px;">
-                    <path d="M14.298 5.99 8.288 12l6.01 6.01 1.414-1.414L11.116 12l4.596-4.596-1.414-1.414Z"
-                          fill="currentColor"></path>
-                </svg>
-                <h6 class="MuiTypography-root MuiTypography-subtitle1">Quay lại danh sách nhóm khách hàng</h6></a>
+<th:block th:replace="/layout/menu"/>
+<div class="jss64 jss40">
+    <div>
+        <div class="jss10118">
+            <div class="jss10121">
+                <a class="MuiTypography-root MuiLink-underlineNone jss23596 MuiTypography-colorSecondary"
+                   href="/admin/customer_groups">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                         class="jss23597">
+                        <path d="M14.298 5.99 8.288 12l6.01 6.01 1.414-1.414L11.116 12l4.596-4.596-1.414-1.414Z"
+                              fill="currentColor">
+                        </path>
+                    </svg>
+                    <h6 class="MuiTypography-root MuiTypography-subtitle1">
+                        Quay lại danh sách nhóm khách hàng
+                    </h6>
+                </a>
             </div>
-            <div class="MuiBox-root jss20296">
-                <button id="Sapo-Button-b07b3814-cc54-436f-95b3-3dc5c028fe16" class="hFrEkh btn black"
-                        fdprocessedid="mh7x7"><span class="">Hủy</span></button>
-                <button id="btnCreateCustomerGroup" class="btn btnCreateCustomerGroup FmJDc"
-                        fdprocessedid="ct2jmq"><span class="">Lưu</span></button>
+            <div class="jss20296">
+                <button type="button" class="ldZiUT ldZabc" href="/admin/customer_groups">
+                    Hủy
+                </button>
+                <button id="btnCreateCustomerGroup" class="RthGc ldZabc" type="button">
+                        <span class="cMXJOk">
+                            Lưu
+                        </span>
+                </button>
             </div>
         </div>
     </div>
-    <form id="frmCreateCusGrp" method="post">
-        <div class="MuiBox-root jss23604 jss608">
-            <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3">
-                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
-                    <div class="MuiPaper-root jss23708 MuiPaper-elevation1 MuiPaper-rounded"
-                         style="box-shadow: rgba(168, 168, 168, 0.25) 0px 2px 4px; height: 100%;">
-                        <div class="MuiBox-root jss751 jss722 borderBottom">
-                            <div class="MuiBox-root jss24250"><h6 class="MuiTypography-root MuiTypography-h6"
-                                                                  style="margin-left: 24px;">Thông tin chung</h6>
+    <form id="frmCreateCusGrp">
+        <div class="jss608">
+            <div class="MuiGrid-container MuiGrid-spacing-xs-3">
+                <div class="MuiGrid-item MuiGrid-grid-xs-6">
+                    <div class="MuiPaper-root jss23708 MuiPaper-elevation1 MuiPaper-rounded">
+                        <div class="jss751 jss722 borderBottom">
+                            <div>
+                                <h6 class="MuiTypography-root jss24250 ">
+                                    Thông tin chung
+                                </h6>
                             </div>
                         </div>
-                        <div class="MuiBox-root jss23712" style="padding: 16px 24px 24px;">
-                            <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2">
-                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
-                                    <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth"><label
-                                            class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink Mui-required Mui-required"
-                                            data-shrink="true" for="titleGroup">Tên
-                                        nhóm<span
-                                                class="MuiFormLabel-asterisk MuiInputLabel-asterisk">&thinsp;*</span></label>
-                                        <div class="MuiFormControl-root MuiTextField-root jss756 MuiFormControl-fullWidth"
+                        <div class="jss23712">
+                            <div class="MuiGrid-container MuiGrid-spacing-xs-2">
+                                <div class="MuiGrid-item MuiGrid-grid-xs-12">
+                                    <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth">
+                                        <label class="MuiFormLabel-root MuiInputLabel-root jss755
+                                        MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
+                                               data-shrink="true" for="titleGroupCre">
+                                            Tên nhóm
+                                            <span class="MuiFormLabel-asterisk MuiInputLabel-asterisk">
+                                                &thinsp;*
+                                            </span>
+                                        </label>
+                                        <div class="MuiFormControl-root jss756 MuiFormControl-fullWidth"
                                              field="[object Object]" form="[object Object]">
-                                            <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl">
-                                                <div><input aria-invalid="false"
-                                                            id="titleGroup"
-                                                            placeholder="Nhập tên nhóm khách hàng" required=""
-                                                            type="text"
-                                                            aria-label="Without label"
-                                                            class="MuiInputBase-input MuiOutlinedInput-input" value=""
-                                                            fdprocessedid="7i85i6">
+                                            <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth">
+                                                <div class="MuiInputBase-fullWidth">
+                                                    <input aria-invalid="false"
+                                                           id="titleGroupCre"
+                                                           name="titleGroupCre"
+                                                           placeholder="Nhập tên nhóm khách hàng"
+                                                           type="text"
+                                                           aria-label="Without label"
+                                                           class="MuiInputBase-input MuiOutlinedInput-input placeholder_text"
+                                                           fdprocessedid="7i85i6">
                                                 </div>
                                                 <fieldset aria-hidden="true"
-                                                          class="jss823 MuiOutlinedInput-notchedOutline"
-                                                          style="padding-left: 8px;">
-                                                    <legend class="jss824" style="width: 0.01px;">
-                                                        <span>&ZeroWidthSpace;</span>
+                                                          class="jss823 MuiOutlinedInput-notchedOutline">
+                                                    <legend class="jss824">
                                                     </legend>
                                                 </fieldset>
                                             </div>
+<!--                                            error container, dont remove-->
+                                            <div class="error titleGroupCre-error"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
-                                    <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth"><label
-                                            class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-                                            data-shrink="true" for="cusGrpCode">Mã
-                                        nhóm</label>
-                                        <div class="MuiFormControl-root MuiTextField-root jss756 MuiFormControl-fullWidth"
+                                <div class="MuiGrid-item MuiGrid-grid-xs-12">
+                                    <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth">
+                                        <label class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
+                                               data-shrink="true" for="cusGrpCode">
+                                            Mã nhóm</label>
+                                        <div class="MuiFormControl-root jss756 MuiFormControl-fullWidth"
                                              field="[object Object]" form="[object Object]">
-                                            <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl">
+                                            <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth">
                                                 <input aria-invalid="false"
                                                        id="cusGrpCode"
+                                                       name="cusGrpCode"
                                                        placeholder="Nhập mã nhóm khách hàng" type="text"
                                                        aria-label="Without label"
-                                                       class="MuiInputBase-input MuiOutlinedInput-input" value=""
+                                                       class="MuiInputBase-input MuiOutlinedInput-input placeholder_text"
                                                        fdprocessedid="sytfp">
                                                 <fieldset aria-hidden="true"
-                                                          class="jss823 MuiOutlinedInput-notchedOutline"
-                                                          style="padding-left: 8px;">
-                                                    <legend class="jss824" style="width: 0.01px;">
-                                                        <span>&ZeroWidthSpace;</span>
+                                                          class="jss823 MuiOutlinedInput-notchedOutline">
+                                                    <legend class="jss824">
                                                     </legend>
                                                 </fieldset>
                                             </div>
                                         </div>
+                                        <div class="error cusGrpCode-error"></div>
                                     </div>
                                 </div>
-                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
-                                    <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth"><label
-                                            class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-                                            data-shrink="true" for="description">Mô tả<span
-                                            class="MuiTypography-root MuiTypography-caption"><svg
-                                            viewBox="0 0 16 16"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="16" height="16"
-                                            font-size="16"
-                                            color="primary"
-                                            style="font-size: 16px; cursor: pointer; margin-left: 6px;"><path
-                                            d="M7.4 5v1.2h1.2V5H7.4ZM7.4 8.6V11h1.8V9.8h-.6V7.4H6.8v1.2h.6Z"
-                                            fill="#0088FF"></path><path fill-rule="evenodd" clip-rule="evenodd"
-                                                                        d="M8 2C4.688 2 2 4.688 2 8s2.688 6 6 6 6-2.688 6-6-2.688-6-6-6ZM3.2 8c0 2.646 2.154 4.8 4.8 4.8s4.8-2.154 4.8-4.8S10.646 3.2 8 3.2A4.806 4.806 0 0 0 3.2 8Z"
-                                                                        fill="#0088FF"></path></svg></span></label>
-                                        <div class="MuiFormControl-root MuiTextField-root jss757 jss756 MuiFormControl-fullWidth"
+                                <div class="MuiGrid-item MuiGrid-grid-xs-12">
+                                    <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth">
+                                        <label data-shrink="true" for="description"
+                                               class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink">
+                                            Mô tả
+                                            <span class="MuiTypography-root MuiTypography-caption"
+                                                  title="Mô tả khách hàng của bạn để phục vụ cho việc chăm sóc khách hàng tốt hơn">
+                                                <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                                     width="16" height="16" color="primary" class="jss23713">
+                                                    <path fill="#0088FF"
+                                                          d="M7.4 5v1.2h1.2V5H7.4ZM7.4 8.6V11h1.8V9.8h-.6V7.4H6.8v1.2h.6Z">
+                                                    </path>
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" fill="#0088FF"
+                                                          d="M8 2C4.688 2 2 4.688 2 8s2.688 6 6 6 6-2.688 6-6-2.688-6-6-6ZM3.2 8c0 2.646 2.154 4.8 4.8 4.8s4.8-2.154 4.8-4.8S10.646 3.2 8 3.2A4.806 4.806 0 0 0 3.2 8Z">
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                        </label>
+                                        <div class="MuiFormControl-root jss757 jss756 MuiFormControl-fullWidth"
                                              field="[object Object]" form="[object Object]">
-                                            <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline">
-                                                <textarea aria-invalid="false" id="description"
-                                                          rows="3" aria-label="Without label"
-                                                          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline"></textarea>
+                                            <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-multiline MuiOutlinedInput-multiline">
+                                                <textarea aria-invalid="false" id="description" rows="3"
+                                                          aria-label="Without label" name="description"
+                                                          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline placeholder_text">
+                                                </textarea>
                                                 <fieldset aria-hidden="true"
-                                                          class="jss823 MuiOutlinedInput-notchedOutline"
-                                                          style="padding-left: 8px;">
-                                                    <legend class="jss824" style="width: 0.01px;">
+                                                          class="jss823 MuiOutlinedInput-notchedOutline">
+                                                    <legend class="jss824">
                                                         <span>&ZeroWidthSpace;</span>
                                                     </legend>
                                                 </fieldset>
                                             </div>
                                         </div>
+                                        <div class="error description-error"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6">
-                    <div class="MuiPaper-root jss721 MuiPaper-elevation1 MuiPaper-rounded"
-                         style="box-shadow: rgba(168, 168, 168, 0.25) 0px 2px 4px; height: 100%;">
-                        <div class="MuiBox-root jss751 jss722 borderBottom">
-                            <div class="MuiBox-root jss1769"><h6 class="MuiTypography-root MuiTypography-h6"
-                                                                 style="margin-left: 24px;">Cài đặt nâng cao</h6>
-                                <button class="MuiButtonBase-root MuiIconButton-root" tabindex="0" type="button"
-                                        title="Cài đặt nâng cao" fdprocessedid="dazdea"
-                                        style="padding: 0px; margin-left: 6px;"><span class="MuiIconButton-label"><svg
-                                        viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16" font-size="16" color="primary"
-                                        style="font-size: 16px; cursor: pointer;"><path
-                                        d="M7.4 5v1.2h1.2V5H7.4ZM7.4 8.6V11h1.8V9.8h-.6V7.4H6.8v1.2h.6Z"
-                                        fill="#0088FF"></path><path fill-rule="evenodd" clip-rule="evenodd"
-                                                                    d="M8 2C4.688 2 2 4.688 2 8s2.688 6 6 6 6-2.688 6-6-2.688-6-6-6ZM3.2 8c0 2.646 2.154 4.8 4.8 4.8s4.8-2.154 4.8-4.8S10.646 3.2 8 3.2A4.806 4.806 0 0 0 3.2 8Z"
-                                                                    fill="#0088FF"></path></svg></span><span
-                                        class="MuiTouchRipple-root"></span></button>
+                <div class="MuiGrid-item MuiGrid-grid-xs-6">
+                    <div class="MuiPaper-root jss721 MuiPaper-elevation1 MuiPaper-rounded">
+                        <div class="jss751 jss722 borderBottom">
+                            <div class="jss1769">
+                                <h6 class="MuiTypography-root jss24250">
+                                    Cài đặt nâng cao
+                                </h6>
+                                <button class="MuiButtonBase-root MuiIconButton-root jss723" tabindex="0" type="button"
+                                        title="Cài đặt nâng cao" fdprocessedid="dazdea">
+                                    <span class="MuiIconButton-label">
+                                        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                             width="16" height="16" color="primary" class="jss724">
+                                            <path fill="#0088FF"
+                                                  d="M7.4 5v1.2h1.2V5H7.4ZM7.4 8.6V11h1.8V9.8h-.6V7.4H6.8v1.2h.6Z">
+                                            </path>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" fill="#0088FF"
+                                                  d="M8 2C4.688 2 2 4.688 2 8s2.688 6 6 6 6-2.688 6-6-2.688-6-6-6ZM3.2 8c0 2.646 2.154 4.8 4.8 4.8s4.8-2.154 4.8-4.8S10.646 3.2 8 3.2A4.806 4.806 0 0 0 3.2 8Z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                    <span class="MuiTouchRipple-root">
+                                    </span>
+                                </button>
                             </div>
                         </div>
-                        <div class="MuiBox-root jss23767" style="padding: 16px 24px 24px;">
-                            <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2">
-                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
-                                    <div class="MuiBox-root jss865 jss1785 item-box"
-                                         style="border-top: 0; padding-top: 0;">
-                                        <span class="MuiTypography-root title MuiTypography-subtitle1">
-                                            Giá Mặc Định</span>
-                                        <div class="dropdown jss1784">
-                                            <div class="dropdown-toggle select-btn-pri"
-                                                 type="button" data-bs-toggle="dropdown"
-                                                 aria-expanded="false" style="
-                                                        padding: 10px 0;
-                                                        display: flex;
-                                                        justify-content: space-between;
-                                                        align-items: center; ">
-                                                <span id="pricingType">Chọn giá mặc định</span>
+                        <div class="jss23712">
+                            <div class="MuiGrid-container MuiGrid-spacing-xs-2">
+                                <div class="MuiGrid-item MuiGrid-grid-xs-12">
+                                    <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth">
+                                        <label class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl
+                                        MuiInputLabel-animated MuiInputLabel-shrink" data-shrink="true"
+                                               for="searchDefaultPriceDropdown">
+                                            Giá Mặc Định
+                                        </label>
+                                        <div class="dropdown jss1784 jss1769"
+                                             onclick="CustomerApp.page.commands.showDefaultPriceDropdown()"
+                                             id="defaultPriceContainer">
+                                            <p id="selectedPriceDefault">Chọn giá mặc định</p>
+                                        </div>
+                                        <div id="defaultPriceDropdown" class="dropdown-content">
+                                            <div>
+                                                <div class="jss23596">
+                                                    <div class="jss23775 jss23769">
+                                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                                    </div>
+                                                    <div class="MuiGrid-container">
+                                                        <input type="text" placeholder="Tìm kiếm" class="jss23784"
+                                                               id="searchDefaultPriceDropdown"
+                                                               onkeyup="CustomerApp.page.commands.searchDefaultPriceDropdown()">
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <ul class="dropdown-menu w-100 pricingPolicyIdCreate showAllPricingPolicy">
-                                                <div style="border-bottom: 1px solid #e3e3e3;">
-                                                    <li>
-                                                        <div class="d-flex align-items-center">
-                                                            <i class="fa-solid fa-magnifying-glass" style="margin-left: 2px;
-                                                                   margin-right: 4px;
-                                                                   color: #828282"></i>
-                                                            <input id="inputSearchCat" style="margin: 2px"
-                                                                   class="w-100 form-control border border-0"
-                                                                   placeholder="Tìm kiếm hoặc nhập mới"/>
-                                                        </div>
-                                                    </li>
-                                                    <li class="text-primary dropdown-item">
-                                                        <button id="btnCreatePri" style="border: none; color: #2d9dff;padding: 10px;text-align: start;
-                                                                     font-weight: 500;
-                                                                     font-size: 14px" type="button"
-                                                                class="bg-white w-100">
-                                                            <i class="fa-solid fa-circle-plus"
-                                                               style="margin: 0 9px"></i>Thêm mới
-                                                            loại sản phẩm
-                                                        </button>
-                                                    </li>
+                                            <div
+                                                 onclick="CustomerApp.page.commands.showModalCreatePricePolicy()">
+                                                <div class="jss23596">
+                                                    <div class="jss23775 jss23769 jss760">
+                                                        <i class="fa-solid fa-circle-plus"></i>
+                                                    </div>
+                                                    <span class="jss760 jss754">Thêm mới chính sách giá</span>
                                                 </div>
-                                                <div id="showAllPricing">
-
-                                                </div>
-                                            </ul>
+                                            </div>
+                                            <div id="listPricePolicy" class=" jss23783"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
-                                    <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth"><label
-                                            class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-                                            data-shrink="true" for="discount">Chiết khấu
-                                        (%)</label>
-                                        <div class="MuiFormControl-root MuiTextField-root jss756  MuiFormControl-fullWidth"
+                                <div class="MuiGrid-item MuiGrid-grid-xs-12">
+                                    <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth">
+                                        <label class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
+                                               data-shrink="true" for="discount">
+                                            Chiết khấu (%)
+                                        </label>
+                                        <div class="MuiFormControl-root jss756 MuiFormControl-fullWidth"
                                              field="[object Object]" form="[object Object]">
-                                            <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl">
+                                            <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth ">
                                                 <input aria-invalid="false"
-                                                       id="discount"
+                                                       id="discount" name="discount"
                                                        type="text" aria-label="Without label"
-                                                       class="MuiInputBase-input MuiOutlinedInput-input" value="0"
-                                                       style="text-align: right;" fdprocessedid="16ju8f">
-                                                <fieldset aria-hidden="true"
-                                                          class="jss823 MuiOutlinedInput-notchedOutline"
-                                                          style="padding-left: 8px;">
-                                                    <legend class="jss824" style="width: 0.01px;">
-                                                        <span>&ZeroWidthSpace;</span>
-                                                    </legend>
+                                                       class="MuiInputBase-input MuiOutlinedInput-input jss758 placeholder_text"
+                                                       placeholder="0"
+                                                       fdprocessedid="16ju8f">
+                                                <fieldset aria-hidden="true" class="jss823 MuiOutlinedInput-notchedOutline">
+                                                    <legend class="jss824"></legend>
                                                 </fieldset>
                                             </div>
                                         </div>
+                                        <div class="error discount-error"></div>
                                     </div>
                                 </div>
-                                <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12">
-                                    <div class="MuiBox-root jss865 jss1785 item-box"
-                                         style="border-top: 0; padding-top: 0;">
-                                        <span class="MuiTypography-root title MuiTypography-subtitle1">
-                                            Hình Thức Thanh Toán</span>
+                                <div class="MuiGrid-item MuiGrid-grid-xs-12">
+                                    <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth">
+                                        <label class="MuiFormLabel-root MuiInputLabel-root jss755
+                                               MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
+                                               data-shrink="true" for="paymentType">
+                                            Hình Thức Thanh Toán
+                                        </label>
                                         <div class="dropdown jss1784">
-                                            <div class="dropdown-toggle select-btn-pay"
+                                            <div class="dropdown-toggle select-btn-pay jss759"
                                                  type="button" data-bs-toggle="dropdown"
-                                                 aria-expanded="false" style="
-                                                        padding: 10px 0;
-                                                        display: flex;
-                                                        justify-content: space-between;
-                                                        align-items: center; ">
-                                                <span id="paymentType">Chọn hình thức thanh toán</span>
+                                                 aria-expanded="false">
+                                                <span id="paymentType">
+                                                    Chọn hình thức thanh toán
+                                                </span>
                                             </div>
-                                            <ul class="dropdown-menu w-100 categoryIdCreate showAllPaymentMethod">
-                                                <li style="color: #0088FF">Chọn hình thức thanh toán</li>
-                                                <div id="showAllPay">
+                                            <ul class="dropdown-menu w-100 showAllPaymentMethod">
+                                                <li class="jss760 jss761">Chọn hình thức thanh toán</li>
+                                                <div id="dropdownPaymentMethod">
 
                                                 </div>
                                             </ul>
@@ -260,188 +273,355 @@
 </div>
 
 </body>
-
-<th:block th:replace="/layout/script :: script"/>
+<th:block th:replace="/admin/customer/modal_createPricePolicy"/>
+<th:block th:replace="/layout/script"/>
 <script src="/assets/admin/js/customer/customerGroup_App.js"></script>
 
+<script src="/assets/admin/js/customer/customer_app.js"></script>
+
 <script>
-    let pricingPolicy;
+    let pricingPolicy = {
+        title: '',
+        pricingPolicyCode: '',
+        pricingPolicyType: ''
+    };
     let paymentMethod;
-    const selectBtnPri = document.querySelector('.select-btn-pri');
-    const selectBtnPay = document.querySelector('.select-btn-pay');
     let createCusGroupParam = new CustomerGroup();
 
-    let page = {
-        urls: {
-        },
-        elements: {},
-        loadData: {},
-        commands: {},
-        dialogs: {
-            elements: {},
-            loadData: {},
-            commands: {},
-        },
-        initializeEventControl: {}
+    CustomerApp.page.elements.modalCreatePricePolicy = $("#modalCreatePricePolicy");
+
+    CustomerApp.page.elements.titleGroupCre = $("#titleGroupCre");
+    CustomerApp.page.elements.selectBtnPri = $('.select-btn-pri');
+    CustomerApp.page.elements.selectBtnPay = $('.select-btn-pay');
+    CustomerApp.page.elements.pricingType = $("#pricingType");
+
+    CustomerApp.page.elements.btnCreateCustomerGroup = $("#btnCreateCustomerGroup");
+    CustomerApp.page.elements.btnCreatePricePolicy = $("#btnCreatePricePolicy");
+    CustomerApp.page.elements.btnCloseCreatePricePolicyModal = $(".btnCloseCreatePricePolicyModal");
+
+    CustomerApp.page.elements.frmCreateCusGrp = $("#frmCreateCusGrp");
+    CustomerApp.page.elements.frmCreatePricePolicy = $("#frmCreatePricePolicy");
+
+    CustomerApp.page.elements.dropdownDefaultPrice = $("#dropdownDefaultPrice");
+    CustomerApp.page.elements.dropdownPaymentMethod = $("#dropdownPaymentMethod");
+
+    CustomerApp.page.elements.cusGrpCode = $("#cusGrpCode");
+    CustomerApp.page.elements.description = $("#description");
+    CustomerApp.page.elements.discount = $("#discount");
+    CustomerApp.page.elements.paymentType = $("#paymentType");
+    CustomerApp.page.elements.defaultPriceDropdown = $("#defaultPriceDropdown");
+    CustomerApp.page.elements.searchDefaultPriceDropdown = $("#searchDefaultPriceDropdown");
+    CustomerApp.page.elements.titlePricePolicyCre = $("#titlePricePolicyCre");
+    CustomerApp.page.elements.pricingPolicyCodeCre = $("#pricingPolicyCodeCre");
+    CustomerApp.page.elements.selectedPriceDefault = $("#selectedPriceDefault");
+    CustomerApp.page.elements.listPricePolicy = $("#listPricePolicy");
+
+    CustomerApp.page.elements.error = $(".error");
+    CustomerApp.page.elements.titleError = $(".title-error.error");
+    CustomerApp.page.elements.pricingPolicyCodeError = $(".pricingPolicyCode-error.error");
+    CustomerApp.page.elements.pricingPolicyTypeError = $(".pricingPolicyType-error.error");
+
+    CustomerApp.page.elements.titleGroupCreError = $(".titleGroupCre-error.error");
+    CustomerApp.page.elements.cusGrpCodeError = $(".cusGrpCode-error.error");
+    CustomerApp.page.elements.descriptionError = $(".description-error.error");
+    CustomerApp.page.elements.discountError = $(".discount-error.error");
+
+
+    CustomerApp.page.commands.showModalCreatePricePolicy = () => {
+        CustomerApp.page.elements.modalCreatePricePolicy.modal("show");
     }
-    page.dialogs.elements.titleGroupCre = $("#titleGroup");
-    page.dialogs.elements.cusGrpCodeCre = $("#cusGrpCode");
-    page.dialogs.elements.descriptionCre = $("#description");
 
+    CustomerApp.page.commands.selectPricePolicy = () => {
+        $(".selectPricePolicy").on('click', function () {
+            createCusGroupParam.pricingPolicyId = $(this).data('id');
+            let value = $(this).data('value');
 
+            CustomerApp.page.elements.selectedPriceDefault.text(value);
+            CustomerApp.page.elements.defaultPriceDropdown[0].classList.toggle("show")
+        })
+    }
 
-    // Lấy List Pricing Policy
-    function getAllPricingPolicy(selectedPricing) {
+    // Lấy List Pricing default
+    CustomerApp.page.commands.getAllPricingPolicy = () => {
         return $.ajax({
             headers: {
                 "accept": "application/json",
                 "content-type": "application/json"
             },
             type: "GET",
-            url: origin +"/api/pricingPolicys"
+            url: origin + "/api/pricingPolicys"
         })
             .done((data) => {
-                console.log(data);
-                pricingPolicy = data;
-                pricingPolicy.forEach(item => {
-                    let isSelected = item === selectedPricing ? "selected" : "";
-                    let str = `<li id="${item.id}" data-id="${item.id}" onclick="updateNamePri(${item.id})" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
-                    $(".showAllPricingPolicy #showAllPricing").append(str);
+                data.forEach(item => {
+                    let str = `<a class="jss23775 selectPricePolicy" data-id="${item.id}" data-value="${item.title}">
+                                    ${item.title}
+                                </a>`;
+
+                    CustomerApp.page.elements.listPricePolicy.prepend(str);
                 });
+                CustomerApp.page.commands.selectPricePolicy();
             })
             .fail((jqXHR) => {
-
+                console.log(jqXHR)
             })
-    }
-
-    //show select pricing policy
-    function updateNamePri(id) {
-        const arrayCat = pricingPolicy.filter(item => item.id === id)
-        const val = arrayCat[0].title;
-        console.log("is", id, val)
-        selectBtnPri.firstElementChild.innerText = val;
-        $("#pricingType").data("id", id);
-        let idValue = $("#pricingType").data("id");
-        console.log(idValue);
     }
 
     // Lấy List Payment Method
-    function getAllPaymentMethod(selectedPayment) {
+    CustomerApp.page.commands.getAllPaymentMethod = () => {
         return $.ajax({
             headers: {
                 "accept": "application/json",
                 "content-type": "application/json"
             },
             type: "GET",
-            url: origin +"/api/admin/payment_methods"
+            url: origin + "/api/admin/payment_methods"
         })
             .done((data) => {
-                console.log(data);
-                paymentMethod = data;
-                paymentMethod.forEach(item => {
-                    let isSelected = item === selectedPayment ? "selected" : "";
-                    let str = `<li id="${item.id}" data-id="${item.id}" onclick="updateNamePay('${item.id}')" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
-                    $(".showAllPaymentMethod #showAllPay").append(str);
+                data.forEach(item => {
+                    let str = `<li data-id="${item.id}" class="catItem dropdown-item jss761 selectedPaymentMethod">${item.title}</li>`;
+
+                    CustomerApp.page.elements.dropdownPaymentMethod.append(str);
                 });
+                CustomerApp.page.commands.selectPaymentMethod();
             })
             .fail((jqXHR) => {
-
+                console.log(jqXHR)
             })
     }
 
-    //show select payment method
-    function updateNamePay(id) {
-        const arrayCat = paymentMethod.filter(item => item.id === id)
-        const val = arrayCat[0].title;
-        console.log("is", id, val)
-        selectBtnPay.firstElementChild.innerText = val;
-        $("#paymentType").data("id", id);
-        let idValue = $("#paymentType").data("id");
-        console.log(idValue);
+    CustomerApp.page.commands.selectPaymentMethod = () => {
+        $(".selectedPaymentMethod").click(function () {
+            createCusGroupParam.paymentMethodId = $(this).data('id');
+        })
     }
 
-    function createCusGrp() {
-        createCusGroupParam.id = null;
-        createCusGroupParam.title = $('#titleGroup').val();
-        createCusGroupParam.cusGrpCode = $('#cusGrpCode').val();
-        createCusGroupParam.description = $('#description').val();
-        createCusGroupParam.pricingPolicyId = $('#pricingType').data("id");
-        createCusGroupParam.discount = $('#discount').val();
-        createCusGroupParam.paymentMethodId = $('#paymentType').data("id");
+    //create price policy
+    CustomerApp.page.commands.createPricePolicy = () => {
+        pricingPolicy = {
+            title: CustomerApp.page.elements.titlePricePolicyCre.val().trim(),
+            pricingPolicyCode: CustomerApp.page.elements.pricingPolicyCodeCre.val().trim(),
+            pricingPolicyType: $('input[name="policyStyle"]:checked').val()
+        }
+
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "POST",
+            url: origin + "/api/pricingPolicys",
+            data: JSON.stringify(pricingPolicy)
+        }).done((data) => {
+            let str = `<a class="jss23775 selectPricePolicy" data-id="${data.id}" data-value="${data.title}">
+                         ${data.title}
+                       </a>`;
+
+            CustomerApp.page.elements.listPricePolicy.prepend(str);
+            CustomerApp.IziToast.showSuccessAlert("Thêm mới chính sách giá thành công")
+            CustomerApp.page.elements.modalCreatePricePolicy.modal("hide");
+            CustomerApp.page.elements.frmCreatePricePolicy[0].reset();
+            CustomerApp.page.commands.selectPricePolicy();
+        })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+                let errors = jqXHR.responseJSON.errors;
+
+                if (errors.title) {
+                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.titleError, errors.title)
+                }
+                if (errors.pricingPolicyCode) {
+                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, errors.pricingPolicyCode)
+                }
+                if (errors.pricingPolicyType) {
+                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, errors.pricingPolicyType)
+                }
+            })
+    }
+
+    //create customer group
+    CustomerApp.page.commands.createCusGrp = () => {
+        createCusGroupParam.title = CustomerApp.page.elements.titleGroupCre.val().trim();
+        createCusGroupParam.description = CustomerApp.page.elements.description.val().trim();
+
+        let cusGrpCode = CustomerApp.page.elements.cusGrpCode.val().trim();
+
+        cusGrpCode ? createCusGroupParam.cusGrpCode = cusGrpCode : undefined;
+
+        CustomerApp.page.elements.discount.val().trim() === ''
+            ? createCusGroupParam.discount = 0
+            : createCusGroupParam.discount = CustomerApp.page.elements.discount.val().trim();
 
         console.log(createCusGroupParam)
+
         $.ajax({
             "headers": {
                 "accept": "application/json",
                 "content-type": "application/json"
             },
             "type": "POST",
-            "url": origin +"/api/customer_groups/create",
+            "url": origin + "/api/customer_groups",
             "data": JSON.stringify(createCusGroupParam)
         })
             .done((data) => {
-                console.log(data.id);
+                console.log(data)
                 CustomerGroup_App.IziToast.showSuccessAlert('Thêm mới nhóm khách hàng thành công  !!!')
-                let id = data.id;
-                window.location.href = "/admin/customer_groups/"+id;
-
             })
             .fail((jqXHR) => {
-                console.log(jqXHR);
-                if (jqXHR.responseJSON) {
-                    $.each(jqXHR.responseJSON, (key, item) => {
-                        CustomerGroup_App.IziToast.showErrorAlert(item);
-                    })
-                }
+                console.log(jqXHR)
+                let errors = jqXHR.responseJSON.errors;
 
+                if (errors.title) {
+                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.titleGroupCreError, errors.title)
+                }
+                if (errors.cusGrpCode) {
+                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.cusGrpCodeError, errors.cusGrpCode)
+                }
+                if (errors.description) {
+                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.descriptionError, errors.description)
+                }
+                if (errors.discount) {
+                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.discountError, errors.discount)
+                }
             })
     }
 
-    $('#btnCreateCustomerGroup').on("click", function () {
-        $("#frmCreateCusGrp").trigger("submit");
+    CustomerApp.page.elements.btnCloseCreatePricePolicyModal.click(() => {
+        CustomerApp.page.elements.frmCreatePricePolicy.validate().resetForm();
+        CustomerApp.page.elements.frmCreatePricePolicy[0].reset();
+        CustomerApp.page.elements.error.removeClass('show').addClass('hidden')
     })
 
-    $("#frmCreateCusGrp").validate({
+    CustomerApp.page.elements.btnCreatePricePolicy.on("click", () => {
+        CustomerApp.page.elements.frmCreatePricePolicy.trigger("submit");
+    })
+
+    CustomerApp.page.elements.btnCreateCustomerGroup.on("click", () => {
+        CustomerApp.page.elements.frmCreateCusGrp.trigger("submit");
+    })
+
+    CustomerApp.page.elements.frmCreatePricePolicy.validate({
+        rules: {
+            titlePricePolicyCre: {
+                required: true,
+                maxlength: 50,
+            },
+            pricingPolicyCodeCre: {
+                required: true,
+                maxlength: 50,
+            },
+            policyStyle: {
+                required: true,
+            }
+        },
+        messages: {
+            titlePricePolicyCre: {
+                required: "Tên chính sách giá không được để trống",
+                maxlength: "Tên chính sách giá không được vượt quá 50 ký tự"
+            },
+            pricingPolicyCodeCre: {
+                required: "Mã chính sách giá không được để trống",
+                maxlength: "Mã chính sách giá không được vượt quá 50 ký tự"
+            },
+            policyStyle: {
+                required: "Vui lòng chọn loại chính sách giá"
+            }
+        },
+        showErrors: (error) => {
+            if (error.titlePricePolicyCre) {
+                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.titleError, error.titlePricePolicyCre);
+            }
+            if (error.pricingPolicyCodeCre) {
+                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, error.pricingPolicyCodeCre);
+            }
+            if (error.policyStyle) {
+                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, error.policyStyle);
+            }
+        },
+        submitHandler: () => {
+            CustomerApp.page.commands.createPricePolicy();
+        },
+    });
+
+    CustomerApp.page.elements.frmCreateCusGrp.validate({
         rules: {
             titleGroupCre: {
                 required: true,
                 maxlength: 50,
             },
-            cusGrpCodeCre: {
+            cusGrpCode: {
                 maxlength: 50,
             },
-            descriptionCre: {
+            description: {
                 maxlength: 255,
             },
+            discount: {
+                digits: true,
+            }
         },
         messages: {
             titleGroupCre: {
-                required: "Vui lòng nhập tên nhóm (ví dụ: Bán Chẳn)",
-                maxlength: "Tên sản phẩm không quá 50 ký tự."
+                required: "Tên nhóm khách hàng không được để trống",
+                maxlength: "Tên nhóm khách hàng không quá 50 ký tự"
             },
-            cusGrpCodeCre: {
+            cusGrpCode: {
                 maxlength: "Mã nhóm không quá 50 ký tự",
             },
-            descriptionCre: {
+            description: {
                 maxlength: "Mô tả không quá 255 ký tự",
             },
+            discount: {
+                digits: "Chỉ được nhập số",
+            },
         },
-        submitHandler: function () {
-            createCusGrp();
+        errorElement: 'label',
+        errorPlacement: function (error, element) {
+            error.appendTo(element.parent("div").parent("div").next("div"));
+        },
+        success: (label) => {
+            label.removeClass('hidden').addClass('show')
+        },
+        submitHandler: () => {
+            CustomerApp.page.commands.createCusGrp();
         },
         invalidHandler: () => {
-            CustomerGroup_App.IziToast.showErrorAlert(CustomerGroup_App.AlertMessageVi.ERROR_400);
+            CustomerApp.IziToast.showErrorAlert('Vui lòng nhập đúng thông tin')
         }
-    })
 
-
-    $(".black").on('click', () => {
-        window.location.href = "/admin/customer_groups";
     })
 
     $(() => {
-        getAllPricingPolicy();
-        getAllPaymentMethod();
+        CustomerApp.page.commands.getAllPricingPolicy();
+        CustomerApp.page.commands.getAllPaymentMethod();
     })
+
+    CustomerApp.page.commands.showDefaultPriceDropdown = () => {
+        CustomerApp.page.elements.defaultPriceDropdown[0].classList.toggle("show")
+    }
+
+    CustomerApp.page.commands.showErrorValidate = (element, error) => {
+        element.addClass('show').removeClass('hidden');
+        element.text(error);
+        CustomerApp.IziToast.showErrorAlert(error);
+    }
+
+    CustomerApp.page.commands.searchDefaultPriceDropdown = () => {
+        let filter, input, div, a, i;
+
+        input = CustomerApp.page.elements.searchDefaultPriceDropdown;
+
+        filter = input.val().toUpperCase();
+
+        div = document.getElementById("defaultPriceDropdown");
+
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            let txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
 </script>
 </html>

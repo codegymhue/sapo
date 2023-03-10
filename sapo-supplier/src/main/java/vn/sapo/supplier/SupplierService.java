@@ -36,4 +36,6 @@ public interface SupplierService {
     void changeStatusToAvailable(Integer id,boolean status);
      void changeEmpIdAndPaymentMethod(Integer supId, Integer empId, String paymentId);
      String findSupplierCodeById(Integer id);
+
+    List<String> findTags();
 }

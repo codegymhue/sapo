@@ -25,6 +25,7 @@ public class Result<T> {
         this(data, null, null, null);
     }
 
+
     public Result(Map<Object, Object> errors, Integer status) {
         this(null, status, null, errors);
     }
@@ -37,4 +38,7 @@ public class Result<T> {
         this(null, status, message, errors);
     }
 
+    public Result(String message, Integer status) {
+        this(null, status, message, null);
+    }
 }
