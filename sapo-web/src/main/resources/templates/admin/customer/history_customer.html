@@ -367,10 +367,13 @@
 
     <th:block th:replace="/admin/customer/modal_delete_customer.html"/>
 </div>
+</div>
 </body>
 <th:block th:replace="/layout/script.html"/>
 <script src="/assets/admin/js/customer/customerHistory.js"></script>
 <script src="/assets/admin/js/customer/customer_app.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>-->
+<!--<script src="https://cdn.datatables.net/plug-ins/1.13.1/i18n/vi.json"></script>-->
 <script>
     Page();
 </script>
@@ -612,12 +615,14 @@ $("#btn_createCustomerShippingAddress").on('click', () => {
     idDeleteCustomerById();
 function showModalDelete(){
         $('#btnSowModalDelete').click(function () {
+            alert("ok")
             $('#modal_delete_customer').modal('show');
         });
 }
 function deleteCustomerHander(){
     let idCustomer = $('.idCustomerDelete').val();
     $('#btn_deleteCustomer').click(function () {
+        alert("ok xoá")
         return $.ajax({
             headers: {
                 "accept": "application/json",
@@ -660,7 +665,7 @@ function deleteCustomerHander(){
 
     /*#showAllCustomerTable_filter{*/
     /*    margin-top: -30px;*/
-    }
+    /*}*/
     .dataTables_info{
         font-size: 15px;
     }
