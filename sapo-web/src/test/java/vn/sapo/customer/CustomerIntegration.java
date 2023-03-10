@@ -1,6 +1,5 @@
 package vn.sapo.customer;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +8,7 @@ import vn.sapo.controllers.address.AddressAPI;
 import vn.sapo.controllers.customer.CustomerAPI;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerResult;
-import vn.sapo.customers.dto.CreateAddressParam;
 <<<<<<< HEAD
-import vn.sapo.shared.parsers.JacksonParser;
 =======
 >>>>>>> vt_dev
 

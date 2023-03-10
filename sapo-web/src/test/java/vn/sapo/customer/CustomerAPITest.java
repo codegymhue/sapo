@@ -36,21 +36,10 @@ import java.util.List;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.isA;
 =======
-import vn.sapo.customers.AddressService;
-import vn.sapo.customers.dto.AddressResult;
-import vn.sapo.customers.dto.CreateAddressParam;
-import vn.sapo.controllers.customer.CustomerAPI;
-import vn.sapo.customer.dto.*;
-import vn.sapo.customerGroup.CustomerGroupService;
-import vn.sapo.excel.ExcelService;
-import vn.sapo.order.sale.SaleOrderService;
-import vn.sapo.order.sale.item.OrderItemService;
 import vn.sapo.payment.sale.PaymentSaleOrderService;
-import vn.sapo.shared.parsers.JacksonParser;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.mock;
 >>>>>>> vt_dev
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -59,7 +48,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 <<<<<<< HEAD
 =======
-import java.util.List;
 
 >>>>>>> vt_dev
 @WebMvcTest(CustomerAPI.class)

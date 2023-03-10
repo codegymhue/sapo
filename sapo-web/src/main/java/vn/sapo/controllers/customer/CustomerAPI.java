@@ -13,6 +13,7 @@ import vn.sapo.customers.AddressService;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customerGroup.CustomerGroupService;
+import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.excel.ExcelHelper;
 import vn.sapo.excel.ExcelService;
 import vn.sapo.order.sale.SaleOrderService;
@@ -21,7 +22,6 @@ import vn.sapo.shared.controllers.BaseController;
 import vn.sapo.voucher.receipt.ReceiptVoucherService;
 import vn.sapo.supplier.excel.ResponseMessage;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
@@ -107,15 +107,12 @@ public class CustomerAPI extends BaseController {
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CreateCustomerParam createCustomerParam) {
         CustomerResult dto = customerService.create(createCustomerParam);
-<<<<<<< HEAD
-=======
         CreateAddressParam createAddressParam = createCustomerParam.getCreateAddressParam();
 
         if (createAddressParam == null)
             return new ResponseEntity<>(dto, HttpStatus.OK);
         createAddressParam.setCustomerId(dto.getId());
         addressService.create(createAddressParam);
->>>>>>> vt_dev
         dto = customerService.findById(dto.getId());
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }

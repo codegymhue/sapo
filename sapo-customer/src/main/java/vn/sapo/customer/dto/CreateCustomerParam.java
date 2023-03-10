@@ -5,12 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-<<<<<<< HEAD
 import vn.sapo.customers.dto.CreateAddressParam;
-=======
-import org.springframework.beans.factory.annotation.Autowired;
-import vn.sapo.address.dto.CreateAddressParam;
->>>>>>> vt_dev
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
 //import vn.sapo.customer.dto.CustomerGender;
 //import vn.sapo.entities.customer.CustomerStatus;
