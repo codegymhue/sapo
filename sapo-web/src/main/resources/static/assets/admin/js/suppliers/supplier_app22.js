@@ -7,8 +7,8 @@ class SupplierApp {
     static SUPPLIER_API = this.DOMAIN_SERVER + "/api/suppliers";
     static EMPLOYEE_API = this.DOMAIN_SERVER + "/api/employees";
     static SUPPLIER_GROUP_API = this.DOMAIN_SERVER + "/api/supplier_groups";
-    static SUPPLIER_FILTER_API = this.DOMAIN_SERVER + this.SUPPLIER_API + "/filter"
-
+    static SUPPLIER_FILTER_API =  this.SUPPLIER_API + "/filter"
+    static SUPPLIER_TAGS_API =  this.SUPPLIER_API + "/tags"
 
     static getTbody(item, field, showStatus) {
         switch (field) {
@@ -213,6 +213,17 @@ class SupplierApp {
                      for="${employee.id}"> ${employee.fullName}</label>
                      </a>
                      </li>`
+        return str;
+    }
+
+    static renderSupplierTagsOnFilter(tag, index) {
+        let str = `  <div class="autocomplete-suggestion suggestion-product suggestion-tag"
+                            style="padding:4px 8px" data-index="${index}">
+                        <div class="search-product-content-refactor item-supplier" 
+                            style="width:100%;">
+                           <div class="search-product-content-name"><span>${tag}</span> </div>
+                        </div>
+                     </div>`
         return str;
     }
 
