@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -74,8 +75,15 @@ public class SupplierAPI extends BaseController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody CreateSupplierParam createSupplierParam) {
-//        System.out.println(createSupplierParam);
+    public ResponseEntity<?> create(@Valid @RequestBody CreateSupplierParam createSupplierParam, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError fieldError : fieldErrors) {
+                errors.put(fieldError.getField(), fieldError.getDefaultMessage());
+            }
+            return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        }
         SupplierResult dto = supplierService.create(createSupplierParam);
         CreateAddressParam createAddressParam = createSupplierParam.getCreateAddressParam();
         if (createAddressParam == null)
