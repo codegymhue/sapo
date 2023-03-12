@@ -176,7 +176,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     @Transactional
     public List<String> findTags() {
-        List<List<String>> a = supplierRepository.findTags().stream()
+        List<List<String>> listTags = supplierRepository.findTags().stream()
                 .map(json -> {
                     if (json != null) {
                         String trimmedJson = json.trim();
@@ -189,8 +189,9 @@ public class SupplierServiceImpl implements SupplierService {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
-        return a.stream()
+        return listTags.stream()
                 .flatMap(List::stream)
+                .distinct()
                 .collect(Collectors.toList());
     }
 }

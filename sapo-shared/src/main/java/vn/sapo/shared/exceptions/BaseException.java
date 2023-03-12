@@ -10,9 +10,9 @@ import java.util.Map;
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class BaseException extends RuntimeException {
 
-    protected Map<String, String> errors;
+    protected Map<Object, Object> errors;
 
-    public BaseException(Map<String, String> errors) {
+    public BaseException(Map<Object, Object> errors) {
         this.errors = errors;
     }
 

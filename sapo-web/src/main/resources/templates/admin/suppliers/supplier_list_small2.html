@@ -37,6 +37,19 @@
             white-space: nowrap;
         }
 
+        .filter-item .bootstrap-tagsinput {
+            height: 36px !important;
+            padding: 0 3px;
+            overflow-y: auto;
+            display: flex;
+        !important;
+            flex-wrap: wrap;
+        !important;
+            width: 250px;
+            float: left;
+
+        }
+
         .available {
             color: #20a917;
         }
@@ -352,29 +365,7 @@
                                                style="display: none;">
                                         <div class="autocomplete-suggestions"
                                              style="position: absolute; width: 250px; max-height: 300px; z-index: 9999; top: 36px; display: none;">
-                                            <div class="autocomplete-suggestion suggestion-product suggestion-tag"
-                                                 style="padding:4px 8px" data-index="0">
-                                                <div class="search-product-content-refactor item-supplier"
-                                                     style="width:100%;">
-                                                    <div class="search-product-content-name"><span>NCC phía Nam</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="autocomplete-suggestion suggestion-product suggestion-tag"
-                                                 style="padding:4px 8px" data-index="1">
-                                                <div class="search-product-content-refactor item-supplier"
-                                                     style="width:100%;">
-                                                    <div class="search-product-content-name">
-                                                        <span>NCC nguyên liệu</span></div>
-                                                </div>
-                                            </div>
-                                            <div class="autocomplete-suggestion suggestion-product suggestion-tag"
-                                                 style="padding:4px 8px" data-index="2">
-                                                <div class="search-product-content-refactor item-supplier"
-                                                     style="width:100%;">
-                                                    <div class="search-product-content-name"><span>NCC hộp</span></div>
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </div>
                                     <a href="javascript" bind-event-click="removeItemFilter(this, 'tags')"
@@ -720,6 +711,7 @@
             getAllEmployee: SupplierApp.EMPLOYEE_API,
             getAllSupplierGroup: SupplierApp.SUPPLIER_GROUP_API,
             getAllSupplierByFilter: SupplierApp.SUPPLIER_FILTER_API,
+            getAllSupplierTags: SupplierApp.SUPPLIER_TAGS_API,
         },
         elements: {},
         commands: {},
@@ -771,42 +763,23 @@
     page.dialogs.elements.filterEmployee = $("#ulAssigneeIdsFilter");
     // page.dialogs.elements.checkboxInputEmployee = $(".sapo-checkbox__input");
     page.dialogs.elements.filterSupplierGroupId = $("#ulSupplierGroupId");
-    page.dialogs.elements.filterSubmit = $("#filterSubmit")
+    page.dialogs.elements.filterSubmit = $("#filterSubmit");
 
     //fillter status
     page.elements.filter_button_tag = $(".filter-button-tag");
 
     //filter employee
-    page.elements.multiselect_employee = $(".multiselect-employee")
+    page.elements.multiselect_employee = $(".multiselect-employee");
 
     //filter supplier_groupId
-    page.elements.multiselect_supplier_groupId = $(".multiselect_supplier_groupId")
+    page.elements.multiselect_supplier_groupId = $(".multiselect_supplier_groupId");
 
+    //filter supplier_tags
+    page.elements.supTagRender = $(".autocomplete-suggestions")
+    page.elements.tagsInput = $(".bootstrap-tagsinput")
 
+    //loading
     page.elements.loader = $(".loader");
-    page.commands.showLoading = () => {
-        page.elements.loader.removeClass("hide");
-
-    }
-
-    page.commands.closeLoading = () => {
-        page.elements.loader.addClass("hide");
-
-    }
-
-    function resetSupplierFilter() {
-        supplierFilter.filter = null;
-        supplierFilter.statuses = [];
-        supplierFilter.employeeIds = [];
-        supplierFilter.groupIds = [];
-        supplierFilter.createdFrom = null;
-        supplierFilter.createdTo = null;
-        supplierFilter.pageNo = null;
-        supplierFilter.pageSize = null;
-        // page.commands.getAllSupplier();
-        console.log("resetSupplierFilter done")
-    }
-
 
     // seach
     page.elements.totalPage = $("#totalPage");
@@ -826,7 +799,14 @@
     //     $("#search-supplierGroupId-container").empty()
     //     resetSupplierFilter()
     // })
+    page.commands.showLoading = () => {
+        page.elements.loader.removeClass("hide");
+    }
 
+    page.commands.closeLoading = () => {
+        page.elements.loader.addClass("hide");
+
+    }
 
     page.commands.getAllSupplier = () => {
 
@@ -922,7 +902,7 @@
                 "content-type": "application/json"
             },
             type: "POST",
-            url: origin + "/api/suppliers/filter",
+            url: page.urls.getAllSupplierByFilter,
             data: JSON.stringify(supplierFilter)
         })
             .done((data) => {
@@ -1092,6 +1072,25 @@
         })
     }
 
+    page.commands.getAllTags = () => {
+        console.log("getAllTags")
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.getAllSupplierTags,
+        })
+            .done((data) => {
+                console.log(data, " alltags")
+                $.each(data, (index, item) => {
+                    page.elements.supTagRender.append(SupplierApp.renderSupplierTagsOnFilter(item, index));
+                });
+            }).fail((jqXHR) => {
+        })
+    }
+
     page.commands.resetInputCheckBox = () => {
         $("#tbSupplier input").each(function () {
             $(this).prop("checked", false);
@@ -1099,6 +1098,7 @@
         arrayIdSupplier = [];
         page.commands.showAction();
     }
+
     page.commands.selectAllCheckBox = () => {
         $("#checkAll").on("change", function () {
             page.elements.selectAction.prop("checked", true);
@@ -1135,7 +1135,6 @@
             page.commands.showAction();
         })
     }
-
 
     page.commands.isCheckbox = () => {
         $(".selectCheckbox").on("change", function () {
@@ -1190,20 +1189,97 @@
         }
     }
 
+    page.elements.tagsInput.children().on("click", () => {
+        page.elements.supTagRender.css("display", "block");
+        $(".suggestion-tag").off("click")
+        page.commands.chooseTag();
+    })
+
+    // page.elements.tagsInput.children().on("change", () => {
+    //     let tagChoose = $(this).find("span").text();
+    //     let listTagsChoose = page.elements.tagsInput.find(".tag").map(function () {
+    //         return $(this).text().trim();
+    //     }).get();
+    //     console.log(listTagsChoose, " input listTagsChoose")
+    //     console.log(tagChoose, " input listsChoose")
+    //     listTagsChoose.forEach(() => {
+    //         if (!listTagsChoose.includes(tagChoose)) {
+    //             listTagsChoose.push(tagChoose)
+    //             supplierFilter.tags.push(tagChoose)
+    //             let str = `<span class="tag label label-info" style="">${tagChoose}<span class="lable-remove" data-role="remove"></span></span>`
+    //             page.elements.tagsInput.prepend(str)
+    //
+    //         }
+    //     })
+    //     if (listTagsChoose.length === 0) {
+    //         listTagsChoose.push(tagChoose)
+    //         supplierFilter.tags.push(tagChoose);
+    //         let str = `<span class="tag label label-info" style="">${tagChoose}<span class="lable-remove" data-role="remove"></span></span>`;
+    //         page.elements.tagsInput.prepend(str);
+    //     }
+    //     page.elements.supTagRender.css("display", "none");
+    //     console.log(supplierFilter.tags, " sau click")
+    //
+    //
+    // })
+    page.commands.chooseTag = () => {
+        $(".suggestion-tag").on("click", function () {
+            console.log(this)
+            let tagChoose = $(this).find("span").text();
+            let listTagsChoose = page.elements.tagsInput.find(".tag").map(function () {
+                return $(this).text().trim();
+            }).get();
+            console.log(listTagsChoose, " listTagsChoose")
+            listTagsChoose.forEach(() => {
+                if (!listTagsChoose.includes(tagChoose)) {
+                    listTagsChoose.push(tagChoose)
+                    supplierFilter.tags.push(tagChoose)
+                    let str = `<span class="tag label label-info" style="">${tagChoose}<span class="lable-remove" data-role="remove"></span></span>`
+                    page.elements.tagsInput.prepend(str)
+
+                }
+            })
+            if (listTagsChoose.length === 0) {
+                listTagsChoose.push(tagChoose)
+                supplierFilter.tags.push(tagChoose);
+                let str = `<span class="tag label label-info" style="">${tagChoose}<span class="lable-remove" data-role="remove"></span></span>`;
+                page.elements.tagsInput.prepend(str);
+            }
+            page.elements.supTagRender.css("display", "none");
+            console.log(supplierFilter.tags, " sau click")
+
+        })
+    }
+
+
+    // page.elements.tagsInput.children().on("click", function (){
+    //     page.elements.supTagRender.css("display", "block");
+    // })
+
+
+    $(document).on("click", 'span[data-role="remove"]', function () {
+        if (supplierFilter.tags.indexOf($(this).parent().text()) > -1) {
+            supplierFilter.tags.splice(supplierFilter.tags.indexOf($(this).parent().text()), 1)
+            $(this).parent().remove()
+        }
+        console.log(supplierFilter.tags, " sau remove")
+    });
 
     page.elements.btnUpdateSup.on("click", () => {
         page.elements.modalUpdateBulk.modal("show");
     })
+
     page.elements.btnAvailable.on("click", () => {
         page.elements.modalAvailable.modal("show");
     })
+
     page.elements.btnUnavailable.on("click", () => {
         page.elements.modalUnavailable.modal("show");
     })
+
     page.elements.btnDelete.on("click", () => {
         page.elements.modalDelete.modal("show");
     })
-
 
     page.elements.updateBulkaction.on("click", () => {
 
@@ -1474,6 +1550,19 @@
         supplierFilter.filter = page.elements.search.val().trim();
     }
 
+    function resetSupplierFilter() {
+        supplierFilter.filter = null;
+        supplierFilter.statuses = [];
+        supplierFilter.employeeIds = [];
+        supplierFilter.groupIds = [];
+        supplierFilter.createdFrom = null;
+        supplierFilter.createdTo = null;
+        supplierFilter.pageNo = null;
+        supplierFilter.pageSize = null;
+        // page.commands.getAllSupplier();
+        console.log("resetSupplierFilter done")
+    }
+
     page.elements.multiselect_employee.on("click", function () {
         $('input[type="checkbox"].checkbox_employee').change(function () {
             page.elements.multiselect_employee.off("click")
@@ -1515,7 +1604,6 @@
         })
     })
 
-
     page.elements.multiselect_supplier_groupId.on("click", () => {
         $('input[type="checkbox"].checkbox_supplier_group').change(function () {
             page.elements.multiselect_supplier_groupId.off("click")
@@ -1549,7 +1637,6 @@
             $(inputId).prop("checked", false)
     }
 
-
     // tìm từ khóa trong filter SupplierGroup
     function suggest(element) {
         let value = $(element).val().toLowerCase();
@@ -1574,11 +1661,6 @@
         console.log(supplierFilter.createdFrom, "supplierFilter.createdFrom")
         console.log(supplierFilter.createdTo, "supplierFilter.createdTo")
     }
-
-
-    // function toggleItem(element) {
-    //
-    // }
 
     function confirmSave(str, element) {
         let sList = [];
@@ -1667,6 +1749,7 @@
         page.commands.getAllEmployee();
         page.commands.getAllPaymentMethodSelect();
         page.commands.getAllSupplierGroup();
+        page.commands.getAllTags();
         // page.commands.getAllSupplierByFilter();
     }
 

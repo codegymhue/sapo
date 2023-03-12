@@ -441,8 +441,11 @@
     //create customer group
     CustomerApp.page.commands.createCusGrp = () => {
         createCusGroupParam.title = CustomerApp.page.elements.titleGroupCre.val().trim();
-        createCusGroupParam.cusGrpCode = CustomerApp.page.elements.cusGrpCode.val().trim();
         createCusGroupParam.description = CustomerApp.page.elements.description.val().trim();
+
+        let cusGrpCode = CustomerApp.page.elements.cusGrpCode.val().trim();
+
+        cusGrpCode ? createCusGroupParam.cusGrpCode = cusGrpCode : undefined;
 
         CustomerApp.page.elements.discount.val().trim() === ''
             ? createCusGroupParam.discount = 0
@@ -459,12 +462,13 @@
             "url": origin + "/api/customer_groups",
             "data": JSON.stringify(createCusGroupParam)
         })
-            .done(() => {
+            .done((data) => {
+                console.log(data)
                 CustomerGroup_App.IziToast.showSuccessAlert('Thêm mới nhóm khách hàng thành công  !!!')
             })
             .fail((jqXHR) => {
                 console.log(jqXHR)
-                let errors = jqXHR.responseJSON.message;
+                let errors = jqXHR.responseJSON.errors;
 
                 if (errors.title) {
                     CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.titleGroupCreError, errors.title)
