@@ -23,9 +23,9 @@ public interface SaleOrderItemRepository extends JpaRepository<SaleOrderItem, In
 
     int countSaleOrderItemByOrderId(Integer orderId);
 
-    @Query("SELECT COUNT(oi) FROM SaleOrderItem  AS oi WHERE oi.id = :orderId")
+    @Query("SELECT COUNT(soi) FROM SaleOrderItem  AS soi WHERE soi.id = :orderId")
     int countSaleOrderItemByOrderId(@Param("orderId") int orderId);
 
-    @Query(value = "call sp_getCountItemByCustomerId(:id);", nativeQuery = true)
-    Integer getQuantityItemCustomerOrderById(Integer id);
+    @Query(value = "call sp_getCountItemByCustomerId(:customerId);", nativeQuery = true)
+    Integer getQuantityItemCustomerOrderById(Integer customerId);
 }

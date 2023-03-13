@@ -120,7 +120,7 @@ public class ExcelHelper {
 //                            chính sách giá mặc định
                             break;
                         case 14:
-                            customer.setGroup(new CustomerGroupResult().setDiscount(0));
+                            customer.setGroup(new CustomerGroupResult().setDefaultDiscountRate(0));
                             break;
                         case 15:
 //                            phương thức thanh toán mặc định
