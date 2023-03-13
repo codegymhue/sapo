@@ -8,7 +8,6 @@ import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerStatus;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -160,7 +159,9 @@ public class CustomerDTOTest {
                 .setTaxCode("tax-88787878")
                 .setBirthday(date)
                 .setGender(vn.sapo.customer.dto.CustomerGender.NAM)
+
 //                .setGroup(new CustomerGroupResult(1, "title", "XMGroupCus", 1, "visa",new Date(), 1L, "description", 2))
+
                 .setEmployeeId(1)
                 .setDebtTotal(new BigDecimal(1000))
                 .setSpendTotal(new BigDecimal(1000))
