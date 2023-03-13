@@ -70,31 +70,39 @@ class CustomerGroup_App {
     }
 }
 
-class CustomerGroupFilter {
-    constructor() {
-        this.title = null;
-        this.cusGrpCode = null;
-        this.customerGroupType = null;
-        this.description = null;
-        this.countCus = null;
-        this.createdAt = null;
-        this.draw = null;
+class CustomerGroupDataTable{
+    constructor(draw, start, length, recordsTotal, recordsFiltered, data) {
+        this.draw = draw;
+        this.start = start;
+        this.length = length;
+        this.recordsTotal = recordsTotal;
+        this.recordsFiltered = recordsFiltered;
+        this.data = data;
     }
 }
 
-class CustomerGroup{
-    constructor(title, cusGrpCode, pricingPolicyId, paymentMethodId, description, discount) {
+class CustomerGroupFilter {
+    constructor(title, cusGrpCode, customerGroupType, description, countCus, createdAt, draw) {
         this.title = title;
         this.cusGrpCode = cusGrpCode;
+        this.customerGroupType = customerGroupType;
         this.description = description;
-        this.pricingPolicyId = pricingPolicyId;
-        this.discount = discount
-        this.paymentMethodId = paymentMethodId;
-        // this.customerGroupType = customerGroupType;
-        // this.createdAt = createdAt;
-        // this.countCus = countCus;
+        this.countCus = countCus;
+        this.createdAt = createdAt;
+        this.draw = draw;
     }
 }
+
+// class CustomerGroup{
+//     constructor(title, cusGrpCode, defaultPricingPolicyId, defaultDiscountRate, defaultPaymentMethodId, note) {
+//         this.title = title;
+//         this.cusGrpCode = cusGrpCode;
+//         this.defaultPricingPolicyId = defaultPricingPolicyId;
+//         this.defaultDiscountRate = defaultDiscountRate
+//         this.defaultPaymentMethodId = defaultPaymentMethodId;
+//         this.note = note;
+//     }
+// }
 
 
 // class CreateCusGroupParam {

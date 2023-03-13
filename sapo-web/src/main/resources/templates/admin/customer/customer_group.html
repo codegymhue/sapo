@@ -234,6 +234,14 @@
 <script src="/assets/admin/js/customer/customer_app.js"></script>
 <script>
     let customerGroupFilter = new CustomerGroupFilter();
+    // let CustomerGroupDataTable = {
+    //     draw: '',
+    //     start: '',
+    //     length: '',
+    //     recordsTotal: '',
+    //     recordsFiltered: '',
+    //     data: ''
+    // };
     let dataTable;
 
     CustomerApp.page.elements.tbCustomerGroup = $("#tbCustomerGroup");
@@ -251,13 +259,15 @@
                 accept: 'application/json',
                 contentType: 'application/json',
                 data: (d) => {
-                    d.title = customerGroupFilter.title;
-                    d.cusGrpCode = customerGroupFilter.cusGrpCode;
-                    d.customerGroupType = customerGroupFilter.customerGroupType;
-                    d.description = customerGroupFilter.description;
-                    d.countCus = customerGroupFilter.countCus;
-                    d.createdAt = customerGroupFilter.createdAt;
-                    d.draw = customerGroupFilter.draw;
+                    // d.draw = customerGroupFilter.draw;
+                    // d.start =
+
+                    // d.title = customerGroupFilter.title;
+                    // d.cusGrpCode = customerGroupFilter.cusGrpCode;
+                    // d.customerGroupType = customerGroupFilter.customerGroupType;
+                    // d.description = customerGroupFilter.description;
+                    // d.countCus = customerGroupFilter.countCus;
+                    // d.createdAt = customerGroupFilter.createdAt;
                     console.log(d);
                     return JSON.stringify(d);
                 }
@@ -351,11 +361,6 @@
     $(() => {
         CustomerApp.page.commands.drawDataTable();
     })
-
-    $('a.paginate_button').on('click', function () {
-        let id = $(this).attr("data-dt-idx");
-    })
-
 
     CustomerApp.page.commands.formatDatePattern = (date) => {
         let fullYear = date.split('-');

@@ -25,11 +25,11 @@ public interface CustomerFilterRepository extends JpaRepository<Customer, Intege
 
             List<Predicate> predicates = new ArrayList<>();
 
-            if(filter.getKeyword() != null){
-                Predicate predicateFullName = criteriaBuilder.like(root.get("fullName"),'%' + filter.getKeyword() + '%');
-                Predicate predicateCustomerCode = criteriaBuilder.like(root.get("customerCode"),'%' + filter.getKeyword() + '%');
-                Predicate predicatePhoneNumber = criteriaBuilder.like(root.get("phoneNumber"),'%' + filter.getKeyword() + '%');
-                Predicate predicateKw = criteriaBuilder.or(predicateCustomerCode, predicateFullName,predicatePhoneNumber);
+            if (filter.getKeyword() != null) {
+                Predicate predicateFullName = criteriaBuilder.like(root.get("fullName"), '%' + filter.getKeyword() + '%');
+                Predicate predicateCustomerCode = criteriaBuilder.like(root.get("customerCode"), '%' + filter.getKeyword() + '%');
+                Predicate predicatePhoneNumber = criteriaBuilder.like(root.get("phoneNumber"), '%' + filter.getKeyword() + '%');
+                Predicate predicateKw = criteriaBuilder.or(predicateCustomerCode, predicateFullName, predicatePhoneNumber);
                 predicates.add(predicateKw);
             }
 
@@ -63,12 +63,12 @@ public interface CustomerFilterRepository extends JpaRepository<Customer, Intege
                 predicates.add(predicate);
             }
 
-            if (!filter.getEmployeeIds().isEmpty()){
+            if (!filter.getEmployeeIds().isEmpty()) {
                 Predicate predicate = criteriaBuilder.or(root.get("employee").get("id").in(filter.getEmployeeIds()));
                 predicates.add(predicate);
             }
 
-            if(!filter.getStatusList().isEmpty()){
+            if (!filter.getStatusList().isEmpty()) {
                 Predicate predicate = criteriaBuilder.or(root.get("status").in(filter.getStatusList()));
                 predicates.add(predicate);
             }
@@ -96,6 +96,7 @@ public interface CustomerFilterRepository extends JpaRepository<Customer, Intege
         }, pageable);
 
     }
+
 }
 
 
