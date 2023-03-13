@@ -11,7 +11,7 @@ import vn.sapo.pricing_policy.dto.PricingPolicyResult;
 import vn.sapo.shared.controllers.BaseController;
 
 @RestController
-@RequestMapping("/api/pricingPolicys")
+@RequestMapping("/api/pricing-policies")
 public class PricingPolicyAPI extends BaseController {
     @Autowired
     private PricingPolicyService pricingPolicyService;
@@ -23,9 +23,7 @@ public class PricingPolicyAPI extends BaseController {
 
     @PostMapping
     private ResponseEntity<?> create(@RequestBody @Validated PricingPolicyParam pricingPolicyParam) {
-
-        PricingPolicyResult dto =  pricingPolicyService.create(pricingPolicyParam);
-
+        PricingPolicyResult dto = pricingPolicyService.create(pricingPolicyParam);
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 }

@@ -353,7 +353,11 @@
                 "content-type": "application/json"
             },
             type: "GET",
+<<<<<<< HEAD
+            url: origin +"/api/pricing-policies"
+=======
             url: origin + "/api/pricingPolicys"
+>>>>>>> 1839f2e0f3941be51a38ccbca6f4385ee3045bee
         })
             .done((data) => {
                 data.forEach(item => {
@@ -444,6 +448,21 @@
             })
     }
 
+<<<<<<< HEAD
+    function createCusGrp() {
+        createCusGroupParam.id = undefined;
+        let title = $('#titleGroup').val().trim();
+        createCusGroupParam.title = title.length > 0 ? title : undefined;
+
+        let cusGrpCode = $('#cusGrpCode').val().trim();
+        createCusGroupParam.cusGrpCode = cusGrpCode.length > 0 ? cusGrpCode : undefined;
+
+        let note = $('#description').val().trim();
+        createCusGroupParam.note = note.length > 0 ? note : undefined;
+        createCusGroupParam.defaultPricingPolicyId = $('#pricingType').data("id");
+        createCusGroupParam.defaultDiscountRate = $('#discount').val();
+        createCusGroupParam.defaultPaymentMethodId = $('#paymentType').data("id");
+=======
     //create customer group
     CustomerApp.page.commands.createCusGrp = () => {
         createCusGroupParam.title = CustomerApp.page.elements.titleGroupCre.val().trim();
@@ -456,6 +475,7 @@
         CustomerApp.page.elements.discount.val().trim() === ''
             ? createCusGroupParam.discount = 0
             : createCusGroupParam.discount = CustomerApp.page.elements.discount.val().trim();
+>>>>>>> 1839f2e0f3941be51a38ccbca6f4385ee3045bee
 
         console.log(createCusGroupParam)
 

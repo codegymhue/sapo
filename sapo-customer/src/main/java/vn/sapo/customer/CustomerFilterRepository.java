@@ -2,12 +2,10 @@ package vn.sapo.customer;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 import vn.sapo.customer.dto.CustomerFilter;
-import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerGender;
 
