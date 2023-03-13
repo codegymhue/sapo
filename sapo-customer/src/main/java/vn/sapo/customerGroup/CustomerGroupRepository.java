@@ -15,7 +15,7 @@ public interface CustomerGroupRepository  extends JpaRepository<CustomerGroup, I
             "g.cusGrpCode as cusGrpCode," +
             "g.createdAt as createdAt, " +
             "count(c.groupId) as countCus," +
-            "g.description as description " +
+            "g.note as note " +
             "from CustomerGroup as g " +
             "left join Customer as c " +
             "on g.id = c.groupId " +

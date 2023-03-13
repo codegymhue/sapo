@@ -13,6 +13,6 @@ public interface ICustomerGroupResult {
 
     Long getCountCus();
 
-    String getDescription();
+    String getNote();
 
 }

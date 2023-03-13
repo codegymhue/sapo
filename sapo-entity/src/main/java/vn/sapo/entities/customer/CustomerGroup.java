@@ -21,44 +21,51 @@ public class CustomerGroup extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
+
     @Column(name = "title", nullable = false, length = 50)
     private String title;
+
     @Column(name = "cus_grp_code", nullable = false, length = 50)
     private String cusGrpCode;
-    @Column(name = "description", nullable = false)
-    private String description;
-    @Column(name = "discount", nullable = false)
-    private Integer discount;
 
-    @Column(name = "cus_grp_type")
+    @Column(name = "note", nullable = false)
+    private String note;
+
+    @Column(name = "is_default", nullable = false)
+    private boolean isDefault;
+
+    @Column(name = "default_discount_rate", nullable = false)
+    private Integer defaultDiscountRate;
+
+    @Column(name = "type")
     @Enumerated(EnumType.STRING)
-    private CustomerGroupType cusGrpType;
+    private CustomerGroupType type;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "payment_method_id")
+    @JoinColumn(name = "default_payment_method_id")
     private PaymentMethod paymentMethod;
 
-    @Column(name = "payment_method_id", insertable = false, updatable = false)
-    private String paymentMethodId;
+    @Column(name = "default_payment_method_id", insertable = false, updatable = false)
+    private String defaultPaymentMethodId;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pricing_policy_id")
+    @JoinColumn(name = "default_pricing_policy_id")
     private PricingPolicy pricingPolicy;
 
-    @Column(name = "pricing_policy_id", insertable = false, updatable = false)
-    private Integer pricingPolicyId;
+    @Column(name = "default_pricing_policy_id", insertable = false, updatable = false)
+    private Integer defaultPricingPolicyId;
 
     public CustomerGroup(Integer id) {
         this.id = id;
     }
 
-    public CustomerGroup setPricingPolicyId(Integer pricingPolicyId) {
-        this.pricingPolicy = new PricingPolicy(this.pricingPolicyId = pricingPolicyId);
+    public CustomerGroup setPricingPolicyId(Integer defaultPricingPolicyId) {
+        this.pricingPolicy = new PricingPolicy(this.defaultPricingPolicyId = defaultPricingPolicyId);
         return this;
     }
 
-    public CustomerGroup setPaymentMethodId(String paymentMethodId) {
-        this.paymentMethod = new PaymentMethod(this.paymentMethodId = paymentMethodId);
+    public CustomerGroup setPaymentMethodId(String defaultPaymentMethodId) {
+        this.paymentMethod = new PaymentMethod(this.defaultPaymentMethodId = defaultPaymentMethodId);
         return this;
     }
 

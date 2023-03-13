@@ -45,9 +45,7 @@ public class CustomerResult {
 
     private CustomerStatus status;
 
-    private Instant createdAt;
 
-    private Instant updatedAt;
 
     private CusEmployeeResult employee;
 
@@ -67,5 +65,9 @@ public class CustomerResult {
     private  String taxCode;
     private  String fax;
     private String website;
+
+    private Instant createdAt;
+
+    private Instant updatedAt;
 }
 

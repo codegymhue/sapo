@@ -18,12 +18,12 @@ public class CreateCusGroupParam {
 
     private String cusGrpCode;
 
-    private Integer pricingPolicyId;
+    private Integer defaultPricingPolicyId;
 
-    private String paymentMethodId;
+    private String defaultPaymentMethodId;
 
-    private String description;
+    private String note;
 
-    private Integer discount;
+    private Integer defaultDiscountRate;
 
 }

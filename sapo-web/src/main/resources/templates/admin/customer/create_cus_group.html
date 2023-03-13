@@ -298,7 +298,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: origin +"/api/pricingPolicys"
+            url: origin +"/api/pricing-policies"
         })
             .done((data) => {
                 console.log(data);
@@ -361,13 +361,18 @@
     }
 
     function createCusGrp() {
-        createCusGroupParam.id = null;
-        createCusGroupParam.title = $('#titleGroup').val();
-        createCusGroupParam.cusGrpCode = $('#cusGrpCode').val();
-        createCusGroupParam.description = $('#description').val();
-        createCusGroupParam.pricingPolicyId = $('#pricingType').data("id");
-        createCusGroupParam.discount = $('#discount').val();
-        createCusGroupParam.paymentMethodId = $('#paymentType').data("id");
+        createCusGroupParam.id = undefined;
+        let title = $('#titleGroup').val().trim();
+        createCusGroupParam.title = title.length > 0 ? title : undefined;
+
+        let cusGrpCode = $('#cusGrpCode').val().trim();
+        createCusGroupParam.cusGrpCode = cusGrpCode.length > 0 ? cusGrpCode : undefined;
+
+        let note = $('#description').val().trim();
+        createCusGroupParam.note = note.length > 0 ? note : undefined;
+        createCusGroupParam.defaultPricingPolicyId = $('#pricingType').data("id");
+        createCusGroupParam.defaultDiscountRate = $('#discount').val();
+        createCusGroupParam.defaultPaymentMethodId = $('#paymentType').data("id");
 
         console.log(createCusGroupParam)
         $.ajax({

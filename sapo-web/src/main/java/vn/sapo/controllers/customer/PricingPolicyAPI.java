@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import vn.sapo.pricing_policy.PricingPolicyService;
 
 @RestController
-@RequestMapping("/api/pricingPolicys")
+@RequestMapping("/api/pricing-policies")
 public class PricingPolicyAPI {
     @Autowired
     private PricingPolicyService pricingPolicyService;
