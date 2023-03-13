@@ -41,7 +41,7 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
         String title = createParam.getTitle().trim();
 //        String description = createCusGroupParam.getDescription().trim();
 //
-        Map<Object, Object> errors = new HashMap<>();
+        Map<String, String> errors = new HashMap<>();
 
         checkCustomerGroupTitle(title, errors);
 
@@ -108,7 +108,7 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     public CustomerGroupResult findById(Integer id) {
         return customerGroupRepository.findById(id)
                 .map(customerGroupMapper::toDTO)
-                .orElseThrow(() -> new NotFoundException("customer.exception.notFound"));
+                .orElseThrow(() -> new NotFoundException("customer_group.exception.notFound"));
 
     }
 
@@ -132,7 +132,7 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
 
     //TODO: ko can nua
 
-    private void checkCustomerGroupTitle(String title, Map<Object, Object> errors) {
+    private void checkCustomerGroupTitle(String title, Map<String, String> errors) {
         if (customerGroupRepository.existsByTitle(title)) {
             errors.put("title", "{customer_group.validation.title.existed}");
         }
@@ -140,7 +140,7 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
 
     //TODO: Ko can nua
 
-    public void checkCusGrpCodeWhenNotEmpty(String cusGrpCode, Map<Object, Object> errors) {
+    public void checkCusGrpCodeWhenNotEmpty(String cusGrpCode, Map<String, String> errors) {
         String prefix = CodePrefix.CUSTOMER_GROUP.getValue();
 
         if (cusGrpCode.substring(0, 3).equalsIgnoreCase(prefix)) {
