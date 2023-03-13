@@ -69,7 +69,6 @@ public class CustomerExcelExporter {
         createCell(row, 25, "Tổng SL sản phẩm đã mua", style);
         createCell(row, 26, "Tổng SL sản phẩm hoàn trả", style);
         createCell(row, 27, "Ngày mua cuối cùng", style);
-
     }
 
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
@@ -91,7 +90,6 @@ public class CustomerExcelExporter {
 
     private void writeDataLines1() {
         int rowCount = 1;
-
 
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();

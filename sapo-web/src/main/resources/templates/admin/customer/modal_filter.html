@@ -392,7 +392,7 @@
                     type: 'POST',
                     dataSrc: "content",
                     contentType: 'application/json',
-                    "data": function (d) {
+                    data: function (d) {
                         d.groupIds = customerFilter.groupIds;
                         d.gender = customerFilter.gender;
                         d.dayOfBirthday = customerFilter.dayOfBirthday;
@@ -409,42 +409,33 @@
                 ],
                 searching: false,
                 destroy: true,
-                columns: [
-                    {data: 'id'},
-                    {data: 'customerCode'},
-                    {data: 'fullName'},
-                    {data: 'phoneNumber'},
-                    {data: 'group.title'},
-                    {data: 'debtTotal'},
-                    {data: 'spendTotal'},
-                    {data: "quantityItemOrder"}],
-                columnDefs: [
-                    {
-                        targets: 0,
-                        render: function (data, type, row, meta) {
-                            return `
-                               <input type="checkbox" value="check_none" />
-                            `
-                        }
-                    },
-                    {
-                        targets: 1,
-                        render: function (data, type, row, meta) {
-                            return `<a href="/admin/customers/ ${row.id}">${row.customerCode}</a>`;
-                        }
-                    },
+                columns: column,
+             columnDefs: [
+             {
+                            targets: 0,
+                            "orderable": false,
+                            render: function (data, type, row, meta) {
+                                return elementCheckBox;
+                            }
+                        },
+             {
+                            targets: thead.indexOf("customerCode")+1,
+                            render: function (data, type, row, meta) {
+                                return `<a href="/admin/customers/${row.id}" style="text-decoration: none">${row.customerCode}</a>`;
+                            }
+                        },
 
 
-                ],
+             ],
             })
         }
-
         // nút lọc
         $("#btnFilter").on('click', () => {
             // drawFilterLabel();
-            drawDataTable();
+            // drawDataTable();
+            // changeColumn nam o modal-config-table.html
+            changeColumn();
             bsOffcanvas.hide()
-
 
             checkCustomerFilterChange = {
                 ...customerFilter
@@ -462,8 +453,6 @@
                 createdTo: null,
                 keyword: null
             }
-
-            console.log(checkCustomerFilterChange);
             let obj = getChanges(checkCustomerFilterRoot, checkCustomerFilterChange);
             if (isEmpty(obj)) {
                 console.log("Không có thay đổi");
