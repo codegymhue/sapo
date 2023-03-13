@@ -359,12 +359,15 @@
                                         </svg>
                                     </div>
                                     <div class="autocomplete-suggestion-holder float-left position-relative">
-                                        <div class="bootstrap-tagsinput"><input type="text" placeholder=""
-                                                                                autocomplete="off"></div>
+                                        <div class="bootstrap-tagsinput" >
+                                            <input  onkeyup="suggestTags(this)"
+                                                    type="text" placeholder=""
+                                                    autocomplete="off">
+                                        </div>
                                         <input type="text" class="sapo-textbox choosed-single-id" id="tags"
                                                style="display: none;">
                                         <div class="autocomplete-suggestions"
-                                             style="position: absolute; width: 250px; max-height: 300px; z-index: 9999; top: 36px; display: none;">
+                                             style="position: absolute; width: 250px; max-height: 300px; z-index: 9999; top: 36px;display: none">
 
                                         </div>
                                     </div>
@@ -427,7 +430,7 @@
                                                     </span>
                                                             <input placeholder="Tìm kiếm" bind="query" type="text"
                                                                    class="single-query sapo-textbox"
-                                                                   bind-event-keyup="suggest(this)"
+                                                                   onkeyup="suggest(this)"
                                                                    style=" font-size: 1.4rem;padding-left: 32px;height: 40px;width: 100%;">
                                                         </div>
                                                     </li>
@@ -891,7 +894,13 @@
         supplierFilter.pageNo = 1;
         console.log(supplierFilter, " supplierFilter truoc rết")
         page.commands.getAllSupplierUseFilter(supplierFilter);
+        for (let prop in supplierFilter) {
+            if (supplierFilter.hasOwnProperty(prop)) {
+                console.log(prop + ": " + supplierFilter[prop], "loop");
+            }
+        }
         page.elements.btnFilter.click()
+
         console.log(supplierFilter)
     })
 
@@ -1193,7 +1202,7 @@
         }
     }
 
-    page.elements.tagsInput.children().on("click", () => {
+    page.elements.tagsInput.children("input").on("click", () => {
         page.elements.supTagRender.css("display", "block");
         $(".suggestion-tag").off("click")
         page.commands.chooseTag();
@@ -1227,12 +1236,6 @@
 
         })
     }
-
-
-    // page.elements.tagsInput.children().on("click", function (){
-    //     page.elements.supTagRender.css("display", "block");
-    // })
-
 
     $(document).on("click", 'span[data-role="remove"]', function () {
         if (supplierFilter.tags.indexOf($(this).parent().text()) > -1) {
@@ -1616,7 +1619,6 @@
         })
     }
 
-
     function tagVariantRemove(element) {
         let variantId = element.getAttribute('variant-id')
         let inputId = document.getElementById(variantId)
@@ -1629,10 +1631,22 @@
     // tìm từ khóa trong filter SupplierGroup
     function suggest(element) {
         let value = $(element).val().toLowerCase();
+        console.log(value, " value")
         let ul = $(element).closest('ul');
         let li = ul.find('li:gt(0)');
         li.hide();
         li.filter(function () {
+            let text = $(this).text().toLowerCase();
+            return text.indexOf(value) >= 0;
+        }).show();
+    }
+
+    // tìm từ khóa trong filter SupplierTags
+    function suggestTags(element) {
+        console.log("in function")
+        let value = $(element).val().toLowerCase();
+        $(".suggestion-tag").hide();
+        $(".suggestion-tag").filter(function (){
             let text = $(this).text().toLowerCase();
             return text.indexOf(value) >= 0;
         }).show();

@@ -242,8 +242,6 @@ class SupplierApp {
     }
 
     static renderFilterListTag(supplierFilter){
-
-
         let str = `<li class="filter-tag">
                        <span class="tag__label">
                                 Trạng thái: Đang giao dịch, Ngừng giao dịch
