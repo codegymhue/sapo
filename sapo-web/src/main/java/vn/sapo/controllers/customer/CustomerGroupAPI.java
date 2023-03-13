@@ -14,6 +14,8 @@ import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.customerGroup.dto.*;
 import vn.sapo.shared.controllers.BaseController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/customer_groups")
 public class CustomerGroupAPI extends BaseController {
@@ -22,6 +24,7 @@ public class CustomerGroupAPI extends BaseController {
 
     @Autowired
     CustomerGroupMapper customerGroupMapper;
+
 
     @GetMapping
     public ResponseEntity<?> getAllCustomerGroup() {
@@ -72,9 +75,10 @@ public class CustomerGroupAPI extends BaseController {
 
         CustomerGroupDataTable customerGroupDataTable = new CustomerGroupDataTable()
                 .setDraw(customerGroupFilter.getDraw())
-                .setRecordsTotal(pageableCustomerGroups.getTotalElements())
-                .setRecordsFiltered(pageableCustomerGroups.getTotalElements())
-                .setData(pageableCustomerGroups.getContent());
+                .setRecordsTotal((int) pageableCustomerGroups.getTotalElements())
+                .setRecordsFiltered((int) pageableCustomerGroups.getTotalElements())
+//                .setData(pageableCustomerGroups.getContent());
+                .setData(customerGroupService.findAllCustomerGroupResult());
 
         return new ResponseEntity<>(customerGroupDataTable, HttpStatus.OK);
     }

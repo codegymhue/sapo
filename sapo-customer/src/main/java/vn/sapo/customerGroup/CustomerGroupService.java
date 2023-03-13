@@ -12,6 +12,8 @@ import java.util.*;
 
 public interface CustomerGroupService {
 
+    List<CustomerGroupResult> findAllCustomerGroupResult();
+
     String getMaxSystemCustomerGroupCode();
 
     CustomerGroupResult create(CreateCusGroupParam createCusGroupParam);

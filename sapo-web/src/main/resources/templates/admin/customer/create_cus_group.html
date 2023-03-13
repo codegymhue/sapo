@@ -81,7 +81,7 @@
                                                     </legend>
                                                 </fieldset>
                                             </div>
-<!--                                            error container, dont remove-->
+                                            <!--                                            error container, dont remove-->
                                             <div class="error titleGroupCre-error"></div>
                                         </div>
                                     </div>
@@ -204,7 +204,7 @@
                                                 </div>
                                             </div>
                                             <div
-                                                 onclick="CustomerApp.page.commands.showModalCreatePricePolicy()">
+                                                    onclick="CustomerApp.page.commands.showModalCreatePricePolicy()">
                                                 <div class="jss23596">
                                                     <div class="jss23775 jss23769 jss760">
                                                         <i class="fa-solid fa-circle-plus"></i>
@@ -231,7 +231,8 @@
                                                        class="MuiInputBase-input MuiOutlinedInput-input jss758 placeholder_text"
                                                        placeholder="0"
                                                        fdprocessedid="16ju8f">
-                                                <fieldset aria-hidden="true" class="jss823 MuiOutlinedInput-notchedOutline">
+                                                <fieldset aria-hidden="true"
+                                                          class="jss823 MuiOutlinedInput-notchedOutline">
                                                     <legend class="jss824"></legend>
                                                 </fieldset>
                                             </div>
@@ -255,7 +256,7 @@
                                                 </span>
                                             </div>
                                             <ul class="dropdown-menu w-100 showAllPaymentMethod">
-                                                <li class="jss760 jss761">Chọn hình thức thanh toán</li>
+                                                <li class="jss760 jss761" disabled="">Chọn hình thức thanh toán</li>
                                                 <div id="dropdownPaymentMethod">
 
                                                 </div>
@@ -285,7 +286,10 @@
         pricingPolicyCode: '',
         pricingPolicyType: ''
     };
-    let paymentMethod;
+    let paymentMethod = {
+        id: '',
+        title: ''
+    };
     let createCusGroupParam = new CustomerGroup();
 
     CustomerApp.page.elements.modalCreatePricePolicy = $("#modalCreatePricePolicy");
@@ -378,8 +382,9 @@
         })
             .done((data) => {
                 data.forEach(item => {
-                    let str = `<li data-id="${item.id}" class="catItem dropdown-item jss761 selectedPaymentMethod">${item.title}</li>`;
-
+                    let str = `<li data-id="${item.id}" data-title=${item.title} class="catItem dropdown-item jss761 selectedPaymentMethod">
+                                    ${item.title}
+                                </li>`;
                     CustomerApp.page.elements.dropdownPaymentMethod.append(str);
                 });
                 CustomerApp.page.commands.selectPaymentMethod();
@@ -392,6 +397,7 @@
     CustomerApp.page.commands.selectPaymentMethod = () => {
         $(".selectedPaymentMethod").click(function () {
             createCusGroupParam.paymentMethodId = $(this).data('id');
+            $("#paymentType").text($(this).text());
         })
     }
 

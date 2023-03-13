@@ -42,8 +42,8 @@ class CustomerGroupServiceImplTest {
         customerGroup.checkCusGrpCodeWhenNotEmpty(cusGrpCode1, errors);
         assertEquals("Mã nhóm không được có tiền tố của hệ thống CTN", errors.get("cusGrpCode"));
 
-        String cusGrpCode3 = "CUS_GRP_123456789012345678901234567890123456789012345678901";
-        customerGroup.checkCusGrpCodeWhenNotEmpty(cusGrpCode3, errors);
+        String cusGrpCode2 = "CTN1234567890123456789012345678901234567890123456789012345";
+        customerGroup.checkCusGrpCodeWhenNotEmpty(cusGrpCode2, errors);
         assertEquals("Mã nhóm khách hàng không được vượt quá 50 ký tự", errors.get("cusGrpCode"));
     }
 

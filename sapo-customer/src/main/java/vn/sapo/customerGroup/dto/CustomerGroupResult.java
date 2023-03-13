@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.time.Instant;
 import java.util.Date;
 
@@ -22,6 +24,8 @@ public class CustomerGroupResult {
 
     private String cusGrpCode;
 
+    private String cusGrpType;
+
     private String description;
 
     private Integer pricingPolicyId;
@@ -30,12 +34,9 @@ public class CustomerGroupResult {
 
     private String paymentMethodId;
 
-
-    private String customerGroupType;
-
     private Date createAtDate;
 
-    private Long countCus;
+    private Integer countCus;
 
     private Instant createdAt;
 
@@ -43,8 +44,18 @@ public class CustomerGroupResult {
 //
 //    private Integer pricingPolicyId;
 
+    public CustomerGroupResult(Integer id, String title, String cusGrpCode, String cusGrpType, Integer countCus, String description, Instant createdAt) {
+        this.id = id;
+        this.title = title;
+        this.cusGrpCode = cusGrpCode;
+        this.cusGrpType = cusGrpType;
+        this.countCus = countCus;
+        this.description = description;
+        this.createdAt = createdAt;
+    }
 
-    public CustomerGroupResult(Integer id, String title, String cusGrpCode, Integer pricingPolicyId, String paymentMethodId, Date createAtDate, Long countCus, String description, Integer discount) {
+
+    public CustomerGroupResult(Integer id, String title, String cusGrpCode, Integer pricingPolicyId, String paymentMethodId, Date createAtDate, Integer countCus, String description, Integer discount) {
         this.id = id;
         this.title = title;
         this.cusGrpCode = cusGrpCode;
@@ -56,7 +67,7 @@ public class CustomerGroupResult {
         this.discount = discount;
     }
 
-    public CustomerGroupResult(Integer id, String title, String cusGrpCode, Integer pricingPolicyId, String paymentMethodId, Instant createdAt, Long countCus, String description, Integer discount) {
+    public CustomerGroupResult(Integer id, String title, String cusGrpCode, Integer pricingPolicyId, String paymentMethodId, Instant createdAt, Integer countCus, String description, Integer discount) {
         this.id = id;
         this.title = title;
         this.cusGrpCode = cusGrpCode;

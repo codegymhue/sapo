@@ -6,7 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.customerGroup.dto.*;
+import vn.sapo.entities.PaymentMethod;
 import vn.sapo.entities.customer.CustomerGroup;
+import vn.sapo.entities.product.pricing_policy.PricingPolicy;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
@@ -25,7 +27,6 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     @Autowired
     private CustomerGroupMapper customerGroupMapper;
 
-
     private final CustomerGroupRepository customerGroupRepository;
 
     @Autowired
@@ -36,6 +37,11 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
         this.customerGroupRepository = customerGroupRepository;
     }
 
+    @Override
+    @Transactional
+    public List<CustomerGroupResult> findAllCustomerGroupResult() {
+        return customerGroupRepository.findAllCustomerGroupResult();
+    }
 
     @Override
     @Transactional
@@ -66,6 +72,9 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
 
         CustomerGroup customerGroup = customerGroupMapper.toModel(createCusGroupParam);
         customerGroup.setCusGrpType(FIXED);
+
+//        customerGroup.setPaymentMethod(createCusGroupParam.getPaymentMethod());
+//        customerGroup.setPricingPolicyId(createCusGroupParam.getPricingPolicyId());
 
         customerGroup = customerGroupRepository.save(customerGroup);
 

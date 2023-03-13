@@ -153,7 +153,7 @@ public class CustomerDTOTest {
                 .setTaxCode("tax-88787878")
                 .setBirthday(date)
                 .setGender(vn.sapo.customer.dto.CustomerGender.NAM)
-                .setGroup(new CustomerGroupResult(1, "title", "XMGroupCus", 1, "visa",new Date(), 1L, "description", 2))
+                .setGroup(new CustomerGroupResult(1, "title", "XMGroupCus", 1, "visa",new Date(), 1, "description", 2))
                 .setEmployeeId(1)
                 .setDebtTotal(new BigDecimal(1000))
                 .setSpendTotal(new BigDecimal(1000))
