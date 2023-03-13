@@ -177,12 +177,10 @@ public class SupplierServiceImpl implements SupplierService {
     public List<String> findTags() {
         List<List<String>> listTags = supplierRepository.findTags().stream()
                 .map(json -> {
-                    if (json != null) {
                         String trimmedJson = json.trim();
                         if (!trimmedJson.isEmpty()) {
                             return Arrays.asList(trimmedJson.split(","));
                         }
-                    }
                     return null;
                 })
                 .filter(Objects::nonNull)
