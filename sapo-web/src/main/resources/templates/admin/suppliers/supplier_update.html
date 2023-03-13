@@ -724,7 +724,6 @@
     function handleChangeGroupSupp(supplierGroupId) {
         let supplierGroup = supplierGroups.find(supplierGroup => supplierGroup.id === supplierGroupId);
         page.elements.changeValueSup.attr("data-id", supplierGroup.id);
-
         page.elements.changeValueSup.val(supplierGroup.id);
         page.elements.changeValueSup.text(supplierGroup.title);
 
