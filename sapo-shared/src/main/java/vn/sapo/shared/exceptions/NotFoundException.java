@@ -10,6 +10,6 @@ import java.util.Map;
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class NotFoundException extends BaseException {
     public NotFoundException(String message) {
-        super(message);
+        super(message, HttpStatus.NOT_FOUND.value());
     }
 }

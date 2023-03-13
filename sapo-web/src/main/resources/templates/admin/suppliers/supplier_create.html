@@ -424,14 +424,16 @@
                     })
                     .fail((jqXHR) => {
                         console.log(jqXHR);
-                        jqXHR.responseJSON.fullName!==undefined ? $("#error-nameCreate").text(jqXHR.responseJSON.fullName):"";
-                        jqXHR.responseJSON.line1 !== undefined ? $("#error-addressCreate").text(jqXHR.responseJSON.line1):"";
-                        // SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_400)
+                        let responseJSON = jqXHR.responseJSON;
+                        if (responseJSON.errors !== undefined) {
+                            let errors=responseJSON.errors;
+                            errors.fullName !== undefined ? $("#error-nameCreate").text(errors.fullName) : "";
+                            errors.line1 !== undefined ? $("#error-addressCreate").text(errors.line1) : "";
+                            errors.email !== undefined ? $("#error-emailCreate").text(errors.email) : "";
+                        }
+
                     })
-                // }else{
-                //     // if(supplier.fullName.trim().split("").length <= 5) $("#error-nameCreate").text("Tên không được trống")
-                //     if(createAddressParam.line1.trim().split("").length <= 5) $("#error-addressCreate").text("Nhà cung cấp không được trống")
-                // }
+
         });
     }
     function getAllProvinces() {
