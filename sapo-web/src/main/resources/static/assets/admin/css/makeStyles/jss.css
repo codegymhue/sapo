@@ -48,8 +48,7 @@
 }
 
 .jss2257 {
-  border: 1px solid;
-  border-color: #0088FF;
+  border: 1px solid #0088FF;
   background-color: #fff;
 }
 
@@ -87,7 +86,6 @@
   color: #747C87;
 }
 
-/*------------------------------------------*/
 .jss139 {
   color: #F3F4F5;
   width: auto;
@@ -450,7 +448,7 @@
   min-height: 56px;
 }
 
-@media (min-width:0px) and (orientation: landscape) {
+@media (min-width:0) and (orientation: landscape) {
   .jss51 {
     min-height: 48px;
   }
@@ -645,7 +643,6 @@
   margin-left: -30px;
 }
 
-/**********************************/
 .jss2112 {
   max-width: 100%;
   align-self: center;
@@ -751,7 +748,6 @@
   order: 1;
 }
 
-/***************************************/
 .jss68 {
   color: rgba(0, 0, 0, 0.87);
   font-size: 14px;
@@ -765,10 +761,6 @@
 
 .jss70 {
   margin-top: 10px;
-}
-
-.jss71 {
-  background-image: "/images/dashboard/frame.png";
 }
 
 .jss72 {
@@ -863,7 +855,6 @@
   border-radius: 10px;
 }
 
-/***************************************************/
 .jss36 {
   flex: 1 1 auto;
   display: flex;
@@ -885,7 +876,6 @@
   line-height: 36px;
 }
 
-/*****************************************************/
 .jss631 {
   width: 476px;
   height: 299px;
@@ -956,7 +946,6 @@
   justify-content: center;
 }
 
-/*****************************************/
 .jss409 {
   top: 0;
   height: 52px;
@@ -965,7 +954,7 @@
   z-index: 1001;
   position: sticky;
   background: #fff;
-  box-shadow: 0px 2px 4px rgba(168, 168, 168, 0.25);
+  box-shadow: 0 2px 4px rgba(168, 168, 168, 0.25);
   align-items: center;
   justify-content: space-between;
 }
@@ -1039,7 +1028,7 @@
 }
 
 .jss418 {
-  box-shadow: 0px 4px 8px rgba(168, 168, 168, 0.25);
+  box-shadow: 0 4px 8px rgba(168, 168, 168, 0.25);
 }
 
 .jss419 {
@@ -1048,13 +1037,11 @@
   align-items: center;
 }
 
-/*************************************************/
 .jss40 {
   display: flex;
   flex-direction: column;
 }
 
-/*************************************************/
 .jss1 span {
   font-size: 14px;
 }
@@ -1067,7 +1054,6 @@
   height: 3px;
 }
 
-/**********************************************/
 .jss775 {
   z-index: 99999;
 }
@@ -1080,7 +1066,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -1094,14 +1080,6 @@
   margin: 8px 0;
 }
 
-/******************************************/
-/* .jss825 {
-  margin: 0;
-  position: unset;
-} */
-
-
-/********************************************/
 .jss2288 {
   left: 0;
   color: #fff;
@@ -1131,7 +1109,6 @@
   margin-right: 45px;
 }
 
-/**************************************/
 .jss2246 {
   left: 0;
   color: #fff;
@@ -1161,11 +1138,10 @@
   margin-right: 45px;
 }
 
-/*****************************************************/
 .jss1978 {
   width: 100%;
   background: #fff;
-  box-shadow: 0px 2px 4px rgba(168, 168, 168, 0.25);
+  box-shadow: 0 2px 4px rgba(168, 168, 168, 0.25);
   margin-bottom: 24px;
 }
 
@@ -1254,7 +1230,6 @@
   background: linear-gradient(64.1deg, #FF4D4D 22.64%, #FF5F7C 102.8%);
 }
 
-/***********************************************/
 .jss2702 {
   height: 72px;
   padding: 13px 12px 15px;
@@ -1282,11 +1257,10 @@
   position: absolute;
 }
 
-/**************************************/
 .jss2216 {
   width: calc(50% - 12px);
   background: #fff;
-  box-shadow: 0px 2px 4px rgba(168, 168, 168, 0.25);
+  box-shadow: 0 2px 4px rgba(168, 168, 168, 0.25);
   margin-left: auto;
 }
 
@@ -1300,7 +1274,6 @@
   }
 }
 
-/********************************************/
 .jss2322 {
   display: flex;
   flex-wrap: wrap;
@@ -1315,7 +1288,7 @@
 .jss2322 .link {
   color: unset;
   width: 100%;
-  margin: 15px 0px;
+  margin: 15px 0;
   display: flex;
   flex-wrap: wrap;
   text-align: center;
@@ -1342,18 +1315,17 @@
   background: #F2F9FF;
 }
 
-/**************************************************/
 .jss2179 {
   width: 100%;
   background: #fff;
-  box-shadow: 0px 2px 4px rgba(168, 168, 168, 0.25);
+  box-shadow: 0 2px 4px rgba(168, 168, 168, 0.25);
   margin-right: auto;
   margin-bottom: 24px;
 }
 
 .jss2180 {
   display: flex;
-  padding: 0px;
+  padding: 0;
 }
 
 .jss2181 {
@@ -1377,7 +1349,7 @@
   height: 400px;
   position: relative;
   background: #fff;
-  box-shadow: 0px 2px 4px rgba(168, 168, 168, 0.25);
+  box-shadow: 0 2px 4px rgba(168, 168, 168, 0.25);
   margin-right: auto;
   border-radius: 3px;
   margin-bottom: 24px;
@@ -1529,7 +1501,7 @@
 .jss2199 {
   width: calc(50% - 12px);
   background: #fff;
-  box-shadow: 0px 2px 4px rgba(168, 168, 168, 0.25);
+  box-shadow: 0 2px 4px rgba(168, 168, 168, 0.25);
   margin-right: auto;
 }
 
@@ -1611,7 +1583,7 @@
 .jss2233 {
   height: fit-content;
   background: #fff;
-  box-shadow: 0px 2px 4px rgba(168, 168, 168, 0.25);
+  box-shadow: 0 2px 4px rgba(168, 168, 168, 0.25);
   margin-top: 24px;
 }
 
@@ -1681,16 +1653,10 @@
   webkit-transform: scale(1.2);
 }
 
-
-
-
-
-
-
 .jss2230 {
   height: fit-content;
   background: #fff;
-  box-shadow: 0px 2px 4px rgba(168, 168, 168, 0.25);
+  box-shadow: 0 2px 4px rgba(168, 168, 168, 0.25);
 }
 
 .jss2231 {
@@ -2214,7 +2180,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2241,7 +2207,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2268,7 +2234,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2295,7 +2261,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2322,7 +2288,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2349,7 +2315,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2376,7 +2342,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2403,7 +2369,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2430,7 +2396,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2457,7 +2423,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2484,7 +2450,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2511,7 +2477,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2535,7 +2501,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2562,7 +2528,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2589,7 +2555,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2617,7 +2583,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2644,7 +2610,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2671,7 +2637,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2698,7 +2664,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2725,7 +2691,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2752,7 +2718,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2779,7 +2745,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2806,7 +2772,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2833,7 +2799,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2860,7 +2826,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2887,7 +2853,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2914,7 +2880,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2941,7 +2907,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2968,7 +2934,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -2995,7 +2961,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -3022,7 +2988,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -3049,7 +3015,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -3076,7 +3042,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -3103,7 +3069,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -3130,7 +3096,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -3157,7 +3123,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -3184,7 +3150,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -3211,7 +3177,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -3238,7 +3204,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -3265,7 +3231,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -3292,7 +3258,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -3319,7 +3285,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -3346,7 +3312,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -3373,7 +3339,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -3400,7 +3366,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -3427,7 +3393,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -3511,7 +3477,7 @@
   color: #182537;
   font-size: 12px;
   max-width: 280px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   font-weight: 400;
   border-radius: 3px;
   background-color: #fff;
@@ -3596,9 +3562,9 @@
 }
 
 .jss14 {
-  top: 0px;
+  top: 0;
   width: 100%;
-  height: 0px;
+  height: 0;
   display: none;
   z-index: 9999999;
   position: sticky;

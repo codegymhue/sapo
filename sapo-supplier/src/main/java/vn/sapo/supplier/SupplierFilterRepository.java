@@ -1,20 +1,15 @@
 package vn.sapo.supplier;
 
-import org.hibernate.Session;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.provider.HibernateUtils;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import vn.sapo.entities.supplier.Supplier;
-import vn.sapo.entities.supplier.SupplierGroup;
 import vn.sapo.supplier.dto.SupplierFilter;
-import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 
-import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,11 +21,11 @@ public interface SupplierFilterRepository extends JpaRepository<Supplier, Intege
         return findAll((root, criteriaQuery, criteriaBuilder) -> {
 
             List<Predicate> predicates = new ArrayList<>();
-            if(filter.getFilter() != null){
-                Predicate predicateSupplierCode = criteriaBuilder.like(root.get("supplierCode"),'%' + filter.getFilter() + '%');
-                Predicate predicatePhone = criteriaBuilder.like(root.get("phone"),'%' + filter.getFilter() + '%');
-                Predicate predicateName = criteriaBuilder.like(root.get("fullName"),'%' + filter.getFilter() + '%');
-                Predicate predicateKw = criteriaBuilder.or(predicateSupplierCode, predicatePhone,predicateName);
+            if (filter.getFilter() != null) {
+                Predicate predicateSupplierCode = criteriaBuilder.like(root.get("supplierCode"), '%' + filter.getFilter() + '%');
+                Predicate predicatePhone = criteriaBuilder.like(root.get("phone"), '%' + filter.getFilter() + '%');
+                Predicate predicateName = criteriaBuilder.like(root.get("fullName"), '%' + filter.getFilter() + '%');
+                Predicate predicateKw = criteriaBuilder.or(predicateSupplierCode, predicatePhone, predicateName);
                 predicates.add(predicateKw);
             }
             if (!filter.getGroupIds().isEmpty()) {
@@ -38,12 +33,41 @@ public interface SupplierFilterRepository extends JpaRepository<Supplier, Intege
                 predicates.add(predicate);
             }
 
-            if (!filter.getEmployeeIds().isEmpty()){
+            if (!filter.getEmployeeIds().isEmpty()) {
                 Predicate predicate = criteriaBuilder.or(root.get("employee").get("id").in(filter.getEmployeeIds()));
                 predicates.add(predicate);
             }
 
-            if(!filter.getStatuses().isEmpty()){
+            List<String> tagsToSearch = filter.getTags();
+            Predicate tagsPredicate = null;
+
+            if (!tagsToSearch.isEmpty()) {
+                Expression<Boolean> fistTag = criteriaBuilder
+                        .function("JSON_CONTAINS",
+                                Boolean.class,
+                                root.get("tags"),
+                                criteriaBuilder.literal('"' + tagsToSearch.get(0) + '"')
+                        );
+                tagsPredicate = criteriaBuilder.isTrue(fistTag);
+
+                for (int i = 1; i < tagsToSearch.size(); i++) {
+                    String remainingTags = tagsToSearch.get(i);
+
+                    Expression<Boolean> leftoverTags = criteriaBuilder
+                            .function("JSON_CONTAINS",
+                                    Boolean.class,
+                                    root.get("tags"),
+                                    criteriaBuilder.literal('"' + remainingTags + '"')
+                            );
+                    tagsPredicate = criteriaBuilder.or(tagsPredicate, criteriaBuilder.isTrue(leftoverTags));
+                }
+            }
+
+            if (tagsPredicate != null) {
+                predicates.add(tagsPredicate);
+            }
+
+            if (!filter.getStatuses().isEmpty()) {
                 Predicate predicate = criteriaBuilder.or(root.get("status").in(filter.getStatuses()));
                 predicates.add(predicate);
             }
@@ -54,11 +78,12 @@ public interface SupplierFilterRepository extends JpaRepository<Supplier, Intege
             if (createdFrom != null && createdTo != null) {
                 createdAtPredicate = criteriaBuilder.between(createdAtPath, createdFrom.toInstant(), createdTo.toInstant());
 
-            }else {
+            } else {
                 if (createdFrom != null) {
                     createdAtPredicate = criteriaBuilder.greaterThan(createdAtPath, createdFrom.toInstant());
 
-                }if (createdTo != null) {
+                }
+                if (createdTo != null) {
                     createdAtPredicate = criteriaBuilder.lessThan(createdAtPath, createdTo.toInstant());
                 }
             }

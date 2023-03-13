@@ -3,6 +3,7 @@ package vn.sapo.supplier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.supplier.dto.CreateSupplierParam;
 import vn.sapo.supplier.dto.SupplierFilter;
@@ -36,4 +37,6 @@ public interface SupplierService {
     void changeStatusToAvailable(Integer id,boolean status);
      void changeEmpIdAndPaymentMethod(Integer supId, Integer empId, String paymentId);
      String findSupplierCodeById(Integer id);
+
+    List<String> findTags();
 }

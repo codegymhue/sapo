@@ -1,6 +1,5 @@
 package vn.sapo.customerGroup.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +7,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.time.Instant;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,6 +15,7 @@ import java.time.Instant;
 @Setter
 @Accessors(chain = true)
 public class CustomerGroupResult {
+
     private Integer id;
 
     private String title;
@@ -30,10 +31,13 @@ public class CustomerGroupResult {
     private String defaultPaymentMethodId;
 
     private Integer defaultDiscountRate;
+    //TODO: SUA LAI UI
 
-    private Instant createdAt;
+    private String type;
 
     private Instant updatedAt;
+
+    private Instant createdAt;
 
 
 }

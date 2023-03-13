@@ -6,12 +6,13 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
-import vn.sapo.address.dto.CreateAddressParam;
+import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.supplier.dto.CreateSupplierParam;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -80,18 +81,16 @@ public class ExcelHelperSuppliers {
                             supplier.setDescription(currentCell.getStringCellValue());
                             break;
                         case 9:
-//                     chính sách giá mặc định
+                            //              chính sách giá mặc định
                             break;
                         case 10:
-//                      Kỳ hạn thanh toán mặc định
+                         //              Kỳ hạn thanh toán mặc định
                             break;
                         case 11:
                             String paymentMethod = currentCell.getStringCellValue();
                             if (paymentMethod != null && !paymentMethod.isBlank())
                                 supplier.setPaymentMethodId(paymentMethod);
-
                             break;
-
                         case 12:
                             address.setFullName(currentCell.getStringCellValue());
                             break;
@@ -120,7 +119,7 @@ public class ExcelHelperSuppliers {
 //                            nợ hiện tại
                             break;
                         case 21:
-//                              tags
+//                            tags
                             break;
                         default:
                             break;

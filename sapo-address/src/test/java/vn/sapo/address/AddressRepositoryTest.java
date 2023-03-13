@@ -6,12 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
+import vn.sapo.customers.AddressRepository;
 import vn.sapo.entities.Address;
 import vn.sapo.shared.exceptions.NotFoundException;
 
-import java.lang.reflect.Array;
-import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;

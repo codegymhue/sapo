@@ -6,20 +6,19 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import vn.sapo.entities.product.Product;
-import vn.sapo.entities.product.ProductStatus;
+import org.springframework.validation.BindingResult;
 import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.entities.supplier.SupplierStatus;
 import vn.sapo.shared.configurations.CodePrefix;
-import vn.sapo.shared.exceptions.DataInputException;
 import vn.sapo.shared.exceptions.NotFoundException;
-import vn.sapo.supplier.dto.*;
+import vn.sapo.supplier.dto.CreateSupplierParam;
+import vn.sapo.supplier.dto.SupplierFilter;
+import vn.sapo.supplier.dto.SupplierResult;
+import vn.sapo.supplier.dto.UpdateSupplierParam;
 import vn.sapo.supplierGroup.SupplierGroupRepository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import javax.validation.Valid;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,7 +47,7 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierResult findById(Integer id) {
         return supplierRepository.findById(id)
                 .map(supplierMapper::toDTO)
-                .orElseThrow(() -> new NotFoundException("Not found supplier with id: " + id));
+                .orElseThrow(() -> new NotFoundException("supplier.exception.notFound"));
     }
 
     @Override
@@ -56,17 +55,12 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierResult create(CreateSupplierParam createParam) {
         Supplier supplier = supplierMapper.toModel(createParam);
 //        supplier.setEmployeeId(1);
-        if (createParam.getFullName() == null) {
-            throw new DataInputException("Tên nhà cung cấp không được để trống");
-        }
-        if (createParam.getCreateAddressParam() == null) {
-            throw new DataInputException("Địa chỉ không được để trống");
-        }
 
         supplier = supplierRepository.save(supplier);
         if (createParam.getSupplierCode() == null)
             supplier.setSupplierCode(CodePrefix.SUPPLIER.generate(supplier.getId()));
 
+//        supplierGroupRepository.findBySupGroupCodeIn()
         if (createParam.getGroupId() == null)
             supplier.setGroupId(252);
         return supplierMapper.toDTO(supplier);
@@ -178,5 +172,26 @@ public class SupplierServiceImpl implements SupplierService {
                 .orElseThrow(() -> new NotFoundException("Supplier not found"));;
         String supplierCode = supplier.getSupplierCode();
         return supplierCode;
+    }
+    @Override
+    @Transactional
+    public List<String> findTags() {
+        List<List<String>> listTags = supplierRepository.findTags().stream()
+                .map(json -> {
+                    if (json != null) {
+                        String trimmedJson = json.trim();
+                        if (!trimmedJson.isEmpty()) {
+                            return Arrays.asList(trimmedJson.split(","));
+                        }
+                    }
+                    return null;
+                })
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+
+        return listTags.stream()
+                .flatMap(List::stream)
+                .distinct()
+                .collect(Collectors.toList());
     }
 }

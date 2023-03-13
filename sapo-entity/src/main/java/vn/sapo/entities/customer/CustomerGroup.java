@@ -24,7 +24,6 @@ public class CustomerGroup extends BaseEntity {
 
     @Column(name = "title", nullable = false, length = 50)
     private String title;
-
     @Column(name = "cus_grp_code", nullable = false, length = 50)
     private String cusGrpCode;
 
@@ -59,12 +58,12 @@ public class CustomerGroup extends BaseEntity {
         this.id = id;
     }
 
-    public CustomerGroup setPricingPolicyId(Integer defaultPricingPolicyId) {
+    public CustomerGroup setDefaultPricingPolicyId(Integer defaultPricingPolicyId) {
         this.pricingPolicy = new PricingPolicy(this.defaultPricingPolicyId = defaultPricingPolicyId);
         return this;
     }
 
-    public CustomerGroup setPaymentMethodId(String defaultPaymentMethodId) {
+    public CustomerGroup setDefaultPaymentMethodId(String defaultPaymentMethodId) {
         this.paymentMethod = new PaymentMethod(this.defaultPaymentMethodId = defaultPaymentMethodId);
         return this;
     }

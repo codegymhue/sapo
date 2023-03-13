@@ -7,7 +7,7 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import vn.sapo.address.dto.AddressResult;
+import vn.sapo.customers.dto.AddressResult;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 
@@ -40,7 +40,7 @@ public class SupplierExcelExporterInventory {
         style.setFont(font);
         createCell(row, 0, "Tên nhà cung cấp ", style);
         createCell(row, 1, "Mã nhà cung cấp", style);
-        createCell(row, 2, "Mã nhóm nhà cung cấp", style );
+        createCell(row, 2, "Mã nhóm nhà cung cấp", style);
         createCell(row, 3, "Email", style);
         createCell(row, 4, "Điện thoại", style);
         createCell(row, 5, "Website", style);
@@ -101,6 +101,8 @@ public class SupplierExcelExporterInventory {
                 createCell(row, columnCount++, supplier.getFax(), style);
                 createCell(row, columnCount++, supplier.getTaxCode(), style);
                 createCell(row, columnCount++, supplier.getDescription(), style);
+                createCell(row, columnCount++, "chính sách giá mặc định", style);
+                createCell(row, columnCount++, "kỳ hạn thanh toán mặc định", style);
                 createCell(row, columnCount++, supplier.getPaymentMethod(), style);
                 createCell(row, columnCount++, address.getFullName(), style);
                 createCell(row, columnCount++, address.getPhoneNumber(), style);
@@ -112,8 +114,6 @@ public class SupplierExcelExporterInventory {
                 createCell(row, columnCount++, district, style);
                 createCell(row, columnCount++, "nợ hiện tại", style);
                 createCell(row, columnCount++, "tags", style);
-                createCell(row, columnCount++, "chính sách giá mặc định", style);
-                createCell(row, columnCount++, "kỳ hạn thanh toán mặc định", style);
 
             }
         }

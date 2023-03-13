@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import vn.sapo.customer.dto.CustomerFilter;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerGender;
-import vn.sapo.entities.customer.CustomerStatus;
 
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Path;
@@ -25,6 +24,7 @@ public interface CustomerFilterRepository extends JpaRepository<Customer, Intege
         return findAll((root, criteriaQuery, criteriaBuilder) -> {
 
             List<Predicate> predicates = new ArrayList<>();
+
             if(filter.getKeyword() != null){
                 Predicate predicateFullName = criteriaBuilder.like(root.get("fullName"),'%' + filter.getKeyword() + '%');
                 Predicate predicateCustomerCode = criteriaBuilder.like(root.get("customerCode"),'%' + filter.getKeyword() + '%');
@@ -32,6 +32,7 @@ public interface CustomerFilterRepository extends JpaRepository<Customer, Intege
                 Predicate predicateKw = criteriaBuilder.or(predicateCustomerCode, predicateFullName,predicatePhoneNumber);
                 predicates.add(predicateKw);
             }
+
             if (!filter.getGroupIds().isEmpty()) {
                 Predicate predicate = criteriaBuilder.or(root.get("group").get("id").in(filter.getGroupIds()));
                 predicates.add(predicate);
@@ -43,15 +44,20 @@ public interface CustomerFilterRepository extends JpaRepository<Customer, Intege
             }
 
             Path<Instant> birthdayPath = root.get("birthday");
+
             Integer dayOfBirthDay = filter.getDayOfBirthday();
+
             Expression<Integer> dayOfBirthDayFunction = criteriaBuilder.function("day", Integer.class, birthdayPath);
+
             if (dayOfBirthDay != null) {
                 Predicate predicate = criteriaBuilder.equal(dayOfBirthDayFunction, dayOfBirthDay);
                 predicates.add(predicate);
             }
 
             Integer monthOfBirthday = filter.getMonthOfBirthday();
+
             Expression<Integer> monthOfBirthdayFunction = criteriaBuilder.function("month", Integer.class, birthdayPath);
+
             if (monthOfBirthday != null) {
                 Predicate predicate = criteriaBuilder.equal(monthOfBirthdayFunction, monthOfBirthday);
                 predicates.add(predicate);
@@ -66,10 +72,15 @@ public interface CustomerFilterRepository extends JpaRepository<Customer, Intege
                 Predicate predicate = criteriaBuilder.or(root.get("status").in(filter.getStatusList()));
                 predicates.add(predicate);
             }
+
             Date createdFrom = filter.getCreatedFrom();
+
             Date createdTo = filter.getCreatedTo();
+
             Predicate createdAtPredicate = criteriaBuilder.conjunction();
+
             Path<Date> createdAtPath = root.get("createdAt");
+
             if (createdFrom != null && createdTo != null)
                 createdAtPredicate = criteriaBuilder.between(createdAtPath, createdFrom, createdTo);
             else {
@@ -80,8 +91,6 @@ public interface CustomerFilterRepository extends JpaRepository<Customer, Intege
                     createdAtPredicate = criteriaBuilder.lessThan(createdAtPath, createdTo);
             }
             predicates.add(createdAtPredicate);
-
-
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
         }, pageable);

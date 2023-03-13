@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.sapo.entities.customer.CustomerGroup;
 
 import javax.persistence.*;
 
@@ -17,17 +16,16 @@ import javax.persistence.*;
 @Accessors(chain = true)
 public class PricingPolicy {
     @Id
-    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "pricing_policy_code", unique = true)
+    @Column(name = "pricing_policy_code", unique = true, nullable = false)
     private String pricingPolicyCode;
 
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "pricing_policy_type")
+    @Column(name = "pricing_policy_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private PricingPolicyType pricingPolicyType;
 

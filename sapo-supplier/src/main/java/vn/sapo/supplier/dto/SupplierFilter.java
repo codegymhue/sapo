@@ -24,7 +24,9 @@ public class SupplierFilter {
     private Date createdFrom;
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern="yyyy-MM-dd", timezone = "UCT")
     private Date createdTo;
+    private List<String> tags;
     private Integer pageNo;
     private Integer pageSize;
+
 
 }

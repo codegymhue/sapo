@@ -17,7 +17,10 @@ import java.util.List;
 @Repository
 public interface SupplierRepository extends JpaRepository<Supplier, Integer> {
     Page<Supplier> findAll(Pageable pageable);
-    @Query("SELECT s FROM Supplier AS s WHERE s.status = :status")
-    Page<Supplier> findAllByStatus(@Param("status")SupplierStatus status, Pageable pageable);
 
+    @Query("SELECT s FROM Supplier AS s WHERE s.status = :status")
+    Page<Supplier> findAllByStatus(@Param("status") SupplierStatus status, Pageable pageable);
+
+    @Query("SELECT tags FROM Supplier")
+    List<String> findTags();
 }

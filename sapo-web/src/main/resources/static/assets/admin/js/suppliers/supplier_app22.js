@@ -1,90 +1,38 @@
 "use strict";
 
-let configDisplays = [
-    {
-        name: "supplier_name",
-        status: true
-    },
-    {
-        name: "supplier_group",
-        status: true
-    },
-    {
-        name: "code",
-        status: true
-    },
 
-
-    {
-        name: "email",
-        status: false
-    },
-    {
-        name: "phone_number",
-        status: true
-    },
-    {
-        name: "status",
-        status: true
-    },
-    {
-        name: "fax",
-        status: true
-    },
-    {
-        name: "tax_number",
-        status: true
-    },
-    {
-        name: "website",
-        status: true
-    },
-    {
-        name: "assignee_name",
-        status: true
-    },
-    {
-        name: "created_on",
-        status: true
-    },
-    {
-        name: "modified_on",
-        status: true
-    },
-];
 
 class SupplierApp {
     static DOMAIN_SERVER = origin;
     static SUPPLIER_API = this.DOMAIN_SERVER + "/api/suppliers";
     static EMPLOYEE_API = this.DOMAIN_SERVER + "/api/employees";
     static SUPPLIER_GROUP_API = this.DOMAIN_SERVER + "/api/supplier_groups";
-    static SUPPLIER_FILTER_API = this.DOMAIN_SERVER + this.SUPPLIER_API + "/filter"
+    static SUPPLIER_FILTER_API =  this.SUPPLIER_API + "/filter"
+    static SUPPLIER_TAGS_API =  this.SUPPLIER_API + "/tags"
 
-
-    static getTD(index, item, configDisplays) {
-        for (let i = 0; i < configDisplays.length; i++) {
-            if (index == i && configDisplays[i].status == true) {
-
-                let tdItem = `<td bind-event-click="location.href='/admin/suppliers/${item.id}/histories'"
-                           className="align-middle">${SupplierApp.getTDValue(configDisplays[i].name, item) || ""}</td>`;
-                console.log(tdItem)
-                return tdItem;
-            }
+    static getTbody(item, field, showStatus) {
+        switch (field) {
+            case "code":
+                return `<td class="align-middle"><a href="/admin/suppliers/${item.id}/histories"
+                            style="text-decoration: none">${SupplierApp.getTbodyValue(field, item) || ""}</a></td>`;
+            case "status":
+                return ` <td onclick="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">
+                               <span id="showStatus" class="${showStatus}">${SupplierApp.getTbodyValue(field, item) || ""}</span> 
+                        </td> `;
+            default :
+                return `<td onclick="location.href='/admin/suppliers/${item.id}/histories'"
+                           class="align-middle">${SupplierApp.getTbodyValue(field, item) || ""}</td>`;
         }
+
+
     }
 
-    static getTh(index, configDisplays) {
-        for (let i = 0; i < configDisplays.length; i++) {
-            if (index == i && configDisplays[i].status == true) {
-
-                let tdItem = `<th class="align-middle" nameth="code" scope="col">${SupplierApp.getThValue(configDisplays[i].name) || ""}</th>`;
-                console.log(tdItem)
-                return tdItem;
-            }
-        }
+    static getThead(field) {
+        let tdItem = `<th class="align-middle" nameth="code" scope="col">${SupplierApp.getTheadValue(field) || ""}</th>`;
+        return tdItem;
     }
 
-    static getTDValue(key, item) {
+    static getTbodyValue(key, item) {
         switch (key) {
             case "code":
                 return item.supplierCode;
@@ -113,7 +61,7 @@ class SupplierApp {
         }
     }
 
-    static getThValue(key) {
+    static getTheadValue(key) {
         switch (key) {
             case "code":
                 return "Mã nhà cung cấp";
@@ -142,8 +90,23 @@ class SupplierApp {
         }
     }
 
-    static renderRowSupplier(item, showStatus, configDisplay) {
-        console.log(item)
+    static renderTbodyFieldsDisplays(item, fields,showStatus) {
+        let str = '';
+        for (let field of fields) {
+            str += SupplierApp.getTbody(item, field,showStatus);
+        }
+        return str;
+    }
+
+    static renderTheadFieldsDisplays(fields) {
+        let str = '';
+        for (let field of fields) {
+            str += SupplierApp.getThead(field);
+        }
+        return str;
+    }
+
+    static renderTbodyFieldsSupplier(item, showStatus, fields) {
         let str = `
              <tr id="tr_${item.id}" >
                 <td class="align-middle">
@@ -151,37 +114,23 @@ class SupplierApp {
                     <input style="cursor:pointer" id="sup_${item.id}" class="selectCheckbox" name="sup_${item.id}" type="checkbox" value="${item.id}">
                 </label>
                 </td>
-                 ${SupplierApp.getTD(0, item, configDisplays)}
-                ${SupplierApp.getTD(1, item, configDisplays)}
-                ${SupplierApp.getTD(2, item, configDisplays)}
-                ${SupplierApp.getTD(3, item, configDisplays)}
-                ${SupplierApp.getTD(4, item, configDisplays)}
-                 ${SupplierApp.getTD(5, item, configDisplays)}
-                ${SupplierApp.getTD(6, item, configDisplays)}
-                ${SupplierApp.getTD(7, item, configDisplays)}
-                ${SupplierApp.getTD(8, item, configDisplays)}
-                ${SupplierApp.getTD(9, item, configDisplays)}
-                 ${SupplierApp.getTD(10, item, configDisplays)}
-                ${SupplierApp.getTD(11, item, configDisplays)}
+            ${SupplierApp.renderTbodyFieldsDisplays(item, fields, showStatus)}
             </tr>
         `;
         return str;
     }
 
-    static renderThSupplier(configDisplay) {
-        let str = `
-                ${SupplierApp.getTh(0, configDisplays)}
-                 ${SupplierApp.getTh(1, configDisplays)}
-                ${SupplierApp.getTh(2, configDisplays)}
-                ${SupplierApp.getTh(3, configDisplays)}
-                ${SupplierApp.getTh(4, configDisplays)}
-                 ${SupplierApp.getTh(5, configDisplays)}
-                ${SupplierApp.getTh(6, configDisplays)}
-                ${SupplierApp.getTh(7, configDisplays)}
-                ${SupplierApp.getTh(8, configDisplays)}
-                ${SupplierApp.getTh(9, configDisplays)}
-                 ${SupplierApp.getTh(10, configDisplays)}
-                ${SupplierApp.getTh(11, configDisplays)}
+    static renderTheadFieldsSupplier(fields) {
+        let str = ` <tr id="theadList" class="show">
+                            <th class="align-middle">
+                                 <label for="checkAll" style="padding: 1rem; cursor:pointer">
+                                     <input style="cursor:pointer" id="checkAll" type="checkbox" value=""
+                                                   nameth="bulk_action"
+                                                   data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả">
+                                 </label>
+                            </th>
+                             ${SupplierApp.renderTheadFieldsDisplays(fields)}
+                    </tr>
         `;
         return str;
     }
@@ -264,6 +213,17 @@ class SupplierApp {
                      for="${employee.id}"> ${employee.fullName}</label>
                      </a>
                      </li>`
+        return str;
+    }
+
+    static renderSupplierTagsOnFilter(tag, index) {
+        let str = `  <div class="autocomplete-suggestion suggestion-product suggestion-tag"
+                            style="padding:4px 8px" data-index="${index}">
+                        <div class="search-product-content-refactor item-supplier" 
+                            style="width:100%;">
+                           <div class="search-product-content-name"><span>${tag}</span> </div>
+                        </div>
+                     </div>`
         return str;
     }
 
@@ -429,6 +389,7 @@ class SupplierFilter {
         this.statuses = [];
         this.employeeIds = [];
         this.groupIds = [];
+        this.tags = [];
         this.createdFrom = null;
         this.createdTo = null;
         this.pageNo = null;

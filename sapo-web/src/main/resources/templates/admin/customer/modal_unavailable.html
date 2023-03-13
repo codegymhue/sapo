@@ -1,0 +1,20 @@
+<th:block th:fragment="modalUnavailable">
+  <div class="modal fade" id="modalUnavailable" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+       aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" style="width: max-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Ngừng giao dịch!</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="statusChangeUnavailable">
+        </div>
+        <div class="modal-footer d-flex align-items-center">
+          <button class="btn btn-outline-warning btn-exit" type="button" data-bs-dismiss="modal">Thoát
+          </button>
+          <button class="btn btn-primary btn-save" id="btnUnavailableSave" type="button">Lưu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</th:block>

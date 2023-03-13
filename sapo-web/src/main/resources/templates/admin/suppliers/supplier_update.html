@@ -576,10 +576,16 @@
         })
             .done((data) => {
                 console.log("data: ", data)
+
+                page.elements.renderGroupLi.prepend(
+                    `<li onclick="handleChangeGroupSupp(${data.id})">
+                        <p  class="w-80 border-0 btnClick " id="${data.id}" style="padding:7px; font-size: 12px;font-weight:450; width: 300px;border: unset;" value="${data.id}">
+                        ${data.title}</p>
+                        </li>`
+                )
+
                 SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
                 page.dialogs.elements.modalCreateGroupSupplier.modal('hide');
-                getAllGroup();
-                // location.reload();
             })
             .fail((jqXHR) =>{
                 if (jqXHR.responseJSON) {
@@ -590,6 +596,12 @@
                 // SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại !");
             })
     }
+
+    // let btn = document.getElementsByClassName("btnClick");
+    // btn.addEventListener("click", function() {
+    //
+    // });
+
 
     page.dialogs.elements.formCreateGroup.validate({
         rules: {
@@ -661,7 +673,6 @@
                         SupplierApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
                     }
                 }
-
                 // SupplierApp.IziToast.showErrorAlert("Sửa thông tin nhà cung cấp thất bại")
             })
     }
@@ -717,7 +728,7 @@
         page.elements.changeValueSup.val(supplierGroup.id);
         page.elements.changeValueSup.text(supplierGroup.title);
 
-        var dropdown = new bootstrap.Dropdown(document.querySelector($("#changeValueSup")));
+        let dropdown = new bootstrap.Dropdown(document.querySelector($("#changeValueSup")));
         dropdown.hide();
     }
 

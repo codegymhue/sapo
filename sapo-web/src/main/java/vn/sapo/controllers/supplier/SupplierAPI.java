@@ -4,13 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import vn.sapo.address.AddressService;
-import vn.sapo.address.dto.CreateAddressParam;
+import vn.sapo.customers.AddressService;
+import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.payment_method.PaymentMethodService;
+import vn.sapo.shared.controllers.BaseController;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.supplier.SupplierExcelService;
 import vn.sapo.supplier.dto.*;
@@ -18,7 +20,6 @@ import vn.sapo.supplier.excel.ImportExcelSupplierParam;
 import vn.sapo.supplier.excel.ResponseMessage;
 
 import vn.sapo.supplier.SupplierService;
-import vn.sapo.supplierGroup.SupplierGroupService;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -28,14 +29,14 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/suppliers")
-public class SupplierAPI {
+public class SupplierAPI extends BaseController {
 
     @Autowired
     private SupplierService supplierService;
 
-
     @Autowired
     private AddressService addressService;
+
     @Autowired
     private PaymentMethodService paymentMethodService;
 
@@ -60,6 +61,13 @@ public class SupplierAPI {
         );
     }
 
+    @GetMapping("/tags")
+    public ResponseEntity<?> getAllSupplierTags() {
+       List<String> listTags =  supplierService.findTags();
+        return new ResponseEntity<>(listTags,HttpStatus.OK);
+
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<SupplierResult> findById(@PathVariable Integer id) {
         SupplierResult dto = supplierService.findById(id);
@@ -67,8 +75,15 @@ public class SupplierAPI {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Validated @RequestBody CreateSupplierParam createSupplierParam) {
-//        System.out.println(createSupplierParam);
+    public ResponseEntity<?> create(@Valid @RequestBody CreateSupplierParam createSupplierParam, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError fieldError : fieldErrors) {
+                errors.put(fieldError.getField(), fieldError.getDefaultMessage());
+            }
+            return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        }
         SupplierResult dto = supplierService.create(createSupplierParam);
         CreateAddressParam createAddressParam = createSupplierParam.getCreateAddressParam();
         if (createAddressParam == null)
@@ -90,15 +105,6 @@ public class SupplierAPI {
         String message = "";
         List<ImportExcelSupplierParam> dtoList = supplierExcelService.extractExcel(file);
         supplierExcelService.fillFieldDto(dtoList);
-        dtoList.forEach(dto -> {
-            try {
-                String paymentMethodId = paymentMethodService.findByTitle(dto.getPaymentMethodTitle()).getId();
-                dto.setPaymentMethodId(paymentMethodId);
-                String supGroupCode = supplierService.findById(dto.getGroupId()).getSupplierCode();
-                dto.setSupGroupCode(supGroupCode);
-            } catch (Exception ignored) {
-            }
-        });
         supplierExcelService.importSupplier(dtoList);
         message = "Uploaded the file successfully: " + file.getOriginalFilename();
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));

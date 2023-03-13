@@ -5,13 +5,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.entities.product.pricing_policy.PricingPolicy;
 import vn.sapo.entities.product.pricing_policy.PricingPolicyType;
+import vn.sapo.pricing_policy.dto.PricingPolicyParam;
 import vn.sapo.pricing_policy.dto.PricingPolicyResult;
+import vn.sapo.shared.exceptions.DataInputException;
+import vn.sapo.shared.exceptions.ValidationException;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class PricingPolicyServiceImpl implements PricingPolicyService{
+public class PricingPolicyServiceImpl implements PricingPolicyService {
 
     @Autowired
     private PricingPolicyMapper pricingPolicyMapper;
@@ -20,12 +26,38 @@ public class PricingPolicyServiceImpl implements PricingPolicyService{
     private PricingPolicyRepository pricingPolicyRepository;
 
     @Override
+    public PricingPolicyResult create(PricingPolicyParam pricingPolicyParam) {
+        Map<Object, Object> errors= new HashMap<>();
+
+        if (!checkPricingPolicyType(pricingPolicyParam.getPricingPolicyType())) {
+            errors.put("pricingPolicyType", "Loại chính sách giá không đúng định dạng");
+        }
+
+        if (checkPricingPolicyTitle(pricingPolicyParam.getTitle())) {
+                errors.put("title", "Tên chính sách giá đã tồn tại");
+        }
+
+        if (checkPricingPolicyCode(pricingPolicyParam.getPricingPolicyCode())) {
+            errors.put("pricingPolicyCode", "Mã chính sách giá đã tồn tại");
+        }
+
+        if (!errors.isEmpty()) {
+                throw new ValidationException(errors);
+        }
+
+        PricingPolicy pricingPolicy = pricingPolicyMapper.toModel(pricingPolicyParam);
+
+        pricingPolicyRepository.save(pricingPolicy);
+        return pricingPolicyMapper.toDTO(pricingPolicy);
+    }
+
+    @Override
     @Transactional
     public List<PricingPolicyResult> findAll() {
-            return pricingPolicyRepository.findAll()
-                    .stream()
-                    .map(pricingPolicyMapper::toDTO)
-                    .collect(Collectors.toList());
+        return pricingPolicyRepository.findAll()
+                .stream()
+                .map(pricingPolicyMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -34,7 +66,7 @@ public class PricingPolicyServiceImpl implements PricingPolicyService{
         return pricingPolicyRepository.findAll()
                 .stream()
                 .filter(pPricingPolicy -> pPricingPolicy.getPricingPolicyType() == PricingPolicyType.SALE)
-                .map(pricingPolicyMapper :: toDTO)
+                .map(pricingPolicyMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
@@ -44,14 +76,15 @@ public class PricingPolicyServiceImpl implements PricingPolicyService{
         return pricingPolicyRepository.findAll()
                 .stream()
                 .filter(pPricingPolicy -> pPricingPolicy.getPricingPolicyType() == PricingPolicyType.PURCHASE)
-                .map(pricingPolicyMapper :: toDTO)
+                .map(pricingPolicyMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
     @Transactional
     public PricingPolicyResult findById(Integer id) {
-        PricingPolicy pricingPolicy = pricingPolicyRepository.findById(id).get();
+        PricingPolicy pricingPolicy = pricingPolicyRepository.findById(id).orElseThrow(
+                () -> new DataInputException("Không tìm thấy chính sách giá có id = " + id));
         return pricingPolicyMapper.toDTO(pricingPolicy);
     }
 
@@ -59,5 +92,20 @@ public class PricingPolicyServiceImpl implements PricingPolicyService{
     @Transactional
     public void deleteById(Integer id) {
         pricingPolicyRepository.deleteById(id);
+    }
+
+    private boolean checkPricingPolicyCode(String code) {
+        return pricingPolicyRepository.existsByPricingPolicyCode(code.trim());
+    }
+
+    private boolean checkPricingPolicyTitle(String title) {
+        return pricingPolicyRepository.existsByTitle(title.trim());
+    }
+
+    private boolean checkPricingPolicyType(String type) {
+        if (type.trim().equalsIgnoreCase("SALE")) {
+            return true;
+        }
+        return type.trim().equalsIgnoreCase("PURCHASE");
     }
 }
