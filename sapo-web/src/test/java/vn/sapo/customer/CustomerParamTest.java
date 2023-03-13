@@ -16,77 +16,77 @@ public class CustomerParamTest {
     public CustomerParamTest(){};
     public static List<CustomerResult> getListCustomerResult(){
         List<CustomerResult> customerResultList = new ArrayList<>();
-        customerResultList.add(new CustomerResult(
-                1,
-                "customerCode",
-                "trung",
-                "0890809989",
-                "trung@gmail.com",
-                Instant.now(),
-                new CusGroupResult()
-                        .setId(1)
-                        .setDiscount(121212)
-                        .setTitle("232323")
-                        .setDescription("")
-                        .setCusGrpCode("23213123123"),
-                CustomerGender.NAM,
-                "description",
-                new BigDecimal(1000),
-                new BigDecimal(1000),
-                CustomerStatus.AVAILABLE,
-                Instant.now(),
-                Instant.now(),
-                new CusEmployeeResult()
-                        .setId(1)
-                        .setFullName("trung"),
-                getListAddressResult().get(0),
-                getListAddressResult().get(1),
-                getListAddressResult(),
-                12,
-                10,
-                Instant.now(),
-                new PaymentMethod()
-                        .setId("1")
-                        .setTitle("visacard"),
-                "tax-09888",
-                "08458484849",
-                "sapo.vn"
-        ));
-        customerResultList.add(new CustomerResult(
-                2,
-                "CustomerCode",
-                "trung",
-                "0890809",
-                "trug@gmail.com",
-                Instant.now(),
-                new CusGroupResult()
-                        .setId(1)
-                        .setDiscount(121212)
-                        .setTitle("232323")
-                        .setDescription("description")
-                        .setCusGrpCode("23213123123"),
-                CustomerGender.NAM,
-                "fsaasdada",
-                new BigDecimal(1000),
-                new BigDecimal(1000),
-                CustomerStatus.AVAILABLE,
-                Instant.now(),
-                Instant.now(),
-                new CusEmployeeResult()
-                        .setId(1)
-                        .setFullName("trung"),
-                getListAddressResult().get(0),
-                getListAddressResult().get(1),
-                getListAddressResult(),
-                12,
-                10,
-                Instant.now(),
-                new PaymentMethod()
-                        .setId("1")
-                        .setTitle("visacard"),
-                "tax-09888",
-                "08458484849",
-                "sapo.vn"));
+//        customerResultList.add(new CustomerResult(
+//                1,
+//                "customerCode",
+//                "trung",
+//                "0890809989",
+//                "trung@gmail.com",
+//                Instant.now(),
+//                new CusGroupResult()
+//                        .setId(1)
+//                        .setDiscount(121212)
+//                        .setTitle("232323")
+//                        .setDescription("")
+//                        .setCusGrpCode("23213123123"),
+//                CustomerGender.NAM,
+//                "description",
+//                new BigDecimal(1000),
+//                new BigDecimal(1000),
+//                CustomerStatus.AVAILABLE,
+//                Instant.now(),
+//                Instant.now(),
+//                new CusEmployeeResult()
+//                        .setId(1)
+//                        .setFullName("trung"),
+//                getListAddressResult().get(0),
+//                getListAddressResult().get(1),
+//                getListAddressResult(),
+//                12,
+//                10,
+//                Instant.now(),
+//                new PaymentMethod()
+//                        .setId("1")
+//                        .setTitle("visacard"),
+//                "tax-09888",
+//                "08458484849",
+//                "sapo.vn"
+//        ));
+//        customerResultList.add(new CustomerResult(
+//                2,
+//                "CustomerCode",
+//                "trung",
+//                "0890809",
+//                "trug@gmail.com",
+//                Instant.now(),
+//                new CusGroupResult()
+//                        .setId(1)
+//                        .setDiscount(121212)
+//                        .setTitle("232323")
+//                        .setDescription("description")
+//                        .setCusGrpCode("23213123123"),
+//                CustomerGender.NAM,
+//                "fsaasdada",
+//                new BigDecimal(1000),
+//                new BigDecimal(1000),
+//                CustomerStatus.AVAILABLE,
+//                Instant.now(),
+//                Instant.now(),
+//                new CusEmployeeResult()
+//                        .setId(1)
+//                        .setFullName("trung"),
+//                getListAddressResult().get(0),
+//                getListAddressResult().get(1),
+//                getListAddressResult(),
+//                12,
+//                10,
+//                Instant.now(),
+//                new PaymentMethod()
+//                        .setId("1")
+//                        .setTitle("visacard"),
+//                "tax-09888",
+//                "08458484849",
+//                "sapo.vn"));
                 return customerResultList;
     }
     public static List<AddressResult> getListAddressResult(){
@@ -152,7 +152,7 @@ public class CustomerParamTest {
                 .setTaxCode("tax-88787878")
                 .setBirthday(new Date())
                 .setGender(CustomerGender.NAM)
-                .setGroup(new CustomerGroupResult(1, "title", "XMGroupCus", 1, "visa",new Date(), 1L, "description", 2))
+            //    .setGroup(new CustomerGroupResult(1, "title", "XMGroupCus", 1, "visa",new Date(), 1L, "description", 2))
                 .setEmployeeId(1)
                 .setDebtTotal(new BigDecimal(1000))
                 .setSpendTotal(new BigDecimal(1000))
