@@ -69,7 +69,7 @@ public class CustomerController {
     //export excel file
 
     @GetMapping("/export/excel")
-    public void exportToExcel(HttpServletResponse response, CustomerParamExport customerParamExport) throws IOException {
+    public void exportToExcel(HttpServletResponse response, @ModelAttribute CustomerParamExport customerParamExport) throws IOException {
         System.out.println(customerParamExport);
         response.setContentType("application/octet-stream");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
