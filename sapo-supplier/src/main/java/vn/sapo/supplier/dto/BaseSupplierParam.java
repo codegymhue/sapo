@@ -6,6 +6,7 @@ import lombok.experimental.Accessors;
 import vn.sapo.shared.validation.constraints.NullOrNotBlank;
 
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Getter
 @Setter
@@ -30,4 +31,5 @@ public abstract class BaseSupplierParam {
     private String fax;
     @NullOrNotBlank
     private String website;
+    private List<String> tags;
 }

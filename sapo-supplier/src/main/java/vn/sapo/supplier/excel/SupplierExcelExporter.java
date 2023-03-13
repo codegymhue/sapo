@@ -1,5 +1,5 @@
 
-package vn.sapo.supplier;
+package vn.sapo.supplier.excel;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -13,11 +13,12 @@ import vn.sapo.supplier.excel.ExcelHeaderSupplier;
 import vn.sapo.supplier.dto.SupGroupResult;
 import vn.sapo.customers.dto.AddressResult;
 import vn.sapo.supplier.dto.SupplierResult;
+
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 
 public class SupplierExcelExporter {
@@ -115,11 +116,11 @@ public class SupplierExcelExporter {
             createCell(row, columnCount++, supplier.getFax(), style);
             createCell(row, columnCount++, supplier.getTaxCode(), style);
             createCell(row, columnCount++, supplier.getDescription(), style);
-            String paymentMethodId = "";
             if (supplier.getPaymentMethod() != null) {
-                paymentMethodId = supplier.getPaymentMethod().getTitle();
+                String paymentMethodId = supplier.getPaymentMethod().getTitle();
+                createCell(row, columnCount, paymentMethodId, style);
             }
-            createCell(row, columnCount++, paymentMethodId != null ? paymentMethodId : "", style);
+            columnCount++;
             if (supplier.getAddresses().size() == 0) {
                 createCell(row, columnCount++, "", style);
                 createCell(row, columnCount++, "", style);
@@ -137,9 +138,14 @@ public class SupplierExcelExporter {
                     createCell(row, columnCount++, adr.getLine1() != null ? adr.getLine1() : "", style);
                     if (adr.getLine2() != null)
                         createCell(sheet.createRow(rowCount++), columnCount - 1, adr.getLine2(), style);
-                    createCell(row, columnCount++, adr.getProvinceName() != null ? adr.getProvinceName() : "", style);
-                    createCell(row, columnCount++, adr.getDistrictName() != null ? adr.getDistrictName() : "", style);
+                    createCell(row, columnCount++,province != null ? province : "", style);
+                    createCell(row, columnCount++, district != null ? district : "", style);
                 }
+            }
+            List<String> tags = supplier.getTags();
+            if (tags.size() > 0) {
+                String tagsStr = String.join(",", tags);
+                 createCell(row, columnCount, tagsStr, style);
             }
         }
     }

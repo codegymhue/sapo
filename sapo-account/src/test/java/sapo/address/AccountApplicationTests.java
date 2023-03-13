@@ -12,10 +12,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEnti
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTypeExcludeFilter;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-<<<<<<< HEAD
-import vn.sapo.customers.AddressService;
-=======
->>>>>>> 8d590a35ac3e4c47ae098624cf5b9127ea527816
 
 @SpringBootTest
 @OverrideAutoConfiguration(enabled = false)
