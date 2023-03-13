@@ -632,6 +632,7 @@
 
 
     $("#btnUpdateCustomer").on('click', () => {
+        // alert("Ok ban")
         let newCustomer = {
             id: customer.id,
             status: $('#statusUp :selected').val(),
@@ -661,6 +662,7 @@
             "data": JSON.stringify(newCustomer)
         })
             .done((data) => {
+                // console.log(data)
                 CustomerApp.IziToast.showSuccessAlert("Sửa thông tin khách hàng thành công !");
                 setTimeout(() => {
                 }, 1500)
@@ -674,9 +676,26 @@
             })
     })
 
+
+    // getAllCustomerGender();
     getAllCustomerGroup();
     getAllEmployeeSelect();
 
+    // $("#btnCloseUpdate").on('click', () =>{
+    //     alert("được")
+    // }) // window.location.href = `/admin/customers/${customer.id}`)
 
+
+</script>
+<script>
+    // $(document).ready(function () {
+    //
+    //     $('.input-daterange').datepicker({
+    //         format: 'dd-mm-yyyy',
+    //         todayHighlight: true,
+    //         startDate: '0d'
+    //     });
+    //
+    // });
 </script>
 </html>

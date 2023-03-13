@@ -1,59 +1,130 @@
-
+<!DOCTYPE html>
 <th:block th:fragment="modal_filter">
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <style>
+        .jss1745 {
+            color: #0088FF;
+            padding: 8px 24px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .deudDf {
+            display: inline-flex;
+            -webkit-box-pack: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            -webkit-box-align: center;
+            align-items: center;
+            outline: 0px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            line-height: 1.42857rem;
+            margin: 0px;
+            overflow: hidden;
+            position: relative;
+            height: 2.57143rem;
+            min-width: unset;
+            color: rgb(0, 136, 255);
+            border: none;
+            background: transparent;
+            padding: 0px;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        .sidenav a, .dropdown-btn {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #818181;
+            display: block;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .dropdown-container {
+            display: none;
+            background-color: white;
+            padding-left: 8px;
+        }
+
+        .fa-caret-down {
+            float: right;
+            padding-right: 8px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+
+        .toolbar {
+            float: left;
+        }
+    </style>
+    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="/assets/admin/css/customer/filter.css"/>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample"
+         aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
-            <div class="ms-2">
-                <p class="MuiTypography-root filter-title MuiTypography-body1">
-                    Bộ lọc
-                </p>
-                <button class="MuiButtonBase-root MuiIconButton-root" tabindex="0" type="button">
-                    <span class="MuiIconButton-label">
-                        <svg xmlns="http://www.w3.org/2000/svg">
-                            <path fill="currentColor"
-                                    d="M6.167 3.667v13.475l-2.159-2.15-1.175 1.175L7 20.333l4.167-4.166-1.175-1.175-2.159 2.15V3.667H6.167ZM17.833 20.333V6.858l2.159 2.15 1.175-1.175L17 3.667l-4.167 4.166 1.175 1.175 2.159-2.15v13.475h1.666Z">
-                            </path>
-                        </svg>
-                    </span>
-                    <span class="MuiTouchRipple-root">
-
-                    </span>
-                </button>
+            <div class="MuiBox-root jss2790"><p class="MuiTypography-root title MuiTypography-body1" style="float: left;
+                        margin-top: 12px;font-size: 20px;font-weight: 500;">Bộ lọc</p>
+                <button class="MuiButtonBase-root MuiIconButton-root jss1753" tabindex="0" type="button"><span
+                        class="MuiIconButton-label"><svg viewBox="0 0 24 24" fill="none"
+                                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                         font-size="24"><path
+                        d="M6.167 3.667v13.475l-2.159-2.15-1.175 1.175L7 20.333l4.167-4.166-1.175-1.175-2.159 2.15V3.667H6.167ZM17.833 20.333V6.858l2.159 2.15 1.175-1.175L17 3.667l-4.167 4.166 1.175 1.175 2.159-2.15v13.475h1.666Z"
+                        fill="currentColor"></path></svg></span><span class="MuiTouchRipple-root"></span></button>
             </div>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
-
-            </button>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
         </div>
-        <div class="ms-2">
-            <button id="" class="deudDf">
+        <div class="MuiBox-root jss2794 jss1744 filter-basic">
+            <button id="Sapo-Button-70cf5262-5927-4383-98a0-897d1ccf81f1" class="sc-jqUVSM deudDf">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                     font-size="20">
+                     font-size="20" style="float: left">
                     <path d="m18.425 12-6.01 6.01L11 16.596 15.596 12 11 7.404l1.414-1.414 6.01 6.01Z"
-                          fill="currentColor">
-
-                    </path>
+                          fill="currentColor"></path>
                     <path d="m13 12-6.01 6.01-1.415-1.414L10.172 12 5.575 7.404 6.99 5.99 13 12Z"
-                          fill="currentColor">
-
-                    </path>
+                          fill="currentColor"></path>
                 </svg>
-                <span class="fCIlZX">
-                    <h6 class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorPrimary">
-                        Bộ lọc nâng cao
-                    </h6>
-                </span>
+                <span class="sc-papXJ fCIlZX"><h6
+                        class="MuiTypography-root MuiTypography-subtitle1 MuiTypography-colorPrimary">Bộ lọc nâng cao</h6></span>
             </button>
         </div>
 
         <div class="offcanvas-body">
             <div>
-                <p class="MuiTypography-root jss1745 MuiTypography-body1">
-                    Nổi bật
-                </p>
+                <p class="MuiTypography-root jss1745 MuiTypography-body1" style="margin-left: -23px">Nổi bật</p>
             </div>
             <div class="dropdown">
-                <div type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <button class="dropdown-btn">
-                        . Nhóm Khách Hàng
+                <div
+                        type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    <button class="dropdown-btn" style="font-size: 1rem;">
+                        . Nhóm Khách Hàng</span>
                         <i class="fa fa-caret-down"></i>
                     </button>
                 </div>
@@ -61,22 +132,22 @@
                     <div>
                         <li>
                             <div class="d-flex align-items-center">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                                <label for="inputSearchCat">
-                                    <input id="inputSearchCat"
-                                           class="w-100 form-control border border-0"
-                                           placeholder="Tìm kiếm hoặc nhập mới"/>
-                                </label>
+                                <i class="fa-solid fa-magnifying-glass" style="margin-left: 16px;
+                                                                   margin-right: 4px;
+                                                                   color: #828282"></i>
+                                <input id="inputSearchCat" style="margin: 2px"
+                                       class="w-100 form-control border border-0"
+                                       placeholder="Tìm kiếm hoặc nhập mới"/>
                             </div>
                         </li>
-                        <div id="customerGroupFilter">
+                        <div id="customerGroupFilter" STYLE="padding: 5px">
 
                         </div>
                     </div>
                 </ul>
             </div>
-            <button class="dropdown-btn">
-                . Giới Tính
+            
+            <button class="dropdown-btn" style="font-size: 1rem;">. Giới Tính
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container" id="genderFilter">
@@ -89,29 +160,33 @@
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
-                           checked value="NU">
+                           checked
+                           value="NU">
                     <label class="form-check-label" for="flexRadioDefault2">
                         Nữ
                     </label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3"
-                           checked value="KHAC">
-                    <label class="form-check-label" for="flexRadioDefault3">
+                           checked
+                           value="KHAC">
+                    <label class="form-check-label" for="flexRadioDefault2">
                         Khác
                     </label>
                 </div>
             </div>
-            <button class="dropdown-btn">
-                . Ngày Tháng sinh
+            <button class="dropdown-btn" style="font-size: 1rem;">. Ngày Tháng sinh
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                <div class="row">
-                    <div class="btn bg-secondary dropdown-toggle col-6 d-flex justify-content-between"
-                         type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                         style="border: solid 1px #D3D5D7; align-items: center; ">
-                        <span id="allDay">chọn ngày</span>
+                <div class="row" id="dayYer">
+                    <div class="btn bg-secondary dropdown-toggle select-btn-cat col-6"
+                         type="button" data-bs-toggle="dropdown"
+                         aria-expanded="false" style=" border: solid 1px #D3D5D7;border: solid 1px #D3D5D7;
+                                                                display: flex;
+                                                                justify-content: space-between;
+                                                                align-items: center; ">
+                        <span id="allDay"> chọn ngày </span>
                     </div>
                     <ul class="dropdown-menu w-50 table table-hover">
                         <li onclick=handleClickDay(1)>1</li>
@@ -146,9 +221,12 @@
                         <li onclick=handleClickDay(30)>30</li>
                         <li onclick=handleClickDay(31)>31</li>
                     </ul>
-                    <div class="btn bg-secondary dropdown-toggle col-6 d-flex justify-content-between"
-                         type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                         style=" border: solid 1px #D3D5D7; align-items: center;">
+                    <div class="btn bg-secondary dropdown-toggle select-btn-cat col-6"
+                         type="button" data-bs-toggle="dropdown"
+                         aria-expanded="false" style=" border: solid 1px #D3D5D7;border: solid 1px #D3D5D7;
+                                                                display: flex;
+                                                                justify-content: space-between;
+                                                                align-items: center; ">
                         <span id="allYear">Chọn Tháng</span>
                     </div>
                     <ul class="dropdown-menu w-50 table table-hover Year">
@@ -168,24 +246,26 @@
                 </div>
             </div>
             <div class="dropdown">
-                <div type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                     class="d-flex justify-content-between"
-                     style="align-items: center;">
-                    <button class="dropdown-btn">
-                        . Nhân Viên Phụ Trách
+                <div
+                        type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false" style="
+                                                                display: flex;
+                                                                justify-content: space-between;
+                                                                align-items: center; ">
+                    <button class="dropdown-btn" style="font-size: 1rem;">. Nhân Viên Phụ Trách
                         <i class="fa fa-caret-down"></i>
                     </button>
                 </div>
-                <ul class="dropdown-menu w-100">
+                <ul class="dropdown-menu w-100 categoryIdUpdate showAllCategory">
                     <div>
                         <li>
                             <div class="d-flex align-items-center">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                                <label for="searchEmployee">
-                                    <input id="searchEmployee"
-                                           class="w-100 form-control border border-0"
-                                           placeholder="Tìm kiếm hoặc nhập mới"/>
-                                </label>
+                                <i class="fa-solid fa-magnifying-glass" style="margin-left: 16px;
+                                                                   margin-right: 4px;
+                                                                   color: #828282"></i>
+                                <input id="searchEmployee" style="margin: 2px"
+                                       class="w-100 form-control border border-0"
+                                       placeholder="Tìm kiếm hoặc nhập mới"/>
                             </div>
                         </li>
                         <div id="employeeNameFilter">
@@ -194,102 +274,526 @@
                     </div>
                 </ul>
                 <div>
-                    <p class="MuiTypography-root jss1745 MuiTypography-body1">
-                        Nhóm Khác
-                    </p>
+                    <p class="MuiTypography-root jss1745 MuiTypography-body1" style="margin-left: -23px">Nhóm
+                        Khác</p>
                 </div>
                 <div class="dropdown">
-                    <button class="dropdown-btn">
-                        . Trạng Thái
+                    <button class="dropdown-btn" style="font-size: 1rem;">. Trạng Thái
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-container">
                         <div class="form-check">
-                            <input id="activate" class="form-check-input" type="checkbox" name="Status"
+                            <input class="form-check-input" type="checkbox" name="Status"
                                    value="Đang Giao Dịch">
-                            <label class="form-check-label" for="activate">
+                            <label class="form-check-label" for="flexRadioDefault1">
                                 Đang Giao Dịch
                             </label>
                         </div>
                         <div class="form-check">
-                            <input id="deactivate" class="form-check-input" type="checkbox" name="Status" checked
+                            <input class="form-check-input" type="checkbox" name="Status" checked
                                    value="Ngừng Giao Dịch">
-                            <label class="form-check-label" for="deactivate">
+                            <label class="form-check-label" for="flexRadioDefault2">
                                 Ngừng Giao Dịch
                             </label>
                         </div>
                     </div>
-                    <button class="dropdown-btn">
-                        . Tags
+                    <button class="dropdown-btn" style="font-size: 1rem;">. Tags
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-container">
-                        <label>
-                            <input placeholder="Nhập tại đây" type="text" class="MuiInputBase-input">
-                        </label>
+                        <input placeholder="Nhập tại đây" type="text" class="MuiInputBase-input" value="">
                     </div>
-                    <button class="dropdown-btn">
-                        . Ngày Tạo
+                    <button class="dropdown-btn" style="font-size: 1rem;">. Ngày Tạo
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-container">
                         <div class="row">
                             <div class="col-6">
-                                <label for="datepicker">
-                                    <input id="datepicker" placeholder="dd/mm/yyyy"/>
-                                </label>
-                                <a href="https://gijgo.com/datepicker/example/bootstrap-5"></a>
+                                <input id="datepicker" width="170" placeholder="dd/mm/yyyy"/>
+                                <p><a href="https://gijgo.com/datepicker/example/bootstrap-5">
+                                </a>
                             </div>
                             <div class="col-6">
-                                <label for="datepicker2">
-                                    <input id="datepicker2" placeholder="dd/mm/yyyy"/>
-                                </label>
-                                <a href="https://gijgo.com/datepicker/example/bootstrap-5"></a>
+                                <input id="datepicker2" width="170" placeholder="dd/mm/yyyy"/>
+                                <p><a href="https://gijgo.com/datepicker/example/bootstrap-5">
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <button class="dropdown-btn">
-                        . Khoảng Ngày Sinh
+                    <button class="dropdown-btn" style="font-size: 1rem;">. Khoảng Ngày Sinh
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-container">
                         <div class="row">
                             <div class="col-6">
-                                <label for="datepicker3">
-                                    <input id="datepicker3" placeholder="dd/mm/yyyy"/>
-                                </label>
-                                <a href="https://gijgo.com/datepicker/example/bootstrap-5"></a>
+                                <input id="datepicker3" width="170" placeholder="dd/mm/yyyy"/>
+                                <p><a href="https://gijgo.com/datepicker/example/bootstrap-5">
+                                </a>
                             </div>
                             <div class="col-6">
-                                <label for="datepicker4">
-                                    <input id="datepicker4" placeholder="dd/mm/yyyy"/>
-                                </label>
-                                <a href="https://gijgo.com/datepicker/example/bootstrap-5"></a>
+                                <input id="datepicker4" width="170" placeholder="dd/mm/yyyy"/>
+                                <p><a href="https://gijgo.com/datepicker/example/bootstrap-5">
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <button class="dropdown-btn">
-                . Ngày Sinh
+            <button class="dropdown-btn" style="font-size: 1rem;">. Ngày Sinh
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                <label for="datepicker5">
-                    <input id="datepicker5"/>
-                </label>
+                <input id="datepicker5" width="370"/>
                 <p><a href="https://gijgo.com/datepicker/example/bootstrap-5">
                 </a>
             </div>
         </div>
         <div class="d-flex flex-row-reverse my-3" style="width: 95%">
-            <button type="button" class="mx-2" id="btnFilter">
-                Lọc
+            <button type="button" class="btn btn-danger mx-2"
+                    style="width: 70px; color: rgb(255, 255, 255);background: rgb(0, 136, 255);border: none;"
+                    id="btnFilter">Lọc
             </button>
-            <button type="button" id="btnCloseFilter">
+            <button type="button" class="btn btn-primary" id="btnCloseFilter"
+                    style="width: 90px; border: 1px solid rgb(255, 77, 77);background: rgb(255, 255, 255);color: rgb(255, 77, 77);">
                 Xóa Bộ Lọc
             </button>
         </div>
 
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+    <script>
+
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+
+
+        function drawDataTable() {
+            $("#tbCustomer").DataTable({
+                // chuyển tiếng việt cho datatable
+                "processing": true,
+                "serverSide": true,
+                "bDestroy": true,
+                "bJQueryUI": true,
+                ajax: {
+                    url: origin + '/api/customers/filter',
+                    type: 'POST',
+                    dataSrc: "content",
+                    contentType: 'application/json',
+                    "data": function (d) {
+                        d.groupIds = customerFilter.groupIds;
+                        d.gender = customerFilter.gender;
+                        d.dayOfBirthday = customerFilter.dayOfBirthday;
+                        d.monthOfBirthday = customerFilter.monthOfBirthday;
+                        d.employeeIds = customerFilter.employeeIds;
+                        d.keyword = customerFilter.keyword;
+                        d.statusList = [];
+                        return JSON.stringify(d)
+                    }
+                },
+                lengthMenu: [
+                    [5, 10, 20, -1],
+                    ["5", "10", "20", "All"]
+                ],
+                searching: false,
+                destroy: true,
+                columns: [
+                    {data: 'id'},
+                    {data: 'customerCode'},
+                    {data: 'fullName'},
+                    {data: 'phoneNumber'},
+                    {data: 'group.title'},
+                    {data: 'debtTotal'},
+                    {data: 'spendTotal'},
+                    {data: "quantityItemOrder"}],
+                columnDefs: [
+                    {
+                        targets: 0,
+                        render: function (data, type, row, meta) {
+                            return `
+                               <input type="checkbox" value="check_none" />
+                            `
+                        }
+                    },
+                    {
+                        targets: 1,
+                        render: function (data, type, row, meta) {
+                            return `<a href="/admin/customers/ ${row.id}">${row.customerCode}</a>`;
+                        }
+                    },
+
+
+                ],
+            })
+        }
+
+        // nút lọc
+        $("#btnFilter").on('click', () => {
+            // drawFilterLabel();
+            drawDataTable();
+            bsOffcanvas.hide()
+
+
+            checkCustomerFilterChange = {
+                ...customerFilter
+            }
+            let checkCustomerFilterRoot = {
+                id: null,
+                customerCode: null,
+                groupIds: [],
+                gender: null,
+                dayOfBirthday: null,
+                monthOfBirthday: null,
+                employeeIds: [],
+                statusList: [],
+                createdFrom: null,
+                createdTo: null,
+                keyword: null
+            }
+
+            console.log(checkCustomerFilterChange);
+            let obj = getChanges(checkCustomerFilterRoot, checkCustomerFilterChange);
+            if (isEmpty(obj)) {
+                console.log("Không có thay đổi");
+                $("#btn-save-search").attr("disabled", "");
+                $("#btn-save-search").css("background-color", "rgb(243, 244, 245)");
+                $("#btn-save-search").css("color", "rgb(116, 124, 135)");
+            } else {
+                $("#btn-save-search").removeAttr("disabled");
+                $("#btn-save-search").css("background-color", "rgb(51, 160, 255)");
+                $("#btn-save-search").css("color", "white");
+                console.log("Có thay đổi");
+            }
+        });
+
+        // nút xóa bộ lọc
+        $("#btnCloseFilter").on('click', () => {
+            $("#offcanvasExample input[type=checkbox]").each((index, item) => {
+                $(item).prop('checked', false);
+            })
+            customerFilter.groupIds = [];
+            $("#offcanvasExample input[type=radio]").each((index, item) => {
+                $(item).prop('checked', false);
+            })
+            customerFilter.groupIds = [];
+            customerFilter.gender = null;
+            customerFilter.employeeIds = [];
+            customerFilter.statusList = null;
+            customerFilter.dayOfBirthday = null;
+            customerFilter.monthOfBirthday = null;
+            localStorage.removeItem(KEY_CUSTOMER_FILTER_SAVE);
+            CustomerApp.IziToast.showSuccessAlert(CustomerApp.AlertMessageVi.SUCCESS_DELETE);
+        })
+
+        function drawFilterLabel() {
+            if (document.getElementById("divDeleteFilterGroupLabel") != null) {
+                $("#divDeleteFilterGroupLabel").remove();
+            }
+            drawFilterLabelGroup();
+
+        }
+
+        function drawFilterLabelGroup() {
+            if (customerFilter.groupIds.length !== 0) {
+                let strNameFilterGroup = "";
+                for (let i = 0; i < customerFilter.groupIds.length; i++) {
+                    for (let j = 0; j < customerGroups.length; j++) {
+                        if (customerFilter.groupIds[i] == customerGroups[j].id) {
+                            strNameFilterGroup += customerGroups[i].title;
+                        }
+                    }
+                    if (i !== customerFilter.groupIds.length - 1) {
+                        strNameFilterGroup += ", "
+                    }
+                }
+                let labelGroups = `
+                    <div class="jss4169" id="divDeleteFilterGroupLabel"><span class="jss4170 label">Nhóm khách hàng: ${strNameFilterGroup}</span>
+                            <div class="jss4171"><button class="MuiButtonBase-root MuiIconButton-root delete-icon" tabindex="0"
+                                                         type="button"><span class="MuiIconButton-label" id="btnDeleteFilterGroupLabel"><svg class="MuiSvgIcon-root" focusable="false"
+                                                                                                              viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                                </path>
+                            </svg></span><span class="MuiTouchRipple-root"></span></button></div>
+                        </div>
+                `;
+
+                $("#filterLabel").append(labelGroups);
+                $("#btnDeleteFilterGroupLabel").click(function () {
+                    customerFilter.groupIds = [];
+                    $("#divDeleteFilterGroupLabel").remove();
+                    drawDataTable();
+                    $("#customerGroupFilter input[type=checkbox]").each((index, item) => {
+                        $(item).prop('checked', false);
+                    })
+                });
+            }
+        }
+
+        function getAllCustomerGender() {
+            return $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "GET",
+                url: origin + "/api/customers/customerGender"
+            })
+                .done((data) => {
+                    console.log(data)
+                    $.each(data, (i, item) => {
+                        console.log(item)
+                        let str = `<option value="${item}">
+                           ${item}
+                        </option>`;
+                        $("#genderFilter").append(str);
+                    });
+                })
+                .fail((jqXHR) => {
+                    console.log(jqXHR);
+                    if (jqXHR.responseJSON) {
+                        $.each(jqXHR.responseJSON, (key, item) => {
+                            CustomerApp.IziToast.showErrorAlert(item);
+                        })
+                    }
+
+                })
+        }
+
+        function getAllEmployeeFilter(arrEmployeeId) {
+            $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "Post",
+                url: origin + "/api/customers/findAllCustomerEmployee",
+                data: JSON.stringify(arrEmployeeId)
+            })
+                .done((data) => {
+
+                    getAllFilterCustomer(data)
+
+                })
+                .fail((jqXHR) => {
+
+                })
+        }
+
+        function getAllFilter(arrId) {
+            $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "Post",
+                url: origin + "/api/customers/filter",
+                data: JSON.stringify(arrId)
+            })
+                .done((data) => {
+
+                    getAllFilterCustomer(data)
+                })
+                .fail((jqXHR) => {
+
+                })
+        }
+
+
+        function getAllCustomerGroup() {
+            return $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "GET",
+                url: origin + "/api/customer_groups"
+            })
+                .done((data) => {
+                    // console.log(data)
+                    customerGroups = data;
+                    $.each(data, (i, item) => {
+                        let str = `<div>
+                            <input type="checkbox"  class="customerGroup-input" data-id=${item.id}>
+                            ${item.title}
+                            </div>`;
+                        $("#customerGroupFilter").append(str);
+                    });
+                })
+                .fail((jqXHR) => {
+
+                })
+        }
+
+        function getAllEmployeeSelect() {
+            return $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "GET",
+                url: origin + "/api/employees"
+            })
+                .done((data) => {
+                    employees = data;
+                    $.each(data, (i, item) => {
+                        let str = `<div value="${item.id}">
+                        <input type="checkbox" class="customerEmployee-input" data-id=${item.id}>
+                        ${item.fullName}</div>`;
+                        $("#employeeNameFilter").append(str);
+                    });
+                })
+                .fail((jqXHR) => {
+
+
+                })
+        }
+
+
+        class CustomerFilter {
+            constructor() {
+                this.id = null;
+                this.customerCode = null;
+                this.groupIds = [];
+                this.gender = null;
+                this.dayOfBirthday = null;
+                this.monthOfBirthday = null;
+                this.employeeIds = [];
+                this.statusList = [];
+                this.createdFrom = null;
+                this.createdTo = null;
+                this.keyword = null;
+            }
+        }
+
+        let customerFilter;
+        let KEY_CUSTOMER_FILTER_SAVE = "customer_filter";
+        let checkCustomerFilterChange;
+
+        // lịch
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap5'
+        });
+        $('#datepicker2').datepicker({
+            uiLibrary: 'bootstrap5'
+        });
+        $('#datepicker3').datepicker({
+            uiLibrary: 'bootstrap5'
+        });
+        $('#datepicker4').datepicker({
+            uiLibrary: 'bootstrap5'
+        });
+        $('#datepicker5').datepicker({
+            uiLibrary: 'bootstrap5'
+        });
+
+        getAllCustomerGroup();
+        getAllCustomerGender();
+        getAllEmployeeSelect();
+
+
+        $(function () {
+            // Customergroup filter
+            let elements = $('input[class="customerGroup-input"]');
+            $.each(elements, (index, item) => {
+                $(item).change(() => {
+                    let idSelected = item.getAttribute("data-id");
+                    if (customerFilter.groupIds.length == 0) {
+                        customerFilter.groupIds.push(idSelected);
+                    } else {
+                        let check = customerFilter.groupIds.includes(idSelected);
+                        if (check == false) {
+                            customerFilter.groupIds.push(item.getAttribute("data-id"));
+                        } else {
+                            let indexSelectedValue = customerFilter.groupIds.findIndex((value, item) => {
+                                if (value == idSelected) {
+                                    return true;
+                                }
+                            })
+                            customerFilter.groupIds.splice(indexSelectedValue, 1);
+                        }
+                    }
+
+                    console.log(customerFilter.groupIds)
+                });
+            });
+
+            // Gender filter
+            $('input[name=flexRadioDefault]').change(function () {
+                var value = $('input[name=flexRadioDefault]:checked').val();
+                customerFilter.gender = value;
+            });
+
+            // Keyword: Mã khách hàng, fullname, SDT
+            var input = document.getElementById("inp-search");
+            input.addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    customerFilter.keyword = document.getElementById("inp-search").value;
+                    drawDataTable();
+                }
+            });
+
+        });
+        $(function () {
+            // Employee Filter
+            let elements = $('input[class="customerEmployee-input"]');
+            $.each(elements, (index, item) => {
+                $(item).change(() => {
+                    let idSelected = item.getAttribute("data-id");
+                    if (customerFilter.employeeIds.length == 0) {
+                        customerFilter.employeeIds.push(idSelected);
+                    } else {
+                        let check = customerFilter.employeeIds.includes(idSelected);
+                        if (check == false) {
+                            customerFilter.employeeIds.push(item.getAttribute("data-id"));
+                        } else {
+                            let indexSelectedValue = customerFilter.employeeIds.findIndex((value, item) => {
+                                if (value == idSelected) {
+                                    return true;
+                                }
+                            })
+                            customerFilter.employeeIds.splice(indexSelectedValue, 1);
+                        }
+                    }
+
+                });
+            });
+
+            // Status filter
+            $('input[name=Status]').change(function () {
+                var value = $('input[name=Status]:checked').val();
+                customerFilter.statusList = value;
+            });
+        })
+
+        // ngày sinh nhật
+        function handleClickDay(day) {
+            customerFilter.dayOfBirthday = day;
+
+            $("#allDay").text(day)
+        }
+
+        // tháng sinh nhật
+        function handleClickYear(month) {
+            customerFilter.monthOfBirthday = month;
+
+            $("#allYear").text(month)
+
+
+        }
+    </script>
+
 </th:block>

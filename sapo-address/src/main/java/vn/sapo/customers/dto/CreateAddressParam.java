@@ -20,10 +20,10 @@ public class CreateAddressParam {
     @NotBlank(message = "Tên khách hàng không được để trống")
     private String fullName;
 
-    @NullOrNotBlank
+    @NullOrNotBlank(message = "Nhãn không được để trống")
     private String label;
 
-    @NullOrNotBlank
+    @NullOrNotBlank(message = "Số điện thoại không được để trống")
     private String phoneNumber;
 
     @NullOrNotBlank
@@ -57,5 +57,6 @@ public class CreateAddressParam {
     private boolean isReceiveBill;
 
     private boolean isShipping;
+
 
 }
