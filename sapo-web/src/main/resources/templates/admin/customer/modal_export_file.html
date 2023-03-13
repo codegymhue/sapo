@@ -53,15 +53,19 @@
                 formData.append("type", type);
                 formData.append("listCustomerId", listRowPresent);
                 $.ajax({
-                    contentType: false,
-                    cache: false,
-                    processData: false,
+                    headers: {
+                        "accept": "application/json",
+                        "content-type": "application/json"
+                    },
                     type: "GET",
                     url: origin +"/admin/customers/export/excel",
                     data: {
                       type: type,
-                      listCustomerId:listRowPresent
+                      listCustomerId: listRowPresent
                     }
+                })
+                .done(()=>{
+                  location.href =  origin +"/admin/customers/export/excel";
                 })
                 listRowPresent =[];
             }
