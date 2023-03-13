@@ -6,18 +6,17 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BindingResult;
 import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.entities.supplier.SupplierStatus;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
+import vn.sapo.shared.exceptions.ValidationException;
 import vn.sapo.supplier.dto.CreateSupplierParam;
 import vn.sapo.supplier.dto.SupplierFilter;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.dto.UpdateSupplierParam;
 import vn.sapo.supplierGroup.SupplierGroupRepository;
 
-import javax.validation.Valid;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -178,12 +177,10 @@ public class SupplierServiceImpl implements SupplierService {
     public List<String> findTags() {
         List<List<String>> listTags = supplierRepository.findTags().stream()
                 .map(json -> {
-                    if (json != null) {
                         String trimmedJson = json.trim();
                         if (!trimmedJson.isEmpty()) {
                             return Arrays.asList(trimmedJson.split(","));
                         }
-                    }
                     return null;
                 })
                 .filter(Objects::nonNull)

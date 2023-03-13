@@ -3,11 +3,13 @@ package vn.sapo.brand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import vn.sapo.brand.dto.*;
+import vn.sapo.brand.dto.BrandResult;
+import vn.sapo.brand.dto.CreateBrandParam;
 import vn.sapo.entities.product.Brand;
-import vn.sapo.shared.exceptions.DataInputException;
+import vn.sapo.shared.exceptions.ValidationException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -22,7 +24,7 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public BrandResult create(CreateBrandParam brandParam) {
         if(brandRepository.findByTitle(brandParam.getTitle().trim()).isPresent()) {
-            throw new DataInputException("Tên nhãn hiệu đã tồn tại. Vui lòng kiểm tra!!!");
+            throw new ValidationException("Tên nhãn hiệu đã tồn tại. Vui lòng kiểm tra!!!");
         }
         Brand brand = brandRepository.save(brandMapper.toModel(brandParam));
         return brandMapper.toDTO(brand);

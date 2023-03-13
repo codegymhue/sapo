@@ -548,7 +548,6 @@
         page.dialogs.elements.groupCreateTitleSup.val("");
         page.dialogs.elements.groupCreateCodeSup.val("");
         page.dialogs.elements.groupCreateDescriptionSup.val("");
-
     })
 
     page.dialogs.elements.btnCreateGroupSupplier.on('click', () => {
@@ -576,16 +575,18 @@
         })
             .done((data) => {
                 console.log("data: ", data)
-
+                supplierGroups.push(data);
                 page.elements.renderGroupLi.prepend(
                     `<li onclick="handleChangeGroupSupp(${data.id})">
                         <p  class="w-80 border-0 btnClick " id="${data.id}" style="padding:7px; font-size: 12px;font-weight:450; width: 300px;border: unset;" value="${data.id}">
                         ${data.title}</p>
                         </li>`
                 )
-
-                SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
                 page.dialogs.elements.modalCreateGroupSupplier.modal('hide');
+                SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
+                handleChangeGroupSupp(data.id);
+
+
             })
             .fail((jqXHR) =>{
                 if (jqXHR.responseJSON) {
@@ -712,7 +713,7 @@
                 supplierGroups = data;
                 $.each(data, function (index, value) {
                     page.elements.renderGroupLi.prepend(
-                        `<li onclick="handleChangeGroupSupp(${value.id})">
+                        `<li  onclick="handleChangeGroupSupp(${value.id})">
                         <p  class="w-80 border-0 " id="${value.id}" style="padding:7px; font-size: 12px;font-weight:450; width: 300px;border: unset;" value="${value.id}">
                         ${value.title}</p>
                         </li>`
@@ -724,13 +725,20 @@
     function handleChangeGroupSupp(supplierGroupId) {
         let supplierGroup = supplierGroups.find(supplierGroup => supplierGroup.id === supplierGroupId);
         page.elements.changeValueSup.attr("data-id", supplierGroup.id);
-
         page.elements.changeValueSup.val(supplierGroup.id);
         page.elements.changeValueSup.text(supplierGroup.title);
 
         let dropdown = new bootstrap.Dropdown(document.querySelector($("#changeValueSup")));
         dropdown.hide();
     }
+
+    $(document).on("click", 'li[data-changeGroup=""]', function () {
+        if (supplierFilter.tags.indexOf($(this).parent().text()) > -1) {
+            supplierFilter.tags.splice(supplierFilter.tags.indexOf($(this).parent().text()), 1)
+            $(this).parent().remove()
+        }
+        console.log(supplierFilter.tags, " sau remove")
+    });
 
     function searchGroup() {
 

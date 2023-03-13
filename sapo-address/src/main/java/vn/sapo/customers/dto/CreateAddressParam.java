@@ -7,6 +7,7 @@ import lombok.experimental.Accessors;
 import vn.sapo.shared.validation.constraints.NullOrNotBlank;
 
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Getter
 @Setter
@@ -57,6 +58,8 @@ public class CreateAddressParam {
     private boolean isReceiveBill;
 
     private boolean isShipping;
+
+    private List<String> tags;
 
 
 }

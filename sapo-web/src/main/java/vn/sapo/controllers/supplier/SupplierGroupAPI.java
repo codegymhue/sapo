@@ -28,17 +28,17 @@ public class SupplierGroupAPI {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
     @PostMapping("/create")
-    public ResponseEntity<SupplierGroupResult> create(@Valid @RequestBody CreateSupGroupParam createSupGroupParam, BindingResult bindingResult) {
-        List<String> allErrors = new ArrayList<>();
-//        System.out.println();
-        List<ObjectError> errors;
-        if (bindingResult.hasFieldErrors()) {
-            errors = bindingResult.getAllErrors();
-            for (ObjectError error : errors) {
-                allErrors.add(error.getDefaultMessage());
-            }
-            throw new NotFoundException(allErrors.toString());
-        }
+    public ResponseEntity<SupplierGroupResult> create(@Valid @RequestBody CreateSupGroupParam createSupGroupParam) {
+//        List<String> allErrors = new ArrayList<>();
+////        System.out.println();
+//        List<ObjectError> errors;
+//        if (bindingResult.hasFieldErrors()) {
+//            errors = bindingResult.getAllErrors();
+//            for (ObjectError error : errors) {
+//                allErrors.add(error.getDefaultMessage());
+//            }
+//            throw new NotFoundException(allErrors.toString());
+//        }
 
 
         SupplierGroupResult dto = supplierGroupService.create(createSupGroupParam);

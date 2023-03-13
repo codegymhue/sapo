@@ -1,4 +1,4 @@
-package vn.sapo.supplier;
+package vn.sapo.supplier.excel;
 
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.supplier.excel.ImportExcelSupplierParam;

@@ -30,11 +30,11 @@ public class Result<T> {
         this(null, status, null, errors);
     }
 
-    public Result(T data, Integer status, String message) {
+    public Result(T data, String message, Integer status) {
         this(data, status, message, null);
     }
 
-    public Result(Integer status, String message, Map<Object, Object> errors) {
+    public Result(String message, Map<Object, Object> errors, Integer status) {
         this(null, status, message, errors);
     }
 
