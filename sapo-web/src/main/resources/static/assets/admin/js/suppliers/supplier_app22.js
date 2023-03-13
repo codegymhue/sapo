@@ -241,6 +241,20 @@ class SupplierApp {
         return str;
     }
 
+    static renderFilterListTag(supplierFilter){
+
+
+        let str = `<li class="filter-tag">
+                       <span class="tag__label">
+                                Trạng thái: Đang giao dịch, Ngừng giao dịch
+                       </span>
+                       <button type="button" class="tag__remove-button" bind-event-click="removeFilterItem('status',this)">
+                           <svg class="next-icon next-icon--size-12"> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-remove"></use> </svg>
+                       </button>
+                   </li>`
+        return str;
+    }
+
     static renderSwitchcaseFilter(value) {
         switch (value) {
             case "status":
