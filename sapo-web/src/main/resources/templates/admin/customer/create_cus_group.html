@@ -81,7 +81,6 @@
                                                     </legend>
                                                 </fieldset>
                                             </div>
-                                            <!--                                            error container, dont remove-->
                                             <div class="error titleGroupCre-error"></div>
                                         </div>
                                     </div>
@@ -113,7 +112,7 @@
                                 </div>
                                 <div class="MuiGrid-item MuiGrid-grid-xs-12">
                                     <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth">
-                                        <label data-shrink="true" for="description"
+                                        <label data-shrink="true" for="note"
                                                class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink">
                                             Mô tả
                                             <span class="MuiTypography-root MuiTypography-caption"
@@ -132,8 +131,8 @@
                                         <div class="MuiFormControl-root jss757 jss756 MuiFormControl-fullWidth"
                                              field="[object Object]" form="[object Object]">
                                             <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-multiline MuiOutlinedInput-multiline">
-                                                <textarea aria-invalid="false" id="description" rows="3"
-                                                          aria-label="Without label" name="description"
+                                                <textarea aria-invalid="false" id="note" rows="3"
+                                                          aria-label="Without label" name="note"
                                                           class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline placeholder_text">
                                                 </textarea>
                                                 <fieldset aria-hidden="true"
@@ -144,7 +143,7 @@
                                                 </fieldset>
                                             </div>
                                         </div>
-                                        <div class="error description-error"></div>
+                                        <div class="error note-error"></div>
                                     </div>
                                 </div>
                             </div>
@@ -186,7 +185,7 @@
                                             Giá Mặc Định
                                         </label>
                                         <div class="dropdown jss1784 jss1769"
-                                             onclick="CustomerApp.page.commands.showDefaultPriceDropdown()"
+                                             onclick="CustomerApp.page.commands.showDefaultPricingPolicyDropdown()"
                                              id="defaultPriceContainer">
                                             <p id="selectedPriceDefault">Chọn giá mặc định</p>
                                         </div>
@@ -219,14 +218,14 @@
                                 <div class="MuiGrid-item MuiGrid-grid-xs-12">
                                     <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth">
                                         <label class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-                                               data-shrink="true" for="discount">
+                                               data-shrink="true" for="defaultDiscountRate">
                                             Chiết khấu (%)
                                         </label>
                                         <div class="MuiFormControl-root jss756 MuiFormControl-fullWidth"
                                              field="[object Object]" form="[object Object]">
                                             <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth ">
                                                 <input aria-invalid="false"
-                                                       id="discount" name="discount"
+                                                       id="defaultDiscountRate" name="defaultDiscountRate"
                                                        type="text" aria-label="Without label"
                                                        class="MuiInputBase-input MuiOutlinedInput-input jss758 placeholder_text"
                                                        placeholder="0"
@@ -237,7 +236,7 @@
                                                 </fieldset>
                                             </div>
                                         </div>
-                                        <div class="error discount-error"></div>
+                                        <div class="error defaultDiscountRate-error"></div>
                                     </div>
                                 </div>
                                 <div class="MuiGrid-item MuiGrid-grid-xs-12">
@@ -281,16 +280,9 @@
 <script src="/assets/admin/js/customer/customer_app.js"></script>
 
 <script>
-    let pricingPolicy = {
-        title: '',
-        pricingPolicyCode: '',
-        pricingPolicyType: ''
-    };
-    let paymentMethod = {
-        id: '',
-        title: ''
-    };
-    let createCusGroupParam = new CustomerGroup();
+    let pricingPolicy = {};
+    let paymentMethod = {};
+    let createCusGroupParam = {};
 
     CustomerApp.page.elements.modalCreatePricePolicy = $("#modalCreatePricePolicy");
 
@@ -310,8 +302,8 @@
     CustomerApp.page.elements.dropdownPaymentMethod = $("#dropdownPaymentMethod");
 
     CustomerApp.page.elements.cusGrpCode = $("#cusGrpCode");
-    CustomerApp.page.elements.description = $("#description");
-    CustomerApp.page.elements.discount = $("#discount");
+    CustomerApp.page.elements.note = $("#note");
+    CustomerApp.page.elements.defaultDiscountRate = $("#defaultDiscountRate");
     CustomerApp.page.elements.paymentType = $("#paymentType");
     CustomerApp.page.elements.defaultPriceDropdown = $("#defaultPriceDropdown");
     CustomerApp.page.elements.searchDefaultPriceDropdown = $("#searchDefaultPriceDropdown");
@@ -327,8 +319,13 @@
 
     CustomerApp.page.elements.titleGroupCreError = $(".titleGroupCre-error.error");
     CustomerApp.page.elements.cusGrpCodeError = $(".cusGrpCode-error.error");
-    CustomerApp.page.elements.descriptionError = $(".description-error.error");
-    CustomerApp.page.elements.discountError = $(".discount-error.error");
+    CustomerApp.page.elements.noteError = $(".note-error.error");
+    CustomerApp.page.elements.defaultDiscountRateError = $(".defaultDiscountRate-error.error");
+
+    testOnchange = (event) => {
+        let a = event.target.value;
+        console.log(a)
+    }
 
 
     CustomerApp.page.commands.showModalCreatePricePolicy = () => {
@@ -337,7 +334,7 @@
 
     CustomerApp.page.commands.selectPricePolicy = () => {
         $(".selectPricePolicy").on('click', function () {
-            createCusGroupParam.pricingPolicyId = $(this).data('id');
+            createCusGroupParam.defaultPricingPolicyId = $(this).data('id');
             let value = $(this).data('value');
 
             CustomerApp.page.elements.selectedPriceDefault.text(value);
@@ -353,11 +350,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-<<<<<<< HEAD
             url: origin +"/api/pricing-policies"
-=======
-            url: origin + "/api/pricingPolicys"
->>>>>>> 1839f2e0f3941be51a38ccbca6f4385ee3045bee
         })
             .done((data) => {
                 data.forEach(item => {
@@ -400,7 +393,7 @@
 
     CustomerApp.page.commands.selectPaymentMethod = () => {
         $(".selectedPaymentMethod").click(function () {
-            createCusGroupParam.paymentMethodId = $(this).data('id');
+            createCusGroupParam.defaultPaymentMethodId = $(this).data('id');
             $("#paymentType").text($(this).text());
         })
     }
@@ -448,36 +441,32 @@
             })
     }
 
-<<<<<<< HEAD
-    function createCusGrp() {
-        createCusGroupParam.id = undefined;
-        let title = $('#titleGroup').val().trim();
-        createCusGroupParam.title = title.length > 0 ? title : undefined;
+    // function createCusGrp() {
+    //     createCusGroupParam.id = undefined;
+    //     let title = $('#titleGroup').val().trim();
+    //     createCusGroupParam.title = title.length > 0 ? title : undefined;
+    //
+    //     let cusGrpCode = $('#cusGrpCode').val().trim();
+    //     createCusGroupParam.cusGrpCode = cusGrpCode.length > 0 ? cusGrpCode : undefined;
+    //
+    //     let note = $('#description').val().trim();
+    //     createCusGroupParam.note = note.length > 0 ? note : undefined;
+    //     createCusGroupParam.defaultPricingPolicyId = $('#pricingType').data("id");
+    //     createCusGroupParam.defaultDiscountRate = $('#discount').val();
+    //     createCusGroupParam.defaultPaymentMethodId = $('#paymentType').data("id");
 
-        let cusGrpCode = $('#cusGrpCode').val().trim();
-        createCusGroupParam.cusGrpCode = cusGrpCode.length > 0 ? cusGrpCode : undefined;
-
-        let note = $('#description').val().trim();
-        createCusGroupParam.note = note.length > 0 ? note : undefined;
-        createCusGroupParam.defaultPricingPolicyId = $('#pricingType').data("id");
-        createCusGroupParam.defaultDiscountRate = $('#discount').val();
-        createCusGroupParam.defaultPaymentMethodId = $('#paymentType').data("id");
-=======
-    //create customer group
+        //create customer group
     CustomerApp.page.commands.createCusGrp = () => {
         createCusGroupParam.title = CustomerApp.page.elements.titleGroupCre.val().trim();
-        createCusGroupParam.description = CustomerApp.page.elements.description.val().trim();
+        createCusGroupParam.note = CustomerApp.page.elements.note.val().trim();
 
         let cusGrpCode = CustomerApp.page.elements.cusGrpCode.val().trim();
 
         cusGrpCode ? createCusGroupParam.cusGrpCode = cusGrpCode : undefined;
 
-        CustomerApp.page.elements.discount.val().trim() === ''
-            ? createCusGroupParam.discount = 0
-            : createCusGroupParam.discount = CustomerApp.page.elements.discount.val().trim();
->>>>>>> 1839f2e0f3941be51a38ccbca6f4385ee3045bee
-
-        console.log(createCusGroupParam)
+        CustomerApp.page.elements.defaultDiscountRate.val().trim() === ''
+            ? createCusGroupParam.defaultDiscountRate = 0
+            : createCusGroupParam.defaultDiscountRate = CustomerApp.page.elements.defaultDiscountRate.val().trim();
 
         $.ajax({
             "headers": {
@@ -489,11 +478,13 @@
             "data": JSON.stringify(createCusGroupParam)
         })
             .done((data) => {
-                console.log(data)
-                CustomerGroup_App.IziToast.showSuccessAlert('Thêm mới nhóm khách hàng thành công  !!!')
+                CustomerGroup_App.IziToast.showSuccessAlert('Thêm mới nhóm khách hàng thành công');
+
+                CustomerApp.page.elements.frmCreateCusGrp[0].reset();
+                CustomerApp.page.elements.error.removeClass('show').addClass('hidden');
+                location.href = `/admin/customer_groups/${data.id}`;
             })
             .fail((jqXHR) => {
-                console.log(jqXHR)
                 let errors = jqXHR.responseJSON.errors;
 
                 if (errors.title) {
@@ -502,11 +493,11 @@
                 if (errors.cusGrpCode) {
                     CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.cusGrpCodeError, errors.cusGrpCode)
                 }
-                if (errors.description) {
-                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.descriptionError, errors.description)
+                if (errors.note) {
+                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.noteError, errors.note)
                 }
-                if (errors.discount) {
-                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.discountError, errors.discount)
+                if (errors.defaultDiscountRate) {
+                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.defaultDiscountRateError, errors.defaultDiscountRate)
                 }
             })
     }
@@ -514,7 +505,7 @@
     CustomerApp.page.elements.btnCloseCreatePricePolicyModal.click(() => {
         CustomerApp.page.elements.frmCreatePricePolicy.validate().resetForm();
         CustomerApp.page.elements.frmCreatePricePolicy[0].reset();
-        CustomerApp.page.elements.error.removeClass('show').addClass('hidden')
+        CustomerApp.page.elements.error.removeClass('show').addClass('hidden');
     })
 
     CustomerApp.page.elements.btnCreatePricePolicy.on("click", () => {
@@ -577,10 +568,10 @@
             cusGrpCode: {
                 maxlength: 50,
             },
-            description: {
+            note: {
                 maxlength: 255,
             },
-            discount: {
+            defaultDiscountRate: {
                 digits: true,
             }
         },
@@ -592,10 +583,10 @@
             cusGrpCode: {
                 maxlength: "Mã nhóm không quá 50 ký tự",
             },
-            description: {
+            note: {
                 maxlength: "Mô tả không quá 255 ký tự",
             },
-            discount: {
+            defaultDiscountRate: {
                 digits: "Chỉ được nhập số",
             },
         },
@@ -620,7 +611,7 @@
         CustomerApp.page.commands.getAllPaymentMethod();
     })
 
-    CustomerApp.page.commands.showDefaultPriceDropdown = () => {
+    CustomerApp.page.commands.showDefaultPricingPolicyDropdown = () => {
         CustomerApp.page.elements.defaultPriceDropdown[0].classList.toggle("show")
     }
 

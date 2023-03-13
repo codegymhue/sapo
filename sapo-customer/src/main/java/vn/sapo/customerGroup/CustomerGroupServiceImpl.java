@@ -7,9 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.customerGroup.dto.*;
 import vn.sapo.entities.customer.CustomerGroup;
+import vn.sapo.entities.customer.CustomerGroupType;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
+import vn.sapo.shared.exceptions.ValidationException;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -35,25 +38,21 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     @Override
     @Transactional
     public CustomerGroupResult create(CreateCusGroupParam createParam) {
-//        String title = createCusGroupParam.getTitle().trim();
+        String title = createParam.getTitle().trim();
 //        String description = createCusGroupParam.getDescription().trim();
 //
-//        Map<Object, Object> errors = new HashMap<>();
-//
-//        checkCustomerGroupTitle(title, errors);
-//
-//        if (createCusGroupParam.getCusGrpCode() != null) {
-//            String cusGrpCode = createCusGroupParam.getCusGrpCode().trim();
-//            checkCusGrpCodeWhenNotEmpty(cusGrpCode, errors);
-//        }
-//
-//        if (description.length() > 255) {
-//            errors.put("description", "Mô tả không được vượt quá 255 ký tự");
-//        }
-//
-//        if (!errors.isEmpty()) {
-//            throw new ValidationException(errors);
-//        }
+        Map<Object, Object> errors = new HashMap<>();
+
+        checkCustomerGroupTitle(title, errors);
+
+        if (createParam.getCusGrpCode() != null) {
+            String cusGrpCode = createParam.getCusGrpCode().trim();
+            checkCusGrpCodeWhenNotEmpty(cusGrpCode, errors);
+        }
+
+        if (!errors.isEmpty()) {
+            throw new ValidationException(errors);
+        }
 
 //        if (createCusGroupParam.getCusGrpCode() == null) {
 //            createCusGroupParam.setCusGrpCode(getMaxSystemCustomerGroupCode());
@@ -71,9 +70,12 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
 //
 //        return customerGroupMapper.toDTO(customerGroup);
         CustomerGroup customerGroup = customerGroupMapper.toModel(createParam);
+        customerGroup.setType(CustomerGroupType.FIXED);
         customerGroup = customerGroupRepository.save(customerGroup);
+
         if (createParam.getCusGrpCode() == null)
             customerGroup.setCusGrpCode(CodePrefix.CUSTOMER_GROUP.generate(customerGroup.getId()));
+
         return customerGroupMapper.toDTO(customerGroup);
     }
 
@@ -131,12 +133,8 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     //TODO: ko can nua
 
     private void checkCustomerGroupTitle(String title, Map<Object, Object> errors) {
-
-        if (title.length() > 250) {
-            errors.put("title", "{customer.validation.CreateCusGroupParam.title.length}");
-        }
         if (customerGroupRepository.existsByTitle(title)) {
-            errors.put("title", "Nhóm khách hàng đã tồn tại");
+            errors.put("title", "{customer_group.validation.title.existed}");
         }
     }
 
@@ -146,11 +144,7 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
         String prefix = CodePrefix.CUSTOMER_GROUP.getValue();
 
         if (cusGrpCode.substring(0, 3).equalsIgnoreCase(prefix)) {
-            errors.put("cusGrpCode", "Mã nhóm không được có tiền tố của hệ thống CTN");
-        } else if (customerGroupRepository.existsByCusGrpCode(cusGrpCode)) {
-            errors.put("cusGrpCode", "Mã nhóm khách hàng này đã tồn tại");
-        } else if (cusGrpCode.length() > 50) {
-            errors.put("cusGrpCode", "Mã nhóm khách hàng không được vượt quá 50 ký tự");
+            errors.put("cusGrpCode", "{customer_group.validation.cusGrpCode.prefix}");
         }
     }
 

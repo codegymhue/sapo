@@ -14,8 +14,6 @@ import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.customerGroup.dto.*;
 import vn.sapo.shared.controllers.BaseController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/customer_groups")
 public class CustomerGroupAPI extends BaseController {
