@@ -10,8 +10,6 @@ public interface CustomerGroupService {
 
     List<CustomerGroupResult> findAllCustomerGroupResult();
 
-    String getMaxSystemCustomerGroupCode();
-
     CustomerGroupResult create(CreateCusGroupParam createCusGroupParam);
 
     CustomerGroupResult update(UpdateCusGroupParam updateCusGroupParam);
