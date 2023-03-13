@@ -26,15 +26,15 @@ public interface CustomerGroupRepository extends JpaRepository<CustomerGroup, In
 
 
     //TODO:KO CAN NUA
-    @Query(value = "SELECT cus_grp_code AS cgc " +
-            "FROM customer_group AS cg " +
-            "WHERE cg.cus_grp_code " +
-            "LIKE 'CTN%' " +
-            "ORDER BY cgc " +
-            "DESC LIMIT 1;"
-            ,
-            nativeQuery = true)
-    String getMaxSystemCustomerGroupCode();
+//    @Query(value = "SELECT cus_grp_code AS cgc " +
+//            "FROM customer_group AS cg " +
+//            "WHERE cg.cus_grp_code " +
+//            "LIKE 'CTN%' " +
+//            "ORDER BY cgc " +
+//            "DESC LIMIT 1;"
+//            ,
+//            nativeQuery = true)
+//    String getMaxSystemCustomerGroupCode();
 
     boolean existsByCusGrpCode(String code);
 
