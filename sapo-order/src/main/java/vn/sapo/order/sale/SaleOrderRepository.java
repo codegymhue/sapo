@@ -12,20 +12,20 @@ import java.util.List;
 
 @Repository
 public interface SaleOrderRepository extends JpaRepository<SaleOrder, Integer> {
-    List<SaleOrder> findAllSaleOrderByCustomerId(Integer customerId);
+    List<SaleOrder> findAllByCustomerId(Integer customerId);
 
 
-    @Query(value = "call sp_getSpendTotalByCustomerId(:id);", nativeQuery = true)
-    BigDecimal getSpendTotalByCustomerId(Integer id);
+    @Query(value = "call sp_getSpendTotalByCustomerId(:customerId);", nativeQuery = true)
+    BigDecimal getSpendTotalByCustomerId(Integer customerId);
 
-    @Query(value = "call sp_getCountOrderByCustomerId(:id);", nativeQuery = true)
-    Integer getQuantityProductOrderById(Integer id);
+    @Query(value = "call sp_getCountOrderByCustomerId(:customerId);", nativeQuery = true)
+    Integer getQuantityProductOrderById(Integer customerId);
 
 
-    @Query("FROM SaleOrder WHERE customerId = :id")
-    List<SaleOrder> findAllCustomerOrderHistory(Integer id);
+    @Query("FROM SaleOrder WHERE customerId = :customerId")
+    List<SaleOrder> findAllCustomerOrderHistory(Integer customerId);
 
-    @Query(value = "call sp_getLastDayOrderByCustomerId( :customerId);", nativeQuery = true)
+    @Query(value = "call sp_getLastDayOrderByCustomerId(:customerId);", nativeQuery = true)
     Instant getLastDayOrderByCustomerId(Integer customerId);
 }
 
