@@ -77,11 +77,10 @@
                                                 </div>
                                                 <fieldset aria-hidden="true"
                                                           class="jss823 MuiOutlinedInput-notchedOutline">
-                                                    <legend class="jss824">
-                                                    </legend>
+                                                    <legend class="jss824"></legend>
                                                 </fieldset>
                                             </div>
-                                            <div class="error titleGroupCre-error"></div>
+                                            <div class="error titleGroupCre-error hidden"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -89,7 +88,8 @@
                                     <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth">
                                         <label class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
                                                data-shrink="true" for="cusGrpCode">
-                                            Mã nhóm</label>
+                                            Mã nhóm
+                                        </label>
                                         <div class="MuiFormControl-root jss756 MuiFormControl-fullWidth"
                                              field="[object Object]" form="[object Object]">
                                             <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth">
@@ -119,8 +119,7 @@
                                                   title="Mô tả khách hàng của bạn để phục vụ cho việc chăm sóc khách hàng tốt hơn">
                                                 <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
                                                      width="16" height="16" color="primary" class="jss23713">
-                                                    <path fill="#0088FF"
-                                                          d="M7.4 5v1.2h1.2V5H7.4ZM7.4 8.6V11h1.8V9.8h-.6V7.4H6.8v1.2h.6Z">
+                                                    <path fill="#0088FF" d="M7.4 5v1.2h1.2V5H7.4ZM7.4 8.6V11h1.8V9.8h-.6V7.4H6.8v1.2h.6Z">
                                                     </path>
                                                     <path fill-rule="evenodd" clip-rule="evenodd" fill="#0088FF"
                                                           d="M8 2C4.688 2 2 4.688 2 8s2.688 6 6 6 6-2.688 6-6-2.688-6-6-6ZM3.2 8c0 2.646 2.154 4.8 4.8 4.8s4.8-2.154 4.8-4.8S10.646 3.2 8 3.2A4.806 4.806 0 0 0 3.2 8Z">
@@ -135,8 +134,7 @@
                                                           aria-label="Without label" name="note"
                                                           class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline placeholder_text">
                                                 </textarea>
-                                                <fieldset aria-hidden="true"
-                                                          class="jss823 MuiOutlinedInput-notchedOutline">
+                                                <fieldset aria-hidden="true" class="jss823 MuiOutlinedInput-notchedOutline">
                                                     <legend class="jss824">
                                                         <span>&ZeroWidthSpace;</span>
                                                     </legend>
@@ -170,8 +168,7 @@
                                             </path>
                                         </svg>
                                     </span>
-                                    <span class="MuiTouchRipple-root">
-                                    </span>
+                                    <span class="MuiTouchRipple-root"></span>
                                 </button>
                             </div>
                         </div>
@@ -350,7 +347,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: origin +"/api/pricing-policies"
+            url: origin + "/api/pricing-policies"
         })
             .done((data) => {
                 data.forEach(item => {
@@ -455,7 +452,7 @@
     //     createCusGroupParam.defaultDiscountRate = $('#discount').val();
     //     createCusGroupParam.defaultPaymentMethodId = $('#paymentType').data("id");
 
-        //create customer group
+    //create customer group
     CustomerApp.page.commands.createCusGrp = () => {
         createCusGroupParam.title = CustomerApp.page.elements.titleGroupCre.val().trim();
         createCusGroupParam.note = CustomerApp.page.elements.note.val().trim();

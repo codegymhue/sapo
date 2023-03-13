@@ -92,27 +92,3 @@ class CustomerGroupFilter {
         this.draw = draw;
     }
 }
-
-// class CustomerGroup{
-//     constructor(title, cusGrpCode, defaultPricingPolicyId, defaultDiscountRate, defaultPaymentMethodId, note) {
-//         this.title = title;
-//         this.cusGrpCode = cusGrpCode;
-//         this.defaultPricingPolicyId = defaultPricingPolicyId;
-//         this.defaultDiscountRate = defaultDiscountRate
-//         this.defaultPaymentMethodId = defaultPaymentMethodId;
-//         this.note = note;
-//     }
-// }
-
-
-// class CreateCusGroupParam {
-//     constructor(id, title, cusGrpCode, pricing_policy_id, payment_method_id, description, discount) {
-//         this.id = id;
-//         this.title = title;
-//         this.cusGrpCode = cusGrpCode;
-//         this.pricing_policy_id = pricing_policy_id;
-//         this.payment_method_id = payment_method_id;
-//         this.description = description;
-//         this.discount = discount
-//     }
-// }

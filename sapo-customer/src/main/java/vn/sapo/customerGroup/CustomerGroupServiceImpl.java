@@ -39,8 +39,6 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     @Transactional
     public CustomerGroupResult create(CreateCusGroupParam createParam) {
         String title = createParam.getTitle().trim();
-//        String description = createCusGroupParam.getDescription().trim();
-//
         Map<Object, Object> errors = new HashMap<>();
 
         checkCustomerGroupTitle(title, errors);
@@ -149,35 +147,35 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     }
 
     //TODO: KO CAN THOIET
-    public String getMaxSystemCustomerGroupCode() {
-        String prefix = CodePrefix.CUSTOMER_GROUP.getValue();
-        String maxSystemCustomerGroupCode;
-
-        String currentMaxSystemCustomerGroupCode = customerGroupRepository.getMaxSystemCustomerGroupCode();
-
-        if (currentMaxSystemCustomerGroupCode == null) {
-            maxSystemCustomerGroupCode = CodePrefix.CUSTOMER_GROUP.getValue().concat("00001");
-        } else {
-
-            String[] a = currentMaxSystemCustomerGroupCode.split(prefix);
-            String suffix = a[1];
-
-            int currentCodeSuffix = Integer.parseInt(suffix);
-            currentCodeSuffix++;
-
-            if (currentCodeSuffix < 10) {
-                maxSystemCustomerGroupCode = prefix.concat("0000").concat(String.valueOf(currentCodeSuffix));
-            } else if (currentCodeSuffix < 100) {
-                maxSystemCustomerGroupCode = prefix.concat("000").concat(String.valueOf(currentCodeSuffix));
-            } else if (currentCodeSuffix < 1000) {
-                maxSystemCustomerGroupCode = prefix.concat("00").concat(String.valueOf(currentCodeSuffix));
-            } else if (currentCodeSuffix < 10000) {
-                maxSystemCustomerGroupCode = prefix.concat("0").concat(String.valueOf(currentCodeSuffix));
-            } else {
-                maxSystemCustomerGroupCode = prefix.concat(String.valueOf(currentCodeSuffix));
-            }
-        }
-
-        return maxSystemCustomerGroupCode;
-    }
+//    public String getMaxSystemCustomerGroupCode() {
+//        String prefix = CodePrefix.CUSTOMER_GROUP.getValue();
+//        String maxSystemCustomerGroupCode;
+//
+//        String currentMaxSystemCustomerGroupCode = customerGroupRepository.getMaxSystemCustomerGroupCode();
+//
+//        if (currentMaxSystemCustomerGroupCode == null) {
+//            maxSystemCustomerGroupCode = CodePrefix.CUSTOMER_GROUP.getValue().concat("00001");
+//        } else {
+//
+//            String[] a = currentMaxSystemCustomerGroupCode.split(prefix);
+//            String suffix = a[1];
+//
+//            int currentCodeSuffix = Integer.parseInt(suffix);
+//            currentCodeSuffix++;
+//
+//            if (currentCodeSuffix < 10) {
+//                maxSystemCustomerGroupCode = prefix.concat("0000").concat(String.valueOf(currentCodeSuffix));
+//            } else if (currentCodeSuffix < 100) {
+//                maxSystemCustomerGroupCode = prefix.concat("000").concat(String.valueOf(currentCodeSuffix));
+//            } else if (currentCodeSuffix < 1000) {
+//                maxSystemCustomerGroupCode = prefix.concat("00").concat(String.valueOf(currentCodeSuffix));
+//            } else if (currentCodeSuffix < 10000) {
+//                maxSystemCustomerGroupCode = prefix.concat("0").concat(String.valueOf(currentCodeSuffix));
+//            } else {
+//                maxSystemCustomerGroupCode = prefix.concat(String.valueOf(currentCodeSuffix));
+//            }
+//        }
+//
+//        return maxSystemCustomerGroupCode;
+//    }
 }
