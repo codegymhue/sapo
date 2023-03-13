@@ -9,15 +9,10 @@ import vn.sapo.customerGroup.dto.*;
 import vn.sapo.entities.customer.CustomerGroup;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
-import vn.sapo.shared.exceptions.ValidationException;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
-
-import static vn.sapo.entities.customer.CustomerGroupType.FIXED;
 
 @Service
 public class CustomerGroupServiceImpl implements CustomerGroupService {
@@ -94,7 +89,7 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ICustomerGroup> sortByGroup() {
+    public List<ICustomerGroupResult> sortByGroup() {
         return customerGroupRepository.sortByGroup();
     }
 
