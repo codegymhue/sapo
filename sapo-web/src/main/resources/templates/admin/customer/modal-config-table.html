@@ -401,7 +401,6 @@
                     d.employeeIds = customerFilter.employeeIds;
                     d.keyword = customerFilter.keyword;
                     d.statusList = [];
-                    console.log(d);
                     return JSON.stringify(d)
                 }
             },
@@ -417,7 +416,7 @@
                             targets: 0,
                             "orderable": false,
                             render: function (data, type, row, meta) {
-                                return elementCheckBox;
+                                return `<input id="${row.id}" type="checkbox" value="check_none" style="float:right"/>`;
                             }
                         },
              {
@@ -432,6 +431,7 @@
         });
         let theadFirst = $("#tbCustomer thead tr th");
         let removeSorting = setInterval(()=>{
+            let tdRow = $("#tbCustomer tbody td input");
             if($(theadFirst[0]).hasClass("sorting_asc")){
                 $(theadFirst[0]).removeClass('sorting_asc');
                 clearInterval(removeSorting);

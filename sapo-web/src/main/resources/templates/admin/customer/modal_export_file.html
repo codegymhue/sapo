@@ -1,0 +1,70 @@
+<th:block th:fragment="modal_export_file">
+    <style>
+        .titleExportFile:hover{
+            color: #0d6efd;
+            cursor: pointer;
+        }
+        .titleExportFile{
+            font-size: 11pt;
+        }
+    </style>
+    <div class="modal fade" id="modal-export-file" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="exampleModalLabel">Xuất file khách hàng</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeExportFile">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h5 style="margin-bottom: 18px;">Giới hạn kết quả xuất</h6>
+              <div class="form-check titleExportFile" style="margin-bottom: 12px;">
+                <input class="form-check-input" type="radio" name="type" id="typeAll" value="ALL" style="cursor: pointer;" checked>
+                <label class="form-check-label" for="typeAll" style="cursor: pointer;">
+                  Tất cả các khách hàng
+                </label>
+              </div>
+              <div class="form-check titleExportFile">
+                <input class="form-check-input" type="radio" name="type" id="typePresent" value="PRESENT" style="cursor: pointer;">
+                <label class="form-check-label" for="typePresent" style="cursor: pointer;">
+                   Khách hàng trên trang này
+                </label>
+              </div>
+              <h6 style="color: #0d6efd; margin-top: 12px; cursor: pointer;" data-toggle="modal" data-target="#modal-select-column" data-dismiss="modal">Tùy chọn trường hiển thị</h6>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" style="color: red;">Thoát</button>
+              <button type="button" class="btn btn-primary" style="color: #0d6efd;" onclick="exportFileExcel()">Xuất file</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+            let listRowPresent = [];
+            function exportFileExcel(){
+                let formData = new FormData();
+                let theadFirst = $("#tbCustomer thead tr th");
+                let tdRow = $("#tbCustomer tbody td input");
+                for(let i=0; i<tdRow.length; i++){
+                    listRowPresent.push(tdRow[i].id);
+                }
+                let type = $("input[name='type']:checked").val();
+                formData.append("type", type);
+                formData.append("listCustomerId", listRowPresent);
+                $.ajax({
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    type: "GET",
+                    url: origin +"/admin/customers/export/excel",
+                    data: {
+                      type: type,
+                      listCustomerId:listRowPresent
+                    }
+                })
+                listRowPresent =[];
+            }
+
+      </script>
+</th:block>
