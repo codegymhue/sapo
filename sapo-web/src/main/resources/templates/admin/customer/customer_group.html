@@ -1,219 +1,227 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="vi-VN" class="sapo-menu-expand sapo-menu-toggle-active">
 <head>
-    <th:block th:replace="/layout/header.html"/>
     <title>Danh sách khách hàng</title>
-    <link rel="stylesheet" href="/assets/admin/css/customer/customer_group.css"/>
-    <link rel="stylesheet" href="/assets/admin/css/customer/cus_group.css"/>
-</head>
-<body data-new-gr-c-s-check-loaded="14.1085.0" cz-shortcut-listen="true">
-<div id="root" style="overflow: auto;">
-    <th:block th:replace="/layout/menu.html"/>
 
-    <div class="col-right MuiBox-root jss64 jss40">
-        <div class="MuiBox-root jss23363 jss440 " id="header">
+    <th:block th:replace="/layout/header"/>
+    <link rel="stylesheet" href="/assets/admin/css/customer/customer_group.css"/>
+    <!--    <link rel="stylesheet" href="/assets/admin/css/customer/cus_group.css"/>-->
+</head>
+<body>
+<div id="root">
+    <th:block th:replace="/layout/menu"/>
+
+    <div class="col-right MuiBox-root jss40">
+        <div class="MuiBox-root jss440" id="header">
             <h3 class="MuiTypography-root MuiTypography-h3">Nhóm khách hàng</h3>
-            <div class="MuiBox-root jss23364 jss441">
-                <div class="MuiBox-root jss23365 jss442">
-                    <svg class="MuiSvgIcon-root jss443" focusable="false"
-                         viewBox="0 0 24 24" color="#A2A8AF" aria-hidden="true">
-                        <path
-                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z">
+            <div class="MuiBox-root jss441">
+                <div class="MuiBox-root jss442">
+                    <svg class="MuiSvgIcon-root jss443" focusable="false" viewBox="0 0 24 24" color="#A2A8AF"
+                         aria-hidden="true">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z">
                         </path>
                     </svg>
-                    <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">Vay vốn kinh
-                        doanh</p>
+                    <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">
+                        Vay vốn kinh doanh
+                    </p>
                 </div>
-                <div class="MuiBox-root jss23380 jss442">
-                    <svg class="MuiSvgIcon-root jss443" focusable="false"
-                         viewBox="0 0 20 20" color="#A2A8AF" aria-hidden="true">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M9.99992 0.833374C4.93992 0.833374 0.833252 4.94004 0.833252 10C0.833252 15.06 4.93992 19.1667 9.99992 19.1667C15.0599 19.1667 19.1666 15.06 19.1666 10C19.1666 4.94004 15.0599 0.833374 9.99992 0.833374ZM9.08325 16.4167V14.5834H10.9166V16.4167H9.08325ZM11.9891 10.1559L12.8141 9.31254C13.3366 8.79004 13.6666 8.05671 13.6666 7.25004C13.6666 5.22421 12.0258 3.58337 9.99992 3.58337C7.97409 3.58337 6.33325 5.22421 6.33325 7.25004H8.16659C8.16659 6.24171 8.99158 5.41671 9.99992 5.41671C11.0083 5.41671 11.8333 6.24171 11.8333 7.25004C11.8333 7.75421 11.6316 8.21254 11.2924 8.54254L10.1558 9.69754C9.49575 10.3667 9.08325 11.2834 9.08325 12.2917V12.75H10.9166C10.9166 11.375 11.3291 10.825 11.9891 10.1559Z"
-                              fill="currentColor"></path>
+                <div class="MuiBox-root jss442">
+                    <svg class="MuiSvgIcon-root jss443" focusable="false" viewBox="0 0 20 20" color="#A2A8AF"
+                         aria-hidden="true">
+                        <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"
+                              d="M9.99992 0.833374C4.93992 0.833374 0.833252 4.94004 0.833252 10C0.833252 15.06 4.93992 19.1667 9.99992 19.1667C15.0599 19.1667 19.1666 15.06 19.1666 10C19.1666 4.94004 15.0599 0.833374 9.99992 0.833374ZM9.08325 16.4167V14.5834H10.9166V16.4167H9.08325ZM11.9891 10.1559L12.8141 9.31254C13.3366 8.79004 13.6666 8.05671 13.6666 7.25004C13.6666 5.22421 12.0258 3.58337 9.99992 3.58337C7.97409 3.58337 6.33325 5.22421 6.33325 7.25004H8.16659C8.16659 6.24171 8.99158 5.41671 9.99992 5.41671C11.0083 5.41671 11.8333 6.24171 11.8333 7.25004C11.8333 7.75421 11.6316 8.21254 11.2924 8.54254L10.1558 9.69754C9.49575 10.3667 9.08325 11.2834 9.08325 12.2917V12.75H10.9166C10.9166 11.375 11.3291 10.825 11.9891 10.1559Z">
+                        </path>
                     </svg>
-                    <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">Trợ giúp</p>
+                    <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">
+                        Trợ giúp
+                    </p>
                 </div>
-                <div class="MuiBox-root jss23381 jss442">
-                    <svg class="MuiSvgIcon-root jss443" focusable="false"
-                         viewBox="0 0 16 14" color="#A2A8AF" aria-hidden="true">
-                        <path
-                                d="M8 14C5.10929 11.4904 0 8.36868 0 4.19619C0 1.84632 1.936 0 4.4 0C5.792 0 7.128 0.578989 8 1.55556C8.872 0.578989 10.208 0 11.6 0C14.064 0 16 1.84632 16 4.19619C16 8.36185 10.8971 11.5039 8 14Z"
-                                fill="currentColor"></path>
+                <div class="MuiBox-root jss442">
+                    <svg class="MuiSvgIcon-root jss443" focusable="false" viewBox="0 0 16 14" color="#A2A8AF"
+                         aria-hidden="true">
+                        <path fill="currentColor"
+                              d="M8 14C5.10929 11.4904 0 8.36868 0 4.19619C0 1.84632 1.936 0 4.4 0C5.792 0 7.128 0.578989 8 1.55556C8.872 0.578989 10.208 0 11.6 0C14.064 0 16 1.84632 16 4.19619C16 8.36185 10.8971 11.5039 8 14Z">
+                        </path>
                     </svg>
-                    <p class="MuiTypography-root MuiTypography-body1" style="color: rgb(24, 37, 55);">Góp ý</p>
+                    <p class="MuiTypography-root MuiTypography-body1 jss24476">
+                        Góp ý
+                    </p>
                 </div>
-                <div class="MuiBox-root jss23382  jss442 jss446">
-                    <div class=" sb-avatar sb-avatar--text"
-                         style="display: inline-block; vertical-align: middle; width: 30px; height: 30px; border-radius: 20px; font-family: Helvetica, Arial, sans-serif;">
-                        <div class=" sb-avatar__text" title="Phú Nguyễn"
-                             style="width: 30px; height: 30px; line-height: initial; text-align: center; color: rgb(255, 255, 255); border-radius: 20px; background: rgb(215, 61, 50);">
-                            <div
-                                    style="display: table; table-layout: fixed; width: 100%; height: 100%; font-size: 10px;">
-                                    <span
-                                            style="display: table-cell; vertical-align: middle; white-space: nowrap;"><span>P</span></span>
+                <div class="MuiBox-root jss442">
+                    <div class="sb-avatar sb-avatar--text me-2 jss24477">
+                        <div class="sb-avatar__text jss24478" title="Phú Nguyễn">
+                            <div class="jss24479">
+                                    <span class="jss24480">
+                                        <span>P</span>
+                                    </span>
                             </div>
                         </div>
                     </div>
-                    <p class="MuiTypography-root jss445 MuiTypography-body1 MuiTypography-colorTextPrimary">Phú
-                        Nguyễn</p>
-                    <svg class="MuiSvgIcon-root arrow-avatar" focusable="false" viewBox="0 0 24 24"
-                         aria-hidden="true">
+                    <p class="MuiTypography-root jss445 MuiTypography-body1 MuiTypography-colorTextPrimary">
+                        Phú Nguyễn
+                    </p>
+                    <svg class="MuiSvgIcon-root arrow-avatar" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path>
                     </svg>
                 </div>
             </div>
         </div>
         <div class="MuiBox-root jss24476 jss24472">
-            <div class="MuiBox-root jss24477 jss24473">
-                <div class="MuiBox-root jss24478 jss24474"></div>
-                <div class="MuiBox-root jss24479 jss24474">
-                    <a href="/admin/customer_groups/create" id="Sapo-Button-0113189c-2e9e-4968-9b4c-4e0a17ff4e75"
-                       class="sc-jqUVSM fEHNKi btnShowCreateModel">
-                        <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
-                        </svg>
-                        <span class="sc-papXJ fCIlZX">Thêm nhóm khách hàng</span>
-                    </a>
+            <div class="MuiBox-root jss6733">
+                <div class="MuiBox-root jss6741">
+                    <div class="cKOfva">
+                        <a href="/admin/customer_groups/create"
+                           id="Sapo-Button-0113189c-2e9e-4968-9b4c-4e0a17ff4e75"
+                           class="fEHNKi text-white">
+                            <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+                            </svg>
+                            <span class="sc-papXJ fCIlZX">Thêm nhóm khách hàng</span>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="MuiBox-root jss24480 jss24475">
                 <div class="MuiPaper-root jss24490 sapo-grid MuiPaper-elevation1 MuiPaper-rounded">
-                    <div class="MuiTableContainer-root jss24491 sapo-grid-header-wrapper stickyHeader"
-                         style="top: 52px;">
-                        <table class="MuiTable-root jss24492 sapo-grid-header" aria-labelledby="tableTitle"
-                               aria-label="enhanced table">
-                            <colgroup>
-                                <col style="width: 208px;">
-                                <col style="width: 105px;">
-                                <col style="width: 144px;">
-                                <col style="width: 294px;">
-                                <col style="width: 186px;">
-                                <col style="width: 119px;">
-                            </colgroup>
-                            <thead class="MuiTableHead-root jss24533">
-                            <tr class="MuiTableRow-root MuiTableRow-head">
-                                <th class="MuiTableCell-root MuiTableCell-head jss24537 MuiTableCell-alignLeft"
-                                    scope="col" colspan="1" rowspan="1"><span
-                                        class="MuiButtonBase-root MuiTableSortLabel-root jss24534" tabindex="0"
-                                        role="button" aria-disabled="false">Tên nhóm<svg
-                                        class="MuiSvgIcon-root UnfoldMoreIcon" focusable="false"
-                                        viewBox="0 0 24 31" aria-hidden="true">
-                                                    <path d="M17 14.5L12 9.5L7 14.5L17 14.5Z" fill="currentColor">
-                                                    </path>
-                                                    <path d="M7 16.5L12 21.5L17 16.5L7 16.5Z" fill="currentColor">
-                                                    </path>
-                                                </svg></span></th>
-                                <th class="MuiTableCell-root MuiTableCell-head jss24537 MuiTableCell-alignLeft"
-                                    scope="col" colspan="1" rowspan="1">Mã nhóm
-                                </th>
-                                <th class="MuiTableCell-root MuiTableCell-head jss24537 MuiTableCell-alignLeft"
-                                    scope="col" colspan="1" rowspan="1">Loại nhóm
-                                </th>
-                                <th class="MuiTableCell-root MuiTableCell-head jss24537 MuiTableCell-alignLeft"
-                                    scope="col" colspan="1" rowspan="1">Mô tả
-                                </th>
-                                <th class="MuiTableCell-root MuiTableCell-head jss24537 MuiTableCell-alignCenter"
-                                    scope="col" colspan="1" rowspan="1">Số lượng khách hàng
-                                </th>
-                                <th class="MuiTableCell-root MuiTableCell-head jss24537 MuiTableCell-alignLeft"
-                                    scope="col" colspan="1" rowspan="1">Ngày tạo
-                                </th>
+                    <div class="MuiTableContainer-root jss24491 sapo-grid-header-wrapper stickyHeader">
+                        <table id="tbCustomerGroup" class="table table-hover mt-2">
+                            <thead>
+                            <tr>
+                                <th class="align-middle" scope="col">Tên nhóm</th>
+                                <th class="align-middle" scope="col">Mã nhóm</th>
+                                <th class="align-middle" scope="col">Loại nhóm</th>
+                                <th class="align-middle" scope="col">Mô tả</th>
+                                <th class="align-middle" scope="col">Số lượng khách hàng</th>
+                                <th class="align-middle" scope="col">Ngày tạo</th>
                             </tr>
                             </thead>
+                            <tbody>
+                            </tbody>
                         </table>
-                    </div>
-                    <div class="MuiTableContainer-root jss24493 sapo-grid-body-wrapper">
-                        <div
-                                style="position: relative; overflow: hidden; width: 100%; height: auto; min-height: 0px; max-height: unset;">
-                            <div
-                                    style="position: relative; overflow: scroll; margin-right: -17px; margin-bottom: -17px; min-height: 17px;">
-                                <table class="table table-hover" aria-labelledby="tableTitle"
-                                       aria-label="enhanced table">
-                                    <colgroup>
-                                        <col style="width: 208px;">
-                                        <col style="width: 105px;">
-                                        <col style="width: 144px;">
-                                        <col style="width: 294px;">
-                                        <col style="width: 186px;">
-                                        <col style="width: 119px;">
-                                    </colgroup>
-                                    <tbody class="MuiTableBody-root" id="customerGroupList">
+                        <!--                        <table class="MuiTable-root" aria-labelledby="tableTitle" aria-label="enhanced table">-->
+                        <!--                            <colgroup>-->
+                        <!--                                <col style="width: 208px;">-->
+                        <!--                                <col style="width: 105px;">-->
+                        <!--                                <col style="width: 144px;">-->
+                        <!--                                <col style="width: 294px;">-->
+                        <!--                                <col style="width: 186px;">-->
+                        <!--                                <col style="width: 119px;">-->
+                        <!--                            </colgroup>-->
+                        <!--                            <thead class="MuiTableHead-root jss24533">-->
+                        <!--                            <tr class="MuiTableRow-root MuiTableRow-head">-->
+                        <!--                                <th class="MuiTableCell-root MuiTableCell-head jss24537 MuiTableCell-alignLeft"-->
+                        <!--                                    scope="col" colspan="1" rowspan="1">-->
+                        <!--                                    <span class="MuiButtonBase-root MuiTableSortLabel-root jss24534" tabindex="0"-->
+                        <!--                                          role="button" aria-disabled="false">-->
+                        <!--                                        Tên nhóm-->
+                        <!--                                        <svg class="MuiSvgIcon-root UnfoldMoreIcon" focusable="false"-->
+                        <!--                                             viewBox="0 0 24 31" aria-hidden="true">-->
+                        <!--                                                    <path d="M17 14.5L12 9.5L7 14.5L17 14.5Z"-->
+                        <!--                                                          fill="currentColor"></path>-->
+                        <!--                                                    <path d="M7 16.5L12 21.5L17 16.5L7 16.5Z"-->
+                        <!--                                                          fill="currentColor"></path>-->
+                        <!--                                                </svg>-->
+                        <!--                                    </span>-->
+                        <!--                                </th>-->
+                        <!--                                <th class="MuiTableCell-root MuiTableCell-head jss24537 MuiTableCell-alignLeft"-->
+                        <!--                                    scope="col" colspan="1" rowspan="1">-->
+                        <!--                                    Mã nhóm-->
+                        <!--                                </th>-->
+                        <!--                                <th class="MuiTableCell-root MuiTableCell-head jss24537 MuiTableCell-alignLeft"-->
+                        <!--                                    scope="col" colspan="1" rowspan="1">-->
+                        <!--                                    Loại nhóm-->
+                        <!--                                </th>-->
+                        <!--                                <th class="MuiTableCell-root MuiTableCell-head jss24537 MuiTableCell-alignLeft"-->
+                        <!--                                    scope="col" colspan="1" rowspan="1">-->
+                        <!--                                    Mô tả-->
+                        <!--                                </th>-->
+                        <!--                                <th class="MuiTableCell-root MuiTableCell-head jss24537 MuiTableCell-alignCenter"-->
+                        <!--                                    scope="col" colspan="1" rowspan="1">-->
+                        <!--                                    Số lượng khách hàng-->
+                        <!--                                </th>-->
+                        <!--                                <th class="MuiTableCell-root MuiTableCell-head jss24537 MuiTableCell-alignLeft"-->
+                        <!--                                    scope="col" colspan="1" rowspan="1">-->
+                        <!--                                    Ngày tạo-->
+                        <!--                                </th>-->
+                        <!--                            </tr>-->
+                        <!--                            </thead>-->
+                        <!--                            <tbody>-->
 
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="jss24496" style="position: fixed; height: 6px; left: 262px;">
-                                <div class="jss24497"
-                                     style="position: relative; display: block; height: 100%; width: 0px;"></div>
-                            </div>
-                            <div
-                                    style="position: absolute; width: 6px; right: 2px; bottom: 2px; top: 2px; border-radius: 3px;">
-                                <div
-                                        style="position: relative; display: block; width: 100%; cursor: pointer; border-radius: inherit; background-color: rgba(0, 0, 0, 0.2); height: 0px;">
-                                </div>
-                            </div>
-                        </div>
+                        <!--                            </tbody>-->
+                        <!--                        </table>-->
                     </div>
-                    <div class="MuiBox-root jss24584 jss24579 sapo-pagination">
-                        <p class="MuiTypography-root MuiTypography-body1">Hiển thị</p>
-                        <div class="MuiFormControl-root">
-                            <div class="MuiInputBase-root MuiOutlinedInput-root jss24580 MuiInputBase-formControl">
-                                <div class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input"
-                                     tabindex="0" role="button" aria-haspopup="listbox">
-                                    <p class="MuiTypography-root jss24582 MuiTypography-body1">20</p>
-                                </div>
-                                <input type="hidden" value="20">
-                                <svg
-                                        class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined" focusable="false"
-                                        viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M7 10l5 5 5-5z"></path>
-                                </svg>
-                                <fieldset aria-hidden="true" class="jss24636 MuiOutlinedInput-notchedOutline"
-                                          style="padding-left: 8px;">
-                                    <legend class="jss24637" style="width: 0.01px;"><span>​</span></legend>
-                                </fieldset>
-                            </div>
-                        </div>
-                        <p class="MuiTypography-root MuiTypography-body1">kết quả</p>
-                        <p class="MuiTypography-root jss24581 MuiTypography-body1">Từ 1 đến 3 trên tổng 3</p>
-                        <nav aria-label="pagination navigation" class="MuiPagination-root jss24583">
-                            <ul class="MuiPagination-ul">
-                                <li>
-                                    <button
-                                            class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-page MuiPaginationItem-textPrimary Mui-disabled MuiPaginationItem-sizeSmall Mui-disabled"
-                                            tabindex="-1" type="button" disabled=""
-                                            aria-label="Go to previous page">
-                                        <svg
-                                                class="MuiSvgIcon-root MuiPaginationItem-icon" focusable="false"
-                                                viewBox="0 0 24 24" aria-hidden="true">
-                                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
-                                        </svg>
-                                    </button>
-                                </li>
-                                <li>
-                                    <button
-                                            class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-page MuiPaginationItem-textPrimary Mui-selected MuiPaginationItem-sizeSmall"
-                                            tabindex="0" type="button" aria-current="true" aria-label="page 1">1<span
-                                            class="MuiTouchRipple-root"></span></button>
-                                </li>
-                                <li>
-                                    <button
-                                            class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-page MuiPaginationItem-textPrimary Mui-disabled MuiPaginationItem-sizeSmall Mui-disabled"
-                                            tabindex="-1" type="button" disabled="" aria-label="Go to next page">
-                                        <svg
-                                                class="MuiSvgIcon-root MuiPaginationItem-icon" focusable="false"
-                                                viewBox="0 0 24 24" aria-hidden="true">
-                                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
-                                        </svg>
-                                    </button>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="__react_component_tooltip t7dec5407-c33b-4df7-af04-ddccf0a28959 place-top type-light jss24495"
-                         id="t7dec5407-c33b-4df7-af04-ddccf0a28959" data-id="tooltip"
-                         style="left: 270px; top: 150px;">
-                    </div>
+                    <!--                    <div class="MuiTableContainer-root">-->
+                    <!--                        <div class="jss24492">-->
+                    <!--                            <div class="jss24493">-->
+                    <!--                                <table class="table table-hover" aria-labelledby="tableTitle"-->
+                    <!--                                       aria-label="enhanced table">-->
+                    <!--                                    <colgroup>-->
+                    <!--                                        <col style="width: 208px;">-->
+                    <!--                                        <col style="width: 105px;">-->
+                    <!--                                        <col style="width: 144px;">-->
+                    <!--                                        <col style="width: 294px;">-->
+                    <!--                                        <col style="width: 186px;">-->
+                    <!--                                        <col style="width: 119px;">-->
+                    <!--                                    </colgroup>-->
+                    <!--                                    <tbody class="MuiTableBody-root" id="customerGroupList">-->
+
+                    <!--                                    </tbody>-->
+                    <!--                                </table>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="MuiBox-root jss24579">-->
+                    <!--                        <p class="MuiTypography-root MuiTypography-body1">Hiển thị</p>-->
+                    <!--                        <div class="MuiFormControl-root">-->
+                    <!--                            <div class="MuiInputBase-root MuiOutlinedInput-root jss24580 MuiInputBase-formControl">-->
+                    <!--                                <div class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input"-->
+                    <!--                                     tabindex="0" role="button" aria-haspopup="listbox">-->
+                    <!--                                    <p class="MuiTypography-root jss24582 MuiTypography-body1">20</p>-->
+                    <!--                                </div>-->
+                    <!--                                <input type="hidden" value="20">-->
+                    <!--                                <svg class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined" focusable="false"-->
+                    <!--                                     viewBox="0 0 24 24" aria-hidden="true">-->
+                    <!--                                    <path d="M7 10l5 5 5-5z"></path>-->
+                    <!--                                </svg>-->
+                    <!--                                <fieldset aria-hidden="true" class="jss24636 MuiOutlinedInput-notchedOutline">-->
+                    <!--                                    <legend class="jss24637">-->
+                    <!--                                        <span>​</span>-->
+                    <!--                                    </legend>-->
+                    <!--                                </fieldset>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                        <p class="MuiTypography-root MuiTypography-body1">kết quả</p>-->
+                    <!--                        <p class="MuiTypography-root jss24581 MuiTypography-body1">Từ 1 đến 3 trên tổng 3</p>-->
+                    <!--                        <nav aria-label="pagination navigation" class="MuiPagination-root jss24583">-->
+                    <!--                            <ul class="MuiPagination-ul">-->
+                    <!--                                <li>-->
+                    <!--                                    <button class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-page MuiPaginationItem-textPrimary Mui-disabled MuiPaginationItem-sizeSmall Mui-disabled"-->
+                    <!--                                            tabindex="-1" type="button" disabled="" aria-label="Go to previous page">-->
+                    <!--                                        <svg class="MuiSvgIcon-root MuiPaginationItem-icon" focusable="false"-->
+                    <!--                                             viewBox="0 0 24 24" aria-hidden="true">-->
+                    <!--                                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>-->
+                    <!--                                        </svg>-->
+                    <!--                                    </button>-->
+                    <!--                                </li>-->
+                    <!--                                <li>-->
+                    <!--                                    <button class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-page MuiPaginationItem-textPrimary Mui-selected MuiPaginationItem-sizeSmall"-->
+                    <!--                                            tabindex="0" type="button" aria-current="true" aria-label="page 1">-->
+                    <!--                                        1-->
+                    <!--                                        <span class="MuiTouchRipple-root"></span>-->
+                    <!--                                    </button>-->
+                    <!--                                </li>-->
+                    <!--                                <li>-->
+                    <!--                                    <button class="MuiButtonBase-root MuiPaginationItem-root MuiPaginationItem-page MuiPaginationItem-textPrimary Mui-disabled MuiPaginationItem-sizeSmall Mui-disabled"-->
+                    <!--                                            tabindex="-1" type="button" disabled="" aria-label="Go to next page">-->
+                    <!--                                        <svg class="MuiSvgIcon-root MuiPaginationItem-icon" focusable="false"-->
+                    <!--                                             viewBox="0 0 24 24" aria-hidden="true">-->
+                    <!--                                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>-->
+                    <!--                                        </svg>-->
+                    <!--                                    </button>-->
+                    <!--                                </li>-->
+                    <!--                            </ul>-->
+                    <!--                        </nav>-->
+                    <!--                    </div>-->
                 </div>
             </div>
         </div>
@@ -221,91 +229,222 @@
 </div>
 </body>
 
-<th:block th:replace="/layout/script :: script"/>
+<th:block th:replace="/layout/script"/>
 <script src="/assets/admin/js/customer/customerGroup_App.js"></script>
+<script src="/assets/admin/js/customer/customer_app.js"></script>
 <script>
-    let customerGroup = new CustomerGroup();
+    let customerGroupFilter = new CustomerGroupFilter();
+    let dataTable;
 
-    function getAllCustomerGroupByGroup() {
-        return $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "GET",
-            url: origin +"/api/customer_groups/sortGroup"
-        })
-            .done((data) => {
-                $.each(data, (i, item) => {
-                    console.log(item)
-                    let str = `<tr data-id="${item.id}" class="MuiTableRow-root jss24569 MuiTableRow-hover upCusGrp" role="checkbox"
-                                        tabindex="-1">
-                                            <td
-                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
-                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                                               data-tip="Vip" currentitem="false"
-                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
-                                                ${item.title}</p>
-                                        </td>
-                                        <td
-                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
-                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                                               data-tip="VIP" currentitem="false"
-                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
-                                                ${item.cusGrpCode}</p>
-                                        </td>
-                                        <td
-                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
-                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                                               data-tip="Cố định" currentitem="false"
-                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
-                                                Cố định</p>
-                                        </td>
-                                        <td
-                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
-                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                                               data-tip="" currentitem="false"
-                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
-                                               ${item.description || ""}</p>
-                                        </td>
-                                        <td id = "countCus"
-                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignCenter">
-                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                                               data-tip="0" currentitem="false"
-                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
-                                                ${item.countCus}</p>
-                                        </td>
-                                        <td
-                                                class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
-                                            <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-                                               data-tip="05/11/2022" currentitem="false"
-                                               style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
-                                                ${item.createdAt === null ? "" : new Date(item.createdAt).toLocaleDateString('en-GB')}</p>
-                                        </td>
-                                    </tr>`;
-                    $("#customerGroupList").append(str);
-                });
-                getIdRow();
-            })
-            .fail((jqXHR) => {
-                if (jqXHR.responseJSON) {
-                    $.each(jqXHR.responseJSON, (key, item) => {
-                        CustomerGroup_App.IziToast.showErrorAlert(item);
-                    })
+    CustomerApp.page.elements.tbCustomerGroup = $("#tbCustomerGroup");
+    CustomerApp.page.elements.customerGroupList = $("#customerGroupList");
+
+    CustomerApp.page.elements.upCusGrp = $(".upCusGrp");
+
+    CustomerApp.page.commands.drawDataTable = () => {
+        dataTable = CustomerApp.page.elements.tbCustomerGroup.DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: origin + "/api/customer_groups/filter",
+                type: 'POST',
+                accept: 'application/json',
+                contentType: 'application/json',
+                data: (d) => {
+                    d.title = customerGroupFilter.title;
+                    d.cusGrpCode = customerGroupFilter.cusGrpCode;
+                    d.customerGroupType = customerGroupFilter.customerGroupType;
+                    d.description = customerGroupFilter.description;
+                    d.countCus = customerGroupFilter.countCus;
+                    d.createdAt = customerGroupFilter.createdAt;
+                    d.draw = customerGroupFilter.draw;
+                    console.log(d);
+                    return JSON.stringify(d);
                 }
-            })
-    }
-
-    function getIdRow() {
-        $(".upCusGrp").on("click", function () {
-            let id = $(this).data("id");
-            window.location.href = "/admin/customer_groups/"+id;
-            console.log(id);
-
+            },
+// <<<<<<< HEAD
+//             type: "GET",
+//             url: origin +"/api/customer_groups/sortGroup"
+//         })
+//             .done((data) => {
+//                 $.each(data, (i, item) => {
+//                     console.log(item)
+//                     let str = `<tr data-id="${item.id}" class="MuiTableRow-root jss24569 MuiTableRow-hover upCusGrp" role="checkbox"
+//                                         tabindex="-1">
+//                                             <td
+//                                                 class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
+//                                             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+//                                                data-tip="Vip" currentitem="false"
+//                                                style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
+//                                                 ${item.title}</p>
+//                                         </td>
+//                                         <td
+//                                                 class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
+//                                             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+//                                                data-tip="VIP" currentitem="false"
+//                                                style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
+//                                                 ${item.cusGrpCode}</p>
+//                                         </td>
+//                                         <td
+//                                                 class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
+//                                             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+//                                                data-tip="Cố định" currentitem="false"
+//                                                style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
+//                                                 Cố định</p>
+//                                         </td>
+//                                         <td
+//                                                 class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
+//                                             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+//                                                data-tip="" currentitem="false"
+//                                                style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
+//                                                ${item.note || ""}</p>
+//                                         </td>
+//                                         <td id = "countCus"
+//                                                 class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignCenter">
+//                                             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+//                                                data-tip="0" currentitem="false"
+//                                                style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
+//                                                 ${item.countCus}</p>
+//                                         </td>
+//                                         <td
+//                                                 class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
+//                                             <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+//                                                data-tip="05/11/2022" currentitem="false"
+//                                                style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
+//                                                 ${item.createdAt === null ? "" : new Date(item.createdAt).toLocaleDateString('en-GB')}</p>
+//                                         </td>
+//                                     </tr>`;
+//                     $("#customerGroupList").append(str);
+//                 });
+//                 getIdRow();
+//             })
+//             .fail((jqXHR) => {
+//                 if (jqXHR.responseJSON) {
+//                     $.each(jqXHR.responseJSON, (key, item) => {
+//                         CustomerGroup_App.IziToast.showErrorAlert(item);
+//                     })
+// =======
+            language: CustomerApp.dataTableDetails.language,
+            lengthMenu: [
+                [5, 20, 50, 100, -1],
+                ["5", "20", "50", "100", "All"]
+            ],
+            searching: false,
+            columns: [
+                {data: 'title'},
+                {data: 'cusGrpCode'},
+                {data: 'customerGroupType'},
+                {data: 'description'},
+                {data: 'countCus'},
+                {
+                    data: 'createdAt',
+                    render: (data) => {
+                        let date = CustomerApp.page.commands.formatDatePattern(data);
+                        return `<td>${date}</td>`
+                    }
+// >>>>>>> 1839f2e0f3941be51a38ccbca6f4385ee3045bee
+                }
+            ],
         })
     }
 
-    getAllCustomerGroupByGroup();
+    $(() => {
+        CustomerApp.page.commands.drawDataTable();
+    })
+
+    $('a.paginate_button').on('click', function () {
+        let id = $(this).attr("data-dt-idx");
+    })
+
+
+    CustomerApp.page.commands.formatDatePattern = (date) => {
+        let fullYear = date.split('-');
+        let yyyy = fullYear[0];
+        let mm = fullYear[1];
+        let dd = fullYear[2].split('T')[0];
+
+        return dd + '/' + mm + '/' + yyyy;
+    }
+
+    // CustomerApp.page.commands.getAllCustomerGroupByGroup = () => {
+    //     return $.ajax({
+    //         headers: {
+    //             "accept": "application/json",
+    //             "content-type": "application/json"
+    //         },
+    //         type: "GET",
+    //         url: origin + "/api/customer_groups/sortGroup"
+    //     })
+    //         .done((data) => {
+    //             console.log(data)
+    //             $.each(data, (i, item) => {
+    //                 let str = `<tr data-id="${item.id}" class="MuiTableRow-root jss24569 MuiTableRow-hover upCusGrp" role="checkbox"
+    //                                     tabindex="-1">
+    //                                         <td
+    //                                             class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
+    //                                         <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+    //                                            data-tip="Vip" currentitem="false"
+    //                                            style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
+    //                                             ${item.title}</p>
+    //                                     </td>
+    //                                     <td
+    //                                             class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
+    //                                         <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+    //                                            data-tip="VIP" currentitem="false"
+    //                                            style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
+    //                                             ${item.cusGrpCode}</p>
+    //                                     </td>
+    //                                     <td
+    //                                             class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
+    //                                         <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+    //                                            data-tip="Cố định" currentitem="false"
+    //                                            style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
+    //                                             Cố định</p>
+    //                                     </td>
+    //                                     <td
+    //                                             class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
+    //                                         <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+    //                                            data-tip="" currentitem="false"
+    //                                            style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
+    //                                            ${item.description || ""}</p>
+    //                                     </td>
+    //                                     <td id = "countCus"
+    //                                             class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignCenter">
+    //                                         <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+    //                                            data-tip="0" currentitem="false"
+    //                                            style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
+    //                                             ${item.countCus}</p>
+    //                                     </td>
+    //                                     <td
+    //                                             class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
+    //                                         <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
+    //                                            data-tip="05/11/2022" currentitem="false"
+    //                                            style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
+    //                                             ${item.createdAt === null ? "" : new Date(item.createdAt).toLocaleDateString('en-GB')}</p>
+    //                                     </td>
+    //                                 </tr>`;
+    //                 CustomerApp.page.elements.customerGroupList.append(str);
+    //             });
+    //             CustomerApp.page.commands.getIdRow();
+    //         })
+    //         .fail((jqXHR) => {
+    //             if (jqXHR.responseJSON) {
+    //                 $.each(jqXHR.responseJSON, (key, item) => {
+    //                     CustomerGroup_App.IziToast.showErrorAlert(item);
+    //                 })
+    //             }
+    //         })
+    // }
+    //
+    // CustomerApp.page.commands.getIdRow = () => {
+    //     CustomerApp.page.elements.upCusGrp.on("click", function () {
+    //         let id = $(this).data("id");
+    //
+    //         window.location.href = "/admin/customer_groups/" + id;
+    //     })
+    // }
+    //
+    // CustomerApp.page.commands.getAllCustomerGroupByGroup();
 </script>
 
 </html>

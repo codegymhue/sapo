@@ -27,7 +27,7 @@ public class PricingPolicyServiceImpl implements PricingPolicyService {
 
     @Override
     public PricingPolicyResult create(PricingPolicyParam pricingPolicyParam) {
-        Map<String, String> errors= new HashMap<>();
+        Map<Object, Object> errors= new HashMap<>();
 
         if (!checkPricingPolicyType(pricingPolicyParam.getPricingPolicyType())) {
             errors.put("pricingPolicyType", "Loại chính sách giá không đúng định dạng");

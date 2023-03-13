@@ -12,10 +12,7 @@ import vn.sapo.shared.exceptions.NotFoundException;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
-
-import static vn.sapo.entities.customer.CustomerGroupType.FIXED;
 
 @Service
 public class CustomerGroupServiceImpl implements CustomerGroupService {
@@ -29,38 +26,45 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     @Autowired
     CustomerGroupFilterRepository customerGroupFilterRepository;
 
+
     @Override
     @Transactional
-    public CustomerGroupResult create(CreateCusGroupParam createCusGroupParam) {
+    public CustomerGroupResult create(CreateCusGroupParam createParam) {
 //        String title = createCusGroupParam.getTitle().trim();
-//        String cusGrpCode = createCusGroupParam.getCusGrpCode().trim();
 //        String description = createCusGroupParam.getDescription().trim();
-//        int discount = createCusGroupParam.getDiscount();
 //
-//        Map<String, String> errors = new HashMap<>();
+//        Map<Object, Object> errors = new HashMap<>();
 //
-//        checkTitleCustomerGroup(title, errors);
+//        checkCustomerGroupTitle(title, errors);
 //
-//        if (!cusGrpCode.isEmpty()) {
+//        if (createCusGroupParam.getCusGrpCode() != null) {
+//            String cusGrpCode = createCusGroupParam.getCusGrpCode().trim();
 //            checkCusGrpCodeWhenNotEmpty(cusGrpCode, errors);
 //        }
 //
-//        checkDescription(description, errors);
-//        checkDiscount(discount, errors);
-//
-//        if (!errors.isEmpty()) {
-//            throw new DataInputValidateException(errors);
+//        if (description.length() > 255) {
+//            errors.put("description", "Mô tả không được vượt quá 255 ký tự");
 //        }
 //
-//        String maxSystemCustomerGroupCode = getMaxSystemCustomerGroupCode();
-//        createCusGroupParam.setCusGrpCode(maxSystemCustomerGroupCode);
+//        if (!errors.isEmpty()) {
+//            throw new ValidationException(errors);
+//        }
+
+//        if (createCusGroupParam.getCusGrpCode() == null) {
+//            createCusGroupParam.setCusGrpCode(getMaxSystemCustomerGroupCode());
+//        }
+
+//        CustomerGroup customerGroup = customerGroupMapper.toModel(createCusGroupParam);
+//        //customerGroup.setCusGrpType(FIXED);
 //
-//        createCusGroupParam.setCusGrpCode(cusGrpCode);
-//new ValidationException(new HashMap<>(){{put("cusGrpCode","sdfsdfsdf");}});
-        CustomerGroup customerGroup = customerGroupMapper.toModel(createCusGroupParam);
-        customerGroup.setCusGrpType(FIXED);
+//        customerGroup = customerGroupRepository.save(customerGroup);
+//
+//        customerGroup.setCusGrpCode(CodePrefix.CUSTOMER_GROUP.generate(customerGroup.getId()));
+//
+//        return customerGroupMapper.toDTO(customerGroup);
+        CustomerGroup customerGroup = customerGroupMapper.toModel(createParam);
         customerGroup = customerGroupRepository.save(customerGroup);
-        if (customerGroup.getCusGrpCode() == null)
+        if (createParam.getCusGrpCode() == null)
             customerGroup.setCusGrpCode(CodePrefix.CUSTOMER_GROUP.generate(customerGroup.getId()));
         return customerGroupMapper.toDTO(customerGroup);
     }
@@ -85,22 +89,17 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ICustomerGroup> sortByGroup() {
+    public List<ICustomerGroupResult> sortByGroup() {
         return customerGroupRepository.sortByGroup();
     }
 
     @Override
     @Transactional
     public CustomerGroupResult findById(Integer id) {
-        Optional<CustomerGroup> optionalCustomerGroup = customerGroupRepository.findById(id);
+        return customerGroupRepository.findById(id)
+                .map(customerGroupMapper::toDTO)
+                .orElseThrow(() -> new NotFoundException("customer.exception.notFound"));
 
-        if (optionalCustomerGroup.isEmpty()) {
-            throw new NotFoundException("Customer id = " + id + "not found!");
-        }
-
-        CustomerGroup customerGroup = optionalCustomerGroup.get();
-
-        return customerGroupMapper.toDTO(customerGroup);
     }
 
     @Override
@@ -121,20 +120,24 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
                 .map(customerGroupMapper::toDTO);
     }
 
-    private void checkDiscount(int discount, Map<String, String> errors) {
-        if (discount < 0 || discount > 100) {
-            errors.put("discount", "Giá trị chiết khấu từ 0 đến 100");
+    //TODO: ko can nua
+
+    private void checkCustomerGroupTitle(String title, Map<Object, Object> errors) {
+
+        if (title.length() > 250) {
+            errors.put("title", "{customer.validation.CreateCusGroupParam.title.length}");
+        }
+        if (customerGroupRepository.existsByTitle(title)) {
+            errors.put("title", "Nhóm khách hàng đã tồn tại");
         }
     }
 
-    private void checkDescription(String description, Map<String, String> errors) {
-        if (description.length() > 255) {
-            errors.put("description", "Mô tả không được vượt quá 255 ký tự");
-        }
-    }
+    //TODO: Ko can nua
 
-    private void checkCusGrpCodeWhenNotEmpty(String cusGrpCode, Map<String, String> errors) {
-        if (cusGrpCode.substring(0, 3).equalsIgnoreCase("ctn")) {
+    public void checkCusGrpCodeWhenNotEmpty(String cusGrpCode, Map<Object, Object> errors) {
+        String prefix = CodePrefix.CUSTOMER_GROUP.getValue();
+
+        if (cusGrpCode.substring(0, 3).equalsIgnoreCase(prefix)) {
             errors.put("cusGrpCode", "Mã nhóm không được có tiền tố của hệ thống CTN");
         } else if (customerGroupRepository.existsByCusGrpCode(cusGrpCode)) {
             errors.put("cusGrpCode", "Mã nhóm khách hàng này đã tồn tại");
@@ -143,22 +146,15 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
         }
     }
 
-    private void checkTitleCustomerGroup(String title, Map<String, String> errors) {
-        if (title.isEmpty()) {
-            errors.put("title", "Tên nhóm khách hàng không được để trống");
-        } else if (title.length() > 50) {
-            errors.put("title", "Tên nhóm khách hàng không được vượt quá 50 ký tự");
-        }
-    }
-
-    private String getMaxSystemCustomerGroupCode() {
-        String prefix = "CTN";
+    //TODO: KO CAN THOIET
+    public String getMaxSystemCustomerGroupCode() {
+        String prefix = CodePrefix.CUSTOMER_GROUP.getValue();
         String maxSystemCustomerGroupCode;
 
         String currentMaxSystemCustomerGroupCode = customerGroupRepository.getMaxSystemCustomerGroupCode();
 
         if (currentMaxSystemCustomerGroupCode == null) {
-            maxSystemCustomerGroupCode = "CTN00001";
+            maxSystemCustomerGroupCode = CodePrefix.CUSTOMER_GROUP.getValue().concat("00001");
         } else {
 
             String[] a = currentMaxSystemCustomerGroupCode.split(prefix);

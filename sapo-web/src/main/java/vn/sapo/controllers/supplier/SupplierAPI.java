@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.customers.AddressService;
 import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.payment_method.PaymentMethodService;
+import vn.sapo.shared.controllers.BaseController;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.supplier.SupplierExcelService;
 import vn.sapo.supplier.dto.*;
@@ -27,7 +29,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/suppliers")
-public class SupplierAPI {
+public class SupplierAPI extends BaseController {
 
     @Autowired
     private SupplierService supplierService;
@@ -59,6 +61,13 @@ public class SupplierAPI {
         );
     }
 
+    @GetMapping("/tags")
+    public ResponseEntity<?> getAllSupplierTags() {
+       List<String> listTags =  supplierService.findTags();
+        return new ResponseEntity<>(listTags,HttpStatus.OK);
+
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<SupplierResult> findById(@PathVariable Integer id) {
         SupplierResult dto = supplierService.findById(id);
@@ -66,8 +75,15 @@ public class SupplierAPI {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Validated @RequestBody CreateSupplierParam createSupplierParam) {
-//        System.out.println(createSupplierParam);
+    public ResponseEntity<?> create(@Valid @RequestBody CreateSupplierParam createSupplierParam, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError fieldError : fieldErrors) {
+                errors.put(fieldError.getField(), fieldError.getDefaultMessage());
+            }
+            return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        }
         SupplierResult dto = supplierService.create(createSupplierParam);
         CreateAddressParam createAddressParam = createSupplierParam.getCreateAddressParam();
         if (createAddressParam == null)
