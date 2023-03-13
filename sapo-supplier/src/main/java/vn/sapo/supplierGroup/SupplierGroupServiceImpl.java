@@ -7,10 +7,12 @@ import vn.sapo.entities.supplier.SupplierGroup;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.OperationException;
+import vn.sapo.shared.exceptions.ValidationException;
 import vn.sapo.supplierGroup.dto.CreateSupGroupParam;
 import vn.sapo.supplierGroup.dto.SupplierGroupResult;
 import vn.sapo.supplierGroup.dto.UpdateSupGroupParam;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,14 +29,14 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
     @Override
     @Transactional
     public SupplierGroupResult create(CreateSupGroupParam createParam) {
-        if (createParam.getTitle() == null) {
-            throw new OperationException("Tên nhóm nhà cung cấp không được để trống");
-        }
+
         if (supplierGroupRepository.existsByTitle(createParam.getTitle()))
-            throw new OperationException("Tên nhóm " + createParam.getTitle() + " đã tồn tại");
+            throw new ValidationException(new HashMap<>() {{
+                put("title", "supplier_group.validation.title.exists");
+            }});
 
         if (createParam.getSupGroupCode() != null && supplierGroupRepository.existsBySupGroupCode(createParam.getSupGroupCode()))
-            throw new OperationException("Mã nhóm nhà cung cấp đã tồn tại");
+            throw new ValidationException("Mã nhóm nhà cung cấp đã tồn tại");
 
         SupplierGroup supplierGroup = supplierGroupMapper.toModel(createParam);
         supplierGroupRepository.save(supplierGroup);
@@ -58,7 +60,7 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
     @Transactional(readOnly = true)
     public SupplierGroupResult findById(Integer id) {
         SupplierGroup supplierGroup = supplierGroupRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Not found group supplier with id: " + id));
+                .orElseThrow(() -> new NotFoundException("supplier_group.exception.notFound"));
         return supplierGroupMapper.toDTO(supplierGroup);
     }
 
@@ -66,7 +68,7 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
     @Transactional
     public SupplierGroupResult update(UpdateSupGroupParam updateParam) {
         SupplierGroup supplierGroup = supplierGroupRepository.findById(updateParam.getId())
-                .orElseThrow(() -> new NotFoundException("Not found group supplier with id: " + updateParam.getId()));
+                .orElseThrow(() -> new NotFoundException("supplier_group.exception.notFound"));
 
         if (supplierGroupRepository.existsBySupGroupCode(updateParam.getSupGroupCode()) && !supplierGroup.getSupGroupCode().equalsIgnoreCase(updateParam.getSupGroupCode())) {
             throw new OperationException("Mã nhóm nhà cung cấp đã tồn tại");
@@ -75,7 +77,7 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
             throw new OperationException("Tên nhóm " + updateParam.getTitle() + " đã tồn tại");
         }
         if (updateParam.getSupGroupCode() != null && !supplierGroup.getSupGroupCode().equalsIgnoreCase(updateParam.getSupGroupCode())) {
-            if (updateParam.getSupGroupCode().startsWith("STN")) {
+            if (updateParam.getSupGroupCode().startsWith(CodePrefix.SUPPLIER_GROUP.getValue())) {
                 throw new OperationException("Mã không được có tiền tố của hệ thống STN");
             }
         }

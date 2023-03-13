@@ -14,6 +14,8 @@ import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.customerGroup.dto.*;
 import vn.sapo.shared.controllers.BaseController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/customer_groups")
 public class CustomerGroupAPI extends BaseController {
@@ -41,7 +43,7 @@ public class CustomerGroupAPI extends BaseController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody @Validated CreateCusGroupParam createCusGroupParam) {
+    public ResponseEntity<?> create(@RequestBody @Valid CreateCusGroupParam createCusGroupParam) {
         CustomerGroupResult dto = customerGroupService.create(createCusGroupParam);
 
         return new ResponseEntity<>(dto, HttpStatus.CREATED);

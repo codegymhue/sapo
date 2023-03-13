@@ -44,6 +44,9 @@ public class GlobalDefaultExceptionHandler extends ResponseEntityExceptionHandle
 
     @ExceptionHandler({ValidationException.class, NotFoundException.class, OperationException.class})
     public ResponseEntity<?> validationException(BaseException ex, Locale locale) {
+        String message = ex.getMessage();
+        if (message != null)
+            message = messageSource.getMessage(ex.getMessage(), new Object[0], locale);
         Map<String, String> errors = ex.getErrors();
         if (ex.getErrors() != null)
             errors = errors
@@ -54,9 +57,9 @@ public class GlobalDefaultExceptionHandler extends ResponseEntityExceptionHandle
                             entry -> messageSource.getMessage(entry.getValue(), new Object[0], locale))
                     );
         return new ResponseEntity<>(
-                new Result<>(
+                new Result(
+                        message,
                         errors,
-                        messageSource.getMessage(ex.getMessage(), new Object[0], locale),
                         ex.status
                 )
                 , HttpStatus.valueOf(ex.status));
