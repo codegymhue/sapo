@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.sapo.customer.dto.CustomerResult;
 
 import java.util.List;
 
@@ -18,9 +17,13 @@ public class CustomerGroupDataTable {
 
     private Integer draw;
 
-    private Long recordsTotal;
+    private Integer start;
 
-    private Long recordsFiltered;
+    private Integer length;
+
+    private Integer recordsTotal;
+
+    private Integer recordsFiltered;
 
     private List<CustomerGroupResult> data;
 }

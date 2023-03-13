@@ -22,7 +22,7 @@ public class CustomerGroupFilter {
 
     private String description;
 
-    private Long countCus;
+    private Integer countCus;
 
     private Instant createdAt;
 

@@ -23,6 +23,7 @@ public class CustomerGroupAPI extends BaseController {
     @Autowired
     CustomerGroupMapper customerGroupMapper;
 
+
     @GetMapping
     public ResponseEntity<?> getAllCustomerGroup() {
         return new ResponseEntity<>(customerGroupService.findAll(), HttpStatus.OK);
@@ -72,9 +73,10 @@ public class CustomerGroupAPI extends BaseController {
 
         CustomerGroupDataTable customerGroupDataTable = new CustomerGroupDataTable()
                 .setDraw(customerGroupFilter.getDraw())
-                .setRecordsTotal(pageableCustomerGroups.getTotalElements())
-                .setRecordsFiltered(pageableCustomerGroups.getTotalElements())
-                .setData(pageableCustomerGroups.getContent());
+                .setRecordsTotal((int) pageableCustomerGroups.getTotalElements())
+                .setRecordsFiltered((int) pageableCustomerGroups.getTotalElements())
+//                .setData(pageableCustomerGroups.getContent());
+                .setData(customerGroupService.findAllCustomerGroupResult());
 
         return new ResponseEntity<>(customerGroupDataTable, HttpStatus.OK);
     }

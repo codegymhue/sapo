@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface CustomerGroupService {
 
+    List<CustomerGroupResult> findAllCustomerGroupResult();
+
     String getMaxSystemCustomerGroupCode();
 
     CustomerGroupResult create(CreateCusGroupParam createCusGroupParam);

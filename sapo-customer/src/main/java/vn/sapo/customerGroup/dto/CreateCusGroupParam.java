@@ -6,8 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.validator.constraints.Length;
 import vn.sapo.shared.validation.constraints.NullOrNotBlank;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -19,18 +21,22 @@ import javax.validation.constraints.NotBlank;
 @Accessors(chain = true)
 public class CreateCusGroupParam {
 
-    @NotBlank(message = "{customer_group.validation..title.notBlank}")
+    @NotBlank(message = "{customer_group.validation.title.notBlank}")
     private String title;
+
     @NullOrNotBlank
+    @Length(max = 50, message = "{customer_group.validation.cusGrpCode.length}")
     private String cusGrpCode;
 
     private Integer defaultPricingPolicyId;
-    @Min(value = 0, message = "{customer_group.validation.discount.min}")
-    @Max(value = 100, message = "{customer_group.validation.discount.max}")
+
+    @Min(value = 0, message = "{customer_group.validation.defaultDiscountRate.min}")
+    @Max(value = 100, message = "{customer_group.validation.defaultDiscountRate.max}")
     private Integer defaultDiscountRate;
+
     @NullOrNotBlank
     private String defaultPaymentMethodId;
 
-    @Max(value = 255, message = "{customer_group.validation.note.max}")
+    @Length(max = 255, message = "{customer_group.validation.note.max}")
     private String note;
 }
