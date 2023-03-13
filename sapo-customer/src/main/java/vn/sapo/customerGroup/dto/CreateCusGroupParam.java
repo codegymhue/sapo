@@ -19,19 +19,18 @@ import javax.validation.constraints.NotBlank;
 @Accessors(chain = true)
 public class CreateCusGroupParam {
 
-    @NotBlank(message = "{customer.validation.CreateCusGroupParam.title.notBlank}")
+    @NotBlank(message = "{customer_group.validation..title.notBlank}")
     private String title;
-
+    @NullOrNotBlank
     private String cusGrpCode;
 
-    private String description;
+    private Integer defaultPricingPolicyId;
+    @Min(value = 0, message = "{customer_group.validation.discount.min}")
+    @Max(value = 100, message = "{customer_group.validation.discount.max}")
+    private Integer defaultDiscountRate;
+    @NullOrNotBlank
+    private String defaultPaymentMethodId;
 
-    private Integer pricingPolicyId;
-
-    @Min(value = 0, message = "{customer.validation.CreateCusGroupParam.discount.min}")
-    @Max(value = 100, message = "{customer.validation.CreateCusGroupParam.discount.max}")
-    private Integer discount;
-
-    private String paymentMethodId;
-
+    @Max(value = 255, message = "{customer_group.validation.note.max}")
+    private String note;
 }
