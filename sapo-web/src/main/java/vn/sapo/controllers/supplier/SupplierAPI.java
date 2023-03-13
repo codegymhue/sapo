@@ -169,16 +169,7 @@ public class SupplierAPI {
     };
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> update(@Valid @RequestBody UpdateSupplierParam updateSupplierParam, BindingResult bindingResult) {
-        List<String> allError = new ArrayList<>();
-        List<ObjectError> errors;
-        if (bindingResult.hasFieldErrors()) {
-            errors = bindingResult.getAllErrors();
-            for (ObjectError error : errors) {
-                allError.add(error.getDefaultMessage());
-            }
-            throw new NotFoundException(allError.toString());
-        }
+    public ResponseEntity<?> update(@Valid @RequestBody UpdateSupplierParam updateSupplierParam) {
         return new ResponseEntity<>(supplierService.update(updateSupplierParam), HttpStatus.OK);
     }
 
