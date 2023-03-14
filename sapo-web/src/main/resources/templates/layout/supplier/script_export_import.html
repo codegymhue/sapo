@@ -23,6 +23,7 @@
 
     <script>
         $('#importBtn').on('click', () => {
+            $("#importBtn").attr("disabled",true)
             let data = new FormData();
             let file = $('#formFileSuppliers')[0].files[0];
             data.append('file',file)
@@ -37,19 +38,19 @@
                 $("#modalImportFileSuppliers").modal("hide");
                 $("#frmFileSuppliers");
                 page.commands.getAllSupplier();
+                $("#importBtn").attr("disabled",false)
                 SupplierApp.IziToast.showSuccessAlert("Tải file lên thành công!")
                 // page.commands.closeLoading();
             }).fail((jqXHR) => {
+                $("#importBtn").attr("disabled",false)
                 SupplierApp.IziToast.showErrorAlert("Tải file lên không thành công!")
                 // page.commands.closeLoading();
             })
 
-
-
-
-
         });
     </script>
+
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </th:block>

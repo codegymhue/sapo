@@ -3,14 +3,13 @@ package vn.sapo.controllers.supplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import vn.sapo.contact.dto.ContactResult;
+import vn.sapo.contact.dto.CreateContactParam;
 import vn.sapo.customers.AddressService;
 import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.payment_method.PaymentMethodService;
-import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.supplier.SupplierService;
 import vn.sapo.supplier.dto.*;
 import vn.sapo.supplier.excel.ImportExcelSupplierParam;
@@ -18,7 +17,6 @@ import vn.sapo.supplier.excel.ResponseMessage;
 import vn.sapo.supplier.excel.SupplierExcelService;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,23 +57,37 @@ public class SupplierAPI {
 
     @GetMapping("/tags")
     public ResponseEntity<?> getAllSupplierTags() {
-       List<String> listTags =  supplierService.findTags();
-        return new ResponseEntity<>(listTags,HttpStatus.OK);
+        List<String> listTags = supplierService.findTags();
+        return new ResponseEntity<>(listTags, HttpStatus.OK);
 
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SupplierResult> findById(@PathVariable Integer id) {
+    public ResponseEntity<?> findById(@PathVariable Integer id) {
         SupplierResult dto = supplierService.findById(id);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
+
+    @GetMapping("/{supplierId}/contacts")
+    public ResponseEntity<?> findContactBySupplierId(@PathVariable Integer supplierId) {
+        List<ContactResult> dto = supplierService.findContactsBySupplierId(supplierId);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+
+    }
+
+    @PostMapping("/{supplierId}/contacts")
+    public ResponseEntity<?> findContactBySupplierId(@PathVariable Integer supplierId, @Valid @RequestBody CreateContactParam createParam) {
+        ContactResult dto = supplierService.createContactBySupplierId(supplierId, createParam);
+        return new ResponseEntity<>(dto, HttpStatus.CREATED);
+    }
+
 
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody CreateSupplierParam createSupplierParam) {
         SupplierResult dto = supplierService.create(createSupplierParam);
         CreateAddressParam createAddressParam = createSupplierParam.getCreateAddressParam();
         if (createAddressParam == null)
-            return new ResponseEntity<>(dto, HttpStatus.OK);
+            return new ResponseEntity<>(dto, HttpStatus.CREATED);
         createAddressParam.setSupplierId(dto.getId());
         addressService.create(createAddressParam);
         dto = supplierService.findById(dto.getId());
@@ -166,7 +178,9 @@ public class SupplierAPI {
                     HttpStatus.EXPECTATION_FAILED);
         }
 
-    };
+    }
+
+    ;
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> update(@Valid @RequestBody UpdateSupplierParam updateSupplierParam) {

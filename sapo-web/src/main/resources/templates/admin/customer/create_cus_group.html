@@ -107,7 +107,7 @@
                                                 </fieldset>
                                             </div>
                                         </div>
-                                        <div class="error cusGrpCode-error"></div>
+                                        <div class="error cusGrpCode-error hidden"></div>
                                     </div>
                                 </div>
                                 <div class="MuiGrid-item MuiGrid-grid-xs-12">
@@ -141,7 +141,7 @@
                                                 </fieldset>
                                             </div>
                                         </div>
-                                        <div class="error note-error"></div>
+                                        <div class="error note-error hidden"></div>
                                     </div>
                                 </div>
                             </div>
@@ -179,7 +179,7 @@
                                         <label class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl
                                         MuiInputLabel-animated MuiInputLabel-shrink" data-shrink="true"
                                                for="searchDefaultPriceDropdown">
-                                            Giá Mặc Định
+                                            Giá mặc định
                                         </label>
                                         <div class="dropdown jss1784 jss1769"
                                              onclick="CustomerApp.page.commands.showDefaultPricingPolicyDropdown()"
@@ -199,8 +199,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div
-                                                    onclick="CustomerApp.page.commands.showModalCreatePricePolicy()">
+                                            <div onclick="CustomerApp.page.commands.showModalCreatePricePolicy()">
                                                 <div class="jss23596">
                                                     <div class="jss23775 jss23769 jss760">
                                                         <i class="fa-solid fa-circle-plus"></i>
@@ -233,7 +232,7 @@
                                                 </fieldset>
                                             </div>
                                         </div>
-                                        <div class="error defaultDiscountRate-error"></div>
+                                        <div class="error defaultDiscountRate-error hidden"></div>
                                     </div>
                                 </div>
                                 <div class="MuiGrid-item MuiGrid-grid-xs-12">
@@ -241,11 +240,11 @@
                                         <label class="MuiFormLabel-root MuiInputLabel-root jss755
                                                MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
                                                data-shrink="true" for="paymentType">
-                                            Hình Thức Thanh Toán
+                                            Hình thức thanh toán
                                         </label>
                                         <div class="dropdown jss1784">
                                             <div class="dropdown-toggle select-btn-pay jss759"
-                                                 type="button" data-bs-toggle="dropdown"
+                                                 type="button" data-toggle="dropdown"
                                                  aria-expanded="false">
                                                 <span id="paymentType">
                                                     Chọn hình thức thanh toán
@@ -281,19 +280,15 @@
     let paymentMethod = {};
     let createCusGroupParam = {};
 
-    CustomerApp.page.elements.modalCreatePricePolicy = $("#modalCreatePricePolicy");
 
     CustomerApp.page.elements.titleGroupCre = $("#titleGroupCre");
     CustomerApp.page.elements.selectBtnPri = $('.select-btn-pri');
-    CustomerApp.page.elements.selectBtnPay = $('.select-btn-pay');
+    // CustomerApp.page.elements.selectBtnPay = $('.select-btn-pay');
     CustomerApp.page.elements.pricingType = $("#pricingType");
 
     CustomerApp.page.elements.btnCreateCustomerGroup = $("#btnCreateCustomerGroup");
-    CustomerApp.page.elements.btnCreatePricePolicy = $("#btnCreatePricePolicy");
-    CustomerApp.page.elements.btnCloseCreatePricePolicyModal = $(".btnCloseCreatePricePolicyModal");
 
     CustomerApp.page.elements.frmCreateCusGrp = $("#frmCreateCusGrp");
-    CustomerApp.page.elements.frmCreatePricePolicy = $("#frmCreatePricePolicy");
 
     CustomerApp.page.elements.dropdownDefaultPrice = $("#dropdownDefaultPrice");
     CustomerApp.page.elements.dropdownPaymentMethod = $("#dropdownPaymentMethod");
@@ -311,23 +306,11 @@
 
     CustomerApp.page.elements.error = $(".error");
     CustomerApp.page.elements.titleError = $(".title-error.error");
-    CustomerApp.page.elements.pricingPolicyCodeError = $(".pricingPolicyCode-error.error");
-    CustomerApp.page.elements.pricingPolicyTypeError = $(".pricingPolicyType-error.error");
 
     CustomerApp.page.elements.titleGroupCreError = $(".titleGroupCre-error.error");
     CustomerApp.page.elements.cusGrpCodeError = $(".cusGrpCode-error.error");
     CustomerApp.page.elements.noteError = $(".note-error.error");
     CustomerApp.page.elements.defaultDiscountRateError = $(".defaultDiscountRate-error.error");
-
-    testOnchange = (event) => {
-        let a = event.target.value;
-        console.log(a)
-    }
-
-
-    CustomerApp.page.commands.showModalCreatePricePolicy = () => {
-        CustomerApp.page.elements.modalCreatePricePolicy.modal("show");
-    }
 
     CustomerApp.page.commands.selectPricePolicy = () => {
         $(".selectPricePolicy").on('click', function () {
@@ -391,52 +374,11 @@
     CustomerApp.page.commands.selectPaymentMethod = () => {
         $(".selectedPaymentMethod").click(function () {
             createCusGroupParam.defaultPaymentMethodId = $(this).data('id');
-            $("#paymentType").text($(this).text());
+            CustomerApp.page.elements.paymentType.text($(this).text());
         })
     }
 
-    //create price policy
-    CustomerApp.page.commands.createPricePolicy = () => {
-        pricingPolicy = {
-            title: CustomerApp.page.elements.titlePricePolicyCre.val().trim(),
-            pricingPolicyCode: CustomerApp.page.elements.pricingPolicyCodeCre.val().trim(),
-            pricingPolicyType: $('input[name="policyStyle"]:checked').val()
-        }
 
-        $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "POST",
-            url: origin + "/api/pricingPolicys",
-            data: JSON.stringify(pricingPolicy)
-        }).done((data) => {
-            let str = `<a class="jss23775 selectPricePolicy" data-id="${data.id}" data-value="${data.title}">
-                         ${data.title}
-                       </a>`;
-
-            CustomerApp.page.elements.listPricePolicy.prepend(str);
-            CustomerApp.IziToast.showSuccessAlert("Thêm mới chính sách giá thành công")
-            CustomerApp.page.elements.modalCreatePricePolicy.modal("hide");
-            CustomerApp.page.elements.frmCreatePricePolicy[0].reset();
-            CustomerApp.page.commands.selectPricePolicy();
-        })
-            .fail((jqXHR) => {
-                console.log(jqXHR)
-                let errors = jqXHR.responseJSON.errors;
-
-                if (errors.title) {
-                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.titleError, errors.title)
-                }
-                if (errors.pricingPolicyCode) {
-                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, errors.pricingPolicyCode)
-                }
-                if (errors.pricingPolicyType) {
-                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, errors.pricingPolicyType)
-                }
-            })
-    }
 
     // function createCusGrp() {
     //     createCusGroupParam.id = undefined;
@@ -499,62 +441,9 @@
             })
     }
 
-    CustomerApp.page.elements.btnCloseCreatePricePolicyModal.click(() => {
-        CustomerApp.page.elements.frmCreatePricePolicy.validate().resetForm();
-        CustomerApp.page.elements.frmCreatePricePolicy[0].reset();
-        CustomerApp.page.elements.error.removeClass('show').addClass('hidden');
-    })
-
-    CustomerApp.page.elements.btnCreatePricePolicy.on("click", () => {
-        CustomerApp.page.elements.frmCreatePricePolicy.trigger("submit");
-    })
-
     CustomerApp.page.elements.btnCreateCustomerGroup.on("click", () => {
         CustomerApp.page.elements.frmCreateCusGrp.trigger("submit");
     })
-
-    CustomerApp.page.elements.frmCreatePricePolicy.validate({
-        rules: {
-            titlePricePolicyCre: {
-                required: true,
-                maxlength: 50,
-            },
-            pricingPolicyCodeCre: {
-                required: true,
-                maxlength: 50,
-            },
-            policyStyle: {
-                required: true,
-            }
-        },
-        messages: {
-            titlePricePolicyCre: {
-                required: "Tên chính sách giá không được để trống",
-                maxlength: "Tên chính sách giá không được vượt quá 50 ký tự"
-            },
-            pricingPolicyCodeCre: {
-                required: "Mã chính sách giá không được để trống",
-                maxlength: "Mã chính sách giá không được vượt quá 50 ký tự"
-            },
-            policyStyle: {
-                required: "Vui lòng chọn loại chính sách giá"
-            }
-        },
-        showErrors: (error) => {
-            if (error.titlePricePolicyCre) {
-                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.titleError, error.titlePricePolicyCre);
-            }
-            if (error.pricingPolicyCodeCre) {
-                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, error.pricingPolicyCodeCre);
-            }
-            if (error.policyStyle) {
-                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, error.policyStyle);
-            }
-        },
-        submitHandler: () => {
-            CustomerApp.page.commands.createPricePolicy();
-        },
-    });
 
     CustomerApp.page.elements.frmCreateCusGrp.validate({
         rules: {
@@ -617,6 +506,115 @@
         element.text(error);
         CustomerApp.IziToast.showErrorAlert(error);
     }
+
+    //start create default pricing policy
+    CustomerApp.page.elements.modalCreatePricePolicy = $("#modalCreatePricePolicy");
+
+    CustomerApp.page.elements.frmCreatePricePolicy = $("#frmCreatePricePolicy");
+    CustomerApp.page.elements.btnCreatePricePolicy = $("#btnCreatePricePolicy");
+    CustomerApp.page.elements.btnCloseCreatePricePolicyModal = $(".btnCloseCreatePricePolicyModal");
+    CustomerApp.page.elements.pricingPolicyCodeError = $(".pricingPolicyCode-error.error");
+    CustomerApp.page.elements.pricingPolicyTypeError = $(".pricingPolicyType-error.error");
+
+    CustomerApp.page.commands.showModalCreatePricePolicy = () => {
+        CustomerApp.page.elements.modalCreatePricePolicy.modal("show");
+    }
+    //create price policy
+    CustomerApp.page.commands.createPricePolicy = () => {
+        pricingPolicy = {
+            title: CustomerApp.page.elements.titlePricePolicyCre.val().trim(),
+            pricingPolicyCode: CustomerApp.page.elements.pricingPolicyCodeCre.val().trim(),
+            pricingPolicyType: $('input[name="policyStyle"]:checked').val()
+        }
+
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "POST",
+            url: origin + "/api/pricing-policies",
+            data: JSON.stringify(pricingPolicy)
+        }).done((data) => {
+            let str = `<a class="jss23775 selectPricePolicy" data-id="${data.id}" data-value="${data.title}">
+                         ${data.title}
+                       </a>`;
+
+            CustomerApp.page.elements.listPricePolicy.prepend(str);
+            CustomerApp.IziToast.showSuccessAlert("Thêm mới chính sách giá thành công")
+            CustomerApp.page.elements.modalCreatePricePolicy.modal("hide");
+            CustomerApp.page.elements.frmCreatePricePolicy[0].reset();
+            CustomerApp.page.commands.selectPricePolicy();
+        })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+                let errors = jqXHR.responseJSON.errors;
+
+                if (errors.title) {
+                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.titleError, errors.title)
+                }
+                if (errors.pricingPolicyCode) {
+                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, errors.pricingPolicyCode)
+                }
+                if (errors.pricingPolicyType) {
+                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, errors.pricingPolicyType)
+                }
+            })
+    }
+
+    CustomerApp.page.elements.btnCloseCreatePricePolicyModal.click(() => {
+        CustomerApp.page.elements.frmCreatePricePolicy.validate().resetForm();
+        CustomerApp.page.elements.frmCreatePricePolicy[0].reset();
+        CustomerApp.page.elements.error.removeClass('show').addClass('hidden');
+    })
+
+    CustomerApp.page.elements.btnCreatePricePolicy.on("click", () => {
+        CustomerApp.page.elements.frmCreatePricePolicy.trigger("submit");
+    })
+
+    CustomerApp.page.elements.frmCreatePricePolicy.validate({
+        rules: {
+            titlePricePolicyCre: {
+                required: true,
+                maxlength: 50,
+            },
+            pricingPolicyCodeCre: {
+                required: true,
+                maxlength: 50,
+            },
+            policyStyle: {
+                required: true,
+            }
+        },
+        messages: {
+            titlePricePolicyCre: {
+                required: "Tên chính sách giá không được để trống",
+                maxlength: "Tên chính sách giá không được vượt quá 50 ký tự"
+            },
+            pricingPolicyCodeCre: {
+                required: "Mã chính sách giá không được để trống",
+                maxlength: "Mã chính sách giá không được vượt quá 50 ký tự"
+            },
+            policyStyle: {
+                required: "Vui lòng chọn loại chính sách giá"
+            }
+        },
+        showErrors: (error) => {
+            if (error.titlePricePolicyCre) {
+                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.titleError, error.titlePricePolicyCre);
+            }
+            if (error.pricingPolicyCodeCre) {
+                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, error.pricingPolicyCodeCre);
+            }
+            if (error.policyStyle) {
+                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, error.policyStyle);
+            }
+        },
+        submitHandler: () => {
+            CustomerApp.page.commands.createPricePolicy();
+        },
+    });
+    //end create default pricing policy
 
     CustomerApp.page.commands.searchDefaultPriceDropdown = () => {
         let filter, input, div, a, i;

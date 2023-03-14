@@ -80,9 +80,13 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
 
     @Override
     @Transactional
-    public CustomerGroupResult update(UpdateCusGroupParam updateCusGroupParam) {
-        CustomerGroup customerGroup = customerGroupRepository.findById(updateCusGroupParam.getId())
-                .orElseThrow(() -> new NotFoundException("Customer Group not found"));
+    public CustomerGroupResult update(Integer id, UpdateCusGroupParam updateCusGroupParam) {
+        CustomerGroup customerGroup = customerGroupRepository.findById(id)
+                .orElseThrow(() -> new ValidationException(
+                        new HashMap<>(){{
+                            put("id", "customer_group.exception.notFound");
+                        }}
+                ));
         customerGroupMapper.transferFields(updateCusGroupParam, customerGroup);
         return customerGroupMapper.toDTO(customerGroup);
     }

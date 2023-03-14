@@ -16,6 +16,12 @@ public class PricingPolicyAPI extends BaseController {
     @Autowired
     private PricingPolicyService pricingPolicyService;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable Integer id) {
+        PricingPolicyResult dto = pricingPolicyService.findById(id);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
     @GetMapping
     public ResponseEntity<?> findAll() {
         return new ResponseEntity<>(pricingPolicyService.findAll(), HttpStatus.OK);
