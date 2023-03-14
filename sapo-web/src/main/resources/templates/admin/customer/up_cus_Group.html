@@ -31,7 +31,7 @@
                 <button type="button" class="ldZiUTB ldZabc" id="btnShowModalDeleteCustomerGroup">
                     Xóa
                 </button>
-                <button id="btnCreateCustomerGroup" class="RthGc ldZabc" type="button">
+                <button id="btnUpdateCustomerGroup" class="RthGc ldZabc" type="button">
                         <span class="cMXJOk">
                             Lưu
                         </span>
@@ -81,7 +81,7 @@
                                                     <legend class="jss824"></legend>
                                                 </fieldset>
                                             </div>
-                                            <div class="error titleGroupUp-error hidden"></div>
+                                            <div class="error title-error hidden"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -108,7 +108,7 @@
                                                 </fieldset>
                                             </div>
                                         </div>
-                                        <div class="error cusGrpCodeUp-error"></div>
+                                        <div class="error cusGrpCodeUp-error hidden"></div>
                                     </div>
                                 </div>
                                 <div class="MuiGrid-item MuiGrid-grid-xs-12">
@@ -142,7 +142,7 @@
                                                 </fieldset>
                                             </div>
                                         </div>
-                                        <div class="error noteUp-error"></div>
+                                        <div class="error note-error hidden"></div>
                                     </div>
                                 </div>
                             </div>
@@ -180,7 +180,7 @@
                                         <label class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl
                                         MuiInputLabel-animated MuiInputLabel-shrink" data-shrink="true"
                                                for="searchDefaultPriceDropdown">
-                                            Giá Mặc Định
+                                            Giá mặc định
                                         </label>
                                         <div class="dropdown jss1784 jss1769"
                                              onclick="CustomerApp.page.commands.showDefaultPricingPolicyDropdown()"
@@ -233,7 +233,7 @@
                                                 </fieldset>
                                             </div>
                                         </div>
-                                        <div class="error defaultDiscountRateUP-error hidden"></div>
+                                        <div class="error defaultDiscountRate-error hidden"></div>
                                     </div>
                                 </div>
                                 <div class="MuiGrid-item MuiGrid-grid-xs-12">
@@ -241,11 +241,11 @@
                                         <label class="MuiFormLabel-root MuiInputLabel-root jss755
                                                MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
                                                data-shrink="true" for="paymentType">
-                                            Hình Thức Thanh Toán
+                                            Hình thức thanh toán
                                         </label>
                                         <div class="dropdown jss1784">
                                             <div class="dropdown-toggle select-btn-pay jss759"
-                                                 type="button" data-bs-toggle="dropdown"
+                                                 type="button" data-toggle="dropdown"
                                                  aria-expanded="false">
                                                 <span id="paymentType">
                                                     Chọn hình thức thanh toán
@@ -270,6 +270,7 @@
 </div>
 
 </body>
+<th:block th:replace="/admin/customer/modal_createPricePolicy"/>
 <th:block th:replace="/admin/customer/modal_dele_Cus_Grp"/>
 <th:block th:replace="/layout/script"/>
 <script src="/assets/admin/js/customer/customerGroup_App.js"></script>
@@ -286,10 +287,20 @@
     CustomerApp.page.elements.selectedPriceDefault =$("#selectedPriceDefault");
     CustomerApp.page.elements.listPricePolicy = $("#listPricePolicy");
     CustomerApp.page.elements.defaultPriceDropdown = $("#defaultPriceDropdown");
+    CustomerApp.page.elements.paymentType = $("#paymentType");
+
+    CustomerApp.page.elements.cusGrpCodeError = $(".cusGrpCodeUp-error.error");
+    CustomerApp.page.elements.noteError = $(".note-error.error");
+    CustomerApp.page.elements.defaultDiscountRateError = $(".defaultDiscountRate-error.error");
 
     CustomerApp.page.elements.btnShowModalDeleteCustomerGroup = $("#btnShowModalDeleteCustomerGroup");
+    CustomerApp.page.elements.btnUpdateCustomerGroup = $("#btnUpdateCustomerGroup");
 
     CustomerApp.page.dialogs.modal_del_cus_grp = $("#modal_del_cus_grp");
+
+
+    CustomerApp.page.elements.selectBtnPay = $('.select-btn-pay');
+    CustomerApp.page.elements.dropdownPaymentMethod = $("#dropdownPaymentMethod");
 
     //end update customer group
 
@@ -299,6 +310,59 @@
     CustomerApp.page.dialogs.elements.btnDeleteCustomerGroup = $("#btnDeleteCustomerGroup");
     //end modal delete customer group
 
+    //start modal create default price policy
+    CustomerApp.page.elements.modalCreatePricePolicy = $("#modalCreatePricePolicy");
+
+    CustomerApp.page.elements.frmCreatePricePolicy = $("#frmCreatePricePolicy");
+    CustomerApp.page.elements.btnCreatePricePolicy = $("#btnCreatePricePolicy");
+    CustomerApp.page.elements.btnCloseCreatePricePolicyModal = $(".btnCloseCreatePricePolicyModal");
+    CustomerApp.page.elements.pricingPolicyCodeError = $(".pricingPolicyCode-error.error");
+    CustomerApp.page.elements.pricingPolicyTypeError = $(".pricingPolicyType-error.error");
+    CustomerApp.page.elements.titleError = $(".title-error.error");
+    //end modal create default price policy
+
+    CustomerApp.page.commands.updateCustomerGroup = () => {
+        CustomerApp.page.elements.btnUpdateCustomerGroup.click(() => {
+            let id = +window.location.pathname.split('/')[3];
+            currentCustomerGroup.title = CustomerApp.page.elements.titleGroupUp.val().trim();
+            currentCustomerGroup.cusGrpCode = CustomerApp.page.elements.cusGrpCodeUp.val().trim();
+            currentCustomerGroup.note = CustomerApp.page.elements.noteUp.val().trim();
+            currentCustomerGroup.defaultDiscountRate = CustomerApp.page.elements.defaultDiscountRateUP.val().trim();
+
+            console.log(currentCustomerGroup)
+
+            $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "PUT",
+                url: origin + "/api/customer_groups/" + id,
+                data: JSON.stringify(currentCustomerGroup)
+            })
+                .done(() => {
+                    CustomerApp.IziToast.showSuccessAlert("Cập nhật nhóm khách hàng thành công");
+                })
+                .fail((jqXHR) => {
+                    console.log(jqXHR)
+                    let errors = jqXHR.responseJSON.errors;
+
+                    if (errors.title) {
+                        CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.titleError, errors.title)
+                    }
+                    if (errors.cusGrpCode) {
+                        CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.cusGrpCodeError, errors.cusGrpCode)
+                    }
+                    if (errors.note) {
+                        CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.noteError, errors.note)
+                    }
+                    if (errors.defaultDiscountRate) {
+                        CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.defaultDiscountRateError, errors.defaultDiscountRate)
+                    }
+                })
+        })
+    }
+
     CustomerApp.page.commands.getDefaultPricingPolicy = () => {
         let id = currentCustomerGroup.defaultPricingPolicyId;
         return $.ajax({
@@ -307,16 +371,28 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: origin + "/api/pricing-policies/" + id
+            url: origin + "/api/pricing-policies"
         })
             .done((data) => {
-                console.log(data)
+                // let currentDefaultPricingPolicyStr = `<a class="jss23775 selectDefaultPricePolicy" data-id="${currentDefaultPricingPolicy.id}" data-value=${currentDefaultPricingPolicy.title}>
+                //                     ${currentDefaultPricingPolicy.title}
+                //                 </a>`;
+                // let value = currentDefaultPricingPolicy.title;
+                //
+                // CustomerApp.page.elements.selectedPriceDefault.text(value);
+                // CustomerApp.page.elements.listPricePolicy.prepend(currentDefaultPricingPolicyStr);
+
+
                 data.forEach(item => {
-                    let str = `<a class="jss23775 selectDefaultPricePolicy" data-id="${item.id}" data-value="${item.title}">
+                    let str = `<a class="jss23775 selectDefaultPricePolicy" data-id="${item.id}" data-value=${item.title}>
                                     ${item.title}
                                 </a>`;
 
                     CustomerApp.page.elements.listPricePolicy.prepend(str);
+                    if (item.id === currentCustomerGroup.defaultPricingPolicyId) {
+                        let value = item.title;
+                        CustomerApp.page.elements.selectedPriceDefault.text(value);
+                    }
                 });
                 CustomerApp.page.commands.selectDefaultPricePolicy();
             })
@@ -333,14 +409,11 @@
             type: "GET",
             url: origin + "/api/customer_groups/" + id
         }).done((data) => {
-            console.log(data);
             currentCustomerGroup = {...data}
-            console.log(currentCustomerGroup)
             CustomerApp.page.elements.titleGroupUp.val(data.title);
             CustomerApp.page.elements.cusGrpCodeUp.val(data.cusGrpCode);
             CustomerApp.page.elements.noteUp.val(data.note);
             CustomerApp.page.elements.defaultDiscountRateUP.val(data.defaultDiscountRate);
-            // CustomerApp.page.elements.selectedPriceDefault.text(data.defaultPricingPolicyId);
         })
             .fail((jqXHR) => {
                 console.log(jqXHR)
@@ -349,15 +422,63 @@
 
     $(() => {
         CustomerApp.page.loadData.getCustomerUpdate().then(() => {
+            CustomerApp.page.commands.updateCustomerGroup();
+            CustomerApp.page.commands.getAllPaymentMethod();
             CustomerApp.page.commands.getDefaultPricingPolicy();
             CustomerApp.page.dialogs.commands.deleteCustomerGroup();
             CustomerApp.page.dialogs.commands.showModalDelete();
         });
     })
 
+    //start payment method
+    CustomerApp.page.commands.getAllPaymentMethod = () => {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: origin + "/api/admin/payment_methods"
+        })
+            .done((data) => {
+                data.forEach(item => {
+                    let str = `<li data-id="${item.id}" data-title=${item.title} class="catItem dropdown-item jss761 selectedPaymentMethod">
+                                    ${item.title}
+                                </li>`;
+
+                    if (item.id === currentCustomerGroup.defaultPaymentMethodId) {
+                        CustomerApp.page.elements.paymentType.text(item.title);
+                    }
+                    CustomerApp.page.elements.dropdownPaymentMethod.append(str);
+                });
+                CustomerApp.page.commands.selectPaymentMethod();
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+    }
+
+    CustomerApp.page.commands.selectPaymentMethod = () => {
+        $(".selectedPaymentMethod").click(function () {
+            currentCustomerGroup.defaultPaymentMethodId = $(this).data('id');
+            CustomerApp.page.elements.paymentType.text($(this).text());
+        })
+    }
+    //end payment method
+
+
+    CustomerApp.page.elements.btnCreatePricePolicy.on("click", () => {
+        CustomerApp.page.elements.frmCreatePricePolicy.trigger("submit");
+    })
+
+
+    CustomerApp.page.commands.showModalCreatePricePolicy = () => {
+        CustomerApp.page.elements.modalCreatePricePolicy.modal("show");
+    }
+
     CustomerApp.page.commands.selectDefaultPricePolicy = () => {
         $(".selectDefaultPricePolicy").on('click', function () {
-            createCusGroupParam.defaultPricingPolicyId = $(this).data('id');
+            currentCustomerGroup.defaultPricingPolicyId = $(this).data('id');
             let value = $(this).data('value');
 
             CustomerApp.page.elements.selectedPriceDefault.text(value);
@@ -402,6 +523,115 @@
             CustomerApp.page.dialogs.elements.showCusGrpDelete.append(str)
         })
     }
+
+    //start create default pricing policy
+
+    CustomerApp.page.commands.showModalCreatePricePolicy = () => {
+        CustomerApp.page.elements.modalCreatePricePolicy.modal("show");
+    }
+    //create price policy
+    CustomerApp.page.commands.createPricePolicy = () => {
+        pricingPolicy = {
+            title: CustomerApp.page.elements.titlePricePolicyCre.val().trim(),
+            pricingPolicyCode: CustomerApp.page.elements.pricingPolicyCodeCre.val().trim(),
+            pricingPolicyType: $('input[name="policyStyle"]:checked').val()
+        }
+
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "POST",
+            url: origin + "/api/pricing-policies",
+            data: JSON.stringify(pricingPolicy)
+        }).done((data) => {
+            let str = `<a class="jss23775 selectPricePolicy" data-id="${data.id}" data-value="${data.title}">
+                         ${data.title}
+                       </a>`;
+
+            CustomerApp.page.elements.listPricePolicy.prepend(str);
+            CustomerApp.IziToast.showSuccessAlert("Thêm mới chính sách giá thành công")
+            CustomerApp.page.elements.modalCreatePricePolicy.modal("hide");
+            CustomerApp.page.elements.frmCreatePricePolicy[0].reset();
+            CustomerApp.page.commands.selectPricePolicy();
+        })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+                let errors = jqXHR.responseJSON.errors;
+
+                if (errors.title) {
+                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.titleError, errors.title)
+                }
+                if (errors.pricingPolicyCode) {
+                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, errors.pricingPolicyCode)
+                }
+                if (errors.pricingPolicyType) {
+                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, errors.pricingPolicyType)
+                }
+            })
+    }
+
+    CustomerApp.page.elements.btnCloseCreatePricePolicyModal.click(() => {
+        CustomerApp.page.elements.frmCreatePricePolicy.validate().resetForm();
+        CustomerApp.page.elements.frmCreatePricePolicy[0].reset();
+        CustomerApp.page.elements.error.removeClass('show').addClass('hidden');
+    })
+
+    CustomerApp.page.elements.btnCreatePricePolicy.on("click", () => {
+        CustomerApp.page.elements.frmCreatePricePolicy.trigger("submit");
+    })
+
+    CustomerApp.page.elements.frmCreatePricePolicy.validate({
+        rules: {
+            titlePricePolicyCre: {
+                required: true,
+                maxlength: 50,
+            },
+            pricingPolicyCodeCre: {
+                required: true,
+                maxlength: 50,
+            },
+            policyStyle: {
+                required: true,
+            }
+        },
+        messages: {
+            titlePricePolicyCre: {
+                required: "Tên chính sách giá không được để trống",
+                maxlength: "Tên chính sách giá không được vượt quá 50 ký tự"
+            },
+            pricingPolicyCodeCre: {
+                required: "Mã chính sách giá không được để trống",
+                maxlength: "Mã chính sách giá không được vượt quá 50 ký tự"
+            },
+            policyStyle: {
+                required: "Vui lòng chọn loại chính sách giá"
+            }
+        },
+        showErrors: (error) => {
+            if (error.titlePricePolicyCre) {
+                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.titleError, error.titlePricePolicyCre);
+            }
+            if (error.pricingPolicyCodeCre) {
+                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, error.pricingPolicyCodeCre);
+            }
+            if (error.policyStyle) {
+                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, error.policyStyle);
+            }
+        },
+        submitHandler: () => {
+            CustomerApp.page.commands.createPricePolicy();
+        },
+    });
+
+    CustomerApp.page.commands.showErrorValidate = (element, error) => {
+        element.addClass('show').removeClass('hidden');
+        element.text(error);
+        CustomerApp.IziToast.showErrorAlert(error);
+    }
+    //end create default pricing policy
+
     // let pricingPolicy;
     // let paymentMethod;
     // let updateCusGroupParam = {};

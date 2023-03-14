@@ -83,10 +83,11 @@ public class CustomerGroupAPI extends BaseController {
         return new ResponseEntity<>(customerGroupDataTable, HttpStatus.OK);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<?> updateCusGroup(@RequestBody UpdateCusGroupParam updateCusGroupParam) {
-        CustomerGroupResult dto = customerGroupService.update(updateCusGroupParam);
-        dto = customerGroupService.findById(dto.getId());
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateCusGroup(@PathVariable Integer id,
+                                            @RequestBody @Validated UpdateCusGroupParam updateCusGroupParam
+    ) {
+        CustomerGroupResult dto = customerGroupService.update(id, updateCusGroupParam);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
