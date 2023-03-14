@@ -34,7 +34,7 @@ public class ContactMapper {
 
 
     public Contact toModel(CreateContactParam createParam) {
-        return modelMapper.map(createParam, Contact.class)
+        return modelMapper.map(createParam, Contact.class);
     }
 
     public void transferFields(UpdateContactParam updateParam, Contact supplier) {
