@@ -26,17 +26,22 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
     @Autowired
     SupplierGroupMapper supplierGroupMapper;
 
+
+//    public void validationSupplierGroup(BaseSu)
+
     @Override
     @Transactional
     public SupplierGroupResult create(CreateSupGroupParam createParam) {
 
         if (supplierGroupRepository.existsByTitle(createParam.getTitle()))
             throw new ValidationException(new HashMap<>() {{
-                put("title", "supplier_group.validation.title.exists");
+                put("title", "supplier_group.exception.title.existed");
             }});
 
         if (createParam.getSupGroupCode() != null && supplierGroupRepository.existsBySupGroupCode(createParam.getSupGroupCode()))
-            throw new ValidationException("Mã nhóm nhà cung cấp đã tồn tại");
+            throw new ValidationException(new HashMap<>() {{
+                put("supGroupCode", "supplier_group.exception.supGroupCode.existed");
+            }});
 
         SupplierGroup supplierGroup = supplierGroupMapper.toModel(createParam);
         supplierGroupRepository.save(supplierGroup);

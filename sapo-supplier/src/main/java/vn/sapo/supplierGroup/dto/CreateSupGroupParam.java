@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class CreateSupGroupParam {
+public class CreateSupGroupParam extends BaseSupplierGroup {
 
     @NullOrNotBlank(message = "{supplier_group.validation.title.notBlank}")
     private String title;
