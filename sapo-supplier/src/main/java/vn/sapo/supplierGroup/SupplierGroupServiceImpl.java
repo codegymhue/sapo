@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.entities.supplier.SupplierGroup;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
-import vn.sapo.shared.exceptions.OperationException;
 import vn.sapo.shared.exceptions.ValidationException;
 import vn.sapo.supplierGroup.dto.CreateSupGroupParam;
 import vn.sapo.supplierGroup.dto.SupplierGroupResult;
@@ -26,31 +25,6 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
     @Autowired
     SupplierGroupMapper supplierGroupMapper;
 
-
-//    public void validationSupplierGroup(BaseSu)
-
-    @Override
-    @Transactional
-    public SupplierGroupResult create(CreateSupGroupParam createParam) {
-
-        if (supplierGroupRepository.existsByTitle(createParam.getTitle()))
-            throw new ValidationException(new HashMap<>() {{
-                put("title", "supplier_group.exception.title.existed");
-            }});
-
-        if (createParam.getSupGroupCode() != null && supplierGroupRepository.existsBySupGroupCode(createParam.getSupGroupCode()))
-            throw new ValidationException(new HashMap<>() {{
-                put("supGroupCode", "supplier_group.exception.supGroupCode.existed");
-            }});
-
-        SupplierGroup supplierGroup = supplierGroupMapper.toModel(createParam);
-        supplierGroupRepository.save(supplierGroup);
-        if (createParam.getSupGroupCode() == null)
-            supplierGroup.setSupGroupCode(CodePrefix.SUPPLIER_GROUP.generate(supplierGroup.getId()));
-
-        return supplierGroupMapper.toDTO(supplierGroup);
-    }
-
     @Override
     @Transactional(readOnly = true)
     public List<SupplierGroupResult> finAll() {
@@ -69,23 +43,53 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
         return supplierGroupMapper.toDTO(supplierGroup);
     }
 
+    public void validationExistsByTitle(String title) {
+        if (supplierGroupRepository.existsByTitle(title))
+            throw new ValidationException(new HashMap<>() {{
+                put("title", "supplier_group.exception.title.existed");
+            }});
+    }
+
+    public void validationExistsBySupGroupCode(String supGroupCode) {
+        if (supGroupCode.startsWith(CodePrefix.SUPPLIER_GROUP.getValue())) {
+            throw new ValidationException(new HashMap<>() {{
+                put("supGroupCode", "supplier_group.exception.supGroupCode.hasSystemPrefix");
+            }});
+        }
+        if (supplierGroupRepository.existsBySupGroupCode(supGroupCode))
+            throw new ValidationException(new HashMap<>() {{
+                put("supGroupCode", "supplier_group.exception.supGroupCode.existed");
+            }});
+    }
+
+    @Override
+    @Transactional
+    public SupplierGroupResult create(CreateSupGroupParam createParam) {
+        validationExistsByTitle(createParam.getTitle());
+        validationExistsBySupGroupCode(createParam.getSupGroupCode());
+
+        SupplierGroup supplierGroup = supplierGroupMapper.toModel(createParam);
+        supplierGroupRepository.save(supplierGroup);
+        if (createParam.getSupGroupCode() == null)
+            supplierGroup.setSupGroupCode(CodePrefix.SUPPLIER_GROUP.generate(supplierGroup.getId()));
+
+        return supplierGroupMapper.toDTO(supplierGroup);
+    }
+
     @Override
     @Transactional
     public SupplierGroupResult update(UpdateSupGroupParam updateParam) {
         SupplierGroup supplierGroup = supplierGroupRepository.findById(updateParam.getId())
                 .orElseThrow(() -> new NotFoundException("supplier_group.exception.notFound"));
 
-        if (supplierGroupRepository.existsBySupGroupCode(updateParam.getSupGroupCode()) && !supplierGroup.getSupGroupCode().equalsIgnoreCase(updateParam.getSupGroupCode())) {
-            throw new OperationException("Mã nhóm nhà cung cấp đã tồn tại");
-        }
-        if (supplierGroupRepository.existsByTitle(updateParam.getTitle()) && !supplierGroup.getTitle().equalsIgnoreCase(updateParam.getTitle())) {
-            throw new OperationException("Tên nhóm " + updateParam.getTitle() + " đã tồn tại");
-        }
-        if (updateParam.getSupGroupCode() != null && !supplierGroup.getSupGroupCode().equalsIgnoreCase(updateParam.getSupGroupCode())) {
-            if (updateParam.getSupGroupCode().startsWith(CodePrefix.SUPPLIER_GROUP.getValue())) {
-                throw new OperationException("Mã không được có tiền tố của hệ thống STN");
-            }
-        }
+        String title = updateParam.getTitle();
+        if (!supplierGroup.getTitle().equalsIgnoreCase(title))
+            validationExistsByTitle(title);
+
+        String supGroupCode = updateParam.getSupGroupCode();
+        if (!supplierGroup.getSupGroupCode().equalsIgnoreCase(supGroupCode))
+            validationExistsBySupGroupCode(supGroupCode);
+
         supplierGroupMapper.transferFields(updateParam, supplierGroup);
         return supplierGroupMapper.toDTO(supplierGroup);
     }
