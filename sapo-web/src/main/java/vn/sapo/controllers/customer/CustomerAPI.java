@@ -9,20 +9,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import vn.sapo.customers.AddressService;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customerGroup.CustomerGroupService;
+import vn.sapo.customers.AddressService;
 import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.excel.ExcelHelper;
 import vn.sapo.excel.ExcelService;
 import vn.sapo.order.sale.SaleOrderService;
 import vn.sapo.order.sale.item.OrderItemService;
 import vn.sapo.shared.controllers.BaseController;
-import vn.sapo.voucher.receipt.ReceiptVoucherService;
+import vn.sapo.shared.exceptions.ValidationException;
 import vn.sapo.supplier.excel.ResponseMessage;
+import vn.sapo.voucher.receipt.ReceiptVoucherService;
 
 import java.time.Instant;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -71,7 +73,6 @@ public class CustomerAPI extends BaseController {
                                         @RequestParam(name = "sort", required = false, defaultValue = "ASC" ) String sort
     ) {
         // start = 10; length = 5;
-        System.out.println(customerFilter);
         int start = customerFilter.getStart();
         int length = customerFilter.getLength();
 
@@ -106,13 +107,15 @@ public class CustomerAPI extends BaseController {
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CreateCustomerParam createCustomerParam) {
-        CustomerResult dto = customerService.create(createCustomerParam);
         CreateAddressParam createAddressParam = createCustomerParam.getCreateAddressParam();
-
         if (createAddressParam == null)
-            return new ResponseEntity<>(dto, HttpStatus.OK);
-        createAddressParam.setCustomerId(dto.getId());
-        addressService.create(createAddressParam);
+            throw new ValidationException(new HashMap<>() {{
+                put("line1", "Dia chi khong duoc de trong");
+            }});
+        CustomerResult dto = customerService.create(createCustomerParam);
+
+//        createAddressParam.setCustomerId(dto.getId());
+//        addressService.create(createAddressParam);
         dto = customerService.findById(dto.getId());
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
@@ -154,6 +157,7 @@ public class CustomerAPI extends BaseController {
         message = "Please upload an excel file!";
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
     }
+
 
 //   public void setData(CustomerResult customer) {
 //       BigDecimal spendTotal = getSpendTotalByCustomerId(customer.getId());

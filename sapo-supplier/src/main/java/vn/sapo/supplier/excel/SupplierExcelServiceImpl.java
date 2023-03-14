@@ -1,4 +1,4 @@
-package vn.sapo.supplier;
+package vn.sapo.supplier.excel;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -14,8 +14,8 @@ import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.payment_method.PaymentMethodService;
 import vn.sapo.shared.configurations.CodePrefix;
-import vn.sapo.supplier.excel.ExportExcelSupplierParam;
-import vn.sapo.supplier.excel.ImportExcelSupplierParam;
+import vn.sapo.supplier.SupplierMapper;
+import vn.sapo.supplier.SupplierRepository;
 import vn.sapo.supplierGroup.SupplierGroupService;
 
 import java.io.IOException;
@@ -173,20 +173,20 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
                     param.setDescription(cell.getStringCellValue());
                     break;
                 case 9:
-//                    PRICEPOLICY :
-//
+//                    PRICE_POLICY :
                     break;
                 case 10:
-//                    PAYMENTTERN :
+//                    PAYMENT_TERN :
                     break;
                 case PAYMENT_METHOD_TITLE:
                     param.setPaymentMethodTitle(cell.getStringCellValue());
                     break;
                 case 20:
-//                            nợ hiện tại
+//              CURRENT_DEBT
                     break;
-                case 21:
-//                              tags
+                case TAGS:
+                    String[] tags = cell.getStringCellValue().split(",");
+                 param.setTags(Arrays.asList(tags));
                     break;
                 default:
                     break;

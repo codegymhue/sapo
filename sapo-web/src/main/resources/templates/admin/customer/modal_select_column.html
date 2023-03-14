@@ -1,0 +1,101 @@
+<th:block th:fragment="modal_select_column">
+    <style>
+        .titleSelectColumn:hover{
+            cursor: pointer;
+        }
+        .titleSelectColumn{
+            font-size: 11pt;
+        }
+        .arrowSelectColumn:hover{
+            background-color: #8080802e;
+            cursor: pointer;
+        }
+        .arrowSelectColumn{
+            padding: 10px;
+            border-radius: 40%;
+        }
+    </style>
+    <div class="modal fade" id="modal-select-column" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="exampleModalLabel">
+                <i class="fa-solid fa-angle-left arrowSelectColumn" data-toggle="modal" data-target="#modal-export-file" data-dismiss="modal"></i> 
+                Xuất file khách hàng
+              </h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="selectColumn">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="body-select-column">
+                <div class="row mb-4">
+                    <div class="col-4">
+                        <span class="form-check">
+                            <input class="form-check-input titleSelectColumn" name="customerCode" type="checkbox" value="customerCode" id="customerCodeColumn" checked>
+                            <label class="form-check-label titleSelectColumn" for="customerCodeColumn">
+                              Mã khách hàng
+                            </label>
+                        </span>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-check">
+                            <input class="form-check-input titleSelectColumn" name="fullName" type="checkbox" value="fullName" id="fullNameColumn" checked>
+                            <label class="form-check-label titleSelectColumn" for="fullNameColumn">
+                              Tên khách hàng
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-check">
+                            <input class="form-check-input titleSelectColumn" name="groupCustomer" type="checkbox" value="groupCustomer" id="groupCustomerColumn" checked>
+                            <label class="form-check-label titleSelectColumn" for="groupCustomerColumn">
+                              Nhóm khách hàng
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-4">
+                        <span class="form-check">
+                            <input class="form-check-input titleSelectColumn" name="debtTotal" type="checkbox" value="debtTotal" id="phoneNumberColumn" checked>
+                            <label class="form-check-label titleSelectColumn" for="phoneNumberColumn">
+                              Số điện thoại
+                            </label>
+                        </span>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-check">
+                            <input class="form-check-input titleSelectColumn" name="debtTotal" type="checkbox" value="debtTotal" id="debtTotalColumn" checked>
+                            <label class="form-check-label titleSelectColumn" for="debtTotalColumn">
+                              Tổng công nợ
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-check">
+                            <input class="form-check-input titleSelectColumn" name="spendTotal" type="checkbox" value="spendTotal" id="spendTotalColumn" checked>
+                            <label class="form-check-label titleSelectColumn" for="spendTotalColumn">
+                              Tổng chi tiêu
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-4">
+                        <span class="form-check">
+                            <input class="form-check-input titleSelectColumn" name="quantityProductOrder" type="checkbox" value="debtTotal" id="quantityProductOrderColumn" checked>
+                            <label class="form-check-label titleSelectColumn" for="quantityProductOrderColumn">
+                              Tổng SL đơn hàng
+                            </label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" style="color: red;">Thoát</button>
+              <button type="button" class="btn btn-primary" style="color: #0d6efd;" onclick="exportFileExcel()">Xuất file</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</th:block>

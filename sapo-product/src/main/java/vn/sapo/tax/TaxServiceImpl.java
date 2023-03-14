@@ -3,10 +3,11 @@ package vn.sapo.tax;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.sapo.entities.tax.Tax;
-import vn.sapo.shared.exceptions.DataInputException;
-import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.product_tax.dto.ProductTaxResult;
-import vn.sapo.tax.dto.*;
+import vn.sapo.shared.exceptions.NotFoundException;
+import vn.sapo.shared.exceptions.ValidationException;
+import vn.sapo.tax.dto.CreateTaxParam;
+import vn.sapo.tax.dto.TaxResult;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class TaxServiceImpl implements TaxService {
     @Transactional
     public TaxResult create(CreateTaxParam taxParam) {
         if (taxRepository.findByTitle(taxParam.getTitle().trim()).isPresent()) {
-            throw new DataInputException("Tên loại thuế đã tồn tại. Vui lòng kiểm tra!!!");
+            throw new ValidationException("Tên loại thuế đã tồn tại. Vui lòng kiểm tra!!!");
         }
         return taxMapper.toDTO(taxRepository.save(taxMapper.toModel(taxParam)));
     }

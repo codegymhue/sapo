@@ -7,10 +7,9 @@ import vn.sapo.entities.product.pricing_policy.PricingPolicy;
 import vn.sapo.entities.product.pricing_policy.PricingPolicyType;
 import vn.sapo.pricing_policy.dto.PricingPolicyParam;
 import vn.sapo.pricing_policy.dto.PricingPolicyResult;
-import vn.sapo.shared.exceptions.DataInputException;
+import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +26,7 @@ public class PricingPolicyServiceImpl implements PricingPolicyService {
 
     @Override
     public PricingPolicyResult create(PricingPolicyParam pricingPolicyParam) {
-        Map<Object, Object> errors= new HashMap<>();
+        Map<String, String> errors= new HashMap<>();
 
         if (!checkPricingPolicyType(pricingPolicyParam.getPricingPolicyType())) {
             errors.put("pricingPolicyType", "Loại chính sách giá không đúng định dạng");
@@ -84,7 +83,7 @@ public class PricingPolicyServiceImpl implements PricingPolicyService {
     @Transactional
     public PricingPolicyResult findById(Integer id) {
         PricingPolicy pricingPolicy = pricingPolicyRepository.findById(id).orElseThrow(
-                () -> new DataInputException("Không tìm thấy chính sách giá có id = " + id));
+                () -> new NotFoundException("Không tìm thấy chính sách giá có id = " + id));
         return pricingPolicyMapper.toDTO(pricingPolicy);
     }
 

@@ -69,12 +69,14 @@
                                     <input id="phoneCreate" name="phoneCreate" class="sapo-textbox w100"
                                            placeholder="Nhập số điện thoại"/>
 <!--                                           title="Nhập số điện thoại" required/>-->
+                                    <div id="error-phoneCreate"></div>
                                 </div>
                                 <div class="col-6 field pr-0">
                                     <label for="emailCreate" class="label-required mb-2">Email</label>
                                     <input id="emailCreate" name="emailCreate" class="sapo-textbox w100"
                                            placeholder="Nhập email"/>
 <!--                                           title="Nhập email" required/>-->
+                                    <div id="error-emailCreate"></div>
                                 </div>
                                 <div class="col-6 field pr-0">
                                     <div class="label mb-2">Nhóm nhà cung cấp</div>
@@ -140,8 +142,6 @@
                                        bind-event-input="checkValidateDataSupplier(this)" data-original-title=""
                                        title="">
                                 <div id="error-addressCreate"></div>
-
-
 <!--                                <div class="label mb-2 label-required">Địa chỉ</div>-->
 
                             </div>
@@ -159,6 +159,7 @@
                                     <input id="faxCreate" name="faxCreate" class="sapo-textbox w100"
                                            data-toggle="tooltip"
                                            bind-event-input="checkValidateDataSupplier" data-original-title="" title="">
+                                    <div id="error-faxCreate"></div>
                                 </div>
                                 <div class="col-6 field pr-0">
                                     <label for="taxCodeCreate" class="label mb-2">Mã số thuế</label>
@@ -401,7 +402,7 @@
             console.log(supplier.fullName.trim().split(""));
             // console.log(JSON.stringify(supplier))
             // console.log(createAddressParam)
-
+            //
             // if(supplier.fullName.trim().split("").length>=5 && createAddressParam.line1.trim() !== ""){
                 $.ajax({
                     "headers": {
@@ -423,14 +424,16 @@
                     })
                     .fail((jqXHR) => {
                         console.log(jqXHR);
-                        jqXHR.responseJSON.fullName!==undefined ? $("#error-nameCreate").text(jqXHR.responseJSON.fullName):"";
-                        jqXHR.responseJSON.line1 !== undefined ? $("#error-addressCreate").text(jqXHR.responseJSON.line1):"";
-                        // SupplierApp.IziToast.showErrorAlert(SupplierApp.AlertMessageVi.ERROR_400)
+                        let responseJSON = jqXHR.responseJSON;
+                        if (responseJSON.errors !== undefined) {
+                            let errors=responseJSON.errors;
+                            errors.fullName !== undefined ? $("#error-nameCreate").text(errors.fullName) : "";
+                            errors.line1 !== undefined ? $("#error-addressCreate").text(errors.line1) : "";
+                            errors.email !== undefined ? $("#error-emailCreate").text(errors.email) : "";
+                        }
+
                     })
-                // }else{
-                //     // if(supplier.fullName.trim().split("").length <= 5) $("#error-nameCreate").text("Tên không được trống")
-                //     if(createAddressParam.line1.trim().split("").length <= 5) $("#error-addressCreate").text("Nhà cung cấp không được trống")
-                // }
+
         });
     }
     function getAllProvinces() {
@@ -759,61 +762,63 @@
     //         createSupplier();
     //     }
     // });
-    $(document).ready(function () {
-        $("#formCreate").validate({
-            rules: {
-                nameCreate: {
-                    required: true,
-                    minlength: 5,
-                },
-                phoneCreate: {
-                    required: false,
-                    digits: true,
-                    pattern: /((09|03|07|08|05)+([0-9]{8})\b)/g,
-                    minlength: 10,
-                    maxlength: 11,
-            },
-            emailCreate: {
-                required: true,
-                email: true,
-                // pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-            },
-                faxCreate: {
-                    required: true,
-                    minlength: 7,
-                    maxlength: 15,
-                    pattern: /^\+[\d]+$/,
-                }
-        },
-        messages: {
-            nameCreate: {
-                required: "Vui lòng nhập tên nhà cung cấp",
-                minlength: "Tên nhà cung cấp phải có ít nhất 5 ký tự"
-            },
-            phoneCreate: {
-                // required: "Vui lòng nhập số điện thoại",
-                digits: "Số điện thoại phải là số",
-                minlength: "Số điện thoại phải có ít nhất 10 chữ số",
-                maxlength: "Số điện thoại không được vượt quá 11 chữ số",
-                pattern: "Số điện thoại không đúng định dạng",
-            },
-            emailCreate: {
-                // required: "Vui lòng nhập địa chỉ email",
-                email: "Định dạng địa chỉ email không hợp lệ",
-                // pattern: "Định dạng địa chỉ email không hợp lệ"
-            },
-            faxCreate: {
-                required: "Vui lòng nhập số fax",
-                minlength: "Số fax phải có ít nhất 7 chữ số",
-                maxlength: "Số fax không được vượt quá 15 chữ số",
-                pattern: "Số fax phải bắt đầu bằng dấu '+' và là một chuỗi số"
-            }
-        },
-            submitHandler: function () {
-                createSupplier();
-            }
-        });
-    });
+
+    // $(document).ready(function () {
+    //     $("#formCreate").validate({
+    //         rules: {
+    //             nameCreate: {
+    //                 required: true,
+    //                 minlength: 5,
+    //             },
+    //             phoneCreate: {
+    //                 required: false,
+    //                 digits: true,
+    //                 pattern: /((09|03|07|08|05)+([0-9]{8})\b)/g,
+    //                 minlength: 10,
+    //                 maxlength: 11,
+    //         },
+    //         emailCreate: {
+    //             required: true,
+    //             email: true,
+    //             // pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    //         },
+    //             faxCreate: {
+    //                 required: true,
+    //                 minlength: 7,
+    //                 maxlength: 15,
+    //                 pattern: /^\+[\d]+$/,
+    //             }
+    //     },
+    //     messages: {
+    //         nameCreate: {
+    //             required: "Vui lòng nhập tên nhà cung cấp",
+    //             minlength: "Tên nhà cung cấp phải có ít nhất 5 ký tự"
+    //         },
+    //         phoneCreate: {
+    //             // required: "Vui lòng nhập số điện thoại",
+    //             digits: "Số điện thoại phải là số",
+    //             minlength: "Số điện thoại phải có ít nhất 10 chữ số",
+    //             maxlength: "Số điện thoại không được vượt quá 11 chữ số",
+    //             pattern: "Số điện thoại không đúng định dạng",
+    //         },
+    //         emailCreate: {
+    //             // required: "Vui lòng nhập địa chỉ email",
+    //             email: "Định dạng địa chỉ email không hợp lệ",
+    //             // pattern: "Định dạng địa chỉ email không hợp lệ"
+    //         },
+    //         faxCreate: {
+    //             required: "Vui lòng nhập số fax",
+    //             minlength: "Số fax phải có ít nhất 7 chữ số",
+    //             maxlength: "Số fax không được vượt quá 15 chữ số",
+    //             pattern: "Số fax phải bắt đầu bằng dấu '+' và là một chuỗi số"
+    //         }
+    //     },
+    //         submitHandler: function () {
+    //             createSupplier();
+    //         }
+    //     });
+    // });
+
     // $("#formCreate").submit(function(event) {
     //     event.preventDefault(); // Ngăn chặn hành động mặc định khi submit form
     //

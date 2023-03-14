@@ -7,7 +7,6 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.time.Instant;
-import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,7 +21,7 @@ public class CustomerGroupResult {
 
     private String cusGrpCode;
 
-    private Long countCus;
+    private Integer countCus;
 
     private String note;
 
@@ -31,7 +30,6 @@ public class CustomerGroupResult {
     private String defaultPaymentMethodId;
 
     private Integer defaultDiscountRate;
-    //TODO: SUA LAI UI
 
     private String type;
 
@@ -40,4 +38,27 @@ public class CustomerGroupResult {
     private Instant createdAt;
 
 
+//    public CustomerGroupResult(Integer id, String title, String cusGrpCode, Integer pricingPolicyId, String paymentMethodId, Date createAtDate, Integer countCus, String description, Integer discount) {
+//        this.id = id;
+//        this.title = title;
+//        this.cusGrpCode = cusGrpCode;
+//        this.pricingPolicyId = pricingPolicyId;
+//        this.paymentMethodId = paymentMethodId;
+//        this.createAtDate = createAtDate;
+//        this.countCus = countCus;
+//        this.description = description;
+//        this.discount = discount;
+//    }
+//
+//    public CustomerGroupResult(Integer id, String title, String cusGrpCode, Integer pricingPolicyId, String paymentMethodId, Instant createdAt, Integer countCus, String description, Integer discount) {
+//        this.id = id;
+//        this.title = title;
+//        this.cusGrpCode = cusGrpCode;
+//        this.pricingPolicyId = pricingPolicyId;
+//        this.paymentMethodId = paymentMethodId;
+//        this.createdAt = createdAt;
+//        this.countCus = countCus;
+//        this.description = description;
+//        this.discount = discount;
+//    }
 }

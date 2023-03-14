@@ -18,6 +18,7 @@ import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,27 +76,19 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public CustomerResult create(CreateCustomerParam createParam) {
 
-//        Instant birthday = createCustomerParam.getBirthday().toInstant();
-//        String cusCode =createCustomerParam.getCustomerCode();
-//        String randomString = String.valueOf(Math.random()*1000000+1);
-//        if(cusCode == null || cusCode.trim().isEmpty()){
-//            createCustomerParam.setCustomerCode(randomString);
-//        }
-//        if(createCustomerParam.getFullName()==null){
-//            throw new DataInputException("Tên khách hàng không được để trống");
-//        }
-//        Customer customer = customerMapper.toModel(createCustomerParam);
-//        customer.setBirthday(birthday);
-//        Customer customerResult = customerRepository.save(customer);
+        Instant birthday = createParam.getBirthday().toInstant();
         CreateAddressParam createAddressParam = createParam.getCreateAddressParam();
         if (createAddressParam == null)
             throw new ValidationException(new HashMap<>() {{
                 put("line1", "Dia chi khong duoc de trong");
             }});
         Customer customer = customerMapper.toModel(createParam);
+        customer.setBirthday(birthday);
         customer = customerRepository.save(customer);
-        if (createParam.getCustomerCode() == null)
+        if (createParam.getCustomerCode() == null || createParam.getCustomerCode().equals("")){
             customer.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
+            customer = customerRepository.save(customer);
+        }
         createAddressParam.setCustomerId(customer.getId());
         addressService.create(createAddressParam);
         return customerMapper.toDTO(customer);

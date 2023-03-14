@@ -9,7 +9,10 @@ import java.util.Map;
 @Getter
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class ValidationException extends BaseException {
-    public ValidationException(Map<Object, Object> errors) {
-        super(errors);
+    public ValidationException(Map<String, String> errors) {
+        super(errors, HttpStatus.BAD_REQUEST.value());
+    }
+    public ValidationException(String message) {
+        super(message, HttpStatus.NOT_FOUND.value());
     }
 }
