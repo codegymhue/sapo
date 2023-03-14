@@ -26,8 +26,8 @@ public class SupplierGroup extends BaseEntity {
     @Column(name = "sup_grp_code", unique = true, length = 50)
     private String supGroupCode;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "note")
+    private String note;
 
     public SupplierGroup(Integer id) {
         this.id = id;

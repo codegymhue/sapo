@@ -394,7 +394,7 @@
                         <span>${item.supGroupCode}</span>
                       </td>
                       <td class="cursor-pointer"
-                        <span>${item.description ? item.description : ""}</span>
+                        <span>${item.note ? item.note : ""}</span>
                       </td>
                       <td class="align-center cursor-pointer">
                         1
@@ -438,14 +438,14 @@
     })
 
     function doCreateGroupSupplier() {
-        let supGroupCode = page.dialogs.elements.groupCreateCodeSup.val();
-        let supGroupTitle = page.dialogs.elements.groupCreateTitleSup.val();
-        let description = page.dialogs.elements.groupCreateDescriptionSup.val();
+        let supGroupCode = page.dialogs.elements.groupCreateCodeSup.val().trim();
+        let supGroupTitle = page.dialogs.elements.groupCreateTitleSup.val().trim();
+        let note = page.dialogs.elements.groupCreateDescriptionSup.val().trim()
         let newGroupSup =
             {
                 title: supGroupTitle.length > 0 ? supGroupTitle : undefined,
                 supGroupCode: supGroupCode.length > 0 ? supGroupCode : undefined,
-                description: description.length > 0 ? description : undefined,
+                note: note.length > 0 ? note : undefined,
             }
         console.log("trc ajax", newGroupSup)
         $.ajax({
@@ -520,7 +520,7 @@
                         page.dialogs.elements.editGroupId.val(data.id),
                         page.dialogs.elements.groupTitleEditSup.val(data.title),
                         page.dialogs.elements.groupCodeEditSup.val(data.supGroupCode),
-                        page.dialogs.elements.groupDescriptionEditSup.val(data.description)
+                        page.dialogs.elements.groupDescriptionEditSup.val(data.note)
                 } else {
                     console.log("data show edit: ", data)
                     page.elements.showModalEditGroupSupplier.modal('show');
@@ -528,7 +528,7 @@
                         page.dialogs.elements.editGroupId.val(data.id),
                         page.dialogs.elements.groupTitleEditSup.val(data.title),
                         page.dialogs.elements.groupCodeEditSup.val(data.supGroupCode),
-                        page.dialogs.elements.groupDescriptionEditSup.val(data.description)
+                        page.dialogs.elements.groupDescriptionEditSup.val(data.note)
                 }
             })
             .fail(() => {
@@ -541,15 +541,15 @@
     })
 
     function doEditGroupSupplier() {
-        let idEditGroup = page.dialogs.elements.editGroupId.val();
-        let editGroupTitle = page.dialogs.elements.groupTitleEditSup.val();
-        let supGroupCode = page.dialogs.elements.groupCodeEditSup.val();
-        let description = page.dialogs.elements.groupDescriptionEditSup.val();
+        let idEditGroup = page.dialogs.elements.editGroupId.val().trim();
+        let editGroupTitle = page.dialogs.elements.groupTitleEditSup.val().trim();
+        let supGroupCode = page.dialogs.elements.groupCodeEditSup.val().trim();
+        let note = page.dialogs.elements.groupDescriptionEditSup.val().trim();
         let editGroup = {
             id: idEditGroup,
             title: editGroupTitle.length > 0 ? editGroupTitle : undefined,
             supGroupCode: supGroupCode.length > 0 ? supGroupCode : undefined,
-            description: description.length > 0 ? description : undefined
+            note: note.length > 0 ? note : undefined
         }
         $.ajax({
             "headers": {
