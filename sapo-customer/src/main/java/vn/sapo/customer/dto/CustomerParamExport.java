@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Setter
@@ -14,12 +15,14 @@ import java.util.List;
 public class CustomerParamExport {
     private String type;
     private List<Integer> listCustomerId;
+    private HashMap<String, String> listNameColumn;
 
     @Override
     public String toString() {
         return "CustomerParamExport{" +
                 "type='" + type + '\'' +
                 ", listCustomerId=" + listCustomerId +
+                ", listNameColumn=" + listNameColumn +
                 '}';
     }
 }
