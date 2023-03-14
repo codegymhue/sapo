@@ -1,6 +1,6 @@
 let page = {
     urls: {
-        addCategories: origin +"/api/categories/create"
+        addCategories: origin +"/api/categories"
     },
     elements: {},
     commands: {},
