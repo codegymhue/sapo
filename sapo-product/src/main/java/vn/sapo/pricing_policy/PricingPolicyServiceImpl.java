@@ -83,7 +83,9 @@ public class PricingPolicyServiceImpl implements PricingPolicyService {
     @Transactional
     public PricingPolicyResult findById(Integer id) {
         PricingPolicy pricingPolicy = pricingPolicyRepository.findById(id).orElseThrow(
-                () -> new NotFoundException("Không tìm thấy chính sách giá có id = " + id));
+                () -> new ValidationException(new HashMap<>(){{
+                    put("id", "pricing.policy.validation.id.notFound");
+                }}));
         return pricingPolicyMapper.toDTO(pricingPolicy);
     }
 
