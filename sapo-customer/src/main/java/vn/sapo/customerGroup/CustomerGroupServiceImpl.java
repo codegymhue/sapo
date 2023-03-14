@@ -53,21 +53,6 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
             throw new ValidationException(errors);
         }
 
-//        if (createCusGroupParam.getCusGrpCode() == null) {
-//            createCusGroupParam.setCusGrpCode(getMaxSystemCustomerGroupCode());
-//        }
-
-//        customerGroup.setPaymentMethod(createCusGroupParam.getPaymentMethod());
-//        customerGroup.setPricingPolicyId(createCusGroupParam.getPricingPolicyId());
-
-//        CustomerGroup customerGroup = customerGroupMapper.toModel(createCusGroupParam);
-//        //customerGroup.setCusGrpType(FIXED);
-//
-//        customerGroup = customerGroupRepository.save(customerGroup);
-//
-//        customerGroup.setCusGrpCode(CodePrefix.CUSTOMER_GROUP.generate(customerGroup.getId()));
-//
-//        return customerGroupMapper.toDTO(customerGroup);
         CustomerGroup customerGroup = customerGroupMapper.toModel(createParam);
         customerGroup.setType(CustomerGroupType.FIXED);
         customerGroup = customerGroupRepository.save(customerGroup);
@@ -87,6 +72,29 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
                             put("id", "customer_group.exception.notFound");
                         }}
                 ));
+
+        Map<String, String> errors = new HashMap<>();
+        String currentTitle = customerGroup.getTitle();
+        String newTitle = updateCusGroupParam.getTitle().trim();
+        String customerGroupCode = updateCusGroupParam.getCusGrpCode().trim();
+
+        if (!currentTitle.equalsIgnoreCase(newTitle)) {
+            checkCustomerGroupTitle(newTitle, errors);
+        }
+
+        if (customerGroupCode.isEmpty()) {
+            updateCusGroupParam.setCusGrpCode(customerGroup.getCusGrpCode());
+        } else {
+            checkCusGrpCodeWhenNotEmpty(customerGroupCode, errors);
+        }
+
+
+        if (!errors.isEmpty()) {
+            throw new ValidationException(errors);
+        }
+
+
+
         customerGroupMapper.transferFields(updateCusGroupParam, customerGroup);
         return customerGroupMapper.toDTO(customerGroup);
     }
@@ -133,54 +141,17 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
                 .map(customerGroupMapper::toDTO);
     }
 
-    //TODO: ko can nua
-
     private void checkCustomerGroupTitle(String title, Map<String, String> errors) {
         if (customerGroupRepository.existsByTitle(title)) {
-            errors.put("title", "{customer_group.validation.title.existed}");
+            errors.put("title", "customer_group.validation.title.existed");
         }
     }
-
-    //TODO: Ko can nua
 
     public void checkCusGrpCodeWhenNotEmpty(String cusGrpCode, Map<String, String> errors) {
         String prefix = CodePrefix.CUSTOMER_GROUP.getValue();
 
         if (cusGrpCode.substring(0, 3).equalsIgnoreCase(prefix)) {
-            errors.put("cusGrpCode", "{customer_group.validation.cusGrpCode.prefix}");
+            errors.put("cusGrpCode", "customer_group.validation.cusGrpCode.prefix");
         }
     }
-
-    //TODO: KO CAN THOIET
-//    public String getMaxSystemCustomerGroupCode() {
-//        String prefix = CodePrefix.CUSTOMER_GROUP.getValue();
-//        String maxSystemCustomerGroupCode;
-//
-//        String currentMaxSystemCustomerGroupCode = customerGroupRepository.getMaxSystemCustomerGroupCode();
-//
-//        if (currentMaxSystemCustomerGroupCode == null) {
-//            maxSystemCustomerGroupCode = CodePrefix.CUSTOMER_GROUP.getValue().concat("00001");
-//        } else {
-//
-//            String[] a = currentMaxSystemCustomerGroupCode.split(prefix);
-//            String suffix = a[1];
-//
-//            int currentCodeSuffix = Integer.parseInt(suffix);
-//            currentCodeSuffix++;
-//
-//            if (currentCodeSuffix < 10) {
-//                maxSystemCustomerGroupCode = prefix.concat("0000").concat(String.valueOf(currentCodeSuffix));
-//            } else if (currentCodeSuffix < 100) {
-//                maxSystemCustomerGroupCode = prefix.concat("000").concat(String.valueOf(currentCodeSuffix));
-//            } else if (currentCodeSuffix < 1000) {
-//                maxSystemCustomerGroupCode = prefix.concat("00").concat(String.valueOf(currentCodeSuffix));
-//            } else if (currentCodeSuffix < 10000) {
-//                maxSystemCustomerGroupCode = prefix.concat("0").concat(String.valueOf(currentCodeSuffix));
-//            } else {
-//                maxSystemCustomerGroupCode = prefix.concat(String.valueOf(currentCodeSuffix));
-//            }
-//        }
-//
-//        return maxSystemCustomerGroupCode;
-//    }
 }

@@ -24,18 +24,6 @@ public interface CustomerGroupRepository extends JpaRepository<CustomerGroup, In
             "group by g.id")
             List<ICustomerGroupResult> sortByGroup();
 
-
-    //TODO:KO CAN NUA
-//    @Query(value = "SELECT cus_grp_code AS cgc " +
-//            "FROM customer_group AS cg " +
-//            "WHERE cg.cus_grp_code " +
-//            "LIKE 'CTN%' " +
-//            "ORDER BY cgc " +
-//            "DESC LIMIT 1;"
-//            ,
-//            nativeQuery = true)
-//    String getMaxSystemCustomerGroupCode();
-
     boolean existsByCusGrpCode(String code);
 
     boolean existsByTitle(String title);
@@ -54,20 +42,6 @@ public interface CustomerGroupRepository extends JpaRepository<CustomerGroup, In
             ,
             nativeQuery = true)
     List<CustomerGroupResult> findAllCustomerGroupResult();
-
-//    @Query(value = "SELECT NEW vn.sapo.customerGroup.dto.CustomerGroupResult (" +
-//            "g.id, " +
-//            "g.title, " +
-//            "g.cusGrpCode, " +
-//            "g.cusGrpType, " +
-//            "g.id, " +
-//            "g.description, " +
-//            "g.createdAt )" +
-//            "FROM CustomerGroup AS g;"
-////            ,
-////            nativeQuery = true
-//    )
-//    List<CustomerGroupResult> findAllCustomerGroupResult();
 }
 
 

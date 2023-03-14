@@ -18,7 +18,6 @@ public class UpdateCusGroupParam {
     @NotBlank(message = "{customer_group.validation.title.notBlank}")
     private String title;
 
-    @NullOrNotBlank
     @Length(max = 50, message = "{customer_group.validation.cusGrpCode.length}")
     private String cusGrpCode;
 
