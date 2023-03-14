@@ -10,16 +10,17 @@ import java.time.Instant;
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
     private static final long serialVersionUID = -6305026811763181957L;
-    public static final String DATETIME_DEFAULT_CURRENT_TIMESTAMP = "DATETIME DEFAULT CURRENT_TIMESTAMP";
+    public static final String TIMESTAMP_DEFAULT_CURRENT_TIMESTAMP = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP";
     @Setter(AccessLevel.NONE)
     @Column(name = "created_at",
             nullable = false,
-            columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP"
+            columnDefinition = TIMESTAMP_DEFAULT_CURRENT_TIMESTAMP
     )
     private Instant createdAt;
 
     @Setter(AccessLevel.NONE)
-    @Column(name = "updated_at")
+    @Column(name = "updated_at",
+            columnDefinition = TIMESTAMP_DEFAULT_CURRENT_TIMESTAMP)
     private Instant updatedAt;
 
     @PrePersist

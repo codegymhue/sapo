@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import vn.sapo.employee.EmployeeService;
 import vn.sapo.payment_method.PaymentMethodService;
 import vn.sapo.supplier.excel.SupplierExcelExporter;
-import vn.sapo.supplier.excel.SupplierExcelExporterInventory;
+//import vn.sapo.supplier.excel.SupplierExcelExporterInventory;
 import vn.sapo.supplier.SupplierService;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplierGroup.SupplierGroupService;
@@ -115,18 +115,18 @@ public class SupplierController {
         excelExporter.export(response);
     }
 
-    @GetMapping("/excel")
-    public void exportItemToExcel(HttpServletResponse response) throws IOException {
-        response.setContentType("application/octet-stream");
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-        String currentDateTime = dateFormatter.format(new Date());
-        String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=Suppliers_" + currentDateTime + ".xlsx";
-        response.setHeader(headerKey, headerValue);
-        List<SupplierResult> listSuppliers = supplierService.findAll();
-        SupplierExcelExporterInventory excelExporter = new SupplierExcelExporterInventory(listSuppliers);
-        excelExporter.export(response);
-    }
+//    @GetMapping("/excel")
+//    public void exportItemToExcel(HttpServletResponse response) throws IOException {
+//        response.setContentType("application/octet-stream");
+//        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+//        String currentDateTime = dateFormatter.format(new Date());
+//        String headerKey = "Content-Disposition";
+//        String headerValue = "attachment; filename=Suppliers_" + currentDateTime + ".xlsx";
+//        response.setHeader(headerKey, headerValue);
+//        List<SupplierResult> listSuppliers = supplierService.findAll();
+//        SupplierExcelExporterInventory excelExporter = new SupplierExcelExporterInventory(listSuppliers);
+//        excelExporter.export(response);
+//    }
 
     @GetMapping("/{id}/addresses")
     public ModelAndView showSupplierAddress(@PathVariable Integer id) {

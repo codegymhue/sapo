@@ -13,6 +13,7 @@ import vn.sapo.entities.supplier.SupplierGroup;
 import vn.sapo.entities.supplier.SupplierStatus;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface SupplierRepository extends JpaRepository<Supplier, Integer> {
@@ -23,4 +24,7 @@ public interface SupplierRepository extends JpaRepository<Supplier, Integer> {
 
     @Query("SELECT tags FROM Supplier")
     List<String> findTags();
+
+    @Query(value = "", nativeQuery = true)
+    Optional<Supplier> findByIdAndContactId(Integer supplierId);
 }

@@ -12,7 +12,7 @@ public interface CustomerGroupService {
 
     CustomerGroupResult create(CreateCusGroupParam createCusGroupParam);
 
-    CustomerGroupResult update(UpdateCusGroupParam updateCusGroupParam);
+    CustomerGroupResult update(Integer id, UpdateCusGroupParam updateCusGroupParam);
 
     List<CustomerGroupResult> findAll();
 

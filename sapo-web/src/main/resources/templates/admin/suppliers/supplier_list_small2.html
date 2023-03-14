@@ -192,6 +192,7 @@
                 </div>
                 <div class="action-bar">
                     <div class="action-bar__top-links">
+<!--                        <a th:href="@{/admin/suppliers/export/excel}" style="text-decoration: none; color: rgba(0,0,0,0.89)"</a>-->
                         <button class="btn sapo-btn-transparent action-bar__link export_supplier" type="button"
                                 name="button">
                             <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge">
@@ -359,10 +360,10 @@
                                         </svg>
                                     </div>
                                     <div class="autocomplete-suggestion-holder float-left position-relative">
-                                        <div class="bootstrap-tagsinput" >
-                                            <input  onkeyup="suggestTags(this)"
-                                                    type="text" placeholder=""
-                                                    autocomplete="off">
+                                        <div class="bootstrap-tagsinput">
+                                            <input onkeyup="suggestTags(this)"
+                                                   type="text" placeholder=""
+                                                   autocomplete="off">
                                         </div>
                                         <input type="text" class="sapo-textbox choosed-single-id" id="tags"
                                                style="display: none;">
@@ -689,7 +690,8 @@
 <th:block th:replace="/layout/supplier/supplier_list_modal.html"/>
 <!--<script src="/assets/admin/js/suppliers/supplier_app.js"></script>-->
 <script src="/assets/admin/js/suppliers/supplier_app22.js"></script>
-<th:block th:replace="/layout/script :: script"/>
+<!--<th:block th:replace="/layout/script :: script"/>-->
+<th:block th:replace="/layout/supplier/tagCreate.html"/>
 <th:block th:replace="/layout/supplier/script_export_import.html"/>
 
 <script>
@@ -1208,7 +1210,9 @@
         page.commands.chooseTag();
     })
 
+
     page.commands.chooseTag = () => {
+
         $(".suggestion-tag").on("click", function () {
             console.log(this)
             let tagChoose = $(this).find("span").text();
@@ -1222,7 +1226,6 @@
                     supplierFilter.tags.push(tagChoose)
                     let str = `<span class="tag label label-info" style="">${tagChoose}<span class="lable-remove" data-role="remove"></span></span>`
                     page.elements.tagsInput.prepend(str)
-
                 }
             })
             if (listTagsChoose.length === 0) {
@@ -1646,7 +1649,7 @@
         console.log("in function")
         let value = $(element).val().toLowerCase();
         $(".suggestion-tag").hide();
-        $(".suggestion-tag").filter(function (){
+        $(".suggestion-tag").filter(function () {
             let text = $(this).text().toLowerCase();
             return text.indexOf(value) >= 0;
         }).show();

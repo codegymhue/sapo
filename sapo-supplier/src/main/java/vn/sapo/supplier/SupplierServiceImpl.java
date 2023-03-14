@@ -6,24 +6,32 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import vn.sapo.contact.dto.ContactMapper;
+import vn.sapo.contact.dto.ContactResult;
+import vn.sapo.contact.dto.CreateContactParam;
+import vn.sapo.contact.dto.UpdateContactParam;
+import vn.sapo.entities.Contact;
 import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.entities.supplier.SupplierStatus;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
-import vn.sapo.shared.exceptions.ValidationException;
 import vn.sapo.supplier.dto.CreateSupplierParam;
 import vn.sapo.supplier.dto.SupplierFilter;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.dto.UpdateSupplierParam;
 import vn.sapo.supplierGroup.SupplierGroupRepository;
 
+import java.time.Instant;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
 public class SupplierServiceImpl implements SupplierService {
     @Autowired
     private SupplierMapper supplierMapper;
+    @Autowired
+    private ContactMapper contactMapper;
     @Autowired
     private SupplierRepository supplierRepository;
     @Autowired
@@ -72,7 +80,7 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierResult update(UpdateSupplierParam param) {
         Supplier supplier = supplierRepository.findById(param.getId())
                 .orElseThrow(() -> new NotFoundException("Not found supplier"));
-        if(param.getSupplierCode() !=null && !supplier.getSupplierCode().equalsIgnoreCase(param.getSupplierCode())) {
+        if (param.getSupplierCode() != null && !supplier.getSupplierCode().equalsIgnoreCase(param.getSupplierCode())) {
             if (param.getSupplierCode().startsWith("SUPN")) {
                 throw new NotFoundException("Mã không được có tiền tố của hệ thống SUPN");
             }
@@ -124,9 +132,9 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     @Transactional(readOnly = true)
     public Map<String, Object> findAllByFilters(SupplierFilter filter) {
-        if(filter.getPageNo() == null)
+        if (filter.getPageNo() == null)
             filter.setPageNo(1);
-        if(filter.getPageSize()== null)
+        if (filter.getPageSize() == null)
             filter.setPageSize(20);
         Page<Supplier> page = supplierFilterRepository.findAllByFilters(filter, PageRequest.of(filter.getPageNo() - 1, filter.getPageSize()));
 
@@ -162,25 +170,28 @@ public class SupplierServiceImpl implements SupplierService {
         if (empId != null)
             supplier.setEmployeeId(empId);
         if (paymentId != null)
-        supplier.setPaymentMethodId(paymentId);
+            supplier.setPaymentMethodId(paymentId);
     }
+
     @Override
     @Transactional
-   public String findSupplierCodeById(Integer id){
+    public String findSupplierCodeById(Integer id) {
         Supplier supplier = supplierRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Supplier not found"));;
+                .orElseThrow(() -> new NotFoundException("Supplier not found"));
+        ;
         String supplierCode = supplier.getSupplierCode();
         return supplierCode;
     }
+
     @Override
     @Transactional
     public List<String> findTags() {
         List<List<String>> listTags = supplierRepository.findTags().stream()
                 .map(json -> {
-                        String trimmedJson = json.trim();
-                        if (!trimmedJson.isEmpty()) {
-                            return Arrays.asList(trimmedJson.split(","));
-                        }
+                    String trimmedJson = json.trim();
+                    if (!trimmedJson.isEmpty()) {
+                        return Arrays.asList(trimmedJson.split(","));
+                    }
                     return null;
                 })
                 .filter(Objects::nonNull)
@@ -190,5 +201,43 @@ public class SupplierServiceImpl implements SupplierService {
                 .flatMap(List::stream)
                 .distinct()
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ContactResult> findContactsBySupplierId(Integer supplierId) {
+        Supplier supplier = supplierRepository.findById(supplierId)
+                .orElseThrow(() -> new NotFoundException("supplier.exception.notFound"));
+        return supplier.getContacts().stream().map(contactMapper::toDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public ContactResult createContactBySupplierId(Integer supplierId, CreateContactParam createParam) {
+        Supplier supplier = supplierRepository.findById(supplierId)
+                .orElseThrow(() -> new NotFoundException("supplier.exception.notFound"));
+        Contact contact = contactMapper.toModel(createParam);
+        contact.setId(System.currentTimeMillis());
+        contact.setStatus("ACTIVE");
+        contact.setCreatedAt(Instant.now());
+        supplier.getContacts().add(contact);
+        return contactMapper.toDTO(contact);
+    }
+
+    @Override
+    @Transactional
+    public ContactResult updateContactBySupplierId(Integer supplierId, UpdateContactParam updateParam) {
+        Supplier supplier = supplierRepository.findByIdAndContactId(supplierId)
+                .orElseThrow(() -> new NotFoundException("supplier.exception.notFound"));
+        Contact contact = supplier.getContacts().stream()
+                .filter(c -> c.getId().equals(updateParam.getId()))
+                .findAny()
+                .orElseThrow(() -> new NotFoundException("contact.exception.notFound"));
+
+        contactMapper.transferFields(updateParam, contact);
+        contact.setId(System.currentTimeMillis());
+        contact.setUpdatedAt(Instant.now());
+        supplier.getContacts().add(contact);
+        return contactMapper.toDTO(contact);
     }
 }
