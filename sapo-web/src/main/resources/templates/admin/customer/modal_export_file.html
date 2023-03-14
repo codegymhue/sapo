@@ -43,34 +43,28 @@
       <script>
             let listCustomerId = [];
             function exportFileExcel(){
-                let formData = new FormData();
                 let theadFirst = $("#tbCustomer thead tr th");
                 let tdRow = $("#tbCustomer tbody td input");
                 for(let i=0; i<tdRow.length; i++){
                     listCustomerId.push(tdRow[i].id);
                 }
                 let type = $("input[name='type']:checked").val();
-                formData.append("type", type);
-                formData.append("listCustomerId", listCustomerId);
-                listNameColumn = {};
+                let listNameColumn = [];
                 let nameColumn = $("#modal-select-column input");
+                let labelColumn = $("#modal-select-column label");
                 for(let i=0; i<nameColumn.length; i++){
                   if($(nameColumn[i]).is(":checked")){
-                    console.log()
+                    listNameColumn.push([$(nameColumn[i]).attr("name")]);
                   }
                 }
-                $.ajax({
-                    headers: {
-                        "accept": "application/json",
-                        "content-type": "application/json"
-                    },
-                    type: "GET",
-                    url: origin +"/admin/customers/export/excel",
-                    data: {type, listCustomerId, listNameColumn}
-                })
-                .done(()=>{
-                  location.href =  origin +"/admin/customers/export/excel";
-                })
+                let listCustomerIdParamList = [];
+                let url= origin+`/admin/customers/export/excel?type=${type}${listCustomerId.map((item)=>{
+                                                                                  return "&listCustomerId"+"="+item
+                                                                              })}${listNameColumn.map((item)=>{
+                                                                                return "&listNameColumn"+"="+item 
+                                                                              })}`;
+                location.href =  url.split(",").join("");
+                  // $(".close").click();
                 listCustomerId =[];
             }
 

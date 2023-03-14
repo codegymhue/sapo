@@ -18,11 +18,9 @@ import java.util.List;
 @Setter
 @Accessors(chain = true)
 public class CustomerResult {
-
-    private Integer id;
-
     private String customerCode;
-
+    private Integer id;
+    private CusGroupResult group;
     private String fullName;
 
     private String phoneNumber;
@@ -31,7 +29,6 @@ public class CustomerResult {
 
     private Instant birthday;
 
-    private CusGroupResult group;
 
     private CustomerGender gender;
 
@@ -70,36 +67,5 @@ public class CustomerResult {
 
     private Instant updatedAt;
 
-    //TODO: NHO XOA
-    @Override
-    public String toString() {
-        return "CustomerResult{" +
-                "id=" + id +
-                ", customerCode='" + customerCode + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                ", birthday=" + birthday +
-                ", group=" + group +
-                ", gender=" + gender +
-                ", description='" + description + '\'' +
-                ", debtTotal=" + debtTotal +
-                ", spendTotal=" + spendTotal +
-                ", status=" + status +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                ", employee=" + employee +
-                ", shippingAddress=" + shippingAddress +
-                ", billAddress=" + billAddress +
-                ", addresses=" + addresses +
-                ", quantityProductOrder=" + quantityProductOrder +
-                ", quantityItemOrder=" + quantityItemOrder +
-                ", lastDayOrder=" + lastDayOrder +
-                ", payment=" + payment +
-                ", taxCode='" + taxCode + '\'' +
-                ", fax='" + fax + '\'' +
-                ", website='" + website + '\'' +
-                '}';
-    }
 }
 

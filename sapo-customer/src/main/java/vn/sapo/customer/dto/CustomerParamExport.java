@@ -15,7 +15,7 @@ import java.util.List;
 public class CustomerParamExport {
     private String type;
     private List<Integer> listCustomerId;
-    private HashMap<String, String> listNameColumn;
+    private List<String> listNameColumn;
 
     @Override
     public String toString() {
