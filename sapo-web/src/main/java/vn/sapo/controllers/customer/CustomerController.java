@@ -14,11 +14,10 @@ import vn.sapo.employee.EmployeeService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/admin/customers")
@@ -77,10 +76,17 @@ public class CustomerController {
         String headerKey = "Content-Disposition";
         String headerValue = "attachment; filename=Customers_" + currentDateTime + ".xlsx";
         response.setHeader(headerKey, headerValue);
-        List<CustomerResult> listCustomers = customerService.findAll();
-//        List<CustomerResult> listCustomers = new ArrayList<>();
-//        listCustomers.add(customerService.findById(8077));
-        CustomerExcelExporter excelExporter = new CustomerExcelExporter(listCustomers);
+
+        List<Integer> listCustomerId =  customerParamExport.getListCustomerId();
+        List<CustomerResult> customerResultList = new ArrayList<>();
+        if(customerParamExport.getType().equals("PRESENT")) {
+            for(int i=0; i<listCustomerId.size(); i++){
+                customerResultList.add(customerService.findById(listCustomerId.get(i)));
+            }
+        }else if(customerParamExport.getType().equals("ALL")){
+            customerResultList = customerService.findAll();
+        }
+        CustomerExcelExporter excelExporter = new CustomerExcelExporter(customerParamExport, customerResultList);
         excelExporter.export(response);
     }
 
