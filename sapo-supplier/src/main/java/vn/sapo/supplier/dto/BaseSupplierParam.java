@@ -6,6 +6,7 @@ import lombok.experimental.Accessors;
 import vn.sapo.shared.validation.constraints.NullOrNotBlank;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Getter
@@ -34,6 +35,7 @@ public abstract class BaseSupplierParam {
     private String taxCode;
 
     @NullOrNotBlank
+//    @Pattern(message = "{supplier.validation.fax.pattern}", regexp = "/^\\+?\\d{6,15}$/\n")
     private String fax;
 
     @NullOrNotBlank
