@@ -76,7 +76,7 @@ public class Voucher extends BaseEntity {
     private Integer groupId;
 
     @Setter(AccessLevel.NONE)
-    @Column(name = "issued_at", nullable = false, columnDefinition = DATETIME_DEFAULT_CURRENT_TIMESTAMP)
+    @Column(name = "issued_at", nullable = false, columnDefinition = TIMESTAMP_DEFAULT_CURRENT_TIMESTAMP)
     private Instant issuedAt;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
