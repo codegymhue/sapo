@@ -1,25 +1,36 @@
 package vn.sapo.customerGroup.dto;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.validator.constraints.Length;
+import vn.sapo.shared.validation.constraints.NullOrNotBlank;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
 @Accessors(chain = true)
 public class UpdateCusGroupParam {
-    private Integer id;
 
+    @NotBlank(message = "{customer_group.validation.title.notBlank}")
     private String title;
 
+    @NullOrNotBlank
+    @Length(max = 50, message = "{customer_group.validation.cusGrpCode.length}")
     private String cusGrpCode;
 
-    private Integer pricingPolicyId;
+    private Integer defaultPricingPolicyId;
 
-    private String paymentMethodId;
+    @NullOrNotBlank
+    private String defaultPaymentMethodId;
 
-    private String description;
+    @Length(max = 255, message = "{customer_group.validation.note.max}")
+    private String note;
 
-    private Integer discount;
+    @Min(value = 0, message = "{customer_group.validation.defaultDiscountRate.min}")
+    @Max(value = 100, message = "{customer_group.validation.defaultDiscountRate.max}")
+    private Integer defaultDiscountRate;
 }
