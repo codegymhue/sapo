@@ -182,7 +182,7 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
                     param.setPaymentMethodTitle(cell.getStringCellValue());
                     break;
                 case 20:
-//              CURRENT_DEBT
+//              CURRENT_DEBT :
                     break;
                 case TAGS:
                     String[] tags = cell.getStringCellValue().split(",");
