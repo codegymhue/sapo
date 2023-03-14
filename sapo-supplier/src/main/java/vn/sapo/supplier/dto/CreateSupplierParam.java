@@ -25,9 +25,9 @@ public class CreateSupplierParam extends BaseSupplierParam {
     @Pattern(message = "{supplier.validation.email.pattern}", regexp = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
     private String email;
 
-//    @Pattern(message = "{supplier.validation.fax.pattern}", regexp = "/^\\d+$/")
+    @Pattern(message = "{supplier.validation.fax.pattern}", regexp ="^[0-9]+$")
     private String fax;
 
-//    @Pattern(message = "{supplier.validation.phone.pattern}", regexp = "/^\\d+$/")
+    @Pattern(message = "{supplier.validation.phone.pattern}", regexp = "^[0-9]+$")
     private String phone;
 }
