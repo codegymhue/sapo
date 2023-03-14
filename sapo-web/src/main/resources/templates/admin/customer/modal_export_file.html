@@ -41,17 +41,24 @@
         </div>
       </div>
       <script>
-            let listRowPresent = [];
+            let listCustomerId = [];
             function exportFileExcel(){
                 let formData = new FormData();
                 let theadFirst = $("#tbCustomer thead tr th");
                 let tdRow = $("#tbCustomer tbody td input");
                 for(let i=0; i<tdRow.length; i++){
-                    listRowPresent.push(tdRow[i].id);
+                    listCustomerId.push(tdRow[i].id);
                 }
                 let type = $("input[name='type']:checked").val();
                 formData.append("type", type);
-                formData.append("listCustomerId", listRowPresent);
+                formData.append("listCustomerId", listCustomerId);
+                listNameColumn = {};
+                let nameColumn = $("#modal-select-column input");
+                for(let i=0; i<nameColumn.length; i++){
+                  if($(nameColumn[i]).is(":checked")){
+                    console.log()
+                  }
+                }
                 $.ajax({
                     headers: {
                         "accept": "application/json",
@@ -59,15 +66,12 @@
                     },
                     type: "GET",
                     url: origin +"/admin/customers/export/excel",
-                    data: {
-                      type: type,
-                      listCustomerId: listRowPresent
-                    }
+                    data: {type, listCustomerId, listNameColumn}
                 })
                 .done(()=>{
                   location.href =  origin +"/admin/customers/export/excel";
                 })
-                listRowPresent =[];
+                listCustomerId =[];
             }
 
       </script>
