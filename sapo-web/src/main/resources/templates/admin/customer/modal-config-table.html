@@ -40,8 +40,9 @@
                
             </div>
             <div class="modal-footer">
-              <button type="button" id="btn-cancel-config-table" class="btn btn-outline-danger modal-change-column" data-dismiss="modal">Close</button>
-              <button type="button" id="btn-submit-config-table" class="btn btn-outline-primary" onclick="changeColumn()">Save changes</button>
+                <button type="button" id="btn-submit-config-table" class="btn btn-outline-primary" onclick="reset()">Quay về ban đầu</button>
+              <button type="button" id="btn-cancel-config-table" class="btn btn-outline-danger modal-change-column" data-dismiss="modal">Thoát</button>
+              <button type="button" id="btn-submit-config-table" class="btn btn-outline-primary" onclick="changeColumn()">Lưu</button>
             </div>
           </div>
         </div>
@@ -94,18 +95,20 @@
             return inputCheckbox;
         }
          //tạo các list để drag và drop trong modal
-        (function createElement(){
-        thead.map((item, index)=>{
-            let headLabel = `
-            <div class="label-column" id="${thead[index]}" data-item-sortable-id="0" draggable="true" role="option" aria-grabbed="false" style="">
-                ${addCheckboxInLabelColumn(thead[index])} ${nameThead[thead[index]]}
-            </div>`;
-            $(theadElement).append(headLabel);
-            $('.checkbox-change-column').prop('checked', true);
-        })
-        })();
+        function createElement(){
+            $(theadElement).html("")
+            thead.map((item, index)=>{
+                let headLabel = `
+                <div class="label-column" id="${thead[index]}" data-item-sortable-id="0" draggable="true" role="option" aria-grabbed="false" style="">
+                    ${addCheckboxInLabelColumn(thead[index])} ${nameThead[thead[index]]}
+                </div>`;
+                $(theadElement).append(headLabel);
+                $('.checkbox-change-column').prop('checked', true);
+            })
+        };
+        createElement();
         //changeColumn() thực hiện khi click save ở modal để chuyển cột
-    function changeColumn(){
+        function changeColumn(){
         let listLabelColumn = document.querySelectorAll(".label-column");
         thead = [];
         for(let i=0; i<listLabelColumn.length; i++){
@@ -416,7 +419,7 @@
                             targets: 0,
                             "orderable": false,
                             render: function (data, type, row, meta) {
-                                return `<input id="${row.id}" type="checkbox" value="check_none" style="float:right"/>`;
+                                return `<input id="${row.id}" type="checkbox" value="check_none" style="${thead.length > 0 ? 'float: right':'opacity:0'}"/>`;
                             }
                         },
              {
@@ -439,6 +442,23 @@
         })
             $(".close").click();
             $(".modal-backdrop").remove();
+        
     }
+        function reset(){
+                thead = [];
+                thead = [
+                'customerCode',
+                'fullName',
+                'phoneNumber',
+                'group.title',
+                'debtTotal',
+                'spendTotal',
+                "quantityItemOrder"
+                ];
+                createElement();
+                for(item of thead){
+                    checkedCheckbox[item] = true;
+                }
+        }   
       </script>
 </th:block>
