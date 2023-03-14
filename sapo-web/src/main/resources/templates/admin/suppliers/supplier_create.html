@@ -212,6 +212,22 @@
                                     <textarea id="descriptionCreate" class="sapo-textbox" title="Nhập mô tả"
                                               style="height: 119px;" required></textarea>
                                 </div>
+
+                                <div class="page-info-item col-12 p-0">
+                                    <div class="page-info-item-title">
+                                        TAG
+                                        <i class="fa fa-info" data-toggle="tooltip" data-placement="top" title=""
+                                           hoặc="" thêm="" thẻ="" sẽ="" cho="" phép="" bạn="" tìm="" kiếm="" và=""
+                                           lọc="" nhà="" cung="" cấp="" ở="" trang="" danh="" sách="" dễ="" dàng=""
+                                           hơn="" data-original-title="Chọn"></i>
+                                    </div>
+                                    <input class="sapo-textbox tags" data-role="tagsinput" style="display: none;">
+                                    <div class="autocomplete-suggestions"
+                                         style="position: relative; width: 250px; max-height: 300px; z-index: 9999; display: none;">
+
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 
@@ -242,7 +258,8 @@
     </div>
 </div>
 <th:bock th:replace="/admin/suppliers/modals/groups/create_group_supplier :: create_group_supplier"/>
-<th:block th:replace="/layout/script :: script"/>
+<!--<th:block th:replace="/layout/script :: script"/>-->
+<th:block th:replace="/layout/supplier/tagCreate :: tagCreate"/>
 
 <script src="/assets/admin/js/suppliers/supplier_create.js"></script>
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
@@ -413,6 +430,8 @@
                     "url": origin + "/api/suppliers",
                     "data": JSON.stringify(supplier)
                 })
+
+
                     .done((data) => {
                         console.log(data)
                         SupplierApp.IziToast.showSuccessAlert(" Thêm nhà cung cấp thành công ");
@@ -426,12 +445,12 @@
                         console.log(jqXHR);
                         let responseJSON = jqXHR.responseJSON;
                         if (responseJSON.errors !== undefined) {
-                            let errors=responseJSON.errors;
+                            let errors = responseJSON.errors;
                             errors.fullName !== undefined ? $("#error-nameCreate").text(errors.fullName) : "";
                             errors.line1 !== undefined ? $("#error-addressCreate").text(errors.line1) : "";
                             errors.email !== undefined ? $("#error-emailCreate").text(errors.email) : "";
-                            // errors.fax !== undefined ? $("#error-faxCreate").text(errors.fax) : "";
-                            // errors.phone !== undefined ? $("#error-phoneCreate").text(errors.phone) : "";
+                            errors.fax !== undefined ? $("#error-faxCreate").text(errors.fax) : "";
+                            errors.phone !== undefined ? $("#error-phoneCreate").text(errors.phone) : "";
                         }
 
                     })
@@ -566,6 +585,53 @@
         getAllWardsByDistrictId(districtId);
     });
 
+    // select chọn tag
+    // function getAllSupplierTags() {
+    //     return $.ajax({
+    //         headers: {
+    //             "accept": "application/json",
+    //             "content-type": "application/json"
+    //         },
+    //         type: "GET",
+    //         url: origin + "/api/suppliers/tags"
+    //     })
+    //         .done((data) => {
+    //             $.each(data, (i, item) => {
+    //                 let str = `<div class="autocomplete-suggestion suggestion-product suggestion-tag"
+    //                                          style="padding:4px 8px" data-index="0">
+    //                                         <div class="search-product-content-refactor item-supplier"
+    //                                              style="width:100%;">
+    //                                             <div class="search-product-content-name"><span>${item}</span></div>
+    //                                         </div>
+    //                                     </div>`;
+    //                 $(".autocomplete-suggestions").append(str);
+    //             });
+    //         })
+    //         .fail((jqXHR) => {
+    //             console.log(jqXHR.error);
+    //
+    //         })
+    // }
+    // $(document).on("click", 'input[type="text"]', function (){
+    //     $(".autocomplete-suggestions").css("display","block");
+    //     $(".suggestion-tag").off("click")
+    //     page.commands.chooseTag();
+    // })
+    //
+    // page.commands.chooseTag = () => {
+    //     $(".suggestion-tag").on("click", function () {
+    //         console.log("click")
+    //         let tagChoose = $(this).find("span").text();
+    //         $('.tags').on('itemAddedOnInit', function(event) {
+    //             // event.item: contains the item
+    //             $('.tags').tagsinput('add', tagChoose);
+    //         });
+    //         $(".autocomplete-suggestions").css("display","none");
+    //     })
+    // }
+
+
+
 
     // select chọn nhân viên
     function getAllEmployeeSelect() {
@@ -575,7 +641,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: origin +"/api/employees"
+            url: origin + "/api/employees"
         })
             .done((data) => {
                 $.each(data, (i, item) => {
@@ -597,7 +663,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: origin +"/api/admin/payment_methods"
+            url: origin + "/api/admin/payment_methods"
         })
             .done((data) => {
                 $.each(data, (i, item) => {
@@ -619,7 +685,7 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: origin +"/api/supplier_groups",
+            url: origin + "/api/supplier_groups",
         })
             .done((data) => {
                 supplierGroups = data;
@@ -633,6 +699,7 @@
                 });
             })
     }
+
     // slect chọn nhóm nhà cung cấp
 
     function getAllGroup() {
@@ -659,7 +726,7 @@
 
     function handleChangeGroupSupp(supplierGroupId) {
         let supplierGroup = supplierGroups.find(supplierGroup => supplierGroup.id === supplierGroupId);
-        $("#changeValueSup").attr("data-id",supplierGroup.id);
+        $("#changeValueSup").attr("data-id", supplierGroup.id);
         $("#changeValueSup").val(supplierGroup.id);
         $("#changeValueSup").text(supplierGroup.title);
         var dropdown = new bootstrap.Dropdown(document.querySelector("#changeValueSup"));
@@ -719,14 +786,14 @@
             "url": origin + "/api/supplier_groups/create",
             "data": JSON.stringify(newGroupSup)
         })
-                .done((data) => {
-                console.log("data: ",data)
+            .done((data) => {
+                console.log("data: ", data)
                 SupplierApp.IziToast.showSuccessAlert("Thêm nhóm nhà cung cấp thành công!");
                 setTimeout(() => {
                 }, 1500);
                 page.dialogs.elements.modalCreateGroupSupplier.modal('hide');
 
-                    getAllGroup();
+                getAllGroup();
             })
             .fail((jqXHR) => {
                 SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
@@ -736,7 +803,7 @@
     })
 
 
-    $("#changeValueSup").on('click', ()=> {
+    $("#changeValueSup").on('click', () => {
         var dropdown = new bootstrap.Dropdown(document.querySelector("#changeValueSup"));
         dropdown.show();
     })
@@ -746,6 +813,8 @@
     createSupplier();
     getAllEmployeeSelect();
     getAllPaymentMethodSelect();
+    getAllSupplierTags();
+
 
     // $("#formCreate").validate({
     //     rules: {
