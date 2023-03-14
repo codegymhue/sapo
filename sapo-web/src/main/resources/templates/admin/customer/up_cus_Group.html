@@ -200,8 +200,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div
-                                                    onclick="CustomerApp.page.commands.showModalCreatePricePolicy()">
+                                            <div onclick="CustomerApp.page.commands.showModalCreatePricePolicy()">
                                                 <div class="jss23596">
                                                     <div class="jss23775 jss23769 jss760">
                                                         <i class="fa-solid fa-circle-plus"></i>
@@ -284,6 +283,9 @@
     CustomerApp.page.elements.cusGrpCodeUp = $("#cusGrpCodeUp");
     CustomerApp.page.elements.noteUp = $("#noteUp");
     CustomerApp.page.elements.defaultDiscountRateUP = $("#defaultDiscountRateUP");
+    CustomerApp.page.elements.selectedPriceDefault =$("#selectedPriceDefault");
+    CustomerApp.page.elements.listPricePolicy = $("#listPricePolicy");
+    CustomerApp.page.elements.defaultPriceDropdown = $("#defaultPriceDropdown");
 
     CustomerApp.page.elements.btnShowModalDeleteCustomerGroup = $("#btnShowModalDeleteCustomerGroup");
 
@@ -296,6 +298,32 @@
     CustomerApp.page.dialogs.elements.dismissDelete = $(".dismissDelete");
     CustomerApp.page.dialogs.elements.btnDeleteCustomerGroup = $("#btnDeleteCustomerGroup");
     //end modal delete customer group
+
+    CustomerApp.page.commands.getDefaultPricingPolicy = () => {
+        let id = currentCustomerGroup.defaultPricingPolicyId;
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: origin + "/api/pricing-policies/" + id
+        })
+            .done((data) => {
+                console.log(data)
+                data.forEach(item => {
+                    let str = `<a class="jss23775 selectDefaultPricePolicy" data-id="${item.id}" data-value="${item.title}">
+                                    ${item.title}
+                                </a>`;
+
+                    CustomerApp.page.elements.listPricePolicy.prepend(str);
+                });
+                CustomerApp.page.commands.selectDefaultPricePolicy();
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+    }
 
 
     CustomerApp.page.loadData.getCustomerUpdate = () => {
@@ -312,6 +340,7 @@
             CustomerApp.page.elements.cusGrpCodeUp.val(data.cusGrpCode);
             CustomerApp.page.elements.noteUp.val(data.note);
             CustomerApp.page.elements.defaultDiscountRateUP.val(data.defaultDiscountRate);
+            // CustomerApp.page.elements.selectedPriceDefault.text(data.defaultPricingPolicyId);
         })
             .fail((jqXHR) => {
                 console.log(jqXHR)
@@ -320,10 +349,25 @@
 
     $(() => {
         CustomerApp.page.loadData.getCustomerUpdate().then(() => {
+            CustomerApp.page.commands.getDefaultPricingPolicy();
             CustomerApp.page.dialogs.commands.deleteCustomerGroup();
             CustomerApp.page.dialogs.commands.showModalDelete();
         });
     })
+
+    CustomerApp.page.commands.selectDefaultPricePolicy = () => {
+        $(".selectDefaultPricePolicy").on('click', function () {
+            createCusGroupParam.defaultPricingPolicyId = $(this).data('id');
+            let value = $(this).data('value');
+
+            CustomerApp.page.elements.selectedPriceDefault.text(value);
+            CustomerApp.page.elements.defaultPriceDropdown[0].classList.toggle("show")
+        })
+    }
+
+    CustomerApp.page.commands.showDefaultPricingPolicyDropdown = () => {
+        CustomerApp.page.elements.defaultPriceDropdown[0].classList.toggle("show")
+    }
 
     CustomerApp.page.dialogs.commands.deleteCustomerGroup = () => {
         CustomerApp.page.dialogs.elements.btnDeleteCustomerGroup.click(() => {
@@ -338,8 +382,9 @@
             }).done(() => {
                 CustomerGroup_App.IziToast.showSuccessAlert("Xóa nhóm khách hàng thành công");
                 CustomerApp.page.dialogs.modal_del_cus_grp.modal('hide');
-                window.location.href = "admin/customer_groups";
+                window.location.href = "/admin/customer_groups";
             }).fail((jqXHR) => {
+                CustomerGroup_App.IziToast.showErrorAlert("Xóa nhóm khách hàng thất bại");
                 console.log(jqXHR)
             })
         })
