@@ -360,10 +360,10 @@
                                         </svg>
                                     </div>
                                     <div class="autocomplete-suggestion-holder float-left position-relative">
-                                        <div class="bootstrap-tagsinput" >
-                                            <input  onkeyup="suggestTags(this)"
-                                                    type="text" placeholder=""
-                                                    autocomplete="off">
+                                        <div class="bootstrap-tagsinput">
+                                            <input onkeyup="suggestTags(this)"
+                                                   type="text" placeholder=""
+                                                   autocomplete="off">
                                         </div>
                                         <input type="text" class="sapo-textbox choosed-single-id" id="tags"
                                                style="display: none;">
@@ -1209,7 +1209,9 @@
         page.commands.chooseTag();
     })
 
+
     page.commands.chooseTag = () => {
+
         $(".suggestion-tag").on("click", function () {
             console.log(this)
             let tagChoose = $(this).find("span").text();
@@ -1223,7 +1225,6 @@
                     supplierFilter.tags.push(tagChoose)
                     let str = `<span class="tag label label-info" style="">${tagChoose}<span class="lable-remove" data-role="remove"></span></span>`
                     page.elements.tagsInput.prepend(str)
-
                 }
             })
             if (listTagsChoose.length === 0) {
@@ -1647,7 +1648,7 @@
         console.log("in function")
         let value = $(element).val().toLowerCase();
         $(".suggestion-tag").hide();
-        $(".suggestion-tag").filter(function (){
+        $(".suggestion-tag").filter(function () {
             let text = $(this).text().toLowerCase();
             return text.indexOf(value) >= 0;
         }).show();
