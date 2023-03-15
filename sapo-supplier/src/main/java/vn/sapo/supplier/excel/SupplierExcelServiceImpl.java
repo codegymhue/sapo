@@ -106,17 +106,20 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
     @Override
     public void fillFieldDto(List<ImportExcelSupplierParam> dtoList) {
         Set<String> pmTitles = new HashSet<>();
+        Set<String> ppTitles = new HashSet<>();
         Set<String> supGroupCodes = new HashSet<>();
         dtoList.forEach(param -> {
             pmTitles.add(param.getPaymentMethodTitle());
+            ppTitles.add(param.getDefaultPricingPolicyTitle());
             supGroupCodes.add(param.getSupGroupCode());
         });
 
         Map<String, String> pmMap = paymentMethodService.findByTitles(pmTitles);
+        Map<String, Integer> ppMap =new HashMap<>();//= paymentMethodService.findByTitles(pmTitles);
         Map<String, Integer> supGroupMap = supplierGroupService.findByGroupCodes(supGroupCodes);
         dtoList.forEach(dto -> {
-            String id = pmMap.get(dto.getPaymentMethodTitle());
-            dto.setPaymentMethodId(id);
+            dto.setPaymentMethodId(pmMap.get(dto.getPaymentMethodTitle()));
+            dto.setDefaultPricingPolicyId(ppMap.get(dto.getDefaultPricingPolicyTitle()));
             dto.setGroupId(supGroupMap.get(dto.getSupGroupCode()));
         });
     }
@@ -198,8 +201,8 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
                 case DESCRIPTION:
                     param.setDescription(cell.getStringCellValue());
                     break;
-                case 9:
-//                    PRICE_POLICY :
+                case PRICE_POLICY:
+                    param.setDefaultPricingPolicyTitle(cell.getStringCellValue());
                     break;
                 case 10:
 //                    PAYMENT_TERN :
@@ -244,7 +247,7 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
                     addressService.create(addressList);
 
                     List<CreateContactParam> contactList = param.getContactList();
-                    contactService.createContactListBySupplierId(supplier.getId(),contactList);
+                    contactService.createContactListBySupplierId(supplier.getId(), contactList);
                 }
             }
         });

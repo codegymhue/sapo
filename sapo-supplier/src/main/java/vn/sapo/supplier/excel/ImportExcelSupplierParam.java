@@ -15,6 +15,7 @@ import java.util.List;
 @Accessors(chain = true)
 public class ImportExcelSupplierParam extends CreateSupplierParam {
     private String paymentMethodTitle;
+    private String defaultPricingPolicyTitle;
     private String supGroupCode;
     List<CreateAddressParam> addressList = new ArrayList<>();
     List<CreateContactParam> contactList = new ArrayList<>();
