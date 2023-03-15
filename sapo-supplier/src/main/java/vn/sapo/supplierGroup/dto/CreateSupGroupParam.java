@@ -9,19 +9,8 @@ import vn.sapo.shared.validation.constraints.NullOrNotBlank;
 
 import javax.validation.constraints.NotNull;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @Accessors(chain = true)
-public class CreateSupGroupParam {
-
-    @NullOrNotBlank(message = "{supplier_group.validation.title.notBlank}")
-    private String title;
-
-    @NullOrNotBlank
-    private String supGroupCode;
-
-    @NullOrNotBlank
-    private String description;
+public class CreateSupGroupParam extends BaseSupplierGroup {
 }

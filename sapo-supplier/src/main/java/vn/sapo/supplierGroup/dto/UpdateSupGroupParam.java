@@ -14,16 +14,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class UpdateSupGroupParam {
+public class UpdateSupGroupParam extends BaseSupplierGroup {
     @NotNull
     private Integer id;
-
-    @NullOrNotBlank(message = "Tên nhóm nhà cung cấp không được để trống")
-    private String title;
-
-    @NullOrNotBlank(message = "Mã nhóm nhà cung cấp không được để trống")
-    private String supGroupCode;
-
-    @NullOrNotBlank
-    private String description;
 }
