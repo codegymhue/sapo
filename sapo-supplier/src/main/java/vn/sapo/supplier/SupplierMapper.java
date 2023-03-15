@@ -33,6 +33,7 @@ public class SupplierMapper implements InitializingBean {
             mapper.when(Conditions.isNotNull()).map(BaseSupplierParam::getGroupId, Supplier::setGroupId);
             mapper.when(Conditions.isNotNull()).map(BaseSupplierParam::getEmployeeId, Supplier::setEmployeeId);
             mapper.when(Conditions.isNotNull()).map(BaseSupplierParam::getPaymentMethodId, Supplier::setPaymentMethodId);
+            mapper.when(Conditions.isNotNull()).map(BaseSupplierParam::getTags, Supplier::setTags);
         });
     }
 
