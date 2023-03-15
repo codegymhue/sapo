@@ -12,10 +12,7 @@ import vn.sapo.entities.*;
 import vn.sapo.entities.product.pricing_policy.PricingPolicy;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 @Getter
@@ -95,7 +92,7 @@ public class Supplier extends BaseEntity {
 
     @Type(type = "contacts")
     @Column(name = "contacts", nullable = false, columnDefinition = "JSON")
-    private List<Contact> contacts = new ArrayList<>();
+    private Set<Contact> contacts = new HashSet<>();
 
     @OneToMany(targetEntity = Address.class, mappedBy = "supplier")
     //For mapper
