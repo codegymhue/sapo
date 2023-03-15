@@ -564,13 +564,13 @@
                 let errors = jqXHR.responseJSON.errors;
 
                 if (errors.title) {
-                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.titleError, errors.title)
+                    CustomerApp.showErrorValidate(CustomerApp.page.elements.titleError, errors.title)
                 }
                 if (errors.pricingPolicyCode) {
-                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, errors.pricingPolicyCode)
+                    CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, errors.pricingPolicyCode)
                 }
                 if (errors.pricingPolicyType) {
-                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, errors.pricingPolicyType)
+                    CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, errors.pricingPolicyType)
                 }
             })
     }
@@ -614,25 +614,19 @@
         },
         showErrors: (error) => {
             if (error.titlePricePolicyCre) {
-                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.titleError, error.titlePricePolicyCre);
+                CustomerApp.showErrorValidate(CustomerApp.page.elements.titleError, error.titlePricePolicyCre);
             }
             if (error.pricingPolicyCodeCre) {
-                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, error.pricingPolicyCodeCre);
+                CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, error.pricingPolicyCodeCre);
             }
             if (error.policyStyle) {
-                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, error.policyStyle);
+                CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, error.policyStyle);
             }
         },
         submitHandler: () => {
             CustomerApp.page.commands.createPricePolicy();
         },
     });
-
-    CustomerApp.page.commands.showErrorValidate = (element, error) => {
-        element.addClass('show').removeClass('hidden');
-        element.text(error);
-        CustomerApp.IziToast.showErrorAlert(error);
-    }
     //end create default pricing policy
 
     // let pricingPolicy;

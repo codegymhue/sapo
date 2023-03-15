@@ -94,6 +94,12 @@ class CustomerApp {
         `;
     }
 
+    static showErrorValidate = (element, error) => {
+        element.addClass('show').removeClass('hidden');
+        element.text(error);
+        CustomerApp.IziToast.showErrorAlert(error);
+    }
+
     static getValue = (input) => {
         let value = input.val().trim();
         return !value ? undefined : value;

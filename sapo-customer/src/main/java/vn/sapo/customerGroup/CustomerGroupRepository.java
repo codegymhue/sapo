@@ -14,6 +14,7 @@ public interface CustomerGroupRepository extends JpaRepository<CustomerGroup, In
     @Query("select " +
             "g.id as id," +
             "g.title as title," +
+            "g.type as type," +
             "g.cusGrpCode as cusGrpCode," +
             "g.createdAt as createdAt, " +
             "count(c.groupId) as countCus," +
@@ -31,17 +32,17 @@ public interface CustomerGroupRepository extends JpaRepository<CustomerGroup, In
     @Query(value = "SELECT " +
                         "g.id, " +
                         "g.title, " +
-                        "g.cus_grp_code, " +
-                        "g.type, " +
-                        "(SELECT COUNT(customer_group_id) AS countCus " +
+                        "g.cus_grp_code as cusGrpCode, " +
+                        "g.type , " +
+                        "(SELECT COUNT(customer_group_id) " +
                             "FROM customer " +
-                            "WHERE customer_group_id = g.id), " +
+                            "WHERE customer_group_id = g.id) AS countCus, " +
                         "g.note, " +
-                        "g.created_at " +
+                        "g.created_at AS createdAt " +
                     "FROM customer_group AS g;"
             ,
             nativeQuery = true)
-    List<CustomerGroupResult> findAllCustomerGroupResult();
+    List<ICustomerGroupResult> findAllCustomerGroupResult();
 }
 
 

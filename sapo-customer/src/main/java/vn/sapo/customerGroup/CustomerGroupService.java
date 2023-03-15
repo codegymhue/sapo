@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CustomerGroupService {
 
-    List<CustomerGroupResult> findAllCustomerGroupResult();
+    List<ICustomerGroupResult> findAllCustomerGroupResult();
 
     CustomerGroupResult create(CreateCusGroupParam createCusGroupParam);
 

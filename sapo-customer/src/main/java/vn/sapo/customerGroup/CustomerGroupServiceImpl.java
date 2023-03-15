@@ -30,7 +30,7 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
 
     @Override
     @Transactional
-    public List<CustomerGroupResult> findAllCustomerGroupResult() {
+    public List<ICustomerGroupResult> findAllCustomerGroupResult() {
         return customerGroupRepository.findAllCustomerGroupResult();
     }
 

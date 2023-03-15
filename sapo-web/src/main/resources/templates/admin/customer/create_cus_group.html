@@ -278,12 +278,9 @@
 <script src="/assets/admin/js/customer/customer_app.js"></script>
 
 <script>
-    // let pricingPolicy = {};
-    // let paymentMethod = {};
     let createCusGroupParam = {};
     let defaultPricingPolicyId;
     let defaultPaymentMethodId;
-
 
     CustomerApp.page.elements.titleGroupCre = $("#titleGroupCre");
     CustomerApp.page.elements.selectBtnPri = $('.select-btn-pri');
@@ -315,6 +312,16 @@
     CustomerApp.page.elements.cusGrpCodeError = $(".cusGrpCode-error.error");
     CustomerApp.page.elements.noteError = $(".note-error.error");
     CustomerApp.page.elements.defaultDiscountRateError = $(".defaultDiscountRate-error.error");
+
+    //start create price policy
+    CustomerApp.page.elements.modalCreatePricePolicy = $("#modalCreatePricePolicy");
+
+    CustomerApp.page.elements.frmCreatePricePolicy = $("#frmCreatePricePolicy");
+    CustomerApp.page.elements.btnCreatePricePolicy = $("#btnCreatePricePolicy");
+    CustomerApp.page.elements.btnCloseCreatePricePolicyModal = $(".btnCloseCreatePricePolicyModal");
+    CustomerApp.page.elements.pricingPolicyCodeError = $(".pricingPolicyCode-error.error");
+    CustomerApp.page.elements.pricingPolicyTypeError = $(".pricingPolicyType-error.error");
+    //end create price policy
 
     CustomerApp.page.commands.selectPricePolicy = () => {
         $(".selectPricePolicy").on('click', function () {
@@ -408,7 +415,7 @@
             "url": origin + "/api/customer_groups",
             "data": JSON.stringify(createCusGroupParam)
         })
-            .done(() => {
+            .done((data) => {
                 CustomerGroup_App.IziToast.showSuccessAlert('Thêm mới nhóm khách hàng thành công');
 
                 location.href = `/admin/customer_groups/${data.id}`;
@@ -417,16 +424,16 @@
                 let errors = jqXHR.responseJSON.errors;
 
                 if (errors.title) {
-                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.titleGroupCreError, errors.title)
+                    CustomerApp.showErrorValidate(CustomerApp.page.elements.titleGroupCreError, errors.title)
                 }
                 if (errors.cusGrpCode) {
-                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.cusGrpCodeError, errors.cusGrpCode)
+                    CustomerApp.showErrorValidate(CustomerApp.page.elements.cusGrpCodeError, errors.cusGrpCode)
                 }
                 if (errors.note) {
-                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.noteError, errors.note)
+                    CustomerApp.showErrorValidate(CustomerApp.page.elements.noteError, errors.note)
                 }
                 if (errors.defaultDiscountRate) {
-                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.defaultDiscountRateError, errors.defaultDiscountRate)
+                    CustomerApp.showErrorValidate(CustomerApp.page.elements.defaultDiscountRateError, errors.defaultDiscountRate)
                 }
             })
     }
@@ -498,22 +505,17 @@
     }
 
     //start create default pricing policy
-    CustomerApp.page.elements.modalCreatePricePolicy = $("#modalCreatePricePolicy");
-
-    CustomerApp.page.elements.frmCreatePricePolicy = $("#frmCreatePricePolicy");
-    CustomerApp.page.elements.btnCreatePricePolicy = $("#btnCreatePricePolicy");
-    CustomerApp.page.elements.btnCloseCreatePricePolicyModal = $(".btnCloseCreatePricePolicyModal");
-    CustomerApp.page.elements.pricingPolicyCodeError = $(".pricingPolicyCode-error.error");
-    CustomerApp.page.elements.pricingPolicyTypeError = $(".pricingPolicyType-error.error");
-
     CustomerApp.page.commands.showModalCreatePricePolicy = () => {
         CustomerApp.page.elements.modalCreatePricePolicy.modal("show");
     }
     //create price policy
     CustomerApp.page.commands.createPricePolicy = () => {
-        pricingPolicy = {
-            title: CustomerApp.page.elements.titlePricePolicyCre.val().trim(),
-            pricingPolicyCode: CustomerApp.page.elements.pricingPolicyCodeCre.val().trim(),
+        let title = CustomerApp.getValue(CustomerApp.page.elements.titlePricePolicyCre);
+        let pricingPolicyCode = CustomerApp.getValue(CustomerApp.page.elements.pricingPolicyCodeCre);
+
+        let pricingPolicy = {
+            title,
+            pricingPolicyCode,
             pricingPolicyType: $('input[name="policyStyle"]:checked').val()
         }
 
@@ -541,13 +543,13 @@
                 let errors = jqXHR.responseJSON.errors;
 
                 if (errors.title) {
-                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.titleError, errors.title)
+                    CustomerApp.showErrorValidate(CustomerApp.page.elements.titleError, errors.title)
                 }
                 if (errors.pricingPolicyCode) {
-                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, errors.pricingPolicyCode)
+                    CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, errors.pricingPolicyCode)
                 }
                 if (errors.pricingPolicyType) {
-                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, errors.pricingPolicyType)
+                    CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, errors.pricingPolicyType)
                 }
             })
     }
@@ -591,13 +593,13 @@
         },
         showErrors: (error) => {
             if (error.titlePricePolicyCre) {
-                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.titleError, error.titlePricePolicyCre);
+                CustomerApp.showErrorValidate(CustomerApp.page.elements.titleError, error.titlePricePolicyCre);
             }
             if (error.pricingPolicyCodeCre) {
-                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, error.pricingPolicyCodeCre);
+                CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, error.pricingPolicyCodeCre);
             }
             if (error.policyStyle) {
-                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, error.policyStyle);
+                CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, error.policyStyle);
             }
         },
         submitHandler: () => {
