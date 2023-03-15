@@ -227,8 +227,8 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     @Transactional
     public ContactResult updateContactBySupplierId(Integer supplierId, UpdateContactParam updateParam) {
-        Supplier supplier = supplierRepository.findByIdAndContactId(supplierId)
-                .orElseThrow(() -> new NotFoundException("supplier.exception.notFound"));
+        Supplier supplier = null;//= supplierRepository.findByIdAndContactId(supplierId)
+        //  .orElseThrow(() -> new NotFoundException("supplier.exception.notFound"));
         Contact contact = supplier.getContacts().stream()
                 .filter(c -> c.getId().equals(updateParam.getId()))
                 .findAny()

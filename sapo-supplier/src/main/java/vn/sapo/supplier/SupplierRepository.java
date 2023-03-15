@@ -25,6 +25,6 @@ public interface SupplierRepository extends JpaRepository<Supplier, Integer> {
     @Query("SELECT tags FROM Supplier")
     List<String> findTags();
 
-    @Query(value = "", nativeQuery = true)
-    Optional<Supplier> findByIdAndContactId(Integer supplierId);
+//    @Query(value = "", nativeQuery = true)
+//    Optional<Supplier> findByIdAndContactId(Integer supplierId);
 }
