@@ -32,11 +32,11 @@ public interface CustomerGroupRepository extends JpaRepository<CustomerGroup, In
                         "g.id, " +
                         "g.title, " +
                         "g.cus_grp_code, " +
-                        "g.cus_grp_type, " +
+                        "g.type, " +
                         "(SELECT COUNT(customer_group_id) AS countCus " +
                             "FROM customer " +
                             "WHERE customer_group_id = g.id), " +
-                        "g.description, " +
+                        "g.note, " +
                         "g.created_at " +
                     "FROM customer_group AS g;"
             ,
