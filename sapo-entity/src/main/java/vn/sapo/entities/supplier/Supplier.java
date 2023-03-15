@@ -84,7 +84,7 @@ public class Supplier extends BaseEntity {
 
     @Type(type = "contacts")
     @Column(name = "contacts", nullable = false, columnDefinition = "JSON")
-    private Set<String> contacts = new HashSet<>();
+    private Set<Contact> contacts = new HashSet<>();
 
     @OneToMany(targetEntity = Address.class, mappedBy = "supplier")
     private Set<Address> addresses;
