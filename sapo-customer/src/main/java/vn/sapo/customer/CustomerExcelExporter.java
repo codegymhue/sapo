@@ -80,9 +80,18 @@ public class CustomerExcelExporter {
         listColumn.put("quantityItemOrder", "Tổng SL sản phẩm đã mua");
         listColumn.put("returnsTotal", "Tổng SL sản phẩm hoàn trả");
         listColumn.put("lastDayOrder", "Ngày mua cuối cùng");
-        for(int i=0; i<customerParamExport.getListNameColumn().size(); i++) {
-            String nameColumn = customerParamExport.getListNameColumn().get(i);
-            createCell(row, i, listColumn.get(nameColumn), style);
+        int j=0;
+        if(customerParamExport.getType().equals("PRESENT")){
+            for(int i=0; i<customerParamExport.getListNameColumn().size(); i++) {
+                String nameColumn = customerParamExport.getListNameColumn().get(i);
+                createCell(row, i, listColumn.get(nameColumn), style);
+            }
+        }else if(customerParamExport.getType().equals("ALL")){
+            Set set = listColumn.keySet();
+            for(Object key:set){
+                createCell(row, j, listColumn.get(key), style);
+                j++;
+            }
         }
 //        createCell(row, 0, "Tên khách hàng", style);
 //        createCell(row, 1, "Mã khách hàng", style);
