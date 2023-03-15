@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import vn.sapo.contact.dto.ContactResult;
 import vn.sapo.customers.dto.AddressResult;
 import vn.sapo.entities.supplier.SupplierStatus;
 
@@ -45,6 +46,7 @@ public class SupplierResult {
     private BigDecimal debtTotal;
 
     private List<AddressResult> addresses;
+    private List<ContactResult> contacts;
 
     private String taxCode;
 

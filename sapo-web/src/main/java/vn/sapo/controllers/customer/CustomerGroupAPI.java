@@ -25,7 +25,6 @@ public class CustomerGroupAPI extends BaseController {
     @Autowired
     CustomerGroupMapper customerGroupMapper;
 
-
     @GetMapping
     public ResponseEntity<?> getAllCustomerGroup() {
         return new ResponseEntity<>(customerGroupService.findAll(), HttpStatus.OK);
@@ -83,7 +82,7 @@ public class CustomerGroupAPI extends BaseController {
         return new ResponseEntity<>(customerGroupDataTable, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<?> updateCusGroup(@PathVariable Integer id,
                                             @RequestBody @Validated UpdateCusGroupParam updateCusGroupParam
     ) {

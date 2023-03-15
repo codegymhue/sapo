@@ -6,11 +6,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import vn.sapo.contact.dto.ContactMapper;
-import vn.sapo.contact.dto.ContactResult;
-import vn.sapo.contact.dto.CreateContactParam;
-import vn.sapo.contact.dto.UpdateContactParam;
-import vn.sapo.entities.Contact;
 import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.entities.supplier.SupplierStatus;
 import vn.sapo.shared.configurations.CodePrefix;
@@ -21,21 +16,16 @@ import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.dto.UpdateSupplierParam;
 import vn.sapo.supplierGroup.SupplierGroupRepository;
 
-import java.time.Instant;
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
 public class SupplierServiceImpl implements SupplierService {
     @Autowired
     private SupplierMapper supplierMapper;
-    @Autowired
-    private ContactMapper contactMapper;
+
     @Autowired
     private SupplierRepository supplierRepository;
-    @Autowired
-    private SupplierGroupRepository supplierGroupRepository;
     @Autowired
     private SupplierFilterRepository supplierFilterRepository;
 
@@ -203,41 +193,5 @@ public class SupplierServiceImpl implements SupplierService {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<ContactResult> findContactsBySupplierId(Integer supplierId) {
-        Supplier supplier = supplierRepository.findById(supplierId)
-                .orElseThrow(() -> new NotFoundException("supplier.exception.notFound"));
-        return supplier.getContacts().stream().map(contactMapper::toDTO).collect(Collectors.toList());
-    }
 
-    @Override
-    @Transactional
-    public ContactResult createContactBySupplierId(Integer supplierId, CreateContactParam createParam) {
-        Supplier supplier = supplierRepository.findById(supplierId)
-                .orElseThrow(() -> new NotFoundException("supplier.exception.notFound"));
-        Contact contact = contactMapper.toModel(createParam);
-        contact.setId(System.currentTimeMillis());
-        contact.setStatus("ACTIVE");
-        contact.setCreatedAt(Instant.now());
-        supplier.getContacts().add(contact);
-        return contactMapper.toDTO(contact);
-    }
-
-    @Override
-    @Transactional
-    public ContactResult updateContactBySupplierId(Integer supplierId, UpdateContactParam updateParam) {
-        Supplier supplier = null;//= supplierRepository.findByIdAndContactId(supplierId)
-        //  .orElseThrow(() -> new NotFoundException("supplier.exception.notFound"));
-        Contact contact = supplier.getContacts().stream()
-                .filter(c -> c.getId().equals(updateParam.getId()))
-                .findAny()
-                .orElseThrow(() -> new NotFoundException("contact.exception.notFound"));
-
-        contactMapper.transferFields(updateParam, contact);
-        contact.setId(System.currentTimeMillis());
-        contact.setUpdatedAt(Instant.now());
-        supplier.getContacts().add(contact);
-        return contactMapper.toDTO(contact);
-    }
 }

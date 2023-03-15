@@ -1,19 +1,13 @@
-package vn.sapo.contact.dto;
+package vn.sapo.contact;
 
-import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeMap;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import vn.sapo.contact.dto.ContactResult;
+import vn.sapo.contact.dto.CreateContactParam;
+import vn.sapo.contact.dto.UpdateContactParam;
 import vn.sapo.entities.Contact;
-import vn.sapo.entities.supplier.Supplier;
-import vn.sapo.entities.supplier.SupplierStatus;
-import vn.sapo.supplier.dto.BaseSupplierParam;
-import vn.sapo.supplier.dto.CreateSupplierParam;
-import vn.sapo.supplier.dto.SupplierResult;
-import vn.sapo.supplier.dto.UpdateSupplierParam;
 
 import static vn.sapo.shared.configurations.MapperConfiguration.MODEL_MAPPER_SKIP_NULL_DISABLED;
 import static vn.sapo.shared.configurations.MapperConfiguration.MODEL_MAPPER_SKIP_NULL_ENABLED;

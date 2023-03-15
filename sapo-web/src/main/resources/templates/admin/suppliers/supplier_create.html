@@ -221,10 +221,15 @@
                                            lọc="" nhà="" cung="" cấp="" ở="" trang="" danh="" sách="" dễ="" dàng=""
                                            hơn="" data-original-title="Chọn"></i>
                                     </div>
-                                    <input class="sapo-textbox tags" data-role="tagsinput" style="display: none;">
+                                    <div class="bootstrap-tagsinput">
+                                        <input onkeyup="suggestTags(this)"
+                                               type="text" placeholder=""
+                                               autocomplete="off">
+                                    </div>
+
+                                    <input class="sapo-textbox tags" style="display: none;">
                                     <div class="autocomplete-suggestions"
                                          style="position: relative; width: 250px; max-height: 300px; z-index: 9999; display: none;">
-
                                     </div>
                                 </div>
 
@@ -276,6 +281,7 @@
 <script>
 
     let supplierGroups = [];
+    let supplierTags = [];
     const page = {
         urls: {},
         elements: {},
@@ -312,6 +318,7 @@
             this.employeeId = employeeId;
             this.employee = employee;
             this.groupId = groupId;
+            this.tags = [];
 
 
         }
@@ -396,6 +403,8 @@
 
             supplier.line1 = $('#addressCreate').val();
 
+            supplier.tags = supplierTags.length > 0 ? supplierTags : undefined;
+
             // supplier.GroupSupplier = $('#changeValueSup :selected').val();
             page.elements.GroupSupplier = $("#ChangeValueSup");
 
@@ -417,6 +426,7 @@
             supplier.createAddressParam = createAddressParam;
 
             console.log(supplier.fullName.trim().split(""));
+            console.log(supplier, "supplier")
             // console.log(JSON.stringify(supplier))
             // console.log(createAddressParam)
             //
@@ -586,51 +596,81 @@
     });
 
     // select chọn tag
-    // function getAllSupplierTags() {
-    //     return $.ajax({
-    //         headers: {
-    //             "accept": "application/json",
-    //             "content-type": "application/json"
-    //         },
-    //         type: "GET",
-    //         url: origin + "/api/suppliers/tags"
-    //     })
-    //         .done((data) => {
-    //             $.each(data, (i, item) => {
-    //                 let str = `<div class="autocomplete-suggestion suggestion-product suggestion-tag"
-    //                                          style="padding:4px 8px" data-index="0">
-    //                                         <div class="search-product-content-refactor item-supplier"
-    //                                              style="width:100%;">
-    //                                             <div class="search-product-content-name"><span>${item}</span></div>
-    //                                         </div>
-    //                                     </div>`;
-    //                 $(".autocomplete-suggestions").append(str);
-    //             });
-    //         })
-    //         .fail((jqXHR) => {
-    //             console.log(jqXHR.error);
-    //
-    //         })
-    // }
-    // $(document).on("click", 'input[type="text"]', function (){
-    //     $(".autocomplete-suggestions").css("display","block");
-    //     $(".suggestion-tag").off("click")
-    //     page.commands.chooseTag();
-    // })
-    //
-    // page.commands.chooseTag = () => {
-    //     $(".suggestion-tag").on("click", function () {
-    //         console.log("click")
-    //         let tagChoose = $(this).find("span").text();
-    //         $('.tags').on('itemAddedOnInit', function(event) {
-    //             // event.item: contains the item
-    //             $('.tags').tagsinput('add', tagChoose);
-    //         });
-    //         $(".autocomplete-suggestions").css("display","none");
-    //     })
-    // }
 
+    page.elements.tagsInput = $(".bootstrap-tagsinput")
+    page.elements.supTagRender = $(".autocomplete-suggestions")
 
+    function getAllSupplierTags() {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: origin + "/api/suppliers/tags"
+        })
+            .done((data) => {
+                $.each(data, (i, item) => {
+                    let str = `<div class="autocomplete-suggestion suggestion-product suggestion-tag"
+                                             style="padding:4px 8px" data-index="0">
+                                            <div class="search-product-content-refactor item-supplier"
+                                                 style="width:100%;">
+                                                <div class="search-product-content-name"><span>${item}</span></div>
+                                            </div>
+                                        </div>`;
+                    $(".autocomplete-suggestions").append(str);
+                });
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR.error);
+
+            })
+    }
+
+    page.elements.tagsInput.children("input").on("click", () => {
+        page.elements.supTagRender.css("display", "block");
+        $(".suggestion-tag").off("click")
+        page.commands.chooseTag();
+    })
+
+    page.commands.chooseTag = () => {
+
+        $(".suggestion-tag").on("click", function () {
+            console.log(this)
+            let tagChoose = $(this).find("span").text();
+            let listTagsChoose = page.elements.tagsInput.find(".tag").map(function () {
+                return $(this).text().trim();
+            }).get();
+            console.log(listTagsChoose, " listTagsChoose")
+            listTagsChoose.forEach(() => {
+                if (!listTagsChoose.includes(tagChoose)) {
+                    listTagsChoose.push(tagChoose)
+
+                    supplierTags.push(tagChoose)
+                    let str = `<span class="tag label label-info" style="">${tagChoose}<span class="lable-remove" data-role="remove"></span></span>`
+                    page.elements.tagsInput.prepend(str)
+                }
+            })
+            if (listTagsChoose.length === 0) {
+                listTagsChoose.push(tagChoose)
+                supplierTags.push(tagChoose);
+                let str = `<span class="tag label label-info" style="">${tagChoose}<span class="lable-remove" data-role="remove"></span></span>`;
+                page.elements.tagsInput.prepend(str);
+            }
+            page.elements.supTagRender.css("display", "none");
+            console.log(supplierTags, " sau click tags")
+            console.log(supplier, " sau click sup")
+
+        })
+    }
+
+    $(document).on("click", 'span[data-role="remove"]', function () {
+        if (supplierTags.indexOf($(this).parent().text()) > -1) {
+            supplierTags.splice(supplierTags.indexOf($(this).parent().text()), 1)
+            $(this).parent().remove()
+        }
+        console.log(supplierTags, " sau remove")
+    });
 
 
     // select chọn nhân viên

@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class SupplierGroupServiceImpl implements SupplierGroupService {
+    private final static String EXCEPTION_NOT_FOUND = "supplier_group.exception.notFound";
     @Autowired
     SupplierGroupRepository supplierGroupRepository;
 
@@ -39,19 +40,19 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
     @Transactional(readOnly = true)
     public SupplierGroupResult findById(Integer id) {
         SupplierGroup supplierGroup = supplierGroupRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("supplier_group.exception.notFound"));
+                .orElseThrow(() -> new NotFoundException(EXCEPTION_NOT_FOUND));
         return supplierGroupMapper.toDTO(supplierGroup);
     }
 
-    public void validationExistsByTitle(String title) {
+    public void validationByTitle(String title) {
         if (supplierGroupRepository.existsByTitle(title))
             throw new ValidationException(new HashMap<>() {{
                 put("title", "supplier_group.exception.title.existed");
             }});
     }
 
-    public void validationExistsBySupGroupCode(String supGroupCode) {
-        if (supGroupCode.startsWith(CodePrefix.SUPPLIER_GROUP.getValue())) {
+    public void validationBySupGroupCode(String supGroupCode) {
+        if (supGroupCode.toUpperCase().startsWith(CodePrefix.SUPPLIER_GROUP.getValue())) {
             throw new ValidationException(new HashMap<>() {{
                 put("supGroupCode", "supplier_group.exception.supGroupCode.hasSystemPrefix");
             }});
@@ -65,13 +66,13 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
     @Override
     @Transactional
     public SupplierGroupResult create(CreateSupGroupParam createParam) {
-        validationExistsByTitle(createParam.getTitle());
-        validationExistsBySupGroupCode(createParam.getSupGroupCode());
+        validationByTitle(createParam.getTitle());
+        if (createParam.getSupGroupCode() != null)
+            validationBySupGroupCode(createParam.getSupGroupCode());
 
         SupplierGroup supplierGroup = supplierGroupMapper.toModel(createParam);
         supplierGroupRepository.save(supplierGroup);
-        if (createParam.getSupGroupCode() == null)
-            supplierGroup.setSupGroupCode(CodePrefix.SUPPLIER_GROUP.generate(supplierGroup.getId()));
+        supplierGroup.setSupGroupCode(CodePrefix.SUPPLIER_GROUP.generate(supplierGroup.getId()));
 
         return supplierGroupMapper.toDTO(supplierGroup);
     }
@@ -80,15 +81,15 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
     @Transactional
     public SupplierGroupResult update(UpdateSupGroupParam updateParam) {
         SupplierGroup supplierGroup = supplierGroupRepository.findById(updateParam.getId())
-                .orElseThrow(() -> new NotFoundException("supplier_group.exception.notFound"));
+                .orElseThrow(() -> new NotFoundException(EXCEPTION_NOT_FOUND));
 
         String title = updateParam.getTitle();
         if (!supplierGroup.getTitle().equalsIgnoreCase(title))
-            validationExistsByTitle(title);
+            validationByTitle(title);
 
         String supGroupCode = updateParam.getSupGroupCode();
-        if (!supplierGroup.getSupGroupCode().equalsIgnoreCase(supGroupCode))
-            validationExistsBySupGroupCode(supGroupCode);
+        if (supGroupCode != null && !supplierGroup.getSupGroupCode().equalsIgnoreCase(supGroupCode))
+            validationBySupGroupCode(supGroupCode);
 
         supplierGroupMapper.transferFields(updateParam, supplierGroup);
         return supplierGroupMapper.toDTO(supplierGroup);

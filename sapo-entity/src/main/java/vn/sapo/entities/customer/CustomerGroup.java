@@ -41,14 +41,14 @@ public class CustomerGroup extends BaseEntity {
     private CustomerGroupType type;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "default_payment_method_id")
+    @JoinColumn(name = "default_payment_method_id", foreignKey = @ForeignKey(name = "fk_customer_group_payment_method"))
     private PaymentMethod paymentMethod;
 
     @Column(name = "default_payment_method_id", insertable = false, updatable = false)
     private String defaultPaymentMethodId;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "default_pricing_policy_id")
+    @JoinColumn(name = "default_pricing_policy_id", foreignKey = @ForeignKey(name = "fk_customer_group_pricing_policy"))
     private PricingPolicy pricingPolicy;
 
     @Column(name = "default_pricing_policy_id", insertable = false, updatable = false)
