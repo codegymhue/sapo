@@ -94,6 +94,11 @@ class CustomerApp {
         `;
     }
 
+    static getValue = (input) => {
+        let value = input.val().trim();
+        return !value ? undefined : value;
+    }
+
     static page = {
         urls: {
             getAllCustomers: CustomerApp.BASE_URL_CUSTOMER,
