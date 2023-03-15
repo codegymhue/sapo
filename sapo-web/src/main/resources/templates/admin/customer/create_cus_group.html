@@ -119,7 +119,8 @@
                                                   title="Mô tả khách hàng của bạn để phục vụ cho việc chăm sóc khách hàng tốt hơn">
                                                 <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
                                                      width="16" height="16" color="primary" class="jss23713">
-                                                    <path fill="#0088FF" d="M7.4 5v1.2h1.2V5H7.4ZM7.4 8.6V11h1.8V9.8h-.6V7.4H6.8v1.2h.6Z">
+                                                    <path fill="#0088FF"
+                                                          d="M7.4 5v1.2h1.2V5H7.4ZM7.4 8.6V11h1.8V9.8h-.6V7.4H6.8v1.2h.6Z">
                                                     </path>
                                                     <path fill-rule="evenodd" clip-rule="evenodd" fill="#0088FF"
                                                           d="M8 2C4.688 2 2 4.688 2 8s2.688 6 6 6 6-2.688 6-6-2.688-6-6-6ZM3.2 8c0 2.646 2.154 4.8 4.8 4.8s4.8-2.154 4.8-4.8S10.646 3.2 8 3.2A4.806 4.806 0 0 0 3.2 8Z">
@@ -134,7 +135,8 @@
                                                           aria-label="Without label" name="note"
                                                           class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline placeholder_text">
                                                 </textarea>
-                                                <fieldset aria-hidden="true" class="jss823 MuiOutlinedInput-notchedOutline">
+                                                <fieldset aria-hidden="true"
+                                                          class="jss823 MuiOutlinedInput-notchedOutline">
                                                     <legend class="jss824">
                                                         <span>&ZeroWidthSpace;</span>
                                                     </legend>
@@ -276,9 +278,11 @@
 <script src="/assets/admin/js/customer/customer_app.js"></script>
 
 <script>
-    let pricingPolicy = {};
-    let paymentMethod = {};
+    // let pricingPolicy = {};
+    // let paymentMethod = {};
     let createCusGroupParam = {};
+    let defaultPricingPolicyId;
+    let defaultPaymentMethodId;
 
 
     CustomerApp.page.elements.titleGroupCre = $("#titleGroupCre");
@@ -314,7 +318,7 @@
 
     CustomerApp.page.commands.selectPricePolicy = () => {
         $(".selectPricePolicy").on('click', function () {
-            createCusGroupParam.defaultPricingPolicyId = $(this).data('id');
+            defaultPricingPolicyId = $(this).data('id');
             let value = $(this).data('value');
 
             CustomerApp.page.elements.selectedPriceDefault.text(value);
@@ -373,39 +377,27 @@
 
     CustomerApp.page.commands.selectPaymentMethod = () => {
         $(".selectedPaymentMethod").click(function () {
-            createCusGroupParam.defaultPaymentMethodId = $(this).data('id');
+            defaultPaymentMethodId = $(this).data('id');
             CustomerApp.page.elements.paymentType.text($(this).text());
         })
     }
 
-
-
-    // function createCusGrp() {
-    //     createCusGroupParam.id = undefined;
-    //     let title = $('#titleGroup').val().trim();
-    //     createCusGroupParam.title = title.length > 0 ? title : undefined;
-    //
-    //     let cusGrpCode = $('#cusGrpCode').val().trim();
-    //     createCusGroupParam.cusGrpCode = cusGrpCode.length > 0 ? cusGrpCode : undefined;
-    //
-    //     let note = $('#description').val().trim();
-    //     createCusGroupParam.note = note.length > 0 ? note : undefined;
-    //     createCusGroupParam.defaultPricingPolicyId = $('#pricingType').data("id");
-    //     createCusGroupParam.defaultDiscountRate = $('#discount').val();
-    //     createCusGroupParam.defaultPaymentMethodId = $('#paymentType').data("id");
-
     //create customer group
     CustomerApp.page.commands.createCusGrp = () => {
-        createCusGroupParam.title = CustomerApp.page.elements.titleGroupCre.val().trim();
-        createCusGroupParam.note = CustomerApp.page.elements.note.val().trim();
+        let title = CustomerApp.getValue(CustomerApp.page.elements.titleGroupCre);
+        let cusGrpCode = CustomerApp.getValue(CustomerApp.page.elements.cusGrpCode);
+        let note = CustomerApp.getValue(CustomerApp.page.elements.note);
+        let defaultDiscountRate = CustomerApp.page.elements.defaultDiscountRate.val();
 
-        let cusGrpCode = CustomerApp.page.elements.cusGrpCode.val().trim();
-
-        cusGrpCode ? createCusGroupParam.cusGrpCode = cusGrpCode : undefined;
-
-        CustomerApp.page.elements.defaultDiscountRate.val().trim() === ''
-            ? createCusGroupParam.defaultDiscountRate = 0
-            : createCusGroupParam.defaultDiscountRate = CustomerApp.page.elements.defaultDiscountRate.val().trim();
+        !defaultDiscountRate ? defaultDiscountRate = 0 : "";
+        createCusGroupParam = {
+            title,
+            cusGrpCode,
+            note,
+            defaultDiscountRate,
+            defaultPricingPolicyId,
+            defaultPaymentMethodId
+        };
 
         $.ajax({
             "headers": {
@@ -416,11 +408,9 @@
             "url": origin + "/api/customer_groups",
             "data": JSON.stringify(createCusGroupParam)
         })
-            .done((data) => {
+            .done(() => {
                 CustomerGroup_App.IziToast.showSuccessAlert('Thêm mới nhóm khách hàng thành công');
 
-                CustomerApp.page.elements.frmCreateCusGrp[0].reset();
-                CustomerApp.page.elements.error.removeClass('show').addClass('hidden');
                 location.href = `/admin/customer_groups/${data.id}`;
             })
             .fail((jqXHR) => {
@@ -615,6 +605,7 @@
         },
     });
     //end create default pricing policy
+
 
     CustomerApp.page.commands.searchDefaultPriceDropdown = () => {
         let filter, input, div, a, i;
