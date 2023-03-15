@@ -1,6 +1,7 @@
 package vn.sapo.entities.supplier;
 
 import io.hypersistence.utils.hibernate.type.json.JsonType;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import lombok.experimental.Accessors;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import vn.sapo.entities.*;
+import vn.sapo.entities.product.pricing_policy.PricingPolicy;
 
 import javax.persistence.*;
 import java.util.*;
@@ -73,6 +75,12 @@ public class Supplier extends BaseEntity {
 
     @Column(name = "supplier_group_id", insertable = false, updatable = false)
     private Integer groupId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "default_pricing_policy_id")
+    private PricingPolicy pricingPolicy;
+
+    @Column(name = "default_pricing_policy_id", insertable = false, updatable = false)
+    private Integer defaultPricingPolicyId;
 
     @Type(type = "extension_attributes")
     @Column(name = "extension_attributes", nullable = false, columnDefinition = "JSON")
@@ -110,6 +118,11 @@ public class Supplier extends BaseEntity {
 
     public Supplier setPaymentMethodId(String paymentMethodId) {
         this.paymentMethod = new PaymentMethod(this.paymentMethodId = paymentMethodId);
+        return this;
+    }
+
+    public Supplier setDefaultPricingPolicyId(Integer defaultPricingPolicyId) {
+        this.pricingPolicy = new PricingPolicy(this.defaultPricingPolicyId = defaultPricingPolicyId);
         return this;
     }
 

@@ -30,6 +30,7 @@ public abstract class BaseSupplierParam {
 
     @NullOrNotBlank
     private String paymentMethodId;
+    private Integer defaultPricingPolicyId;
 
     @NullOrNotBlank
     private String taxCode;
