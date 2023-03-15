@@ -32,7 +32,7 @@ public class SupplierIntegrationTest {
 
     @Test
     public void testFindById() {
-        SupplierResult actual = supplierAPI.findById(expected.getId()).getBody();
+        SupplierResult actual = (SupplierResult) supplierAPI.findById(expected.getId()).getBody();
         assertSupplier(actual, expected);
     }
 
