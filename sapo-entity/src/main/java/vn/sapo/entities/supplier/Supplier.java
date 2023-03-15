@@ -95,8 +95,6 @@ public class Supplier extends BaseEntity {
     private Set<Contact> contacts = new HashSet<>();
 
     @OneToMany(targetEntity = Address.class, mappedBy = "supplier")
-    //For mapper
-    @Setter(AccessLevel.NONE)
     private Set<Address> addresses;
 
     public Supplier(Integer id) {
