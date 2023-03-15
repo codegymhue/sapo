@@ -43,6 +43,11 @@ public class ContactSupplierServiceImpl implements ContactSupplierService {
     }
 
     @Override
+    public void createContactListBySupplierId(Integer supplierId, List<CreateContactParam> createParams) {
+
+    }
+
+    @Override
     @Transactional
     public ContactResult updateContactBySupplierId(Integer supplierId, UpdateContactParam updateParam) {
         Supplier supplier = null;//= supplierRepository.findByIdAndContactId(supplierId)
