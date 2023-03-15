@@ -14,7 +14,6 @@ import vn.sapo.shared.exceptions.ValidationException;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,20 +37,11 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     @Override
     @Transactional
     public CustomerGroupResult create(CreateCusGroupParam createParam) {
-        String title = createParam.getTitle().trim();
+        String title = createParam.getTitle();
 
-        Map<String, String> errors = new HashMap<>();
+        validationByTitle(title);
 
-        checkCustomerGroupTitle(title, errors);
-
-        if (createParam.getCusGrpCode() != null) {
-            String cusGrpCode = createParam.getCusGrpCode().trim();
-            checkCusGrpCodeWhenNotEmpty(cusGrpCode, errors);
-        }
-
-        if (!errors.isEmpty()) {
-            throw new ValidationException(errors);
-        }
+        validationByCusGroupCode(createParam.getCusGrpCode());
 
         CustomerGroup customerGroup = customerGroupMapper.toModel(createParam);
         customerGroup.setType(CustomerGroupType.FIXED);
@@ -67,35 +57,21 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     @Transactional
     public CustomerGroupResult update(Integer id, UpdateCusGroupParam updateCusGroupParam) {
         CustomerGroup customerGroup = customerGroupRepository.findById(id)
-                .orElseThrow(() -> new ValidationException(
-                        new HashMap<>(){{
-                            put("id", "customer_group.exception.notFound");
-                        }}
-                ));
+                .orElseThrow(() -> new NotFoundException("customer_group.exception.notFound"));
 
-        Map<String, String> errors = new HashMap<>();
-        String currentTitle = customerGroup.getTitle();
-        String newTitle = updateCusGroupParam.getTitle().trim();
-        String customerGroupCode = updateCusGroupParam.getCusGrpCode().trim();
+        String title = updateCusGroupParam.getTitle();
 
-        if (!currentTitle.equalsIgnoreCase(newTitle)) {
-            checkCustomerGroupTitle(newTitle, errors);
+        if (!customerGroup.getTitle().equalsIgnoreCase(title)) {
+            validationByTitle(title);
         }
 
-        if (customerGroupCode.isEmpty()) {
-            updateCusGroupParam.setCusGrpCode(customerGroup.getCusGrpCode());
-        } else {
-            checkCusGrpCodeWhenNotEmpty(customerGroupCode, errors);
+        String cusGrpCode = updateCusGroupParam.getCusGrpCode();
+        if (cusGrpCode != null && !customerGroup.getCusGrpCode().equalsIgnoreCase(cusGrpCode)) {
+            validationByCusGroupCode(cusGrpCode);
         }
-
-
-        if (!errors.isEmpty()) {
-            throw new ValidationException(errors);
-        }
-
-
 
         customerGroupMapper.transferFields(updateCusGroupParam, customerGroup);
+
         return customerGroupMapper.toDTO(customerGroup);
     }
 
@@ -141,17 +117,18 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
                 .map(customerGroupMapper::toDTO);
     }
 
-    private void checkCustomerGroupTitle(String title, Map<String, String> errors) {
+    private void validationByTitle(String title) {
         if (customerGroupRepository.existsByTitle(title)) {
-            errors.put("title", "customer_group.validation.title.existed");
+            throw new ValidationException("title", "customer_group.validation.title.existed");
         }
     }
 
-    public void checkCusGrpCodeWhenNotEmpty(String cusGrpCode, Map<String, String> errors) {
-        String prefix = CodePrefix.CUSTOMER_GROUP.getValue();
-
-        if (cusGrpCode.substring(0, 3).equalsIgnoreCase(prefix)) {
-            errors.put("cusGrpCode", "customer_group.validation.cusGrpCode.prefix");
+    public void validationByCusGroupCode(String cusGrpCode) {
+        if (cusGrpCode.toUpperCase().startsWith(CodePrefix.CUSTOMER_GROUP.getValue())) {
+            throw new ValidationException("cusGrpCode", "customer_group.validation.cusGrpCode.prefix");
+        }
+        if (customerGroupRepository.existsByCusGrpCode(cusGrpCode)) {
+            throw new ValidationException("cusGrpCode", "customer_group.validation.cusGrpCode.existed");
         }
     }
 }

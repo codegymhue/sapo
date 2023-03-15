@@ -7,12 +7,10 @@ import vn.sapo.entities.product.pricing_policy.PricingPolicy;
 import vn.sapo.entities.product.pricing_policy.PricingPolicyType;
 import vn.sapo.pricing_policy.dto.PricingPolicyParam;
 import vn.sapo.pricing_policy.dto.PricingPolicyResult;
-import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,22 +24,17 @@ public class PricingPolicyServiceImpl implements PricingPolicyService {
 
     @Override
     public PricingPolicyResult create(PricingPolicyParam pricingPolicyParam) {
-        Map<String, String> errors= new HashMap<>();
 
         if (!checkPricingPolicyType(pricingPolicyParam.getPricingPolicyType())) {
-            errors.put("pricingPolicyType", "Loại chính sách giá không đúng định dạng");
+            throw new ValidationException("pricingPolicyType", "pricing.policy.validation.pricingPolicyType.format");
         }
 
         if (checkPricingPolicyTitle(pricingPolicyParam.getTitle())) {
-                errors.put("title", "Tên chính sách giá đã tồn tại");
+            throw new ValidationException("title", "pricing.policy.validation.title.existed");
         }
 
         if (checkPricingPolicyCode(pricingPolicyParam.getPricingPolicyCode())) {
-            errors.put("pricingPolicyCode", "Mã chính sách giá đã tồn tại");
-        }
-
-        if (!errors.isEmpty()) {
-                throw new ValidationException(errors);
+            throw new ValidationException("pricingPolicyCode", "pricing.policy.validation.pricingPolicyCode.existed");
         }
 
         PricingPolicy pricingPolicy = pricingPolicyMapper.toModel(pricingPolicyParam);
@@ -96,17 +89,17 @@ public class PricingPolicyServiceImpl implements PricingPolicyService {
     }
 
     private boolean checkPricingPolicyCode(String code) {
-        return pricingPolicyRepository.existsByPricingPolicyCode(code.trim());
+        return pricingPolicyRepository.existsByPricingPolicyCode(code);
     }
 
     private boolean checkPricingPolicyTitle(String title) {
-        return pricingPolicyRepository.existsByTitle(title.trim());
+        return pricingPolicyRepository.existsByTitle(title);
     }
 
     private boolean checkPricingPolicyType(String type) {
-        if (type.trim().equalsIgnoreCase("SALE")) {
+        if (type.equalsIgnoreCase("SALE")) {
             return true;
         }
-        return type.trim().equalsIgnoreCase("PURCHASE");
+        return type.equalsIgnoreCase("PURCHASE");
     }
 }
