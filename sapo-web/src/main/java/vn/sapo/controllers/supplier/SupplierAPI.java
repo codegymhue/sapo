@@ -5,11 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import vn.sapo.contact.ContactSupplierService;
 import vn.sapo.contact.dto.ContactResult;
 import vn.sapo.contact.dto.CreateContactParam;
 import vn.sapo.customers.AddressService;
 import vn.sapo.customers.dto.CreateAddressParam;
-import vn.sapo.payment_method.PaymentMethodService;
 import vn.sapo.supplier.SupplierService;
 import vn.sapo.supplier.dto.*;
 import vn.sapo.supplier.excel.ImportExcelSupplierParam;
@@ -24,15 +24,14 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/suppliers")
 public class SupplierAPI {
+    @Autowired
+    private AddressService addressService;
+    @Autowired
+    private ContactSupplierService contactService;
 
     @Autowired
     private SupplierService supplierService;
 
-    @Autowired
-    private AddressService addressService;
-
-    @Autowired
-    private PaymentMethodService paymentMethodService;
 
 //    @Autowired
 //    ExcelServiceSupplier excelServiceSupplier;
@@ -40,10 +39,6 @@ public class SupplierAPI {
     @Autowired
     SupplierExcelService supplierExcelService;
 
-    //    @GetMapping
-//    public ResponseEntity<List<SupplierResult>> findAll() {
-//        return new ResponseEntity<>(supplierService.findAll(), HttpStatus.OK);
-//    }
     @GetMapping
     public ResponseEntity<?> getAllSupplierPage(@RequestParam HashMap<String, String> hashMap) {
         return new ResponseEntity<>(supplierService.getAllSupplierPage(
@@ -70,14 +65,14 @@ public class SupplierAPI {
 
     @GetMapping("/{supplierId}/contacts")
     public ResponseEntity<?> findContactBySupplierId(@PathVariable Integer supplierId) {
-        List<ContactResult> dto = supplierService.findContactsBySupplierId(supplierId);
+        List<ContactResult> dto = contactService.findContactsBySupplierId(supplierId);
         return new ResponseEntity<>(dto, HttpStatus.OK);
 
     }
 
     @PostMapping("/{supplierId}/contacts")
     public ResponseEntity<?> findContactBySupplierId(@PathVariable Integer supplierId, @Valid @RequestBody CreateContactParam createParam) {
-        ContactResult dto = supplierService.createContactBySupplierId(supplierId, createParam);
+        ContactResult dto = contactService.createContactBySupplierId(supplierId, createParam);
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
@@ -102,11 +97,10 @@ public class SupplierAPI {
 
     @PostMapping("/upload")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
-        String message = "";
         List<ImportExcelSupplierParam> dtoList = supplierExcelService.extractExcel(file);
         supplierExcelService.fillFieldDto(dtoList);
         supplierExcelService.importSupplier(dtoList);
-        message = "Uploaded the file successfully: " + file.getOriginalFilename();
+        String message = "Uploaded the file successfully: " + file.getOriginalFilename();
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
     }
 
