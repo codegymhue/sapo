@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import static vn.sapo.supplier.excel.ExcelHeaderSupplier.*;
+
 public class SupplierExcelExporterInventory {
     private XSSFWorkbook workbook;
     private XSSFSheet sheet;
@@ -92,28 +94,28 @@ public class SupplierExcelExporterInventory {
                 Row row = sheet.createRow(rowcount++);
                 int columnCount = 0;
 
-                createCell(row, columnCount++, supplier.getFullName() != null ? supplier.getFullName() : "", style);
-                createCell(row, columnCount++, supplier.getSupplierCode(), style);
-                createCell(row, columnCount++, supplier.getGroup().getSupGroupCode() , style);
-                createCell(row, columnCount++, supplier.getEmail(), style);
-                createCell(row, columnCount++, supplier.getPhone(), style);
-                createCell(row, columnCount++, supplier.getWebsite(), style);
-                createCell(row, columnCount++, supplier.getFax(), style);
-                createCell(row, columnCount++, supplier.getTaxCode(), style);
-                createCell(row, columnCount++, supplier.getDescription(), style);
-                createCell(row, columnCount++, "chính sách giá mặc định", style);
-                createCell(row, columnCount++, "kỳ hạn thanh toán mặc định", style);
-                createCell(row, columnCount++, supplier.getPaymentMethod(), style);
-                createCell(row, columnCount++, address.getFullName(), style);
-                createCell(row, columnCount++, address.getPhoneNumber(), style);
-                createCell(row, columnCount++, address.getEmail(), style);
-                createCell(row, columnCount++, address.getLabel(), style);
-                createCell(row, columnCount++, address.getLine1(), style);
-                createCell(row, columnCount++, address.getLine2(), style);
-                createCell(row, columnCount++, province, style);
-                createCell(row, columnCount++, district, style);
-                createCell(row, columnCount++, "nợ hiện tại", style);
-                createCell(row, columnCount++, supplier.getTags(), style);
+                createCell(row, FULL_NAME, supplier.getFullName() != null ? supplier.getFullName() : "", style);
+                createCell(row, SUPPLIER_CODE, supplier.getSupplierCode(), style);
+                createCell(row, SUP_GROUP_CODE, supplier.getGroup().getSupGroupCode() , style);
+                createCell(row, EMAIL, supplier.getEmail(), style);
+                createCell(row, PHONE, supplier.getPhone(), style);
+                createCell(row, WEBSITE, supplier.getWebsite(), style);
+                createCell(row, FAX, supplier.getFax(), style);
+                createCell(row, TAX_CODE, supplier.getTaxCode(), style);
+                createCell(row, DESCRIPTION, supplier.getDescription(), style);
+                createCell(row, PRICE_POLICY, "chính sách giá mặc định", style);
+                createCell(row, PAYMENT_TERN, "kỳ hạn thanh toán mặc định", style);
+                createCell(row, PAYMENT_METHOD_TITLE, supplier.getPaymentMethod(), style);
+                createCell(row, CONTACT_NAME, address.getFullName(), style);
+                createCell(row, CONTACT_PHONE, address.getPhoneNumber(), style);
+                createCell(row, CONTACT_EMAIL, address.getEmail(), style);
+                createCell(row, LABEL, address.getLabel(), style);
+                createCell(row, LINE1, address.getLine1(), style);
+                createCell(row, LINE2, address.getLine2(), style);
+                createCell(row, PROVINCE_NAME, province, style);
+                createCell(row, DISTRICT_NAME, district, style);
+                createCell(row, CURRENT_DEBT, "nợ hiện tại", style);
+                createCell(row, TAGS, supplier.getTags(), style);
 
             }
         }

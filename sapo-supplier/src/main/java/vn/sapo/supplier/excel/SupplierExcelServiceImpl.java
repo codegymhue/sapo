@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import vn.sapo.contact.ContactSupplierService;
+import vn.sapo.contact.dto.CreateContactParam;
 import vn.sapo.customers.AddressService;
 import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.entities.supplier.Supplier;
@@ -35,6 +37,8 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
     private PaymentMethodService paymentMethodService;
     @Autowired
     AddressService addressService;
+    @Autowired
+    ContactSupplierService contactService;
 
     public static final String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
@@ -63,7 +67,7 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
                     ImportExcelSupplierParam importExcel = extractSupplier(row.iterator());
                     CreateAddressParam addressParam = extractAddress(row.iterator());
                     if (addressParam.getLine1() != null)
-                        importExcel.getCreateAddressParams().add(addressParam);
+                        importExcel.getAddressList().add(addressParam);
                     importExcelList.add(importExcel);
                 } else {
                     cell = row.getCell(LINE1);
@@ -73,7 +77,18 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
                         CreateAddressParam addressParam = extractAddress(cellsInRow);
                         if (importExcelList.size() > 0) {
                             ImportExcelSupplierParam importExcel = importExcelList.get(importExcelList.size() - 1);
-                            importExcel.getCreateAddressParams().add(addressParam);
+                            importExcel.getAddressList().add(addressParam);
+                        }
+                    }
+
+                    cell = row.getCell(CONTACT_NAME);
+                    String contactName = cell == null ? null : cell.getStringCellValue();
+                    if (contactName != null && !contactName.isBlank()) {
+                        Iterator<Cell> cellsInRow = row.iterator();
+                        CreateContactParam contactParam = extractContact(cellsInRow);
+                        if (importExcelList.size() > 0) {
+                            ImportExcelSupplierParam importExcel = importExcelList.get(importExcelList.size() - 1);
+                            importExcel.getContactList().add(contactParam);
                         }
                     }
                 }
@@ -91,17 +106,20 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
     @Override
     public void fillFieldDto(List<ImportExcelSupplierParam> dtoList) {
         Set<String> pmTitles = new HashSet<>();
+        Set<String> ppTitles = new HashSet<>();
         Set<String> supGroupCodes = new HashSet<>();
         dtoList.forEach(param -> {
             pmTitles.add(param.getPaymentMethodTitle());
+            ppTitles.add(param.getDefaultPricingPolicyTitle());
             supGroupCodes.add(param.getSupGroupCode());
         });
 
         Map<String, String> pmMap = paymentMethodService.findByTitles(pmTitles);
+        Map<String, Integer> ppMap =new HashMap<>();//= paymentMethodService.findByTitles(pmTitles);
         Map<String, Integer> supGroupMap = supplierGroupService.findByGroupCodes(supGroupCodes);
         dtoList.forEach(dto -> {
-            String id = pmMap.get(dto.getPaymentMethodTitle());
-            dto.setPaymentMethodId(id);
+            dto.setPaymentMethodId(pmMap.get(dto.getPaymentMethodTitle()));
+            dto.setDefaultPricingPolicyId(ppMap.get(dto.getDefaultPricingPolicyTitle()));
             dto.setGroupId(supGroupMap.get(dto.getSupGroupCode()));
         });
     }
@@ -110,14 +128,6 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
         CreateAddressParam param = new CreateAddressParam();
         cells.forEachRemaining(cell -> {
             switch (cell.getColumnIndex()) {
-
-                case CONTACT_NAME:
-                    param.setFullName(cell.getStringCellValue());
-                    break;
-                case CONTACT_PHONE:
-                    param.setPhoneNumber(cell.getStringCellValue());
-                case CONTACT_EMAIL:
-                    param.setEmail(cell.getStringCellValue());
                 case LABEL:
                     param.setLabel(cell.getStringCellValue());
                     break;
@@ -133,6 +143,25 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
                 case DISTRICT_NAME:
                     param.setDistrictName(cell.getStringCellValue());
                     break;
+                default:
+                    break;
+            }
+        });
+        return param;
+
+    }
+
+    public CreateContactParam extractContact(Iterator<Cell> cells) {
+        CreateContactParam param = new CreateContactParam();
+        cells.forEachRemaining(cell -> {
+            switch (cell.getColumnIndex()) {
+                case CONTACT_NAME:
+                    param.setFullName(cell.getStringCellValue());
+                    break;
+                case CONTACT_PHONE:
+                    param.setPhoneNumber(cell.getStringCellValue());
+                case CONTACT_EMAIL:
+                    param.setEmail(cell.getStringCellValue());
                 default:
                     break;
             }
@@ -172,8 +201,8 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
                 case DESCRIPTION:
                     param.setDescription(cell.getStringCellValue());
                     break;
-                case 9:
-//                    PRICE_POLICY :
+                case PRICE_POLICY:
+                    param.setDefaultPricingPolicyTitle(cell.getStringCellValue());
                     break;
                 case 10:
 //                    PAYMENT_TERN :
@@ -186,7 +215,7 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
                     break;
                 case TAGS:
                     String[] tags = cell.getStringCellValue().split(",");
-                 param.setTags(Arrays.asList(tags));
+                    param.setTags(Arrays.asList(tags));
                     break;
                 default:
                     break;
@@ -213,17 +242,16 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
                 String phone = param.getPhone();
                 boolean matchPhone = phone != null && phone.equals(supplier.getPhone());
                 if (matchFullName && matchPhone) {
-                    List<CreateAddressParam> addressParams = param.getCreateAddressParams();
-                    addressParams.forEach(addressParam -> {
-                        addressParam.setSupplierId(supplier.getId());
-                    });
-                    addressService.create(addressParams);
+                    List<CreateAddressParam> addressList = param.getAddressList();
+                    addressList.forEach(addressParam -> addressParam.setSupplierId(supplier.getId()));
+                    addressService.create(addressList);
+
+                    List<CreateContactParam> contactList = param.getContactList();
+                    contactService.createContactListBySupplierId(supplier.getId(), contactList);
                 }
             }
         });
     }
-
-
 
 
 }

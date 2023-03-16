@@ -52,7 +52,7 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
     }
 
     public void validationBySupGroupCode(String supGroupCode) {
-        if (supGroupCode.startsWith(CodePrefix.SUPPLIER_GROUP.getValue())) {
+        if (supGroupCode.toUpperCase().startsWith(CodePrefix.SUPPLIER_GROUP.getValue())) {
             throw new ValidationException(new HashMap<>() {{
                 put("supGroupCode", "supplier_group.exception.supGroupCode.hasSystemPrefix");
             }});
@@ -67,12 +67,12 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
     @Transactional
     public SupplierGroupResult create(CreateSupGroupParam createParam) {
         validationByTitle(createParam.getTitle());
-        validationBySupGroupCode(createParam.getSupGroupCode());
+        if (createParam.getSupGroupCode() != null)
+            validationBySupGroupCode(createParam.getSupGroupCode());
 
         SupplierGroup supplierGroup = supplierGroupMapper.toModel(createParam);
         supplierGroupRepository.save(supplierGroup);
-        if (createParam.getSupGroupCode() == null)
-            supplierGroup.setSupGroupCode(CodePrefix.SUPPLIER_GROUP.generate(supplierGroup.getId()));
+        supplierGroup.setSupGroupCode(CodePrefix.SUPPLIER_GROUP.generate(supplierGroup.getId()));
 
         return supplierGroupMapper.toDTO(supplierGroup);
     }
@@ -88,7 +88,7 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
             validationByTitle(title);
 
         String supGroupCode = updateParam.getSupGroupCode();
-        if (!supplierGroup.getSupGroupCode().equalsIgnoreCase(supGroupCode))
+        if (supGroupCode != null && !supplierGroup.getSupGroupCode().equalsIgnoreCase(supGroupCode))
             validationBySupGroupCode(supGroupCode);
 
         supplierGroupMapper.transferFields(updateParam, supplierGroup);

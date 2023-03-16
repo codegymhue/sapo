@@ -313,6 +313,9 @@
     //start modal create default price policy
     CustomerApp.page.elements.modalCreatePricePolicy = $("#modalCreatePricePolicy");
 
+    CustomerApp.page.elements.titlePricePolicyCre = $("#titlePricePolicyCre");
+    CustomerApp.page.elements.pricingPolicyCodeCre = $("#pricingPolicyCodeCre");
+
     CustomerApp.page.elements.frmCreatePricePolicy = $("#frmCreatePricePolicy");
     CustomerApp.page.elements.btnCreatePricePolicy = $("#btnCreatePricePolicy");
     CustomerApp.page.elements.btnCloseCreatePricePolicyModal = $(".btnCloseCreatePricePolicyModal");
@@ -336,7 +339,7 @@
                     "accept": "application/json",
                     "content-type": "application/json"
                 },
-                type: "PUT",
+                type: "PATCH",
                 url: origin + "/api/customer_groups/" + id,
                 data: JSON.stringify(currentCustomerGroup)
             })

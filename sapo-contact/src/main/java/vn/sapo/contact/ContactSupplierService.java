@@ -8,12 +8,11 @@ import vn.sapo.contact.dto.UpdateContactParam;
 import java.util.List;
 
 public interface ContactSupplierService {
-    @Transactional(readOnly = true)
     List<ContactResult> findContactsBySupplierId(Integer supplierId);
 
-    @Transactional
     ContactResult createContactBySupplierId(Integer supplierId, CreateContactParam createParam);
 
-    @Transactional
+    void createContactListBySupplierId(Integer supplierId, List<CreateContactParam> createParams);
+
     ContactResult updateContactBySupplierId(Integer supplierId, UpdateContactParam updateParam);
 }

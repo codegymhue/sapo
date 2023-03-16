@@ -30,12 +30,12 @@ public abstract class BaseSupplierParam {
 
     @NullOrNotBlank
     private String paymentMethodId;
+    private Integer defaultPricingPolicyId;
 
     @NullOrNotBlank
     private String taxCode;
 
     @NullOrNotBlank
-//    @Pattern(message = "{supplier.validation.fax.pattern}", regexp = "/^\\+?\\d{6,15}$/\n")
     private String fax;
 
     @NullOrNotBlank

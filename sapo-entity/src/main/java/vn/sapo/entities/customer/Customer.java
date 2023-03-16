@@ -10,6 +10,8 @@ import org.hibernate.annotations.TypeDef;
 import vn.sapo.entities.Address;
 import vn.sapo.entities.BaseEntity;
 import vn.sapo.entities.Employee;
+import vn.sapo.entities.PaymentMethod;
+import vn.sapo.entities.product.pricing_policy.PricingPolicy;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -74,6 +76,19 @@ public class Customer extends BaseEntity {
     @Column(name = "tags", nullable = false, columnDefinition = "JSON")
     private List<String> tags = new ArrayList<>();
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "default_payment_method_id", foreignKey = @ForeignKey(name = "fk_customer_payment_method"))
+    private PaymentMethod paymentMethod;
+
+    @Column(name = "default_payment_method_id", insertable = false, updatable = false)
+    private String defaultPaymentMethodId;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "default_pricing_policy_id", foreignKey = @ForeignKey(name = "fk_customer_pricing_policy"))
+    private PricingPolicy pricingPolicy;
+
+    @Column(name = "default_pricing_policy_id", insertable = false, updatable = false)
+    private Integer defaultPricingPolicyId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_group_id", nullable = false, foreignKey = @ForeignKey(name = "fk_customer_customer_group"))
@@ -89,13 +104,24 @@ public class Customer extends BaseEntity {
     @Column(name = "employee_id", insertable = false, updatable = false)
     private Integer employeeId;
 
+    public Customer setGroupId(Integer groupId) {
+        this.group = new CustomerGroup(this.groupId = groupId);
+        return this;
+    }
+
     public Customer setEmployeeId(Integer employeeId) {
         this.employee = new Employee(this.employeeId = employeeId);
         return this;
     }
 
-    public Customer setGroupId(Integer groupId) {
-        this.group = new CustomerGroup(this.groupId = groupId);
+
+    public Customer setDefaultPricingPolicyId(Integer defaultPricingPolicyId) {
+        this.pricingPolicy = new PricingPolicy(this.defaultPricingPolicyId = defaultPricingPolicyId);
+        return this;
+    }
+
+    public Customer setDefaultPaymentMethodId(String defaultPaymentMethodId) {
+        this.paymentMethod = new PaymentMethod(this.defaultPaymentMethodId = defaultPaymentMethodId);
         return this;
     }
 

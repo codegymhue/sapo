@@ -7,6 +7,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import vn.sapo.contact.dto.ContactResult;
 import vn.sapo.supplier.dto.SupGroupResult;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.excel.ExcelHeaderSupplier;
@@ -102,13 +103,11 @@ public class SupplierExcelExporter {
             createCell(row, FULL_NAME, fullName != null ? fullName : "", style);
             createCell(row, SUPPLIER_CODE, supplier.getSupplierCode(), style);
             SupGroupResult group = supplier.getGroup();
-            if (group != null) {
-                String title = group.getSupGroupCode();
-                createCell(row, SUP_GROUP_CODE, title, style);
-            } else {
+            if (group != null)
+                createCell(row, SUP_GROUP_CODE, group.getSupGroupCode(), style);
+            else
                 createCell(row, SUP_GROUP_CODE, null, style);
 
-            }
             String email = supplier.getEmail();
             createCell(row, EMAIL, email != null ? email : "", style);
             String phone = supplier.getPhone();
@@ -126,26 +125,21 @@ public class SupplierExcelExporter {
             }
             if (supplier.getAddresses().size() == 0) {
                 createCell(row, columnCount++, "", style);
-//                createCell(row, columnCount++, "", style);
-//                createCell(row, columnCount++, "", style);
-//                createCell(row, columnCount++, "", style);
-//                createCell(row, columnCount++, "", style);
+
             } else {
                 for (AddressResult adr : supplier.getAddresses()) {
                     String province = adr.getProvinceName();
                     String district = adr.getDistrictName();
-                    createCell(row, CONTACT_NAME, adr.getFullName() != null ? adr.getFullName() : "", style);
-                    createCell(row, CONTACT_PHONE, adr.getPhoneNumber() != null ? adr.getPhoneNumber() : "", style);
-                    createCell(row, CONTACT_EMAIL, adr.getEmail() != null ? adr.getEmail() : "", style);
                     createCell(row, LABEL, adr.getLabel() != null ? adr.getLabel() : "", style);
                     createCell(row, LINE1, adr.getLine1() != null ? adr.getLine1() : "", style);
-                    if (adr.getLine2() != null){
-                        createCell(sheet.createRow(rowCount++), LINE2 , adr.getLine2(), style);
-                    }else {
-                        createCell(sheet.createRow(rowCount++), LINE2, "", style);
-                    }
+                    createCell(row, LINE2, adr.getLine2() != null ? adr.getLine2() : "", style);
                     createCell(row, PROVINCE_NAME, province != null ? province : "", style);
                     createCell(row, DISTRICT_NAME, district != null ? district : "", style);
+                }
+                for (ContactResult contact : supplier.getContacts()) {
+                    createCell(row, CONTACT_NAME, contact.getFullName() != null ? contact.getFullName() : "", style);
+                    createCell(row, CONTACT_PHONE, contact.getPhoneNumber() != null ? contact.getPhoneNumber() : "", style);
+                    createCell(row, CONTACT_EMAIL, contact.getEmail() != null ? contact.getEmail() : "", style);
                 }
             }
             createCell(row, CURRENT_DEBT, "", style);
