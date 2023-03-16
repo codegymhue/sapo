@@ -87,9 +87,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     @Transactional
     public void deleteByIdd(Integer id) {
-        supplierRepository.findById(id).ifPresent(supplier -> {
-            supplier.setStatus(SupplierStatus.UNAVAILABLE);
-        });
+        supplierRepository.findById(id).ifPresent(supplier -> supplier.setStatus(SupplierStatus.DELETED));
     }
 
 
