@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import vn.sapo.entities.supplier.Supplier;
+import vn.sapo.entities.supplier.SupplierStatus;
 import vn.sapo.supplier.dto.SupplierFilter;
 
 import javax.persistence.criteria.Expression;
@@ -21,6 +22,7 @@ public interface SupplierFilterRepository extends JpaRepository<Supplier, Intege
         return findAll((root, criteriaQuery, criteriaBuilder) -> {
 
             List<Predicate> predicates = new ArrayList<>();
+            predicates.add(criteriaBuilder.equal(root.get("status"), SupplierStatus.AVAILABLE));
             if (filter.getFilter() != null) {
                 Predicate predicateSupplierCode = criteriaBuilder.like(root.get("supplierCode"), '%' + filter.getFilter() + '%');
                 Predicate predicatePhone = criteriaBuilder.like(root.get("phone"), '%' + filter.getFilter() + '%');
