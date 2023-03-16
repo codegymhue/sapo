@@ -12,7 +12,6 @@ import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,14 +24,21 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     @Autowired
     private CustomerGroupRepository customerGroupRepository;
 
-    @Autowired
-    CustomerGroupFilterRepository customerGroupFilterRepository;
+//    @Autowired
+//    CustomerGroupFilterRepository customerGroupFilterRepository;
 
     @Override
     @Transactional
-    public List<ICustomerGroupResult> findAllCustomerGroupResult() {
-        return customerGroupRepository.findAllCustomerGroupResult();
+    public Page<CustomerGroupResult> findAllCustomerGroupPageable(Pageable pageable) {
+        return customerGroupRepository.findAllCustomerGroupPageable(pageable)
+                .map(customerGroupMapper::toDTO);
     }
+
+//    @Override
+//    @Transactional
+//    public List<ICustomerGroupResult> findAllCustomerGroupResult() {
+//        return customerGroupRepository.findAllCustomerGroupResult();
+//    }
 
     @Override
     @Transactional
@@ -84,11 +90,11 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<ICustomerGroupResult> sortByGroup() {
-        return customerGroupRepository.sortByGroup();
-    }
+//    @Override
+//    @Transactional(readOnly = true)
+//    public List<ICustomerGroupResult> sortByGroup() {
+//        return customerGroupRepository.sortByGroup();
+//    }
 
     @Override
     @Transactional
@@ -110,12 +116,12 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
 //        return customerGroupRepository.sortByGroup();
 //    }
 
-    @Override
-    public Page<CustomerGroupResult> findAllByFilters(CustomerGroupFilter filters, Pageable pageable) {
-        return customerGroupFilterRepository.
-                findAllByFilters(filters, pageable)
-                .map(customerGroupMapper::toDTO);
-    }
+//    @Override
+//    public Page<CustomerGroupResult> findAllByFilters(CustomerGroupFilter filters, Pageable pageable) {
+//        return customerGroupFilterRepository.
+//                findAllByFilters(filters, pageable)
+//                .map(customerGroupMapper::toDTO);
+//    }
 
     private void validationByTitle(String title) {
         if (customerGroupRepository.existsByTitle(title)) {
