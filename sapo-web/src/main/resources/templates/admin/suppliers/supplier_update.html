@@ -303,20 +303,20 @@
                             <div class="page-info-body">
 
                                 <div id="config-customer" class="w-100">
-                                    <div class="col-12 field p-0">
-                                        <div class="label mb-2">Giá mặc định</div>
-                                        <div class="select__wrapper " id="search-price-list-wrap">
-                                            <a class="sapo-select select--a select-suggest" id="search-price-list"
-                                               href="javascript:">
-                                                Chọn giá mặc định </a>
-                                            <svg class="next-icon next-icon--size-16">
-                                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                     xlink:href="#select-chevron"></use>
-                                            </svg>
-                                            <div class="filter-body--suggest">
-                                            </div>
-                                        </div>
-                                    </div>
+<!--                                    <div class="col-12 field p-0">-->
+<!--                                        <div class="label mb-2">Giá mặc định</div>-->
+<!--                                        <div class="select__wrapper " id="search-price-list-wrap">-->
+<!--                                            <a class="sapo-select select&#45;&#45;a select-suggest" id="search-price-list"-->
+<!--                                               href="javascript:">-->
+<!--                                                Chọn giá mặc định </a>-->
+<!--                                            <svg class="next-icon next-icon&#45;&#45;size-16">-->
+<!--                                                <use xmlns:xlink="http://www.w3.org/1999/xlink"-->
+<!--                                                     xlink:href="#select-chevron"></use>-->
+<!--                                            </svg>-->
+<!--                                            <div class="filter-body&#45;&#45;suggest">-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
                                     <div class="col-12 field p-0">
                                         <div class="label mb-2">Hình thức thanh toán</div>
 
@@ -745,7 +745,6 @@
             taxCode: taxCode.length > 0 ? taxCode : undefined,
             fax: fax.length > 0 ? fax : undefined,
             website: website.length > 0 ? website : undefined,
-            tags:  $("#input-tags").tagsinput('items')
         }
         $.ajax({
             "headers": {
