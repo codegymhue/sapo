@@ -13,14 +13,14 @@ class SupplierApp {
     static getTbody(item, field, showStatus) {
         switch (field) {
             case "code":
-                return `<td class="align-middle"><a href="/admin/suppliers/${item.id}/histories"
+                return `<td class="align-middle"><a href="/admin/suppliers/${item.id}/addresses"
                             style="text-decoration: none">${SupplierApp.getTbodyValue(field, item) || ""}</a></td>`;
             case "status":
-                return ` <td onclick="location.href='/admin/suppliers/${item.id}/histories'" class="align-middle">
+                return ` <td onclick="location.href='/admin/suppliers/${item.id}/addresses'" class="align-middle">
                                <span id="showStatus" class="${showStatus}">${SupplierApp.getTbodyValue(field, item) || ""}</span> 
                         </td> `;
             default :
-                return `<td onclick="location.href='/admin/suppliers/${item.id}/histories'"
+                return `<td onclick="location.href='/admin/suppliers/${item.id}/addresses'"
                            class="align-middle">${SupplierApp.getTbodyValue(field, item) || ""}</td>`;
         }
 
