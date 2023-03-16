@@ -10,16 +10,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import vn.sapo.contact.dto.ContactResult;
 import vn.sapo.supplier.dto.SupGroupResult;
 import vn.sapo.supplier.dto.SupplierResult;
-import vn.sapo.supplier.excel.ExcelHeaderSupplier;
-import vn.sapo.supplier.dto.SupGroupResult;
 import vn.sapo.customers.dto.AddressResult;
-import vn.sapo.supplier.dto.SupplierResult;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static vn.sapo.supplier.excel.ExcelHeaderSupplier.*;
 
@@ -125,6 +121,8 @@ public class SupplierExcelExporter {
             }
             if (supplier.getAddresses().size() == 0) {
                 createCell(row, columnCount++, "", style);
+                createCell(row, columnCount++, "", style);
+                createCell(row,columnCount++,"",style);
 
             } else {
                 for (AddressResult adr : supplier.getAddresses()) {
