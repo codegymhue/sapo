@@ -22,7 +22,7 @@ public interface SupplierFilterRepository extends JpaRepository<Supplier, Intege
         return findAll((root, criteriaQuery, criteriaBuilder) -> {
 
             List<Predicate> predicates = new ArrayList<>();
-            predicates.add(criteriaBuilder.equal(root.get("status"), SupplierStatus.AVAILABLE));
+
             if (filter.getFilter() != null) {
                 Predicate predicateSupplierCode = criteriaBuilder.like(root.get("supplierCode"), '%' + filter.getFilter() + '%');
                 Predicate predicatePhone = criteriaBuilder.like(root.get("phone"), '%' + filter.getFilter() + '%');
@@ -69,9 +69,16 @@ public interface SupplierFilterRepository extends JpaRepository<Supplier, Intege
                 predicates.add(tagsPredicate);
             }
 
+            Predicate predicate;
             if (!filter.getStatuses().isEmpty()) {
-                Predicate predicate = criteriaBuilder.or(root.get("status").in(filter.getStatuses()));
+                predicate = criteriaBuilder.or(root.get("status").in(filter.getStatuses()));
                 predicates.add(predicate);
+            } else {
+                predicate = criteriaBuilder.or(criteriaBuilder.equal(root.get("status"), SupplierStatus.AVAILABLE),
+                        criteriaBuilder.equal(root.get("status"), SupplierStatus.UNAVAILABLE)
+                );
+                predicates.add(predicate);
+
             }
             Date createdFrom = filter.getCreatedFrom();
             Date createdTo = filter.getCreatedTo();

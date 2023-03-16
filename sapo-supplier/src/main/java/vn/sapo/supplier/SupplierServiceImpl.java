@@ -31,7 +31,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     @Transactional(readOnly = true)
     public List<SupplierResult> findAll() {
-        return supplierRepository.findAll()
+        return supplierRepository.findAllByStatusNot(SupplierStatus.DELETED)
                 .stream()
                 .map(supplierMapper::toDTO)
                 .collect(Collectors.toList());
@@ -75,6 +75,7 @@ public class SupplierServiceImpl implements SupplierService {
             }
         }
         supplierMapper.transferFields(param, supplier);
+        supplier.setTags(param.getTags());
         return supplierMapper.toDTO(supplier);
     }
 

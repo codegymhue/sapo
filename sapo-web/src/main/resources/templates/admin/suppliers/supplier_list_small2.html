@@ -847,7 +847,7 @@
                 page.elements.tbSupplier_tbody.empty();
                 page.elements.totalPage.empty();
                 totalPage = data.totalPage;
-                console.log(data)
+
                 if (data.suppliers != null) {
                     $(".ui-type-container").hide();
                     $("#sapo-table_wrapper").show();
@@ -887,7 +887,7 @@
         supplierFilter.pageNo = Number(page.elements.pageNo.text());
         supplierFilter.pageSize = Number(page.elements.pageSize.val());
         supplierFilter.filter = page.elements.searchKey.val().trim();
-        console.log(supplierFilter)
+
         page.commands.getAllSupplierUseFilter(supplierFilter);
         // page.elements.searchKey.val("");
 
@@ -896,22 +896,16 @@
     page.dialogs.elements.filterSubmit.on("click", () => {
         page.elements.pageNo.text(1);
         supplierFilter.pageNo = 1;
-        console.log(supplierFilter, " supplierFilter truoc rết")
+
         page.commands.getAllSupplierUseFilter(supplierFilter);
-        for (let prop in supplierFilter) {
-            if (supplierFilter.hasOwnProperty(prop)) {
-                console.log(prop + ": " + supplierFilter[prop], "loop");
-            }
-        }
+
         page.elements.btnFilter.click()
 
-        console.log(supplierFilter)
     })
 
     page.commands.getAllSupplierUseFilter = (supplierFilter) => {
         let fields = JSON.parse(localStorage.getItem("fields")) || ["code", "supplier_name", "supplier_group", "email", "phone_number", "status"];
-        console.log(supplierFilter, " supplierFilter")
-        console.log(fields, "fields getAllSupplierUseFilter")
+
         page.commands.showLoading();
         $.ajax({
             headers: {
@@ -924,7 +918,7 @@
         })
             .done((data) => {
 
-                console.log(data.suppliers, " datasup")
+
                 page.elements.tbSupplier_tbody.empty();
                 page.elements.tbSupplier_thead.empty()
                 page.elements.totalPage.empty();
@@ -1090,7 +1084,7 @@
     }
 
     page.commands.getAllTags = () => {
-        console.log("getAllTags")
+
         $.ajax({
             headers: {
                 "accept": "application/json",
@@ -1100,7 +1094,7 @@
             url: page.urls.getAllSupplierTags,
         })
             .done((data) => {
-                console.log(data, " alltags")
+
                 $.each(data, (index, item) => {
                     page.elements.supTagRender.append(SupplierApp.renderSupplierTagsOnFilter(item, index));
                 });
@@ -1136,19 +1130,19 @@
         page.elements.selectAction.on("change", function () {
             $("#checkAll").prop("checked", false);
             arrayIdSupplier = [];
-            console.log(this)
+
             if (this.checked) {
                 $("#tbSupplier>tbody input").each(function () {
                     $(this).prop("checked", true);
                     arrayIdSupplier.push($(this).val());
                 })
             } else {
-                console.log(this)
+
                 $("#tbSupplier>tbody input").each(function () {
                     $(this).prop("checked", false);
                 })
             }
-            console.log(arrayIdSupplier)
+
             page.commands.showAction();
         })
     }
@@ -1216,12 +1210,12 @@
     page.commands.chooseTag = () => {
 
         $(".suggestion-tag").on("click", function () {
-            console.log(this)
+
             let tagChoose = $(this).find("span").text();
             let listTagsChoose = page.elements.tagsInput.find(".tag").map(function () {
                 return $(this).text().trim();
             }).get();
-            console.log(listTagsChoose, " listTagsChoose")
+
             listTagsChoose.forEach(() => {
                 if (!listTagsChoose.includes(tagChoose)) {
                     listTagsChoose.push(tagChoose)
@@ -1237,7 +1231,7 @@
                 page.elements.tagsInput.prepend(str);
             }
             page.elements.supTagRender.css("display", "none");
-            console.log(supplierFilter.tags, " sau click")
+
 
         })
     }
@@ -1247,7 +1241,7 @@
             supplierFilter.tags.splice(supplierFilter.tags.indexOf($(this).parent().text()), 1)
             $(this).parent().remove()
         }
-        console.log(supplierFilter.tags, " sau remove")
+
     });
 
     page.elements.btnUpdateSup.on("click", () => {
@@ -1271,11 +1265,11 @@
         let empId = $("#accountIdBulk").val();
         if (empId == 0)
             empId = null
-        console.log(empId)
+
         let paymentId = $("#paymentMethodIdBulk").val();
         if (paymentId == 0)
             paymentId = null
-        console.log(paymentId, " paymentId")
+
         $(".ui-dialog-title").text("Cập nhật thông tin nhà cung cấp")
         let countOrderComplete = 0;
         let countOrderFail = 0;
@@ -1303,7 +1297,7 @@
                 let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
                 $("#countOrderFail").text(countOrderFail);
                 $("#listOrderFail").append(str);
-                console.log(e, " err")
+
             }
             if ((countOrderComplete + countOrderFail) === arrayIdSupplier.length) {
                 $("#btn-confirm").attr("disabled", false);
@@ -1349,7 +1343,7 @@
         arrayIdSupplier.forEach(async id => {
             try {
                 const result = await activeBulk(id);
-                console.log(result)
+
                 if (result.message.includes("Đã được cập nhật trạng thái thành công")) {
                     countOrderComplete += 1
                     let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${result.supplierCode}</a>
@@ -1364,7 +1358,7 @@
                     $("#listOrderFail").append(str)
                 }
             } catch (e) {
-                console.log(e, " err")
+
                 countOrderFail += 1
                 let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
                 $("#countOrderFail").text(countOrderFail)
@@ -1408,7 +1402,7 @@
         arrayIdSupplier.forEach(async id => {
             try {
                 const result = await disableBulk(id);
-                console.log(result, " res")
+
                 if (result.message.includes("Đã ngừng giao dịch thành công")) {
                     countOrderComplete += 1
                     let str = `  <div><a target="_blank" href="/admin/suppliers/${id}/histories">${result.supplierCode}</a>
@@ -1423,7 +1417,7 @@
                     $("#listOrderFail").append(str)
                 }
             } catch (e) {
-                console.log(e, " err")
+
                 countOrderFail += 1
                 let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
                 $("#countOrderFail").text(countOrderFail)
@@ -1481,7 +1475,7 @@
                     $("#listOrderFail").append(str)
                 }
             } catch (e) {
-                console.log(e, " err")
+
                 countOrderFail += 1
                 let str = ` <div><a target="_blank" href="/admin/suppliers/${id}/histories">${id}</a><span> - Có lỗi xảy ra</span></div>`
                 $("#countOrderFail").text(countOrderFail)
@@ -1518,7 +1512,7 @@
 
     // tùy chọn filter status
     function setParamFilterActive(str, element) {
-        console.log(element, "element")
+
         if ($(element).hasClass("active")) {
             $(element).removeClass("active")
             if (supplierFilter.statuses.indexOf(str) > -1) {
@@ -1528,7 +1522,7 @@
             $(element).addClass("active");
             supplierFilter.statuses.push(str)
         }
-        console.log(supplierFilter.statuses)
+
     }
 
     function query() {
@@ -1546,7 +1540,7 @@
         supplierFilter.pageNo = null;
         supplierFilter.pageSize = null;
         // page.commands.getAllSupplier();
-        console.log("resetSupplierFilter done")
+
     }
 
     page.elements.multiselect_employee.on("click", () => {
@@ -1591,7 +1585,7 @@
                 else if (checkboxCheckedLength === checkboxAll)
                     page.elements.multiselect_employee.text(`Tất cả (${checkboxCheckedLength})`)
             }
-            console.log(supplierFilter.employeeIds)
+
         })
     }
 
@@ -1620,7 +1614,7 @@
                     $("span[" + "id" + "*=" + "tag-variant-" + checkbox.val() + "]").remove()
                 }
             }
-            console.log(supplierFilter.groupIds)
+
         })
     }
 
@@ -1636,7 +1630,7 @@
     // tìm từ khóa trong filter SupplierGroup
     function suggest(element) {
         let value = $(element).val().toLowerCase();
-        console.log(value, " value")
+
         let ul = $(element).closest('ul');
         let li = ul.find('li:gt(0)');
         li.hide();
@@ -1648,7 +1642,7 @@
 
     // tìm từ khóa trong filter SupplierTags
     function suggestTags(element) {
-        console.log("in function")
+
         let value = $(element).val().toLowerCase();
         $(".suggestion-tag").hide();
         $(".suggestion-tag").filter(function () {
@@ -1666,19 +1660,18 @@
             supplierFilter.createdFrom = null;
         document.getElementById("createMin").setAttribute("max", supplierFilter.createdTo);
         document.getElementById("createMax").setAttribute("min", supplierFilter.createdFrom);
-        console.log(supplierFilter.createdFrom, "supplierFilter.createdFrom")
-        console.log(supplierFilter.createdTo, "supplierFilter.createdTo")
+
     }
 
     function confirmSave(str, element) {
-        console.log("confirmSave")
+
         let sList = [];
         if ($("#defaultSettings").is(":checked")) {
             $("#list-row-default").find('input[type="checkbox"].export-field-group--toggle-item').each(function () {
                 if (this.checked)
                     sList.push($(this).val())
             });
-            console.log(sList, " list-row-default")
+
             localStorage.setItem("fields", JSON.stringify(sList));
             page.commands.getAllSupplier();
 
@@ -1687,7 +1680,7 @@
                 if (this.checked)
                     sList.push($(this).val())
             });
-            console.log(sList, ' list-row-settings')
+
             localStorage.setItem("fields", JSON.stringify(sList));
             page.commands.getAllSupplier();
         }
