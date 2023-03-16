@@ -45,7 +45,7 @@
                     <div class="MuiPaper-root jss23708 MuiPaper-elevation1 MuiPaper-rounded">
                         <div class="jss751 jss722 borderBottom">
                             <div>
-                                <h6 class="MuiTypography-root jss24250 ">
+                                <h6 class="MuiTypography-root jss24250">
                                     Thông tin chung
                                 </h6>
                             </div>
@@ -496,12 +496,6 @@
 
     CustomerApp.page.commands.showDefaultPricingPolicyDropdown = () => {
         CustomerApp.page.elements.defaultPriceDropdown[0].classList.toggle("show")
-    }
-
-    CustomerApp.page.commands.showErrorValidate = (element, error) => {
-        element.addClass('show').removeClass('hidden');
-        element.text(error);
-        CustomerApp.IziToast.showErrorAlert(error);
     }
 
     //start create default pricing policy

@@ -29,9 +29,9 @@ public class CustomerGroupResult {
 
     private Instant createdAt;
 
-//    private Integer defaultPricingPolicyId;
-//
-//    private String defaultPaymentMethodId;
+    private Integer defaultPricingPolicyId;
+
+    private String defaultPaymentMethodId;
 //
     private Integer defaultDiscountRate;
 //

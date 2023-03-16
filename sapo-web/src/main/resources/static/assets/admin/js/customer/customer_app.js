@@ -102,7 +102,7 @@ class CustomerApp {
 
     static getValue = (input) => {
         let value = input.val().trim();
-        return !value ? undefined : value;
+        return value ? value : undefined;
     }
 
     static page = {

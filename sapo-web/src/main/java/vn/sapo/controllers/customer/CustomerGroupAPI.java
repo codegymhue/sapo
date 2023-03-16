@@ -49,7 +49,7 @@ public class CustomerGroupAPI extends BaseController {
         int draw = input.getDraw();
         int start = input.getStart();
         int length = input.getLength();
-        int page = start / length;
+        int page = start / length + 1;
 
         Object sort = input.getOrder().get(0);
         LinkedHashMap<String, String> linkedHashMap = (LinkedHashMap<String, String>) sort;
@@ -57,10 +57,12 @@ public class CustomerGroupAPI extends BaseController {
 
         Sort s = Sort.by(Sort.Direction.valueOf(order), "title");
 
-        Pageable pageable = PageRequest.of(page, length, s);
+        Pageable pageable = PageRequest.of(page - 1, length, s);
 
         Page<CustomerGroupResult> pageableCustomerGroups =
                 customerGroupService.findAllCustomerGroupPageable(pageable);
+
+//        Page<ICustomerGroupResult> pageableCustomerGroups = customerGroupService.test(pageable);
 
         DataTablesOutput<CustomerGroupResult> output = new DataTablesOutput<>();
         output.setDraw(draw);

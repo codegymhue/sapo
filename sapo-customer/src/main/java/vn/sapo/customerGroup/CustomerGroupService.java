@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface CustomerGroupService {
 
+    Page<ICustomerGroupResult> test(Pageable pageable);
+
 //    List<ICustomerGroupResult> findAllCustomerGroupResult();
 
     CustomerGroupResult create(CreateCusGroupParam createCusGroupParam);
