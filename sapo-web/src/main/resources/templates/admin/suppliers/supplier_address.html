@@ -570,6 +570,7 @@
 
   page.elements.btnSupplierDelete.on('click', ()=>{
     let idDelete = page.elements.idDeleteSupplier.val()
+    console.log("delete id ",idDelete)
     $.ajax({
       "headers": {
         "accept": "application/json",

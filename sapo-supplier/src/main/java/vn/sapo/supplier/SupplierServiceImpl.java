@@ -14,7 +14,6 @@ import vn.sapo.supplier.dto.CreateSupplierParam;
 import vn.sapo.supplier.dto.SupplierFilter;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.dto.UpdateSupplierParam;
-import vn.sapo.supplierGroup.SupplierGroupRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -83,6 +82,14 @@ public class SupplierServiceImpl implements SupplierService {
     @Transactional
     public void deleteById(Integer id) {
         supplierRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteByIdd(Integer id) {
+        supplierRepository.findById(id).ifPresent(supplier -> {
+            supplier.setStatus(SupplierStatus.UNAVAILABLE);
+        });
     }
 
 
