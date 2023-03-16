@@ -75,6 +75,7 @@ public class SupplierServiceImpl implements SupplierService {
             }
         }
         supplierMapper.transferFields(param, supplier);
+        supplier.setTags(param.getTags());
         return supplierMapper.toDTO(supplier);
     }
 

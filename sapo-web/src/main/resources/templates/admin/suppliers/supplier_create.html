@@ -5,6 +5,7 @@
 
     <th:block th:replace="/layout/header :: header"/>
     <title>Thêm mới nhà cung cấp</title>
+    <link rel="stylesheet" href="/assets/admin/css/bootstrap-tagsinput.css"/>
 
 </head>
 
@@ -221,13 +222,9 @@
                                            lọc="" nhà="" cung="" cấp="" ở="" trang="" danh="" sách="" dễ="" dàng=""
                                            hơn="" data-original-title="Chọn"></i>
                                     </div>
-                                    <div class="bootstrap-tagsinput">
-                                        <input onkeyup="suggestTags(this)"
-                                               type="text" placeholder=""
-                                               autocomplete="off">
-                                    </div>
 
-                                    <input class="sapo-textbox tags" style="display: none;">
+
+                                    <input class="sapo-textbox tags" id="input-tags-create" value="" data-role="tagsinput" style="display: none;">
                                     <div class="autocomplete-suggestions"
                                          style="position: relative; width: 250px; max-height: 300px; z-index: 9999; display: none;">
                                     </div>
@@ -274,8 +271,7 @@
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript"
         src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-
-
+<script src="/assets/admin/js/bootstrap-tagsinput.min.js"></script>
 </body>
 </html>
 <script>
@@ -403,7 +399,7 @@
 
             supplier.line1 = $('#addressCreate').val();
 
-            supplier.tags = supplierTags.length > 0 ? supplierTags : undefined;
+            supplier.tags =  $("#input-tags-create").tagsinput('items');
 
             // supplier.GroupSupplier = $('#changeValueSup :selected').val();
             page.elements.GroupSupplier = $("#ChangeValueSup");
