@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="/assets/admin/css/customer/customer.css"/>
     <link rel="stylesheet" href="/assets/admin/css/customer/filter.css"/>
 </head>
+<style>
+    .dataTables_wrapper{
+        overflow-x: scroll;
+    }
+</style>
 <body style="font-size: 12px">
 <div>
     <th:block th:replace="/layout/menu :: menu"/>
@@ -285,7 +290,7 @@
 </script>
 
 <script>
-    // var myOffcanvas = document.getElementById('offcanvasExample')
+    var myOffcanvas = document.getElementById('offcanvasExample')
     // var bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
 
     let page = {

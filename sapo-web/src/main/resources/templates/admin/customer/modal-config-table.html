@@ -23,6 +23,7 @@
         .label-dragging{
             background-color: rgb(241, 235, 235);
         }
+
     </style>
     <div class="modal fade" id="modal-config-table" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"  style="overflow-x: hidden">
@@ -61,7 +62,18 @@
             'group.title',
             'debtTotal',
             'spendTotal',
-            "quantityItemOrder"
+            "quantityItemOrder",
+            "email",
+            "group.cusGrpCode",
+            "birthday",
+            "gender",
+            "description",
+            "status",
+            "employee.fullName",
+            "quantityProductOrder",
+            "taxCode",
+            "fax",
+            "website"
         ];
         let column = [];
         let nameThead = {
@@ -71,7 +83,18 @@
             'group.title':"Nhóm khách hàng",
             'debtTotal':"Tổng công nợ",
             'spendTotal': "Tổng chi tiêu",
-            'quantityItemOrder': "Tổng SL đơn hàng"
+            'quantityItemOrder': "Tổng SL đơn hàng",
+            "email": "Email",
+            "group.cusGrpCode": "Mã nhóm khách hàng",
+            "birthday": "Ngày sinh",
+            "gender": "Giới tính",
+            "description": "Mô tả",
+            "status":"Trạng thái",
+            "employee.fullName": "Nhân viên giao dịch",
+            "quantityProductOrder":"SL đơn hàng",
+            "taxCode": "Tax",
+            "fax": "Fax",
+            "website": "Website"
         }
         if(localStorage.getItem("config-dataTable")===null){
             localStorage.setItem("config-dataTable", JSON.stringify(column));
@@ -82,8 +105,12 @@
             }
         }
         let checkedCheckbox = {};
+        let j=1;
         for(item of thead){
-            checkedCheckbox[item] = true;
+            if(j >= 1 && j <= 7){
+                checkedCheckbox[item] = true;
+            }
+            j++;
         }
         // sử dụng để thay đổi check box, được inline ở input checkbox ở hàm addCheckboxInLabelColumn(index)
         function changeCheckbox(e){
@@ -96,13 +123,14 @@
         }
          //tạo các list để drag và drop trong modal
         function createElement(){
-            $(theadElement).html("")
+            $(theadElement).html("");
             thead.map((item, index)=>{
                 let headLabel = `
                 <div class="label-column" id="${thead[index]}" data-item-sortable-id="0" draggable="true" role="option" aria-grabbed="false" style="">
                     ${addCheckboxInLabelColumn(thead[index])} ${nameThead[thead[index]]}
                 </div>`;
                 $(theadElement).append(headLabel);
+                if(index >= 0 && index < 7)
                 $('.checkbox-change-column').prop('checked', true);
             })
         };
@@ -445,7 +473,6 @@
         
     }
         function reset(){
-                thead = [];
                 thead = [
                 'customerCode',
                 'fullName',
@@ -453,12 +480,27 @@
                 'group.title',
                 'debtTotal',
                 'spendTotal',
-                "quantityItemOrder"
+                "quantityItemOrder",
+                "email",
+                "group.cusGrpCode",
+                "birthday",
+                "gender",
+                "description",
+                "status",
+                "employee.fullName",
+                "quantityProductOrder",
+                "taxCode",
+                "fax",
+                "website"
                 ];
                 createElement();
+                j=1;
                 for(item of thead){
-                    checkedCheckbox[item] = true;
+                    if(j >= 1 && j <= 7){
+                        checkedCheckbox[item] = true;
+                    }
+                    j++;
                 }
-        }   
+        } 
       </script>
 </th:block>
