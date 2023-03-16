@@ -258,29 +258,14 @@
             processing: true,
             serverSide: true,
             ajax: {
-                // url: origin + "/api/customer_groups/filter",
-                // type: 'POST',
-                url: origin + "/api/customer_groups/test-table",
-                type: 'GET',
-                dataSrc: (response) => {
-                    console.log(response.data)
+                type: 'POST',
+                url: origin + "/api/customer_groups/test-datatable",
+                accept: 'application/json',
+                contentType: 'application/json',
+                'data': function(d) {
+                    console.log(d)
+                    return JSON.stringify(d);
                 }
-                // accept: 'application/json',
-                // contentType: 'application/json',
-                // data: JSON.stringify(CustomerGroupDataTable),
-                // data: (d) => {
-                // d.draw = customerGroupFilter.draw;
-                // d.start =
-
-                // d.title = customerGroupFilter.title;
-                // d.cusGrpCode = customerGroupFilter.cusGrpCode;
-                // d.customerGroupType = customerGroupFilter.customerGroupType;
-                // d.description = customerGroupFilter.description;
-                // d.countCus = customerGroupFilter.countCus;
-                // d.createdAt = customerGroupFilter.createdAt;
-                //     console.log(d);
-                //     return JSON.stringify(d);
-                // }
             },
             language: CustomerApp.dataTableDetails.language,
             lengthMenu: [
