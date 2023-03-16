@@ -67,12 +67,12 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
     @Transactional
     public SupplierGroupResult create(CreateSupGroupParam createParam) {
         validationByTitle(createParam.getTitle());
-        validationBySupGroupCode(createParam.getSupGroupCode());
+        if (createParam.getSupGroupCode() != null)
+            validationBySupGroupCode(createParam.getSupGroupCode());
 
         SupplierGroup supplierGroup = supplierGroupMapper.toModel(createParam);
         supplierGroupRepository.save(supplierGroup);
-        if (createParam.getSupGroupCode() == null)
-            supplierGroup.setSupGroupCode(CodePrefix.SUPPLIER_GROUP.generate(supplierGroup.getId()));
+        supplierGroup.setSupGroupCode(CodePrefix.SUPPLIER_GROUP.generate(supplierGroup.getId()));
 
         return supplierGroupMapper.toDTO(supplierGroup);
     }

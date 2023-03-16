@@ -125,8 +125,6 @@ public class SupplierExcelExporter {
             }
             if (supplier.getAddresses().size() == 0) {
                 createCell(row, columnCount++, "", style);
-                createCell(row, columnCount++, "", style);
-                createCell(row, columnCount++, "", style);
 
             } else {
                 for (AddressResult adr : supplier.getAddresses()) {

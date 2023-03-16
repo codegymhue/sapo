@@ -72,7 +72,7 @@ public class CustomerExcelExporter {
         listColumn.put("taxCode", "Tax");
         listColumn.put("description", "Description");
         listColumn.put("policy", "Chính sách giá mặc định");
-        listColumn.put("discount", "Chính sách giá mặc định");
+        listColumn.put("discount", "Chiết khấu mặc đinh (%)");
         listColumn.put("paymentMethod", "Phương thức thanh toán mặc định");
         listColumn.put("debtTotal", "Nợ hiện tại");
         listColumn.put("spendTotal", "Tổng chi tiêu");

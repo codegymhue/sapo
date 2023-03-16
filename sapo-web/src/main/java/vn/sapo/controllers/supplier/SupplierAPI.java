@@ -98,6 +98,11 @@ public class SupplierAPI {
     @PostMapping("/upload")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
         List<ImportExcelSupplierParam> dtoList = supplierExcelService.extractExcel(file);
+        for(ImportExcelSupplierParam importExcelSupplierParam: dtoList){
+            if(importExcelSupplierParam.getSupGroupCode()==null || importExcelSupplierParam.getSupGroupCode().isEmpty()){
+                importExcelSupplierParam.setSupGroupCode("MACDINH");
+            }
+        }
         supplierExcelService.fillFieldDto(dtoList);
         supplierExcelService.importSupplier(dtoList);
         String message = "Uploaded the file successfully: " + file.getOriginalFilename();
