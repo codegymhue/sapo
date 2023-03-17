@@ -122,7 +122,8 @@ public class CustomerAPI extends BaseController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UpdateCustomerParam updateCustomer) {
-        return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.OK);
+
+       return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.OK);
     }
 
     @PutMapping("/updateStatusAvailable")
