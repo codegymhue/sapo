@@ -83,8 +83,11 @@
         .toolbar {
             float: left;
         }
+        .inputDate{
+            cursor: pointer;
+        }
     </style>
-    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
+
     <link rel="stylesheet" href="/assets/admin/css/customer/filter.css"/>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample"
          aria-labelledby="offcanvasExampleLabel">
@@ -160,7 +163,6 @@
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
-                           checked
                            value="NU">
                     <label class="form-check-label" for="flexRadioDefault2">
                         Nữ
@@ -168,7 +170,6 @@
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3"
-                           checked
                            value="KHAC">
                     <label class="form-check-label" for="flexRadioDefault2">
                         Khác
@@ -188,8 +189,8 @@
                                                                 align-items: center; ">
                         <span id="allDay"> chọn ngày </span>
                     </div>
-                    <ul class="dropdown-menu w-50 table table-hover">
-                        <li onclick=handleClickDay(1)>1</li>
+                    <ul class="dropdown-menu w-50 table table-hover" id="dayofBirth">
+                        <!-- <li onclick=handleClickDay(1)>1</li>
                         <li onclick=handleClickDay(2)>2</li>
                         <li onclick=handleClickDay(3)>3</li>
                         <li onclick=handleClickDay(4)>4</li>
@@ -219,7 +220,7 @@
                         <li onclick=handleClickDay(28)>28</li>
                         <li onclick=handleClickDay(29)>29</li>
                         <li onclick=handleClickDay(30)>30</li>
-                        <li onclick=handleClickDay(31)>31</li>
+                        <li onclick=handleClickDay(31)>31</li> -->
                     </ul>
                     <div class="btn bg-secondary dropdown-toggle select-btn-cat col-6"
                          type="button" data-bs-toggle="dropdown"
@@ -229,8 +230,8 @@
                                                                 align-items: center; ">
                         <span id="allYear">Chọn Tháng</span>
                     </div>
-                    <ul class="dropdown-menu w-50 table table-hover Year">
-                        <li onclick=handleClickYear(1)>1</li>
+                    <ul class="dropdown-menu w-50 table table-hover Year" id="yearOfBirth">
+                        <!-- <li onclick=handleClickYear(1)>1</li>
                         <li onclick=handleClickYear(2)>2</li>
                         <li onclick=handleClickYear(3)>3</li>
                         <li onclick=handleClickYear(4)>4</li>
@@ -241,7 +242,7 @@
                         <li onclick=handleClickYear(9)>9</li>
                         <li onclick=handleClickYear(10)>10</li>
                         <li onclick=handleClickYear(11)>11</li>
-                        <li onclick=handleClickYear(12)>12</li>
+                        <li onclick=handleClickYear(12)>12</li> -->
                     </ul>
                 </div>
             </div>
@@ -281,17 +282,17 @@
                     <button class="dropdown-btn" style="font-size: 1rem;">. Trạng Thái
                         <i class="fa fa-caret-down"></i>
                     </button>
-                    <div class="dropdown-container">
+                    <div class="dropdown-container" id="statusContact">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="Status"
-                                   value="Đang Giao Dịch">
+                                   value="AVAILABLE">
                             <label class="form-check-label" for="flexRadioDefault1">
                                 Đang Giao Dịch
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="Status" checked
-                                   value="Ngừng Giao Dịch">
+                            <input class="form-check-input" type="checkbox" name="Status"
+                                   value="UNAVAILABLE">
                             <label class="form-check-label" for="flexRadioDefault2">
                                 Ngừng Giao Dịch
                             </label>
@@ -309,14 +310,10 @@
                     <div class="dropdown-container">
                         <div class="row">
                             <div class="col-6">
-                                <input id="datepicker" width="170" placeholder="dd/mm/yyyy"/>
-                                <p><a href="https://gijgo.com/datepicker/example/bootstrap-5">
-                                </a>
+                                <input id="createDayBegin" class="form-control inputDate" width="170" type="date" placeholder="dd-mm-yyyy"/>
                             </div>
                             <div class="col-6">
-                                <input id="datepicker2" width="170" placeholder="dd/mm/yyyy"/>
-                                <p><a href="https://gijgo.com/datepicker/example/bootstrap-5">
-                                </a>
+                                <input id="createDayEnd" class="form-control inputDate" width="170" type="date" placeholder="dd-mm-yyyy"/>
                             </div>
                         </div>
                     </div>
@@ -326,14 +323,10 @@
                     <div class="dropdown-container">
                         <div class="row">
                             <div class="col-6">
-                                <input id="datepicker3" width="170" placeholder="dd/mm/yyyy"/>
-                                <p><a href="https://gijgo.com/datepicker/example/bootstrap-5">
-                                </a>
+                                <input id="birthDayBegin" class="form-control inputDate" width="170" type="date" placeholder="dd/mm/yyyy"/>
                             </div>
                             <div class="col-6">
-                                <input id="datepicker4" width="170" placeholder="dd/mm/yyyy"/>
-                                <p><a href="https://gijgo.com/datepicker/example/bootstrap-5">
-                                </a>
+                                <input id="birthDayEnd" class="form-control inputDate" width="170" type="date" placeholder="dd/mm/yyyy"/>
                             </div>
                         </div>
                     </div>
@@ -343,9 +336,7 @@
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                <input id="datepicker5" width="370"/>
-                <p><a href="https://gijgo.com/datepicker/example/bootstrap-5">
-                </a>
+                <input id="birthDayFilter" class="form-control inputDate" width="170" type="date" placeholder="dd/mm/yyyy"/>
             </div>
         </div>
         <div class="d-flex flex-row-reverse my-3" style="width: 95%">
@@ -360,10 +351,20 @@
         </div>
 
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
     <script>
-
+        // load tat ca cac ngay trong thang
+        (function(){
+            let ulDayofBirth = $("#dayofBirth");
+            for(let i=1; i<=31; i++){
+                let li = `<li onclick=getDayOfBirth(${i})>${i}</li>`;
+                ulDayofBirth.append(li)
+            }
+            let ulYearOfBirth = $("#yearOfBirth");
+            for(let i=1; i<=12; i++){
+                let li = `<li onclick=getYearOfBirth(${i})>${i}</li>`;
+                ulYearOfBirth.append(li);
+            }
+        })();
         var dropdown = document.getElementsByClassName("dropdown-btn");
         var i;
 
@@ -378,7 +379,6 @@
                 }
             });
         }
-
 
         function drawDataTable() {
             $("#tbCustomer").DataTable({
@@ -429,20 +429,102 @@
              ],
             })
         }
+        let customerFilter = {};
+        //lay cac check box group da dc check
+        function getGroupIdsChecked(){
+            let groupIds = [];
+            let checkboxGroupIds = $("#customerGroupFilter input")
+            for(let i=0; i<checkboxGroupIds.length; i++){
+                if($(checkboxGroupIds[i]).is(":checked")){
+                    let id = $(checkboxGroupIds[i]).data("id");
+                    groupIds.push(id);
+                }
+            }
+            return groupIds;
+        }
+        function getGender(){
+            let genders = $("input[name='flexRadioDefault']");
+            for(let i=0; i<genders.length; i++){
+                if($(genders[i]).is(":checked")){
+                    return $(genders[i]).val()
+                }
+            }
+            return null;
+        }
+        function getDayOfBirth(i){
+            $("#allDay").text(i);
+        }
+        function getYearOfBirth(i){
+            $("#allYear").text(i);
+        }
+        function getEmployeeIds(){
+            let result = [];
+            let employees = $("#employeeNameFilter input");
+            for(let i=0; i<employees.length; i++){
+                if($(employees[i]).is(":checked")){
+                    result.push($(employees[i]).data("id"));
+                }
+            }
+            return result;
+        }
+        function getStatus(){
+            let statusList = []
+            let status = $("#statusContact input");
+            for(let i=0; i<status.length; i++){
+                if($(status[i]).is(":checked")){
+                    statusList.push($(status[i]).val());
+                }
+            }
+            return statusList;
+        }
+        function getKeyWord(){
+            return $("#inp-search").val().trim();
+        }
+        function getCreatedFrom(){
+            return $("#createDayBegin").val();
+        }
+        function getCreatedTo(){
+            return $("#createDayEnd").val();
+        }
+        function getBirthDayFrom(){
+            let birthDayFrom = $("#birthDayBegin").val();
+            return birthDayFrom===""?null:birthDayFrom;
+        }
+        function getBirthDayEnd(){
+            let birthDayEnd = $("#birthDayEnd").val();
+            return birthDayEnd===""?null:birthDayEnd;
+        }
+        function getBirthDay(){
+            let birthDay = $("#birthDayFilter").val();
+            return birthDay===""?null:birthDay;
+        }
         // nút lọc
         $("#btnFilter").on('click', () => {
-            // drawFilterLabel();
             // drawDataTable();
+            // bsOffcanvas.hide()
+            customerFilter = {
+                groupIds: getGroupIdsChecked(),
+                gender: getGender(),
+                dayOfBirth: isNaN(Number($("#allDay").text()))?null:Number($("#allDay").text()),
+                monthOfBirthday: isNaN(Number($("#allYear").text()))?null:Number($("#allYear").text()),
+                employeeIds: getEmployeeIds(),
+                statusList: getStatus(),
+                createdFrom: getCreatedFrom()?getCreatedFrom():null,
+                createdTo: getCreatedTo()?getCreatedTo():null,
+                birthDayFrom: getBirthDayFrom(),
+                birthDayTo:getBirthDayEnd(),
+                birthDay: getBirthDay(),
+                keyword: getKeyWord()
+            }
             // changeColumn nam o modal-config-table.html
             changeColumn();
-            bsOffcanvas.hide()
-
+            console.log(customerFilter);
             checkCustomerFilterChange = {
                 ...customerFilter
             }
             let checkCustomerFilterRoot = {
-                id: null,
-                customerCode: null,
+                // id: null,
+                // customerCode: null,
                 groupIds: [],
                 gender: null,
                 dayOfBirthday: null,
@@ -466,7 +548,6 @@
                 console.log("Có thay đổi");
             }
         });
-
         // nút xóa bộ lọc
         $("#btnCloseFilter").on('click', () => {
             $("#offcanvasExample input[type=checkbox]").each((index, item) => {
@@ -666,27 +747,25 @@
                 this.keyword = null;
             }
         }
-
-        let customerFilter;
         let KEY_CUSTOMER_FILTER_SAVE = "customer_filter";
         let checkCustomerFilterChange;
 
-        // lịch
-        $('#datepicker').datepicker({
-            uiLibrary: 'bootstrap5'
-        });
-        $('#datepicker2').datepicker({
-            uiLibrary: 'bootstrap5'
-        });
-        $('#datepicker3').datepicker({
-            uiLibrary: 'bootstrap5'
-        });
-        $('#datepicker4').datepicker({
-            uiLibrary: 'bootstrap5'
-        });
-        $('#datepicker5').datepicker({
-            uiLibrary: 'bootstrap5'
-        });
+        // // lịch
+        // $('#datepicker').datepicker({
+        //     uiLibrary: 'bootstrap5'
+        // });
+        // $('#datepicker2').datepicker({
+        //     uiLibrary: 'bootstrap5'
+        // });
+        // $('#datepicker3').datepicker({
+        //     uiLibrary: 'bootstrap5'
+        // });
+        // $('#datepicker4').datepicker({
+        //     uiLibrary: 'bootstrap5'
+        // });
+        // $('#datepicker5').datepicker({
+        //     uiLibrary: 'bootstrap5'
+        // });
 
         getAllCustomerGroup();
         getAllCustomerGender();
@@ -771,17 +850,13 @@
         // ngày sinh nhật
         function handleClickDay(day) {
             customerFilter.dayOfBirthday = day;
-
             $("#allDay").text(day)
         }
 
         // tháng sinh nhật
         function handleClickYear(month) {
             customerFilter.monthOfBirthday = month;
-
             $("#allYear").text(month)
-
-
         }
     </script>
 

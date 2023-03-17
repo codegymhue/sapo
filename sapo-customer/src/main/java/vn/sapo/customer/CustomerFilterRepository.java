@@ -92,6 +92,19 @@ public interface CustomerFilterRepository extends JpaRepository<Customer, Intege
             }
             predicates.add(createdAtPredicate);
 
+            Date birthDayFrom = filter.getBirthDayFrom();
+            Date birthDayTo = filter.getBirthDayTo();
+
+            if(birthDayFrom != null && birthDayTo != null){
+                Predicate predicate = criteriaBuilder.between(root.get("birthDay"), birthDayFrom, birthDayTo);
+                predicates.add(predicate);
+            }
+            Date birthDay = filter.getBirthDay();
+            if(birthDay != null){
+                Predicate predicate = criteriaBuilder.equal(root.get("birthDay"), birthDay);
+                predicates.add(predicate);
+            }
+
             return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
         }, pageable);
 

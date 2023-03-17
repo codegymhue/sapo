@@ -38,7 +38,7 @@
               </button>
             </div>
             <div class="modal-body change-column" id="sortable">
-               
+                
             </div>
             <div class="modal-footer">
                 <button type="button" id="btn-submit-config-table" class="btn btn-outline-primary" onclick="reset()">Quay về ban đầu</button>
@@ -83,7 +83,7 @@
             'group.title':"Nhóm khách hàng",
             'debtTotal':"Tổng công nợ",
             'spendTotal': "Tổng chi tiêu",
-            'quantityItemOrder': "Tổng SL đơn hàng",
+            'quantityItemOrder': "Tổng SL sản phẩm đã mua",
             "email": "Email",
             "group.cusGrpCode": "Mã nhóm khách hàng",
             "birthday": "Ngày sinh",
@@ -137,6 +137,7 @@
         createElement();
         //changeColumn() thực hiện khi click save ở modal để chuyển cột
         function changeColumn(){
+            
         let listLabelColumn = document.querySelectorAll(".label-column");
         thead = [];
         for(let i=0; i<listLabelColumn.length; i++){
@@ -144,7 +145,8 @@
                 thead.push(listLabelColumn[i].id);
             }
         }
-        column = [{data: "id"}];
+        
+        column = [{data: "id"}, {data: "id"}];
         for(let i=0; i<thead.length; i++){
             let data = {data: thead[i]}
             column.push(data);
@@ -160,9 +162,11 @@
                 `<table id="tbCustomer" class="table table-hover" style="width: 100%;">
                         <thead style="background-color: #f4f6f8; height: 55px">
                         <tr>
-                            <th class="align-middle" style="width:30px">
-                                <i class="fa-solid fa-gear" style="float: left;" data-toggle="modal" data-target="#modal-config-table"></i>
-                                <label for="checkAll" style="cursor:pointer; float: right;">
+                            <th class="align-middle" style="width:0,5%">
+                                <i class="fa-solid fa-gear" data-toggle="modal" data-target="#modal-config-table"></i>
+                            </th>
+                            <th>
+                                <label for="checkAll" style="cursor:pointer width="1%">
                                     ${thead.length > 0 ? elementCheckBoxAll:""}
                                 </label>
                             </th>
@@ -431,10 +435,20 @@
                     d.monthOfBirthday = customerFilter.monthOfBirthday;
                     d.employeeIds = customerFilter.employeeIds;
                     d.keyword = customerFilter.keyword;
-                    d.statusList = [];
+                    d.statusList = customerFilter.statusList;
+                    d.createdTo = customerFilter.createTo;
+                    d.createdFrom = customerFilter.createdFrom;
+                    d.birthDayFrom = customerFilter.birthDayFrom;
+                    d.birthDayTo = customerFilter.birthDayTo;
+                    d.birthDay = customerFilter.birthDay;
+                    d.keyword= customerFilter.keyword;
+                    console.log(d);
                     return JSON.stringify(d)
                 }
             },
+            "columnDefs": [
+                { "width": "20%", "targets": 0 }
+            ],
             lengthMenu: [
                 [10, 30, 50,1000000000],
                 ["10", "30", "50", "All"]
@@ -442,23 +456,37 @@
             searching: false,
             destroy: true,
             columns: column,
-             columnDefs: [
-             {
-                            targets: 0,
-                            "orderable": false,
-                            render: function (data, type, row, meta) {
-                                return `<input id="${row.id}" type="checkbox" value="check_none" style="${thead.length > 0 ? 'float: right':'opacity:0'}"/>`;
-                            }
-                        },
-             {
-                            targets: thead.indexOf("customerCode")+1,
-                            render: function (data, type, row, meta) {
-                                return `<a href="/admin/customers/${row.id}" style="text-decoration: none">${row.customerCode}</a>`;
-                            }
-                        },
+            columnDefs: [
+            {
+                targets: 0,
+                "orderable": false,
+                render: function (data, type, row, meta) {
+                    return ""
+                }
+            },
+            {
+                targets: 1,
+                "orderable": false,
+                render: function (data, type, row, meta) {
+                    return `
+                    <input id=${row.id} type="checkbox" value="check_none"/>
+                `
+                }
+            },
+            {
+                    targets: thead.indexOf("status")+1,
+                    render: function (data, type, row, meta) {
+                        return `<td><span style="${row.status==="AVAILABLE"?"color:green":"color:red"}">${row.status==="AVAILABLE"?"Đang giao dịch":row.status==="UNAVAILABLE"?"Ngừng giao dịch":""}</span></td>`;
+                    }
+            },
+            {
+                    targets: thead.indexOf("birthday")+1,
+                    render: function (data, type, row, meta) {
+                        return `<td>${row.birthday.split("T")[0].split("-").reverse().join("-")}</td>`;
+                    }
+            },
 
-
-             ],
+            ],
         });
         let theadFirst = $("#tbCustomer thead tr th");
         let removeSorting = setInterval(()=>{
@@ -498,7 +526,9 @@
                 for(item of thead){
                     if(j >= 1 && j <= 7){
                         checkedCheckbox[item] = true;
-                    }
+                    }else{
+                        checkedCheckbox[item] = false;
+                    }   
                     j++;
                 }
         } 
