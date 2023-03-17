@@ -2,27 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="vi-VN" class="sapo-menu-expand sapo-menu-toggle-active">
 <head>
     <title>Danh sách khách hàng</title>
+
     <th:block th:replace="/layout/header"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/admin/css/customer/customer.css"/>
     <link rel="stylesheet" href="/assets/admin/css/customer/filter.css"/>
 </head>
-<style>
-    .dataTables_wrapper{
-        overflow-x: scroll;
-    }
-</style>
-<body style="font-size: 12px">
+<body>
 <div>
-    <th:block th:replace="/layout/menu :: menu"/>
-    <th:block th:replace="/admin/customer/modal_importFile.html" />
+    <th:block th:replace="/layout/menu"/>
+    <th:block th:replace="/admin/customer/modal_importFile"/>
     <!--    <th:block th:replace="/layout/modalImportFile :: #modalImportFile"/>-->
-    <div class="col-right  MuiBox-root jss64 jss40">
-        <div class="MuiBox-root jss6915 jss440 "
-             id="header">
-            <h3 class="MuiTypography-root MuiTypography-h3">Danh sách khách hàng</h3>
-            <div class="MuiBox-root jss6916 jss441">
-                <div class="MuiBox-root jss6917 jss442">
+    <div class="col-right jss64 jss40">
+        <div class="jss6915 jss440" id="header">
+            <h3 class="MuiTypography-root MuiTypography-h3">
+                Khách hàng
+            </h3>
+            <div class="jss441">
+                <div class="jss442">
                     <svg class="MuiSvgIcon-root jss443"
                          focusable="false"
                          viewBox="0 0 24 24"
@@ -31,10 +29,11 @@
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z">
                         </path>
                     </svg>
-                    <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">Vay vốn kinh
-                        doanh</p>
+                    <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">
+                        Vay vốn kinh doanh
+                    </p>
                 </div>
-                <div class="MuiBox-root jss6932 jss442">
+                <div class="jss442">
                     <svg class="MuiSvgIcon-root jss443"
                          focusable="false"
                          viewBox="0 0 20 20"
@@ -46,9 +45,11 @@
                               fill="currentColor">
                         </path>
                     </svg>
-                    <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">Trợ giúp</p>
+                    <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">
+                        Trợ giúp
+                    </p>
                 </div>
-                <div class="MuiBox-root jss6933 jss442">
+                <div class="jss442">
                     <svg class="MuiSvgIcon-root jss443"
                          focusable="false"
                          viewBox="0 0 16 14"
@@ -58,24 +59,24 @@
                               fill="currentColor">
                         </path>
                     </svg>
-                    <p class="MuiTypography-root MuiTypography-body1"
-                       style="color: rgb(24, 37, 55);">Góp ý</p>
+                    <p class="MuiTypography-root MuiTypography-body1">
+                        Góp ý
+                    </p>
                 </div>
-                <div class="MuiBox-root jss6934  jss442 jss446">
-                    <div class=" sb-avatar sb-avatar--text"
-                         style="display: inline-block; vertical-align: middle; width: 30px; height: 30px; border-radius: 20px; font-family: Helvetica, Arial, sans-serif;">
-                        <div class=" sb-avatar__text"
-                             title="SKT"
-                             style="width: 30px; height: 30px; line-height: initial; text-align: center; color: rgb(255, 255, 255); border-radius: 20px; background: rgb(215, 61, 50);">
-                            <div style="display: table; table-layout: fixed; width: 100%; height: 100%; font-size: 10px;">
-                                <span style="display: table-cell; vertical-align: middle; white-space: nowrap;">
+                <div class="jss442">
+                    <div class="sb-avatar jss24477">
+                        <div title="SKT" class="jss24478">
+                            <div class="jss24479">
+                                <span class="jss24480">
                                     <span>S</span>
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <p class="MuiTypography-root jss445 MuiTypography-body1 MuiTypography-colorTextPrimary">SKT</p>
-                    <svg class="MuiSvgIcon-root arrow-avatar"
+                    <p class="MuiTypography-root jss445 MuiTypography-body1 MuiTypography-colorTextPrimary">
+                        SKT
+                    </p>
+                    <svg class="MuiSvgIcon-root"
                          focusable="false"
                          viewBox="0 0 24 24"
                          aria-hidden="true">
@@ -84,1658 +85,631 @@
                 </div>
             </div>
         </div>
-        <div class="MuiBox-root jss6754 jss6732">
-            <div class="MuiBox-root jss6755 jss6733">
-                <div class="MuiBox-root jss6756 jss6741">
-                    <!-- <a th:href="@{/admin/customers/export/excel}" style="text-decoration: none; color: rgba(0,0,0,0.89)"> -->
-                    <button class="MuiButtonBase-root MuiButton-rloot MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
-                            tabindex="0"
-                            type="button"
+        <div class="jss6732">
+            <div class="jss6733">
+                <div class="jss6741">
+                    <button class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall"
+                            tabindex="0" type="button"
                             data-toggle="modal" data-target="#modal-export-file">
-                      <span class="MuiButton-label" style="font-weight: 500">
-                        <span class="MuiButton-startIcon MuiButton-iconSizeSmall">
-                          <svg class="MuiSvgIcon-root jss6758"
-                               focusable="false"
-                               viewBox="0 0 14 20"
-                               aria-hidden="true">
-                              <path d="M6 8.74228e-08L6 12.17L2.41 8.59L1 10L7 16L13 10L11.59 8.59L8 12.17L8 0L6 8.74228e-08Z"
-                                    fill="currentColor">
-                              </path>
-                              <path d="M0 18H14V20H0V18Z"
-                                    fill="currentColor">
-                              </path>
-                            </svg>
-                        </span>Xuất file
-                      </span>
-                        <span class="MuiTouchRipple-root">
-                      </span>
-                    </button>
-                    </a>
-                    <div class="MuiBox-root jss6793"
-                         style="width: 1px; height: 20px; border-left: 1px solid rgb(211, 213, 215); margin: 0 8px;">
-                    </div>
-                    <button id="importFileCustomers"
-                            class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall MuiButton-sizeSmall"
-                            tabindex="0"
-                            type="button">
                       <span class="MuiButton-label">
                         <span class="MuiButton-startIcon MuiButton-iconSizeSmall">
                           <svg class="MuiSvgIcon-root jss6758"
-                               focusable="false"
-                               viewBox="0 0 14 20"
-                               aria-hidden="true">
+                               focusable="false" viewBox="0 0 14 20" aria-hidden="true">
+                              <path d="M6 8.74228e-08L6 12.17L2.41 8.59L1 10L7 16L13 10L11.59 8.59L8 12.17L8 0L6 8.74228e-08Z"
+                                    fill="currentColor">
+                              </path>
+                              <path d="M0 18H14V20H0V18Z" fill="currentColor">
+                              </path>
+                            </svg>
+                        </span>
+                          Xuất file
+                      </span>
+                        <span class="MuiTouchRipple-root"></span>
+                    </button>
+                    <div class="jss6793"></div>
+                    <button id="importFileCustomers"
+                            class="MuiButtonBase-root MuiButton-root MuiButton-text jss6759 MuiButton-textSizeSmall"
+                            tabindex="0" type="button">
+                      <span class="MuiButton-label">
+                        <span class="MuiButton-startIcon MuiButton-iconSizeSmall">
+                          <svg class="MuiSvgIcon-root jss6758" focusable="false"
+                               viewBox="0 0 14 20" aria-hidden="true">
                             <path d="M8.00003 16L8.00003 3.83001L11.59 7.41001L13 6.00001L7.00003 1.29539e-06L1.00002 6.00001L2.41002 7.41001L6.00002 3.83001L6.00002 9.91501L6.00002 16L8.00003 16Z"
                                   fill="currentColor">
                             </path>
-                            <path d="M14 20L1.90735e-06 20L2.08219e-06 18L14 18L14 20Z"
-                                  fill="currentColor">
+                            <path d="M14 20L1.90735e-06 20L2.08219e-06 18L14 18L14 20Z" fill="currentColor">
                             </path>
                           </svg>
-                        </span>Nhập file
+                        </span>
+                          Nhập file
                       </span>
-                        <span class="MuiTouchRipple-root">
-                      </span>
+                        <span class="MuiTouchRipple-root"></span>
                     </button>
-                    <div class="MuiBox-root jss6793"
-                         style="width: 1px; height: 20px; border-left: 1px solid rgb(211, 213, 215); margin: 0 8px;">
-                    </div>
+                    <div class="jss6793"></div>
                 </div>
-                <div class="MuiBox-root jss6799 jss6741">
-                    <div class="sc-kDDrLX cKOfva">
+                <div class="jss6741">
+                    <div class="cKOfva">
                         <a id="Sapo-Button-4967a07b-9f63-4c0e-bfd9-3ad94f06186c"
-                           class="sc-jqUVSM fEHNKi"
-                           href="/admin/customers/create"
-                           style="color: white; text-decoration: none">
-                            <svg class="MuiSvgIcon-root"
-                                 focusable="false"
-                                 viewBox="0 0 24 24"
-                                 aria-hidden="true">
-                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" ></path>
+                           class="fEHNKi" href="/admin/customers/create">
+                            <svg class="MuiSvgIcon-root" focusable="false"
+                                 viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
                             </svg>
                             Thêm khách hàng
                         </a>
-                        <button id="btn-create-product"
-                                class="sc-jqUVSM dfbErd">
-                            <span class="sc-papXJ jcEYKF">
-                                <svg class="MuiSvgIcon-root"
-                                     focusable="false"
-                                     viewBox="0 0 24 24"
-                                     aria-hidden="true">
-                                    <path d="M7 10l5 5 5-5z"></path>
-                                </svg>
-                            </span>
-                        </button>
                     </div>
                 </div>
             </div>
-            <div class="MuiBox-root jss6800 jss6734">
-                <div class="MuiBox-root jss6801 jss6735">
-                    <div class="sc-hZFzCs cTUhMx">
+            <div class="jss6734">
+                <div class="jss6735">
+                    <div class="cTUhMx">
                         <div id="scroller"
-                             class="sc-cHPgQl hYUFnd">
-                            <div class="sc-gHLcSH ieIWRo">
-                                <button class="sc-KfMfS dvtKJo"> <a href="/admin/customers" style="text-decoration: none">Tất cả khách hàng</a>
+                             class="hYUFnd">
+                            <div class="ieIWRo">
+                                <button class="dvtKJo">
+                                    <a href="/admin/customers" class="ffDJGnc">
+                                        Tất cả khách hàng
+                                    </a>
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div class="MuiBox-root jss6802 jss6736" style="display:flex">
-                        <div class="sc-hjriPb elNOYP">
-                            <div class="sc-himrzO gTRFtW sc-gUAEMC dYvjic">
-                                <div class="sc-jIZahH hISLMV Sapo-InputRoot input-group">
-                                    <div class="sc-gicCDI sc-ezWOiH bqqjdk kZUaKd">
-                                        <svg viewBox="0 0 24 24"
-                                             fill="none"
+                    <div class="jss6736">
+                        <div class="elNOYP">
+                            <div class="gTRFtW">
+                                <div class="hISLMV input-group">
+                                    <div class="bqqjdk kZUaKd">
+                                        <svg viewBox="0 0 24 24" fill="none"
                                              xmlns="http://www.w3.org/2000/svg"
                                              class="sc-hsOonA echsof">
-                                            <path fill-rule="evenodd"
-                                                  clip-rule="evenodd"
-                                                  d="M14.891 13.477a6.002 6.002 0 0 0-9.134-7.72 6 6 0 0 0 7.72 9.134l5.715 5.716 1.415-1.415-5.716-5.715Zm-2.063-6.305a4 4 0 1 1-5.656 5.656 4 4 0 0 1 5.657-5.656Z"
-                                                  fill="currentColor">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"
+                                                  d="M14.891 13.477a6.002 6.002 0 0 0-9.134-7.72 6 6 0 0 0 7.72 9.134l5.715 5.716 1.415-1.415-5.716-5.715Zm-2.063-6.305a4 4 0 1 1-5.656 5.656 4 4 0 0 1 5.657-5.656Z">
                                             </path>
                                         </svg>
                                     </div>
-                                    <label style="width: 100%">
-                                        <input id="inp-search"
-                                               placeholder="Tìm kiếm theo Mã Khách Hàng, Tên, SDT Khách Hàng"
-                                               type="text"
-                                               class="sc-ikZpkk iYDwCJ form-control searchTitle "
-                                               value="">
+                                    <label class="gTRFtW">
+                                        <input id="inp-search" type="text" class="iYDwCJ form-control"
+                                               placeholder="Tìm kiếm theo mã khách hàng, tên, SĐT khách hàng">
                                     </label>
-                                    <fieldset class="sc-iIPllB iUBRZb"></fieldset>
+                                    <fieldset class="iUBRZb"></fieldset>
                                 </div>
                             </div>
                         </div>
-                        <div role="group"
-                             class="MuiButtonGroup-root jss6803">
-                            <button type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" id="Sapo-Button-36500209-3250-443b-accc-5a44188f93d4" class="sc-jqUVSM jDWLfh "><span
-
-                                    class="sc-papXJ ffDJGn"><p class="MuiTypography-root MuiTypography-body1 " style="margin-top: 10px;">Bộ lọc</p></span>
-
-
-                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20"
-                                     height="20"  style="font-size: 20px; color: rgb(163, 168, 175);">
-
+                        <div role="group" class="MuiButtonGroup-root jss6803">
+                            <button type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+                                    aria-controls="offcanvasExample"
+                                    id="Sapo-Button-36500209-3250-443b-accc-5a44188f93d4"
+                                    class="jDWLfh">
+                                <span class="ffDJGn">
+                                    <p class="MuiTypography-root MuiTypography-body1">
+                                        Bộ lọc
+                                    </p>
+                                </span>
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="ffDJGnn">
                                     <path d="M20.052 3.667H4.5v1.296h15.552V3.667ZM4.811 5.74l5.988 6.066c.078.077.181.181.181.285v8.242l2.592-1.4v-6.842c0-.104.104-.208.182-.285L19.74 5.74H4.811Z"
-                                          fill="currentColor"></path>
+                                          fill="currentColor">
+                                    </path>
                                 </svg>
                             </button>
-                            <button disabled="" id="btn-save-search" class="sc-jqUVSM gMKSKz"><span class="sc-papXJ jcEYKF">Lưu bộ lọc</span></button>
+                            <button disabled="" id="btn-save-search" class="gMKSKz">
+                                <span class="jcEYKF">Lưu bộ lọc</span>
+                            </button>
                         </div>
                     </div>
-                    <div class="MuiBox-root jss6842"></div>
                 </div>
+                <!--                <div>-->
+                <!--                    <div class="jss2435" id="filterLabel">-->
 
-                <div class="MuiBox-root jss2434">
-                    <div class="jss2435" id="filterLabel">
-
-                    </div>
-                </div>
-                <div style="font-size:small" id="tableCheckbox">
-                    <table id="tbCustomer" class="table table-hover" style="width: 100%;">
-                        <thead style="background-color: #f4f6f8; height: 55px">
+                <!--                    </div>-->
+                <!--                </div>-->
+                <div id="tableCheckbox">
+                    <table id="tbCustomer" class="table table-hover jss79">
+                        <thead>
                         <tr>
-                            <th class="align-middle" style="width:30px">
-                                <i class="fa-solid fa-gear" style="float: left;" data-toggle="modal" data-target="#modal-config-table"></i>
-                                <!-- <input style="cursor:pointer" id="checkAll" type="checkbox" value=""
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả" style="float: right;"/ -->
-
-                                <label for="checkAll" style="cursor:pointer; float: right;">
-                                    <input style="cursor:pointer" id="checkAll" type="checkbox" value=""
-                                           data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả" onchange="checkAllSelect()">
+                            <td class="align-middle ffDJGna">
+                                <i class="fa-solid fa-gear" data-toggle="modal" data-target="#modal-config-table"></i>
+                                <label for="checkAll" class="ffDJGnb">
+                                    <input id="checkAll" type="checkbox" data-bs-toggle="tooltip"
+                                           data-bs-placement="top" title="Tất cả" onchange="CustomerApp.page.commands.checkAllSelect()">
                                 </label>
-                            </th>
-                            <th class="align-middle" scope="col">Mã khách hàng</th>
-                            <th class="align-middle" scope="col">Tên khách hàng</th>
-                            <th class="align-middle" scope="col">Số điện thoại</th>
-                            <th class="align-middle" scope="col">Nhóm khách hàng</th>
-                            <th class="align-middle" scope="col">Công nợ hiện tại</th>
-                            <th class="align-middle" scope="col">Tổng chi tiêu</th>
-                            <th class="align-middle" scope="col">Tổng SL đơn hàng</th>
+                            </td>
+                            <td class="align-middle" scope="col">Mã khách hàng</td>
+                            <td class="align-middle" scope="col">Tên khách hàng</td>
+                            <td class="align-middle" scope="col">Số điện thoại</td>
+                            <td class="align-middle" scope="col">Nhóm khách hàng</td>
+                            <td class="align-middle" scope="col">Công nợ hiện tại</td>
+                            <td class="align-middle" scope="col">Tổng chi tiêu</td>
+                            <td class="align-middle" scope="col">Tổng SL đơn hàng</td>
                         </tr>
-                        <!-- <tr class="hide" id="selectActionThead" style="border: snow">
-                            <td class="align-middle" style="width: 20px">
-                                <label for="selectAction" style="padding: 0.5rem; cursor:pointer">
-                                    <input style="cursor:pointer" id="selectAction" type="checkbox" value="">
-                                </label>
-                            </td>
-                            <td colspan="2" class="align-middle" id="numberSelectProductList" style="width: 24%">
-                            </td>
-                            <td colspan="5"></td>
-                        </tr> -->
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- <script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
-<th:block th:replace="/admin/customer/modal_export_file.html"/>
-<th:block th:replace="/admin/customer/modal-config-table.html"/>
-<th:block th:replace="/admin/customer/modal_filter::modal_filter"/>
-<th:block th:replace="/layout/script :: script"/>
-<th:block th:replace="/admin/customer/modal_select_column.html"/>
+    <th:block th:replace="/admin/customer/modal_export_file"/>
+    <th:block th:replace="/admin/customer/modal-config-table"/>
+    <th:block th:replace="/admin/customer/modal_filter"/>
+    <th:block th:replace="/admin/customer/modal_select_column"/>
+    <th:block th:replace="/layout/script"/>
 
 
-<script src="/assets/admin/js/customer/customer_app.js"></script>
-    <script src="/assets/admin/js/product/app.js"></script>
-<script>
-    let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
-</script>
+    <script src="/assets/admin/js/customer/customer_app.js"></script>
+<!--    <script src="/assets/admin/js/product/app.js"></script>-->
+    <script>
+        let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
 
-<script>
-    var myOffcanvas = document.getElementById('offcanvasExample')
-    // var bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
+    <script>
+        // var myOffcanvas = document.getElementById('offcanvasExample')
+        // var bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
 
-    let page = {
-        urls: {
-            getAllCustomers: CustomerApp.BASE_URL_CUSTOMER,
-            getGroupCustomerById: CustomerApp.BASE_URL_CUSTOMER + "/groupCustomer",
-            getAllStatus: CustomerApp.BASE_URL_CUSTOMER + "/status",
-            updateStatusAvailable: CustomerApp.BASE_URL_CUSTOMER + "/updateStatusAvailable",
-            updateStatusUnavailable: CustomerApp.BASE_URL_CUSTOMER + "/updateStatusUnavailable",
-            deleteProduct: CustomerApp.BASE_URL_CUSTOMER + "/delete",
-            getAllCustomerGroup: CustomerApp.BASE_URL_CUSTOMER_GROUP,
-                
+        let totalPage;
+        let sortPage = {"type": "des", "value": "id"};
+        let arrayIdCustomer = [];
 
-        },
-        elements: {},
-        loadData: {},
-        commands: {},
-        dialogs: {
-            elements: {},
-            loadData: {},
-            commands: {},
-        },
-        initializeEventControl: {},
-        util:{}
-    }
+        CustomerApp.page.elements.tbCustomer = $("#tbCustomer tbody");
+
+        CustomerApp.page.elements.btnAvailable = $("#btnAvailable");
+        CustomerApp.page.elements.btnUnavailable = $("#btnUnavailable");
+        CustomerApp.page.elements.btnDelete = $("#btnDelete");
+        CustomerApp.page.elements.btnAvailableSave = $("#btnAvailableSave");
+        CustomerApp.page.elements.btnUnavailableSave = $("#btnUnavailableSave");
+        CustomerApp.page.elements.btnSubmitDelete = $("#btnSubmitDelete");
 
 
-    let totalPage;
-    let sortPage = {"type": "des", "value": "id"};
-    let arrayIdCustomer = [];
+        CustomerApp.page.elements.btnTitleSort = $("#btnTitleSort");
+        CustomerApp.page.elements.btnCreatAtSort = $("#btnCreatAtSort");
+        CustomerApp.page.elements.btnUpdateAtSort = $("#btnUpdateAtSort");
 
-    page.elements.tbCustomer = $("#tbCustomer tbody");
+        CustomerApp.page.elements.totalPage = $("#totalPage");
+        CustomerApp.page.elements.pageNo = $("#pageNo");
+        CustomerApp.page.elements.pageSize = $("#pageSize");
+        CustomerApp.page.elements.search = $("#inp-search");
 
-    page.elements.btnAvailable = $("#btnAvailable");
-    page.elements.btnUnavailable = $("#btnUnavailable");
-    page.elements.btnDelete = $("#btnDelete");
-    page.elements.btnAvailableSave = $("#btnAvailableSave");
-    page.elements.btnUnavailableSave = $("#btnUnavailableSave");
-    page.elements.btnSubmitDelete = $("#btnSubmitDelete");
+        CustomerApp.page.elements.checkAll = $("#checkAll");
+        CustomerApp.page.elements.selectAction = $("#selectAction");
 
+        CustomerApp.page.elements.selectActionThead = $("#selectActionThead");
+        CustomerApp.page.elements.theadList = $("#theadList");
+        CustomerApp.page.elements.numberSelectCustomerList = $("#numberSelectCustomerList");
+        CustomerApp.page.elements.statusChangeForNumberCustomerList = $("#statusChange");
+        CustomerApp.page.elements.statusChangeForNumberToUnavailable = $("#statusChangeUnavailable");
+        CustomerApp.page.elements.statusChangeForNumberDelete = $("#statusChangeDelete");
 
-    page.elements.btnTitleSort = $("#btnTitleSort");
-    page.elements.btnCreatAtSort = $("#btnCreatAtSort");
-    page.elements.btnUpdateAtSort = $("#btnUpdateAtSort");
+        CustomerApp.page.elements.modalAvailable = $("#modalAvailable");
+        CustomerApp.page.elements.modalUnavailable = $("#modalUnavailable");
+        CustomerApp.page.elements.modalDelete = $("#modalDelete");
 
-    page.elements.totalPage = $("#totalPage");
-    page.elements.pageNo = $("#pageNo");
-    page.elements.pageSize = $("#pageSize");
-    page.elements.search = $("#inp-search");
+        CustomerApp.page.dialogs.elements.status = $("#status");
+        CustomerApp.page.dialogs.elements.groupCustomer = $("#ddl-group-customer");
+        CustomerApp.page.dialogs.elements.status = $("#ddl-status");
+        CustomerApp.page.dialogs.elements.nextPage = $("#nextPage");
+        CustomerApp.page.dialogs.elements.previousPage = $("#previousPage");
 
-    page.elements.checkAll = $("#checkAll");
-    page.elements.selectAction = $("#selectAction");
+        CustomerApp.page.elements.importFile = $("#importFileCustomers");
 
-    page.elements.selectActionThead = $("#selectActionThead");
-    page.elements.theadList = $("#theadList");
-    page.elements.numberSelectCustomerList = $("#numberSelectCustomerList");
-    page.elements.statusChangeForNumberCustomerList = $("#statusChange");
-    page.elements.statusChangeForNumberToUnavailable = $("#statusChangeUnavailable");
-    page.elements.statusChangeForNumberDelete = $("#statusChangeDelete");
+        CustomerApp.page.elements.loading = $(".modal-content .modal-header .loader");
+        //duoc lay tu modal-config-table.html
+        CustomerApp.page.util.nameColumn = column;
 
-    page.elements.modalAvailable = $("#modalAvailable");
-    page.elements.modalUnavailable = $("#modalUnavailable");
-    page.elements.modalDelete = $("#modalDelete");
+        CustomerApp.page.elements.importFile.on("click", function () {
+            $("#modalImportFileCustomers").modal("show");
+        })
 
-    page.dialogs.elements.status = $("#status");
-    page.dialogs.elements.groupCustomer = $("#ddl-group-customer");
-    page.dialogs.elements.status = $("#ddl-status");
-    page.dialogs.elements.nextPage = $("#nextPage");
-    page.dialogs.elements.previousPage = $("#previousPage");
-
-    page.elements.importFile = $("#importFileCustomers");
-
-    page.elements.loading = $(".modal-content .modal-header .loader");
-    //duoc lay tu modal-config-table.html
-    page.util.nameColumn = column;
-    
-    page.elements.importFile.on("click", function (){
-        $("#modalImportFileCustomers").modal("show");
-    })
-
-        page.commands.showLoading = () => {
-            page.elements.loading.css('z-index', 1);
+        CustomerApp.page.commands.showLoading = () => {
+            CustomerApp.page.elements.loading.css('z-index', 1);
             $('#btnImportFileCustomers').prop('disabled', true);
 
         }
 
-        page.commands.closeLoading = () => {
-            page.elements.loading.css('z-index', -1);
+        CustomerApp.page.commands.closeLoading = () => {
+            CustomerApp.page.elements.loading.css('z-index', -1);
             $('#btnImportFileCustomers').prop('disabled', false);
         }
-    //List customer hien tai
-    
-    page.commands.getAllCustomers = () => {
-        $(document).ready(function () {
-            if(localStorage.getItem(KEY_CUSTOMER_FILTER_SAVE)==null){
-                customerFilter = new CustomerFilter();
-                localStorage.setItem(KEY_CUSTOMER_FILTER_SAVE, JSON.stringify(customerFilter));
-            }else{
-                customerFilter = JSON.parse(localStorage.getItem(KEY_CUSTOMER_FILTER_SAVE));
-            }
-            drawDataTable();
-        })
-    }
-    function drawDataTable(){
-        $("#tbCustomer").DataTable({
-            // chuyển tiếng việt cho datatable
-            "destroy": true,
-            "processing": true,
-            "serverSide": true,
-            "paging": true,
-            language:
-                {
-                    "processing": "<i class='fa fa-refresh fa-spin' style='font-size: 50pt; z-index: 100000'></i>",
-                    "aria": {
-                        "sortAscending": ": Sắp xếp thứ tự tăng dần",
-                        "sortDescending": ": Sắp xếp thứ tự giảm dần"
-                    },
-                    "autoFill": {
-                        "cancel": "Hủy",
-                        "fill": "Điền tất cả ô với <i>%d<\/i>",
-                        "fillHorizontal": "Điền theo hàng ngang",
-                        "fillVertical": "Điền theo hàng dọc"
-                    },
-                    "buttons": {
-                        "collection": "Chọn lọc <span class=\"ui-button-icon-primary ui-icon ui-icon-triangle-1-s\"><\/span>",
-                        "colvis": "Hiển thị theo cột",
-                        "colvisRestore": "Khôi phục hiển thị",
-                        "copy": "Sao chép",
-                        "copyKeys": "Nhấn Ctrl hoặc u2318 + C để sao chép bảng dữ liệu vào clipboard.<br \/><br \/>Để hủy, click vào thông báo này hoặc nhấn ESC",
-                        "copySuccess": {
-                            "1": "Đã sao chép 1 dòng dữ liệu vào clipboard",
-                            "_": "Đã sao chép %d dòng vào clipboard"
-                        },
-                        "copyTitle": "Sao chép vào clipboard",
-                        "pageLength": {
-                            "-1": "Xem tất cả các dòng",
-                            "_": "Hiển thị %d dòng",
-                            "1": "Hiển thị 1 dòng"
-                        },
-                        "print": "In ấn",
-                        "createState": "Tạo trạng thái",
-                        "csv": "CSV",
-                        "excel": "Excel",
-                        "pdf": "PDF",
-                        "removeAllStates": "Xóa hết trạng thái",
-                        "removeState": "Xóa",
-                        "renameState": "Đổi tên",
-                        "savedStates": "Trạng thái đã lưu",
-                        "stateRestore": "Trạng thái %d",
-                        "updateState": "Cập nhật"
-                    },
-                    "select": {
-                        "cells": {
-                            "1": "1 ô đang được chọn",
-                            "_": "%d ô đang được chọn"
-                        },
-                        "columns": {
-                            "1": "1 cột đang được chọn",
-                            "_": "%d cột đang được được chọn"
-                        },
-                        "rows": {
-                            "1": "1 dòng đang được chọn",
-                            "_": "%d dòng đang được chọn"
-                        }
-                    },
-                    "searchBuilder": {
-                        "title": {
-                            "_": "Thiết lập tìm kiếm (%d)",
-                            "0": "Thiết lập tìm kiếm"
-                        },
-                        "button": {
-                            "0": "Thiết lập tìm kiếm",
-                            "_": "Thiết lập tìm kiếm (%d)"
-                        },
-                        "value": "Giá trị",
-                        "clearAll": "Xóa hết",
-                        "condition": "Điều kiện",
-                        "conditions": {
-                            "date": {
-                                "after": "Sau",
-                                "before": "Trước",
-                                "between": "Nằm giữa",
-                                "empty": "Rỗng",
-                                "equals": "Bằng với",
-                                "not": "Không phải",
-                                "notBetween": "Không nằm giữa",
-                                "notEmpty": "Không rỗng"
-                            },
-                            "number": {
-                                "between": "Nằm giữa",
-                                "empty": "Rỗng",
-                                "equals": "Bằng với",
-                                "gt": "Lớn hơn",
-                                "gte": "Lớn hơn hoặc bằng",
-                                "lt": "Nhỏ hơn",
-                                "lte": "Nhỏ hơn hoặc bằng",
-                                "not": "Không phải",
-                                "notBetween": "Không nằm giữa",
-                                "notEmpty": "Không rỗng"
-                            },
-                            "string": {
-                                "contains": "Chứa",
-                                "empty": "Rỗng",
-                                "endsWith": "Kết thúc bằng",
-                                "equals": "Bằng",
-                                "not": "Không phải",
-                                "notEmpty": "Không rỗng",
-                                "startsWith": "Bắt đầu với",
-                                "notContains": "Không chứa",
-                                "notEndsWith": "Không kết thúc với",
-                                "notStartsWith": "Không bắt đầu với"
-                            },
-                            "array": {
-                                "equals": "Bằng",
-                                "empty": "Trống",
-                                "contains": "Chứa",
-                                "not": "Không",
-                                "notEmpty": "Không được rỗng",
-                                "without": "không chứa"
-                            }
-                        },
-                        "logicAnd": "Và",
-                        "logicOr": "Hoặc",
-                        "add": "Thêm điều kiện",
-                        "data": "Dữ liệu",
-                        "deleteTitle": "Xóa quy tắc lọc",
-                        "leftTitle": "Giảm thụt lề",
-                        "rightTitle": "Tăng thụt lề"
-                    },
-                    "searchPanes": {
-                        "countFiltered": "{shown} ({total})",
-                        "emptyPanes": "Không có phần tìm kiếm",
-                        "clearMessage": "Xóa hết",
-                        "loadMessage": "Đang load phần tìm kiếm",
-                        "collapse": {
-                            "0": "Phần tìm kiếm",
-                            "_": "Phần tìm kiếm (%d)"
-                        },
-                        "title": "Bộ lọc đang hoạt động - %d",
-                        "count": "{total}",
-                        "collapseMessage": "Thu gọn tất cả",
-                        "showMessage": "Hiện tất cả"
-                    },
-                    "datetime": {
-                        "hours": "Giờ",
-                        "minutes": "Phút",
-                        "next": "Sau",
-                        "previous": "Trước",
-                        "seconds": "Giây",
-                        "amPm": [
-                            "am",
-                            "pm"
-                        ],
-                        "unknown": "-",
-                        "weekdays": [
-                            "Chủ nhật"
-                        ],
-                        "months": [
-                            "Tháng Một",
-                            "Tháng Hai",
-                            "Tháng Ba",
-                            "Tháng Tư",
-                            "Tháng Năm",
-                            "Tháng Sáu",
-                            "Tháng Bảy",
-                            "Tháng Tám",
-                            "Tháng Chín",
-                            "Tháng Mười",
-                            "Tháng Mười Một",
-                            "Tháng Mười Hai"
-                        ]
-                    },
-                    "emptyTable": "Không có dữ liệu",
-                    "info": "Hiển thị _START_ tới _END_ của _TOTAL_ dữ liệu",
-                    "infoEmpty": "Hiển thị 0 tới 0 của 0 dữ liệu",
-                    "lengthMenu": "Hiển thị _MENU_ dữ liệu",
-                    "loadingRecords": "Đang tải...",
-                    "paginate": {
-                        "first": "Đầu tiên",
-                        "last": "Cuối cùng",
-                        "next": "Sau",
-                        "previous": "Trước"
-                    },
-                    "search": "Tìm kiếm:",
-                    "zeroRecords": "Không tìm thấy kết quả",
-                    "decimal": ",",
-                    "editor": {
-                        "close": "Đóng",
-                        "create": {
-                            "button": "Thêm",
-                            "submit": "Thêm",
-                            "title": "Thêm mục mới"
-                        },
-                        "edit": {
-                            "button": "Sửa",
-                            "submit": "Cập nhật",
-                            "title": "Sửa mục"
-                        },
-                        "error": {
-                            "system": "Đã xảy ra lỗi hệ thống (&lt;a target=\"\\\" rel=\"nofollow\" href=\"\\\"&gt;Thêm thông tin&lt;\/a&gt;)."
-                        },
-                        "multi": {
-                            "info": "Các mục đã chọn chứa các giá trị khác nhau cho đầu vào này. Để chỉnh sửa và đặt tất cả các mục cho đầu vào này thành cùng một giá trị, hãy nhấp hoặc nhấn vào đây, nếu không chúng sẽ giữ lại các giá trị riêng lẻ của chúng.",
-                            "noMulti": "Đầu vào này có thể được chỉnh sửa riêng lẻ, nhưng không phải là một phần của một nhóm.",
-                            "restore": "Hoàn tác thay đổi",
-                            "title": "Nhiều giá trị"
-                        },
-                        "remove": {
-                            "button": "Xóa",
-                            "confirm": {
-                                "_": "Bạn có chắc chắn muốn xóa %d hàng không?",
-                                "1": "Bạn có chắc chắn muốn xóa 1 hàng không?"
-                            },
-                            "submit": "Xóa",
-                            "title": "Xóa"
-                        }
-                    },
-                    "infoFiltered": "(được lọc từ _MAX_ dữ liệu)",
-                    "searchPlaceholder": "Nhập tìm kiếm...",
-                    "stateRestore": {
-                        "creationModal": {
-                            "button": "Thêm",
-                            "columns": {
-                                "search": "Tìm kiếm cột",
-                                "visible": "Khả năng hiển thị cột"
-                            },
-                            "name": "Tên:",
-                            "order": "Sắp xếp",
-                            "paging": "Phân trang",
-                            "scroller": "Cuộn vị trí",
-                            "search": "Tìm kiếm",
-                            "searchBuilder": "Trình tạo tìm kiếm",
-                            "select": "Chọn",
-                            "title": "Thêm trạng thái",
-                            "toggleLabel": "Bao gồm:"
-                        },
-                        "duplicateError": "Trạng thái có tên này đã tồn tại.",
-                        "emptyError": "Tên không được để trống.",
-                        "emptyStates": "Không có trạng thái đã lưu",
-                        "removeConfirm": "Bạn có chắc chắn muốn xóa %s không?",
-                        "removeError": "Không xóa được trạng thái.",
-                        "removeJoiner": "và",
-                        "removeSubmit": "Xóa",
-                        "removeTitle": "Xóa trạng thái",
-                        "renameButton": "Đổi tên",
-                        "renameLabel": "Tên mới cho %s:",
-                        "renameTitle": "Đổi tên trạng thái"
-                    },
-                },
-            ajax: {
-                url: origin +'/api/customers/filter',
-                type: 'POST',
-                // dataSrc: "content",
-                contentType: 'application/json',
-                data: function (d) {
-                    d.groupIds = customerFilter.groupIds;
-                    d.gender = customerFilter.gender;
-                    d.dayOfBirthday = customerFilter.dayOfBirthday;
-                    d.monthOfBirthday = customerFilter.monthOfBirthday;
-                    d.employeeIds = customerFilter.employeeIds;
-                    d.keyword = customerFilter.keyword;
-                    d.statusList = [];
-                    return JSON.stringify(d)
+        //List customer hien tai
+
+        CustomerApp.page.commands.getAllCustomers = () => {
+            $(document).ready(() => {
+                if (localStorage.getItem(KEY_CUSTOMER_FILTER_SAVE) == null) {
+                    customerFilter = new CustomerFilter();
+                    localStorage.setItem(KEY_CUSTOMER_FILTER_SAVE, JSON.stringify(customerFilter));
+                } else {
+                    customerFilter = JSON.parse(localStorage.getItem(KEY_CUSTOMER_FILTER_SAVE));
                 }
-            },
-            lengthMenu: [
-                [10, 30, 50,1000000000],
-                ["10", "30", "50", "All"]
-            ],
-            searching: false,
-            destroy: true,
-            columns: [
-                {data: 'id'},
-                {data: 'phoneNumber'},
-                {data: 'customerCode'},
-                {data: 'fullName'},
-                {data: 'group.title'},
-                {data: 'debtTotal'},
-                {data: 'spendTotal'},
-                {data: "quantityItemOrder"}],
-             columnDefs: [
-             {
-                            targets: 0,
-                            "orderable": false,
-                            render: function (data, type, row, meta) {
-                                return `
+                CustomerApp.page.commands.drawDataTable();
+            })
+        }
+
+        CustomerApp.page.commands.drawDataTable = () => {
+            $("#tbCustomer").DataTable({
+                // chuyển tiếng việt cho datatable
+                "destroy": true,
+                "processing": true,
+                "serverSide": true,
+                "paging": true,
+                language: CustomerApp.dataTableDetails.language,
+                ajax: {
+                    url: origin + '/api/customers/filter',
+                    type: 'POST',
+                    // dataSrc: "content",
+                    contentType: 'application/json',
+                    data: function (d) {
+                        d.groupIds = customerFilter.groupIds;
+                        d.gender = customerFilter.gender;
+                        d.dayOfBirthday = customerFilter.dayOfBirthday;
+                        d.monthOfBirthday = customerFilter.monthOfBirthday;
+                        d.employeeIds = customerFilter.employeeIds;
+                        d.keyword = customerFilter.keyword;
+                        d.statusList = [];
+                        return JSON.stringify(d)
+                    }
+                },
+                lengthMenu: [
+                    [10, 30, 50, 1000000000],
+                    ["10", "30", "50", "All"]
+                ],
+                searching: false,
+                columns: [
+                    {data: 'id'},
+                    {data: 'phoneNumber'},
+                    {data: 'customerCode'},
+                    {data: 'fullName'},
+                    {data: 'group.title'},
+                    {data: 'debtTotal'},
+                    {data: 'spendTotal'},
+                    {data: "quantityItemOrder"}],
+                columnDefs: [
+                    {
+                        targets: 0,
+                        "orderable": false,
+                        render: function (data, type, row, meta) {
+                            return `
                                <input id=${row.id} type="checkbox" value="check_none" style="float:right"/>
                             `
-                            }
-                        },
-             {
-                            targets: 1,
-                            render: function (data, type, row, meta) {
-                                return `<a href="/admin/customers/${row.id}" style="text-decoration: none">${row.customerCode}</a>`;
-                            }
-                        },
-
-
-             ],
-        })
-
-        let theadFirst = $("#tbCustomer thead tr th");
-        let removeSorting = setInterval(()=>{
-            let tdRow = $("#tbCustomer tbody td input");
-            if($(theadFirst[0]).hasClass("sorting_asc")){
-                $(theadFirst[0]).removeClass('sorting_asc');
-                clearInterval(removeSorting);
-            }
-        })
-        
-    }
-    
-    function findCustomerByGroup(groupId) {
-        $("#tbCustomer").DataTable({
-            // chuyển tiếng việt cho datatable
-            language:
-                {
-                    "processing": "<i class='fa fa-refresh fa-spin' style='font-size: 50pt; z-index: 100000'></i>",
-                    "aria": {
-                        "sortAscending": ": Sắp xếp thứ tự tăng dần",
-                        "sortDescending": ": Sắp xếp thứ tự giảm dần"
-                    },
-                    "autoFill": {
-                        "cancel": "Hủy",
-                        "fill": "Điền tất cả ô với <i>%d<\/i>",
-                        "fillHorizontal": "Điền theo hàng ngang",
-                        "fillVertical": "Điền theo hàng dọc"
-                    },
-                    "buttons": {
-                        "collection": "Chọn lọc <span class=\"ui-button-icon-primary ui-icon ui-icon-triangle-1-s\"><\/span>",
-                        "colvis": "Hiển thị theo cột",
-                        "colvisRestore": "Khôi phục hiển thị",
-                        "copy": "Sao chép",
-                        "copyKeys": "Nhấn Ctrl hoặc u2318 + C để sao chép bảng dữ liệu vào clipboard.<br \/><br \/>Để hủy, click vào thông báo này hoặc nhấn ESC",
-                        "copySuccess": {
-                            "1": "Đã sao chép 1 dòng dữ liệu vào clipboard",
-                            "_": "Đã sao chép %d dòng vào clipboard"
-                        },
-                        "copyTitle": "Sao chép vào clipboard",
-                        "pageLength": {
-                            "-1": "Xem tất cả các dòng",
-                            "_": "Hiển thị %d dòng",
-                            "1": "Hiển thị 1 dòng"
-                        },
-                        "print": "In ấn",
-                        "createState": "Tạo trạng thái",
-                        "csv": "CSV",
-                        "excel": "Excel",
-                        "pdf": "PDF",
-                        "removeAllStates": "Xóa hết trạng thái",
-                        "removeState": "Xóa",
-                        "renameState": "Đổi tên",
-                        "savedStates": "Trạng thái đã lưu",
-                        "stateRestore": "Trạng thái %d",
-                        "updateState": "Cập nhật"
-                    },
-                    "select": {
-                        "cells": {
-                            "1": "1 ô đang được chọn",
-                            "_": "%d ô đang được chọn"
-                        },
-                        "columns": {
-                            "1": "1 cột đang được chọn",
-                            "_": "%d cột đang được được chọn"
-                        },
-                        "rows": {
-                            "1": "1 dòng đang được chọn",
-                            "_": "%d dòng đang được chọn"
                         }
                     },
-                    "searchBuilder": {
-                        "title": {
-                            "_": "Thiết lập tìm kiếm (%d)",
-                            "0": "Thiết lập tìm kiếm"
-                        },
-                        "button": {
-                            "0": "Thiết lập tìm kiếm",
-                            "_": "Thiết lập tìm kiếm (%d)"
-                        },
-                        "value": "Giá trị",
-                        "clearAll": "Xóa hết",
-                        "condition": "Điều kiện",
-                        "conditions": {
-                            "date": {
-                                "after": "Sau",
-                                "before": "Trước",
-                                "between": "Nằm giữa",
-                                "empty": "Rỗng",
-                                "equals": "Bằng với",
-                                "not": "Không phải",
-                                "notBetween": "Không nằm giữa",
-                                "notEmpty": "Không rỗng"
-                            },
-                            "number": {
-                                "between": "Nằm giữa",
-                                "empty": "Rỗng",
-                                "equals": "Bằng với",
-                                "gt": "Lớn hơn",
-                                "gte": "Lớn hơn hoặc bằng",
-                                "lt": "Nhỏ hơn",
-                                "lte": "Nhỏ hơn hoặc bằng",
-                                "not": "Không phải",
-                                "notBetween": "Không nằm giữa",
-                                "notEmpty": "Không rỗng"
-                            },
-                            "string": {
-                                "contains": "Chứa",
-                                "empty": "Rỗng",
-                                "endsWith": "Kết thúc bằng",
-                                "equals": "Bằng",
-                                "not": "Không phải",
-                                "notEmpty": "Không rỗng",
-                                "startsWith": "Bắt đầu với",
-                                "notContains": "Không chứa",
-                                "notEndsWith": "Không kết thúc với",
-                                "notStartsWith": "Không bắt đầu với"
-                            },
-                            "array": {
-                                "equals": "Bằng",
-                                "empty": "Trống",
-                                "contains": "Chứa",
-                                "not": "Không",
-                                "notEmpty": "Không được rỗng",
-                                "without": "không chứa"
-                            }
-                        },
-                        "logicAnd": "Và",
-                        "logicOr": "Hoặc",
-                        "add": "Thêm điều kiện",
-                        "data": "Dữ liệu",
-                        "deleteTitle": "Xóa quy tắc lọc",
-                        "leftTitle": "Giảm thụt lề",
-                        "rightTitle": "Tăng thụt lề"
-                    },
-                    "searchPanes": {
-                        "countFiltered": "{shown} ({total})",
-                        "emptyPanes": "Không có phần tìm kiếm",
-                        "clearMessage": "Xóa hết",
-                        "loadMessage": "Đang load phần tìm kiếm",
-                        "collapse": {
-                            "0": "Phần tìm kiếm",
-                            "_": "Phần tìm kiếm (%d)"
-                        },
-                        "title": "Bộ lọc đang hoạt động - %d",
-                        "count": "{total}",
-                        "collapseMessage": "Thu gọn tất cả",
-                        "showMessage": "Hiện tất cả"
-                    },
-                    "datetime": {
-                        "hours": "Giờ",
-                        "minutes": "Phút",
-                        "next": "Sau",
-                        "previous": "Trước",
-                        "seconds": "Giây",
-                        "amPm": [
-                            "am",
-                            "pm"
-                        ],
-                        "unknown": "-",
-                        "weekdays": [
-                            "Chủ nhật"
-                        ],
-                        "months": [
-                            "Tháng Một",
-                            "Tháng Hai",
-                            "Tháng Ba",
-                            "Tháng Tư",
-                            "Tháng Năm",
-                            "Tháng Sáu",
-                            "Tháng Bảy",
-                            "Tháng Tám",
-                            "Tháng Chín",
-                            "Tháng Mười",
-                            "Tháng Mười Một",
-                            "Tháng Mười Hai"
-                        ]
-                    },
-                    "emptyTable": "Không có dữ liệu",
-                    "info": "Hiển thị _START_ tới _END_ của _TOTAL_ dữ liệu",
-                    "infoEmpty": "Hiển thị 0 tới 0 của 0 dữ liệu",
-                    "lengthMenu": "Hiển thị _MENU_ dữ liệu",
-                    "loadingRecords": "Đang tải...",
-                    "paginate": {
-                        "first": "Đầu tiên",
-                        "last": "Cuối cùng",
-                        "next": "Sau",
-                        "previous": "Trước"
-                    },
-                    "search": "Tìm kiếm:",
-                    "zeroRecords": "Không tìm thấy kết quả",
-                    "decimal": ",",
-                    "editor": {
-                        "close": "Đóng",
-                        "create": {
-                            "button": "Thêm",
-                            "submit": "Thêm",
-                            "title": "Thêm mục mới"
-                        },
-                        "edit": {
-                            "button": "Sửa",
-                            "submit": "Cập nhật",
-                            "title": "Sửa mục"
-                        },
-                        "error": {
-                            "system": "Đã xảy ra lỗi hệ thống (&lt;a target=\"\\\" rel=\"nofollow\" href=\"\\\"&gt;Thêm thông tin&lt;\/a&gt;)."
-                        },
-                        "multi": {
-                            "info": "Các mục đã chọn chứa các giá trị khác nhau cho đầu vào này. Để chỉnh sửa và đặt tất cả các mục cho đầu vào này thành cùng một giá trị, hãy nhấp hoặc nhấn vào đây, nếu không chúng sẽ giữ lại các giá trị riêng lẻ của chúng.",
-                            "noMulti": "Đầu vào này có thể được chỉnh sửa riêng lẻ, nhưng không phải là một phần của một nhóm.",
-                            "restore": "Hoàn tác thay đổi",
-                            "title": "Nhiều giá trị"
-                        },
-                        "remove": {
-                            "button": "Xóa",
-                            "confirm": {
-                                "_": "Bạn có chắc chắn muốn xóa %d hàng không?",
-                                "1": "Bạn có chắc chắn muốn xóa 1 hàng không?"
-                            },
-                            "submit": "Xóa",
-                            "title": "Xóa"
+                    {
+                        targets: 1,
+                        render: function (data, type, row, meta) {
+                            return `<a href="/admin/customers/${row.id}" style="text-decoration: none">${row.customerCode}</a>`;
                         }
                     },
-                    "infoFiltered": "(được lọc từ _MAX_ dữ liệu)",
-                    "searchPlaceholder": "Nhập tìm kiếm...",
-                    "stateRestore": {
-                        "creationModal": {
-                            "button": "Thêm",
-                            "columns": {
-                                "search": "Tìm kiếm cột",
-                                "visible": "Khả năng hiển thị cột"
-                            },
-                            "name": "Tên:",
-                            "order": "Sắp xếp",
-                            "paging": "Phân trang",
-                            "scroller": "Cuộn vị trí",
-                            "search": "Tìm kiếm",
-                            "searchBuilder": "Trình tạo tìm kiếm",
-                            "select": "Chọn",
-                            "title": "Thêm trạng thái",
-                            "toggleLabel": "Bao gồm:"
-                        },
-                        "duplicateError": "Trạng thái có tên này đã tồn tại.",
-                        "emptyError": "Tên không được để trống.",
-                        "emptyStates": "Không có trạng thái đã lưu",
-                        "removeConfirm": "Bạn có chắc chắn muốn xóa %s không?",
-                        "removeError": "Không xóa được trạng thái.",
-                        "removeJoiner": "và",
-                        "removeSubmit": "Xóa",
-                        "removeTitle": "Xóa trạng thái",
-                        "renameButton": "Đổi tên",
-                        "renameLabel": "Tên mới cho %s:",
-                        "renameTitle": "Đổi tên trạng thái"
-                    },
-                    "infoThousands": ".",
-                    "thousands": "."
-                },
-            ajax: {
-                contentType: 'application/json',
-                url: origin +"/api/customers/findAllCustomerByGroupId/" + groupId,
-                type: "GET",
-                dataSrc: ''
-            },
-            lengthMenu: [
-                [5, 10, 20,, -1],
-                ["5", "10", "20", "All"]
-            ],
-            searching: false,
-            destroy: true,
-            columns: [
-                {data: 'customerCode'},
-                {data: 'id'},
-                {data: 'fullName'},
-                {data: 'phoneNumber'},
-                {data: 'group.title'},
-                {data: 'debtTotal'},
-                {data: 'spendTotal'},
-                {data: "quantityItemOrder"}],
-            columnDefs: [
-                {
-                    targets: 0,
-                    render: function (data, type, row, meta) {
-                        return `
-                               <input type="checkbox" value="check_none" />
-                            `
-                    }
-                },
-                {
-                    targets: 1,
-                    render: function (data, type, row, meta) {
-                        return `<a href="/admin/customers/customerInfo/${row.id}">${row.customerCode}</a>`;
-                    }
-                },
-            ],
-        })
-
-    }
-
-    function findCustomerByGroupAndStatus(groupId, status) {
-        $("#tbCustomer").DataTable({
-            // chuyển tiếng việt cho datatable
-            language:
-                {
-                    "processing": "<i class='fa fa-refresh fa-spin' style='font-size: 50pt; z-index: 100000'></i>",
-                    "aria": {
-                        "sortAscending": ": Sắp xếp thứ tự tăng dần",
-                        "sortDescending": ": Sắp xếp thứ tự giảm dần"
-                    },
-                    "autoFill": {
-                        "cancel": "Hủy",
-                        "fill": "Điền tất cả ô với <i>%d<\/i>",
-                        "fillHorizontal": "Điền theo hàng ngang",
-                        "fillVertical": "Điền theo hàng dọc"
-                    },
-                    "buttons": {
-                        "collection": "Chọn lọc <span class=\"ui-button-icon-primary ui-icon ui-icon-triangle-1-s\"><\/span>",
-                        "colvis": "Hiển thị theo cột",
-                        "colvisRestore": "Khôi phục hiển thị",
-                        "copy": "Sao chép",
-                        "copyKeys": "Nhấn Ctrl hoặc u2318 + C để sao chép bảng dữ liệu vào clipboard.<br \/><br \/>Để hủy, click vào thông báo này hoặc nhấn ESC",
-                        "copySuccess": {
-                            "1": "Đã sao chép 1 dòng dữ liệu vào clipboard",
-                            "_": "Đã sao chép %d dòng vào clipboard"
-                        },
-                        "copyTitle": "Sao chép vào clipboard",
-                        "pageLength": {
-                            "-1": "Xem tất cả các dòng",
-                            "_": "Hiển thị %d dòng",
-                            "1": "Hiển thị 1 dòng"
-                        },
-                        "print": "In ấn",
-                        "createState": "Tạo trạng thái",
-                        "csv": "CSV",
-                        "excel": "Excel",
-                        "pdf": "PDF",
-                        "removeAllStates": "Xóa hết trạng thái",
-                        "removeState": "Xóa",
-                        "renameState": "Đổi tên",
-                        "savedStates": "Trạng thái đã lưu",
-                        "stateRestore": "Trạng thái %d",
-                        "updateState": "Cập nhật"
-                    },
-                    "select": {
-                        "cells": {
-                            "1": "1 ô đang được chọn",
-                            "_": "%d ô đang được chọn"
-                        },
-                        "columns": {
-                            "1": "1 cột đang được chọn",
-                            "_": "%d cột đang được được chọn"
-                        },
-                        "rows": {
-                            "1": "1 dòng đang được chọn",
-                            "_": "%d dòng đang được chọn"
-                        }
-                    },
-                    "searchBuilder": {
-                        "title": {
-                            "_": "Thiết lập tìm kiếm (%d)",
-                            "0": "Thiết lập tìm kiếm"
-                        },
-                        "button": {
-                            "0": "Thiết lập tìm kiếm",
-                            "_": "Thiết lập tìm kiếm (%d)"
-                        },
-                        "value": "Giá trị",
-                        "clearAll": "Xóa hết",
-                        "condition": "Điều kiện",
-                        "conditions": {
-                            "date": {
-                                "after": "Sau",
-                                "before": "Trước",
-                                "between": "Nằm giữa",
-                                "empty": "Rỗng",
-                                "equals": "Bằng với",
-                                "not": "Không phải",
-                                "notBetween": "Không nằm giữa",
-                                "notEmpty": "Không rỗng"
-                            },
-                            "number": {
-                                "between": "Nằm giữa",
-                                "empty": "Rỗng",
-                                "equals": "Bằng với",
-                                "gt": "Lớn hơn",
-                                "gte": "Lớn hơn hoặc bằng",
-                                "lt": "Nhỏ hơn",
-                                "lte": "Nhỏ hơn hoặc bằng",
-                                "not": "Không phải",
-                                "notBetween": "Không nằm giữa",
-                                "notEmpty": "Không rỗng"
-                            },
-                            "string": {
-                                "contains": "Chứa",
-                                "empty": "Rỗng",
-                                "endsWith": "Kết thúc bằng",
-                                "equals": "Bằng",
-                                "not": "Không phải",
-                                "notEmpty": "Không rỗng",
-                                "startsWith": "Bắt đầu với",
-                                "notContains": "Không chứa",
-                                "notEndsWith": "Không kết thúc với",
-                                "notStartsWith": "Không bắt đầu với"
-                            },
-                            "array": {
-                                "equals": "Bằng",
-                                "empty": "Trống",
-                                "contains": "Chứa",
-                                "not": "Không",
-                                "notEmpty": "Không được rỗng",
-                                "without": "không chứa"
-                            }
-                        },
-                        "logicAnd": "Và",
-                        "logicOr": "Hoặc",
-                        "add": "Thêm điều kiện",
-                        "data": "Dữ liệu",
-                        "deleteTitle": "Xóa quy tắc lọc",
-                        "leftTitle": "Giảm thụt lề",
-                        "rightTitle": "Tăng thụt lề"
-                    },
-                    "searchPanes": {
-                        "countFiltered": "{shown} ({total})",
-                        "emptyPanes": "Không có phần tìm kiếm",
-                        "clearMessage": "Xóa hết",
-                        "loadMessage": "Đang load phần tìm kiếm",
-                        "collapse": {
-                            "0": "Phần tìm kiếm",
-                            "_": "Phần tìm kiếm (%d)"
-                        },
-                        "title": "Bộ lọc đang hoạt động - %d",
-                        "count": "{total}",
-                        "collapseMessage": "Thu gọn tất cả",
-                        "showMessage": "Hiện tất cả"
-                    },
-                    "datetime": {
-                        "hours": "Giờ",
-                        "minutes": "Phút",
-                        "next": "Sau",
-                        "previous": "Trước",
-                        "seconds": "Giây",
-                        "amPm": [
-                            "am",
-                            "pm"
-                        ],
-                        "unknown": "-",
-                        "weekdays": [
-                            "Chủ nhật"
-                        ],
-                        "months": [
-                            "Tháng Một",
-                            "Tháng Hai",
-                            "Tháng Ba",
-                            "Tháng Tư",
-                            "Tháng Năm",
-                            "Tháng Sáu",
-                            "Tháng Bảy",
-                            "Tháng Tám",
-                            "Tháng Chín",
-                            "Tháng Mười",
-                            "Tháng Mười Một",
-                            "Tháng Mười Hai"
-                        ]
-                    },
-                    "emptyTable": "Không có dữ liệu",
-                    "info": "Hiển thị _START_ tới _END_ của _TOTAL_ dữ liệu",
-                    "infoEmpty": "Hiển thị 0 tới 0 của 0 dữ liệu",
-                    "lengthMenu": "Hiển thị _MENU_ dữ liệu",
-                    "loadingRecords": "Đang tải...",
-                    "paginate": {
-                        "first": "Đầu tiên",
-                        "last": "Cuối cùng",
-                        "next": "Sau",
-                        "previous": "Trước"
-                    },
-                    "search": "Tìm kiếm:",
-                    "zeroRecords": "Không tìm thấy kết quả",
-                    "decimal": ",",
-                    "editor": {
-                        "close": "Đóng",
-                        "create": {
-                            "button": "Thêm",
-                            "submit": "Thêm",
-                            "title": "Thêm mục mới"
-                        },
-                        "edit": {
-                            "button": "Sửa",
-                            "submit": "Cập nhật",
-                            "title": "Sửa mục"
-                        },
-                        "error": {
-                            "system": "Đã xảy ra lỗi hệ thống (&lt;a target=\"\\\" rel=\"nofollow\" href=\"\\\"&gt;Thêm thông tin&lt;\/a&gt;)."
-                        },
-                        "multi": {
-                            "info": "Các mục đã chọn chứa các giá trị khác nhau cho đầu vào này. Để chỉnh sửa và đặt tất cả các mục cho đầu vào này thành cùng một giá trị, hãy nhấp hoặc nhấn vào đây, nếu không chúng sẽ giữ lại các giá trị riêng lẻ của chúng.",
-                            "noMulti": "Đầu vào này có thể được chỉnh sửa riêng lẻ, nhưng không phải là một phần của một nhóm.",
-                            "restore": "Hoàn tác thay đổi",
-                            "title": "Nhiều giá trị"
-                        },
-                        "remove": {
-                            "button": "Xóa",
-                            "confirm": {
-                                "_": "Bạn có chắc chắn muốn xóa %d hàng không?",
-                                "1": "Bạn có chắc chắn muốn xóa 1 hàng không?"
-                            },
-                            "submit": "Xóa",
-                            "title": "Xóa"
-                        }
-                    },
-                    "infoFiltered": "(được lọc từ _MAX_ dữ liệu)",
-                    "searchPlaceholder": "Nhập tìm kiếm...",
-                    "stateRestore": {
-                        "creationModal": {
-                            "button": "Thêm",
-                            "columns": {
-                                "search": "Tìm kiếm cột",
-                                "visible": "Khả năng hiển thị cột"
-                            },
-                            "name": "Tên:",
-                            "order": "Sắp xếp",
-                            "paging": "Phân trang",
-                            "scroller": "Cuộn vị trí",
-                            "search": "Tìm kiếm",
-                            "searchBuilder": "Trình tạo tìm kiếm",
-                            "select": "Chọn",
-                            "title": "Thêm trạng thái",
-                            "toggleLabel": "Bao gồm:"
-                        },
-                        "duplicateError": "Trạng thái có tên này đã tồn tại.",
-                        "emptyError": "Tên không được để trống.",
-                        "emptyStates": "Không có trạng thái đã lưu",
-                        "removeConfirm": "Bạn có chắc chắn muốn xóa %s không?",
-                        "removeError": "Không xóa được trạng thái.",
-                        "removeJoiner": "và",
-                        "removeSubmit": "Xóa",
-                        "removeTitle": "Xóa trạng thái",
-                        "renameButton": "Đổi tên",
-                        "renameLabel": "Tên mới cho %s:",
-                        "renameTitle": "Đổi tên trạng thái"
-                    },
-                    "infoThousands": ".",
-                    "thousands": "."
-                },
-            ajax: {
-                contentType: 'application/json',
-                url: origin +"/api/customers/findAllCustomerByGroupAndStatus/" + groupId + "," + status,
-                type: "GET",
-                dataSrc: ''
-            },
-            lengthMenu: [
-                [5, 10, 20, -1],
-                ["5", "10", "20", "All"]
-            ],
-            searching: false,
-            destroy: true,
-            columns: [
-                {data: 'id'},
-                {data: 'customerCode'},
-                {data: 'fullName'},
-                {data: 'phoneNumber'},
-                {data: 'group.title'},
-                {data: 'debtTotal'},
-                {data: 'spendTotal'},
-                {data: "quantityItemOrder"}],
-            columnDefs: [
-                {
-                    targets: 0,
-                    render: function (data, type, row, meta) {
-                        return `
-                               <input type="checkbox" value="check_none" />
-                            `
-                    }
-                },
-                {
-                    targets: 1,
-                    render: function (data, type, row, meta) {
-                        return `<a href="/admin/customers/customerInfo/${row.id}">${row.customerCode}</a>`;
-                    }
-                },
-
-            ],
-        })
-
-    }
-
-    function findCustomerByStatus(status) {
-
-        $("#tbCustomer").DataTable({
-            // chuyển tiếng việt cho datatable
-            language:
-                {
-                    "processing": "<i class='fa fa-refresh fa-spin' style='font-size: 50pt; z-index: 100000'></i>",
-                    "aria": {
-                        "sortAscending": ": Sắp xếp thứ tự tăng dần",
-                        "sortDescending": ": Sắp xếp thứ tự giảm dần"
-                    },
-                    "autoFill": {
-                        "cancel": "Hủy",
-                        "fill": "Điền tất cả ô với <i>%d<\/i>",
-                        "fillHorizontal": "Điền theo hàng ngang",
-                        "fillVertical": "Điền theo hàng dọc"
-                    },
-                    "buttons": {
-                        "collection": "Chọn lọc <span class=\"ui-button-icon-primary ui-icon ui-icon-triangle-1-s\"><\/span>",
-                        "colvis": "Hiển thị theo cột",
-                        "colvisRestore": "Khôi phục hiển thị",
-                        "copy": "Sao chép",
-                        "copyKeys": "Nhấn Ctrl hoặc u2318 + C để sao chép bảng dữ liệu vào clipboard.<br \/><br \/>Để hủy, click vào thông báo này hoặc nhấn ESC",
-                        "copySuccess": {
-                            "1": "Đã sao chép 1 dòng dữ liệu vào clipboard",
-                            "_": "Đã sao chép %d dòng vào clipboard"
-                        },
-                        "copyTitle": "Sao chép vào clipboard",
-                        "pageLength": {
-                            "-1": "Xem tất cả các dòng",
-                            "_": "Hiển thị %d dòng",
-                            "1": "Hiển thị 1 dòng"
-                        },
-                        "print": "In ấn",
-                        "createState": "Tạo trạng thái",
-                        "csv": "CSV",
-                        "excel": "Excel",
-                        "pdf": "PDF",
-                        "removeAllStates": "Xóa hết trạng thái",
-                        "removeState": "Xóa",
-                        "renameState": "Đổi tên",
-                        "savedStates": "Trạng thái đã lưu",
-                        "stateRestore": "Trạng thái %d",
-                        "updateState": "Cập nhật"
-                    },
-                    "select": {
-                        "cells": {
-                            "1": "1 ô đang được chọn",
-                            "_": "%d ô đang được chọn"
-                        },
-                        "columns": {
-                            "1": "1 cột đang được chọn",
-                            "_": "%d cột đang được được chọn"
-                        },
-                        "rows": {
-                            "1": "1 dòng đang được chọn",
-                            "_": "%d dòng đang được chọn"
-                        }
-                    },
-                    "searchBuilder": {
-                        "title": {
-                            "_": "Thiết lập tìm kiếm (%d)",
-                            "0": "Thiết lập tìm kiếm"
-                        },
-                        "button": {
-                            "0": "Thiết lập tìm kiếm",
-                            "_": "Thiết lập tìm kiếm (%d)"
-                        },
-                        "value": "Giá trị",
-                        "clearAll": "Xóa hết",
-                        "condition": "Điều kiện",
-                        "conditions": {
-                            "date": {
-                                "after": "Sau",
-                                "before": "Trước",
-                                "between": "Nằm giữa",
-                                "empty": "Rỗng",
-                                "equals": "Bằng với",
-                                "not": "Không phải",
-                                "notBetween": "Không nằm giữa",
-                                "notEmpty": "Không rỗng"
-                            },
-                            "number": {
-                                "between": "Nằm giữa",
-                                "empty": "Rỗng",
-                                "equals": "Bằng với",
-                                "gt": "Lớn hơn",
-                                "gte": "Lớn hơn hoặc bằng",
-                                "lt": "Nhỏ hơn",
-                                "lte": "Nhỏ hơn hoặc bằng",
-                                "not": "Không phải",
-                                "notBetween": "Không nằm giữa",
-                                "notEmpty": "Không rỗng"
-                            },
-                            "string": {
-                                "contains": "Chứa",
-                                "empty": "Rỗng",
-                                "endsWith": "Kết thúc bằng",
-                                "equals": "Bằng",
-                                "not": "Không phải",
-                                "notEmpty": "Không rỗng",
-                                "startsWith": "Bắt đầu với",
-                                "notContains": "Không chứa",
-                                "notEndsWith": "Không kết thúc với",
-                                "notStartsWith": "Không bắt đầu với"
-                            },
-                            "array": {
-                                "equals": "Bằng",
-                                "empty": "Trống",
-                                "contains": "Chứa",
-                                "not": "Không",
-                                "notEmpty": "Không được rỗng",
-                                "without": "không chứa"
-                            }
-                        },
-                        "logicAnd": "Và",
-                        "logicOr": "Hoặc",
-                        "add": "Thêm điều kiện",
-                        "data": "Dữ liệu",
-                        "deleteTitle": "Xóa quy tắc lọc",
-                        "leftTitle": "Giảm thụt lề",
-                        "rightTitle": "Tăng thụt lề"
-                    },
-                    "searchPanes": {
-                        "countFiltered": "{shown} ({total})",
-                        "emptyPanes": "Không có phần tìm kiếm",
-                        "clearMessage": "Xóa hết",
-                        "loadMessage": "Đang load phần tìm kiếm",
-                        "collapse": {
-                            "0": "Phần tìm kiếm",
-                            "_": "Phần tìm kiếm (%d)"
-                        },
-                        "title": "Bộ lọc đang hoạt động - %d",
-                        "count": "{total}",
-                        "collapseMessage": "Thu gọn tất cả",
-                        "showMessage": "Hiện tất cả"
-                    },
-                    "datetime": {
-                        "hours": "Giờ",
-                        "minutes": "Phút",
-                        "next": "Sau",
-                        "previous": "Trước",
-                        "seconds": "Giây",
-                        "amPm": [
-                            "am",
-                            "pm"
-                        ],
-                        "unknown": "-",
-                        "weekdays": [
-                            "Chủ nhật"
-                        ],
-                        "months": [
-                            "Tháng Một",
-                            "Tháng Hai",
-                            "Tháng Ba",
-                            "Tháng Tư",
-                            "Tháng Năm",
-                            "Tháng Sáu",
-                            "Tháng Bảy",
-                            "Tháng Tám",
-                            "Tháng Chín",
-                            "Tháng Mười",
-                            "Tháng Mười Một",
-                            "Tháng Mười Hai"
-                        ]
-                    },
-                    "emptyTable": "Không có dữ liệu",
-                    "info": "Hiển thị _START_ tới _END_ của _TOTAL_ dữ liệu",
-                    "infoEmpty": "Hiển thị 0 tới 0 của 0 dữ liệu",
-                    "lengthMenu": "Hiển thị _MENU_ dữ liệu",
-                    "loadingRecords": "Đang tải...",
-                    "paginate": {
-                        "first": "Đầu tiên",
-                        "last": "Cuối cùng",
-                        "next": "Sau",
-                        "previous": "Trước"
-                    },
-                    "search": "Tìm kiếm:",
-                    "zeroRecords": "Không tìm thấy kết quả",
-                    "decimal": ",",
-                    "editor": {
-                        "close": "Đóng",
-                        "create": {
-                            "button": "Thêm",
-                            "submit": "Thêm",
-                            "title": "Thêm mục mới"
-                        },
-                        "edit": {
-                            "button": "Sửa",
-                            "submit": "Cập nhật",
-                            "title": "Sửa mục"
-                        },
-                        "error": {
-                            "system": "Đã xảy ra lỗi hệ thống (&lt;a target=\"\\\" rel=\"nofollow\" href=\"\\\"&gt;Thêm thông tin&lt;\/a&gt;)."
-                        },
-                        "multi": {
-                            "info": "Các mục đã chọn chứa các giá trị khác nhau cho đầu vào này. Để chỉnh sửa và đặt tất cả các mục cho đầu vào này thành cùng một giá trị, hãy nhấp hoặc nhấn vào đây, nếu không chúng sẽ giữ lại các giá trị riêng lẻ của chúng.",
-                            "noMulti": "Đầu vào này có thể được chỉnh sửa riêng lẻ, nhưng không phải là một phần của một nhóm.",
-                            "restore": "Hoàn tác thay đổi",
-                            "title": "Nhiều giá trị"
-                        },
-                        "remove": {
-                            "button": "Xóa",
-                            "confirm": {
-                                "_": "Bạn có chắc chắn muốn xóa %d hàng không?",
-                                "1": "Bạn có chắc chắn muốn xóa 1 hàng không?"
-                            },
-                            "submit": "Xóa",
-                            "title": "Xóa"
-                        }
-                    },
-                    "infoFiltered": "(được lọc từ _MAX_ dữ liệu)",
-                    "searchPlaceholder": "Nhập tìm kiếm...",
-                    "stateRestore": {
-                        "creationModal": {
-                            "button": "Thêm",
-                            "columns": {
-                                "search": "Tìm kiếm cột",
-                                "visible": "Khả năng hiển thị cột"
-                            },
-                            "name": "Tên:",
-                            "order": "Sắp xếp",
-                            "paging": "Phân trang",
-                            "scroller": "Cuộn vị trí",
-                            "search": "Tìm kiếm",
-                            "searchBuilder": "Trình tạo tìm kiếm",
-                            "select": "Chọn",
-                            "title": "Thêm trạng thái",
-                            "toggleLabel": "Bao gồm:"
-                        },
-                        "duplicateError": "Trạng thái có tên này đã tồn tại.",
-                        "emptyError": "Tên không được để trống.",
-                        "emptyStates": "Không có trạng thái đã lưu",
-                        "removeConfirm": "Bạn có chắc chắn muốn xóa %s không?",
-                        "removeError": "Không xóa được trạng thái.",
-                        "removeJoiner": "và",
-                        "removeSubmit": "Xóa",
-                        "removeTitle": "Xóa trạng thái",
-                        "renameButton": "Đổi tên",
-                        "renameLabel": "Tên mới cho %s:",
-                        "renameTitle": "Đổi tên trạng thái"
-                    },
-                    "infoThousands": ".",
-                    "thousands": "."
-                },
-            ajax: {
-                contentType: 'application/json',
-                url: origin +"/api/customers/findAllCustomerByStatus/" + status,
-                type: "GET",
-                dataSrc: ''
-            },
-            lengthMenu: [
-                [5, 10, 20, -1],
-                ["5", "10", "20", "All"]
-            ],
-
-            searching: false,
-            //mỗi khi thay đổi dữ liệu nó sẻ xoá cái cũ tạo cái mới á
-            destroy: true,
-            columns: [
-                {data: 'id'},
-                {data: 'customerCode'},
-                {data: 'fullName'},
-                {data: 'phoneNumber'},
-                {data: 'group.title'},
-                {data: 'debtTotal'},
-                {data: 'spendTotal'},
-                {data: "quantityItemOrder"}],
-            // columnDefs đếm từ o tới á
-            columnDefs: [
-                {
-                    targets: 0,
-                    render: function (data, type, row, meta) {
-                        return `
-                               <input type="checkbox" value="check_none" />
-                            `
-                    }
-                },
-                {
-                    targets: 1,
-                    render: function (data, type, row, meta) {
-                        return `<a href="/admin/customers/customerInfo/${row.id}">${row.customerCode}</a>`;
-                    }
-                },
-
-
-            ],
-        })
-
-    }
-    function showAllCustomerGroup() {
-        return $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "GET",
-
-            url: origin +"/api/customer_groups",
-        })
-            .done((data) => {
-
-                $.each(data, (i, item) => {
-                    let str = `<option value="${item.id}">${item.title}</option>`;
-                    page.dialogs.elements.groupCustomer.append(str);
-                });
+                ],
             })
-            .fail((jqXHR) => {
-                CustomerApp.IziToast.showErrorAlert("Lỗi tại customer Group")
-            })
-    }
 
-
-    function checkAllSelect(){
-        let checkAll = $("#checkAll");
-        arrayIdCustomer = [];
-        if (checkAll.is(":checked")) {
-            $("#tbCustomer > tbody input").each(function () {
-                $(this).prop("checked", true);
-                arrayIdCustomer.push($(this).val());
-            })
-        } else {
-            $("#tbCustomer > tbody input").each(function () {
-                $(this).prop("checked", false);
-            })
-        }
-
-    }
-    
-
-    $("#ddl-group-customer").on('change', () => {
-        let groupId = $("#ddl-group-customer :selected").val();
-        let status = $("#ddl-status :selected").val();
-
-
-        console.log(groupId)
-        findCustomerByGroup(groupId)
-        if(status === -1 || groupId === -1){
-            page.commands.getAllCustomers();
-        }
-    });
-    $("#ddl-status").on('change', () => {
-        let groupId = $("#ddl-group-customer :selected").val();
-        let status = $("#ddl-status :selected").val();
-        console.log(status)
-        findCustomerByStatus(status)
-        if(status === -1 || groupId === -1){
-            page.commands.getAllCustomers();
-        }
-    });
-
-    $('#btnImportFileCustomers').on('click', () => {
-        page.commands.showLoading();
-        let data = new FormData();
-        let file = $('#formFileCustomers')[0].files[0];
-        data.append('file',file);
-        $.ajax({
-            url: origin +'/api/customers/upload',
-            processData: false,
-            contentType: false,
-            data: data,
-            type: 'POST'
-        }).done(function(result) {
-            $("#modalImportFileCustomers").modal("hide");
-            $("#frmFileCustomers")[0].reset();
-            page.commands.getAllCustomers();
-            page.commands.closeLoading();
-            CustomerApp.IziToast.showSuccessAlert("Tải file lên thành công!")
-        }).fail((jqXHR) => {
-            CustomerApp.IziToast.showErrorAlert("Tải file lên không thành công!")
-            page.commands.closeLoading();
-        })
-
-
-    });
-
-    function handleSaveFilter(){
-        $("#btn-save-search").on("click", ()=>{
-            localStorage.setItem(KEY_CUSTOMER_FILTER_SAVE, JSON.stringify(customerFilter));
-            CustomerApp.IziToast.showSuccessAlert(CustomerApp.AlertMessageVi.SUCCESS_FILTERED);
-        });
-    }
-
-    page.loadData = () => {
-        page.commands.getAllCustomers();
-        showAllCustomerGroup()
-
-        handleSaveFilter();
-    }
-
-    $(() => {
-
-        page.loadData()
-
-    });
-    let customerGroups;
-    let employees;
-
-
-    const getChanges = (previous, current) => {
-        if (isPrimitive(previous) && isPrimitive(current)) {
-            if (previous === current) {
-                return "";
-            }
-
-            return current;
-        }
-
-        if (isObject(previous) && isObject(current)) {
-            const diff = getChanges(Object.entries(previous), Object.entries(current));
-
-            return diff.reduce((merged, [key, value]) => {
-                return {
-                    ...merged,
-                    [key]: value
+            let theadFirst = $("#tbCustomer thead tr th");
+            let removeSorting = setInterval(() => {
+                let tdRow = $("#tbCustomer tbody td input");
+                if ($(theadFirst[0]).hasClass("sorting_asc")) {
+                    $(theadFirst[0]).removeClass('sorting_asc');
+                    clearInterval(removeSorting);
                 }
-            }, {});
+            })
+
         }
 
-        const changes = [];
+        CustomerApp.page.commands.findCustomerByGroup = (groupId) => {
+            $("#tbCustomer").DataTable({
+                // chuyển tiếng việt cho datatable
+                language: CustomerApp.dataTableDetails.language,
+                ajax: {
+                    contentType: 'application/json',
+                    url: origin + "/api/customers/findAllCustomerByGroupId/" + groupId,
+                    type: "GET",
+                    dataSrc: ''
+                },
+                lengthMenu: [
+                    [5, 10, 20, -1],
+                    ["5", "10", "20", "All"]
+                ],
+                searching: false,
+                destroy: true,
+                columns: [
+                    {data: 'customerCode'},
+                    {data: 'id'},
+                    {data: 'fullName'},
+                    {data: 'phoneNumber'},
+                    {data: 'group.title'},
+                    {data: 'debtTotal'},
+                    {data: 'spendTotal'},
+                    {data: "quantityItemOrder"}],
+                columnDefs: [
+                    {
+                        targets: 0,
+                        render: function (data, type, row, meta) {
+                            return `
+                               <input type="checkbox" value="check_none" />
+                            `
+                        }
+                    },
+                    {
+                        targets: 1,
+                        render: function (data, type, row, meta) {
+                            return `<a href="/admin/customers/customerInfo/${row.id}">${row.customerCode}</a>`;
+                        }
+                    },
+                ],
+            })
 
-        if (JSON.stringify(previous) === JSON.stringify(current)) {
+        }
+
+        CustomerApp.page.commands.findCustomerByStatus = (status) => {
+
+            $("#tbCustomer").DataTable({
+                // chuyển tiếng việt cho datatable
+                language: CustomerApp.dataTableDetails.language,
+                ajax: {
+                    contentType: 'application/json',
+                    url: origin + "/api/customers/findAllCustomerByStatus/" + status,
+                    type: "GET",
+                    dataSrc: ''
+                },
+                lengthMenu: [
+                    [5, 10, 20, -1],
+                    ["5", "10", "20", "All"]
+                ],
+
+                searching: false,
+                //mỗi khi thay đổi dữ liệu nó sẻ xoá cái cũ tạo cái mới á
+                destroy: true,
+                columns: [
+                    {data: 'id'},
+                    {data: 'customerCode'},
+                    {data: 'fullName'},
+                    {data: 'phoneNumber'},
+                    {data: 'group.title'},
+                    {data: 'debtTotal'},
+                    {data: 'spendTotal'},
+                    {data: "quantityItemOrder"}],
+                // columnDefs đếm từ o tới á
+                columnDefs: [
+                    {
+                        targets: 0,
+                        render: function (data, type, row, meta) {
+                            return `
+                               <input type="checkbox" value="check_none" />
+                            `
+                        }
+                    },
+                    {
+                        targets: 1,
+                        render: function (data, type, row, meta) {
+                            return `<a href="/admin/customers/customerInfo/${row.id}">${row.customerCode}</a>`;
+                        }
+                    },
+                ],
+            })
+
+        }
+
+        CustomerApp.page.commands.showAllCustomerGroup = () => {
+            return $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "GET",
+
+                url: origin + "/api/customer_groups",
+            })
+                .done((data) => {
+
+                    $.each(data, (i, item) => {
+                        let str = `<option value="${item.id}">${item.title}</option>`;
+                        CustomerApp.page.dialogs.elements.groupCustomer.append(str);
+                    });
+                })
+                .fail((jqXHR) => {
+                    CustomerApp.IziToast.showErrorAlert("Lỗi tại customer Group")
+                })
+        }
+
+
+        CustomerApp.page.commands.checkAllSelect = () => {
+            let checkAll = $("#checkAll");
+            arrayIdCustomer = [];
+            if (checkAll.is(":checked")) {
+                $("#tbCustomer > tbody input").each(function () {
+                    $(this).prop("checked", true);
+                    arrayIdCustomer.push($(this).val());
+                })
+            } else {
+                $("#tbCustomer > tbody input").each(function () {
+                    $(this).prop("checked", false);
+                })
+            }
+
+        }
+
+
+        $("#ddl-group-customer").on('change', () => {
+            let groupId = $("#ddl-group-customer :selected").val();
+            let status = $("#ddl-status :selected").val();
+
+
+            console.log(groupId)
+            CustomerApp.page.commands.findCustomerByGroup(groupId)
+            if (status === -1 || groupId === -1) {
+                CustomerApp.page.commands.getAllCustomers();
+            }
+        });
+        $("#ddl-status").on('change', () => {
+            let groupId = $("#ddl-group-customer :selected").val();
+            let status = $("#ddl-status :selected").val();
+            console.log(status)
+            CustomerApp.page.commands.findCustomerByStatus(status)
+            if (status === -1 || groupId === -1) {
+                CustomerApp.page.commands.getAllCustomers();
+            }
+        });
+
+        $('#btnImportFileCustomers').on('click', () => {
+            CustomerApp.page.commands.showLoading();
+            let data = new FormData();
+            let file = $('#formFileCustomers')[0].files[0];
+            data.append('file', file);
+            $.ajax({
+                url: origin + '/api/customers/upload',
+                processData: false,
+                contentType: false,
+                data: data,
+                type: 'POST'
+            }).done(function (result) {
+                $("#modalImportFileCustomers").modal("hide");
+                $("#frmFileCustomers")[0].reset();
+                CustomerApp.page.commands.getAllCustomers();
+                CustomerApp.page.commands.closeLoading();
+                CustomerApp.IziToast.showSuccessAlert("Tải file lên thành công!")
+            }).fail((jqXHR) => {
+                CustomerApp.IziToast.showErrorAlert("Tải file lên không thành công!")
+                CustomerApp.page.commands.closeLoading();
+            })
+
+
+        });
+
+        CustomerApp.page.commands.handleSaveFilter = () => {
+            $("#btn-save-search").on("click", () => {
+                localStorage.setItem(KEY_CUSTOMER_FILTER_SAVE, JSON.stringify(customerFilter));
+                CustomerApp.IziToast.showSuccessAlert(CustomerApp.AlertMessageVi.SUCCESS_FILTERED);
+            });
+        }
+
+        CustomerApp.page.loadData = () => {
+            CustomerApp.page.commands.getAllCustomers();
+            CustomerApp.page.commands.showAllCustomerGroup()
+
+            CustomerApp.page.commands.handleSaveFilter();
+        }
+
+        $(() => {
+
+            CustomerApp.page.loadData()
+
+        });
+        let customerGroups;
+        let employees;
+
+
+        const getChanges = (previous, current) => {
+            if (isPrimitive(previous) && isPrimitive(current)) {
+                if (previous === current) {
+                    return "";
+                }
+
+                return current;
+            }
+
+            if (isObject(previous) && isObject(current)) {
+                const diff = getChanges(Object.entries(previous), Object.entries(current));
+
+                return diff.reduce((merged, [key, value]) => {
+                    return {
+                        ...merged,
+                        [key]: value
+                    }
+                }, {});
+            }
+
+            const changes = [];
+
+            if (JSON.stringify(previous) === JSON.stringify(current)) {
+                return changes;
+            }
+
+            for (let i = 0; i < current.length; i++) {
+                const item = current[i];
+
+                if (JSON.stringify(item) !== JSON.stringify(previous[i])) {
+                    changes.push(item);
+                }
+            }
+
             return changes;
-        }
+        };
 
-        for (let i = 0; i < current.length; i++) {
-            const item = current[i];
+        const typeOf = o => Object.prototype.toString.call(o);
+        const isObject = o => o !== null && !Array.isArray(o) && typeOf(o).split(" ")[1].slice(0, -1) === "Object";
 
-            if (JSON.stringify(item) !== JSON.stringify(previous[i])) {
-                changes.push(item);
+        const isPrimitive = o => {
+            switch (typeof o) {
+                case "object": {
+                    return false;
+                }
+                case "function": {
+                    return false;
+                }
+                default: {
+                    return true;
+                }
             }
-        }
+        };
 
-        return changes;
-    };
-    function isEmpty(obj) {
-        for (var prop in obj) {
-            if (Object.prototype.hasOwnProperty.call(obj, prop)) {
-                return false;
-            }
-        }
 
-        return JSON.stringify(obj) === JSON.stringify({});
-    }
+        // function isEmpty(obj) {
+        //     for (var prop in obj) {
+        //         if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+        //             return false;
+        //         }
+        //     }
+        //
+        //     return JSON.stringify(obj) === JSON.stringify({});
+        // }
 
-    const typeOf = o => Object.prototype.toString.call(o);
-    const isObject = o => o !== null && !Array.isArray(o) && typeOf(o).split(" ")[1].slice(0, -1) === "Object";
 
-    const isPrimitive = o => {
-        switch (typeof o) {
-            case "object": {
-                return false;
-            }
-            case "function": {
-                return false;
-            }
-            default: {
-                return true;
-            }
-        }
-    };
-</script>
+        // function findCustomerByGroupAndStatus(groupId, status) {
+        //     $("#tbCustomer").DataTable({
+        //         // chuyển tiếng việt cho datatable
+        //         language: CustomerApp.dataTableDetails.language,
+        //         ajax: {
+        //             contentType: 'application/json',
+        //             url: origin + "/api/customers/findAllCustomerByGroupAndStatus/" + groupId + "," + status,
+        //             type: "GET",
+        //             dataSrc: ''
+        //         },
+        //         lengthMenu: [
+        //             [5, 10, 20, -1],
+        //             ["5", "10", "20", "All"]
+        //         ],
+        //         searching: false,
+        //         destroy: true,
+        //         columns: [
+        //             {data: 'id'},
+        //             {data: 'customerCode'},
+        //             {data: 'fullName'},
+        //             {data: 'phoneNumber'},
+        //             {data: 'group.title'},
+        //             {data: 'debtTotal'},
+        //             {data: 'spendTotal'},
+        //             {data: "quantityItemOrder"}],
+        //         columnDefs: [
+        //             {
+        //                 targets: 0,
+        //                 render: function (data, type, row, meta) {
+        //                     return `
+        //                        <input type="checkbox" value="check_none" />
+        //                     `
+        //                 }
+        //             },
+        //             {
+        //                 targets: 1,
+        //                 render: function (data, type, row, meta) {
+        //                     return `<a href="/admin/customers/customerInfo/${row.id}">${row.customerCode}</a>`;
+        //                 }
+        //             },
+        //
+        //         ],
+        //     })
+        //
+        // }
+    </script>
 </div>
 </body>
 </html>

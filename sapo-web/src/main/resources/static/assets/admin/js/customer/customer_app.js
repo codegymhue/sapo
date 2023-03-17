@@ -123,12 +123,13 @@ class CustomerApp {
             loadData: {},
             commands: {},
         },
-        initializeEventControl: {}
+        initializeEventControl: {},
+        util:{}
     }
 
     static dataTableDetails = {
         language: {
-            "processing": "Đang xử lý...",
+            "processing": "<i class='fa fa-refresh fa-spin' style='font-size: 50pt; z-index: 100000'></i>",
             "aria": {
                 "sortAscending": ": Sắp xếp thứ tự tăng dần",
                 "sortDescending": ": Sắp xếp thứ tự giảm dần"

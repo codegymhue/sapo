@@ -711,7 +711,7 @@
 
     let createAddressParam = new CreateAddressParam();
 
-    function createCustomer() {
+    CustomerApp.page.commands.createCustomer = () => {
         $('#btnCreateCustomer').on('click', () => {
             customer.fullName = $('#nameCreate').val();
             customer.fax = $('#faxCreate').val();
@@ -736,10 +736,6 @@
             createAddressParam.wardName = $('#ward :selected').text();
             createAddressParam.phoneNumber = $('#phoneCreate').val();
             customer.createAddressParam = createAddressParam;
-            // console.log("đay là customer")
-            // console.log(customer.gender)
-            // console.log(customer)
-            console.log(createAddressParam)
             $.ajax({
                 "headers": {
                     "accept": "application/json",
@@ -767,7 +763,7 @@
     }
 
 
-    function getAllProvinces() {
+    CustomerApp.page.commands.getAllProvinces = () => {
         return $.ajax({
             headers: {
                 "accept": "application/json",
@@ -794,7 +790,7 @@
             })
     }
 
-    function getAllDistrictsByProvinceId(provinceId) {
+    CustomerApp.page.commands.getAllDistrictsByProvinceId = (provinceId) => {
         $("#district").empty();
         $("#districtUpdate").empty();
         return $.ajax({
@@ -823,7 +819,7 @@
             })
     }
 
-    function getAllWardsByDistrictId(districtId) {
+    CustomerApp.page.commands.getAllWardsByDistrictId = (districtId) => {
         $("#ward").empty();
         $('#wardUpdate').empty();
         return $.ajax({
@@ -855,46 +851,46 @@
             })
     }
 
-    getAllProvinces().then(() => {
+    CustomerApp.page.commands.getAllProvinces().then(() => {
         let provinceId = $("#province").val();
 
-        getAllDistrictsByProvinceId(provinceId).then(() => {
+        CustomerApp.page.commands.getAllDistrictsByProvinceId(provinceId).then(() => {
 
             let districtId = $("#district").val();
 
-            getAllWardsByDistrictId(districtId)
+            CustomerApp.page.commands.getAllWardsByDistrictId(districtId)
 
 
         });
     });
     $("#province").on('change', () => {
         let provinceId = $("#province").val();
-        getAllDistrictsByProvinceId(provinceId).done(() => {
+        CustomerApp.page.commands.getAllDistrictsByProvinceId(provinceId).done(() => {
             let districtId = $("#district").val();
-            getAllWardsByDistrictId(districtId);
+            CustomerApp.page.commands.getAllWardsByDistrictId(districtId);
         })
 
         $("#district").on('change', () => {
             let districtId = $("#district").val();
-            getAllWardsByDistrictId(districtId);
+            CustomerApp.page.commands.getAllWardsByDistrictId(districtId);
         })
     });
 
     $("#provinceUpdate").on("change", () => {
         let provinceId = $("#provinceUpdate").val();
-        getAllDistrictsByProvinceId(provinceId).then(() => {
+        CustomerApp.page.commands.getAllDistrictsByProvinceId(provinceId).then(() => {
             let districtId = $("#districtUpdate").val();
-            getAllWardsByDistrictId(districtId);
+            CustomerApp.page.commands.getAllWardsByDistrictId(districtId);
         })
     })
 
     $("#districtUpdate").on("change", () => {
         let districtId = $("#districtUpdate").val();
-        getAllWardsByDistrictId(districtId);
+        CustomerApp.page.commands.getAllWardsByDistrictId(districtId);
     });
 
 
-    function getAllEmployeeSelect() {
+    CustomerApp.page.commands.getAllEmployeeSelect = () => {
         return $.ajax({
             headers: {
                 "accept": "application/json",
@@ -915,7 +911,7 @@
             })
     }
 
-    function getAllCustomerGroup() {
+    CustomerApp.page.commands.getAllCustomerGroup = () => {
         return $.ajax({
             headers: {
                 "accept": "application/json",
@@ -937,7 +933,7 @@
             })
     }
 
-    function getAllCustomerGender() {
+    CustomerApp.page.commands.getAllCustomerGender = () => {
         return $.ajax({
             headers: {
                 "accept": "application/json",
@@ -971,10 +967,10 @@
     $('#btnCloseCustomer').on('click', () => window.location.href = ("/admin/customers"))
 
 
-    createCustomer();
-    // getAllCustomerGender();
-    getAllCustomerGroup();
-    getAllEmployeeSelect();
+    CustomerApp.page.commands.createCustomer();
+    // CustomerApp.page.commands.getAllCustomerGender();
+    CustomerApp.page.commands.getAllCustomerGroup();
+    CustomerApp.page.commands.getAllEmployeeSelect();
 
     $("#formCreate").validate({
         rules: {
@@ -990,7 +986,7 @@
             }
         },
         submitHandler: function () {
-            createCustomer();
+            CustomerApp.page.commands.createCustomer();
         }
     });
 
