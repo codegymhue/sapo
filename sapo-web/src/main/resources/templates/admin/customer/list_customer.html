@@ -10,6 +10,10 @@
 <style>
     .dataTables_wrapper{
         overflow-x: scroll;
+        overflow-y: hidden;
+    }
+    .table > tbody > tr > td{
+        padding: 10px;
     }
 </style>
 <body style="font-size: 12px">
@@ -235,14 +239,15 @@
                     <table id="tbCustomer" class="table table-hover" style="width: 100%;">
                         <thead style="background-color: #f4f6f8; height: 55px">
                         <tr>
-                            <th class="align-middle" style="width:30px">
-                                <i class="fa-solid fa-gear" style="float: left;" data-toggle="modal" data-target="#modal-config-table"></i>
+                            <th class="align-middle" style="width:12px">
+                                <i style="font-size: 13pt" class="fa-solid fa-gear" data-toggle="modal" data-target="#modal-config-table"></i>
                                 <!-- <input style="cursor:pointer" id="checkAll" type="checkbox" value=""
                                 data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả" style="float: right;"/ -->
-
-                                <label for="checkAll" style="cursor:pointer; float: right;">
-                                    <input style="cursor:pointer" id="checkAll" type="checkbox" value=""
-                                           data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả" onchange="checkAllSelect()">
+                            </th>
+                            <th class="align-middle" scope="col" width="12px">
+                                <label for="checkAll" style="cursor:pointer;">
+                                <input style="cursor:pointer" id="checkAll" type="checkbox" value=""
+                                       data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả" onchange="checkAllSelect()">
                                 </label>
                             </th>
                             <th class="align-middle" scope="col">Mã khách hàng</th>
@@ -275,7 +280,7 @@
 <!-- <script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
 <th:block th:replace="/admin/customer/modal_export_file.html"/>
 <th:block th:replace="/admin/customer/modal-config-table.html"/>
-<th:block th:replace="/admin/customer/modal_filter::modal_filter"/>
+<th:block th:replace="/admin/customer/modal_filter"/>
 <th:block th:replace="/layout/script :: script"/>
 <th:block th:replace="/admin/customer/modal_select_column.html"/>
 
@@ -663,6 +668,7 @@
             searching: false,
             destroy: true,
             columns: [
+                {data: "id"},
                 {data: 'id'},
                 {data: 'phoneNumber'},
                 {data: 'customerCode'},
@@ -671,22 +677,29 @@
                 {data: 'debtTotal'},
                 {data: 'spendTotal'},
                 {data: "quantityItemOrder"}],
-             columnDefs: [
-             {
-                            targets: 0,
-                            "orderable": false,
-                            render: function (data, type, row, meta) {
-                                return `
-                               <input id=${row.id} type="checkbox" value="check_none" style="float:right"/>
-                            `
-                            }
-                        },
-             {
-                            targets: 1,
-                            render: function (data, type, row, meta) {
-                                return `<a href="/admin/customers/${row.id}" style="text-decoration: none">${row.customerCode}</a>`;
-                            }
-                        },
+            columnDefs: [
+            {
+                targets: 0,
+                "orderable": false,
+                render: function (data, type, row, meta) {
+                    return ""
+                }
+            },
+            {
+                targets: 1,
+                "orderable": false,
+                render: function (data, type, row, meta) {
+                    return `
+                    <input id=${row.id} type="checkbox" value="check_none"/>
+                `
+                }
+            },
+            {
+                targets: 2,
+                render: function (data, type, row, meta) {
+                    return `<a href="/admin/customers/${row.id}" style="text-decoration: none">${row.customerCode}</a>`;
+                }
+            },
 
 
              ],

@@ -35,6 +35,12 @@ public class CustomerFilter {
 
     private Date createdTo;
 
+    private Date birthDayFrom;
+
+    private Date birthDayTo;
+
+    private Date birthDay;
+
     private Integer draw;           //page hiện tại
 
     private Integer length;            // số lượng trên 1 trang
