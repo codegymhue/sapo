@@ -151,27 +151,31 @@
             let data = {data: thead[i]}
             column.push(data);
         }
-        let elementCheckBox = `<input type="checkbox" value="check_none" style="float:right"/>`;
+        function setElementCheckBox(id){
+            let elementCheckBox = `<input id="${id}" type="checkbox" value="check_none"/>`;
+            if(thead.length > 0){
+                return elementCheckBox = `<input id="${id}" type="checkbox" value="check_none"/>`;;
+            }else{
+                return elementCheckBox = `<input id="${id}" type="checkbox" value="check_none" style="opacity: 0"/>`;
+            }
+        }
         let elementCheckBoxAll = `<input style="cursor:pointer" id="checkAll" type="checkbox" value=""
                                  data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả" onchange="checkAllSelect()">`
-        if(thead.length===0){
-            elementCheckBox = ""
-        }
             $('#tbCustomer_wrapper').remove();
             let newTable = 
                 `<table id="tbCustomer" class="table table-hover" style="width: 100%;">
-                        <thead style="background-color: #f4f6f8; height: 55px">
+                    <thead style="background-color: #f4f6f8; height: 55px">
                         <tr>
-                            <th class="align-middle" style="width:0,5%">
-                                <i class="fa-solid fa-gear" data-toggle="modal" data-target="#modal-config-table"></i>
+                            <th class="align-middle" style="width:12px">
+                                <i style="font-size: 13pt" class="fa-solid fa-gear" data-toggle="modal" data-target="#modal-config-table"></i>
                             </th>
-                            <th>
-                                <label for="checkAll" style="cursor:pointer width="1%">
+                            <th class="align-middle">
+                                <label for="checkAll" style="cursor:pointer width="12px">
                                     ${thead.length > 0 ? elementCheckBoxAll:""}
                                 </label>
                             </th>
                         </tr>
-                        </thead>
+                    </thead>
                 </table>`;
             $("#tableCheckbox").append(newTable);
             let trHead = $("#tbCustomer thead tr");
@@ -468,9 +472,7 @@
                 targets: 1,
                 "orderable": false,
                 render: function (data, type, row, meta) {
-                    return `
-                    <input id=${row.id} type="checkbox" value="check_none"/>
-                `
+                    return setElementCheckBox(row.id)
                 }
             },
             {

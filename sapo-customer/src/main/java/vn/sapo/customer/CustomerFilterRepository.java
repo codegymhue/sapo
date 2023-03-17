@@ -79,16 +79,16 @@ public interface CustomerFilterRepository extends JpaRepository<Customer, Intege
 
             Predicate createdAtPredicate = criteriaBuilder.conjunction();
 
-            Path<Date> createdAtPath = root.get("createdAt");
+            Path<Instant> createdAtPath = root.get("createdAt");
 
             if (createdFrom != null && createdTo != null)
-                createdAtPredicate = criteriaBuilder.between(createdAtPath, createdFrom, createdTo);
+                createdAtPredicate = criteriaBuilder.between(createdAtPath, createdFrom.toInstant(), createdTo.toInstant());
             else {
                 if (createdFrom != null)
-                    createdAtPredicate = criteriaBuilder.greaterThan(createdAtPath, createdFrom);
+                    createdAtPredicate = criteriaBuilder.greaterThan(createdAtPath, createdFrom.toInstant());
 
                 if (createdTo != null)
-                    createdAtPredicate = criteriaBuilder.lessThan(createdAtPath, createdTo);
+                    createdAtPredicate = criteriaBuilder.lessThan(createdAtPath, createdTo.toInstant());
             }
             predicates.add(createdAtPredicate);
 
@@ -96,12 +96,21 @@ public interface CustomerFilterRepository extends JpaRepository<Customer, Intege
             Date birthDayTo = filter.getBirthDayTo();
 
             if(birthDayFrom != null && birthDayTo != null){
-                Predicate predicate = criteriaBuilder.between(root.get("birthDay"), birthDayFrom, birthDayTo);
+                Predicate predicate = criteriaBuilder.between(root.get("birthday"), birthDayFrom.toInstant(), birthDayTo.toInstant());
                 predicates.add(predicate);
+            }else{
+                if(birthDayFrom != null){
+                    Predicate predicate = criteriaBuilder.greaterThan(root.get("birthday"), birthDayFrom.toInstant());
+                    predicates.add(predicate);
+                }
+                if(birthDayTo != null){
+                    Predicate predicate = criteriaBuilder.lessThan(root.get("birthday"), birthDayTo.toInstant());
+                    predicates.add(predicate);
+                }
             }
             Date birthDay = filter.getBirthDay();
             if(birthDay != null){
-                Predicate predicate = criteriaBuilder.equal(root.get("birthDay"), birthDay);
+                Predicate predicate = criteriaBuilder.equal(root.get("birthday"), birthDay.toInstant());
                 predicates.add(predicate);
             }
 
