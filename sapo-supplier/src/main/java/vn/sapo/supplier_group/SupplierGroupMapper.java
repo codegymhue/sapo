@@ -1,12 +1,12 @@
-package vn.sapo.supplierGroup;
+package vn.sapo.supplier_group;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import vn.sapo.entities.supplier.SupplierGroup;
-import vn.sapo.supplierGroup.dto.CreateSupGroupParam;
-import vn.sapo.supplierGroup.dto.UpdateSupGroupParam;
-import vn.sapo.supplierGroup.dto.SupplierGroupResult;
+import vn.sapo.supplier_group.dto.CreateSupGroupParam;
+import vn.sapo.supplier_group.dto.UpdateSupGroupParam;
+import vn.sapo.supplier_group.dto.SupplierGroupResult;
 
 @Component
 public class SupplierGroupMapper {
