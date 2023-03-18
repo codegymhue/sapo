@@ -290,9 +290,9 @@ class CustomerApp {
                 ]
             },
             "emptyTable": "Không có dữ liệu",
-            "info": "Hiển thị _START_ tới _END_ của _TOTAL_ dữ liệu",
+            "info": " Từ _START_ tới _END_ trên tổng _TOTAL_",
             "infoEmpty": "Hiển thị 0 tới 0 của 0 dữ liệu",
-            "lengthMenu": "Hiển thị _MENU_ dữ liệu",
+            "lengthMenu": "Hiển thị _MENU_ kết quả ",
             "loadingRecords": "Đang tải...",
             "paginate": {
                 "first": "Đầu tiên",

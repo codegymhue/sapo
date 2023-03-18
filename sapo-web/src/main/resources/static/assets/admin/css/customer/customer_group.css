@@ -4,11 +4,15 @@
 }
 
 #tbCustomerGroup {
-    width: 100%;
+    width: 100% !important;
 }
 
 #tbCustomerGroup thead {
     background: #f4f6f8;
+}
+
+#tbCustomerGroup thead tr th {
+    font-weight: 500;
 }
 
 #tbCustomerGroup tbody tr:hover {
@@ -981,4 +985,14 @@ label[data-shrink=false] + .MuiInputBase-formControl .MuiInputBase-input:focus::
     margin-right: -17px;
     margin-bottom: -17px;
     min-height: 17px;
+}
+
+.dataTables_length{
+    align-self: center;
+    padding-right: 10px;
+}
+
+.bottom{
+    display: flex;
+    float: right;
 }

@@ -206,20 +206,22 @@
                     <table id="tbCustomer" class="table table-hover jss79">
                         <thead>
                         <tr>
-                            <td class="align-middle ffDJGna">
-                                <i class="fa-solid fa-gear" data-toggle="modal" data-target="#modal-config-table"></i>
-                                <label for="checkAll" class="ffDJGnb">
+<!--                            align-middle ffDJGna-->
+                            <th class="ffDJGne">
+                                <i class="fa-solid fa-gear ffDJGnf" data-toggle="modal" data-target="#modal-config-table"></i>
+                                <label for="checkAll" class="ffDJGnb ffDJGnf">
                                     <input id="checkAll" type="checkbox" data-bs-toggle="tooltip"
-                                           data-bs-placement="top" title="Tất cả" onchange="CustomerApp.page.commands.checkAllSelect()">
+                                           data-bs-placement="top" title="Tất cả"
+                                           onchange="CustomerApp.page.commands.checkAllSelect()">
                                 </label>
-                            </td>
-                            <td class="align-middle" scope="col">Mã khách hàng</td>
-                            <td class="align-middle" scope="col">Tên khách hàng</td>
-                            <td class="align-middle" scope="col">Số điện thoại</td>
-                            <td class="align-middle" scope="col">Nhóm khách hàng</td>
-                            <td class="align-middle" scope="col">Công nợ hiện tại</td>
-                            <td class="align-middle" scope="col">Tổng chi tiêu</td>
-                            <td class="align-middle" scope="col">Tổng SL đơn hàng</td>
+                            </th>
+                            <th class="align-middle" scope="col">Mã khách hàng</th>
+                            <th class="align-middle" scope="col">Tên khách hàng</th>
+                            <th class="align-middle" scope="col">Số điện thoại</th>
+                            <th class="align-middle" scope="col">Nhóm khách hàng</th>
+                            <th class="align-middle" scope="col">Công nợ hiện tại</th>
+                            <th class="align-middle" scope="col">Tổng chi tiêu</th>
+                            <th class="align-middle" scope="col">Tổng SL đơn hàng</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -238,7 +240,7 @@
 
 
     <script src="/assets/admin/js/customer/customer_app.js"></script>
-<!--    <script src="/assets/admin/js/product/app.js"></script>-->
+    <!--    <script src="/assets/admin/js/product/app.js"></script>-->
     <script>
         let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -329,7 +331,7 @@
 
         CustomerApp.page.commands.drawDataTable = () => {
             $("#tbCustomer").DataTable({
-                // chuyển tiếng việt cho datatable
+                dom: '<"top">rt<"bottom"lifp><"clear">',
                 "destroy": true,
                 "processing": true,
                 "serverSide": true,
@@ -357,7 +359,8 @@
                 ],
                 searching: false,
                 columns: [
-                    {data: 'id'},
+                    {data: 'id',
+                        className: "ffDJGnd"},
                     {data: 'phoneNumber'},
                     {data: 'customerCode'},
                     {data: 'fullName'},
@@ -368,18 +371,31 @@
                 columnDefs: [
                     {
                         targets: 0,
-                        "orderable": false,
+                        orderable: false,
                         render: function (data, type, row, meta) {
                             return `
-                               <input id=${row.id} type="checkbox" value="check_none" style="float:right"/>
+                               <input id=${row.id} type="checkbox" value="check_none"/>
                             `
                         }
                     },
                     {
                         targets: 1,
+                        orderable: false,
                         render: function (data, type, row, meta) {
                             return `<a href="/admin/customers/${row.id}" style="text-decoration: none">${row.customerCode}</a>`;
                         }
+                    },
+                    {
+                        targets: 3,
+                        orderable: false,
+                    },
+                    {
+                        targets: 4,
+                        orderable: false,
+                    },
+                    {
+                        targets: 7,
+                        orderable: false,
                     },
                 ],
             })

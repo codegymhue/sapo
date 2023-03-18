@@ -4833,11 +4833,22 @@ html {
 
 #tbCustomer thead {
     background-color: #f4f6f8;
-    height: 55px
+    height: 55px;
+}
+
+#tbCustomer thead tr th{
+    font-weight: 500;
 }
 
 #tbCustomer tbody tr {
     cursor: pointer;
+}
+
+#tbCustomer tbody tr td:first-child{
+    width: 36px;
+    height: 20px;
+    display: flex;
+    justify-content: end;
 }
 
 a.hover:hover {
@@ -4947,9 +4958,9 @@ button.btnGear {
     margin-left: 10px;
 }
 
-.ffDJGna {
-    width: 35px
-}
+/*.ffDJGna {*/
+/*    width: 35px*/
+/*}*/
 
 .ffDJGnb{
     float: right;
@@ -4957,4 +4968,30 @@ button.btnGear {
 
 .ffDJGnc{
     text-decoration: none;
+}
+
+.bottom{
+    display: flex;
+    float: right;
+}
+
+.dataTables_length{
+    align-self: center;
+    padding-right: 10px;
+}
+
+.ffDJGnd{
+    float:right;
+    padding-right: 10px !important;
+}
+
+.ffDJGne{
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ffDJGnf{
+    align-self: center;
 }
