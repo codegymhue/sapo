@@ -16,12 +16,12 @@ import java.util.List;
 public interface CustomerGroupFilterRepository
         extends JpaRepository<CustomerGroup, Integer>, JpaSpecificationExecutor<CustomerGroup> {
 
-    default Page<CustomerGroup> findAllByFilters(CustomerGroupFilter filter, Pageable pageable) {
-        return findAll((root, criteriaQuery, criteriaBuilder) -> {
-
-            List<Predicate> predicates = new ArrayList<>();
-
-            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
-        }, pageable);
-    }
+//    default Page<CustomerGroup> findAllByFilters(CustomerGroupFilter filter, Pageable pageable) {
+//        return findAll((root, criteriaQuery, criteriaBuilder) -> {
+//
+//            List<Predicate> predicates = new ArrayList<>();
+//
+//            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+//        }, pageable);
+//    }
 }

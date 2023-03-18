@@ -39,7 +39,7 @@
                     </div>
                     <div class="col-4">
                       <span class="form-check">
-                          <input class="form-check-input titleSelectColumn" name="customerCode" type="checkbox" value="customerCode" id="customerCodeColumn" checked>
+                          <input class="form-check-input titleSelectColumn" name="customerCode" type="checkbox" value="customerCode" id="customerCodeColumn" checked onclick="return false">
                           <label class="form-check-label titleSelectColumn" for="customerCodeColumn">
                             Mã khách hàng
                           </label>
@@ -56,6 +56,22 @@
                 </div>
                 <div class="row mb-4">
                     <div class="col-4">
+                        <div class="form-check">
+                            <input class="form-check-input titleSelectColumn" name="endow" type="checkbox" value="endow" id="endowColumn" checked>
+                            <label class="form-check-label titleSelectColumn" for="debtTotalColumn">
+                              Áp dụng ưu đãi
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="form-check">
+                          <input class="form-check-input titleSelectColumn" name="email" type="checkbox" value="email" id="emailColumn" checked>
+                          <label class="form-check-label titleSelectColumn" for="emailColumn">
+                            Email
+                          </label>
+                      </div>
+                  </div>
+                    <div class="col-4">
                         <span class="form-check">
                             <input class="form-check-input titleSelectColumn" name="phoneNumber" type="checkbox" value="debtTotal" id="phoneNumberColumn" checked>
                             <label class="form-check-label titleSelectColumn" for="phoneNumberColumn">
@@ -63,31 +79,197 @@
                             </label>
                         </span>
                     </div>
-                    <div class="col-4">
-                        <div class="form-check">
-                            <input class="form-check-input titleSelectColumn" name="debtTotal" type="checkbox" value="debtTotal" id="debtTotalColumn" checked>
-                            <label class="form-check-label titleSelectColumn" for="debtTotalColumn">
-                              Tổng công nợ
-                            </label>
-                        </div>
+                </div>
+                <div class="row mb-4">
+                  <div class="col-4">
+                      <div class="form-check">
+                          <input class="form-check-input titleSelectColumn" name="birthDay" type="checkbox" value="birthDay" id="birthDayColumn" checked>
+                          <label class="form-check-label titleSelectColumn" for="birthDayColumn">
+                            Ngày sinh
+                          </label>
+                      </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-check">
+                        <input class="form-check-input titleSelectColumn" name="gender" type="checkbox" value="gender" id="genderColumn" checked>
+                        <label class="form-check-label titleSelectColumn" for="genderColumn">
+                            Giới tính
+                        </label>
                     </div>
-                    <div class="col-4">
-                        <div class="form-check">
-                            <input class="form-check-input titleSelectColumn" name="spendTotal" type="checkbox" value="spendTotal" id="spendTotalColumn" checked>
-                            <label class="form-check-label titleSelectColumn" for="spendTotalColumn">
-                              Tổng chi tiêu
-                            </label>
-                        </div>
+                </div>
+                  <div class="col-4">
+                      <span class="form-check">
+                          <input class="form-check-input titleSelectColumn" name="contact" type="checkbox" value="contact" id="contactColumn" checked>
+                          <label class="form-check-label titleSelectColumn" for="contactColumn">
+                            Người liên hệ
+                          </label>
+                      </span>
+                  </div>
+                </div>
+                <div class="row mb-4">
+                  <div class="col-4">
+                      <div class="form-check">
+                          <input class="form-check-input titleSelectColumn" name="contactPhone" type="checkbox" value="contactPhone" id="contactPhoneColumn" checked>
+                          <label class="form-check-label titleSelectColumn" for="contactPhoneColumn">
+                            Người liên hệ - SĐT
+                          </label>
+                      </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-check">
+                        <input class="form-check-input titleSelectColumn" name="contactEmail" type="checkbox" value="contactEmail" id="contactEmail" checked>
+                        <label class="form-check-label titleSelectColumn" for="contactEmail">
+                          Người liên hệ - Email
+                        </label>
                     </div>
+                  </div>
+                  <div class="col-4">
+                      <span class="form-check">
+                          <input class="form-check-input titleSelectColumn" name="address" type="checkbox" value="address" id="addressColumn" checked>
+                          <label class="form-check-label titleSelectColumn" for="addressColumn">
+                            Địa chỉ
+                          </label>
+                      </span>
+                  </div>
                 </div>
                 <div class="row mb-4">
                     <div class="col-4">
                         <span class="form-check">
-                            <input class="form-check-input titleSelectColumn" name="quantityProductOrder" type="checkbox" value="debtTotal" id="quantityProductOrderColumn" checked>
-                            <label class="form-check-label titleSelectColumn" for="quantityProductOrderColumn">
-                              Tổng SL đơn hàng
+                            <input class="form-check-input titleSelectColumn" name="province" type="checkbox" value="province" id="provinceColumn" checked>
+                            <label class="form-check-label titleSelectColumn" for="provinceColumn">
+                              Tỉnh thành
                             </label>
                         </span>
+                    </div>
+                    <div class="col-4">
+                      <span class="form-check">
+                          <input class="form-check-input titleSelectColumn" name="district" type="checkbox" value="district" id="districtColumn" checked>
+                          <label class="form-check-label titleSelectColumn" for="districtColumn">
+                            Quận/huyện
+                          </label>
+                      </span>
+                    </div>
+                    <div class="col-4">
+                      <span class="form-check">
+                          <input class="form-check-input titleSelectColumn" name="ward" type="checkbox" value="ward" id="wardColumn" checked>
+                          <label class="form-check-label titleSelectColumn" for="wardColumn">
+                            Phường xã
+                          </label>
+                      </span>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                  <div class="col-4">
+                    <span class="form-check">
+                        <input class="form-check-input titleSelectColumn" name="website" type="checkbox" value="website" id="websiteColumn" checked>
+                        <label class="form-check-label titleSelectColumn" for="websiteColumn">
+                          Website
+                        </label>
+                    </span>
+                  </div>
+                  <div class="col-4">
+                    <span class="form-check">
+                        <input class="form-check-input titleSelectColumn" name="fax" type="checkbox" value="fax" id="faxColumn" checked>
+                        <label class="form-check-label titleSelectColumn" for="faxColumn">
+                          Fax
+                        </label>
+                    </span>
+                  </div>
+                  <div class="col-4">
+                    <span class="form-check">
+                        <input class="form-check-input titleSelectColumn" name="taxCode" type="checkbox" value="taxCode" id="taxCodeColumn" checked>
+                        <label class="form-check-label titleSelectColumn" for="taxCodeColumn">
+                          Tax
+                        </label>
+                    </span>
+                </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-4">
+                      <span class="form-check">
+                          <input class="form-check-input titleSelectColumn" name="description" type="checkbox" value="description" id="descriptionColumn" checked>
+                          <label class="form-check-label titleSelectColumn" for="descriptionColumn">
+                            Mô tả
+                          </label>
+                      </span>
+                    </div>
+                    <div class="col-4">
+                      <span class="form-check">
+                          <input class="form-check-input titleSelectColumn" name="policy" type="checkbox" value="policy" id="policyColumn" checked>
+                          <label class="form-check-label titleSelectColumn" for="policyColumn">
+                            Chính sách giá mặc định
+                          </label>
+                      </span>
+                    </div>
+                    <div class="col-4">
+                      <span class="form-check">
+                          <input class="form-check-input titleSelectColumn" name="discount" type="checkbox" value="discount" id="discountColumn" checked>
+                          <label class="form-check-label titleSelectColumn" for="discountColumn">
+                            Chiết khấu mặc đinh (%)
+                          </label>
+                      </span>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-4">
+                      <span class="form-check">
+                          <input class="form-check-input titleSelectColumn" name="paymentMethod" type="checkbox" value="paymentMethod" id="paymentMethodColumn" checked>
+                          <label class="form-check-label titleSelectColumn" for="paymentMethodColumn">
+                            Phương thức thanh toán mặc định
+                          </label>
+                      </span>
+                    </div>
+                    <div class="col-4">
+                      <span class="form-check">
+                          <input class="form-check-input titleSelectColumn" name="debtTotal" type="checkbox" value="debtTotal" id="debtTotalColumn" checked>
+                          <label class="form-check-label titleSelectColumn" for="debtTotalColumn">
+                            Nợ hiện tại
+                          </label>
+                      </span>
+                    </div>
+                    <div class="col-4">
+                      <span class="form-check">
+                          <input class="form-check-input titleSelectColumn" name="spendTotal" type="checkbox" value="spendTotal" id="spendTotalColumn" checked>
+                          <label class="form-check-label titleSelectColumn" for="spendTotalColumn">
+                            Tổng chi tiêu
+                          </label>
+                      </span>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-4">
+                      <span class="form-check">
+                          <input class="form-check-input titleSelectColumn" name="quantityProductOrder" type="checkbox" value="quantityProductOrder" id="quantityProductOrderColumn" checked>
+                          <label class="form-check-label titleSelectColumn" for="quantityProductOrderColumn">
+                            SL đơn hàng
+                          </label>
+                      </span>
+                    </div>
+                    <div class="col-4">
+                      <span class="form-check">
+                          <input class="form-check-input titleSelectColumn" name="quantityItemOrder" type="checkbox" value="quantityItemOrder" id="quantityItemOrderColumn" checked>
+                          <label class="form-check-label titleSelectColumn" for="quantityItemOrderColumn">
+                            Tổng SL sản phẩm đã mua
+                          </label>
+                      </span>
+                    </div>
+                    <div class="col-4">
+                      <span class="form-check">
+                          <input class="form-check-input titleSelectColumn" name="returnsTotal" type="checkbox" value="returnsTotal" id="returnsTotalColumn" checked>
+                          <label class="form-check-label titleSelectColumn" for="returnsTotalColumn">
+                            Tổng SL sản phẩm hoàn trả
+                          </label>
+                      </span>
+                  </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-4">
+                      <span class="form-check">
+                          <input class="form-check-input titleSelectColumn" name="lastDayOrder" type="checkbox" value="lastDayOrder" id="lastDayOrderColumn" checked>
+                          <label class="form-check-label titleSelectColumn" for="lastDayOrderColumn">
+                            Ngày mua cuối cùng
+                          </label>
+                      </span>
                     </div>
                 </div>
             </div>
