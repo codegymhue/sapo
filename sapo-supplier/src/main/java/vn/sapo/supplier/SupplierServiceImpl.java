@@ -14,7 +14,6 @@ import vn.sapo.supplier.dto.CreateSupplierParam;
 import vn.sapo.supplier.dto.SupplierFilter;
 import vn.sapo.supplier.dto.SupplierResult;
 import vn.sapo.supplier.dto.UpdateSupplierParam;
-import vn.sapo.supplierGroup.SupplierGroupRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,7 +31,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     @Transactional(readOnly = true)
     public List<SupplierResult> findAll() {
-        return supplierRepository.findAll()
+        return supplierRepository.findAllByStatusNot(SupplierStatus.DELETED)
                 .stream()
                 .map(supplierMapper::toDTO)
                 .collect(Collectors.toList());
@@ -76,6 +75,7 @@ public class SupplierServiceImpl implements SupplierService {
             }
         }
         supplierMapper.transferFields(param, supplier);
+        supplier.setTags(param.getTags());
         return supplierMapper.toDTO(supplier);
     }
 
@@ -83,6 +83,12 @@ public class SupplierServiceImpl implements SupplierService {
     @Transactional
     public void deleteById(Integer id) {
         supplierRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteByIdd(Integer id) {
+        supplierRepository.findById(id).ifPresent(supplier -> supplier.setStatus(SupplierStatus.DELETED));
     }
 
 
@@ -168,9 +174,7 @@ public class SupplierServiceImpl implements SupplierService {
     public String findSupplierCodeById(Integer id) {
         Supplier supplier = supplierRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Supplier not found"));
-        ;
-        String supplierCode = supplier.getSupplierCode();
-        return supplierCode;
+        return supplier.getSupplierCode();
     }
 
     @Override
@@ -184,7 +188,6 @@ public class SupplierServiceImpl implements SupplierService {
                     }
                     return null;
                 })
-                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
         return listTags.stream()

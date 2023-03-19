@@ -9,7 +9,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import vn.sapo.customers.dto.AddressResult;
 import vn.sapo.supplier.dto.SupplierResult;
-import vn.sapo.supplierGroup.dto.SupplierGroupResult;
+import vn.sapo.supplier_group.dto.SupplierGroupResult;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;

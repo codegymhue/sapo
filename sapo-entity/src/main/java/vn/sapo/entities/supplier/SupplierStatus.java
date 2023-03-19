@@ -6,7 +6,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 public enum SupplierStatus {
 
     AVAILABLE("AVAILABLE"),
-    UNAVAILABLE("UNAVAILABLE");
+    UNAVAILABLE("UNAVAILABLE"),
+    DELETED("DELETED");
 
     private final String value;
 
@@ -21,8 +22,8 @@ public enum SupplierStatus {
 
     @JsonCreator
     public static SupplierStatus parseSupplierStatus(String value) {
-        for (SupplierStatus supplierStatus : SupplierStatus.values())
-            if (supplierStatus.value.equals(value)) return supplierStatus;
+        for (SupplierStatus status : SupplierStatus.values())
+            if (status.value.equals(value)) return status;
 
         throw new IllegalArgumentException("The supplier status [" + value + "] is invalid!");
     }

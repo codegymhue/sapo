@@ -17,6 +17,8 @@ import java.util.Optional;
 
 @Repository
 public interface SupplierRepository extends JpaRepository<Supplier, Integer> {
+    List<Supplier> findAllByStatusNot(SupplierStatus status);
+
     Page<Supplier> findAll(Pageable pageable);
 
     @Query("SELECT s FROM Supplier AS s WHERE s.status = :status")

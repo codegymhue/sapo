@@ -214,10 +214,10 @@ public class SupplierAPI {
     }
 
 
-//    @DeleteMapping("/suppliers/DeleteAddress")
-//    public ResponseEntity<?> deleteAddressSupplier(@RequestBody List<Integer> arrayIdSupplier) {
-//        addressService.deleteSoftSupplier(arrayIdSupplier);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteSupplier(@PathVariable Integer id) {
+        supplierService.deleteByIdd(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }

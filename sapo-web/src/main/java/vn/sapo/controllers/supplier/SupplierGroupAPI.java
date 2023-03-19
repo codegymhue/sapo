@@ -5,13 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import vn.sapo.shared.exceptions.NotFoundException;
-import vn.sapo.supplierGroup.SupplierGroupService;
-import vn.sapo.supplierGroup.dto.CreateSupGroupParam;
-import vn.sapo.supplierGroup.dto.UpdateSupGroupParam;
-import vn.sapo.supplierGroup.dto.SupplierGroupResult;
+import vn.sapo.supplier_group.SupplierGroupService;
+import vn.sapo.supplier_group.dto.CreateSupGroupParam;
+import vn.sapo.supplier_group.dto.UpdateSupGroupParam;
+import vn.sapo.supplier_group.dto.SupplierGroupResult;
 
 import javax.validation.Valid;
 import java.util.ArrayList;

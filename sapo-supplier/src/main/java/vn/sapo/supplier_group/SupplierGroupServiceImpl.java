@@ -1,4 +1,4 @@
-package vn.sapo.supplierGroup;
+package vn.sapo.supplier_group;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -7,9 +7,9 @@ import vn.sapo.entities.supplier.SupplierGroup;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
-import vn.sapo.supplierGroup.dto.CreateSupGroupParam;
-import vn.sapo.supplierGroup.dto.SupplierGroupResult;
-import vn.sapo.supplierGroup.dto.UpdateSupGroupParam;
+import vn.sapo.supplier_group.dto.CreateSupGroupParam;
+import vn.sapo.supplier_group.dto.SupplierGroupResult;
+import vn.sapo.supplier_group.dto.UpdateSupGroupParam;
 
 import java.util.HashMap;
 import java.util.List;

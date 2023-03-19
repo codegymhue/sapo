@@ -23,6 +23,9 @@ public interface SupplierService {
 
     void deleteById(Integer id);
 
+
+    void deleteByIdd(Integer id);
+
     Map<String, Object> getAllSupplierPage(Integer pageNo, Integer pageSize, String status);
 
     @Transactional(readOnly = true)

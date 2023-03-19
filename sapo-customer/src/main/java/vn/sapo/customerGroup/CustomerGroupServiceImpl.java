@@ -24,10 +24,6 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     @Autowired
     private CustomerGroupRepository customerGroupRepository;
 
-//    @Autowired
-//    CustomerGroupFilterRepository customerGroupFilterRepository;
-
-
     @Override
     public Page<ICustomerGroupResult> test(Pageable pageable) {
         return customerGroupRepository.test(pageable);

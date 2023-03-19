@@ -477,29 +477,14 @@
             .fail((jqXHR) => {
                 let str =``
                 if (jqXHR.responseJSON){
-                    if (jqXHR.responseJSON.message){
-                        SupplierApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
-                            //         str += `<label id="${key}-error" class="error" for="message">${jqXHR.responseJSON.message}</label>`
-                            //         $("#" + key).addClass("error");
-                            //     })
-                        // str += `<label id="message-error" class="error" for="message">${jqXHR.responseJSON.message}</label>`
+                    let errors=jqXHR.responseJSON.errors;
+                    if (errors.supGroupCode){
+                        SupplierApp.IziToast.showErrorAlert(errors.supGroupCode);
                     }
-                    // else {
-                    //     $.each(jqXHR.responseJSON, function (key, value){
-                    //         str += `<label id="${key}-error" class="error" for="message">${jqXHR.responseJSON.message}</label>`
-                    //         $("#" + key).addClass("error");
-                    //     })
-                    // }
-                    // page.dialogs.elements.modalCreateGroupSupplier.modal('hide');
-                    // $("#showError").removeClass("hide").addClass("show");
-                    //
-                    // $("#showError").append(str);
-
-
-                    // SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
-
+                    if (errors.title){
+                        SupplierApp.IziToast.showErrorAlert(errors.title);
+                    }
                 }
-                // SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
             })
     }
 
@@ -568,13 +553,16 @@
                 $(`#tr_${data.id}`).replaceWith(renderGroup(data))
             })
             .fail((jqXHR) => {
-                if (jqXHR.responseJSON) {
-                    if (jqXHR.responseJSON.message) {
-                        SupplierApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
-                        // str += `<label id="message-error" class="error" for="message">${jqXHR.responseJSON.message}</label>`
+                let str =``
+                if (jqXHR.responseJSON){
+                    let errors=jqXHR.responseJSON.errors;
+                    if (errors.supGroupCode){
+                        SupplierApp.IziToast.showErrorAlert(errors.supGroupCode);
+                    }
+                    if (errors.title){
+                        SupplierApp.IziToast.showErrorAlert(errors.title);
                     }
                 }
-                    // SupplierApp.IziToast.showErrorAlert("Nhóm nhà cung cấp đã tồn tại!");
 
             })
     }

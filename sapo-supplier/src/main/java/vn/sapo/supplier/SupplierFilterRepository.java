@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import vn.sapo.entities.supplier.Supplier;
+import vn.sapo.entities.supplier.SupplierStatus;
 import vn.sapo.supplier.dto.SupplierFilter;
 
 import javax.persistence.criteria.Expression;
@@ -21,6 +22,7 @@ public interface SupplierFilterRepository extends JpaRepository<Supplier, Intege
         return findAll((root, criteriaQuery, criteriaBuilder) -> {
 
             List<Predicate> predicates = new ArrayList<>();
+
             if (filter.getFilter() != null) {
                 Predicate predicateSupplierCode = criteriaBuilder.like(root.get("supplierCode"), '%' + filter.getFilter() + '%');
                 Predicate predicatePhone = criteriaBuilder.like(root.get("phone"), '%' + filter.getFilter() + '%');
@@ -67,9 +69,16 @@ public interface SupplierFilterRepository extends JpaRepository<Supplier, Intege
                 predicates.add(tagsPredicate);
             }
 
+            Predicate predicate;
             if (!filter.getStatuses().isEmpty()) {
-                Predicate predicate = criteriaBuilder.or(root.get("status").in(filter.getStatuses()));
+                predicate = criteriaBuilder.or(root.get("status").in(filter.getStatuses()));
                 predicates.add(predicate);
+            } else {
+                predicate = criteriaBuilder.or(criteriaBuilder.equal(root.get("status"), SupplierStatus.AVAILABLE),
+                        criteriaBuilder.equal(root.get("status"), SupplierStatus.UNAVAILABLE)
+                );
+                predicates.add(predicate);
+
             }
             Date createdFrom = filter.getCreatedFrom();
             Date createdTo = filter.getCreatedTo();

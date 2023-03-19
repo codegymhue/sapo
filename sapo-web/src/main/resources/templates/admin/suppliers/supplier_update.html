@@ -6,25 +6,23 @@
 
     <link rel="icon" type="image/x-icon" href="/assets/admin/images/favicon.ico"/>
 
-<!--    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/izitoast@1/dist/css/iziToast.min.css" crossorigin/>-->
-<!--    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" crossorigin/>-->
-<!--    <link rel="stylesheet" type="text/css" href="https://sapo.dktcdn.net/sapo-frontend-x/e603c93.main.css" crossorigin/>-->
-<!--    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>-->
+    <!--    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/izitoast@1/dist/css/iziToast.min.css" crossorigin/>-->
+    <!--    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" crossorigin/>-->
+    <!--    <link rel="stylesheet" type="text/css" href="https://sapo.dktcdn.net/sapo-frontend-x/e603c93.main.css" crossorigin/>-->
+    <!--    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>-->
 
-<!--    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" crossorigin/>-->
+    <!--    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" crossorigin/>-->
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
 
     <link rel="icon" type="image/x-icon" href="/assets/admin/images/favicon.ico"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/izitoast@1/dist/css/iziToast.min.css" crossorigin/>
-    <script>
-        var CKEDITOR_BASEPATH = '/v2/lib/ckeditor/';
-        var S_LANG = 'vi-VN';
-        var S_LANG_RES = 'https://sapo.dktcdn.net/sapo-frontend-x/d9ad77d.i18n_vi-VN.json';
-    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/izitoast@1/dist/css/iziToast.min.css"
+          crossorigin/>
+    <link rel="stylesheet" href="/assets/admin/css/bootstrap-tagsinput.css"/>
     <script src="https://sapo.dktcdn.net/sapo-frontend-x/ad78972.client.bundle.js"></script>
     <link rel="stylesheet" href="https://sapo.dktcdn.net/sapo-frontend-x/6386cc5.main.css"/>
     <script src="https://sapo.dktcdn.net/fe-cdn-production/lib/wootric/wootric-sdk.js"></script>
@@ -59,10 +57,12 @@
         .help-dropdown div:hover {
             background-color: #e7f2ff;
         }
-        .btn-group>ul>li p:hover{
+
+        .btn-group > ul > li p:hover {
             background-color: #007bff;
         }
-        .error{
+
+        .error {
             color: #b93c3c;
         }
     </style>
@@ -90,7 +90,7 @@
                     </div>
                     <div class="w-50" style="position:relative">
                         <a class="btn sapo-btn-default right  btnUpdateSupplier">Lưu</a>
-                        <a th:href="'/admin/suppliers/' + ${supplier.id} + '/histories'"
+                        <a th:href="'/admin/suppliers/' + ${supplier.id} + '/addresses'"
                            class="btn sapo-btn-blank right mr-3">Huỷ</a>
 
                     </div>
@@ -257,10 +257,10 @@
                                                         th:text="${supplier.employee} ? ${supplier.employee.fullName} : ${'Chọn nhân viên phụ trách '}"></option>
                                             </select>
                                         </a>
-<!--                                        <svg class="next-icon next-icon&#45;&#45;size-16">-->
-<!--                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"-->
-<!--                                                 xlink:href="#select-chevron"></use>-->
-<!--                                        </svg>-->
+                                        <!--                                        <svg class="next-icon next-icon&#45;&#45;size-16">-->
+                                        <!--                                            <use xmlns:xlink="http://www.w3.org/1999/xlink"-->
+                                        <!--                                                 xlink:href="#select-chevron"></use>-->
+                                        <!--                                        </svg>-->
                                         <div class="filter-body--suggest">
                                         </div>
                                     </div>
@@ -280,7 +280,16 @@
                                         <i class="fa fa-info" data-toggle="tooltip" data-placement="top"
                                            title="Chọn hoặc thêm thẻ sẽ cho phép bạn tìm kiếm và lọc nhà cung cấp ở trang danh sách dễ dàng hơn"></i>
                                     </div>
-                                    <input class="sapo-textbox tags" bind="tagso" value="Adipisicing nihil ea"/>
+                                    <!--                                    <div class="bootstrap-tagsinput">-->
+                                    <!--                                        <input onkeyup="suggestTags(this)"-->
+                                    <!--                                               type="text" placeholder=""-->
+                                    <!--                                               autocomplete="off" th:value="${supplier.getTags()}">-->
+                                    <input id="input-tags" type="text" th:value="${tags}" data-role="tagsinput"/>
+
+                                    <input class="sapo-textbox tags" style="display: none;">
+                                    <div class="autocomplete-suggestions"
+                                         style="position: relative; width: 250px; max-height: 300px; z-index: 9999; display: none;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -294,20 +303,20 @@
                             <div class="page-info-body">
 
                                 <div id="config-customer" class="w-100">
-                                    <div class="col-12 field p-0">
-                                        <div class="label mb-2">Giá mặc định</div>
-                                        <div class="select__wrapper " id="search-price-list-wrap">
-                                            <a class="sapo-select select--a select-suggest" id="search-price-list"
-                                               href="javascript:">
-                                                Chọn giá mặc định </a>
-                                            <svg class="next-icon next-icon--size-16">
-                                                <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                     xlink:href="#select-chevron"></use>
-                                            </svg>
-                                            <div class="filter-body--suggest">
-                                            </div>
-                                        </div>
-                                    </div>
+<!--                                    <div class="col-12 field p-0">-->
+<!--                                        <div class="label mb-2">Giá mặc định</div>-->
+<!--                                        <div class="select__wrapper " id="search-price-list-wrap">-->
+<!--                                            <a class="sapo-select select&#45;&#45;a select-suggest" id="search-price-list"-->
+<!--                                               href="javascript:">-->
+<!--                                                Chọn giá mặc định </a>-->
+<!--                                            <svg class="next-icon next-icon&#45;&#45;size-16">-->
+<!--                                                <use xmlns:xlink="http://www.w3.org/1999/xlink"-->
+<!--                                                     xlink:href="#select-chevron"></use>-->
+<!--                                            </svg>-->
+<!--                                            <div class="filter-body&#45;&#45;suggest">-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
                                     <div class="col-12 field p-0">
                                         <div class="label mb-2">Hình thức thanh toán</div>
 
@@ -326,7 +335,7 @@
                         <a class="btn sapo-btn-default right btnUpdateSupplier">
                             Lưu
                         </a>
-                        <a th:href="'/admin/suppliers/' + ${supplier.id} + '/histories'"
+                        <a th:href="'/admin/suppliers/' + ${supplier.id} + '/addresses'"
                            class="btn sapo-btn-blank right mr-3">Huỷ</a>
                     </div>
                 </div>
@@ -367,10 +376,6 @@
 </style>
 <div id="surveys"></div>
 
-<script>
-    Page();
-    hj('trigger', 'split_test_b');
-</script>
 <script type='text/javascript'>
     function showMenu() {
         $(".col-left").css("margin-left", 0);
@@ -458,6 +463,7 @@
 <th:block th:replace="/layout/supplier/tagCreate :: tagCreate"/>
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
 <script src="/assets/admin/js/suppliers/jquery/jquery.validate.min.js"></script>
+<script src="/assets/admin/js/bootstrap-tagsinput.min.js"></script>
 <!--<script src="/assets/admin/js/suppliers/jquery/jquery-3.6.1.min.js"></script>-->
 <script src="https://cdn.jsdelivr.net/npm/izitoast@1/dist/js/iziToast.min.js" type="text/javascript"
         crossorigin>
@@ -468,7 +474,7 @@
     let supplierGroups = [];
     const page = {
         urls: {
-            getAllEmployeeSelect:  origin + "/api/employees",
+            getAllEmployeeSelect: origin + "/api/employees",
             getAllPaymentMethodSelect: origin + "/api/admin/payment_methods",
             doCreateGroupSupplier: origin + "/api/supplier_groups/create",
             doUpdateSupplier: origin + "/api/suppliers/",
@@ -507,6 +513,91 @@
     page.elements.taxCodeUp = $("#taxCodeUp");
     page.elements.faxUp = $("#faxUp");
     page.elements.websiteUp = $("#websiteUp");
+
+    // tags
+    page.elements.tagsInput = $(".bootstrap-tagsinput")
+    page.elements.supTagRender = $(".autocomplete-suggestions")
+
+    let supplierTags = [...new Set()];
+
+    function getAllSupplierTags() {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: origin + "/api/suppliers/tags"
+        })
+            .done((data) => {
+                $.each(data, (i, item) => {
+                    let str = `<div class="autocomplete-suggestion suggestion-product suggestion-tag"
+                                             style="padding:4px 8px" data-index="0">
+                                            <div class="search-product-content-refactor item-supplier"
+                                                 style="width:100%;">
+                                                <div class="search-product-content-name"><span>${item}</span></div>
+                                            </div>
+                                        </div>`;
+                    $(".autocomplete-suggestions").append(str);
+                });
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR.error);
+
+            })
+    }
+
+    page.elements.tagsInput.children("input").on("click", () => {
+        page.elements.supTagRender.css("display", "block");
+        $(".suggestion-tag").off("click")
+        page.commands.chooseTag();
+    })
+
+    page.commands.chooseTag = () => {
+
+        $(".suggestion-tag").on("click", function () {
+            console.log(this)
+            let tagChoose = $(this).find("span").text();
+            let listTagsChoose = page.elements.tagsInput.find(".tag").map(function () {
+                return $(this).text().trim();
+            }).get();
+            console.log(listTagsChoose, " listTagsChoose")
+            listTagsChoose.forEach(() => {
+                if (!listTagsChoose.includes(tagChoose)) {
+                    listTagsChoose.push(tagChoose)
+
+                    supplierTags.push(tagChoose)
+                    let str = `<span class="tag label label-info" style="">${tagChoose}<span class="lable-remove" data-role="remove"></span></span>`
+                    page.elements.tagsInput.prepend(str)
+                }
+            })
+            if (listTagsChoose.length === 0) {
+                listTagsChoose.push(tagChoose)
+                supplierTags.push(tagChoose);
+                let str = `<span class="tag label label-info" style="">${tagChoose}<span class="lable-remove" data-role="remove"></span></span>`;
+                page.elements.tagsInput.prepend(str);
+            }
+            page.elements.supTagRender.css("display", "none");
+        })
+    }
+
+    $(document).on("click", 'span[data-role="remove"]', function () {
+        if (supplierTags.indexOf($(this).parent().text()) > -1) {
+            supplierTags.splice(supplierTags.indexOf($(this).parent().text()), 1)
+            $(this).parent().remove()
+        }
+        console.log(supplierTags, " sau remove")
+    });
+
+    function renderTags(tags) {
+        if (tags.length > 0) {
+            $.each(tags, (index, tag) => {
+                let str = `<span class="tag label label-info" style="">${tag}<span class="lable-remove" data-role="remove"></span></span>`
+                page.elements.tagsInput.prepend(str)
+            });
+
+        }
+    }
 
     function getAllEmployeeSelect() {
         return $.ajax({
@@ -589,7 +680,7 @@
 
 
             })
-            .fail((jqXHR) =>{
+            .fail((jqXHR) => {
                 if (jqXHR.responseJSON) {
                     if (jqXHR.responseJSON.message) {
                         SupplierApp.IziToast.showErrorAlert(jqXHR.responseJSON.message);
@@ -640,7 +731,6 @@
         let taxCode = page.elements.taxCodeUp.val();
         let fax = page.elements.faxUp.val();
         let website = page.elements.websiteUp.val();
-
         let newUpdateSupplierParam = {
             id: idSupp,
             supplierCode: supplierCode.length > 0 ? supplierCode : undefined,
@@ -667,7 +757,7 @@
         })
             .done((data) => {
                 SupplierApp.IziToast.showSuccessAlert("Sửa thông tin nhà cung cấp thành công!");
-                location.href = `/admin/suppliers/${data.id}/histories`;
+                location.href = `/admin/suppliers/${data.id}/addresses`;
             })
             .fail((jqXHR) => {
                 if (jqXHR.responseJSON) {
@@ -761,10 +851,11 @@
         });
     }
 
-    $(function() {
+    $(function () {
         getAllGroup();
         getAllEmployeeSelect();
         getAllPaymentMethodSelect();
+        getAllSupplierTags();
     })
 
 </script>

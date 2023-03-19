@@ -23,12 +23,10 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryResult> findAll() {
-        List<CategoryResult> result = new ArrayList<>();
-         result = categoryRepository.findAll()
+        return categoryRepository.findAll()
                 .stream()
                 .map(categoryMapper::toDTO)
                 .collect(Collectors.toList());
-        return result;
     }
 
     @Override

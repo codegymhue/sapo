@@ -67,7 +67,7 @@ public class PricingPolicyServiceImpl implements PricingPolicyService {
     public List<PricingPolicyResult> findAllPurchase() {
         return pricingPolicyRepository.findAll()
                 .stream()
-                .filter(pPricingPolicy -> pPricingPolicy.getPricingPolicyType() == PricingPolicyType.PURCHASE)
+                .filter(pricingPolicy -> pricingPolicy.getPricingPolicyType() == PricingPolicyType.PURCHASE)
                 .map(pricingPolicyMapper::toDTO)
                 .collect(Collectors.toList());
     }
@@ -76,9 +76,7 @@ public class PricingPolicyServiceImpl implements PricingPolicyService {
     @Transactional
     public PricingPolicyResult findById(Integer id) {
         PricingPolicy pricingPolicy = pricingPolicyRepository.findById(id).orElseThrow(
-                () -> new ValidationException(new HashMap<>(){{
-                    put("id", "pricing.policy.validation.id.notFound");
-                }}));
+                () -> new ValidationException("id", "pricing.policy.validation.id.notFound"));
         return pricingPolicyMapper.toDTO(pricingPolicy);
     }
 

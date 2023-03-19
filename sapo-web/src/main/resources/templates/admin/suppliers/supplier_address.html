@@ -2,462 +2,500 @@
 <html xmlns:th="http://www.thymeleaf.org" class="sapo-menu-expand sapo-menu-toggle-active" lang="vi-VN">
 
 <head>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/x-icon" href="/assets/admin/images/favicon.ico"/>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/izitoast@1/dist/css/iziToast.min.css">
-  <script>
-    var CKEDITOR_BASEPATH = '/v2/lib/ckeditor/';
-    var S_LANG = 'vi-VN';
-    var S_LANG_RES = 'https://sapo.dktcdn.net/sapo-frontend-x/d9ad77d.i18n_vi-VN.json';
-  </script>
-  <link rel="stylesheet" href="https://sapo.dktcdn.net/sapo-frontend-x/6386cc5.main.css"/>
-  <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+    <meta charset="utf-8"/>
+    <link rel="icon" type="image/x-icon" href="/assets/admin/images/favicon.ico"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/izitoast@1/dist/css/iziToast.min.css">
+    <script>
+        var CKEDITOR_BASEPATH = '/v2/lib/ckeditor/';
+        var S_LANG = 'vi-VN';
+        var S_LANG_RES = 'https://sapo.dktcdn.net/sapo-frontend-x/d9ad77d.i18n_vi-VN.json';
+    </script>
+    <link rel="stylesheet" href="https://sapo.dktcdn.net/sapo-frontend-x/6386cc5.main.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
 
 
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/izitoast@1/dist/css/iziToast.min.css"
-        crossorigin/>
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
-        crossorigin/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/izitoast@1/dist/css/iziToast.min.css"
+          crossorigin/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+          crossorigin/>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="/assets/admin/css/supplier/export_file.css"/>
-  <link rel="stylesheet" href="/assets/admin/css/supplier/import_file.css"/>
-  <link href="/assets/admin/css/supplier/supplier_list.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/admin/css/supplier/export_file.css"/>
+    <link rel="stylesheet" href="/assets/admin/css/supplier/import_file.css"/>
+    <link href="/assets/admin/css/supplier/supplier_list.css">
 
-  <link href="https://sapo.dktcdn.net/fe-cdn-production/lib/driver/driver.min.css?v=20220218" rel="stylesheet" />
-  <title>Chi ti&#x1EBF;t nh&#xE0; cung c&#x1EA5;p</title>
-  <!-- Hotjar Tracking Code for mysapo.vn -->
-  <script>
-    (function (h, o, t, j, a, r) {
-      h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
-      h._hjSettings = { hjid: 1081489, hjsv: 6 };
-      a = o.getElementsByTagName('head')[0];
-      r = o.createElement('script'); r.async = 1;
-      r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
-      a.appendChild(r);
-    })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
-  </script>
-  <style>
-    #formUpdateAddressSup>input>label{
-      color: red;
-    }
-     .help-dashboard .help-dropdown .btn-blank {
-       background: #fff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDplN2MwNTFiZi1lNGJiLTNjNDktOGM3YS00NTZmZTZlNGQ1NmYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjI5NDdDQ0NGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjI5NDdDQ0JGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjdkNDRhZTRlLTIzMTMtYTE0ZC1hNWQ4LTA5YTVjYTBmNmM0NCIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjk3N2NmYTliLThmZDctZGU0Mi1hNDFiLWIwOTJiYzRkYWM2MiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Po5ReOIAAAIxSURBVHjalJU9aFNRGIbTk+sSh0xiEKciaBF1culiA2IdOlQHaRBKqEurYJYOFn9Ql7iJghQcSqlDAop0yFIoWJcigouKKIROClWnomaQVHw+eAPxcs7J9cDDhXvP997vfH9naPbybC6wEpiASRiFYcjDLmzBJqxCa/HRYtcn4ALCFWjDQ/gGNRiB/XrW9N6+t+euzFV8IkMpzwuwDGNwDVagmwsvO9003IMNqHKKjs9zE16Dg3AclgYI2+oitqT9ZrfGKQo+8WXF9DRs5/5j8YNt2eWl8494RaE4Dx1f+OAwnIRi4Acd2Y/1cuAUt7pi7PP4GLyHj/AavsPNyAlMp84PEqdyc0qer5oa8AuOQAnuw10YD0RpRXYTTnXcDCTvBByVp5/gK1yH33Am4H1XepNODfIi4MUPuANv+t7tgz3wM5Jj0xtN1HntwCZ7fztVrk3F/XFE3OyGE5XPToaKs33PlOBT8CWy1/TyTrOimEH8IpyFc/BuwF7T23UaQocyiJfhA7zMsNf0tpymWzmDwROYz9i0prfpNDan1EyxtRcODFK15pHeqom34I+mW2xdglsZvJ6WXsupeRY0NksRoxvyKOZ1SToL1ky9wdXQPH6uWvYtmy+vIsIF2W8g3EiP3KrKcn3ACUIer8u+6pvnHQ2jz/AWZjIkOUF4RvvNbrz/Jkob24cLmu91tX5Ts6KtziuqjsvKgSWv1gtF+g70Ldv4tO/2fxC4/a/Gbv+/AgwA9q+ezeP4kToAAAAASUVORK5CYII=') no-repeat center center;
-       border: none;
-       font-size: 0;
-       box-shadow: none;
-       margin-left: 0;
-       height: 61px;
-       width: 60px;
-       border: 1px solid #dbdbdb;
-       outline: none;
-       border-radius: 0;
-     }
+    <link href="https://sapo.dktcdn.net/fe-cdn-production/lib/driver/driver.min.css?v=20220218" rel="stylesheet"/>
+    <title>Chi ti&#x1EBF;t nh&#xE0; cung c&#x1EA5;p</title>
+    <!-- Hotjar Tracking Code for mysapo.vn -->
+    <script>
+        (function (h, o, t, j, a, r) {
+            h.hj = h.hj || function () {
+                (h.hj.q = h.hj.q || []).push(arguments)
+            };
+            h._hjSettings = {hjid: 1081489, hjsv: 6};
+            a = o.getElementsByTagName('head')[0];
+            r = o.createElement('script');
+            r.async = 1;
+            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+    </script>
+    <style>
+        #formUpdateAddressSup > input > label {
+            color: red;
+        }
 
-    .help-dashboard .help-dropdown .btn-blank:focus {
-      box-shadow: none;
-    }
+        .help-dashboard .help-dropdown .btn-blank {
+            background: #fff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA39pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDplN2MwNTFiZi1lNGJiLTNjNDktOGM3YS00NTZmZTZlNGQ1NmYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjI5NDdDQ0NGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjI5NDdDQ0JGMUY1MTFFODhFOTZCNjZBNjQxRjJFNzUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjdkNDRhZTRlLTIzMTMtYTE0ZC1hNWQ4LTA5YTVjYTBmNmM0NCIgc3RSZWY6ZG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjk3N2NmYTliLThmZDctZGU0Mi1hNDFiLWIwOTJiYzRkYWM2MiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Po5ReOIAAAIxSURBVHjalJU9aFNRGIbTk+sSh0xiEKciaBF1culiA2IdOlQHaRBKqEurYJYOFn9Ql7iJghQcSqlDAop0yFIoWJcigouKKIROClWnomaQVHw+eAPxcs7J9cDDhXvP997vfH9naPbybC6wEpiASRiFYcjDLmzBJqxCa/HRYtcn4ALCFWjDQ/gGNRiB/XrW9N6+t+euzFV8IkMpzwuwDGNwDVagmwsvO9003IMNqHKKjs9zE16Dg3AclgYI2+oitqT9ZrfGKQo+8WXF9DRs5/5j8YNt2eWl8494RaE4Dx1f+OAwnIRi4Acd2Y/1cuAUt7pi7PP4GLyHj/AavsPNyAlMp84PEqdyc0qer5oa8AuOQAnuw10YD0RpRXYTTnXcDCTvBByVp5/gK1yH33Am4H1XepNODfIi4MUPuANv+t7tgz3wM5Jj0xtN1HntwCZ7fztVrk3F/XFE3OyGE5XPToaKs33PlOBT8CWy1/TyTrOimEH8IpyFc/BuwF7T23UaQocyiJfhA7zMsNf0tpymWzmDwROYz9i0prfpNDan1EyxtRcODFK15pHeqom34I+mW2xdglsZvJ6WXsupeRY0NksRoxvyKOZ1SToL1ky9wdXQPH6uWvYtmy+vIsIF2W8g3EiP3KrKcn3ACUIer8u+6pvnHQ2jz/AWZjIkOUF4RvvNbrz/Jkob24cLmu91tX5Ts6KtziuqjsvKgSWv1gtF+g70Ldv4tO/2fxC4/a/Gbv+/AgwA9q+ezeP4kToAAAAASUVORK5CYII=') no-repeat center center;
+            border: none;
+            font-size: 0;
+            box-shadow: none;
+            margin-left: 0;
+            height: 61px;
+            width: 60px;
+            border: 1px solid #dbdbdb;
+            outline: none;
+            border-radius: 0;
+        }
 
-    .help-dashboard .help-dropdown .help-popup {
-      top: 60px;
-      box-shadow: #c6c6c6 0px 3px 5px 0px;
-    }
+        .help-dashboard .help-dropdown .btn-blank:focus {
+            box-shadow: none;
+        }
 
-    .help-dashboard .help-dropdown .help-popup:after {
-      right: 20px;
-    }
+        .help-dashboard .help-dropdown .help-popup {
+            top: 60px;
+            box-shadow: #c6c6c6 0px 3px 5px 0px;
+        }
 
-    .sapo-menu-expand .page-heading {
-      z-index: 1001;
-    }
-    .help-dropdown a {
-      color: #686868;
-      display: flex;
-      height: 100%;
-      border: none;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      border: 1px solid #c4cdd5;
-      float: right;
-      width: auto;
-    }
+        .help-dashboard .help-dropdown .help-popup:after {
+            right: 20px;
+        }
 
-    .help-dropdown div:hover {
-      background-color: #e7f2ff;
-    }
+        .sapo-menu-expand .page-heading {
+            z-index: 1001;
+        }
 
-    .help-dropdown .btn-blank:focus {
-      box-shadow: none;
-      border: 1px solid #c4cdd5;
-    }
+        .help-dropdown a {
+            color: #686868;
+            display: flex;
+            height: 100%;
+            border: none;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border: 1px solid #c4cdd5;
+            float: right;
+            width: auto;
+        }
 
-    .help-dropdown .help-popup {
-      position: absolute;
-      right: 0;
-      z-index: 9999999;
-      top: 45px;
-      box-shadow: #c6c6c6 0 0 10px 5px;
-      display: none;
-      -webkit-transition: ease 0.5s;
-      /* Safari */
-      transition: ease 0.5s;
-    }
+        .help-dropdown div:hover {
+            background-color: #e7f2ff;
+        }
 
-    .help-dropdown .help-popup.shown {
-      display: block;
-      height: 560px;
-      margin-top: 15px;
-    }
+        .help-dropdown .btn-blank:focus {
+            box-shadow: none;
+            border: 1px solid #c4cdd5;
+        }
 
-    .help-dropdown .help-popup:after {
-      content: "";
-      display: block;
-      width: 0px;
-      height: 0px;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-bottom: 10px solid #f3f6f8;
-      top: -9px;
-      position: absolute;
-      right: 25px;
-    }
-    #bodyRenderAddressSupplier>tr{
-      cursor: pointer;
-    }
-    .error{
-      color: #b93c3c;
-    }
+        .help-dropdown .help-popup {
+            position: absolute;
+            right: 0;
+            z-index: 9999999;
+            top: 45px;
+            box-shadow: #c6c6c6 0 0 10px 5px;
+            display: none;
+            -webkit-transition: ease 0.5s;
+            /* Safari */
+            transition: ease 0.5s;
+        }
 
-  </style>
-  </head>
+        .help-dropdown .help-popup.shown {
+            display: block;
+            height: 560px;
+            margin-top: 15px;
+        }
+
+        .help-dropdown .help-popup:after {
+            content: "";
+            display: block;
+            width: 0px;
+            height: 0px;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid #f3f6f8;
+            top: -9px;
+            position: absolute;
+            right: 25px;
+        }
+
+        #bodyRenderAddressSupplier > tr {
+            cursor: pointer;
+        }
+
+        .error {
+            color: #b93c3c;
+        }
+
+    </style>
+</head>
 
 <body class="body_dashboard partners suppliers detail">
 <div id="container">
-  <div class="hidden" context="tenantInfo"
-       define="{tenantInfo: new Components.TenantInfo(this,{&quot;countries&quot;:{&quot;countryId&quot;:201}})}">
-  </div>
-  <div class="header-mobile">
-    <a href="javascript:" class="icon-menu visible-xs visible-sm" onclick="showMenu()">
-      <svg class="next-icon next-icon--size-20">
-        <use xlink:href="#icon-menu" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
-      </svg>
-    </a>
-  </div>
-  <th:block th:replace="/layout/supplier/menu :: menu"/>
-  <div class="col-right">
-    <div class="col-right_content" id="content">
-      <header class="ui-title-bar-container">
-        <div class="ui-title-bar" style="display:inline-block;min-height:0px;">
-          <div class="ui-title-bar__navigation w-50 left">
-            <div class="ui-breadcrumbs">
-              <a href="/admin/suppliers" id="link-index-shipper">
-                <svg class="next-icon next-icon--size-20 next-icon--no-nudge">
-                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                       xlink:href="#chevron-left-thinner"></use>
-                </svg>
-                <span class="ui-breadcrumb__item">Danh sách nhà cung cấp</span>
-              </a>
-            </div>
-          </div>
-          <div class="w-50 right detail-supplier">
-
-            <div class="header-fr help-dropdown">
-              <a class="btn sapo-btn-blank btn-help" onclick="showHelpPopup()"><img
-                      src="/v2/images/dashboard/icons8-help-20.png"
-                      style="padding-right: 5px;" /><span>Trợ giúp</span></a>
-              <div class="help-popup">
-                <iframe id="iframe-help" src=""
-                        style="width: 400px; height: 560px;border:none"></iframe>
-                <input type="hidden" id="iframe-help-src"
-                       value="https://support.sapo.vn?ver=2&amp;view=pos&amp;url=http://anges.mysapogo.com/admin/suppliers/206718863/histories" />
-              </div>
-            </div>
-            <a href="javascript:" class="btn sapo-btn-default right" style="border-radius: 3px 0 0 3px;"
-               data-toggle="dropdown">Tạo phiếu thu/chi</a>
-            <ul class="dropdown-menu newscroll" style="font-size:13px">
-              <li><a bind-event-click="detailSupplier.createReceiptVoucher()">Tạo phiếu thu</a></li>
-              <li><a bind-event-click="detailSupplier.createPaymentVoucher()">Tạo phiếu chi</a></li>
-            </ul>
-          </div>
-          <div class="ui-title-bar__main-group">
-            <div class="ui-title-bar__heading-group">
-              <div class="ui-title-bar__title">
-                <h1 class="text-overflow-hiden" th:value="${supplier.id}" th:text="${supplier.fullName}"> </h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-      <div class="detail-supplier-container container mt-0" context="detailSupplier"
-           define="{detailSupplier: new Components.Supplier.DetailSupplier(this,{&quot;id&quot;:206718863,&quot;tenantId&quot;:688746,&quot;name&quot;:&quot;Nguyen Tan Luong&quot;,&quot;groupName&quot;:&quot;Khác&quot;,&quot;actionRouting&quot;:&quot;histories&quot;,&quot;email&quot;:&quot;nguyentanluong0503@gmail.com&quot;,&quot;assigneeId&quot;:941587,&quot;assigneeName&quot;:null,&quot;defaultLedgerAccountId&quot;:null,&quot;defaultPaymentTermId&quot;:null,&quot;defaultStockLocationId&quot;:null,&quot;defaultTaxTypeId&quot;:null,&quot;code&quot;:&quot;SUPN00005&quot;,&quot;type&quot;:null,&quot;issuedOnMax&quot;:null,&quot;issuedOnMin&quot;:null,&quot;supplierGroupId&quot;:2650779,&quot;defaultDiscountRate&quot;:null,&quot;defaultPriceListId&quot;:null,&quot;description&quot;:&quot;jrhfjahf&quot;,&quot;fax&quot;:null,&quot;taxNumber&quot;:null,&quot;stringTags&quot;:null,&quot;phoneNumber&quot;:&quot;0977194578&quot;,&quot;website&quot;:null,&quot;createdOn&quot;:&quot;2023-01-30T09:50:16Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-31T10:14:50Z&quot;,&quot;tags&quot;:[&quot;fastfuasj&quot;],&quot;tagso&quot;:null,&quot;contryId&quot;:0,&quot;cityId&quot;:0,&quot;districtId&quot;:0,&quot;countryId&quot;:0,&quot;debt&quot;:0.0,&quot;defaultPaymentMethodId&quot;:3023200,&quot;accountId&quot;:0,&quot;status&quot;:&quot;active&quot;,&quot;page&quot;:0,&quot;tenant&quot;:{&quot;id&quot;:688746,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;name&quot;:&quot;anges&quot;,&quot;industryId&quot;:14,&quot;industry&quot;:&quot;Thời trang&quot;,&quot;mobile&quot;:&quot;0899624267&quot;,&quot;phoneNo&quot;:&quot;0899624267&quot;,&quot;email&quot;:&quot;nguyenthanhhoan3006@gmail.com&quot;,&quot;contactEmail&quot;:null,&quot;fax&quot;:&quot;&quot;,&quot;timezone&quot;:null,&quot;description&quot;:null,&quot;address1&quot;:&quot;Thừa Thiên Huế&quot;,&quot;address2&quot;:null,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;statusError&quot;:0,&quot;city&quot;:&quot;Thừa Thiên Huế&quot;,&quot;district&quot;:null,&quot;cityId&quot;:0,&quot;countryId&quot;:201,&quot;districtId&quot;:0,&quot;domain&quot;:&quot;anges&quot;,&quot;domainUri&quot;:&quot;anges.mysapogo.com&quot;,&quot;startDate&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;endDate&quot;:&quot;2023-02-04T17:00:00Z&quot;,&quot;imageUrl&quot;:null,&quot;packageId&quot;:46,&quot;packageName&quot;:&quot;RETAIL_PRO_TRIAL&quot;,&quot;status&quot;:&quot;active&quot;,&quot;createdOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-28T13:42:40Z&quot;,&quot;locationIds&quot;:[659422],&quot;accountIds&quot;:null,&quot;productLimit&quot;:500,&quot;accountLimit&quot;:3,&quot;locationLimit&quot;:1,&quot;frontendRestricts&quot;:null,&quot;apiRestricts&quot;:null,&quot;viewTutorial&quot;:false,&quot;createSampleDataStatus&quot;:&quot;success&quot;,&quot;registerCompleted&quot;:true,&quot;registerFrom&quot;:&quot;N/A&quot;,&quot;landingPageType&quot;:1},&quot;priceList&quot;:null,&quot;taxType&quot;:null,&quot;supplierCode&quot;:{&quot;tenantId&quot;:0,&quot;code&quot;:null,&quot;id&quot;:0},&quot;paymentTerm&quot;:null,&quot;paymentMethod&quot;:{&quot;id&quot;:3023200,&quot;tenantId&quot;:688746,&quot;name&quot;:&quot;COD&quot;,&quot;status&quot;:&quot;active&quot;,&quot;createdOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;init&quot;:true,&quot;integrated&quot;:false,&quot;type&quot;:&quot;cod&quot;,&quot;removable&quot;:true},&quot;account&quot;:{&quot;id&quot;:941587,&quot;tenantId&quot;:688746,&quot;createdOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;status&quot;:&quot;active&quot;,&quot;avatarUrl&quot;:null,&quot;email&quot;:&quot;nguyenthanhhoan3006@gmail.com&quot;,&quot;sex&quot;:null,&quot;password&quot;:null,&quot;firstName&quot;:&quot;Thanh&quot;,&quot;lastName&quot;:&quot;Hoan Nguyễn&quot;,&quot;fullName&quot;:&quot;Hoan Nguyễn Thanh&quot;,&quot;userName&quot;:&quot;nguyenthanhhoan3006@gmail.com&quot;,&quot;locationId&quot;:0,&quot;mobile&quot;:&quot;0899624267&quot;,&quot;countryCode&quot;:&quot;84&quot;,&quot;intlPhoneNo&quot;:&quot;84899624267&quot;,&quot;guideStatus&quot;:null,&quot;accountOwner&quot;:true,&quot;fakeLoginAccount&quot;:null,&quot;limitedAccess&quot;:false,&quot;permissions&quot;:[],&quot;startSession&quot;:null,&quot;lastLogin&quot;:null,&quot;description&quot;:null,&quot;address&quot;:&quot;&quot;,&quot;dob&quot;:null,&quot;hasPassword&quot;:false,&quot;isDuplicateMobile&quot;:null,&quot;globalSessionId&quot;:null,&quot;ssoLoginIdentity&quot;:null,&quot;hasUpgradedSSO&quot;:false,&quot;isAccountSSO&quot;:true,&quot;sapoAccountProfileUrl&quot;:null,&quot;isAccountAuthenticated&quot;:false,&quot;accountRoles&quot;:[{&quot;locationId&quot;:0,&quot;tenantRoleId&quot;:1,&quot;scopes&quot;:[&quot;full&quot;]}],&quot;languageCode&quot;:&quot;vi&quot;,&quot;dataPermissions&quot;:null},&quot;accounts&quot;:null,&quot;contries&quot;:null,&quot;cities&quot;:null,&quot;listCityDistrict&quot;:null,&quot;paymentMethods&quot;:null,&quot;priceLists&quot;:null,&quot;taxTypes&quot;:null,&quot;paymentTerms&quot;:null,&quot;supplierGroups&quot;:null,&quot;districts&quot;:null,&quot;address&quot;:null,&quot;addresses&quot;:[{&quot;id&quot;:179127841,&quot;tenantId&quot;:0,&quot;subjectId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-30T09:50:16Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-30T09:50:16Z&quot;,&quot;partnerId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;city&quot;:&quot;Đắk Lắk&quot;,&quot;district&quot;:&quot;Thành phố Buôn Ma Thuột&quot;,&quot;ward&quot;:&quot;Xã Hòa Khánh&quot;,&quot;zipCode&quot;:null,&quot;state&quot;:null,&quot;address1&quot;:&quot;fa&quot;,&quot;address2&quot;:null,&quot;email&quot;:&quot;nguyentanluong0503@gmail.com&quot;,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:null,&quot;phoneNumber&quot;:&quot;0977194578&quot;,&quot;status&quot;:&quot;active&quot;,&quot;countryId&quot;:0,&quot;cityId&quot;:0,&quot;districtId&quot;:0,&quot;cityDistrictIds&quot;:null,&quot;selectContries&quot;:null,&quot;selectCities&quot;:null,&quot;selectDistricts&quot;:null,&quot;selectWards&quot;:null,&quot;listCityDistrict&quot;:null,&quot;wardSapos&quot;:null,&quot;listDistrict&quot;:null,&quot;listCity&quot;:null}],&quot;contacts&quot;:[],&quot;ids&quot;:[],&quot;returnUrl&quot;:null,&quot;action&quot;:null,&quot;checkCreate&quot;:0})}">
-        <div class="page-info page-info-order-detail w100">
-          <div class="page-info-title">
-            Thông tin cá nhân
-            <th:block th:if="${supplier.status} == ${supplier.status.AVAILABLE}">
-              <span class="badge sapo-badge badge--sushi position-absolute" style="left: calc(100%/3)">Đang giao dịch</span>
-            </th:block>
-            <th:block th:if="${supplier.status} == ${supplier.status.UNAVAILABLE}">
-              <span class="badge sapo-badge badge--status badge--flamingo position-absolute" style="left: calc(100%/3)">Ngừng giao dịch</span>
-            </th:block>
-            <div class="order-sources">
-              <a href="javascript:" data-toggle="dropdown" aria-expanded="false"
-                 style="color:#212b35">Thao tác khác<i class="fa fa-caret-down ml-2"
-                                                       aria-hidden="true"></i></a>
-              <ul class="dropdown-menu newscroll" style="font-size:13px">
-                <li>
-                  <a th:href="'/admin/suppliers/'+${supplier.getId()}+'/edit'">Cập nhật thông tin</a>
-                </li>
-                <li><a id="showModalDelete"> Xoá nhà cung cấp </a></li>
-                <input type="hidden" id="idDeleteSupplier" th:value="${supplier.id}">
-              </ul>
-            </div>
-            <th:bock th:replace="/admin/suppliers/modals/supplier_modal_delete :: supplier_modal_delete"/>
-
-          </div>
-          <input type="hidden" id="supplierId" th:value="${supplier.id}">
-          <div class="page-info-body" id="supplier-info">
-            <div class="page-info-body--sub flex pb-0">
-              <div class="col-4 p-0">
-                <div class="line-info flex">
-                  <label>Nhóm nhà cung cấp<span class="right">:</span></label>
-                  <div class="content text-overflow-hiden div-pd-r-10" th:text="${supplier.group} ? ${supplier.group.title}: ${'---'}" >
-
-                    <!--                    <span th:tex="${supplier.supplierGroup} ? ${supplier.supplierGroup.title} : ${'---'}"></span>-->
-                  </div>
-                </div>
-                <div class="line-info flex">
-                  <label>Mã<span class="right">:</span></label>
-                  <div class="content">
-                    <span class="content" th:text="${supplier.supplierCode}"> </span>
-                  </div>
-                </div>
-                <div class="line-info flex">
-                  <label>Số điện thoại<span class="right">:</span></label>
-                  <div class="content text-overflow-hiden div-pd-r-10" >
-                    <span th:text="${supplier.phone} ? ${supplier.phone} : ${'---'} "></span>
-                  </div>
-                </div>
-                <div class="line-info flex">
-                  <label>Nợ hiện tại<span class="right">:</span></label>
-                  <div class="content" title="0">0</div>
-                </div>
-              </div>
-              <div class="col-4 p-0">
-                <div class="line-info flex">
-                  <label>Mã số thuế<span class="right">:</span></label>
-                  <div class="content text-overflow-hiden div-pd-r-10" th:text="${supplier.taxCode} ? ${supplier.taxCode} : ${'---'} "></div>
-                </div>
-                <div class="line-info flex">
-                  <label>Website<span class="right">:</span></label>
-                  <a class="content text-overflow-hiden div-pd-r-10" target="_blank" th:text=" ${supplier.website} ? ${supplier.website} : ${'---'}">---</a>
-                </div>
-                <div class="line-info flex">
-                  <label>Mô tả<span class="right">:</span></label>
-                  <div class="content text-overflow-hiden div-pd-r-10">
-                    <span th:text="${supplier.description} ? ${supplier.description} : '---'"></span>
-                  </div>
-                </div>
-                <div class="line-info flex">
-                  <label>Email<span class="right">:</span></label>
-                  <div class="content text-overflow-hiden div-pd-r-10">
-                    <span th:text="${supplier.email} ? ${supplier.email} : '---'"></span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-4 p-0">
-                <div class="line-info flex">
-                  <label>Người phụ trách<span class="right">:</span></label>
-                  <div class="content text-overflow-hiden div-pd-r-10" title="">
-                    <span th:text="${supplier.employee} ? ${supplier.employee.fullName} : '---' "></span>
-                  </div>
-                </div>
-                <div class="line-info flex">
-                  <label>Giá mặc định<span class="right">:</span></label>
-                  <div class="content text-overflow-hiden div-pd-r-10" title="">
-                    <span>---</span>
-                  </div>
-                </div>
-                <div class="line-info flex">
-                  <label>Hình thức thanh toán<span class="right">:</span></label>
-                  <div class="content text-overflow-hiden div-pd-r-10" title="">
-
-                    <span th:text="${supplier.paymentMethod} ? ${supplier.paymentMethod.title} : '---' "></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="gird-layout gird-layout--full-width" style="padding:0px;width:100%;">
-          <section class="grid-card">
-            <div class="filter-tab-container" style=" width: 100%;display: inline-block;">
-              <ul class="filter-tab-list" id="filter-tab-list" style="width: 50%; float: left;border-bottom:none;" role="tablist" data-has-next-tab-controller="true">
-                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('history',this)">
-                  <a href="javascript:" id="filter-tab-history" class="filter-tab show-all-items">Lịch sử nhập hàng</a>
-                </li>
-                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('debt',this)">
-                  <a href="javascript:" id="filter-tab-debt" class="filter-tab show-all-items">Công nợ</a>
-                </li>
-                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('contact',this)">
-                  <a href="javascript:" id="filter-tab-contact" class="filter-tab show-all-items">Liên hệ</a>
-                </li>
-                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('address',this)">
-                  <a href="javascript:" id="supplierAddress" class="filter-tab show-all-items filter-tab-active">Địa chỉ</a>
-                </li>
-                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('note',this)">
-                  <a href="javascript:" id="filter-tab-note" class="filter-tab show-all-items">Ghi chú</a>
-                </li>
-              </ul>
-              <div>
-                <a class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-contact" style="margin-top: 6px; margin-right: 15px; display: none;" >Thêm mới liên hệ</a>
-                <a  class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-address" style="margin-top: 6px; margin-right: 15px;" id="btnShowCrAddressSupplier">Thêm mới địa chỉ</a>
-                <a  class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-note" style="margin-top:6px;margin-right:15px;display:none;" >Thêm mới ghi chú</a>
-                <a class="btn sapo-btn-blank right btn-help btn-create btn-create-debt" style="margin-top:6px;margin-right:15px;display:none;">
-                  <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge" style="padding-right: 5px; margin-top: 7px;">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#next-export-minor"></use>
-                  </svg>
-                  <span>Xuất file</span>
-                </a>
-              </div>
-            </div>
-          </section>
-          <div style="font-size:small" id="tableCheckbox">
-            <table id="tbAddress" class="table table-hover" style="background-color: white">
-              <thead style="height: 55px">
-              <tr id="theadList" class="show">
-                <th class="align-middle">
-                  <label for="checkAll" style="padding: 1rem; cursor:pointer">
-                    <input style="cursor:pointer" id="checkAll" type="checkbox" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Tất cả" aria-label="Tất cả">
-                  </label>
-                </th>
-                <th class="align-middle" scope="col">Nhãn</th>
-                <th class="align-middle" scope="col">Địa chỉ </th>
-                <th class="align-middle" scope="col">Phường xã</th>
-                <th class="align-middle" scope="col">Quận huyện</th>
-                <th class="align-middle" scope="col">Tỉnh thành phố</th>
-                <th class="align-middle" scope="col">Mã bưu điện </th>
-                <th class="align-middle" scope="col">Số điện thoại</th>
-                <th class="align-middle" scope="col">Email</th>
-              </tr>
-
-              <tr class="hide" id="selectActionThead" style="border: snow">
-                <td class="align-middle" style="width: 20px">
-                  <label for="selectAction" style="padding: 1rem; cursor:pointer">
-                    <input style="cursor:pointer" id="selectAction" type="checkbox" value="">
-                  </label>
-                </td>
-                <td colspan="2" class="align-middle" id="numberSelectProductList" style="width: 24%">
-                </td>
-                <td class="align-middle" colspan="2">
-                  <div class="btn-group">
-                    <button class="btn dropdown-toggle btnDropdown me-2" type="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                      Chọn thao tác
-                      <i class="fa-solid fa-sort-down" style="padding-left: 2.3rem"></i>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                      <li>
-                        <button style="width: 155px; font-size: 13px" class="dropdown-item btnDropdown btnShowDeleteAddressSupplier">Xoá địa chỉ
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                </td>
-                <td colspan="5"></td>
-              </tr>
-              </thead>
-              <tbody id="bodyRenderAddressSupplier">
-
-              </tbody>
-            </table>
-          </div>
-          <div class="container-fluid " style="height: 50px">
-            <div class="row col-md-12 d-flex align-items-center" style="font-size: small">
-              <div class="col-md-5"></div>
-              <div class="col-md-3" id="totalPage" style="padding: initial">
-
-              </div>
-              <div class="col-md-3 text-end">
-                <label class="me-2">Hiển thị</label>
-                <select class="me-2 " id="pageSize">
-<!--                  <option value="7">7</option>-->
-<!--                  <option value="14">14</option>-->
-                  <option value="20">20</option>
-                </select>
-                <span>Kết quả</span>
-              </div>
-
-              <div class="col-md-1">
-                <nav aria-label="Page navigation example ">
-                  <ul class="pagination">
-                    <li class="page-item">
-                      <button class=" btn-outline-primary btn-sm me-2" id="previousPage"
-                              style="border: none">
-                        <i class="fa-solid fa-angle-left"></i>
-                      </button>
-                    </li>
-                    <li class="page-item">
-                      <button class="pageNumber btn-primary btn-sm me-2">
-                        <span id="pageNo">1</span>
-                      </button>
-                    </li>
-                    <li class="page-item">
-                      <button class=" btn-outline-primary btn-sm " id="nextPage" style="border: none">
-                        <i class="fa-solid fa-angle-right"></i>
-                      </button>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="hidden" context="tenantInfo"
+         define="{tenantInfo: new Components.TenantInfo(this,{&quot;countries&quot;:{&quot;countryId&quot;:201}})}">
     </div>
-    <div class="popup-box">
-      <iframe scrolling="no" src="about:blank" name="myIframe" id="popupPrint"
-              style="border:0;position:absolute;width:0px;height:0px;left:0px;top:0px;"></iframe>
+    <div class="header-mobile">
+        <a href="javascript:" class="icon-menu visible-xs visible-sm" onclick="showMenu()">
+            <svg class="next-icon next-icon--size-20">
+                <use xlink:href="#icon-menu" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+            </svg>
+        </a>
     </div>
-  </div>
+    <th:block th:replace="/layout/supplier/menu :: menu"/>
+    <div class="col-right">
+        <div class="col-right_content" id="content">
+            <header class="ui-title-bar-container">
+                <div class="ui-title-bar" style="display:inline-block;min-height:0px;">
+                    <div class="ui-title-bar__navigation w-50 left">
+                        <div class="ui-breadcrumbs">
+                            <a href="/admin/suppliers" id="link-index-shipper">
+                                <svg class="next-icon next-icon--size-20 next-icon--no-nudge">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         xlink:href="#chevron-left-thinner"></use>
+                                </svg>
+                                <span class="ui-breadcrumb__item">Danh sách nhà cung cấp</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="w-50 right detail-supplier">
+
+                        <div class="header-fr help-dropdown">
+                            <a class="btn sapo-btn-blank btn-help" onclick="showHelpPopup()"><img
+                                    src="/v2/images/dashboard/icons8-help-20.png"
+                                    style="padding-right: 5px;"/><span>Trợ giúp</span></a>
+                            <div class="help-popup">
+                                <iframe id="iframe-help" src=""
+                                        style="width: 400px; height: 560px;border:none"></iframe>
+                                <input type="hidden" id="iframe-help-src"
+                                       value="https://support.sapo.vn?ver=2&amp;view=pos&amp;url=http://anges.mysapogo.com/admin/suppliers/206718863/histories"/>
+                            </div>
+                        </div>
+                        <a href="javascript:" class="btn sapo-btn-default right" style="border-radius: 3px 0 0 3px;"
+                           data-toggle="dropdown">Tạo phiếu thu/chi</a>
+                        <ul class="dropdown-menu newscroll" style="font-size:13px">
+                            <li><a bind-event-click="detailSupplier.createReceiptVoucher()">Tạo phiếu thu</a></li>
+                            <li><a bind-event-click="detailSupplier.createPaymentVoucher()">Tạo phiếu chi</a></li>
+                        </ul>
+                    </div>
+                    <div class="ui-title-bar__main-group">
+                        <div class="ui-title-bar__heading-group">
+                            <div class="ui-title-bar__title">
+                                <h1 class="text-overflow-hiden" th:value="${supplier.id}"
+                                    th:text="${supplier.fullName}"></h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="detail-supplier-container container mt-0" context="detailSupplier"
+                 define="{detailSupplier: new Components.Supplier.DetailSupplier(this,{&quot;id&quot;:206718863,&quot;tenantId&quot;:688746,&quot;name&quot;:&quot;Nguyen Tan Luong&quot;,&quot;groupName&quot;:&quot;Khác&quot;,&quot;actionRouting&quot;:&quot;histories&quot;,&quot;email&quot;:&quot;nguyentanluong0503@gmail.com&quot;,&quot;assigneeId&quot;:941587,&quot;assigneeName&quot;:null,&quot;defaultLedgerAccountId&quot;:null,&quot;defaultPaymentTermId&quot;:null,&quot;defaultStockLocationId&quot;:null,&quot;defaultTaxTypeId&quot;:null,&quot;code&quot;:&quot;SUPN00005&quot;,&quot;type&quot;:null,&quot;issuedOnMax&quot;:null,&quot;issuedOnMin&quot;:null,&quot;supplierGroupId&quot;:2650779,&quot;defaultDiscountRate&quot;:null,&quot;defaultPriceListId&quot;:null,&quot;description&quot;:&quot;jrhfjahf&quot;,&quot;fax&quot;:null,&quot;taxNumber&quot;:null,&quot;stringTags&quot;:null,&quot;phoneNumber&quot;:&quot;0977194578&quot;,&quot;website&quot;:null,&quot;createdOn&quot;:&quot;2023-01-30T09:50:16Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-31T10:14:50Z&quot;,&quot;tags&quot;:[&quot;fastfuasj&quot;],&quot;tagso&quot;:null,&quot;contryId&quot;:0,&quot;cityId&quot;:0,&quot;districtId&quot;:0,&quot;countryId&quot;:0,&quot;debt&quot;:0.0,&quot;defaultPaymentMethodId&quot;:3023200,&quot;accountId&quot;:0,&quot;status&quot;:&quot;active&quot;,&quot;page&quot;:0,&quot;tenant&quot;:{&quot;id&quot;:688746,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;name&quot;:&quot;anges&quot;,&quot;industryId&quot;:14,&quot;industry&quot;:&quot;Thời trang&quot;,&quot;mobile&quot;:&quot;0899624267&quot;,&quot;phoneNo&quot;:&quot;0899624267&quot;,&quot;email&quot;:&quot;nguyenthanhhoan3006@gmail.com&quot;,&quot;contactEmail&quot;:null,&quot;fax&quot;:&quot;&quot;,&quot;timezone&quot;:null,&quot;description&quot;:null,&quot;address1&quot;:&quot;Thừa Thiên Huế&quot;,&quot;address2&quot;:null,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;statusError&quot;:0,&quot;city&quot;:&quot;Thừa Thiên Huế&quot;,&quot;district&quot;:null,&quot;cityId&quot;:0,&quot;countryId&quot;:201,&quot;districtId&quot;:0,&quot;domain&quot;:&quot;anges&quot;,&quot;domainUri&quot;:&quot;anges.mysapogo.com&quot;,&quot;startDate&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;endDate&quot;:&quot;2023-02-04T17:00:00Z&quot;,&quot;imageUrl&quot;:null,&quot;packageId&quot;:46,&quot;packageName&quot;:&quot;RETAIL_PRO_TRIAL&quot;,&quot;status&quot;:&quot;active&quot;,&quot;createdOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-28T13:42:40Z&quot;,&quot;locationIds&quot;:[659422],&quot;accountIds&quot;:null,&quot;productLimit&quot;:500,&quot;accountLimit&quot;:3,&quot;locationLimit&quot;:1,&quot;frontendRestricts&quot;:null,&quot;apiRestricts&quot;:null,&quot;viewTutorial&quot;:false,&quot;createSampleDataStatus&quot;:&quot;success&quot;,&quot;registerCompleted&quot;:true,&quot;registerFrom&quot;:&quot;N/A&quot;,&quot;landingPageType&quot;:1},&quot;priceList&quot;:null,&quot;taxType&quot;:null,&quot;supplierCode&quot;:{&quot;tenantId&quot;:0,&quot;code&quot;:null,&quot;id&quot;:0},&quot;paymentTerm&quot;:null,&quot;paymentMethod&quot;:{&quot;id&quot;:3023200,&quot;tenantId&quot;:688746,&quot;name&quot;:&quot;COD&quot;,&quot;status&quot;:&quot;active&quot;,&quot;createdOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;init&quot;:true,&quot;integrated&quot;:false,&quot;type&quot;:&quot;cod&quot;,&quot;removable&quot;:true},&quot;account&quot;:{&quot;id&quot;:941587,&quot;tenantId&quot;:688746,&quot;createdOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-28T13:15:45Z&quot;,&quot;status&quot;:&quot;active&quot;,&quot;avatarUrl&quot;:null,&quot;email&quot;:&quot;nguyenthanhhoan3006@gmail.com&quot;,&quot;sex&quot;:null,&quot;password&quot;:null,&quot;firstName&quot;:&quot;Thanh&quot;,&quot;lastName&quot;:&quot;Hoan Nguyễn&quot;,&quot;fullName&quot;:&quot;Hoan Nguyễn Thanh&quot;,&quot;userName&quot;:&quot;nguyenthanhhoan3006@gmail.com&quot;,&quot;locationId&quot;:0,&quot;mobile&quot;:&quot;0899624267&quot;,&quot;countryCode&quot;:&quot;84&quot;,&quot;intlPhoneNo&quot;:&quot;84899624267&quot;,&quot;guideStatus&quot;:null,&quot;accountOwner&quot;:true,&quot;fakeLoginAccount&quot;:null,&quot;limitedAccess&quot;:false,&quot;permissions&quot;:[],&quot;startSession&quot;:null,&quot;lastLogin&quot;:null,&quot;description&quot;:null,&quot;address&quot;:&quot;&quot;,&quot;dob&quot;:null,&quot;hasPassword&quot;:false,&quot;isDuplicateMobile&quot;:null,&quot;globalSessionId&quot;:null,&quot;ssoLoginIdentity&quot;:null,&quot;hasUpgradedSSO&quot;:false,&quot;isAccountSSO&quot;:true,&quot;sapoAccountProfileUrl&quot;:null,&quot;isAccountAuthenticated&quot;:false,&quot;accountRoles&quot;:[{&quot;locationId&quot;:0,&quot;tenantRoleId&quot;:1,&quot;scopes&quot;:[&quot;full&quot;]}],&quot;languageCode&quot;:&quot;vi&quot;,&quot;dataPermissions&quot;:null},&quot;accounts&quot;:null,&quot;contries&quot;:null,&quot;cities&quot;:null,&quot;listCityDistrict&quot;:null,&quot;paymentMethods&quot;:null,&quot;priceLists&quot;:null,&quot;taxTypes&quot;:null,&quot;paymentTerms&quot;:null,&quot;supplierGroups&quot;:null,&quot;districts&quot;:null,&quot;address&quot;:null,&quot;addresses&quot;:[{&quot;id&quot;:179127841,&quot;tenantId&quot;:0,&quot;subjectId&quot;:0,&quot;createdOn&quot;:&quot;2023-01-30T09:50:16Z&quot;,&quot;modifiedOn&quot;:&quot;2023-01-30T09:50:16Z&quot;,&quot;partnerId&quot;:0,&quot;country&quot;:&quot;Việt Nam&quot;,&quot;city&quot;:&quot;Đắk Lắk&quot;,&quot;district&quot;:&quot;Thành phố Buôn Ma Thuột&quot;,&quot;ward&quot;:&quot;Xã Hòa Khánh&quot;,&quot;zipCode&quot;:null,&quot;state&quot;:null,&quot;address1&quot;:&quot;fa&quot;,&quot;address2&quot;:null,&quot;email&quot;:&quot;nguyentanluong0503@gmail.com&quot;,&quot;fullName&quot;:null,&quot;firstName&quot;:null,&quot;lastName&quot;:null,&quot;label&quot;:null,&quot;phoneNumber&quot;:&quot;0977194578&quot;,&quot;status&quot;:&quot;active&quot;,&quot;countryId&quot;:0,&quot;cityId&quot;:0,&quot;districtId&quot;:0,&quot;cityDistrictIds&quot;:null,&quot;selectContries&quot;:null,&quot;selectCities&quot;:null,&quot;selectDistricts&quot;:null,&quot;selectWards&quot;:null,&quot;listCityDistrict&quot;:null,&quot;wardSapos&quot;:null,&quot;listDistrict&quot;:null,&quot;listCity&quot;:null}],&quot;contacts&quot;:[],&quot;ids&quot;:[],&quot;returnUrl&quot;:null,&quot;action&quot;:null,&quot;checkCreate&quot;:0})}">
+                <div class="page-info page-info-order-detail w100">
+                    <div class="page-info-title">
+
+                        Thông tin cá nhân
+                        <th:block th:if="${supplier.status} == ${supplier.status.DELETED}">
+                            <span class="badge sapo-badge position-absolute " style="left: calc(100%/3)">Đã Xoá</span>
+                        </th:block>
+                        <th:block th:if="${supplier.status} == ${supplier.status.AVAILABLE}">
+                            <span class="badge sapo-badge badge--sushi position-absolute" style="left: calc(100%/3)">Đang giao dịch</span>
+                        </th:block>
+                        <th:block th:if="${supplier.status} == ${supplier.status.UNAVAILABLE}">
+                            <span class="badge sapo-badge badge--status badge--flamingo position-absolute"
+                                  style="left: calc(100%/3)">Ngừng giao dịch</span>
+                        </th:block>
+                        <div class="order-sources">
+                            <a href="javascript:" data-toggle="dropdown" aria-expanded="false"
+                               style="color:#212b35">Thao tác khác<i class="fa fa-caret-down ml-2"
+                                                                     aria-hidden="true"></i></a>
+                            <ul class="dropdown-menu newscroll" style="font-size:13px">
+                                <li>
+                                    <a th:href="'/admin/suppliers/'+${supplier.getId()}+'/edit'">Cập nhật thông tin</a>
+                                </li>
+                                <li><a id="showModalDelete"> Xoá nhà cung cấp </a></li>
+                                <input type="hidden" id="idDeleteSupplier" th:value="${supplier.id}">
+                            </ul>
+                        </div>
+                        <th:bock th:replace="/admin/suppliers/modals/supplier_modal_delete :: supplier_modal_delete"/>
+
+                    </div>
+                    <input type="hidden" id="supplierId" th:value="${supplier.id}">
+                    <div class="page-info-body" id="supplier-info">
+                        <div class="page-info-body--sub flex pb-0">
+                            <div class="col-4 p-0">
+                                <div class="line-info flex">
+                                    <label>Nhóm nhà cung cấp<span class="right">:</span></label>
+                                    <div class="content text-overflow-hiden div-pd-r-10"
+                                         th:text="${supplier.group} ? ${supplier.group.title}: ${'---'}">
+
+                                        <!--                    <span th:tex="${supplier.supplierGroup} ? ${supplier.supplierGroup.title} : ${'---'}"></span>-->
+                                    </div>
+                                </div>
+                                <div class="line-info flex">
+                                    <label>Mã<span class="right">:</span></label>
+                                    <div class="content">
+                                        <span class="content" th:text="${supplier.supplierCode}"> </span>
+                                    </div>
+                                </div>
+                                <div class="line-info flex">
+                                    <label>Số điện thoại<span class="right">:</span></label>
+                                    <div class="content text-overflow-hiden div-pd-r-10">
+                                        <span th:text="${supplier.phone} ? ${supplier.phone} : ${'---'} "></span>
+                                    </div>
+                                </div>
+                                <div class="line-info flex">
+                                    <label>Nợ hiện tại<span class="right">:</span></label>
+                                    <div class="content" title="0">0</div>
+                                </div>
+                            </div>
+                            <div class="col-4 p-0">
+                                <div class="line-info flex">
+                                    <label>Mã số thuế<span class="right">:</span></label>
+                                    <div class="content text-overflow-hiden div-pd-r-10"
+                                         th:text="${supplier.taxCode} ? ${supplier.taxCode} : ${'---'} "></div>
+                                </div>
+                                <div class="line-info flex">
+                                    <label>Website<span class="right">:</span></label>
+                                    <a class="content text-overflow-hiden div-pd-r-10" target="_blank"
+                                       th:text=" ${supplier.website} ? ${supplier.website} : ${'---'}">---</a>
+                                </div>
+                                <div class="line-info flex">
+                                    <label>Mô tả<span class="right">:</span></label>
+                                    <div class="content text-overflow-hiden div-pd-r-10">
+                                        <span th:text="${supplier.description} ? ${supplier.description} : '---'"></span>
+                                    </div>
+                                </div>
+                                <div class="line-info flex">
+                                    <label>Email<span class="right">:</span></label>
+                                    <div class="content text-overflow-hiden div-pd-r-10">
+                                        <span th:text="${supplier.email} ? ${supplier.email} : '---'"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 p-0">
+                                <div class="line-info flex">
+                                    <label>Người phụ trách<span class="right">:</span></label>
+                                    <div class="content text-overflow-hiden div-pd-r-10" title="">
+                                        <span th:text="${supplier.employee} ? ${supplier.employee.fullName} : '---' "></span>
+                                    </div>
+                                </div>
+                                <div class="line-info flex">
+                                    <label>Giá mặc định<span class="right">:</span></label>
+                                    <div class="content text-overflow-hiden div-pd-r-10" title="">
+                                        <span>---</span>
+                                    </div>
+                                </div>
+                                <div class="line-info flex">
+                                    <label>Hình thức thanh toán<span class="right">:</span></label>
+                                    <div class="content text-overflow-hiden div-pd-r-10" title="">
+
+                                        <span th:text="${supplier.paymentMethod} ? ${supplier.paymentMethod.title} : '---' "></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gird-layout gird-layout--full-width" style="padding:0px;width:100%;">
+                    <section class="grid-card">
+                        <div class="filter-tab-container" style=" width: 100%;display: inline-block;">
+                            <ul class="filter-tab-list" id="filter-tab-list"
+                                style="width: 50%; float: left;border-bottom:none;" role="tablist"
+                                data-has-next-tab-controller="true">
+                                <li class="filter-tab-item" style="opacity:1;"
+                                    bind-event-click="loadTab('history',this)">
+                                    <a href="javascript:" id="filter-tab-history" class="filter-tab show-all-items">Lịch
+                                        sử nhập hàng</a>
+                                </li>
+                                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('debt',this)">
+                                    <a href="javascript:" id="filter-tab-debt" class="filter-tab show-all-items">Công
+                                        nợ</a>
+                                </li>
+                                <li class="filter-tab-item" style="opacity:1;"
+                                    bind-event-click="loadTab('contact',this)">
+                                    <a href="javascript:" id="filter-tab-contact" class="filter-tab show-all-items">Liên
+                                        hệ</a>
+                                </li>
+                                <li class="filter-tab-item" style="opacity:1;"
+                                    bind-event-click="loadTab('address',this)">
+                                    <a href="javascript:" id="supplierAddress"
+                                       class="filter-tab show-all-items filter-tab-active">Địa chỉ</a>
+                                </li>
+                                <li class="filter-tab-item" style="opacity:1;" bind-event-click="loadTab('note',this)">
+                                    <a href="javascript:" id="filter-tab-note" class="filter-tab show-all-items">Ghi
+                                        chú</a>
+                                </li>
+                            </ul>
+                            <div>
+                                <a class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-contact"
+                                   style="margin-top: 6px; margin-right: 15px; display: none;">Thêm mới liên hệ</a>
+                                <a class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-address"
+                                   style="margin-top: 6px; margin-right: 15px;" id="btnShowCrAddressSupplier">Thêm mới
+                                    địa chỉ</a>
+                                <a class="btn sapo-btn-blank right btn-margin-left btn-create btn-create-note"
+                                   style="margin-top:6px;margin-right:15px;display:none;">Thêm mới ghi chú</a>
+                                <a class="btn sapo-btn-blank right btn-help btn-create btn-create-debt"
+                                   style="margin-top:6px;margin-right:15px;display:none;">
+                                    <svg class="next-icon next-icon--size-20 action-bar__link-icon next-icon--no-nudge"
+                                         style="padding-right: 5px; margin-top: 7px;">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             xlink:href="#next-export-minor"></use>
+                                    </svg>
+                                    <span>Xuất file</span>
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+                    <div style="font-size:small" id="tableCheckbox">
+                        <table id="tbAddress" class="table table-hover" style="background-color: white">
+                            <thead style="height: 55px">
+                            <tr id="theadList" class="show">
+                                <th class="align-middle">
+                                    <label for="checkAll" style="padding: 1rem; cursor:pointer">
+                                        <input style="cursor:pointer" id="checkAll" type="checkbox"
+                                               data-bs-toggle="tooltip" data-bs-placement="top" title=""
+                                               data-bs-original-title="Tất cả" aria-label="Tất cả">
+                                    </label>
+                                </th>
+                                <th class="align-middle" scope="col">Nhãn</th>
+                                <th class="align-middle" scope="col">Địa chỉ</th>
+                                <th class="align-middle" scope="col">Phường xã</th>
+                                <th class="align-middle" scope="col">Quận huyện</th>
+                                <th class="align-middle" scope="col">Tỉnh thành phố</th>
+                                <th class="align-middle" scope="col">Mã bưu điện</th>
+                                <th class="align-middle" scope="col">Số điện thoại</th>
+                                <th class="align-middle" scope="col">Email</th>
+                            </tr>
+
+                            <tr class="hide" id="selectActionThead" style="border: snow">
+                                <td class="align-middle" style="width: 20px">
+                                    <label for="selectAction" style="padding: 1rem; cursor:pointer">
+                                        <input style="cursor:pointer" id="selectAction" type="checkbox" value="">
+                                    </label>
+                                </td>
+                                <td colspan="2" class="align-middle" id="numberSelectProductList" style="width: 24%">
+                                </td>
+                                <td class="align-middle" colspan="2">
+                                    <div class="btn-group">
+                                        <button class="btn dropdown-toggle btnDropdown me-2" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                            Chọn thao tác
+                                            <i class="fa-solid fa-sort-down" style="padding-left: 2.3rem"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                            <li>
+                                                <button style="width: 155px; font-size: 13px"
+                                                        class="dropdown-item btnDropdown btnShowDeleteAddressSupplier">
+                                                    Xoá địa chỉ
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td colspan="5"></td>
+                            </tr>
+                            </thead>
+                            <tbody id="bodyRenderAddressSupplier">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="container-fluid " style="height: 50px">
+                        <div class="row col-md-12 d-flex align-items-center" style="font-size: small">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-3" id="totalPage" style="padding: initial">
+
+                            </div>
+                            <div class="col-md-3 text-end">
+                                <label class="me-2">Hiển thị</label>
+                                <select class="me-2 " id="pageSize">
+                                    <!--                  <option value="7">7</option>-->
+                                    <!--                  <option value="14">14</option>-->
+                                    <option value="20">20</option>
+                                </select>
+                                <span>Kết quả</span>
+                            </div>
+
+                            <div class="col-md-1">
+                                <nav aria-label="Page navigation example ">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <button class=" btn-outline-primary btn-sm me-2" id="previousPage"
+                                                    style="border: none">
+                                                <i class="fa-solid fa-angle-left"></i>
+                                            </button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button class="pageNumber btn-primary btn-sm me-2">
+                                                <span id="pageNo">1</span>
+                                            </button>
+                                        </li>
+                                        <li class="page-item">
+                                            <button class=" btn-outline-primary btn-sm " id="nextPage"
+                                                    style="border: none">
+                                                <i class="fa-solid fa-angle-right"></i>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="popup-box">
+            <iframe scrolling="no" src="about:blank" name="myIframe" id="popupPrint"
+                    style="border:0;position:absolute;width:0px;height:0px;left:0px;top:0px;"></iframe>
+        </div>
+    </div>
 </div>
 <th:block th:replace="/admin/suppliers/modals/addresses/create_address_supplier :: create_address_supplier"/>
 <th:block th:replace="/admin/suppliers/modals/addresses/edit_address_supplier :: edit_address_supplier"/>
 <th:block th:replace="/admin/suppliers/modals/addresses/delete_address_supplier :: delete_address_supplier"/>
 
 <div class='container-fluid-md notifications'>
-  <div class='ajax-notification'><span class='ajax-notification-message'></span></div>
+    <div class='ajax-notification'><span class='ajax-notification-message'></span></div>
 </div>
 <div class="modal fade" id="sapo-modal-container" data-width="" tabindex="-1" role="dialog" data-backdrop="false">
 </div>
 <div class="modal-backdrop fade in" id="sapo-modal-backdrop"></div>
 <script>
-  Page();
-  hj('trigger', 'split_test_b');
+    Page();
+    hj('trigger', 'split_test_b');
 </script>
 
 <div context="notificationVNPay"
      define="{notificationVNPay: new Components.NotificationVNPay(this, {accountId:941587 })}">
-  <div class="popup-notification">
-    <a href="javascript:" bind-event-click="closeNoti()" class="close">
-      <svg>
-        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use>
-      </svg>
-    </a>
-    <a href="" target="_blank" class="link-order">
-      <img class="left" src="/v2/images/ico-sapo.png" />
+    <div class="popup-notification">
+        <a href="javascript:" bind-event-click="closeNoti()" class="close">
+            <svg>
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cancel-small-minor"></use>
+            </svg>
+        </a>
+        <a href="" target="_blank" class="link-order">
+            <img class="left" src="/v2/images/ico-sapo.png"/>
 
-    </a>
-    <a href="" target="_blank" class="link-order">
-      <div class="title left">Thanh toán đơn hàng</div>
-      <div class="desc left"></div>
-    </a>
-  </div>
+        </a>
+        <a href="" target="_blank" class="link-order">
+            <div class="title left">Thanh toán đơn hàng</div>
+            <div class="desc left"></div>
+        </a>
+    </div>
 </div>
 </body>
 <!--<th:block th:replace="/layout/script :: script"/>-->
@@ -465,143 +503,144 @@
 <script src="/assets/admin/js/suppliers/supplier_app.js"></script>
 <script src="/assets/admin/js/suppliers/jquery/jquery.validate.min.js"></script>
 <script>
-  const page = {
-    urls: {
-      showModalDelete: origin +'/api/suppliers/',
-      btnSupplierDelete: origin +'/api/suppliers/',
-      getAllProvince:"https://vapi.vnappmob.com/api/province/",
-      getAllDistricts: "https://vapi.vnappmob.com/api/province/district/",
-      getAllWards: "https://vapi.vnappmob.com/api/province/ward/",
-      getAllAddressOfSupplier: origin + '/api/addresses/findBySupplierId/',
-      doCreateAddressSup: origin +'/api/addresses',
+    const page = {
+        urls: {
+            showModalDelete: origin + '/api/suppliers/',
+            btnSupplierDelete: origin + '/api/suppliers/',
+            getAllProvince: "https://vapi.vnappmob.com/api/province/",
+            getAllDistricts: "https://vapi.vnappmob.com/api/province/district/",
+            getAllWards: "https://vapi.vnappmob.com/api/province/ward/",
+            getAllAddressOfSupplier: origin + '/api/addresses/findBySupplierId/',
+            doCreateAddressSup: origin + '/api/addresses',
 
-    },
-    elements: {},
-    commands: {},
-    dialogs: {
-      elements: {},
-      commands: {}
+        },
+        elements: {},
+        commands: {},
+        dialogs: {
+            elements: {},
+            commands: {}
+        }
     }
-  }
-  page.elements.bodyRenderAddressSupplier = $("#bodyRenderAddressSupplier")
-  page.elements.showModalDelete = $("#showModalDelete");
-  page.elements.idDeleteSupplier = $("#idDeleteSupplier");
-  page.elements.modalDeleteSupplier = $("#supplier-delete-modal");
-  page.elements.btnSupplierDelete = $("#btn-supplier-delete");
-  page.elements.supplierId = $("#supplierId");
+    page.elements.bodyRenderAddressSupplier = $("#bodyRenderAddressSupplier")
+    page.elements.showModalDelete = $("#showModalDelete");
+    page.elements.idDeleteSupplier = $("#idDeleteSupplier");
+    page.elements.modalDeleteSupplier = $("#supplier-delete-modal");
+    page.elements.btnSupplierDelete = $("#btn-supplier-delete");
+    page.elements.supplierId = $("#supplierId");
 
 
-  page.elements.btnShowCrAddressSupplier = $("#btnShowCrAddressSupplier");
-  page.dialogs.elements.modalCreateAddressSupplier = $("#modalCreateAddressSupplier");
-  page.dialogs.elements.labelCrAddressSup = $("#labelCrAddressSup");
-  page.dialogs.elements.fullNameCrAddressSup = $("#fullNameCrAddressSup");
-  page.dialogs.elements.address1CrAddressSup = $("#address1CrAddressSup");
-  page.dialogs.elements.address2CrAddressSup =$("#address2CrAddressSup");
-  page.dialogs.elements.emailCrAddressSup = $("#emailCrAddressSup");
-  page.dialogs.elements.phoneNumberCrAddressSup = $("#phoneNumberCrAddressSup");
-  page.dialogs.elements.provinceCr = $("#provinceCr");
-  page.dialogs.elements.districtCr = $("#districtCr");
-  page.dialogs.elements.wardCr =$("#wardCr");
-  page.dialogs.elements.zipCodeCrAddressSup = $("#zipCodeCrAddressSup");
+    page.elements.btnShowCrAddressSupplier = $("#btnShowCrAddressSupplier");
+    page.dialogs.elements.modalCreateAddressSupplier = $("#modalCreateAddressSupplier");
+    page.dialogs.elements.labelCrAddressSup = $("#labelCrAddressSup");
+    page.dialogs.elements.fullNameCrAddressSup = $("#fullNameCrAddressSup");
+    page.dialogs.elements.address1CrAddressSup = $("#address1CrAddressSup");
+    page.dialogs.elements.address2CrAddressSup = $("#address2CrAddressSup");
+    page.dialogs.elements.emailCrAddressSup = $("#emailCrAddressSup");
+    page.dialogs.elements.phoneNumberCrAddressSup = $("#phoneNumberCrAddressSup");
+    page.dialogs.elements.provinceCr = $("#provinceCr");
+    page.dialogs.elements.districtCr = $("#districtCr");
+    page.dialogs.elements.wardCr = $("#wardCr");
+    page.dialogs.elements.zipCodeCrAddressSup = $("#zipCodeCrAddressSup");
 
-  page.dialogs.elements.btnCreateAddressSup =$("#btnCreateAddressSup");
-  page.dialogs.elements.formCreateAddressSup = $("#formCreateAddressSup");
+    page.dialogs.elements.btnCreateAddressSup = $("#btnCreateAddressSup");
+    page.dialogs.elements.formCreateAddressSup = $("#formCreateAddressSup");
 
-  page.dialogs.elements.idUpAddressSup =  $("#idUpAddressSup");
-  page.dialogs.elements.modalUpdateAddressSupplier = $("#modalUpdateAddressSupplier");
-  page.dialogs.elements.fullNameUpAddressSup = $("#fullNameUpAddressSup");
-  page.dialogs.elements.labelUpAddressSup = $("#labelUpAddressSup");
-  page.dialogs.elements.phoneNumberUpAddressSup = $("#phoneNumberUpAddressSup");
-  page.dialogs.elements.emailUpAddressSup = $("#emailUpAddressSup");
-  page.dialogs.elements.address1UpAddressSup = $("#address1UpAddressSup");
-  page.dialogs.elements.address2UpAddressSup = $("#address2UpAddressSup");
-  page.dialogs.elements.zipCodeUpAddressSup = $("#zipCodeUpAddressSup");
-  page.dialogs.elements.provinceUp  = $("#provinceUp");
-  page.dialogs.elements.districtUp = $("#districtUp");
-  page.dialogs.elements.wardUp = $("#wardUp") ;
-
-
-  page.dialogs.elements.btnUpAddressSup =  $("#btnUpAddressSup");
-  page.dialogs.elements.formUpdateAddressSup= $("#formUpdateAddressSup");
-
-  page.elements.btnShowDeleteAddressSupplier = $(".btnShowDeleteAddressSupplier");
-  page.dialogs.elements.modalDeleteAddressSup = $("#modalDeleteAddressSup");
-  page.dialogs.elements.btnDeleteAddressSup = $(".btnDeleteAddressSup");
-
-  let arrayIdAddressSup = [];
-  let totalPage;
-  page.elements.checkAll = $("#checkAll");
-  page.elements.selectAction = $("#selectAction");
-  page.elements.selectActionThead = $("#selectActionThead");
-  page.elements.theadList = $("#theadList");
-  page.elements.numberSelectProductList = $("#numberSelectProductList");
-  page.elements.statusChangeForNumberProductList = $("#statusChange");
-  page.elements.statusChangeForNumberToUnavailable = $("#statusChangeUnavailable");
-  page.elements.statusChangeForNumberDelete = $("#statusChangeDelete");
-
-  page.elements.modalAvailable = $("#modalAvailable");
-  page.elements.modalUnavailable = $("#modalUnavailable");
-  page.elements.modalDelete = $("#modalDelete");
-  page.elements.modalCheckInventory = $("#modalCheckInventory");
-  page.elements.tbAddress = $("#tbAddress");
-  page.elements.totalPage = $("#totalPage");
-  page.dialogs.elements.nextPage = $("#nextPage");
+    page.dialogs.elements.idUpAddressSup = $("#idUpAddressSup");
+    page.dialogs.elements.modalUpdateAddressSupplier = $("#modalUpdateAddressSupplier");
+    page.dialogs.elements.fullNameUpAddressSup = $("#fullNameUpAddressSup");
+    page.dialogs.elements.labelUpAddressSup = $("#labelUpAddressSup");
+    page.dialogs.elements.phoneNumberUpAddressSup = $("#phoneNumberUpAddressSup");
+    page.dialogs.elements.emailUpAddressSup = $("#emailUpAddressSup");
+    page.dialogs.elements.address1UpAddressSup = $("#address1UpAddressSup");
+    page.dialogs.elements.address2UpAddressSup = $("#address2UpAddressSup");
+    page.dialogs.elements.zipCodeUpAddressSup = $("#zipCodeUpAddressSup");
+    page.dialogs.elements.provinceUp = $("#provinceUp");
+    page.dialogs.elements.districtUp = $("#districtUp");
+    page.dialogs.elements.wardUp = $("#wardUp");
 
 
-  page.elements.showModalDelete.on('click', ()=>{
-    let idDelete = page.elements.idDeleteSupplier.val()
-    console.log("idDelete : " ,idDelete);
-    $.ajax({
-      "headers": {
-        "accept": "application/json",
-        "content-type": "application/json"
-      },
-      type: "GET",
-      url: page.urls.showModalDelete + idDelete
-    })
+    page.dialogs.elements.btnUpAddressSup = $("#btnUpAddressSup");
+    page.dialogs.elements.formUpdateAddressSup = $("#formUpdateAddressSup");
+
+    page.elements.btnShowDeleteAddressSupplier = $(".btnShowDeleteAddressSupplier");
+    page.dialogs.elements.modalDeleteAddressSup = $("#modalDeleteAddressSup");
+    page.dialogs.elements.btnDeleteAddressSup = $(".btnDeleteAddressSup");
+
+    let arrayIdAddressSup = [];
+    let totalPage;
+    page.elements.checkAll = $("#checkAll");
+    page.elements.selectAction = $("#selectAction");
+    page.elements.selectActionThead = $("#selectActionThead");
+    page.elements.theadList = $("#theadList");
+    page.elements.numberSelectProductList = $("#numberSelectProductList");
+    page.elements.statusChangeForNumberProductList = $("#statusChange");
+    page.elements.statusChangeForNumberToUnavailable = $("#statusChangeUnavailable");
+    page.elements.statusChangeForNumberDelete = $("#statusChangeDelete");
+
+    page.elements.modalAvailable = $("#modalAvailable");
+    page.elements.modalUnavailable = $("#modalUnavailable");
+    page.elements.modalDelete = $("#modalDelete");
+    page.elements.modalCheckInventory = $("#modalCheckInventory");
+    page.elements.tbAddress = $("#tbAddress");
+    page.elements.totalPage = $("#totalPage");
+    page.dialogs.elements.nextPage = $("#nextPage");
+
+
+    page.elements.showModalDelete.on('click', () => {
+        let idDelete = page.elements.idDeleteSupplier.val()
+        console.log("idDelete : ", idDelete);
+        $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: page.urls.showModalDelete + idDelete
+        })
             .done(() => {
-              page.elements.modalDeleteSupplier.modal("show");
+                page.elements.modalDeleteSupplier.modal("show");
             })
             .fail((error) => {
-              console.log(error);
+                console.log(error);
             })
 
-  })
-
-  page.elements.btnSupplierDelete.on('click', ()=>{
-    let idDelete = page.elements.idDeleteSupplier.val()
-    $.ajax({
-      "headers": {
-        "accept": "application/json",
-        "content-type": "application/json"
-      },
-      type: "DELETE",
-      url: page.urls.btnSupplierDelete + idDelete
     })
+
+    page.elements.btnSupplierDelete.on('click', () => {
+        let idDelete = page.elements.idDeleteSupplier.val()
+        console.log("delete id ", idDelete)
+        $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "DELETE",
+            url: page.urls.btnSupplierDelete + idDelete
+        })
             .done(() => {
-              page.elements.modalDeleteSupplier.modal("hide");
-              SupplierApp.IziToast.showSuccessAlert("Xoá nhà cung cấp thành công");
-              window.location.href = `/admin/suppliers`;
+                page.elements.modalDeleteSupplier.modal("hide");
+                SupplierApp.IziToast.showSuccessAlert("Xoá nhà cung cấp thành công");
+                window.location.href = `/admin/suppliers`;
             })
             .fail((error) => {
-              SupplierApp.IziToast.showErrorAlert("Xoá nhà cung cấp thất bại");
+                SupplierApp.IziToast.showErrorAlert("Xoá nhà cung cấp thất bại");
             })
-  })
+    })
 
-  function renderAddressSupplier(item) {
-    console.log("item address : ", item)
-    return `
+    function renderAddressSupplier(item) {
+        console.log("item address : ", item)
+        return `
  <tr id="tr_${item.id}" data-id="${item.id}">
                 <td class="align-middle">
                 <label for="${item.id}" style="padding: 1rem; cursor:pointer">
                     <input style="cursor:pointer" id ="${item.id}" class="selectCheckbox"  name="options[]" type="checkbox" value="${item.id}">
                 </label>
                 </td>
-                 <td onclick="editAddressSup(${item.id})" class="align-middle">${item.label ? item.label : "" }</td>
+                 <td onclick="editAddressSup(${item.id})" class="align-middle">${item.label ? item.label : ""}</td>
                 <td onclick="editAddressSup(${item.id})" class="align-middle">${item.line1}</td>
                 <td onclick="editAddressSup(${item.id})" class="align-middle" ${item.wardId}>${item.wardName ? item.wardName : ""}</td>
                 <td onclick="editAddressSup(${item.id})" class="align-middle" ${item.districtId}>${item.districtName ? item.districtName : ""}</td>
-                <td onclick="editAddressSup(${item.id})" class="align-middle" ${item.provinceId} >${item.provinceName ? item.provinceName: ""}</td>
+                <td onclick="editAddressSup(${item.id})" class="align-middle" ${item.provinceId} >${item.provinceName ? item.provinceName : ""}</td>
                 <td onclick="editAddressSup(${item.id})" class="align-middle text-end ">${item.zipCode ? item.zipCode : ""}</td>
                 <td onclick="editAddressSup(${item.id})" class="align-middle text-end">${item.phoneNumber ? item.phoneNumber : ""}</td>
                 <td onclick="editAddressSup(${item.id})" class="align-middle">
@@ -609,535 +648,562 @@
                 </td>
               </tr>
     `
-  }
-  let pageable;
-  function getAllAddressOfSupplierPage(){
-    console.log("debug" , pageable)
+    }
 
-    $.ajax({
-      headers: {
-        "accept": "application/json",
-        "content-type": "application/json"
-      },
-      type: "GET",
-      url: origin + '/api/addresses/findBySupplierId',
-      data: jQuery.param(pageable)
+    let pageable;
 
-      // data: ({
-      //   "pageNo": pageNo,
-      //   "pageSize": pageSize,
-      //   "supplierId" :supplierId,
-      // })
-    })
-            .done((data)=>{
-              page.elements.bodyRenderAddressSupplier.empty();
-              page.elements.totalPage.empty();
-              totalPage = data.totalPage;
-              data.addresses.map(item => {
-                  page.elements.bodyRenderAddressSupplier.prepend(renderAddressSupplier(item))
-              });
-              page.commands.isCheckbox();
-              page.elements.totalPage.prepend(
-                      `<span class="me-2">Hiển thị kết quả từ ${data.totalPage} - ${data.totalItem} trên tổng ${data.totalItem}</span>`
-              )
-            })
-  }
+    function getAllAddressOfSupplierPage() {
+        console.log("debug", pageable)
 
-  // function getAllAddressOfSupplier(){
-  // let supplierId = page.elements.supplierId.val();
-  // console.log("supplierId: ", supplierId)
-  // $.ajax({
-  //   "headers": {
-  //     "accept": "application/json",
-  //     "content-type": "application/json"
-  //   },
-  //   type: "GET",
-  //   url: page.urls.getAllAddressOfSupplier + supplierId
-  // })
-  //         .done((data) => {
-  //           console.log("dataAdress: ", data);
-  //           $.each(data, function (index, item) {
-  //             let str = renderAddressSupplier(item);
-  //             page.elements.bodyRenderAddressSupplier.prepend(str);
-  //           })
-  //         })
-  //         .fail((error) => {
-  //         })
-  // }
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: origin + '/api/addresses/findBySupplierId',
+            data: jQuery.param(pageable)
 
-  function getAllProvince(element) {
-    return $.ajax({
-      type: "GET",
-      url: page.urls.getAllProvince
-    })
+            // data: ({
+            //   "pageNo": pageNo,
+            //   "pageSize": pageSize,
+            //   "supplierId" :supplierId,
+            // })
+        })
             .done((data) => {
-              // element.append('<option value="-1">Tỉnh/Thành phố</option>')
-              $.each(data.results, function (index, value) {
-                element.append(`<option value="${value.province_id}">${value.province_name}</option>`)
-              });
+                page.elements.bodyRenderAddressSupplier.empty();
+                page.elements.totalPage.empty();
+                totalPage = data.totalPage;
+                data.addresses.map(item => {
+                    page.elements.bodyRenderAddressSupplier.prepend(renderAddressSupplier(item))
+                });
+                page.commands.isCheckbox();
+                page.elements.totalPage.prepend(
+                    `<span class="me-2">Hiển thị kết quả từ ${data.totalPage} - ${data.totalItem} trên tổng ${data.totalItem}</span>`
+                )
             })
-  }
-
-  function getAllDistrictsByProvinceId(element, provinceId) {
-   return  $.ajax({
-      "url": page.urls.getAllDistricts + provinceId,
-      "method": "GET"
-    }).done(function (response) {
-      $.each(response.results, function (index, value) {
-        element.append(`<option value="${value.district_id}">${value.district_name}</option>`)
-      });
-    });
-  }
-
-  function getAllWardsByDistrictId(element, districtId) {
-    return $.ajax({
-      "url": page.urls.getAllWards + districtId,
-      "method": "GET"
-    }).done(function(data){
-      $.each(data.results, function (index, value) {
-        element.append(`<option value="${value.ward_id}">${value.ward_name}</option>`)
-      });
-    });
-  }
-
-  let provinceIdCre = page.dialogs.elements.provinceCr ;
-  let districtIdCre = page.dialogs.elements.districtCr;
-  let wardIdCre = page.dialogs.elements.wardCr;
-
-  let provinceIdUp = page.dialogs.elements.provinceUp;
-  let districIdUp = page.dialogs.elements.districtUp;
-  let wardIdUp = page.dialogs.elements.wardUp;
-
-  getAllProvince(provinceIdCre);
-  getAllProvince(provinceIdUp);
-  provinceIdCre.on("change", function () {
-    districtIdCre.empty();
-    districtIdCre.append('<option>Chọn quận huyện</option>');
-    wardIdCre.empty();
-    wardIdCre.append('<option>Chọn phường xã</option>');
-    getAllDistrictsByProvinceId(districtIdCre, provinceIdCre.val());
-  });
-
-  districtIdCre.on("change", function () {
-    wardIdCre.empty();
-    wardIdCre.append('<option>Chọn phường xã</option>');
-    getAllWardsByDistrictId(wardIdCre, districtIdCre.val());
-  });
-
-  provinceIdUp.on("change", function () {
-    districIdUp.empty();
-    districIdUp.append('<option>Chọn quận huyện </option>');
-    wardIdUp.empty();
-    wardIdUp.append('<option>Chọn phường xã</option>');
-    getAllDistrictsByProvinceId(districIdUp, provinceIdUp.val());
-  })
-
-  districIdUp.on("change", function(){
-    wardIdUp.empty();
-    wardIdUp.append('<option>Chọn phường xã</option>');
-    getAllWardsByDistrictId(wardIdUp, districIdUp.val());
-  })
-
-  page.elements.checkAll.on("change", function () {
-    page.elements.selectAction.prop("checked", true);
-    arrayIdAddressSup = [];
-    if (this.checked) {
-      $("#tbAddress > tbody input").each(function () {
-        $(this).prop("checked", true);
-        arrayIdAddressSup.push($(this).val());
-      })
-    } else {
-      $("#tbAddress > tbody input").each(function () {
-        $(this).prop("checked", false);
-      })
     }
-    page.commands.showAction();
-  })
 
-  page.commands.isCheckbox = () => {
-    $(".selectCheckbox").on("change", function () {
-      if(this.checked) {
-        $(this).prop("checked", true);
-        arrayIdAddressSup.push($(this).val());
-      } else {
-        $(this).prop("checked", false);
-        arrayIdAddressSup = page.commands.deleteArrayId($(this).val());
-      }
-      page.commands.showAction();
-      if (arrayIdAddressSup.length === $(".selectCheckbox").length) {
-        page.elements.checkAll.prop("checked", true);
+    // function getAllAddressOfSupplier(){
+    // let supplierId = page.elements.supplierId.val();
+    // console.log("supplierId: ", supplierId)
+    // $.ajax({
+    //   "headers": {
+    //     "accept": "application/json",
+    //     "content-type": "application/json"
+    //   },
+    //   type: "GET",
+    //   url: page.urls.getAllAddressOfSupplier + supplierId
+    // })
+    //         .done((data) => {
+    //           console.log("dataAdress: ", data);
+    //           $.each(data, function (index, item) {
+    //             let str = renderAddressSupplier(item);
+    //             page.elements.bodyRenderAddressSupplier.prepend(str);
+    //           })
+    //         })
+    //         .fail((error) => {
+    //         })
+    // }
+
+    function getAllProvince(element) {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.getAllProvince
+        })
+            .done((data) => {
+                // element.append('<option value="-1">Tỉnh/Thành phố</option>')
+                $.each(data.results, function (index, value) {
+                    element.append(`<option value="${value.province_id}">${value.province_name}</option>`)
+                });
+            })
+    }
+
+    function getAllDistrictsByProvinceId(element, provinceId) {
+        return $.ajax({
+            "url": page.urls.getAllDistricts + provinceId,
+            "method": "GET"
+        }).done(function (response) {
+            $.each(response.results, function (index, value) {
+                element.append(`<option value="${value.district_id}">${value.district_name}</option>`)
+            });
+        });
+    }
+
+    function getAllWardsByDistrictId(element, districtId) {
+        return $.ajax({
+            "url": page.urls.getAllWards + districtId,
+            "method": "GET"
+        }).done(function (data) {
+            $.each(data.results, function (index, value) {
+                element.append(`<option value="${value.ward_id}">${value.ward_name}</option>`)
+            });
+        });
+    }
+
+    let provinceIdCre = page.dialogs.elements.provinceCr;
+    let districtIdCre = page.dialogs.elements.districtCr;
+    let wardIdCre = page.dialogs.elements.wardCr;
+
+    let provinceIdUp = page.dialogs.elements.provinceUp;
+    let districIdUp = page.dialogs.elements.districtUp;
+    let wardIdUp = page.dialogs.elements.wardUp;
+
+    getAllProvince(provinceIdCre);
+    getAllProvince(provinceIdUp);
+    provinceIdCre.on("change", function () {
+        districtIdCre.empty();
+        districtIdCre.append('<option>Chọn quận huyện</option>');
+        wardIdCre.empty();
+        wardIdCre.append('<option>Chọn phường xã</option>');
+        getAllDistrictsByProvinceId(districtIdCre, provinceIdCre.val());
+    });
+
+    districtIdCre.on("change", function () {
+        wardIdCre.empty();
+        wardIdCre.append('<option>Chọn phường xã</option>');
+        getAllWardsByDistrictId(wardIdCre, districtIdCre.val());
+    });
+
+    provinceIdUp.on("change", function () {
+        districIdUp.empty();
+        districIdUp.append('<option>Chọn quận huyện </option>');
+        wardIdUp.empty();
+        wardIdUp.append('<option>Chọn phường xã</option>');
+        getAllDistrictsByProvinceId(districIdUp, provinceIdUp.val());
+    })
+
+    districIdUp.on("change", function () {
+        wardIdUp.empty();
+        wardIdUp.append('<option>Chọn phường xã</option>');
+        getAllWardsByDistrictId(wardIdUp, districIdUp.val());
+    })
+
+    page.elements.checkAll.on("change", function () {
         page.elements.selectAction.prop("checked", true);
-      } else {
-        page.elements.checkAll.prop("checked", false);
-        page.elements.selectAction.prop("checked", false);
-      }
-    })
-  }
-
-
-  page.commands.deleteArrayId = (item) => {
-    if (arrayIdAddressSup.length <= 0) {
-      return [];
-    } else {
-      for (let i = 0; i < arrayIdAddressSup.length; i++) {
-        if (arrayIdAddressSup[i] === item) {
-          arrayIdAddressSup.splice(i, 1);
+        arrayIdAddressSup = [];
+        if (this.checked) {
+            $("#tbAddress > tbody input").each(function () {
+                $(this).prop("checked", true);
+                arrayIdAddressSup.push($(this).val());
+            })
+        } else {
+            $("#tbAddress > tbody input").each(function () {
+                $(this).prop("checked", false);
+            })
         }
-      }
-      return arrayIdAddressSup;
-    }
-  }
-  page.commands.showAction = () => {
-    page.elements.numberSelectProductList.empty();
-    page.elements.statusChangeForNumberProductList.empty();
-    page.elements.statusChangeForNumberToUnavailable.empty();
-    page.elements.statusChangeForNumberDelete.empty();
-
-    if (arrayIdAddressSup.length > 0) {
-      page.elements.theadList.removeClass("show").addClass("hide");
-      page.elements.numberSelectProductList.append(`<span>Đã chọn ${arrayIdAddressSup.length} sản phẩm trên trang này</span>`)
-      page.elements.statusChangeForNumberDelete.append(`<span style="font-size: medium">Thao tác này sẽ xóa ${arrayIdAddressSup.length} sản phẩm bạn đã chọn. Thao tác này không thể khôi phục.</span>`);
-      page.elements.selectActionThead.removeClass("hide").addClass("show");
-    } else {
-      page.elements.theadList.removeClass("hide").addClass("show");
-      page.elements.selectActionThead.removeClass("show").addClass("hide");
-    }
-  }
-  page.elements.selectAction.on("change", function () {
-    page.elements.checkAll.prop("checked", false);
-    arrayIdAddressSup = [];
-    if (this.checked) {
-      $("#tbAddress > tbody input").each(function () {
-        $(this).prop("checked", true);
-        arrayIdAddressSup.push($(this).val());
-      })
-    } else {
-      console.log(this)
-      $("#tbAddress > tbody input").each(function () {
-        $(this).prop("checked", false);
-      })
-    }
-    page.commands.showAction();
-  })
-
-  page.commands.resetInputCheckBox = () => {
-    $("#tbAddress input").each(function () {
-      $(this).prop("checked", false);
+        page.commands.showAction();
     })
-    arrayIdProduct = [];
-    page.commands.showAction();
-  }
 
-  page.elements.btnShowDeleteAddressSupplier.on('click', ()=>{
-    page.dialogs.elements.modalDeleteAddressSup.modal('show');
-  })
+    page.commands.isCheckbox = () => {
+        $(".selectCheckbox").on("change", function () {
+            if (this.checked) {
+                $(this).prop("checked", true);
+                arrayIdAddressSup.push($(this).val());
+            } else {
+                $(this).prop("checked", false);
+                arrayIdAddressSup = page.commands.deleteArrayId($(this).val());
+            }
+            page.commands.showAction();
+            if (arrayIdAddressSup.length === $(".selectCheckbox").length) {
+                page.elements.checkAll.prop("checked", true);
+                page.elements.selectAction.prop("checked", true);
+            } else {
+                page.elements.checkAll.prop("checked", false);
+                page.elements.selectAction.prop("checked", false);
+            }
+        })
+    }
 
-  page.dialogs.elements.btnDeleteAddressSup.on('click', ()=>{
-      page.commands.deleteProductSelect();
-  })
 
-  page.commands.deleteProductSelect = () => {
-    $.ajax({
-      headers: {
-        "accept": "application/json",
-        "content-type": "application/json"
-      },
-      type: "DELETE",
-      url: origin +'/api/addresses/deleteAddress' ,
-      data: JSON.stringify(arrayIdAddressSup)
+    page.commands.deleteArrayId = (item) => {
+        if (arrayIdAddressSup.length <= 0) {
+            return [];
+        } else {
+            for (let i = 0; i < arrayIdAddressSup.length; i++) {
+                if (arrayIdAddressSup[i] === item) {
+                    arrayIdAddressSup.splice(i, 1);
+                }
+            }
+            return arrayIdAddressSup;
+        }
+    }
+    page.commands.showAction = () => {
+        page.elements.numberSelectProductList.empty();
+        page.elements.statusChangeForNumberProductList.empty();
+        page.elements.statusChangeForNumberToUnavailable.empty();
+        page.elements.statusChangeForNumberDelete.empty();
+
+        if (arrayIdAddressSup.length > 0) {
+            page.elements.theadList.removeClass("show").addClass("hide");
+            page.elements.numberSelectProductList.append(`<span>Đã chọn ${arrayIdAddressSup.length} sản phẩm trên trang này</span>`)
+            page.elements.statusChangeForNumberDelete.append(`<span style="font-size: medium">Thao tác này sẽ xóa ${arrayIdAddressSup.length} sản phẩm bạn đã chọn. Thao tác này không thể khôi phục.</span>`);
+            page.elements.selectActionThead.removeClass("hide").addClass("show");
+        } else {
+            page.elements.theadList.removeClass("hide").addClass("show");
+            page.elements.selectActionThead.removeClass("show").addClass("hide");
+        }
+    }
+    page.elements.selectAction.on("change", function () {
+        page.elements.checkAll.prop("checked", false);
+        arrayIdAddressSup = [];
+        if (this.checked) {
+            $("#tbAddress > tbody input").each(function () {
+                $(this).prop("checked", true);
+                arrayIdAddressSup.push($(this).val());
+            })
+        } else {
+            console.log(this)
+            $("#tbAddress > tbody input").each(function () {
+                $(this).prop("checked", false);
+            })
+        }
+        page.commands.showAction();
     })
+
+    page.commands.resetInputCheckBox = () => {
+        $("#tbAddress input").each(function () {
+            $(this).prop("checked", false);
+        })
+        arrayIdProduct = [];
+        page.commands.showAction();
+    }
+
+    page.elements.btnShowDeleteAddressSupplier.on('click', () => {
+        page.dialogs.elements.modalDeleteAddressSup.modal('show');
+    })
+
+    page.dialogs.elements.btnDeleteAddressSup.on('click', () => {
+        page.commands.deleteProductSelect();
+    })
+
+    page.commands.deleteProductSelect = () => {
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "DELETE",
+            url: origin + '/api/addresses/deleteAddress',
+            data: JSON.stringify(arrayIdAddressSup)
+        })
             .done(() => {
-              // SupplierApp.IziToast.showSuccessAlert("Xoá địa chỉ nhà cung cấp thành công!");
-              page.dialogs.elements.modalDeleteAddressSup.modal('hide');
-              location.reload();
+                // SupplierApp.IziToast.showSuccessAlert("Xoá địa chỉ nhà cung cấp thành công!");
+                page.dialogs.elements.modalDeleteAddressSup.modal('hide');
+                location.reload();
             })
             .fail((jqXHR) => {
-              console.log(jqXHR)
+                console.log(jqXHR)
             })
-  }
-
-  page.elements.btnShowCrAddressSupplier.on('click', () => {
-    page.dialogs.elements.modalCreateAddressSupplier.modal('show');
-    page.dialogs.elements.labelCrAddressSup.val("");
-    page.dialogs.elements.fullNameCrAddressSup.val("");
-    page.dialogs.elements.address1CrAddressSup.val("");
-    page.dialogs.elements.address2CrAddressSup.val("");
-    page.dialogs.elements.emailCrAddressSup.val("");
-    page.dialogs.elements.phoneNumberCrAddressSup.val("");
-    page.dialogs.elements.provinceCr.val("");
-    page.dialogs.elements.districtCr.val("");
-    page.dialogs.elements.wardCr.val("");
-    page.dialogs.elements.zipCodeCrAddressSup.val("");
- })
-
-  page.dialogs.elements.btnCreateAddressSup.on('click', ()=> {
-    page.dialogs.elements.formCreateAddressSup.trigger('submit');
-  })
-
-  function doCreateAddressSup(){
-    let fullName = page.dialogs.elements.fullNameCrAddressSup.val();
-    let phoneNumber = page.dialogs.elements.phoneNumberCrAddressSup.val();
-    let email = page.dialogs.elements.emailCrAddressSup.val();
-    let line1 =  page.dialogs.elements.address1CrAddressSup.val();
-    let line2 = page.dialogs.elements.address2CrAddressSup.val();
-    let zipCode = page.dialogs.elements.zipCodeCrAddressSup.val();
-    let label = page.dialogs.elements.labelCrAddressSup.val();
-    let wardName = page.dialogs.elements.wardCr.find("option:selected").text();
-    console.log("ward Name : " , wardName);
-    if (wardName.includes("Chọn phường xã")){
-      wardName = undefined;
     }
 
-    let districtName = page.dialogs.elements.districtCr.find("option:selected").text();
-    if(districtName.includes("Chọn quận huyện")){
-      districtName = undefined;
-    }
-
-    let provinceName = page.dialogs.elements.provinceCr.find("option:selected").text()
-    if(provinceName.includes("Chọn tỉnh thành phố")){
-      provinceName = undefined;
-    }
-    let createAddressParam = {
-      supplierId: page.elements.supplierId.val(),
-      label : label.length > 0 ? label : undefined,
-      fullName: fullName.length > 0 ? fullName : undefined,
-      phoneNumber:  phoneNumber.length > 0 ? phoneNumber : undefined,
-      email: email.length > 0 ? email : undefined,
-      line1: line1.length > 0 ? line1 : undefined,
-      line2:  line2.length > 0 ? line2 : undefined,
-      zipCode:  zipCode.length > 0 ? zipCode : undefined,
-      wardId:  page.dialogs.elements.wardCr.val(),
-      wardName: wardName,
-      districtId:  page.dialogs.elements.districtCr.val(),
-      districtName: districtName,
-      provinceId : page.dialogs.elements.provinceCr.val(),
-      provinceName : provinceName,
-    }
-    $.ajax({
-      "headers": {
-        "accept": "application/json",
-        "content-type": "application/json"
-      },
-      type: "POST",
-      url: origin +'/api/addresses',
-      data: JSON.stringify(createAddressParam)
+    page.elements.btnShowCrAddressSupplier.on('click', () => {
+        page.dialogs.elements.modalCreateAddressSupplier.modal('show');
+        page.dialogs.elements.labelCrAddressSup.val("");
+        page.dialogs.elements.fullNameCrAddressSup.val("");
+        page.dialogs.elements.address1CrAddressSup.val("");
+        page.dialogs.elements.address2CrAddressSup.val("");
+        page.dialogs.elements.emailCrAddressSup.val("");
+        page.dialogs.elements.phoneNumberCrAddressSup.val("");
+        page.dialogs.elements.provinceCr.val("");
+        page.dialogs.elements.districtCr.val("");
+        page.dialogs.elements.wardCr.val("");
+        page.dialogs.elements.zipCodeCrAddressSup.val("");
     })
+
+    page.dialogs.elements.btnCreateAddressSup.on('click', () => {
+        page.dialogs.elements.formCreateAddressSup.trigger('submit');
+    })
+
+    function doCreateAddressSup() {
+        let fullName = page.dialogs.elements.fullNameCrAddressSup.val();
+        let phoneNumber = page.dialogs.elements.phoneNumberCrAddressSup.val();
+        let email = page.dialogs.elements.emailCrAddressSup.val();
+        let line1 = page.dialogs.elements.address1CrAddressSup.val();
+        let line2 = page.dialogs.elements.address2CrAddressSup.val();
+        let zipCode = page.dialogs.elements.zipCodeCrAddressSup.val();
+        let label = page.dialogs.elements.labelCrAddressSup.val();
+        let wardName = page.dialogs.elements.wardCr.find("option:selected").text();
+        console.log("ward Name : ", wardName);
+        if (wardName.includes("Chọn phường xã")) {
+            wardName = undefined;
+        }
+
+        let districtName = page.dialogs.elements.districtCr.find("option:selected").text();
+        if (districtName.includes("Chọn quận huyện")) {
+            districtName = undefined;
+        }
+
+        let provinceName = page.dialogs.elements.provinceCr.find("option:selected").text()
+        if (provinceName.includes("Chọn tỉnh thành phố")) {
+            provinceName = undefined;
+        }
+        let createAddressParam = {
+            supplierId: page.elements.supplierId.val(),
+            label: label.length > 0 ? label : undefined,
+            fullName: fullName.length > 0 ? fullName : undefined,
+            phoneNumber: phoneNumber.length > 0 ? phoneNumber : undefined,
+            email: email.length > 0 ? email : undefined,
+            line1: line1.length > 0 ? line1 : undefined,
+            line2: line2.length > 0 ? line2 : undefined,
+            zipCode: zipCode.length > 0 ? zipCode : undefined,
+            wardId: page.dialogs.elements.wardCr.val(),
+            wardName: wardName,
+            districtId: page.dialogs.elements.districtCr.val(),
+            districtName: districtName,
+            provinceId: page.dialogs.elements.provinceCr.val(),
+            provinceName: provinceName,
+        }
+        $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "POST",
+            url: origin + '/api/addresses',
+            data: JSON.stringify(createAddressParam)
+        })
             .done(() => {
-              SupplierApp.IziToast.showSuccessAlert("Thêm địa chỉ nhà cung cấp thành công!");
-              page.dialogs.elements.modalCreateAddressSupplier.modal('hide');
-              location.reload();
+                SupplierApp.IziToast.showSuccessAlert("Thêm địa chỉ nhà cung cấp thành công!");
+                page.dialogs.elements.modalCreateAddressSupplier.modal('hide');
+                location.reload();
             })
             .fail((error) => {
-              console.log(error);
+                console.log(error);
             })
-  }
-
-  page.dialogs.elements.formCreateAddressSup.validate({
-    rules: {
-      address1CrAddressSup: {
-        required: true,
-      },
-      // wardCr: {
-      //   required: true,
-      // },
-      // districtCr: {
-      //   required: true,
-      // },
-      // provinceCr: {
-      //   required:true,
-      // }
-    },
-    messages: {
-      address1CrAddressSup: {
-        required: "Vui lòng nhập địa chỉ nhà cung cấp",
-      },
-      // wardCr: {
-      //   required: "Vui lòng chọn Phường xã",
-      // },
-      // districtCr: {
-      //   required: "Vui lòng chọn Quận huyện",
-      // },
-      // provinceCr: {
-      //   required:"Vui lòng chọn Tỉnh thành phố",
-      // }
-    },
-    submitHandler:() => {
-      doCreateAddressSup()
     }
-  })
 
-  function editAddressSup(item){
-    page.dialogs.elements.idUpAddressSup.val(item);
-    console.log("item", item)
-    $.ajax({
-      "headers": {
-        "accept": "application/json",
-        "content-type": "application/json"
-      },
-      type: "GET",
-      url: origin +"/api/addresses/" + item,
+    page.dialogs.elements.formCreateAddressSup.validate({
+        rules: {
+            address1CrAddressSup: {
+                required: true,
+            },
+            // wardCr: {
+            //   required: true,
+            // },
+            // districtCr: {
+            //   required: true,
+            // },
+            // provinceCr: {
+            //   required:true,
+            // }
+        },
+        messages: {
+            address1CrAddressSup: {
+                required: "Vui lòng nhập địa chỉ nhà cung cấp",
+            },
+            // wardCr: {
+            //   required: "Vui lòng chọn Phường xã",
+            // },
+            // districtCr: {
+            //   required: "Vui lòng chọn Quận huyện",
+            // },
+            // provinceCr: {
+            //   required:"Vui lòng chọn Tỉnh thành phố",
+            // }
+        },
+        submitHandler: () => {
+            doCreateAddressSup()
+        }
     })
-            .done((data) => {
-              console.log("data get update : ", data)
-              page.dialogs.elements.modalUpdateAddressSupplier.modal('show');
-              page.dialogs.elements.fullNameUpAddressSup.val(data.fullName);
-              page.dialogs.elements.labelUpAddressSup.val(data.label);
-              page.dialogs.elements.phoneNumberUpAddressSup.val(data.phoneNumber);
-              page.dialogs.elements.emailUpAddressSup.val(data.email);
-              page.dialogs.elements.address1UpAddressSup.val(data.line1);
-              page.dialogs.elements.address2UpAddressSup.val(data.line2);
-              page.dialogs.elements.zipCodeUpAddressSup.val(data.zipCode);
-              let province = data.provinceId;
-              if(province == undefined){
-                $("#provinceUp").remove(`<option value="" disabled="" selected="">Chọn tỉnh thành phố</option>`)
-              } else {
-                page.dialogs.elements.provinceUp.val(province);
-              }
-              console.log("province id:", page.dialogs.elements.provinceUp.val(data.provinceId));
 
-              page.dialogs.elements.provinceUp.val(data.provinceId);
-              getAllDistrictsByProvinceId(page.dialogs.elements.districtUp,data.provinceId).then(()=>{
-                page.dialogs.elements.districtUp.val(data.districtId);
-              });
-              getAllWardsByDistrictId(page.dialogs.elements.wardUp,data.districtId).then(()=>{
-                page.dialogs.elements.wardUp.val(data.wardId);
-              });
+    function editAddressSup(item) {
+        page.dialogs.elements.idUpAddressSup.val(item);
+        console.log("item", item)
+        $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: origin + "/api/addresses/" + item,
+        })
+            .done((data) => {
+                console.log("data get update : ", data)
+                page.dialogs.elements.modalUpdateAddressSupplier.modal('show');
+                page.dialogs.elements.fullNameUpAddressSup.val(data.fullName);
+                page.dialogs.elements.labelUpAddressSup.val(data.label);
+                page.dialogs.elements.phoneNumberUpAddressSup.val(data.phoneNumber);
+                page.dialogs.elements.emailUpAddressSup.val(data.email);
+                page.dialogs.elements.address1UpAddressSup.val(data.line1);
+                page.dialogs.elements.address2UpAddressSup.val(data.line2);
+                page.dialogs.elements.zipCodeUpAddressSup.val(data.zipCode);
+                let province = data.provinceId;
+                if (province == undefined) {
+                    $("#provinceUp").remove(`<option value="" disabled="" selected="">Chọn tỉnh thành phố</option>`)
+                } else {
+                    page.dialogs.elements.provinceUp.val(province);
+                }
+                console.log("province id:", page.dialogs.elements.provinceUp.val(data.provinceId));
+
+                page.dialogs.elements.provinceUp.val(data.provinceId);
+                getAllDistrictsByProvinceId(page.dialogs.elements.districtUp, data.provinceId).then(() => {
+                    page.dialogs.elements.districtUp.val(data.districtId);
+                });
+                getAllWardsByDistrictId(page.dialogs.elements.wardUp, data.districtId).then(() => {
+                    page.dialogs.elements.wardUp.val(data.wardId);
+                });
 
             })
-  }
-
-  page.dialogs.elements.btnUpAddressSup.on('click', ()=>{
-    page.dialogs.elements.formUpdateAddressSup.trigger('submit');
-  })
-
-  function doUpdateAddressSup(){
-    let idAddressSupNow = page.dialogs.elements.idUpAddressSup.val();
-    console.log("id update: ", idAddressSupNow);
-    let label = page.dialogs.elements.labelUpAddressSup.val();
-    let fullName = page.dialogs.elements.fullNameUpAddressSup.val();
-    let phoneNumber =  page.dialogs.elements.phoneNumberUpAddressSup.val();
-    let email = page.dialogs.elements.emailUpAddressSup.val();
-    let line1 = page.dialogs.elements.address1UpAddressSup.val();
-    let line2  = page.dialogs.elements.address2UpAddressSup.val();
-    let zipCode = page.dialogs.elements.zipCodeUpAddressSup.val();
-    let wardName = page.dialogs.elements.wardUp.find("option:selected").text();
-    console.log("ward Name : " , wardName);
-
-    let updateAddressSup = {
-      id: idAddressSupNow,
-      label: label.length>0 ? label : undefined,
-      fullName: fullName.length>0 ? fullName : undefined ,
-      supplierId: page.elements.supplierId.val(),
-      phoneNumber: phoneNumber.length>0 ? phoneNumber : undefined,
-      email:email.length > 0 ? email : undefined,
-      line1: line1.length > 0 ? line1 : undefined,
-      line2:  line2.length > 0 ? line2 : undefined,
-      wardId:  page.dialogs.elements.wardUp.val(),
-      wardName: page.dialogs.elements.wardUp.find("option:selected").text(),
-      districtId: page.dialogs.elements.districtUp.val(),
-      districtName: page.dialogs.elements.districtUp.find("option:selected").text(),
-      provinceId:  page.dialogs.elements.provinceUp.val(),
-      provinceName: page.dialogs.elements.provinceUp.find("option:selected").text(),
-      zipCode:  zipCode
     }
-    $.ajax({
-      "headers": {
-        "accept": "application/json",
-        "content-type": "application/json"
-      },
-      type: "PUT",
-      url: origin +"/api/addresses/",
-      data: JSON.stringify(updateAddressSup)
-    })
-            .done((data) => {
-              SupplierApp.IziToast.showSuccessAlert("Sửa địa chỉ nhà cung cấp thành công!");
-              page.dialogs.elements.modalUpdateAddressSupplier.modal('hide');
-              location.reload();
-            })
-  }
 
-  page.dialogs.elements.formUpdateAddressSup.validate({
-    rules: {
-      address1UpAddressSup: {
-        required: true,
-      },
-      // wardUp: {
-      //   required: true,
-      // },
-      // districtUp: {
-      //   required: true,
-      // },
-      // provinceUp: {
-      //   required:true,
-      // }
-    },
-    messages: {
-      address1UpAddressSup: {
-        required: "Vui lòng nhập địa chỉ nhà cung cấp",
-      },
-      // wardUp: {
-      //   required: "Vui lòng chọn Phường xã",
-      // },
-      // districtUp: {
-      //   required: "Vui lòng chọn Quận huyện",
-      // },
-      // provinceUp: {
-      //   required:"Vui lòng chọn Tỉnh thành phố",
-      // }
-    },
-    submitHandler:() => {
-      doUpdateAddressSup()
+    page.dialogs.elements.btnUpAddressSup.on('click', () => {
+        page.dialogs.elements.formUpdateAddressSup.trigger('submit');
+    })
+
+    function getValue(input) {
+        let value = input.val().trim();
+        return value.length > 0 ? value : undefined;
     }
-  })
 
+    function doUpdateAddressSup() {
+        let idAddressSupNow = page.dialogs.elements.idUpAddressSup.val();
+        console.log("id update: ", idAddressSupNow);
+        let label = getValue(page.dialogs.elements.labelUpAddressSup);
+        let fullName = page.dialogs.elements.fullNameUpAddressSup.val();
+        let phoneNumber = page.dialogs.elements.phoneNumberUpAddressSup.val();
+        let email = page.dialogs.elements.emailUpAddressSup.val();
+        let line1 = getValue(page.dialogs.elements.address1UpAddressSup);
+        let line2 = page.dialogs.elements.address2UpAddressSup.val();
+        let zipCode = getValue(page.dialogs.elements.zipCodeUpAddressSup);
 
-  page.elements.btnShowDeleteAddressSupplier.on('click', ()=>{
-    let idAddressSupNow = $("#idUpAddressSup").val();
-    console.log("idAddressSupNow : ", idAddressSupNow)
-    $.ajax({
-      "headers": {
-        "accept": "application/json",
-        "content-type": "application/json"
-      },
-      type: "GET",
-      url: origin +"/api/addresses/" + idAddressSupNow,
-    })
+        let wardName = page.dialogs.elements.wardUp.find("option:selected").text();
+        let wardId = page.dialogs.elements.wardUp.find("option:selected").val();
+        console.log("ward Name : ", wardName);
+        if (wardName.includes("Chọn phường xã")) {
+            wardName = undefined;
+            wardId = undefined;
+        }
+
+        let districtId = page.dialogs.elements.districtUp.find("option:selected").val();
+        let districtName = page.dialogs.elements.districtUp.find("option:selected").text();
+        if (districtName.includes("Chọn quận huyện")) {
+            districtName = undefined;
+            districtId = undefined;
+        }
+
+        let provinceId = page.dialogs.elements.provinceUp.find("option:selected").val();
+        let provinceName = page.dialogs.elements.provinceUp.find("option:selected").text();
+        if (provinceName.includes("Chọn tỉnh thành phố")) {
+            provinceName = undefined;
+            provinceId = undefined;
+        }
+
+        let updateAddressSup = {
+            id: idAddressSupNow,
+            label: label,
+            fullName: fullName.length > 0 ? fullName : undefined,
+            supplierId: page.elements.supplierId.val(),
+            phoneNumber: phoneNumber.length > 0 ? phoneNumber : undefined,
+            email: email.length > 0 ? email : undefined,
+            line1: line1.length > 0 ? line1 : undefined,
+            line2: line2.length > 0 ? line2 : undefined,
+            wardId: wardId,
+            wardName: wardName,
+            districtId: districtId,
+            districtName: districtName,
+            provinceId: provinceId,
+            provinceName: provinceName,
+            zipCode: zipCode
+        }
+        $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "PUT",
+            url: origin + "/api/addresses/",
+            data: JSON.stringify(updateAddressSup)
+        })
             .done((data) => {
-              $("#modalUpdateAddressSupplier").modal('hide');
-              page.dialogs.elements.modalDeleteAddressSup.modal('show');
+                SupplierApp.IziToast.showSuccessAlert("Sửa địa chỉ nhà cung cấp thành công!");
+                page.dialogs.elements.modalUpdateAddressSupplier.modal('hide');
+                location.reload();
             })
-  })
-
-  page.dialogs.elements.btnDeleteAddressSup.on('click', ()=>{
-    let idAddressSupNow = $("#idUpAddressSup").val();
-    console.log("idAddressSupNow : ", idAddressSupNow)
-    $.ajax({
-      "headers": {
-        "accept": "application/json",
-        "content-type": "application/json"
-      },
-      type: "DELETE",
-      url: origin +"/api/addresses/" + idAddressSupNow,
-    })
-            .done((data) => {
-              page.dialogs.elements.modalDeleteAddressSup.modal('hide');
-              SupplierApp.IziToast.showSuccessAlert("Xoá địa chỉ nhà cung cấp thành công!");
-              location.reload()
-            })
-            .fail(()=>{
-              SupplierApp.IziToast.showSuccessAlert("Xoá địa chỉ nhà cung cấp thành công!");
-
-            })
-  })
-
-
-  $(function() {
-    pageable = {
-      pageNo : 1,
-      pageSize: 20,
-      supplierId: $("#supplierId").val()
     }
-    getAllAddressOfSupplierPage();
-  });
+
+    page.dialogs.elements.formUpdateAddressSup.validate({
+        rules: {
+            address1UpAddressSup: {
+                required: true,
+            },
+            // wardUp: {
+            //   required: true,
+            // },
+            // districtUp: {
+            //   required: true,
+            // },
+            // provinceUp: {
+            //   required:true,
+            // }
+        },
+        messages: {
+            address1UpAddressSup: {
+                required: "Vui lòng nhập địa chỉ nhà cung cấp",
+            },
+            // wardUp: {
+            //   required: "Vui lòng chọn Phường xã",
+            // },
+            // districtUp: {
+            //   required: "Vui lòng chọn Quận huyện",
+            // },
+            // provinceUp: {
+            //   required:"Vui lòng chọn Tỉnh thành phố",
+            // }
+        },
+        submitHandler: () => {
+            doUpdateAddressSup()
+        }
+    })
+
+
+    page.elements.btnShowDeleteAddressSupplier.on('click', () => {
+        let idAddressSupNow = $("#idUpAddressSup").val();
+        console.log("idAddressSupNow : ", idAddressSupNow)
+        $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: origin + "/api/addresses/" + idAddressSupNow,
+        })
+            .done((data) => {
+                $("#modalUpdateAddressSupplier").modal('hide');
+                page.dialogs.elements.modalDeleteAddressSup.modal('show');
+            })
+    })
+
+    page.dialogs.elements.btnDeleteAddressSup.on('click', () => {
+        let idAddressSupNow = $("#idUpAddressSup").val();
+        console.log("idAddressSupNow : ", idAddressSupNow)
+        $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "DELETE",
+            url: origin + "/api/addresses/" + idAddressSupNow,
+        })
+            .done((data) => {
+                page.dialogs.elements.modalDeleteAddressSup.modal('hide');
+                SupplierApp.IziToast.showSuccessAlert("Xoá địa chỉ nhà cung cấp thành công!");
+                location.reload()
+            })
+            .fail(() => {
+                SupplierApp.IziToast.showSuccessAlert("Xoá địa chỉ nhà cung cấp thành công!");
+
+            })
+    })
+
+
+    $(function () {
+        pageable = {
+            pageNo: 1,
+            pageSize: 20,
+            supplierId: $("#supplierId").val()
+        }
+        getAllAddressOfSupplierPage();
+    });
 </script>
 </html>
