@@ -241,8 +241,6 @@
                         <tr>
                             <th class="align-middle" style="width:12px">
                                 <i style="font-size: 13pt" class="fa-solid fa-gear" data-toggle="modal" data-target="#modal-config-table"></i>
-                                <!-- <input style="cursor:pointer" id="checkAll" type="checkbox" value=""
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Tất cả" style="float: right;"/ -->
                             </th>
                             <th class="align-middle" scope="col" width="12px">
                                 <label for="checkAll" style="cursor:pointer;">
@@ -258,16 +256,6 @@
                             <th class="align-middle" scope="col">Tổng chi tiêu</th>
                             <th class="align-middle" scope="col">Tổng SL đơn hàng</th>
                         </tr>
-                        <!-- <tr class="hide" id="selectActionThead" style="border: snow">
-                            <td class="align-middle" style="width: 20px">
-                                <label for="selectAction" style="padding: 0.5rem; cursor:pointer">
-                                    <input style="cursor:pointer" id="selectAction" type="checkbox" value="">
-                                </label>
-                            </td>
-                            <td colspan="2" class="align-middle" id="numberSelectProductList" style="width: 24%">
-                            </td>
-                            <td colspan="5"></td>
-                        </tr> -->
                         </thead>
                         <tbody>
                         </tbody>
@@ -277,7 +265,6 @@
     </div>
 </div>
 
-<!-- <script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
 <th:block th:replace="/admin/customer/modal_export_file.html"/>
 <th:block th:replace="/admin/customer/modal-config-table.html"/>
 <th:block th:replace="/admin/customer/modal_filter"/>
@@ -648,7 +635,6 @@
             ajax: {
                 url: origin +'/api/customers/filter',
                 type: 'POST',
-                // dataSrc: "content",
                 contentType: 'application/json',
                 data: function (d) {
                     d.groupIds = customerFilter.groupIds;
@@ -662,7 +648,7 @@
                 }
             },
             lengthMenu: [
-                [10, 30, 50,1000000000],
+                [10, 30, 50, 100],
                 ["10", "30", "50", "All"]
             ],
             searching: false,
@@ -690,7 +676,7 @@
                 "orderable": false,
                 render: function (data, type, row, meta) {
                     return `
-                    <input id=${row.id} type="checkbox" value="check_none"/>
+                    <input class="checkBoxCustomer" id=${row.id} type="checkbox" value="check_none" onchange="clickCheckedCustomer(event)"/>
                 `
                 }
             },
@@ -700,9 +686,7 @@
                     return `<a href="/admin/customers/${row.id}" style="text-decoration: none">${row.customerCode}</a>`;
                 }
             },
-
-
-             ],
+            ],
         })
 
         let theadFirst = $("#tbCustomer thead tr th");
@@ -1602,17 +1586,33 @@
 
     function checkAllSelect(){
         let checkAll = $("#checkAll");
+        let tHead = $("#tbCustomer thead tr th");
+        let trTable = $("#tbCustomer thead tr");
+        countChecked=0;
         arrayIdCustomer = [];
         if (checkAll.is(":checked")) {
             $("#tbCustomer > tbody input").each(function () {
                 $(this).prop("checked", true);
                 arrayIdCustomer.push($(this).val());
+                countChecked++;
             })
+            changeWhenCheckBox(tHead, trTable)
         } else {
             $("#tbCustomer > tbody input").each(function () {
                 $(this).prop("checked", false);
             })
+            for(let i=0; i<tHead.length; i++){
+                    if(i >= 2){
+                        $(tHead[i]).remove();
+                    }
+                }
+                for(let i=2; i < tHeadTr.length; i++){
+                    let tcolumn = $(tHeadTr[i]);
+                    trTable.append(tcolumn);
+                }
+            countChecked=0;
         }
+        console.log(countChecked);
 
     }
     
@@ -1620,9 +1620,6 @@
     $("#ddl-group-customer").on('change', () => {
         let groupId = $("#ddl-group-customer :selected").val();
         let status = $("#ddl-status :selected").val();
-
-
-        console.log(groupId)
         findCustomerByGroup(groupId)
         if(status === -1 || groupId === -1){
             page.commands.getAllCustomers();

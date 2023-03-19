@@ -26,10 +26,10 @@ public class CustomerGroupAPI extends BaseController {
     @Autowired
     CustomerGroupMapper customerGroupMapper;
 
-//    @GetMapping
-//    public ResponseEntity<?> getAllCustomerGroup() {
-//        return new ResponseEntity<>(customerGroupService.findAll(), HttpStatus.OK);
-//    }
+    @GetMapping
+    public ResponseEntity<?> getAllCustomerGroup() {
+        return new ResponseEntity<>(customerGroupService.findAll(), HttpStatus.OK);
+    }
 
 //    @GetMapping("/sortGroup")
 //    public ResponseEntity<?> sortByGroup() {

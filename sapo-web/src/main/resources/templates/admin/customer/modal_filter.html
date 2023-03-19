@@ -342,6 +342,7 @@
         <div class="d-flex flex-row-reverse my-3" style="width: 95%">
             <button type="button" class="btn btn-danger mx-2"
                     style="width: 70px; color: rgb(255, 255, 255);background: rgb(0, 136, 255);border: none;"
+                    data-bs-dismiss="offcanvas"
                     id="btnFilter">Lọc
             </button>
             <button type="button" class="btn btn-primary" id="btnCloseFilter"
@@ -367,7 +368,7 @@
         })();
         var dropdown = document.getElementsByClassName("dropdown-btn");
         var i;
-
+        
         for (i = 0; i < dropdown.length; i++) {
             dropdown[i].addEventListener("click", function () {
                 this.classList.toggle("active");
@@ -518,7 +519,6 @@
             }
             // changeColumn nam o modal-config-table.html
             changeColumn();
-            console.log(customerFilter);
             checkCustomerFilterChange = {
                 ...customerFilter
             }
@@ -750,23 +750,6 @@
         let KEY_CUSTOMER_FILTER_SAVE = "customer_filter";
         let checkCustomerFilterChange;
 
-        // // lịch
-        // $('#datepicker').datepicker({
-        //     uiLibrary: 'bootstrap5'
-        // });
-        // $('#datepicker2').datepicker({
-        //     uiLibrary: 'bootstrap5'
-        // });
-        // $('#datepicker3').datepicker({
-        //     uiLibrary: 'bootstrap5'
-        // });
-        // $('#datepicker4').datepicker({
-        //     uiLibrary: 'bootstrap5'
-        // });
-        // $('#datepicker5').datepicker({
-        //     uiLibrary: 'bootstrap5'
-        // });
-
         getAllCustomerGroup();
         getAllCustomerGender();
         getAllEmployeeSelect();
@@ -847,17 +830,6 @@
             });
         })
 
-        // ngày sinh nhật
-        function handleClickDay(day) {
-            customerFilter.dayOfBirthday = day;
-            $("#allDay").text(day)
-        }
-
-        // tháng sinh nhật
-        function handleClickYear(month) {
-            customerFilter.monthOfBirthday = month;
-            $("#allYear").text(month)
-        }
     </script>
 
 </th:block>
