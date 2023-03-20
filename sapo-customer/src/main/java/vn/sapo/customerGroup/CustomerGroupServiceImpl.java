@@ -25,22 +25,10 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     private CustomerGroupRepository customerGroupRepository;
 
     @Override
-    public Page<ICustomerGroupResult> test(Pageable pageable) {
-        return customerGroupRepository.test(pageable);
-    }
-
-    @Override
     @Transactional
-    public Page<CustomerGroupResult> findAllCustomerGroupPageable(Pageable pageable) {
-        return customerGroupRepository.findAllCustomerGroupPageable(pageable)
-                .map(customerGroupMapper::toDTO);
+    public Page<ICustomerGroupResult> findAllCustomerGroupPageable(Pageable pageable) {
+        return customerGroupRepository.findAllCustomerGroupPageable(pageable);
     }
-
-//    @Override
-//    @Transactional
-//    public List<ICustomerGroupResult> findAllCustomerGroupResult() {
-//        return customerGroupRepository.findAllCustomerGroupResult();
-//    }
 
     @Override
     @Transactional
@@ -92,12 +80,6 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
                 .collect(Collectors.toList());
     }
 
-//    @Override
-//    @Transactional(readOnly = true)
-//    public List<ICustomerGroupResult> sortByGroup() {
-//        return customerGroupRepository.sortByGroup();
-//    }
-
     @Override
     @Transactional
     public CustomerGroupResult findById(Integer id) {
@@ -112,18 +94,6 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     public void deleteById(Integer id) {
         customerGroupRepository.deleteById(id);
     }
-
-//    @Override
-//    public Page<CustomerGroup> findAllByFilters(CustomerGroupFilter filters, Pageable pageable) {
-//        return customerGroupRepository.sortByGroup();
-//    }
-
-//    @Override
-//    public Page<CustomerGroupResult> findAllByFilters(CustomerGroupFilter filters, Pageable pageable) {
-//        return customerGroupFilterRepository.
-//                findAllByFilters(filters, pageable)
-//                .map(customerGroupMapper::toDTO);
-//    }
 
     private void validationByTitle(String title) {
         if (customerGroupRepository.existsByTitle(title)) {

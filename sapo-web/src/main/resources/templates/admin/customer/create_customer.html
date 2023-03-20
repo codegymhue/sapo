@@ -108,11 +108,11 @@
                                                         <div>
                                                             <div class="jss21262">
                                                                 <label for="customerGroupCreate"
-                                                                       class="MuiTypography-root MuiTypography-body1">
+                                                                       class="MuiTypography-root MuiTypography-body1 jss764">
                                                                     Nhóm khách hàng
                                                                 </label>
                                                             </div>
-                                                            <select class="form-select"
+                                                            <select class="form-select jss763"
                                                                     name="customerGroupCreate"
                                                                     id="customerGroupCreate">
                                                             </select>
@@ -183,7 +183,7 @@
                                                                 </label>
                                                             </div>
                                                             <div tabindex="0">
-                                                                <select class="form-select jss87874" name="province"
+                                                                <select class="form-select jss87874 jss763" name="province"
                                                                         id="province">
                                                                     <option selected value="0">
                                                                         <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">
@@ -202,7 +202,7 @@
                                                                     Huyện
                                                                 </label>
                                                             </div>
-                                                            <select class="form-select jss87874" name="district"
+                                                            <select class="form-select jss87874 jss763" name="district"
                                                                     id="district">
                                                                 <option value="0">
                                                                     <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">
@@ -224,7 +224,7 @@
                                                                     Xã
                                                                 </label>
                                                             </div>
-                                                            <select class="form-select jss87874" name="ward" id="ward">
+                                                            <select class="form-select jss87874 jss763" name="ward" id="ward">
                                                                 <option value="0">
                                                                     <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">
                                                                         Chọn Phường/Xã
@@ -286,7 +286,7 @@
                                                         <div class="hISLMV">
                                                             <div class="input-group">
                                                                 <input type="date" id="birthdayCreate"
-                                                                       class="birthdayCreate form-control">
+                                                                       class="birthdayCreate form-control jss763">
                                                             </div>
                                                             <fieldset class="iUBRZb"></fieldset>
                                                             <div class="bqqjdk nysSE"></div>
@@ -303,7 +303,7 @@
                                                                 </label>
                                                             </div>
                                                             <div class="MuiInputBase-root MuiOutlinedInput-root jss20633 MuiInputBase-fullWidth">
-                                                                <select class="jss87874 form-select"
+                                                                <select class="jss87874 form-select jss763"
                                                                         name="genderCreate"
                                                                         id="genderCreate">
                                                                     <option value="NAM">Nam</option>
@@ -431,7 +431,7 @@
                                                         </label>
                                                     </div>
                                                     <select name="employeeNameCreate" id="employeeNameCreate"
-                                                            class="form-select jss20483">
+                                                            class="form-select jss20483 jss763">
                                                     </select>
                                                 </div>
                                             </div>
@@ -711,6 +711,21 @@
 
     let createAddressParam = new CreateAddressParam();
 
+    CustomerApp.page.elements.formCreate = $("#formCreate");
+
+    CustomerApp.page.elements.genderCreate = $("#genderCreate");
+    CustomerApp.page.elements.customerGroupCreate = $("#customerGroupCreate");
+    CustomerApp.page.elements.employeeNameCreate = $("#employeeNameCreate");
+
+    CustomerApp.page.elements.districtUpdate = $("#districtUpdate");
+    CustomerApp.page.elements.provinceUpdate = $("#provinceUpdate");
+    CustomerApp.page.elements.wardUpdate = $("#wardUpdate");
+    CustomerApp.page.elements.district = $("#district");
+    CustomerApp.page.elements.province = $("#province");
+    CustomerApp.page.elements.ward = $("#ward");
+
+    CustomerApp.page.elements.btnCloseCustomer = $('#btnCloseCustomer');
+
     CustomerApp.page.commands.createCustomer = () => {
         $('#btnCreateCustomer').on('click', () => {
             customer.fullName = $('#nameCreate').val();
@@ -736,6 +751,7 @@
             createAddressParam.wardName = $('#ward :selected').text();
             createAddressParam.phoneNumber = $('#phoneCreate').val();
             customer.createAddressParam = createAddressParam;
+
             $.ajax({
                 "headers": {
                     "accept": "application/json",
@@ -750,7 +766,7 @@
                     CustomerApp.IziToast.showSuccessAlert("tạo khách hàng thành công !");
                     setTimeout(() => {
                     }, 2500)
-                    $('#formCreate')[0].reset();
+                    CustomerApp.page.elements.formCreate[0].reset();
                     // window.location.href = `/admin/customers/${data.id}`;
 
                 })
@@ -775,12 +791,12 @@
             .done((data) => {
                 if (data.results.length === 0) {
                     let str = `<option value="0">Chọn Tỉnh/Thành Phố</option>`;
-                    $("#province").append(str);
+                    CustomerApp.page.elements.province.append(str);
                 } else {
                     $.each(data.results, (i, item) => {
                         let str = `<option value="${item.province_id}">${item.province_name}</option>`;
-                        $("#province").append(str);
-                        $('#provinceUpdate').append(str);
+                        CustomerApp.page.elements.province.append(str);
+                        CustomerApp.page.elements.provinceUpdate.append(str);
                     });
                 }
 
@@ -791,8 +807,8 @@
     }
 
     CustomerApp.page.commands.getAllDistrictsByProvinceId = (provinceId) => {
-        $("#district").empty();
-        $("#districtUpdate").empty();
+        CustomerApp.page.elements.district.empty();
+        CustomerApp.page.elements.districtUpdate.empty();
         return $.ajax({
             headers: {
                 "accept": "application/json",
@@ -804,12 +820,12 @@
             .done((data) => {
                 if (data.results.length === 0) {
                     let str = `<option value="0">Chọn Quận/Huyện</option>`;
-                    $("#district").append(str);
+                    CustomerApp.page.elements.district.append(str);
                 } else {
                     $.each(data.results, (i, item) => {
                         let str = ` <option value="${item.district_id}">${item.district_name}</option>`;
-                        $("#district").append(str);
-                        $('#districtUpdate').append(str);
+                        CustomerApp.page.elements.district.append(str);
+                        CustomerApp.page.elements.districtUpdate.append(str);
                     })
 
                 }
@@ -820,8 +836,8 @@
     }
 
     CustomerApp.page.commands.getAllWardsByDistrictId = (districtId) => {
-        $("#ward").empty();
-        $('#wardUpdate').empty();
+        CustomerApp.page.elements.ward.empty();
+        CustomerApp.page.elements.wardUpdate.empty();
         return $.ajax({
             headers: {
                 "accept": "application/json",
@@ -832,17 +848,17 @@
         })
             .done((data) => {
                 // $('#ward').html('');
-                // $('#wardUpdate').html('');
+                // CustomerApp.page.elements.wardUpdate.html('');
 
                 if (data.results.length === 0) {
                     let str = `<option value="0">Chọn Phường/Xã</option>`;
-                    $("#ward").append(str);
+                    CustomerApp.page.elements.ward.append(str);
 
                 } else {
                     $.each(data.results, (i, item) => {
                         let str = `<option value="${item.ward_id}">${item.ward_name}</option>`;
-                        $("#ward").append(str);
-                        $('#wardUpdate').append(str);
+                        CustomerApp.page.elements.ward.append(str);
+                        CustomerApp.page.elements.wardUpdate.append(str);
                     });
                 }
             })
@@ -852,40 +868,41 @@
     }
 
     CustomerApp.page.commands.getAllProvinces().then(() => {
-        let provinceId = $("#province").val();
+        let provinceId = CustomerApp.page.elements.province.val();
 
         CustomerApp.page.commands.getAllDistrictsByProvinceId(provinceId).then(() => {
 
-            let districtId = $("#district").val();
+            let districtId = CustomerApp.page.elements.district.val();
 
             CustomerApp.page.commands.getAllWardsByDistrictId(districtId)
 
-
         });
     });
-    $("#province").on('change', () => {
-        let provinceId = $("#province").val();
+    CustomerApp.page.elements.province.on('change', () => {
+        let provinceId = CustomerApp.page.elements.province.val();
+
         CustomerApp.page.commands.getAllDistrictsByProvinceId(provinceId).done(() => {
-            let districtId = $("#district").val();
+            let districtId = CustomerApp.page.elements.district.val();
             CustomerApp.page.commands.getAllWardsByDistrictId(districtId);
         })
 
-        $("#district").on('change', () => {
-            let districtId = $("#district").val();
+        CustomerApp.page.elements.district.on('change', () => {
+            let districtId = CustomerApp.page.elements.district.val();
             CustomerApp.page.commands.getAllWardsByDistrictId(districtId);
         })
     });
 
-    $("#provinceUpdate").on("change", () => {
-        let provinceId = $("#provinceUpdate").val();
+    CustomerApp.page.elements.provinceUpdate.on("change", () => {
+        let provinceId = CustomerApp.page.elements.provinceUpdate.val();
+
         CustomerApp.page.commands.getAllDistrictsByProvinceId(provinceId).then(() => {
-            let districtId = $("#districtUpdate").val();
+            let districtId = CustomerApp.page.elements.districtUpdate.val();
             CustomerApp.page.commands.getAllWardsByDistrictId(districtId);
         })
     })
 
-    $("#districtUpdate").on("change", () => {
-        let districtId = $("#districtUpdate").val();
+    CustomerApp.page.elements.districtUpdate.on("change", () => {
+        let districtId = CustomerApp.page.elements.districtUpdate.val();
         CustomerApp.page.commands.getAllWardsByDistrictId(districtId);
     });
 
@@ -902,12 +919,11 @@
             .done((data) => {
                 $.each(data, (i, item) => {
                     let str = `<option value="${item.id}">${item.fullName}</option>`;
-                    $("#employeeNameCreate").append(str);
+                    CustomerApp.page.elements.employeeNameCreate.append(str);
                 });
             })
             .fail((jqXHR) => {
-
-
+                console.log(jqXHR);
             })
     }
 
@@ -918,14 +934,14 @@
                 "content-type": "application/json"
             },
             type: "GET",
-            url: origin + "/api/customer_groups/"
+            url: origin + "/api/customer_groups"
         })
             .done((data) => {
                 console.log(data)
                 $.each(data, (i, item) => {
                     console.log(item)
                     let str = `<option value="${item.id}">${item.title}</option>`;
-                    $("#customerGroupCreate").append(str);
+                    CustomerApp.page.elements.customerGroupCreate.append(str);
                 });
             })
             .fail((jqXHR) => {
@@ -947,7 +963,7 @@
                 $.each(data, (i, item) => {
                     console.log(item)
                     let str = `<option value="${item}">${item}</option>`;
-                    $("#genderCreate").append(str);
+                    CustomerApp.page.elements.genderCreate.append(str);
                 });
             })
             .fail((jqXHR) => {
@@ -957,14 +973,10 @@
                         CustomerApp.IziToast.showErrorAlert(item);
                     })
                 }
-
             })
     }
 
-
-    $('#okbn').on('click', () => alert(":ok caauj"))
-
-    $('#btnCloseCustomer').on('click', () => window.location.href = ("/admin/customers"))
+    CustomerApp.page.elements.btnCloseCustomer.on('click', () => window.location.href = "/admin/customers");
 
 
     CustomerApp.page.commands.createCustomer();
@@ -972,20 +984,18 @@
     CustomerApp.page.commands.getAllCustomerGroup();
     CustomerApp.page.commands.getAllEmployeeSelect();
 
-    $("#formCreate").validate({
+    CustomerApp.page.elements.formCreate.validate({
         rules: {
             nameCreate: {
                 required: true
-
             }
         },
         messages: {
             nameCreate: {
                 required: "Vui lòng nhập tên khách hàng",
-
             }
         },
-        submitHandler: function () {
+        submitHandler: () => {
             CustomerApp.page.commands.createCustomer();
         }
     });

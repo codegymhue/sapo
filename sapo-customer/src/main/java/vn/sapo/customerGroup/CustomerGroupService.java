@@ -8,23 +8,15 @@ import java.util.List;
 
 public interface CustomerGroupService {
 
-    Page<ICustomerGroupResult> test(Pageable pageable);
-
-//    List<ICustomerGroupResult> findAllCustomerGroupResult();
-
     CustomerGroupResult create(CreateCusGroupParam createCusGroupParam);
 
     CustomerGroupResult update(Integer id, UpdateCusGroupParam updateCusGroupParam);
 
     List<CustomerGroupResult> findAll();
 
-//    List<ICustomerGroupResult> sortByGroup();
-
     CustomerGroupResult findById(Integer id);
 
     void deleteById(Integer id);
 
-//    Page<CustomerGroupResult> findAllByFilters(CustomerGroupFilter filters, Pageable pageable);
-
-    Page<CustomerGroupResult> findAllCustomerGroupPageable(Pageable pageable);
+    Page<ICustomerGroupResult> findAllCustomerGroupPageable(Pageable pageable);
 }

@@ -5,7 +5,6 @@
 
     <th:block th:replace="/layout/header"/>
     <link rel="stylesheet" href="/assets/admin/css/customer/customer_group.css"/>
-    <!--    <link rel="stylesheet" href="/assets/admin/css/customer/cus_group.css"/>-->
 </head>
 <body>
 <div id="root">
@@ -130,11 +129,10 @@
             serverSide: true,
             ajax: {
                 type: 'POST',
-                url: origin + "/api/customer_groups/test-datatable",
+                url: origin + "/api/customer_groups/pagination",
                 accept: 'application/json',
                 contentType: 'application/json',
                 'data': function (d) {
-                    console.log(d)
                     return JSON.stringify(d);
                 }
             },
@@ -186,86 +184,6 @@
 
         return dd + '/' + mm + '/' + yyyy;
     }
-
-    // CustomerApp.page.commands.getAllCustomerGroupByGroup = () => {
-    //     return $.ajax({
-    //         headers: {
-    //             "accept": "application/json",
-    //             "content-type": "application/json"
-    //         },
-    //         type: "GET",
-    //         url: origin + "/api/customer_groups/sortGroup"
-    //     })
-    //         .done((data) => {
-    //             console.log(data)
-    //             $.each(data, (i, item) => {
-    //                 let str = `<tr data-id="${item.id}" class="MuiTableRow-root jss24569 MuiTableRow-hover upCusGrp" role="checkbox"
-    //                                     tabindex="-1">
-    //                                         <td
-    //                                             class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
-    //                                         <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-    //                                            data-tip="Vip" currentitem="false"
-    //                                            style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
-    //                                             ${item.title}</p>
-    //                                     </td>
-    //                                     <td
-    //                                             class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
-    //                                         <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-    //                                            data-tip="VIP" currentitem="false"
-    //                                            style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
-    //                                             ${item.cusGrpCode}</p>
-    //                                     </td>
-    //                                     <td
-    //                                             class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
-    //                                         <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-    //                                            data-tip="Cố định" currentitem="false"
-    //                                            style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
-    //                                             Cố định</p>
-    //                                     </td>
-    //                                     <td
-    //                                             class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
-    //                                         <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-    //                                            data-tip="" currentitem="false"
-    //                                            style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
-    //                                            ${item.description || ""}</p>
-    //                                     </td>
-    //                                     <td id = "countCus"
-    //                                             class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignCenter">
-    //                                         <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-    //                                            data-tip="0" currentitem="false"
-    //                                            style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
-    //                                             ${item.countCus}</p>
-    //                                     </td>
-    //                                     <td
-    //                                             class="MuiTableCell-root MuiTableCell-body jss24575 cellClick MuiTableCell-alignLeft">
-    //                                         <p class="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap"
-    //                                            data-tip="05/11/2022" currentitem="false"
-    //                                            style="width: fit-content; max-width: 100%; display: inline-block; vertical-align: middle;">
-    //                                             ${item.createdAt === null ? "" : new Date(item.createdAt).toLocaleDateString('en-GB')}</p>
-    //                                     </td>
-    //                                 </tr>`;
-    //                 CustomerApp.page.elements.customerGroupList.append(str);
-    //             });
-    //             CustomerApp.page.commands.getIdRow();
-    //         })
-    //         .fail((jqXHR) => {
-    //             if (jqXHR.responseJSON) {
-    //                 $.each(jqXHR.responseJSON, (key, item) => {
-    //                     CustomerGroup_App.IziToast.showErrorAlert(item);
-    //                 })
-    //             }
-    //         })
-    // }
-    //
-    // CustomerApp.page.commands.getIdRow = () => {
-    //     CustomerApp.page.elements.upCusGrp.on("click", function () {
-    //         let id = $(this).data("id");
-    //
-    //         window.location.href = "/admin/customer_groups/" + id;
-    //     })
-    // }
-    //
-    // CustomerApp.page.commands.getAllCustomerGroupByGroup();
 </script>
 
 </html>
