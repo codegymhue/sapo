@@ -241,24 +241,12 @@
                                     <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth">
                                         <label class="MuiFormLabel-root MuiInputLabel-root jss755
                                                MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-                                               data-shrink="true" for="paymentType">
+                                               data-shrink="true" for="dropdownPaymentMethod">
                                             Hình thức thanh toán
                                         </label>
-                                        <div class="dropdown jss1784">
-                                            <div class="dropdown-toggle select-btn-pay jss759"
-                                                 type="button" data-toggle="dropdown"
-                                                 aria-expanded="false">
-                                                <span id="paymentType">
-                                                    Chọn hình thức thanh toán
-                                                </span>
-                                            </div>
-                                            <ul class="dropdown-menu w-100 showAllPaymentMethod">
-                                                <li class="jss760 jss761" disabled="">Chọn hình thức thanh toán</li>
-                                                <div id="dropdownPaymentMethod">
-
-                                                </div>
-                                            </ul>
-                                        </div>
+                                        <select id="dropdownPaymentMethod" class="jss759">
+                                            <option value="0" class="jss23599">Chọn hình thức thanh toán</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -284,7 +272,7 @@
 
     CustomerApp.page.elements.titleGroupCre = $("#titleGroupCre");
     CustomerApp.page.elements.selectBtnPri = $('.select-btn-pri');
-    // CustomerApp.page.elements.selectBtnPay = $('.select-btn-pay');
+    CustomerApp.page.elements.selectBtnPay = $('.select-btn-pay');
     CustomerApp.page.elements.pricingType = $("#pricingType");
 
     CustomerApp.page.elements.btnCreateCustomerGroup = $("#btnCreateCustomerGroup");
@@ -332,6 +320,34 @@
             CustomerApp.page.elements.defaultPriceDropdown[0].classList.toggle("show")
         })
     }
+    // Lấy List Payment Method
+    CustomerApp.page.commands.getAllPaymentMethod = () => {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: origin + "/api/admin/payment_methods"
+        })
+            .done((data) => {
+                data.forEach(item => {
+                    let str = `<option value=${item.id} class="selectedPaymentMethod">${item.title}</option>`;
+
+                    CustomerApp.page.elements.dropdownPaymentMethod.append(str);
+                });
+                CustomerApp.page.commands.selectPaymentMethod();
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+    }
+
+    CustomerApp.page.commands.selectPaymentMethod = () => {
+        $(".selectedPaymentMethod").click(function () {
+            defaultPaymentMethodId = $(this).val();
+        })
+    }
 
     // Lấy List Pricing default
     CustomerApp.page.commands.getAllPricingPolicy = () => {
@@ -356,37 +372,6 @@
             .fail((jqXHR) => {
                 console.log(jqXHR)
             })
-    }
-
-    // Lấy List Payment Method
-    CustomerApp.page.commands.getAllPaymentMethod = () => {
-        return $.ajax({
-            headers: {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            type: "GET",
-            url: origin + "/api/admin/payment_methods"
-        })
-            .done((data) => {
-                data.forEach(item => {
-                    let str = `<li data-id="${item.id}" data-title=${item.title} class="catItem dropdown-item jss761 selectedPaymentMethod">
-                                    ${item.title}
-                                </li>`;
-                    CustomerApp.page.elements.dropdownPaymentMethod.append(str);
-                });
-                CustomerApp.page.commands.selectPaymentMethod();
-            })
-            .fail((jqXHR) => {
-                console.log(jqXHR)
-            })
-    }
-
-    CustomerApp.page.commands.selectPaymentMethod = () => {
-        $(".selectedPaymentMethod").click(function () {
-            defaultPaymentMethodId = $(this).data('id');
-            CustomerApp.page.elements.paymentType.text($(this).text());
-        })
     }
 
     //create customer group
@@ -491,7 +476,11 @@
 
     $(() => {
         CustomerApp.page.commands.getAllPricingPolicy();
+
         CustomerApp.page.commands.getAllPaymentMethod();
+
+        CustomerApp.searchDefaultPriceDropdown();
+
     })
 
     CustomerApp.page.commands.showDefaultPricingPolicyDropdown = () => {
@@ -603,24 +592,5 @@
     //end create default pricing policy
 
 
-    CustomerApp.page.commands.searchDefaultPriceDropdown = () => {
-        let filter, input, div, a, i;
-
-        input = CustomerApp.page.elements.searchDefaultPriceDropdown;
-
-        filter = input.val().toUpperCase();
-
-        div = document.getElementById("defaultPriceDropdown");
-
-        a = div.getElementsByTagName("a");
-        for (i = 0; i < a.length; i++) {
-            let txtValue = a[i].textContent || a[i].innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                a[i].style.display = "";
-            } else {
-                a[i].style.display = "none";
-            }
-        }
-    }
 </script>
 </html>

@@ -242,24 +242,12 @@
                                     <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth">
                                         <label class="MuiFormLabel-root MuiInputLabel-root jss755
                                                MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-                                               data-shrink="true" for="paymentType">
+                                               data-shrink="true" for="dropdownPaymentMethod">
                                             Hình thức thanh toán
                                         </label>
-                                        <div class="dropdown jss1784">
-                                            <div class="dropdown-toggle select-btn-pay jss759"
-                                                 type="button" data-toggle="dropdown"
-                                                 aria-expanded="false">
-                                                <span id="paymentType">
-                                                    Chọn hình thức thanh toán
-                                                </span>
-                                            </div>
-                                            <ul class="dropdown-menu w-100 showAllPaymentMethod">
-                                                <li class="jss760 jss761" disabled="">Chọn hình thức thanh toán</li>
-                                                <div id="dropdownPaymentMethod">
-
-                                                </div>
-                                            </ul>
-                                        </div>
+                                        <select id="dropdownPaymentMethod" class="jss759" name="dropdownPaymentMethod">
+                                            <option value="0" class="jss23599">Chọn hình thức thanh toán</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -334,7 +322,7 @@
             currentCustomerGroup.cusGrpCode = CustomerApp.getValue(CustomerApp.page.elements.cusGrpCodeUp);
             currentCustomerGroup.note = CustomerApp.getValue(CustomerApp.page.elements.noteUp);
             currentCustomerGroup.defaultDiscountRate = CustomerApp.getValue(CustomerApp.page.elements.defaultDiscountRateUP);
-
+            console.log(currentCustomerGroup)
             $.ajax({
                 headers: {
                     "accept": "application/json",
@@ -435,14 +423,13 @@
         })
             .done((data) => {
                 data.forEach(item => {
-                    let str = `<li data-id="${item.id}" data-title=${item.title} class="catItem dropdown-item jss761 selectedPaymentMethod">
-                                    ${item.title}
-                                </li>`;
+                    let str = `<option value=${item.id} class="selectedPaymentMethod">${item.title}</option>`;
+
+                    CustomerApp.page.elements.dropdownPaymentMethod.append(str);
 
                     if (item.id === currentCustomerGroup.defaultPaymentMethodId) {
-                        CustomerApp.page.elements.paymentType.text(item.title);
+                        $('#dropdownPaymentMethod option').prop('selected', true)
                     }
-                    CustomerApp.page.elements.dropdownPaymentMethod.append(str);
                 });
                 CustomerApp.page.commands.selectPaymentMethod();
             })
@@ -453,8 +440,7 @@
 
     CustomerApp.page.commands.selectPaymentMethod = () => {
         $(".selectedPaymentMethod").click(function () {
-            currentCustomerGroup.defaultPaymentMethodId = $(this).data('id');
-            CustomerApp.page.elements.paymentType.text($(this).text());
+            currentCustomerGroup.defaultPaymentMethodId = $(this).val();
         })
     }
     //end payment method

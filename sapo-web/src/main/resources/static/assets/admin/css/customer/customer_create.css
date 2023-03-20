@@ -7637,7 +7637,6 @@ form .error {
     font-size: 14px;
     line-height: 1.42857rem;
     box-sizing: border-box;
-    padding: 0;
     margin: 0 0 0.285714rem;
     color: rgb(70, 81, 95);
 }
@@ -7655,7 +7654,7 @@ form .error {
     color: #46515F;
     display: flex;
     align-items: center;
-    padding-bottom: 5px !important;
+    padding-bottom: 10px !important;
 }
 
 .jss755 .MuiFormLabel-asterisk {
@@ -7761,10 +7760,16 @@ form .error {
 }
 
 .jss759{
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    /*padding: 10px 0;*/
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+    /*align-items: center;*/
+    width: 255px;
+    height: 40px;
+    background: #fff;
+    border: 1px solid #d3d5d7;
+    border-radius: 3px;
+    padding-left: 12px;
 }
 
 .jss761{
@@ -7806,4 +7811,19 @@ form .error {
     border: 1px solid #d3d5d7;
     padding: 0 12px;
     width: 251px;
+}
+
+.diplSI:hover{
+    cursor: pointer;
+}
+
+.jss23599{
+    background: #f2f9ff;
+    color: #0088ff;
+}
+
+.show {display: block;}
+
+.hidden{
+    display: none;
 }

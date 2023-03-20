@@ -112,7 +112,7 @@
                                                                     Nhóm khách hàng
                                                                 </label>
                                                             </div>
-                                                            <select class="form-select jss763"
+                                                            <select class="form-select jss763  diplSI"
                                                                     name="customerGroupCreate"
                                                                     id="customerGroupCreate">
                                                             </select>
@@ -183,7 +183,8 @@
                                                                 </label>
                                                             </div>
                                                             <div tabindex="0">
-                                                                <select class="form-select jss87874 jss763" name="province"
+                                                                <select class="form-select jss87874 jss763 diplSI"
+                                                                        name="province"
                                                                         id="province">
                                                                     <option selected value="0">
                                                                         <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">
@@ -202,7 +203,7 @@
                                                                     Huyện
                                                                 </label>
                                                             </div>
-                                                            <select class="form-select jss87874 jss763" name="district"
+                                                            <select class="form-select jss87874 jss763 diplSI" name="district"
                                                                     id="district">
                                                                 <option value="0">
                                                                     <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">
@@ -224,7 +225,8 @@
                                                                     Xã
                                                                 </label>
                                                             </div>
-                                                            <select class="form-select jss87874 jss763" name="ward" id="ward">
+                                                            <select class="form-select jss87874 jss763 diplSI" name="ward"
+                                                                    id="ward">
                                                                 <option value="0">
                                                                     <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">
                                                                         Chọn Phường/Xã
@@ -431,7 +433,7 @@
                                                         </label>
                                                     </div>
                                                     <select name="employeeNameCreate" id="employeeNameCreate"
-                                                            class="form-select jss20483 jss763">
+                                                            class="form-select jss20483 jss763 diplSI">
                                                     </select>
                                                 </div>
                                             </div>
@@ -551,14 +553,26 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="jss20683">
+                                                <div class="MuiGrid-container MuiGrid-spacing-xs-2">
                                                     <div class="MuiGrid-item MuiGrid-grid-xs-12">
-                                                        <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth">
-                                                            <label class="MuiFormLabel-root MuiInputLabel-root jss755 iFpFap MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink" data-shrink="true"
-                                                                   for="searchDefaultPriceDropdown">
-                                                                Giá mặc định
+                                                        <div>
+                                                            <label class="MuiFormLabel-root MuiInputLabel-root jss755"
+                                                                   data-shrink="true" for="dropdownPaymentMethod">
+                                                                Hình thức thanh toán
                                                             </label>
-                                                            <div class="dropdown jss1784 jss1769"
+                                                            <select id="dropdownPaymentMethod" class="jss759 diplSI">
+                                                                <option value="0" class="jss23599">Chọn hình thức thanh toán</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="MuiGrid-item MuiGrid-grid-xs-12">
+                                                        <div>
+                                                            <div class="jss1199">
+                                                                <label class="MuiFormLabel-root MuiInputLabel-root jss755">
+                                                                    Giá mặc định
+                                                                </label>
+                                                            </div>
+                                                            <div class="dropdown jss1784 jss1769  diplSI"
                                                                  onclick="CustomerApp.page.commands.showDefaultPricingPolicyDropdown()"
                                                                  id="defaultPriceContainer">
                                                                 <p id="selectedPriceDefault">Chọn giá mặc định</p>
@@ -590,57 +604,31 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="MuiGrid-item MuiGrid-grid-xs-12">
-                                                        <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth">
-                                                            <label class="MuiFormLabel-root MuiInputLabel-root jss755 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-                                                                   data-shrink="true" for="defaultDiscountRate">
-                                                                Chiết khấu (%)
-                                                            </label>
-                                                            <div class="MuiFormControl-root jss756 MuiFormControl-fullWidth"
-                                                                 field="[object Object]" form="[object Object]">
-                                                                <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth ">
-                                                                    <input aria-invalid="false"
-                                                                           id="defaultDiscountRate"
-                                                                           name="defaultDiscountRate"
-                                                                           type="text" aria-label="Without label"
-                                                                           class="MuiInputBase-input MuiOutlinedInput-input jss758 placeholder_text"
-                                                                           placeholder="0"
-                                                                           fdprocessedid="16ju8f">
-                                                                    <fieldset aria-hidden="true"
-                                                                              class="jss823 MuiOutlinedInput-notchedOutline">
-                                                                        <legend class="jss824"></legend>
-                                                                    </fieldset>
-                                                                </div>
-                                                            </div>
-                                                            <div class="error defaultDiscountRate-error hidden"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="MuiGrid-item MuiGrid-grid-xs-12">
-                                                        <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth">
-                                                            <label class="MuiFormLabel-root MuiInputLabel-root jss755
-                                               MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-                                                                   data-shrink="true" for="paymentType">
-                                                                Hình thức thanh toán
-                                                            </label>
-                                                            <div class="dropdown jss1784">
-                                                                <div class="dropdown-toggle select-btn-pay jss759"
-                                                                     type="button" data-toggle="dropdown"
-                                                                     aria-expanded="false">
-                                                <span id="paymentType">
-                                                    Chọn hình thức thanh toán
-                                                </span>
-                                                                </div>
-                                                                <ul class="dropdown-menu w-100 showAllPaymentMethod">
-                                                                    <li class="jss760 jss761" disabled="">Chọn hình
-                                                                        thức thanh toán
-                                                                    </li>
-                                                                    <div id="dropdownPaymentMethod">
-
-                                                                    </div>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+<!--                                                    <div class="MuiGrid-item MuiGrid-grid-xs-12">-->
+<!--                                                        <div>-->
+<!--                                                            <label class="MuiFormLabel-root MuiInputLabel-root jss755"-->
+<!--                                                                   data-shrink="true" for="defaultDiscountRate">-->
+<!--                                                                Chiết khấu (%)-->
+<!--                                                            </label>-->
+<!--                                                            <div class="MuiFormControl-root jss756 MuiFormControl-fullWidth"-->
+<!--                                                                 field="[object Object]" form="[object Object]">-->
+<!--                                                                <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth ">-->
+<!--                                                                    <input aria-invalid="false"-->
+<!--                                                                           id="defaultDiscountRate"-->
+<!--                                                                           name="defaultDiscountRate"-->
+<!--                                                                           type="text" aria-label="Without label"-->
+<!--                                                                           class="MuiInputBase-input MuiOutlinedInput-input jss758 placeholder_text"-->
+<!--                                                                           placeholder="0"-->
+<!--                                                                           fdprocessedid="16ju8f">-->
+<!--                                                                    <fieldset aria-hidden="true"-->
+<!--                                                                              class="jss823 MuiOutlinedInput-notchedOutline">-->
+<!--                                                                        <legend class="jss824"></legend>-->
+<!--                                                                    </fieldset>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="error defaultDiscountRate-error hidden"></div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
                                                 </div>
                                             </div>
                                         </div>
@@ -656,6 +644,7 @@
 </div>
 
 </body>
+<th:block th:replace="/admin/customer/modal_createPricePolicy"/>
 <th:block th:replace="/layout/script"/>
 <script src="/assets/admin/js/customer/customer_app.js"></script>
 
@@ -711,6 +700,8 @@
 
     let createAddressParam = new CreateAddressParam();
 
+    CustomerApp.page.elements.modalCreatePricePolicy = $("#modalCreatePricePolicy");
+
     CustomerApp.page.elements.formCreate = $("#formCreate");
 
     CustomerApp.page.elements.genderCreate = $("#genderCreate");
@@ -724,7 +715,14 @@
     CustomerApp.page.elements.province = $("#province");
     CustomerApp.page.elements.ward = $("#ward");
 
+    CustomerApp.page.elements.dropdownPaymentMethod = $("#dropdownPaymentMethod");
+
     CustomerApp.page.elements.btnCloseCustomer = $('#btnCloseCustomer');
+    CustomerApp.page.elements.btnCloseCreatePricePolicyModal = $(".btnCloseCreatePricePolicyModal");
+    CustomerApp.page.elements.btnCreatePricePolicy = $("#btnCreatePricePolicy");
+    CustomerApp.page.elements.frmCreatePricePolicy = $("#frmCreatePricePolicy");
+    CustomerApp.page.elements.searchDefaultPriceDropdown = $("#searchDefaultPriceDropdown");
+    CustomerApp.page.elements.defaultPriceDropdown = $("#defaultPriceDropdown");
 
     CustomerApp.page.commands.createCustomer = () => {
         $('#btnCreateCustomer').on('click', () => {
@@ -762,7 +760,6 @@
                 "data": JSON.stringify(customer)
             })
                 .done((data) => {
-                    console.log(data)
                     CustomerApp.IziToast.showSuccessAlert("tạo khách hàng thành công !");
                     setTimeout(() => {
                     }, 2500)
@@ -937,15 +934,13 @@
             url: origin + "/api/customer_groups"
         })
             .done((data) => {
-                console.log(data)
                 $.each(data, (i, item) => {
-                    console.log(item)
                     let str = `<option value="${item.id}">${item.title}</option>`;
                     CustomerApp.page.elements.customerGroupCreate.append(str);
                 });
             })
             .fail((jqXHR) => {
-
+                console.log(jqXHR);
             })
     }
 
@@ -959,9 +954,7 @@
             url: origin + "/api/customers/customerGender"
         })
             .done((data) => {
-                console.log(data)
                 $.each(data, (i, item) => {
-                    console.log(item)
                     let str = `<option value="${item}">${item}</option>`;
                     CustomerApp.page.elements.genderCreate.append(str);
                 });
@@ -999,6 +992,150 @@
             CustomerApp.page.commands.createCustomer();
         }
     });
+
+    $(() => {
+        CustomerApp.page.commands.getAllPaymentMethod();
+        CustomerApp.page.commands.selectPaymentMethod();
+        CustomerApp.searchDefaultPriceDropdown();
+    })
+
+    //start create default pricing policy
+    CustomerApp.page.commands.showModalCreatePricePolicy = () => {
+        CustomerApp.page.elements.modalCreatePricePolicy.modal("show");
+    }
+    //create price policy
+    CustomerApp.page.commands.createPricePolicy = () => {
+        let title = CustomerApp.getValue(CustomerApp.page.elements.titlePricePolicyCre);
+        let pricingPolicyCode = CustomerApp.getValue(CustomerApp.page.elements.pricingPolicyCodeCre);
+
+        let pricingPolicy = {
+            title,
+            pricingPolicyCode,
+            pricingPolicyType: $('input[name="policyStyle"]:checked').val()
+        }
+
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "POST",
+            url: origin + "/api/pricing-policies",
+            data: JSON.stringify(pricingPolicy)
+        }).done((data) => {
+            let str = `<a class="jss23775 selectPricePolicy" data-id="${data.id}" data-value="${data.title}">
+                         ${data.title}
+                       </a>`;
+
+            CustomerApp.page.elements.listPricePolicy.prepend(str);
+            CustomerApp.IziToast.showSuccessAlert("Thêm mới chính sách giá thành công")
+            CustomerApp.page.elements.modalCreatePricePolicy.modal("hide");
+            CustomerApp.page.elements.frmCreatePricePolicy[0].reset();
+            CustomerApp.page.commands.selectPricePolicy();
+        })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+                let errors = jqXHR.responseJSON.errors;
+
+                if (errors.title) {
+                    CustomerApp.showErrorValidate(CustomerApp.page.elements.titleError, errors.title)
+                }
+                if (errors.pricingPolicyCode) {
+                    CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, errors.pricingPolicyCode)
+                }
+                if (errors.pricingPolicyType) {
+                    CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, errors.pricingPolicyType)
+                }
+            })
+    }
+
+    CustomerApp.page.elements.btnCloseCreatePricePolicyModal.click(() => {
+        CustomerApp.page.elements.frmCreatePricePolicy.validate().resetForm();
+        CustomerApp.page.elements.frmCreatePricePolicy[0].reset();
+        CustomerApp.page.elements.error.removeClass('show').addClass('hidden');
+    })
+
+    CustomerApp.page.elements.btnCreatePricePolicy.on("click", () => {
+        CustomerApp.page.elements.frmCreatePricePolicy.trigger("submit");
+    })
+
+    CustomerApp.page.elements.frmCreatePricePolicy.validate({
+        rules: {
+            titlePricePolicyCre: {
+                required: true,
+                maxlength: 50,
+            },
+            pricingPolicyCodeCre: {
+                required: true,
+                maxlength: 50,
+            },
+            policyStyle: {
+                required: true,
+            }
+        },
+        messages: {
+            titlePricePolicyCre: {
+                required: "Tên chính sách giá không được để trống",
+                maxlength: "Tên chính sách giá không được vượt quá 50 ký tự"
+            },
+            pricingPolicyCodeCre: {
+                required: "Mã chính sách giá không được để trống",
+                maxlength: "Mã chính sách giá không được vượt quá 50 ký tự"
+            },
+            policyStyle: {
+                required: "Vui lòng chọn loại chính sách giá"
+            }
+        },
+        showErrors: (error) => {
+            if (error.titlePricePolicyCre) {
+                CustomerApp.showErrorValidate(CustomerApp.page.elements.titleError, error.titlePricePolicyCre);
+            }
+            if (error.pricingPolicyCodeCre) {
+                CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, error.pricingPolicyCodeCre);
+            }
+            if (error.policyStyle) {
+                CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, error.policyStyle);
+            }
+        },
+        submitHandler: () => {
+            CustomerApp.page.commands.createPricePolicy();
+        },
+    });
+    //end create default pricing policy
+
+    CustomerApp.page.commands.showDefaultPricingPolicyDropdown = () => {
+        CustomerApp.page.elements.defaultPriceDropdown[0].classList.toggle("show")
+    }
+
+    //start payment method
+    CustomerApp.page.commands.getAllPaymentMethod = () => {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: origin + "/api/admin/payment_methods"
+        })
+            .done((data) => {
+                data.forEach(item => {
+                    let str = `<option value=${item.id} class="selectedPaymentMethod diplSI">${item.title}</option>`;
+
+                    CustomerApp.page.elements.dropdownPaymentMethod.append(str);
+                });
+                CustomerApp.page.commands.selectPaymentMethod();
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+    }
+
+    CustomerApp.page.commands.selectPaymentMethod = () => {
+        $(".selectedPaymentMethod").click(function () {
+            currentCustomerGroup.defaultPaymentMethodId = $(this).val();
+        })
+    }
+    //end payment method
 
 </script>
 </html>

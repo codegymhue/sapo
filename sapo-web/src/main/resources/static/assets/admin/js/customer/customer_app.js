@@ -409,39 +409,28 @@ class CustomerApp {
                                 `;
                 }
             },
-            // {
-            //     targets: 2,
-            //     render: (data, type, row, meta) => {
-            //         return `<p>${row.fullName}</p>`;
-            //     }
-            // },
-            // {
-            //     targets: 3,
-            //     render: (data, type, row, meta) => {
-            //         return `<p>${row.phoneNumber}</p>`;
-            //     }
-            // },
-            // {
-            //     targets: 4,
-            //     render: (data, type, row, meta) => {
-            //         return `<p>${row.group.title}</p>`;
-            //     }
-            // },
-            // {
-            //     targets: 5,
-            //     render: (data, type, row, meta) => {
-            //         return `<p>${row.debtTotal}</p>`;
-            //     }
-            // },
-            // {
-            //     targets: 6,
-            //     render: (data, type, row, meta) => {
-            //         return `<p>${row.spendTotal}</p>`;
-            //     }
-            // },
         ],
     }
 
+    static searchDefaultPriceDropdown = () => {
+        let filter, input, div, a, i;
+
+        input = CustomerApp.page.elements.searchDefaultPriceDropdown;
+
+        filter = input.val().toUpperCase();
+
+        div = document.getElementById("defaultPriceDropdown");
+
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            let txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
 }
 
 
