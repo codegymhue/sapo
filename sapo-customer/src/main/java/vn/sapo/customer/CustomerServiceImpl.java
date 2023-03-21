@@ -115,13 +115,19 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public CustomerResult updateSeries(CustomerUpdateSeries customerUpdateSeries) {
-        Customer customer = customerRepository.findById(customerUpdateSeries.getCustomerId())
-                .orElseThrow(()->new NotFoundException("Không tìm thấy khách hàng"));
-        customer.setEmployeeId(customerUpdateSeries.getEmployeeId());
-        customer.setDefaultPaymentMethodId(customerUpdateSeries.getPaymentMethodId());
-        customer.setDefaultPricingPolicyId(customerUpdateSeries.getDefaultPrice());
-        Customer customerSaveResult = customerRepository.save(customer);
-        return customerMapper.toDTO(customerSaveResult);
+        System.out.println(customerUpdateSeries);
+        Optional<Customer> customerOptional = customerRepository.findById(customerUpdateSeries.getCustomerId());
+        if(customerOptional.isPresent()) {
+            Integer employeeId = customerUpdateSeries.getEmployeeId();
+            String paymentMethodId = customerUpdateSeries.getPaymentMethodId();
+            Integer pricingPolicyId = customerUpdateSeries.getDefaultPrice();
+            Integer id = customerUpdateSeries.getCustomerId();
+            customerRepository.updateSeriesCustomer(employeeId, paymentMethodId, pricingPolicyId, id);
+            Optional<Customer> customer = customerRepository.findById(id);
+            return customerMapper.toDTO(customer.get());
+        }else{
+            throw new NotFoundException("Not Found");
+        }
     }
 
     //
