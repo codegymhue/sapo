@@ -11,6 +11,7 @@ import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerFilter;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
+import vn.sapo.customers.dto.AddressResult;
 import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerStatus;
@@ -76,9 +77,26 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public CustomerResult create(CreateCustomerParam createParam) {
 
-        if (createParam.getCustomerCode() == null){
-            createParam.setCustomerCode(CodePrefix.CUSTOMER.generate(createParam.getId()));
+        if (createParam.getCustomerCode() != null)
+            validateCustomerCode(createParam.getCustomerCode());
+
+        Customer customer = customerMapper.toModel(createParam);
+        customer = customerRepository.save(customer);
+
+        if (createParam.getCustomerCode() == null)
+            customer.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
+
+        if (createParam.getCreateAddressParam().getLine1() != null) {
+            if (createParam.getCreateAddressParam().getLine1().length() > 255)
+                throw new ValidationException("line1", "Địa chỉ không được vượt quá 255 ký tự");
+
+            CreateAddressParam addressParam = createParam
+                    .getCreateAddressParam()
+                    .setCustomerId(customer.getId());
+
+            addressService.create(addressParam);
         }
+
 
 //        Instant birthday = createParam.getBirthday().toInstant();
 //        CreateAddressParam createAddressParam = createParam.getCreateAddressParam();
@@ -86,9 +104,7 @@ public class CustomerServiceImpl implements CustomerService {
 //            throw new ValidationException(new HashMap<>() {{
 //                put("line1", "Dia chi khong duoc de trong");
 //            }});
-        Customer customer = customerMapper.toModel(createParam);
 //        customer.setBirthday(birthday);
-        customer = customerRepository.save(customer);
 
 //        createAddressParam.setCustomerId(customer.getId());
 //        addressService.create(createAddressParam);
@@ -149,6 +165,14 @@ public class CustomerServiceImpl implements CustomerService {
         return customerFilterRepository.findAllByFilters(filters, pageable).map(customerMapper::toDTO);
     }
 
+    public void validateCustomerCode(String customerCode) {
+        if (customerCode.toUpperCase().startsWith(CodePrefix.CUSTOMER.getValue())) {
+            throw new ValidationException("customerCode", "customer.validation.customerCode.prefix");
+        }
+        if (customerRepository.existsCustomerByCustomerCode(customerCode)) {
+            throw new ValidationException("customerCode", "customer.validation.customerCode.existed");
+        }
+    }
 
 }
 

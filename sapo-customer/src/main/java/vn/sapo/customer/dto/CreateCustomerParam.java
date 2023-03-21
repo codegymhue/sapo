@@ -10,7 +10,9 @@ import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.shared.validation.constraints.NullOrNotBlank;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,9 +31,11 @@ public class CreateCustomerParam {
 
     private CustomerGroupResult group;
 
+    @Pattern(regexp = "^[0-9]{8,15}$", message = "{customer.validation.phoneNumber.pattern}")
     @NullOrNotBlank
     private String phoneNumber;
 
+    @Pattern(regexp = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "{customer.validation.email.pattern}")
     @NullOrNotBlank
     private String email;
 
@@ -42,49 +46,57 @@ public class CreateCustomerParam {
 
     private CustomerGender gender;
 
-    @Length(max = 50, message = "{customer.validation.fax.length}")
+    @Pattern(regexp = "^[0-9]{8,15}$", message = "{customer.validation.fax.pattern}")
+    @NullOrNotBlank
     private String fax;
 
+    @NullOrNotBlank
     @Length(max = 50, message = "{customer.validation.taxCode.length}")
     private String taxCode;
 
+    @NullOrNotBlank
+    @Length(max = 255, message = "{customer.validation.website.length}")
     private String website;
 
+//    @Min(value = -999999999, message = "{customer.validation.debtTotal.min}")
+//    @Max(value = 999999999, message = "{customer.validation.debtTotal.max}")
     private BigDecimal debtTotal;
 
     private BigDecimal spendTotal;
 
     private Integer employeeId;
 
+    @NullOrNotBlank
+    @Length(max = 500, message = "{customer.validation.description.length}")
     private String description;
 
     private List<String> tags;
 
     private Integer groupId;
 
-    private CustomerStatus status;
+//    private CustomerStatus status;
 
-    @Override
-    public String toString() {
-        return "CreateCustomerParam{" +
-                "id=" + id +
-                ", customerCode='" + customerCode + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", description='" + description + '\'' +
-                ", groupId=" + groupId +
-                ", email='" + email + '\'' +
-                ", website='" + website + '\'' +
-                ", fax='" + fax + '\'' +
-                ", taxCode='" + taxCode + '\'' +
-                ", birthday=" + birthday +
-                ", gender=" + gender +
-                ", group=" + group +
-                ", employeeId=" + employeeId +
-                ", createAddressParam=" + createAddressParam +
-                ", debtTotal=" + debtTotal +
-                ", spendTotal=" + spendTotal +
-                ", status=" + status +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "CreateCustomerParam{" +
+//                "id=" + id +
+//                ", customerCode='" + customerCode + '\'' +
+//                ", fullName='" + fullName + '\'' +
+//                ", phoneNumber='" + phoneNumber + '\'' +
+//                ", description='" + description + '\'' +
+//                ", groupId=" + groupId +
+//                ", email='" + email + '\'' +
+//                ", website='" + website + '\'' +
+//                ", fax='" + fax + '\'' +
+//                ", taxCode='" + taxCode + '\'' +
+//                ", birthday=" + birthday +
+//                ", gender=" + gender +
+//                ", group=" + group +
+//                ", employeeId=" + employeeId +
+//                ", createAddressParam=" + createAddressParam +
+//                ", debtTotal=" + debtTotal +
+//                ", spendTotal=" + spendTotal +
+//                ", status=" + status +
+//                '}';
+//    }
 }
