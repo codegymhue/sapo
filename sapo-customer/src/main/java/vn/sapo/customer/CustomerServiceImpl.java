@@ -6,11 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import vn.sapo.customer.dto.*;
 import vn.sapo.customers.AddressService;
-import vn.sapo.customer.dto.CreateCustomerParam;
-import vn.sapo.customer.dto.CustomerFilter;
-import vn.sapo.customer.dto.CustomerResult;
-import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerStatus;
@@ -22,6 +19,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -111,6 +109,18 @@ public class CustomerServiceImpl implements CustomerService {
 
         Customer customerResult = customerRepository.save(customer);
         return customerMapper.toDTO(customerResult);
+    }
+
+    @Override
+    @Transactional
+    public CustomerResult updateSeries(CustomerUpdateSeries customerUpdateSeries) {
+        Customer customer = customerRepository.findById(customerUpdateSeries.getCustomerId())
+                .orElseThrow(()->new NotFoundException("Không tìm thấy khách hàng"));
+        customer.setEmployeeId(customerUpdateSeries.getEmployeeId());
+        customer.setDefaultPaymentMethodId(customerUpdateSeries.getPaymentMethodId());
+        customer.setDefaultPricingPolicyId(customerUpdateSeries.getDefaultPrice());
+        Customer customerSaveResult = customerRepository.save(customer);
+        return customerMapper.toDTO(customerSaveResult);
     }
 
     //

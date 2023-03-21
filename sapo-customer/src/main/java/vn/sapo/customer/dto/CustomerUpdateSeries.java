@@ -8,6 +8,8 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 public class CustomerUpdateSeries {
-//    private Integer employeeId;
-//    private String
+    private Integer customerId;
+    private Integer employeeId;
+    private Integer defaultPrice;
+    private String paymentMethodId;
 }

@@ -135,13 +135,15 @@
                 </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn" style="border-color:red" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn" style="border-color: blue" onclick="updateSeriesCustomer()">Save changes</button>
+              <button id="close-modal-update-customer" type="button" class="btn" style="border-color:red" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn" style="border-color: blue" data-bs-toggle="modal" data-bs-target="#modal-alert-series-customer" onclick="updateSeriesCustomer()">Save changes</button>
             </div>
           </div>
         </div>
     </div>
+    <th:block th:replace="/admin/customer/modal-alert-update-series-customer.html"/>
     <script>
+      //call API cap nhat toan bo series customer
       function updateSeriesCustomer(){
         let arrChecked = [];
         let selector = $(".checkBoxCustomer");
@@ -150,14 +152,42 @@
             arrChecked.push($(selector[i]).attr("id"));
           }
         }
-        let data = {
-          employeeId:$(".labelemployeeUpdate").data("id"),
-          paymentMethodId: $(".dropdown-payment-method").data("id"),
-          discount: $("#input-discount").val(),
-          defaultPrice: $(".dropdown-price").data("id"),
-          listCheckedCustomer: arrChecked
+        let countSuccess=0;
+        $("#close-modal-update-customer").click();
+        $("#show-detai-success-series-customer").html("");
+        setTimeout(()=>{
+          for(let i=0; i<arrChecked.length; i++){
+            let data = {
+              customerId: arrChecked[i],
+              employeeId:$(".labelemployeeUpdate").data("id"),
+              paymentMethodId: $(".dropdown-payment-method").data("id"),
+              defaultPrice: $(".dropdown-price").data("id"),
+              listCheckedCustomer: arrChecked
+            }
+            $.ajax({
+                url: origin +'/api/customers',
+                headers:{
+                  'Content-Type':'application/json',
+                  'accept': 'application/json'
+                },
+                // async: false,
+                data: JSON.stringify(data),
+                type: 'PATCH'
+            }).done(function(result) {
+                let content = `<div class="customer-series-update">
+                                  <a href="/admin/customers/${result.id}">${result.fullName}</a> - Đã được cập nhật trạng thái thành công
+                               </div>`
+                $("#count-success").text(++countSuccess);
+                $("#show-detai-success-series-customer").append(content);
+            }).fail((error) => {
+                // let content = `<div class="customer-series-update">
+                //                   ${result.fullName} - Đã được cập nhật trạng thái thành công
+                //                </div>`
+                // $("#count-success").text(++countSuccess);
+                // $("#show-detai-success-series-customer").append(content);
+            })
         }
-        console.log(data);
+        },100)
       }
       let arrEmployee = [];
       $.ajax({
@@ -231,7 +261,8 @@
       function dropdownSelect(e, selectorTarget){
         $(selectorTarget).text(e.target.innerText);
         $(selectorTarget).data("id", e.target.dataset.id); 
-        changeHeightModal()
+        if(selector==".dropdown-price")
+        changeHeightModal();
       }
       let indexArrEmployee = 0;
       //thuc hien khi click vao button
