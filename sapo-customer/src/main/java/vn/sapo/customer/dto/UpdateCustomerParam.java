@@ -5,10 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-//import vn.sapo.entities.customer.CustomerGender;
-//import vn.sapo.entities.customer.CustomerStatus;
+import org.hibernate.validator.constraints.Length;
+import vn.sapo.shared.validation.constraints.NullOrNotBlank;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -18,14 +21,22 @@ public class UpdateCustomerParam {
 
     private Integer id;
 
-    private String customerCode;
-
+    @NotBlank(message = "{customer.validation.fullName.notBlank}")
+    @Length(max = 255, message = "{customer.validation.fullName.length}")
     private String fullName;
 
-    private String phoneNumber;
+    @NotBlank(message = "{customer.validation.customerCode.notBlank}")
+    @Length(max = 50, message = "{customer.validation.customerCode.length}")
+    private String customerCode;
 
     private Integer groupId;
 
+    @NullOrNotBlank
+    @Pattern(regexp = "^[0-9]{8,15}$", message = "{customer.validation.phoneNumber.pattern}")
+    private String phoneNumber;
+
+    @NullOrNotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "{customer.validation.email.pattern}")
     private String email;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -33,13 +44,23 @@ public class UpdateCustomerParam {
 
     private CustomerGender gender;
 
-    private Integer employeeId;
+    @NullOrNotBlank
+    @Pattern(regexp = "^[0-9]{8,15}$", message = "{customer.validation.fax.pattern}")
+    private String fax;
+
+    @NullOrNotBlank
+    @Length(max = 50, message = "{customer.validation.taxCode.length}")
+    private String taxCode;
+    private String website;
 
     private CustomerStatus status;
 
+    private Integer employeeId;
+
+    @NullOrNotBlank
+    @Length(max = 500, message = "{customer.validation.description.length}")
     private String description;
-    private String website;
-    private String fax;
-    private String taxCode;
+
+    private List<String> tags;
 
 }

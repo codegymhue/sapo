@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customers.AddressService;
 import vn.sapo.customer.dto.CreateCustomerParam;
@@ -50,11 +52,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional(readOnly = true)
     public List<CustomerResult> findAll() {
-        List<CustomerResult> customerResults = new ArrayList<>();
-        customerResults = customerRepository.findAll()
+        return customerRepository.findAll()
                 .stream()
                 .map(customerMapper::toDTO).collect(Collectors.toList());
-        return customerResults;
     }
 
 
@@ -111,18 +111,24 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
-    public CustomerResult update(UpdateCustomerParam updateCustomerParam) {
-        Customer customer = customerRepository.findById(updateCustomerParam.getId())
-                .orElseThrow(() -> new NotFoundException("Khách hàng không tồn tại hoặc đã bị xóa"));
-        if (updateCustomerParam.getFullName().isEmpty() || updateCustomerParam.getFullName().equals("")) {
-            updateCustomerParam.setFullName(customer.getFullName());
-        }
+    public CustomerResult update(Integer id, UpdateCustomerParam updateCustomerParam) {
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("customer.findById.notFound"));
 
-        if (updateCustomerParam.getCustomerCode().equals("")) {
-            updateCustomerParam.setCustomerCode(customer.getCustomerCode());
-        }
+        String code = updateCustomerParam.getCustomerCode();
+        if (!code.equalsIgnoreCase(customer.getCustomerCode()))
+            validateCustomerCode(code);
 
-        customerMapper.transferFields(updateCustomerParam, customer);
+//        if (updateCustomerParam.getFullName().isEmpty() || updateCustomerParam.getFullName().equals("")) {
+//            updateCustomerParam.setFullName(customer.getFullName());
+//        }
+
+//        if (updateCustomerParam.getCustomerCode().equals("")) {
+//            updateCustomerParam.setCustomerCode(customer.getCustomerCode());
+//        }
+
+//        customerMapper.transferFields(updateCustomerParam, customer);
+        customerMapper.transferFieldsSkipNull(updateCustomerParam, customer);
 
         Customer customerResult = customerRepository.save(customer);
         return customerMapper.toDTO(customerResult);

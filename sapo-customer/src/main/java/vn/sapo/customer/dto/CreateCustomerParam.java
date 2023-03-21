@@ -9,6 +9,7 @@ import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.shared.validation.constraints.NullOrNotBlank;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
@@ -22,7 +23,8 @@ import java.util.List;
 public class CreateCustomerParam {
     private Integer id;
 
-    @NotEmpty(message = "{customer.validation.title.notBlank}")
+    @NotBlank(message = "{customer.validation.fullName.notBlank}")
+    @Length(max = 255, message = "{customer.validation.fullName.length}")
     private String fullName;
 
     @NullOrNotBlank

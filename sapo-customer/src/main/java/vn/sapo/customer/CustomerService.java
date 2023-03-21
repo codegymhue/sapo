@@ -13,7 +13,8 @@ public interface CustomerService {
 
     CustomerResult create(CreateCustomerParam customerCreate);
 
-    CustomerResult update(UpdateCustomerParam updateCustomer);
+    CustomerResult update(Integer id, UpdateCustomerParam updateCustomer);
+
     CustomerResult updateSeries(CustomerUpdateSeries customerUpdateSeries);
 
     void deleteById(Integer id);
