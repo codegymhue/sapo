@@ -37,10 +37,11 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
 
         validationByTitle(title);
 
-        validationByCusGroupCode(createParam.getCusGrpCode());
+        if (createParam.getCusGrpCode() != null) {
+            validationByCusGroupCode(createParam.getCusGrpCode());
+        }
 
         CustomerGroup customerGroup = customerGroupMapper.toModel(createParam);
-        customerGroup.setType(CustomerGroupType.FIXED);
         customerGroup = customerGroupRepository.save(customerGroup);
 
         if (createParam.getCusGrpCode() == null)
