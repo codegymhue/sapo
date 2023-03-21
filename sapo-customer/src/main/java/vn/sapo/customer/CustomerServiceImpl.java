@@ -44,7 +44,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional(readOnly = true)
     public CustomerResult findById(Integer id) {
         Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Không tìm thấy khách hàng"));
+                .orElseThrow(() -> new NotFoundException("customer.findById.notFound"));
         return customerMapper.toDTO(customer);
     }
 
@@ -76,21 +76,22 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public CustomerResult create(CreateCustomerParam createParam) {
 
-        Instant birthday = createParam.getBirthday().toInstant();
-        CreateAddressParam createAddressParam = createParam.getCreateAddressParam();
-        if (createAddressParam == null)
-            throw new ValidationException(new HashMap<>() {{
-                put("line1", "Dia chi khong duoc de trong");
-            }});
-        Customer customer = customerMapper.toModel(createParam);
-        customer.setBirthday(birthday);
-        customer = customerRepository.save(customer);
-        if (createParam.getCustomerCode() == null || createParam.getCustomerCode().equals("")){
-            customer.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
-            customer = customerRepository.save(customer);
+        if (createParam.getCustomerCode() == null){
+            createParam.setCustomerCode(CodePrefix.CUSTOMER.generate(createParam.getId()));
         }
-        createAddressParam.setCustomerId(customer.getId());
-        addressService.create(createAddressParam);
+
+//        Instant birthday = createParam.getBirthday().toInstant();
+//        CreateAddressParam createAddressParam = createParam.getCreateAddressParam();
+//        if (createAddressParam == null)
+//            throw new ValidationException(new HashMap<>() {{
+//                put("line1", "Dia chi khong duoc de trong");
+//            }});
+        Customer customer = customerMapper.toModel(createParam);
+//        customer.setBirthday(birthday);
+        customer = customerRepository.save(customer);
+
+//        createAddressParam.setCustomerId(customer.getId());
+//        addressService.create(createAddressParam);
         return customerMapper.toDTO(customer);
     }
 

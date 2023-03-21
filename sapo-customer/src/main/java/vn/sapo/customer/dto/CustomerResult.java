@@ -1,6 +1,5 @@
 package vn.sapo.customer.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,17 +17,19 @@ import java.util.List;
 @Setter
 @Accessors(chain = true)
 public class CustomerResult {
-    private String customerCode;
     private Integer id;
-    private CusGroupResult group;
+
     private String fullName;
+
+    private String customerCode;
+
+    private CusGroupResult group;
 
     private String phoneNumber;
 
     private String email;
 
     private Instant birthday;
-
 
     private CustomerGender gender;
 
@@ -39,7 +40,6 @@ public class CustomerResult {
     private BigDecimal spendTotal;
 
     private CustomerStatus status;
-
 
     private CusEmployeeResult employee;
 
@@ -57,9 +57,9 @@ public class CustomerResult {
 
     private PaymentMethod payment;
 
-    private  String taxCode;
+    private String taxCode;
 
-    private  String fax;
+    private String fax;
 
     private String website;
 

@@ -1,19 +1,18 @@
 package vn.sapo.customer.dto;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.validator.constraints.Length;
 import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
-//import vn.sapo.customer.dto.CustomerGender;
-//import vn.sapo.entities.customer.CustomerStatus;
+import vn.sapo.shared.validation.constraints.NullOrNotBlank;
 
 import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 import java.util.Date;
-
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,36 +20,47 @@ import java.util.Date;
 public class CreateCustomerParam {
     private Integer id;
 
-    private String customerCode;
-    @NotEmpty(message = "Tên khách hàng không đuợc để trống")
+    @NotEmpty(message = "{customer.validation.title.notBlank}")
     private String fullName;
 
-    @NotEmpty(message = "Số điện thoại không được để trống")
+    @NullOrNotBlank
+    @Length(max = 50, message = "{customer.validation.customerCode.length}")
+    private String customerCode;
+
+    private CustomerGroupResult group;
+
+    @NullOrNotBlank
     private String phoneNumber;
 
-    private String description;
-
-    private Integer groupId;
-    @NotEmpty(message = "Email không được để trống")
+    @NullOrNotBlank
     private String email;
-    private String website;
-    private String fax;
-    private String taxCode;
+
+    private CreateAddressParam createAddressParam;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     private CustomerGender gender;
 
-    private CustomerGroupResult group;
+    @Length(max = 50, message = "{customer.validation.fax.length}")
+    private String fax;
 
-    private Integer employeeId;
+    @Length(max = 50, message = "{customer.validation.taxCode.length}")
+    private String taxCode;
 
-    private CreateAddressParam createAddressParam;
+    private String website;
 
     private BigDecimal debtTotal;
 
     private BigDecimal spendTotal;
+
+    private Integer employeeId;
+
+    private String description;
+
+    private List<String> tags;
+
+    private Integer groupId;
 
     private CustomerStatus status;
 

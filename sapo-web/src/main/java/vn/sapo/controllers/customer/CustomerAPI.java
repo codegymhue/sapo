@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.customer.CustomerService;
@@ -106,16 +107,14 @@ public class CustomerAPI extends BaseController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody CreateCustomerParam createCustomerParam) {
-        CreateAddressParam createAddressParam = createCustomerParam.getCreateAddressParam();
-        if (createAddressParam == null)
-            throw new ValidationException(new HashMap<>() {{
-                put("line1", "Dia chi khong duoc de trong");
-            }});
+    public ResponseEntity<?> create(@RequestBody @Validated CreateCustomerParam createCustomerParam) {
+//        CreateAddressParam createAddressParam = createCustomerParam.getCreateAddressParam();
+//        if (createAddressParam == null)
+//            throw new ValidationException(new HashMap<>() {{
+//                put("line1", "Dia chi khong duoc de trong");
+//            }});
         CustomerResult dto = customerService.create(createCustomerParam);
 
-//        createAddressParam.setCustomerId(dto.getId());
-//        addressService.create(createAddressParam);
         dto = customerService.findById(dto.getId());
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
