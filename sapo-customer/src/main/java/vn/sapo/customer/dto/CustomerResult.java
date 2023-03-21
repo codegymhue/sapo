@@ -33,15 +33,23 @@ public class CustomerResult {
 
     private CustomerGender gender;
 
-    private String description;
+    private String fax;
+
+    private String taxCode;
+
+    private String website;
 
     private BigDecimal debtTotal;
 
     private BigDecimal spendTotal;
 
-    private CustomerStatus status;
-
     private CusEmployeeResult employee;
+
+    private String description;
+
+    private List<String> tags;
+
+    private CustomerStatus status;
 
     private AddressResult shippingAddress;
 
@@ -56,12 +64,6 @@ public class CustomerResult {
     private Instant lastDayOrder;
 
     private PaymentMethod payment;
-
-    private String taxCode;
-
-    private String fax;
-
-    private String website;
 
     private Instant createdAt;
 

@@ -14,18 +14,15 @@ import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.customers.AddressService;
-import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.excel.ExcelHelper;
 import vn.sapo.excel.ExcelService;
 import vn.sapo.order.sale.SaleOrderService;
 import vn.sapo.order.sale.item.OrderItemService;
 import vn.sapo.shared.controllers.BaseController;
-import vn.sapo.shared.exceptions.ValidationException;
 import vn.sapo.supplier.excel.ResponseMessage;
 import vn.sapo.voucher.receipt.ReceiptVoucherService;
 
 import java.time.Instant;
-import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -64,7 +61,6 @@ public class CustomerAPI extends BaseController {
    @GetMapping("/{id}")
    public ResponseEntity<?> findById(@PathVariable Integer id) {
        CustomerResult dto = customerService.findById(id);
-//       setData(dto);
        return new ResponseEntity<>(dto, HttpStatus.OK);
    }
 
@@ -119,10 +115,11 @@ public class CustomerAPI extends BaseController {
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UpdateCustomerParam updateCustomer) {
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Integer id,
+                                    @RequestBody @Validated UpdateCustomerParam updateCustomer) {
 
-       return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.OK);
+       return new ResponseEntity<>(customerService.update(id, updateCustomer), HttpStatus.OK);
     }
     @PatchMapping
     public ResponseEntity<?> updateSeriesCustomer(@RequestBody CustomerUpdateSeries customerUpdateSeries){

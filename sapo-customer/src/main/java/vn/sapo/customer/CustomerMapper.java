@@ -55,4 +55,8 @@ public class CustomerMapper implements InitializingBean {
     public void transferFields(UpdateCustomerParam updateCustomerParam, Customer customer) {
         modelMapperSkipNullDisabled.map(updateCustomerParam, customer);
     }
+
+    public void transferFieldsSkipNull(UpdateCustomerParam updateCustomerParam, Customer customer) {
+        modelMapper.map(updateCustomerParam, customer);
+    }
 }

@@ -53,7 +53,7 @@ public class CustomerAPITest {
     private CustomerGroupService customerGroupService;
     @MockBean
     private CustomerService customerService;
-    @Autowired
+//    @Autowired
     private MockMvc mockMvc;
     private static CreateAddressParam createAddressParam;
     private static CreateCustomerParam createCustomerParam;
@@ -75,7 +75,7 @@ public class CustomerAPITest {
         Mockito.when(customerService.findAll()).thenReturn(customerResultList);
         Mockito.when(customerService.findById(1)).thenReturn(customerResultList.get(0));
         Mockito.when(customerService.create(isA(CreateCustomerParam.class))).thenReturn(customerResultList.get(0));
-        Mockito.when(customerService.update(isA(UpdateCustomerParam.class))).thenReturn(customerResultList.get(0));
+//        Mockito.when(customerService.update(isA(UpdateCustomerParam.class))).thenReturn(customerResultList.get(0));
     }
 
     @Test

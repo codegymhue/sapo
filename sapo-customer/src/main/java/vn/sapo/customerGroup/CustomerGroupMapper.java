@@ -7,6 +7,7 @@ import vn.sapo.customerGroup.dto.CreateCusGroupParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.customerGroup.dto.UpdateCusGroupParam;
 import vn.sapo.entities.customer.CustomerGroup;
+import vn.sapo.entities.customer.CustomerGroupType;
 
 @Component
 public class CustomerGroupMapper {
@@ -14,7 +15,9 @@ public class CustomerGroupMapper {
     private ModelMapper modelMapper;
 
     public CustomerGroup toModel(CreateCusGroupParam createCusGroupParam) {
-        return modelMapper.map(createCusGroupParam, CustomerGroup.class);
+        return modelMapper
+                .map(createCusGroupParam, CustomerGroup.class)
+                .setType(CustomerGroupType.FIXED);
     }
 
     public CustomerGroupResult toDTO(CustomerGroup customerGroup) {

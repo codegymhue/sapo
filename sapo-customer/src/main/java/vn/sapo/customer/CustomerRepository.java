@@ -25,6 +25,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer>, Jp
     @Query(value = "UPDATE `sapo`.`customer` SET `employee_id` = :employeeId, `default_payment_method_id` = :paymentMethodId, `default_pricing_policy_id` = :pricingPolicyId WHERE (`id` = :id)", nativeQuery = true)
     void updateSeriesCustomer(@Param("employeeId") Integer employeeId, @Param("paymentMethodId") String paymentMethodId, @Param("pricingPolicyId") Integer pricingPolicyId, @Param("id") Integer id);
 
+    boolean existsCustomerByCustomerCode(String customerCode);
+
 }
 
 
