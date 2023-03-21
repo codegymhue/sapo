@@ -30,13 +30,10 @@ public class CustomerGroupAPI extends BaseController {
     public ResponseEntity<?> getAllCustomerGroup() {
         return new ResponseEntity<>(customerGroupService.findAll(), HttpStatus.OK);
     }
-<<<<<<< HEAD
 //    @GetMapping("/sortGroup")
 //    public ResponseEntity<?> sortByGroup() {
 //        return new ResponseEntity<>(customerGroupService.sortByGroup(), HttpStatus.OK);
 //    }
-=======
->>>>>>> 2644407b156ba8a577581386282dcd8b04ac3b37
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
