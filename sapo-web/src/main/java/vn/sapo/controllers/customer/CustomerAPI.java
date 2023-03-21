@@ -124,7 +124,10 @@ public class CustomerAPI extends BaseController {
 
        return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.OK);
     }
-
+    @PatchMapping
+    public ResponseEntity<?> updateSeriesCustomer(@RequestBody CustomerUpdateSeries customerUpdateSeries){
+        return new ResponseEntity<>(customerService.updateSeries(customerUpdateSeries), HttpStatus.OK);
+    }
     @PutMapping("/updateStatusAvailable")
     public ResponseEntity<?> updateStatusAvailable(@RequestBody List<Integer> customerIds) {
         customerService.changeStatusToAvailable(customerIds, true);

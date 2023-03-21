@@ -1,0 +1,80 @@
+<th:block th:fragment="modal-update-series-customer">
+  <style>
+      .detail-alert-customer{
+        display: none;
+      }
+      .content-customer-series{
+        font-size: 11pt;
+        margin-bottom: 10px;
+      }
+      .detail-alert-series-customer{
+        font-weight: bold;
+        color: blue;
+        margin-left: 5px;
+        cursor: pointer;
+      }
+      .detail-alert-series-customer:hover{
+        color: rgba(0, 0, 255, 0.651);
+      }
+      .customer-series-update{
+        padding: 10px;
+        margin: 10px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, 
+        rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, 
+        rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+      }
+      .detail-failure-series-customer{
+        display: none;
+      }
+      .count-success{
+        color: blue;
+      }
+  </style>
+  <div class="modal fade" id="modal-alert-series-customer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Cập nhật khách hàng</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="modal-alert-update-series">
+          <h3 style="margin-bottom: 10px;">Xử lý dữ liệu hoàn tất!</h3>
+          <div id="layout-success-series-customer" class="content-customer-series">
+            <div>
+              Khách hàng cập nhật thành công: 
+              <span id="count-success-series-customer">
+                <span id="count-success">0</span> <span class="detail-alert-series-customer" id="detail-success-series-customer" onclick="toggleAlert('#show-detai-success-series-customer')">Chi tiết</span>
+              </span>
+            </div>
+            <div class="detail-alert-customer" id="show-detai-success-series-customer">
+                
+            </div>
+          </div>
+          <div id="layout-failure-series-customer" class="content-customer-series">
+            <div>
+              Khách hàng cập nhật không thành công: 
+              <span id="count-failure-series-customer">
+                <span id="count-failure">0</span> <span class="detail-alert-series-customer" id="detail-failure-series-customer">Chi tiết</span>
+              </span>
+            </div>
+            <div class="detail-alert-customer" id="show-detai-failure-series-customer">
+              
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" data-bs-dismiss="modal">Xác nhận</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      function toggleAlert(selector){
+        if($(selector).css("display") == "block"){
+          $(selector).css("display", "none");
+        }else{
+          $(selector).css("display", "block");
+        }
+      }
+    </script>
+  </div>
+</th:block>
