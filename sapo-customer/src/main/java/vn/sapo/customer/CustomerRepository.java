@@ -20,6 +20,8 @@ public interface CustomerRepository
     List<Customer> findAllByEmployeeIdIn(List<Integer> employeeIds);
     List<Customer> findAllByGender(String genderId);
 
+    boolean existsCustomerByCustomerCode(String customerCode);
+
 }
 
 

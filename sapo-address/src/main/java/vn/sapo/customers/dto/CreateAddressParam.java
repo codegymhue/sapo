@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.validator.constraints.Length;
 import vn.sapo.shared.validation.constraints.NullOrNotBlank;
 
 import javax.validation.constraints.NotBlank;
@@ -30,8 +31,10 @@ public class CreateAddressParam {
     @NullOrNotBlank
     private String email;
 
-    @NotBlank(message = "Địa chỉ không được trống")
+    @NotBlank(message = "{address.validation.line1.notBlank}")
+    @Length(max = 255, message = "{address.validation.line1.length}")
     private String line1;
+
     @NullOrNotBlank
     private String line2;
 
