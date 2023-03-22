@@ -68,6 +68,5 @@ public class CustomerResult {
     private Instant createdAt;
 
     private Instant updatedAt;
-
 }
 

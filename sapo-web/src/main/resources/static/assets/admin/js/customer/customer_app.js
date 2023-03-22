@@ -94,6 +94,15 @@ class CustomerApp {
         `;
     }
 
+    static formatDatePattern = (date) => {
+        let fullYear = date.split('-');
+        let yyyy = fullYear[0];
+        let mm = fullYear[1];
+        let dd = fullYear[2].split('T')[0];
+
+        return dd + '/' + mm + '/' + yyyy;
+    }
+
     static showErrorValidate = (element, error) => {
         element.addClass('show').removeClass('hidden');
         element.text(error);
