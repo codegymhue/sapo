@@ -58,6 +58,7 @@
       padding: 10px; 
       border-radius: 0px;
       font-size: 11pt;
+      height: 45px;
     }
   </style>
     <div class="modal fade" id="modal-update-customer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -73,10 +74,10 @@
                         <div class="form-group">
                             <div class="dropdown" style="margin-left: 10px">
                               <label for="selectEmployee" style="font-size: 11pt; margin-bottom: 5px;">Nhân viên phụ trách</label>
-                              <span data-id="0" onclick="toggleModalUpdate(event)" class="dropdown-update labelemployeeUpdate" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <span data-id="0" onclick="toggleOption('#dropdow-employee-option')" class="dropdown-update labelemployeeUpdate" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                  Chọn nhân viên phụ trách
                               </span>
-                              <ul class="dropdown-menu dropdown-update-employee dropdown-checked">
+                              <ul class="dropdown-menu dropdown-update-employee dropdown-checked" id="dropdow-employee-option">
                                 
                               </ul>
                           </div>
@@ -86,7 +87,7 @@
                         <div class="form-group">
                             <div class="dropdown" style="margin-left: 10px">
                               <label for="selectEmployee" style="font-size: 11pt; margin-bottom: 5px;">Hình thức thanh toán</label>
-                              <span data-id="0" class="dropdown-update dropdown-payment-method" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <span onclick="toggleOption('#payment-method-update')" data-id="0" class="dropdown-update dropdown-payment-method" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                  Chọn hình thức thanh toán
                               </span>
                               <ul class="dropdown-menu" id="payment-method-update" style="width: 363px">
@@ -159,11 +160,11 @@
           for(let i=0; i<arrChecked.length; i++){
             let data = {
               customerId: arrChecked[i],
-              employeeId:$(".labelemployeeUpdate").data("id"),
-              paymentMethodId: $(".dropdown-payment-method").data("id"),
-              defaultPrice: $(".dropdown-price").data("id"),
-              listCheckedCustomer: arrChecked
+              employeeId:$(".labelemployeeUpdate").data("id")==0 ? undefined : $(".labelemployeeUpdate").data("id"),
+              paymentMethodId: $(".dropdown-payment-method").data("id")==0 ? undefined : $(".dropdown-payment-method").data("id"),
+              defaultPrice: $(".dropdown-price").data("id")==0 ? undefined : $(".dropdown-price").data("id")
             }
+            console.log(data)
             $.ajax({
                 url: origin +'/api/customers',
                 headers:{
@@ -243,6 +244,7 @@
         }else{
           $(".modal-customer-update").css("height","250px");
         }
+        toggleOption("#price-update")
       }
       //validate input discount
       function validateDiscount(e){
@@ -261,8 +263,10 @@
       function dropdownSelect(e, selectorTarget){
         $(selectorTarget).text(e.target.innerText);
         $(selectorTarget).data("id", e.target.dataset.id); 
-        if(selector==".dropdown-price")
+        if(selectorTarget==".dropdown-price")
         changeHeightModal();
+        if(selectorTarget == ".dropdown-payment-method")
+        toggleOption('#payment-method-update')
       }
       let indexArrEmployee = 0;
       //thuc hien khi click vao button

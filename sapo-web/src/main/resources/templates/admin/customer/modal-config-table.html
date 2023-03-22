@@ -150,18 +150,25 @@
                     <div style="display: flex">
                         <div style="font-weight: normal; margin:auto 0">Đã chọn ${countChecked} khách hàng trên trang này</div>
                         <div class="dropdown" style="margin-left: 10px">
-                            <button style="border:1px solid grey" class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button onclick="toggleOption('#dropdown-label-action')" style="border:1px solid grey" class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Chọn thao tác
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <div style="cursor:pointer" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-update-customer">Cập nhật khách hàng</div>
-                                <div style="cursor:pointer" class="dropdown-item">Ngừng giao dịch</div>
-                                <div style="cursor:pointer" class="dropdown-item">Cập nhật trạng thái</div>
-                                <div style="cursor:pointer" class="dropdown-item">Xóa khách hàng</div>
+                            <div id="dropdown-label-action" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <div onclick="toggleOption('#dropdown-label-action')" style="cursor:pointer" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-update-customer">Cập nhật khách hàng</div>
+                                <div onclick="toggleOption('#dropdown-label-action')" style="cursor:pointer" class="dropdown-item">Ngừng giao dịch</div>
+                                <div onclick="toggleOption('#dropdown-label-action')" style="cursor:pointer" class="dropdown-item">Cập nhật trạng thái</div>
+                                <div onclick="toggleOption('#dropdown-label-action')" style="cursor:pointer" class="dropdown-item">Xóa khách hàng</div>
                             </div>
                         </div>
                 </th>`;
                 trTable.append(tcolumn);
+        }
+        function toggleOption(selectorLabel){
+            if($(selectorLabel).css("display") == "block"){
+                $(selectorLabel).css("display","none")
+            }else{
+                $(selectorLabel).css("display","block")
+            }
         }
         //xu ly ki nguoi dung checkbox
         let countChecked = 0;

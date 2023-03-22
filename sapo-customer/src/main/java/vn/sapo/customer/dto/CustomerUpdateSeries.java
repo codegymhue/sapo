@@ -12,4 +12,14 @@ public class CustomerUpdateSeries {
     private Integer employeeId;
     private Integer defaultPrice;
     private String paymentMethodId;
+
+    @Override
+    public String toString() {
+        return "CustomerUpdateSeries{" +
+                "customerId=" + customerId +
+                ", employeeId=" + employeeId +
+                ", defaultPrice=" + defaultPrice +
+                ", paymentMethodId='" + paymentMethodId + '\'' +
+                '}';
+    }
 }
