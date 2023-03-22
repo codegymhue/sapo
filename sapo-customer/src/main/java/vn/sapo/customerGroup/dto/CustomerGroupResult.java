@@ -21,21 +21,21 @@ public class CustomerGroupResult {
 
     private String cusGrpCode;
 
+    private String type;
+
     private Integer countCus;
 
     private String note;
 
+    private Instant createdAt;
+
     private Integer defaultPricingPolicyId;
 
     private String defaultPaymentMethodId;
-
+//
     private Integer defaultDiscountRate;
-
-    private String type;
-
-    private Instant updatedAt;
-
-    private Instant createdAt;
+//
+//    private Instant updatedAt;
 
 
 //    public CustomerGroupResult(Integer id, String title, String cusGrpCode, Integer pricingPolicyId, String paymentMethodId, Date createAtDate, Integer countCus, String description, Integer discount) {

@@ -1,4 +1,4 @@
-package vn.sapo.supplierGroup.dto;
+package vn.sapo.supplier_group.dto;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -174,9 +174,7 @@ public class SupplierServiceImpl implements SupplierService {
     public String findSupplierCodeById(Integer id) {
         Supplier supplier = supplierRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Supplier not found"));
-        ;
-        String supplierCode = supplier.getSupplierCode();
-        return supplierCode;
+        return supplier.getSupplierCode();
     }
 
     @Override
@@ -190,7 +188,6 @@ public class SupplierServiceImpl implements SupplierService {
                     }
                     return null;
                 })
-                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
         return listTags.stream()

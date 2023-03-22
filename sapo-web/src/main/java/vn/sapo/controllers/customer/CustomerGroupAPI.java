@@ -15,6 +15,7 @@ import vn.sapo.customerGroup.dto.*;
 import vn.sapo.shared.controllers.BaseController;
 
 import javax.validation.Valid;
+import java.util.LinkedHashMap;
 
 @RestController
 @RequestMapping("/api/customer_groups")
@@ -25,20 +26,51 @@ public class CustomerGroupAPI extends BaseController {
     @Autowired
     CustomerGroupMapper customerGroupMapper;
 
-    @GetMapping
-    public ResponseEntity<?> getAllCustomerGroup() {
-        return new ResponseEntity<>(customerGroupService.findAll(), HttpStatus.OK);
-    }
+//    @GetMapping
+//    public ResponseEntity<?> getAllCustomerGroup() {
+//        return new ResponseEntity<>(customerGroupService.findAll(), HttpStatus.OK);
+//    }
 
-    @GetMapping("/sortGroup")
-    public ResponseEntity<?> sortByGroup() {
-        return new ResponseEntity<>(customerGroupService.sortByGroup(), HttpStatus.OK);
-    }
+//    @GetMapping("/sortGroup")
+//    public ResponseEntity<?> sortByGroup() {
+//        return new ResponseEntity<>(customerGroupService.sortByGroup(), HttpStatus.OK);
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
         CustomerGroupResult customerGroupResult = customerGroupService.findById(id);
         return new ResponseEntity<>(customerGroupResult, HttpStatus.OK);
+    }
+
+    @PostMapping("/test-datatable")
+    private ResponseEntity<?> test(@Valid @RequestBody DataTablesInput input) {
+        System.out.println(input);
+
+        int draw = input.getDraw();
+        int start = input.getStart();
+        int length = input.getLength();
+        int page = start / length + 1;
+
+        Object sort = input.getOrder().get(0);
+        LinkedHashMap<String, String> linkedHashMap = (LinkedHashMap<String, String>) sort;
+        String order = linkedHashMap.get("dir").toUpperCase();
+
+        Sort s = Sort.by(Sort.Direction.valueOf(order), "title");
+
+        Pageable pageable = PageRequest.of(page - 1, length, s);
+
+        Page<CustomerGroupResult> pageableCustomerGroups =
+                customerGroupService.findAllCustomerGroupPageable(pageable);
+
+//        Page<ICustomerGroupResult> pageableCustomerGroups = customerGroupService.test(pageable);
+
+        DataTablesOutput<CustomerGroupResult> output = new DataTablesOutput<>();
+        output.setDraw(draw);
+        output.setRecordsTotal(pageableCustomerGroups.getTotalElements());
+        output.setRecordsFiltered(pageableCustomerGroups.getTotalElements());
+        output.setData(pageableCustomerGroups.getContent());
+
+        return new ResponseEntity<>(output, HttpStatus.OK);
     }
 
     @PostMapping
@@ -48,39 +80,39 @@ public class CustomerGroupAPI extends BaseController {
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
-    @PostMapping("/filter")
-    public ResponseEntity<?> filter(@RequestBody CustomerGroupFilter customerGroupFilter,
-                                    @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort
-    ) {
-
-        int start = customerGroupFilter.getStart();
-        int length = customerGroupFilter.getLength();
-
-        int page = start / length + 1;
-
-        Sort sortable = null;
-
-        if (sort.equals("ASC")) {
-            sortable = Sort.by("title").ascending();
-        }
-
-        if (sort.equals("DESC")) {
-            sortable = Sort.by("title").descending();
-        }
-
-        Pageable pageable = PageRequest.of(page - 1, length, sortable);
-
-        Page<CustomerGroupResult> pageableCustomerGroups = customerGroupService.findAllByFilters(customerGroupFilter, pageable);
-
-        CustomerGroupDataTable customerGroupDataTable = new CustomerGroupDataTable()
-                .setDraw(customerGroupFilter.getDraw())
-                .setRecordsTotal((int) pageableCustomerGroups.getTotalElements())
-                .setRecordsFiltered((int) pageableCustomerGroups.getTotalElements())
-//                .setData(pageableCustomerGroups.getContent());
-                .setData(customerGroupService.findAllCustomerGroupResult());
-
-        return new ResponseEntity<>(customerGroupDataTable, HttpStatus.OK);
-    }
+//    @PostMapping("/filter")
+//    public ResponseEntity<?> filter(@RequestBody CustomerGroupFilter customerGroupFilter,
+//                                    @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort
+//    ) {
+//
+//        int start = customerGroupFilter.getStart();
+//        int length = customerGroupFilter.getLength();
+//
+//        int page = start / length + 1;
+//
+//        Sort sortable = null;
+//
+//        if (sort.equals("ASC")) {
+//            sortable = Sort.by("title").ascending();
+//        }
+//
+//        if (sort.equals("DESC")) {
+//            sortable = Sort.by("title").descending();
+//        }
+//
+//        Pageable pageable = PageRequest.of(page - 1, length, sortable);
+//
+//        Page<CustomerGroupResult> pageableCustomerGroups = customerGroupService.findAllByFilters(customerGroupFilter, pageable);
+//
+//        CustomerGroupDataTable customerGroupDataTable = new CustomerGroupDataTable()
+//                .setDraw(customerGroupFilter.getDraw())
+//                .setRecordsTotal((int) pageableCustomerGroups.getTotalElements())
+//                .setRecordsFiltered((int) pageableCustomerGroups.getTotalElements())
+////                .setData(pageableCustomerGroups.getContent());
+//                .setData(customerGroupService.findAllCustomerGroupResult());
+//
+//        return new ResponseEntity<>(customerGroupDataTable, HttpStatus.OK);
+//    }
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateCusGroup(@PathVariable Integer id,

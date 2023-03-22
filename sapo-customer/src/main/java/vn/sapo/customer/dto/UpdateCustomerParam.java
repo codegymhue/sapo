@@ -42,6 +42,4 @@ public class UpdateCustomerParam {
     private String fax;
     private String taxCode;
 
-
-
 }

@@ -18,7 +18,7 @@ import vn.sapo.payment_method.PaymentMethodService;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.supplier.SupplierMapper;
 import vn.sapo.supplier.SupplierRepository;
-import vn.sapo.supplierGroup.SupplierGroupService;
+import vn.sapo.supplier_group.SupplierGroupService;
 
 import java.io.IOException;
 import java.util.*;
