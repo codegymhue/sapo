@@ -5,7 +5,8 @@
 <head>
     <title>Chi tiết khách hàng</title>
 
-    <th:block th:replace="/layout/header"/>
+    <!--    <th:block th:replace="/layout/header"/>-->
+    <th:block th:replace="/admin/customer/layout/header"/>
     <link rel="stylesheet" href="/assets/admin/css/customer/info.css"/>
 </head>
 <body data-new-gr-c-s-check-loaded="14.1085.0">
@@ -27,7 +28,7 @@
                     </a>
                 </div>
                 <div class="jss2119">
-                    <button id="btnSowModalDelete" class="gYRFmk">
+                    <button id="btnShowModalDelete" class="gYRFmk">
                         <span class="jcEYKF">
                             Xóa khách hàng
                         </span>
@@ -311,7 +312,8 @@
 
 </body>
 <th:block th:replace="/admin/customer/modal_delete_customer"/>
-<th:block th:replace="/layout/script"/>
+<!--<th:block th:replace="/layout/script"/>-->
+<th:block th:replace="/admin/customer/layout/script"/>
 
 <script src="/assets/admin/js/customer/customerHistory.js"></script>
 <script src="/assets/admin/js/customer/customer_app.js"></script>
@@ -340,10 +342,15 @@
 
     CustomerApp.page.elements.goToUpdate = $(".goToUpdate");
 
+    CustomerApp.page.elements.btnShowModalDelete = $("#btnShowModalDelete");
+    CustomerApp.page.elements.btnDeleteCustomer = $("#btnDeleteCustomer");
+
+    CustomerApp.page.elements.modalDeleteCustomer = $('#modal_delete_customer');
+
     CustomerApp.page.commands.getCustomerInfo = () => {
         let id = +window.location.pathname.split('/')[3];
 
-        $.ajax({
+        return $.ajax({
             type: "GET",
             url: origin + `/api/customers/${id}`,
         })
@@ -372,8 +379,8 @@
                 CustomerApp.page.elements.employee.text(CustomerApp.page.commands.getValue(data.employee.fullName));
 
                 data.tags.length > 0
-                ? CustomerApp.page.elements.tags.text(data.tags)
-                : CustomerApp.page.elements.tags.text('---');
+                    ? CustomerApp.page.elements.tags.text(data.tags)
+                    : CustomerApp.page.elements.tags.text('---');
 
                 CustomerApp.page.elements.customerGroup.text(CustomerApp.page.commands.getValue(data.group.title));
                 CustomerApp.page.elements.code.text(CustomerApp.page.commands.getValue(data.customerCode));
@@ -391,8 +398,40 @@
     }
 
     $(() => {
-        CustomerApp.page.commands.getCustomerInfo();
+        CustomerApp.page.commands.getCustomerInfo().then(() => {
+            CustomerApp.page.commands.deleteCustomer();
+        });
     })
+
+    CustomerApp.page.commands.deleteCustomer = () => {
+        CustomerApp.page.elements.btnDeleteCustomer.click(() => {
+            let id = currentCustomer.id;
+            $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "DELETE",
+                url: origin + "/api/customers/delete/" + id
+            })
+                .done(() => {
+                    CustomerApp.IziToast.showSuccessAlert("Xoá khách hàng thành công");
+                    CustomerApp.page.elements.modalDeleteCustomer.modal('hide');
+
+                    setTimeout(() => {
+                        window.location.href = "/admin/customers";
+                    }, 2500)
+                })
+                .fail((jqXHR) => {
+                    console.log(jqXHR)
+                })
+        })
+    }
+
+    CustomerApp.page.elements.btnShowModalDelete.click(() => {
+        CustomerApp.page.elements.modalDeleteCustomer.modal('show');
+        $("#confirmText").text(`Bạn có chắc chắn muốn xóa khách hàng ${currentCustomer.fullName}? Thao tác này không thể khôi phục.`)
+    });
 
     CustomerApp.page.elements.customerGroup.click(() => {
         window.open(`/admin/customer_groups/${currentCustomer.group.id}`, '_blank');
@@ -1401,39 +1440,9 @@
 
     deleteEventModelShow();
 
-    function showModalDelete() {
-        $('#btnSowModalDelete').click(function () {
-            $('#modal_delete_customer').modal('show');
-        });
-    }
 
-    function deleteCustomerHander() {
-        let idCustomer = $('#customerId').val();
 
-        $('#btn_deleteCustomer').click(function () {
-            return $.ajax({
-                headers: {
-                    "accept": "application/json",
-                    "content-type": "application/json"
-                },
-                type: "DELETE",
-                url: origin + "/api/customers/delete/" + idCustomer
-            })
-                .done((data) => {
-                    CustomerApp.IziToast.showSuccessAlert("Xoá khách hàng thành công  !!! ");
-                    $('#modal_delete_customer').modal('hide');
 
-                    setTimeout(() => {
-                        window.location.href = "/admin/customers";
-                    }, 2500)
-                })
-                .fail((jqXHR) => {
-                    $.each(jqXHR.responseJSON, (key, item) => {
-                        CustomerApp.IziToast.showErrorAlert(item);
-                    })
-                })
-        })
-    }
 
     showModalDelete();
     deleteCustomerHander();
