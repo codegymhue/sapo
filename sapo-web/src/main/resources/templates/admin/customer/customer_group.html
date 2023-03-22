@@ -164,7 +164,7 @@
                     data: 'createdAt',
                     sortable: false,
                     render: (data) => {
-                        let date = CustomerApp.page.commands.formatDatePattern(data);
+                        let date = CustomerApp.formatDatePattern(data);
                         return `<td>${date}</td>`
                     }
                 }
@@ -175,15 +175,6 @@
     $(() => {
         CustomerApp.page.commands.drawDataTable();
     })
-
-    CustomerApp.page.commands.formatDatePattern = (date) => {
-        let fullYear = date.split('-');
-        let yyyy = fullYear[0];
-        let mm = fullYear[1];
-        let dd = fullYear[2].split('T')[0];
-
-        return dd + '/' + mm + '/' + yyyy;
-    }
 </script>
 
 </html>
