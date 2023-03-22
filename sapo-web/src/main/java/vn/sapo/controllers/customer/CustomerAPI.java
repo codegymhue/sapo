@@ -125,16 +125,12 @@ public class CustomerAPI extends BaseController {
     public ResponseEntity<?> updateSeriesCustomer(@RequestBody CustomerUpdateSeries customerUpdateSeries){
         return new ResponseEntity<>(customerService.updateSeries(customerUpdateSeries), HttpStatus.OK);
     }
-    @PutMapping("/updateStatusAvailable")
-    public ResponseEntity<?> updateStatusAvailable(@RequestBody List<Integer> customerIds) {
-        customerService.changeStatusToAvailable(customerIds, true);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @PutMapping("/updateStatusUnavailable")
-    public ResponseEntity<?> updateStatusUnavailable(@RequestBody List<Integer> arrayIdCustomer) {
-        customerService.changeStatusToAvailable(arrayIdCustomer, false);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @PutMapping("/updateStatus")
+    public ResponseEntity<?> updateStatusAvailable(@RequestBody CustomerUpdateStatus customerUpdateStatus) {
+        int customerId = customerUpdateStatus.getCustomerId();
+        boolean status = customerUpdateStatus.getStatus();
+        CustomerResult customerResult = customerService.changeStatusToAvailable(customerId, status);
+        return new ResponseEntity<>(customerResult, HttpStatus.OK);
     }
 
     // UpLoad File Excel

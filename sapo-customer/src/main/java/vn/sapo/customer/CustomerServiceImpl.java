@@ -163,11 +163,10 @@ public class CustomerServiceImpl implements CustomerService {
 //
     @Override
     @Transactional
-    public void changeStatusToAvailable(List<Integer> customerIds, boolean status) {
-        for (Integer customerId : customerIds) {
+    public CustomerResult changeStatusToAvailable(Integer customerId, boolean status) {
             Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new NotFoundException("Customer not found"));
             customer.setStatus(status ? CustomerStatus.AVAILABLE : CustomerStatus.UNAVAILABLE);
-        }
+            return customerMapper.toDTO(customerRepository.findById(customerId).get());
     }
 
 

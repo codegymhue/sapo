@@ -1,0 +1,58 @@
+<style>
+    #content-status-series-customer{
+        font-size: 12pt;
+    }
+</style>
+<div data-status="false" class="modal fade" id="modal-change-status-series-customer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title head-status-series-customer" id="exampleModalLabel">Ngừng </h5>
+          <button id="close-modal-change-status-customer" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="content-status-series-customer">
+            Thao tác này .
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" data-bs-dismiss="modal" style="border-color: red;">Thoát</button>
+          <button style="border-color: blue;" type="button" class="btn" onclick="stopSeriesCustomers()"  data-bs-toggle="modal" data-bs-target="#modal-alert-series-customer">Xác nhận</button>
+        </div>
+      </div>
+    </div>
+    <script>
+        function stopSeriesCustomers(){
+            let status = $("#modal-change-status-series-customer").data("status");
+            let listCustomerId = [];
+            let customersChecked = $(".checkBoxCustomer");
+            for(let i=0; i<customersChecked.length; i++){
+                if($(customersChecked[i]).is(":checked")){
+                    listCustomerId.push($(customersChecked[i]).attr("id"));
+                }
+            }
+            $("#show-detai-success-series-customer").html("")
+            let countSuccess = 0;
+            for(let i=0; i<listCustomerId.length; i++){
+                $.ajax({
+                    headers:{
+                        "content-type": "application/json",
+                        "accept":"application/json"
+                    },
+                    url: origin +'/api/customers/updateStatus',
+                    type:"PUT",
+                    data:JSON.stringify({
+                        customerId: listCustomerId[i],
+                        status: status
+                    })
+                })
+                .done((result)=>{
+                    let content =`<div class="customer-series-update">
+                                    <a href="/admin/customers/${result.id}">${result.fullName}</a> - Đã được cập nhật trạng thái thành công
+                                </div>`
+                    $("#count-success").text(++countSuccess);
+                    $("#show-detai-success-series-customer").append(content);
+                })
+                $("#close-modal-change-status-customer").click();
+            }
+        }
+    </script>
+  </div>
