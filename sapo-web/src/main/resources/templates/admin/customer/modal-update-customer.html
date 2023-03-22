@@ -164,7 +164,6 @@
               paymentMethodId: $(".dropdown-payment-method").data("id")==0 ? undefined : $(".dropdown-payment-method").data("id"),
               defaultPrice: $(".dropdown-price").data("id")==0 ? undefined : $(".dropdown-price").data("id")
             }
-            console.log(data)
             $.ajax({
                 url: origin +'/api/customers',
                 headers:{

@@ -21,8 +21,7 @@ public interface CustomerService {
 
     boolean existsById(Integer id);
 
-    void changeStatusToAvailable(List<Integer> customerIds, boolean status);
-
+    CustomerResult changeStatusToAvailable(Integer customerIds, boolean status);
     List<CustomerResult> findAllByGroupListId(List<Integer> groupIds);
     Page<CustomerResult> findAllByFilters(CustomerFilter filters, Pageable pageable);
 }

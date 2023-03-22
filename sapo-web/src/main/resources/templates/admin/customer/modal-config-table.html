@@ -51,6 +51,7 @@
         </div>
       </div>
       <th:block th:replace="/admin/customer/modal-update-customer.html"/>
+      <th:block th:replace="/admin/customer/modal-change-status-series-customer.html"/>
       <script>
         alert = ()=>{}
         $( function() {
@@ -155,13 +156,28 @@
                             </button>
                             <div id="dropdown-label-action" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <div onclick="toggleOption('#dropdown-label-action')" style="cursor:pointer" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-update-customer">Cập nhật khách hàng</div>
-                                <div onclick="toggleOption('#dropdown-label-action')" style="cursor:pointer" class="dropdown-item">Ngừng giao dịch</div>
-                                <div onclick="toggleOption('#dropdown-label-action')" style="cursor:pointer" class="dropdown-item">Cập nhật trạng thái</div>
+                                <div data-status="false" onclick="clickToModalStatus(event)" style="cursor:pointer" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-change-status-series-customer">Ngừng giao dịch</div>
+                                <div data-status="true" onclick="clickToModalStatus(event)" style="cursor:pointer" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-change-status-series-customer">Cập nhật trạng thái</div>
                                 <div onclick="toggleOption('#dropdown-label-action')" style="cursor:pointer" class="dropdown-item">Xóa khách hàng</div>
                             </div>
                         </div>
                 </th>`;
                 trTable.append(tcolumn);
+        }
+        // click de an hien modal status
+        function clickToModalStatus(e){
+            if(e.target.dataset.status == "true"){
+                $("#content-status-series-customer").text("Thao tác này sẽ cập nhật trạng thái giao dịch các khách hàng đã chọn.");
+                $(".head-status-series-customer").text("Cập nhật trạng thái");
+                $("#modal-change-status-series-customer").data("status", true);
+                console.log("statusAvai: "+e.target.dataset.status);
+            }else{
+                $("#content-status-series-customer").text("Thao tác này sẽ ngừng giao dịch các khách hàng đã chọn.");
+                $(".head-status-series-customer").text("Ngừng giao dịch");
+                $("#modal-change-status-series-customer").data("status", false);
+                console.log("statusAnAvai: "+e.target.dataset.status);
+            }
+            toggleOption('#dropdown-label-action');
         }
         function toggleOption(selectorLabel){
             if($(selectorLabel).css("display") == "block"){
@@ -204,6 +220,7 @@
             }
         }
         //changeColumn() thực hiện khi click save ở modal để chuyển cột
+        let listThead = [];
         function changeColumn(){
             countChecked = 0
             let listLabelColumn = document.querySelectorAll(".label-column");
@@ -513,7 +530,10 @@
                         d.birthDayTo = customerFilter.birthDayTo;
                         d.birthDay = customerFilter.birthDay;
                         d.keyword= customerFilter.keyword;
-                        console.log(d);
+                        if($("#checkAll").is(":checked")){
+                            $("#checkAll").click();
+                        }
+                       
                         return JSON.stringify(d)
                     }
                 },
@@ -527,6 +547,9 @@
                 searching: false,
                 destroy: true,
                 columns: column,
+                "fnDrawCallback": function( oSettings ) {
+                    alert( 'DataTables has redrawn the table' );
+                    },
                 columnDefs: [
                 {
                     targets: 0,
@@ -563,16 +586,22 @@
                 ],
             });
             let theadFirst = $("#tbCustomer thead tr th");
-            let removeSorting = setInterval(()=>{
+            let updateAfterDatatable = setInterval(async ()=>{
                 let tdRow = $("#tbCustomer tbody td input");
                 if($(theadFirst[0]).hasClass("sorting_asc")){
+                    listThead = $("#tbCustomer thead tr th");
+                    $(".paginate_button").click(()=>{
+                        console.log("ggg")
+                    })
                     $(theadFirst[0]).removeClass('sorting_asc');
                     tHeadTr = $("#tbCustomer thead tr th"); 
-                    clearInterval(removeSorting);
+                    clearInterval(updateAfterDatatable);
                 }
             })
                 $(".close").click();
                 $(".modal-backdrop").remove();
+        }
+        function buttonPaginate(){
             
         }
         function reset(){

@@ -647,6 +647,9 @@
                     d.employeeIds = customerFilter.employeeIds;
                     d.keyword = customerFilter.keyword;
                     d.statusList = [];
+                    if($("#checkAll").is(":checked")){
+                        $("#checkAll").click();
+                    }
                     return JSON.stringify(d)
                 }
             },
