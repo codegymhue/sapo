@@ -2,10 +2,7 @@ package vn.sapo.customer;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import vn.sapo.customer.dto.CreateCustomerParam;
-import vn.sapo.customer.dto.CustomerFilter;
-import vn.sapo.customer.dto.CustomerResult;
-import vn.sapo.customer.dto.UpdateCustomerParam;
+import vn.sapo.customer.dto.*;
 
 import java.util.List;
 
@@ -16,7 +13,9 @@ public interface CustomerService {
 
     CustomerResult create(CreateCustomerParam customerCreate);
 
-    CustomerResult update(UpdateCustomerParam updateCustomer);
+    CustomerResult update(Integer id, UpdateCustomerParam updateCustomer);
+
+    CustomerResult updateSeries(CustomerUpdateSeries customerUpdateSeries);
 
     void deleteById(Integer id);
 

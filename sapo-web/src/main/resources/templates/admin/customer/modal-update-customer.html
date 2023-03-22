@@ -1,0 +1,303 @@
+<th:block th:fragment="modal-update-customer">
+  <style>
+    .dropdown-update{
+      font-size: 11pt;
+      padding: 10px 0px 10px 20px;
+      border:1px solid grey; 
+      width:100%;
+      background-color: white;
+    }
+    .input-search{
+      border: 1px solid blue; 
+      background-color: white;
+      height: 40px;
+      padding-left: 35px;
+    }
+    .input-search:focus{
+      background-color: white;
+    }
+    .item-dropdown{
+      cursor:pointer; 
+      padding: 15px 0px; 
+      font-weight: bold;
+      padding-left: 20px;
+    }
+    .icon-search{
+      position: absolute;
+      top: 33%;
+      right: 93%;
+    }
+    .dropdown-update-employee li{
+        width: 363px;
+        scroll-behavior: unset;
+    }
+    .nextEmployee{
+      border: 2px solid black;
+      padding: 3px;
+      margin-top: 8px;
+    }
+    .nextEmployee:hover{
+      border-color: blue;
+      color: blue;
+      cursor: pointer;
+    }
+    #payment-method-update{
+      height: 155px;
+    }
+    .item-dropdown-no-search{
+      padding: 10px;
+      border: none;
+    }
+    .item-dropdown-no-search:hover{
+      background-color: rgba(201, 188, 188, 0.966);
+      cursor: pointer;
+    }
+    #input-discount{
+      border-color: #808080;
+      text-align: right;
+      padding: 10px; 
+      border-radius: 0px;
+      font-size: 11pt;
+      height: 45px;
+    }
+  </style>
+    <div class="modal fade" id="modal-update-customer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Cập nhật khách hàng</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body modal-customer-update" style="height: 250px">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <div class="dropdown" style="margin-left: 10px">
+                              <label for="selectEmployee" style="font-size: 11pt; margin-bottom: 5px;">Nhân viên phụ trách</label>
+                              <span data-id="0" onclick="toggleOption('#dropdow-employee-option')" class="dropdown-update labelemployeeUpdate" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 Chọn nhân viên phụ trách
+                              </span>
+                              <ul class="dropdown-menu dropdown-update-employee dropdown-checked" id="dropdow-employee-option">
+                                
+                              </ul>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <div class="dropdown" style="margin-left: 10px">
+                              <label for="selectEmployee" style="font-size: 11pt; margin-bottom: 5px;">Hình thức thanh toán</label>
+                              <span onclick="toggleOption('#payment-method-update')" data-id="0" class="dropdown-update dropdown-payment-method" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 Chọn hình thức thanh toán
+                              </span>
+                              <ul class="dropdown-menu" id="payment-method-update" style="width: 363px">
+                                <li>
+                                  <div data-id="0" onclick="dropdownSelect(event, '.dropdown-payment-method')" class="item-dropdown-no-search" style="background-color: #f2f9ff; color: #0088ff;"> Chọn hình thức thanh toán</div>
+                                </li>
+                                 
+                              </ul>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <div class="dropdown" style="margin-left: 10px">
+                        <label for="input-discount" style="font-size: 11pt; margin-bottom: 5px;">Chiết khấu (%)</label>
+                        <input class="form-control" id="input-discount" value="0" oninput="validateDiscount(event)">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                        <div class="dropdown" style="margin-left: 10px">
+                          <label for="selectEmployee" style="font-size: 11pt; margin-bottom: 5px;">Giá mặc định</label>
+                          <span onclick="changeHeightModal()" data-id="0" class="dropdown-update dropdown-price" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             Chọn giá mặc định
+                          </span>
+                          <ul class="dropdown-menu" id="price-update" style="width: 363px">
+                            <li>
+                              <div data-id="0" onclick="dropdownSelect(event, '.dropdown-price')" class="item-dropdown-no-search" style="background-color: #f2f9ff; color: #0088ff;">Chọn giá mặc định</div>
+                            </li>
+                            <li>
+                              <div data-id="1" onclick="dropdownSelect(event, '.dropdown-price')" class="item-dropdown-no-search">Giá bán lẻ</div>
+                            </li>
+                            <li>
+                              <div data-id="2" onclick="dropdownSelect(event, '.dropdown-price')" class="item-dropdown-no-search">Giá nhập</div>
+                            </li>
+                            <li>
+                              <div data-id="3" onclick="dropdownSelect(event, '.dropdown-price')" class="item-dropdown-no-search">Giá bán buôn</div>
+                            </li>
+                          </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button id="close-modal-update-customer" type="button" class="btn" style="border-color:red" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn" style="border-color: blue" data-bs-toggle="modal" data-bs-target="#modal-alert-series-customer" onclick="updateSeriesCustomer()">Save changes</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <th:block th:replace="/admin/customer/modal-alert-update-series-customer.html"/>
+    <script>
+      //call API cap nhat toan bo series customer
+      function updateSeriesCustomer(){
+        let arrChecked = [];
+        let selector = $(".checkBoxCustomer");
+        for(let i=0; i<selector.length; i++){
+          if($(selector[i]).is(":checked")){
+            arrChecked.push($(selector[i]).attr("id"));
+          }
+        }
+        let countSuccess=0;
+        $("#close-modal-update-customer").click();
+        $("#show-detai-success-series-customer").html("");
+        setTimeout(()=>{
+          for(let i=0; i<arrChecked.length; i++){
+            let data = {
+              customerId: arrChecked[i],
+              employeeId:$(".labelemployeeUpdate").data("id")==0 ? undefined : $(".labelemployeeUpdate").data("id"),
+              paymentMethodId: $(".dropdown-payment-method").data("id")==0 ? undefined : $(".dropdown-payment-method").data("id"),
+              defaultPrice: $(".dropdown-price").data("id")==0 ? undefined : $(".dropdown-price").data("id")
+            }
+            console.log(data)
+            $.ajax({
+                url: origin +'/api/customers',
+                headers:{
+                  'Content-Type':'application/json',
+                  'accept': 'application/json'
+                },
+                // async: false,
+                data: JSON.stringify(data),
+                type: 'PATCH'
+            }).done(function(result) {
+                let content = `<div class="customer-series-update">
+                                  <a href="/admin/customers/${result.id}">${result.fullName}</a> - Đã được cập nhật trạng thái thành công
+                               </div>`
+                $("#count-success").text(++countSuccess);
+                $("#show-detai-success-series-customer").append(content);
+            }).fail((error) => {
+                // let content = `<div class="customer-series-update">
+                //                   ${result.fullName} - Đã được cập nhật trạng thái thành công
+                //                </div>`
+                // $("#count-success").text(++countSuccess);
+                // $("#show-detai-success-series-customer").append(content);
+            })
+        }
+        },100)
+      }
+      let arrEmployee = [];
+      $.ajax({
+            url: origin +'/api/employees',
+            processData: false,
+            contentType: false,
+            async: false,
+            type: 'GET'
+        }).done(function(result) {
+            arrEmployee = result;
+            
+        }).fail((jqXHR) => {})
+      $.ajax({
+            url: origin +'/api/admin/payment_methods',
+            processData: false,
+            contentType: false,
+            async: false,
+            type: 'GET'
+        }).done(function(result) {
+            for(let i=0; i<result.length; i++){
+              let li = `
+              <li>
+                <div data-id="${result[i].id}" onclick="dropdownSelect(event, '.dropdown-payment-method')" class="item-dropdown-no-search">${result[i].title}</div>
+              </li>`;
+              $("#payment-method-update").append(li);
+            }
+        }).fail((jqXHR) => {})
+        
+      let firstLi = `<li>
+                        <div style="position: relative;">
+                          <i class="fas fa-search icon-search"></i>
+                          <input type="search" class="form-control input-search" />
+                        </div>
+                    </li>`;
+      let secondLi = `<li onclick="toggleModalUpdate(event)">
+                        <div class="item-dropdown" id="employeeNameUpdateModal">
+                          <div id="employeeNameChecked">${arrEmployee[0].fullName}</div>
+                          <span style="font-weight: normal;" id="employeePhoneUpdateModal">${arrEmployee[0].email}</span>
+                        </div>
+                    </li>`;
+      let lastLi = `<li>
+                        <div style="margin-left: 280px">
+                          <i onclick="selectEmployee('prev')" class="fa fa-arrow-left nextEmployee" aria-hidden="true"></i>
+                          <i onclick="selectEmployee('next')" class="fa fa-arrow-right nextEmployee" style="margin-left: 15px;"></i>
+                        </div>
+                    </li>`;
+      let targetClass = $(".dropdown-checked");
+      let labelemployee = $(".labelemployeeUpdate");
+      //change height modal
+      function changeHeightModal(){
+        if($("#price-update").css("display")=="none"){
+          $(".modal-customer-update").css("height","350px");
+        }else{
+          $(".modal-customer-update").css("height","250px");
+        }
+        toggleOption("#price-update")
+      }
+      //validate input discount
+      function validateDiscount(e){
+        let value = e.target.value.trim();
+        if(value.split("")[0] == 0 && value.split("").length >= 2){
+          value = value.split("")[1];
+        }
+        if(value == "") e.target.value = "0"
+        let reg = /^([0-9]|[1-9][0-9])$/;
+        if(value.match(reg)==null){
+          e.target.value="0"
+        }else if(value.match(reg).length > 0){
+          e.target.value = value;
+        }
+      }
+      function dropdownSelect(e, selectorTarget){
+        $(selectorTarget).text(e.target.innerText);
+        $(selectorTarget).data("id", e.target.dataset.id); 
+        if(selectorTarget==".dropdown-price")
+        changeHeightModal();
+        if(selectorTarget == ".dropdown-payment-method")
+        toggleOption('#payment-method-update')
+      }
+      let indexArrEmployee = 0;
+      //thuc hien khi click vao button
+      function toggleModalUpdate(e){
+        if(targetClass.css("display")=="block"){
+          targetClass.css("display","none");
+          let text = $("#employeeNameChecked").text();
+          if(e.target.localName!=="span"){
+            labelemployee.text(text);
+          }
+          $(".labelemployeeUpdate").data("id", arrEmployee[indexArrEmployee].id)
+        }else{
+          targetClass.css("display","block");
+        }
+      }
+      //phan trang nhan vien phu trach
+      function selectEmployee(status){
+        if(status==="prev"){
+          indexArrEmployee==arrEmployee.length-1 ? indexArrEmployee=0 : indexArrEmployee++; 
+        }else{
+          indexArrEmployee==0 ? indexArrEmployee=arrEmployee.length-1 : indexArrEmployee--;
+        }
+        targetClass.css("display","block");
+        let infoEmployee = `<div id="employeeNameChecked">${arrEmployee[indexArrEmployee].fullName}</div>
+                            <span style="font-weight: normal;" id="employeePhoneUpdateModal">${arrEmployee[indexArrEmployee].email}</span>`;
+        $("#employeeNameUpdateModal").html(infoEmployee);
+      }
+      $(document).ready(()=>{
+          targetClass.append(firstLi);
+          targetClass.append(secondLi);
+          targetClass.append(lastLi);
+      })
+    </script>
+</th:block>

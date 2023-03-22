@@ -12,7 +12,6 @@ import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,13 +24,10 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     @Autowired
     private CustomerGroupRepository customerGroupRepository;
 
-    @Autowired
-    CustomerGroupFilterRepository customerGroupFilterRepository;
-
     @Override
     @Transactional
-    public List<CustomerGroupResult> findAllCustomerGroupResult() {
-        return customerGroupRepository.findAllCustomerGroupResult();
+    public Page<ICustomerGroupResult> findAllCustomerGroupPageable(Pageable pageable) {
+        return customerGroupRepository.findAllCustomerGroupPageable(pageable);
     }
 
     @Override
@@ -41,10 +37,11 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
 
         validationByTitle(title);
 
-        validationByCusGroupCode(createParam.getCusGrpCode());
+        if (createParam.getCusGrpCode() != null) {
+            validationByCusGroupCode(createParam.getCusGrpCode());
+        }
 
         CustomerGroup customerGroup = customerGroupMapper.toModel(createParam);
-        customerGroup.setType(CustomerGroupType.FIXED);
         customerGroup = customerGroupRepository.save(customerGroup);
 
         if (createParam.getCusGrpCode() == null)
@@ -85,12 +82,6 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<ICustomerGroupResult> sortByGroup() {
-        return customerGroupRepository.sortByGroup();
-    }
-
-    @Override
     @Transactional
     public CustomerGroupResult findById(Integer id) {
         return customerGroupRepository.findById(id)
@@ -103,18 +94,6 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     @Transactional
     public void deleteById(Integer id) {
         customerGroupRepository.deleteById(id);
-    }
-
-//    @Override
-//    public Page<CustomerGroup> findAllByFilters(CustomerGroupFilter filters, Pageable pageable) {
-//        return customerGroupRepository.sortByGroup();
-//    }
-
-    @Override
-    public Page<CustomerGroupResult> findAllByFilters(CustomerGroupFilter filters, Pageable pageable) {
-        return customerGroupFilterRepository.
-                findAllByFilters(filters, pageable)
-                .map(customerGroupMapper::toDTO);
     }
 
     private void validationByTitle(String title) {

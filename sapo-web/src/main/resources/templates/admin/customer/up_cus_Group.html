@@ -39,7 +39,7 @@
             </div>
         </div>
     </div>
-    <form id="frmCreateCusGrp">
+    <form id="frmUpdateCusGrp">
         <div class="jss608">
             <div class="MuiGrid-container MuiGrid-spacing-xs-3">
                 <div class="MuiGrid-item MuiGrid-grid-xs-6">
@@ -108,7 +108,7 @@
                                                 </fieldset>
                                             </div>
                                         </div>
-                                        <div class="error cusGrpCodeUp-error hidden"></div>
+                                        <div class="error cusGrpCode-error hidden"></div>
                                     </div>
                                 </div>
                                 <div class="MuiGrid-item MuiGrid-grid-xs-12">
@@ -120,7 +120,8 @@
                                                   title="Mô tả khách hàng của bạn để phục vụ cho việc chăm sóc khách hàng tốt hơn">
                                                 <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
                                                      width="16" height="16" color="primary" class="jss23713">
-                                                    <path fill="#0088FF" d="M7.4 5v1.2h1.2V5H7.4ZM7.4 8.6V11h1.8V9.8h-.6V7.4H6.8v1.2h.6Z">
+                                                    <path fill="#0088FF"
+                                                          d="M7.4 5v1.2h1.2V5H7.4ZM7.4 8.6V11h1.8V9.8h-.6V7.4H6.8v1.2h.6Z">
                                                     </path>
                                                     <path fill-rule="evenodd" clip-rule="evenodd" fill="#0088FF"
                                                           d="M8 2C4.688 2 2 4.688 2 8s2.688 6 6 6 6-2.688 6-6-2.688-6-6-6ZM3.2 8c0 2.646 2.154 4.8 4.8 4.8s4.8-2.154 4.8-4.8S10.646 3.2 8 3.2A4.806 4.806 0 0 0 3.2 8Z">
@@ -135,7 +136,8 @@
                                                           aria-label="Without label" name="noteUp"
                                                           class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline placeholder_text">
                                                 </textarea>
-                                                <fieldset aria-hidden="true" class="jss823 MuiOutlinedInput-notchedOutline">
+                                                <fieldset aria-hidden="true"
+                                                          class="jss823 MuiOutlinedInput-notchedOutline">
                                                     <legend class="jss824">
                                                         <span>&ZeroWidthSpace;</span>
                                                     </legend>
@@ -240,24 +242,12 @@
                                     <div class="MuiFormControl-root jss754 MuiFormControl-fullWidth">
                                         <label class="MuiFormLabel-root MuiInputLabel-root jss755
                                                MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-                                               data-shrink="true" for="paymentType">
+                                               data-shrink="true" for="dropdownPaymentMethod">
                                             Hình thức thanh toán
                                         </label>
-                                        <div class="dropdown jss1784">
-                                            <div class="dropdown-toggle select-btn-pay jss759"
-                                                 type="button" data-toggle="dropdown"
-                                                 aria-expanded="false">
-                                                <span id="paymentType">
-                                                    Chọn hình thức thanh toán
-                                                </span>
-                                            </div>
-                                            <ul class="dropdown-menu w-100 showAllPaymentMethod">
-                                                <li class="jss760 jss761" disabled="">Chọn hình thức thanh toán</li>
-                                                <div id="dropdownPaymentMethod">
-
-                                                </div>
-                                            </ul>
-                                        </div>
+                                        <select id="dropdownPaymentMethod" class="jss759" name="dropdownPaymentMethod">
+                                            <option value="0" class="jss23599">Chọn hình thức thanh toán</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -280,16 +270,17 @@
     let currentCustomerGroup = {};
 
     // start update customer group
+    CustomerApp.page.elements.frmUpdateCusGrp = $("#frmUpdateCusGrp");
     CustomerApp.page.elements.titleGroupUp = $("#titleGroupUp");
     CustomerApp.page.elements.cusGrpCodeUp = $("#cusGrpCodeUp");
     CustomerApp.page.elements.noteUp = $("#noteUp");
     CustomerApp.page.elements.defaultDiscountRateUP = $("#defaultDiscountRateUP");
-    CustomerApp.page.elements.selectedPriceDefault =$("#selectedPriceDefault");
+    CustomerApp.page.elements.selectedPriceDefault = $("#selectedPriceDefault");
     CustomerApp.page.elements.listPricePolicy = $("#listPricePolicy");
     CustomerApp.page.elements.defaultPriceDropdown = $("#defaultPriceDropdown");
     CustomerApp.page.elements.paymentType = $("#paymentType");
 
-    CustomerApp.page.elements.cusGrpCodeError = $(".cusGrpCodeUp-error.error");
+    CustomerApp.page.elements.cusGrpCodeError = $(".cusGrpCode-error.error");
     CustomerApp.page.elements.noteError = $(".note-error.error");
     CustomerApp.page.elements.defaultDiscountRateError = $(".defaultDiscountRate-error.error");
 
@@ -327,13 +318,11 @@
     CustomerApp.page.commands.updateCustomerGroup = () => {
         CustomerApp.page.elements.btnUpdateCustomerGroup.click(() => {
             let id = +window.location.pathname.split('/')[3];
-            currentCustomerGroup.title = CustomerApp.page.elements.titleGroupUp.val().trim();
-            currentCustomerGroup.cusGrpCode = CustomerApp.page.elements.cusGrpCodeUp.val().trim();
-            currentCustomerGroup.note = CustomerApp.page.elements.noteUp.val().trim();
-            currentCustomerGroup.defaultDiscountRate = CustomerApp.page.elements.defaultDiscountRateUP.val().trim();
-
+            currentCustomerGroup.title = CustomerApp.getValue(CustomerApp.page.elements.titleGroupUp);
+            currentCustomerGroup.cusGrpCode = CustomerApp.getValue(CustomerApp.page.elements.cusGrpCodeUp);
+            currentCustomerGroup.note = CustomerApp.getValue(CustomerApp.page.elements.noteUp);
+            currentCustomerGroup.defaultDiscountRate = CustomerApp.getValue(CustomerApp.page.elements.defaultDiscountRateUP);
             console.log(currentCustomerGroup)
-
             $.ajax({
                 headers: {
                     "accept": "application/json",
@@ -347,27 +336,25 @@
                     CustomerApp.IziToast.showSuccessAlert("Cập nhật nhóm khách hàng thành công");
                 })
                 .fail((jqXHR) => {
-                    console.log(jqXHR)
                     let errors = jqXHR.responseJSON.errors;
 
                     if (errors.title) {
-                        CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.titleError, errors.title)
+                        CustomerApp.showErrorValidate(CustomerApp.page.elements.titleError, errors.title)
                     }
                     if (errors.cusGrpCode) {
-                        CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.cusGrpCodeError, errors.cusGrpCode)
+                        CustomerApp.showErrorValidate(CustomerApp.page.elements.cusGrpCodeError, errors.cusGrpCode)
                     }
                     if (errors.note) {
-                        CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.noteError, errors.note)
+                        CustomerApp.showErrorValidate(CustomerApp.page.elements.noteError, errors.note)
                     }
                     if (errors.defaultDiscountRate) {
-                        CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.defaultDiscountRateError, errors.defaultDiscountRate)
+                        CustomerApp.showErrorValidate(CustomerApp.page.elements.defaultDiscountRateError, errors.defaultDiscountRate)
                     }
                 })
         })
     }
 
     CustomerApp.page.commands.getDefaultPricingPolicy = () => {
-        let id = currentCustomerGroup.defaultPricingPolicyId;
         return $.ajax({
             headers: {
                 "accept": "application/json",
@@ -377,15 +364,6 @@
             url: origin + "/api/pricing-policies"
         })
             .done((data) => {
-                // let currentDefaultPricingPolicyStr = `<a class="jss23775 selectDefaultPricePolicy" data-id="${currentDefaultPricingPolicy.id}" data-value=${currentDefaultPricingPolicy.title}>
-                //                     ${currentDefaultPricingPolicy.title}
-                //                 </a>`;
-                // let value = currentDefaultPricingPolicy.title;
-                //
-                // CustomerApp.page.elements.selectedPriceDefault.text(value);
-                // CustomerApp.page.elements.listPricePolicy.prepend(currentDefaultPricingPolicyStr);
-
-
                 data.forEach(item => {
                     let str = `<a class="jss23775 selectDefaultPricePolicy" data-id="${item.id}" data-value=${item.title}>
                                     ${item.title}
@@ -445,14 +423,13 @@
         })
             .done((data) => {
                 data.forEach(item => {
-                    let str = `<li data-id="${item.id}" data-title=${item.title} class="catItem dropdown-item jss761 selectedPaymentMethod">
-                                    ${item.title}
-                                </li>`;
+                    let str = `<option value=${item.id} class="selectedPaymentMethod">${item.title}</option>`;
+
+                    CustomerApp.page.elements.dropdownPaymentMethod.append(str);
 
                     if (item.id === currentCustomerGroup.defaultPaymentMethodId) {
-                        CustomerApp.page.elements.paymentType.text(item.title);
+                        $('#dropdownPaymentMethod option').prop('selected', true)
                     }
-                    CustomerApp.page.elements.dropdownPaymentMethod.append(str);
                 });
                 CustomerApp.page.commands.selectPaymentMethod();
             })
@@ -463,8 +440,7 @@
 
     CustomerApp.page.commands.selectPaymentMethod = () => {
         $(".selectedPaymentMethod").click(function () {
-            currentCustomerGroup.defaultPaymentMethodId = $(this).data('id');
-            CustomerApp.page.elements.paymentType.text($(this).text());
+            currentCustomerGroup.defaultPaymentMethodId = $(this).val();
         })
     }
     //end payment method
@@ -534,9 +510,9 @@
     }
     //create price policy
     CustomerApp.page.commands.createPricePolicy = () => {
-        pricingPolicy = {
-            title: CustomerApp.page.elements.titlePricePolicyCre.val().trim(),
-            pricingPolicyCode: CustomerApp.page.elements.pricingPolicyCodeCre.val().trim(),
+        let pricingPolicy = {
+            title: CustomerApp.getValue(CustomerApp.page.elements.titlePricePolicyCre),
+            pricingPolicyCode: CustomerApp.getValue(CustomerApp.page.elements.pricingPolicyCodeCre),
             pricingPolicyType: $('input[name="policyStyle"]:checked').val()
         }
 
@@ -564,13 +540,13 @@
                 let errors = jqXHR.responseJSON.errors;
 
                 if (errors.title) {
-                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.titleError, errors.title)
+                    CustomerApp.showErrorValidate(CustomerApp.page.elements.titleError, errors.title)
                 }
                 if (errors.pricingPolicyCode) {
-                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, errors.pricingPolicyCode)
+                    CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, errors.pricingPolicyCode)
                 }
                 if (errors.pricingPolicyType) {
-                    CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, errors.pricingPolicyType)
+                    CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, errors.pricingPolicyType)
                 }
             })
     }
@@ -583,6 +559,53 @@
 
     CustomerApp.page.elements.btnCreatePricePolicy.on("click", () => {
         CustomerApp.page.elements.frmCreatePricePolicy.trigger("submit");
+    })
+
+    CustomerApp.page.elements.frmUpdateCusGrp.validate({
+        rules: {
+            titleGroupUp: {
+                required: true,
+                maxlength: 50,
+            },
+            cusGrpCodeUp: {
+                maxlength: 50,
+            },
+            noteUp: {
+                maxlength: 255,
+            },
+            defaultDiscountRateUp: {
+                digits: true,
+            }
+        },
+        messages: {
+            titleGroupUp: {
+                required: "Tên nhóm khách hàng không được để trống",
+                maxlength: "Tên nhóm khách hàng không quá 50 ký tự"
+            },
+            cusGrpCodeUp: {
+                maxlength: "Mã nhóm không quá 50 ký tự",
+            },
+            noteUp: {
+                maxlength: "Mô tả không quá 255 ký tự",
+            },
+            defaultDiscountRateUp: {
+                digits: "Chỉ được nhập số",
+            },
+        },
+        errorElement: 'label',
+        errorPlacement: (error, element) => {
+            error.appendTo(element.parent("div").parent("div").next("div"));
+        },
+        success: (label) => {
+            label.removeClass('hidden').addClass('show')
+        },
+        submitHandler: () => {
+            CustomerApp.page.commands.updateCustomerGroup();
+        },
+        invalidHandler: () => {
+            CustomerApp.IziToast.showErrorAlert('Vui lòng nhập đúng thông tin')
+        }
+
     })
 
     CustomerApp.page.elements.frmCreatePricePolicy.validate({
@@ -614,213 +637,20 @@
         },
         showErrors: (error) => {
             if (error.titlePricePolicyCre) {
-                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.titleError, error.titlePricePolicyCre);
+                CustomerApp.showErrorValidate(CustomerApp.page.elements.titleError, error.titlePricePolicyCre);
             }
             if (error.pricingPolicyCodeCre) {
-                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, error.pricingPolicyCodeCre);
+                CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, error.pricingPolicyCodeCre);
             }
             if (error.policyStyle) {
-                CustomerApp.page.commands.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, error.policyStyle);
+                CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, error.policyStyle);
             }
         },
         submitHandler: () => {
             CustomerApp.page.commands.createPricePolicy();
         },
     });
-
-    CustomerApp.page.commands.showErrorValidate = (element, error) => {
-        element.addClass('show').removeClass('hidden');
-        element.text(error);
-        CustomerApp.IziToast.showErrorAlert(error);
-    }
     //end create default pricing policy
 
-    // let pricingPolicy;
-    // let paymentMethod;
-    // let updateCusGroupParam = {};
-    // const selectBtnPri = document.querySelector('.select-btn-pri');
-    // const selectBtnPay = document.querySelector('.select-btn-pay');
-    //
-    // // Lấy List Pricing Policy
-    // function getAllPricingPolicy(selectedPricing) {
-    //     return $.ajax({
-    //         headers: {
-    //             "accept": "application/json",
-    //             "content-type": "application/json"
-    //         },
-    //         type: "GET",
-    //         url: origin + "/api/pricing-policies"
-    //     })
-    //         .done((data) => {
-    //             console.log(data);
-    //             pricingPolicy = data;
-    //             pricingPolicy.forEach(item => {
-    //                 let isSelected = item === selectedPricing ? "selected" : "";
-    //                 let str = `<li id="${item.id}" data-id="${item.id}" onclick="updateNamePri(${item.id})" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
-    //                 $(".showAllPricingPolicy #showAllPricing").append(str);
-    //             });
-    //         })
-    //         .fail((jqXHR) => {
-    //
-    //         })
-    // }
-    //
-    // //show select pricing policy
-    // function updateNamePri(id) {
-    //     const arrayCat = pricingPolicy.filter(item => item.id === id)
-    //     const val = arrayCat[0].title;
-    //     console.log("is", id, val)
-    //     selectBtnPri.firstElementChild.innerText = val;
-    //     $("#upPricingType").data("id", id);
-    //     let idValue = $("#upPricingType").data("id");
-    //     console.log(idValue);
-    // }
-    //
-    // // Lấy List Payment Method
-    // function getAllPaymentMethod(selectedPayment) {
-    //     return $.ajax({
-    //         headers: {
-    //             "accept": "application/json",
-    //             "content-type": "application/json"
-    //         },
-    //         type: "GET",
-    //         url: origin + "/api/admin/payment_methods"
-    //     })
-    //         .done((data) => {
-    //             console.log(data);
-    //             paymentMethod = data;
-    //             paymentMethod.forEach(item => {
-    //                 let isSelected = item === selectedPayment ? "selected" : "";
-    //                 let str = `<li id="${item.id}" data-id="${item.id}" onclick="updateNamePay('${item.id}')" class="${isSelected} catItem dropdown-item">${item.title}</li>`;
-    //                 $(".showAllPaymentMethod #showAllPay").append(str);
-    //             });
-    //         })
-    //         .fail((jqXHR) => {
-    //
-    //         })
-    // }
-    //
-    // //show select payment method
-    // function updateNamePay(id) {
-    //     const arrayCat = paymentMethod.filter(item => item.id === id)
-    //     const val = arrayCat[0].title;
-    //     console.log("is", id, val)
-    //     selectBtnPay.firstElementChild.innerText = val;
-    //     $("#upPaymentType").data("id", id);
-    //     let idValue = $("#upPaymentType").data("id");
-    //     console.log(idValue);
-    // }
-    //
-    // $('#btnUpdateCustomerGroup').on('click', () => {
-    //     let id = $("#cusGrpId").text();
-    //     updateCusGroupParam.id = id;
-    //     let title = $('#upTitleGroup').val().trim();
-    //     updateCusGroupParam.title = title.length > 0 ? title : undefined;
-    //
-    //     let cusGrpCode = $('#upCusGrpCode').val().trim();
-    //     updateCusGroupParam.cusGrpCode = cusGrpCode.length > 0 ? cusGrpCode : undefined;
-    //
-    //     let note = $('#upDescription').val().trim();
-    //     updateCusGroupParam.note = note.length > 0 ? note : undefined;
-    //
-    //     updateCusGroupParam.defaultPricingPolicyId = $('#upPricingType').data("id");
-    //     updateCusGroupParam.defaultDiscountRate = $('#upDiscount').val();
-    //     updateCusGroupParam.defaultPaymentMethodId = $('#upPaymentType').data("id");
-    //     $.ajax({
-    //         "headers": {
-    //             "accept": "application/json",
-    //             "content-type": "application/json"
-    //         },
-    //         "type": "POST",
-    //         "url": origin + "/api/customer_groups/update",
-    //         "data": JSON.stringify(updateCusGroupParam)
-    //     })
-    //         .done((data) => {
-    //             console.log(data);
-    //             let id = data.id;
-    //             CustomerGroup_App.IziToast.showSuccessAlert('Sửa nhóm khách hàng thành công  !!!')
-    //
-    //             setTimeout(() => {
-    //                 window.location.href = "/admin/customer_groups/" + id;
-    //             }, 1000)
-    //
-    //         })
-    //         .fail((jqXHR) => {
-    //             console.log(jqXHR);
-    //             if (jqXHR.responseJSON) {
-    //                 $.each(jqXHR.responseJSON, (key, item) => {
-    //                     CustomerGroup_App.IziToast.showErrorAlert(item);
-    //                 })
-    //             }
-    //
-    //         })
-    // })
-    //
-    // function getCusGroupById(Id) {
-    //     return $.ajax({
-    //         headers: {
-    //             "accept": "application/json",
-    //             "content-type": "application/json"
-    //         },
-    //         type: "GET",
-    //         url: origin + "/api/customer_groups" + "/" + Id
-    //     })
-    //         .done((data) => {
-    //             customerGroup = data;
-    //             console.log(customerGroup);
-    //         })
-    //         .fail((jqXHR) => {
-    //             if (jqXHR.responseJSON) {
-    //                 $.each(jqXHR.responseJSON, (key, item) => {
-    //                     CustomerGroup_App.IziToast.showErrorAlert(item);
-    //                 })
-    //             }
-    //         });
-    // }
-    //
-    // function showModalDelete() {
-    //     $('#btnSowModalDelete').click(function () {
-    //         // alert("modal dele")
-    //         $('#modal_dele_cus_grp').modal('show');
-    //     });
-    // }
-    //
-    // function deleteCusGrpHander() {
-    //     let id = $("#cusGrpId").text();
-    //
-    //     $('#btn_deleteCustomer').click(function () {
-    //         // alert(" ok")
-    //         console.log(id)
-    //         return $.ajax({
-    //             headers: {
-    //                 "accept": "application/json",
-    //                 "content-type": "application/json"
-    //             },
-    //             type: "DELETE",
-    //             url: origin + "/api/customer_groups/delete/" + id,
-    //         })
-    //             .done((data) => {
-    //                 CustomerGroup_App.IziToast.showSuccessAlert("Xoá nhóm khách hàng thành công  !!! ");
-    //                 $('#modal_dele_cus_grp').modal('hide');
-    //
-    //                 setTimeout(() => {
-    //                     window.location.href = "/admin/customer_groups";
-    //                 }, 2500)
-    //             })
-    //             .fail((jqXHR) => {
-    //                 $.each(jqXHR.responseJSON, (key, item) => {
-    //                     CustomerGroup_App.IziToast.showErrorAlert(item);
-    //                 })
-    //             })
-    //     })
-    // }
-    //
-    // deleteCusGrpHander();
-    //
-    // $(() => {
-    //     getAllPricingPolicy();
-    //     getAllPaymentMethod();
-    //     showModalDelete();
-    // })
 </script>
 </html>

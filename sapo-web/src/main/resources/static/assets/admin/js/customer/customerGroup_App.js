@@ -70,16 +70,16 @@ class CustomerGroup_App {
     }
 }
 
-class CustomerGroupDataTable{
-    constructor(draw, start, length, recordsTotal, recordsFiltered, data) {
-        this.draw = draw;
-        this.start = start;
-        this.length = length;
-        this.recordsTotal = recordsTotal;
-        this.recordsFiltered = recordsFiltered;
-        this.data = data;
-    }
-}
+// class CustomerGroupDataTable{
+//     constructor(draw, start, length, recordsTotal, recordsFiltered, data) {
+//         this.draw = draw;
+//         this.start = start;
+//         this.length = length;
+//         this.recordsTotal = recordsTotal;
+//         this.recordsFiltered = recordsFiltered;
+//         this.data = data;
+//     }
+// }
 
 class CustomerGroupFilter {
     constructor(title, cusGrpCode, customerGroupType, description, countCus, createdAt, draw) {

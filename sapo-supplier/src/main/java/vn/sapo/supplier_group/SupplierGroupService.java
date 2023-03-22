@@ -1,8 +1,8 @@
-package vn.sapo.supplierGroup;
+package vn.sapo.supplier_group;
 
-import vn.sapo.supplierGroup.dto.CreateSupGroupParam;
-import vn.sapo.supplierGroup.dto.UpdateSupGroupParam;
-import vn.sapo.supplierGroup.dto.SupplierGroupResult;
+import vn.sapo.supplier_group.dto.CreateSupGroupParam;
+import vn.sapo.supplier_group.dto.UpdateSupGroupParam;
+import vn.sapo.supplier_group.dto.SupplierGroupResult;
 
 import java.util.List;
 import java.util.Map;

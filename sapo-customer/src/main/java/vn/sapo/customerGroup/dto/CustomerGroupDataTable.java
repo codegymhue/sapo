@@ -16,14 +16,14 @@ import java.util.List;
 public class CustomerGroupDataTable {
 
     private Integer draw;
-
+//
     private Integer start;
-
-    private Integer length;
-
+//
+//    private Integer length;
+//
     private Integer recordsTotal;
 
     private Integer recordsFiltered;
 
-    private List<CustomerGroupResult> data;
+    private List<ICustomerGroupResult> data;
 }

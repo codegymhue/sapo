@@ -1,19 +1,21 @@
 package vn.sapo.customerGroup;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import vn.sapo.customerGroup.dto.CustomerGroupResult;
 import vn.sapo.customerGroup.dto.ICustomerGroupResult;
 import vn.sapo.entities.customer.CustomerGroup;
 
-import java.util.List;
-
 @Repository
-public interface CustomerGroupRepository extends JpaRepository<CustomerGroup, Integer> {
+public interface CustomerGroupRepository extends JpaRepository<CustomerGroup, Integer>, JpaSpecificationExecutor<CustomerGroup> {
+
     @Query("select " +
             "g.id as id," +
             "g.title as title," +
+            "g.type as type," +
             "g.cusGrpCode as cusGrpCode," +
             "g.createdAt as createdAt, " +
             "count(c.groupId) as countCus," +
@@ -22,26 +24,11 @@ public interface CustomerGroupRepository extends JpaRepository<CustomerGroup, In
             "left join Customer as c " +
             "on g.id = c.groupId " +
             "group by g.id")
-            List<ICustomerGroupResult> sortByGroup();
+    Page<ICustomerGroupResult> findAllCustomerGroupPageable(Pageable pageable);
 
     boolean existsByCusGrpCode(String code);
 
     boolean existsByTitle(String title);
-
-    @Query(value = "SELECT " +
-                        "g.id, " +
-                        "g.title, " +
-                        "g.cus_grp_code, " +
-                        "g.type, " +
-                        "(SELECT COUNT(customer_group_id) AS countCus " +
-                            "FROM customer " +
-                            "WHERE customer_group_id = g.id), " +
-                        "g.note, " +
-                        "g.created_at " +
-                    "FROM customer_group AS g;"
-            ,
-            nativeQuery = true)
-    List<CustomerGroupResult> findAllCustomerGroupResult();
 }
 
 

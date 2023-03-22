@@ -7,11 +7,13 @@ public interface ICustomerGroupResult {
 
     String getTitle();
 
+    String getType();
+
     String getCusGrpCode();
 
-    Instant getCreatedAt();
+    Integer getCountCus();
 
-    Long getCountCus();
+    Instant getCreatedAt();
 
     String getNote();
 

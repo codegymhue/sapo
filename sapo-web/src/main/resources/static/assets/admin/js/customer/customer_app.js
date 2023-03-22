@@ -94,9 +94,15 @@ class CustomerApp {
         `;
     }
 
+    static showErrorValidate = (element, error) => {
+        element.addClass('show').removeClass('hidden');
+        element.text(error);
+        CustomerApp.IziToast.showErrorAlert(error);
+    }
+
     static getValue = (input) => {
         let value = input.val().trim();
-        return !value ? undefined : value;
+        return value ? value : undefined;
     }
 
     static page = {
@@ -117,12 +123,13 @@ class CustomerApp {
             loadData: {},
             commands: {},
         },
-        initializeEventControl: {}
+        initializeEventControl: {},
+        util:{}
     }
 
     static dataTableDetails = {
         language: {
-            "processing": "Đang xử lý...",
+            "processing": "<i class='fa fa-refresh fa-spin' style='font-size: 50pt; z-index: 100000'></i>",
             "aria": {
                 "sortAscending": ": Sắp xếp thứ tự tăng dần",
                 "sortDescending": ": Sắp xếp thứ tự giảm dần"
@@ -283,9 +290,9 @@ class CustomerApp {
                 ]
             },
             "emptyTable": "Không có dữ liệu",
-            "info": "Hiển thị _START_ tới _END_ của _TOTAL_ dữ liệu",
+            "info": " Từ _START_ tới _END_ trên tổng _TOTAL_",
             "infoEmpty": "Hiển thị 0 tới 0 của 0 dữ liệu",
-            "lengthMenu": "Hiển thị _MENU_ dữ liệu",
+            "lengthMenu": "Hiển thị _MENU_ kết quả ",
             "loadingRecords": "Đang tải...",
             "paginate": {
                 "first": "Đầu tiên",
@@ -402,39 +409,28 @@ class CustomerApp {
                                 `;
                 }
             },
-            // {
-            //     targets: 2,
-            //     render: (data, type, row, meta) => {
-            //         return `<p>${row.fullName}</p>`;
-            //     }
-            // },
-            // {
-            //     targets: 3,
-            //     render: (data, type, row, meta) => {
-            //         return `<p>${row.phoneNumber}</p>`;
-            //     }
-            // },
-            // {
-            //     targets: 4,
-            //     render: (data, type, row, meta) => {
-            //         return `<p>${row.group.title}</p>`;
-            //     }
-            // },
-            // {
-            //     targets: 5,
-            //     render: (data, type, row, meta) => {
-            //         return `<p>${row.debtTotal}</p>`;
-            //     }
-            // },
-            // {
-            //     targets: 6,
-            //     render: (data, type, row, meta) => {
-            //         return `<p>${row.spendTotal}</p>`;
-            //     }
-            // },
         ],
     }
 
+    static searchDefaultPriceDropdown = () => {
+        let filter, input, div, a, i;
+
+        input = CustomerApp.page.elements.searchDefaultPriceDropdown;
+
+        filter = input.val().toUpperCase();
+
+        div = document.getElementById("defaultPriceDropdown");
+
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            let txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
 }
 
 

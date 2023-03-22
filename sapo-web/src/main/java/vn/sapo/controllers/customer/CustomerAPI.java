@@ -7,24 +7,22 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.customers.AddressService;
-import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.excel.ExcelHelper;
 import vn.sapo.excel.ExcelService;
 import vn.sapo.order.sale.SaleOrderService;
 import vn.sapo.order.sale.item.OrderItemService;
 import vn.sapo.shared.controllers.BaseController;
-import vn.sapo.shared.exceptions.ValidationException;
 import vn.sapo.supplier.excel.ResponseMessage;
 import vn.sapo.voucher.receipt.ReceiptVoucherService;
 
 import java.time.Instant;
-import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -63,7 +61,6 @@ public class CustomerAPI extends BaseController {
    @GetMapping("/{id}")
    public ResponseEntity<?> findById(@PathVariable Integer id) {
        CustomerResult dto = customerService.findById(id);
-//       setData(dto);
        return new ResponseEntity<>(dto, HttpStatus.OK);
    }
 
@@ -106,25 +103,28 @@ public class CustomerAPI extends BaseController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody CreateCustomerParam createCustomerParam) {
-        CreateAddressParam createAddressParam = createCustomerParam.getCreateAddressParam();
-        if (createAddressParam == null)
-            throw new ValidationException(new HashMap<>() {{
-                put("line1", "Dia chi khong duoc de trong");
-            }});
+    public ResponseEntity<?> create(@RequestBody @Validated CreateCustomerParam createCustomerParam) {
+//        CreateAddressParam createAddressParam = createCustomerParam.getCreateAddressParam();
+//        if (createAddressParam == null)
+//            throw new ValidationException(new HashMap<>() {{
+//                put("line1", "Dia chi khong duoc de trong");
+//            }});
         CustomerResult dto = customerService.create(createCustomerParam);
 
-//        createAddressParam.setCustomerId(dto.getId());
-//        addressService.create(createAddressParam);
         dto = customerService.findById(dto.getId());
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UpdateCustomerParam updateCustomer) {
-        return new ResponseEntity<>(customerService.update(updateCustomer), HttpStatus.OK);
-    }
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Integer id,
+                                    @RequestBody @Validated UpdateCustomerParam updateCustomer) {
 
+       return new ResponseEntity<>(customerService.update(id, updateCustomer), HttpStatus.OK);
+    }
+    @PatchMapping
+    public ResponseEntity<?> updateSeriesCustomer(@RequestBody CustomerUpdateSeries customerUpdateSeries){
+        return new ResponseEntity<>(customerService.updateSeries(customerUpdateSeries), HttpStatus.OK);
+    }
     @PutMapping("/updateStatusAvailable")
     public ResponseEntity<?> updateStatusAvailable(@RequestBody List<Integer> customerIds) {
         customerService.changeStatusToAvailable(customerIds, true);
