@@ -86,7 +86,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         if (createParam.getCreateAddressParam().getLine1() != null) {
             if (createParam.getCreateAddressParam().getLine1().length() > 255)
-                throw new ValidationException("line1", "Địa chỉ không được vượt quá 255 ký tự");
+                throw new ValidationException("line1", "address.validation.line1.length");
 
             CreateAddressParam addressParam = createParam
                     .getCreateAddressParam()
@@ -167,12 +167,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public List<CustomerResult> findAllByGroupListId(List<Integer> groupIds) {
-        List<CustomerResult> customerResults = new ArrayList<>();
-        customerResults = customerRepository.findAllByGroupIdIn(groupIds)
+        return customerRepository.findAllByGroupIdIn(groupIds)
                 .stream()
                 .map(customerMapper::toDTO)
                 .collect(Collectors.toList());
-        return customerResults;
     }
 
     @Override
