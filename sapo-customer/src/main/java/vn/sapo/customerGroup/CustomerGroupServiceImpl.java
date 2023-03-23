@@ -3,6 +3,7 @@ package vn.sapo.customerGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.customerGroup.dto.*;
@@ -23,6 +24,11 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
 
     @Autowired
     private CustomerGroupRepository customerGroupRepository;
+
+    @Override
+    public Page<ICustomerGroupResult> findCustomerGroupResultById(Integer id, Pageable pageable) {
+        return customerGroupRepository.findCustomerGroupResultById(id,pageable);
+    }
 
     @Override
     @Transactional

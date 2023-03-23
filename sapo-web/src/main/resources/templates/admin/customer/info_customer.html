@@ -285,21 +285,34 @@
                     </div>
                 </div>
             </div>
-            <div class="jss2273 jss2103">
-                <div class="jss2274 jss2104">
-                    <div class="sc-dSuTWQ gCRNBf">
-                        <div id="scroller" class="sc-hZFzCs fvZzuO">
-                            <div class="sc-KfMfS jyZcwm">
-                                <!--                                <button id="histories" class="sc-cHPgQl fJFgex">Lịch sử mua hàng</button>-->
-                                <!--                                <button id="debts" class="sc-cHPgQl fJFgex">Công nợ</button>-->
-                                <button id="contacts" class="sc-cHPgQl fJFgex">Liên hệ</button>
-                                <button id="addresses" class="sc-cHPgQl fJFgex">Địa chỉ</button>
-                                <button id="notes" class="sc-cHPgQl fJFgex">Ghi chú</button>
-                                <button id="customer_groups" class="sc-cHPgQl fACSJt">Nhóm khách hàng</button>
+            <div class="jss2103">
+                <div class="jss2104">
+                    <div class="gCRNBf">
+                        <div id="scroller" class="fvZzuO">
+                            <div class="jyZcwm">
+                                <button id="histories" class="fJFgex">Lịch sử mua hàng</button>
+                                <button id="debts" class="fJFgex">Công nợ</button>
+                                <button id="contacts" class="fJFgex">Liên hệ</button>
+                                <button id="addresses" class="fJFgex">Địa chỉ</button>
+                                <button id="notes" class="fJFgex">Ghi chú</button>
+                                <button id="customer_groups" class="fACSJt">Nhóm khách hàng</button>
                             </div>
                         </div>
                     </div>
                     <div id="render_table">
+                        <div id="customerGroupContainer">
+                            <table id="tbCustomerGroup" class="jsseh238">
+                                <thead>
+                                <tr>
+                                    <th class="col-3">Mã nhóm</th>
+                                    <th class="col-3">Tên nhóm</th>
+                                    <th class="col-3">Loại nhóm</th>
+                                    <th class="col-3">Mô tả</th>
+                                </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
                         <!--                        <table id="tbTable" class="table table-hover" style="width:100%">-->
 
                         <!--                        </table>-->
@@ -347,6 +360,10 @@
 
     CustomerApp.page.elements.modalDeleteCustomer = $('#modal_delete_customer');
 
+    CustomerApp.page.elements.confirmText = $("#confirmText");
+
+    CustomerApp.page.elements.customerGroups = $("#customer_groups");
+
     CustomerApp.page.commands.getCustomerInfo = () => {
         let id = +window.location.pathname.split('/')[3];
 
@@ -355,7 +372,6 @@
             url: origin + `/api/customers/${id}`,
         })
             .done((data) => {
-                console.log(data);
                 currentCustomer = {...data}
                 CustomerApp.page.elements.fullName.text(CustomerApp.page.commands.getValue(data.fullName));
 
@@ -400,8 +416,57 @@
     $(() => {
         CustomerApp.page.commands.getCustomerInfo().then(() => {
             CustomerApp.page.commands.deleteCustomer();
+
+            CustomerApp.page.commands.showCustomerGroup();
         });
     })
+
+    CustomerApp.page.commands.showCustomerGroup = () => {
+        CustomerApp.page.elements.customerGroups.click(() => {
+            let id = currentCustomer.id;
+            console.log(id)
+
+            $("#tbCustomerGroup").DataTable({
+                dom: '<"top">rt<"bottom"lifp><"clear">',
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    type: 'POST',
+                    url: origin + `/api/customer_groups/${id}/customer`,
+                    accept: 'application/json',
+                    contentType: 'application/json',
+                    data: (d) => {
+                        console.log(d)
+                        return JSON.stringify(d);
+                    }
+                },
+                language: CustomerApp.dataTableDetails.language,
+                lengthMenu: [
+                    [20, 50, 100],
+                    ["20", "50", "100"]
+                ],
+                columns: [
+                    {
+                        data: 'cusGrpCode',
+                        sortable: false,
+                    },
+                    {
+                        data: 'title',
+                        sortable: false,
+                    },
+                    {
+                        data: 'type',
+                        sortable: false,
+                    },
+                    {
+                        data: 'note',
+                        sortable: false,
+                    }
+                ],
+                searching: false
+            })
+        })
+    }
 
     CustomerApp.page.commands.deleteCustomer = () => {
         CustomerApp.page.elements.btnDeleteCustomer.click(() => {
@@ -430,7 +495,7 @@
 
     CustomerApp.page.elements.btnShowModalDelete.click(() => {
         CustomerApp.page.elements.modalDeleteCustomer.modal('show');
-        $("#confirmText").text(`Bạn có chắc chắn muốn xóa khách hàng ${currentCustomer.fullName}? Thao tác này không thể khôi phục.`)
+        CustomerApp.page.elements.confirmText.text(`Bạn có chắc chắn muốn xóa khách hàng ${currentCustomer.fullName}? Thao tác này không thể khôi phục.`)
     });
 
     CustomerApp.page.elements.customerGroup.click(() => {
@@ -442,7 +507,8 @@
     })
 
     CustomerApp.page.commands.getValue = (value) => {
-        return value ? value : '---';
+        // return value ? value : '---';
+        return value || '---';
     }
 
     /*

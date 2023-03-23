@@ -1,10 +1,7 @@
 package vn.sapo.controllers.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -43,8 +40,6 @@ public class CustomerGroupAPI extends BaseController {
 
     @PostMapping("/pagination")
     private ResponseEntity<?> test(@Valid @RequestBody DataTablesInput input) {
-        System.out.println(input);
-
         int draw = input.getDraw();
         int start = input.getStart();
         int length = input.getLength();
@@ -66,6 +61,30 @@ public class CustomerGroupAPI extends BaseController {
         output.setRecordsTotal(pageableCustomerGroups.getTotalElements());
         output.setRecordsFiltered(pageableCustomerGroups.getTotalElements());
         output.setData(pageableCustomerGroups.getContent());
+
+        return new ResponseEntity<>(output, HttpStatus.OK);
+    }
+
+    @PostMapping("/{id}/customer")
+    private ResponseEntity<?> findCustomerGroupByCustomer(@Valid @RequestBody DataTablesInput input,
+                                                          @PathVariable Integer id) {
+        int draw = input.getDraw();
+        int start = input.getStart();
+        int length = input.getLength();
+        int page = start / length + 1;
+
+        Sort s = Sort.by(Sort.Direction.ASC, "title");
+
+        Pageable pageable = PageRequest.of(page - 1, length, s);
+
+        Page<ICustomerGroupResult> findCustomerGroupResultById =
+                customerGroupService.findCustomerGroupResultById(id, pageable);
+
+        DataTablesOutput<ICustomerGroupResult> output = new DataTablesOutput<>();
+        output.setDraw(draw);
+        output.setRecordsTotal(findCustomerGroupResultById.getTotalElements());
+        output.setRecordsFiltered(findCustomerGroupResultById.getTotalElements());
+        output.setData(findCustomerGroupResultById.getContent());
 
         return new ResponseEntity<>(output, HttpStatus.OK);
     }

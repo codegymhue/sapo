@@ -85,16 +85,16 @@ public class CustomerServiceImpl implements CustomerService {
         if (createParam.getCustomerCode() == null)
             customer.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
 
-        if (createParam.getCreateAddressParam().getLine1() != null) {
-            if (createParam.getCreateAddressParam().getLine1().length() > 255)
-                throw new ValidationException("line1", "address.validation.line1.length");
-
-            CreateAddressParam addressParam = createParam
-                    .getCreateAddressParam()
-                    .setCustomerId(customer.getId());
-
-            addressService.create(addressParam);
-        }
+//        if (createParam.getCreateAddressParam().getLine1() != null) {
+//            if (createParam.getCreateAddressParam().getLine1().length() > 255)
+//                throw new ValidationException("line1", "address.validation.line1.length");
+//
+//            CreateAddressParam addressParam = createParam
+//                    .getCreateAddressParam()
+//                    .setCustomerId(customer.getId());
+//
+//            addressService.create(addressParam);
+//        }
 
 
 //        Instant birthday = createParam.getBirthday().toInstant();

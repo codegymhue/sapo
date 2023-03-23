@@ -33,12 +33,12 @@ public class CreateCustomerParam {
 
     private CustomerGroupResult group;
 
-    @Pattern(regexp = "^[0-9]{8,15}$", message = "{customer.validation.phoneNumber.pattern}")
-    @NullOrNotBlank
+//    @NullOrNotBlank
+    @Pattern(regexp = "^$|[0-9]{8,15}$", message = "{customer.validation.phoneNumber.pattern}")
     private String phoneNumber;
 
-    @Pattern(regexp = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "{customer.validation.email.pattern}")
-    @NullOrNotBlank
+//    @NullOrNotBlank
+    @Pattern(regexp = "^$|[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "{customer.validation.email.pattern}")
     private String email;
 
     private CreateAddressParam createAddressParam;
@@ -48,15 +48,15 @@ public class CreateCustomerParam {
 
     private CustomerGender gender;
 
-    @Pattern(regexp = "^[0-9]{8,15}$", message = "{customer.validation.fax.pattern}")
-    @NullOrNotBlank
+//    @NullOrNotBlank
+    @Pattern(regexp = "^$|[0-9]{8,15}$", message = "{customer.validation.fax.pattern}")
     private String fax;
 
-    @NullOrNotBlank
+//    @NullOrNotBlank
     @Length(max = 50, message = "{customer.validation.taxCode.length}")
     private String taxCode;
 
-    @NullOrNotBlank
+//    @NullOrNotBlank
     @Length(max = 255, message = "{customer.validation.website.length}")
     private String website;
 
@@ -68,7 +68,7 @@ public class CreateCustomerParam {
 
     private Integer employeeId;
 
-    @NullOrNotBlank
+//    @NullOrNotBlank
     @Length(max = 500, message = "{customer.validation.description.length}")
     private String description;
 

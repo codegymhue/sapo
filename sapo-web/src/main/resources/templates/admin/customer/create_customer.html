@@ -374,12 +374,12 @@
                                                     </div>
                                                 </div>
                                                 <div class="MuiGrid-item MuiGrid-grid-xs-6">
-                                                    <div name="dept" class="iFpFap">
-                                                        <label for="dept" class="dGcxKm">
+                                                    <div name="debtTotal" class="iFpFap">
+                                                        <label for="debtTotal" class="dGcxKm">
                                                             Công nợ
                                                         </label>
                                                         <div class="bPMzLG">
-                                                            <input id="dept"
+                                                            <input id="debtTotal"
                                                                    placeholder="Nhập công nợ khách hàng" type="text"
                                                                    class="fqUehn">
                                                             <fieldset class="iKmOWq"></fieldset>
@@ -392,11 +392,11 @@
                                             <div class="MuiGrid-container MuiGrid-spacing-xs-3">
                                                 <div class="MuiGrid-item MuiGrid-grid-xs-6">
                                                     <div name="website" class="iFpFap">
-                                                        <label for="consume" class="dGcxKm">
+                                                        <label for="spendTotal" class="dGcxKm">
                                                             Tổng chi tiêu
                                                         </label>
                                                         <div class="bPMzLG">
-                                                            <input id="consume"
+                                                            <input id="spendTotal"
                                                                    placeholder="Nhập tổng chi tiêu khách hàng"
                                                                    type="text"
                                                                    class="fqUehn">
@@ -696,9 +696,9 @@
         }
     }
 
-    let customer = new Customer();
+    let customer = {};
 
-    let createAddressParam = new CreateAddressParam();
+    let createAddressParam = {};
 
     CustomerApp.page.elements.modalCreatePricePolicy = $("#modalCreatePricePolicy");
 
@@ -720,35 +720,41 @@
     CustomerApp.page.elements.btnCloseCustomer = $('#btnCloseCustomer');
     CustomerApp.page.elements.btnCloseCreatePricePolicyModal = $(".btnCloseCreatePricePolicyModal");
     CustomerApp.page.elements.btnCreatePricePolicy = $("#btnCreatePricePolicy");
+    CustomerApp.page.elements.btnCreateCustomer = $("#btnCreateCustomer");
     CustomerApp.page.elements.frmCreatePricePolicy = $("#frmCreatePricePolicy");
     CustomerApp.page.elements.searchDefaultPriceDropdown = $("#searchDefaultPriceDropdown");
     CustomerApp.page.elements.defaultPriceDropdown = $("#defaultPriceDropdown");
 
     CustomerApp.page.commands.createCustomer = () => {
-        $('#btnCreateCustomer').on('click', () => {
-            customer.fullName = $('#nameCreate').val();
-            customer.fax = $('#faxCreate').val();
-            customer.taxCode = $('#taxCodeCreate').val();
-            customer.website = $('#websiteCreate').val();
+        CustomerApp.page.elements.btnCreateCustomer.on('click', () => {
+            customer.fullName = CustomerApp.getValue($('#nameCreate'));
+            customer.customerCode = CustomerApp.getValue($('#codeCreate'));
+            customer.group = {
+                id: $('#customerGroupCreate').find(":selected").val()
+            };
+            customer.phoneNumber = CustomerApp.getValue($('#phoneCreate'));
+            customer.email = CustomerApp.getValue($('#emailCreate'));
+            customer.birthday = CustomerApp.getValue($('#birthdayCreate'));
+            customer.gender = $('#genderCreate').find(":selected").val();
+            customer.fax = CustomerApp.getValue($('#faxCreate'));
+            customer.taxCode = CustomerApp.getValue($('#taxCodeCreate'));
+            customer.website = CustomerApp.getValue($('#websiteCreate'));
+            customer.debtTotal = CustomerApp.getValue($("#debtTotal"));
+            customer.spendTotal = CustomerApp.getValue($("#spendTotal"));
+            customer.employeeId = $('#employeeNameCreate').find(":selected").val();
+            customer.description = CustomerApp.getValue($('#descriptionCreate'));
+            customer.tags = CustomerApp.getValue($('#tagCreate'));
 
-            customer.customerCode = $('#codeCreate').val();
-            customer.groupId = $('#customerGroupCreate :selected').val();
-            customer.phoneNumber = $('#phoneCreate').val();
-            customer.email = $('#emailCreate').val();
-            customer.birthday = $('#birthdayCreate').val();
-            customer.gender = $('#genderCreate :selected').val();
-            customer.employeeId = $('#employeeNameCreate :selected').val();
-            customer.description = $('#descriptionCreate').val();
-
-            createAddressParam.line1 = $('#addressCreate').val();
-            createAddressParam.provinceId = $('#province').val();
-            createAddressParam.provinceName = $('#province :selected').text();
-            createAddressParam.districtId = $('#district').val();
-            createAddressParam.districtName = $('#district :selected').text();
-            createAddressParam.wardId = $('#ward').val();
-            createAddressParam.wardName = $('#ward :selected').text();
-            createAddressParam.phoneNumber = $('#phoneCreate').val();
+            createAddressParam.provinceName = $('#province').find(":selected").text();
+            createAddressParam.provinceId = $('#province').find(":selected").val();
+            createAddressParam.districtName = $('#district').find(":selected").text();
+            createAddressParam.districtId = $('#district').find(":selected").val();
+            createAddressParam.wardName = $('#ward').find(":selected").text();
+            createAddressParam.wardId = $('#ward').find(":selected").val();
+            createAddressParam.line1 = CustomerApp.getValue($('#addressCreate'));
             customer.createAddressParam = createAddressParam;
+
+            console.log(customer)
 
             $.ajax({
                 "headers": {
@@ -760,7 +766,7 @@
                 "data": JSON.stringify(customer)
             })
                 .done((data) => {
-                    CustomerApp.IziToast.showSuccessAlert("tạo khách hàng thành công !");
+                    CustomerApp.IziToast.showSuccessAlert("tạo khách hàng thành công");
                     setTimeout(() => {
                     }, 2500)
                     CustomerApp.page.elements.formCreate[0].reset();
