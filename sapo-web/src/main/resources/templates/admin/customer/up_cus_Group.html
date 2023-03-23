@@ -197,7 +197,7 @@
                                                     <div class="MuiGrid-container">
                                                         <input type="text" placeholder="Tìm kiếm" class="jss23784"
                                                                id="searchDefaultPriceDropdown"
-                                                               onkeyup="CustomerApp.page.commands.searchDefaultPriceDropdown()">
+                                                               onkeyup="CustomerApp.searchDefaultPriceDropdown()">
                                                     </div>
                                                 </div>
                                             </div>
@@ -261,7 +261,7 @@
 </body>
 <th:block th:replace="/admin/customer/modal_createPricePolicy"/>
 <th:block th:replace="/admin/customer/modal_dele_Cus_Grp"/>
-<th:block th:replace="/layout/script"/>
+<th:block th:replace="/admin/customer/layout/script"/>
 <script src="/assets/admin/js/customer/customerGroup_App.js"></script>
 <script src="/assets/admin/js/customer/customer_app.js"></script>
 
@@ -312,6 +312,7 @@
     CustomerApp.page.elements.pricingPolicyCodeError = $(".pricingPolicyCode-error.error");
     CustomerApp.page.elements.pricingPolicyTypeError = $(".pricingPolicyType-error.error");
     CustomerApp.page.elements.titleError = $(".title-error.error");
+    CustomerApp.page.elements.searchDefaultPriceDropdown = $("#searchDefaultPriceDropdown");
     //end modal create default price policy
 
     CustomerApp.page.commands.updateCustomerGroup = () => {
@@ -448,11 +449,6 @@
     CustomerApp.page.elements.btnCreatePricePolicy.on("click", () => {
         CustomerApp.page.elements.frmCreatePricePolicy.trigger("submit");
     })
-
-
-    CustomerApp.page.commands.showModalCreatePricePolicy = () => {
-        CustomerApp.page.elements.modalCreatePricePolicy.modal("show");
-    }
 
     CustomerApp.page.commands.selectDefaultPricePolicy = () => {
         $(".selectDefaultPricePolicy").on('click', function () {

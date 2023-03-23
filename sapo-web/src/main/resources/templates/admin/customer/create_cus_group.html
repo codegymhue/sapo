@@ -3,7 +3,7 @@
 <head>
     <title>Thêm Nhóm khách hàng</title>
 
-    <th:block th:replace="/layout/header"/>
+    <th:block th:replace="/admin/customer/layout/header"/>
 
     <link rel="stylesheet" href="/assets/admin/css/customer/cus_group.css"/>
 </head>
@@ -197,7 +197,7 @@
                                                     <div class="MuiGrid-container">
                                                         <input type="text" placeholder="Tìm kiếm" class="jss23784"
                                                                id="searchDefaultPriceDropdown"
-                                                               onkeyup="CustomerApp.page.commands.searchDefaultPriceDropdown()">
+                                                               onkeyup="CustomerApp.searchDefaultPriceDropdown()">
                                                     </div>
                                                 </div>
                                             </div>
@@ -260,7 +260,7 @@
 
 </body>
 <th:block th:replace="/admin/customer/modal_createPricePolicy"/>
-<th:block th:replace="/layout/script"/>
+<th:block th:replace="/admin/customer/layout/script"/>
 <script src="/assets/admin/js/customer/customerGroup_App.js"></script>
 
 <script src="/assets/admin/js/customer/customer_app.js"></script>

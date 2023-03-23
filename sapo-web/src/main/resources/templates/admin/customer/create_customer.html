@@ -4,8 +4,9 @@
 <head>
     <title>Thêm khách hàng mới</title>
 
-    <th:block th:replace="/layout/header"/>
+    <th:block th:replace="/admin/customer/layout/header"/>
     <link rel="stylesheet" href="/assets/admin/css/customer/customer_create.css"/>
+    <!--    <link rel="stylesheet" href="/assets/admin/css/customer/cus_group.css"/>-->
 </head>
 <body>
 <div id="root">
@@ -40,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <form id="formCreateCustomer">
+        <form id="frmCreateCustomer">
             <div class="jss20286">
                 <div class="MuiGrid-container MuiGrid-spacing-xs-3">
                     <div class="MuiGrid-item MuiGrid-grid-xs-8">
@@ -197,13 +198,14 @@
                                                     </div>
                                                     <div class="MuiGrid-item MuiGrid-grid-xs-6">
                                                         <div>
-                                                            <div class="jss20622 jss21112">
+                                                            <div class="jss21097">
                                                                 <label class="MuiTypography-root MuiTypography-body1"
                                                                        for="district">
                                                                     Huyện
                                                                 </label>
                                                             </div>
-                                                            <select class="form-select jss87874 jss763 diplSI" name="district"
+                                                            <select class="form-select jss87874 jss763 diplSI"
+                                                                    name="district"
                                                                     id="district">
                                                                 <option value="0">
                                                                     <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">
@@ -219,13 +221,14 @@
                                                 <div class="MuiGrid-container MuiGrid-spacing-xs-3">
                                                     <div class="MuiGrid-item MuiGrid-grid-xs-6">
                                                         <div>
-                                                            <div class="jss20622 jss21112">
+                                                            <div class="jss21097">
                                                                 <label class="MuiTypography-root MuiTypography-body1"
                                                                        for="ward">
                                                                     Xã
                                                                 </label>
                                                             </div>
-                                                            <select class="form-select jss87874 jss763 diplSI" name="ward"
+                                                            <select class="form-select jss87874 jss763 diplSI"
+                                                                    name="ward"
                                                                     id="ward">
                                                                 <option value="0">
                                                                     <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">
@@ -245,19 +248,15 @@
                                                     </label>
                                                     <div class="MuiFormControl-root jss20483 jss20484 MuiFormControl-fullWidth">
                                                         <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-multiline MuiOutlinedInput-multiline">
-                                                            <textarea type="text" aria-invalid="false"
-                                                                      id="addressCreate"
-                                                                      name="addressCreate"
-                                                                      placeholder="Nhập địa chỉ" rows="5"
-                                                                      aria-label="Without label"
-                                                                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline">
+                                                            <textarea
+                                                                    type="text"
+                                                                    aria-invalid="false"
+                                                                    id="addressCreate"
+                                                                    name="addressCreate"
+                                                                    placeholder="Nhập địa chỉ" rows="5"
+                                                                    aria-label="Without label"
+                                                                    class="jss23785 jss23786">
                                                             </textarea>
-                                                            <fieldset aria-hidden="true"
-                                                                      class="jss20550 MuiOutlinedInput-notchedOutline">
-                                                                <legend class="jss20551">
-                                                                    <span>​</span>
-                                                                </legend>
-                                                            </fieldset>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -433,7 +432,7 @@
                                                         </label>
                                                     </div>
                                                     <select name="employeeNameCreate" id="employeeNameCreate"
-                                                            class="form-select jss20483 jss763 diplSI">
+                                                            class="form-select jss20483 jss763 diplSI jss23786">
                                                     </select>
                                                 </div>
                                             </div>
@@ -445,16 +444,10 @@
                                                     </label>
                                                     <div class="MuiFormControl-root MuiTextField-root jss20483 jss20484 MuiFormControl-fullWidth">
                                                         <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline">
-                              <textarea id="descriptionCreate"
-                                        name="descriptionCreate" placeholder="Nhập mô tả" rows="3"
-                                        class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline jss20623">
-                              </textarea>
-                                                            <fieldset aria-hidden="true"
-                                                                      class="jss20550 MuiOutlinedInput-notchedOutline">
-                                                                <legend class="jss20551">
-                                                                    <span>​</span>
-                                                                </legend>
-                                                            </fieldset>
+                                                          <textarea id="descriptionCreate" class="jss23785 jss23786"
+                                                                    name="descriptionCreate" placeholder="Nhập mô tả"
+                                                                    rows="3">
+                                                          </textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -483,14 +476,8 @@
                               <textarea aria-invalid="false" id="tagCreate"
                                         name="tagCreate" rows="3"
                                         aria-label="Without label"
-                                        class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline">
+                                        class="jss23785 jss23786">
                               </textarea>
-                                                            <fieldset aria-hidden="true"
-                                                                      class="jss20550 MuiOutlinedInput-notchedOutline">
-                                                                <legend class="jss20551">
-                                                                    <span>​</span>
-                                                                </legend>
-                                                            </fieldset>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -512,12 +499,11 @@
                                                                  aria-hidden="true">
                                 <path d="M5.4 3V4.2H6.6V3H5.4Z" fill="currenColor"></path>
                                 <path d="M5.4 6.6V9H7.2V7.8H6.6V5.4H4.8V6.6H5.4Z" fill="currenColor"></path>
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                      d="M6 0C2.688 0 0 2.688 0 6C0 9.312 2.688 12 6 12C9.312 12 12 9.312 12 6C12 2.688 9.312 0 6 0ZM1.2 6C1.2 8.646 3.354 10.8 6 10.8C8.646 10.8 10.8 8.646 10.8 6C10.8 3.354 8.646 1.2 6 1.2C3.354 1.2 1.2 3.354 1.2 6Z"
-                                      fill="currenColor">
+                                <path fill-rule="evenodd" clip-rule="evenodd" fill="currenColor"
+                                      d="M6 0C2.688 0 0 2.688 0 6C0 9.312 2.688 12 6 12C9.312 12 12 9.312 12 6C12 2.688 9.312 0 6 0ZM1.2 6C1.2 8.646 3.354 10.8 6 10.8C8.646 10.8 10.8 8.646 10.8 6C10.8 3.354 8.646 1.2 6 1.2C3.354 1.2 1.2 3.354 1.2 6Z">
                                 </path>
-                              </svg>
-                                                        </span>
+                                                            </svg>
+                                                </span>
                                             </h6>
                                         </div>
                                     </div>
@@ -553,7 +539,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="MuiGrid-container MuiGrid-spacing-xs-2">
+                                                <div class="MuiGrid-container MuiGrid-spacing-xs-2 hidden" id="offer">
                                                     <div class="MuiGrid-item MuiGrid-grid-xs-12">
                                                         <div>
                                                             <label class="MuiFormLabel-root MuiInputLabel-root jss755"
@@ -561,18 +547,20 @@
                                                                 Hình thức thanh toán
                                                             </label>
                                                             <select id="dropdownPaymentMethod" class="jss759 diplSI">
-                                                                <option value="0" class="jss23599">Chọn hình thức thanh toán</option>
+                                                                <option value="0" class="jss23599">Chọn hình thức thanh toán
+                                                                </option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="MuiGrid-item MuiGrid-grid-xs-12">
                                                         <div>
-                                                            <div class="jss1199">
-                                                                <label class="MuiFormLabel-root MuiInputLabel-root jss755">
+                                                            <div class="">
+                                                                <label class="MuiFormLabel-root MuiInputLabel-root jss755"
+                                                                       for="searchDefaultPriceDropdown">
                                                                     Giá mặc định
                                                                 </label>
                                                             </div>
-                                                            <div class="dropdown jss1784 jss1769  diplSI"
+                                                            <div class="dropdown jss1784 jss1769 diplSI jss759"
                                                                  onclick="CustomerApp.page.commands.showDefaultPricingPolicyDropdown()"
                                                                  id="defaultPriceContainer">
                                                                 <p id="selectedPriceDefault">Chọn giá mặc định</p>
@@ -588,7 +576,7 @@
                                                                                    placeholder="Tìm kiếm"
                                                                                    class="jss23784"
                                                                                    id="searchDefaultPriceDropdown"
-                                                                                   onkeyup="CustomerApp.page.commands.searchDefaultPriceDropdown()">
+                                                                                   onkeyup="CustomerApp.searchDefaultPriceDropdown()">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -604,31 +592,37 @@
                                                             </div>
                                                         </div>
                                                     </div>
-<!--                                                    <div class="MuiGrid-item MuiGrid-grid-xs-12">-->
-<!--                                                        <div>-->
-<!--                                                            <label class="MuiFormLabel-root MuiInputLabel-root jss755"-->
-<!--                                                                   data-shrink="true" for="defaultDiscountRate">-->
-<!--                                                                Chiết khấu (%)-->
-<!--                                                            </label>-->
-<!--                                                            <div class="MuiFormControl-root jss756 MuiFormControl-fullWidth"-->
-<!--                                                                 field="[object Object]" form="[object Object]">-->
-<!--                                                                <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth ">-->
-<!--                                                                    <input aria-invalid="false"-->
-<!--                                                                           id="defaultDiscountRate"-->
-<!--                                                                           name="defaultDiscountRate"-->
-<!--                                                                           type="text" aria-label="Without label"-->
-<!--                                                                           class="MuiInputBase-input MuiOutlinedInput-input jss758 placeholder_text"-->
-<!--                                                                           placeholder="0"-->
-<!--                                                                           fdprocessedid="16ju8f">-->
-<!--                                                                    <fieldset aria-hidden="true"-->
-<!--                                                                              class="jss823 MuiOutlinedInput-notchedOutline">-->
-<!--                                                                        <legend class="jss824"></legend>-->
-<!--                                                                    </fieldset>-->
-<!--                                                                </div>-->
-<!--                                                            </div>-->
-<!--                                                            <div class="error defaultDiscountRate-error hidden"></div>-->
-<!--                                                        </div>-->
-<!--                                                    </div>-->
+                                                    <div class="MuiGrid-item MuiGrid-grid-xs-12">
+                                                        <div>
+                                                            <label class="MuiFormLabel-root MuiInputLabel-root jss755"
+                                                                   data-shrink="true"
+                                                                   for="defaultDiscountRate">
+                                                                Chiết
+                                                                khấu
+                                                                (%)
+                                                            </label>
+                                                            <div class="MuiFormControl-root jss756 MuiFormControl-fullWidth"
+                                                                 field="[object Object]"
+                                                                 form="[object Object]">
+                                                                <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth jss759">
+                                                                    <input aria-invalid="false"
+                                                                           id="defaultDiscountRate"
+                                                                           name="defaultDiscountRate"
+                                                                           type="text"
+                                                                           aria-label="Without label"
+                                                                           class="MuiInputBase-input MuiOutlinedInput-input jss758 placeholder_text"
+                                                                           placeholder="0"
+                                                                           fdprocessedid="16ju8f">
+                                                                    <fieldset
+                                                                            aria-hidden="true"
+                                                                            class="MuiOutlinedInput-notchedOutline">
+                                                                        <legend class="jss824"></legend>
+                                                                    </fieldset>
+                                                                </div>
+                                                            </div>
+                                                            <div class="error defaultDiscountRate-error hidden"></div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -645,68 +639,29 @@
 
 </body>
 <th:block th:replace="/admin/customer/modal_createPricePolicy"/>
-<th:block th:replace="/layout/script"/>
+<th:block th:replace="/admin/customer/layout/script"/>
 <script src="/assets/admin/js/customer/customer_app.js"></script>
 
 <script>
-    class Customer {
-        constructor(id, website, taxCode, fax, customerCode, name, phone, customerGroup, gender, email, birthday, status, createAt, updateAt, employeeId, deleted, createAddressParam, description) {
-            this.id = id;
-            this.customerCode = customerCode;
-            this.name = name;
-            this.phone = phone;
-            this.gender = gender;
-            this.customerGroup = customerGroup;
-            this.email = email;
-            this.birthday = birthday;
-            this.status = status;
-            this.createAt = createAt;
-            this.updateAt = updateAt;
-            this.employeeId = employeeId;
-            this.deleted = deleted;
-            this.createAddressParam = createAddressParam;
-            this.description = description;
-            this.website = website;
-            this.taxCode = taxCode;
-            this.fax = fax;
-
-        }
-    }
-
-    class CreateAddressParam {
-        constructor(id, fullName, phoneNumber, line1, line2, email, districtId, districtName, provinceId, provinceName, wardId, wardName, zipCode, customerId, supplierId, isDefault, description) {
-            this.fullName = fullName;
-            this.line1 = line1;
-            this.line2 = line2;
-            this.phoneNumber = phoneNumber;
-            this.email = email;
-            // this.address = address;
-            this.districtId = districtId;
-            this.districtName = districtName;
-            this.provinceId = provinceId;
-            this.provinceName = provinceName;
-            this.wardId = wardId;
-            this.wardName = wardName;
-            this.zipCode = zipCode;
-            this.customerId = customerId;
-            this.id = id;
-            this.isDefault = isDefault;
-            this.supplierId = supplierId;
-            this.description = description;
-        }
-    }
 
     let customer = {};
-
     let createAddressParam = {};
 
     CustomerApp.page.elements.modalCreatePricePolicy = $("#modalCreatePricePolicy");
 
-    CustomerApp.page.elements.formCreate = $("#formCreate");
+    CustomerApp.page.elements.frmCreateCustomer = $("#frmCreateCustomer");
 
     CustomerApp.page.elements.genderCreate = $("#genderCreate");
     CustomerApp.page.elements.customerGroupCreate = $("#customerGroupCreate");
     CustomerApp.page.elements.employeeNameCreate = $("#employeeNameCreate");
+    CustomerApp.page.elements.offer = $("#offer");
+
+    CustomerApp.page.elements.nameCreate = $('#nameCreate');
+    CustomerApp.page.elements.codeCreate = $('#codeCreate');
+    CustomerApp.page.elements.phoneCreate = $('#phoneCreate');
+    CustomerApp.page.elements.emailCreate = $('#emailCreate');
+    CustomerApp.page.elements.birthdayCreate = $('#birthdayCreate');
+    CustomerApp.page.elements.faxCreate = $('#faxCreate');
 
     CustomerApp.page.elements.districtUpdate = $("#districtUpdate");
     CustomerApp.page.elements.provinceUpdate = $("#provinceUpdate");
@@ -714,6 +669,13 @@
     CustomerApp.page.elements.district = $("#district");
     CustomerApp.page.elements.province = $("#province");
     CustomerApp.page.elements.ward = $("#ward");
+    CustomerApp.page.elements.taxCodeCreate = $("#taxCodeCreate");
+    CustomerApp.page.elements.websiteCreate = $("#websiteCreate");
+    CustomerApp.page.elements.debtTotal = $("#debtTotal");
+    CustomerApp.page.elements.spendTotal = $("#spendTotal");
+    CustomerApp.page.elements.descriptionCreate = $("#descriptionCreate");
+    CustomerApp.page.elements.tagCreate = $("#tagCreate");
+    CustomerApp.page.elements.addressCreate = $("#addressCreate");
 
     CustomerApp.page.elements.dropdownPaymentMethod = $("#dropdownPaymentMethod");
 
@@ -725,33 +687,40 @@
     CustomerApp.page.elements.searchDefaultPriceDropdown = $("#searchDefaultPriceDropdown");
     CustomerApp.page.elements.defaultPriceDropdown = $("#defaultPriceDropdown");
 
+    CustomerApp.page.elements.selectedPriceDefault = $("#selectedPriceDefault");
+
+    CustomerApp.page.elements.error = $(".error");
+
     CustomerApp.page.commands.createCustomer = () => {
         CustomerApp.page.elements.btnCreateCustomer.on('click', () => {
-            customer.fullName = CustomerApp.getValue($('#nameCreate'));
-            customer.customerCode = CustomerApp.getValue($('#codeCreate'));
-            customer.group = {
-                id: $('#customerGroupCreate').find(":selected").val()
-            };
-            customer.phoneNumber = CustomerApp.getValue($('#phoneCreate'));
-            customer.email = CustomerApp.getValue($('#emailCreate'));
-            customer.birthday = CustomerApp.getValue($('#birthdayCreate'));
-            customer.gender = $('#genderCreate').find(":selected").val();
-            customer.fax = CustomerApp.getValue($('#faxCreate'));
-            customer.taxCode = CustomerApp.getValue($('#taxCodeCreate'));
-            customer.website = CustomerApp.getValue($('#websiteCreate'));
-            customer.debtTotal = CustomerApp.getValue($("#debtTotal"));
-            customer.spendTotal = CustomerApp.getValue($("#spendTotal"));
-            customer.employeeId = $('#employeeNameCreate').find(":selected").val();
-            customer.description = CustomerApp.getValue($('#descriptionCreate'));
-            customer.tags = CustomerApp.getValue($('#tagCreate'));
+            customer.fullName = CustomerApp.getValue(CustomerApp.page.elements.nameCreate);
+            customer.customerCode = CustomerApp.getValue(CustomerApp.page.elements.codeCreate);
 
-            createAddressParam.provinceName = $('#province').find(":selected").text();
-            createAddressParam.provinceId = $('#province').find(":selected").val();
-            createAddressParam.districtName = $('#district').find(":selected").text();
-            createAddressParam.districtId = $('#district').find(":selected").val();
-            createAddressParam.wardName = $('#ward').find(":selected").text();
-            createAddressParam.wardId = $('#ward').find(":selected").val();
-            createAddressParam.line1 = CustomerApp.getValue($('#addressCreate'));
+            customer.group = {
+                id: CustomerApp.page.elements.customerGroupCreate.find(":selected").val()
+            };
+
+            customer.phoneNumber = CustomerApp.getValue(CustomerApp.page.elements.phoneCreate);
+            customer.email = CustomerApp.getValue(CustomerApp.page.elements.emailCreate);
+            customer.birthday = CustomerApp.getValue(CustomerApp.page.elements.birthdayCreate);
+            customer.gender = CustomerApp.page.elements.genderCreate.find(":selected").val();
+            customer.fax = CustomerApp.getValue(CustomerApp.page.elements.faxCreate);
+            customer.taxCode = CustomerApp.getValue(CustomerApp.page.elements.taxCodeCreate);
+            customer.website = CustomerApp.getValue(CustomerApp.page.elements.websiteCreate);
+            customer.debtTotal = CustomerApp.getValue(CustomerApp.page.elements.debtTotal);
+            customer.spendTotal = CustomerApp.getValue(CustomerApp.page.elements.spendTotal);
+            customer.employeeId = CustomerApp.page.elements.employeeNameCreate.find(":selected").val();
+            customer.description = CustomerApp.getValue(CustomerApp.page.elements.descriptionCreate);
+            customer.tags = CustomerApp.getValue(CustomerApp.page.elements.tagCreate);
+
+            createAddressParam.provinceName = CustomerApp.page.elements.province.find(":selected").text();
+            createAddressParam.provinceId = CustomerApp.page.elements.province.find(":selected").val();
+            createAddressParam.districtName = CustomerApp.page.elements.district.find(":selected").text();
+            createAddressParam.districtId = CustomerApp.page.elements.district.find(":selected").val();
+            createAddressParam.wardName = CustomerApp.page.elements.ward.find(":selected").text();
+            createAddressParam.wardId = CustomerApp.page.elements.ward.find(":selected").val();
+            createAddressParam.line1 = CustomerApp.getValue(CustomerApp.page.elements.addressCreate);
+
             customer.createAddressParam = createAddressParam;
 
             console.log(customer)
@@ -766,10 +735,11 @@
                 "data": JSON.stringify(customer)
             })
                 .done((data) => {
-                    CustomerApp.IziToast.showSuccessAlert("tạo khách hàng thành công");
+                    CustomerApp.IziToast.showSuccessAlert("Tạo khách hàng thành công");
+
                     setTimeout(() => {
                     }, 2500)
-                    CustomerApp.page.elements.formCreate[0].reset();
+                    CustomerApp.page.elements.frmCreateCustomer[0].reset();
                     // window.location.href = `/admin/customers/${data.id}`;
 
                 })
@@ -802,7 +772,6 @@
                         CustomerApp.page.elements.provinceUpdate.append(str);
                     });
                 }
-
             })
             .fail((jqXHR) => {
                 console.log(jqXHR);
@@ -830,7 +799,6 @@
                         CustomerApp.page.elements.district.append(str);
                         CustomerApp.page.elements.districtUpdate.append(str);
                     })
-
                 }
             })
             .fail((jqXHR) => {
@@ -850,8 +818,6 @@
             url: "https://vapi.vnappmob.com/api/province/ward/" + districtId
         })
             .done((data) => {
-                // $('#ward').html('');
-                // CustomerApp.page.elements.wardUpdate.html('');
 
                 if (data.results.length === 0) {
                     let str = `<option value="0">Chọn Phường/Xã</option>`;
@@ -881,6 +847,7 @@
 
         });
     });
+
     CustomerApp.page.elements.province.on('change', () => {
         let provinceId = CustomerApp.page.elements.province.val();
 
@@ -983,7 +950,7 @@
     CustomerApp.page.commands.getAllCustomerGroup();
     CustomerApp.page.commands.getAllEmployeeSelect();
 
-    CustomerApp.page.elements.formCreate.validate({
+    CustomerApp.page.elements.frmCreateCustomer.validate({
         rules: {
             nameCreate: {
                 required: true
@@ -1002,7 +969,6 @@
     $(() => {
         CustomerApp.page.commands.getAllPaymentMethod();
         CustomerApp.page.commands.selectPaymentMethod();
-        CustomerApp.searchDefaultPriceDropdown();
     })
 
     //start create default pricing policy
@@ -1052,6 +1018,34 @@
                 if (errors.pricingPolicyType) {
                     CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, errors.pricingPolicyType)
                 }
+            })
+    }
+
+    CustomerApp.page.commands.getDefaultPricingPolicy = () => {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: origin + "/api/pricing-policies"
+        })
+            .done((data) => {
+                data.forEach(item => {
+                    let str = `<a class="jss23775 selectDefaultPricePolicy" data-id="${item.id}" data-value=${item.title}>
+                                    ${item.title}
+                                </a>`;
+
+                    CustomerApp.page.elements.listPricePolicy.prepend(str);
+                    if (item.id === currentCustomerGroup.defaultPricingPolicyId) {
+                        let value = item.title;
+                        CustomerApp.page.elements.selectedPriceDefault.text(value);
+                    }
+                });
+                CustomerApp.page.commands.selectDefaultPricePolicy();
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
             })
     }
 
@@ -1109,8 +1103,18 @@
     });
     //end create default pricing policy
 
+    CustomerApp.page.commands.selectDefaultPricePolicy = () => {
+        $(".selectDefaultPricePolicy").on('click', function () {
+            currentCustomerGroup.defaultPricingPolicyId = $(this).data('id');
+            let value = $(this).data('value');
+
+            CustomerApp.page.elements.selectedPriceDefault.text(value);
+            CustomerApp.page.elements.defaultPriceDropdown[0].classList.toggle("show")
+        })
+    }
+
     CustomerApp.page.commands.showDefaultPricingPolicyDropdown = () => {
-        CustomerApp.page.elements.defaultPriceDropdown[0].classList.toggle("show")
+        CustomerApp.page.elements.defaultPriceDropdown[0].classList.toggle('show');
     }
 
     //start payment method
@@ -1138,10 +1142,16 @@
 
     CustomerApp.page.commands.selectPaymentMethod = () => {
         $(".selectedPaymentMethod").click(function () {
-            currentCustomerGroup.defaultPaymentMethodId = $(this).val();
+            customer.defaultPaymentMethodId = $(this).val();
         })
     }
     //end payment method
+
+    $("#customerRadio, #customerGroupRadio").change(() => {
+        ($("#customerRadio").is(":checked"))
+            ? CustomerApp.page.elements.offer.show()
+            : CustomerApp.page.elements.offer.hide();
+    });
 
 </script>
 </html>
