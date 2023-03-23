@@ -76,9 +76,12 @@ public class ExcelHelper {
                             customer.setFullName(currentCell.getStringCellValue());
                             break;
                         case 1:
-                            if (currentCell.getStringCellValue() == null)
+
+                            if (currentCell.getStringCellValue().equals("") || currentCell.getStringCellValue() == null) {
                                 customer.setCustomerCode("CUZN000" + customer.getId());
-                            customer.setCustomerCode(currentCell.getStringCellValue());
+                            }else{
+                                customer.setCustomerCode(currentCell.getStringCellValue());
+                            }
                             break;
                         case 2:
                             System.out.println(customer.setGroupId((int) currentCell.getNumericCellValue()));

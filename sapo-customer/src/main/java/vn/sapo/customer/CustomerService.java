@@ -17,7 +17,7 @@ public interface CustomerService {
 
     CustomerResult updateSeries(CustomerUpdateSeries customerUpdateSeries);
 
-    void deleteById(Integer id);
+    CustomerResult deleteById(Integer id);
 
     boolean existsById(Integer id);
 
