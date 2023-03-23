@@ -48,8 +48,8 @@ public class CustomerAPI extends BaseController {
     @Autowired
     CustomerGroupService customerGroupService;
 
-    @Autowired
-    ExcelService excelService;
+//    @Autowired
+//    ExcelService excelService;
 
 //   @GetMapping
 //   public ResponseEntity<?> findAll() {
@@ -138,8 +138,7 @@ public class CustomerAPI extends BaseController {
         String message = "";
         if (ExcelHelper.hasExcelFormat(file)) {
             try {
-                List<CreateCustomerParam> customers = excelService.save(file);
-                customers.forEach(param -> create(param));
+                customerService.createSeriesCustomerParam(file);
                 message = "Uploaded the file successfully: " + file.getOriginalFilename();
                 return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
             } catch (Exception e) {
