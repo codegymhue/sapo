@@ -1,0 +1,59 @@
+<style>
+    #cancel-delete-series-customer{
+        border-color: red;
+        color: red;
+    }
+    #delete-series-customer{
+        color: red;
+        font-weight: bold;
+        border-color: red;
+    }
+</style>
+<div class="modal fade" id="modal-detele-series-customer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Xóa khách hàng??</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="font-size: 11pt;">
+            Thao tác này sẽ xóa các khách hàng bạn đã chọn. Thao tác này không thể khôi phục.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" data-bs-dismiss="modal" id="cancel-delete-series-customer">Thoát</button>
+          <button type="button" class="btn" id="delete-series-customer" data-bs-toggle="modal" data-bs-target="#modal-alert-series-customer" onclick="deleteSeriesCustomer()">Xóa</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function deleteSeriesCustomer(){
+      let listCustomerId = [];
+      let customersChecked = $(".checkBoxCustomer");
+      for(let i=0; i<customersChecked.length; i++){
+          if($(customersChecked[i]).is(":checked")){
+              listCustomerId.push($(customersChecked[i]).attr("id"));
+          }
+      }
+      $("#show-detai-success-series-customer").html("")
+      let countSuccess = 0;
+      for(let i=0; i<listCustomerId.length; i++){
+          $.ajax({
+              headers:{
+                  "content-type": "application/json",
+                  "accept":"application/json"
+              },
+              url: origin +`/api/customers/delete/${listCustomerId[i]}`,
+              type:"DELETE"
+          })
+          .done((result)=>{
+              let content =`<div class="customer-series-update">
+                              ${result.fullName} - Đã được xóa thành công
+                          </div>`;
+              $("#count-success").text(++countSuccess);
+              $("#show-detai-success-series-customer").append(content);
+          })
+          $("#cancel-delete-series-customer").click();
+      }
+    }
+  </script>

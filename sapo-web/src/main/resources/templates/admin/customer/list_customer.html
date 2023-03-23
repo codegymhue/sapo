@@ -648,6 +648,9 @@
                     d.keyword = customerFilter.keyword;
                     d.statusList = [];
                     if($("#checkAll").is(":checked")){
+                            $("#checkAll").click();
+                    }else if($("#checkAll").prop("indeterminate")){
+                        $("#checkAll").click();
                         $("#checkAll").click();
                     }
                     return JSON.stringify(d)

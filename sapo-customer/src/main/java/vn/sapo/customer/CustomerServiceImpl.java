@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import vn.sapo.customer.dto.*;
+import vn.sapo.customerGroup.CustomerGroupRepository;
 import vn.sapo.customers.AddressService;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerFilter;
@@ -40,6 +41,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private AddressService addressService;
+    @Autowired
+    private CustomerGroupRepository customerGroupRepository;
 
 
     @Override
@@ -61,9 +64,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
-    public void deleteById(Integer id) {
+    public CustomerResult deleteById(Integer id) {
+        Customer customer = customerRepository.findById(id)
+                        .orElseThrow(()->new NotFoundException("not found customer"));
         addressService.deleteByCustomerId(id);
         customerRepository.deleteById(id);
+        return customerMapper.toDTO(customer);
     }
 
 

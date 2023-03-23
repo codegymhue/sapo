@@ -52,6 +52,7 @@
       </div>
       <th:block th:replace="/admin/customer/modal-update-customer.html"/>
       <th:block th:replace="/admin/customer/modal-change-status-series-customer.html"/>
+      <th:block th:replace="/admin/customer/modal-delete-series-customer.html"/>
       <script>
         alert = ()=>{}
         $( function() {
@@ -158,7 +159,7 @@
                                 <div onclick="toggleOption('#dropdown-label-action')" style="cursor:pointer" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-update-customer">Cập nhật khách hàng</div>
                                 <div data-status="false" onclick="clickToModalStatus(event)" style="cursor:pointer" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-change-status-series-customer">Ngừng giao dịch</div>
                                 <div data-status="true" onclick="clickToModalStatus(event)" style="cursor:pointer" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-change-status-series-customer">Cập nhật trạng thái</div>
-                                <div onclick="toggleOption('#dropdown-label-action')" style="cursor:pointer" class="dropdown-item">Xóa khách hàng</div>
+                                <div onclick="toggleOption('#dropdown-label-action')" style="cursor:pointer" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-detele-series-customer">Xóa khách hàng</div>
                             </div>
                         </div>
                 </th>`;
@@ -531,6 +532,9 @@
                         d.birthDay = customerFilter.birthDay;
                         d.keyword= customerFilter.keyword;
                         if($("#checkAll").is(":checked")){
+                            $("#checkAll").click();
+                        }else if($("#checkAll").prop("indeterminate")){
+                            $("#checkAll").click();
                             $("#checkAll").click();
                         }
                        

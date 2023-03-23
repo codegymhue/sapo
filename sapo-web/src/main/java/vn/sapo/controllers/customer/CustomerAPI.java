@@ -97,9 +97,8 @@ public class CustomerAPI extends BaseController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteCustomerById(@PathVariable Integer id) {
-        addressService.deleteByCustomerId(id);
-        customerService.deleteById(id);
+    public ResponseEntity<?> deleteCustomerById(@PathVariable Integer id) {
+        return new ResponseEntity<>(customerService.deleteById(id), HttpStatus.OK);
     }
 
     @PostMapping("/create")
