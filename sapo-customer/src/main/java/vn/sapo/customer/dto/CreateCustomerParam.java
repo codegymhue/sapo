@@ -78,27 +78,26 @@ public class CreateCustomerParam {
 
 //    private CustomerStatus status;
 
-//    @Override
-//    public String toString() {
-//        return "CreateCustomerParam{" +
-//                "id=" + id +
-//                ", customerCode='" + customerCode + '\'' +
-//                ", fullName='" + fullName + '\'' +
-//                ", phoneNumber='" + phoneNumber + '\'' +
-//                ", description='" + description + '\'' +
-//                ", groupId=" + groupId +
-//                ", email='" + email + '\'' +
-//                ", website='" + website + '\'' +
-//                ", fax='" + fax + '\'' +
-//                ", taxCode='" + taxCode + '\'' +
-//                ", birthday=" + birthday +
-//                ", gender=" + gender +
-//                ", group=" + group +
-//                ", employeeId=" + employeeId +
-//                ", createAddressParam=" + createAddressParam +
-//                ", debtTotal=" + debtTotal +
-//                ", spendTotal=" + spendTotal +
-//                ", status=" + status +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "CreateCustomerParam{" +
+                "id=" + id +
+                ", customerCode='" + customerCode + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", description='" + description + '\'' +
+                ", groupId=" + groupId +
+                ", email='" + email + '\'' +
+                ", website='" + website + '\'' +
+                ", fax='" + fax + '\'' +
+                ", taxCode='" + taxCode + '\'' +
+                ", birthday=" + birthday +
+                ", gender=" + gender +
+                ", group=" + group +
+                ", employeeId=" + employeeId +
+                ", createAddressParam=" + createAddressParam +
+                ", debtTotal=" + debtTotal +
+                ", spendTotal=" + spendTotal+
+                '}';
+    }
 }

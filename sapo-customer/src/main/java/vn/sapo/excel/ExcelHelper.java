@@ -39,7 +39,6 @@ public class ExcelHelper {
     }
 
     public static List<CreateCustomerParam> excelToCustomers(InputStream is) {
-
         try {
             Workbook workbook = new XSSFWorkbook(is);
 
@@ -76,17 +75,14 @@ public class ExcelHelper {
                             customer.setFullName(currentCell.getStringCellValue());
                             break;
                         case 1:
-
-                            if (currentCell.getStringCellValue().equals("") || currentCell.getStringCellValue() == null) {
-                                customer.setCustomerCode("CUZN000" + customer.getId());
-                            }else{
-                                customer.setCustomerCode(currentCell.getStringCellValue());
-                            }
+                                if(currentCell.getStringCellValue().equals("")){
+                                    customer.setCustomerCode(null);
+                                }else{
+                                    customer.setCustomerCode(currentCell.getStringCellValue());
+                                }
                             break;
                         case 2:
-                            System.out.println(customer.setGroupId((int) currentCell.getNumericCellValue()));
                             customer.setGroupId((int) currentCell.getNumericCellValue());
-//
                             break;
                         case 3:
 //                             áp dụng uu đãi
