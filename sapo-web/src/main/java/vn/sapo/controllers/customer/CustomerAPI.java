@@ -22,6 +22,7 @@ import vn.sapo.shared.controllers.BaseController;
 import vn.sapo.supplier.excel.ResponseMessage;
 import vn.sapo.voucher.receipt.ReceiptVoucherService;
 
+import javax.validation.Valid;
 import java.time.Instant;
 import java.util.List;
 
@@ -102,7 +103,7 @@ public class CustomerAPI extends BaseController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody @Validated CreateCustomerParam createCustomerParam) {
+    public ResponseEntity<?> create(@RequestBody @Valid CreateCustomerParam createCustomerParam) {
 //        CreateAddressParam createAddressParam = createCustomerParam.getCreateAddressParam();
 //        if (createAddressParam == null)
 //            throw new ValidationException(new HashMap<>() {{

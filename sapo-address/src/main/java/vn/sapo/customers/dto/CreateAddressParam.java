@@ -13,7 +13,6 @@ import java.util.List;
 @Getter
 @Setter
 @Accessors(chain = true)
-@EqualsAndHashCode
 public class CreateAddressParam {
     private Integer customerId;
 

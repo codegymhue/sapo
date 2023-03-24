@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import vn.sapo.customerGroup.dto.CustomerGroupResult;
-import vn.sapo.entities.customer.CustomerGender;
 import vn.sapo.shared.validation.constraints.NullOrNotBlank;
 
 import javax.validation.constraints.NotBlank;
@@ -36,9 +34,9 @@ public abstract class BaseCustomerParam {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
-    private CustomerGender gender;
+    private String gender;
 
-    private CustomerGroupResult group;
+    private String defaultPaymentMethodId;
 
-    private Integer employeeId;
+    private Integer defaultPricingPolicyId;
 }

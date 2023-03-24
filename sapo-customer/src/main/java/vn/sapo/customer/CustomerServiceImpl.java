@@ -71,7 +71,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public CustomerResult deleteById(Integer id) {
         Customer customer = customerRepository.findById(id)
-                        .orElseThrow(()->new NotFoundException("not found customer"));
+                .orElseThrow(() -> new NotFoundException("not found customer"));
         addressService.deleteByCustomerId(id);
         customerRepository.deleteById(id);
         return customerMapper.toDTO(customer);
@@ -87,6 +87,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public CustomerResult create(CreateCustomerParam createParam) {
 
+        if (createParam.getGroupId() == null) {
+            createParam.setGroupId(3);
+        }
+
         if (createParam.getCustomerCode() != null)
             validateCustomerCode(createParam.getCustomerCode());
 
@@ -94,6 +98,16 @@ public class CustomerServiceImpl implements CustomerService {
         customer = customerRepository.save(customer);
         if (createParam.getCustomerCode() == null)
             customer.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
+
+        CreateAddressParam addressParam = createParam.getCreateAddressParam();
+        addressParam.setCustomerId(customer.getId());
+
+        if (createParam.getCreateAddressParam().getFullName() == null) {
+            createParam.getCreateAddressParam().setFullName(createParam.getFullName());
+        }
+
+        addressService.create(addressParam);
+
 
 //        if (createParam.getCreateAddressParam().getLine1() != null) {
 //            if (createParam.getCreateAddressParam().getLine1().length() > 255)
@@ -157,7 +171,7 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerResult updateSeries(CustomerUpdateSeries customerUpdateSeries) {
         System.out.println(customerUpdateSeries);
         Optional<Customer> customerOptional = customerRepository.findById(customerUpdateSeries.getCustomerId());
-        if(customerOptional.isPresent()) {
+        if (customerOptional.isPresent()) {
             Integer employeeId = customerUpdateSeries.getEmployeeId();
             String paymentMethodId = customerUpdateSeries.getPaymentMethodId();
             Integer pricingPolicyId = customerUpdateSeries.getDefaultPrice();
@@ -165,7 +179,7 @@ public class CustomerServiceImpl implements CustomerService {
             customerRepository.updateSeriesCustomer(employeeId, paymentMethodId, pricingPolicyId, id);
             Optional<Customer> customer = customerRepository.findById(id);
             return customerMapper.toDTO(customer.get());
-        }else{
+        } else {
             throw new NotFoundException("Not Found");
         }
     }
@@ -181,9 +195,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public CustomerResult changeStatusToAvailable(Integer customerId, boolean status) {
-            Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new NotFoundException("Customer not found"));
-            customer.setStatus(status ? CustomerStatus.AVAILABLE : CustomerStatus.UNAVAILABLE);
-            return customerMapper.toDTO(customerRepository.findById(customerId).get());
+        Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new NotFoundException("Customer not found"));
+        customer.setStatus(status ? CustomerStatus.AVAILABLE : CustomerStatus.UNAVAILABLE);
+        return customerMapper.toDTO(customerRepository.findById(customerId).get());
     }
 
 

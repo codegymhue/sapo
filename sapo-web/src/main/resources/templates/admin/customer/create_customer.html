@@ -113,9 +113,10 @@
                                                                     Nhóm khách hàng
                                                                 </label>
                                                             </div>
-                                                            <select class="form-select jss763  diplSI"
+                                                            <select class="form-select jss763 diplSI"
                                                                     name="customerGroupCreate"
                                                                     id="customerGroupCreate">
+                                                                <option value="0">Chọn nhóm khách hàng</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -245,6 +246,7 @@
                                                     <label class="MuiFormLabel-root MuiInputLabel-root jss20482 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
                                                            data-shrink="true" for="addressCreate">
                                                         Địa chỉ cụ thể
+                                                        <span class="MuiFormLabel-asterisk MuiInputLabel-asterisk"> *</span>
                                                     </label>
                                                     <div class="MuiFormControl-root jss20483 jss20484 MuiFormControl-fullWidth">
                                                         <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-multiline MuiOutlinedInput-multiline">
@@ -253,7 +255,7 @@
                                                                     aria-invalid="false"
                                                                     id="addressCreate"
                                                                     name="addressCreate"
-                                                                    placeholder="Nhập địa chỉ" rows="5"
+                                                                    placeholder="Nhập địa chỉ" rows="3"
                                                                     aria-label="Without label"
                                                                     class="jss23785 jss23786">
                                                             </textarea>
@@ -547,7 +549,8 @@
                                                                 Hình thức thanh toán
                                                             </label>
                                                             <select id="dropdownPaymentMethod" class="jss759 diplSI">
-                                                                <option value="0" class="jss23599">Chọn hình thức thanh toán
+                                                                <option value="0" class="jss23599">
+                                                                    Chọn hình thức thanh toán
                                                                 </option>
                                                             </select>
                                                         </div>
@@ -597,9 +600,7 @@
                                                             <label class="MuiFormLabel-root MuiInputLabel-root jss755"
                                                                    data-shrink="true"
                                                                    for="defaultDiscountRate">
-                                                                Chiết
-                                                                khấu
-                                                                (%)
+                                                                Chiết khấu (%)
                                                             </label>
                                                             <div class="MuiFormControl-root jss756 MuiFormControl-fullWidth"
                                                                  field="[object Object]"
@@ -612,7 +613,7 @@
                                                                            aria-label="Without label"
                                                                            class="MuiInputBase-input MuiOutlinedInput-input jss758 placeholder_text"
                                                                            placeholder="0"
-                                                                           fdprocessedid="16ju8f">
+                                                                           fdprocessedid="16ju8f" maxlength='3' onkeypress="return /[0-9]/i.test(event.key)">
                                                                     <fieldset
                                                                             aria-hidden="true"
                                                                             class="MuiOutlinedInput-notchedOutline">
@@ -644,8 +645,14 @@
 
 <script>
 
-    let customer = {};
     let createAddressParam = {};
+    let pricingPolicy = {};
+    let paymentMethod = {}
+    let customer = {
+        createAddressParam,
+        paymentMethod,
+        pricingPolicy
+    };
 
     CustomerApp.page.elements.modalCreatePricePolicy = $("#modalCreatePricePolicy");
 
@@ -678,6 +685,7 @@
     CustomerApp.page.elements.addressCreate = $("#addressCreate");
 
     CustomerApp.page.elements.dropdownPaymentMethod = $("#dropdownPaymentMethod");
+    CustomerApp.page.elements.defaultDiscountRate = $("#defaultDiscountRate");
 
     CustomerApp.page.elements.btnCloseCustomer = $('#btnCloseCustomer');
     CustomerApp.page.elements.btnCloseCreatePricePolicyModal = $(".btnCloseCreatePricePolicyModal");
@@ -688,6 +696,7 @@
     CustomerApp.page.elements.defaultPriceDropdown = $("#defaultPriceDropdown");
 
     CustomerApp.page.elements.selectedPriceDefault = $("#selectedPriceDefault");
+    CustomerApp.page.elements.listPricePolicy = $("#listPricePolicy");
 
     CustomerApp.page.elements.error = $(".error");
 
@@ -695,11 +704,6 @@
         CustomerApp.page.elements.btnCreateCustomer.on('click', () => {
             customer.fullName = CustomerApp.getValue(CustomerApp.page.elements.nameCreate);
             customer.customerCode = CustomerApp.getValue(CustomerApp.page.elements.codeCreate);
-
-            customer.group = {
-                id: CustomerApp.page.elements.customerGroupCreate.find(":selected").val()
-            };
-
             customer.phoneNumber = CustomerApp.getValue(CustomerApp.page.elements.phoneCreate);
             customer.email = CustomerApp.getValue(CustomerApp.page.elements.emailCreate);
             customer.birthday = CustomerApp.getValue(CustomerApp.page.elements.birthdayCreate);
@@ -713,15 +717,31 @@
             customer.description = CustomerApp.getValue(CustomerApp.page.elements.descriptionCreate);
             customer.tags = CustomerApp.getValue(CustomerApp.page.elements.tagCreate);
 
-            createAddressParam.provinceName = CustomerApp.page.elements.province.find(":selected").text();
-            createAddressParam.provinceId = CustomerApp.page.elements.province.find(":selected").val();
-            createAddressParam.districtName = CustomerApp.page.elements.district.find(":selected").text();
-            createAddressParam.districtId = CustomerApp.page.elements.district.find(":selected").val();
-            createAddressParam.wardName = CustomerApp.page.elements.ward.find(":selected").text();
-            createAddressParam.wardId = CustomerApp.page.elements.ward.find(":selected").val();
-            createAddressParam.line1 = CustomerApp.getValue(CustomerApp.page.elements.addressCreate);
+            if ($("#customerGroupRadio").is(":checked")) {
+                customer.group = {
+                    id: CustomerApp.page.elements.customerGroupCreate.find(":selected").val()
+                };
+            } else if ($("#customerRadio").is(":checked")) {
+                customer.defaultPaymentMethodId = CustomerApp.page.elements.dropdownPaymentMethod.find(":selected").val();
+                customer.discount = CustomerApp.getValue(CustomerApp.page.elements.defaultDiscountRate);
+            }
 
-            customer.createAddressParam = createAddressParam;
+            if (CustomerApp.page.elements.province.find(":selected").val() !== "0") {
+                createAddressParam.provinceId = CustomerApp.page.elements.province.find(":selected").val();
+                createAddressParam.provinceName = CustomerApp.page.elements.province.find(":selected").text();
+                createAddressParam.districtName = CustomerApp.page.elements.district.find(":selected").text();
+                createAddressParam.districtId = CustomerApp.page.elements.district.find(":selected").val();
+                createAddressParam.wardName = CustomerApp.page.elements.ward.find(":selected").text();
+                createAddressParam.wardId = CustomerApp.page.elements.ward.find(":selected").val();
+            } else {
+                createAddressParam.provinceId = undefined;
+                createAddressParam.provinceName = undefined;
+                createAddressParam.districtName = undefined;
+                createAddressParam.districtId = undefined;
+                createAddressParam.wardName = undefined;
+                createAddressParam.wardId = undefined;
+            }
+            createAddressParam.line1 = CustomerApp.getValue(CustomerApp.page.elements.addressCreate);
 
             console.log(customer)
 
@@ -969,6 +989,7 @@
     $(() => {
         CustomerApp.page.commands.getAllPaymentMethod();
         CustomerApp.page.commands.selectPaymentMethod();
+        CustomerApp.page.commands.getDefaultPricingPolicy();
     })
 
     //start create default pricing policy
@@ -1031,16 +1052,13 @@
             url: origin + "/api/pricing-policies"
         })
             .done((data) => {
+                console.log(data)
                 data.forEach(item => {
                     let str = `<a class="jss23775 selectDefaultPricePolicy" data-id="${item.id}" data-value=${item.title}>
                                     ${item.title}
                                 </a>`;
 
                     CustomerApp.page.elements.listPricePolicy.prepend(str);
-                    if (item.id === currentCustomerGroup.defaultPricingPolicyId) {
-                        let value = item.title;
-                        CustomerApp.page.elements.selectedPriceDefault.text(value);
-                    }
                 });
                 CustomerApp.page.commands.selectDefaultPricePolicy();
             })
@@ -1105,7 +1123,7 @@
 
     CustomerApp.page.commands.selectDefaultPricePolicy = () => {
         $(".selectDefaultPricePolicy").on('click', function () {
-            currentCustomerGroup.defaultPricingPolicyId = $(this).data('id');
+            customer.defaultPricingPolicyId = $(this).data('id');
             let value = $(this).data('value');
 
             CustomerApp.page.elements.selectedPriceDefault.text(value);

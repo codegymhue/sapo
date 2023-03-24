@@ -5,7 +5,6 @@
 <head>
     <title>Chi tiết khách hàng</title>
 
-    <!--    <th:block th:replace="/layout/header"/>-->
     <th:block th:replace="/admin/customer/layout/header"/>
     <link rel="stylesheet" href="/assets/admin/css/customer/info.css"/>
 </head>
@@ -288,7 +287,7 @@
             <div class="jss2103">
                 <div class="jss2104">
                     <div class="gCRNBf">
-                        <div id="scroller" class="fvZzuO">
+                        <div id="scroller" class="fvZzuO jyZcwm1 jsseh238">
                             <div class="jyZcwm">
                                 <button id="histories" class="fJFgex">Lịch sử mua hàng</button>
                                 <button id="debts" class="fJFgex">Công nợ</button>
@@ -297,9 +296,18 @@
                                 <button id="notes" class="fJFgex">Ghi chú</button>
                                 <button id="customer_groups" class="fACSJt">Nhóm khách hàng</button>
                             </div>
+                            <div class="jyZcwm2">
+                                <button id="btnShowModalCreateContact" class="kDDrLX">
+                                    <svg class="MuiSvgIcon-root liFCEr" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z">
+                                        </path>
+                                    </svg>
+                                    <span class="sc-jqUVSM jaWHHK">Thêm mới liên hệ</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div id="render_table">
+                    <div id="render_table" class="hidden">
                         <div id="customerGroupContainer">
                             <table id="tbCustomerGroup" class="jsseh238">
                                 <thead>
@@ -325,7 +333,7 @@
 
 </body>
 <th:block th:replace="/admin/customer/modal_delete_customer"/>
-<!--<th:block th:replace="/layout/script"/>-->
+<th:block th:replace="/admin/customer/modal_createContact"/>
 <th:block th:replace="/admin/customer/layout/script"/>
 
 <script src="/assets/admin/js/customer/customerHistory.js"></script>
@@ -357,8 +365,10 @@
 
     CustomerApp.page.elements.btnShowModalDelete = $("#btnShowModalDelete");
     CustomerApp.page.elements.btnDeleteCustomer = $("#btnDeleteCustomer");
+    CustomerApp.page.elements.btnShowModalCreateContact = $("#btnShowModalCreateContact");
 
     CustomerApp.page.elements.modalDeleteCustomer = $('#modal_delete_customer');
+    CustomerApp.page.elements.modalCreateContact = $('#modalCreateContact');
 
     CustomerApp.page.elements.confirmText = $("#confirmText");
 
@@ -510,6 +520,12 @@
         // return value ? value : '---';
         return value || '---';
     }
+
+    //start modal create contact
+    CustomerApp.page.elements.btnShowModalCreateContact.click(() => {
+        CustomerApp.page.elements.modalCreateContact.modal('show');
+    })
+    //end modal create contact
 
     /*
     // liên hệ
