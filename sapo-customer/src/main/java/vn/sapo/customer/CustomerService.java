@@ -5,7 +5,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.customer.dto.*;
 
-import java.nio.channels.MulticastChannel;
 import java.util.List;
 
 public interface CustomerService {
@@ -15,7 +14,7 @@ public interface CustomerService {
 
     CustomerResult create(CreateCustomerParam customerCreate);
 
-    void createSeriesCustomerParam(MultipartFile file);
+    List<CreateCustomerParam> createSeriesCustomerParam(MultipartFile file);
     CustomerResult update(Integer id, UpdateCustomerParam updateCustomer);
 
     CustomerResult updateSeries(CustomerUpdateSeries customerUpdateSeries);

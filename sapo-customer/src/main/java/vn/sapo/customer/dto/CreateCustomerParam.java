@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import net.bytebuddy.implementation.bind.annotation.Empty;
 import org.hibernate.validator.constraints.Length;
 import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
@@ -78,26 +79,4 @@ public class CreateCustomerParam {
 
 //    private CustomerStatus status;
 
-    @Override
-    public String toString() {
-        return "CreateCustomerParam{" +
-                "id=" + id +
-                ", customerCode='" + customerCode + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", description='" + description + '\'' +
-                ", groupId=" + groupId +
-                ", email='" + email + '\'' +
-                ", website='" + website + '\'' +
-                ", fax='" + fax + '\'' +
-                ", taxCode='" + taxCode + '\'' +
-                ", birthday=" + birthday +
-                ", gender=" + gender +
-                ", group=" + group +
-                ", employeeId=" + employeeId +
-                ", createAddressParam=" + createAddressParam +
-                ", debtTotal=" + debtTotal +
-                ", spendTotal=" + spendTotal+
-                '}';
-    }
 }

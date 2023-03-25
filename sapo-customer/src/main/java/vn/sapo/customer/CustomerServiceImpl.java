@@ -6,8 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customerGroup.CustomerGroupRepository;
@@ -16,7 +14,6 @@ import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerFilter;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
-import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.excel.ExcelService;
@@ -24,8 +21,6 @@ import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
 
-import java.nio.channels.MulticastChannel;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -122,9 +117,10 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
-    public void createSeriesCustomerParam(MultipartFile file) {
-        List<CreateCustomerParam> customers = excelService.save(file);
-        customers.forEach(param -> create(param));
+    public List<CreateCustomerParam> createSeriesCustomerParam(MultipartFile file) {
+//        List<CreateCustomerParam> customers = excelService.save(file);
+//        customers.forEach(param -> create(param));
+        return excelService.save(file);
     }
 
     @Override

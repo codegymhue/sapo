@@ -16,8 +16,14 @@
         padding: 10px;
     }
     #tbCustomer tbody tr td:first-child {
-        width: 17px
+        width: 17px;
+        display: revert;
     }
+    /* #tbCustomer tbody tr td{
+        text-overflow:ellipsis;
+        overflow:hidden;
+        white-space:nowrap;
+    } */
 </style>
 <body style="font-size: 12px">
 <div>
@@ -239,7 +245,7 @@
                     </div>
                 </div>
                 <div style="font-size:small" id="tableCheckbox">
-                    <table id="tbCustomer" class="table table-hover" style="width: 100%;">
+                    <table id="tbCustomer" class="table table-hover" style="width:100%">
                         <thead style="background-color: #f4f6f8; height: 55px">
                         <tr>
                             <th class="align-middle" style="width:12px">
@@ -1644,30 +1650,6 @@
         }
     });
 
-    $('#btnImportFileCustomers').on('click', () => {
-        page.commands.showLoading();
-        let data = new FormData();
-        let file = $('#formFileCustomers')[0].files[0];
-        data.append('file',file);
-        $.ajax({
-            url: origin +'/api/customers/upload',
-            processData: false,
-            contentType: false,
-            data: data,
-            type: 'POST'
-        }).done(function(result) {
-            $("#modalImportFileCustomers").modal("hide");
-            $("#frmFileCustomers")[0].reset();
-            page.commands.getAllCustomers();
-            page.commands.closeLoading();
-            CustomerApp.IziToast.showSuccessAlert("Tải file lên thành công!")
-        }).fail((jqXHR) => {
-            CustomerApp.IziToast.showErrorAlert("Tải file lên không thành công!")
-            page.commands.closeLoading();
-        })
-
-
-    });
 
     function handleSaveFilter(){
         $("#btn-save-search").on("click", ()=>{
