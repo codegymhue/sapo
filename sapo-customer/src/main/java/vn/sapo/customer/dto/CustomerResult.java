@@ -9,6 +9,7 @@ import vn.sapo.customers.dto.AddressResult;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.HashMap;
 import java.util.List;
 
 @NoArgsConstructor
@@ -68,5 +69,7 @@ public class CustomerResult {
     private Instant createdAt;
 
     private Instant updatedAt;
+
+    private HashMap<String, String> attributes;
 }
 

@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.customer.CustomerService;
+import vn.sapo.customer.contact.dto.ContactParam;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.customers.AddressService;
@@ -59,16 +60,16 @@ public class CustomerAPI extends BaseController {
 //       return new ResponseEntity<>(customers, HttpStatus.OK);
 //   }
 
-   @GetMapping("/{id}")
-   public ResponseEntity<?> findById(@PathVariable Integer id) {
-       CustomerResult dto = customerService.findById(id);
-       return new ResponseEntity<>(dto, HttpStatus.OK);
-   }
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable Integer id) {
+        CustomerResult dto = customerService.findById(id);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
 
 
     @PostMapping("/filter")
     public ResponseEntity<?> testFilter(@RequestBody CustomerFilter customerFilter,
-                                        @RequestParam(name = "sort", required = false, defaultValue = "ASC" ) String sort
+                                        @RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort
     ) {
         // start = 10; length = 5;
         int start = customerFilter.getStart();
@@ -97,12 +98,12 @@ public class CustomerAPI extends BaseController {
         return new ResponseEntity<>(customerDataTable, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCustomerById(@PathVariable Integer id) {
         return new ResponseEntity<>(customerService.deleteById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<?> create(@RequestBody @Valid CreateCustomerParam createCustomerParam) {
 //        CreateAddressParam createAddressParam = createCustomerParam.getCreateAddressParam();
 //        if (createAddressParam == null)
@@ -119,12 +120,14 @@ public class CustomerAPI extends BaseController {
     public ResponseEntity<?> update(@PathVariable Integer id,
                                     @RequestBody @Validated UpdateCustomerParam updateCustomer) {
 
-       return new ResponseEntity<>(customerService.update(id, updateCustomer), HttpStatus.OK);
+        return new ResponseEntity<>(customerService.update(id, updateCustomer), HttpStatus.OK);
     }
+
     @PatchMapping
-    public ResponseEntity<?> updateSeriesCustomer(@RequestBody CustomerUpdateSeries customerUpdateSeries){
+    public ResponseEntity<?> updateSeriesCustomer(@RequestBody CustomerUpdateSeries customerUpdateSeries) {
         return new ResponseEntity<>(customerService.updateSeries(customerUpdateSeries), HttpStatus.OK);
     }
+
     @PutMapping("/updateStatus")
     public ResponseEntity<?> updateStatusAvailable(@RequestBody CustomerUpdateStatus customerUpdateStatus) {
         int customerId = customerUpdateStatus.getCustomerId();
@@ -151,6 +154,14 @@ public class CustomerAPI extends BaseController {
 
         message = "Please upload an excel file!";
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
+    }
+
+    @PostMapping("/{id}/contacts")
+    private ResponseEntity<?> createContact(@PathVariable Integer id,
+                                            @RequestBody @Validated ContactParam contactParam) {
+        CustomerResult dto = customerService.createContact(id, contactParam);
+
+        return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
 

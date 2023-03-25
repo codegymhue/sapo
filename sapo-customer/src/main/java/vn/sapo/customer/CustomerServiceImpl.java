@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
+import vn.sapo.customer.contact.dto.ContactParam;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customerGroup.CustomerGroupRepository;
 import vn.sapo.customers.AddressService;
@@ -25,7 +26,9 @@ import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
 
 import java.nio.channels.MulticastChannel;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -49,6 +52,23 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private ExcelService excelService;
 
+    @Override
+    @Transactional
+    public CustomerResult createContact(Integer id, ContactParam contactParam) {
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("customer.findById.notFound"));
+
+        //TODO: change attribute HashMap<String, String> --> HashMap<String, HashMap<String, String>
+//        HashMap<String, HashMap<String, String>> contactsAttribute = new HashMap<>();
+//        contactsAttribute.put("contacts", getContactParamValue(contactParam));
+//
+//        customer.setAttributes(contactsAttribute);
+
+        customer.setAttributes(getContactParamValue(contactParam));
+
+        Customer customerResult = customerRepository.save(customer);
+        return customerMapper.toDTO(customerResult);
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -214,6 +234,28 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional(readOnly = true)
     public Page<CustomerResult> findAllByFilters(CustomerFilter filters, Pageable pageable) {
         return customerFilterRepository.findAllByFilters(filters, pageable).map(customerMapper::toDTO);
+    }
+
+    private HashMap<String, String> getContactParamValue(ContactParam contactParam) {
+        HashMap<String, String> contacts = new HashMap<>();
+
+        contacts.put("fullName", contactParam.getFullName());
+
+        checkNullContactParamValue(contacts, "phoneNumber", contactParam.getPhoneNumber());
+        checkNullContactParamValue(contacts, "email", contactParam.getEmail());
+        checkNullContactParamValue(contacts, "fax", contactParam.getFax());
+        checkNullContactParamValue(contacts, "position", contactParam.getPosition());
+        checkNullContactParamValue(contacts, "department", contactParam.getDepartment());
+        checkNullContactParamValue(contacts, "note", contactParam.getNote());
+
+        contacts.put("createdAt", String.valueOf(Instant.now()));
+
+        return contacts;
+    }
+
+    private void checkNullContactParamValue(HashMap<String, String> contacts, String field, String value) {
+        if (value != null)
+            contacts.put(field, value);
     }
 
     public void validateCustomerCode(String customerCode) {

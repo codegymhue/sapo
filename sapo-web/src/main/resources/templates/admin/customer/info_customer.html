@@ -321,9 +321,6 @@
                                 <tbody></tbody>
                             </table>
                         </div>
-                        <!--                        <table id="tbTable" class="table table-hover" style="width:100%">-->
-
-                        <!--                        </table>-->
                     </div>
                 </div>
             </div>
@@ -333,7 +330,7 @@
 
 </body>
 <th:block th:replace="/admin/customer/modal_delete_customer"/>
-<th:block th:replace="/admin/customer/modal_createContact"/>
+<th:block th:replace="/admin/customer/modal/contact/modal_createContact"/>
 <th:block th:replace="/admin/customer/layout/script"/>
 
 <script src="/assets/admin/js/customer/customerHistory.js"></script>
@@ -487,7 +484,7 @@
                     "content-type": "application/json"
                 },
                 type: "DELETE",
-                url: origin + "/api/customers/delete/" + id
+                url: origin + "/api/customers/" + id
             })
                 .done(() => {
                     CustomerApp.IziToast.showSuccessAlert("Xoá khách hàng thành công");
