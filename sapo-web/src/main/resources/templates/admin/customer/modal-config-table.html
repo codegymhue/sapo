@@ -584,7 +584,11 @@
                 {
                         targets: thead.indexOf("birthday")+2,
                         render: function (data, type, row, meta) {
-                            return `<td>${row.birthday.split("T")[0].split("-").reverse().join("-")}</td>`;
+                            return `<td>${
+                                row.birthday != undefined?
+                                row.birthday.split("T")[0].split("-").reverse().join("-"):
+                                ""
+                            }</td>`;
                         }
                 },
                 ],
@@ -594,9 +598,6 @@
                 let tdRow = $("#tbCustomer tbody td input");
                 if($(theadFirst[0]).hasClass("sorting_asc")){
                     listThead = $("#tbCustomer thead tr th");
-                    $(".paginate_button").click(()=>{
-                        console.log("ggg")
-                    })
                     $(theadFirst[0]).removeClass('sorting_asc');
                     tHeadTr = $("#tbCustomer thead tr th"); 
                     clearInterval(updateAfterDatatable);
@@ -604,9 +605,6 @@
             })
                 $(".close").click();
                 $(".modal-backdrop").remove();
-        }
-        function buttonPaginate(){
-            
         }
         function reset(){
                 thead = [

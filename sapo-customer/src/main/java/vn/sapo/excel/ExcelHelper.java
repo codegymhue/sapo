@@ -5,7 +5,10 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
+import vn.sapo.customer.CustomerService;
+import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerGender;
@@ -20,6 +23,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ExcelHelper {
+    @Autowired
+    private CustomerService customerService;
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
     static String[] HEADER = {"Tên khách hàng", "Mã khách hàng", "Mã nhóm khách hàng", "Áp dụng ưu đãi", "Email",
@@ -97,7 +102,6 @@ public class ExcelHelper {
                             customer.setBirthday(currentCell.getDateCellValue());
                             break;
                         case 7:
-//                            customer.setGender(CustomerGender.parseCustomerGender(currentCell.getStringCellValue()));
                             customer.setGender(CustomerGender.parseCustomerGender(currentCell.getStringCellValue()));
                             break;
                         case 8:
@@ -174,4 +178,9 @@ public class ExcelHelper {
             throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
         }
     }
+    public List<CreateCustomerParam> saveListCustomer(InputStream is){
+        List<CreateCustomerParam> customers = excelToCustomers(is);
+        return null;
+    }
+
 }

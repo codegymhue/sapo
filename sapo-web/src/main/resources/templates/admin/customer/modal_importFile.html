@@ -1,5 +1,6 @@
 <th:block th:fragment="modalImportFileCustomers">
     <link rel="stylesheet" href="/static/assets/admin/css/customer/loading.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js"></script>  
     <div class="modal fade" id="modalImportFileCustomers" data-bs-backdrop="static" data-bs-keyboard="false"
          tabindex="-1">
         <div class="modal-dialog modal-lg">
@@ -60,5 +61,79 @@
             </div>
         </div>
     </div>
-
+    <script>
+        let statusLoading = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                             <span class="sr-only">Loading...</span>`
+        $('#btnImportFileCustomers').on('click',() => {
+            $.ajax({
+                    headers: {          
+                        "accept": "application/json",
+                        "content-type": "application/json"
+                    },
+                    type:"POST",
+                    url: origin + 'api/customers/create',
+                    data: JSON.stringify("ooooo"),
+                })
+                .done((result)=>{
+                    let content =`<div class="customer-series-update">
+                                    <a href="/admin/customers/${result.id}">${result.fullName}</a> - Đã được tạo thành công
+                                 </div>`
+                    $("#count-success").text(++countSuccess);
+                    $("#show-detai-success-series-customer").append(content);
+                })
+            let obj = [];
+            $('#btnImportFileCustomers').attr('disabled',true);
+            $('#comfirm-alert-series-customer').attr('disabled', true);
+            $('#btnImportFileCustomers').html(statusLoading);
+            
+            let data = new FormData();
+            let file = $('#formFileCustomers')[0].files[0];
+            data.append('file',file);
+            $("#modalImportFileCustomers").modal("hide");
+            $("#modal-alert-series-customer").modal('show');
+            $.ajax({
+                url: origin +'/api/customers/upload',
+                processData: false,
+                contentType: false,
+                data: data,
+                type: 'POST'
+            }).done(function(result){
+                obj = result;
+                // page.commands.getAllCustomers();
+                createSeriesCustomer(result);
+                // page.commands.closeLoading();
+            }).fail((jqXHR) => {
+                console.log(jqXHR)
+                $('#btnImportFileCustomers').attr('disabled',false)
+                $('#btnImportFileCustomers').text('Nhap file')
+                CustomerApp.IziToast.showErrorAlert("Tải file lên không thành công!")
+            })
+        });
+        function createSeriesCustomer(data){  
+            let countSuccess = 0;      
+            for(let i=0; i<data.length; i++){
+                $.ajax({
+                    headers: {          
+                        "accept": "application/json",
+                        "content-type": "application/json"
+                    },
+                    type:"POST",
+                    url: origin + '/api/customers/create',
+                    data: JSON.stringify(data[i]),
+                })
+                .done((result)=>{
+                    let content =`<div class="customer-series-update">
+                                    <a href="/admin/customers/${result.id}">${result.fullName}</a> - Đã được tạo thành công
+                                 </div>`
+                    $("#count-success").text(++countSuccess);
+                    $("#show-detai-success-series-customer").append(content);
+                })
+            }
+            $('#btnImportFileCustomers').text('Nhap file')
+            $('#btnImportFileCustomers').attr('disabled',false)
+            $('#comfirm-alert-series-customer').attr('disabled', false);
+            $("#frmFileCustomers")[0].reset();
+            CustomerApp.IziToast.showSuccessAlert("Tải file lên thành công!")
+        }
+    </script>
 </th:block>

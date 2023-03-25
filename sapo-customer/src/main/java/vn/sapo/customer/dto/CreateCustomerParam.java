@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import net.bytebuddy.implementation.bind.annotation.Empty;
 import org.hibernate.validator.constraints.Length;
 import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
@@ -74,5 +75,8 @@ public class CreateCustomerParam {
 
     private String defaultPaymentMethodId;
 
+<<<<<<< HEAD
     private Integer defaultPricingPolicyId;
+=======
+>>>>>>> vt_dev
 }

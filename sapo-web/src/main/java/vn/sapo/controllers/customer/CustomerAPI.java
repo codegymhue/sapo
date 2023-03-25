@@ -138,13 +138,12 @@ public class CustomerAPI extends BaseController {
 
     // UpLoad File Excel
     @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
         if (ExcelHelper.hasExcelFormat(file)) {
             try {
-                customerService.createSeriesCustomerParam(file);
-                message = "Uploaded the file successfully: " + file.getOriginalFilename();
-                return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+//                message = "Uploaded the file successfully: " + file.getOriginalFilename();
+                return ResponseEntity.status(HttpStatus.OK).body(customerService.createSeriesCustomerParam(file));
             } catch (Exception e) {
                 e.printStackTrace();
                 message = "Could not upload the file: " + file.getOriginalFilename() + "!";
