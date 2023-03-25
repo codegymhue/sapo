@@ -15,6 +15,7 @@ import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerFilter;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
+import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.excel.ExcelService;
@@ -22,13 +23,11 @@ import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
 
-<<<<<<< HEAD
 import java.nio.channels.MulticastChannel;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
-=======
->>>>>>> vt_dev
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

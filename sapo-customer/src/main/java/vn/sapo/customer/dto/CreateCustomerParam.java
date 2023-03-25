@@ -75,8 +75,6 @@ public class CreateCustomerParam {
 
     private String defaultPaymentMethodId;
 
-<<<<<<< HEAD
     private Integer defaultPricingPolicyId;
-=======
->>>>>>> vt_dev
+
 }

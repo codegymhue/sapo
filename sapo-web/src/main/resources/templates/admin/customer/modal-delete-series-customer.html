@@ -43,7 +43,7 @@
                   "content-type": "application/json",
                   "accept":"application/json"
               },
-              url: origin +`/api/customers/delete/${listCustomerId[i]}`,
+              url: origin +`/api/customers/${listCustomerId[i]}`,
               type:"DELETE"
           })
           .done((result)=>{
