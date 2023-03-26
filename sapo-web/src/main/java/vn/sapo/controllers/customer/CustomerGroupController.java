@@ -1,21 +1,13 @@
 package vn.sapo.controllers.customer;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-import vn.sapo.customerGroup.CustomerGroupService;
-import vn.sapo.customerGroup.dto.CustomerGroupResult;
-
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin/customer_groups")
 public class CustomerGroupController {
-    @Autowired
-    CustomerGroupService customerGroupService;
 
     @GetMapping
     public String showCustomerGroupPage() {
@@ -33,14 +25,7 @@ public class CustomerGroupController {
     }
 
     @GetMapping("/{id}")
-    public ModelAndView showUpCusGrpPage(@PathVariable Integer id) {
-        ModelAndView modelAndView = new ModelAndView();
-
-        CustomerGroupResult cusGrpOptional = customerGroupService.findById(id);
-
-        modelAndView.setViewName("/admin/customer/up_cus_Group");
-        modelAndView.addObject("customerGroup", cusGrpOptional);
-
-        return modelAndView;
+    public String showUpCusGrpPage(@PathVariable Integer id) {
+        return "/admin/customer/up_cus_Group";
     }
 }

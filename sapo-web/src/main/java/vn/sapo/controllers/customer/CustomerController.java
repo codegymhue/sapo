@@ -42,27 +42,13 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ModelAndView showCustomerInfoPage(@PathVariable Integer id) {
-        ModelAndView modelAndView = new ModelAndView();
-        try{
-            CustomerResult customer = customerService.findById(id);
-//            customerAPI.setData(customer);
-            modelAndView.addObject("customer", customer);
-        }catch (Exception ex){
-            modelAndView.addObject("errors", ex.getMessage());
-        }
-        modelAndView.setViewName("/admin/customer/info_customer");
-        return modelAndView;
+    public String showCustomerInfoPage(@PathVariable Integer id) {
+        return "/admin/customer/info_customer";
     }
 
     @GetMapping("/{id}/edit")
-    public ModelAndView showCustomerEditPage(@PathVariable Integer id) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("customer", customerService.findById(id));
-        modelAndView.addObject("group", customerGroupService.findAll());
-        modelAndView.addObject("employee", employeeService.findAll());
-        modelAndView.setViewName("/admin/customer/edit_customer");
-        return modelAndView;
+    public String showCustomerEditPage(@PathVariable Integer id) {
+        return "/admin/customer/edit_customer";
     }
 
     //export excel file

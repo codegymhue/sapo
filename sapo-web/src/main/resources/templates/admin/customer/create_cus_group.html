@@ -431,7 +431,7 @@
         rules: {
             titleGroupCre: {
                 required: true,
-                maxlength: 50,
+                maxlength: 250,
             },
             cusGrpCode: {
                 maxlength: 50,
@@ -441,12 +441,13 @@
             },
             defaultDiscountRate: {
                 digits: true,
+                range: [0, 100]
             }
         },
         messages: {
             titleGroupCre: {
                 required: "Tên nhóm khách hàng không được để trống",
-                maxlength: "Tên nhóm khách hàng không quá 50 ký tự"
+                maxlength: "Tên nhóm khách hàng không được vượt quá 250 ký tự"
             },
             cusGrpCode: {
                 maxlength: "Mã nhóm không quá 50 ký tự",
@@ -456,10 +457,12 @@
             },
             defaultDiscountRate: {
                 digits: "Chỉ được nhập số",
+                range: "Chiết khấu từ 0% đến 100%",
             },
         },
         errorElement: 'label',
         errorPlacement: function (error, element) {
+            error ? $(".error.hidden").addClass('show').removeClass('hidden') : '';
             error.appendTo(element.parent("div").parent("div").next("div"));
         },
         success: (label) => {
@@ -469,7 +472,7 @@
             CustomerApp.page.commands.createCusGrp();
         },
         invalidHandler: () => {
-            CustomerApp.IziToast.showErrorAlert('Vui lòng nhập đúng thông tin')
+            CustomerApp.IziToast.showErrorAlert('Vui lòng nhập đúng thông tin');
         }
 
     })

@@ -22,6 +22,7 @@ import javax.validation.constraints.NotBlank;
 public class CreateCusGroupParam {
 
     @NotBlank(message = "{customer_group.validation.title.notBlank}")
+    @Length(max = 250, message = "{customer_group.validation.title.length}")
     private String title;
 
     @NullOrNotBlank

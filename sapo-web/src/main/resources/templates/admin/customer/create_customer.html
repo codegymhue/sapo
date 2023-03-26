@@ -6,7 +6,6 @@
 
     <th:block th:replace="/admin/customer/layout/header"/>
     <link rel="stylesheet" href="/assets/admin/css/customer/customer_create.css"/>
-    <!--    <link rel="stylesheet" href="/assets/admin/css/customer/cus_group.css"/>-->
 </head>
 <body>
 <div id="root">
@@ -77,6 +76,7 @@
                                                             </fieldset>
                                                         </div>
                                                     </div>
+                                                    <div class="error nameCreate-error hidden"></div>
                                                 </div>
                                             </div>
                                             <div class="MuiGrid-item MuiGrid-grid-xs-12">
@@ -103,6 +103,7 @@
                                                                     </fieldset>
                                                                 </div>
                                                             </div>
+                                                            <div class="error codeCreate-error hidden"></div>
                                                         </div>
                                                     </div>
                                                     <div class="MuiGrid-item MuiGrid-grid-xs-6">
@@ -146,6 +147,7 @@
                                                                     </fieldset>
                                                                 </div>
                                                             </div>
+                                                            <div class="error phoneCreate-error hidden"></div>
                                                         </div>
                                                     </div>
                                                     <div class="MuiGrid-item MuiGrid-grid-xs-6">
@@ -170,6 +172,7 @@
                                                                     </fieldset>
                                                                 </div>
                                                             </div>
+                                                            <div class="error emailCreate-error hidden"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -261,6 +264,7 @@
                                                             </textarea>
                                                         </div>
                                                     </div>
+                                                    <div class="error addressCreate-error hidden"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -338,11 +342,13 @@
                                                             Số fax
                                                         </label>
                                                         <div class="bPMzLG">
-                                                            <input id="faxCreate" placeholder="Nhập số fax" type="text"
+                                                            <input id="faxCreate" name="faxCreate"
+                                                                   placeholder="Nhập số fax" type="text"
                                                                    class="fqUehn">
                                                             <fieldset class="iKmOWq"></fieldset>
                                                         </div>
                                                     </div>
+                                                    <div class="error faxCreate-error hidden"></div>
                                                 </div>
                                                 <div class="MuiGrid-item MuiGrid-grid-xs-6">
                                                     <div name="taxNumber" class="iFpFap">
@@ -350,12 +356,13 @@
                                                             Mã số thuế
                                                         </label>
                                                         <div class="bPMzLG">
-                                                            <input id="taxCodeCreate"
+                                                            <input id="taxCodeCreate" name="taxCodeCreate"
                                                                    placeholder="Nhập mã số thuế" type="text"
                                                                    class="fqUehn">
                                                             <fieldset class="iKmOWq"></fieldset>
                                                         </div>
                                                     </div>
+                                                    <div class="error taxCodeCreate-error hidden"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -367,12 +374,13 @@
                                                             Website
                                                         </label>
                                                         <div class="bPMzLG">
-                                                            <input id="websiteCreate"
+                                                            <input id="websiteCreate" name="websiteCreate"
                                                                    placeholder="Nhập tên miền website " type="text"
                                                                    class="fqUehn">
                                                             <fieldset class="iKmOWq"></fieldset>
                                                         </div>
                                                     </div>
+                                                    <div class="error websiteCreate-error hidden"></div>
                                                 </div>
                                                 <div class="MuiGrid-item MuiGrid-grid-xs-6">
                                                     <div name="debtTotal" class="iFpFap">
@@ -380,12 +388,13 @@
                                                             Công nợ
                                                         </label>
                                                         <div class="bPMzLG">
-                                                            <input id="debtTotal"
+                                                            <input id="debtTotal" name="debtTotal"
                                                                    placeholder="Nhập công nợ khách hàng" type="text"
                                                                    class="fqUehn">
                                                             <fieldset class="iKmOWq"></fieldset>
                                                         </div>
                                                     </div>
+                                                    <div class="error debtTotal-error hidden"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -397,13 +406,14 @@
                                                             Tổng chi tiêu
                                                         </label>
                                                         <div class="bPMzLG">
-                                                            <input id="spendTotal"
+                                                            <input id="spendTotal" name="spendTotal"
                                                                    placeholder="Nhập tổng chi tiêu khách hàng"
                                                                    type="text"
                                                                    class="fqUehn">
                                                             <fieldset class="iKmOWq"></fieldset>
                                                         </div>
                                                     </div>
+                                                    <div class="error spendTotal-error hidden"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -443,6 +453,19 @@
                                                     <label class="MuiFormLabel-root MuiInputLabel-root jss20482 MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
                                                            data-shrink="true" for="descriptionCreate">
                                                         Mô tả
+                                                        <span class="MuiTypography-root MuiTypography-caption"
+                                                              title="Mô tả khách hàng của bạn để phục vụ cho việc chăm sóc khách hàng tốt hơn">
+                                                        <svg viewBox="0 0 16 16" fill="none"
+                                                             xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                             class="uehYa">
+                                                            <path fill="#0088FF"
+                                                                  d="M7.4 5v1.2h1.2V5H7.4ZM7.4 8.6V11h1.8V9.8h-.6V7.4H6.8v1.2h.6Z">
+                                                            </path>
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" fill="#0088FF"
+                                                                  d="M8 2C4.688 2 2 4.688 2 8s2.688 6 6 6 6-2.688 6-6-2.688-6-6-6ZM3.2 8c0 2.646 2.154 4.8 4.8 4.8s4.8-2.154 4.8-4.8S10.646 3.2 8 3.2A4.806 4.806 0 0 0 3.2 8Z">
+                                                            </path>
+                                                        </svg>
+                                                    </span>
                                                     </label>
                                                     <div class="MuiFormControl-root MuiTextField-root jss20483 jss20484 MuiFormControl-fullWidth">
                                                         <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline">
@@ -452,6 +475,7 @@
                                                           </textarea>
                                                         </div>
                                                     </div>
+                                                    <div class="error descriptionCreate-error hidden"></div>
                                                 </div>
                                             </div>
                                             <div class="MuiGrid-item MuiGrid-grid-xs-12">
@@ -475,13 +499,14 @@
                                                     </label>
                                                     <div class="MuiFormControl-root MuiTextField-root jss20483 jss20484 MuiFormControl-fullWidth">
                                                         <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline">
-                              <textarea aria-invalid="false" id="tagCreate"
-                                        name="tagCreate" rows="3"
-                                        aria-label="Without label"
-                                        class="jss23785 jss23786">
-                              </textarea>
+                                                              <textarea aria-invalid="false" id="tagCreate"
+                                                                        name="tagCreate" rows="3"
+                                                                        aria-label="Without label"
+                                                                        class="jss23785 jss23786">
+                                                              </textarea>
                                                         </div>
                                                     </div>
+                                                    <div class="error tagCreate-error hidden"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -613,7 +638,8 @@
                                                                            aria-label="Without label"
                                                                            class="MuiInputBase-input MuiOutlinedInput-input jss758 placeholder_text"
                                                                            placeholder="0"
-                                                                           fdprocessedid="16ju8f" maxlength='3' onkeypress="return /[0-9]/i.test(event.key)">
+                                                                           fdprocessedid="16ju8f" maxlength='3'
+                                                                           onkeypress="return /[0-9]/i.test(event.key)">
                                                                     <fieldset
                                                                             aria-hidden="true"
                                                                             class="MuiOutlinedInput-notchedOutline">
@@ -701,74 +727,70 @@
     CustomerApp.page.elements.error = $(".error");
 
     CustomerApp.page.commands.createCustomer = () => {
-        CustomerApp.page.elements.btnCreateCustomer.on('click', () => {
-            customer.fullName = CustomerApp.getValue(CustomerApp.page.elements.nameCreate);
-            customer.customerCode = CustomerApp.getValue(CustomerApp.page.elements.codeCreate);
-            customer.phoneNumber = CustomerApp.getValue(CustomerApp.page.elements.phoneCreate);
-            customer.email = CustomerApp.getValue(CustomerApp.page.elements.emailCreate);
-            customer.birthday = CustomerApp.getValue(CustomerApp.page.elements.birthdayCreate);
-            customer.gender = CustomerApp.page.elements.genderCreate.find(":selected").val();
-            customer.fax = CustomerApp.getValue(CustomerApp.page.elements.faxCreate);
-            customer.taxCode = CustomerApp.getValue(CustomerApp.page.elements.taxCodeCreate);
-            customer.website = CustomerApp.getValue(CustomerApp.page.elements.websiteCreate);
-            customer.debtTotal = CustomerApp.getValue(CustomerApp.page.elements.debtTotal);
-            customer.spendTotal = CustomerApp.getValue(CustomerApp.page.elements.spendTotal);
-            customer.employeeId = CustomerApp.page.elements.employeeNameCreate.find(":selected").val();
-            customer.description = CustomerApp.getValue(CustomerApp.page.elements.descriptionCreate);
-            customer.tags = CustomerApp.getValue(CustomerApp.page.elements.tagCreate);
+        customer.fullName = CustomerApp.getValue(CustomerApp.page.elements.nameCreate);
+        customer.customerCode = CustomerApp.getValue(CustomerApp.page.elements.codeCreate);
+        customer.phoneNumber = CustomerApp.getValue(CustomerApp.page.elements.phoneCreate);
+        customer.email = CustomerApp.getValue(CustomerApp.page.elements.emailCreate);
+        customer.birthday = CustomerApp.getValue(CustomerApp.page.elements.birthdayCreate);
+        customer.gender = CustomerApp.page.elements.genderCreate.find(":selected").val();
+        customer.fax = CustomerApp.getValue(CustomerApp.page.elements.faxCreate);
+        customer.taxCode = CustomerApp.getValue(CustomerApp.page.elements.taxCodeCreate);
+        customer.website = CustomerApp.getValue(CustomerApp.page.elements.websiteCreate);
+        customer.debtTotal = CustomerApp.getValue(CustomerApp.page.elements.debtTotal);
+        customer.spendTotal = CustomerApp.getValue(CustomerApp.page.elements.spendTotal);
+        customer.employeeId = CustomerApp.page.elements.employeeNameCreate.find(":selected").val();
+        customer.description = CustomerApp.getValue(CustomerApp.page.elements.descriptionCreate);
+        customer.tags = CustomerApp.getValue(CustomerApp.page.elements.tagCreate);
 
-            if ($("#customerGroupRadio").is(":checked")) {
-                customer.group = {
-                    id: CustomerApp.page.elements.customerGroupCreate.find(":selected").val()
-                };
-            } else if ($("#customerRadio").is(":checked")) {
-                customer.defaultPaymentMethodId = CustomerApp.page.elements.dropdownPaymentMethod.find(":selected").val();
-                customer.discount = CustomerApp.getValue(CustomerApp.page.elements.defaultDiscountRate);
-            }
+        if ($("#customerGroupRadio").is(":checked")) {
+            customer.group = {
+                id: CustomerApp.page.elements.customerGroupCreate.find(":selected").val()
+            };
+        } else if ($("#customerRadio").is(":checked")) {
+            customer.defaultPaymentMethodId = CustomerApp.page.elements.dropdownPaymentMethod.find(":selected").val();
+            customer.discount = CustomerApp.getValue(CustomerApp.page.elements.defaultDiscountRate);
+        }
 
-            if (CustomerApp.page.elements.province.find(":selected").val() !== "0") {
-                createAddressParam.provinceId = CustomerApp.page.elements.province.find(":selected").val();
-                createAddressParam.provinceName = CustomerApp.page.elements.province.find(":selected").text();
-                createAddressParam.districtName = CustomerApp.page.elements.district.find(":selected").text();
-                createAddressParam.districtId = CustomerApp.page.elements.district.find(":selected").val();
-                createAddressParam.wardName = CustomerApp.page.elements.ward.find(":selected").text();
-                createAddressParam.wardId = CustomerApp.page.elements.ward.find(":selected").val();
-            } else {
-                createAddressParam.provinceId = undefined;
-                createAddressParam.provinceName = undefined;
-                createAddressParam.districtName = undefined;
-                createAddressParam.districtId = undefined;
-                createAddressParam.wardName = undefined;
-                createAddressParam.wardId = undefined;
-            }
-            createAddressParam.line1 = CustomerApp.getValue(CustomerApp.page.elements.addressCreate);
+        if (CustomerApp.page.elements.province.find(":selected").val() !== "0") {
+            createAddressParam.provinceId = CustomerApp.page.elements.province.find(":selected").val();
+            createAddressParam.provinceName = CustomerApp.page.elements.province.find(":selected").text();
+            createAddressParam.districtName = CustomerApp.page.elements.district.find(":selected").text();
+            createAddressParam.districtId = CustomerApp.page.elements.district.find(":selected").val();
+            createAddressParam.wardName = CustomerApp.page.elements.ward.find(":selected").text();
+            createAddressParam.wardId = CustomerApp.page.elements.ward.find(":selected").val();
+        } else {
+            createAddressParam.provinceId = undefined;
+            createAddressParam.provinceName = undefined;
+            createAddressParam.districtName = undefined;
+            createAddressParam.districtId = undefined;
+            createAddressParam.wardName = undefined;
+            createAddressParam.wardId = undefined;
+        }
+        createAddressParam.line1 = CustomerApp.getValue(CustomerApp.page.elements.addressCreate);
 
-            console.log(customer)
+        $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            "type": "POST",
+            "url": origin + "/api/customers",
+            "data": JSON.stringify(customer)
+        })
+            .done((data) => {
+                CustomerApp.IziToast.showSuccessAlert("Tạo khách hàng thành công");
 
-            $.ajax({
-                "headers": {
-                    "accept": "application/json",
-                    "content-type": "application/json"
-                },
-                "type": "POST",
-                "url": origin + "/api/customers",
-                "data": JSON.stringify(customer)
+                setTimeout(() => {
+                }, 2500)
+                CustomerApp.page.elements.frmCreateCustomer[0].reset();
+                // window.location.href = `/admin/customers/${data.id}`;
+
             })
-                .done((data) => {
-                    CustomerApp.IziToast.showSuccessAlert("Tạo khách hàng thành công");
+            .fail((jqXHR) => {
+                console.log(jqXHR);
 
-                    setTimeout(() => {
-                    }, 2500)
-                    CustomerApp.page.elements.frmCreateCustomer[0].reset();
-                    // window.location.href = `/admin/customers/${data.id}`;
-
-                })
-                .fail((jqXHR) => {
-                    console.log(jqXHR);
-
-                    CustomerApp.IziToast.showErrorAlert(CustomerApp.AlertMessageVi.ERROR_400)
-                })
-        });
+                CustomerApp.IziToast.showErrorAlert(CustomerApp.AlertMessageVi.ERROR_400)
+            })
     }
 
 
@@ -964,27 +986,107 @@
 
     CustomerApp.page.elements.btnCloseCustomer.on('click', () => window.location.href = "/admin/customers");
 
-
-    CustomerApp.page.commands.createCustomer();
-    // CustomerApp.page.commands.getAllCustomerGender();
     CustomerApp.page.commands.getAllCustomerGroup();
     CustomerApp.page.commands.getAllEmployeeSelect();
+
+    CustomerApp.page.elements.btnCreateCustomer.on("click", () => {
+        CustomerApp.page.elements.frmCreateCustomer.trigger("submit");
+    })
 
     CustomerApp.page.elements.frmCreateCustomer.validate({
         rules: {
             nameCreate: {
-                required: true
+                required: true,
+                maxlength: 255
+            },
+            codeCreate: {
+                maxlength: 50
+            },
+            phoneCreate: {
+                isValidPhone: true,
+            },
+            emailCreate: {
+                isValidEmail: true
+            },
+            addressCreate: {
+                required: true,
+                maxlength: 255
+            },
+            faxCreate: {
+                isValidFax: true,
+            },
+            taxCodeCreate: {
+                maxlength: 255
+            },
+            websiteCreate: {
+                maxlength: 255
+            },
+            debtTotal: {
+                digits: true,
+                range: [0, 99999999999]
+            },
+            spendTotal: {
+                digits: true,
+                range: [0, 99999999999]
+            },
+            descriptionCreate: {
+                maxlength: 500
             }
         },
         messages: {
             nameCreate: {
-                required: "Vui lòng nhập tên khách hàng",
+                required: "Tên khách hàng không được để trống",
+                maxlength: "Tên khách hàng không được vượt quá 255 ký tự"
+            },
+            codeCreate: {
+                maxlength: 'Mã khách hàng không được vượt quá 50 ký tự'
+            },
+            addressCreate: {
+                required: 'Địa chỉ không được trống',
+                maxlength: 'Địa chỉ không được vượt quá 255 ký tự'
+            },
+            taxCodeCreate: {
+                maxlength: 'Mã số thuế không được vượt quá 50 ký tự',
+            },
+            websiteCreate: {
+                maxlength: 'Website không được vượt quá 255 ký tự'
+            },
+            debtTotal: {
+                digits: "Chỉ được nhập số",
+                range: 'Công nợ từ 0 đến 99,999,999,999 đồng'
+            },
+            spendTotal: {
+                digits: "Chỉ được nhập số",
+                range: 'Tổng chi tiêu từ 0 đến 99,999,999,999 đồng'
+            },
+            descriptionCreate: {
+                maxlength: 'Mô tả không được vượt quá 500 ký tự'
             }
+        },
+        errorElement: 'label',
+        errorPlacement: (error, element) => {
+            error ? $(".error.hidden").addClass('show').removeClass('hidden') : '';
+            error.appendTo(element.parent("div").parent("div").next("div"));
         },
         submitHandler: () => {
             CustomerApp.page.commands.createCustomer();
+        },
+        invalidHandler: () => {
+            CustomerApp.IziToast.showErrorAlert('Vui lòng nhập đúng thông tin')
         }
     });
+
+    $.validator.addMethod("isValidPhone", function (value, element) {
+        return this.optional(element) || /^$|[0-9]{8,15}$/i.test(value);
+    }, "Số điện thoại không đúng định dạng");
+
+    $.validator.addMethod("isValidEmail", function (value, element) {
+        return this.optional(element) || /^$|[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i.test(value);
+    }, "Email không đúng định dạng");
+
+    $.validator.addMethod("isValidFax", function (value, element) {
+        return this.optional(element) || /^$|[0-9]{8,15}$/i.test(value);
+    }, "Số fax không đúng định dạng");
 
     $(() => {
         CustomerApp.page.commands.getAllPaymentMethod();
@@ -1052,7 +1154,6 @@
             url: origin + "/api/pricing-policies"
         })
             .done((data) => {
-                console.log(data)
                 data.forEach(item => {
                     let str = `<a class="jss23775 selectDefaultPricePolicy" data-id="${item.id}" data-value=${item.title}>
                                     ${item.title}

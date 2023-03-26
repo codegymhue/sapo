@@ -10,13 +10,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import vn.sapo.contact.ContactCustomerService;
+import vn.sapo.contact.dto.ContactResult;
+import vn.sapo.contact.dto.CreateContactParam;
 import vn.sapo.customer.CustomerService;
-import vn.sapo.customer.contact.dto.ContactParam;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customerGroup.CustomerGroupService;
-import vn.sapo.customers.AddressService;
+import vn.sapo.customerGroup.dto.DataTablesInput;
+import vn.sapo.customerGroup.dto.DataTablesOutput;
+import vn.sapo.customerGroup.dto.ICustomerGroupResult;
 import vn.sapo.excel.ExcelHelper;
-import vn.sapo.excel.ExcelService;
 import vn.sapo.order.sale.SaleOrderService;
 import vn.sapo.order.sale.item.OrderItemService;
 import vn.sapo.shared.controllers.BaseController;
@@ -36,7 +39,7 @@ public class CustomerAPI extends BaseController {
     private CustomerService customerService;
 
     @Autowired
-    private AddressService addressService;
+    private ContactCustomerService contactCustomerService;
 
     @Autowired
     OrderItemService orderItemService;
@@ -157,10 +160,36 @@ public class CustomerAPI extends BaseController {
 
     @PostMapping("/{id}/contacts")
     private ResponseEntity<?> createContact(@PathVariable Integer id,
-                                            @RequestBody @Validated ContactParam contactParam) {
-        CustomerResult dto = customerService.createContact(id, contactParam);
+                                            @RequestBody @Validated CreateContactParam contactParam) {
+        ContactResult dto = contactCustomerService.createContactByCustomerId(id, contactParam);
 
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/{id}/contacts/pagination")
+    private ResponseEntity<?> getContactsPagination(@PathVariable Integer id,
+                                            @RequestBody @Validated DataTablesInput input) {
+        int draw = input.getDraw();
+        int start = input.getStart();
+        int length = input.getLength();
+        int page = start / length + 1;
+
+        Sort s = Sort.by(Sort.Direction.DESC, "id");
+
+        Pageable pageable = PageRequest.of(page - 1, length, s);
+
+        Page<ContactResult> findContactResultByCustomerId =
+                contactCustomerService.findContactResultByCustomerId(id, pageable);
+
+        DataTablesOutput<ContactResult> output = new DataTablesOutput<>();
+        output.setDraw(draw);
+        output.setRecordsTotal(findContactResultByCustomerId.getTotalElements());
+        output.setRecordsFiltered(findContactResultByCustomerId.getTotalElements());
+        output.setData(findContactResultByCustomerId.getContent());
+
+        System.out.println(findContactResultByCustomerId.getContent());
+
+        return new ResponseEntity<>(output, HttpStatus.OK);
     }
 
 
