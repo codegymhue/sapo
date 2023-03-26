@@ -560,7 +560,7 @@
         rules: {
             titleGroupUp: {
                 required: true,
-                maxlength: 50,
+                maxlength: 250,
             },
             cusGrpCodeUp: {
                 maxlength: 50,
@@ -570,21 +570,23 @@
             },
             defaultDiscountRateUp: {
                 digits: true,
+                range: [0, 100]
             }
         },
         messages: {
             titleGroupUp: {
                 required: "Tên nhóm khách hàng không được để trống",
-                maxlength: "Tên nhóm khách hàng không quá 50 ký tự"
+                maxlength: "Tên nhóm khách hàng không được vượt quá 250 ký tự"
             },
             cusGrpCodeUp: {
-                maxlength: "Mã nhóm không quá 50 ký tự",
+                maxlength: "Mã nhóm khách hàng không được vượt quá 50 ký tự",
             },
             noteUp: {
                 maxlength: "Mô tả không quá 255 ký tự",
             },
             defaultDiscountRateUp: {
                 digits: "Chỉ được nhập số",
+                range: "Chiết khấu từ 0% đến 100%",
             },
         },
         errorElement: 'label',
