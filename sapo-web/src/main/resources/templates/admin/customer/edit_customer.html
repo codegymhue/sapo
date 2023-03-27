@@ -42,6 +42,7 @@
                 </div>
             </div>
         </div>
+        <form id="frmUpdateCustomer">
         <div class="jss3817 jss3576">
             <div class="MuiGrid-container MuiGrid-spacing-xs-3">
                 <div class="MuiGrid-item MuiGrid-grid-xs-8">
@@ -113,7 +114,8 @@
                                                                data-shrink="true" for="customerGroupUp">
                                                             Nhóm khách hàng
                                                         </label>
-                                                        <select class="form-select jss87874" name="customerGroupUp"
+                                                        <select class="form-select jss87874 Dsifs"
+                                                                name="customerGroupUp"
                                                                 id="customerGroupUp">
                                                         </select>
                                                     </div>
@@ -213,33 +215,12 @@
                                                             </label>
                                                         </div>
                                                         <div class="MuiInputBase-root MuiOutlinedInput-root jss4065 MuiInputBase-fullWidth ">
-                                                            <select class="jss87874 form-select" name="genderUp"
+                                                            <select class="jss87874 form-select Dsifs" name="genderUp"
                                                                     id="genderUp">
-                                                                <!--                                                                <option th:selected="${customer.gender.toString() == '-1'}"-->
-                                                                <!--                                                                        value="-1">Giới tính-->
-                                                                <!--                                                                </option>-->
-                                                                <!--                                                                <option th:selected="${customer.gender.toString() == 'NAM'}"-->
-                                                                <!--                                                                        value="NAM">Nam-->
-                                                                <!--                                                                </option>-->
-                                                                <!--                                                                <option th:selected="${customer.gender.toString() == 'NU'}"-->
-                                                                <!--                                                                        value="NU">Nữ-->
-                                                                <!--                                                                </option>-->
-                                                                <!--                                                                <option th:selected="${customer.gender.toString() == 'KHAC'}"-->
-                                                                <!--                                                                        value="KHAC">Khác-->
-                                                                <!--                                                                </option>-->
+                                                                <option value="NAM">Nam</option>
+                                                                <option value="NU">Nữ</option>
+                                                                <option value="KHAC">Khác</option>
                                                             </select>
-                                                            <!--                                                            <input name="gender" type="hidden" value="other">-->
-                                                            <!--                                                            <svg class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"-->
-                                                            <!--                                                                 focusable="false" viewBox="0 0 24 24"-->
-                                                            <!--                                                                 aria-hidden="true">-->
-
-                                                            <!--                                                            </svg>-->
-                                                            <!--                                                            <fieldset aria-hidden="true"-->
-                                                            <!--                                                                      class="jss4023 MuiOutlinedInput-notchedOutline"-->
-                                                            <!--                                                                      style="padding-left: 8px;">-->
-                                                            <!--                                                                <legend class="jss4024" style="width: 0.01px;">-->
-                                                            <!--                                                                    <span>​</span></legend>-->
-                                                            <!--                                                            </fieldset>-->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -328,27 +309,11 @@
                                                             </label>
                                                         </div>
                                                         <div class="MuiInputBase-root MuiOutlinedInput-root jss4065 MuiInputBase-fullWidth">
-                                                            <select class="jss87874 form-select" name="statusUp"
+                                                            <select class="jss87874 form-select Dsifs" name="statusUp"
                                                                     id="statusUp">
-                                                                <!--                                                                <option th:selected="${customer.status.toString() == 'AVAILABLE'}"-->
-                                                                <!--                                                                        value="AVAILABLE">Đang giao dịch-->
-                                                                <!--                                                                </option>-->
-                                                                <!--                                                                <option th:selected="${customer.status.toString() == 'UNAVAILABLE'}"-->
-                                                                <!--                                                                        value="UNAVAILABLE">Ngừng giao dịch-->
-                                                                <!--                                                                </option>-->
-
+                                                                <option value="AVAILABLE">Đang giao dịch</option>
+                                                                <option value="UNAVAILABLE">Ngừng giao dịch</option>
                                                             </select>
-                                                            <!--                                                            <input name="status" type="hidden" value="active">-->
-                                                            <!--                                                            <svg class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"-->
-                                                            <!--                                                                 focusable="false" viewBox="0 0 24 24"-->
-                                                            <!--                                                                 aria-hidden="true">-->
-                                                            <!--                                                            </svg>-->
-                                                            <!--                                                            <fieldset aria-hidden="true"-->
-                                                            <!--                                                                      class="jss4023 MuiOutlinedInput-notchedOutline"-->
-                                                            <!--                                                                      style="padding-left: 8px;">-->
-                                                            <!--                                                                <legend class="jss4024" style="width: 0.01px;">-->
-                                                            <!--                                                                    <span>​</span></legend>-->
-                                                            <!--                                                            </fieldset>-->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -377,12 +342,12 @@
                                             <div class="jss4122 jss5790">
                                                 <div>
                                                     <label class="jss3955 MuiInputLabel-animated MuiInputLabel-shrink jUgebs"
-                                                           for="employeeNameUp">
+                                                           for="employeeUp">
                                                         Nhân viên phụ trách
                                                     </label>
                                                 </div>
-                                                <select name="employeeNameUp" id="employeeNameUp"
-                                                        class="form-select nuYvg">
+                                                <select name="employeeUp" id="employeeUp"
+                                                        class="form-select nuYvg Dsifs jss14177">
                                                 </select>
                                             </div>
                                         </div>
@@ -408,9 +373,9 @@
                                                 <div class="MuiFormControl-root jss3956 jss3957 MuiFormControl-fullWidth">
                                                     <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-multiline MuiOutlinedInput-multiline">
                                                         <textarea aria-invalid="false" id="descriptionUp"
-                                                                name="descriptionUp" placeholder="Nhập mô tả"
-                                                                rows="3" aria-label="Without label"
-                                                                class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline">
+                                                                  name="descriptionUp" placeholder="Nhập mô tả"
+                                                                  rows="3" aria-label="Without label"
+                                                                  class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline">
                                                         </textarea>
                                                         <fieldset aria-hidden="true"
                                                                   class="jss4023 MuiOutlinedInput-notchedOutline">
@@ -446,7 +411,7 @@
                                                         <textarea aria-invalid="false" id="tagsUp"
                                                                   name="tagsUp" placeholder="Nhập tags"
                                                                   rows="3" aria-label="Without label"
-                                                                  class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline">
+                                                                  class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline">
                                                         </textarea>
                                                         <fieldset aria-hidden="true"
                                                                   class="jss4023 MuiOutlinedInput-notchedOutline">
@@ -474,9 +439,12 @@
                                                             <svg class="MuiSvgIcon-root MuiSvgIcon-colorPrimary jss20682"
                                                                  focusable="false" viewBox="0 0 12 12"
                                                                  aria-hidden="true">
-                                                                <path d="M5.4 3V4.2H6.6V3H5.4Z" fill="currenColor"></path>
-                                                                <path d="M5.4 6.6V9H7.2V7.8H6.6V5.4H4.8V6.6H5.4Z" fill="currenColor"></path>
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" fill="currenColor"
+                                                                <path d="M5.4 3V4.2H6.6V3H5.4Z"
+                                                                      fill="currenColor"></path>
+                                                                <path d="M5.4 6.6V9H7.2V7.8H6.6V5.4H4.8V6.6H5.4Z"
+                                                                      fill="currenColor"></path>
+                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                      fill="currenColor"
                                                                       d="M6 0C2.688 0 0 2.688 0 6C0 9.312 2.688 12 6 12C9.312 12 12 9.312 12 6C12 2.688 9.312 0 6 0ZM1.2 6C1.2 8.646 3.354 10.8 6 10.8C8.646 10.8 10.8 8.646 10.8 6C10.8 3.354 8.646 1.2 6 1.2C3.354 1.2 1.2 3.354 1.2 6Z">
                                                                 </path>
                                                             </svg>
@@ -500,7 +468,7 @@
                                                                    id="customerGroupRadio" name="radio">
                                                         </div>
                                                         <label for="customerGroupRadio"
-                                                               class="MuiTypography-root MuiTypography-body1">
+                                                               class="MuiTypography-root MuiTypography-body1 jss14177">
                                                             Theo nhóm khách hàng
                                                         </label>
                                                     </div>
@@ -509,7 +477,7 @@
                                                             <input type="radio" id="customerRadio" name="radio">
                                                         </div>
                                                         <label for="customerRadio"
-                                                               class="MuiTypography-root MuiTypography-body1">
+                                                               class="MuiTypography-root MuiTypography-body1 jss14177">
                                                             Theo khách hàng
                                                         </label>
                                                     </div>
@@ -522,7 +490,7 @@
                                                                data-shrink="true" for="dropdownPaymentMethod">
                                                             Hình thức thanh toán
                                                         </label>
-                                                        <select id="dropdownPaymentMethod" class="jss759 diplSI">
+                                                        <select id="dropdownPaymentMethod" class="jss759 diplSI nfFwi">
                                                             <option value="0" class="jss23599">
                                                                 Chọn hình thức thanh toán
                                                             </option>
@@ -542,7 +510,7 @@
                                                              id="defaultPriceContainer">
                                                             <p id="selectedPriceDefault">Chọn giá mặc định</p>
                                                         </div>
-                                                        <div id="defaultPriceDropdown" class="dropdown-content">
+                                                        <div id="defaultPriceDropdown" class="dropdown-content nauSt">
                                                             <div>
                                                                 <div class="jss23596">
                                                                     <div class="jss23775 jss23769">
@@ -579,7 +547,7 @@
                                                         <div class="MuiFormControl-root jss756 MuiFormControl-fullWidth"
                                                              field="[object Object]"
                                                              form="[object Object]">
-                                                            <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth jss759">
+                                                            <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth jss759 nfFwi">
                                                                 <input aria-invalid="false"
                                                                        id="defaultDiscountRate"
                                                                        name="defaultDiscountRate"
@@ -587,7 +555,8 @@
                                                                        aria-label="Without label"
                                                                        class="MuiInputBase-input MuiOutlinedInput-input jss758 placeholder_text"
                                                                        placeholder="0"
-                                                                       fdprocessedid="16ju8f" maxlength='3' onkeypress="return /[0-9]/i.test(event.key)">
+                                                                       fdprocessedid="16ju8f" maxlength='3'
+                                                                       onkeypress="return /[0-9]/i.test(event.key)">
                                                                 <fieldset
                                                                         aria-hidden="true"
                                                                         class="MuiOutlinedInput-notchedOutline">
@@ -608,9 +577,11 @@
                 </div>
             </div>
         </div>
+        </form>
     </div>
 </div>
 </body>
+<th:block th:replace="/admin/customer/modal_createPricePolicy"/>
 <th:block th:replace="/admin/customer/layout/script"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
 <script src="/assets/admin/js/customer/customer_app.js"></script>
@@ -618,19 +589,250 @@
 
 <script>
 
+    let customer = {};
+    let pricingPolicy = {};
+    let paymentMethod = {};
+    let customerStatus = {};
+    let newCustomer = {
+        paymentMethod,
+        pricingPolicy,
+        customerStatus
+    };
+
+    CustomerApp.page.elements.frmUpdateCustomer = $("#frmUpdateCustomer");
+
     CustomerApp.page.elements.fullNameUp = $("#fullNameUp");
     CustomerApp.page.elements.customerCodeUp = $("#customerCodeUp");
+    CustomerApp.page.elements.customerGroupUp = $("#customerGroupUp");
     CustomerApp.page.elements.phoneUp = $("#phoneUp");
     CustomerApp.page.elements.emailUp = $("#emailUp");
+    CustomerApp.page.elements.birthdayUp = $("#birthdayUp");
+    CustomerApp.page.elements.genderUp = $("#genderUp");
     CustomerApp.page.elements.faxUpdate = $("#faxUpdate");
     CustomerApp.page.elements.taxCodeUp = $("#taxCodeUp");
     CustomerApp.page.elements.websiteUp = $("#websiteUp");
+    CustomerApp.page.elements.statusUp = $("#statusUp");
+    CustomerApp.page.elements.employeeUp = $("#employeeUp");
     CustomerApp.page.elements.descriptionUp = $("#descriptionUp");
     CustomerApp.page.elements.tagsUp = $("#tagsUp");
 
+    CustomerApp.page.elements.dropdownPaymentMethod = $("#dropdownPaymentMethod");
+    CustomerApp.page.elements.btnCloseCreatePricePolicyModal = $(".btnCloseCreatePricePolicyModal");
+    CustomerApp.page.elements.frmCreatePricePolicy = $("#frmCreatePricePolicy");
+    CustomerApp.page.elements.btnCreatePricePolicy = $("#btnCreatePricePolicy");
+    CustomerApp.page.elements.btnUpdateCustomer = $("#btnUpdateCustomer");
+    CustomerApp.page.elements.defaultPriceDropdown = $("#defaultPriceDropdown");
+    CustomerApp.page.elements.modalCreatePricePolicy = $("#modalCreatePricePolicy");
+    CustomerApp.page.elements.error = $(".error");
+    CustomerApp.page.elements.titleError = $(".title-error.error");
+    CustomerApp.page.elements.pricingPolicyCodeError = $(".pricingPolicyCode-error.error");
+    CustomerApp.page.elements.pricingPolicyTypeError = $(".pricingPolicyType-error.error");
+    CustomerApp.page.elements.offer = $("#offer");
+    CustomerApp.page.elements.listPricePolicy = $("#listPricePolicy");
+
+
     $(() => {
-        CustomerApp.page.commands.getInfoCustomer();
+        CustomerApp.page.commands.getInfoCustomer().then(() => {
+            CustomerApp.page.commands.getAllCustomerGroup();
+            CustomerApp.page.commands.getAllEmployee();
+            CustomerApp.page.commands.getAllPaymentMethod();
+            CustomerApp.page.commands.getDefaultPricingPolicy();
+        });
     })
+
+    CustomerApp.page.commands.updateCustomer = () => {
+        let id = window.location.pathname.split('/')[3];
+
+        newCustomer.fullName = CustomerApp.getValue(CustomerApp.page.elements.fullNameUp);
+        newCustomer.customerCode = CustomerApp.getValue(CustomerApp.page.elements.customerCodeUp);
+        newCustomer.groupId = CustomerApp.page.elements.customerGroupUp.find(":selected").val();
+        newCustomer.phoneNumber = CustomerApp.getValue(CustomerApp.page.elements.phoneUp);
+        newCustomer.email = CustomerApp.getValue(CustomerApp.page.elements.emailUp);
+        newCustomer.birthday = new Date(CustomerApp.getValue(CustomerApp.page.elements.birthdayUp));
+        newCustomer.gender = CustomerApp.page.elements.genderUp.find(":selected").val();
+        newCustomer.fax = CustomerApp.getValue(CustomerApp.page.elements.faxUpdate);
+        newCustomer.taxCode = CustomerApp.getValue(CustomerApp.page.elements.taxCodeUp);
+        newCustomer.website = CustomerApp.getValue(CustomerApp.page.elements.websiteUp);
+        customerStatus.status = CustomerApp.page.elements.statusUp.find(":selected").val();
+        newCustomer.employeeId = CustomerApp.page.elements.employeeUp.find(":selected").val();
+        newCustomer.description = CustomerApp.getValue(CustomerApp.page.elements.descriptionUp);
+        newCustomer.tags = CustomerApp.getValue(CustomerApp.page.elements.tagsUp);
+
+        if ($("#customerGroupRadio").is(":checked")) {
+            newCustomer.group = {
+                id: CustomerApp.page.elements.customerGroupUp.find(":selected").val()
+            };
+        } else if ($("#customerRadio").is(":checked")) {
+            newCustomer.defaultPaymentMethodId = CustomerApp.page.elements.dropdownPaymentMethod.find(":selected").val();
+            newCustomer.discount = CustomerApp.getValue(CustomerApp.page.elements.defaultDiscountRate);
+        }
+
+        console.log(newCustomer)
+
+        $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            "type": "PATCH",
+            "url": origin + `/api/customers/${id}`,
+            "data": JSON.stringify(newCustomer)
+        })
+            .done((data) => {
+                CustomerApp.IziToast.showSuccessAlert("Cập nhật khách hàng thành công");
+
+                // setTimeout(() => {
+                // }, 2500)
+                // window.location.href = `/admin/customers/${data.id}`;
+
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR);
+
+                CustomerApp.IziToast.showErrorAlert(CustomerApp.AlertMessageVi.ERROR_400)
+            })
+    }
+
+
+    CustomerApp.page.elements.btnUpdateCustomer.on("click", () => {
+        CustomerApp.page.elements.frmUpdateCustomer.trigger("submit");
+    })
+
+    CustomerApp.page.elements.frmUpdateCustomer.validate({
+        rules: {
+            nameCreate: {
+                required: true,
+                maxlength: 255
+            },
+            codeCreate: {
+                maxlength: 50
+            },
+            phoneCreate: {
+                isValidPhone: true,
+            },
+            emailCreate: {
+                isValidEmail: true
+            },
+            addressCreate: {
+                required: true,
+                maxlength: 255
+            },
+            faxCreate: {
+                isValidFax: true,
+            },
+            taxCodeCreate: {
+                maxlength: 255
+            },
+            websiteCreate: {
+                maxlength: 255
+            },
+            debtTotal: {
+                digits: true,
+                range: [0, 99999999999]
+            },
+            spendTotal: {
+                digits: true,
+                range: [0, 99999999999]
+            },
+            descriptionCreate: {
+                maxlength: 500
+            }
+        },
+        messages: {
+            nameCreate: {
+                required: "Tên khách hàng không được để trống",
+                maxlength: "Tên khách hàng không được vượt quá 255 ký tự"
+            },
+            codeCreate: {
+                maxlength: 'Mã khách hàng không được vượt quá 50 ký tự'
+            },
+            addressCreate: {
+                required: 'Địa chỉ không được trống',
+                maxlength: 'Địa chỉ không được vượt quá 255 ký tự'
+            },
+            taxCodeCreate: {
+                maxlength: 'Mã số thuế không được vượt quá 50 ký tự',
+            },
+            websiteCreate: {
+                maxlength: 'Website không được vượt quá 255 ký tự'
+            },
+            debtTotal: {
+                digits: "Chỉ được nhập số",
+                range: 'Công nợ từ 0 đến 99,999,999,999 đồng'
+            },
+            spendTotal: {
+                digits: "Chỉ được nhập số",
+                range: 'Tổng chi tiêu từ 0 đến 99,999,999,999 đồng'
+            },
+            descriptionCreate: {
+                maxlength: 'Mô tả không được vượt quá 500 ký tự'
+            }
+        },
+        errorElement: 'label',
+        errorPlacement: (error, element) => {
+            error ? $(".error.hidden").addClass('show').removeClass('hidden') : '';
+            error.appendTo(element.parent("div").parent("div").next("div"));
+        },
+        submitHandler: () => {
+            CustomerApp.page.commands.updateCustomer();
+        },
+        invalidHandler: () => {
+            CustomerApp.IziToast.showErrorAlert('Vui lòng nhập đúng thông tin')
+        }
+    });
+
+    $.validator.addMethod("isValidPhone", function (value, element) {
+        return this.optional(element) || /^$|[0-9]{8,15}$/i.test(value);
+    }, "Số điện thoại không đúng định dạng");
+
+    $.validator.addMethod("isValidEmail", function (value, element) {
+        return this.optional(element) || /^$|[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i.test(value);
+    }, "Email không đúng định dạng");
+
+    $.validator.addMethod("isValidFax", function (value, element) {
+        return this.optional(element) || /^$|[0-9]{8,15}$/i.test(value);
+    }, "Số fax không đúng định dạng");
+
+    CustomerApp.page.commands.getAllEmployee = () => {
+        return $.ajax({
+            type: "GET",
+            url: origin + "/api/employees"
+        })
+            .done((data) => {
+                $.each(data, (i, item) => {
+                    let str = `<option value="${item.id}">${item.fullName}</option>`;
+                    $("#employeeUp").append(str);
+
+                    customer.employee.id === item.id
+                        ? $('#employeeUp option').prop('selected', true)
+                        : '';
+                });
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+
+            })
+    }
+
+    CustomerApp.page.commands.getAllCustomerGroup = () => {
+        return $.ajax({
+            type: "GET",
+            url: origin + "/api/customer_groups/",
+        })
+            .done((data) => {
+                $.each(data, (i, item) => {
+                    let str = `<option value="${item.id}">${item.title}</option>`;
+                    $("#customerGroupUp").append(str);
+
+                    item.id === customer.group.id
+                        ? $('#customerGroupUp option').prop('selected', true)
+                        : '';
+                });
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+    }
 
     CustomerApp.page.commands.getInfoCustomer = () => {
         let id = window.location.pathname.split('/')[3];
@@ -640,170 +842,209 @@
             url: origin + "/api/customers/" + id
         }).done((data) => {
             console.log(data)
+            customer = {...data};
+
             CustomerApp.page.elements.fullNameUp.val(data.fullName);
             CustomerApp.page.elements.customerCodeUp.val(data.customerCode);
             CustomerApp.page.elements.phoneUp.val(data.phoneNumber);
             CustomerApp.page.elements.emailUp.val(data.email);
+            CustomerApp.page.elements.birthdayUp.val(data.birthday.split('T')[0]);
             CustomerApp.page.elements.faxUpdate.val(data.fax);
             CustomerApp.page.elements.taxCodeUp.val(data.taxCode);
             CustomerApp.page.elements.websiteUp.val(data.website);
+            CustomerApp.page.elements.statusUp.val(data.status);
             CustomerApp.page.elements.descriptionUp.val(data.description);
             CustomerApp.page.elements.tagsUp.val(data.tags);
+
+            $("#genderUp").val(data.gender);
+            $("#statusUp").val(data.status);
         })
             .fail((jqXHR) => {
                 console.log(jqXHR)
             })
     }
 
+    //start payment method
+    CustomerApp.page.commands.getAllPaymentMethod = () => {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: origin + "/api/admin/payment_methods"
+        })
+            .done((data) => {
+                data.forEach(item => {
+                    let str = `<option value=${item.id} class="selectedPaymentMethod">${item.title}</option>`;
 
-    /*<![CDATA[*/
-    // var customer = /*[[${customer}]]*/ 'default';
+                    CustomerApp.page.elements.dropdownPaymentMethod.append(str);
 
-    /*]]>*/
-    /*
+                    // if (item.id === currentCustomerGroup.defaultPaymentMethodId) {
+                    //     $('#dropdownPaymentMethod option').prop('selected', true)
+                    // }
+                });
+                CustomerApp.page.commands.selectPaymentMethod();
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+    }
 
-      class Customer {
-          constructor(id, customerCode, name, phone, customerGroup, gender, email, birthday, status, createAt, updateAt, employee, deleted, updateAddressParam, description) {
-              this.id = id;
-              this.customerCode = customerCode;
-              this.name = name;
-              this.phone = phone;
-              this.gender = gender;
+    CustomerApp.page.commands.selectPaymentMethod = () => {
+        $(".selectedPaymentMethod").click(function () {
+            currentCustomerGroup.defaultPaymentMethodId = $(this).val();
+        })
+    }
+    //end payment method
 
-              this.customerGroup = customerGroup;
-              this.email = email;
-              this.birthday = birthday;
-              this.status = status;
-              this.createAt = createAt;
-              this.updateAt = updateAt;
+    //start create default pricing policy
+    CustomerApp.page.commands.showModalCreatePricePolicy = () => {
+        CustomerApp.page.elements.modalCreatePricePolicy.modal("show");
+    }
+    //create price policy
+    CustomerApp.page.commands.createPricePolicy = () => {
+        let title = CustomerApp.getValue(CustomerApp.page.elements.titlePricePolicyCre);
+        let pricingPolicyCode = CustomerApp.getValue(CustomerApp.page.elements.pricingPolicyCodeCre);
 
-              this.employee = employee;
-              this.deleted = deleted;
-              this.updateAddressParam = updateAddressParam;
-              this.description = description;
+        let pricingPolicy = {
+            title,
+            pricingPolicyCode,
+            pricingPolicyType: $('input[name="policyStyle"]:checked').val()
+        }
 
-          }
-      }
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "POST",
+            url: origin + "/api/pricing-policies",
+            data: JSON.stringify(pricingPolicy)
+        }).done((data) => {
+            let str = `<a class="jss23775 selectPricePolicy" data-id="${data.id}" data-value="${data.title}">
+                         ${data.title}
+                       </a>`;
 
-      class UpdateAddressParam {
-          constructor(id, fullName, phoneNumber, line1, line2, email, districtId, districtName, provinceId, provinceName, wardId, wardName, zipCode, customerId, supplierId, isDefault, description) {
-              this.fullName = fullName;
-              this.line1 = line1;
-              this.line2 = line2;
-              this.phoneNumber = phoneNumber;
-              this.email = email;
-              // this.address = address;
-              this.districtId = districtId;
-              this.districtName = districtName;
-              this.provinceId = provinceId;
-              this.provinceName = provinceName;
-              this.wardId = wardId;
-              this.wardName = wardName;
-              this.zipCode = zipCode;
-              this.customerId = customerId;
-              this.id = id;
-              this.isDefault = isDefault;
-              this.supplierId = supplierId;
-              this.description = description;
-          }
-      }
+            CustomerApp.page.elements.listPricePolicy.prepend(str);
+            CustomerApp.IziToast.showSuccessAlert("Thêm mới chính sách giá thành công")
+            CustomerApp.page.elements.modalCreatePricePolicy.modal("hide");
+            CustomerApp.page.elements.frmCreatePricePolicy[0].reset();
+            CustomerApp.page.commands.selectPricePolicy();
+        })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+                let errors = jqXHR.responseJSON.errors;
 
+                if (errors.title) {
+                    CustomerApp.showErrorValidate(CustomerApp.page.elements.titleError, errors.title)
+                }
+                if (errors.pricingPolicyCode) {
+                    CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, errors.pricingPolicyCode)
+                }
+                if (errors.pricingPolicyType) {
+                    CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, errors.pricingPolicyType)
+                }
+            })
+    }
 
-      function getAllEmployeeSelect() {
-          // let employeeId = $("#employeeUp")
-          return $.ajax({
-              headers: {
-                  "accept": "application/json",
-                  "content-type": "application/json"
-              },
-              type: "GET",
-              url: origin + "/api/employees"
-          })
-              .done((data) => {
-                  $.each(data, (i, item) => {
-                      let str = `<option value="${item.id}">${item.fullName}</option>`;
-                      $("#employeeNameUp").append(str);
-                  });
-              })
-              .fail((jqXHR) => {
+    CustomerApp.page.commands.getDefaultPricingPolicy = () => {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: origin + "/api/pricing-policies"
+        })
+            .done((data) => {
+                data.forEach(item => {
+                    let str = `<a class="jss23775 selectDefaultPricePolicy" data-id="${item.id}" data-value=${item.title}>
+                                    ${item.title}
+                                </a>`;
 
+                    CustomerApp.page.elements.listPricePolicy.prepend(str);
+                });
+                CustomerApp.page.commands.selectDefaultPricePolicy();
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+    }
 
-              })
-      }
+    CustomerApp.page.elements.btnCloseCreatePricePolicyModal.click(() => {
+        CustomerApp.page.elements.frmCreatePricePolicy.validate().resetForm();
+        CustomerApp.page.elements.frmCreatePricePolicy[0].reset();
+        CustomerApp.page.elements.error.removeClass('show').addClass('hidden');
+    })
 
+    CustomerApp.page.elements.btnCreatePricePolicy.on("click", () => {
+        CustomerApp.page.elements.frmCreatePricePolicy.trigger("submit");
+    })
 
-      // function getAllCustomerGroup() {
-      //     return $.ajax({
-      //         headers: {
-      //             "accept": "application/json",
-      //             "content-type": "application/json"
-      //         },
-      //         type: "GET",
-      //         url: origin +"/api/customer_groups/",
-      //     })
-      //         .done((data) => {
-      //             console.log(data)
-      //             $.each(data, (i, item) => {
-      //                 console.log(item)
-      //                 let str = `<option value="${item.id}">${item.title}</option>`;
-      //                 $("#customerGroupUp").append(str);
-      //             });
-      //         })
-      //         .fail((jqXHR) => {
-      //
-      //         })
-      // }
+    CustomerApp.page.elements.frmCreatePricePolicy.validate({
+        rules: {
+            titlePricePolicyCre: {
+                required: true,
+                maxlength: 50,
+            },
+            pricingPolicyCodeCre: {
+                required: true,
+                maxlength: 50,
+            },
+            policyStyle: {
+                required: true,
+            }
+        },
+        messages: {
+            titlePricePolicyCre: {
+                required: "Tên chính sách giá không được để trống",
+                maxlength: "Tên chính sách giá không được vượt quá 50 ký tự"
+            },
+            pricingPolicyCodeCre: {
+                required: "Mã chính sách giá không được để trống",
+                maxlength: "Mã chính sách giá không được vượt quá 50 ký tự"
+            },
+            policyStyle: {
+                required: "Vui lòng chọn loại chính sách giá"
+            }
+        },
+        showErrors: (error) => {
+            if (error.titlePricePolicyCre) {
+                CustomerApp.showErrorValidate(CustomerApp.page.elements.titleError, error.titlePricePolicyCre);
+            }
+            if (error.pricingPolicyCodeCre) {
+                CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyCodeError, error.pricingPolicyCodeCre);
+            }
+            if (error.policyStyle) {
+                CustomerApp.showErrorValidate(CustomerApp.page.elements.pricingPolicyTypeError, error.policyStyle);
+            }
+        },
+        submitHandler: () => {
+            CustomerApp.page.commands.createPricePolicy();
+        },
+    });
+    //end create default pricing policy
 
+    CustomerApp.page.commands.selectDefaultPricePolicy = () => {
+        $(".selectDefaultPricePolicy").on('click', function () {
+            customer.defaultPricingPolicyId = $(this).data('id');
+            let value = $(this).data('value');
 
-      $("#btnUpdateCustomer").on('click', () => {
-          // alert("Ok ban")
-          let newCustomer = {
-              id: customer.id,
-              status: $('#statusUp :selected').val(),
-              fullName: $('#fullNameUp').val(),
-              customerCode: $('#customerCodeUp').val(),
-              groupId: $('#customerGroupUp :selected').val(),
-              phoneNumber: $('#phoneUp').val(),
-              email: $('#emailUp').val(),
-              birthday: $('#birthdayUp').val(),
-              gender: $('#genderUp :selected').val(),
-              employeeId: $('#employeeNameUp :selected').val(),
-              description: $('#descriptionUp').val(),
-              taxCode: $('#taxCodeUp').val(),
-              fax: $('#faxUpdate').val(),
-              website: $('#websiteUp').val()
+            CustomerApp.page.elements.selectedPriceDefault.text(value);
+            CustomerApp.page.elements.defaultPriceDropdown[0].classList.toggle("show")
+        })
+    }
 
-          }
+    CustomerApp.page.commands.showDefaultPricingPolicyDropdown = () => {
+        CustomerApp.page.elements.defaultPriceDropdown[0].classList.toggle('show');
+    }
 
-          console.log(newCustomer);
-          $.ajax({
-              "headers": {
-                  "accept": "application/json",
-                  "content-type": "application/json"
-              },
-              "type": "PUT",
-              "url": origin + `/api/customers/${customer.id}`,
-              "data": JSON.stringify(newCustomer)
-          })
-              .done((data) => {
-                  // console.log(data)
-                  CustomerApp.IziToast.showSuccessAlert("Sửa thông tin khách hàng thành công !");
-                  setTimeout(() => {
-                  }, 1500)
-                  window.location.href = `/admin/customers/${customer.id}`;
-
-              })
-              .fail((jqXHR) => {
-                  console.log(jqXHR);
-                  CustomerApp.IziToast.showErrorAlert(CustomerApp.AlertMessageVi.ERROR_400)
-
-              })
-      })
-
-
-      getAllEmployeeSelect();
-
-      */
+    $("#customerRadio, #customerGroupRadio").change(() => {
+        ($("#customerRadio").is(":checked"))
+            ? CustomerApp.page.elements.offer.show()
+            : CustomerApp.page.elements.offer.hide();
+    });
 
     $("#btnCloseUpdate").on('click', () => {
         let id = window.location.pathname.split('/')[3];

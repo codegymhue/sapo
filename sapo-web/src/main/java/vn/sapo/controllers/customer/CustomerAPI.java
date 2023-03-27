@@ -108,11 +108,6 @@ public class CustomerAPI extends BaseController {
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody @Valid CreateCustomerParam createCustomerParam) {
-//        CreateAddressParam createAddressParam = createCustomerParam.getCreateAddressParam();
-//        if (createAddressParam == null)
-//            throw new ValidationException(new HashMap<>() {{
-//                put("line1", "Dia chi khong duoc de trong");
-//            }});
         CustomerResult dto = customerService.create(createCustomerParam);
 
         dto = customerService.findById(dto.getId());
@@ -122,8 +117,9 @@ public class CustomerAPI extends BaseController {
     @PatchMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Integer id,
                                     @RequestBody @Validated UpdateCustomerParam updateCustomer) {
+        customerService.update(id, updateCustomer);
 
-        return new ResponseEntity<>(customerService.update(id, updateCustomer), HttpStatus.OK);
+        return new ResponseEntity<>(customerService.findById(id), HttpStatus.OK);
     }
 
     @PatchMapping

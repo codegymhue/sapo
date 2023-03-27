@@ -3,18 +3,14 @@ package vn.sapo.controllers.customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import vn.sapo.customer.CustomerExcelExporter;
 import vn.sapo.customer.CustomerExcelExporterInventory;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.CustomerParamExport;
 import vn.sapo.customer.dto.CustomerResult;
-import vn.sapo.customerGroup.CustomerGroupService;
-import vn.sapo.employee.EmployeeService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -23,13 +19,7 @@ import java.util.*;
 @RequestMapping("/admin/customers")
 public class CustomerController {
     @Autowired
-    CustomerAPI customerAPI;
-    @Autowired
     CustomerService customerService;
-    @Autowired
-    CustomerGroupService customerGroupService;
-    @Autowired
-    EmployeeService employeeService;
 
     @GetMapping
     public String showListCustomerPage() {

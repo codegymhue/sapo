@@ -725,13 +725,17 @@
     CustomerApp.page.elements.listPricePolicy = $("#listPricePolicy");
 
     CustomerApp.page.elements.error = $(".error");
+    CustomerApp.page.elements.titleError = $(".title-error.error");
+    CustomerApp.page.elements.pricingPolicyCodeError = $(".pricingPolicyCode-error.error");
+    CustomerApp.page.elements.pricingPolicyTypeError = $(".pricingPolicyType-error.error");
 
     CustomerApp.page.commands.createCustomer = () => {
         customer.fullName = CustomerApp.getValue(CustomerApp.page.elements.nameCreate);
         customer.customerCode = CustomerApp.getValue(CustomerApp.page.elements.codeCreate);
         customer.phoneNumber = CustomerApp.getValue(CustomerApp.page.elements.phoneCreate);
         customer.email = CustomerApp.getValue(CustomerApp.page.elements.emailCreate);
-        customer.birthday = CustomerApp.getValue(CustomerApp.page.elements.birthdayCreate);
+
+        customer.birthday = new Date(CustomerApp.getValue(CustomerApp.page.elements.birthdayCreate));
         customer.gender = CustomerApp.page.elements.genderCreate.find(":selected").val();
         customer.fax = CustomerApp.getValue(CustomerApp.page.elements.faxCreate);
         customer.taxCode = CustomerApp.getValue(CustomerApp.page.elements.taxCodeCreate);
@@ -783,7 +787,7 @@
                 setTimeout(() => {
                 }, 2500)
                 CustomerApp.page.elements.frmCreateCustomer[0].reset();
-                // window.location.href = `/admin/customers/${data.id}`;
+                window.location.href = `/admin/customers/${data.id}`;
 
             })
             .fail((jqXHR) => {

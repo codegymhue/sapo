@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Length;
+import vn.sapo.customers.dto.UpdateAddressParam;
 import vn.sapo.shared.validation.constraints.NullOrNotBlank;
 
 import javax.validation.constraints.NotBlank;
@@ -51,6 +52,9 @@ public class UpdateCustomerParam {
     @NullOrNotBlank
     @Length(max = 50, message = "{customer.validation.taxCode.length}")
     private String taxCode;
+
+    @NullOrNotBlank
+    @Length(max = 255, message = "{customer.validation.website.length}")
     private String website;
 
     private CustomerStatus status;
@@ -62,5 +66,9 @@ public class UpdateCustomerParam {
     private String description;
 
     private List<String> tags;
+
+    private String defaultPaymentMethodId;
+
+    private Integer defaultPricingPolicyId;
 
 }
