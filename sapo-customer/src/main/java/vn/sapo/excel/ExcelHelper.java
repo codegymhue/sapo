@@ -8,9 +8,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.customer.CustomerService;
-import vn.sapo.customer.dto.CustomerResult;
-import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.customer.dto.CreateCustomerParam;
+import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.customer.dto.CustomerGender;
 import vn.sapo.customerGroup.dto.CustomerGroupResult;
 //import vn.sapo.entities.customer.CustomerGender;
@@ -19,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -50,7 +50,7 @@ public class ExcelHelper {
             Sheet sheet = workbook.getSheet(SHEET);
             Iterator<Row> rows = sheet.iterator();
 
-            List<CreateCustomerParam> customers = new ArrayList<CreateCustomerParam>();
+            List<CreateCustomerParam> customers = new ArrayList<>();
 
             int rowNumber = 0;
             while (rows.hasNext()) {
@@ -99,11 +99,21 @@ public class ExcelHelper {
                             customer.setPhoneNumber(currentCell.getStringCellValue());
                             break;
                         case 6:
-                            customer.setBirthday(currentCell.getDateCellValue());
-                            break;
+                            try{
+                                customer.setBirthday(currentCell.getDateCellValue());
+                                break;
+                            }catch (Exception e){
+                                customer.setBirthday(new Date());
+                                break;
+                            }
                         case 7:
-                            customer.setGender(CustomerGender.parseCustomerGender(currentCell.getStringCellValue()));
-                            break;
+                            try{
+                                customer.setGender(CustomerGender.parseCustomerGender(currentCell.getStringCellValue()));
+                                break;
+                            }catch (Exception e){
+                                customer.setGender(CustomerGender.parseCustomerGender("KHAC"));
+                                break;
+                            }
                         case 8:
                             customer.setWebsite(currentCell.getStringCellValue());
                             break;
@@ -178,9 +188,6 @@ public class ExcelHelper {
             throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
         }
     }
-    public List<CreateCustomerParam> saveListCustomer(InputStream is){
-        List<CreateCustomerParam> customers = excelToCustomers(is);
-        return null;
-    }
+
 
 }
