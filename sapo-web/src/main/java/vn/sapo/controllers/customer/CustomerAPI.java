@@ -143,7 +143,7 @@ public class CustomerAPI extends BaseController {
         if (ExcelHelper.hasExcelFormat(file)) {
             try {
 //                message = "Uploaded the file successfully: " + file.getOriginalFilename();
-                return ResponseEntity.status(HttpStatus.OK).body(customerService.createSeriesCustomerParam(file));
+                return ResponseEntity.status(HttpStatus.OK).body(customerService.excelToCustomerCreate(file));
             } catch (Exception e) {
                 e.printStackTrace();
                 message = "Could not upload the file: " + file.getOriginalFilename() + "!";

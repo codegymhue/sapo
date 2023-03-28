@@ -23,9 +23,7 @@ import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
 
-import java.nio.channels.MulticastChannel;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import java.util.List;
@@ -155,7 +153,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
-    public List<CreateCustomerParam> createSeriesCustomerParam(MultipartFile file) {
+    public List<CreateCustomerParam> excelToCustomerCreate(MultipartFile file) {
 //        List<CreateCustomerParam> customers = excelService.save(file);
 //        customers.forEach(param -> create(param));
         return excelService.save(file);

@@ -18,7 +18,7 @@ public interface CustomerService {
 
     CustomerResult create(CreateCustomerParam customerCreate);
 
-    List<CreateCustomerParam> createSeriesCustomerParam(MultipartFile file);
+    List<CreateCustomerParam> excelToCustomerCreate(MultipartFile file);
     CustomerResult update(Integer id, UpdateCustomerParam updateCustomer);
 
     CustomerResult updateSeries(CustomerUpdateSeries customerUpdateSeries);
