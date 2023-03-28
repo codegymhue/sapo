@@ -20,13 +20,11 @@ import vn.sapo.excel.ExcelService;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
-<<<<<<< HEAD
-=======
 
 import java.time.Instant;
 import java.util.HashMap;
 
->>>>>>> vt_dev
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
