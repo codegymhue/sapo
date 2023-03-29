@@ -47,7 +47,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn-outline-primary" data-bs-dismiss="modal" style="border: 1px solid #bdbdbd;
+                    <button type="button" onclick="cancelToReset()" class="btn-outline-primary" data-bs-dismiss="modal" style="border: 1px solid #bdbdbd;
                                                                                              padding: 6px 12px;
                                                                                              border-radius: 6px;
                                                                                              font-weight: 500;">Thoát
@@ -83,6 +83,7 @@
             listObjAddress = {};
             countSuccess = 0;
             countFailure = 0;
+
             $("#customer-series-update").html("");
             $('#btnImportFileCustomers').attr('disabled',true);
             $('#comfirm-alert-series-customer').attr('disabled', true);
@@ -100,51 +101,36 @@
                     createListAddress(listCreateCustomerParam);
                     createListResult(listCreateCustomerParam, errorArrRow, listObjAddress);
                     createListAddress(listResultParam);
-
-                    createSeriesCustomer(listResultParam, listObjAddress);
+                    if(errorArrRow.length==0){
+                        createSeriesCustomer(listResultParam, listObjAddress);
+                    }else{
+                        renderError(errorArrRow);
+                    }
 
                     console.log(listCreateCustomerParam);
                     console.log(errorArrRow);
                     console.log(listObjAddress);
                     console.log(listResultParam);
 
-                    renderError(errorArrRow);
                     $("#modalImportFileCustomers").modal("hide");
                     $("#modal-alert-series-customer").modal('show');
+                    $('#btnImportFileCustomers').text('Nhập file')
+                    $('#btnImportFileCustomers').attr('disabled',false);
+                    $('#comfirm-alert-series-customer').text('Xác nhận');
+                    $('#comfirm-alert-series-customer').attr('disabled', false);
+                    $("#frmFileCustomers")[0].reset();
 
                     clearInterval(setData);
                 }
             });
-            // countSuccess = 0;
-            // $("#customer-series-update").html("");
-            // $('#btnImportFileCustomers').attr('disabled',true);
-            // $('#comfirm-alert-series-customer').attr('disabled', true);
-            // $('#btnImportFileCustomers').html(statusLoading);
-            // $('#comfirm-alert-series-customer').html(statusLoading);
-            // let data = new FormData();
-            // let file = $('#formFileCustomers')[0].files[0];
-            // data.append('file',file);
-            // $.ajax({
-            //     url: origin +'/api/customers/upload',
-            //     processData: false,
-            //     contentType: false,
-            //     data: data,
-            //     type: 'POST'
-            // }).done(function(result){
-            //     $("#modalImportFileCustomers").modal("hide");
-            //     $("#modal-alert-series-customer").modal('show');
-            //     createSeriesCustomer(result, createListAddress(result));
-            //     // page.commands.getAllCustomers();
-            //     // createSeriesCustomer(result);
-            //     // page.commands.closeLoading();
-            // }).fail((jqXHR) => {
-            //     $('#btnImportFileCustomers').attr('disabled',false)
-            //     $('#btnImportFileCustomers').text('Nhap file')
-            //     CustomerApp.IziToast.showErrorAlert("Tải file lên không thành công!")
-            // })
         });
+        //reset form khi nhan thoat
+        function cancelToReset(){
+            $("#frmFileCustomers")[0].reset();
+        }
         function renderError(listError){
             $(`#show-detai-failure-series-customer`).html("");
+            $("#count-failure").text(0);
             for(let error of listError){
                 let index = Object.keys(error)[0];
                 let indexMessage = error[index];
@@ -216,12 +202,6 @@
                     }
                 }
             }
-
-            $('#btnImportFileCustomers').text('Nhập file')
-            $('#btnImportFileCustomers').attr('disabled',false);
-            $('#comfirm-alert-series-customer').text('Xác nhận');
-            $('#comfirm-alert-series-customer').attr('disabled', false);
-            $("#frmFileCustomers")[0].reset();
             CustomerApp.IziToast.showSuccessAlert("Tải file lên thành công!")
         }
         //tao listcontact tuong ung voi tung customer
@@ -251,64 +231,64 @@
         }
         //tao 1 customer voi 1 dia chi lien he
         function createCustomerOneContact(customer){
-            // $.ajax({
-            //     headers: {          
-            //         "accept": "application/json",
-            //         "content-type": "application/json"
-            //     },
-            //     async: false,
-            //     type:"POST",
-            //     url: origin + '/api/customers',
-            //     data: JSON.stringify(customer),
-            // })
-            // .done((result)=>{
-            //     let content =`<div class="customer-series-update">
-            //                     <a href="/admin/customers/${result.id}">${result.fullName}</a> - Đã được tạo thành công
-            //                  </div>`
-            //     $("#count-success").text(++countSuccess);
-            //     $("#show-detai-success-series-customer").append(content);
-            // })
-            console.log("customer: ");
-            console.log(customer);
+            $.ajax({
+                headers: {          
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                async: false,
+                type:"POST",
+                url: origin + '/api/customers',
+                data: JSON.stringify(customer),
+            })
+            .done((result)=>{
+                let content =`<div class="customer-series-update">
+                                <a href="/admin/customers/${result.id}">${result.fullName}</a> - Đã được tạo thành công
+                             </div>`
+                $("#count-success").text(++countSuccess);
+                $("#show-detai-success-series-customer").append(content);
+            })
+            // console.log("customer: ");
+            // console.log(customer);
         }
         //tao 1 customer voi nhieu dia chi lien he
         function createCustomerManyContact(customer, contact){
-            console.log("customer: ");
-            console.log(customer);
-            // $.ajax({
-            //     headers: {          
-            //         "accept": "application/json",
-            //         "content-type": "application/json"
-            //     },
-            //     async: false,
-            //     type:"POST",
-            //     url: origin + '/api/customers',
-            //     data: JSON.stringify(customer),
-            // })
-            // .done((result)=>{
-            //     let content =`<div class="customer-series-update">
-            //                     <a href="/admin/customers/${result.id}">${result.fullName}</a> - Đã được tạo thành công
-            //                     </div>`
-            //     $("#count-success").text(++countSuccess);
-            //     $("#show-detai-success-series-customer").append(content);
+            // console.log("customer: ");
+            // console.log(customer);
+            $.ajax({
+                headers: {          
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                async: false,
+                type:"POST",
+                url: origin + '/api/customers',
+                data: JSON.stringify(customer),
+            })
+            .done((result)=>{
+                let content =`<div class="customer-series-update">
+                                <a href="/admin/customers/${result.id}">${result.fullName}</a> - Đã được tạo thành công
+                             </div>`
+                $("#count-success").text(++countSuccess);
+                $("#show-detai-success-series-customer").append(content);
                 for(let i=0; i<contact.length; i++){
-                // $.ajax({
-                //     headers: {          
-                //         "accept": "application/json",
-                //         "content-type": "application/json"
-                //     },
-                //     async:false,
-                //     type:"POST",
-                //     url: origin + '/api/addresses',
-                //     data: JSON.stringify({...contact[i], customerId: result.id}),
-                // })
-                // .done((result)=>{
-                //     console.log(result);
-                // })
-                console.log("contact: ");
-                console.log(contact);
+                $.ajax({
+                    headers: {          
+                        "accept": "application/json",
+                        "content-type": "application/json"
+                    },
+                    async:false,
+                    type:"POST",
+                    url: origin + '/api/addresses',
+                    data: JSON.stringify({...contact[i], customerId: result.id}),
+                })
+                .done((result)=>{
+                    console.log(result);
+                })
+                // console.log("contact: ");
+                // console.log(contact);
             }
-            // })
+            })
         }
         //validate data excel
         function validateDataExcel(data, index){
@@ -373,17 +353,21 @@
                     empty:{
                         value: true
                     },
-                    
                 },
                 ["Fax"]:{
                     empty:{
                         value: true
+                    },
+                    regex: {
+                        value: /^[0-9]*$/,
+                        message: "Fax không phải là số"
                     }
                 },
                 ["Mã số thuế"]:{
                     empty:{
                         value: true
                     },
+                    
                     regex:{
                         value: /^[0-9]*$/,
                         message: "Mã số thuế không đúng định dạng"
@@ -525,6 +509,15 @@
             }
             if(i!=0) errorArrRow.push(error);
         }
+        function convertBirthDay(day){
+            try{
+                let isoDay = new Date(Date.UTC(0,0,day-1)).toISOString();
+                let result = isoDay.split("T")[0];
+                return result;
+            }catch{
+                return undefined;
+            }
+        }
         //convert excel to DTO
         function excelToCreateCustomerParam(jsonData){
             let customerCreateParam = {
@@ -533,7 +526,7 @@
                 groupId: jsonData["Mã nhóm khách hàng"] || 0,
                 phoneNumber: jsonData["Điện thoại"] || '',
                 email: jsonData["Email"] || '',
-                birthday: new Date(Date.UTC(0,0,jsonData["Ngày sinh"]-1)).toLocaleDateString() || '',
+                birthday: convertBirthDay(jsonData["Ngày sinh"]) || '',
                 gender: jsonData["Giới tính"] || '',
                 fax:jsonData["Fax"] || '',
                 taxCode: jsonData["Fax"] || '',
@@ -543,8 +536,8 @@
                 employeeId: 6,
                 description: jsonData["Mô tả"] || '',
                 tags:[],
-                defaultPaymentMethodId: jsonData["Phương thức thanh toán mặc định"] || '',
-                defaultPricingPolicyId: jsonData["Chính sách giá mặc định"] || '',
+                // defaultPaymentMethodId: jsonData["Phương thức thanh toán mặc định"] || '',
+                // defaultPricingPolicyId: jsonData["Chính sách giá mặc định"] || '',
                 createAddressParam:{
                     fullName: jsonData["Người liên hệ"],
                     label: undefined,
@@ -566,6 +559,7 @@
         function upload() {
             let files = document.getElementById('formFileCustomers').files;
             if(files.length==0){
+                CustomerApp.IziToast.showErrorAlert("Không tồn tại file")
                 alert("Please choose any file...");
                 return;
             }

@@ -159,16 +159,21 @@ public class CustomerExcelExporter {
                 if(listColumnExist.contains("birthDay"))
                     createCell(row, columnCount++, customer.getBirthday() != null ? customer.getBirthday().toString() : "", style);
                 if(listColumnExist.contains("gender"))
-                    switch (customer.getGender().getValue()) {
-                        case "NAM":
-                            createCell(row, columnCount++, nam, style);
-                            break;
-                        case "NU":
-                            createCell(row, columnCount++, nu, style);
-                            break;
-                        case "KHAC":
-                            createCell(row, columnCount++, khac, style);
-                            break;
+                    try{
+                        switch (customer.getGender().getValue()) {
+                            case "NAM":
+                                createCell(row, columnCount++, nam, style);
+                                break;
+                            case "NU":
+                                createCell(row, columnCount++, nu, style);
+                                break;
+                            case "KHAC":
+                                createCell(row, columnCount++, khac, style);
+                                break;
+                        }
+
+                    }catch (Exception e) {
+                        createCell(row, columnCount++, "", style);
                     }
                 if (customer.getAddresses().size() == 0) {
                     if(listColumnExist.contains("contact"))
