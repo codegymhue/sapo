@@ -293,25 +293,25 @@
                                 <button id="btnContacts" class="fJFgex">Liên hệ</button>
                                 <button id="addresses" class="fJFgex">Địa chỉ</button>
                                 <button id="notes" class="fJFgex">Ghi chú</button>
-                                <button id="customer_groups" class="fACSJt">Nhóm khách hàng</button>
+                                <button id="btnCustomerGroups" class="fACSJt">Nhóm khách hàng</button>
                             </div>
-                            <div class="jyZcwm2">
+                            <div class="jyZcwm2 hidden">
                                 <button id="btnShowModalCreateContact" class="kDDrLX">
                                     <svg class="MuiSvgIcon-root liFCEr" focusable="false" viewBox="0 0 24 24"
                                          aria-hidden="true">
                                         <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z">
                                         </path>
                                     </svg>
-                                    <span class="sc-jqUVSM jaWHHK">Thêm mới liên hệ</span>
+                                    <span class="jaWHHK">Thêm mới liên hệ</span>
                                 </button>
                             </div>
                         </div>
                     </div>
 
-                    <th:block th:replace="/admin/customer/layout/info_customer_tb::tbContact"/>
+                                        <th:block th:replace="/admin/customer/layout/info_customer_tb::tbContact"/>
 
-                    <div id="render_table" class="hidden">
-                        <div id="customerGroupContainer">
+                    <div id="render_table">
+                        <div id="customerGroupContainer" class="hidden">
                             <table id="tbCustomerGroup" class="jsseh238">
                                 <thead>
                                 <tr>
@@ -321,7 +321,14 @@
                                     <th class="col-3">Mô tả</th>
                                 </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                <tr class="row Bgekd">
+                                    <td id="cgrCode" class="col-3"></td>
+                                    <td id="cgrTitle" class="col-3"></td>
+                                    <td id="cgrType" class="col-3"></td>
+                                    <td id="cgrNote" class="col-3"></td>
+                                </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -374,7 +381,9 @@
 
     CustomerApp.page.elements.confirmText = $("#confirmText");
 
-    CustomerApp.page.elements.customerGroups = $("#customer_groups");
+    CustomerApp.page.elements.btnCustomerGroups = $("#btnCustomerGroups");
+
+    CustomerApp.page.elements.cgrCode = $("#cgrCode");
 
     //start contact
     CustomerApp.page.elements.btnContacts = $("#btnContacts");
@@ -537,49 +546,31 @@
     })
 
     CustomerApp.page.commands.showCustomerGroup = () => {
-        CustomerApp.page.elements.customerGroups.click(() => {
-            let id = currentCustomer.id;
-            console.log(id)
+        CustomerApp.page.elements.btnCustomerGroups.click(() => {
 
-            $("#tbCustomerGroup").DataTable({
-                dom: '<"top">rt<"bottom"lifp><"clear">',
-                processing: true,
-                serverSide: true,
-                ajax: {
-                    type: 'POST',
-                    url: origin + `/api/customer_groups/${id}/customer`,
-                    accept: 'application/json',
-                    contentType: 'application/json',
-                    data: (d) => {
-                        console.log(d)
-                        return JSON.stringify(d);
-                    }
-                },
-                language: CustomerApp.dataTableDetails.language,
-                lengthMenu: [
-                    [20, 50, 100],
-                    ["20", "50", "100"]
-                ],
-                columns: [
-                    {
-                        data: 'cusGrpCode',
-                        sortable: false,
-                    },
-                    {
-                        data: 'title',
-                        sortable: false,
-                    },
-                    {
-                        data: 'type',
-                        sortable: false,
-                    },
-                    {
-                        data: 'note',
-                        sortable: false,
-                    }
-                ],
-                searching: false
+            $("#customerGroupContainer").addClass('show').removeClass('hidden');
+            let id = currentCustomer.id;
+
+            $.ajax({
+                type: "GET",
+                url: origin + `/api/customer_groups/${id}/customer`
             })
+                .done((data) => {
+                    console.log(data)
+                    let groupId = data.id;
+                    CustomerApp.page.elements.cgrCode.text(`${data.cusGrpCode}`)
+                    $("#cgrTitle").text(`${data.title}`)
+                    $("#cgrType").text(`${data.type}`)
+                    $("#cgrNote").text(`${data.note || '---'}`)
+
+                    CustomerApp.page.elements.cgrCode.click(() => {
+                        window.open(`/admin/customer_groups/${groupId}`,
+                            '_blank');
+                    })
+                })
+                .fail((jqXHR) => {
+                    console.log(jqXHR)
+                })
         })
     }
 
@@ -622,7 +613,6 @@
     })
 
     CustomerApp.page.commands.getValue = (value) => {
-        // return value ? value : '---';
         return value || '---';
     }
 
@@ -667,7 +657,7 @@
     });
 
     // nhóm khách hàng
-    $('#customer_groups').on('click', () => {
+    $('#btnCustomerGroups').on('click', () => {
         removeTable();
         showCusGroup();
         $('#customer_groups').css({

@@ -34,8 +34,11 @@ public class CustomerMapper implements InitializingBean {
 
         createDTO2Model.addMapping(source -> source.getBirthday().toInstant(), Customer::setBirthday);
 
+//        TypeMap<UpdateCustomerParam, Customer> updateDTO2Model
+//                = modelMapperSkipNullDisabled.createTypeMap(UpdateCustomerParam.class, Customer.class);
+
         TypeMap<UpdateCustomerParam, Customer> updateDTO2Model
-                = modelMapperSkipNullDisabled.createTypeMap(UpdateCustomerParam.class, Customer.class);
+                = modelMapper.createTypeMap(UpdateCustomerParam.class, Customer.class);
 
         updateDTO2Model.addMapping(source -> source.getBirthday().toInstant(), Customer::setBirthday);
 

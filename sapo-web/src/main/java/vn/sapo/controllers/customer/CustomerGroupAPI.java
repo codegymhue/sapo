@@ -13,6 +13,7 @@ import vn.sapo.shared.controllers.BaseController;
 
 import javax.validation.Valid;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/customer_groups")
@@ -65,28 +66,14 @@ public class CustomerGroupAPI extends BaseController {
         return new ResponseEntity<>(output, HttpStatus.OK);
     }
 
-    @PostMapping("/{id}/customer")
-    private ResponseEntity<?> findCustomerGroupByCustomer(@Valid @RequestBody DataTablesInput input,
-                                                          @PathVariable Integer id) {
-        int draw = input.getDraw();
-        int start = input.getStart();
-        int length = input.getLength();
-        int page = start / length + 1;
+    @GetMapping("/{id}/customer")
+    private ResponseEntity<?> findCustomerGroupByCustomer(@PathVariable Integer id) {
 
-        Sort s = Sort.by(Sort.Direction.ASC, "title");
+        CustomerGroupResult customerGroupResult =
+                customerGroupService.findCustomerGroupByCustomerId(id);
 
-        Pageable pageable = PageRequest.of(page - 1, length, s);
+        return new ResponseEntity<>(customerGroupResult, HttpStatus.OK);
 
-        Page<ICustomerGroupResult> findCustomerGroupResultById =
-                customerGroupService.findCustomerGroupResultById(id, pageable);
-
-        DataTablesOutput<ICustomerGroupResult> output = new DataTablesOutput<>();
-        output.setDraw(draw);
-        output.setRecordsTotal(findCustomerGroupResultById.getTotalElements());
-        output.setRecordsFiltered(findCustomerGroupResultById.getTotalElements());
-        output.setData(findCustomerGroupResultById.getContent());
-
-        return new ResponseEntity<>(output, HttpStatus.OK);
     }
 
     @PostMapping

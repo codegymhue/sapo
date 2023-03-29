@@ -20,15 +20,9 @@ import vn.sapo.excel.ExcelService;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
-
-import java.time.Instant;
-import java.util.HashMap;
-
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -148,10 +142,6 @@ public class CustomerServiceImpl implements CustomerService {
         String code = updateCustomerParam.getCustomerCode();
         if (!code.equalsIgnoreCase(customer.getCustomerCode()))
             validateCustomerCode(code);
-
-        if (updateCustomerParam.getBirthday() != null) {
-            System.out.println(updateCustomerParam.getBirthday());
-        }
 
 //        customerMapper.transferFields(updateCustomerParam, customer);
         customerMapper.transferFieldsSkipNull(updateCustomerParam, customer);

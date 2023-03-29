@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CustomerGroupService {
 
-    Page<ICustomerGroupResult> findCustomerGroupResultById(Integer id, Pageable pageable);
+    CustomerGroupResult findCustomerGroupByCustomerId(Integer id);
 
     CustomerGroupResult create(CreateCusGroupParam createCusGroupParam);
 
