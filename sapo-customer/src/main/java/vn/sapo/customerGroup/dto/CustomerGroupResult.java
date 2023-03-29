@@ -32,7 +32,7 @@ public class CustomerGroupResult {
     private Integer defaultPricingPolicyId;
 
     private String defaultPaymentMethodId;
-//
+
     private Integer defaultDiscountRate;
 //
 //    private Instant updatedAt;

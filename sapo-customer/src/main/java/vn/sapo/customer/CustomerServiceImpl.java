@@ -144,10 +144,6 @@ public class CustomerServiceImpl implements CustomerService {
         if (!code.equalsIgnoreCase(customer.getCustomerCode()))
             validateCustomerCode(code);
 
-        if (updateCustomerParam.getBirthday() != null) {
-            System.out.println(updateCustomerParam.getBirthday());
-        }
-
 //        customerMapper.transferFields(updateCustomerParam, customer);
         customerMapper.transferFieldsSkipNull(updateCustomerParam, customer);
 
