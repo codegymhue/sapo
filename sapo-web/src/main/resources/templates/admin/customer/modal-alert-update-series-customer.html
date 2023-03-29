@@ -54,7 +54,7 @@
             <div>
               Khách hàng cập nhật không thành công: 
               <span id="count-failure-series-customer">
-                <span id="count-failure">0</span> <span class="detail-alert-series-customer" id="detail-failure-series-customer">Chi tiết</span>
+                <span id="count-failure">0</span> <span class="detail-alert-series-customer" id="detail-failure-series-customer" onclick="toggleAlert('#show-detai-failure-series-customer')">Chi tiết</span>
               </span>
             </div>
             <div class="detail-alert-customer" id="show-detai-failure-series-customer">
@@ -63,11 +63,18 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button id="comfirm-alert-series-customer" onclick="changeColumn()" type="button" class="btn" style="border-color: blue;" data-bs-dismiss="modal">Xác nhận</button>
+          <button id="comfirm-alert-series-customer" onclick="resetAlert()" type="button" class="btn" style="border-color: blue;" data-bs-dismiss="modal">Xác nhận</button>
         </div>
       </div>
     </div>
     <script>
+      function resetAlert(){
+        $("#count-failure").text("0");
+        $("#show-detai-failure-series-customer").html("");
+        $("#count-success").text("0");
+        $("#show-detai-success-series-customer").html("");
+        changeColumn();
+      }
       function toggleAlert(selector){
         if($(selector).css("display") == "block"){
           $(selector).css("display", "none");
