@@ -13,6 +13,7 @@ import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerFilter;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
+import vn.sapo.customers.dto.AddressResult;
 import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerStatus;
@@ -44,9 +45,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional(readOnly = true)
     public CustomerResult findById(Integer id) {
-        Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("customer.findById.notFound"));
-        return customerMapper.toDTO(customer);
+                return customerMapper.toDTO(findCustomerById(id));
     }
 
     @Override
@@ -61,8 +60,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public CustomerResult deleteById(Integer id) {
-        Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("not found customer"));
+        Customer customer = findCustomerById(id);
         addressService.deleteByCustomerId(id);
         customerRepository.deleteById(id);
         return customerMapper.toDTO(customer);
@@ -136,8 +134,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public CustomerResult update(Integer id, UpdateCustomerParam updateCustomerParam) {
-        Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("customer.findById.notFound"));
+        Customer customer = findCustomerById(id);
 
         String code = updateCustomerParam.getCustomerCode();
         if (!code.equalsIgnoreCase(customer.getCustomerCode()))
@@ -179,7 +176,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public CustomerResult changeStatusToAvailable(Integer customerId, boolean status) {
-        Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new NotFoundException("Customer not found"));
+        Customer customer = findCustomerById(customerId);
         customer.setStatus(status ? CustomerStatus.AVAILABLE : CustomerStatus.UNAVAILABLE);
         return customerMapper.toDTO(customerRepository.findById(customerId).get());
     }
@@ -198,6 +195,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional(readOnly = true)
     public Page<CustomerResult> findAllByFilters(CustomerFilter filters, Pageable pageable) {
         return customerFilterRepository.findAllByFilters(filters, pageable).map(customerMapper::toDTO);
+    }
+
+    private Customer findCustomerById(Integer id) {
+        return customerRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("customer.findById.notFound"));
     }
 
     public void validateCustomerCode(String customerCode) {

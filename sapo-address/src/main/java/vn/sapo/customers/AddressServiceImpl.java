@@ -25,6 +25,12 @@ public class AddressServiceImpl implements AddressService {
     @Autowired
     AddressMapper addressMapper;
 
+    @Override
+    @Transactional
+    public AddressResult createAddressWithCustomerId(CreateAddressParam createAddressParam, Integer id) {
+        createAddressParam.setCustomerId(id);
+        return create(createAddressParam);
+    }
 
     @Override
     @Transactional(readOnly = true)

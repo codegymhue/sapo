@@ -3,7 +3,9 @@ package vn.sapo.controllers.address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import vn.sapo.customer.CustomerService;
 import vn.sapo.customers.AddressService;
 import vn.sapo.customers.dto.AddressResult;
 import vn.sapo.customers.dto.CreateAddressParam;
@@ -58,14 +60,24 @@ public class AddressAPI {
         return new ResponseEntity<>(address, HttpStatus.OK);
     }
 
+    @PostMapping("/{id}/customer")
+    private ResponseEntity<?> createAddressWithCustomerId(@RequestBody @Validated CreateAddressParam createAddressParam,
+                                                          @PathVariable Integer id) {
+
+        AddressResult addressResult = addressService.createAddressWithCustomerId(createAddressParam, id);
+
+        return new ResponseEntity<>(addressResult, HttpStatus.CREATED);
+    }
+
     @PutMapping
     public ResponseEntity<?> update(@RequestBody UpdateAddressParam updateAddressParam) {
         AddressResult address = addressService.update(updateAddressParam);
         return new ResponseEntity<>(address, HttpStatus.OK);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteByAddressSupplierId(@PathVariable Integer id) {
-         addressService.deleteByAddressSupplierId(id);
+        addressService.deleteByAddressSupplierId(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

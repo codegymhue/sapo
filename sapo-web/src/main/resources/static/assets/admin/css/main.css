@@ -14927,28 +14927,17 @@ a:hover {
   width: 100%;
 }
 .sapo-textbox {
-  display: inline-block;
-  vertical-align: baseline;
-  width: auto;
-  height: 34px;
-  padding: 1px;
-  margin: 0;
-  border: 1px solid #95a7b7;
-  border-radius: 0;
-  border-style: inset;
-  color: black !important;
+    vertical-align: baseline;
+    height: 40px;
+    margin: 0;
+    color: black !important;
   -webkit-appearance: none;
   -moz-appearance: none;
-  padding: 4px 2px 4px 6px;
-  border: 1px solid #c4cdd5;
-  border-radius: 3px;
-  font-weight: 400;
+    font-weight: 400;
   text-transform: none;
   letter-spacing: normal;
   box-sizing: border-box;
-  display: block;
-  width: 100%;
-  font-size: 13px;
+    font-size: 13px;
   font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI,
     Roboto, Helvetica Neue, sans-serif;
 }
@@ -14969,30 +14958,19 @@ a:hover {
   border-bottom: 2px solid rgba(0, 0, 0, 0.87) !important;
 }
 .sapo-textbox-popover {
-  display: inline-block;
-  vertical-align: baseline;
-  width: auto;
-  height: 34px;
-  padding: 1px;
-  margin: 0;
-  border: 1px solid #95a7b7;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 3px;
-  border-style: inset;
+    vertical-align: baseline;
+    height: 34px;
+    margin: 0;
+    border-radius: 3px 0 0 3px;
+    border-style: inset;
   color: #000;
   -webkit-appearance: none;
   -moz-appearance: none;
-  padding: 4px 2px 4px 6px;
-  border: 1px solid #c4cdd5;
-  font-weight: 400;
+    font-weight: 400;
   text-transform: none;
   letter-spacing: normal;
   box-sizing: border-box;
-  display: block;
-  width: 100%;
-  font-size: 13px;
+    font-size: 13px;
   font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI,
     Roboto, Helvetica Neue, sans-serif;
   position: relative;
@@ -15004,7 +14982,6 @@ textarea.sapo-textbox {
 .sapo-textbox:focus {
   border: 1px solid #08f;
   box-shadow: 0 0 0 1px #08f;
-  border-color: #08f !important;
 }
 .sapo-select {
   font-size: 1.4rem;
@@ -15042,8 +15019,7 @@ textarea.sapo-textbox {
   vertical-align: bottom;
   transition: all 0.2s ease-out;
   background: linear-gradient(180deg, #fff, #f9fafb);
-  border-color: #c4cdd5;
-  box-shadow: 0 1px 0 0 rgba(22, 29, 37, 0.05);
+    box-shadow: 0 1px 0 0 rgba(22, 29, 37, 0.05);
 }
 .sapo-select:focus {
   border: 1px solid #08f;
@@ -15062,9 +15038,7 @@ textarea.sapo-textbox {
   position: absolute;
   right: 0.8rem;
   top: 50%;
-  margin-top: -0.6rem;
-  pointer-events: none;
-  margin-top: -0.8rem;
+    pointer-events: none;
 }
 .typeahead {
   z-index: 1051;
@@ -15320,8 +15294,7 @@ textarea:disabled {
   margin: 0;
   border-radius: inherit;
   font-family: inherit;
-  white-space: nowrap;
-  cursor: pointer;
+    cursor: pointer;
   border: 0;
   color: #08f;
   font-weight: 400;
@@ -15329,19 +15302,14 @@ textarea:disabled {
   letter-spacing: normal;
   padding: 0;
   text-align: left;
-  white-space: normal;
-  vertical-align: initial;
+    vertical-align: initial;
 }
 .input-dropdown {
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath d='M10 16l-4-4h8l-4 4zm0-12L6 8h8l-4-4z'%3e%3c/path%3e%3c/svg%3e") !important;
-  background: linear-gradient(180deg, #fff, #f9fafb);
-  border-color: #c4cdd5;
+    border-color: #c4cdd5;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-position: 99% 50% !important;
-  background-repeat: no-repeat !important;
-  background-color: #fff !important;
-  cursor: pointer !important;
+    background: #fff url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath d='M10 16l-4-4h8l-4 4zm0-12L6 8h8l-4-4z'%3e%3c/path%3e%3c/svg%3e") no-repeat 99% 50% !important;
+    cursor: pointer !important;
   padding-right: 10px;
   text-overflow: ellipsis;
   color: #212b35;
@@ -15437,8 +15405,7 @@ textarea:disabled {
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #999;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
+    border-radius: 6px;
   outline: 0;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }

@@ -54,8 +54,9 @@ allprojects { proj ->
         implementation 'org.modelmapper:modelmapper:3.1.1'
         implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.1'
         implementation 'io.hypersistence:hypersistence-utils-hibernate-55:3.2.0'
+        implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
         runtimeOnly 'mysql:mysql-connector-java'
-        implementation 'com.jayway.jsonpath:json-path:2.4.0'
+        implementation 'com.jayway.jsonpath:json-path:2.7.0'
 
     }
     test {

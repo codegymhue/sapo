@@ -18,7 +18,7 @@ import vn.sapo.customer.dto.*;
 import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.customerGroup.dto.DataTablesInput;
 import vn.sapo.customerGroup.dto.DataTablesOutput;
-import vn.sapo.customerGroup.dto.ICustomerGroupResult;
+import vn.sapo.customers.AddressService;
 import vn.sapo.excel.ExcelHelper;
 import vn.sapo.order.sale.SaleOrderService;
 import vn.sapo.order.sale.item.OrderItemService;
@@ -52,6 +52,9 @@ public class CustomerAPI extends BaseController {
 
     @Autowired
     CustomerGroupService customerGroupService;
+
+    @Autowired
+    private AddressService addressService;
 
 //    @Autowired
 //    ExcelService excelService;
@@ -157,14 +160,14 @@ public class CustomerAPI extends BaseController {
     @PostMapping("/{id}/contacts")
     private ResponseEntity<?> createContact(@PathVariable Integer id,
                                             @RequestBody @Validated CreateContactParam contactParam) {
-        ContactResult dto = contactCustomerService.createContactByCustomerId(id, contactParam);
+        ContactResult dto = contactCustomerService.createByCustomerId(id, contactParam);
 
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
     @PostMapping("/{id}/contacts/pagination")
     private ResponseEntity<?> getContactsPagination(@PathVariable Integer id,
-                                            @RequestBody @Validated DataTablesInput input) {
+                                                    @RequestBody @Validated DataTablesInput input) {
         int draw = input.getDraw();
         int start = input.getStart();
         int length = input.getLength();
@@ -174,16 +177,16 @@ public class CustomerAPI extends BaseController {
 
         Pageable pageable = PageRequest.of(page - 1, length, s);
 
-        Page<ContactResult> findContactResultByCustomerId =
-                contactCustomerService.findContactResultByCustomerId(id, pageable);
+        Page<ContactResult> dtoPage =
+                contactCustomerService.findAllContact(id, pageable);
 
         DataTablesOutput<ContactResult> output = new DataTablesOutput<>();
         output.setDraw(draw);
-        output.setRecordsTotal(findContactResultByCustomerId.getTotalElements());
-        output.setRecordsFiltered(findContactResultByCustomerId.getTotalElements());
-        output.setData(findContactResultByCustomerId.getContent());
+        output.setRecordsTotal(dtoPage.getTotalElements());
+        output.setRecordsFiltered(dtoPage.getTotalElements());
+        output.setData(dtoPage.getContent());
 
-        System.out.println(findContactResultByCustomerId.getContent());
+        System.out.println(dtoPage.getContent());
 
         return new ResponseEntity<>(output, HttpStatus.OK);
     }

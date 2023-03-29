@@ -7,10 +7,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-import vn.sapo.entities.Address;
-import vn.sapo.entities.BaseEntity;
-import vn.sapo.entities.Employee;
-import vn.sapo.entities.PaymentMethod;
+import vn.sapo.entities.*;
 import vn.sapo.entities.product.pricing_policy.PricingPolicy;
 
 import javax.persistence.*;
@@ -30,6 +27,9 @@ import java.util.*;
         typeClass = JsonType.class)
 @TypeDef(
         name = "tags",
+        typeClass = JsonType.class)
+@TypeDef(
+        name = "contacts",
         typeClass = JsonType.class)
 public class Customer extends BaseEntity {
 
@@ -75,6 +75,10 @@ public class Customer extends BaseEntity {
     @Type(type = "tags")
     @Column(name = "tags", nullable = false, columnDefinition = "JSON")
     private List<String> tags = new ArrayList<>();
+
+    @Type(type = "contacts")
+    @Column(name = "contacts", nullable = false, columnDefinition = "JSON")
+    private Set<Contact> contacts = new HashSet<>();
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "default_payment_method_id", foreignKey = @ForeignKey(name = "fk_customer_payment_method"))

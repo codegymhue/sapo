@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 public interface AddressService {
+
+    AddressResult createAddressWithCustomerId(CreateAddressParam createAddressParam, Integer id);
+
     AddressResult findById(Integer id);
 
     List<AddressResult> findByCustomerId(Integer customerId);

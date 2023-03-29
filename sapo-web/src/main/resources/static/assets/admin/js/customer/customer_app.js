@@ -2,11 +2,11 @@ class CustomerApp {
 
     static DOMAIN_API = origin;
     // static BASE_URL_Customer = this.DOMAIN_API + "/api/customers";
-    static BASE_URL_CUSTOMER  = this.DOMAIN_API + "/api/customers";
-    static BASE_URL_CUSTOMER_GROUP  = this.DOMAIN_API + "/api/customer_groups";
+    static BASE_URL_CUSTOMER = this.DOMAIN_API + "/api/customers";
+    static BASE_URL_CUSTOMER_GROUP = this.DOMAIN_API + "/api/customer_groups";
 
     static URL_CREATE_CUSTOMER = this.BASE_URL_Customer + "/create";
-    static URL_UPDATE_CUSTOMER = this.BASE_URL_Customer  + "/update";
+    static URL_UPDATE_CUSTOMER = this.BASE_URL_Customer + "/update";
 
     static AlertMessageVi = class {
         static SUCCESS_CREATED = "Tạo dữ liệu thành công !";
@@ -45,7 +45,7 @@ class CustomerApp {
         }
 
     }
-    static IziToast = class  {
+    static IziToast = class {
         static showSuccessAlert(m) {
             iziToast.success({
                 title: 'Success',
@@ -54,6 +54,7 @@ class CustomerApp {
                 message: m,
             });
         }
+
         static showFilter(m) {
             iziToast.success({
                 title: 'lưu bộ lọc thành công',
@@ -133,7 +134,7 @@ class CustomerApp {
             commands: {},
         },
         initializeEventControl: {},
-        util:{}
+        util: {}
     }
 
     static dataTableDetails = {
@@ -439,6 +440,90 @@ class CustomerApp {
                 a[i].style.display = "none";
             }
         }
+    }
+
+    static getAllProvinces = () => {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "https://vapi.vnappmob.com/api/province/"
+        })
+            .done((data) => {
+                if (data.results.length === 0) {
+                    let str = `<option value="0">Chọn Tỉnh/Thành Phố</option>`;
+                    CustomerApp.page.elements.province.append(str);
+                } else {
+                    $.each(data.results, (i, item) => {
+                        let str = `<option value="${item.province_id}">${item.province_name}</option>`;
+                        CustomerApp.page.elements.province.append(str);
+                        CustomerApp.page.elements.provinceUpdate.append(str);
+                    });
+                }
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR);
+            })
+    }
+
+    static getAllDistrictsByProvinceId = (provinceId) => {
+        CustomerApp.page.elements.district.empty();
+        CustomerApp.page.elements.districtUpdate.empty();
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "https://vapi.vnappmob.com/api/province/district/" + provinceId
+        })
+            .done((data) => {
+                if (data.results.length === 0) {
+                    let str = `<option value="0">Chọn Quận/Huyện</option>`;
+                    CustomerApp.page.elements.district.append(str);
+                } else {
+                    $.each(data.results, (i, item) => {
+                        let str = ` <option value="${item.district_id}">${item.district_name}</option>`;
+                        CustomerApp.page.elements.district.append(str);
+                        CustomerApp.page.elements.districtUpdate.append(str);
+                    })
+                }
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR);
+            })
+    }
+
+    static getAllWardsByDistrictId = (districtId) => {
+        CustomerApp.page.elements.ward.empty();
+        CustomerApp.page.elements.wardUpdate.empty();
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "https://vapi.vnappmob.com/api/province/ward/" + districtId
+        })
+            .done((data) => {
+
+                if (data.results.length === 0) {
+                    let str = `<option value="0">Chọn Phường/Xã</option>`;
+                    CustomerApp.page.elements.ward.append(str);
+
+                } else {
+                    $.each(data.results, (i, item) => {
+                        let str = `<option value="${item.ward_id}">${item.ward_name}</option>`;
+                        CustomerApp.page.elements.ward.append(str);
+                        CustomerApp.page.elements.wardUpdate.append(str);
+                    });
+                }
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR);
+            })
     }
 }
 

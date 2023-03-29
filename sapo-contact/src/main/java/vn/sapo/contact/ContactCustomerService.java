@@ -7,7 +7,7 @@ import vn.sapo.contact.dto.CreateContactParam;
 
 public interface ContactCustomerService {
 
-    Page<ContactResult> findContactResultByCustomerId(Integer id, Pageable pageable);
+    Page<ContactResult> findAllContact(Integer id, Pageable pageable);
 
-    ContactResult createContactByCustomerId(Integer id, CreateContactParam createParam);
+    ContactResult createByCustomerId(Integer id, CreateContactParam createParam);
 }

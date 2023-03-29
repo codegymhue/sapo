@@ -291,7 +291,7 @@
                                 <button id="histories" class="fJFgex">Lịch sử mua hàng</button>
                                 <button id="debts" class="fJFgex">Công nợ</button>
                                 <button id="btnContacts" class="fJFgex">Liên hệ</button>
-                                <button id="addresses" class="fJFgex">Địa chỉ</button>
+                                <button id="btnAddress" class="fJFgex">Địa chỉ</button>
                                 <button id="notes" class="fJFgex">Ghi chú</button>
                                 <button id="btnCustomerGroups" class="fACSJt">Nhóm khách hàng</button>
                             </div>
@@ -305,10 +305,20 @@
                                     <span class="jaWHHK">Thêm mới liên hệ</span>
                                 </button>
                             </div>
+                            <div class="jyZcwm2 hidden addressContainer">
+                                <button id="btnShowModalCreateAddress" class="kDDrLX">
+                                    <svg class="MuiSvgIcon-root liFCEr" focusable="false" viewBox="0 0 24 24"
+                                         aria-hidden="true">
+                                        <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z">
+                                        </path>
+                                    </svg>
+                                    <span class="jaWHHK">Thêm mới địa chỉ</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
-                                        <th:block th:replace="/admin/customer/layout/info_customer_tb::tbContact"/>
+                    <th:block th:replace="/admin/customer/layout/info_customer_tb::tbContact"/>
 
                     <div id="render_table">
                         <div id="customerGroupContainer" class="hidden">
@@ -341,6 +351,7 @@
 </body>
 <th:block th:replace="/admin/customer/modal_delete_customer"/>
 <th:block th:replace="/admin/customer/modal/contact/modal_createContact"/>
+<th:block th:replace="/admin/customer/modal/address/modal_createAddress"/>
 <th:block th:replace="/admin/customer/layout/script"/>
 
 <script src="/assets/admin/js/customer/customerHistory.js"></script>
@@ -399,7 +410,18 @@
     CustomerApp.page.dialogs.elements.noteCtCre = $("#noteCtCre");
 
     CustomerApp.page.dialogs.elements.btnCreateContact = $("#btnCreateContact");
+    CustomerApp.page.elements.modalCreateAddress = $("#modalCreateAddress");
     //end contact
+
+    //start address
+    CustomerApp.page.elements.btnAddress = $("#btnAddress");
+    CustomerApp.page.elements.districtUpdate = $("#districtUpdate");
+    CustomerApp.page.elements.provinceUpdate = $("#provinceUpdate");
+    CustomerApp.page.elements.wardUpdate = $("#wardUpdate");
+    CustomerApp.page.elements.district = $("#district");
+    CustomerApp.page.elements.province = $("#province");
+    CustomerApp.page.elements.ward = $("#ward");
+    //end address
 
     //start contact
     CustomerApp.page.elements.btnContacts.click(() => {
@@ -621,6 +643,18 @@
         CustomerApp.page.elements.modalCreateContact.modal('show');
     })
     //end modal create contact
+
+    //start address
+    CustomerApp.page.elements.btnAddress.click(() => {
+        $('.addressContainer').removeClass('hidden').addClass('show');
+    })
+
+    $("#btnShowModalCreateAddress").click(() => {
+        CustomerApp.page.elements.modalCreateAddress.modal('show');
+    })
+
+    CustomerApp.getAllProvinces();
+    //end address
 
     /*
     // liên hệ
@@ -1681,10 +1715,6 @@
 
             })
     })
-
-    function createCustomerShippingAddress() {
-
-    }
 
     $(document).ready(function () {
         showContacts();

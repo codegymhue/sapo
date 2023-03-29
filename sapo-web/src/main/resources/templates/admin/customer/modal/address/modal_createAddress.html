@@ -1,0 +1,89 @@
+<th:block th:fragment="modal_createAddress">
+    <div class="modal fade" id="modalCreateAddress" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="jss23776">
+                    <h5 class="modal-title" id="staticBackdropLabel">Thêm mới địa chỉ</h5>
+                    <button type="button" class="btn-close btnCloseCreateAddressModal" data-bs-dismiss="modal">
+                    </button>
+                </div>
+                <form id="formCreateAddress">
+                    <div class="Quveh">
+                        <div class="row">
+                            <div class="col-6 field">
+                                <label for="fullNameAddressCreate" class="hTBRNU">
+                                    Họ tên
+                                </label>
+                                <input class="form-control sapo-textbox" id="fullNameAddressCreate"
+                                       name="fullNameAddressCreate" type="text" placeholder="Nhập họ tên">
+                            </div>
+                            <div class="col-6 field">
+                                <label for="phoneAddressCreate" class="hTBRNU">
+                                    Số điện thoại
+                                </label>
+                                <input class="form-control sapo-textbox" id="phoneAddressCreate"
+                                       name="phoneAddressCreate"
+                                       type="text" placeholder="Nhập số điện thoại">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 field">
+                                <label for="line1Create" class="hTBRNU">
+                                    Địa chỉ cụ thể
+                                </label>
+                                <input class="form-control sapo-textbox" id="line1Create" name="line1Create"
+                                       placeholder="Nhập địa chỉ" type="text">
+                            </div>
+                            <div class="col-6 field">
+                                <label for="emailCreate" class="hTBRNU">
+                                    Email
+                                </label>
+                                <input class="form-control sapo-textbox" id="emailCreate" name="emailCreate" type="text"
+                                       placeholder="Nhập địa chỉ email">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 field">
+                                <label for="provinceCr">Tỉnh thành phố</label>
+                                <select id="provinceCr" name="provinceCr"
+                                        class="w100 input-dropdown sapo-btn-blank select-padding aeIbe">
+                                    <option disabled selected>Chọn tỉnh thành phố</option>
+                                </select>
+                            </div>
+                            <div class="col-6 field">
+                                <label for="districtCr">Quận huyện</label>
+                                <select id="districtCr" name="districtCr"
+                                        class="w100 input-dropdown sapo-btn-blank select-padding aeIbe">
+                                    <option disabled selected>Chọn quận huyện</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 field">
+                                <label for="wardCr">Phường xã</label>
+                                <select id="wardCr" name="wardCr"
+                                        class="w100 input-dropdown sapo-btn-blank select-padding aeIbe">
+                                    <option value="" disabled selected>Chọn phường xã</option>
+                                </select>
+                            </div>
+                            <div class="col-6 field">
+                                <label for="zipCodeCreate">Mã bưu điện</label>
+                                <input class="form-control sapo-textbox" id="zipCodeCreate" name="zipCodeCreate"
+                                       type="text" placeholder="Nhập mã bưu điện">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer irenfk">
+                    <button type="button" class="ldZiUT ldZiUTA btnCloseCreatePricePolicyModal" data-bs-dismiss="modal">
+                        Thoát
+                    </button>
+                    <button id="btnCreateContact" class="RthGc ldZiUTA" type="button">
+                        Thêm
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
