@@ -69,9 +69,11 @@
         let listCreateCustomerParam = [];
         let listObjAddress = {};
         let listResultParam = [];
+        
         let flag = false;
         let obj = {};
         let countSuccess = 0;
+        let countFailure = 0;
         let sheetName = "";
         $('#btnImportFileCustomers').on('click',() => {
             listCreateCustomerParam = [];
@@ -79,6 +81,14 @@
             errorArrRow = [];
             listResultParam = [];
             listObjAddress = {};
+            countSuccess = 0;
+            countFailure = 0;
+            $("#customer-series-update").html("");
+            $('#btnImportFileCustomers').attr('disabled',true);
+            $('#comfirm-alert-series-customer').attr('disabled', true);
+            $('#btnImportFileCustomers').html(statusLoading);
+            $('#comfirm-alert-series-customer').html(statusLoading);
+
             upload();
             let setData = setInterval(()=>{
                 if(flag){
@@ -89,18 +99,24 @@
                     }
                     createListAddress(listCreateCustomerParam);
                     createListResult(listCreateCustomerParam, errorArrRow, listObjAddress);
+                    createListAddress(listResultParam);
+
+                    createSeriesCustomer(listResultParam, listObjAddress);
 
                     console.log(listCreateCustomerParam);
                     console.log(errorArrRow);
                     console.log(listObjAddress);
                     console.log(listResultParam);
 
+                    renderError(errorArrRow);
+                    $("#modalImportFileCustomers").modal("hide");
+                    $("#modal-alert-series-customer").modal('show');
+
                     clearInterval(setData);
                 }
             });
             // countSuccess = 0;
             // $("#customer-series-update").html("");
-
             // $('#btnImportFileCustomers').attr('disabled',true);
             // $('#comfirm-alert-series-customer').attr('disabled', true);
             // $('#btnImportFileCustomers').html(statusLoading);
@@ -127,6 +143,22 @@
             //     CustomerApp.IziToast.showErrorAlert("Tải file lên không thành công!")
             // })
         });
+        function renderError(listError){
+            $(`#show-detai-failure-series-customer`).html("");
+            for(let error of listError){
+                let index = Object.keys(error)[0];
+                let indexMessage = error[index];
+                countFailure++;
+                $("#count-failure").text(countFailure);
+                let elementRowError = `<div class="customer-series-update" id=error-excel-${countFailure}><h5>Hàng ${Number(index)+1}: </h5></div>`
+                $(`#show-detai-failure-series-customer`).append(elementRowError);
+                for(let message in indexMessage){
+                    let content = `<div>- ${message}: ${indexMessage[message]}</div>`;
+                    $(`#error-excel-${countFailure}`).append(content);
+                }
+            }
+        }
+        //loc data Excel
         function createListResult(listCreateCustomerParam, errorArrRow, listObjAddress){
             for(let i=0; i<listCreateCustomerParam.length; i++){ 
                 let index = i;
@@ -169,6 +201,7 @@
             // console.log("index")
             // console.log(indexListCreate)
         }
+        // tao customer hang loat
         function createSeriesCustomer(data, contact){  
             let address = Object.keys(contact);
             let countSuccess = 0;
@@ -183,6 +216,7 @@
                     }
                 }
             }
+
             $('#btnImportFileCustomers').text('Nhập file')
             $('#btnImportFileCustomers').attr('disabled',false);
             $('#comfirm-alert-series-customer').text('Xác nhận');
@@ -190,8 +224,9 @@
             $("#frmFileCustomers")[0].reset();
             CustomerApp.IziToast.showSuccessAlert("Tải file lên thành công!")
         }
+        //tao listcontact tuong ung voi tung customer
         function createListAddress(arr){
-            // let listObjAddress = {};
+            listObjAddress = {};
             for(let i=0; i<arr.length-1; i++){
                 let address = [];
                 if(arr[i+1]["fullName"] != ''){
@@ -214,28 +249,32 @@
             }
             // return listObjAddress;
         }
+        //tao 1 customer voi 1 dia chi lien he
         function createCustomerOneContact(customer){
-            $.ajax({
-                headers: {          
-                    "accept": "application/json",
-                    "content-type": "application/json"
-                },
-                async: false,
-                type:"POST",
-                url: origin + '/api/customers',
-                data: JSON.stringify(customer),
-            })
-            .done((result)=>{
-                let content =`<div class="customer-series-update">
-                                <a href="/admin/customers/${result.id}">${result.fullName}</a> - Đã được tạo thành công
-                             </div>`
-                $("#count-success").text(++countSuccess);
-                $("#show-detai-success-series-customer").append(content);
-            })
-            // console.log("customer: ");
-            // console.log(customer);
+            // $.ajax({
+            //     headers: {          
+            //         "accept": "application/json",
+            //         "content-type": "application/json"
+            //     },
+            //     async: false,
+            //     type:"POST",
+            //     url: origin + '/api/customers',
+            //     data: JSON.stringify(customer),
+            // })
+            // .done((result)=>{
+            //     let content =`<div class="customer-series-update">
+            //                     <a href="/admin/customers/${result.id}">${result.fullName}</a> - Đã được tạo thành công
+            //                  </div>`
+            //     $("#count-success").text(++countSuccess);
+            //     $("#show-detai-success-series-customer").append(content);
+            // })
+            console.log("customer: ");
+            console.log(customer);
         }
+        //tao 1 customer voi nhieu dia chi lien he
         function createCustomerManyContact(customer, contact){
+            console.log("customer: ");
+            console.log(customer);
             // $.ajax({
             //     headers: {          
             //         "accept": "application/json",
@@ -266,13 +305,12 @@
                 // .done((result)=>{
                 //     console.log(result);
                 // })
-                console.log("contact: ")
+                console.log("contact: ");
                 console.log(contact);
             }
             // })
-            console.log("customer: ");
-            console.log(customer);
         }
+        //validate data excel
         function validateDataExcel(data, index){
             let validate = {
                 ["Tên khách hàng"]: {
@@ -487,6 +525,7 @@
             }
             if(i!=0) errorArrRow.push(error);
         }
+        //convert excel to DTO
         function excelToCreateCustomerParam(jsonData){
             let customerCreateParam = {
                 fullName: jsonData["Tên khách hàng"] || '',
