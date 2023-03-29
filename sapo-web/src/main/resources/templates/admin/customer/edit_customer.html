@@ -681,9 +681,9 @@
             .done((data) => {
                 CustomerApp.IziToast.showSuccessAlert("Cập nhật khách hàng thành công");
 
-                // setTimeout(() => {
-                // }, 2500)
-                // window.location.href = `/admin/customers/${data.id}`;
+                setTimeout(() => {
+                }, 2500)
+                window.location.href = `/admin/customers/${data.id}`;
 
             })
             .fail((jqXHR) => {

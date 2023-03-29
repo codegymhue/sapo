@@ -4,7 +4,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import vn.sapo.customerGroup.dto.ICustomerGroupResult;
 import vn.sapo.entities.customer.CustomerGroup;
@@ -25,16 +24,16 @@ public interface CustomerGroupRepository extends JpaRepository<CustomerGroup, In
             "group by g.id")
     Page<ICustomerGroupResult> findAllCustomerGroupPageable(Pageable pageable);
 
-    @Query("SELECT " +
-            "g.id AS id," +
-            "g.cusGrpCode AS cusGrpCode," +
-            "g.title AS title," +
-            "g.type AS type," +
-            "g.note AS note " +
-            "FROM CustomerGroup AS g " +
-            "WHERE g.id = :id"
-    )
-    Page<ICustomerGroupResult> findCustomerGroupResultById(@Param("id") Integer id, Pageable pageable);
+    //    @Query("SELECT " +
+//            "g.id AS id," +
+//            "g.cusGrpCode AS cusGrpCode," +
+//            "g.title AS title," +
+//            "g.type AS type," +
+//            "g.note AS note " +
+//            "FROM CustomerGroup AS g " +
+//            "WHERE g.id = :id"
+//    )
+    CustomerGroup findCustomerGroupById (Integer id);
 
     boolean existsByCusGrpCode(String code);
 

@@ -6,7 +6,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import vn.sapo.customer.CustomerService;
+import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customerGroup.dto.*;
+import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerGroup;
 import vn.sapo.entities.customer.CustomerGroupType;
 import vn.sapo.shared.configurations.CodePrefix;
@@ -25,9 +28,17 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     @Autowired
     private CustomerGroupRepository customerGroupRepository;
 
+    @Autowired
+    private CustomerService customerService;
+
     @Override
-    public Page<ICustomerGroupResult> findCustomerGroupResultById(Integer id, Pageable pageable) {
-        return customerGroupRepository.findCustomerGroupResultById(id,pageable);
+    public CustomerGroupResult findCustomerGroupByCustomerId(Integer id) {
+        CustomerResult customerResult = customerService.findById(id);
+
+        CustomerGroup customerGroup = customerGroupRepository
+                .findCustomerGroupById(customerResult.getGroup().getId());
+
+        return customerGroupMapper.toDTO(customerGroup);
     }
 
     @Override
