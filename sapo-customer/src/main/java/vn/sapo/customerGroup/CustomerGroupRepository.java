@@ -24,15 +24,6 @@ public interface CustomerGroupRepository extends JpaRepository<CustomerGroup, In
             "group by g.id")
     Page<ICustomerGroupResult> findAllCustomerGroupPageable(Pageable pageable);
 
-    //    @Query("SELECT " +
-//            "g.id AS id," +
-//            "g.cusGrpCode AS cusGrpCode," +
-//            "g.title AS title," +
-//            "g.type AS type," +
-//            "g.note AS note " +
-//            "FROM CustomerGroup AS g " +
-//            "WHERE g.id = :id"
-//    )
     CustomerGroup findCustomerGroupById (Integer id);
 
     boolean existsByCusGrpCode(String code);
