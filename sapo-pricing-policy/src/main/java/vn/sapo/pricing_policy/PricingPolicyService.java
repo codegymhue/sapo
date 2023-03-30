@@ -5,6 +5,8 @@ import vn.sapo.pricing_policy.dto.PricingPolicyParam;
 import vn.sapo.pricing_policy.dto.PricingPolicyResult;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Service
 public interface PricingPolicyService {
@@ -20,4 +22,6 @@ public interface PricingPolicyService {
     List<PricingPolicyResult> findAllSale();
 
     List<PricingPolicyResult> findAllPurchase();
+
+    Map<String, Integer> findByTitles(Set<String> titles);
 }

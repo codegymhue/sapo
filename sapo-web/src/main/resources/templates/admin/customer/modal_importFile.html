@@ -91,7 +91,8 @@
             $('#comfirm-alert-series-customer').html(statusLoading);
 
             upload();
-            let setData = setInterval(()=>{
+            try{
+                let setData = setInterval(()=>{
                 if(flag){
                     let datas = obj[sheetName];
                     for(let i=0; i<datas.length; i++){
@@ -107,10 +108,10 @@
                         renderError(errorArrRow);
                     }
 
-                    console.log(listCreateCustomerParam);
-                    console.log(errorArrRow);
-                    console.log(listObjAddress);
-                    console.log(listResultParam);
+                    // console.log(listCreateCustomerParam);
+                    // console.log(errorArrRow);
+                    // console.log(listObjAddress);
+                    // console.log(listResultParam);
 
                     $("#modalImportFileCustomers").modal("hide");
                     $("#modal-alert-series-customer").modal('show');
@@ -122,7 +123,10 @@
 
                     clearInterval(setData);
                 }
-            });
+                });
+            }catch{
+                clearInterval(setData);
+            }
         });
         //reset form khi nhan thoat
         function cancelToReset(){
@@ -144,6 +148,7 @@
                 }
             }
         }
+        
         //loc data Excel
         function createListResult(listCreateCustomerParam, errorArrRow, listObjAddress){
             for(let i=0; i<listCreateCustomerParam.length; i++){ 
@@ -242,11 +247,25 @@
                 data: JSON.stringify(customer),
             })
             .done((result)=>{
+                
                 let content =`<div class="customer-series-update">
                                 <a href="/admin/customers/${result.id}">${result.fullName}</a> - Đã được tạo thành công
                              </div>`
                 $("#count-success").text(++countSuccess);
                 $("#show-detai-success-series-customer").append(content);
+                let data = 
+                console.log("fullName: ")
+                console.log({fullName: result.addresses[0].fullName});
+                // $.ajax({
+                //     headers: {          
+                //         "accept": "application/json",
+                //         "content-type": "application/json"
+                //     },
+                //     async:false,
+                //     type:"POST",
+                //     url: origin + `/api/customers/${result.id}/contacts`,
+                //     data: JSON.stringify({fullName: result.addresses[0].fullName})
+                // });
             })
             // console.log("customer: ");
             // console.log(customer);
@@ -271,23 +290,42 @@
                              </div>`
                 $("#count-success").text(++countSuccess);
                 $("#show-detai-success-series-customer").append(content);
+
+                let listContactData = result.addresses.map((address)=>{
+                        return address.fullName;
+                })
+
                 for(let i=0; i<contact.length; i++){
-                $.ajax({
-                    headers: {          
-                        "accept": "application/json",
-                        "content-type": "application/json"
-                    },
-                    async:false,
-                    type:"POST",
-                    url: origin + '/api/addresses',
-                    data: JSON.stringify({...contact[i], customerId: result.id}),
-                })
-                .done((result)=>{
-                    console.log(result);
-                })
+                    $.ajax({
+                        headers: {          
+                            "accept": "application/json",
+                            "content-type": "application/json"
+                        },
+                        async:false,
+                        type:"POST",
+                        url: origin + '/api/addresses',
+                        data: JSON.stringify({...contact[i], customerId: result.id})
+                    });
+                }
+                // console.log("listContactData");
+                // console.log(listContactData);
+                for(let i=0; i<listContactData.length; i++){
+                    $.ajax({
+                        headers: {          
+                            "accept": "application/json",
+                            "content-type": "application/json"
+                        },
+                        async:false,
+                        type:"POST",
+                        url: origin + `/api/customers/${result.id}/contacts`,
+                        data: JSON.stringify({fullName: listContactData[i].fullName})
+                    })
+                }
+                // .done((result)=>{
+                //     console.log(result);
+                // })
                 // console.log("contact: ");
                 // console.log(contact);
-            }
             })
         }
         //validate data excel
@@ -518,6 +556,18 @@
                 return undefined;
             }
         }
+        function tagsToArray(tags){
+            try{
+                let arr = tags.split(",")
+                let result = [];
+                for(let item of arr){
+                    result.push(item.trim());
+                }   
+                return result;
+            }catch{
+                return [];
+            }
+        }
         //convert excel to DTO
         function excelToCreateCustomerParam(jsonData){
             let customerCreateParam = {
@@ -535,7 +585,7 @@
                 spendTotal: jsonData["Tổng chi tiêu"] || 0,
                 employeeId: 6,
                 description: jsonData["Mô tả"] || '',
-                tags:[],
+                tags: tagsToArray(jsonData["Tags"]),
                 // defaultPaymentMethodId: jsonData["Phương thức thanh toán mặc định"] || '',
                 // defaultPricingPolicyId: jsonData["Chính sách giá mặc định"] || '',
                 createAddressParam:{

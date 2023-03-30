@@ -4,7 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import vn.sapo.entities.product.pricing_policy.PricingPolicy;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface PricingPolicyRepository extends JpaRepository<PricingPolicy, Integer> {
@@ -14,4 +17,6 @@ public interface PricingPolicyRepository extends JpaRepository<PricingPolicy, In
     boolean existsByPricingPolicyCode(String code);
 
     Optional<PricingPolicy> findByTitle(String title);
+
+    List<PricingPolicy> findByTitleIn(Set<String> titles);
 }

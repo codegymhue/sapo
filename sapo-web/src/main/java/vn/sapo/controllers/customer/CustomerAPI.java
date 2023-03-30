@@ -192,46 +192,6 @@ public class CustomerAPI extends BaseController {
     }
 
 
-//   public void setData(CustomerResult customer) {
-//       BigDecimal spendTotal = getSpendTotalByCustomerId(customer.getId());
-//       BigDecimal paidTotal = getPaidTotalByCustomerId(customer.getId());
-//       customer.setSpendTotal(spendTotal);
-//       customer.setDebtTotal(spendTotal.subtract(paidTotal));
-//       customer.setQuantityProductOrder(getQuantityProductOrderByCustomerId(customer.getId()));
-//       customer.setQuantityItemOrder(getQuantityItemCustomerOrderById(customer.getId()));
-//       customer.setLastDayOrder(getLastDayOrderByCustomerId(customer.getId()));
-//   }
-//
-//    public BigDecimal getSpendTotalByCustomerId(Integer customerId) {
-//        BigDecimal spendTotal = saleOrderService.getSpendTotalByCustomerId(customerId);
-//        if (spendTotal == null)
-//            spendTotal = BigDecimal.valueOf(0);
-//        return spendTotal;
-//    }
-//
-//    public BigDecimal getPaidTotalByCustomerId(Integer customerId) {
-//        BigDecimal paidTotal = new BigDecimal(0);//= paymentSaleOrderService.getPaidTotalByCustomerId(customerId);
-//        if (paidTotal == null)
-//            paidTotal = BigDecimal.valueOf(0);
-//        return paidTotal;
-//    }
-//
-//
-//    public Integer getQuantityProductOrderByCustomerId(Integer customerId) {
-//        Integer quantityProductOrder = saleOrderService.getQuantityProductOrder(customerId);
-//        if (quantityProductOrder == null)
-//            quantityProductOrder = 0;
-//        return quantityProductOrder;
-//    }
-//
-//    public Integer getQuantityItemCustomerOrderById(Integer customerId) {
-//        Integer quantityItemOrder = orderItemService.getQuantityItemCustomerOrderById(customerId);
-//        if (quantityItemOrder == null)
-//            quantityItemOrder = 0;
-//        return quantityItemOrder;
-//    }
-
-
     public Instant getLastDayOrderByCustomerId(Integer customerId) {
         return saleOrderService.getLastDayOrderByCustomerId(customerId);
     }
@@ -242,71 +202,6 @@ public class CustomerAPI extends BaseController {
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
-//    @GetMapping("/{id}/address")
-//    public ResponseEntity<?> shippingAddress(@PathVariable Integer id) {
-//        CustomerResult dto = customerService.findById(id);
-//        setData(dto);
-//
-//        CustomerResultDataTable customerResultDataTable = new CustomerResultDataTable();
-//        List<CustomerResult> customerResults = new ArrayList<>();
-//        customerResults.add(dto);
-//        customerResultDataTable.setData(customerResults);
-//
-//        return new ResponseEntity<>(customerResultDataTable, HttpStatus.OK);
-//    }
-
-
-//    public void setData(CustomerResult customer) {
-//        BigDecimal spendTotal = getSpendTotalByCustomerId(customer.getId());
-//        BigDecimal paidTotal = getPaidTotalByCustomerId(customer.getId());
-//
-//        customer.setSpendTotal(spendTotal);
-//        customer.setDebtTotal(spendTotal.subtract(paidTotal));
-//        customer.setQuantityProductOrder(getQuantityProductOrderByCustomerId(customer.getId()));
-//        customer.setQuantityItemOrder(getQuantityItemCustomerOrderById(customer.getId()));
-//        customer.setLastDayOrder(getLastDayOrderByCustomerId(customer.getId()));
-//    }
-
-//    public BigDecimal getSpendTotalByCustomerId(Integer customerId) {
-//        BigDecimal spendTotal = saleOrderService.getSpendTotalByCustomerId(customerId);
-//
-//        if (spendTotal == null)
-//            spendTotal = BigDecimal.valueOf(0);
-//
-//        return spendTotal;
-//    }
-
-//    public BigDecimal getPaidTotalByCustomerId(Integer customerId) {
-//        BigDecimal paidTotal = paymentSaleOrderService.getPaidTotalByCustomerId(customerId);
-//
-//        if (paidTotal == null)
-//            paidTotal = BigDecimal.valueOf(0);
-//
-//        return paidTotal;
-//    }
-
-//    public Integer getQuantityProductOrderByCustomerId(Integer customerId) {
-//        Integer quantityProductOrder = saleOrderService.getQuantityProductOrder(customerId);
-//
-//        if (quantityProductOrder == null)
-//            quantityProductOrder = 0;
-//
-//        return quantityProductOrder;
-//    }
-
-//    public Integer getQuantityItemCustomerOrderById(Integer customerId) {
-//        Integer quantityItemOrder = orderItemService.getQuantityItemCustomerOrderById(customerId);
-//
-//        if (quantityItemOrder == null)
-//            quantityItemOrder = 0;
-//
-//        return quantityItemOrder;
-//    }
-
-
-//    public Instant getLastDayOrderByCustomerId(Integer customerId) {
-//        return saleOrderService.getLastDayOrderByCustomerId(customerId);
-//    }
 
 }
 

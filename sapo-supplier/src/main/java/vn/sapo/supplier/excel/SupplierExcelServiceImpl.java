@@ -15,6 +15,7 @@ import vn.sapo.customers.AddressService;
 import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.entities.supplier.Supplier;
 import vn.sapo.payment_method.PaymentMethodService;
+import vn.sapo.pricing_policy.PricingPolicyService;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.supplier.SupplierMapper;
 import vn.sapo.supplier.SupplierRepository;
@@ -35,6 +36,9 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
     private SupplierGroupService supplierGroupService;
     @Autowired
     private PaymentMethodService paymentMethodService;
+    @Autowired
+    private PricingPolicyService pricingPolicyService;
+    //
     @Autowired
     AddressService addressService;
     @Autowired
@@ -115,7 +119,7 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
         });
 
         Map<String, String> pmMap = paymentMethodService.findByTitles(pmTitles);
-        Map<String, Integer> ppMap =new HashMap<>();//= paymentMethodService.findByTitles(pmTitles);
+        Map<String, Integer> ppMap = pricingPolicyService.findByTitles(pmTitles);
         Map<String, Integer> supGroupMap = supplierGroupService.findByGroupCodes(supGroupCodes);
         dtoList.forEach(dto -> {
             dto.setPaymentMethodId(pmMap.get(dto.getPaymentMethodTitle()));

@@ -7,10 +7,12 @@ import vn.sapo.entities.product.pricing_policy.PricingPolicy;
 import vn.sapo.entities.product.pricing_policy.PricingPolicyType;
 import vn.sapo.pricing_policy.dto.PricingPolicyParam;
 import vn.sapo.pricing_policy.dto.PricingPolicyResult;
+import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -76,8 +78,16 @@ public class PricingPolicyServiceImpl implements PricingPolicyService {
     @Transactional
     public PricingPolicyResult findById(Integer id) {
         PricingPolicy pricingPolicy = pricingPolicyRepository.findById(id).orElseThrow(
-                () -> new ValidationException("id", "pricing.policy.validation.id.notFound"));
+                () -> new NotFoundException("pricing.policy.exception.notFound"));
         return pricingPolicyMapper.toDTO(pricingPolicy);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Map<String, Integer> findByTitles(Set<String> titles) {
+        return pricingPolicyRepository.findByTitleIn(titles)
+                .stream()
+                .collect(Collectors.toMap(PricingPolicy::getTitle, PricingPolicy::getId));
     }
 
     @Override

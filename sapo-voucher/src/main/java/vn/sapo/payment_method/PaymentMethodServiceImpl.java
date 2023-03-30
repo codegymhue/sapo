@@ -64,6 +64,7 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Map<String, String> findByTitles(Set<String> titles) {
         return paymentMethodRepository.findByTitleIn(titles)
                 .stream()

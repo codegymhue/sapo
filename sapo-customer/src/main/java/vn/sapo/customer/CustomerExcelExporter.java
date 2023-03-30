@@ -171,7 +171,6 @@ public class CustomerExcelExporter {
                                 createCell(row, columnCount++, khac, style);
                                 break;
                         }
-
                     }catch (Exception e) {
                         createCell(row, columnCount++, "", style);
                     }
