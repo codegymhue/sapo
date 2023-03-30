@@ -14,4 +14,16 @@ public class ContactResult extends BaseContact {
     private Instant createdAt;
 
     private Instant updatedAt;
+
+    @Override
+    public String toString() {
+        return "ContactResult{" +
+                "id=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", position='" + position + '\'' +
+                ", department='" + department + '\'' +
+                '}';
+    }
 }

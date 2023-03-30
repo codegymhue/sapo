@@ -14,29 +14,29 @@ public class BaseContact {
 
     @NotBlank(message = "{contact.validation.fullName.notBlank}")
     @Length(max = 255, message = "{contact.validation.fullName.length}")
-    private String fullName;
+    protected String fullName;
 
     @NullOrNotBlank
     @Pattern(regexp = "^$|[0-9]{8,15}$", message = "{contact.validation.phoneNumber.pattern}")
-    private String phoneNumber;
+    protected String phoneNumber;
 
     @NullOrNotBlank
     @Pattern(regexp = "^$|[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "{contact.validation.email.pattern}")
-    private String email;
+    protected String email;
 
     @NullOrNotBlank
     @Pattern(regexp = "^$|[0-9]{8,15}$", message = "{contact.validation.fax.pattern}")
-    private String fax;
+    protected String fax;
 
     @NullOrNotBlank
     @Length(max = 50, message = "{contact.validation.position.length}")
-    private String position;
+    protected String position;
 
     @NullOrNotBlank
     @Length(max = 255, message = "{contact.validation.department.length}")
-    private String department;
+    protected String department;
 
     @NullOrNotBlank
     @Length(max = 255, message = "{contact.validation.note.length}")
-    private String note;
+    protected String note;
 }
