@@ -2,11 +2,13 @@ package vn.sapo.customerGroup.dto;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.Collections;
 import java.util.List;
 
 @Data
+@Accessors(chain = true)
 public class DataTablesOutput<T> {
 
     @JsonView(View.class)

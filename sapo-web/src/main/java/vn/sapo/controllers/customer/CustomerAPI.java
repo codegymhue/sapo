@@ -18,7 +18,6 @@ import vn.sapo.customer.dto.*;
 import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.customerGroup.dto.DataTablesInput;
 import vn.sapo.customerGroup.dto.DataTablesOutput;
-import vn.sapo.customers.AddressService;
 import vn.sapo.excel.ExcelHelper;
 import vn.sapo.order.sale.SaleOrderService;
 import vn.sapo.order.sale.item.OrderItemService;
@@ -52,9 +51,6 @@ public class CustomerAPI extends BaseController {
 
     @Autowired
     CustomerGroupService customerGroupService;
-
-    @Autowired
-    private AddressService addressService;
 
 //    @Autowired
 //    ExcelService excelService;
@@ -180,13 +176,11 @@ public class CustomerAPI extends BaseController {
         Page<ContactResult> dtoPage =
                 contactCustomerService.findAllContact(id, pageable);
 
-        DataTablesOutput<ContactResult> output = new DataTablesOutput<>();
-        output.setDraw(draw);
-        output.setRecordsTotal(dtoPage.getTotalElements());
-        output.setRecordsFiltered(dtoPage.getTotalElements());
-        output.setData(dtoPage.getContent());
-
-        System.out.println(dtoPage.getContent());
+        DataTablesOutput<ContactResult> output = new DataTablesOutput<ContactResult>()
+                .setDraw(draw)
+                .setRecordsTotal(dtoPage.getTotalElements())
+                .setRecordsFiltered(dtoPage.getTotalElements())
+                .setData(dtoPage.getContent());
 
         return new ResponseEntity<>(output, HttpStatus.OK);
     }

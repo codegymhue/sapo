@@ -25,7 +25,6 @@ public class DataTablesInput<T> {
     @Min(-1)
     private Integer length = 10;
 
-    @NotEmpty
     private List<T> order = new ArrayList<>();
 
 }

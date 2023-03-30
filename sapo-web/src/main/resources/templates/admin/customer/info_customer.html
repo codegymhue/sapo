@@ -318,7 +318,27 @@
                         </div>
                     </div>
 
-                    <th:block th:replace="/admin/customer/layout/info_customer_tb::tbContact"/>
+                    <!--                    <th:block th:replace="/admin/customer/layout/info_customer_tb::tbContact"/>-->
+
+                    <div>
+                        <table id="tbContact" class="table-hover jsseh238 jss13504">
+                            <thead>
+                            <tr class="Bgekd">
+                                <th class="IgeUe">
+                                    <label for="checkAll">
+                                        <input id="checkAll" type="checkbox" title="Tất cả">
+                                    </label>
+                                </th>
+                                <th class="IgeUe">Tên liên hệ</th>
+                                <th class="IgeUe">Số điện thoại</th>
+                                <th class="IgeUe">Email</th>
+                                <th class="IgeUe">Chức vụ</th>
+                                <th class="IgeUe">Bộ phận</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
 
                     <div id="render_table">
                         <div id="customerGroupContainer" class="hidden">
@@ -424,24 +444,24 @@
     //end address
 
     //start contact
-    CustomerApp.page.elements.btnContacts.click(() => {
-        CustomerApp.page.commands.drawContactDataTable();
-    })
+    // CustomerApp.page.elements.btnContacts.click(() => {
+    // })
 
     CustomerApp.page.commands.drawContactDataTable = () => {
         let id = +window.location.pathname.split('/')[3];
 
-        CustomerApp.page.elements.tbContact.DataTable({
-            dom: '<"top">rt<"bottom"lifp><"clear">',
+        let tbContact = CustomerApp.page.elements.tbContact.DataTable({
+            dom: '<"top">Brt<"bottom"lifp><"clear">',
             processing: true,
             serverSide: true,
+            searching: false,
+            ordering: false,
             ajax: {
                 type: 'POST',
                 url: origin + `/api/customers/${id}/contacts/pagination`,
                 accept: 'application/json',
                 contentType: 'application/json',
                 data: function (d) {
-                    console.log(d)
                     return JSON.stringify(d);
                 }
             },
@@ -450,31 +470,57 @@
                 [20, 50, 100],
                 ["20", "50", "100"]
             ],
-            column: [
+            aoColumns: [
                 {
-                    data: 'fullName',
-                    ordering: false
+                    mData: 'id',
                 },
                 {
-                    data: 'phoneNumber',
-                    ordering: false
+                    mData: 'fullName',
+                    render: (data, type, row) => {
+                        return row.fullName || '';
+                    }
                 },
                 {
-                    data: 'email',
-                    ordering: false
+                    mData: 'phoneNumber',
+                    render: (data, type, row) => {
+                        return row.phoneNumber || '';
+                    }
                 },
                 {
-                    data: 'position',
-                    ordering: false
+                    mData: 'email',
+                    render: (data, type, row) => {
+                        return row.email || '';
+                    }
                 },
                 {
-                    data: 'department',
-                    ordering: false
+                    mData: 'position',
+                    render: (data, type, row) => {
+                        return row.position || '';
+                    }
+                },
+                {
+                    mData: 'department',
+                    render: (data, type, row) => {
+                        return row.department || '';
+                    }
                 }
             ],
-            searching: false
+            columnDefs: [{
+                targets: 0,
+                className: 'select-checkbox',
+                render: function (data, type, row, meta) {
+                    return `<input id=${row.id} type="checkbox"/>`
+                }
+            }],
         })
     }
+
+    //check all select
+    $('#checkAll').click(function (e) {
+        $('#tbContact tbody :checkbox').prop('checked', $(this).is(':checked'));
+        e.stopImmediatePropagation();
+    });
+    //
 
     CustomerApp.page.dialogs.elements.btnCreateContact.click(() => {
         CustomerApp.page.commands.createContact();
@@ -516,7 +562,6 @@
             url: origin + `/api/customers/${id}`,
         })
             .done((data) => {
-                console.log(data)
                 currentCustomer = {...data}
                 CustomerApp.page.elements.fullName.text(CustomerApp.page.commands.getValue(data.fullName));
 
@@ -564,6 +609,7 @@
             CustomerApp.page.commands.deleteCustomer();
 
             CustomerApp.page.commands.showCustomerGroup();
+            CustomerApp.page.commands.drawContactDataTable();
         });
     })
 
@@ -578,7 +624,6 @@
                 url: origin + `/api/customer_groups/${id}/customer`
             })
                 .done((data) => {
-                    console.log(data)
                     let groupId = data.id;
                     CustomerApp.page.elements.cgrCode.text(`${data.cusGrpCode}`)
                     $("#cgrTitle").text(`${data.title}`)

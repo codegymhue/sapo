@@ -1434,18 +1434,26 @@ li {
 }
 
 .jsseh238 {
-    width: 100%;
+    width: 100% !important;
 }
 
 table thead tr {
-    display: flex;
+    display: inline-flex;
     height: 52px;
 }
 
 table thead tr th {
-    font-weight: 500;
+    font-weight: 500 !important;
     background: #f4f6f8;
     padding: 16px;
+}
+
+table tbody tr:hover{
+    cursor: pointer;
+}
+
+th{
+    font-weight: normal;
 }
 
 .jyZcwm1 {
@@ -1589,4 +1597,8 @@ table thead tr th {
 
 .aeIbe {
     height: 40px;
+}
+
+.IgeUe {
+    width: 145.5px;
 }
