@@ -8,7 +8,7 @@
                     <button type="button" class="btn-close btnCloseCreateAddressModal" data-bs-dismiss="modal">
                     </button>
                 </div>
-                <form id="formCreateAddress">
+                <form id="frmCreateAddress">
                     <div class="Quveh">
                         <div class="row">
                             <div class="col-6 field">
@@ -30,7 +30,7 @@
                         <div class="row">
                             <div class="col-6 field">
                                 <label for="line1Create" class="hTBRNU">
-                                    Địa chỉ cụ thể
+                                    Địa chỉ cụ thể <span class="fewigj">*</span>
                                 </label>
                                 <input class="form-control sapo-textbox" id="line1Create" name="line1Create"
                                        placeholder="Nhập địa chỉ" type="text">
@@ -45,26 +45,38 @@
                         </div>
                         <div class="row">
                             <div class="col-6 field">
-                                <label for="provinceCr">Tỉnh thành phố</label>
-                                <select id="provinceCr" name="provinceCr"
+                                <label for="province">Tỉnh thành phố</label>
+                                <select id="province" name="province"
                                         class="w100 input-dropdown sapo-btn-blank select-padding aeIbe">
-                                    <option disabled selected>Chọn tỉnh thành phố</option>
+                                    <option selected value="0">
+                                        <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">
+                                            Chọn Tỉnh/Thành phố
+                                        </p>
+                                    </option>
                                 </select>
                             </div>
                             <div class="col-6 field">
-                                <label for="districtCr">Quận huyện</label>
-                                <select id="districtCr" name="districtCr"
+                                <label for="district">Quận huyện</label>
+                                <select id="district" name="district"
                                         class="w100 input-dropdown sapo-btn-blank select-padding aeIbe">
-                                    <option disabled selected>Chọn quận huyện</option>
+                                    <option value="0">
+                                        <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">
+                                            Chọn Quận/Huyện
+                                        </p>
+                                    </option>
                                 </select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-6 field">
-                                <label for="wardCr">Phường xã</label>
-                                <select id="wardCr" name="wardCr"
+                                <label for="ward">Phường xã</label>
+                                <select id="ward" name="ward"
                                         class="w100 input-dropdown sapo-btn-blank select-padding aeIbe">
-                                    <option value="" disabled selected>Chọn phường xã</option>
+                                    <option value="0">
+                                        <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">
+                                            Chọn Phường/Xã
+                                        </p>
+                                    </option>
                                 </select>
                             </div>
                             <div class="col-6 field">
@@ -76,10 +88,10 @@
                     </div>
                 </form>
                 <div class="modal-footer irenfk">
-                    <button type="button" class="ldZiUT ldZiUTA btnCloseCreatePricePolicyModal" data-bs-dismiss="modal">
+                    <button type="button" class="ldZiUT ldZiUTA" data-bs-dismiss="modal">
                         Thoát
                     </button>
-                    <button id="btnCreateContact" class="RthGc ldZiUTA" type="button">
+                    <button id="btnCreateAddress" class="RthGc ldZiUTA" type="button">
                         Thêm
                     </button>
                 </div>

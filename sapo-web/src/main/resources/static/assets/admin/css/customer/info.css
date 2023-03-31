@@ -1437,22 +1437,37 @@ li {
     width: 100% !important;
 }
 
+table thead {
+    width: 100%;
+    display: block;
+}
+
 table thead tr {
     display: inline-flex;
     height: 52px;
+    width: 100%;
 }
 
 table thead tr th {
     font-weight: 500 !important;
     background: #f4f6f8;
     padding: 16px;
+    width: auto !important;
 }
 
 table tbody tr:hover{
     cursor: pointer;
 }
 
-th{
+table#tbAddress thead tr th {
+    width: 12.5% !important;
+}
+
+table#tbAddress tbody tr td {
+    width: 12.5% !important;
+}
+
+th {
     font-weight: normal;
 }
 

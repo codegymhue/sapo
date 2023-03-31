@@ -13,10 +13,8 @@ import vn.sapo.entities.customer.Customer;
 import vn.sapo.shared.exceptions.NotFoundException;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service

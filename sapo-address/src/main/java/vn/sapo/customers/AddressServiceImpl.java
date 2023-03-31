@@ -3,6 +3,7 @@ package vn.sapo.customers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import vn.sapo.customers.dto.AddressResult;
 import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.customers.dto.UpdateAddressParam;
 import vn.sapo.entities.Address;
+import vn.sapo.entities.customer.Customer;
 import vn.sapo.shared.exceptions.NotFoundException;
 
 import java.util.*;
@@ -24,6 +26,17 @@ public class AddressServiceImpl implements AddressService {
 
     @Autowired
     AddressMapper addressMapper;
+
+    @Override
+    public Page<AddressResult> findAllAddresses(Integer id, Pageable pageable) {
+        List<AddressResult> dtoList = addressRepository
+                .findAllByCustomerId(id)
+                .stream()
+                .map(addressMapper::toDTO)
+                .collect(Collectors.toList());
+
+        return new PageImpl<>(dtoList, pageable, dtoList.size());
+    }
 
     @Override
     @Transactional
@@ -87,9 +100,9 @@ public class AddressServiceImpl implements AddressService {
     public void deleteSoftSupplier(List<Integer> supplierAddressIds) {
         for (Integer supplierId : supplierAddressIds) {
             Optional<Address> address = addressRepository.findById(supplierId);
-            if(address.isPresent()) {
+            if (address.isPresent()) {
                 addressRepository.deleteById(address.get().getId());
-            }else {
+            } else {
                 throw new NotFoundException("Address not found");
             }
         }
@@ -98,9 +111,9 @@ public class AddressServiceImpl implements AddressService {
     @Override
     @Transactional
     public Map<String, Object> getAllAddressSupplierPage(Integer pageNo, Integer pageSize, Integer supplierId) {
-        Pageable pageable = PageRequest.of(pageNo-1, pageSize);
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
 
-        Page<Address> addresses = addressRepository.findAllBySupplierId(pageable,supplierId );
+        Page<Address> addresses = addressRepository.findAllBySupplierId(pageable, supplierId);
         if (addresses.hasContent()) {
             List<Address> addressList = addresses.getContent();
             System.out.println("page: " + addressList);
@@ -118,8 +131,7 @@ public class AddressServiceImpl implements AddressService {
             response.put("totalPage", addresses.getTotalPages());
 
             return response;
-        }
-        else {
+        } else {
             return new HashMap<>();
         }
     }
@@ -143,11 +155,14 @@ public class AddressServiceImpl implements AddressService {
     public void deleteByCustomerId(Integer customerId) {
         addressRepository.deleteByCustomerId(customerId);
     }
+
     @Override
     @Transactional
-   public void deleteAllBySupplierId(Integer id){
+    public void deleteAllBySupplierId(Integer id) {
         addressRepository.deleteAllBySupplierId(id);
-    };
+    }
+
+    ;
 }
 
 

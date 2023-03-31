@@ -318,49 +318,11 @@
                         </div>
                     </div>
 
-                    <!--                    <th:block th:replace="/admin/customer/layout/info_customer_tb::tbContact"/>-->
-
-                    <div>
-                        <table id="tbContact" class="table-hover jsseh238 jss13504">
-                            <thead>
-                            <tr class="Bgekd">
-                                <th class="IgeUe">
-                                    <label for="checkAll">
-                                        <input id="checkAll" type="checkbox" title="Tất cả">
-                                    </label>
-                                </th>
-                                <th class="IgeUe">Tên liên hệ</th>
-                                <th class="IgeUe">Số điện thoại</th>
-                                <th class="IgeUe">Email</th>
-                                <th class="IgeUe">Chức vụ</th>
-                                <th class="IgeUe">Bộ phận</th>
-                            </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-
                     <div id="render_table">
-                        <div id="customerGroupContainer" class="hidden">
-                            <table id="tbCustomerGroup" class="jsseh238">
-                                <thead>
-                                <tr>
-                                    <th class="col-3">Mã nhóm</th>
-                                    <th class="col-3">Tên nhóm</th>
-                                    <th class="col-3">Loại nhóm</th>
-                                    <th class="col-3">Mô tả</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="row Bgekd">
-                                    <td id="cgrCode" class="col-3"></td>
-                                    <td id="cgrTitle" class="col-3"></td>
-                                    <td id="cgrType" class="col-3"></td>
-                                    <td id="cgrNote" class="col-3"></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <th:block th:replace="/admin/customer/layout/info_customer_tb::tbContact"/>
+                        <th:block th:replace="/admin/customer/layout/info_customer_tb::tbCustomerGroup"/>
+                        <th:block th:replace="/admin/customer/layout/info_customer_tb::tbAddress"/>
+
                     </div>
                 </div>
             </div>
@@ -372,6 +334,7 @@
 <th:block th:replace="/admin/customer/modal_delete_customer"/>
 <th:block th:replace="/admin/customer/modal/contact/modal_createContact"/>
 <th:block th:replace="/admin/customer/modal/address/modal_createAddress"/>
+<th:block th:replace="/admin/customer/modal/address/modal_editAddress"/>
 <th:block th:replace="/admin/customer/layout/script"/>
 
 <script src="/assets/admin/js/customer/customerHistory.js"></script>
@@ -380,7 +343,8 @@
 
     let currentCustomer = {};
     let contactParam = {};
-    let dataInput = {};
+    let createAddressParam = {};
+    let addressDataTable = {};
 
     CustomerApp.page.elements.fullName = $("#fullName");
     CustomerApp.page.elements.status = $("#status");
@@ -416,6 +380,10 @@
 
     CustomerApp.page.elements.cgrCode = $("#cgrCode");
 
+    //start customer group
+    CustomerApp.page.elements.tbCustomerGroup = $("#tbCustomerGroup");
+    //end customer group
+
     //start contact
     CustomerApp.page.elements.btnContacts = $("#btnContacts");
 
@@ -434,6 +402,8 @@
     //end contact
 
     //start address
+    CustomerApp.page.elements.tbAddress = $("#tbAddress");
+
     CustomerApp.page.elements.btnAddress = $("#btnAddress");
     CustomerApp.page.elements.districtUpdate = $("#districtUpdate");
     CustomerApp.page.elements.provinceUpdate = $("#provinceUpdate");
@@ -507,11 +477,14 @@
             ],
             columnDefs: [{
                 targets: 0,
-                className: 'select-checkbox',
                 render: function (data, type, row, meta) {
                     return `<input id=${row.id} type="checkbox"/>`
                 }
             }],
+            select: {
+                style: 'os',
+                selector: 'td:first-child'
+            },
         })
     }
 
@@ -609,6 +582,7 @@
             CustomerApp.page.commands.deleteCustomer();
 
             CustomerApp.page.commands.showCustomerGroup();
+            CustomerApp.page.elements.drawAddressDatatable();
             CustomerApp.page.commands.drawContactDataTable();
         });
     })
@@ -616,7 +590,15 @@
     CustomerApp.page.commands.showCustomerGroup = () => {
         CustomerApp.page.elements.btnCustomerGroups.click(() => {
 
-            $("#customerGroupContainer").addClass('show').removeClass('hidden');
+            CustomerApp.page.elements.tbCustomerGroup.addClass('show').removeClass('hidden');
+            $(".jyZcwm2.addressContainer").addClass('hidden').removeClass('show');
+
+            CustomerApp.page.elements.tbAddress.addClass('hidden').removeClass('show');
+            CustomerApp.page.elements.tbAddress.DataTable().destroy();
+
+            CustomerApp.page.elements.tbContact.addClass('hidden').removeClass('show');
+            CustomerApp.page.elements.tbContact.DataTable().destroy();
+
             let id = currentCustomer.id;
 
             $.ajax({
@@ -690,15 +672,282 @@
     //end modal create contact
 
     //start address
+
+    $("#tbAddress tbody").on('click', 'tr', function () {
+        let id = addressDataTable.row(this).data().id;
+        console.log(id)
+        $("#modalEditAddress").modal('show');
+    });
+
+    $("#btnCreateAddress").click(() => {
+        let id = +window.location.pathname.split('/')[3];
+
+        createAddressParam.fullName = CustomerApp.getValue($('#fullNameAddressCreate'));
+        createAddressParam.phoneNumber = CustomerApp.getValue($('#phoneAddressCreate'));
+        createAddressParam.line1 = CustomerApp.getValue($('#line1Create'));
+        createAddressParam.email = CustomerApp.getValue($('#emailCreate'));
+        createAddressParam.zipCode = CustomerApp.getValue($('#zipCodeCreate'));
+
+        if (CustomerApp.page.elements.province.find(":selected").val() !== "0") {
+            createAddressParam.provinceId = CustomerApp.page.elements.province.find(":selected").val();
+            createAddressParam.provinceName = CustomerApp.page.elements.province.find(":selected").text();
+            createAddressParam.districtName = CustomerApp.page.elements.district.find(":selected").text();
+            createAddressParam.districtId = CustomerApp.page.elements.district.find(":selected").val();
+            createAddressParam.wardName = CustomerApp.page.elements.ward.find(":selected").text();
+            createAddressParam.wardId = CustomerApp.page.elements.ward.find(":selected").val();
+        } else {
+            createAddressParam.provinceId = undefined;
+            createAddressParam.provinceName = undefined;
+            createAddressParam.districtName = undefined;
+            createAddressParam.districtId = undefined;
+            createAddressParam.wardName = undefined;
+            createAddressParam.wardId = undefined;
+        }
+
+        $.ajax({
+            "headers": {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            "type": "POST",
+            "url": origin + `/api/addresses/${id}/customer`,
+            "data": JSON.stringify(createAddressParam)
+        })
+            .done((data) => {
+                CustomerApp.page.elements.modalCreateAddress.modal('hide');
+                CustomerApp.IziToast.showSuccessAlert('Thêm mới địa chỉ thành công')
+            })
+            .fail((jqXHR) => {
+                $.each(jqXHR.responseJSON, (key, item) => {
+                    CustomerApp.IziToast.showErrorAlert(item);
+                })
+            })
+    });
+
     CustomerApp.page.elements.btnAddress.click(() => {
+        CustomerApp.page.elements.tbCustomerGroup.addClass('hidden').removeClass('show');
+        $(".jyZcwm2.addressContainer").addClass('hidden').removeClass('show');
+
+        CustomerApp.page.elements.tbContact.addClass('hidden').removeClass('show');
+        CustomerApp.page.elements.tbContact.DataTable().destroy();
+
+        // $(".jyZcwm2.addressContainer").addClass('hidden').removeClass('show');
+        // CustomerApp.page.elements.tbContact.addClass('hidden').removeClass('show');
+        // CustomerApp.page.elements.tbContact.DataTable().destroy();
+
         $('.addressContainer').removeClass('hidden').addClass('show');
+        CustomerApp.page.elements.tbAddress.removeClass('hidden').addClass('show');
+
+        CustomerApp.page.elements.tbAddress.addClass('show').removeClass('hidden');
     })
+
+    CustomerApp.page.elements.drawAddressDatatable = () => {
+        let id = +window.location.pathname.split('/')[3];
+
+        addressDataTable = CustomerApp.page.elements.tbAddress.DataTable({
+            dom: '<"top">Brt<"bottom"lifp><"clear">',
+            processing: true,
+            serverSide: true,
+            searching: false,
+            ordering: false,
+            ajax: {
+                type: 'POST',
+                url: origin + `/api/addresses/${id}/customer/pagination`,
+                accept: 'application/json',
+                contentType: 'application/json',
+                data: function (d) {
+                    return JSON.stringify(d);
+                }
+            },
+            language: CustomerApp.dataTableDetails.language,
+            lengthMenu: [
+                [20, 50, 100],
+                ["20", "50", "100"]
+            ],
+            aoColumns: [
+                {
+                    mData: 'id'
+                },
+                {
+                    mData: 'phoneNumber',
+                    render: (data, type, row) => {
+                        return row.phoneNumber || '';
+                    }
+                },
+                {
+                    mData: 'line1',
+                    render: (data, type, row) => {
+                        return row.line1 || '';
+                    }
+                },
+                {
+                    mData: 'wardName',
+                    render: (data, type, row) => {
+                        return row.wardName || '';
+                    }
+                },
+                {
+                    mData: 'districtName',
+                    render: (data, type, row) => {
+                        return row.districtName || '';
+                    }
+                },
+                {
+                    mData: 'provinceName',
+                    render: (data, type, row) => {
+                        return row.provinceName || '';
+                    }
+                },
+                {
+                    mData: 'zipCode',
+                    render: (data, type, row) => {
+                        return row.zipCode || '';
+                    }
+                },
+                {
+                    mData: 'email',
+                    render: (data, type, row) => {
+                        return row.email || '';
+                    }
+                }
+            ],
+            columnDefs: [{
+                targets: 0,
+                render: function (data, type, row, meta) {
+                    return `<input id=${row.id} type="checkbox"/>`
+                }
+            }],
+        })
+    }
+
 
     $("#btnShowModalCreateAddress").click(() => {
         CustomerApp.page.elements.modalCreateAddress.modal('show');
     })
 
-    CustomerApp.getAllProvinces();
+    CustomerApp.page.commands.getAllProvinces = () => {
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "https://vapi.vnappmob.com/api/province/"
+        })
+            .done((data) => {
+                if (data.results.length === 0) {
+                    let str = `<option value="0">Chọn Tỉnh/Thành Phố</option>`;
+                    CustomerApp.page.elements.province.append(str);
+                } else {
+                    $.each(data.results, (i, item) => {
+                        let str = `<option value="${item.province_id}">${item.province_name}</option>`;
+                        CustomerApp.page.elements.province.append(str);
+                        CustomerApp.page.elements.provinceUpdate.append(str);
+                    });
+                }
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR);
+            })
+    }
+
+    CustomerApp.page.commands.getAllDistrictsByProvinceId = (provinceId) => {
+        CustomerApp.page.elements.district.empty();
+        CustomerApp.page.elements.districtUpdate.empty();
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "https://vapi.vnappmob.com/api/province/district/" + provinceId
+        })
+            .done((data) => {
+                if (data.results.length === 0) {
+                    let str = `<option value="0">Chọn Quận/Huyện</option>`;
+                    CustomerApp.page.elements.district.append(str);
+                } else {
+                    $.each(data.results, (i, item) => {
+                        let str = ` <option value="${item.district_id}">${item.district_name}</option>`;
+                        CustomerApp.page.elements.district.append(str);
+                        CustomerApp.page.elements.districtUpdate.append(str);
+                    })
+                }
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR);
+            })
+    }
+
+    CustomerApp.page.commands.getAllWardsByDistrictId = (districtId) => {
+        CustomerApp.page.elements.ward.empty();
+        CustomerApp.page.elements.wardUpdate.empty();
+        return $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: "https://vapi.vnappmob.com/api/province/ward/" + districtId
+        })
+            .done((data) => {
+
+                if (data.results.length === 0) {
+                    let str = `<option value="0">Chọn Phường/Xã</option>`;
+                    CustomerApp.page.elements.ward.append(str);
+
+                } else {
+                    $.each(data.results, (i, item) => {
+                        let str = `<option value="${item.ward_id}">${item.ward_name}</option>`;
+                        CustomerApp.page.elements.ward.append(str);
+                        CustomerApp.page.elements.wardUpdate.append(str);
+                    });
+                }
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR);
+            })
+    }
+
+    CustomerApp.page.commands.getAllProvinces().then(() => {
+        let provinceId = CustomerApp.page.elements.province.val();
+
+        CustomerApp.page.commands.getAllDistrictsByProvinceId(provinceId).then(() => {
+
+            let districtId = CustomerApp.page.elements.district.val();
+
+            CustomerApp.page.commands.getAllWardsByDistrictId(districtId)
+
+        });
+    });
+
+    CustomerApp.page.elements.province.on('change', () => {
+        let provinceId = CustomerApp.page.elements.province.val();
+
+        CustomerApp.page.commands.getAllDistrictsByProvinceId(provinceId).done(() => {
+            let districtId = CustomerApp.page.elements.district.val();
+            CustomerApp.page.commands.getAllWardsByDistrictId(districtId);
+        })
+
+        CustomerApp.page.elements.district.on('change', () => {
+            let districtId = CustomerApp.page.elements.district.val();
+            CustomerApp.page.commands.getAllWardsByDistrictId(districtId);
+        })
+    });
+
+    CustomerApp.page.elements.provinceUpdate.on("change", () => {
+        let provinceId = CustomerApp.page.elements.provinceUpdate.val();
+
+        CustomerApp.page.commands.getAllDistrictsByProvinceId(provinceId).then(() => {
+            let districtId = CustomerApp.page.elements.districtUpdate.val();
+            CustomerApp.page.commands.getAllWardsByDistrictId(districtId);
+        })
+    })
+
+    CustomerApp.page.elements.districtUpdate.on("change", () => {
+        let districtId = CustomerApp.page.elements.districtUpdate.val();
+        CustomerApp.page.commands.getAllWardsByDistrictId(districtId);
+    });
     //end address
 
     /*
@@ -1717,46 +1966,7 @@
 
     $("#address").on('click', () => {
 
-        customer.fullName = $('#fullName').val();
-        customer.phoneNumber = $('#phoneNumber').val();
-        customer.email = $('#email').val();
-        address.supplierId = 1;
-        address.id = 2
-        address.line1 = $('.addressCreate').val();
-        address.s = "b"
-        address.fullName = $('.fullNameCreate').val();
-        address.phoneNumber = $('.mobileCreate').val();
-        address.email = $('.emailCreate').val();
-        // shippingAddress.address = $('.addressCreate').val();
-        address.provinceId = $('#province').val();
-        address.provinceName = $('#province :selected').text();
-        address.districtId = $('#district').val();
-        address.districtName = $('#district :selected').text();
-        address.wardId = $('#ward').val();
-        address.wardName = $('#ward :selected').text();
-        address.customerId = $('.idCustomerDelete').val();
-        address.zipCode = $('.zipCodeCreate').val();
-        customer.address = address;
-        address.isDefault = true;
-        console.log(address)
-        $.ajax({
-            "headers": {
-                "accept": "application/json",
-                "content-type": "application/json"
-            },
-            "type": "POST",
-            "url": origin + "/api/shippingAddress/create",
-            "data": JSON.stringify(address)
-        })
-            .done((data) => {
-                CustomerApp.IziToast.showSuccessAlert('Thêm mới khách hàng thành công  !!!')
-                $('#modal_create_shippingAddress').off('show');
-                showCustomerInfoShippingAddressByCustomerId();
-            })
-            .fail((jqXHR) => {
-                $.each(jqXHR.responseJSON, (key, item) => {
-                    CustomerApp.IziToast.showErrorAlert(item);
-                })
+
 
             })
     })
