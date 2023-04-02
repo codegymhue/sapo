@@ -18,6 +18,7 @@ import vn.sapo.customer.dto.*;
 import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.customerGroup.dto.DataTablesInput;
 import vn.sapo.customerGroup.dto.DataTablesOutput;
+import vn.sapo.customers.AddressService;
 import vn.sapo.excel.ExcelHelper;
 import vn.sapo.order.sale.SaleOrderService;
 import vn.sapo.order.sale.item.OrderItemService;
@@ -52,15 +53,12 @@ public class CustomerAPI extends BaseController{
     @Autowired
     CustomerGroupService customerGroupService;
 
-<<<<<<< HEAD
-=======
     @Autowired
     private AddressService addressService;
 
     @Autowired
     private CreateCustomerThread createCustomerThread;
 
->>>>>>> vt_dev
 //    @Autowired
 //    ExcelService excelService;
 
