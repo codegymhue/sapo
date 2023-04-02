@@ -32,7 +32,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/customers")
 @CrossOrigin("*")
-public class CustomerAPI extends BaseController {
+public class CustomerAPI extends BaseController{
 
     @Autowired
     private CustomerService customerService;
@@ -52,6 +52,15 @@ public class CustomerAPI extends BaseController {
     @Autowired
     CustomerGroupService customerGroupService;
 
+<<<<<<< HEAD
+=======
+    @Autowired
+    private AddressService addressService;
+
+    @Autowired
+    private CreateCustomerThread createCustomerThread;
+
+>>>>>>> vt_dev
 //    @Autowired
 //    ExcelService excelService;
 
@@ -112,7 +121,11 @@ public class CustomerAPI extends BaseController {
         dto = customerService.findById(dto.getId());
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
-
+    @PostMapping("/upload")
+    public ResponseEntity<?> createCustomerByExcel(@RequestBody @Valid CreateSeriesCustomerParam createSeriesCustomerParam){
+        createCustomerThread.start(createSeriesCustomerParam);
+        return new ResponseEntity<>("Success", HttpStatus.OK);
+    }
     @PatchMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Integer id,
                                     @RequestBody @Validated UpdateCustomerParam updateCustomer) {
@@ -135,23 +148,23 @@ public class CustomerAPI extends BaseController {
     }
 
     // UpLoad File Excel
-    @PostMapping("/upload")
-    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
-        String message = "";
-        if (ExcelHelper.hasExcelFormat(file)) {
-            try {
-//                message = "Uploaded the file successfully: " + file.getOriginalFilename();
-                return ResponseEntity.status(HttpStatus.OK).body(customerService.excelToCustomerCreate(file));
-            } catch (Exception e) {
-                e.printStackTrace();
-                message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
-            }
-        }
-
-        message = "Please upload an excel file!";
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
-    }
+//    @PostMapping("/upload")
+//    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
+//        String message = "";
+//        if (ExcelHelper.hasExcelFormat(file)) {
+//            try {
+////                message = "Uploaded the file successfully: " + file.getOriginalFilename();
+//                return ResponseEntity.status(HttpStatus.OK).body(customerService.excelToCustomerCreate(file));
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                message = "Could not upload the file: " + file.getOriginalFilename() + "!";
+//                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+//            }
+//        }
+//
+//        message = "Please upload an excel file!";
+//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
+//    }
 
     @PostMapping("/{id}/contacts")
     private ResponseEntity<?> createContact(@PathVariable Integer id,
@@ -195,7 +208,6 @@ public class CustomerAPI extends BaseController {
         List<CustomerResult> customers = customerService.findAllByGroupListId(arrGroupId);
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
-
 
 }
 

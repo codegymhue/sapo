@@ -7,22 +7,26 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.web.multipart.MultipartFile;
+import vn.sapo.contact.ContactCustomerService;
+import vn.sapo.contact.dto.CreateContactParam;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customers.AddressService;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerFilter;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
-import vn.sapo.customers.dto.AddressResult;
 import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.excel.ExcelService;
+import vn.sapo.mail.EMailSender;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
-import java.util.List;
-import java.util.Optional;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,6 +45,10 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private ExcelService excelService;
+    @Autowired
+    private ContactCustomerService contactCustomerService;
+    @Autowired
+    private EMailSender eMailSender;
 
     @Override
     @Transactional(readOnly = true)
@@ -87,7 +95,6 @@ public class CustomerServiceImpl implements CustomerService {
         customer = customerRepository.save(customer);
         if (createParam.getCustomerCode() == null)
             customer.setCustomerCode(CodePrefix.CUSTOMER.generate(customer.getId()));
-
         CreateAddressParam addressParam = createParam.getCreateAddressParam();
         addressParam.setCustomerId(customer.getId());
 
@@ -197,6 +204,69 @@ public class CustomerServiceImpl implements CustomerService {
         return customerFilterRepository.findAllByFilters(filters, pageable).map(customerMapper::toDTO);
     }
 
+    @Override
+    public void createSeriesCustomer(CreateSeriesCustomerParam createSeriesCustomerParam) {
+        List<CreateCustomerParam> listResultParam = createSeriesCustomerParam.getListResultParam();
+        HashMap<Integer, List<CreateAddressParam>> listObjAddress = createSeriesCustomerParam.getListObjAddress();
+        Set<Integer> address = listObjAddress.keySet();
+            for(int i=0; i<listResultParam.size(); i++){
+                if(address.contains(i)){
+                    createCustomerManyContact(listResultParam.get(i), listObjAddress.get(i));
+                }else{
+                    if(!listResultParam.get(i).getFullName().equals("")){
+                        createCustomerOneContact(listResultParam.get(i));
+                    }
+                }
+            }
+        String contentEmail = createSeriesCustomerParam.getErrorMessage();
+        String emailTo = createSeriesCustomerParam.getEmail();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String toDay = dateFormat.format(new Date());
+        String subject = "Sapo - Nhập file khách hàng - "+ toDay;
+        System.out.println("Subject: "+subject);
+        eMailSender.sendEmail(emailTo, subject, contentEmail);
+
+    }
+    public void createCustomerOneContact(CreateCustomerParam createCustomerParam){
+        System.out.println("one contact");
+        CustomerResult customerResult = create(createCustomerParam);
+        Integer customerId = customerResult.getId();
+        if(createCustomerParam.getCustomerCode()==null) {
+            Optional<Customer> customerById = customerRepository.findById(customerId);
+            System.out.println(customerById.get());
+            customerById.get().setCustomerCode(CodePrefix.CUSTOMER.generate(customerId));
+            customerRepository.save(customerById.get());
+        }
+        CreateContactParam contact = new CreateContactParam();
+        customerResult.setAddresses(addressService.findByCustomerId(customerId));
+        contact.setFullName(customerResult.getAddresses().get(0).getFullName());
+        contactCustomerService.createByCustomerId(customerId, contact);
+
+    }
+    public void createCustomerManyContact(CreateCustomerParam createCustomerParam, List<CreateAddressParam> listAddress){
+        System.out.println("many contact");
+        CustomerResult customerResult = create(createCustomerParam);
+        Integer customerId = customerResult.getId();
+//        System.out.println(customerResult);
+        if(createCustomerParam.getCustomerCode()==null) {
+            Optional<Customer> customerById = customerRepository.findById(customerId);
+            customerById.get().setCustomerCode(CodePrefix.CUSTOMER.generate(customerId));
+            customerRepository.save(customerById.get());
+        }
+        customerResult.setAddresses(addressService.findByCustomerId(customerId));
+        CreateContactParam contact = new CreateContactParam();
+//        System.out.println(customerResult.getAddresses().get(0).getFullName());
+        contact.setFullName(customerResult.getAddresses().get(0).getFullName());
+        List<CreateContactParam> listContact = new ArrayList<>();
+        listContact.add(contact);
+        for(int i=0; i< listAddress.size(); i++){
+            CreateAddressParam createAddressParam = listAddress.get(i);
+            addressService.createAddressWithCustomerId(createAddressParam, customerId);
+        }
+        for(int i=0; i< listContact.size(); i++){
+            contactCustomerService.createByCustomerId(customerId, listContact.get(i));
+        }
+    }
     private Customer findCustomerById(Integer id) {
         return customerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("customer.findById.notFound"));

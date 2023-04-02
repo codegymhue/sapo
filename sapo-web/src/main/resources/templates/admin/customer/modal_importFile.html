@@ -43,8 +43,13 @@
                             </ul>
                             <label class="mb-3">Nhập file vào đây</label>
                             <input class="form-control" type="file" id="formFileCustomers">
+                            <div style="display: flex; gap: 50px; margin-top: 25px">
+                                <input type="text" id="emailTo" class="form-control" width="40%" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1">
+                                <input type="text" id="fullNameEmail" class="form-control col-6" width="40%" placeholder="Họ và tên" aria-label="Username" aria-describedby="basic-addon1">    
+                            </div>
                         </div>
                     </form>
+                   
                 </div>
                 <div class="modal-footer">
                     <button type="button" onclick="cancelToReset()" class="btn-outline-primary" data-bs-dismiss="modal" style="border: 1px solid #bdbdbd;
@@ -61,6 +66,24 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modal-file-success" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+              <button onclick="changeColumn()" id="btn-close-file-success" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="margin: 0 auto; padding: 40px 0px;">
+                <h4 style="margin-left: 49px; margin-bottom: 15px;">Nhập file dữ liệu khách hàng thành công!</h4>
+                <div style="font-size: 11pt; margin: 0 auto;" id="content-file-success"></div>
+            </div>
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+          </div>
+        </div>
+      </div>
     <script>
         {
         let statusLoading = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -71,10 +94,13 @@
         let listResultParam = [];
         
         let flag = false;
+        let fullNameEmail = "";
         let obj = {};
         let countSuccess = 0;
         let countFailure = 0;
         let sheetName = "";
+        let policyAndPayment = {};
+        let email = "";
         $('#btnImportFileCustomers').on('click',() => {
             listCreateCustomerParam = [];
             flag = false;
@@ -83,17 +109,32 @@
             listObjAddress = {};
             countSuccess = 0;
             countFailure = 0;
-
-            $("#customer-series-update").html("");
+            fullNameEmail = $("#fullNameEmail").val();
+            email = $("#emailTo").val();
+            if(email.trim().match(/^$|[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)==null || email.trim() == ''){
+                console.log("qwerty")
+                CustomerApp.IziToast.showErrorAlert("Email không đúng định dạng");
+                return;
+            };
+            if(fullNameEmail.trim()=='') {
+                CustomerApp.IziToast.showErrorAlert("Họ và tên bị trống");
+                return;
+            };
+            let files = document.getElementById('formFileCustomers').files;
+            if(files.length==0){
+                CustomerApp.IziToast.showErrorAlert("File bị trống");
+                return;
+            }
+            // $("#customer-series-update").html("");
             $('#btnImportFileCustomers').attr('disabled',true);
-            $('#comfirm-alert-series-customer').attr('disabled', true);
+            // $('#comfirm-alert-series-customer').attr('disabled', true);
             $('#btnImportFileCustomers').html(statusLoading);
-            $('#comfirm-alert-series-customer').html(statusLoading);
-
+            // $('#comfirm-alert-series-customer').html(statusLoading);
             upload();
             try{
                 let setData = setInterval(()=>{
                 if(flag){
+                    policyAndPayment = getApiPolicyAndPayment();
                     let datas = obj[sheetName];
                     for(let i=0; i<datas.length; i++){
                         validateDataExcel(datas[i], i);
@@ -102,35 +143,169 @@
                     createListAddress(listCreateCustomerParam);
                     createListResult(listCreateCustomerParam, errorArrRow, listObjAddress);
                     createListAddress(listResultParam);
-                    if(errorArrRow.length==0){
-                        createSeriesCustomer(listResultParam, listObjAddress);
-                    }else{
-                        renderError(errorArrRow);
-                    }
-
+                    // if(errorArrRow.length==0){
+                    //     createSeriesCustomer(listResultParam, listObjAddress);
+                    // }else{
+                    //     renderError(errorArrRow);
+                    // }
+            //log ra se ro
                     // console.log(listCreateCustomerParam);
                     // console.log(errorArrRow);
                     // console.log(listObjAddress);
                     // console.log(listResultParam);
-
-                    $("#modalImportFileCustomers").modal("hide");
-                    $("#modal-alert-series-customer").modal('show');
-                    $('#btnImportFileCustomers').text('Nhập file')
-                    $('#btnImportFileCustomers').attr('disabled',false);
-                    $('#comfirm-alert-series-customer').text('Xác nhận');
-                    $('#comfirm-alert-series-customer').attr('disabled', false);
-                    $("#frmFileCustomers")[0].reset();
-
-                    clearInterval(setData);
+                    // console.log(renderErrorMsg(errorArrRow, listResultParam));
+                    
+                    // console.log(policyAndPayment);
+                    let errorMessage = renderErrorMsg(errorArrRow, listResultParam);
+                    
+                    createCustomerByExcel(listResultParam, listObjAddress, errorMessage, email);
+                    eventAfterUpload(setData)
+                    // clearInterval();
                 }
                 });
             }catch{
                 clearInterval(setData);
             }
         });
+        function eventAfterUpload(setData){
+            $("#modalImportFileCustomers").modal("hide");
+            // $("#modal-alert-series-customer").modal('show');
+            $('#btnImportFileCustomers').text('Nhập file')
+            $('#btnImportFileCustomers').attr('disabled',false);
+            // $('#comfirm-alert-series-customer').text('Xác nhận');
+            // $('#comfirm-alert-series-customer').attr('disabled', false);
+            $("#modal-file-success").modal("show");
+            $("#content-file-success").text(`Dữ liệu sẽ được xử lý và gửi thông báo về email ${email}`);
+            $("#frmFileCustomers")[0].reset();
+            clearInterval(setData);
+        }
+        //get api chinh sach gia mac dinh va phuong thuc thanh toan
+        function getApiPolicyAndPayment(){
+            let data = {payment:[], policy:[], cusGroup: [], phoneEmployee: []};
+            $.ajax({
+                headers:{
+                    "accept":"application/json",
+                    "content-type": "application/json"
+                },
+                type:"GET",
+                async:false,
+                url: origin + "/api/payment_methods",
+            })
+            .done((result)=>{
+                for(let item of result){
+                    let payment = Object.values(item)[0];
+                    data.payment.push(payment);
+                }
+            });
+            $.ajax({
+                headers:{
+                    "accept":"application/json",
+                    "content-type": "application/json"
+                },
+                type:"GET",
+                async:false,
+                url: origin + "/api/pricing-policies",
+            })
+            .done((result)=>{
+                for(let item of result){
+                    let policy = Object.values(item)[2];
+                    data.policy.push(policy);
+                }
+            });
+            $.ajax({
+                headers:{
+                    "accept":"application/json",
+                    "content-type": "application/json"
+                },
+                type:"GET",
+                async:false,
+                url: origin + "/api/customer_groups",
+            })
+            .done((result)=>{
+                for(let item of result){
+                    let cusGroup = Object.values(item)[2];
+                    data.cusGroup.push(cusGroup);
+                }
+            });
+            $.ajax({
+                headers:{
+                    "accept":"application/json",
+                    "content-type": "application/json"
+                },
+                type:"GET",
+                async:false,
+                url: origin + "/api/employees",
+            })
+            .done((result)=>{
+                for(let item of result){
+                    let phoneEmployee = Object.values(item)[4];
+                    data.phoneEmployee.push(phoneEmployee);
+                }
+            });
+            console.log(data);
+            return data;
+        }
+        //tao api create customer va gui mail
+        function createCustomerByExcel(listResultParam, listObjAddress, errorMessage, email){
+            let createSeriesCustomer = {listResultParam, listObjAddress, errorMessage, email};
+            console.log(createSeriesCustomer)
+            $.ajax({
+                headers:{
+                    "content-type": "application/json",
+                    "accept": "application/json",
+                },
+                type:"POST",
+                async: false,
+                url: origin + "/api/customers/upload",
+                data: JSON.stringify(createSeriesCustomer)
+            })
+            .done(()=>{
+                CustomerApp.IziToast.showSuccessAlert("Tải file lên thành công!")
+            })
+            
+        }
         //reset form khi nhan thoat
         function cancelToReset(){
             $("#frmFileCustomers")[0].reset();
+        }
+        //render alert de gui vao mail 
+        function renderErrorMsg(listError, listResultParam){
+            let countSuccess = 0;
+            let countFailure = 0;
+            for(let i=0; i<listResultParam.length; i++){
+                if(listResultParam[i]["fullName"]!=""){
+                    countSuccess++;
+                }
+            }
+            for(let row of listError){
+                countFailure++;
+            }
+            let headerString = `<p>Chào anh/chị ${fullNameEmail},</p>`+
+                                `<p>Anh/chị đã yêu cầu nhập file khách hàng tại: <a href="https://sapo.tk/admin/customers">sapo.tk</a></p>`+
+                                `<p>Dưới đây là kết quả nhập file:</p>`+
+                                `<div style="margin-left: 50px;">`
+                             ;
+            let totalSuccessString = `<p>Tổng số khách hàng nhập vào thành công: ${countSuccess}</p>`;
+            let totalFailureString = `<p>Danh sách nhập lỗi: ${countFailure==0 ? 0: ''}</p>`
+            let errorMsg = "";
+            let i=0;
+            for(let error of listError){
+                let index = Object.keys(error)[0];
+                let indexMessage = error[index];
+                i++;
+                // let wrapTr = `<tr>${tr}</tr>`;
+                let elementRowError =  `<td style="vertical-align: top; border-spacing: 0px 30px">${i}. Hàng ${Number(index)+1}: </td>`;
+                let listErrorString = "";
+                for(let message in indexMessage){
+                    let content = `<div style="margin-bottom: 9px;"> -${message}: ${indexMessage[message]}</div>`;
+                    listErrorString+=content;
+                }
+                let wrapErrorColumn = `<td style="vertical-align: top; border-spacing: 0px 30px">${listErrorString}</td>`;
+                errorMsg += (`<tr>${elementRowError + wrapErrorColumn}</tr>`);
+            }
+            let errorString = `<table>${errorMsg}</table>`;
+            let alertString = headerString + totalSuccessString + totalFailureString + errorString + "</div><div>Trân trọng!</div>";
+            return alertString;
         }
         function renderError(listError){
             $(`#show-detai-failure-series-customer`).html("");
@@ -148,7 +323,6 @@
                 }
             }
         }
-        
         //loc data Excel
         function createListResult(listCreateCustomerParam, errorArrRow, listObjAddress){
             for(let i=0; i<listCreateCustomerParam.length; i++){ 
@@ -163,7 +337,7 @@
                 }
                 let flag = false;
                 if(Object.keys(listObjAddress).includes(`${i}`)){
-                    if(Object.keys(errorArrRow).includes(`${i}`)){
+                    if(indexError.includes(`${i}`)){
                         i+=listObjAddress[i].length;
                     }else{
                         for(let j=0; j<listObjAddress[i].length; j++){
@@ -195,9 +369,9 @@
         // tao customer hang loat
         function createSeriesCustomer(data, contact){  
             let address = Object.keys(contact);
-            let countSuccess = 0;
-            $("#show-detai-success-series-customer").html("");
-            $("#count-success").text(countSuccess);
+            // let countSuccess = 0;
+            // $("#show-detai-success-series-customer").html("");
+            // $("#count-success").text(countSuccess);
             for(let i=0; i<data.length; i++){
                 if(address.includes(`${i}`)){
                     createCustomerManyContact(data[i], contact[i]);
@@ -256,16 +430,16 @@
                 let data = 
                 console.log("fullName: ")
                 console.log({fullName: result.addresses[0].fullName});
-                // $.ajax({
-                //     headers: {          
-                //         "accept": "application/json",
-                //         "content-type": "application/json"
-                //     },
-                //     async:false,
-                //     type:"POST",
-                //     url: origin + `/api/customers/${result.id}/contacts`,
-                //     data: JSON.stringify({fullName: result.addresses[0].fullName})
-                // });
+                $.ajax({
+                    headers: {          
+                        "accept": "application/json",
+                        "content-type": "application/json"
+                    },
+                    async:false,
+                    type:"POST",
+                    url: origin + `/api/customers/${result.id}/contacts`,
+                    data: JSON.stringify({fullName: result.addresses[0].fullName})
+                });
             })
             // console.log("customer: ");
             // console.log(customer);
@@ -291,10 +465,8 @@
                 $("#count-success").text(++countSuccess);
                 $("#show-detai-success-series-customer").append(content);
 
-                let listContactData = result.addresses.map((address)=>{
-                        return address.fullName;
-                })
-
+                let listContactData = [{fullName: result.addresses[0].fullName}];
+                
                 for(let i=0; i<contact.length; i++){
                     $.ajax({
                         headers: {          
@@ -306,9 +478,8 @@
                         url: origin + '/api/addresses',
                         data: JSON.stringify({...contact[i], customerId: result.id})
                     });
+                    listContactData.push({fullName: contact[i].fullName});
                 }
-                // console.log("listContactData");
-                // console.log(listContactData);
                 for(let i=0; i<listContactData.length; i++){
                     $.ajax({
                         headers: {          
@@ -318,9 +489,23 @@
                         async:false,
                         type:"POST",
                         url: origin + `/api/customers/${result.id}/contacts`,
-                        data: JSON.stringify({fullName: listContactData[i].fullName})
+                        data: JSON.stringify(listContactData[i])
                     })
                 }
+                // console.log("listContactData");
+                // console.log(listContactData);
+                // for(let i=0; i<listContactData.length; i++){
+                //     $.ajax({
+                //         headers: {          
+                //             "accept": "application/json",
+                //             "content-type": "application/json"
+                //         },
+                //         async:false,
+                //         type:"POST",
+                //         url: origin + `/api/customers/${result.id}/contacts`,
+                //         data: JSON.stringify({fullName: listContactData[i]})
+                //     })
+                // }
                 // .done((result)=>{
                 //     console.log(result);
                 // })
@@ -353,9 +538,9 @@
                     empty: {
                         value: true
                     },
-                    regex: {
-                        value: /^[0-9][1-9]*$/,
-                        message: "Mã nhóm khách hàng phải là một số"
+                    api:{
+                        value: policyAndPayment.cusGroup,
+                        message: "Mã nhóm khách hàng không tồn tại"
                     }
                 },
                 ["Áp dụng ưu đãi"]: {
@@ -415,9 +600,9 @@
                     empty:{
                         value: true
                     },
-                    regex:{
-                        value: /^[0-9]*$/,
-                        message: "Số điện thoại nhân viên phụ trách không đúng định dạng"
+                    api:{
+                        value: policyAndPayment.phoneEmployee,
+                        message: "SĐT nhân viên phụ trách không tồn tại"
                     }
                 },
                 ["Mô tả"]:{
@@ -429,6 +614,10 @@
                     empty:{
                         value: true
                     },
+                    api:{
+                        value: policyAndPayment.policy,
+                        message: "Chính sách giá mặc định không tồn tại"
+                    }
                 },
                 ["Chiết khấu mặc định (%)"]:{
                     empty:{
@@ -442,6 +631,10 @@
                 ["Phương thức thanh toán mặc định"]:{
                     empty:{
                         value: true
+                    },
+                    api:{
+                        value: policyAndPayment.payment,
+                        message: "Phương thức thanh toán không tồn tại"
                     }
                 },
                 ["Người liên hệ"]:{
@@ -452,7 +645,7 @@
                 },
                 ["Người liên hệ - SĐT"]:{
                     empty:{
-                        value: false,
+                        value: true,
                         message: "Người liên hệ - SĐT bị trống"
                     },
                     regex:{
@@ -462,7 +655,7 @@
                 },
                 ["Người liên hệ - Email"]:{
                     empty:{
-                        value: false,
+                        value: true,
                         message: "Email người liên hệ bị trống",
                     },
                     regex:{
@@ -478,19 +671,19 @@
                 },
                 ["Tỉnh thành"]:{
                     empty: {
-                        value: false,
+                        value: true,
                         message: "Tỉnh thành bị bỏ trống"
                     }
                 },
                 ["Quận huyện"]:{
                     empty:{
-                        value: false,
+                        value: true,
                         message: "Quận huyện bị bỏ trống"
                     }
                 },
                 ["Phường xã"]:{
                     empty:{
-                        value: false,
+                        value: true,
                         message: "Phường xã bị bỏ trống"
                     }
                 },
@@ -543,6 +736,12 @@
                            i++;
                         }
                     }
+                    if(validate[key].api!=undefined){
+                        if(!validate[key].api.value.includes(`${data[key]}`)){
+                            error[index][key] = validate[key].api.message;
+                            i++;
+                        }
+                    }
                 }
             }
             if(i!=0) errorArrRow.push(error);
@@ -570,24 +769,48 @@
         }
         //convert excel to DTO
         function excelToCreateCustomerParam(jsonData){
+            function findIdPolicy(policy){
+                if(policy==undefined || policy==''){
+                    return undefined;
+                }else{
+                    let id = policyAndPayment.policy.indexOf(policy)+1;
+                    return id;
+                }
+            }
+            function findIdCusGroup(cusGroup){
+                if(cusGroup==undefined || cusGroup==''){
+                    return undefined;
+                }else{
+                    let id = policyAndPayment.cusGroup.indexOf(cusGroup)+1;
+                    return id;
+                }
+            }
+            function findIdEmployee(phoneEmployee){
+                if(phoneEmployee==undefined || phoneEmployee==''){
+                    return undefined;
+                }else{
+                    let id = policyAndPayment.phoneEmployee.indexOf(phoneEmployee)+1;
+                    return id;
+                }
+            }
             let customerCreateParam = {
                 fullName: jsonData["Tên khách hàng"] || '',
                 customerCode: jsonData["Mã khách hàng"] || undefined,
-                groupId: jsonData["Mã nhóm khách hàng"] || 0,
+                groupId: findIdCusGroup(jsonData["Mã nhóm khách hàng"]) || undefined,
                 phoneNumber: jsonData["Điện thoại"] || '',
                 email: jsonData["Email"] || '',
                 birthday: convertBirthDay(jsonData["Ngày sinh"]) || '',
-                gender: jsonData["Giới tính"] || '',
+                gender: jsonData["Giới tính"] || 'NAM',
                 fax:jsonData["Fax"] || '',
                 taxCode: jsonData["Fax"] || '',
                 website: jsonData["Website"] || '',
                 debtTotal: jsonData["Nợ hiện tại"] || 0,
                 spendTotal: jsonData["Tổng chi tiêu"] || 0,
-                employeeId: 6,
+                employeeId: findIdEmployee(jsonData["SĐT nhân viên phụ trách"]),
                 description: jsonData["Mô tả"] || '',
                 tags: tagsToArray(jsonData["Tags"]),
-                // defaultPaymentMethodId: jsonData["Phương thức thanh toán mặc định"] || '',
-                // defaultPricingPolicyId: jsonData["Chính sách giá mặc định"] || '',
+                defaultPaymentMethodId: jsonData["Phương thức thanh toán mặc định"] || undefined,
+                defaultPricingPolicyId: findIdPolicy(jsonData["Chính sách giá mặc định"]) || undefined,
                 createAddressParam:{
                     fullName: jsonData["Người liên hệ"],
                     label: undefined,
@@ -609,8 +832,14 @@
         function upload() {
             let files = document.getElementById('formFileCustomers').files;
             if(files.length==0){
-                CustomerApp.IziToast.showErrorAlert("Không tồn tại file")
-                alert("Please choose any file...");
+                CustomerApp.IziToast.showErrorAlert("Không tồn tại file");
+                $("#modalImportFileCustomers").modal("hide");
+                $("#modal-alert-series-customer").modal('show');
+                $('#btnImportFileCustomers').text('Nhập file')
+                $('#btnImportFileCustomers').attr('disabled',false);
+                $('#comfirm-alert-series-customer').text('Xác nhận');
+                $('#comfirm-alert-series-customer').attr('disabled', false);
+                $("#frmFileCustomers")[0].reset();
                 return;
             }
             let filename = files[0].name;
