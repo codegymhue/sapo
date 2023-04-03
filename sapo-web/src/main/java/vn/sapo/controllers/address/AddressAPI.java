@@ -9,13 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import vn.sapo.contact.dto.ContactResult;
-import vn.sapo.customer.CustomerService;
 import vn.sapo.customerGroup.dto.DataTablesInput;
 import vn.sapo.customerGroup.dto.DataTablesOutput;
 import vn.sapo.customers.AddressService;
 import vn.sapo.customers.dto.AddressResult;
 import vn.sapo.customers.dto.CreateAddressParam;
+import vn.sapo.customers.dto.DeleteAddressResult;
 import vn.sapo.customers.dto.UpdateAddressParam;
 
 import java.util.HashMap;
@@ -116,5 +115,13 @@ public class AddressAPI {
     public ResponseEntity<?> deleteAddressSupplier(@RequestBody List<Integer> arrayIdSupplier) {
         addressService.deleteSoftSupplier(arrayIdSupplier);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}/customer-addresses")
+    private ResponseEntity<?> deleteCustomerAddresses(@PathVariable Integer id,
+                                                      @RequestBody List<Integer> listAddressId) {
+        DeleteAddressResult result= addressService.deleteAddressesByListId(id, listAddressId);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

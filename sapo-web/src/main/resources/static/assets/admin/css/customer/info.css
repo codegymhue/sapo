@@ -51,12 +51,6 @@ body {
     align-items: center;
 }
 
-.jss640 {
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-}
-
 .jss645 {
     display: inline-flex;
 }
@@ -1446,25 +1440,39 @@ table thead tr {
     display: inline-flex;
     height: 52px;
     width: 100%;
+    background: #f4f6f8;
 }
 
 table thead tr th {
     font-weight: 500 !important;
     background: #f4f6f8;
-    padding: 16px;
+    padding: 16px !important;
     width: auto !important;
+    border: none !important;
 }
 
 table tbody tr:hover{
     cursor: pointer;
 }
 
-table#tbAddress thead tr th {
-    width: 12.5% !important;
+table#tbAddress thead tr {
+    /*justify-content: space-between;*/
+    /*background: #f4f6f8;*/
 }
 
-table#tbAddress tbody tr td {
-    width: 12.5% !important;
+table#tbAddress tbody {
+    width: 100%;
+    display: block;
+}
+
+table#tbAddress tbody tr {
+    width: inherit;
+    display: block;
+}
+
+table#tbAddress tbody tr td{
+    /*justify-content: space-between;*/
+    padding: 16px;
 }
 
 th {
@@ -1582,7 +1590,7 @@ th {
 }
 
 .show {
-    display: block;
+    display: block !important;
 }
 
 .hidden {
@@ -1616,4 +1624,94 @@ th {
 
 .IgeUe {
     width: 145.5px;
+}
+
+.LavuC {
+    width: 120px !important;
+}
+
+.BaviW {
+    width: 103px !important;
+}
+
+.jYgve {
+    width: 100px !important;
+}
+
+.bottom {
+    display: flex;
+    justify-content: end;
+}
+
+#tbAddress_length {
+    align-self: center;
+    margin-right: 10px;
+}
+
+.vUaem {
+    background-color: #fff;
+    border: 1px solid #d3d5d7;
+    border-radius: 3px;
+    width: 150px;
+    height: 40px;
+    align-self: center;
+    padding: 8px 12px;
+}
+
+.vUaem:hover {
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    overflow: auto;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.mauWs {
+    margin-top: 35px;
+}
+
+#numberAddressesDeleted{
+    color: #0088FF;
+}
+
+#deletedSucceedNames {
+    padding: 10px 16px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 3px 1px -2px, rgba(0, 0, 0, 0.14) 0 2px 2px 0, rgba(0, 0, 0, 0.12) 0 1px 5px 0;
+}
+
+#deletedSucceedNames:hover{
+    background: #f2f9ff;
+}
+
+#numberAddressesDeleteFail {
+    color: #f44336;
+}
+
+#deletedFailNames{
+    padding: 10px 16px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 3px 1px -2px, rgba(0, 0, 0, 0.14) 0 2px 2px 0, rgba(0, 0, 0, 0.12) 0 1px 5px 0;
+}
+
+#deletedFailNames:hover{
+    background: #f2f9ff;
+}
+
+.bdiEg{
+    color: #0088FF;
+    height: 20px;
+    padding: 0;
+    margin-left: 8px;
+    background: #fff;
+    border: none;
+    margin-top: 14px;
+}
+
+.bdiEg{
+    background-color: #f5faff;
+    border-radius: 5px;
+    display: flex;
 }
