@@ -140,7 +140,8 @@ public class CustomerExcelExporter {
         style.setFont(font);
 
         for (CustomerResult customer : customerList) {
-
+            int i=0;
+            int j=0;
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
             List<String> listColumnExist = customerParamExport.getListNameColumn();
@@ -158,8 +159,8 @@ public class CustomerExcelExporter {
                     createCell(row, columnCount++, customer.getPhoneNumber() != null ? customer.getPhoneNumber() : "" , style);
                 if(listColumnExist.contains("birthDay"))
                     createCell(row, columnCount++, customer.getBirthday() != null ? customer.getBirthday().toString() : "", style);
-                if(listColumnExist.contains("gender"))
-                    try{
+                if(listColumnExist.contains("gender")) {
+                    try {
                         switch (customer.getGender().getValue()) {
                             case "NAM":
                                 createCell(row, columnCount++, nam, style);
@@ -171,9 +172,84 @@ public class CustomerExcelExporter {
                                 createCell(row, columnCount++, khac, style);
                                 break;
                         }
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         createCell(row, columnCount++, "", style);
                     }
+                }
+
+
+            if(listColumnExist.contains("contact"))
+                i++;
+            if(listColumnExist.contains("contactPhone"))
+                i++;
+            if(listColumnExist.contains("contactEmail"))
+                i++;
+            if(listColumnExist.contains("address"))
+                i++;
+            //LINE2 === ?
+//            createCell(row, columnCount++, "", style);
+            if(listColumnExist.contains("province"))
+                i++;
+            if(listColumnExist.contains("district"))
+                i++;
+            if(listColumnExist.contains("ward"))
+                i++;
+
+            columnCount+=i;
+            if(listColumnExist.contains("website")) {
+                createCell(row, columnCount++, customer.getWebsite() != null ? customer.getWebsite() : "", style);
+                j++;
+            }
+            if(listColumnExist.contains("fax")) {
+                createCell(row, columnCount++, customer.getFax() != null ? customer.getFax() : "", style);
+                j++;
+            }
+            if(listColumnExist.contains("taxCode")) {
+                createCell(row, columnCount++, customer.getTaxCode() != null ? customer.getTaxCode() : "", style);
+                j++;
+            }
+            if(listColumnExist.contains("description")) {
+                createCell(row, columnCount++, customer.getDescription() != null ? customer.getDescription() : "", style);
+                j++;
+            };
+            if(listColumnExist.contains("policy")) {
+                createCell(row, columnCount++, "Theo nhóm " + "' " + customer.getGroup().getTitle() + " '", style);
+                j++;
+            }
+            if(listColumnExist.contains("discount")) {
+                createCell(row, columnCount++, customer.getGroup().getDiscount(), style);
+                j++;
+            }
+            if(listColumnExist.contains("paymentMethod")) {
+                createCell(row, columnCount++, "", style);
+                j++;
+            }
+            if(listColumnExist.contains("debtTotal")) {
+                createCell(row, columnCount++, customer.getDebtTotal() != null ? customer.getDebtTotal() : "0", style);
+                j++;
+            }
+            if(listColumnExist.contains("spendTotal")) {
+                createCell(row, columnCount++, customer.getSpendTotal() != null ? customer.getSpendTotal() : "0", style);
+                j++;
+            }
+            if(listColumnExist.contains("quantityItemOrder")) {
+                createCell(row, columnCount++, customer.getQuantityItemOrder(), style);
+                j++;
+            }
+            if(listColumnExist.contains("quantityProductOrder")) {
+                createCell(row, columnCount++, customer.getQuantityProductOrder(), style);
+                j++;
+            }
+            if(listColumnExist.contains("returnsTotal")) {
+                createCell(row, columnCount++, "", style);
+                j++;
+            }
+            if(listColumnExist.contains("lastDayOrder")) {
+                createCell(row, columnCount++, customer.getLastDayOrder() != null ? customer.getLastDayOrder().toString() : "", style);
+                j++;
+            }
+
+            columnCount-=(j+i);
                 if (customer.getAddresses().size() == 0) {
                     if(listColumnExist.contains("contact"))
                         createCell(row, columnCount++, "", style);
@@ -193,50 +269,38 @@ public class CustomerExcelExporter {
                         createCell(row, columnCount++, "", style);
                 }else {
                     for (AddressResult ar : customer.getAddresses()) {
-                        if(listColumnExist.contains("contact"))
+                        if(listColumnExist.contains("contact")) {
                             createCell(row, columnCount++, ar.getFullName() != null ? ar.getFullName() : "", style);
-                        if(listColumnExist.contains("contactPhone"))
+                        }
+                        if(listColumnExist.contains("contactPhone")) {
                             createCell(row, columnCount++, ar.getPhoneNumber() != null ? ar.getPhoneNumber() : "", style);
-                        if(listColumnExist.contains("contactEmail"))
+                        };
+                        if(listColumnExist.contains("contactEmail")) {
                             createCell(row, columnCount++, ar.getEmail() != null ? ar.getEmail() : "", style);
-                        if(listColumnExist.contains("address"))
+                        }
+                        if(listColumnExist.contains("address")) {
                             createCell(row, columnCount++, ar.getLine1() != null ? ar.getLine1() : "", style);
-                        if (ar.getLine2() != null)
-                            createCell(sheet.createRow(rowCount++),columnCount-1,ar.getLine2(),style);
-                        if(listColumnExist.contains("province"))
-                            createCell(row, columnCount++, ar.getProvinceName() != null ?  ar.getProvinceName() : "", style);
-                        if(listColumnExist.contains("district"))
+                        }
+                        if (ar.getLine2() != null) {
+                            createCell(sheet.createRow(rowCount++), columnCount - 1, ar.getLine2(), style);
+                        }
+                        if(listColumnExist.contains("province")) {
+                            createCell(row, columnCount++, ar.getProvinceName() != null ? ar.getProvinceName() : "", style);
+                        }
+                        if(listColumnExist.contains("district")) {
                             createCell(row, columnCount++, ar.getDistrictName() != null ? ar.getDistrictName() : "", style);
-                        if(listColumnExist.contains("ward"))
+                        }
+                        if(listColumnExist.contains("ward")) {
                             createCell(row, columnCount++, ar.getWardName() != null ? ar.getWardName() : "", style);
+                        }
+                        columnCount-=i;
+                        if(i!=0){
+                            row = sheet.createRow(rowCount++);
+                        }
                     }
+                    row = sheet.createRow(rowCount--);
                 }
-                if(listColumnExist.contains("website"))
-                    createCell(row, columnCount++, customer.getWebsite()!=null ? customer.getWebsite() : "", style);
-                if(listColumnExist.contains("fax"))
-                    createCell(row, columnCount++, customer.getFax() !=null ? customer.getFax() : "", style);
-                if(listColumnExist.contains("taxCode"))
-                    createCell(row, columnCount++, customer.getTaxCode() !=null ? customer.getTaxCode() : "", style);
-                if(listColumnExist.contains("description"))
-                    createCell(row, columnCount++, customer.getDescription() != null ? customer.getDescription() : "" , style);
-                if(listColumnExist.contains("policy"))
-                    createCell(row, columnCount++, "Theo nhóm " +"' " + customer.getGroup().getTitle() +" '", style);
-                if(listColumnExist.contains("discount"))
-                    createCell(row, columnCount++, customer.getGroup().getDiscount(), style);
-                if(listColumnExist.contains("paymentMethod"))
-                    createCell(row, columnCount++, "", style);
-                if(listColumnExist.contains("debtTotal"))
-                    createCell(row, columnCount++, customer.getDebtTotal() != null ? customer.getDebtTotal() : "0" , style);
-                if(listColumnExist.contains("spendTotal"))
-                    createCell(row, columnCount++, customer.getSpendTotal() != null ? customer.getSpendTotal() : "0", style);
-                if(listColumnExist.contains("quantityItemOrder"))
-                    createCell(row, columnCount++, customer.getQuantityItemOrder(), style);
-                if(listColumnExist.contains("quantityProductOrder"))
-                    createCell(row, columnCount++, customer.getQuantityProductOrder(), style);
-                if(listColumnExist.contains("returnsTotal"))
-                    createCell(row, columnCount++, "", style);
-                if(listColumnExist.contains("lastDayOrder"))
-                    createCell(row, columnCount++, customer.getLastDayOrder()!=null ? customer.getLastDayOrder().toString() : "", style);
+
         }
 }
 

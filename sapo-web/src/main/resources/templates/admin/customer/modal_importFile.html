@@ -40,9 +40,6 @@
                                 <li>
                                    <span>File có dung lượng tối đa là 2MB và 5000 dòng</span>
                                 </li>
-                                <li>
-                                    <a href="https://support.google.com/mail/answer/185833?hl=vi">Tạo mật khẩu ứng dụng cho mail</a>
-                                 </li>
                             </ul>
                             <label class="mb-3">Nhập file vào đây</label>
                             <input class="form-control" type="file" id="formFileCustomers">
@@ -133,14 +130,6 @@
             emailFrom = $("#emailFrom").val();
             passEmailFrom = $('#passEmailFrom').val();
             email = $("#emailTo").val();
-            if(emailFrom.trim().match(/^$|[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)==null || emailFrom.trim() == ''){
-                CustomerApp.IziToast.showErrorAlert("Email người nhận không đúng định dạng");
-                return;
-            };
-            if(passEmailFrom.trim()==''){
-                CustomerApp.IziToast.showErrorAlert("Mật khẩu ứng dụng bị trống");
-                return;
-            }
             if(email.trim().match(/^$|[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)==null || email.trim() == ''){
                 CustomerApp.IziToast.showErrorAlert("Email người nhận không đúng định dạng");
                 return;
@@ -152,6 +141,12 @@
             let files = document.getElementById('formFileCustomers').files;
             if(files.length==0){
                 CustomerApp.IziToast.showErrorAlert("File bị trống");
+                return;
+            }
+            let filename = files[0].name;
+            let extension = filename.substring(filename.lastIndexOf(".")).toUpperCase();
+            if (extension != '.XLSX') {
+                CustomerApp.IziToast.showErrorAlert("File không đúng định dạng");
                 return;
             }
             // $("#customer-series-update").html("");
