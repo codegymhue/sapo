@@ -24,4 +24,18 @@ public class CreateSeriesCustomerParam {
     @NotBlank
     @Email
     private String email;
+    private String emailFrom;
+    private String passAppEmailFrom;
+
+    @Override
+    public String toString() {
+        return "CreateSeriesCustomerParam{" +
+                "listObjAddress=" + listObjAddress +
+                ", listResultParam=" + listResultParam +
+                ", errorMessage='" + errorMessage + '\'' +
+                ", email='" + email + '\'' +
+                ", emailFrom='" + emailFrom + '\'' +
+                ", passAppEmailFrom='" + passAppEmailFrom + '\'' +
+                '}';
+    }
 }

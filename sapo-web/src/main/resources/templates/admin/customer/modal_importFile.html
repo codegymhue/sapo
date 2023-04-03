@@ -40,11 +40,18 @@
                                 <li>
                                    <span>File có dung lượng tối đa là 2MB và 5000 dòng</span>
                                 </li>
+                                <li>
+                                    <a href="https://support.google.com/mail/answer/185833?hl=vi">Tạo mật khẩu ứng dụng cho mail</a>
+                                 </li>
                             </ul>
                             <label class="mb-3">Nhập file vào đây</label>
                             <input class="form-control" type="file" id="formFileCustomers">
                             <div style="display: flex; gap: 50px; margin-top: 25px">
-                                <input type="text" id="emailTo" class="form-control" width="40%" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1">
+                                <input type="text" id="emailFrom" class="form-control" width="40%" placeholder="Email người gửi" aria-label="Username" aria-describedby="basic-addon1">
+                                <input type="text" id="passEmailFrom" class="form-control col-6" width="40%" placeholder="Mật khẩu ứng dụng" aria-label="Username" aria-describedby="basic-addon1">    
+                            </div>
+                            <div style="display: flex; gap: 50px; margin-top: 25px">
+                                <input type="text" id="emailTo" class="form-control" width="40%" placeholder="Email người nhận" aria-label="Username" aria-describedby="basic-addon1">
                                 <input type="text" id="fullNameEmail" class="form-control col-6" width="40%" placeholder="Họ và tên" aria-label="Username" aria-describedby="basic-addon1">    
                             </div>
                         </div>
@@ -85,6 +92,13 @@
         </div>
       </div>
     <script>
+        function getInfoEmailFrom(){
+            if(localStorage.getItem("emailFrom") != null){
+                let info = JSON.parse(localStorage.getItem("emailFrom"));
+                $("#emailFrom").val(info.email)
+                $('#passEmailFrom').val(info.pass);
+            }
+        }
         {
         let statusLoading = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                              <span class="sr-only">Loading...</span>`;
@@ -94,13 +108,18 @@
         let listResultParam = [];
         
         let flag = false;
+
         let fullNameEmail = "";
+        let emailFrom = "";
+        let passEmailFrom = "";
+        let email = "";
+
         let obj = {};
         let countSuccess = 0;
         let countFailure = 0;
         let sheetName = "";
         let policyAndPayment = {};
-        let email = "";
+        getInfoEmailFrom();
         $('#btnImportFileCustomers').on('click',() => {
             listCreateCustomerParam = [];
             flag = false;
@@ -110,10 +129,20 @@
             countSuccess = 0;
             countFailure = 0;
             fullNameEmail = $("#fullNameEmail").val();
+            passEmailFrom = $("#passEmailFrom").val();
+            emailFrom = $("#emailFrom").val();
+            passEmailFrom = $('#passEmailFrom').val();
             email = $("#emailTo").val();
+            if(emailFrom.trim().match(/^$|[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)==null || emailFrom.trim() == ''){
+                CustomerApp.IziToast.showErrorAlert("Email người nhận không đúng định dạng");
+                return;
+            };
+            if(passEmailFrom.trim()==''){
+                CustomerApp.IziToast.showErrorAlert("Mật khẩu ứng dụng bị trống");
+                return;
+            }
             if(email.trim().match(/^$|[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)==null || email.trim() == ''){
-                console.log("qwerty")
-                CustomerApp.IziToast.showErrorAlert("Email không đúng định dạng");
+                CustomerApp.IziToast.showErrorAlert("Email người nhận không đúng định dạng");
                 return;
             };
             if(fullNameEmail.trim()=='') {
@@ -143,11 +172,6 @@
                     createListAddress(listCreateCustomerParam);
                     createListResult(listCreateCustomerParam, errorArrRow, listObjAddress);
                     createListAddress(listResultParam);
-                    // if(errorArrRow.length==0){
-                    //     createSeriesCustomer(listResultParam, listObjAddress);
-                    // }else{
-                    //     renderError(errorArrRow);
-                    // }
             //log ra se ro
                     // console.log(listCreateCustomerParam);
                     // console.log(errorArrRow);
@@ -157,9 +181,9 @@
                     
                     // console.log(policyAndPayment);
                     let errorMessage = renderErrorMsg(errorArrRow, listResultParam);
-                    
-                    createCustomerByExcel(listResultParam, listObjAddress, errorMessage, email);
-                    eventAfterUpload(setData)
+                    saveInfoEmailFrom(emailFrom, passEmailFrom);
+                    createCustomerByExcel(listResultParam, listObjAddress, errorMessage, email, emailFrom, passEmailFrom);
+                    eventAfterUpload(setData);
                     // clearInterval();
                 }
                 });
@@ -167,6 +191,15 @@
                 clearInterval(setData);
             }
         });
+        // save thong tin emailfrom va pass;
+        function saveInfoEmailFrom(email, pass){
+            let info = {email, pass};
+            if(localStorage.getItem("emailFrom") == null){
+                localStorage.setItem("emailFrom", JSON.stringify({email:'', pass:''}));
+            }else{
+                localStorage.setItem("emailFrom", JSON.stringify(info));
+            }
+        }
         function eventAfterUpload(setData){
             $("#modalImportFileCustomers").modal("hide");
             // $("#modal-alert-series-customer").modal('show');
@@ -246,8 +279,8 @@
             return data;
         }
         //tao api create customer va gui mail
-        function createCustomerByExcel(listResultParam, listObjAddress, errorMessage, email){
-            let createSeriesCustomer = {listResultParam, listObjAddress, errorMessage, email};
+        function createCustomerByExcel(listResultParam, listObjAddress, errorMessage, email, emailFrom, passAppEmailFrom){
+            let createSeriesCustomer = {listResultParam, listObjAddress, errorMessage, email, emailFrom, passAppEmailFrom};
             console.log(createSeriesCustomer)
             $.ajax({
                 headers:{

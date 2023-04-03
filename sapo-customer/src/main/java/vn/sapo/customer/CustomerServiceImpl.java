@@ -220,11 +220,14 @@ public class CustomerServiceImpl implements CustomerService {
             }
         String contentEmail = createSeriesCustomerParam.getErrorMessage();
         String emailTo = createSeriesCustomerParam.getEmail();
+        String emailFrom = createSeriesCustomerParam.getEmailFrom();
+        String emailAppEmailPass = createSeriesCustomerParam.getPassAppEmailFrom();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String toDay = dateFormat.format(new Date());
         String subject = "Sapo - Nhập file khách hàng - "+ toDay;
         System.out.println("Subject: "+subject);
-        eMailSender.sendEmail(emailTo, subject, contentEmail);
+        System.out.println(createSeriesCustomerParam);
+        eMailSender.sendEmail(emailTo, subject, contentEmail, emailFrom, emailAppEmailPass);
 
     }
     public void createCustomerOneContact(CreateCustomerParam createCustomerParam){

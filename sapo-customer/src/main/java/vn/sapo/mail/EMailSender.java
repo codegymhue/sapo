@@ -18,17 +18,11 @@ public class EMailSender{
     @Autowired
     private JavaMailSender emailSender;
 
-    public void sendEmail(String toEmail, String subject, String body) {
-//        SimpleMailMessage message = new SimpleMailMessage();
-//        message.setFrom("sapoproject01@gmail.com");
-//        message.setTo(to);
-//        message.setSubject(subject);
-//        message.setText(text);
-//        emailSender.send(message);
+    public void sendEmail(String toEmail, String subject, String body, String emailFrom, String passAppEmail) {
         try{
-            final String fromEmail = "sapoproject01@gmail.com";
+            final String fromEmail = emailFrom;
             // Mat khai email cua ban
-            final String password = "hanlvpvfqagfegqj";
+            final String password = passAppEmail;
 //            // dia chi email nguoi nhan
 //            final String toEmail = "trantrung2751999@gmail.com";
 //            final String subject = "Java Example Test";
@@ -61,6 +55,27 @@ public class EMailSender{
             e.printStackTrace();
             System.out.println("Gui mail that bai");
         }
+    }
+    public void checkUserPass(String emailFrom, String passAppEmail){
+        try {
+            final String fromEmail = emailFrom;
+            // Mat khai email cua ban
+            final String password = passAppEmail;
+//            // dia chi email nguoi nhan
+//            final String toEmail = "trantrung2751999@gmail.com";
+//            final String subject = "Java Example Test";
+//            final String body = "Hello Admin";
+            Properties props = new Properties();
+            props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
+            props.put("mail.smtp.port", "587"); //TLS Port
+            props.put("mail.smtp.auth", "true"); //enable authentication
+            props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
+            Authenticator auth = new Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(fromEmail, password);
+                }
+            };
+        }catch ()
     }
 //    @Autowired
 //    private MailSender mailSender;
