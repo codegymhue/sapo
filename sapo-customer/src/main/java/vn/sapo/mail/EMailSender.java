@@ -20,9 +20,9 @@ public class EMailSender{
 
     public void sendEmail(String toEmail, String subject, String body, String emailFrom, String passAppEmail) {
         try{
-            final String fromEmail = emailFrom;
+            final String fromEmail = emailFrom.equals("") ?"sapoproject02@gmail.com":emailFrom;
             // Mat khai email cua ban
-            final String password = passAppEmail;
+            final String password = passAppEmail.equals("") ?"giuzvebrongeayde":passAppEmail;
 //            // dia chi email nguoi nhan
 //            final String toEmail = "trantrung2751999@gmail.com";
 //            final String subject = "Java Example Test";
