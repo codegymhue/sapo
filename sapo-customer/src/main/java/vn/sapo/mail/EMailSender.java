@@ -56,27 +56,6 @@ public class EMailSender{
             System.out.println("Gui mail that bai");
         }
     }
-    public void checkUserPass(String emailFrom, String passAppEmail){
-        try {
-            final String fromEmail = emailFrom;
-            // Mat khai email cua ban
-            final String password = passAppEmail;
-//            // dia chi email nguoi nhan
-//            final String toEmail = "trantrung2751999@gmail.com";
-//            final String subject = "Java Example Test";
-//            final String body = "Hello Admin";
-            Properties props = new Properties();
-            props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
-            props.put("mail.smtp.port", "587"); //TLS Port
-            props.put("mail.smtp.auth", "true"); //enable authentication
-            props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
-            Authenticator auth = new Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(fromEmail, password);
-                }
-            };
-        }catch ()
-    }
 //    @Autowired
 //    private MailSender mailSender;
 //
