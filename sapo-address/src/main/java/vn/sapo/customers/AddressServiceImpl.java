@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.customers.dto.AddressResult;
 import vn.sapo.customers.dto.CreateAddressParam;
+import vn.sapo.customers.dto.DeleteAddressResult;
 import vn.sapo.customers.dto.UpdateAddressParam;
 import vn.sapo.entities.Address;
-import vn.sapo.entities.customer.Customer;
 import vn.sapo.shared.exceptions.NotFoundException;
 
 import java.util.*;
@@ -26,6 +26,45 @@ public class AddressServiceImpl implements AddressService {
 
     @Autowired
     AddressMapper addressMapper;
+
+    @Override
+    @Transactional
+    public DeleteAddressResult deleteAddressesByListId(Integer id, List<Integer> ids) {
+        Integer total = addressRepository.countAddressesByCustomerId(id);
+        DeleteAddressResult result = new DeleteAddressResult();
+
+        if (total == 1)
+            result.setMessage(new HashMap<>(){{
+                put("fail", "address.exception.lastAddress");
+            }});
+
+        if (total > ids.size()) {
+            addressRepository.deleteByIdIn(ids);
+
+            result.setNumberOfSuccess(ids.size())
+                    .setMessage(new HashMap<>(){{
+                        put("success", "Xóa thành công " + ids.size() + " địa chỉ");
+                    }});
+        }
+
+        if (ids.size() == total) {
+            List<Integer> currentListAddressesId = addressRepository.findAllAddressIdByCustomerId(id);
+            List<Integer> newListAddressesId = currentListAddressesId.subList(1, currentListAddressesId.size());
+            List<String> deletedNames = addressRepository.findLine1ByIds(newListAddressesId);
+            int deleteSize = newListAddressesId.size();
+            addressRepository.deleteByIdIn(newListAddressesId);
+
+            result.setNumberOfSuccess(newListAddressesId.size())
+                    .setNumberOfFail(currentListAddressesId.size() - deleteSize)
+                    .setAddressResult(findById(currentListAddressesId.get(0)))
+                    .setMessage(new HashMap<>(){{
+                        put("fail", "address.customer.exception.lastAddress");
+                    }})
+                    .setNamesDeleted(deletedNames);
+        }
+
+        return result;
+    }
 
     @Override
     public Page<AddressResult> findAllAddresses(Integer id, Pageable pageable) {
@@ -49,8 +88,7 @@ public class AddressServiceImpl implements AddressService {
     @Transactional(readOnly = true)
     public AddressResult findById(Integer id) {
         Address address = addressRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("address not found"));
-        Integer customerId = address.getCustomerId();
+                .orElseThrow(() -> new NotFoundException("address.exception.notFound"));
         return addressMapper.toDTO(address);
     }
 
@@ -162,7 +200,6 @@ public class AddressServiceImpl implements AddressService {
         addressRepository.deleteAllBySupplierId(id);
     }
 
-    ;
 }
 
 

@@ -335,6 +335,8 @@
 <th:block th:replace="/admin/customer/modal/contact/modal_createContact"/>
 <th:block th:replace="/admin/customer/modal/address/modal_createAddress"/>
 <th:block th:replace="/admin/customer/modal/address/modal_editAddress"/>
+<th:block th:replace="/admin/customer/modal/address/modal_deleteAddress"/>
+<th:block th:replace="/admin/customer/modal/address/modal_resultDeleteAddress"/>
 <th:block th:replace="/admin/customer/layout/script"/>
 
 <script src="/assets/admin/js/customer/customerHistory.js"></script>
@@ -345,6 +347,7 @@
     let contactParam = {};
     let createAddressParam = {};
     let addressDataTable = {};
+    let listAddressId = [];
 
     CustomerApp.page.elements.fullName = $("#fullName");
     CustomerApp.page.elements.status = $("#status");
@@ -404,7 +407,12 @@
     //start address
     CustomerApp.page.elements.tbAddress = $("#tbAddress");
 
+    CustomerApp.page.elements.modalDeleteAddress = $("#modalDeleteAddress");
+    CustomerApp.page.elements.modalResultDeleteAddress = $("#modalResultDeleteAddress");
+
     CustomerApp.page.elements.btnAddress = $("#btnAddress");
+    CustomerApp.page.elements.btnDeleteAddressContainer = $("#btnDeleteAddressContainer");
+
     CustomerApp.page.elements.districtUpdate = $("#districtUpdate");
     CustomerApp.page.elements.provinceUpdate = $("#provinceUpdate");
     CustomerApp.page.elements.wardUpdate = $("#wardUpdate");
@@ -673,11 +681,11 @@
 
     //start address
 
-    $("#tbAddress tbody").on('click', 'tr', function () {
-        let id = addressDataTable.row(this).data().id;
-        console.log(id)
-        $("#modalEditAddress").modal('show');
-    });
+    // $("#tbAddress tbody").on('click', 'tr', function () {
+    //     let id = addressDataTable.row(this).data().id;
+    //     console.log(id)
+    //     $("#modalEditAddress").modal('show');
+    // });
 
     $("#btnCreateAddress").click(() => {
         let id = +window.location.pathname.split('/')[3];
@@ -713,7 +721,7 @@
             "url": origin + `/api/addresses/${id}/customer`,
             "data": JSON.stringify(createAddressParam)
         })
-            .done((data) => {
+            .done(() => {
                 CustomerApp.page.elements.modalCreateAddress.modal('hide');
                 CustomerApp.IziToast.showSuccessAlert('Thêm mới địa chỉ thành công')
             })
@@ -750,6 +758,7 @@
             serverSide: true,
             searching: false,
             ordering: false,
+            "autoWidth": false,
             ajax: {
                 type: 'POST',
                 url: origin + `/api/addresses/${id}/customer/pagination`,
@@ -761,64 +770,180 @@
             },
             language: CustomerApp.dataTableDetails.language,
             lengthMenu: [
-                [20, 50, 100],
-                ["20", "50", "100"]
+                [5, 20, 50, 100],
+                ['5', "20", "50", "100"]
             ],
-            aoColumns: [
+            columns: [
                 {
-                    mData: 'id'
+                    data: 'id',
+                    target: 0
                 },
                 {
-                    mData: 'phoneNumber',
+                    data: 'phoneNumber',
                     render: (data, type, row) => {
                         return row.phoneNumber || '';
-                    }
+                    },
+                    target: 1,
+                    className: 'LavuC'
                 },
                 {
-                    mData: 'line1',
+                    data: 'line1',
                     render: (data, type, row) => {
                         return row.line1 || '';
-                    }
+                    },
+                    target: 2,
+                    className: 'BaviW'
                 },
                 {
-                    mData: 'wardName',
+                    data: 'wardName',
                     render: (data, type, row) => {
                         return row.wardName || '';
-                    }
+                    },
+                    className: 'jYgve',
                 },
                 {
-                    mData: 'districtName',
+                    data: 'districtName',
                     render: (data, type, row) => {
                         return row.districtName || '';
-                    }
+                    },
+                    className: 'jYgve',
                 },
                 {
-                    mData: 'provinceName',
+                    data: 'provinceName',
                     render: (data, type, row) => {
                         return row.provinceName || '';
-                    }
+                    },
+                    className: 'jYgve',
                 },
                 {
-                    mData: 'zipCode',
+                    data: 'zipCode',
                     render: (data, type, row) => {
                         return row.zipCode || '';
-                    }
+                    },
+                    className: 'jYgve',
                 },
                 {
-                    mData: 'email',
+                    data: 'email',
                     render: (data, type, row) => {
                         return row.email || '';
-                    }
+                    },
+                    className: 'jYgve',
                 }
             ],
-            columnDefs: [{
-                targets: 0,
-                render: function (data, type, row, meta) {
-                    return `<input id=${row.id} type="checkbox"/>`
-                }
-            }],
+            columnDefs: [
+                {
+                    targets: 0,
+                    render: function (data, type, row, meta) {
+                        return `<input id=${row.id} type="checkbox"/>`
+                    }
+                },
+            ],
         })
     }
+
+    //start check all/uncheck all
+    CustomerApp.page.commands.checkAllAddresses = () => {
+
+        if ($("#checkAllAddresses").is(":checked")) {
+            $("#tbAddress tbody tr td input").each(function () {
+                $(this).prop("checked", true);
+                listAddressId.push($(this)[0].id);
+                console.log(listAddressId)
+            })
+            $("#tbAddress thead tr th:not(:first-child)").addClass("hidden").removeClass('show');
+            CustomerApp.page.commands.showTheadAction();
+        } else {
+            $("#tbAddress tbody tr td input").each(function () {
+                $(this).prop("checked", false);
+                listAddressId = [];
+            })
+            $("#tbAddress thead tr th:not(:first-child)").addClass("show").removeClass('hidden');
+            $("#addressActionContainer").remove();
+        }
+
+    }
+
+    CustomerApp.page.commands.showTheadAction = () => {
+        let str = `<th class="jss12735" id="addressActionContainer">
+                        <div class="jyZcwm2">Đã chọn ${listAddressId.length} địa chỉ trên trang này</div>
+                        <div class="jss12735">
+                            <button type="button" onclick="CustomerApp.page.commands.showBtnDeleteAddressContainer()"
+                            class="vUaem">
+                            Chọn thao tác
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            width="24" height="24" font-size="24" active="true" variant="filled"
+                            class="sc-hHLeRK cDcJUH">
+                                <path d="m7 9.5 5 5 5-5H7Z" fill="currentColor">
+                                </path>
+                            </svg>
+                            </button>
+                            <div id="btnDeleteAddressContainer" class="dropdown-content mauWs">
+                                <button type="button" class="vUaem" id="showModalDeleteAddress"
+                                        onclick=CustomerApp.page.commands.showModalDeleteAddress()>
+                                    Xóa địa chỉ
+                                </button>
+                            </div>
+                        </div>
+                    </th>`;
+        $("#tbAddress thead tr").append(str);
+    }
+
+    $("#btnDeleteAddress").click(() => {
+        let id = +window.location.pathname.split('/')[3];
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "DELETE",
+            url: origin + `/api/addresses/${id}/customer-addresses`,
+            data: JSON.stringify(listAddressId)
+        })
+            .done((data) => {
+                let {namesDeleted, numberOfSuccess, numberOfFail, addressResult, message} = data;
+
+                CustomerApp.page.elements.modalDeleteAddress.modal('hide');
+
+                CustomerApp.page.elements.modalResultDeleteAddress.modal('show');
+                $("#numberAddressesDeleted").text(numberOfSuccess);
+                $("#numberAddressesDeleteFail").text(numberOfFail);
+
+                $.each(namesDeleted, (i, name) => {
+                    console.log(name)
+                    let success = `<p>${name} - Đã được xóa thành công</p>`;
+                    $("#deletedSucceedNames").prepend(success);
+                })
+
+                let fail = `<p>${addressResult.line1} - address : ${message.fail}</p>`;
+                $("#deletedFailNames").prepend(fail);
+
+                $("#showDeleteSuccessDetail").click(() => {
+                    $("#deletedSucceedNames").toggleClass('show');
+                })
+
+                $("#showDeleteFailDetail").click(() => {
+                    $("#deletedFailNames").toggleClass('show');
+                })
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+    })
+
+    $("#btnCloseResultDeleteAddress").click(() => {
+        CustomerApp.page.elements.modalResultDeleteAddress.modal('hide');
+    })
+
+    CustomerApp.page.commands.showModalDeleteAddress = () => {
+        $("#confirmAddressText").text(`Bạn có chắc chắn muốn xóa ${listAddressId.length} địa chỉ được chọn? Thao tác này không thể khôi phục.`);
+        CustomerApp.page.elements.modalDeleteAddress.modal('show')
+        $("#btnDeleteAddressContainer").toggleClass('show');
+    }
+
+    CustomerApp.page.commands.showBtnDeleteAddressContainer = () => {
+        $("#btnDeleteAddressContainer").toggleClass('show');
+    }
+    //end checkAll/deCheckAll
 
 
     $("#btnShowModalCreateAddress").click(() => {

@@ -1,0 +1,62 @@
+<th:block th:fragment="modal_resultDeleteAddress">
+    <div class="modal fade" id="modalResultDeleteAddress" data-bs-backdrop="static" data-bs-keyboard="false"
+         tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Xóa địa chỉ</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h3>Xử lý dữ liệu hoàn tất!</h3>
+                    <div>
+                        <div class="jss12735">
+                            <p>
+                                Địa chỉ xóa thành công: <span id="numberAddressesDeleted"></span>
+                            </p>
+                            <button class="bdiEg" id="showDeleteSuccessDetail">
+                          <span class="MuiButton-label">
+                            Chi tiết
+                            <span class="MuiButton-endIcon MuiButton-iconSizeMedium">
+                              <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M7 10l5 5 5-5z">
+                                </path>
+                              </svg>
+                            </span>
+                          </span>
+                                <span class="MuiTouchRipple-root"></span>
+                            </button>
+                        </div>
+                        <div id="deletedSucceedNames" class="hidden"></div>
+                    </div>
+                    <div>
+                        <div class="jss12735">
+                            <p>
+                                Địa chỉ xóa không thành công: <span id="numberAddressesDeleteFail"></span>
+                            </p>
+                            <button class="bdiEg" id="showDeleteFailDetail">
+                              <span class="MuiButton-label">
+                                Chi tiết
+                                <span class="MuiButton-endIcon MuiButton-iconSizeMedium">
+                                  <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M7 10l5 5 5-5z">
+                                    </path>
+                                  </svg>
+                                </span>
+                              </span>
+                                <span class="MuiTouchRipple-root"></span>
+                            </button>
+                        </div>
+                        <div id="deletedFailNames" class="hidden"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnCloseResultDeleteAddress" class="RthGc ldZiUTA" type="button">
+                        Xác nhận
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</th:block>
