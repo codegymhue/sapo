@@ -250,7 +250,6 @@ public class CustomerServiceImpl implements CustomerService {
         System.out.println("many contact");
         CustomerResult customerResult = create(createCustomerParam);
         Integer customerId = customerResult.getId();
-//        System.out.println(customerResult);
         if(createCustomerParam.getCustomerCode()==null) {
             Optional<Customer> customerById = customerRepository.findById(customerId);
             customerById.get().setCustomerCode(CodePrefix.CUSTOMER.generate(customerId));
@@ -258,13 +257,15 @@ public class CustomerServiceImpl implements CustomerService {
         }
         customerResult.setAddresses(addressService.findByCustomerId(customerId));
         CreateContactParam contact = new CreateContactParam();
-//        System.out.println(customerResult.getAddresses().get(0).getFullName());
         contact.setFullName(customerResult.getAddresses().get(0).getFullName());
         List<CreateContactParam> listContact = new ArrayList<>();
         listContact.add(contact);
         for(int i=0; i< listAddress.size(); i++){
             CreateAddressParam createAddressParam = listAddress.get(i);
             addressService.createAddressWithCustomerId(createAddressParam, customerId);
+            CreateContactParam createContactParam = new CreateContactParam();
+            createContactParam.setFullName(listAddress.get(i).getFullName());
+            listContact.add(createContactParam);
         }
         for(int i=0; i< listContact.size(); i++){
             contactCustomerService.createByCustomerId(customerId, listContact.get(i));

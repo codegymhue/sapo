@@ -59,6 +59,28 @@
             $( "#sortable" ).sortable();
             $( "#sortable" ).disableSelection();
         });
+        // let ggg = $("#tbCustomer tr th");
+        // for(let i=0; i<ggg.length; i++){
+        //     console.log("th: "+$(ggg[i]).css("min-width"));
+        // }
+        function optimizeWidthColumn(){
+            let thList= $("#tbCustomer tr th");
+            $(thList[3]).css("min-width", `1000px`);
+            for(let i=2; i<thList.length; i++){
+                let thHeight = +($(thList[i]).css("height").split("p")[0]);
+                console.log("th height: "+thHeight);
+                let deltaHeight = 0;
+                let setHeight = setInterval(()=>{
+                    deltaHeight+=50;
+                    $(thList[i]).css("min-width", `${deltaHeight}px`);
+                    thHeight = +($(thList[i]).css("height").split("p")[0]);
+                    if(thHeight<=55){
+                        console.log($(thList[i]).css("min-width"));
+                        clearInterval(setHeight);
+                    }
+                })
+            }
+        }
         const theadElement = document.querySelector('.change-column');
         let thead = [
             'customerCode',
@@ -597,10 +619,16 @@
             let updateAfterDatatable = setInterval(async ()=>{
                 let tdRow = $("#tbCustomer tbody td input");
                 if($(theadFirst[0]).hasClass("sorting_asc")){
-                    listThead = $("#tbCustomer thead tr th");
-                    $(theadFirst[0]).removeClass('sorting_asc');
-                    tHeadTr = $("#tbCustomer thead tr th"); 
-                    clearInterval(updateAfterDatatable);
+                    try{
+                        listThead = $("#tbCustomer thead tr th");
+                        $(theadFirst[0]).removeClass('sorting_asc');
+                        tHeadTr = $("#tbCustomer thead tr th");
+                        optimizeWidthColumn(); 
+                        clearInterval(updateAfterDatatable);
+                    }catch(e){
+                        console.log(e);
+                        clearInterval(updateAfterDatatable);
+                    }
                 }
             })
                 $(".close").click();

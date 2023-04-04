@@ -150,9 +150,9 @@ public class CustomerExcelExporter {
                 if(listColumnExist.contains("customerCode"))
                     createCell(row, columnCount++, customer.getCustomerCode(), style);
                 if(listColumnExist.contains("customerGroupCode"))
-                    createCell(row, columnCount++, customer.getGroup().getTitle(), style);
+                    createCell(row, columnCount++, customer.getGroup()!=null?customer.getGroup().getTitle():"", style);
                 if(listColumnExist.contains("endow"))
-                    createCell(row, columnCount++, customer.getGroup().getTitle(), style);
+                    createCell(row, columnCount++, customer.getGroup()!=null?customer.getGroup().getTitle():"", style);
                 if(listColumnExist.contains("email"))
                     createCell(row, columnCount++, customer.getEmail() != null ? customer.getEmail() : "", style);
                 if(listColumnExist.contains("phoneNumber"))
@@ -213,15 +213,16 @@ public class CustomerExcelExporter {
                 j++;
             };
             if(listColumnExist.contains("policy")) {
-                createCell(row, columnCount++, "Theo nhóm " + "' " + customer.getGroup().getTitle() + " '", style);
+                createCell(row, columnCount++, customer.getGroup()!=null?"Theo nhóm " + "' " + customer.getGroup().getTitle():"" + " '", style);
                 j++;
             }
             if(listColumnExist.contains("discount")) {
-                createCell(row, columnCount++, customer.getGroup().getDiscount(), style);
+                createCell(row, columnCount++, customer.getGroup()!=null?customer.getGroup().getDiscount():"", style);
                 j++;
             }
             if(listColumnExist.contains("paymentMethod")) {
-                createCell(row, columnCount++, "", style);
+                createCell(row, columnCount++,
+                        customer.getGroup()!=null && customer.getGroup().getPaymentMethod()!=null?customer.getGroup().getPaymentMethod().getId():"", style);
                 j++;
             }
             if(listColumnExist.contains("debtTotal")) {

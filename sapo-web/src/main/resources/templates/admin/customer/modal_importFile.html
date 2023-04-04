@@ -6,7 +6,10 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5">Nhập file dữ liệu khách hàng</h1>
+                    <h1 class="modal-title fs-5">
+                        <span id="toogleEmail">N</span>hập file dữ liệu khách hàng
+                        <!-- <button id="button-tile-email">Button</button> -->
+                    </h1>
 
                     <span class="loader" style="z-index: -1"></span>
 
@@ -44,12 +47,12 @@
                             <label class="mb-3">Nhập file vào đây</label>
                             <input class="form-control" type="file" id="formFileCustomers">
                             <div style="display: flex; gap: 50px; margin-top: 25px">
-                                <input type="text" id="emailFrom" class="form-control" width="40%" placeholder="Email người gửi" aria-label="Username" aria-describedby="basic-addon1">
-                                <input type="text" id="passEmailFrom" class="form-control col-6" width="40%" placeholder="Mật khẩu ứng dụng" aria-label="Username" aria-describedby="basic-addon1">    
+                                <input style="display: none;" type="text" id="emailFrom" class="form-control input-emailFrom" placeholder="Email người gửi" aria-label="Username" aria-describedby="basic-addon1">
+                                <input style="display: none;" type="text" id="passEmailFrom" class="form-control input-emailFrom" placeholder="Mật khẩu ứng dụng" aria-label="Username" aria-describedby="basic-addon1">    
                             </div>
-                            <div style="display: flex; gap: 50px; margin-top: 25px">
-                                <input type="text" id="emailTo" class="form-control" width="40%" placeholder="Email người nhận" aria-label="Username" aria-describedby="basic-addon1">
-                                <input type="text" id="fullNameEmail" class="form-control col-6" width="40%" placeholder="Họ và tên" aria-label="Username" aria-describedby="basic-addon1">    
+                            <div id="groupEmail" style="gap: 50px; display: flex;">
+                                <input type="text" id="emailTo" class="form-control" placeholder="Email người nhận" aria-label="Username" aria-describedby="basic-addon1">
+                                <input type="text" id="fullNameEmail" class="form-control" placeholder="Họ và tên" aria-label="Username" aria-describedby="basic-addon1">    
                             </div>
                         </div>
                     </form>
@@ -92,11 +95,25 @@
         function getInfoEmailFrom(){
             if(localStorage.getItem("emailFrom") != null){
                 let info = JSON.parse(localStorage.getItem("emailFrom"));
-                $("#emailFrom").val(info.email)
+                $("#emailFrom").val(info.email);
                 $('#passEmailFrom').val(info.pass);
+            }
+            if(localStorage.getItem("emailTo") != null){
+                let info = JSON.parse(localStorage.getItem("emailTo"));
+                $("#fullNameEmail").val(info.name);
+                $("#emailTo").val(info.email);
             }
         }
         {
+        $("#toogleEmail").on("click",()=>{
+            if($(".input-emailFrom").css("display")=="none"){
+                $("#groupEmail").css("margin-top","25px");
+                $(".input-emailFrom").css("display", "block");
+            }else{
+                $("#groupEmail").css("margin-top","0px");
+                $(".input-emailFrom").css("display", "none");
+            }
+        })
         let statusLoading = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                              <span class="sr-only">Loading...</span>`;
         let errorArrRow = [];
@@ -125,10 +142,9 @@
             listObjAddress = {};
             countSuccess = 0;
             countFailure = 0;
-            fullNameEmail = $("#fullNameEmail").val();
-            passEmailFrom = $("#passEmailFrom").val();
             emailFrom = $("#emailFrom").val();
             passEmailFrom = $('#passEmailFrom').val();
+            fullNameEmail = $("#fullNameEmail").val();
             email = $("#emailTo").val();
             if(email.trim().match(/^$|[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)==null || email.trim() == ''){
                 CustomerApp.IziToast.showErrorAlert("Email người nhận không đúng định dạng");
@@ -173,13 +189,13 @@
                     // console.log(listObjAddress);
                     // console.log(listResultParam);
                     // console.log(renderErrorMsg(errorArrRow, listResultParam));
-                    
-                    // console.log(policyAndPayment);
                     let errorMessage = renderErrorMsg(errorArrRow, listResultParam);
-                    saveInfoEmailFrom(emailFrom, passEmailFrom);
+                    let objEmailFrom = {email: emailFrom, pass: passEmailFrom};
+                    let objEmailTo = {email: email, name: fullNameEmail};
+                    console.log(objEmailTo)
+                    saveInfoEmailFrom(objEmailFrom, objEmailTo);
                     createCustomerByExcel(listResultParam, listObjAddress, errorMessage, email, emailFrom, passEmailFrom);
                     eventAfterUpload(setData);
-                    // clearInterval();
                 }
                 });
             }catch{
@@ -187,12 +203,16 @@
             }
         });
         // save thong tin emailfrom va pass;
-        function saveInfoEmailFrom(email, pass){
-            let info = {email, pass};
+        function saveInfoEmailFrom(emailFrom, emailTo){
             if(localStorage.getItem("emailFrom") == null){
                 localStorage.setItem("emailFrom", JSON.stringify({email:'', pass:''}));
             }else{
-                localStorage.setItem("emailFrom", JSON.stringify(info));
+                localStorage.setItem("emailFrom", JSON.stringify(emailFrom));
+            }
+            if(localStorage.getItem("emailTo") == null){
+                localStorage.setItem("emailTo", JSON.stringify({email:'', name:''}));
+            }else{
+                localStorage.setItem("emailTo", JSON.stringify(emailTo));
             }
         }
         function eventAfterUpload(setData){

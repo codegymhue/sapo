@@ -187,8 +187,8 @@
                         <div id="scroller"
                              class="sc-cHPgQl hYUFnd">
                             <div class="sc-gHLcSH ieIWRo">
-                                <button class="sc-KfMfS dvtKJo"> <a href="/admin/customers" style="text-decoration: none">Tất cả khách hàng</a>
-                                </button>
+                                <button class="sc-KfMfS dvtKJo statusAll" onclick="selectStatus('.statusAll')">Tất cả khách hàng</button>
+                                <button class="sc-KfMfS dvtKJo statusContact" onclick="selectStatus('.statusContact')">Đang giao dịch</button>
                             </div>
                         </div>
                     </div>
@@ -394,6 +394,33 @@
             }
             drawDataTable();
         })
+    }
+    $(".statusContact").css("border-bottom", "none");
+    $(".statusContact").css("color", "rgb(116, 124, 135)");
+    function selectStatus(selector){
+        if(selector==".statusAll"){
+            $(".statusAll").css("color", "rgb(0, 136, 255)");
+            $(".statusAll").css("border-bottom", "2px solid rgb(0, 136, 255)");
+
+            $(".statusContact").css("border-bottom", "none");
+            $(".statusContact").css("color", "rgb(116, 124, 135)");
+
+            $("#AVAILABLE").prop("checked", false);
+            $("#btnFilter").click();
+            changeColumn();
+        }else if(selector==".statusContact"){
+            $(".statusAll").css("color", "rgb(116, 124, 135)");
+            $(".statusAll").css("border-bottom", "none");
+
+            $(".statusContact").css("color", "rgb(0, 136, 255)");
+            $(".statusContact").css("border-bottom", "2px solid rgb(0, 136, 255)");
+
+            $("#AVAILABLE").prop("checked", true);
+            $("#btnFilter").click();
+        }
+    }
+    function toggleEmailFrom(){
+
     }
     function drawDataTable(){
         $("#tbCustomer").DataTable({
