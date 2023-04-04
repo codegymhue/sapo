@@ -32,6 +32,7 @@ public class AddressServiceImpl implements AddressService {
     public DeleteAddressResult deleteAddressesByListId(Integer id, List<Integer> ids) {
         Integer total = addressRepository.countAddressesByCustomerId(id);
         DeleteAddressResult result = new DeleteAddressResult();
+        List<String> deletedNames;
 
         if (total == 1)
             result.setMessage(new HashMap<>(){{
@@ -39,18 +40,21 @@ public class AddressServiceImpl implements AddressService {
             }});
 
         if (total > ids.size()) {
+            deletedNames = addressRepository.findLine1ByIds(ids);
             addressRepository.deleteByIdIn(ids);
 
             result.setNumberOfSuccess(ids.size())
                     .setMessage(new HashMap<>(){{
                         put("success", "Xóa thành công " + ids.size() + " địa chỉ");
-                    }});
+                    }})
+                    .setNamesDeleted(deletedNames)
+                    .setIdsDeleted(ids);
         }
 
         if (ids.size() == total) {
             List<Integer> currentListAddressesId = addressRepository.findAllAddressIdByCustomerId(id);
             List<Integer> newListAddressesId = currentListAddressesId.subList(1, currentListAddressesId.size());
-            List<String> deletedNames = addressRepository.findLine1ByIds(newListAddressesId);
+            deletedNames = addressRepository.findLine1ByIds(newListAddressesId);
             int deleteSize = newListAddressesId.size();
             addressRepository.deleteByIdIn(newListAddressesId);
 
@@ -60,7 +64,8 @@ public class AddressServiceImpl implements AddressService {
                     .setMessage(new HashMap<>(){{
                         put("fail", "address.customer.exception.lastAddress");
                     }})
-                    .setNamesDeleted(deletedNames);
+                    .setNamesDeleted(deletedNames)
+                    .setIdsDeleted(newListAddressesId);
         }
 
         return result;

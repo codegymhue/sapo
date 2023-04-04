@@ -22,4 +22,6 @@ public class DeleteAddressResult {
 
     private List<String> namesDeleted;
 
+    private List<Integer> idsDeleted;
+
 }

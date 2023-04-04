@@ -347,7 +347,7 @@
     let contactParam = {};
     let createAddressParam = {};
     let addressDataTable = {};
-    let listAddressId = [];
+    const listAddressId = new Set();
 
     CustomerApp.page.elements.fullName = $("#fullName");
     CustomerApp.page.elements.status = $("#status");
@@ -430,7 +430,7 @@
 
         let tbContact = CustomerApp.page.elements.tbContact.DataTable({
             dom: '<"top">Brt<"bottom"lifp><"clear">',
-            processing: true,
+            processing: CustomerApp.dataTableDetails.language.processing,
             serverSide: true,
             searching: false,
             ordering: false,
@@ -681,11 +681,51 @@
 
     //start address
 
-    // $("#tbAddress tbody").on('click', 'tr', function () {
-    //     let id = addressDataTable.row(this).data().id;
-    //     console.log(id)
-    //     $("#modalEditAddress").modal('show');
-    // });
+    //start delete one customer's address
+
+    CustomerApp.page.commands.deleteOneOrMoreCustomerAddress = () => {
+        $('#tbAddress tbody tr td input[type="checkbox"]').change(function () {
+            let checkboxLength = $('#tbAddress tbody tr td input[type="checkbox"]').length;
+
+            if ($(this).is(":checked")) {
+                listAddressId.add($(this).attr('id'))
+
+                if (checkboxLength > listAddressId.size && listAddressId.size > 0)
+                    $("#checkAllAddresses").prop({indeterminate: true, checked: false})
+
+                if (checkboxLength === listAddressId.size && listAddressId.size > 0)
+                    $("#checkAllAddresses").prop({indeterminate: false, checked: true});
+
+                $("#tbAddress thead tr th:not(:first-child)").addClass("hidden").removeClass('show');
+                $("#addressActionContainer").remove();
+                CustomerApp.page.commands.showTheadAction();
+
+            } else {
+                listAddressId.delete($(this).attr('id'));
+
+                $("#addressActionContainer").remove();
+                CustomerApp.page.commands.showTheadAction();
+
+                if (listAddressId.size === 0)
+                    $("#checkAllAddresses").prop({indeterminate: false, checked: false})
+
+                if (checkboxLength > listAddressId.size && listAddressId.size > 0)
+                    $("#checkAllAddresses").prop({indeterminate: true, checked: false})
+
+                if (listAddressId.size === 0){
+
+                    $("#tbAddress thead tr th:not(:first-child)").addClass("show").removeClass('hidden');
+                    $("#addressActionContainer").remove();
+                }
+            }
+        })
+    }
+    //end delete one customer's address
+
+    $("#tbAddress tbody").on('click', " tr td:not(:first-child)", function () {
+        let id = addressDataTable.row(this).data().id;
+        $("#modalEditAddress").modal('show');
+    });
 
     $("#btnCreateAddress").click(() => {
         let id = +window.location.pathname.split('/')[3];
@@ -739,10 +779,6 @@
         CustomerApp.page.elements.tbContact.addClass('hidden').removeClass('show');
         CustomerApp.page.elements.tbContact.DataTable().destroy();
 
-        // $(".jyZcwm2.addressContainer").addClass('hidden').removeClass('show');
-        // CustomerApp.page.elements.tbContact.addClass('hidden').removeClass('show');
-        // CustomerApp.page.elements.tbContact.DataTable().destroy();
-
         $('.addressContainer').removeClass('hidden').addClass('show');
         CustomerApp.page.elements.tbAddress.removeClass('hidden').addClass('show');
 
@@ -754,11 +790,11 @@
 
         addressDataTable = CustomerApp.page.elements.tbAddress.DataTable({
             dom: '<"top">Brt<"bottom"lifp><"clear">',
-            processing: true,
+            processing: CustomerApp.dataTableDetails.language.processing,
             serverSide: true,
             searching: false,
             ordering: false,
-            "autoWidth": false,
+            autoWidth: false,
             ajax: {
                 type: 'POST',
                 url: origin + `/api/addresses/${id}/customer/pagination`,
@@ -768,6 +804,7 @@
                     return JSON.stringify(d);
                 }
             },
+            rowId: 'id',
             language: CustomerApp.dataTableDetails.language,
             lengthMenu: [
                 [5, 20, 50, 100],
@@ -838,34 +875,37 @@
                     }
                 },
             ],
+            initComplete: function (setting, json) {
+                CustomerApp.page.commands.deleteOneOrMoreCustomerAddress();
+            }
         })
     }
 
     //start check all/uncheck all
+
     CustomerApp.page.commands.checkAllAddresses = () => {
 
         if ($("#checkAllAddresses").is(":checked")) {
             $("#tbAddress tbody tr td input").each(function () {
                 $(this).prop("checked", true);
-                listAddressId.push($(this)[0].id);
-                console.log(listAddressId)
+                listAddressId.add($(this)[0].id);
             })
             $("#tbAddress thead tr th:not(:first-child)").addClass("hidden").removeClass('show');
             CustomerApp.page.commands.showTheadAction();
         } else {
             $("#tbAddress tbody tr td input").each(function () {
                 $(this).prop("checked", false);
-                listAddressId = [];
+                listAddressId.clear();
             })
             $("#tbAddress thead tr th:not(:first-child)").addClass("show").removeClass('hidden');
             $("#addressActionContainer").remove();
         }
-
-    }
+        console.log(listAddressId)
+    };
 
     CustomerApp.page.commands.showTheadAction = () => {
         let str = `<th class="jss12735" id="addressActionContainer">
-                        <div class="jyZcwm2">Đã chọn ${listAddressId.length} địa chỉ trên trang này</div>
+                        <div class="jyZcwm2">Đã chọn ${listAddressId.size} địa chỉ trên trang này</div>
                         <div class="jss12735">
                             <button type="button" onclick="CustomerApp.page.commands.showBtnDeleteAddressContainer()"
                             class="vUaem">
@@ -890,6 +930,7 @@
 
     $("#btnDeleteAddress").click(() => {
         let id = +window.location.pathname.split('/')[3];
+        const list = [...listAddressId];
         $.ajax({
             headers: {
                 "accept": "application/json",
@@ -897,11 +938,11 @@
             },
             type: "DELETE",
             url: origin + `/api/addresses/${id}/customer-addresses`,
-            data: JSON.stringify(listAddressId)
+            data: JSON.stringify(list)
         })
             .done((data) => {
-                let {namesDeleted, numberOfSuccess, numberOfFail, addressResult, message} = data;
-
+                let {namesDeleted, numberOfSuccess, numberOfFail, addressResult, message, idsDeleted} = data;
+                console.log(data)
                 CustomerApp.page.elements.modalDeleteAddress.modal('hide');
 
                 CustomerApp.page.elements.modalResultDeleteAddress.modal('show');
@@ -910,11 +951,11 @@
 
                 $.each(namesDeleted, (i, name) => {
                     console.log(name)
-                    let success = `<p>${name} - Đã được xóa thành công</p>`;
+                    let success = namesDeleted ? `<p>${name} - Đã được xóa thành công</p>` : '';
                     $("#deletedSucceedNames").prepend(success);
                 })
 
-                let fail = `<p>${addressResult.line1} - address : ${message.fail}</p>`;
+                let fail = addressResult ? `<p>${addressResult.line1} - address : ${message.fail}</p>` : '';
                 $("#deletedFailNames").prepend(fail);
 
                 $("#showDeleteSuccessDetail").click(() => {
@@ -924,6 +965,10 @@
                 $("#showDeleteFailDetail").click(() => {
                     $("#deletedFailNames").toggleClass('show');
                 })
+
+                // $.each(list, (index, id) => {
+                let rows = addressDataTable.rows(...idsDeleted).remove().draw();
+                // })
             })
             .fail((jqXHR) => {
                 console.log(jqXHR)
@@ -935,7 +980,7 @@
     })
 
     CustomerApp.page.commands.showModalDeleteAddress = () => {
-        $("#confirmAddressText").text(`Bạn có chắc chắn muốn xóa ${listAddressId.length} địa chỉ được chọn? Thao tác này không thể khôi phục.`);
+        $("#confirmAddressText").text(`Bạn có chắc chắn muốn xóa ${listAddressId.size} địa chỉ được chọn? Thao tác này không thể khôi phục.`);
         CustomerApp.page.elements.modalDeleteAddress.modal('show')
         $("#btnDeleteAddressContainer").toggleClass('show');
     }
