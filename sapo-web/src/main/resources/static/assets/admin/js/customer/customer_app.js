@@ -139,7 +139,7 @@ class CustomerApp {
 
     static dataTableDetails = {
         language: {
-            "processing": "<i class='fa fa-refresh fa-spin' style='font-size: 50pt; z-index: 100000'></i>",
+            "processing": `<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>`,
             "aria": {
                 "sortAscending": ": Sắp xếp thứ tự tăng dần",
                 "sortDescending": ": Sắp xếp thứ tự giảm dần"
