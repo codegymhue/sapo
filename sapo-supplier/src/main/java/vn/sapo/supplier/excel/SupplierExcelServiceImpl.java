@@ -120,7 +120,7 @@ public class SupplierExcelServiceImpl implements SupplierExcelService {
 
         Map<String, String> pmMap = paymentMethodService.findByTitles(pmTitles);
         Map<String, Integer> ppMap = pricingPolicyService.findByTitles(pmTitles);
-        Map<String, Integer> supGroupMap = supplierGroupService.findByGroupCodes(supGroupCodes);
+        Map<String, Integer> supGroupMap = supplierGroupService.findAllByGroupCodes(supGroupCodes);
         dtoList.forEach(dto -> {
             dto.setPaymentMethodId(pmMap.get(dto.getPaymentMethodTitle()));
             dto.setDefaultPricingPolicyId(ppMap.get(dto.getDefaultPricingPolicyTitle()));

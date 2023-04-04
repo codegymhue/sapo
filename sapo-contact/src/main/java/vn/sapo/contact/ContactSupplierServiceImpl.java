@@ -23,7 +23,7 @@ public class ContactSupplierServiceImpl implements ContactSupplierService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ContactResult> findContactsBySupplierId(Integer supplierId) {
+    public List<ContactResult> findAllContactBySupplierId(Integer supplierId) {
         Supplier supplier = supplierRepository.findById(supplierId)
                 .orElseThrow(() -> new NotFoundException("supplier.exception.notFound"));
         return supplier.getContacts().stream().map(contactMapper::toDTO).collect(Collectors.toList());

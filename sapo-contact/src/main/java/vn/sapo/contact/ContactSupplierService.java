@@ -1,6 +1,5 @@
 package vn.sapo.contact;
 
-import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.contact.dto.ContactResult;
 import vn.sapo.contact.dto.CreateContactParam;
 import vn.sapo.contact.dto.UpdateContactParam;
@@ -8,7 +7,7 @@ import vn.sapo.contact.dto.UpdateContactParam;
 import java.util.List;
 
 public interface ContactSupplierService {
-    List<ContactResult> findContactsBySupplierId(Integer supplierId);
+    List<ContactResult> findAllContactBySupplierId(Integer supplierId);
 
     ContactResult createContactBySupplierId(Integer supplierId, CreateContactParam createParam);
 
