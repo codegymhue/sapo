@@ -1,14 +1,20 @@
 package vn.sapo.controllers.address;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import vn.sapo.customer.CustomerService;
+import vn.sapo.customerGroup.dto.DataTablesInput;
+import vn.sapo.customerGroup.dto.DataTablesOutput;
 import vn.sapo.customers.AddressService;
 import vn.sapo.customers.dto.AddressResult;
 import vn.sapo.customers.dto.CreateAddressParam;
+import vn.sapo.customers.dto.DeleteAddressResult;
 import vn.sapo.customers.dto.UpdateAddressParam;
 
 import java.util.HashMap;
@@ -69,6 +75,30 @@ public class AddressAPI {
         return new ResponseEntity<>(addressResult, HttpStatus.CREATED);
     }
 
+    @PostMapping("/{id}/customer/pagination")
+    private ResponseEntity<?> getContactsPagination(@PathVariable Integer id,
+                                                    @RequestBody @Validated DataTablesInput input) {
+        int draw = input.getDraw();
+        int start = input.getStart();
+        int length = input.getLength();
+        int page = start / length + 1;
+
+        Sort s = Sort.by(Sort.Direction.DESC, "id");
+
+        Pageable pageable = PageRequest.of(page - 1, length, s);
+
+        Page<AddressResult> dtoPage =
+                addressService.findAllAddresses(id, pageable);
+
+        DataTablesOutput<AddressResult> output = new DataTablesOutput<AddressResult>()
+                .setDraw(draw)
+                .setRecordsTotal(dtoPage.getTotalElements())
+                .setRecordsFiltered(dtoPage.getTotalElements())
+                .setData(dtoPage.getContent());
+
+        return new ResponseEntity<>(output, HttpStatus.OK);
+    }
+
     @PutMapping
     public ResponseEntity<?> update(@RequestBody UpdateAddressParam updateAddressParam) {
         AddressResult address = addressService.update(updateAddressParam);
@@ -85,5 +115,13 @@ public class AddressAPI {
     public ResponseEntity<?> deleteAddressSupplier(@RequestBody List<Integer> arrayIdSupplier) {
         addressService.deleteSoftSupplier(arrayIdSupplier);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}/customer-addresses")
+    private ResponseEntity<?> deleteCustomerAddresses(@PathVariable Integer id,
+                                                      @RequestBody List<Integer> listAddressId) {
+        DeleteAddressResult result= addressService.deleteAddressesByListId(id, listAddressId);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

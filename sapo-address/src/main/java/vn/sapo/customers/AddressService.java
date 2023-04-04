@@ -1,14 +1,21 @@
 package vn.sapo.customers;
 
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import vn.sapo.customers.dto.AddressResult;
 import vn.sapo.customers.dto.CreateAddressParam;
+import vn.sapo.customers.dto.DeleteAddressResult;
 import vn.sapo.customers.dto.UpdateAddressParam;
 
 import java.util.List;
 import java.util.Map;
 
 public interface AddressService {
+
+    DeleteAddressResult deleteAddressesByListId(Integer id, List<Integer> listAddressesId);
+
+    Page<AddressResult> findAllAddresses(Integer id, Pageable pageable);
 
     AddressResult createAddressWithCustomerId(CreateAddressParam createAddressParam, Integer id);
 

@@ -7,13 +7,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import vn.sapo.mail.EMailSender;
 import vn.sapo.pricing_policy.PricingPolicyService;
 
 import java.util.Set;
 
 @RestController
-@RequestMapping("/api/pricing_policies")
-public class PricingPolicyAPI {
+@RequestMapping("/api/pricing-policies")
+public class PricingPolicyAPI extends Thread {
+//    @Autowired
+//    private EMailSender eMailSender;
     @Autowired
     private PricingPolicyService pricingPolicyService;
 
@@ -28,7 +31,7 @@ public class PricingPolicyAPI {
     }
 
     @GetMapping("/findByTitles")
-    public ResponseEntity<?> findByTitles(Set<String> titles) {
+    public ResponseEntity<?> findByTitles(Set<String> titles){
         return new ResponseEntity<>(pricingPolicyService.findByTitles(titles), HttpStatus.OK);
     }
 }

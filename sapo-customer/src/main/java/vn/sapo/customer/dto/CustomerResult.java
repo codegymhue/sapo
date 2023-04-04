@@ -73,5 +73,38 @@ public class CustomerResult {
 
     private HashMap<String, String> attributes;
 //    private Set<> contacts;
+
+    @Override
+    public String toString() {
+        return "CustomerResult{" +
+                "id=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", customerCode='" + customerCode + '\'' +
+                ", group=" + group +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", birthday=" + birthday +
+                ", gender=" + gender +
+                ", fax='" + fax + '\'' +
+                ", taxCode='" + taxCode + '\'' +
+                ", website='" + website + '\'' +
+                ", debtTotal=" + debtTotal +
+                ", spendTotal=" + spendTotal +
+                ", employee=" + employee +
+                ", description='" + description + '\'' +
+                ", tags=" + tags +
+                ", status=" + status +
+                ", shippingAddress=" + shippingAddress +
+                ", billAddress=" + billAddress +
+                ", addresses=" + addresses +
+                ", quantityProductOrder=" + quantityProductOrder +
+                ", quantityItemOrder=" + quantityItemOrder +
+                ", lastDayOrder=" + lastDayOrder +
+                ", payment=" + payment +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", attributes=" + attributes +
+                '}';
+    }
 }
 

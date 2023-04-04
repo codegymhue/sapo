@@ -1,21 +1,68 @@
-<th:block th:fragment="tbContact">
+<th:block th:fragment="tbAddress">
     <div>
-        <table id="tbContact">
+        <table id="tbAddress" class="table-hover jsseh238 jss13504">
             <thead>
-            <tr>
+            <tr class="">
                 <th>
-                    <label for="checkAll">
-                        <input id="checkAll" type="checkbox" title="Tất cả">
+                    <label for="checkAllAddresses">
+                        <input id="checkAllAddresses" type="checkbox" title="Tất cả" onchange=CustomerApp.page.commands.checkAllAddresses()>
                     </label>
                 </th>
-                <th>Tên liên hệ</th>
-                <th>Số điện thoại</th>
-                <th>Email</th>
-                <th>Chức vụ</th>
-                <th>Bộ phận</th>
+                <th class="LavuC">Số điện thoại</th>
+                <th class="BaviW">Địa chỉ</th>
+                <th class="jYgve">Phường xã</th>
+                <th class="jYgve">Quận huyện</th>
+                <th class="jYgve">Tỉnh thành phố</th>
+                <th class="jYgve">Mã bưu điện</th>
+                <th class="jYgve">Email</th>
             </tr>
             </thead>
             <tbody></tbody>
+        </table>
+    </div>
+</th:block>
+
+<th:block th:fragment="tbContact">
+    <div>
+        <table id="tbContact" class="table-hover jsseh238 jss13504">
+            <thead>
+            <tr class="Bgekd">
+                <th class="IgeUe">
+                    <label for="checkAllContacts">
+                        <input id="checkAllContacts" type="checkbox" title="Tất cả">
+                    </label>
+                </th>
+                <th class="IgeUe">Tên liên hệ</th>
+                <th class="IgeUe">Số điện thoại</th>
+                <th class="IgeUe">Email</th>
+                <th class="IgeUe">Chức vụ</th>
+                <th class="IgeUe">Bộ phận</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</th:block>
+
+<th:block th:fragment="tbCustomerGroup">
+    <div>
+        <table id="tbCustomerGroup" class="jsseh238">
+            <thead>
+            <tr>
+                <th class="col-3">Mã nhóm</th>
+                <th class="col-3">Tên nhóm</th>
+                <th class="col-3">Loại nhóm</th>
+                <th class="col-3">Mô tả</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="row Bgekd">
+                <td id="cgrCode" class="col-3"></td>
+                <td id="cgrTitle" class="col-3"></td>
+                <td id="cgrType" class="col-3"></td>
+                <td id="cgrNote" class="col-3"></td>
+            </tr>
+            </tbody>
         </table>
     </div>
 </th:block>
