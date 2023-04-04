@@ -32,10 +32,6 @@ public class SupplierAPI {
     @Autowired
     private SupplierService supplierService;
 
-
-//    @Autowired
-//    ExcelServiceSupplier excelServiceSupplier;
-
     @Autowired
     SupplierExcelService supplierExcelService;
 
@@ -64,14 +60,14 @@ public class SupplierAPI {
     }
 
     @GetMapping("/{supplierId}/contacts")
-    public ResponseEntity<?> findContactBySupplierId(@PathVariable Integer supplierId) {
-        List<ContactResult> dto = contactService.findContactsBySupplierId(supplierId);
+    public ResponseEntity<?> findAllContactBySupplierId(@PathVariable Integer supplierId) {
+        List<ContactResult> dto = contactService.findAllContactBySupplierId(supplierId);
         return new ResponseEntity<>(dto, HttpStatus.OK);
 
     }
 
     @PostMapping("/{supplierId}/contacts")
-    public ResponseEntity<?> findContactBySupplierId(@PathVariable Integer supplierId, @Valid @RequestBody CreateContactParam createParam) {
+    public ResponseEntity<?> findAllContactBySupplierId(@PathVariable Integer supplierId, @Valid @RequestBody CreateContactParam createParam) {
         ContactResult dto = contactService.createContactBySupplierId(supplierId, createParam);
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }

@@ -27,41 +27,19 @@ public class SupplierGroupAPI {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
     @PostMapping("/create")
-    public ResponseEntity<SupplierGroupResult> create(@Valid @RequestBody CreateSupGroupParam createSupGroupParam) {
-//        List<String> allErrors = new ArrayList<>();
-////        System.out.println();
-//        List<ObjectError> errors;
-//        if (bindingResult.hasFieldErrors()) {
-//            errors = bindingResult.getAllErrors();
-//            for (ObjectError error : errors) {
-//                allErrors.add(error.getDefaultMessage());
-//            }
-//            throw new NotFoundException(allErrors.toString());
-//        }
-
-
+    public ResponseEntity<?> create(@Valid @RequestBody CreateSupGroupParam createSupGroupParam) {
         SupplierGroupResult dto = supplierGroupService.create(createSupGroupParam);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity <SupplierGroupResult> findById(@PathVariable Integer id) {
-        SupplierGroupResult dto = supplierGroupService.findById(id);
+    public ResponseEntity <?> findById(@PathVariable Integer id) {
+        SupplierGroupResult dto = supplierGroupService.getById(id);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity <SupplierGroupResult> update(@Valid @RequestBody UpdateSupGroupParam updateSupGroupParam, BindingResult bindingResult) {
-        List<String> allErrors = new ArrayList<>();
-//        System.out.println();
-        List<ObjectError> errors;
-        if (bindingResult.hasFieldErrors()) {
-            errors = bindingResult.getAllErrors();
-            for (ObjectError error : errors) {
-                allErrors.add(error.getDefaultMessage());
-            }
-            throw new NotFoundException(allErrors.toString());
-        }
+    public ResponseEntity <?> update(@Valid @RequestBody UpdateSupGroupParam updateSupGroupParam, BindingResult bindingResult) {
         SupplierGroupResult dto = supplierGroupService.update(updateSupGroupParam);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
