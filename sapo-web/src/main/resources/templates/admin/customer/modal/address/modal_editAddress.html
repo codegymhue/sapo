@@ -4,8 +4,8 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="jss23776">
-          <h5 class="modal-title" id="staticBackdropLabel">Sửa mới địa chỉ</h5>
-          <button type="button" class="btn-close btnCloseCreateAddressModal" data-bs-dismiss="modal">
+          <h5 class="modal-title" id="staticBackdropLabel">Sửa địa chỉ</h5>
+          <button type="button" class="btn-close btnCloseEditAddressModal" data-bs-dismiss="modal">
           </button>
         </div>
         <form id="frmEditAddress">
@@ -17,6 +17,7 @@
                 </label>
                 <input class="form-control sapo-textbox" id="fullNameAddressEdit"
                        name="fullNameAddressEdit" type="text" placeholder="Nhập họ tên">
+                <div class="error fullNameAddressEdit-error hidden KagUd"></div>
               </div>
               <div class="col-6 field">
                 <label for="phoneAddressEdit" class="hTBRNU">
@@ -25,6 +26,7 @@
                 <input class="form-control sapo-textbox" id="phoneAddressEdit"
                        name="phoneAddressEdit"
                        type="text" placeholder="Nhập số điện thoại">
+                <div class="error phoneAddressEdit-error hidden KagUd"></div>
               </div>
             </div>
             <div class="row">
@@ -34,6 +36,7 @@
                 </label>
                 <input class="form-control sapo-textbox" id="line1Edit" name="line1Edit"
                        placeholder="Nhập địa chỉ" type="text">
+                <div class="error line1Edit-error hidden KagUd"></div>
               </div>
               <div class="col-6 field">
                 <label for="emailEdit" class="hTBRNU">
@@ -41,6 +44,7 @@
                 </label>
                 <input class="form-control sapo-textbox" id="emailEdit" name="emailEdit" type="text"
                        placeholder="Nhập địa chỉ email">
+                <div class="error emailEdit-error hidden KagUd"></div>
               </div>
             </div>
             <div class="row">
@@ -48,22 +52,12 @@
                 <label for="provinceEdit">Tỉnh thành phố</label>
                 <select id="provinceEdit" name="provinceEdit"
                         class="w100 input-dropdown sapo-btn-blank select-padding aeIbe">
-                  <option selected value="0">
-                    <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">
-                      Chọn Tỉnh/Thành phố
-                    </p>
-                  </option>
                 </select>
               </div>
               <div class="col-6 field">
                 <label for="districtEdit">Quận huyện</label>
                 <select id="districtEdit" name="districtEdit"
                         class="w100 input-dropdown sapo-btn-blank select-padding aeIbe">
-                  <option value="0">
-                    <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">
-                      Chọn Quận/Huyện
-                    </p>
-                  </option>
                 </select>
               </div>
             </div>
@@ -72,27 +66,26 @@
                 <label for="wardEdit">Phường xã</label>
                 <select id="wardEdit" name="wardEdit"
                         class="w100 input-dropdown sapo-btn-blank select-padding aeIbe">
-                  <option value="0">
-                    <p class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary">
-                      Chọn Phường/Xã
-                    </p>
-                  </option>
                 </select>
               </div>
               <div class="col-6 field">
                 <label for="zipCodeEdit">Mã bưu điện</label>
                 <input class="form-control sapo-textbox" id="zipCodeEdit" name="zipCodeEdit"
                        type="text" placeholder="Nhập mã bưu điện">
+                <div class="error zipCodeEdit-error hidden KagUd"></div>
               </div>
             </div>
           </div>
         </form>
         <div class="modal-footer irenfk">
-          <button type="button" class="ldZiUT ldZiUTA" data-bs-dismiss="modal">
+<!--          <button type="button" class="ldZiUTB ldZabc showModalDeleteAddress">-->
+<!--            Xóa-->
+<!--          </button>-->
+          <button type="button" class="ldZiUT ldZiUTA btnCloseEditAddressModal" data-bs-dismiss="modal">
             Thoát
           </button>
-          <button id="btnCreateAddress" class="RthGc ldZiUTA" type="button">
-            Thêm
+          <button id="btnEditAddress" class="RthGc ldZiUTA" type="button">
+            Lưu
           </button>
         </div>
       </div>

@@ -426,7 +426,7 @@
                     CustomerApp.page.elements.dropdownPaymentMethod.append(str);
 
                     if (item.id === currentCustomerGroup.defaultPaymentMethodId) {
-                        $('#dropdownPaymentMethod option').prop('selected', true)
+                        $('#dropdownPaymentMethod option').prop('selected', true);
                     }
                 });
                 CustomerApp.page.commands.selectPaymentMethod();

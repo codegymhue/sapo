@@ -35,7 +35,7 @@ public class AddressServiceImpl implements AddressService {
         List<String> deletedNames;
 
         if (total == 1)
-            result.setMessage(new HashMap<>(){{
+            result.setMessage(new HashMap<>() {{
                 put("fail", "address.exception.lastAddress");
             }});
 
@@ -44,7 +44,7 @@ public class AddressServiceImpl implements AddressService {
             addressRepository.deleteByIdIn(ids);
 
             result.setNumberOfSuccess(ids.size())
-                    .setMessage(new HashMap<>(){{
+                    .setMessage(new HashMap<>() {{
                         put("success", "Xóa thành công " + ids.size() + " địa chỉ");
                     }})
                     .setNamesDeleted(deletedNames)
@@ -61,8 +61,8 @@ public class AddressServiceImpl implements AddressService {
             result.setNumberOfSuccess(newListAddressesId.size())
                     .setNumberOfFail(currentListAddressesId.size() - deleteSize)
                     .setAddressResult(findById(currentListAddressesId.get(0)))
-                    .setMessage(new HashMap<>(){{
-                        put("fail", "address.customer.exception.lastAddress");
+                    .setMessage(new HashMap<>() {{
+                        put("fail", "address.exception.lastAddress");
                     }})
                     .setNamesDeleted(deletedNames)
                     .setIdsDeleted(newListAddressesId);
@@ -117,12 +117,26 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     @Transactional
-    public AddressResult update(UpdateAddressParam updateAddressParam) {
-        if (!addressRepository.existsById(updateAddressParam.getId()))
-            throw new NotFoundException("address not found");
-        Address address = addressMapper.toModel(updateAddressParam);
-        address = addressRepository.save(address);
-        return addressMapper.toDTO(address);
+    public AddressResult update(Integer id, UpdateAddressParam updateAddressParam) {
+        Address address = addressRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("address.exception.notFound")
+        );
+
+        address.setFullName(updateAddressParam.getFullName())
+                .setPhoneNumber(updateAddressParam.getPhoneNumber())
+                .setLine1(updateAddressParam.getLine1())
+                .setEmail(updateAddressParam.getEmail())
+                .setProvinceId(updateAddressParam.getProvinceId())
+                .setProvinceName(updateAddressParam.getProvinceName())
+                .setDistrictId(updateAddressParam.getDistrictId())
+                .setDistrictName(updateAddressParam.getDistrictName())
+                .setWardId(updateAddressParam.getWardId())
+                .setWardName(updateAddressParam.getWardName())
+                .setZipCode(updateAddressParam.getZipCode());
+
+        addressRepository.save(address);
+
+        return findById(id);
     }
 
     @Override

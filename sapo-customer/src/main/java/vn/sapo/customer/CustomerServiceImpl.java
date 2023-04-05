@@ -103,30 +103,6 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         addressService.create(addressParam);
-
-
-//        if (createParam.getCreateAddressParam().getLine1() != null) {
-//            if (createParam.getCreateAddressParam().getLine1().length() > 255)
-//                throw new ValidationException("line1", "address.validation.line1.length");
-//
-//            CreateAddressParam addressParam = createParam
-//                    .getCreateAddressParam()
-//                    .setCustomerId(customer.getId());
-//
-//            addressService.create(addressParam);
-//        }
-
-
-//        Instant birthday = createParam.getBirthday().toInstant();
-//        CreateAddressParam createAddressParam = createParam.getCreateAddressParam();
-//        if (createAddressParam == null)
-//            throw new ValidationException(new HashMap<>() {{
-//                put("line1", "Dia chi khong duoc de trong");
-//            }});
-//        customer.setBirthday(birthday);
-
-//        createAddressParam.setCustomerId(customer.getId());
-//        addressService.create(createAddressParam);
         return customerMapper.toDTO(customer);
     }
 
