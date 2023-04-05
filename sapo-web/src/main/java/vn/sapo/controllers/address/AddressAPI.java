@@ -99,9 +99,10 @@ public class AddressAPI {
         return new ResponseEntity<>(output, HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<?> update(@RequestBody UpdateAddressParam updateAddressParam) {
-        AddressResult address = addressService.update(updateAddressParam);
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Integer id,
+                                    @RequestBody @Validated UpdateAddressParam updateAddressParam) {
+        AddressResult address = addressService.update(id, updateAddressParam);
         return new ResponseEntity<>(address, HttpStatus.OK);
     }
 
@@ -120,7 +121,7 @@ public class AddressAPI {
     @DeleteMapping("/{id}/customer-addresses")
     private ResponseEntity<?> deleteCustomerAddresses(@PathVariable Integer id,
                                                       @RequestBody List<Integer> listAddressId) {
-        DeleteAddressResult result= addressService.deleteAddressesByListId(id, listAddressId);
+        DeleteAddressResult result = addressService.deleteAddressesByListId(id, listAddressId);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

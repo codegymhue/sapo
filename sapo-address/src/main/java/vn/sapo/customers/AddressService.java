@@ -31,7 +31,7 @@ public interface AddressService {
 
     List<AddressResult> findAll();
 
-    AddressResult update(UpdateAddressParam updateAddressParam);
+    AddressResult update(Integer id, UpdateAddressParam updateAddressParam);
 
     List<AddressResult> findBySupplierId(Integer supplierId);
 

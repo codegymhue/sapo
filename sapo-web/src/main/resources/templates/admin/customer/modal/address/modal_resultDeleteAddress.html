@@ -5,16 +5,18 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Xóa địa chỉ</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btnCloseResultDeleteAddress"
+                            data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <h3>Xử lý dữ liệu hoàn tất!</h3>
-                    <div>
-                        <div class="jss12735">
-                            <p>
-                                Địa chỉ xóa thành công: <span id="numberAddressesDeleted"></span>
-                            </p>
-                            <button class="bdiEg" id="showDeleteSuccessDetail">
+                <form id="frmResultDeleteAddress">
+                    <div class="modal-body">
+                        <h3>Xử lý dữ liệu hoàn tất!</h3>
+                        <div>
+                            <div class="jss12735">
+                                <p>
+                                    Địa chỉ xóa thành công: <span id="numberAddressesDeleted"></span>
+                                </p>
+                                <button class="bdiEg" id="showDeleteSuccessDetail" type="button">
                           <span class="MuiButton-label">
                             Chi tiết
                             <span class="MuiButton-endIcon MuiButton-iconSizeMedium">
@@ -24,17 +26,17 @@
                               </svg>
                             </span>
                           </span>
-                                <span class="MuiTouchRipple-root"></span>
-                            </button>
+                                    <span class="MuiTouchRipple-root"></span>
+                                </button>
+                            </div>
+                            <div id="deletedSucceedNames" class="hidden"></div>
                         </div>
-                        <div id="deletedSucceedNames" class="hidden"></div>
-                    </div>
-                    <div>
-                        <div class="jss12735">
-                            <p>
-                                Địa chỉ xóa không thành công: <span id="numberAddressesDeleteFail"></span>
-                            </p>
-                            <button class="bdiEg" id="showDeleteFailDetail">
+                        <div>
+                            <div class="jss12735">
+                                <p>
+                                    Địa chỉ xóa không thành công: <span id="numberAddressesDeleteFail"></span>
+                                </p>
+                                <button class="bdiEg" id="showDeleteFailDetail" type="button">
                               <span class="MuiButton-label">
                                 Chi tiết
                                 <span class="MuiButton-endIcon MuiButton-iconSizeMedium">
@@ -44,14 +46,17 @@
                                   </svg>
                                 </span>
                               </span>
-                                <span class="MuiTouchRipple-root"></span>
-                            </button>
+                                    <span class="MuiTouchRipple-root"></span>
+                                </button>
+                            </div>
+                            <div id="deletedFailNames" class="hidden"></div>
                         </div>
-                        <div id="deletedFailNames" class="hidden"></div>
                     </div>
-                </div>
+                </form>
                 <div class="modal-footer">
-                    <button id="btnCloseResultDeleteAddress" class="RthGc ldZiUTA" type="button">
+                    <button id="btnCloseResultDeleteAddress"
+                            class="RthGc ldZiUTA btnCloseResultDeleteAddress"
+                            type="button">
                         Xác nhận
                     </button>
                 </div>

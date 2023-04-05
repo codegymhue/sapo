@@ -347,6 +347,7 @@
     let contactParam = {};
     let createAddressParam = {};
     let addressDataTable = {};
+    let updateAddressParam = {};
     const listAddressId = new Set();
 
     CustomerApp.page.elements.fullName = $("#fullName");
@@ -407,6 +408,8 @@
     //start address
     CustomerApp.page.elements.tbAddress = $("#tbAddress");
 
+    CustomerApp.page.elements.frmCreateAddress = $("#frmCreateAddress");
+
     CustomerApp.page.elements.modalDeleteAddress = $("#modalDeleteAddress");
     CustomerApp.page.elements.modalResultDeleteAddress = $("#modalResultDeleteAddress");
 
@@ -420,6 +423,15 @@
     CustomerApp.page.elements.province = $("#province");
     CustomerApp.page.elements.ward = $("#ward");
     //end address
+
+    //start edit address
+    CustomerApp.page.elements.frmEditAddress = $("#frmEditAddress");
+    CustomerApp.page.elements.modalEditAddress = $("#modalEditAddress");
+
+    CustomerApp.page.elements.provinceEdit = $("#provinceEdit");
+    CustomerApp.page.elements.districtEdit = $("#districtEdit");
+    CustomerApp.page.elements.wardEdit = $("#wardEdit");
+    //end edit address
 
     //start contact
     // CustomerApp.page.elements.btnContacts.click(() => {
@@ -712,7 +724,7 @@
                 if (checkboxLength > listAddressId.size && listAddressId.size > 0)
                     $("#checkAllAddresses").prop({indeterminate: true, checked: false})
 
-                if (listAddressId.size === 0){
+                if (listAddressId.size === 0) {
 
                     $("#tbAddress thead tr th:not(:first-child)").addClass("show").removeClass('hidden');
                     $("#addressActionContainer").remove();
@@ -722,12 +734,372 @@
     }
     //end delete one customer's address
 
-    $("#tbAddress tbody").on('click', " tr td:not(:first-child)", function () {
-        let id = addressDataTable.row(this).data().id;
-        $("#modalEditAddress").modal('show');
+    //start edit address
+    CustomerApp.page.commands.editAddress = () => {
+        updateAddressParam.fullName = CustomerApp.getValue($("#fullNameAddressEdit"));
+        updateAddressParam.phoneNumber = CustomerApp.getValue($("#phoneAddressEdit"));
+        updateAddressParam.line1 = CustomerApp.getValue($("#line1Edit"));
+        updateAddressParam.zipCode = CustomerApp.getValue($("#zipCodeEdit"));
+
+        CustomerApp.getSelectedValue(CustomerApp.page.elements.provinceEdit, updateAddressParam.provinceId, updateAddressParam.provinceName);
+        CustomerApp.getSelectedValue(CustomerApp.page.elements.districtEdit, updateAddressParam.districtId, updateAddressParam.districtName);
+        CustomerApp.getSelectedValue(CustomerApp.page.elements.wardEdit, updateAddressParam.wardId, updateAddressParam.wardName);
+
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "PATCH",
+            url: origin + `/api/addresses/${updateAddressParam.id}`,
+            data: JSON.stringify(updateAddressParam)
+        })
+            .done((data) => {
+                CustomerApp.IziToast.showSuccessAlert('Cập nhật địa chỉ thành công');
+                CustomerApp.page.elements.modalEditAddress.modal('hide');
+
+                CustomerApp.redrawDatatables(origin + `/api/addresses`)
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+
+                let errors = jqXHR.responseJSON.errors;
+                if (errors.fullName) {
+                    CustomerApp.showErrorValidate($(".fullNameAddressEdit-error.error"), errors.fullName)
+                }
+                if (errors.phoneNumber) {
+                    CustomerApp.showErrorValidate($(".phoneAddressEdit-error.error"), errors.phoneNumber)
+                }
+                if (errors.line1) {
+                    CustomerApp.showErrorValidate($(".line1Edit-error.error"), errors.line1)
+                }
+                if (errors.email) {
+                    CustomerApp.showErrorValidate($(".emailEdit-error.error"), errors.email)
+                }
+                if (errors.zipCode) {
+                    CustomerApp.showErrorValidate($(".zipCodeEdit-error.error"), errors.zipCode)
+                }
+            })
+    };
+
+    CustomerApp.page.elements.frmEditAddress.validate({
+        rules: {
+            fullNameAddressEdit: {
+                maxlength: 150
+            },
+            phoneAddressEdit: {
+                isValidPhone: true,
+            },
+            line1Edit: {
+                required: true,
+                maxlength: 255
+            },
+            emailEdit: {
+                isValidEmail: true,
+            },
+            zipCodeEdit: {
+                maxlength: 255
+            }
+        },
+        messages: {
+            fullNameAddressEdit: {
+                maxlength: "Họ tên không được vượt quá 150 ký tự"
+            },
+            line1Edit: {
+                required: 'Địa chỉ không được để trống',
+                maxlength: 'Địa chỉ không được vượt quá 255 ký tự'
+            },
+            zipCodeEdit: {
+                maxlength: 'Mã bưu điện không được vượt quá 255 ký tự',
+            }
+        },
+        errorElement: 'label',
+        errorPlacement: (error, element) => {
+            error ? $(".error.hidden").addClass('show').removeClass('hidden') : '';
+            error.appendTo(element.next("div"));
+        },
+        submitHandler: () => {
+            CustomerApp.page.commands.editAddress();
+        },
+        invalidHandler: () => {
+            CustomerApp.IziToast.showErrorAlert('Vui lòng nhập đúng thông tin')
+        }
     });
 
+    $("#btnEditAddress").click(() => {
+        CustomerApp.page.elements.frmEditAddress.trigger('submit');
+    })
+
+    CustomerApp.page.elements.provinceEdit.on('change', function () {
+        updateAddressParam.provinceId = Number($(this).find(":selected").val())
+            ? $(this).find(":selected").val()
+            : undefined;
+        updateAddressParam.provinceName = Number($(this).find(":selected").val())
+            ? $(this).find(":selected").text()
+            : undefined;
+
+        $.ajax({
+            type: "GET",
+            url: "https://vapi.vnappmob.com/api/province/district/" + updateAddressParam.provinceId
+        })
+            .done((data) => {
+                let {results} = data ? data : null;
+                CustomerApp.page.elements.districtEdit.empty();
+
+                let str = '<option value=0>Chọn Quận/Huyện</option>';
+
+                CustomerApp.page.elements.districtEdit.append(str);
+                $.each(results, (i, item) => {
+                    let str = ` <option value="${item.district_id}">${item.district_name}</option>`;
+                    CustomerApp.page.elements.districtEdit.append(str);
+                })
+
+                updateAddressParam.districtId = Number(CustomerApp.page.elements.districtEdit.find(":selected").val())
+                    ? CustomerApp.page.elements.districtEdit.find(":selected").val()
+                    : undefined;
+                updateAddressParam.districtName = Number(CustomerApp.page.elements.districtEdit.find(":selected").val())
+                    ? CustomerApp.page.elements.districtEdit.find(":selected").text()
+                    : undefined;
+
+                $.ajax({
+                    type: "GET",
+                    url: "https://vapi.vnappmob.com/api/province/ward/" + updateAddressParam.districtId
+                })
+                    .done((data) => {
+                        let {results} = data ? data : null;
+                        CustomerApp.page.elements.wardEdit.empty();
+                        let str = '<option value=0>Chọn Phường/Xã</option>';
+
+                        CustomerApp.page.elements.wardEdit.append(str);
+                        $.each(results, (i, item) => {
+                            let str = `<option value="${item.ward_id}">${item.ward_name}</option>`;
+                            CustomerApp.page.elements.wardEdit.append(str);
+                        });
+
+                        updateAddressParam.wardId = Number(CustomerApp.page.elements.wardEdit.find(":selected").val())
+                            ? CustomerApp.page.elements.wardEdit.find(":selected").val()
+                            : undefined;
+                        updateAddressParam.wardName = Number(CustomerApp.page.elements.wardEdit.find(":selected").val())
+                            ? CustomerApp.page.elements.wardEdit.find(":selected").text()
+                            : undefined;
+
+                        CustomerApp.page.elements.wardEdit.on('change', function () {
+                            updateAddressParam.wardId = Number($(this).find(":selected").val())
+                                ? $(this).find(":selected").val()
+                                : undefined;
+                            updateAddressParam.wardName = Number($(this).find(":selected").val())
+                                ? $(this).find(":selected").text()
+                                : undefined;
+                        })
+                    })
+                    .fail((jqXHR) => {
+                        console.log(jqXHR);
+                    })
+
+                CustomerApp.page.elements.districtEdit.on('change', function () {
+                    updateAddressParam.districtId = Number($(this).find(":selected").val())
+                        ? $(this).find(":selected").val()
+                        : undefined;
+                    updateAddressParam.districtName = Number($(this).find(":selected").val())
+                        ? $(this).find(":selected").text()
+                        : undefined;
+
+                    $.ajax({
+                        type: "GET",
+                        url: "https://vapi.vnappmob.com/api/province/ward/" + updateAddressParam.districtId
+                    })
+                        .done((data) => {
+                            let {results} = data ? data : null;
+                            CustomerApp.page.elements.wardEdit.empty();
+                            let str = '<option value=0>Chọn Phường/Xã</option>';
+
+                            CustomerApp.page.elements.wardEdit.append(str);
+                            $.each(results, (i, item) => {
+                                let str = `<option value="${item.ward_id}">${item.ward_name}</option>`;
+                                CustomerApp.page.elements.wardEdit.append(str);
+                            });
+
+                            updateAddressParam.wardId = Number(CustomerApp.page.elements.wardEdit.find(":selected").val())
+                                ? CustomerApp.page.elements.wardEdit.find(":selected").val()
+                                : undefined;
+                            updateAddressParam.wardName = Number(CustomerApp.page.elements.wardEdit.find(":selected").val())
+                                ? CustomerApp.page.elements.wardEdit.find(":selected").text()
+                                : undefined;
+
+                            CustomerApp.page.elements.wardEdit.on('change', function () {
+                                updateAddressParam.wardId = Number($(this).find(":selected").val())
+                                    ? $(this).find(":selected").val()
+                                    : undefined;
+                                updateAddressParam.wardName = Number($(this).find(":selected").val())
+                                    ? $(this).find(":selected").text()
+                                    : undefined;
+                                console.log(updateAddressParam.wardId)
+                                console.log(updateAddressParam.wardName)
+                            })
+                        })
+                        .fail((jqXHR) => {
+                            console.log(jqXHR);
+                        })
+                })
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR);
+            })
+    })
+
+    $('.btnCloseEditAddressModal').click(() => {
+        CustomerApp.page.elements.provinceEdit.empty();
+        CustomerApp.page.elements.wardEdit.empty();
+        CustomerApp.page.elements.districtEdit.empty();
+        CustomerApp.page.elements.frmEditAddress[0].reset();
+
+        CustomerApp.setNullObj(updateAddressParam, null);
+    })
+    //end edit address
+
+    $("#tbAddress tbody").on('click', " tr td:not(:first-child)", function () {
+        let id = addressDataTable.row(this).data().id;
+        updateAddressParam.id = id;
+        CustomerApp.page.elements.modalEditAddress.modal('show');
+        $.ajax({
+            type: "GET",
+            url: origin + `/api/addresses/${id}`
+        })
+            .done((data) => {
+                let address = {...data};
+                data.fullName ? $("#fullNameAddressEdit").val(data.fullName) : '';
+                data.phoneNumber ? $("#phoneAddressEdit").val(data.phoneNumber) : '';
+                data.line1 ? $("#line1Edit").val(data.line1) : '';
+                data.email ? $("#emailEdit").val(data.email) : '';
+                data.zipCode ? $("#zipCodeEdit").val(data.zipCode) : '';
+
+                data.districtId ? CustomerApp.page.elements.districtEdit.val(data.districtId) : '';
+                data.wardId ? CustomerApp.page.elements.wardEdit.val(data.wardId) : '';
+
+                $.ajax({
+                    type: "GET",
+                    url: "https://vapi.vnappmob.com/api/province/"
+                })
+                    .done((data) => {
+                        let {results} = data ? data : null;
+                        let str = '<option value=0>Chọn Tỉnh/Thành phố</option>';
+
+                        CustomerApp.page.elements.provinceEdit.append(str);
+
+                        $.each(results, (i, item) => {
+                            let row = `<option value="${item.province_id}">${item.province_name}</option>`;
+
+                            CustomerApp.page.elements.provinceEdit.append(row);
+                            if (address.provinceId === Number(item.province_id)) {
+                                $("#provinceEdit option").prop('selected', true);
+                            }
+                        });
+                    })
+                    .fail((jqXHR) => {
+                        console.log(jqXHR);
+                    })
+
+                $.ajax({
+                    type: "GET",
+                    url: "https://vapi.vnappmob.com/api/province/district/" + address.provinceId
+                })
+                    .done((data) => {
+                        let {results} = data ? data : null;
+                        let str = '<option value=0>Chọn Quận/Huyện</option>';
+
+                        CustomerApp.page.elements.districtEdit.append(str);
+                        $.each(results, (i, item) => {
+                            let str = ` <option value="${item.district_id}">${item.district_name}</option>`;
+                            CustomerApp.page.elements.districtEdit.append(str);
+                            address.districtId === Number(item.district_id) ? $("#districtEdit option").prop('selected', true) : '';
+                        })
+                    })
+                    .fail((jqXHR) => {
+                        console.log(jqXHR);
+                    })
+
+                $.ajax({
+                    type: "GET",
+                    url: "https://vapi.vnappmob.com/api/province/ward/" + address.districtId
+                })
+                    .done((data) => {
+                        let {results} = data ? data : null;
+                        let str = '<option value=0>Chọn Phường/Xã</option>';
+
+                        CustomerApp.page.elements.wardEdit.append(str);
+                        $.each(results, (i, item) => {
+                            let str = `<option value="${item.ward_id}">${item.ward_name}</option>`;
+                            CustomerApp.page.elements.wardEdit.append(str);
+                            address.wardId === Number(item.ward_id) ? $("#wardEdit option").prop('selected', true) : '';
+                        });
+                    })
+                    .fail((jqXHR) => {
+                        console.log(jqXHR);
+                    })
+
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+    });
+
+    CustomerApp.page.elements.frmCreateAddress.validate({
+        rules: {
+            fullNameAddressCreate: {
+                maxlength: 150
+            },
+            phoneAddressCreate: {
+                isValidPhone: true,
+            },
+            line1Create: {
+                required: true,
+                maxlength: 255
+            },
+            emailCreate: {
+                isValidEmail: true,
+            },
+            zipCodeCreate: {
+                maxlength: 255
+            }
+        },
+        messages: {
+            fullNameAddressCreate: {
+                maxlength: "Họ tên không được vượt quá 150 ký tự"
+            },
+            line1Create: {
+                required: 'Địa chỉ không được để trống',
+                maxlength: 'Địa chỉ không được vượt quá 255 ký tự'
+            },
+            zipCodeCreate: {
+                maxlength: 'Mã bưu điện không được vượt quá 255 ký tự',
+            }
+        },
+        errorElement: 'label',
+        errorPlacement: (error, element) => {
+            error ? $(".error.hidden").addClass('show').removeClass('hidden') : '';
+            error.appendTo(element.next("div"));
+        },
+        submitHandler: () => {
+            CustomerApp.page.commands.createAddress();
+        },
+        invalidHandler: () => {
+            CustomerApp.IziToast.showErrorAlert('Vui lòng nhập đúng thông tin')
+        }
+    });
+
+    $.validator.addMethod("isValidPhone", function (value, element) {
+        return this.optional(element) || /^$|[0-9]{8,15}$/i.test(value);
+    }, "Số điện thoại không đúng định dạng");
+
+    $.validator.addMethod("isValidEmail", function (value, element) {
+        return this.optional(element) || /^$|[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i.test(value);
+    }, "Email không đúng định dạng");
+
     $("#btnCreateAddress").click(() => {
+        CustomerApp.page.elements.frmCreateAddress.trigger("submit");
+    });
+
+    CustomerApp.page.commands.createAddress = () => {
         let id = +window.location.pathname.split('/')[3];
 
         createAddressParam.fullName = CustomerApp.getValue($('#fullNameAddressCreate'));
@@ -763,14 +1135,23 @@
         })
             .done(() => {
                 CustomerApp.page.elements.modalCreateAddress.modal('hide');
-                CustomerApp.IziToast.showSuccessAlert('Thêm mới địa chỉ thành công')
+                CustomerApp.IziToast.showSuccessAlert('Thêm mới địa chỉ thành công');
+
+                CustomerApp.page.elements.frmCreateAddress[0].reset();
+
+                CustomerApp.redrawDatatables(origin + `/api/addresses`);
             })
             .fail((jqXHR) => {
-                $.each(jqXHR.responseJSON, (key, item) => {
-                    CustomerApp.IziToast.showErrorAlert(item);
-                })
+                console.log(jqXHR)
+
+                let errors = jqXHR.responseJSON.errors;
+                errors.fullName ? CustomerApp.showErrorValidate($(".fullNameAddressCreate-error.error"), errors.fullName) : '';
+                errors.phoneNumber ? CustomerApp.showErrorValidate($(".phoneAddressCreate-error.error"), errors.phoneNumber) : '';
+                errors.line1 ? CustomerApp.showErrorValidate($(".line1Create-error.error"), errors.line1) : '';
+                errors.email ? CustomerApp.showErrorValidate($(".emailCreate-error.error"), errors.email) : '';
+                errors.zipCode ? CustomerApp.showErrorValidate($(".zipCodeCreate-error.error"), errors.zipCode) : '';
             })
-    });
+    }
 
     CustomerApp.page.elements.btnAddress.click(() => {
         CustomerApp.page.elements.tbCustomerGroup.addClass('hidden').removeClass('show');
@@ -900,7 +1281,6 @@
             $("#tbAddress thead tr th:not(:first-child)").addClass("show").removeClass('hidden');
             $("#addressActionContainer").remove();
         }
-        console.log(listAddressId)
     };
 
     CustomerApp.page.commands.showTheadAction = () => {
@@ -918,7 +1298,7 @@
                             </svg>
                             </button>
                             <div id="btnDeleteAddressContainer" class="dropdown-content mauWs">
-                                <button type="button" class="vUaem" id="showModalDeleteAddress"
+                                <button type="button" class="vUaem showModalDeleteAddress" id="showModalDeleteAddress"
                                         onclick=CustomerApp.page.commands.showModalDeleteAddress()>
                                     Xóa địa chỉ
                                 </button>
@@ -955,7 +1335,7 @@
                     $("#deletedSucceedNames").prepend(success);
                 })
 
-                let fail = addressResult ? `<p>${addressResult.line1} - address : ${message.fail}</p>` : '';
+                let fail = addressResult ? `<p>${addressResult.line1} - address: Không thể xóa địa chỉ cuối cùng</p>` : '';
                 $("#deletedFailNames").prepend(fail);
 
                 $("#showDeleteSuccessDetail").click(() => {
@@ -966,17 +1346,20 @@
                     $("#deletedFailNames").toggleClass('show');
                 })
 
-                // $.each(list, (index, id) => {
-                let rows = addressDataTable.rows(...idsDeleted).remove().draw();
-                // })
+                addressDataTable.rows(...idsDeleted).remove().draw();
             })
             .fail((jqXHR) => {
                 console.log(jqXHR)
             })
     })
 
-    $("#btnCloseResultDeleteAddress").click(() => {
+    $(".btnCloseResultDeleteAddress").click(() => {
         CustomerApp.page.elements.modalResultDeleteAddress.modal('hide');
+        $("#frmResultDeleteAddress")[0].reset();
+        $("#checkAllAddresses").prop({
+            indeterminate: false,
+            checked: false
+        })
     })
 
     CustomerApp.page.commands.showModalDeleteAddress = () => {
@@ -1118,6 +1501,10 @@
         let districtId = CustomerApp.page.elements.districtUpdate.val();
         CustomerApp.page.commands.getAllWardsByDistrictId(districtId);
     });
+
+    $('.btnCloseCreateAddressModal').click(() => {
+        CustomerApp.page.elements.frmCreateAddress[0].reset();
+    })
     //end address
 
     /*
