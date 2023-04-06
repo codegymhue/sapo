@@ -841,7 +841,6 @@
             type: "GET",
             url: origin + "/api/customers/" + id
         }).done((data) => {
-            console.log(data)
             customer = {...data};
 
             CustomerApp.page.elements.fullNameUp.val(data.fullName);

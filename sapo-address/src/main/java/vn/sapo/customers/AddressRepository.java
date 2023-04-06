@@ -14,19 +14,19 @@ import java.util.Optional;
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Integer> {
 
-    @Query(value = "" +
+    @Query(value =
             "SELECT a.line1 " +
-            "FROM Address AS a " +
-            "WHERE a.id IN :ids"
+                    "FROM Address AS a " +
+                    "WHERE a.id IN :ids"
     )
     List<String> findLine1ByIds(List<Integer> ids);
 
-    @Query(value = "" +
+    @Query(value =
             "SELECT a.id " +
-            "FROM Address AS a " +
-            "WHERE a.customerId = :id"
+                    "FROM Address AS a " +
+                    "WHERE a.customerId = :customerId"
     )
-    List<Integer> findAllAddressIdByCustomerId(@Param("id") Integer id);
+    List<Integer> findAllAddressIdByCustomerId(@Param("customerId") Integer customerId);
 
     Integer countAddressesByCustomerId(Integer id);
 

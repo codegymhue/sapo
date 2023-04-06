@@ -1132,7 +1132,6 @@
             CustomerApp.page.commands.selectPricePolicy();
         })
             .fail((jqXHR) => {
-                console.log(jqXHR)
                 let errors = jqXHR.responseJSON.errors;
 
                 if (errors.title) {

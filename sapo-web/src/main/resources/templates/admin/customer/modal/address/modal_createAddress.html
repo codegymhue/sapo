@@ -17,6 +17,7 @@
                                 </label>
                                 <input class="form-control sapo-textbox" id="fullNameAddressCreate"
                                        name="fullNameAddressCreate" type="text" placeholder="Nhập họ tên">
+                                <div class="error fullNameAddressCreate-error hidden KagUd"></div>
                             </div>
                             <div class="col-6 field">
                                 <label for="phoneAddressCreate" class="hTBRNU">
@@ -25,6 +26,7 @@
                                 <input class="form-control sapo-textbox" id="phoneAddressCreate"
                                        name="phoneAddressCreate"
                                        type="text" placeholder="Nhập số điện thoại">
+                                <div class="error phoneAddressCreate-error hidden KagUd"></div>
                             </div>
                         </div>
                         <div class="row">
@@ -34,6 +36,7 @@
                                 </label>
                                 <input class="form-control sapo-textbox" id="line1Create" name="line1Create"
                                        placeholder="Nhập địa chỉ" type="text">
+                                <div class="error line1Create-error hidden KagUd"></div>
                             </div>
                             <div class="col-6 field">
                                 <label for="emailCreate" class="hTBRNU">
@@ -41,6 +44,7 @@
                                 </label>
                                 <input class="form-control sapo-textbox" id="emailCreate" name="emailCreate" type="text"
                                        placeholder="Nhập địa chỉ email">
+                                <div class="error emailCreate-error hidden KagUd"></div>
                             </div>
                         </div>
                         <div class="row">
@@ -83,12 +87,13 @@
                                 <label for="zipCodeCreate">Mã bưu điện</label>
                                 <input class="form-control sapo-textbox" id="zipCodeCreate" name="zipCodeCreate"
                                        type="text" placeholder="Nhập mã bưu điện">
+                                <div class="error zipCodeCreate-error hidden KagUd"></div>
                             </div>
                         </div>
                     </div>
                 </form>
                 <div class="modal-footer irenfk">
-                    <button type="button" class="ldZiUT ldZiUTA" data-bs-dismiss="modal">
+                    <button type="button" class="ldZiUT ldZiUTA btnCloseCreateAddressModal" data-bs-dismiss="modal">
                         Thoát
                     </button>
                     <button id="btnCreateAddress" class="RthGc ldZiUTA" type="button">

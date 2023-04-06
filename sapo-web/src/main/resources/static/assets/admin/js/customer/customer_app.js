@@ -115,6 +115,26 @@ class CustomerApp {
         return value ? value : undefined;
     }
 
+    static getSelectedValue = (input, variable1, variable2) => {
+        if (Number(input.find(':selected').val()) !== 0) {
+            variable1 = input.find(':selected').val();
+            variable2 = input.find(':selected').text();
+        } else {
+            variable1 = undefined;
+            variable2 = undefined;
+        }
+    }
+
+    static setNullObj = (obj, val) => Object.keys(obj).forEach(k => obj[k] = val);
+
+    static redrawDatatables = (url) => {
+        $.get(url, function(newData) {
+            addressDataTable.clear();
+            addressDataTable.rows.add(newData);
+            addressDataTable.draw();
+        });
+    }
+
     static page = {
         urls: {
             getAllCustomers: CustomerApp.BASE_URL_CUSTOMER,
