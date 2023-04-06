@@ -121,22 +121,9 @@ public class AddressServiceImpl implements AddressService {
         Address address = addressRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("address.exception.notFound")
         );
-
-        address.setFullName(updateAddressParam.getFullName())
-                .setPhoneNumber(updateAddressParam.getPhoneNumber())
-                .setLine1(updateAddressParam.getLine1())
-                .setEmail(updateAddressParam.getEmail())
-                .setProvinceId(updateAddressParam.getProvinceId())
-                .setProvinceName(updateAddressParam.getProvinceName())
-                .setDistrictId(updateAddressParam.getDistrictId())
-                .setDistrictName(updateAddressParam.getDistrictName())
-                .setWardId(updateAddressParam.getWardId())
-                .setWardName(updateAddressParam.getWardName())
-                .setZipCode(updateAddressParam.getZipCode());
-
+        address = addressMapper.toModel(updateAddressParam);
         addressRepository.save(address);
-
-        return findById(id);
+        return addressMapper.toDTO(address);
     }
 
     @Override
@@ -202,8 +189,8 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     @Transactional
-    public void create(List<CreateAddressParam> createShippingAddressParams) {
-        List<Address> addresses = createShippingAddressParams.stream().map(addressMapper::toModel).collect(Collectors.toList());
+    public void create(List<CreateAddressParam> createAddressParamList) {
+        List<Address> addresses = createAddressParamList.stream().map(addressMapper::toModel).collect(Collectors.toList());
         addressRepository.saveAll(addresses);
     }
 

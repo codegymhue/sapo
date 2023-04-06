@@ -3,12 +3,12 @@ package vn.sapo.controllers.pricing_policy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import vn.sapo.mail.EMailSender;
 import vn.sapo.pricing_policy.PricingPolicyService;
+import vn.sapo.pricing_policy.dto.PricingPolicyParam;
+import vn.sapo.pricing_policy.dto.PricingPolicyResult;
 
 import java.util.Set;
 
@@ -33,5 +33,12 @@ public class PricingPolicyAPI extends Thread {
     @GetMapping("/findByTitles")
     public ResponseEntity<?> findByTitles(Set<String> titles){
         return new ResponseEntity<>(pricingPolicyService.findByTitles(titles), HttpStatus.OK);
+    }
+
+    @PostMapping
+    private ResponseEntity<?> create(@RequestBody @Validated PricingPolicyParam param) {
+        PricingPolicyResult result = pricingPolicyService.create(param);
+
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 }
