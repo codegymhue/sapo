@@ -185,7 +185,7 @@ public class CustomerAPI extends BaseController{
         Pageable pageable = PageRequest.of(page - 1, length, s);
 
         Page<ContactResult> dtoPage =
-                contactCustomerService.findAllContact(id, pageable);
+                contactCustomerService.findAllContact(pageable, id);
 
         DataTablesOutput<ContactResult> output = new DataTablesOutput<ContactResult>()
                 .setDraw(draw)

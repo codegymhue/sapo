@@ -26,11 +26,17 @@ public class ContactCustomerServiceImpl implements ContactCustomerService {
     private ContactCustomerRepository contactCustomerRepository;
 
     @Override
-    public Page<ContactResult> findAllContact(Integer customerId, Pageable pageable) {
+    public Page<ContactResult> findAllContact(Pageable pageable, Integer customerId) {
         Customer customer = findCustomerById(customerId);
         List<ContactResult> dtoList = customer.getContacts().stream().map(contactMapper::toDTO).collect(Collectors.toList());
+        int sizePerPage = pageable.getPageSize();
+        int page = pageable.getPageNumber();
+        int from = Math.max(0, page * sizePerPage);
+        int to = Math.min(dtoList.size(), (page + 1) * sizePerPage);
 
-        return new PageImpl<>(dtoList, pageable, dtoList.size());
+        List<ContactResult> results = dtoList.subList(from, to);
+
+        return new PageImpl<>(results, pageable, dtoList.size());
     }
 
     @Override
@@ -48,20 +54,20 @@ public class ContactCustomerServiceImpl implements ContactCustomerService {
         return contactMapper.toDTO(contact);
     }
 
-    private HashMap<String, String> getContactParamValue(Contact contact) {
-        HashMap<String, String> contacts = new HashMap<>();
-
-        contacts.put("id", String.valueOf(contact.getId()));
-        contacts.put("fullName", contact.getFullName());
-        contacts.put("phoneNumber", contact.getPhoneNumber());
-        contacts.put("email", contact.getEmail());
-        contacts.put("fax", contact.getFax());
-        contacts.put("position", contact.getPosition());
-        contacts.put("department", contact.getDepartment());
-        contacts.put("note", contact.getNote());
-
-        return contacts;
-    }
+//    private HashMap<String, String> getContactParamValue(Contact contact) {
+//        HashMap<String, String> contacts = new HashMap<>();
+//
+//        contacts.put("id", String.valueOf(contact.getId()));
+//        contacts.put("fullName", contact.getFullName());
+//        contacts.put("phoneNumber", contact.getPhoneNumber());
+//        contacts.put("email", contact.getEmail());
+//        contacts.put("fax", contact.getFax());
+//        contacts.put("position", contact.getPosition());
+//        contacts.put("department", contact.getDepartment());
+//        contacts.put("note", contact.getNote());
+//
+//        return contacts;
+//    }
 
     private Customer findCustomerById(Integer id) {
         return contactCustomerRepository.findById(id).orElseThrow(

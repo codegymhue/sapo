@@ -288,14 +288,14 @@
                     <div class="gCRNBf">
                         <div id="scroller" class="fvZzuO jyZcwm1 jsseh238">
                             <div class="jyZcwm">
-                                <button id="histories" class="fJFgex">Lịch sử mua hàng</button>
-                                <button id="debts" class="fJFgex">Công nợ</button>
+                                <!--                                <button id="histories" class="fJFgex">Lịch sử mua hàng</button>-->
+                                <!--                                <button id="debts" class="fJFgex">Công nợ</button>-->
                                 <button id="btnContacts" class="fJFgex">Liên hệ</button>
                                 <button id="btnAddress" class="fJFgex">Địa chỉ</button>
-                                <button id="notes" class="fJFgex">Ghi chú</button>
-                                <button id="btnCustomerGroups" class="fACSJt">Nhóm khách hàng</button>
+                                <!--                                <button id="notes" class="fJFgex">Ghi chú</button>-->
+                                <button id="btnCustomerGroups" class="fJFgex">Nhóm khách hàng</button>
                             </div>
-                            <div class="jyZcwm2 hidden">
+                            <div class="jyZcwm2 hidden contactContainer">
                                 <button id="btnShowModalCreateContact" class="kDDrLX">
                                     <svg class="MuiSvgIcon-root liFCEr" focusable="false" viewBox="0 0 24 24"
                                          aria-hidden="true">
@@ -316,6 +316,9 @@
                                 </button>
                             </div>
                         </div>
+                    </div>
+                    <div id="noContact">
+                        <p>Không có dữ liệu liên hệ</p>
                     </div>
 
                     <div id="render_table">
@@ -349,6 +352,7 @@
     let addressDataTable = {};
     let updateAddressParam = {};
     const listAddressId = new Set();
+    let tbContact = {};
 
     CustomerApp.page.elements.fullName = $("#fullName");
     CustomerApp.page.elements.status = $("#status");
@@ -434,78 +438,106 @@
     //end edit address
 
     //start contact
-    // CustomerApp.page.elements.btnContacts.click(() => {
-    // })
+    CustomerApp.page.elements.btnContacts.click(() => {
+        $(".contactContainer").removeClass('hidden').addClass('show');
+        $('.addressContainer').addClass('hidden').removeClass('show');
+        $('#tbAddress_wrapper').hide();
+        // $('#tbContact_wrapper').removeClass('hidden').addClass('show');
+        $('#tbContact_wrapper').show();
+        $('#tbContact').show();
+        $('#tbCustomerGroup').addClass('hidden').removeClass('show');
+    })
 
     CustomerApp.page.commands.drawContactDataTable = () => {
         let id = +window.location.pathname.split('/')[3];
 
-        let tbContact = CustomerApp.page.elements.tbContact.DataTable({
-            dom: '<"top">Brt<"bottom"lifp><"clear">',
-            processing: CustomerApp.dataTableDetails.language.processing,
-            serverSide: true,
-            searching: false,
-            ordering: false,
-            ajax: {
-                type: 'POST',
-                url: origin + `/api/customers/${id}/contacts/pagination`,
-                accept: 'application/json',
-                contentType: 'application/json',
-                data: function (d) {
-                    return JSON.stringify(d);
-                }
-            },
-            language: CustomerApp.dataTableDetails.language,
-            lengthMenu: [
-                [20, 50, 100],
-                ["20", "50", "100"]
-            ],
-            aoColumns: [
-                {
-                    mData: 'id',
-                },
-                {
-                    mData: 'fullName',
-                    render: (data, type, row) => {
-                        return row.fullName || '';
+        if (currentCustomer.contacts.length === 0) {
+            $("#render_table").addClass('hidden');
+        } else {
+            $("#render_table").removeClass('hidden').addClass('show');
+            $("#noContact").removeClass('show').addClass('hidden');
+            tbContact = CustomerApp.page.elements.tbContact.DataTable({
+                dom: '<"top">Brt<"bottom"lifp><"clear">',
+                processing: CustomerApp.dataTableDetails.language.processing,
+                serverSide: true,
+                searching: false,
+                ordering: false,
+                ajax: {
+                    type: 'POST',
+                    url: origin + `/api/customers/${id}/contacts/pagination`,
+                    accept: 'application/json',
+                    contentType: 'application/json',
+                    data: function (d) {
+                        return JSON.stringify(d);
                     }
                 },
-                {
-                    mData: 'phoneNumber',
-                    render: (data, type, row) => {
-                        return row.phoneNumber || '';
+                language: CustomerApp.dataTableDetails.language,
+                lengthMenu: [
+                    [3, 20, 50, 100],
+                    ['3', "20", "50", "100"]
+                ],
+                aoColumns: [
+                    {
+                        mData: 'id',
+                        className: 'hYsv8 nYvd3',
+                        target: 0
+                    },
+                    {
+                        mData: 'fullName',
+                        render: (data, type, row) => {
+                            console.log(data)
+                            console.log(type)
+                            console.log(row)
+                            return row.fullName || '';
+                        },
+                        className: 's7uel',
+                        target: 1
+                    },
+                    {
+                        mData: 'phoneNumber',
+                        render: (data, type, row) => {
+                            return row.phoneNumber || '';
+                        },
+                        className: 's7uel',
+                        target: 2
+                    },
+                    {
+                        mData: 'email',
+                        render: (data, type, row) => {
+                            return row.email || '';
+                        },
+                        className: 's7uel',
+                        target: 3
+                    },
+                    {
+                        mData: 'position',
+                        render: (data, type, row) => {
+                            return row.position || '';
+                        },
+                        className: 's7uel',
+                        target: 4
+                    },
+                    {
+                        mData: 'department',
+                        render: (data, type, row) => {
+                            return row.department || '';
+                        },
+                        className: 's7uel',
+                        target: 5
                     }
+                ],
+                columnDefs: [{
+                    targets: 0,
+                    render: function (data, type, row, meta) {
+                        return `<input id=${row.id} type="checkbox"/>`
+                    }
+                }],
+                select: {
+                    style: 'os',
+                    selector: 'td:first-child'
                 },
-                {
-                    mData: 'email',
-                    render: (data, type, row) => {
-                        return row.email || '';
-                    }
-                },
-                {
-                    mData: 'position',
-                    render: (data, type, row) => {
-                        return row.position || '';
-                    }
-                },
-                {
-                    mData: 'department',
-                    render: (data, type, row) => {
-                        return row.department || '';
-                    }
-                }
-            ],
-            columnDefs: [{
-                targets: 0,
-                render: function (data, type, row, meta) {
-                    return `<input id=${row.id} type="checkbox"/>`
-                }
-            }],
-            select: {
-                style: 'os',
-                selector: 'td:first-child'
-            },
-        })
+            })
+        }
     }
 
     //check all select
@@ -595,29 +627,27 @@
                 console.log(jqXHR)
             })
     }
-    //end contact
 
-    $(() => {
-        CustomerApp.page.commands.getCustomerInfo().then(() => {
-            CustomerApp.page.commands.deleteCustomer();
-
-            CustomerApp.page.commands.showCustomerGroup();
-            CustomerApp.page.elements.drawAddressDatatable();
-            CustomerApp.page.commands.drawContactDataTable();
-        });
+    $(".btnCloseCreateContactModal").click(() => {
+        $("#frmCreateContact")[0].reset();
     })
+    //end contact
 
     CustomerApp.page.commands.showCustomerGroup = () => {
         CustomerApp.page.elements.btnCustomerGroups.click(() => {
+            $('#tbAddress_wrapper').hide();
+            $('#tbContact_wrapper').hide();
+
+            $('.contactContainer').addClass('hidden').removeClass('show');
 
             CustomerApp.page.elements.tbCustomerGroup.addClass('show').removeClass('hidden');
             $(".jyZcwm2.addressContainer").addClass('hidden').removeClass('show');
 
             CustomerApp.page.elements.tbAddress.addClass('hidden').removeClass('show');
-            CustomerApp.page.elements.tbAddress.DataTable().destroy();
+            // CustomerApp.page.elements.tbAddress.DataTable().destroy();
 
             CustomerApp.page.elements.tbContact.addClass('hidden').removeClass('show');
-            CustomerApp.page.elements.tbContact.DataTable().destroy();
+            // CustomerApp.page.elements.tbContact.DataTable().destroy();
 
             let id = currentCustomer.id;
 
@@ -1154,11 +1184,15 @@
     }
 
     CustomerApp.page.elements.btnAddress.click(() => {
+
+        $('#tbAddress_wrapper').show();
+        $('#tbContact_wrapper').hide();
+        $('.contactContainer').addClass('hidden').removeClass('show');
         CustomerApp.page.elements.tbCustomerGroup.addClass('hidden').removeClass('show');
         $(".jyZcwm2.addressContainer").addClass('hidden').removeClass('show');
 
         CustomerApp.page.elements.tbContact.addClass('hidden').removeClass('show');
-        CustomerApp.page.elements.tbContact.DataTable().destroy();
+        // CustomerApp.page.elements.tbContact.DataTable().destroy();
 
         $('.addressContainer').removeClass('hidden').addClass('show');
         CustomerApp.page.elements.tbAddress.removeClass('hidden').addClass('show');
@@ -1506,6 +1540,23 @@
         CustomerApp.page.elements.frmCreateAddress[0].reset();
     })
     //end address
+
+    $('button').on('click', function () {
+        $('button').removeClass('active');
+        $(this).addClass('active');
+    });
+
+    $(() => {
+        CustomerApp.page.commands.getCustomerInfo().then(() => {
+            CustomerApp.page.commands.deleteCustomer();
+
+            CustomerApp.page.commands.showCustomerGroup();
+            CustomerApp.page.elements.drawAddressDatatable();
+            CustomerApp.page.commands.drawContactDataTable();
+
+            $('#btnContacts').trigger('click');
+        });
+    })
 
 </script>
 </html>
