@@ -133,7 +133,8 @@
                                             <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-multiline MuiOutlinedInput-multiline">
                                                 <textarea aria-invalid="false" id="noteUp" rows="3"
                                                           aria-label="Without label" name="noteUp"
-                                                          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline placeholder_text">
+                                                          class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline placeholder_text"
+                                                          placeholder="Nhập mô tả">
                                                 </textarea>
                                                 <fieldset aria-hidden="true"
                                                           class="jss823 MuiOutlinedInput-notchedOutline">
@@ -311,16 +312,18 @@
     CustomerApp.page.elements.pricingPolicyTypeError = $(".pricingPolicyType-error.error");
     CustomerApp.page.elements.titleError = $(".title-error.error");
     CustomerApp.page.elements.searchDefaultPriceDropdown = $("#searchDefaultPriceDropdown");
+    CustomerApp.page.elements.error = $(".error");
     //end modal create default price policy
 
     CustomerApp.page.commands.updateCustomerGroup = () => {
         CustomerApp.page.elements.btnUpdateCustomerGroup.click(() => {
             let id = +window.location.pathname.split('/')[3];
+
             currentCustomerGroup.title = CustomerApp.getValue(CustomerApp.page.elements.titleGroupUp);
             currentCustomerGroup.cusGrpCode = CustomerApp.getValue(CustomerApp.page.elements.cusGrpCodeUp);
             currentCustomerGroup.note = CustomerApp.getValue(CustomerApp.page.elements.noteUp);
             currentCustomerGroup.defaultDiscountRate = CustomerApp.getValue(CustomerApp.page.elements.defaultDiscountRateUP);
-            console.log(currentCustomerGroup)
+
             $.ajax({
                 headers: {
                     "accept": "application/json",
@@ -529,7 +532,7 @@
             CustomerApp.page.commands.selectPricePolicy();
         })
             .fail((jqXHR) => {
-                console.log(jqXHR)
+
                 let errors = jqXHR.responseJSON.errors;
 
                 if (errors.title) {
@@ -547,11 +550,8 @@
     CustomerApp.page.elements.btnCloseCreatePricePolicyModal.click(() => {
         CustomerApp.page.elements.frmCreatePricePolicy.validate().resetForm();
         CustomerApp.page.elements.frmCreatePricePolicy[0].reset();
-        CustomerApp.page.elements.error.removeClass('show').addClass('hidden');
-    })
 
-    CustomerApp.page.elements.btnCreatePricePolicy.on("click", () => {
-        CustomerApp.page.elements.frmCreatePricePolicy.trigger("submit");
+        CustomerApp.page.elements.error.hasClass('show') ? CustomerApp.page.elements.error.removeClass('show').addClass('hidden') : '';
     })
 
     CustomerApp.page.elements.frmUpdateCusGrp.validate({

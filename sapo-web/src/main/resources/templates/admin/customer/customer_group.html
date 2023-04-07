@@ -127,6 +127,7 @@
             dom: '<"top">rt<"bottom"lifp><"clear">',
             processing: true,
             serverSide: true,
+            searching: false,
             ajax: {
                 type: 'POST',
                 url: origin + "/api/customer_groups/pagination",
@@ -141,31 +142,47 @@
                 [20, 50, 100],
                 ["20", "50", "100"]
             ],
-            searching: false,
             columns: [
-                {data: 'title'},
+                {
+                    data: 'title',
+                    render: (data) => {
+                        return data || '';
+                    }
+                },
                 {
                     data: 'cusGrpCode',
-                    sortable: false
+                    sortable: false,
+                    render: (data) => {
+                        return data || '';
+                    }
                 },
                 {
                     data: 'type',
-                    sortable: false
+                    sortable: false,
+                    render: (data) => {
+                        return data || '';
+                    }
                 },
                 {
                     data: 'note',
-                    sortable: false
+                    sortable: false,
+                    render: (data) => {
+                        return data || '';
+                    }
                 },
                 {
                     data: 'countCus',
-                    sortable: false
+                    sortable: false,
+                    render: (data) => {
+                        return data || '';
+                    }
                 },
                 {
                     data: 'createdAt',
                     sortable: false,
                     render: (data) => {
                         let date = CustomerApp.formatDatePattern(data);
-                        return `<td>${date}</td>`
+                        return `<td>${date}</td>` || '';
                     }
                 }
             ],

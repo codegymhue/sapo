@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import vn.sapo.customerGroup.dto.DataTablesInput;
 import vn.sapo.customerGroup.dto.DataTablesOutput;
 import vn.sapo.customers.AddressService;
-import vn.sapo.customers.dto.AddressResult;
-import vn.sapo.customers.dto.CreateAddressParam;
-import vn.sapo.customers.dto.DeleteAddressResult;
-import vn.sapo.customers.dto.UpdateAddressParam;
+import vn.sapo.customers.dto.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -87,10 +84,10 @@ public class AddressAPI {
 
         Pageable pageable = PageRequest.of(page - 1, length, s);
 
-        Page<AddressResult> dtoPage =
-                addressService.findAllAddresses(id, pageable);
+        Page<IAddressResult> dtoPage =
+                addressService.findAllAddresses(pageable, id);
 
-        DataTablesOutput<AddressResult> output = new DataTablesOutput<AddressResult>()
+        DataTablesOutput<IAddressResult> output = new DataTablesOutput<IAddressResult>()
                 .setDraw(draw)
                 .setRecordsTotal(dtoPage.getTotalElements())
                 .setRecordsFiltered(dtoPage.getTotalElements())

@@ -253,15 +253,8 @@
                                                     </label>
                                                     <div class="MuiFormControl-root jss20483 jss20484 MuiFormControl-fullWidth">
                                                         <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-multiline MuiOutlinedInput-multiline">
-                                                            <textarea
-                                                                    type="text"
-                                                                    aria-invalid="false"
-                                                                    id="addressCreate"
-                                                                    name="addressCreate"
-                                                                    placeholder="Nhập địa chỉ" rows="3"
-                                                                    aria-label="Without label"
-                                                                    class="jss23785 jss23786">
-                                                            </textarea>
+                                                            <textarea placeholder="Nhập địa chỉ" id="addressCreate"
+                                                                      name="addressCreate" class="bQyECD"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="error addressCreate-error hidden"></div>
@@ -469,10 +462,9 @@
                                                     </label>
                                                     <div class="MuiFormControl-root MuiTextField-root jss20483 jss20484 MuiFormControl-fullWidth">
                                                         <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline">
-                                                          <textarea id="descriptionCreate" class="jss23785 jss23786"
+                                                          <textarea id="descriptionCreate" class="jss23785 jss23786 bQyECD"
                                                                     name="descriptionCreate" placeholder="Nhập mô tả"
-                                                                    rows="3">
-                                                          </textarea>
+                                                                    rows="3"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="error descriptionCreate-error hidden"></div>
@@ -502,8 +494,8 @@
                                                               <textarea aria-invalid="false" id="tagCreate"
                                                                         name="tagCreate" rows="3"
                                                                         aria-label="Without label"
-                                                                        class="jss23785 jss23786">
-                                                              </textarea>
+                                                                        placeholder="Nhập tags"
+                                                                        class="jss23785 jss23786 bQyECD"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="error tagCreate-error hidden"></div>
@@ -1013,7 +1005,9 @@
                 isValidEmail: true
             },
             addressCreate: {
-                required: true,
+                required: function() {
+                    return $("#addressCreate").val().trim() === '';
+                },
                 maxlength: 255
             },
             faxCreate: {
@@ -1274,6 +1268,7 @@
             ? CustomerApp.page.elements.offer.show()
             : CustomerApp.page.elements.offer.hide();
     });
+
 
 </script>
 </html>
