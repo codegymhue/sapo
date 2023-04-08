@@ -350,8 +350,10 @@
     let contactParam = {};
     let createAddressParam = {};
     let addressDataTable = {};
+    let contactDataTable = {};
     let updateAddressParam = {};
     const listAddressId = new Set();
+    const listContactId = new Set();
     let tbContact = {};
 
     CustomerApp.page.elements.fullName = $("#fullName");
@@ -393,6 +395,8 @@
     //end customer group
 
     //start contact
+    CustomerApp.page.elements.frmCreateContact = $("#frmCreateContact");
+
     CustomerApp.page.elements.btnContacts = $("#btnContacts");
 
     CustomerApp.page.elements.tbContact = $("#tbContact");
@@ -439,6 +443,7 @@
 
     //start contact
     CustomerApp.page.elements.btnContacts.click(() => {
+        $("#noContact").removeClass('hidden').addClass('show');
         $(".contactContainer").removeClass('hidden').addClass('show');
         $('.addressContainer').addClass('hidden').removeClass('show');
         $('#tbAddress_wrapper').hide();
@@ -452,11 +457,12 @@
         let id = +window.location.pathname.split('/')[3];
 
         if (currentCustomer.contacts.length === 0) {
-            $("#render_table").addClass('hidden');
+            $("#tbContact").parent().addClass('hidden');
         } else {
-            $("#render_table").removeClass('hidden').addClass('show');
+            $("#tbContact").parent().removeClass('hidden').addClass('show');
             $("#noContact").removeClass('show').addClass('hidden');
-            tbContact = CustomerApp.page.elements.tbContact.DataTable({
+
+            contactDataTable = CustomerApp.page.elements.tbContact.DataTable({
                 dom: '<"top">Brt<"bottom"lifp><"clear">',
                 processing: CustomerApp.dataTableDetails.language.processing,
                 serverSide: true,
@@ -485,9 +491,6 @@
                     {
                         mData: 'fullName',
                         render: (data, type, row) => {
-                            console.log(data)
-                            console.log(type)
-                            console.log(row)
                             return row.fullName || '';
                         },
                         className: 's7uel',
@@ -541,14 +544,14 @@
     }
 
     //check all select
-    $('#checkAll').click(function (e) {
+    $('#checkAllContacts').click(function (e) {
         $('#tbContact tbody :checkbox').prop('checked', $(this).is(':checked'));
         e.stopImmediatePropagation();
     });
     //
 
     CustomerApp.page.dialogs.elements.btnCreateContact.click(() => {
-        CustomerApp.page.commands.createContact();
+        CustomerApp.page.elements.frmCreateContact.trigger('submit');
     })
 
     CustomerApp.page.commands.createContact = () => {
@@ -573,11 +576,80 @@
         })
             .done((data) => {
                 console.log(data)
+                $("#modalCreateContact").modal('hide');
+                CustomerApp.IziToast.showSuccessAlert('Thêm mới liên hệ thành công');
+
+                CustomerApp.page.elements.frmCreateContact[0].reset();
+
+                CustomerApp.redrawDatatables(contactDataTable, origin + `/api/customers/${id}/contacts`);
+
+                console.log(origin + `/api/customers/${id}/contacts`)
             })
             .fail((jqXHR) => {
                 console.log(jqXHR)
+
+                let errors = jqXHR.responseJSON.errors;
+                errors.fullName ? CustomerApp.showErrorValidate($(".fullNameCtCre-error.error"), errors.fullName) : '';
+                errors.phoneNumber ? CustomerApp.showErrorValidate($(".phoneCtCre-error.error"), errors.phoneNumber) : '';
+                errors.email ? CustomerApp.showErrorValidate($(".emailCtCre-error.error"), errors.email) : '';
+                errors.fax ? CustomerApp.showErrorValidate($(".faxCtCre-error.error"), errors.fax) : '';
+                errors.position ? CustomerApp.showErrorValidate($(".positionCtCre-error.error"), errors.position) : '';
+                errors.department ? CustomerApp.showErrorValidate($(".departmentCtCre-error.error"), errors.department) : '';
+                errors.note ? CustomerApp.showErrorValidate($(".noteCtCre-error.error"), errors.note) : '';
             })
     }
+    let contactCreateValidate = CustomerApp.page.elements.frmCreateContact.validate({
+        rules: {
+            fullNameCtCre: {
+                required: true,
+                maxlength: 255
+            },
+            phoneCtCre: {
+                isValidPhone: true,
+            },
+            faxCtCre: {
+                isValidFax: true,
+            },
+            emailCtCre: {
+                isValidEmail: true,
+            },
+            positionCtCre: {
+                maxlength: 50
+            },
+            departmentCtCre: {
+                maxlength: 255
+            },
+            noteCtCre: {
+                maxlength: 255
+            }
+        },
+        messages: {
+            fullNameCtCre: {
+                required: 'Họ tên không được để trống',
+                maxlength: "Họ tên không được vượt quá 255 ký tự"
+            },
+            positionCtCre: {
+                maxlength: 'Chức vụ không được vượt quá 50 ký tự',
+            },
+            departmentCtCre: {
+                maxlength: 'Bộ phận không được vượt quá 255 ký tự',
+            },
+            noteCtCre: {
+                maxlength: 'Ghi chú không được vượt quá 255 ký tự',
+            }
+        },
+        errorElement: 'label',
+        errorPlacement: (error, element) => {
+            error ? $(".error.hidden").addClass('show').removeClass('hidden') : '';
+            error.appendTo(element.parent().next("div"));
+        },
+        submitHandler: () => {
+            CustomerApp.page.commands.createContact();
+        },
+        invalidHandler: () => {
+            CustomerApp.IziToast.showErrorAlert('Vui lòng nhập đúng thông tin')
+        }
+    });
 
     CustomerApp.page.commands.getCustomerInfo = () => {
         let id = +window.location.pathname.split('/')[3];
@@ -629,7 +701,8 @@
     }
 
     $(".btnCloseCreateContactModal").click(() => {
-        $("#frmCreateContact")[0].reset();
+        CustomerApp.page.elements.frmCreateContact[0].reset();
+        contactCreateValidate.resetForm();
     })
     //end contact
 
@@ -637,6 +710,7 @@
         CustomerApp.page.elements.btnCustomerGroups.click(() => {
             $('#tbAddress_wrapper').hide();
             $('#tbContact_wrapper').hide();
+            $('#noContact').addClass('hidden').removeClass('show');
 
             $('.contactContainer').addClass('hidden').removeClass('show');
 
@@ -766,14 +840,19 @@
 
     //start edit address
     CustomerApp.page.commands.editAddress = () => {
+        let id = updateAddressParam.id;
+        console.log(id)
         updateAddressParam.fullName = CustomerApp.getValue($("#fullNameAddressEdit"));
         updateAddressParam.phoneNumber = CustomerApp.getValue($("#phoneAddressEdit"));
         updateAddressParam.line1 = CustomerApp.getValue($("#line1Edit"));
+        updateAddressParam.email = CustomerApp.getValue($("#emailEdit"));
         updateAddressParam.zipCode = CustomerApp.getValue($("#zipCodeEdit"));
 
-        CustomerApp.getSelectedValue(CustomerApp.page.elements.provinceEdit, updateAddressParam.provinceId, updateAddressParam.provinceName);
-        CustomerApp.getSelectedValue(CustomerApp.page.elements.districtEdit, updateAddressParam.districtId, updateAddressParam.districtName);
-        CustomerApp.getSelectedValue(CustomerApp.page.elements.wardEdit, updateAddressParam.wardId, updateAddressParam.wardName);
+        getSelectedValue(CustomerApp.page.elements.provinceEdit, updateAddressParam.provinceId, updateAddressParam.provinceName);
+        getSelectedValue(CustomerApp.page.elements.districtEdit, updateAddressParam.districtId, updateAddressParam.districtName);
+        getSelectedValue(CustomerApp.page.elements.wardEdit, updateAddressParam.wardId, updateAddressParam.wardName);
+
+        console.log(updateAddressParam)
 
         $.ajax({
             headers: {
@@ -781,19 +860,20 @@
                 "content-type": "application/json"
             },
             type: "PATCH",
-            url: origin + `/api/addresses/${updateAddressParam.id}`,
+            url: origin + `/api/addresses/${id}`,
             data: JSON.stringify(updateAddressParam)
         })
             .done((data) => {
+                console.log(data)
                 CustomerApp.IziToast.showSuccessAlert('Cập nhật địa chỉ thành công');
                 CustomerApp.page.elements.modalEditAddress.modal('hide');
+                CustomerApp.page.elements.frmEditAddress[0].reset();
 
-                CustomerApp.redrawDatatables(origin + `/api/addresses`)
+                CustomerApp.redrawDatatables(addressDataTable, origin + `/api/addresses`)
             })
             .fail((jqXHR) => {
-                console.log(jqXHR)
-
                 let errors = jqXHR.responseJSON.errors;
+
                 if (errors.fullName) {
                     CustomerApp.showErrorValidate($(".fullNameAddressEdit-error.error"), errors.fullName)
                 }
@@ -812,7 +892,7 @@
             })
     };
 
-    CustomerApp.page.elements.frmEditAddress.validate({
+    let addressEditValidate = CustomerApp.page.elements.frmEditAddress.validate({
         rules: {
             fullNameAddressEdit: {
                 maxlength: 150
@@ -874,6 +954,7 @@
         })
             .done((data) => {
                 let {results} = data ? data : null;
+
                 CustomerApp.page.elements.districtEdit.empty();
 
                 let str = '<option value=0>Chọn Quận/Huyện</option>';
@@ -982,6 +1063,7 @@
         CustomerApp.page.elements.wardEdit.empty();
         CustomerApp.page.elements.districtEdit.empty();
         CustomerApp.page.elements.frmEditAddress[0].reset();
+        addressEditValidate.resetForm();
 
         CustomerApp.setNullObj(updateAddressParam, null);
     })
@@ -991,12 +1073,14 @@
         let id = addressDataTable.row(this).data().id;
         updateAddressParam.id = id;
         CustomerApp.page.elements.modalEditAddress.modal('show');
+
         $.ajax({
             type: "GET",
             url: origin + `/api/addresses/${id}`
         })
             .done((data) => {
                 let address = {...data};
+                console.log(data)
                 data.fullName ? $("#fullNameAddressEdit").val(data.fullName) : '';
                 data.phoneNumber ? $("#phoneAddressEdit").val(data.phoneNumber) : '';
                 data.line1 ? $("#line1Edit").val(data.line1) : '';
@@ -1073,7 +1157,7 @@
             })
     });
 
-    CustomerApp.page.elements.frmCreateAddress.validate({
+    let addressCreateValidate = CustomerApp.page.elements.frmCreateAddress.validate({
         rules: {
             fullNameAddressCreate: {
                 maxlength: 150
@@ -1120,6 +1204,10 @@
     $.validator.addMethod("isValidPhone", function (value, element) {
         return this.optional(element) || /^$|[0-9]{8,15}$/i.test(value);
     }, "Số điện thoại không đúng định dạng");
+
+    $.validator.addMethod("isValidFax", function (value, element) {
+        return this.optional(element) || /^$|[0-9]{8,15}$/i.test(value);
+    }, "Số fax không đúng định dạng");
 
     $.validator.addMethod("isValidEmail", function (value, element) {
         return this.optional(element) || /^$|[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i.test(value);
@@ -1169,7 +1257,9 @@
 
                 CustomerApp.page.elements.frmCreateAddress[0].reset();
 
-                CustomerApp.redrawDatatables(origin + `/api/addresses`);
+                // CustomerApp.redrawDatatables(addressDataTable, origin + `/api/addresses`);
+                // CustomerApp.page.commands.deleteOneOrMoreCustomerAddress();
+                addressDataTable.ajax.reload();
             })
             .fail((jqXHR) => {
                 console.log(jqXHR)
@@ -1187,6 +1277,7 @@
 
         $('#tbAddress_wrapper').show();
         $('#tbContact_wrapper').hide();
+        $('#noContact').addClass('hidden').removeClass('show');
         $('.contactContainer').addClass('hidden').removeClass('show');
         CustomerApp.page.elements.tbCustomerGroup.addClass('hidden').removeClass('show');
         $(".jyZcwm2.addressContainer").addClass('hidden').removeClass('show');
@@ -1314,6 +1405,7 @@
             })
             $("#tbAddress thead tr th:not(:first-child)").addClass("show").removeClass('hidden');
             $("#addressActionContainer").remove();
+            $("#addressActionContainer").addClass("hidden").removeClass('show');
         }
     };
 
@@ -1356,7 +1448,7 @@
         })
             .done((data) => {
                 let {namesDeleted, numberOfSuccess, numberOfFail, addressResult, message, idsDeleted} = data;
-                console.log(data)
+
                 CustomerApp.page.elements.modalDeleteAddress.modal('hide');
 
                 CustomerApp.page.elements.modalResultDeleteAddress.modal('show');
@@ -1364,7 +1456,7 @@
                 $("#numberAddressesDeleteFail").text(numberOfFail);
 
                 $.each(namesDeleted, (i, name) => {
-                    console.log(name)
+
                     let success = namesDeleted ? `<p>${name} - Đã được xóa thành công</p>` : '';
                     $("#deletedSucceedNames").prepend(success);
                 })
@@ -1380,6 +1472,8 @@
                     $("#deletedFailNames").toggleClass('show');
                 })
 
+                listAddressId.clear();
+
                 addressDataTable.rows(...idsDeleted).remove().draw();
             })
             .fail((jqXHR) => {
@@ -1393,7 +1487,11 @@
         $("#checkAllAddresses").prop({
             indeterminate: false,
             checked: false
-        })
+        });
+        $("#addressActionContainer").addClass('hidden').removeClass('show');
+        $("#tbAddress thead tr th:not(:first-child)").addClass("show").removeClass('hidden');
+        $("#tbAddress thead tr th:last-child").addClass("hidden").removeClass('show');
+        CustomerApp.page.commands.deleteOneOrMoreCustomerAddress();
     })
 
     CustomerApp.page.commands.showModalDeleteAddress = () => {
@@ -1538,13 +1636,24 @@
 
     $('.btnCloseCreateAddressModal').click(() => {
         CustomerApp.page.elements.frmCreateAddress[0].reset();
+        addressCreateValidate.resetForm();
     })
     //end address
 
-    $('button').on('click', function () {
+    $('.fJFgex').on('click', function () {
         $('button').removeClass('active');
         $(this).addClass('active');
     });
+
+    const getSelectedValue = (input, variable1, variable2) => {
+        if (Number(input.find(':selected').val()) !== 0) {
+            variable1 = input.find(':selected').val();
+            variable2 = input.find(':selected').text();
+        } else {
+            variable1 = undefined;
+            variable2 = undefined;
+        }
+    }
 
     $(() => {
         CustomerApp.page.commands.getCustomerInfo().then(() => {

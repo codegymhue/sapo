@@ -29,6 +29,7 @@ import vn.sapo.voucher.receipt.ReceiptVoucherService;
 import javax.validation.Valid;
 import java.time.Instant;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/customers")
@@ -75,6 +76,12 @@ public class CustomerAPI extends BaseController{
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
+    @GetMapping("/{id}/contacts")
+    private ResponseEntity<?> getAllContactsByCustomerId(@PathVariable Integer id) {
+        Set<ContactResult> dto = customerService.getAllContactsByCustomerId(id);
+
+        return new ResponseEntity<>(dto, HttpStatus.CREATED);
+    }
 
     @PostMapping("/filter")
     public ResponseEntity<?> testFilter(@RequestBody CustomerFilter customerFilter,

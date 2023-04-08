@@ -109,10 +109,29 @@ public class AddressServiceImpl implements AddressService {
     @Override
     @Transactional
     public AddressResult update(Integer id, UpdateAddressParam updateAddressParam) {
-        updateAddressParam.setId(id);
-        Address address = addressMapper.toModel(updateAddressParam);
+//        updateAddressParam.setId(id);
+//        Address address = addressMapper.toModel(updateAddressParam);
+//        addressRepository.save(address);
+//        return findById(id);
+        Address address = addressRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("address.exception.notFound")
+        );
+
+        address.setFullName(updateAddressParam.getFullName())
+                .setPhoneNumber(updateAddressParam.getPhoneNumber())
+                .setLine1(updateAddressParam.getLine1())
+                .setEmail(updateAddressParam.getEmail())
+                .setProvinceId(updateAddressParam.getProvinceId())
+                .setProvinceName(updateAddressParam.getProvinceName())
+                .setDistrictId(updateAddressParam.getDistrictId())
+                .setDistrictName(updateAddressParam.getDistrictName())
+                .setWardId(updateAddressParam.getWardId())
+                .setWardName(updateAddressParam.getWardName())
+                .setZipCode(updateAddressParam.getZipCode());
+
         addressRepository.save(address);
-        return addressMapper.toDTO(address);
+
+        return findById(id);
     }
 
     @Override
