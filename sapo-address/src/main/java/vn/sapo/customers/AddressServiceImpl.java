@@ -110,10 +110,6 @@ public class AddressServiceImpl implements AddressService {
     @Transactional
     public AddressResult update(UpdateAddressParam updateAddressParam) {
         Integer id = updateAddressParam.getId();
-//        updateAddressParam.setId(id);
-//        Address address = addressMapper.toModel(updateAddressParam);
-//        addressRepository.save(address);
-//        return findById(id);
         Address address = addressRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("address.exception.notFound")
         );

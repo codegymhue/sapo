@@ -9,21 +9,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.contact.ContactCustomerService;
 import vn.sapo.contact.dto.ContactResult;
 import vn.sapo.contact.dto.CreateContactParam;
+import vn.sapo.contact.dto.DeletedContactResult;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customerGroup.CustomerGroupService;
 import vn.sapo.customerGroup.dto.DataTablesInput;
 import vn.sapo.customerGroup.dto.DataTablesOutput;
 import vn.sapo.customers.AddressService;
-import vn.sapo.excel.ExcelHelper;
 import vn.sapo.order.sale.SaleOrderService;
 import vn.sapo.order.sale.item.OrderItemService;
 import vn.sapo.shared.controllers.BaseController;
-import vn.sapo.supplier.excel.ResponseMessage;
 import vn.sapo.voucher.receipt.ReceiptVoucherService;
 
 import javax.validation.Valid;
@@ -34,7 +32,7 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api/customers")
 @CrossOrigin("*")
-public class CustomerAPI extends BaseController{
+public class CustomerAPI extends BaseController {
 
     @Autowired
     private CustomerService customerService;
@@ -119,6 +117,13 @@ public class CustomerAPI extends BaseController{
         return new ResponseEntity<>(customerService.deleteById(id), HttpStatus.OK);
     }
 
+    @DeleteMapping("/{customerId}/contacts")
+    private ResponseEntity<?> deleteCustomerContactById(@PathVariable Integer customerId,
+                                                        @RequestBody Set<Long> ids) {
+        DeletedContactResult deleteAddressResult = contactCustomerService.deleteCustomerContactById(customerId, ids);
+        return new ResponseEntity<>(deleteAddressResult, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@RequestBody @Valid CreateCustomerParam createCustomerParam) {
         CustomerResult dto = customerService.create(createCustomerParam);
@@ -126,11 +131,13 @@ public class CustomerAPI extends BaseController{
         dto = customerService.findById(dto.getId());
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
+
     @PostMapping("/upload")
-    public ResponseEntity<?> createCustomerByExcel(@RequestBody @Valid CreateSeriesCustomerParam createSeriesCustomerParam){
+    public ResponseEntity<?> createCustomerByExcel(@RequestBody @Valid CreateSeriesCustomerParam createSeriesCustomerParam) {
         createCustomerThread.start(createSeriesCustomerParam);
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
+
     @PatchMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Integer id,
                                     @RequestBody @Validated UpdateCustomerParam updateCustomer) {
@@ -186,10 +193,7 @@ public class CustomerAPI extends BaseController{
         int start = input.getStart();
         int length = input.getLength();
         int page = start / length + 1;
-
-        Sort s = Sort.by(Sort.Direction.DESC, "id");
-
-        Pageable pageable = PageRequest.of(page - 1, length, s);
+        Pageable pageable = PageRequest.of(page - 1, length);
 
         Page<ContactResult> dtoPage =
                 contactCustomerService.findAllContact(pageable, id);
