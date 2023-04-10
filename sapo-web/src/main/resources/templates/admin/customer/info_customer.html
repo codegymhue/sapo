@@ -874,21 +874,21 @@
             .fail((jqXHR) => {
                 let errors = jqXHR.responseJSON.errors;
 
-                if (errors.fullName) {
+                if (errors.fullName)
                     CustomerApp.showErrorValidate($(".fullNameAddressEdit-error.error"), errors.fullName)
-                }
-                if (errors.phoneNumber) {
+
+                if (errors.phoneNumber)
                     CustomerApp.showErrorValidate($(".phoneAddressEdit-error.error"), errors.phoneNumber)
-                }
-                if (errors.line1) {
+
+                if (errors.line1)
                     CustomerApp.showErrorValidate($(".line1Edit-error.error"), errors.line1)
-                }
-                if (errors.email) {
+
+                if (errors.email)
                     CustomerApp.showErrorValidate($(".emailEdit-error.error"), errors.email)
-                }
-                if (errors.zipCode) {
+
+                if (errors.zipCode)
                     CustomerApp.showErrorValidate($(".zipCodeEdit-error.error"), errors.zipCode)
-                }
+
             })
     };
 
@@ -1071,6 +1071,7 @@
 
     $("#tbAddress tbody").on('click', " tr td:not(:first-child)", function () {
         let id = addressDataTable.row(this).data().id;
+        console.log($(this))
         updateAddressParam.id = id;
         CustomerApp.page.elements.modalEditAddress.modal('show');
 
@@ -1251,15 +1252,16 @@
             "url": origin + `/api/addresses/${id}/customer`,
             "data": JSON.stringify(createAddressParam)
         })
-            .done(() => {
+            .done((data) => {
+                console.log(data)
                 CustomerApp.page.elements.modalCreateAddress.modal('hide');
                 CustomerApp.IziToast.showSuccessAlert('Thêm mới địa chỉ thành công');
 
                 CustomerApp.page.elements.frmCreateAddress[0].reset();
 
-                // CustomerApp.redrawDatatables(addressDataTable, origin + `/api/addresses`);
-                // CustomerApp.page.commands.deleteOneOrMoreCustomerAddress();
-                addressDataTable.ajax.reload();
+                let {id, phoneNumber, line1, wardName, districtName, provinceName, zipCode, email} = data;
+
+                addressDataTable.row.add([id, phoneNumber, line1, wardName, districtName, provinceName, zipCode, email]).draw(false);
             })
             .fail((jqXHR) => {
                 console.log(jqXHR)
@@ -1381,7 +1383,13 @@
                     }
                 },
             ],
+            fnCreatedRow: function (nRow, aData, iDataIndex) {
+                $(nRow).attr('id', aData.id);
+            },
             initComplete: function (setting, json) {
+                CustomerApp.page.commands.deleteOneOrMoreCustomerAddress();
+            },
+            drawCallback: () => {
                 CustomerApp.page.commands.deleteOneOrMoreCustomerAddress();
             }
         });

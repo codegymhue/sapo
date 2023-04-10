@@ -108,7 +108,8 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     @Transactional
-    public AddressResult update(Integer id, UpdateAddressParam updateAddressParam) {
+    public AddressResult update(UpdateAddressParam updateAddressParam) {
+        Integer id = updateAddressParam.getId();
 //        updateAddressParam.setId(id);
 //        Address address = addressMapper.toModel(updateAddressParam);
 //        addressRepository.save(address);

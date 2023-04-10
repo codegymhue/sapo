@@ -97,9 +97,8 @@ public class AddressAPI {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id,
-                                    @RequestBody @Validated UpdateAddressParam updateAddressParam) {
-        AddressResult address = addressService.update(id, updateAddressParam);
+    public ResponseEntity<?> update(@RequestBody @Validated UpdateAddressParam updateAddressParam) {
+        AddressResult address = addressService.update(updateAddressParam);
         return new ResponseEntity<>(address, HttpStatus.OK);
     }
 
