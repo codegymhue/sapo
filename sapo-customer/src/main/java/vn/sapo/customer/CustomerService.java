@@ -7,12 +7,15 @@ import vn.sapo.contact.dto.ContactResult;
 import vn.sapo.contact.dto.UpdateContactParam;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customers.dto.CreateAddressParam;
+import vn.sapo.entities.customer.Customer;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
 public interface CustomerService {
+
+    List<Customer> findAllByGroupId(Integer groupId);
 
     ContactResult updateCustomerContactById(Integer customerId, UpdateContactParam updateContactParam);
 

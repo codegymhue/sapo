@@ -60,6 +60,11 @@ public class CustomerServiceImpl implements CustomerService {
     private ContactMapper contactMapper;
 
     @Override
+    public List<Customer> findAllByGroupId(Integer groupId) {
+        return customerRepository.findAllByGroupId(groupId);
+    }
+
+    @Override
     @Transactional
     public ContactResult updateCustomerContactById(Integer customerId, UpdateContactParam param) {
         Customer customer = findCustomerById(customerId);

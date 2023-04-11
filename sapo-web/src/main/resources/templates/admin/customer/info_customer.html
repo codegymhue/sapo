@@ -31,12 +31,12 @@
                             Xóa khách hàng
                         </span>
                     </button>
-                    <button id="btn-create-voucher" class="FmJDc">
-                        <span class="sc-papXJ ffDJGn">Tạo phiếu thu/chi</span>
-                        <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M7 10l5 5 5-5z"></path>
-                        </svg>
-                    </button>
+<!--                    <button id="btn-create-voucher" class="FmJDc">-->
+<!--                        <span class="sc-papXJ ffDJGn">Tạo phiếu thu/chi</span>-->
+<!--                        <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">-->
+<!--                            <path d="M7 10l5 5 5-5z"></path>-->
+<!--                        </svg>-->
+<!--                    </button>-->
                 </div>
             </div>
         </div>
@@ -459,6 +459,15 @@
         $('#tbContact_wrapper').show();
         $('#tbContact').show();
         $('#tbCustomerGroup').addClass('hidden').removeClass('show');
+        console.log(currentCustomer)
+
+        if(currentCustomer.contacts.length > 0){
+            $("#noContact").addClass('hidden').removeClass('show');
+            $("#tbContact_wrapper").parent().addClass('show').removeClass('hidden');
+        } else {
+            $("#noContact").addClass('show').removeClass('hidden');
+            $("#tbContact_wrapper").parent().addClass('hidden').removeClass('show');
+        }
     })
 
     CustomerApp.page.commands.drawContactDataTable = () => {
@@ -487,8 +496,8 @@
                 },
                 language: CustomerApp.dataTableDetails.language,
                 lengthMenu: [
-                    [3, 20, 50, 100],
-                    ['3', "20", "50", "100"]
+                    [20, 50, 100],
+                    ["20", "50", "100"]
                 ],
                 aoColumns: [
                     {
@@ -510,7 +519,8 @@
                             return row.phoneNumber || '';
                         },
                         className: 's7uel',
-                        target: 2
+                        target: 2,
+                        flex: 1
                     },
                     {
                         mData: 'email',
@@ -586,7 +596,7 @@
                 CustomerApp.page.elements.modalEditContact.modal('hide');
                 CustomerApp.page.elements.frmEditContact[0].reset();
 
-                // CustomerApp.redrawDatatables(addressDataTable, origin + `/api/addresses`)
+                CustomerApp.redrawDatatables(contactDataTable, origin + `/api/customers/${customerId}/contacts`)
             })
             .fail((jqXHR) => {
                 let errors = jqXHR.responseJSON.errors;

@@ -110,7 +110,19 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     @Override
     @Transactional
     public void deleteById(Integer id) {
-        customerGroupRepository.deleteById(id);
+        CustomerGroup customerGroup = findCustomerGroupById(id)
+                .setDefaultPaymentMethodId(null)
+                .setPaymentMethod(null)
+                .setDefaultPricingPolicyId(null)
+                .setPricingPolicy(null);
+
+        List<Customer> customers = customerService.findAllByGroupId(id);
+        customers.forEach(
+                c -> c.setGroupId(null)
+                        .setGroup(null)
+        );
+
+        customerGroupRepository.delete(customerGroup);
     }
 
     private void validationByTitle(String title) {
@@ -126,5 +138,10 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
         if (customerGroupRepository.existsByCusGrpCode(cusGrpCode)) {
             throw new ValidationException("cusGrpCode", "customer_group.validation.cusGrpCode.existed");
         }
+    }
+
+    private CustomerGroup findCustomerGroupById(Integer id) {
+        return customerGroupRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("customer_group.exception.notFound"));
     }
 }
