@@ -29,38 +29,48 @@ public class ContactSupplierServiceImpl implements ContactSupplierService {
         return supplier.getContacts().stream().map(contactMapper::toDTO).collect(Collectors.toList());
     }
 
+    public Contact toModel(CreateContactParam createContact) {
+        Contact contact = contactMapper.toModel(createContact);
+        contact.setId(System.currentTimeMillis());
+        contact.setStatus("ACTIVE");
+        contact.setCreatedAt(Instant.now());
+        return contact;
+    }
+
     @Override
     @Transactional
     public ContactResult createContactBySupplierId(Integer supplierId, CreateContactParam createParam) {
         Supplier supplier = supplierRepository.findById(supplierId)
                 .orElseThrow(() -> new NotFoundException("supplier.exception.notFound"));
-        Contact contact = contactMapper.toModel(createParam);
-        contact.setId(System.currentTimeMillis());
-        contact.setStatus("ACTIVE");
-        contact.setCreatedAt(Instant.now());
+        Contact contact = toModel(createParam);
         supplier.getContacts().add(contact);
         return contactMapper.toDTO(contact);
     }
 
     @Override
-    public void createContactListBySupplierId(Integer supplierId, List<CreateContactParam> createParams) {
-
+    @Transactional
+    public void createContactListBySupplierId(Integer supplierId, List<CreateContactParam> createContactList) {
+        Supplier supplier = supplierRepository.findById(supplierId)
+                .orElseThrow(() -> new NotFoundException("supplier.exception.notFound"));
+        List<Contact> contacts = createContactList
+                .stream()
+                .map(this::toModel)
+                .collect(Collectors.toList());
+        supplier.getContacts().addAll(contacts);
     }
 
     @Override
     @Transactional
     public ContactResult updateContactBySupplierId(Integer supplierId, UpdateContactParam updateParam) {
-        Supplier supplier = null;//= supplierRepository.findByIdAndContactId(supplierId)
-        //  .orElseThrow(() -> new NotFoundException("supplier.exception.notFound"));
+        Supplier supplier = supplierRepository.findById(supplierId)
+                .orElseThrow(() -> new NotFoundException("supplier.exception.notFound"));
         Contact contact = supplier.getContacts().stream()
                 .filter(c -> c.getId().equals(updateParam.getId()))
                 .findAny()
                 .orElseThrow(() -> new NotFoundException("contact.exception.notFound"));
 
         contactMapper.transferFields(updateParam, contact);
-        contact.setId(System.currentTimeMillis());
         contact.setUpdatedAt(Instant.now());
-        supplier.getContacts().add(contact);
         return contactMapper.toDTO(contact);
     }
 }
