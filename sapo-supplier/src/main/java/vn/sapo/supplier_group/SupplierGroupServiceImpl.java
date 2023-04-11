@@ -57,7 +57,7 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
     public void validationBySupGroupCode(String supGroupCode) {
         String fieldName = "supGroupCode";
         if (supGroupCode.toUpperCase().startsWith(CodePrefix.SUPPLIER_GROUP.getValue())) {
-            throw new ValidationException(fieldName, "supplier_group.exception.supGroupCode.hasSystemPrefix");
+            throw new ValidationException(fieldName, "supplier_group.exception.supGroupCode.prefix.invalid");
         }
         if (supplierGroupRepository.existsBySupGroupCode(supGroupCode))
             throw new ValidationException(fieldName, "supplier_group.exception.supGroupCode.existed");

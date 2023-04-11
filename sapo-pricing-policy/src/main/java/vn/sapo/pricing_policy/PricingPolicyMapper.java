@@ -27,8 +27,7 @@ public class PricingPolicyMapper {
         return new PricingPolicy()
                 .setTitle(pricingPolicyParam.getTitle())
                 .setPricingPolicyCode(pricingPolicyParam.getPricingPolicyCode())
-                .setPricingPolicyType(PricingPolicyType
-                        .parsePricingPolicyType(pricingPolicyParam
-                                .getPricingPolicyType()));
+                .setPricingPolicyType(pricingPolicyParam
+                                .getPricingPolicyType());
     }
 }

@@ -14,9 +14,7 @@ public interface PricingPolicyRepository extends JpaRepository<PricingPolicy, In
 
     boolean existsByTitle(String title);
 
-    boolean existsByPricingPolicyCode(String code);
-
-    Optional<PricingPolicy> findByTitle(String title);
+    boolean existsByPricingPolicyCode(String pricingPolicyCode);
 
     List<PricingPolicy> findByTitleIn(Set<String> titles);
 }

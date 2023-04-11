@@ -26,21 +26,8 @@ public class PricingPolicyServiceImpl implements PricingPolicyService {
 
     @Override
     public PricingPolicyResult create(PricingPolicyParam pricingPolicyParam) {
-
-        if (!checkPricingPolicyType(pricingPolicyParam.getPricingPolicyType())) {
-            throw new ValidationException("pricingPolicyType", "pricing.policy.validation.pricingPolicyType.format");
-        }
-
-        if (checkPricingPolicyTitle(pricingPolicyParam.getTitle())) {
-            throw new ValidationException("title", "pricing.policy.validation.title.existed");
-        }
-
-        if (checkPricingPolicyCode(pricingPolicyParam.getPricingPolicyCode())) {
-            throw new ValidationException("pricingPolicyCode", "pricing.policy.validation.pricingPolicyCode.existed");
-        }
-
+        validateByPricingPolicyCode(pricingPolicyParam.getPricingPolicyCode());
         PricingPolicy pricingPolicy = pricingPolicyMapper.toModel(pricingPolicyParam);
-
         pricingPolicyRepository.save(pricingPolicy);
         return pricingPolicyMapper.toDTO(pricingPolicy);
     }
@@ -78,7 +65,7 @@ public class PricingPolicyServiceImpl implements PricingPolicyService {
     @Transactional
     public PricingPolicyResult findById(Integer id) {
         PricingPolicy pricingPolicy = pricingPolicyRepository.findById(id).orElseThrow(
-                () -> new NotFoundException("pricing.policy.exception.notFound"));
+                () -> new NotFoundException("pricing_policy.exception.notFound"));
         return pricingPolicyMapper.toDTO(pricingPolicy);
     }
 
@@ -96,18 +83,9 @@ public class PricingPolicyServiceImpl implements PricingPolicyService {
         pricingPolicyRepository.deleteById(id);
     }
 
-    private boolean checkPricingPolicyCode(String code) {
-        return pricingPolicyRepository.existsByPricingPolicyCode(code);
-    }
-
-    private boolean checkPricingPolicyTitle(String title) {
-        return pricingPolicyRepository.existsByTitle(title);
-    }
-
-    private boolean checkPricingPolicyType(String type) {
-        if (type.equalsIgnoreCase("SALE")) {
-            return true;
-        }
-        return type.equalsIgnoreCase("PURCHASE");
+    private void validateByPricingPolicyCode(String pricingPolicyCode) {
+        String fieldName = "pricingPolicyCode";
+        if (pricingPolicyRepository.existsByPricingPolicyCode(pricingPolicyCode))
+            throw new ValidationException(fieldName, "pricing_policy.exception.pricingPolicyCode.existed");
     }
 }

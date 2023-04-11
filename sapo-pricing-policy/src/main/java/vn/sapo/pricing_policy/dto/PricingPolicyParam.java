@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Length;
-import vn.sapo.shared.validation.constraints.NullOrNotBlank;
+import vn.sapo.entities.product.pricing_policy.PricingPolicyType;
 
 import javax.validation.constraints.NotBlank;
 
@@ -13,15 +13,15 @@ import javax.validation.constraints.NotBlank;
 @Accessors(chain = true)
 public class PricingPolicyParam {
 
-    @NotBlank(message = "Tên chính sách giá không được để trống")
-    @Length(max = 255, message = "Tên chính sách giá không được vượt quá 255 ký tự")
+    @NotBlank(message = "{pricing_policy.validation.title.notBlank}")
+    @Length(max = 255, message = "{pricing_policy.validation.title.length}")
     private String title;
 
-    @NotBlank(message = "Mã chính sách giá không được để trống")
-    @Length(max = 255, message = "Mã chính sách giá không được vượt quá 255 ký tự")
+
+    @NotBlank(message = "{pricing_policy.validation.pricingPolicyCode.notBlank}")
+    @Length(max = 255, message = "{pricing_policy.validation.pricingPolicyCode.length}")
     private String pricingPolicyCode;
 
-    @NotBlank(message = "Loại chính sách giá không được để trống")
-    private String pricingPolicyType;
+    private PricingPolicyType pricingPolicyType;
 
 }
