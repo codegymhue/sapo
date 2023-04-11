@@ -8,10 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import vn.sapo.customers.dto.AddressResult;
-import vn.sapo.customers.dto.CreateAddressParam;
-import vn.sapo.customers.dto.DeleteAddressResult;
-import vn.sapo.customers.dto.UpdateAddressParam;
+import vn.sapo.customers.dto.*;
 import vn.sapo.entities.Address;
 import vn.sapo.shared.exceptions.NotFoundException;
 
@@ -72,14 +69,8 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Page<AddressResult> findAllAddresses(Integer id, Pageable pageable) {
-        List<AddressResult> dtoList = addressRepository
-                .findAllByCustomerId(id)
-                .stream()
-                .map(addressMapper::toDTO)
-                .collect(Collectors.toList());
-
-        return new PageImpl<>(dtoList, pageable, dtoList.size());
+    public Page<IAddressResult> findAllAddresses(Pageable pageable, Integer id) {
+        return addressRepository.findAllByCustomerIdPageable(pageable, id);
     }
 
     @Override
@@ -117,13 +108,27 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     @Transactional
-    public AddressResult update(Integer id, UpdateAddressParam updateAddressParam) {
+    public AddressResult update(UpdateAddressParam updateAddressParam) {
+        Integer id = updateAddressParam.getId();
         Address address = addressRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("address.exception.notFound")
         );
-        address = addressMapper.toModel(updateAddressParam);
+
+        address.setFullName(updateAddressParam.getFullName())
+                .setPhoneNumber(updateAddressParam.getPhoneNumber())
+                .setLine1(updateAddressParam.getLine1())
+                .setEmail(updateAddressParam.getEmail())
+                .setProvinceId(updateAddressParam.getProvinceId())
+                .setProvinceName(updateAddressParam.getProvinceName())
+                .setDistrictId(updateAddressParam.getDistrictId())
+                .setDistrictName(updateAddressParam.getDistrictName())
+                .setWardId(updateAddressParam.getWardId())
+                .setWardName(updateAddressParam.getWardName())
+                .setZipCode(updateAddressParam.getZipCode());
+
         addressRepository.save(address);
-        return addressMapper.toDTO(address);
+
+        return findById(id);
     }
 
     @Override

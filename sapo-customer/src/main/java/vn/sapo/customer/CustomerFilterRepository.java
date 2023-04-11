@@ -81,16 +81,20 @@ public interface CustomerFilterRepository extends JpaRepository<Customer, Intege
 
             Path<Instant> createdAtPath = root.get("createdAt");
 
-            if (createdFrom != null && createdTo != null)
+            if (createdFrom != null && createdTo != null){
                 createdAtPredicate = criteriaBuilder.between(createdAtPath, createdFrom.toInstant(), createdTo.toInstant());
-            else {
-                if (createdFrom != null)
+                predicates.add(createdAtPredicate);
+            }else {
+                if (createdFrom != null) {
                     createdAtPredicate = criteriaBuilder.greaterThan(createdAtPath, createdFrom.toInstant());
+                    predicates.add(createdAtPredicate);
+                }
 
-                if (createdTo != null)
+                if (createdTo != null) {
                     createdAtPredicate = criteriaBuilder.lessThan(createdAtPath, createdTo.toInstant());
+                    predicates.add(createdAtPredicate);
+                }
             }
-            predicates.add(createdAtPredicate);
 
             Date birthDayFrom = filter.getBirthDayFrom();
             Date birthDayTo = filter.getBirthDayTo();

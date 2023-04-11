@@ -1,0 +1,26 @@
+<th:block th:fragment="modal_deleteContact">
+  <div class="modal fade" id="modalDeleteContact" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Xóa liên hệ?</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <span id="confirmContactText"></span>
+        </div>
+        <div class="modal-footer">
+          <div class="mr-2">
+            <button type="button" data-bs-dismiss="modal" class="ldZiUTB ldZabc">
+              Thoát
+            </button>
+            <button id="btnDeleteContact" class="ldZabc RthGcA" type="button">
+              <span class="cMXJOk">Xóa</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</th:block>

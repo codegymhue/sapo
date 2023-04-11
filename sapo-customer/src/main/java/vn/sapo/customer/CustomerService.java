@@ -3,13 +3,17 @@ package vn.sapo.customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
+import vn.sapo.contact.dto.ContactResult;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customers.dto.CreateAddressParam;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public interface CustomerService {
+
+    Set<ContactResult> getAllContactsByCustomerId(Integer customerId);
 
     CustomerResult findById(Integer id);
 

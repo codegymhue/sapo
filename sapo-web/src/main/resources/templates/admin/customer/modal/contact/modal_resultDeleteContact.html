@@ -1,22 +1,22 @@
-<th:block th:fragment="modal_resultDeleteAddress">
-    <div class="modal fade" id="modalResultDeleteAddress" data-bs-backdrop="static" data-bs-keyboard="false"
+<th:block th:fragment="modal_resultDeleteContact">
+    <div class="modal fade" id="modalResultDeleteContact" data-bs-backdrop="static" data-bs-keyboard="false"
          tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">Xóa địa chỉ</h3>
-                    <button type="button" class="btn-close btnCloseResultDeleteAddress"
+                    <h3 class="modal-title">Xóa liên hệ</h3>
+                    <button type="button" class="btn-close btnCloseResultDeleteContact"
                             data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="frmResultDeleteAddress">
+                <form id="frmResultDeleteContact">
                     <div class="modal-body">
                         <h3>Xử lý dữ liệu hoàn tất!</h3>
                         <div>
                             <div class="jss12735">
                                 <p>
-                                    Địa chỉ xóa thành công: <span id="numberAddressesDeleted"></span>
+                                    Liê hệ xóa thành công: <span id="numberContactsDeleted" class="jsseh237"></span>
                                 </p>
-                                <button class="bdiEg" id="showDeleteSuccessDetail" type="button">
+                                <button class="bdiEg" id="showDeleteContactSuccessDetail" type="button">
                           <span class="MuiButton-label">
                             Chi tiết
                             <span class="MuiButton-endIcon MuiButton-iconSizeMedium">
@@ -29,14 +29,14 @@
                                     <span class="MuiTouchRipple-root"></span>
                                 </button>
                             </div>
-                            <div id="deletedAddressSucceedNames" class="hidden hIeh5"></div>
+                            <div id="deletedContactSucceedNames" class="hidden hIeh5"></div>
                         </div>
                         <div>
                             <div class="jss12735">
                                 <p>
-                                    Địa chỉ xóa không thành công: <span id="numberAddressesDeleteFail"></span>
+                                    Liên hệ xóa không thành công: <span id="numberContactsDeleteFail" class="fewigj"></span>
                                 </p>
-                                <button class="bdiEg" id="showDeleteFailDetail" type="button">
+                                <button class="bdiEg" id="showDeleteContactFailDetail" type="button">
                               <span class="MuiButton-label">
                                 Chi tiết
                                 <span class="MuiButton-endIcon MuiButton-iconSizeMedium">
@@ -49,13 +49,13 @@
                                     <span class="MuiTouchRipple-root"></span>
                                 </button>
                             </div>
-                            <div id="deletedFailNames" class="hidden"></div>
+                            <div id="deletedContactFailNames" class="hidden hIeh5"></div>
                         </div>
                     </div>
                 </form>
                 <div class="modal-footer">
-                    <button id="btnCloseResultDeleteAddress"
-                            class="RthGc ldZiUTA btnCloseResultDeleteAddress"
+                    <button id="btnCloseResultDeleteContact"
+                            class="RthGc ldZiUTA btnCloseResultDeleteContact"
                             type="button">
                         Xác nhận
                     </button>

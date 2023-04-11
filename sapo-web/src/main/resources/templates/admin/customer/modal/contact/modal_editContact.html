@@ -1,47 +1,47 @@
-<th:block th:fragment="modalCreateContact">
-    <div class="modal fade" id="modalCreateContact" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<th:block th:fragment="modal_editContact">
+    <div class="modal fade" id="modalEditContact" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
          aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="jss23776">
-                    <h5 class="modal-title" id="staticBackdropLabel">Thêm mới liên hệ</h5>
-                    <button type="button" class="btn-close btnCloseCreateContactModal"
+                    <h5 class="modal-title" id="staticBackdropLabel">Sửa liên hệ</h5>
+                    <button type="button" class="btn-close btnCloseEditContactModal"
                             data-bs-dismiss="modal">
                     </button>
                 </div>
-                <form id="frmCreateContact">
+                <form id="frmEditContact">
                     <div class="MuiGrid-container ugqFK">
                         <div class="MuiGrid-item MuiGrid-grid-xs-12 hTBRNt">
                             <div class="MuiGrid-container MuiGrid-spacing-xs-3">
                                 <div class="MuiGrid-item MuiGrid-grid-xs-6">
                                     <div name="name" class="jsseh238">
-                                        <label for="fullNameCtCre"
+                                        <label for="fullNameContactEdit"
                                                class="hTBRNU">
                                             Họ tên
                                             <span class="fewigj">&nbsp;*</span>
                                         </label>
                                         <div class="">
-                                            <input id="fullNameCtCre" name="fullNameCtCre"
+                                            <input id="fullNameContactEdit"
                                                    placeholder="Nhập họ tên" type="text" class="bQyECD">
                                             <fieldset class="">
                                             </fieldset>
                                         </div>
-                                        <div class="error fullNameCtCre-error hidden KagUd"></div>
+                                        <div class="error fullNameContactEdit-error hidden KagUd"></div>
                                     </div>
                                 </div>
                                 <div class="MuiGrid-item MuiGrid-grid-xs-6">
                                     <div name="phone_number" class="jsseh238">
-                                        <label for="phoneCtCre"
+                                        <label for="phoneContactEdit"
                                                class="hTBRNU">
                                             Số điện thoại
                                         </label>
                                         <div class="cjfZhD">
-                                            <input id="phoneCtCre" name="phoneCtCre"
+                                            <input id="phoneContactEdit"
                                                    placeholder="Nhập số điện thoại" type="text" class="bQyECD">
                                             <fieldset class="sc-kLLXSd etpkYt">
                                             </fieldset>
                                         </div>
-                                        <div class="error phoneCtCre-error hidden KagUd"></div>
+                                        <div class="error phoneContactEdit-error hidden KagUd"></div>
                                     </div>
                                 </div>
                             </div>
@@ -50,33 +50,30 @@
                             <div class="MuiGrid-container MuiGrid-spacing-xs-3">
                                 <div class="MuiGrid-item MuiGrid-grid-xs-6">
                                     <div name="email" class="jsseh238">
-                                        <label for="emailCtCre"
-                                               class="hTBRNU">
+                                        <label for="emailContactEdit" class="hTBRNU">
                                             Email
                                         </label>
                                         <div class="cjfZhD">
-                                            <input id="emailCtCre" name="emailCtCre"
-                                                   placeholder="Nhập địa chỉ email" type="text" class="bQyECD"
-                                                   value="">
+                                            <input id="emailContactEdit"
+                                                   placeholder="Nhập địa chỉ email" type="text" class="bQyECD">
                                             <fieldset class="sc-kLLXSd etpkYt">
                                             </fieldset>
                                         </div>
-                                        <div class="error emailCtCre-error hidden KagUd"></div>
+                                        <div class="error emailContactEdit-error hidden KagUd"></div>
                                     </div>
                                 </div>
                                 <div class="MuiGrid-item MuiGrid-grid-xs-6">
                                     <div name="fax" class="jsseh238">
-                                        <label for="faxCtCre"
+                                        <label for="faxContactEdit"
                                                class="hTBRNU">
                                             Số fax
                                         </label>
                                         <div class="cjfZhD">
-                                            <input id="faxCtCre" name="faxCtCre"
-                                                   placeholder="Nhập số fax" type="text" class="bQyECD" value="">
+                                            <input id="faxContactEdit" placeholder="Nhập số fax" type="text" class="bQyECD">
                                             <fieldset class="sc-kLLXSd etpkYt">
                                             </fieldset>
                                         </div>
-                                        <div class="error faxCtCre-error hidden KagUd"></div>
+                                        <div class="error faxContactEdit-error hidden KagUd"></div>
                                     </div>
                                 </div>
                             </div>
@@ -85,58 +82,61 @@
                             <div class="MuiGrid-container MuiGrid-spacing-xs-3">
                                 <div class="MuiGrid-item MuiGrid-grid-xs-6">
                                     <div name="title" class="">
-                                        <label for="positionCtCre"
+                                        <label for="positionContactEdit"
                                                class="hTBRNU">
                                             Chức vụ
                                         </label>
                                         <div class="cjfZhD">
-                                            <input id="positionCtCre" name="positionCtCre"
-                                                   placeholder="Nhập chức vụ" type="text" class="bQyECD" value="">
+                                            <input id="positionContactEdit" placeholder="Nhập chức vụ" type="text" class="bQyECD">
                                             <fieldset class="sc-kLLXSd etpkYt">
                                             </fieldset>
                                         </div>
-                                        <div class="error positionCtCre-error hidden KagUd"></div>
+                                        <div class="error positionContactEdit-error hidden KagUd"></div>
                                     </div>
                                 </div>
                                 <div class="MuiGrid-item MuiGrid-grid-xs-6">
                                     <div name="department" class="">
-                                        <label for="departmentCtCre"
+                                        <label for="departmentContactEdit"
                                                class="hTBRNU">
                                             Bộ phận
                                         </label>
                                         <div class="cjfZhD">
-                                            <input id="departmentCtCre" name="departmentCtCre"
-                                                   placeholder="Nhập bộ phận" type="text" class="bQyECD" value="">
+                                            <input id="departmentContactEdit" placeholder="Nhập bộ phận" type="text" class="bQyECD">
                                             <fieldset class="sc-kLLXSd etpkYt">
                                             </fieldset>
                                         </div>
-                                        <div class="error departmentCtCre-error hidden KagUd"></div>
+                                        <div class="error departmentContactEdit-error hidden KagUd"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="MuiGrid-item MuiGrid-grid-xs-12">
                             <div name="note" class="sc-brCFrO ilnJuY">
-                                <label for="noteCtCre" class="hTBRNU">
+                                <label for="noteContactEdit" class="hTBRNU">
                                     Ghi chú
                                 </label>
                                 <div class="sc-dFdIVH dlzPcz">
-                    <textarea id="noteCtCre" placeholder="Nhập ghi chú" name="noteCtCre"
-                              style="height: 5.14286rem;" class="jsseh238 owi8wi"></textarea>
+                                    <textarea id="noteContactEdit" placeholder="Nhập ghi chú"
+                                              style="height: 5.14286rem;" class="jsseh238 owi8wi"></textarea>
                                     <fieldset class="">
                                     </fieldset>
                                 </div>
-                                <div class="error noteCtCre-error hidden KagUd"></div>
+                                <div class="error noteContactEdit-error hidden KagUd"></div>
                             </div>
                         </div>
                     </div>
                 </form>
                 <div class="modal-footer irenfk">
-                    <button type="button" class="ldZiUT ldZiUTA btnCloseCreateContactModal" data-bs-dismiss="modal">
+<!--                    <button id="btnShowModalDeleteContact" class="gYRFmk">-->
+<!--                        <span class="jcEYKF">-->
+<!--                            Xóa-->
+<!--                        </span>-->
+<!--                    </button>-->
+                    <button type="button" class="ldZiUT ldZiUTA btnCloseEditContactModal" data-bs-dismiss="modal">
                         Thoát
                     </button>
-                    <button id="btnCreateContact" class="RthGc ldZiUTA" type="button">
-                        Thêm
+                    <button id="btnEditContact" class="RthGc ldZiUTA" type="button">
+                        Lưu
                     </button>
                 </div>
             </div>

@@ -288,14 +288,14 @@
                     <div class="gCRNBf">
                         <div id="scroller" class="fvZzuO jyZcwm1 jsseh238">
                             <div class="jyZcwm">
-                                <button id="histories" class="fJFgex">Lịch sử mua hàng</button>
-                                <button id="debts" class="fJFgex">Công nợ</button>
+                                <!--                                <button id="histories" class="fJFgex">Lịch sử mua hàng</button>-->
+                                <!--                                <button id="debts" class="fJFgex">Công nợ</button>-->
                                 <button id="btnContacts" class="fJFgex">Liên hệ</button>
                                 <button id="btnAddress" class="fJFgex">Địa chỉ</button>
-                                <button id="notes" class="fJFgex">Ghi chú</button>
-                                <button id="btnCustomerGroups" class="fACSJt">Nhóm khách hàng</button>
+                                <!--                                <button id="notes" class="fJFgex">Ghi chú</button>-->
+                                <button id="btnCustomerGroups" class="fJFgex">Nhóm khách hàng</button>
                             </div>
-                            <div class="jyZcwm2 hidden">
+                            <div class="jyZcwm2 hidden contactContainer">
                                 <button id="btnShowModalCreateContact" class="kDDrLX">
                                     <svg class="MuiSvgIcon-root liFCEr" focusable="false" viewBox="0 0 24 24"
                                          aria-hidden="true">
@@ -317,6 +317,9 @@
                             </div>
                         </div>
                     </div>
+                    <div id="noContact">
+                        <p>Không có dữ liệu liên hệ</p>
+                    </div>
 
                     <div id="render_table">
                         <th:block th:replace="/admin/customer/layout/info_customer_tb::tbContact"/>
@@ -333,6 +336,9 @@
 </body>
 <th:block th:replace="/admin/customer/modal_delete_customer"/>
 <th:block th:replace="/admin/customer/modal/contact/modal_createContact"/>
+<th:block th:replace="/admin/customer/modal/contact/modal_editContact"/>
+<th:block th:replace="/admin/customer/modal/contact/modal_deleteContact"/>
+<th:block th:replace="/admin/customer/modal/contact/modal_resultDeleteContact"/>
 <th:block th:replace="/admin/customer/modal/address/modal_createAddress"/>
 <th:block th:replace="/admin/customer/modal/address/modal_editAddress"/>
 <th:block th:replace="/admin/customer/modal/address/modal_deleteAddress"/>
@@ -347,8 +353,12 @@
     let contactParam = {};
     let createAddressParam = {};
     let addressDataTable = {};
+    let contactDataTable = {};
     let updateAddressParam = {};
+    let updateContactParam = {};
     const listAddressId = new Set();
+    const listContactId = new Set();
+    let tbContact = {};
 
     CustomerApp.page.elements.fullName = $("#fullName");
     CustomerApp.page.elements.status = $("#status");
@@ -389,6 +399,9 @@
     //end customer group
 
     //start contact
+    CustomerApp.page.elements.frmCreateContact = $("#frmCreateContact");
+    CustomerApp.page.elements.frmEditContact = $("#frmEditContact");
+
     CustomerApp.page.elements.btnContacts = $("#btnContacts");
 
     CustomerApp.page.elements.tbContact = $("#tbContact");
@@ -402,15 +415,18 @@
     CustomerApp.page.dialogs.elements.noteCtCre = $("#noteCtCre");
 
     CustomerApp.page.dialogs.elements.btnCreateContact = $("#btnCreateContact");
-    CustomerApp.page.elements.modalCreateAddress = $("#modalCreateAddress");
+    CustomerApp.page.elements.modalDeleteContact = $("#modalDeleteContact");
+    CustomerApp.page.elements.modalResultDeleteContact = $("#modalResultDeleteContact");
+    CustomerApp.page.elements.modalEditContact = $("#modalEditContact");
     //end contact
 
     //start address
-    CustomerApp.page.elements.tbAddress = $("#tbAddress");
 
+    CustomerApp.page.elements.tbAddress = $("#tbAddress");
     CustomerApp.page.elements.frmCreateAddress = $("#frmCreateAddress");
 
     CustomerApp.page.elements.modalDeleteAddress = $("#modalDeleteAddress");
+    CustomerApp.page.elements.modalCreateAddress = $("#modalCreateAddress");
     CustomerApp.page.elements.modalResultDeleteAddress = $("#modalResultDeleteAddress");
 
     CustomerApp.page.elements.btnAddress = $("#btnAddress");
@@ -434,89 +450,411 @@
     //end edit address
 
     //start contact
-    // CustomerApp.page.elements.btnContacts.click(() => {
-    // })
+    CustomerApp.page.elements.btnContacts.click(() => {
+        $("#noContact").removeClass('hidden').addClass('show');
+        $(".contactContainer").removeClass('hidden').addClass('show');
+        $('.addressContainer').addClass('hidden').removeClass('show');
+        $('#tbAddress_wrapper').hide();
+        // $('#tbContact_wrapper').removeClass('hidden').addClass('show');
+        $('#tbContact_wrapper').show();
+        $('#tbContact').show();
+        $('#tbCustomerGroup').addClass('hidden').removeClass('show');
+    })
 
     CustomerApp.page.commands.drawContactDataTable = () => {
         let id = +window.location.pathname.split('/')[3];
 
-        let tbContact = CustomerApp.page.elements.tbContact.DataTable({
-            dom: '<"top">Brt<"bottom"lifp><"clear">',
-            processing: CustomerApp.dataTableDetails.language.processing,
-            serverSide: true,
-            searching: false,
-            ordering: false,
-            ajax: {
-                type: 'POST',
-                url: origin + `/api/customers/${id}/contacts/pagination`,
-                accept: 'application/json',
-                contentType: 'application/json',
-                data: function (d) {
-                    return JSON.stringify(d);
+        if (currentCustomer.contacts.length === 0) {
+            $("#tbContact").parent().addClass('hidden');
+        } else {
+            $("#tbContact").parent().removeClass('hidden').addClass('show');
+            $("#noContact").removeClass('show').addClass('hidden');
+
+            contactDataTable = CustomerApp.page.elements.tbContact.DataTable({
+                dom: '<"top">Brt<"bottom"lifp><"clear">',
+                processing: CustomerApp.dataTableDetails.language.processing,
+                serverSide: true,
+                searching: false,
+                ordering: false,
+                ajax: {
+                    type: 'POST',
+                    url: origin + `/api/customers/${id}/contacts/pagination`,
+                    accept: 'application/json',
+                    contentType: 'application/json',
+                    data: function (d) {
+                        return JSON.stringify(d);
+                    }
+                },
+                language: CustomerApp.dataTableDetails.language,
+                lengthMenu: [
+                    [3, 20, 50, 100],
+                    ['3', "20", "50", "100"]
+                ],
+                aoColumns: [
+                    {
+                        mData: 'id',
+                        className: 'hYsv8 nYvd3',
+                        target: 0
+                    },
+                    {
+                        mData: 'fullName',
+                        render: (data, type, row) => {
+                            return row.fullName || '';
+                        },
+                        className: 's7uel',
+                        target: 1
+                    },
+                    {
+                        mData: 'phoneNumber',
+                        render: (data, type, row) => {
+                            return row.phoneNumber || '';
+                        },
+                        className: 's7uel',
+                        target: 2
+                    },
+                    {
+                        mData: 'email',
+                        render: (data, type, row) => {
+                            return row.email || '';
+                        },
+                        className: 's7uel',
+                        target: 3
+                    },
+                    {
+                        mData: 'position',
+                        render: (data, type, row) => {
+                            return row.position || '';
+                        },
+                        className: 's7uel',
+                        target: 4
+                    },
+                    {
+                        mData: 'department',
+                        render: (data, type, row) => {
+                            return row.department || '';
+                        },
+                        className: 's7uel',
+                        target: 5
+                    }
+                ],
+                columnDefs: [{
+                    targets: 0,
+                    render: function (data, type, row, meta) {
+                        return `<input id=${row.id} type="checkbox"/>`
+                    }
+                }],
+                fnCreatedRow: function (nRow, aData, iDataIndex) {
+                    $(nRow).attr('id', aData.id);
+                },
+                initComplete: function (setting, json) {
+                    CustomerApp.page.commands.deleteOneOrMoreCustomerContact();
+                },
+                drawCallback: () => {
+                    CustomerApp.page.commands.deleteOneOrMoreCustomerContact();
                 }
+            })
+        }
+    }
+
+    //start update contact
+    CustomerApp.page.commands.editContact = () => {
+        let customerId = +window.location.pathname.split('/')[3];
+        let id = updateContactParam.id;
+        console.log(id)
+        updateContactParam.fullName = CustomerApp.getValue($("#fullNameContactEdit"));
+        updateContactParam.phoneNumber = CustomerApp.getValue($("#phoneContactEdit"));
+        updateContactParam.email = CustomerApp.getValue($("#emailContactEdit"));
+        updateContactParam.fax = CustomerApp.getValue($("#faxContactEdit"));
+        updateContactParam.position = CustomerApp.getValue($("#positionContactEdit"));
+        updateContactParam.department = CustomerApp.getValue($("#departmentContactEdit"));
+        updateContactParam.note = CustomerApp.getValue($("#noteContactEdit"));
+
+        console.log(updateContactParam)
+
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
             },
-            language: CustomerApp.dataTableDetails.language,
-            lengthMenu: [
-                [20, 50, 100],
-                ["20", "50", "100"]
-            ],
-            aoColumns: [
-                {
-                    mData: 'id',
-                },
-                {
-                    mData: 'fullName',
-                    render: (data, type, row) => {
-                        return row.fullName || '';
-                    }
-                },
-                {
-                    mData: 'phoneNumber',
-                    render: (data, type, row) => {
-                        return row.phoneNumber || '';
-                    }
-                },
-                {
-                    mData: 'email',
-                    render: (data, type, row) => {
-                        return row.email || '';
-                    }
-                },
-                {
-                    mData: 'position',
-                    render: (data, type, row) => {
-                        return row.position || '';
-                    }
-                },
-                {
-                    mData: 'department',
-                    render: (data, type, row) => {
-                        return row.department || '';
-                    }
-                }
-            ],
-            columnDefs: [{
-                targets: 0,
-                render: function (data, type, row, meta) {
-                    return `<input id=${row.id} type="checkbox"/>`
-                }
-            }],
-            select: {
-                style: 'os',
-                selector: 'td:first-child'
+            type: "PATCH",
+            url: origin + `/api/customers/${customerId}/contact/${id}`,
+            data: JSON.stringify(updateContactParam)
+        })
+            .done((data) => {
+                console.log(data)
+                CustomerApp.IziToast.showSuccessAlert('Cập nhật liên hệ thành công');
+                CustomerApp.page.elements.modalEditContact.modal('hide');
+                CustomerApp.page.elements.frmEditContact[0].reset();
+
+                // CustomerApp.redrawDatatables(addressDataTable, origin + `/api/addresses`)
+            })
+            .fail((jqXHR) => {
+                let errors = jqXHR.responseJSON.errors;
+
+                errors.fullName ? CustomerApp.showErrorValidate($(".fullNameContactEdit-error.error"), errors.fullName) : '';
+
+                errors.phoneNumber ? CustomerApp.showErrorValidate($(".phoneContactEdit-error.error"), errors.phoneNumber) : '';
+
+                errors.email ? CustomerApp.showErrorValidate($(".emailContactEdit-error.error"), errors.email) : '';
+
+                errors.fax ? CustomerApp.showErrorValidate($(".faxContactEdit-error.error"), errors.fax) : '';
+
+                errors.position ? CustomerApp.showErrorValidate($(".positionContactEdit-error.error"), errors.position) : '';
+
+                errors.department ? CustomerApp.showErrorValidate($(".departmentContactEdit-error.error"), errors.department) : '';
+
+                errors.note ? CustomerApp.showErrorValidate($(".noteContactEdit-error.error"), errors.note) : '';
+
+            })
+    };
+
+    let contactEditValidate = CustomerApp.page.elements.frmEditContact.validate({
+        rules: {
+            fullNameContactEdit: {
+                maxlength: 255
             },
+            phoneContactEdit: {
+                isValidPhone: true,
+            },
+            emailContactEdit: {
+                isValidEmail: true,
+            },
+            faxContactEdit: {
+                isValidFax: true,
+            },
+            positionContactEdit: {
+                maxlength: 50
+            },
+            departmentContactEdit: {
+                maxlength: 255
+            },
+            noteContactEdit: {
+                maxlength: 255
+            }
+        },
+        messages: {
+            fullNameContactEdit: {
+                maxlength: "Họ tên không được vượt quá 255 ký tự"
+            },
+            positionContactEdit: {
+                maxlength: 'Chức vụ không được vượt quá 50 ký tự'
+            },
+            departmentContactEdit: {
+                maxlength: 'Bộ phận không được vượt quá 255 ký tự',
+            },
+            noteContactEdit: {
+                maxlength: 'Ghi chú không được vượt quá 255 ký tự',
+            }
+        },
+        errorElement: 'label',
+        errorPlacement: (error, element) => {
+            error ? $(".error.hidden").addClass('show').removeClass('hidden') : '';
+            error.appendTo(element.parent().next("div"));
+        },
+        submitHandler: () => {
+            CustomerApp.page.commands.editContact();
+        },
+        invalidHandler: () => {
+            CustomerApp.IziToast.showErrorAlert('Vui lòng nhập đúng thông tin')
+        }
+    });
+
+    $("#btnEditContact").click(() => {
+        CustomerApp.page.elements.frmEditContact.trigger('submit');
+    })
+
+    $('.btnCloseEditContactModal').click(() => {
+        CustomerApp.page.elements.frmEditContact[0].reset();
+        contactEditValidate.resetForm();
+
+        CustomerApp.setNullObj(updateContactParam, null);
+    })
+
+    $("#tbContact tbody").on('click', "tr td:not(:first-child)", function () {
+        let customerId = +window.location.pathname.split('/')[3];
+        let id = contactDataTable.row(this).data().id;
+
+        updateContactParam.id = id;
+        CustomerApp.page.elements.modalEditContact.modal('show');
+
+        $.ajax({
+            type: "GET",
+            url: origin + `/api/customers/${customerId}/contact/${id}`
+        })
+            .done((data) => {
+                let {fullName, phoneNumber, email, fax, position, department, note} = data;
+                console.log(data)
+                fullName ? $("#fullNameContactEdit").val(fullName) : '';
+                phoneNumber ? $("#phoneContactEdit").val(phoneNumber) : '';
+                email ? $("#emailContactEdit").val(email) : '';
+                fax ? $("#faxContactEdit").val(fax) : '';
+                position ? $("#positionContactEdit").val(position) : '';
+                department ? $("#departmentContactEdit").val(department) : '';
+                note ? $("#noteContactEdit").val(note) : '';
+
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+    });
+    //end update contact
+    //start delete one or more customer's contact
+    CustomerApp.page.commands.deleteOneOrMoreCustomerContact = () => {
+        $('#tbContact tbody tr td input[type="checkbox"]').change(function () {
+            let checkboxLength = $('#tbContact tbody tr td input[type="checkbox"]').length;
+
+            if ($(this).is(":checked")) {
+                listContactId.add($(this).attr('id'))
+
+                if (checkboxLength > listContactId.size && listContactId.size > 0)
+                    $("#checkAllContacts").prop({indeterminate: true, checked: false})
+
+                if (checkboxLength === listContactId.size && listContactId.size > 0)
+                    $("#checkAllContacts").prop({indeterminate: false, checked: true});
+
+                $("#tbContact thead tr th:not(:first-child)").addClass("hidden").removeClass('show');
+                $("#contactActionContainer").remove();
+                CustomerApp.page.commands.showTheadContactAction();
+
+            } else {
+                listContactId.delete($(this).attr('id'));
+
+                $("#contactActionContainer").remove();
+                CustomerApp.page.commands.showTheadContactAction();
+
+                if (listContactId.size === 0)
+                    $("#checkAllContacts").prop({indeterminate: false, checked: false})
+
+                if (checkboxLength > listContactId.size && listContactId.size > 0)
+                    $("#checkAllContacts").prop({indeterminate: true, checked: false})
+
+                if (listContactId.size === 0) {
+                    $("#tbContact thead tr th:not(:first-child)").addClass("show").removeClass('hidden');
+                    $("#contactActionContainer").remove();
+                }
+            }
         })
     }
 
-    //check all select
-    $('#checkAll').click(function (e) {
-        $('#tbContact tbody :checkbox').prop('checked', $(this).is(':checked'));
-        e.stopImmediatePropagation();
-    });
-    //
+    CustomerApp.page.commands.checkAllContacts = () => {
+
+        if ($("#checkAllContacts").is(":checked")) {
+            $("#tbContact tbody tr td input").each(function () {
+                $(this).prop("checked", true);
+                listContactId.add($(this)[0].id);
+            })
+            $("#tbContact thead tr th:not(:first-child)").addClass("hidden").removeClass('show');
+            CustomerApp.page.commands.showTheadContactAction();
+        } else {
+            $("#tbContact tbody tr td input").each(function () {
+                $(this).prop("checked", false);
+                listContactId.clear();
+            })
+            $("#tbContact thead tr th:not(:first-child)").addClass("show").removeClass('hidden');
+            $("#contactActionContainer").remove();
+            $("#contactActionContainer").addClass("hidden").removeClass('show');
+        }
+    };
+
+    CustomerApp.page.commands.checkAllContacts();
+
+    CustomerApp.page.commands.showTheadContactAction = () => {
+        let str = `<th class="jss12735" id="contactActionContainer">
+                        <div class="jyZcwm2">Đã chọn ${listContactId.size} liên hệ trên trang này</div>
+                        <div class="jss12735">
+                            <button type="button" onclick="CustomerApp.page.commands.showBtnDeleteContactContainer()"
+                            class="vUaem">
+                            Chọn thao tác
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            width="24" height="24" font-size="24" active="true" variant="filled"
+                            class="sc-hHLeRK cDcJUH">
+                                <path d="m7 9.5 5 5 5-5H7Z" fill="currentColor">
+                                </path>
+                            </svg>
+                            </button>
+                            <div id="btnDeleteContactContainer" class="dropdown-content mauWs">
+                                <button type="button" class="vUaem showModalDeleteContact" id="showModalDeleteContact"
+                                        onclick=CustomerApp.page.commands.showModalDeleteContact()>
+                                    Xóa địa chỉ
+                                </button>
+                            </div>
+                        </div>
+                    </th>`;
+        $("#tbContact thead tr").append(str);
+    }
+
+    $("#btnDeleteContact").click(() => {
+        let customerId = +window.location.pathname.split('/')[3];
+        const list = [...listContactId];
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "DELETE",
+            url: origin + `/api/customers/${customerId}/contacts`,
+            data: JSON.stringify(list)
+        })
+            .done((data) => {
+                console.log(data)
+                let {namesDeleted, numberOfSuccess, numberOfFail, addressResult, idsDeleted} = data;
+
+                CustomerApp.page.elements.modalDeleteContact.modal('hide');
+
+                CustomerApp.page.elements.modalResultDeleteContact.modal('show');
+                $("#numberContactsDeleted").text(numberOfSuccess);
+                $("#numberContactsDeleteFail").text(numberOfFail);
+
+                $.each(namesDeleted, (i, name) => {
+
+                    let success = namesDeleted ? `<p class="kUvHa3">${name} - Đã được xóa thành công</p>` : '';
+                    $("#deletedContactSucceedNames").prepend(success);
+                })
+
+                $("#showDeleteContactSuccessDetail").click(() => {
+                    $("#deletedContactSucceedNames").toggleClass('show');
+                })
+
+                $("#showDeleteContactFailDetail").click(() => {
+                    $("#deletedContactFailNames").toggleClass('show');
+                })
+
+                listContactId.clear();
+
+                contactDataTable.rows(...idsDeleted).remove().draw();
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+    })
+
+    $(".btnCloseResultDeleteAddress").click(() => {
+        CustomerApp.page.elements.modalResultDeleteAddress.modal('hide');
+        $("#frmResultDeleteAddress")[0].reset();
+        $("#checkAllAddresses").prop({
+            indeterminate: false,
+            checked: false
+        });
+        $("#addressActionContainer").addClass('hidden').removeClass('show');
+        $("#tbAddress thead tr th:not(:first-child)").addClass("show").removeClass('hidden');
+        $("#tbAddress thead tr th:last-child").addClass("hidden").removeClass('show');
+        CustomerApp.page.commands.deleteOneOrMoreCustomerAddress();
+    })
+
+    CustomerApp.page.commands.showModalDeleteContact = () => {
+        $("#confirmContactText").text(`Bạn có chắc chắn muốn xóa ${listContactId.size} liên hệ được chọn? Thao tác này không thể khôi phục.`);
+        CustomerApp.page.elements.modalDeleteContact.modal('show')
+        $("#btnDeleteContactContainer").toggleClass('show');
+    }
+
+    CustomerApp.page.commands.showBtnDeleteContactContainer = () => {
+        $("#btnDeleteContactContainer").toggleClass('show');
+    }
+
+    //end delete one or more customer's contact
 
     CustomerApp.page.dialogs.elements.btnCreateContact.click(() => {
-        CustomerApp.page.commands.createContact();
+        CustomerApp.page.elements.frmCreateContact.trigger('submit');
     })
 
     CustomerApp.page.commands.createContact = () => {
@@ -541,11 +879,80 @@
         })
             .done((data) => {
                 console.log(data)
+                $("#modalCreateContact").modal('hide');
+                CustomerApp.IziToast.showSuccessAlert('Thêm mới liên hệ thành công');
+
+                CustomerApp.page.elements.frmCreateContact[0].reset();
+
+                let {fullName, phoneNumber, email, fax, position, department, note} = data;
+
+                contactDataTable.row.add([fullName, phoneNumber, email, fax, position, department, note]).draw(false);
+
             })
             .fail((jqXHR) => {
-                console.log(jqXHR)
+
+                let errors = jqXHR.responseJSON.errors;
+                errors.fullName ? CustomerApp.showErrorValidate($(".fullNameCtCre-error.error"), errors.fullName) : '';
+                errors.phoneNumber ? CustomerApp.showErrorValidate($(".phoneCtCre-error.error"), errors.phoneNumber) : '';
+                errors.email ? CustomerApp.showErrorValidate($(".emailCtCre-error.error"), errors.email) : '';
+                errors.fax ? CustomerApp.showErrorValidate($(".faxCtCre-error.error"), errors.fax) : '';
+                errors.position ? CustomerApp.showErrorValidate($(".positionCtCre-error.error"), errors.position) : '';
+                errors.department ? CustomerApp.showErrorValidate($(".departmentCtCre-error.error"), errors.department) : '';
+                errors.note ? CustomerApp.showErrorValidate($(".noteCtCre-error.error"), errors.note) : '';
             })
     }
+    let contactCreateValidate = CustomerApp.page.elements.frmCreateContact.validate({
+        rules: {
+            fullNameCtCre: {
+                required: true,
+                maxlength: 255
+            },
+            phoneCtCre: {
+                isValidPhone: true,
+            },
+            faxCtCre: {
+                isValidFax: true,
+            },
+            emailCtCre: {
+                isValidEmail: true,
+            },
+            positionCtCre: {
+                maxlength: 50
+            },
+            departmentCtCre: {
+                maxlength: 255
+            },
+            noteCtCre: {
+                maxlength: 255
+            }
+        },
+        messages: {
+            fullNameCtCre: {
+                required: 'Họ tên không được để trống',
+                maxlength: "Họ tên không được vượt quá 255 ký tự"
+            },
+            positionCtCre: {
+                maxlength: 'Chức vụ không được vượt quá 50 ký tự',
+            },
+            departmentCtCre: {
+                maxlength: 'Bộ phận không được vượt quá 255 ký tự',
+            },
+            noteCtCre: {
+                maxlength: 'Ghi chú không được vượt quá 255 ký tự',
+            }
+        },
+        errorElement: 'label',
+        errorPlacement: (error, element) => {
+            error ? $(".error.hidden").addClass('show').removeClass('hidden') : '';
+            error.appendTo(element.parent().next("div"));
+        },
+        submitHandler: () => {
+            CustomerApp.page.commands.createContact();
+        },
+        invalidHandler: () => {
+            CustomerApp.IziToast.showErrorAlert('Vui lòng nhập đúng thông tin')
+        }
+    });
 
     CustomerApp.page.commands.getCustomerInfo = () => {
         let id = +window.location.pathname.split('/')[3];
@@ -595,29 +1002,29 @@
                 console.log(jqXHR)
             })
     }
-    //end contact
 
-    $(() => {
-        CustomerApp.page.commands.getCustomerInfo().then(() => {
-            CustomerApp.page.commands.deleteCustomer();
-
-            CustomerApp.page.commands.showCustomerGroup();
-            CustomerApp.page.elements.drawAddressDatatable();
-            CustomerApp.page.commands.drawContactDataTable();
-        });
+    $(".btnCloseCreateContactModal").click(() => {
+        CustomerApp.page.elements.frmCreateContact[0].reset();
+        contactCreateValidate.resetForm();
     })
+    //end contact
 
     CustomerApp.page.commands.showCustomerGroup = () => {
         CustomerApp.page.elements.btnCustomerGroups.click(() => {
+            $('#tbAddress_wrapper').hide();
+            $('#tbContact_wrapper').hide();
+            $('#noContact').addClass('hidden').removeClass('show');
+
+            $('.contactContainer').addClass('hidden').removeClass('show');
 
             CustomerApp.page.elements.tbCustomerGroup.addClass('show').removeClass('hidden');
             $(".jyZcwm2.addressContainer").addClass('hidden').removeClass('show');
 
             CustomerApp.page.elements.tbAddress.addClass('hidden').removeClass('show');
-            CustomerApp.page.elements.tbAddress.DataTable().destroy();
+            // CustomerApp.page.elements.tbAddress.DataTable().destroy();
 
             CustomerApp.page.elements.tbContact.addClass('hidden').removeClass('show');
-            CustomerApp.page.elements.tbContact.DataTable().destroy();
+            // CustomerApp.page.elements.tbContact.DataTable().destroy();
 
             let id = currentCustomer.id;
 
@@ -710,13 +1117,13 @@
 
                 $("#tbAddress thead tr th:not(:first-child)").addClass("hidden").removeClass('show');
                 $("#addressActionContainer").remove();
-                CustomerApp.page.commands.showTheadAction();
+                CustomerApp.page.commands.showTheadAddressAction();
 
             } else {
                 listAddressId.delete($(this).attr('id'));
 
                 $("#addressActionContainer").remove();
-                CustomerApp.page.commands.showTheadAction();
+                CustomerApp.page.commands.showTheadAddressAction();
 
                 if (listAddressId.size === 0)
                     $("#checkAllAddresses").prop({indeterminate: false, checked: false})
@@ -736,14 +1143,19 @@
 
     //start edit address
     CustomerApp.page.commands.editAddress = () => {
+        let id = updateAddressParam.id;
+        console.log(id)
         updateAddressParam.fullName = CustomerApp.getValue($("#fullNameAddressEdit"));
         updateAddressParam.phoneNumber = CustomerApp.getValue($("#phoneAddressEdit"));
         updateAddressParam.line1 = CustomerApp.getValue($("#line1Edit"));
+        updateAddressParam.email = CustomerApp.getValue($("#emailEdit"));
         updateAddressParam.zipCode = CustomerApp.getValue($("#zipCodeEdit"));
 
-        CustomerApp.getSelectedValue(CustomerApp.page.elements.provinceEdit, updateAddressParam.provinceId, updateAddressParam.provinceName);
-        CustomerApp.getSelectedValue(CustomerApp.page.elements.districtEdit, updateAddressParam.districtId, updateAddressParam.districtName);
-        CustomerApp.getSelectedValue(CustomerApp.page.elements.wardEdit, updateAddressParam.wardId, updateAddressParam.wardName);
+        getSelectedValue(CustomerApp.page.elements.provinceEdit, updateAddressParam.provinceId, updateAddressParam.provinceName);
+        getSelectedValue(CustomerApp.page.elements.districtEdit, updateAddressParam.districtId, updateAddressParam.districtName);
+        getSelectedValue(CustomerApp.page.elements.wardEdit, updateAddressParam.wardId, updateAddressParam.wardName);
+
+        console.log(updateAddressParam)
 
         $.ajax({
             headers: {
@@ -751,38 +1163,39 @@
                 "content-type": "application/json"
             },
             type: "PATCH",
-            url: origin + `/api/addresses/${updateAddressParam.id}`,
+            url: origin + `/api/addresses/${id}`,
             data: JSON.stringify(updateAddressParam)
         })
             .done((data) => {
+                console.log(data)
                 CustomerApp.IziToast.showSuccessAlert('Cập nhật địa chỉ thành công');
                 CustomerApp.page.elements.modalEditAddress.modal('hide');
+                CustomerApp.page.elements.frmEditAddress[0].reset();
 
-                CustomerApp.redrawDatatables(origin + `/api/addresses`)
+                CustomerApp.redrawDatatables(addressDataTable, origin + `/api/addresses`)
             })
             .fail((jqXHR) => {
-                console.log(jqXHR)
-
                 let errors = jqXHR.responseJSON.errors;
-                if (errors.fullName) {
+
+                if (errors.fullName)
                     CustomerApp.showErrorValidate($(".fullNameAddressEdit-error.error"), errors.fullName)
-                }
-                if (errors.phoneNumber) {
+
+                if (errors.phoneNumber)
                     CustomerApp.showErrorValidate($(".phoneAddressEdit-error.error"), errors.phoneNumber)
-                }
-                if (errors.line1) {
+
+                if (errors.line1)
                     CustomerApp.showErrorValidate($(".line1Edit-error.error"), errors.line1)
-                }
-                if (errors.email) {
+
+                if (errors.email)
                     CustomerApp.showErrorValidate($(".emailEdit-error.error"), errors.email)
-                }
-                if (errors.zipCode) {
+
+                if (errors.zipCode)
                     CustomerApp.showErrorValidate($(".zipCodeEdit-error.error"), errors.zipCode)
-                }
+
             })
     };
 
-    CustomerApp.page.elements.frmEditAddress.validate({
+    let addressEditValidate = CustomerApp.page.elements.frmEditAddress.validate({
         rules: {
             fullNameAddressEdit: {
                 maxlength: 150
@@ -844,6 +1257,7 @@
         })
             .done((data) => {
                 let {results} = data ? data : null;
+
                 CustomerApp.page.elements.districtEdit.empty();
 
                 let str = '<option value=0>Chọn Quận/Huyện</option>';
@@ -952,6 +1366,7 @@
         CustomerApp.page.elements.wardEdit.empty();
         CustomerApp.page.elements.districtEdit.empty();
         CustomerApp.page.elements.frmEditAddress[0].reset();
+        addressEditValidate.resetForm();
 
         CustomerApp.setNullObj(updateAddressParam, null);
     })
@@ -959,14 +1374,17 @@
 
     $("#tbAddress tbody").on('click', " tr td:not(:first-child)", function () {
         let id = addressDataTable.row(this).data().id;
+
         updateAddressParam.id = id;
         CustomerApp.page.elements.modalEditAddress.modal('show');
+
         $.ajax({
             type: "GET",
             url: origin + `/api/addresses/${id}`
         })
             .done((data) => {
                 let address = {...data};
+
                 data.fullName ? $("#fullNameAddressEdit").val(data.fullName) : '';
                 data.phoneNumber ? $("#phoneAddressEdit").val(data.phoneNumber) : '';
                 data.line1 ? $("#line1Edit").val(data.line1) : '';
@@ -1043,7 +1461,7 @@
             })
     });
 
-    CustomerApp.page.elements.frmCreateAddress.validate({
+    let addressCreateValidate = CustomerApp.page.elements.frmCreateAddress.validate({
         rules: {
             fullNameAddressCreate: {
                 maxlength: 150
@@ -1091,6 +1509,10 @@
         return this.optional(element) || /^$|[0-9]{8,15}$/i.test(value);
     }, "Số điện thoại không đúng định dạng");
 
+    $.validator.addMethod("isValidFax", function (value, element) {
+        return this.optional(element) || /^$|[0-9]{8,15}$/i.test(value);
+    }, "Số fax không đúng định dạng");
+
     $.validator.addMethod("isValidEmail", function (value, element) {
         return this.optional(element) || /^$|[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i.test(value);
     }, "Email không đúng định dạng");
@@ -1133,16 +1555,17 @@
             "url": origin + `/api/addresses/${id}/customer`,
             "data": JSON.stringify(createAddressParam)
         })
-            .done(() => {
+            .done((data) => {
                 CustomerApp.page.elements.modalCreateAddress.modal('hide');
                 CustomerApp.IziToast.showSuccessAlert('Thêm mới địa chỉ thành công');
 
                 CustomerApp.page.elements.frmCreateAddress[0].reset();
 
-                CustomerApp.redrawDatatables(origin + `/api/addresses`);
+                let {id, phoneNumber, line1, wardName, districtName, provinceName, zipCode, email} = data;
+
+                addressDataTable.row.add([id, phoneNumber, line1, wardName, districtName, provinceName, zipCode, email]).draw(false);
             })
             .fail((jqXHR) => {
-                console.log(jqXHR)
 
                 let errors = jqXHR.responseJSON.errors;
                 errors.fullName ? CustomerApp.showErrorValidate($(".fullNameAddressCreate-error.error"), errors.fullName) : '';
@@ -1154,11 +1577,16 @@
     }
 
     CustomerApp.page.elements.btnAddress.click(() => {
+
+        $('#tbAddress_wrapper').show();
+        $('#tbContact_wrapper').hide();
+        $('#noContact').addClass('hidden').removeClass('show');
+        $('.contactContainer').addClass('hidden').removeClass('show');
         CustomerApp.page.elements.tbCustomerGroup.addClass('hidden').removeClass('show');
         $(".jyZcwm2.addressContainer").addClass('hidden').removeClass('show');
 
         CustomerApp.page.elements.tbContact.addClass('hidden').removeClass('show');
-        CustomerApp.page.elements.tbContact.DataTable().destroy();
+        // CustomerApp.page.elements.tbContact.DataTable().destroy();
 
         $('.addressContainer').removeClass('hidden').addClass('show');
         CustomerApp.page.elements.tbAddress.removeClass('hidden').addClass('show');
@@ -1188,8 +1616,8 @@
             rowId: 'id',
             language: CustomerApp.dataTableDetails.language,
             lengthMenu: [
-                [5, 20, 50, 100],
-                ['5', "20", "50", "100"]
+                [20, 50, 100],
+                ["20", "50", "100"]
             ],
             columns: [
                 {
@@ -1256,10 +1684,16 @@
                     }
                 },
             ],
+            fnCreatedRow: function (nRow, aData, iDataIndex) {
+                $(nRow).attr('id', aData.id);
+            },
             initComplete: function (setting, json) {
                 CustomerApp.page.commands.deleteOneOrMoreCustomerAddress();
+            },
+            drawCallback: () => {
+                CustomerApp.page.commands.deleteOneOrMoreCustomerAddress();
             }
-        })
+        });
     }
 
     //start check all/uncheck all
@@ -1272,7 +1706,7 @@
                 listAddressId.add($(this)[0].id);
             })
             $("#tbAddress thead tr th:not(:first-child)").addClass("hidden").removeClass('show');
-            CustomerApp.page.commands.showTheadAction();
+            CustomerApp.page.commands.showTheadAddressAction();
         } else {
             $("#tbAddress tbody tr td input").each(function () {
                 $(this).prop("checked", false);
@@ -1280,10 +1714,11 @@
             })
             $("#tbAddress thead tr th:not(:first-child)").addClass("show").removeClass('hidden');
             $("#addressActionContainer").remove();
+            $("#addressActionContainer").addClass("hidden").removeClass('show');
         }
     };
 
-    CustomerApp.page.commands.showTheadAction = () => {
+    CustomerApp.page.commands.showTheadAddressAction = () => {
         let str = `<th class="jss12735" id="addressActionContainer">
                         <div class="jyZcwm2">Đã chọn ${listAddressId.size} địa chỉ trên trang này</div>
                         <div class="jss12735">
@@ -1322,7 +1757,7 @@
         })
             .done((data) => {
                 let {namesDeleted, numberOfSuccess, numberOfFail, addressResult, message, idsDeleted} = data;
-                console.log(data)
+
                 CustomerApp.page.elements.modalDeleteAddress.modal('hide');
 
                 CustomerApp.page.elements.modalResultDeleteAddress.modal('show');
@@ -1330,21 +1765,23 @@
                 $("#numberAddressesDeleteFail").text(numberOfFail);
 
                 $.each(namesDeleted, (i, name) => {
-                    console.log(name)
-                    let success = namesDeleted ? `<p>${name} - Đã được xóa thành công</p>` : '';
-                    $("#deletedSucceedNames").prepend(success);
+
+                    let success = namesDeleted ? `<p class="kUvHa3">${name} - Đã được xóa thành công</p>` : '';
+                    $("#deletedAddressSucceedNames").prepend(success);
                 })
 
                 let fail = addressResult ? `<p>${addressResult.line1} - address: Không thể xóa địa chỉ cuối cùng</p>` : '';
                 $("#deletedFailNames").prepend(fail);
 
                 $("#showDeleteSuccessDetail").click(() => {
-                    $("#deletedSucceedNames").toggleClass('show');
+                    $("#deletedAddressSucceedNames").toggleClass('show');
                 })
 
                 $("#showDeleteFailDetail").click(() => {
                     $("#deletedFailNames").toggleClass('show');
                 })
+
+                listAddressId.clear();
 
                 addressDataTable.rows(...idsDeleted).remove().draw();
             })
@@ -1356,10 +1793,15 @@
     $(".btnCloseResultDeleteAddress").click(() => {
         CustomerApp.page.elements.modalResultDeleteAddress.modal('hide');
         $("#frmResultDeleteAddress")[0].reset();
+        $("#deletedAddressSucceedNames").empty();
         $("#checkAllAddresses").prop({
             indeterminate: false,
             checked: false
-        })
+        });
+        $("#addressActionContainer").addClass('hidden').removeClass('show');
+        $("#tbAddress thead tr th:not(:first-child)").addClass("show").removeClass('hidden');
+        $("#tbAddress thead tr th:last-child").addClass("hidden").removeClass('show');
+        CustomerApp.page.commands.deleteOneOrMoreCustomerAddress();
     })
 
     CustomerApp.page.commands.showModalDeleteAddress = () => {
@@ -1504,1044 +1946,36 @@
 
     $('.btnCloseCreateAddressModal').click(() => {
         CustomerApp.page.elements.frmCreateAddress[0].reset();
+        addressCreateValidate.resetForm();
     })
     //end address
 
-    /*
-    // liên hệ
-    $('#contacts').on('click', () => {
-
-        removeTable();
-        showContacts();
-
-        $('#contacts').css({
-            'color': '#4a8aff',
-            'border-bottom': '2px solid rgb(0, 136, 255)'
-        });
+    $('.fJFgex').on('click', function () {
+        $('button').removeClass('active');
+        $(this).addClass('active');
     });
 
-    //địa chỉ
-    $('#addresses').on('click', () => {
-        removeTable();
-        showAddress();
+    const getSelectedValue = (input, variable1, variable2) => {
+        if (Number(input.find(':selected').val()) !== 0) {
+            variable1 = input.find(':selected').val();
+            variable2 = input.find(':selected').text();
+        } else {
+            variable1 = undefined;
+            variable2 = undefined;
+        }
+    }
 
-        $('#addresses').css({
-            'color': '#4a8aff',
-            'border-bottom': '2px solid rgb(0, 136, 255)'
-        });
-    });
+    $(() => {
+        CustomerApp.page.commands.getCustomerInfo().then(() => {
+            CustomerApp.page.commands.deleteCustomer();
 
-    // mô tả
-    $('#notes').on('click', () => {
-        removeTable();
-        showNotes();
-        $('#notes').css({
-            'color': '#4a8aff',
-            'border-bottom': '2px solid rgb(0, 136, 255)'
-        });
-    });
+            CustomerApp.page.commands.showCustomerGroup();
+            CustomerApp.page.elements.drawAddressDatatable();
+            CustomerApp.page.commands.drawContactDataTable();
 
-    // nhóm khách hàng
-    $('#btnCustomerGroups').on('click', () => {
-        removeTable();
-        showCusGroup();
-        $('#customer_groups').css({
-            'color': '#4a8aff',
-            'border-bottom': '2px solid rgb(0, 136, 255)'
+            $('#btnContacts').trigger('click');
         });
     })
 
-
-    // remove table
-    removeTableContacts = () => {
-        $('#tbContacts').DataTable().destroy();
-        $('#tbContacts').remove();
-
-        deleteEventModelShow();
-    }
-    removeTableAddress = () => {
-        $('#tbAddress').DataTable().destroy();
-        $('#tbAddress').remove();
-
-        deleteEventModelShow();
-    }
-    removeTableNotes = () => {
-        $('#tbNotes').DataTable().destroy();
-        $('#tbNotes').remove();
-
-        deleteEventModelShow();
-    }
-    removeTableCusGroup = () => {
-        $('#tbCusGroup').DataTable().destroy();
-        $('#tbCusGroup').remove();
-
-        deleteEventModelShow();
-
-    }
-
-    removeTable = () => {
-        removeTableAddress();
-        removeTableContacts();
-        removeTableNotes();
-        removeTableCusGroup();
-    }
-
-    // Liên hệ
-    showContacts = () => {
-
-        $('#render_table').append(`
-                            <table id="tbContacts" class="table table-hover" style="width:100%">
-                                <thead style="background-color: #f4f6f8; height: 55px">
-                                    <th class="align-middle" >Tên liên hệ</th>
-                                    <th class="align-middle">Số điện thoại</th>
-                                    <th class="align-middle" >Email</th>
-                                    <th class="align-middle" >Chức vụ</th>
-                                    <th class="align-middle" >Bộ phận</th>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>`);
-
-        $('#tbContacts').DataTable({
-            language: CustomerApp.dataTableDetails.language,
-            ajax: {
-                url: origin + `/api/customers/${customer.id}/address`,
-                type: 'GET',
-                contentType: 'application/json'
-            },
-            "lengthChange": false,
-            searching: false,
-            destroy: false,
-            sortable: false,
-            "ordering": false,
-            "aoColumns": [{
-                "bVisible": false
-            }
-            ],
-            search: false,
-            columns: [
-                {data: 'addresses[0].fullName'},
-                {data: 'addresses[0].phoneNumber'},
-                {data: 'addresses[0].email'},
-                {
-                    "data": "position_level", // can be null or undefined
-                    "defaultContent": ""
-                },
-                {
-                    "data": "parts", // can be null or undefined
-                    "defaultContent": ""
-                },
-            ]
-        })
-    }
-
-    // // địa chỉ
-    showAddress = () => {
-        $('#render_table').append(`
-                                <table id="tbAddress" class="table table-hover" style="width:100%">
-                                    <thead style="background-color: #f4f6f8; height: 55px">
-                                    <th class="align-middle" >Số điện thoại</th>
-                                    <th class="align-middle">Địa chỉ</th>
-                                    <th class="align-middle" >Phường xã</th>
-                                    <th class="align-middle" >Quận huyện</th>
-                                    <th class="align-middle" >Tỉnh thành phố</th>
-                                    <th class="align-middle" >Mã bưu điện</th>
-                                    <th class="align-middle" >Email</th>
-
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
-                                </table>`);
-        $("#tbAddress").DataTable({
-            language:
-                {
-                    "processing": "Đang xử lý...",
-                    "aria": {
-                        "sortAscending": ": Sắp xếp thứ tự tăng dần",
-                        "sortDescending": ": Sắp xếp thứ tự giảm dần"
-                    },
-                    "autoFill": {
-                        "cancel": "Hủy",
-                        "fill": "Điền tất cả ô với <i>%d<\/i>",
-                        "fillHorizontal": "Điền theo hàng ngang",
-                        "fillVertical": "Điền theo hàng dọc"
-                    },
-                    "buttons": {
-                        "collection": "Chọn lọc <span class=\"ui-button-icon-primary ui-icon ui-icon-triangle-1-s\"><\/span>",
-                        "colvis": "Hiển thị theo cột",
-                        "colvisRestore": "Khôi phục hiển thị",
-                        "copy": "Sao chép",
-                        "copyKeys": "Nhấn Ctrl hoặc u2318 + C để sao chép bảng dữ liệu vào clipboard.<br \/><br \/>Để hủy, click vào thông báo này hoặc nhấn ESC",
-                        "copySuccess": {
-                            "1": "Đã sao chép 1 dòng dữ liệu vào clipboard",
-                            "_": "Đã sao chép %d dòng vào clipboard"
-                        },
-                        "copyTitle": "Sao chép vào clipboard",
-                        "pageLength": {
-                            "-1": "Xem tất cả các dòng",
-                            "_": "Hiển thị %d dòng",
-                            "1": "Hiển thị 1 dòng"
-                        },
-                        "print": "In ấn",
-                        "createState": "Tạo trạng thái",
-                        "csv": "CSV",
-                        "excel": "Excel",
-                        "pdf": "PDF",
-                        "removeAllStates": "Xóa hết trạng thái",
-                        "removeState": "Xóa",
-                        "renameState": "Đổi tên",
-                        "savedStates": "Trạng thái đã lưu",
-                        "stateRestore": "Trạng thái %d",
-                        "updateState": "Cập nhật"
-                    },
-                    "select": {
-                        "cells": {
-                            "1": "1 ô đang được chọn",
-                            "_": "%d ô đang được chọn"
-                        },
-                        "columns": {
-                            "1": "1 cột đang được chọn",
-                            "_": "%d cột đang được được chọn"
-                        },
-                        "rows": {
-                            "1": "1 dòng đang được chọn",
-                            "_": "%d dòng đang được chọn"
-                        }
-                    },
-                    "searchBuilder": {
-                        "title": {
-                            "_": "Thiết lập tìm kiếm (%d)",
-                            "0": "Thiết lập tìm kiếm"
-                        },
-                        "button": {
-                            "0": "Thiết lập tìm kiếm",
-                            "_": "Thiết lập tìm kiếm (%d)"
-                        },
-                        "value": "Giá trị",
-                        "clearAll": "Xóa hết",
-                        "condition": "Điều kiện",
-                        "conditions": {
-                            "date": {
-                                "after": "Sau",
-                                "before": "Trước",
-                                "between": "Nằm giữa",
-                                "empty": "Rỗng",
-                                "equals": "Bằng với",
-                                "not": "Không phải",
-                                "notBetween": "Không nằm giữa",
-                                "notEmpty": "Không rỗng"
-                            },
-                            "number": {
-                                "between": "Nằm giữa",
-                                "empty": "Rỗng",
-                                "equals": "Bằng với",
-                                "gt": "Lớn hơn",
-                                "gte": "Lớn hơn hoặc bằng",
-                                "lt": "Nhỏ hơn",
-                                "lte": "Nhỏ hơn hoặc bằng",
-                                "not": "Không phải",
-                                "notBetween": "Không nằm giữa",
-                                "notEmpty": "Không rỗng"
-                            },
-                            "string": {
-                                "contains": "Chứa",
-                                "empty": "Rỗng",
-                                "endsWith": "Kết thúc bằng",
-                                "equals": "Bằng",
-                                "not": "Không phải",
-                                "notEmpty": "Không rỗng",
-                                "startsWith": "Bắt đầu với",
-                                "notContains": "Không chứa",
-                                "notEndsWith": "Không kết thúc với",
-                                "notStartsWith": "Không bắt đầu với"
-                            },
-                            "array": {
-                                "equals": "Bằng",
-                                "empty": "Trống",
-                                "contains": "Chứa",
-                                "not": "Không",
-                                "notEmpty": "Không được rỗng",
-                                "without": "không chứa"
-                            }
-                        },
-                        "logicAnd": "Và",
-                        "logicOr": "Hoặc",
-                        "add": "Thêm điều kiện",
-                        "data": "Dữ liệu",
-                        "deleteTitle": "Xóa quy tắc lọc",
-                        "leftTitle": "Giảm thụt lề",
-                        "rightTitle": "Tăng thụt lề"
-                    },
-                    "searchPanes": {
-                        "countFiltered": "{shown} ({total})",
-                        "emptyPanes": "Không có phần tìm kiếm",
-                        "clearMessage": "Xóa hết",
-                        "loadMessage": "Đang load phần tìm kiếm",
-                        "collapse": {
-                            "0": "Phần tìm kiếm",
-                            "_": "Phần tìm kiếm (%d)"
-                        },
-                        "title": "Bộ lọc đang hoạt động - %d",
-                        "count": "{total}",
-                        "collapseMessage": "Thu gọn tất cả",
-                        "showMessage": "Hiện tất cả"
-                    },
-                    "datetime": {
-                        "hours": "Giờ",
-                        "minutes": "Phút",
-                        "next": "Sau",
-                        "previous": "Trước",
-                        "seconds": "Giây",
-                        "amPm": [
-                            "am",
-                            "pm"
-                        ],
-                        "unknown": "-",
-                        "weekdays": [
-                            "Chủ nhật"
-                        ],
-                        "months": [
-                            "Tháng Một",
-                            "Tháng Hai",
-                            "Tháng Ba",
-                            "Tháng Tư",
-                            "Tháng Năm",
-                            "Tháng Sáu",
-                            "Tháng Bảy",
-                            "Tháng Tám",
-                            "Tháng Chín",
-                            "Tháng Mười",
-                            "Tháng Mười Một",
-                            "Tháng Mười Hai"
-                        ]
-                    },
-                    "emptyTable": "Không có dữ liệu",
-                    "info": "Hiển thị _START_ tới _END_ của _TOTAL_ dữ liệu",
-                    "infoEmpty": "Hiển thị 0 tới 0 của 0 dữ liệu",
-                    "lengthMenu": "Hiển thị _MENU_ dữ liệu",
-                    "loadingRecords": "Đang tải...",
-                    "paginate": {
-                        "first": "Đầu tiên",
-                        "last": "Cuối cùng",
-                        "next": "Sau",
-                        "previous": "Trước"
-                    },
-                    "search": "Tìm kiếm:",
-                    "zeroRecords": "Không tìm thấy kết quả",
-                    "decimal": ",",
-                    "editor": {
-                        "close": "Đóng",
-                        "create": {
-                            "button": "Thêm",
-                            "submit": "Thêm",
-                            "title": "Thêm mục mới"
-                        },
-                        "edit": {
-                            "button": "Sửa",
-                            "submit": "Cập nhật",
-                            "title": "Sửa mục"
-                        },
-                        "error": {
-                            "system": "Đã xảy ra lỗi hệ thống (&lt;a target=\"\\\" rel=\"nofollow\" href=\"\\\"&gt;Thêm thông tin&lt;\/a&gt;)."
-                        },
-                        "multi": {
-                            "info": "Các mục đã chọn chứa các giá trị khác nhau cho đầu vào này. Để chỉnh sửa và đặt tất cả các mục cho đầu vào này thành cùng một giá trị, hãy nhấp hoặc nhấn vào đây, nếu không chúng sẽ giữ lại các giá trị riêng lẻ của chúng.",
-                            "noMulti": "Đầu vào này có thể được chỉnh sửa riêng lẻ, nhưng không phải là một phần của một nhóm.",
-                            "restore": "Hoàn tác thay đổi",
-                            "title": "Nhiều giá trị"
-                        },
-                        "remove": {
-                            "button": "Xóa",
-                            "confirm": {
-                                "_": "Bạn có chắc chắn muốn xóa %d hàng không?",
-                                "1": "Bạn có chắc chắn muốn xóa 1 hàng không?"
-                            },
-                            "submit": "Xóa",
-                            "title": "Xóa"
-                        }
-                    },
-                    "infoFiltered": "(được lọc từ _MAX_ dữ liệu)",
-                    "searchPlaceholder": "Nhập tìm kiếm...",
-                    "stateRestore": {
-                        "creationModal": {
-                            "button": "Thêm",
-                            "columns": {
-                                "search": "Tìm kiếm cột",
-                                "visible": "Khả năng hiển thị cột"
-                            },
-                            "name": "Tên:",
-                            "order": "Sắp xếp",
-                            "paging": "Phân trang",
-                            "scroller": "Cuộn vị trí",
-                            "search": "Tìm kiếm",
-                            "searchBuilder": "Trình tạo tìm kiếm",
-                            "select": "Chọn",
-                            "title": "Thêm trạng thái",
-                            "toggleLabel": "Bao gồm:"
-                        },
-                        "duplicateError": "Trạng thái có tên này đã tồn tại.",
-                        "emptyError": "Tên không được để trống.",
-                        "emptyStates": "Không có trạng thái đã lưu",
-                        "removeConfirm": "Bạn có chắc chắn muốn xóa %s không?",
-                        "removeError": "Không xóa được trạng thái.",
-                        "removeJoiner": "và",
-                        "removeSubmit": "Xóa",
-                        "removeTitle": "Xóa trạng thái",
-                        "renameButton": "Đổi tên",
-                        "renameLabel": "Tên mới cho %s:",
-                        "renameTitle": "Đổi tên trạng thái"
-                    },
-                    "infoThousands": ".",
-                    "thousands": "."
-                },
-            // chuyển tiếng việt cho datatable
-            ajax: {
-                url: origin + `/api/customers/${customer.id}/address`,
-                type: 'GET',
-                contentType: 'application/json'
-            },
-            "lengthChange": false,
-            "ordering": false,
-            searching: false,
-            destroy: false,
-            "aoColumns": [{
-                "bVisible": false
-            }
-            ],
-            search: false,
-            columns: [
-                {
-                    "data": "phoneNumber",
-                    "defaultContent": ""
-                },
-                {
-                    "data": "addresses[0].line1",
-                    "defaultContent": ""
-                },
-                {data: 'addresses[0].wardName'},
-                {data: 'addresses[0].districtName'},
-                {data: 'addresses[0].provinceName'},
-                {
-                    "data": "addresses[0].zipCode",
-                    "defaultContent": ""
-                },
-                {
-                    "data": "email",
-                    "defaultContent": ""
-                },
-            ]
-
-        });
-    }
-
-    // Ghi chú
-    showNotes = () => {
-        $('#render_table').append(`
-                            <table id="tbNotes" class="table table-hover" style="width:100%">
-                                <thead style="background-color: #f4f6f8; height: 55px">
-
-                                <th class="align-middle" >Ghi chú</th>
-                                <th class="align-middle">Người thêm</th>
-                                <th class="align-middle" >Thời gian</th>
-
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>`);
-        $('#tbNotes').DataTable({
-            language:
-                {
-                    "processing": "Đang xử lý...",
-                    "aria": {
-                        "sortAscending": ": Sắp xếp thứ tự tăng dần",
-                        "sortDescending": ": Sắp xếp thứ tự giảm dần"
-                    },
-                    "autoFill": {
-                        "cancel": "Hủy",
-                        "fill": "Điền tất cả ô với <i>%d<\/i>",
-                        "fillHorizontal": "Điền theo hàng ngang",
-                        "fillVertical": "Điền theo hàng dọc"
-                    },
-                    "buttons": {
-                        "collection": "Chọn lọc <span class=\"ui-button-icon-primary ui-icon ui-icon-triangle-1-s\"><\/span>",
-                        "colvis": "Hiển thị theo cột",
-                        "colvisRestore": "Khôi phục hiển thị",
-                        "copy": "Sao chép",
-                        "copyKeys": "Nhấn Ctrl hoặc u2318 + C để sao chép bảng dữ liệu vào clipboard.<br \/><br \/>Để hủy, click vào thông báo này hoặc nhấn ESC",
-                        "copySuccess": {
-                            "1": "Đã sao chép 1 dòng dữ liệu vào clipboard",
-                            "_": "Đã sao chép %d dòng vào clipboard"
-                        },
-                        "copyTitle": "Sao chép vào clipboard",
-                        "pageLength": {
-                            "-1": "Xem tất cả các dòng",
-                            "_": "Hiển thị %d dòng",
-                            "1": "Hiển thị 1 dòng"
-                        },
-                        "print": "In ấn",
-                        "createState": "Tạo trạng thái",
-                        "csv": "CSV",
-                        "excel": "Excel",
-                        "pdf": "PDF",
-                        "removeAllStates": "Xóa hết trạng thái",
-                        "removeState": "Xóa",
-                        "renameState": "Đổi tên",
-                        "savedStates": "Trạng thái đã lưu",
-                        "stateRestore": "Trạng thái %d",
-                        "updateState": "Cập nhật"
-                    },
-                    "select": {
-                        "cells": {
-                            "1": "1 ô đang được chọn",
-                            "_": "%d ô đang được chọn"
-                        },
-                        "columns": {
-                            "1": "1 cột đang được chọn",
-                            "_": "%d cột đang được được chọn"
-                        },
-                        "rows": {
-                            "1": "1 dòng đang được chọn",
-                            "_": "%d dòng đang được chọn"
-                        }
-                    },
-                    "searchBuilder": {
-                        "title": {
-                            "_": "Thiết lập tìm kiếm (%d)",
-                            "0": "Thiết lập tìm kiếm"
-                        },
-                        "button": {
-                            "0": "Thiết lập tìm kiếm",
-                            "_": "Thiết lập tìm kiếm (%d)"
-                        },
-                        "value": "Giá trị",
-                        "clearAll": "Xóa hết",
-                        "condition": "Điều kiện",
-                        "conditions": {
-                            "date": {
-                                "after": "Sau",
-                                "before": "Trước",
-                                "between": "Nằm giữa",
-                                "empty": "Rỗng",
-                                "equals": "Bằng với",
-                                "not": "Không phải",
-                                "notBetween": "Không nằm giữa",
-                                "notEmpty": "Không rỗng"
-                            },
-                            "number": {
-                                "between": "Nằm giữa",
-                                "empty": "Rỗng",
-                                "equals": "Bằng với",
-                                "gt": "Lớn hơn",
-                                "gte": "Lớn hơn hoặc bằng",
-                                "lt": "Nhỏ hơn",
-                                "lte": "Nhỏ hơn hoặc bằng",
-                                "not": "Không phải",
-                                "notBetween": "Không nằm giữa",
-                                "notEmpty": "Không rỗng"
-                            },
-                            "string": {
-                                "contains": "Chứa",
-                                "empty": "Rỗng",
-                                "endsWith": "Kết thúc bằng",
-                                "equals": "Bằng",
-                                "not": "Không phải",
-                                "notEmpty": "Không rỗng",
-                                "startsWith": "Bắt đầu với",
-                                "notContains": "Không chứa",
-                                "notEndsWith": "Không kết thúc với",
-                                "notStartsWith": "Không bắt đầu với"
-                            },
-                            "array": {
-                                "equals": "Bằng",
-                                "empty": "Trống",
-                                "contains": "Chứa",
-                                "not": "Không",
-                                "notEmpty": "Không được rỗng",
-                                "without": "không chứa"
-                            }
-                        },
-                        "logicAnd": "Và",
-                        "logicOr": "Hoặc",
-                        "add": "Thêm điều kiện",
-                        "data": "Dữ liệu",
-                        "deleteTitle": "Xóa quy tắc lọc",
-                        "leftTitle": "Giảm thụt lề",
-                        "rightTitle": "Tăng thụt lề"
-                    },
-                    "searchPanes": {
-                        "countFiltered": "{shown} ({total})",
-                        "emptyPanes": "Không có phần tìm kiếm",
-                        "clearMessage": "Xóa hết",
-                        "loadMessage": "Đang load phần tìm kiếm",
-                        "collapse": {
-                            "0": "Phần tìm kiếm",
-                            "_": "Phần tìm kiếm (%d)"
-                        },
-                        "title": "Bộ lọc đang hoạt động - %d",
-                        "count": "{total}",
-                        "collapseMessage": "Thu gọn tất cả",
-                        "showMessage": "Hiện tất cả"
-                    },
-                    "datetime": {
-                        "hours": "Giờ",
-                        "minutes": "Phút",
-                        "next": "Sau",
-                        "previous": "Trước",
-                        "seconds": "Giây",
-                        "amPm": [
-                            "am",
-                            "pm"
-                        ],
-                        "unknown": "-",
-                        "weekdays": [
-                            "Chủ nhật"
-                        ],
-                        "months": [
-                            "Tháng Một",
-                            "Tháng Hai",
-                            "Tháng Ba",
-                            "Tháng Tư",
-                            "Tháng Năm",
-                            "Tháng Sáu",
-                            "Tháng Bảy",
-                            "Tháng Tám",
-                            "Tháng Chín",
-                            "Tháng Mười",
-                            "Tháng Mười Một",
-                            "Tháng Mười Hai"
-                        ]
-                    },
-                    "emptyTable": "Không có dữ liệu",
-                    "info": "Hiển thị _START_ tới _END_ của _TOTAL_ dữ liệu",
-                    "infoEmpty": "Hiển thị 0 tới 0 của 0 dữ liệu",
-                    "lengthMenu": "Hiển thị _MENU_ dữ liệu",
-                    "loadingRecords": "Đang tải...",
-                    "paginate": {
-                        "first": "Đầu tiên",
-                        "last": "Cuối cùng",
-                        "next": "Sau",
-                        "previous": "Trước"
-                    },
-                    "search": "Tìm kiếm:",
-                    "zeroRecords": "Không tìm thấy kết quả",
-                    "decimal": ",",
-                    "editor": {
-                        "close": "Đóng",
-                        "create": {
-                            "button": "Thêm",
-                            "submit": "Thêm",
-                            "title": "Thêm mục mới"
-                        },
-                        "edit": {
-                            "button": "Sửa",
-                            "submit": "Cập nhật",
-                            "title": "Sửa mục"
-                        },
-                        "error": {
-                            "system": "Đã xảy ra lỗi hệ thống (&lt;a target=\"\\\" rel=\"nofollow\" href=\"\\\"&gt;Thêm thông tin&lt;\/a&gt;)."
-                        },
-                        "multi": {
-                            "info": "Các mục đã chọn chứa các giá trị khác nhau cho đầu vào này. Để chỉnh sửa và đặt tất cả các mục cho đầu vào này thành cùng một giá trị, hãy nhấp hoặc nhấn vào đây, nếu không chúng sẽ giữ lại các giá trị riêng lẻ của chúng.",
-                            "noMulti": "Đầu vào này có thể được chỉnh sửa riêng lẻ, nhưng không phải là một phần của một nhóm.",
-                            "restore": "Hoàn tác thay đổi",
-                            "title": "Nhiều giá trị"
-                        },
-                        "remove": {
-                            "button": "Xóa",
-                            "confirm": {
-                                "_": "Bạn có chắc chắn muốn xóa %d hàng không?",
-                                "1": "Bạn có chắc chắn muốn xóa 1 hàng không?"
-                            },
-                            "submit": "Xóa",
-                            "title": "Xóa"
-                        }
-                    },
-                    "infoFiltered": "(được lọc từ _MAX_ dữ liệu)",
-                    "searchPlaceholder": "Nhập tìm kiếm...",
-                    "stateRestore": {
-                        "creationModal": {
-                            "button": "Thêm",
-                            "columns": {
-                                "search": "Tìm kiếm cột",
-                                "visible": "Khả năng hiển thị cột"
-                            },
-                            "name": "Tên:",
-                            "order": "Sắp xếp",
-                            "paging": "Phân trang",
-                            "scroller": "Cuộn vị trí",
-                            "search": "Tìm kiếm",
-                            "searchBuilder": "Trình tạo tìm kiếm",
-                            "select": "Chọn",
-                            "title": "Thêm trạng thái",
-                            "toggleLabel": "Bao gồm:"
-                        },
-                        "duplicateError": "Trạng thái có tên này đã tồn tại.",
-                        "emptyError": "Tên không được để trống.",
-                        "emptyStates": "Không có trạng thái đã lưu",
-                        "removeConfirm": "Bạn có chắc chắn muốn xóa %s không?",
-                        "removeError": "Không xóa được trạng thái.",
-                        "removeJoiner": "và",
-                        "removeSubmit": "Xóa",
-                        "removeTitle": "Xóa trạng thái",
-                        "renameButton": "Đổi tên",
-                        "renameLabel": "Tên mới cho %s:",
-                        "renameTitle": "Đổi tên trạng thái"
-                    },
-                    "infoThousands": ".",
-                    "thousands": "."
-                },
-            ajax: {
-                url: origin + `/api/customers/${customer.id}/address`,
-                type: 'GET',
-                contentType: 'application/json'
-            },
-            "lengthChange": false,
-            "ordering": false,
-            searching: false,
-            destroy: false,
-            "aoColumns": [{
-                "bVisible": false
-            }
-            ],
-            search: false,
-            columns: [
-                {data: 'description'},
-                {data: 'employee.fullName'},
-                {data: 'createdAt'},
-            ]
-        })
-    }
-
-    // Nhóm khách hàng
-    showCusGroup = () => {
-        $('#render_table').append(`
-                            <table id="tbCusGroup" class="table table-hover" style="width:100%">
-                                <thead style="background-color: #f4f6f8; height: 55px">
-
-                                <th class="align-middle" >Mã nhóm</th>
-                                <th class="align-middle">Tên nhóm</th>
-                                <th class="align-middle" >Loại nhóm</th>
-                                <th class="align-middle" >Mô tả</th>
-
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>`);
-        $('#tbCusGroup').DataTable({
-            language:
-                {
-                    "processing": "Đang xử lý...",
-                    "aria": {
-                        "sortAscending": ": Sắp xếp thứ tự tăng dần",
-                        "sortDescending": ": Sắp xếp thứ tự giảm dần"
-                    },
-                    "autoFill": {
-                        "cancel": "Hủy",
-                        "fill": "Điền tất cả ô với <i>%d<\/i>",
-                        "fillHorizontal": "Điền theo hàng ngang",
-                        "fillVertical": "Điền theo hàng dọc"
-                    },
-                    "buttons": {
-                        "collection": "Chọn lọc <span class=\"ui-button-icon-primary ui-icon ui-icon-triangle-1-s\"><\/span>",
-                        "colvis": "Hiển thị theo cột",
-                        "colvisRestore": "Khôi phục hiển thị",
-                        "copy": "Sao chép",
-                        "copyKeys": "Nhấn Ctrl hoặc u2318 + C để sao chép bảng dữ liệu vào clipboard.<br \/><br \/>Để hủy, click vào thông báo này hoặc nhấn ESC",
-                        "copySuccess": {
-                            "1": "Đã sao chép 1 dòng dữ liệu vào clipboard",
-                            "_": "Đã sao chép %d dòng vào clipboard"
-                        },
-                        "copyTitle": "Sao chép vào clipboard",
-                        "pageLength": {
-                            "-1": "Xem tất cả các dòng",
-                            "_": "Hiển thị %d dòng",
-                            "1": "Hiển thị 1 dòng"
-                        },
-                        "print": "In ấn",
-                        "createState": "Tạo trạng thái",
-                        "csv": "CSV",
-                        "excel": "Excel",
-                        "pdf": "PDF",
-                        "removeAllStates": "Xóa hết trạng thái",
-                        "removeState": "Xóa",
-                        "renameState": "Đổi tên",
-                        "savedStates": "Trạng thái đã lưu",
-                        "stateRestore": "Trạng thái %d",
-                        "updateState": "Cập nhật"
-                    },
-                    "select": {
-                        "cells": {
-                            "1": "1 ô đang được chọn",
-                            "_": "%d ô đang được chọn"
-                        },
-                        "columns": {
-                            "1": "1 cột đang được chọn",
-                            "_": "%d cột đang được được chọn"
-                        },
-                        "rows": {
-                            "1": "1 dòng đang được chọn",
-                            "_": "%d dòng đang được chọn"
-                        }
-                    },
-                    "searchBuilder": {
-                        "title": {
-                            "_": "Thiết lập tìm kiếm (%d)",
-                            "0": "Thiết lập tìm kiếm"
-                        },
-                        "button": {
-                            "0": "Thiết lập tìm kiếm",
-                            "_": "Thiết lập tìm kiếm (%d)"
-                        },
-                        "value": "Giá trị",
-                        "clearAll": "Xóa hết",
-                        "condition": "Điều kiện",
-                        "conditions": {
-                            "date": {
-                                "after": "Sau",
-                                "before": "Trước",
-                                "between": "Nằm giữa",
-                                "empty": "Rỗng",
-                                "equals": "Bằng với",
-                                "not": "Không phải",
-                                "notBetween": "Không nằm giữa",
-                                "notEmpty": "Không rỗng"
-                            },
-                            "number": {
-                                "between": "Nằm giữa",
-                                "empty": "Rỗng",
-                                "equals": "Bằng với",
-                                "gt": "Lớn hơn",
-                                "gte": "Lớn hơn hoặc bằng",
-                                "lt": "Nhỏ hơn",
-                                "lte": "Nhỏ hơn hoặc bằng",
-                                "not": "Không phải",
-                                "notBetween": "Không nằm giữa",
-                                "notEmpty": "Không rỗng"
-                            },
-                            "string": {
-                                "contains": "Chứa",
-                                "empty": "Rỗng",
-                                "endsWith": "Kết thúc bằng",
-                                "equals": "Bằng",
-                                "not": "Không phải",
-                                "notEmpty": "Không rỗng",
-                                "startsWith": "Bắt đầu với",
-                                "notContains": "Không chứa",
-                                "notEndsWith": "Không kết thúc với",
-                                "notStartsWith": "Không bắt đầu với"
-                            },
-                            "array": {
-                                "equals": "Bằng",
-                                "empty": "Trống",
-                                "contains": "Chứa",
-                                "not": "Không",
-                                "notEmpty": "Không được rỗng",
-                                "without": "không chứa"
-                            }
-                        },
-                        "logicAnd": "Và",
-                        "logicOr": "Hoặc",
-                        "add": "Thêm điều kiện",
-                        "data": "Dữ liệu",
-                        "deleteTitle": "Xóa quy tắc lọc",
-                        "leftTitle": "Giảm thụt lề",
-                        "rightTitle": "Tăng thụt lề"
-                    },
-                    "searchPanes": {
-                        "countFiltered": "{shown} ({total})",
-                        "emptyPanes": "Không có phần tìm kiếm",
-                        "clearMessage": "Xóa hết",
-                        "loadMessage": "Đang load phần tìm kiếm",
-                        "collapse": {
-                            "0": "Phần tìm kiếm",
-                            "_": "Phần tìm kiếm (%d)"
-                        },
-                        "title": "Bộ lọc đang hoạt động - %d",
-                        "count": "{total}",
-                        "collapseMessage": "Thu gọn tất cả",
-                        "showMessage": "Hiện tất cả"
-                    },
-                    "datetime": {
-                        "hours": "Giờ",
-                        "minutes": "Phút",
-                        "next": "Sau",
-                        "previous": "Trước",
-                        "seconds": "Giây",
-                        "amPm": [
-                            "am",
-                            "pm"
-                        ],
-                        "unknown": "-",
-                        "weekdays": [
-                            "Chủ nhật"
-                        ],
-                        "months": [
-                            "Tháng Một",
-                            "Tháng Hai",
-                            "Tháng Ba",
-                            "Tháng Tư",
-                            "Tháng Năm",
-                            "Tháng Sáu",
-                            "Tháng Bảy",
-                            "Tháng Tám",
-                            "Tháng Chín",
-                            "Tháng Mười",
-                            "Tháng Mười Một",
-                            "Tháng Mười Hai"
-                        ]
-                    },
-                    "emptyTable": "Không có dữ liệu",
-                    "info": "Hiển thị _START_ tới _END_ của _TOTAL_ dữ liệu",
-                    "infoEmpty": "Hiển thị 0 tới 0 của 0 dữ liệu",
-                    "lengthMenu": "Hiển thị _MENU_ dữ liệu",
-                    "loadingRecords": "Đang tải...",
-                    "paginate": {
-                        "first": "Đầu tiên",
-                        "last": "Cuối cùng",
-                        "next": "Sau",
-                        "previous": "Trước"
-                    },
-                    "search": "Tìm kiếm:",
-                    "zeroRecords": "Không tìm thấy kết quả",
-                    "decimal": ",",
-                    "editor": {
-                        "close": "Đóng",
-                        "create": {
-                            "button": "Thêm",
-                            "submit": "Thêm",
-                            "title": "Thêm mục mới"
-                        },
-                        "edit": {
-                            "button": "Sửa",
-                            "submit": "Cập nhật",
-                            "title": "Sửa mục"
-                        },
-                        "error": {
-                            "system": "Đã xảy ra lỗi hệ thống (&lt;a target=\"\\\" rel=\"nofollow\" href=\"\\\"&gt;Thêm thông tin&lt;\/a&gt;)."
-                        },
-                        "multi": {
-                            "info": "Các mục đã chọn chứa các giá trị khác nhau cho đầu vào này. Để chỉnh sửa và đặt tất cả các mục cho đầu vào này thành cùng một giá trị, hãy nhấp hoặc nhấn vào đây, nếu không chúng sẽ giữ lại các giá trị riêng lẻ của chúng.",
-                            "noMulti": "Đầu vào này có thể được chỉnh sửa riêng lẻ, nhưng không phải là một phần của một nhóm.",
-                            "restore": "Hoàn tác thay đổi",
-                            "title": "Nhiều giá trị"
-                        },
-                        "remove": {
-                            "button": "Xóa",
-                            "confirm": {
-                                "_": "Bạn có chắc chắn muốn xóa %d hàng không?",
-                                "1": "Bạn có chắc chắn muốn xóa 1 hàng không?"
-                            },
-                            "submit": "Xóa",
-                            "title": "Xóa"
-                        }
-                    },
-                    "infoFiltered": "(được lọc từ _MAX_ dữ liệu)",
-                    "searchPlaceholder": "Nhập tìm kiếm...",
-                    "stateRestore": {
-                        "creationModal": {
-                            "button": "Thêm",
-                            "columns": {
-                                "search": "Tìm kiếm cột",
-                                "visible": "Khả năng hiển thị cột"
-                            },
-                            "name": "Tên:",
-                            "order": "Sắp xếp",
-                            "paging": "Phân trang",
-                            "scroller": "Cuộn vị trí",
-                            "search": "Tìm kiếm",
-                            "searchBuilder": "Trình tạo tìm kiếm",
-                            "select": "Chọn",
-                            "title": "Thêm trạng thái",
-                            "toggleLabel": "Bao gồm:"
-                        },
-                        "duplicateError": "Trạng thái có tên này đã tồn tại.",
-                        "emptyError": "Tên không được để trống.",
-                        "emptyStates": "Không có trạng thái đã lưu",
-                        "removeConfirm": "Bạn có chắc chắn muốn xóa %s không?",
-                        "removeError": "Không xóa được trạng thái.",
-                        "removeJoiner": "và",
-                        "removeSubmit": "Xóa",
-                        "removeTitle": "Xóa trạng thái",
-                        "renameButton": "Đổi tên",
-                        "renameLabel": "Tên mới cho %s:",
-                        "renameTitle": "Đổi tên trạng thái"
-                    },
-                    "infoThousands": ".",
-                    "thousands": "."
-                },
-            ajax: {
-                url: origin + `/api/customers/${customer.id}/address`,
-                type: 'GET',
-                contentType: 'application/json'
-            },
-            "lengthChange": false,
-            "ordering": false,
-            searching: false,
-            destroy: false,
-            "aoColumns": [{
-                "bVisible": false
-            }
-            ],
-            search: false,
-            columns: [
-                {data: 'group.cusGrpCode'},
-                {data: 'group.title'},
-                {
-                    "data": "group_type", // can be null or undefined
-                    "defaultContent": "Mặc định"
-                },
-                {
-                    "data": "description",
-                    "defaultContent": "---"
-                }
-            ]
-        })
-    }
-
-
-    deleteEventModelShow();
-
-
-
-
-
-    showModalDelete();
-    deleteCustomerHander();
-
-
-    // -----------------------------------------------------------
-    handleCreateShowCustomer();
-
-    function handleCreateShowCustomer() {
-        $('#btn_showModalCreateAddress').click(function () {
-            $('#modal_create_shippingAddress').modal('show');
-        })
-    }
-
-    // Thêm mới địa chỉ
-
-    $("#address").on('click', () => {
-
-
-
-            })
-    })
-
-    $(document).ready(function () {
-        showContacts();
-        removeTableNotes();
-        removeTableAddress();
-        removeTableCusGroup();
-
-        $('#contacts').css({
-            'color': '#4a8aff',
-            'border-bottom': '2px solid rgb(0, 136, 255)'
-        });
-    });
-
-    // --------------------------------------------------------------
-
-     */
 </script>
 </html>

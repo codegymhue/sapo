@@ -629,35 +629,6 @@ body {
     max-width: 17.1429rem;
 }
 
-.fACSJt {
-    display: inline-block;
-    -webkit-box-pack: center;
-    justify-content: center;
-    position: relative;
-    padding: 0.428571rem 1.14286rem;
-    box-sizing: border-box;
-    -webkit-box-align: center;
-    align-items: center;
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    border-image: initial;
-    background-color: transparent;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: left;
-    cursor: pointer;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    font-size: 1rem;
-    line-height: 1.42857rem;
-    margin: 0;
-    height: 3.42857rem;
-    max-width: 17.1429rem;
-    color: rgb(0, 136, 255);
-    font-weight: 500;
-    border-bottom: 2px solid rgb(0, 136, 255);
-}
-
 .jss2105 {
     position: relative;
     box-shadow: 0 2px 4px rgb(168 168 168 / 25%);
@@ -1424,7 +1395,7 @@ li {
 }
 
 #render_table {
-    margin-top: 15px;
+    margin-top: 0;
 }
 
 .jsseh238 {
@@ -1447,7 +1418,7 @@ table thead tr th {
     font-weight: 500 !important;
     background: #f4f6f8;
     padding: 16px !important;
-    width: auto !important;
+    /*width: auto !important;*/
     border: none !important;
 }
 
@@ -1578,6 +1549,7 @@ th {
 
 .owi8wi {
     padding-left: 10px;
+    padding-top: 5px;
 }
 
 .irenfk {
@@ -1590,6 +1562,11 @@ th {
 
 .hidden {
     display: none;
+}
+
+.active{
+    color: #0088ff;
+    border-bottom: 2px solid;
 }
 
 .Bgekd {
@@ -1715,4 +1692,60 @@ th {
 
 .KagUd {
     padding-left: 12px;
+}
+
+table {
+    table-layout: fixed;
+}
+
+table td {
+    overflow:hidden;
+    word-wrap:break-word;
+}
+
+#tbContact thead tr {
+    height: 52px;
+}
+
+#noContact {
+    margin-left: 12px;
+}
+
+#tbContact_length{
+    align-self: center;
+    margin-right: 5px;
+}
+
+.hYsv8 {
+    padding-left: 16px !important;
+}
+
+#tbContact tbody tr {
+    display: table;
+}
+
+.nYvd3 {
+    width: 46.75px;
+}
+
+.s7uel {
+    width: 164.05px;
+}
+
+textarea{
+    resize: none;
+}
+
+.hIeh5 {
+    box-shadow: rgba(0, 0, 0, 0.2) 0 3px 1px -2px, rgba(0, 0, 0, 0.14) 0 2px 2px 0, rgba(0, 0, 0, 0.12) 0 1px 5px 0;
+}
+
+.kUvHa3{
+    height: 40px;
+    padding-left: 10px;
+    padding-top: 8px;
+}
+
+.kUvHa3:hover{
+    background: #f2f9ff;
 }

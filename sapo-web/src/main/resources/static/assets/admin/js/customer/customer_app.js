@@ -127,11 +127,11 @@ class CustomerApp {
 
     static setNullObj = (obj, val) => Object.keys(obj).forEach(k => obj[k] = val);
 
-    static redrawDatatables = (url) => {
+    static redrawDatatables = (tableName, url) => {
         $.get(url, function(newData) {
-            addressDataTable.clear();
-            addressDataTable.rows.add(newData);
-            addressDataTable.draw();
+            tableName.clear();
+            tableName.rows.add(newData);
+            tableName.draw();
         });
     }
 

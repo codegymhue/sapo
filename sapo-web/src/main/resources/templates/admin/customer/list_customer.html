@@ -244,7 +244,8 @@
 
                     </div>
                 </div>
-                <div style="font-size:small" id="tableCheckbox">
+                <th:block th:replace="/admin/customer/modal-loading.html"/>
+                <div style="font-size:small; opacity: 0;" id="tableCheckbox">
                     <table id="tbCustomer" class="table table-hover" style="width:100%">
                         <thead style="background-color: #f4f6f8; height: 55px">
                         <tr>
@@ -371,6 +372,7 @@
     page.elements.importFile.on("click", function (){
         $("#modalImportFileCustomers").modal("show");
     })
+
 
         page.commands.showLoading = () => {
             page.elements.loading.css('z-index', 1);
@@ -734,7 +736,10 @@
         let removeSorting = setInterval(()=>{
             let tdRow = $("#tbCustomer tbody td input");
             if($(theadFirst[0]).hasClass("sorting_asc")){
+                $(".spinner-loading").css("display","none")
                 $(theadFirst[0]).removeClass('sorting_asc');
+                $("#tableCheckbox").css("opacity","1");
+                page.commands.closeLoading();
                 clearInterval(removeSorting);
             }
         })

@@ -15,10 +15,8 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.time.Instant;
+import java.util.*;
 
 
 public class CustomerExcelExporter {
@@ -158,7 +156,8 @@ public class CustomerExcelExporter {
                 if(listColumnExist.contains("phoneNumber"))
                     createCell(row, columnCount++, customer.getPhoneNumber() != null ? customer.getPhoneNumber() : "" , style);
                 if(listColumnExist.contains("birthDay"))
-                    createCell(row, columnCount++, customer.getBirthday() != null ? customer.getBirthday().toString() : "", style);
+                    createCell(row, columnCount++, customer.getBirthday() != null ?
+                            convertBirthday(customer.getBirthday()) : "", style);
                 if(listColumnExist.contains("gender")) {
                     try {
                         switch (customer.getGender().getValue()) {
@@ -315,5 +314,9 @@ public class CustomerExcelExporter {
 
         outputStream.close();
 
+    }
+    public String convertBirthday(Instant birthday){
+        String[] arr =  birthday.toString().split("T")[0].split("-");
+        return String.format("%s-%s-%s",arr[2],arr[1],arr[0]);
     }
 }

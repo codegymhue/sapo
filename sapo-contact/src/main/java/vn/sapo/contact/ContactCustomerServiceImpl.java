@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.contact.dto.ContactResult;
 import vn.sapo.contact.dto.CreateContactParam;
+import vn.sapo.contact.dto.DeletedContactResult;
+import vn.sapo.contact.dto.UpdateContactParam;
 import vn.sapo.entities.Contact;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.shared.exceptions.NotFoundException;
 
 import java.time.Instant;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,11 +27,89 @@ public class ContactCustomerServiceImpl implements ContactCustomerService {
     private ContactCustomerRepository contactCustomerRepository;
 
     @Override
-    public Page<ContactResult> findAllContact(Integer customerId, Pageable pageable) {
+    @Transactional
+    public ContactResult updateCustomerContactById(Integer customerId, UpdateContactParam param) {
         Customer customer = findCustomerById(customerId);
-        List<ContactResult> dtoList = customer.getContacts().stream().map(contactMapper::toDTO).collect(Collectors.toList());
+        Set<Contact> contacts =  customer.getContacts();
 
-        return new PageImpl<>(dtoList, pageable, dtoList.size());
+        for (Contact contact : contacts) {
+            if (contact.getId().equals(param.getId())) {
+                contact.setFullName(param.getFullName())
+                        .setPhoneNumber(param.getPhoneNumber())
+                        .setEmail(param.getEmail())
+                        .setFax(param.getFax())
+                        .setPosition(param.getPosition())
+                        .setDepartment(param.getDepartment())
+                        .setNote(param.getNote());
+                break;
+            }
+        }
+
+        contactCustomerRepository.save(customer.setContacts(contacts));
+        return getCustomerContactById(customerId, param.getId());
+    }
+
+    @Override
+    public ContactResult getCustomerContactById(Integer customerId, Long id) {
+        Set<Contact> contacts =  findCustomerById(customerId).getContacts();
+        ContactResult dto = null;
+        for (Contact contact : contacts) {
+            if (contact.getId().equals(id)) {
+                dto = contactMapper.toDTO(contact);
+                break;
+            }
+        }
+
+        if (dto == null)
+            throw new NotFoundException("contact.exception.notFound");
+
+        return dto;
+    }
+
+    @Override
+    @Transactional
+    public DeletedContactResult deleteCustomerContactById(Integer customerId, Set<Long> ids) {
+        Customer customer = findCustomerById(customerId);
+        Set<Contact> contacts =  customer.getContacts();
+        Set<Contact> newContacts = new HashSet<>(contacts);
+        List<String> deletedNames = new ArrayList<>();
+        int i = 0;
+        for (Contact contact : contacts) {
+            for (Long id : ids) {
+                if (contact.getId().equals(id)){
+                    deletedNames.add(contact.getFullName());
+                    i++;
+                    newContacts.remove(contact);
+                }
+            }
+        }
+
+        customer.setContacts(newContacts);
+        contactCustomerRepository.save(customer);
+
+        return new DeletedContactResult()
+                .setIdsDeleted(ids)
+                .setNamesDeleted(deletedNames)
+                .setNumberOfSuccess(i)
+                .setNumberOfFail(ids.size() - i);
+    }
+
+    @Override
+    public Page<ContactResult> findAllContact(Pageable pageable, Integer customerId) {
+        List<ContactResult> dtoList = findCustomerById(customerId)
+                .getContacts()
+                .stream()
+                .map(contactMapper::toDTO)
+                .sorted((o1, o2) -> (int) (o2.getId() - o1.getId()))
+                .collect(Collectors.toList());
+        int sizePerPage = pageable.getPageSize();
+        int page = pageable.getPageNumber();
+        int from = Math.max(0, page * sizePerPage);
+        int to = Math.min(dtoList.size(), (page + 1) * sizePerPage);
+
+        List<ContactResult> results = dtoList.subList(from, to);
+
+        return new PageImpl<>(results, pageable, dtoList.size());
     }
 
     @Override
@@ -46,21 +125,6 @@ public class ContactCustomerServiceImpl implements ContactCustomerService {
         customer.getContacts().add(contact);
 
         return contactMapper.toDTO(contact);
-    }
-
-    private HashMap<String, String> getContactParamValue(Contact contact) {
-        HashMap<String, String> contacts = new HashMap<>();
-
-        contacts.put("id", String.valueOf(contact.getId()));
-        contacts.put("fullName", contact.getFullName());
-        contacts.put("phoneNumber", contact.getPhoneNumber());
-        contacts.put("email", contact.getEmail());
-        contacts.put("fax", contact.getFax());
-        contacts.put("position", contact.getPosition());
-        contacts.put("department", contact.getDepartment());
-        contacts.put("note", contact.getNote());
-
-        return contacts;
     }
 
     private Customer findCustomerById(Integer id) {

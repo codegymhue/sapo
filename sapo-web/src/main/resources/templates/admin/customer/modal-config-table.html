@@ -59,27 +59,25 @@
             $( "#sortable" ).sortable();
             $( "#sortable" ).disableSelection();
         });
-        // let ggg = $("#tbCustomer tr th");
-        // for(let i=0; i<ggg.length; i++){
-        //     console.log("th: "+$(ggg[i]).css("min-width"));
-        // }
-        function optimizeWidthColumn(){
+
+        async function optimizeWidthColumn(){
             let thList= $("#tbCustomer tr th");
-            $(thList[3]).css("min-width", `1000px`);
+            let flag = true;
             for(let i=2; i<thList.length; i++){
-                let thHeight = +($(thList[i]).css("height").split("p")[0]);
-                console.log("th height: "+thHeight);
                 let deltaHeight = 0;
                 let setHeight = setInterval(()=>{
-                    deltaHeight+=50;
+                    deltaHeight+=10;
                     $(thList[i]).css("min-width", `${deltaHeight}px`);
-                    thHeight = +($(thList[i]).css("height").split("p")[0]);
-                    if(thHeight<=55){
-                        console.log($(thList[i]).css("min-width"));
+                    let textHeight = $($(".textHeight")[i]).height();
+                    if(textHeight<=20){
                         clearInterval(setHeight);
                     }
                 })
             }
+            setTimeout(()=>{
+                $(".spinner-loading").css("display","none")
+                flag ? $("#tableCheckbox").css("opacity","1") : "";
+            },1500)
         }
         const theadElement = document.querySelector('.change-column');
         let thead = [
@@ -116,7 +114,7 @@
             "birthday": "Ngày sinh",
             "gender": "Giới tính",
             "description": "Mô tả",
-            "status":"Trạng thái",
+            "status":"Trạng thái giao dịch",
             "employee.fullName": "Nhân viên giao dịch",
             "quantityProductOrder":"SL đơn hàng",
             "taxCode": "Tax",
@@ -245,6 +243,8 @@
         //changeColumn() thực hiện khi click save ở modal để chuyển cột
         let listThead = [];
         function changeColumn(){
+            $(".spinner-loading").css("display","block")
+            $("#tableCheckbox").css("opacity","0");
             countChecked = 0
             let listLabelColumn = document.querySelectorAll(".label-column");
             thead = [];
@@ -274,10 +274,10 @@
                     `<table id="tbCustomer" class="table table-hover" style="width: 100%;">
                         <thead style="background-color: #f4f6f8; height: 55px">
                             <tr>
-                                <th class="align-middle" style="width:12px">
+                                <th class="align-middle textHeight" style="width:12px">
                                     <i style="font-size: 13pt" class="fa-solid fa-gear" data-toggle="modal" data-target="#modal-config-table"></i>
                                 </th>
-                                <th class="align-middle">
+                                <th class="align-middle textHeight">
                                     <label for="checkAll" style="cursor:pointer width="12px">
                                         ${thead.length > 0 ? elementCheckBoxAll:""}
                                     </label>
@@ -288,7 +288,10 @@
                 $("#tableCheckbox").append(newTable);
                 let trHead = $("#tbCustomer thead tr");
                 for(let i=0; i < thead.length; i++){
-                    let tcolumn = `<th class="align-middle" scope="col">${nameThead[thead[i]]}</th>`;
+                    let tcolumn = `<th class="align-middle" scope="col"><div class="textHeight">${nameThead[thead[i]]}</div></th>`;
+                    if(thead[i] == "description"){
+                        tcolumn = `<th class="align-middle" scope="col"><div style="min-width:200px " class="textHeight">${nameThead[thead[i]]}</div></th>`;
+                    }
                     trHead.append(tcolumn);
                 }
                 $("#tbCustomer").DataTable({
@@ -298,7 +301,7 @@
                 "paging": true,
                 language:
                     {
-                        "processing": "<i class='fa fa-refresh fa-spin' style='font-size: 50pt; z-index: 100000'></i>",
+                        "processing": "<i class='fa fa-refresh fa-spin' id='loading-spinner' style='font-size: 50pt; z-index: 100000'></i>",
                         "aria": {
                             "sortAscending": ": Sắp xếp thứ tự tăng dần",
                             "sortDescending": ": Sắp xếp thứ tự giảm dần"
@@ -563,9 +566,6 @@
                         return JSON.stringify(d)
                     }
                 },
-                "columnDefs": [
-                    { "width": "20%", "targets": 0 }
-                ],
                 lengthMenu: [
                     [10, 30, 50, 100],
                     ["10", "30", "50", "All"]
@@ -631,6 +631,22 @@
                     }
                 }
             })
+                $("#tbCustomer_wrapper").scroll(()=>{
+                   let scrollLeft = $("#tbCustomer_wrapper").scrollLeft();
+                   $("#tbCustomer_info").css("margin-left",`${scrollLeft}px`);
+                   $("#tbCustomer_paginate").css("margin-right",`-${scrollLeft}px`);
+                   $("#tbCustomer").css("margin-left",`-${scrollLeft}px`);
+                   $("#loading-spinner").css("margin-left",`-${scrollLeft}px`);
+                   let table = $("#tbCustomer").width();
+                   let containerTable = $("#tbCustomer_wrapper").width();
+                   let delta = table-containerTable-scrollLeft;
+                //    console.log(delta);
+                //    if(scrollLeft>600){
+                //      setTimeout(()=>{
+                //      $("#tbCustomer").css("margin-left",`-${delta}px`);
+                //    },1000)
+                //    }    
+                });
                 $(".close").click();
                 $(".modal-backdrop").remove();
         }

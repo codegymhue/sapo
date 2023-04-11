@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.contact.ContactCustomerService;
+import vn.sapo.contact.ContactMapper;
+import vn.sapo.contact.dto.ContactResult;
 import vn.sapo.contact.dto.CreateContactParam;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customers.AddressService;
@@ -16,6 +18,7 @@ import vn.sapo.customer.dto.CustomerFilter;
 import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customer.dto.UpdateCustomerParam;
 import vn.sapo.customers.dto.CreateAddressParam;
+import vn.sapo.entities.Contact;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerStatus;
 import vn.sapo.excel.ExcelService;
@@ -49,6 +52,18 @@ public class CustomerServiceImpl implements CustomerService {
     private ContactCustomerService contactCustomerService;
     @Autowired
     private EMailSender eMailSender;
+
+    @Autowired
+    private ContactMapper contactMapper;
+
+    @Override
+    public Set<ContactResult> getAllContactsByCustomerId(Integer customerId) {
+        Customer customer = findCustomerById(customerId);
+        Set<Contact> contacts = customer.getContacts();
+        Set<ContactResult> contactResults = contacts.stream().map(contactMapper::toDTO).collect(Collectors.toSet());
+
+        return contactResults;
+    }
 
     @Override
     @Transactional(readOnly = true)
