@@ -11,6 +11,7 @@ import vn.sapo.contact.ContactCustomerService;
 import vn.sapo.contact.ContactMapper;
 import vn.sapo.contact.dto.ContactResult;
 import vn.sapo.contact.dto.CreateContactParam;
+import vn.sapo.contact.dto.UpdateContactParam;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customers.AddressService;
 import vn.sapo.customer.dto.CreateCustomerParam;
@@ -26,9 +27,11 @@ import vn.sapo.mail.EMailSender;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
+import vn.sapo.shared.parsers.JacksonParser;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -57,12 +60,41 @@ public class CustomerServiceImpl implements CustomerService {
     private ContactMapper contactMapper;
 
     @Override
+    @Transactional
+    public ContactResult updateCustomerContactById(Integer customerId, UpdateContactParam param) {
+        Customer customer = findCustomerById(customerId);
+        Set<Contact> contacts = customer.getContacts();
+        Set<Contact> newContacts = customer
+                .getContacts()
+                .stream()
+                .filter(e -> !e.getId().equals(param.getId()))
+                .collect(Collectors.toSet());
+
+        for (Contact contact : contacts) {
+            if (contact.getId().equals(param.getId())) {
+                Contact newContact = contactMapper.toModel(param)
+                        .setCreatedAt(contact.getCreatedAt())
+                        .setStatus(contact.getStatus())
+                        .setUpdatedAt(Instant.now());
+
+                newContacts.add(newContact);
+
+//                customer.setContacts(newContacts);
+                customerRepository.updateCustomerContactById(customerId, JacksonParser.INSTANCE.toJson(newContacts));
+                break;
+            }
+        }
+
+
+        return contactCustomerService.getCustomerContactById(customerId, param.getId());
+    }
+
+    @Override
     public Set<ContactResult> getAllContactsByCustomerId(Integer customerId) {
         Customer customer = findCustomerById(customerId);
         Set<Contact> contacts = customer.getContacts();
-        Set<ContactResult> contactResults = contacts.stream().map(contactMapper::toDTO).collect(Collectors.toSet());
 
-        return contactResults;
+        return contacts.stream().map(contactMapper::toDTO).collect(Collectors.toSet());
     }
 
     @Override

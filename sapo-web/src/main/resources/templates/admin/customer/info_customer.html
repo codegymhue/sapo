@@ -666,6 +666,7 @@
     $('.btnCloseEditContactModal').click(() => {
         CustomerApp.page.elements.frmEditContact[0].reset();
         contactEditValidate.resetForm();
+        $(".error.show").addClass('hidden').removeClass('show')
 
         CustomerApp.setNullObj(updateContactParam, null);
     })

@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.contact.dto.ContactResult;
 import vn.sapo.contact.dto.CreateContactParam;
 import vn.sapo.contact.dto.DeletedContactResult;
-import vn.sapo.contact.dto.UpdateContactParam;
 import vn.sapo.entities.Contact;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.shared.exceptions.NotFoundException;
@@ -27,31 +26,8 @@ public class ContactCustomerServiceImpl implements ContactCustomerService {
     private ContactCustomerRepository contactCustomerRepository;
 
     @Override
-    @Transactional
-    public ContactResult updateCustomerContactById(Integer customerId, UpdateContactParam param) {
-        Customer customer = findCustomerById(customerId);
-        Set<Contact> contacts =  customer.getContacts();
-
-        for (Contact contact : contacts) {
-            if (contact.getId().equals(param.getId())) {
-                contact.setFullName(param.getFullName())
-                        .setPhoneNumber(param.getPhoneNumber())
-                        .setEmail(param.getEmail())
-                        .setFax(param.getFax())
-                        .setPosition(param.getPosition())
-                        .setDepartment(param.getDepartment())
-                        .setNote(param.getNote());
-                break;
-            }
-        }
-
-        contactCustomerRepository.save(customer.setContacts(contacts));
-        return getCustomerContactById(customerId, param.getId());
-    }
-
-    @Override
     public ContactResult getCustomerContactById(Integer customerId, Long id) {
-        Set<Contact> contacts =  findCustomerById(customerId).getContacts();
+        Set<Contact> contacts = findCustomerById(customerId).getContacts();
         ContactResult dto = null;
         for (Contact contact : contacts) {
             if (contact.getId().equals(id)) {
@@ -70,13 +46,13 @@ public class ContactCustomerServiceImpl implements ContactCustomerService {
     @Transactional
     public DeletedContactResult deleteCustomerContactById(Integer customerId, Set<Long> ids) {
         Customer customer = findCustomerById(customerId);
-        Set<Contact> contacts =  customer.getContacts();
+        Set<Contact> contacts = customer.getContacts();
         Set<Contact> newContacts = new HashSet<>(contacts);
         List<String> deletedNames = new ArrayList<>();
         int i = 0;
         for (Contact contact : contacts) {
             for (Long id : ids) {
-                if (contact.getId().equals(id)){
+                if (contact.getId().equals(id)) {
                     deletedNames.add(contact.getFullName());
                     i++;
                     newContacts.remove(contact);

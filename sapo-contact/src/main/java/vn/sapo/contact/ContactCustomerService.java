@@ -11,8 +11,6 @@ import java.util.Set;
 
 public interface ContactCustomerService {
 
-    ContactResult updateCustomerContactById(Integer customerId, UpdateContactParam updateContactParam);
-
     ContactResult getCustomerContactById(Integer customerId, Long id);
 
     DeletedContactResult deleteCustomerContactById(Integer customerId, Set<Long> ids);
