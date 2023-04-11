@@ -336,6 +336,7 @@
 </body>
 <th:block th:replace="/admin/customer/modal_delete_customer"/>
 <th:block th:replace="/admin/customer/modal/contact/modal_createContact"/>
+<th:block th:replace="/admin/customer/modal/contact/modal_editContact"/>
 <th:block th:replace="/admin/customer/modal/contact/modal_deleteContact"/>
 <th:block th:replace="/admin/customer/modal/contact/modal_resultDeleteContact"/>
 <th:block th:replace="/admin/customer/modal/address/modal_createAddress"/>
@@ -354,6 +355,7 @@
     let addressDataTable = {};
     let contactDataTable = {};
     let updateAddressParam = {};
+    let updateContactParam = {};
     const listAddressId = new Set();
     const listContactId = new Set();
     let tbContact = {};
@@ -398,6 +400,7 @@
 
     //start contact
     CustomerApp.page.elements.frmCreateContact = $("#frmCreateContact");
+    CustomerApp.page.elements.frmEditContact = $("#frmEditContact");
 
     CustomerApp.page.elements.btnContacts = $("#btnContacts");
 
@@ -414,6 +417,7 @@
     CustomerApp.page.dialogs.elements.btnCreateContact = $("#btnCreateContact");
     CustomerApp.page.elements.modalDeleteContact = $("#modalDeleteContact");
     CustomerApp.page.elements.modalResultDeleteContact = $("#modalResultDeleteContact");
+    CustomerApp.page.elements.modalEditContact = $("#modalEditContact");
     //end contact
 
     //start address
@@ -552,13 +556,148 @@
         }
     }
 
-    //start check all select
-    // $('#checkAllContacts').click(function (e) {
-    //     $('#tbContact tbody :checkbox').prop('checked', $(this).is(':checked'));
-    //     e.stopImmediatePropagation();
-    // });
+    //start update contact
+    CustomerApp.page.commands.editContact = () => {
+        let customerId = +window.location.pathname.split('/')[3];
+        let id = updateContactParam.id;
+        console.log(id)
+        updateContactParam.fullName = CustomerApp.getValue($("#fullNameContactEdit"));
+        updateContactParam.phoneNumber = CustomerApp.getValue($("#phoneContactEdit"));
+        updateContactParam.email = CustomerApp.getValue($("#emailContactEdit"));
+        updateContactParam.fax = CustomerApp.getValue($("#faxContactEdit"));
+        updateContactParam.position = CustomerApp.getValue($("#positionContactEdit"));
+        updateContactParam.department = CustomerApp.getValue($("#departmentContactEdit"));
+        updateContactParam.note = CustomerApp.getValue($("#noteContactEdit"));
 
-    //end check all select
+        console.log(updateContactParam)
+
+        $.ajax({
+            headers: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "PATCH",
+            url: origin + `/api/customers/${customerId}/contact/${id}`,
+            data: JSON.stringify(updateContactParam)
+        })
+            .done((data) => {
+                console.log(data)
+                CustomerApp.IziToast.showSuccessAlert('Cập nhật liên hệ thành công');
+                CustomerApp.page.elements.modalEditContact.modal('hide');
+                CustomerApp.page.elements.frmEditContact[0].reset();
+
+                // CustomerApp.redrawDatatables(addressDataTable, origin + `/api/addresses`)
+            })
+            .fail((jqXHR) => {
+                let errors = jqXHR.responseJSON.errors;
+
+                errors.fullName ? CustomerApp.showErrorValidate($(".fullNameContactEdit-error.error"), errors.fullName) : '';
+
+                errors.phoneNumber ? CustomerApp.showErrorValidate($(".phoneContactEdit-error.error"), errors.phoneNumber) : '';
+
+                errors.email ? CustomerApp.showErrorValidate($(".emailContactEdit-error.error"), errors.email) : '';
+
+                errors.fax ? CustomerApp.showErrorValidate($(".faxContactEdit-error.error"), errors.fax) : '';
+
+                errors.position ? CustomerApp.showErrorValidate($(".positionContactEdit-error.error"), errors.position) : '';
+
+                errors.department ? CustomerApp.showErrorValidate($(".departmentContactEdit-error.error"), errors.department) : '';
+
+                errors.note ? CustomerApp.showErrorValidate($(".noteContactEdit-error.error"), errors.note) : '';
+
+            })
+    };
+
+    let contactEditValidate = CustomerApp.page.elements.frmEditContact.validate({
+        rules: {
+            fullNameContactEdit: {
+                maxlength: 255
+            },
+            phoneContactEdit: {
+                isValidPhone: true,
+            },
+            emailContactEdit: {
+                isValidEmail: true,
+            },
+            faxContactEdit: {
+                isValidFax: true,
+            },
+            positionContactEdit: {
+                maxlength: 50
+            },
+            departmentContactEdit: {
+                maxlength: 255
+            },
+            noteContactEdit: {
+                maxlength: 255
+            }
+        },
+        messages: {
+            fullNameContactEdit: {
+                maxlength: "Họ tên không được vượt quá 255 ký tự"
+            },
+            positionContactEdit: {
+                maxlength: 'Chức vụ không được vượt quá 50 ký tự'
+            },
+            departmentContactEdit: {
+                maxlength: 'Bộ phận không được vượt quá 255 ký tự',
+            },
+            noteContactEdit: {
+                maxlength: 'Ghi chú không được vượt quá 255 ký tự',
+            }
+        },
+        errorElement: 'label',
+        errorPlacement: (error, element) => {
+            error ? $(".error.hidden").addClass('show').removeClass('hidden') : '';
+            error.appendTo(element.parent().next("div"));
+        },
+        submitHandler: () => {
+            CustomerApp.page.commands.editContact();
+        },
+        invalidHandler: () => {
+            CustomerApp.IziToast.showErrorAlert('Vui lòng nhập đúng thông tin')
+        }
+    });
+
+    $("#btnEditContact").click(() => {
+        CustomerApp.page.elements.frmEditContact.trigger('submit');
+    })
+
+    $('.btnCloseEditContactModal').click(() => {
+        CustomerApp.page.elements.frmEditContact[0].reset();
+        contactEditValidate.resetForm();
+
+        CustomerApp.setNullObj(updateContactParam, null);
+    })
+
+    $("#tbContact tbody").on('click', "tr td:not(:first-child)", function () {
+        let customerId = +window.location.pathname.split('/')[3];
+        let id = contactDataTable.row(this).data().id;
+
+        updateContactParam.id = id;
+        CustomerApp.page.elements.modalEditContact.modal('show');
+
+        $.ajax({
+            type: "GET",
+            url: origin + `/api/customers/${customerId}/contact/${id}`
+        })
+            .done((data) => {
+                let {fullName, phoneNumber, email, fax, position, department, note} = data;
+                console.log(data)
+                fullName ? $("#fullNameContactEdit").val(fullName) : '';
+                phoneNumber ? $("#phoneContactEdit").val(phoneNumber) : '';
+                email ? $("#emailContactEdit").val(email) : '';
+                fax ? $("#faxContactEdit").val(fax) : '';
+                position ? $("#positionContactEdit").val(position) : '';
+                department ? $("#departmentContactEdit").val(department) : '';
+                note ? $("#noteContactEdit").val(note) : '';
+
+            })
+            .fail((jqXHR) => {
+                console.log(jqXHR)
+            })
+    });
+    //end update contact
     //start delete one or more customer's contact
     CustomerApp.page.commands.deleteOneOrMoreCustomerContact = () => {
         $('#tbContact tbody tr td input[type="checkbox"]').change(function () {
@@ -1235,7 +1374,7 @@
 
     $("#tbAddress tbody").on('click', " tr td:not(:first-child)", function () {
         let id = addressDataTable.row(this).data().id;
-        console.log($(this))
+
         updateAddressParam.id = id;
         CustomerApp.page.elements.modalEditAddress.modal('show');
 
@@ -1245,7 +1384,7 @@
         })
             .done((data) => {
                 let address = {...data};
-                console.log(data)
+
                 data.fullName ? $("#fullNameAddressEdit").val(data.fullName) : '';
                 data.phoneNumber ? $("#phoneAddressEdit").val(data.phoneNumber) : '';
                 data.line1 ? $("#line1Edit").val(data.line1) : '';

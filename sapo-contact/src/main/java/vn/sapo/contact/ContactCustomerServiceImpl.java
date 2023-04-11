@@ -9,13 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.contact.dto.ContactResult;
 import vn.sapo.contact.dto.CreateContactParam;
 import vn.sapo.contact.dto.DeletedContactResult;
+import vn.sapo.contact.dto.UpdateContactParam;
 import vn.sapo.entities.Contact;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.shared.exceptions.NotFoundException;
 
 import java.time.Instant;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,6 +25,46 @@ public class ContactCustomerServiceImpl implements ContactCustomerService {
 
     @Autowired
     private ContactCustomerRepository contactCustomerRepository;
+
+    @Override
+    @Transactional
+    public ContactResult updateCustomerContactById(Integer customerId, UpdateContactParam param) {
+        Customer customer = findCustomerById(customerId);
+        Set<Contact> contacts =  customer.getContacts();
+
+        for (Contact contact : contacts) {
+            if (contact.getId().equals(param.getId())) {
+                contact.setFullName(param.getFullName())
+                        .setPhoneNumber(param.getPhoneNumber())
+                        .setEmail(param.getEmail())
+                        .setFax(param.getFax())
+                        .setPosition(param.getPosition())
+                        .setDepartment(param.getDepartment())
+                        .setNote(param.getNote());
+                break;
+            }
+        }
+
+        contactCustomerRepository.save(customer.setContacts(contacts));
+        return getCustomerContactById(customerId, param.getId());
+    }
+
+    @Override
+    public ContactResult getCustomerContactById(Integer customerId, Long id) {
+        Set<Contact> contacts =  findCustomerById(customerId).getContacts();
+        ContactResult dto = null;
+        for (Contact contact : contacts) {
+            if (contact.getId().equals(id)) {
+                dto = contactMapper.toDTO(contact);
+                break;
+            }
+        }
+
+        if (dto == null)
+            throw new NotFoundException("contact.exception.notFound");
+
+        return dto;
+    }
 
     @Override
     @Transactional
@@ -43,10 +83,6 @@ public class ContactCustomerServiceImpl implements ContactCustomerService {
                 }
             }
         }
-
-//        for (Long id :ids) {
-//            newContacts.removeIf(contact -> contact.getId().equals(id));
-//        }
 
         customer.setContacts(newContacts);
         contactCustomerRepository.save(customer);

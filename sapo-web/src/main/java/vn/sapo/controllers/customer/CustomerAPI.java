@@ -13,6 +13,7 @@ import vn.sapo.contact.ContactCustomerService;
 import vn.sapo.contact.dto.ContactResult;
 import vn.sapo.contact.dto.CreateContactParam;
 import vn.sapo.contact.dto.DeletedContactResult;
+import vn.sapo.contact.dto.UpdateContactParam;
 import vn.sapo.customer.CustomerService;
 import vn.sapo.customer.dto.*;
 import vn.sapo.customerGroup.CustomerGroupService;
@@ -71,6 +72,13 @@ public class CustomerAPI extends BaseController {
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
         CustomerResult dto = customerService.findById(id);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+    @GetMapping("/{customerId}/contact/{id}")
+    private ResponseEntity<?> getCustomerContactById(@PathVariable Integer customerId, @PathVariable Long id) {
+        ContactResult dto = contactCustomerService.getCustomerContactById(customerId, id);
+
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
@@ -149,6 +157,14 @@ public class CustomerAPI extends BaseController {
     @PatchMapping
     public ResponseEntity<?> updateSeriesCustomer(@RequestBody CustomerUpdateSeries customerUpdateSeries) {
         return new ResponseEntity<>(customerService.updateSeries(customerUpdateSeries), HttpStatus.OK);
+    }
+
+    @PatchMapping("/{customerId}/contact/{id}")
+    private ResponseEntity<?> updateCustomerContactById(@PathVariable Integer customerId,
+                                                        @RequestBody @Validated UpdateContactParam updateContactParam) {
+        ContactResult dto = contactCustomerService.updateCustomerContactById(customerId, updateContactParam);
+
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     @PutMapping("/updateStatus")
