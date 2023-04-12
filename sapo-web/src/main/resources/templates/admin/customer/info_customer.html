@@ -31,12 +31,12 @@
                             Xóa khách hàng
                         </span>
                     </button>
-<!--                    <button id="btn-create-voucher" class="FmJDc">-->
-<!--                        <span class="sc-papXJ ffDJGn">Tạo phiếu thu/chi</span>-->
-<!--                        <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">-->
-<!--                            <path d="M7 10l5 5 5-5z"></path>-->
-<!--                        </svg>-->
-<!--                    </button>-->
+                    <!--                    <button id="btn-create-voucher" class="FmJDc">-->
+                    <!--                        <span class="sc-papXJ ffDJGn">Tạo phiếu thu/chi</span>-->
+                    <!--                        <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">-->
+                    <!--                            <path d="M7 10l5 5 5-5z"></path>-->
+                    <!--                        </svg>-->
+                    <!--                    </button>-->
                 </div>
             </div>
         </div>
@@ -460,7 +460,7 @@
         $('#tbContact').show();
         $('#tbCustomerGroup').addClass('hidden').removeClass('show');
 
-        if(currentCustomer.contacts.length > 0){
+        if (currentCustomer.contacts.length > 0) {
             $("#noContact").addClass('hidden').removeClass('show');
             $("#tbContact_wrapper").parent().addClass('show').removeClass('hidden');
         } else {
@@ -804,6 +804,14 @@
         })
             .done((data) => {
                 console.log(data)
+                $("#checkAllContacts").prop({indeterminate: false, checked: false})
+                if (currentCustomer.contacts.length === 0){
+                    $("#noContact").addClass("show").removeClass('hidden');
+                    $("#tbContact_wrapper").addClass("hidden").removeClass('show');
+                } else {
+                    $("#tbContact thead tr th:not(:first-child)").addClass("show").removeClass('hidden');
+                    $("#contactActionContainer").addClass("hidden").removeClass('show');
+                }
                 let {namesDeleted, numberOfSuccess, numberOfFail, addressResult, idsDeleted} = data;
 
                 CustomerApp.page.elements.modalDeleteContact.modal('hide');
@@ -885,8 +893,8 @@
             data: JSON.stringify(contactParam)
         })
             .done((data) => {
-                    $("#tbContact_wrapper").removeClass('hidden').addClass('show');
-                    $("#noContact").removeClass('show').addClass('hidden');
+                $("#tbContact_wrapper").parent().removeClass('hidden').addClass('show');
+                $("#noContact").removeClass('show').addClass('hidden');
 
 
                 $("#modalCreateContact").modal('hide');
