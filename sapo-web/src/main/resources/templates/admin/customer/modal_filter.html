@@ -431,6 +431,44 @@
             })
         }
         let customerFilter = {};
+        function resetFilter(){
+            //reset group
+            let checkboxGroupIds = $("#customerGroupFilter input")
+            for(let i=0; i<checkboxGroupIds.length; i++){
+                $(checkboxGroupIds[i]).prop("checked", false);
+            }
+            //reset Gender
+            let genders = $("input[name='flexRadioDefault']");
+            for(let i=0; i<genders.length; i++){
+                $(genders[i]).prop("checked",false);
+            }
+            // reset DayOfBirth
+            $("#allDay").text("chọn ngày");
+            // reset YearOfBirth
+            $("#allYear").text("chọn tháng");
+            // reset EmployeeId
+            let employees = $("#employeeNameFilter input");
+            for(let i=0; i<employees.length; i++){
+                $(employees[i]).prop("checked", false);
+            }
+            // reset Status
+            let status = $("#statusContact input");
+            for(let i=0; i<status.length; i++){
+                $(status[i]).prop("checked",false);
+            }
+            // reset keyWord
+            $("#inp-search").val("");
+            // reset createdFrom
+            $("#createDayBegin").val("");
+            // reset createdEnd
+            $("#createDayEnd").val("");
+            // reset birthDayFrom
+            $("#birthDayBegin").val("");
+            // reset birthDayEnd
+            $("#birthDayEnd").val("");
+            // reset BirthDay   
+            $("#birthDayFilter").val("");
+        }
         //lay cac check box group da dc check
         function getGroupIdsChecked(){
             let groupIds = [];
