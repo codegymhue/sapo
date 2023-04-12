@@ -26,6 +26,7 @@ import vn.sapo.shared.controllers.BaseController;
 import vn.sapo.voucher.receipt.ReceiptVoucherService;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Set;
@@ -110,6 +111,11 @@ public class CustomerAPI extends BaseController {
         Page<CustomerResult> pageableCustomers = customerService.findAllByFilters(customerFilter, pageable);
 
         CustomerDataTable customerDataTable = new CustomerDataTable();
+        List<CustomerResult> data = pageableCustomers.getContent();
+        for(int i=0; i<data.size(); i++){
+            if(data.get(i).getDebtTotal()==null) data.get(i).setDebtTotal(new BigDecimal(0));
+            if(data.get(i).getSpendTotal()==null) data.get(i).setSpendTotal(new BigDecimal(0));
+        }
 
         if (pageableCustomers != null) {
             customerDataTable.setRecordsTotal(pageableCustomers.getTotalElements());
