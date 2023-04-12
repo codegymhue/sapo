@@ -85,20 +85,22 @@
             'fullName',
             'phoneNumber',
             'group.title',
-            'debtTotal',
-            'spendTotal',
-            "quantityItemOrder",
-            "email",
-            "group.cusGrpCode",
-            "birthday",
             "gender",
+            "email",
+            "birthday",
+
+            "group.cusGrpCode",
             "description",
             "status",
             "employee.fullName",
             "quantityProductOrder",
             "taxCode",
             "fax",
-            "website"
+            "website",
+
+            'debtTotal',
+            'spendTotal',
+            "quantityItemOrder",
         ];
         let column = [];
         let nameThead = {
@@ -106,13 +108,13 @@
             "fullName": "Tên khách hàng",
             "phoneNumber": "Số điện thoại",
             'group.title':"Nhóm khách hàng",
+            "birthday": "Ngày sinh",
+            "gender": "Giới tính",
+            "email": "Email",
             'debtTotal':"Tổng công nợ",
             'spendTotal': "Tổng chi tiêu",
             'quantityItemOrder': "Tổng SL sản phẩm đã mua",
-            "email": "Email",
             "group.cusGrpCode": "Mã nhóm khách hàng",
-            "birthday": "Ngày sinh",
-            "gender": "Giới tính",
             "description": "Mô tả",
             "status":"Trạng thái giao dịch",
             "employee.fullName": "Nhân viên giao dịch",
@@ -598,20 +600,20 @@
                     }
                 },
                 {
-                        targets: thead.indexOf("status")+2,
-                        render: function (data, type, row, meta) {
-                            return `<td><span style="${row.status==="AVAILABLE"?"color:green":"color:red"}">${row.status==="AVAILABLE"?"Đang giao dịch":row.status==="UNAVAILABLE"?"Ngừng giao dịch":""}</span></td>`;
-                        }
+                    targets: thead.indexOf("status")+2,
+                    render: function (data, type, row, meta) {
+                        return `<td><span style="${row.status==="AVAILABLE"?"color:green":"color:red"}">${row.status==="AVAILABLE"?"Đang giao dịch":row.status==="UNAVAILABLE"?"Ngừng giao dịch":""}</span></td>`;
+                    }
                 },
                 {
-                        targets: thead.indexOf("birthday")+2,
-                        render: function (data, type, row, meta) {
-                            return `<td>${
-                                row.birthday != undefined?
-                                row.birthday.split("T")[0].split("-").reverse().join("-"):
-                                ""
-                            }</td>`;
-                        }
+                    targets: thead.indexOf("birthday")+2,
+                    render: function (data, type, row, meta) {
+                        return `<td>${
+                            row.birthday != undefined?
+                            row.birthday.split("T")[0].split("-").reverse().join("-"):
+                            ""
+                        }</td>`;
+                    }
                 },
                 ],
             });
