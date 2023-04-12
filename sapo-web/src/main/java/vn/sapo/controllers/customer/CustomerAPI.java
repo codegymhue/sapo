@@ -168,7 +168,7 @@ public class CustomerAPI extends BaseController {
     @PatchMapping("/{customerId}/contact/{id}")
     private ResponseEntity<?> updateCustomerContactById(@PathVariable Integer customerId,
                                                         @RequestBody @Validated UpdateContactParam updateContactParam) {
-        ContactResult dto = contactCustomerService.updateCustomerContactById(customerId, updateContactParam);
+        ContactResult dto = customerService.updateCustomerContactById(customerId, updateContactParam);
 
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }

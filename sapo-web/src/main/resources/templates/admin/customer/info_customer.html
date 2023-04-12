@@ -31,12 +31,12 @@
                             Xóa khách hàng
                         </span>
                     </button>
-                    <button id="btn-create-voucher" class="FmJDc">
-                        <span class="sc-papXJ ffDJGn">Tạo phiếu thu/chi</span>
-                        <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M7 10l5 5 5-5z"></path>
-                        </svg>
-                    </button>
+<!--                    <button id="btn-create-voucher" class="FmJDc">-->
+<!--                        <span class="sc-papXJ ffDJGn">Tạo phiếu thu/chi</span>-->
+<!--                        <svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">-->
+<!--                            <path d="M7 10l5 5 5-5z"></path>-->
+<!--                        </svg>-->
+<!--                    </button>-->
                 </div>
             </div>
         </div>
@@ -459,6 +459,14 @@
         $('#tbContact_wrapper').show();
         $('#tbContact').show();
         $('#tbCustomerGroup').addClass('hidden').removeClass('show');
+
+        if(currentCustomer.contacts.length > 0){
+            $("#noContact").addClass('hidden').removeClass('show');
+            $("#tbContact_wrapper").parent().addClass('show').removeClass('hidden');
+        } else {
+            $("#noContact").addClass('show').removeClass('hidden');
+            $("#tbContact_wrapper").parent().addClass('hidden').removeClass('show');
+        }
     })
 
     CustomerApp.page.commands.drawContactDataTable = () => {
@@ -470,90 +478,91 @@
             $("#tbContact").parent().removeClass('hidden').addClass('show');
             $("#noContact").removeClass('show').addClass('hidden');
 
-            contactDataTable = CustomerApp.page.elements.tbContact.DataTable({
-                dom: '<"top">Brt<"bottom"lifp><"clear">',
-                processing: CustomerApp.dataTableDetails.language.processing,
-                serverSide: true,
-                searching: false,
-                ordering: false,
-                ajax: {
-                    type: 'POST',
-                    url: origin + `/api/customers/${id}/contacts/pagination`,
-                    accept: 'application/json',
-                    contentType: 'application/json',
-                    data: function (d) {
-                        return JSON.stringify(d);
-                    }
-                },
-                language: CustomerApp.dataTableDetails.language,
-                lengthMenu: [
-                    [3, 20, 50, 100],
-                    ['3', "20", "50", "100"]
-                ],
-                aoColumns: [
-                    {
-                        mData: 'id',
-                        className: 'hYsv8 nYvd3',
-                        target: 0
-                    },
-                    {
-                        mData: 'fullName',
-                        render: (data, type, row) => {
-                            return row.fullName || '';
-                        },
-                        className: 's7uel',
-                        target: 1
-                    },
-                    {
-                        mData: 'phoneNumber',
-                        render: (data, type, row) => {
-                            return row.phoneNumber || '';
-                        },
-                        className: 's7uel',
-                        target: 2
-                    },
-                    {
-                        mData: 'email',
-                        render: (data, type, row) => {
-                            return row.email || '';
-                        },
-                        className: 's7uel',
-                        target: 3
-                    },
-                    {
-                        mData: 'position',
-                        render: (data, type, row) => {
-                            return row.position || '';
-                        },
-                        className: 's7uel',
-                        target: 4
-                    },
-                    {
-                        mData: 'department',
-                        render: (data, type, row) => {
-                            return row.department || '';
-                        },
-                        className: 's7uel',
-                        target: 5
-                    }
-                ],
-                columnDefs: [{
-                    targets: 0,
-                    render: function (data, type, row, meta) {
-                        return `<input id=${row.id} type="checkbox"/>`
-                    }
-                }],
-                fnCreatedRow: function (nRow, aData, iDataIndex) {
-                    $(nRow).attr('id', aData.id);
-                },
-                initComplete: function (setting, json) {
-                    CustomerApp.page.commands.deleteOneOrMoreCustomerContact();
-                },
-                drawCallback: () => {
-                    CustomerApp.page.commands.deleteOneOrMoreCustomerContact();
-                }
-            })
         }
+        contactDataTable = CustomerApp.page.elements.tbContact.DataTable({
+            dom: '<"top">Brt<"bottom"lifp><"clear">',
+            processing: CustomerApp.dataTableDetails.language.processing,
+            serverSide: true,
+            searching: false,
+            ordering: false,
+            ajax: {
+                type: 'POST',
+                url: origin + `/api/customers/${id}/contacts/pagination`,
+                accept: 'application/json',
+                contentType: 'application/json',
+                data: function (d) {
+                    return JSON.stringify(d);
+                }
+            },
+            language: CustomerApp.dataTableDetails.language,
+            lengthMenu: [
+                [20, 50, 100],
+                ["20", "50", "100"]
+            ],
+            aoColumns: [
+                {
+                    mData: 'id',
+                    className: 'hYsv8 nYvd3',
+                    target: 0
+                },
+                {
+                    mData: 'fullName',
+                    render: (data, type, row) => {
+                        return row.fullName || '';
+                    },
+                    className: 's7uel',
+                    target: 1
+                },
+                {
+                    mData: 'phoneNumber',
+                    render: (data, type, row) => {
+                        return row.phoneNumber || '';
+                    },
+                    className: 's7uel',
+                    target: 2,
+                    flex: 1
+                },
+                {
+                    mData: 'email',
+                    render: (data, type, row) => {
+                        return row.email || '';
+                    },
+                    className: 's7uel',
+                    target: 3
+                },
+                {
+                    mData: 'position',
+                    render: (data, type, row) => {
+                        return row.position || '';
+                    },
+                    className: 's7uel',
+                    target: 4
+                },
+                {
+                    mData: 'department',
+                    render: (data, type, row) => {
+                        return row.department || '';
+                    },
+                    className: 's7uel',
+                    target: 5
+                }
+            ],
+            columnDefs: [{
+                targets: 0,
+                render: function (data, type, row, meta) {
+                    return `<input id=${row.id} type="checkbox"/>`
+                }
+            }],
+            fnCreatedRow: function (nRow, aData, iDataIndex) {
+                $(nRow).attr('id', aData.id);
+            },
+            initComplete: function (setting, json) {
+                CustomerApp.page.commands.deleteOneOrMoreCustomerContact();
+            },
+            drawCallback: () => {
+                CustomerApp.page.commands.deleteOneOrMoreCustomerContact();
+            }
+        })
     }
 
     //start update contact
@@ -569,8 +578,6 @@
         updateContactParam.department = CustomerApp.getValue($("#departmentContactEdit"));
         updateContactParam.note = CustomerApp.getValue($("#noteContactEdit"));
 
-        console.log(updateContactParam)
-
         $.ajax({
             headers: {
                 "accept": "application/json",
@@ -581,12 +588,11 @@
             data: JSON.stringify(updateContactParam)
         })
             .done((data) => {
-                console.log(data)
                 CustomerApp.IziToast.showSuccessAlert('Cập nhật liên hệ thành công');
                 CustomerApp.page.elements.modalEditContact.modal('hide');
                 CustomerApp.page.elements.frmEditContact[0].reset();
 
-                // CustomerApp.redrawDatatables(addressDataTable, origin + `/api/addresses`)
+                CustomerApp.redrawDatatables(contactDataTable, origin + `/api/customers/${customerId}/contacts`)
             })
             .fail((jqXHR) => {
                 let errors = jqXHR.responseJSON.errors;
@@ -666,6 +672,7 @@
     $('.btnCloseEditContactModal').click(() => {
         CustomerApp.page.elements.frmEditContact[0].reset();
         contactEditValidate.resetForm();
+        $(".error.show").addClass('hidden').removeClass('show')
 
         CustomerApp.setNullObj(updateContactParam, null);
     })
@@ -878,7 +885,10 @@
             data: JSON.stringify(contactParam)
         })
             .done((data) => {
-                console.log(data)
+                    $("#tbContact_wrapper").removeClass('hidden').addClass('show');
+                    $("#noContact").removeClass('show').addClass('hidden');
+
+
                 $("#modalCreateContact").modal('hide');
                 CustomerApp.IziToast.showSuccessAlert('Thêm mới liên hệ thành công');
 
@@ -886,6 +896,7 @@
 
                 let {fullName, phoneNumber, email, fax, position, department, note} = data;
 
+                // CustomerApp.redrawDatatables(contactDataTable, origin + `/api/customers/${id}/contacts`)
                 contactDataTable.row.add([fullName, phoneNumber, email, fax, position, department, note]).draw(false);
 
             })

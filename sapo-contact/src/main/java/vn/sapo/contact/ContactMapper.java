@@ -31,6 +31,10 @@ public class ContactMapper {
         return modelMapper.map(createParam, Contact.class);
     }
 
+    public Contact toModel(UpdateContactParam updateParam) {
+        return modelMapper.map(updateParam, Contact.class);
+    }
+
     public void transferFields(UpdateContactParam updateParam, Contact supplier) {
         modelMapperSkipNullDisabled.map(updateParam, supplier);
     }

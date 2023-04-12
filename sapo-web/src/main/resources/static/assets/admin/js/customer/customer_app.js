@@ -135,6 +135,36 @@ class CustomerApp {
         });
     }
 
+    static searchDefaultPriceDropdown = () => {
+        let filter, input, div, a, i;
+
+        input = CustomerApp.page.elements.searchDefaultPriceDropdown;
+
+        filter = input.val().toUpperCase();
+
+        div = document.getElementById("defaultPriceDropdown");
+
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            let txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
+
+    static selectPricePolicy = () => {
+        $(".selectPricePolicy").on('click', function () {
+            defaultPricingPolicyId = $(this).data('id');
+            let value = $(this).data('value');
+
+            CustomerApp.page.elements.selectedPriceDefault.text(value);
+            CustomerApp.page.elements.defaultPriceDropdown[0].classList.toggle("show")
+        })
+    }
+
     static page = {
         urls: {
             getAllCustomers: CustomerApp.BASE_URL_CUSTOMER,

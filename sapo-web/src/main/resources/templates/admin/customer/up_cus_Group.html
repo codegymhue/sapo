@@ -454,7 +454,7 @@
     CustomerApp.page.commands.selectDefaultPricePolicy = () => {
         $(".selectDefaultPricePolicy").on('click', function () {
             currentCustomerGroup.defaultPricingPolicyId = $(this).data('id');
-            let value = $(this).data('value');
+            let value = $(this).text();
 
             CustomerApp.page.elements.selectedPriceDefault.text(value);
             CustomerApp.page.elements.defaultPriceDropdown[0].classList.toggle("show")
@@ -521,7 +521,7 @@
             url: origin + "/api/pricing-policies",
             data: JSON.stringify(pricingPolicy)
         }).done((data) => {
-            let str = `<a class="jss23775 selectPricePolicy" data-id="${data.id}" data-value="${data.title}">
+            let str = `<a class="jss23775 selectDefaultPricePolicy" data-id="${data.id}" data-value="${data.title}">
                          ${data.title}
                        </a>`;
 
@@ -529,7 +529,7 @@
             CustomerApp.IziToast.showSuccessAlert("Thêm mới chính sách giá thành công")
             CustomerApp.page.elements.modalCreatePricePolicy.modal("hide");
             CustomerApp.page.elements.frmCreatePricePolicy[0].reset();
-            CustomerApp.page.commands.selectPricePolicy();
+            CustomerApp.page.commands.selectDefaultPricePolicy();
         })
             .fail((jqXHR) => {
 
@@ -645,6 +645,17 @@
             CustomerApp.page.commands.createPricePolicy();
         },
     });
+
+    // CustomerApp.page.commands.selectPricePolicy = () => {
+    //     $(".selectPricePolicy").on('click', function () {
+    //         defaultPricingPolicyId = $(this).data('id');
+    //         let value = $(this).data('value');
+    //         console.log($(this).data('value'))
+    //
+    //         CustomerApp.page.elements.selectedPriceDefault.text(value);
+    //         CustomerApp.page.elements.defaultPriceDropdown[0].classList.toggle("show")
+    //     })
+    // }
     //end create default pricing policy
 
 </script>

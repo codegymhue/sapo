@@ -1,5 +1,6 @@
 package vn.sapo.entities.customer;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.hypersistence.utils.hibernate.type.json.JsonType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,6 @@ import vn.sapo.entities.*;
 import vn.sapo.entities.product.pricing_policy.PricingPolicy;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.*;
 
