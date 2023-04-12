@@ -569,7 +569,7 @@
     CustomerApp.page.commands.editContact = () => {
         let customerId = +window.location.pathname.split('/')[3];
         let id = updateContactParam.id;
-        console.log(id)
+
         updateContactParam.fullName = CustomerApp.getValue($("#fullNameContactEdit"));
         updateContactParam.phoneNumber = CustomerApp.getValue($("#phoneContactEdit"));
         updateContactParam.email = CustomerApp.getValue($("#emailContactEdit"));
@@ -1163,18 +1163,23 @@
     //start edit address
     CustomerApp.page.commands.editAddress = () => {
         let id = updateAddressParam.id;
-        console.log(id)
+
         updateAddressParam.fullName = CustomerApp.getValue($("#fullNameAddressEdit"));
         updateAddressParam.phoneNumber = CustomerApp.getValue($("#phoneAddressEdit"));
         updateAddressParam.line1 = CustomerApp.getValue($("#line1Edit"));
         updateAddressParam.email = CustomerApp.getValue($("#emailEdit"));
         updateAddressParam.zipCode = CustomerApp.getValue($("#zipCodeEdit"));
 
-        getSelectedValue(CustomerApp.page.elements.provinceEdit, updateAddressParam.provinceId, updateAddressParam.provinceName);
-        getSelectedValue(CustomerApp.page.elements.districtEdit, updateAddressParam.districtId, updateAddressParam.districtName);
-        getSelectedValue(CustomerApp.page.elements.wardEdit, updateAddressParam.wardId, updateAddressParam.wardName);
-
-        console.log(updateAddressParam)
+        // if (Number(input.find(':selected').val()) !== 0) {
+        //     variable1 = input.find(':selected').val();
+        //     variable2 = input.find(':selected').text();
+        // } else {
+        //     variable1 = undefined;
+        //     variable2 = undefined;
+        // }
+        getSelectedValue($("#provinceEdit"), updateAddressParam.provinceId, updateAddressParam.provinceName);
+        getSelectedValue($("#districtEdit"), updateAddressParam.districtId, updateAddressParam.districtName);
+        getSelectedValue($("#wardEdit"), updateAddressParam.wardId, updateAddressParam.wardName);
 
         $.ajax({
             headers: {
@@ -1186,9 +1191,11 @@
             data: JSON.stringify(updateAddressParam)
         })
             .done((data) => {
-                console.log(data)
                 CustomerApp.IziToast.showSuccessAlert('Cập nhật địa chỉ thành công');
                 CustomerApp.page.elements.modalEditAddress.modal('hide');
+                CustomerApp.page.elements.provinceEdit.empty();
+                CustomerApp.page.elements.wardEdit.empty();
+                CustomerApp.page.elements.districtEdit.empty();
                 CustomerApp.page.elements.frmEditAddress[0].reset();
 
                 CustomerApp.redrawDatatables(addressDataTable, origin + `/api/addresses`)
@@ -1360,14 +1367,12 @@
                                 : undefined;
 
                             CustomerApp.page.elements.wardEdit.on('change', function () {
-                                updateAddressParam.wardId = Number($(this).find(":selected").val())
+                                updateAddressParam.wardId = Number($(this).find(":selected").val()) > 0
                                     ? $(this).find(":selected").val()
                                     : undefined;
-                                updateAddressParam.wardName = Number($(this).find(":selected").val())
+                                updateAddressParam.wardName = Number($(this).find(":selected").val()) > 0
                                     ? $(this).find(":selected").text()
                                     : undefined;
-                                console.log(updateAddressParam.wardId)
-                                console.log(updateAddressParam.wardName)
                             })
                         })
                         .fail((jqXHR) => {
@@ -1402,7 +1407,14 @@
             url: origin + `/api/addresses/${id}`
         })
             .done((data) => {
+                console.log(data)
                 let address = {...data};
+                updateAddressParam.provinceId = data.provinceId;
+                updateAddressParam.provinceName = data.provinceName;
+                updateAddressParam.districtId = data.districtId;
+                updateAddressParam.districtName = data.districtName;
+                updateAddressParam.wardId = data.wardId;
+                updateAddressParam.wardName = data.wardName;
 
                 data.fullName ? $("#fullNameAddressEdit").val(data.fullName) : '';
                 data.phoneNumber ? $("#phoneAddressEdit").val(data.phoneNumber) : '';
