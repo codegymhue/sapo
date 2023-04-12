@@ -471,6 +471,12 @@ class CustomerApp {
             },
         ],
     }
+
+static validateTest = () => {
+    $.validator.addMethod("isNotStartWithCUZN", function (value, element) {
+        return this.optional(element) || /^(?!cuzn)\w+$/i.test(value);
+    }, "Mã khách hàng không được có tiền tố CUZN của hệ thống");
+}
 }
 
 
