@@ -724,6 +724,9 @@
     CustomerApp.page.commands.createCustomer = () => {
         customer.fullName = CustomerApp.getValue(CustomerApp.page.elements.nameCreate);
         customer.customerCode = CustomerApp.getValue(CustomerApp.page.elements.codeCreate);
+        customer.groupId = CustomerApp.page.elements.customerGroupCreate.find(":selected").val() > 0
+            ? CustomerApp.page.elements.customerGroupCreate.find(":selected").val()
+            : undefined;
         customer.phoneNumber = CustomerApp.getValue(CustomerApp.page.elements.phoneCreate);
         customer.email = CustomerApp.getValue(CustomerApp.page.elements.emailCreate);
 

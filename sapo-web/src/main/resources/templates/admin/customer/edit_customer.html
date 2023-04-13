@@ -677,7 +677,7 @@
             newCustomer.defaultPaymentMethodId = CustomerApp.page.elements.dropdownPaymentMethod.find(":selected").val();
             newCustomer.discount = CustomerApp.getValue(CustomerApp.page.elements.defaultDiscountRate);
         }
-        console.log(newCustomer)
+
         $.ajax({
             "headers": {
                 "accept": "application/json",
@@ -692,7 +692,7 @@
 
                 setTimeout(() => {
                 }, 2500)
-                // window.location.href = `/admin/customers/${data.id}`;
+                window.location.href = `/admin/customers/${data.id}`;
 
             })
             .fail((jqXHR) => {

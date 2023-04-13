@@ -499,14 +499,14 @@
                 [20, 50, 100],
                 ["20", "50", "100"]
             ],
-            aoColumns: [
+            columns: [
                 {
-                    mData: 'id',
+                    data: 'id',
                     className: 'hYsv8 nYvd3',
                     target: 0
                 },
                 {
-                    mData: 'fullName',
+                    data: 'fullName',
                     render: (data, type, row) => {
                         return row.fullName || '';
                     },
@@ -514,7 +514,7 @@
                     target: 1
                 },
                 {
-                    mData: 'phoneNumber',
+                    data: 'phoneNumber',
                     render: (data, type, row) => {
                         return row.phoneNumber || '';
                     },
@@ -523,7 +523,7 @@
                     flex: 1
                 },
                 {
-                    mData: 'email',
+                    data: 'email',
                     render: (data, type, row) => {
                         return row.email || '';
                     },
@@ -531,7 +531,7 @@
                     target: 3
                 },
                 {
-                    mData: 'position',
+                    data: 'position',
                     render: (data, type, row) => {
                         return row.position || '';
                     },
@@ -539,7 +539,7 @@
                     target: 4
                 },
                 {
-                    mData: 'department',
+                    data: 'department',
                     render: (data, type, row) => {
                         return row.department || '';
                     },
@@ -558,9 +558,11 @@
             },
             initComplete: function (setting, json) {
                 CustomerApp.page.commands.deleteOneOrMoreCustomerContact();
+                CustomerApp.page.commands.showBtnDeleteContactContainer()
             },
             drawCallback: () => {
                 CustomerApp.page.commands.deleteOneOrMoreCustomerContact();
+                CustomerApp.page.commands.showBtnDeleteContactContainer();
             }
         })
     }
@@ -768,7 +770,7 @@
     CustomerApp.page.commands.showTheadContactAction = () => {
         let str = `<th class="jss12735" id="contactActionContainer">
                         <div class="jyZcwm2">Đã chọn ${listContactId.size} liên hệ trên trang này</div>
-                        <div class="jss12735">
+                        <div class="jss612">
                             <button type="button" onclick="CustomerApp.page.commands.showBtnDeleteContactContainer()"
                             class="vUaem">
                             Chọn thao tác
@@ -787,6 +789,7 @@
                             </div>
                         </div>
                     </th>`;
+        $("#contactActionContainer").remove();
         $("#tbContact thead tr").append(str);
     }
 
@@ -804,15 +807,18 @@
         })
             .done((data) => {
 
+                let {namesDeleted, numberOfSuccess, numberOfFail, numberOfContactsLeft, idsDeleted} = data;
+
                 $("#checkAllContacts").prop({indeterminate: false, checked: false})
-                if (currentCustomer.contacts.length === 0){
+
+                if (numberOfContactsLeft === 0) {
                     $("#noContact").addClass("show").removeClass('hidden');
-                    $("#tbContact_wrapper").addClass("hidden").removeClass('show');
+                    $("#tbContact_wrapper").parent().addClass("hidden").removeClass('show');
                 } else {
                     $("#tbContact thead tr th:not(:first-child)").addClass("show").removeClass('hidden');
+                    $("#tbContact_wrapper").parent().addClass("show").removeClass('hidden');
                     $("#contactActionContainer").addClass("hidden").removeClass('show');
                 }
-                let {namesDeleted, numberOfSuccess, numberOfFail, addressResult, idsDeleted} = data;
 
                 CustomerApp.page.elements.modalDeleteContact.modal('hide');
 
@@ -826,14 +832,6 @@
                     $("#deletedContactSucceedNames").prepend(success);
                 })
 
-                $("#showDeleteContactSuccessDetail").click(() => {
-                    $("#deletedContactSucceedNames").toggleClass('show');
-                })
-
-                $("#showDeleteContactFailDetail").click(() => {
-                    $("#deletedContactFailNames").toggleClass('show');
-                })
-
                 listContactId.clear();
 
                 contactDataTable.rows(...idsDeleted).remove().draw();
@@ -842,10 +840,16 @@
                 console.log(jqXHR)
             })
     })
+    $(".btnCloseResultDeleteContact").click(() => {
+        $("#deletedContactSucceedNames").children('p').remove();
+        $("#deletedContactFailNames").children('p').remove();
+    })
 
     $(".btnCloseResultDeleteAddress").click(() => {
         CustomerApp.page.elements.modalResultDeleteAddress.modal('hide');
         $("#frmResultDeleteAddress")[0].reset();
+        $("#deletedAddressSucceedNames").children('p').remove();
+        $("#deletedFailNames").children('p').remove();
         $("#checkAllAddresses").prop({
             indeterminate: false,
             checked: false
@@ -895,9 +899,11 @@
             .done((data) => {
                 $("#tbContact_wrapper").parent().removeClass('hidden').addClass('show');
                 $("#noContact").removeClass('show').addClass('hidden');
-
-
+                $("#contactActionContainer").remove();
+                $("#tbContact thead tr th:not(:first-child)").addClass("show").removeClass('hidden');
                 $("#modalCreateContact").modal('hide');
+                $("#checkAllContacts").prop({indeterminate: false, checked: false})
+                listContactId.clear();
                 CustomerApp.IziToast.showSuccessAlert('Thêm mới liên hệ thành công');
 
                 CustomerApp.page.elements.frmCreateContact[0].reset();
@@ -1548,6 +1554,15 @@
                 let {id, phoneNumber, line1, wardName, districtName, provinceName, zipCode, email} = data;
 
                 addressDataTable.row.add([id, phoneNumber, line1, wardName, districtName, provinceName, zipCode, email]).draw(false);
+
+                $("#addressActionContainer").remove();
+                // $("#addressActionContainer").addClass("hidden").removeClass('show');
+                $("#tbAddress thead tr th:not(:first-child)").addClass("show").removeClass('hidden');
+                $("#checkAllAddresses").prop({
+                    indeterminate: false,
+                    checked: false
+                });
+                listAddressId.clear();
             })
             .fail((jqXHR) => {
 
@@ -1673,9 +1688,11 @@
             },
             initComplete: function (setting, json) {
                 CustomerApp.page.commands.deleteOneOrMoreCustomerAddress();
+                CustomerApp.page.commands.showBtnDeleteAddressContainer();
             },
             drawCallback: () => {
                 CustomerApp.page.commands.deleteOneOrMoreCustomerAddress();
+                CustomerApp.page.commands.showBtnDeleteAddressContainer();
             }
         });
     }
@@ -1683,8 +1700,8 @@
     //start check all/uncheck all
 
     CustomerApp.page.commands.checkAllAddresses = () => {
-
         if ($("#checkAllAddresses").is(":checked")) {
+            listAddressId.clear();
             $("#tbAddress tbody tr td input").each(function () {
                 $(this).prop("checked", true);
                 listAddressId.add($(this)[0].id);
@@ -1705,7 +1722,7 @@
     CustomerApp.page.commands.showTheadAddressAction = () => {
         let str = `<th class="jss12735" id="addressActionContainer">
                         <div class="jyZcwm2">Đã chọn ${listAddressId.size} địa chỉ trên trang này</div>
-                        <div class="jss12735">
+                        <div class="jss612">
                             <button type="button" onclick="CustomerApp.page.commands.showBtnDeleteAddressContainer()"
                             class="vUaem">
                             Chọn thao tác
@@ -1724,6 +1741,7 @@
                             </div>
                         </div>
                     </th>`;
+        $("#addressActionContainer").remove();
         $("#tbAddress thead tr").append(str);
     }
 
@@ -1757,14 +1775,6 @@
                 let fail = addressResult ? `<p>${addressResult.line1} - address: Không thể xóa địa chỉ cuối cùng</p>` : '';
                 $("#deletedFailNames").prepend(fail);
 
-                $("#showDeleteSuccessDetail").click(() => {
-                    $("#deletedAddressSucceedNames").toggleClass('show');
-                })
-
-                $("#showDeleteFailDetail").click(() => {
-                    $("#deletedFailNames").toggleClass('show');
-                })
-
                 listAddressId.clear();
 
                 addressDataTable.rows(...idsDeleted).remove().draw();
@@ -1772,20 +1782,6 @@
             .fail((jqXHR) => {
                 console.log(jqXHR)
             })
-    })
-
-    $(".btnCloseResultDeleteAddress").click(() => {
-        CustomerApp.page.elements.modalResultDeleteAddress.modal('hide');
-        $("#frmResultDeleteAddress")[0].reset();
-        $("#deletedAddressSucceedNames").empty();
-        $("#checkAllAddresses").prop({
-            indeterminate: false,
-            checked: false
-        });
-        $("#addressActionContainer").addClass('hidden').removeClass('show');
-        $("#tbAddress thead tr th:not(:first-child)").addClass("show").removeClass('hidden');
-        $("#tbAddress thead tr th:last-child").addClass("hidden").removeClass('show');
-        CustomerApp.page.commands.deleteOneOrMoreCustomerAddress();
     })
 
     CustomerApp.page.commands.showModalDeleteAddress = () => {
@@ -1997,6 +1993,22 @@
                     console.log(jqXHR);
                 })
         })
+    }
+
+    CustomerApp.page.commands.showDeleteAddressSuccessDetail = () => {
+        $("#deletedAddressSucceedNames").toggleClass('show');
+    }
+
+    CustomerApp.page.commands.showDeleteAddressFailDetail = () => {
+        $("#deletedFailNames").toggleClass('show');
+    }
+
+    CustomerApp.page.commands.showDeleteContactSuccessDetail = () => {
+        $("#deletedContactSucceedNames").toggleClass('show');
+    }
+
+    CustomerApp.page.commands.showDeleteContactFailDetail = () => {
+        $("#deletedContactFailNames").toggleClass('show');
     }
 
     $(() => {

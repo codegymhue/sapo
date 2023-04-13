@@ -22,4 +22,6 @@ public class DeletedContactResult {
     private List<String> namesDeleted;
 
     private Set<Long> idsDeleted;
+
+    private Integer numberOfContactsLeft;
 }

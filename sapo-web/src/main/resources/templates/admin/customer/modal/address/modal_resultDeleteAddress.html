@@ -16,7 +16,8 @@
                                 <p>
                                     Địa chỉ xóa thành công: <span id="numberAddressesDeleted"></span>
                                 </p>
-                                <button class="bdiEg" id="showDeleteSuccessDetail" type="button">
+                                <button class="bdiEg" id="showDeleteSuccessDetail" type="button"
+                                        onclick=CustomerApp.page.commands.showDeleteAddressSuccessDetail()>
                           <span class="MuiButton-label">
                             Chi tiết
                             <span class="MuiButton-endIcon MuiButton-iconSizeMedium">
@@ -36,7 +37,8 @@
                                 <p>
                                     Địa chỉ xóa không thành công: <span id="numberAddressesDeleteFail"></span>
                                 </p>
-                                <button class="bdiEg" id="showDeleteFailDetail" type="button">
+                                <button class="bdiEg" id="showDeleteFailDetail" type="button"
+                                        onclick=CustomerApp.page.commands.showDeleteAddressFailDetail()>
                               <span class="MuiButton-label">
                                 Chi tiết
                                 <span class="MuiButton-endIcon MuiButton-iconSizeMedium">

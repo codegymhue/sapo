@@ -67,7 +67,8 @@ public class ContactCustomerServiceImpl implements ContactCustomerService {
                 .setIdsDeleted(ids)
                 .setNamesDeleted(deletedNames)
                 .setNumberOfSuccess(i)
-                .setNumberOfFail(ids.size() - i);
+                .setNumberOfFail(ids.size() - i)
+                .setNumberOfContactsLeft(contacts.size() - i);
     }
 
     @Override
