@@ -125,7 +125,7 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
         customerGroupRepository.delete(customerGroup);
     }
 
-    private void validationByTitle(String title) {
+    public void validationByTitle(String title) {
         if (customerGroupRepository.existsByTitle(title)) {
             throw new ValidationException("title", "customer_group.validation.title.existed");
         }
@@ -140,8 +140,12 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
         }
     }
 
-    private CustomerGroup findCustomerGroupById(Integer id) {
+    public CustomerGroup findCustomerGroupById(Integer id) {
         return customerGroupRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("customer_group.exception.notFound"));
+    }
+
+    public List<CustomerGroup> findAllCustomerGroup() {
+        return customerGroupRepository.findAll();
     }
 }

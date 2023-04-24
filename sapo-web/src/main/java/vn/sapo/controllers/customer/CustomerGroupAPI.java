@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/customer_groups")
+@CrossOrigin("*")
 public class CustomerGroupAPI extends BaseController {
     @Autowired
     CustomerGroupService customerGroupService;
