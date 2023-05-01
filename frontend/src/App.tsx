@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+
 import "./app.scss";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import SideBar from "./components/Navbar/SideBar";

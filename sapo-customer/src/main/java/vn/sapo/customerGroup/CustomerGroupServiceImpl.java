@@ -3,7 +3,6 @@ package vn.sapo.customerGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.customer.CustomerService;
@@ -11,7 +10,6 @@ import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customerGroup.dto.*;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerGroup;
-import vn.sapo.entities.customer.CustomerGroupType;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
@@ -143,9 +141,5 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
     public CustomerGroup findCustomerGroupById(Integer id) {
         return customerGroupRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("customer_group.exception.notFound"));
-    }
-
-    public List<CustomerGroup> findAllCustomerGroup() {
-        return customerGroupRepository.findAll();
     }
 }

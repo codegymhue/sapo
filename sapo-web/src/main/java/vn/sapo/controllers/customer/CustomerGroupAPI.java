@@ -13,7 +13,6 @@ import vn.sapo.shared.controllers.BaseController;
 
 import javax.validation.Valid;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/customer_groups")

@@ -1,9 +1,12 @@
-import axios from "axios";
+import { useState, useEffect } from "react";
+import CustomerGroupsService from "../../../services/customerGroupService/CustomerGroupService";
 import MUIDataTable, { MUIDataTableOptions } from "mui-datatables";
 import { Button } from "react-bootstrap";
 import "./customerGroups.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { DataTableInput } from "../../../interfaces/share/ShareInterface";
+import { CustomerGroup } from "../../../interfaces/customerGroup/customerGroupInterface";
 
 const columns = [
   {
@@ -56,32 +59,12 @@ const columns = [
   },
 ];
 
-let data: (object | string[] | number[])[];
-
-axios
-  .post(
-    "http://localhost:8080/api/customer_groups/pagination",
-    {
-      draw: 1,
-      start: 0,
-      length: 10,
-      // order:
-    },
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  )
-  .then(
-    (response) => {
-      console.log(response);
-    },
-    (error) => {
-      console.log("error");
-      console.log(error);
-    }
-  );
+const dataTableInput: DataTableInput = {
+  draw: 1,
+  start: 0,
+  length: 10,
+  order: [{ dir: "DESC" }],
+};
 
 const options: MUIDataTableOptions = {
   serverSide: true,
@@ -95,6 +78,23 @@ const options: MUIDataTableOptions = {
 };
 
 function CustomerGroups() {
+  const [customerGroups, setCustomerGroups] = useState<any>([]);
+
+  useEffect(() => {
+    try {
+      async function getCustomerGroupsPagination() {
+        const customerGroupRes =
+          await CustomerGroupsService.getCustomerGroupsPagination(
+            dataTableInput
+          );
+        setCustomerGroups(customerGroupRes.data.data);
+      }
+      getCustomerGroupsPagination();
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   return (
     <>
       <div className="customer-groups">
@@ -113,7 +113,7 @@ function CustomerGroups() {
         <div className="customer-group-table">
           <MUIDataTable
             title={""}
-            data={data}
+            data={customerGroups}
             columns={columns}
             options={options}
             components={{
