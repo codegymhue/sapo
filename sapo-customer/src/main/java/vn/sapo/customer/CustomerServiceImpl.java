@@ -2,6 +2,7 @@ package vn.sapo.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,8 @@ import vn.sapo.contact.dto.ContactResult;
 import vn.sapo.contact.dto.CreateContactParam;
 import vn.sapo.contact.dto.UpdateContactParam;
 import vn.sapo.customer.dto.*;
+import vn.sapo.customerGroup.dto.DataTablesInput;
+import vn.sapo.customerGroup.dto.DataTablesOutput;
 import vn.sapo.customers.AddressService;
 import vn.sapo.customer.dto.CreateCustomerParam;
 import vn.sapo.customer.dto.CustomerFilter;
@@ -58,6 +61,24 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private ContactMapper contactMapper;
+
+    @Override
+    public DataTablesOutput<ContactResult> getContactsPagination(Integer id, DataTablesInput input) {
+        int draw = input.getDraw();
+        int start = input.getStart();
+        int length = input.getLength();
+        int page = start / length + 1;
+        Pageable pageable = PageRequest.of(page - 1, length);
+
+        Page<ContactResult> dtoPage =
+                contactCustomerService.findAllContact(pageable, id);
+
+        return new DataTablesOutput<ContactResult>()
+                .setDraw(draw)
+                .setRecordsTotal(dtoPage.getTotalElements())
+                .setRecordsFiltered(dtoPage.getTotalElements())
+                .setData(dtoPage.getContent());
+    }
 
     @Override
     public List<Customer> findAllByGroupId(Integer groupId) {

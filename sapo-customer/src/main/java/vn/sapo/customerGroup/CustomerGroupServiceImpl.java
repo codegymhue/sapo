@@ -1,9 +1,7 @@
 package vn.sapo.customerGroup;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.customer.CustomerService;
@@ -16,6 +14,7 @@ import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +29,23 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
 
     @Autowired
     private CustomerService customerService;
+
+    @Override
+    public Page<ICustomerGroupResult> getAllCustomerGroupsPagination(DataTablesInput input) {
+        int start = input.getStart();
+        int length = input.getLength();
+        int page = start / length + 1;
+
+        Object sort = input.getOrder().get(0);
+        LinkedHashMap<String, String> linkedHashMap = (LinkedHashMap<String, String>) sort;
+        String order = linkedHashMap.get("dir").toUpperCase();
+
+        Sort s = Sort.by(Sort.Direction.valueOf(order), "title");
+
+        Pageable pageable = PageRequest.of(page - 1, length, s);
+
+        return findAllCustomerGroupPageable(pageable);
+    }
 
     @Override
     public CustomerGroupResult findCustomerGroupByCustomerId(Integer id) {
