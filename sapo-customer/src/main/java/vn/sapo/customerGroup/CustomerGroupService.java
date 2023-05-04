@@ -22,4 +22,6 @@ public interface CustomerGroupService {
     void deleteById(Integer id);
 
     Page<ICustomerGroupResult> findAllCustomerGroupPageable(Pageable pageable);
+
+    Page<ICustomerGroupResult> getAllCustomerGroupsPagination(DataTablesInput input);
 }

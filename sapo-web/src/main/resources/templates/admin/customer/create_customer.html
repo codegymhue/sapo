@@ -375,41 +375,41 @@
                                                     </div>
                                                     <div class="error websiteCreate-error hidden"></div>
                                                 </div>
-                                                <div class="MuiGrid-item MuiGrid-grid-xs-6">
-                                                    <div name="debtTotal" class="iFpFap">
-                                                        <label for="debtTotal" class="dGcxKm">
-                                                            Công nợ
-                                                        </label>
-                                                        <div class="bPMzLG">
-                                                            <input id="debtTotal" name="debtTotal"
-                                                                   placeholder="Nhập công nợ khách hàng" type="text"
-                                                                   class="fqUehn">
-                                                            <fieldset class="iKmOWq"></fieldset>
-                                                        </div>
-                                                    </div>
-                                                    <div class="error debtTotal-error hidden"></div>
-                                                </div>
+<!--                                                <div class="MuiGrid-item MuiGrid-grid-xs-6">-->
+<!--                                                    <div name="debtTotal" class="iFpFap">-->
+<!--                                                        <label for="debtTotal" class="dGcxKm">-->
+<!--                                                            Công nợ-->
+<!--                                                        </label>-->
+<!--                                                        <div class="bPMzLG">-->
+<!--                                                            <input id="debtTotal" name="debtTotal"-->
+<!--                                                                   placeholder="Nhập công nợ khách hàng" type="text"-->
+<!--                                                                   class="fqUehn">-->
+<!--                                                            <fieldset class="iKmOWq"></fieldset>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="error debtTotal-error hidden"></div>-->
+<!--                                                </div>-->
                                             </div>
                                         </div>
-                                        <div class="MuiGrid-item MuiGrid-grid-xs-12">
-                                            <div class="MuiGrid-container MuiGrid-spacing-xs-3">
-                                                <div class="MuiGrid-item MuiGrid-grid-xs-6">
-                                                    <div name="website" class="iFpFap">
-                                                        <label for="spendTotal" class="dGcxKm">
-                                                            Tổng chi tiêu
-                                                        </label>
-                                                        <div class="bPMzLG">
-                                                            <input id="spendTotal" name="spendTotal"
-                                                                   placeholder="Nhập tổng chi tiêu khách hàng"
-                                                                   type="text"
-                                                                   class="fqUehn">
-                                                            <fieldset class="iKmOWq"></fieldset>
-                                                        </div>
-                                                    </div>
-                                                    <div class="error spendTotal-error hidden"></div>
-                                                </div>
-                                            </div>
-                                        </div>
+<!--                                        <div class="MuiGrid-item MuiGrid-grid-xs-12">-->
+<!--                                            <div class="MuiGrid-container MuiGrid-spacing-xs-3">-->
+<!--                                                <div class="MuiGrid-item MuiGrid-grid-xs-6">-->
+<!--                                                    <div name="website" class="iFpFap">-->
+<!--                                                        <label for="spendTotal" class="dGcxKm">-->
+<!--                                                            Tổng chi tiêu-->
+<!--                                                        </label>-->
+<!--                                                        <div class="bPMzLG">-->
+<!--                                                            <input id="spendTotal" name="spendTotal"-->
+<!--                                                                   placeholder="Nhập tổng chi tiêu khách hàng"-->
+<!--                                                                   type="text"-->
+<!--                                                                   class="fqUehn">-->
+<!--                                                            <fieldset class="iKmOWq"></fieldset>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="error spendTotal-error hidden"></div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
                                     </div>
                                 </div>
                             </div>
@@ -724,6 +724,9 @@
     CustomerApp.page.commands.createCustomer = () => {
         customer.fullName = CustomerApp.getValue(CustomerApp.page.elements.nameCreate);
         customer.customerCode = CustomerApp.getValue(CustomerApp.page.elements.codeCreate);
+        customer.groupId = CustomerApp.page.elements.customerGroupCreate.find(":selected").val() > 0
+            ? CustomerApp.page.elements.customerGroupCreate.find(":selected").val()
+            : undefined;
         customer.phoneNumber = CustomerApp.getValue(CustomerApp.page.elements.phoneCreate);
         customer.email = CustomerApp.getValue(CustomerApp.page.elements.emailCreate);
 
@@ -732,8 +735,8 @@
         customer.fax = CustomerApp.getValue(CustomerApp.page.elements.faxCreate);
         customer.taxCode = CustomerApp.getValue(CustomerApp.page.elements.taxCodeCreate);
         customer.website = CustomerApp.getValue(CustomerApp.page.elements.websiteCreate);
-        customer.debtTotal = CustomerApp.getValue(CustomerApp.page.elements.debtTotal);
-        customer.spendTotal = CustomerApp.getValue(CustomerApp.page.elements.spendTotal);
+        // customer.debtTotal = CustomerApp.getValue(CustomerApp.page.elements.debtTotal);
+        // customer.spendTotal = CustomerApp.getValue(CustomerApp.page.elements.spendTotal);
         customer.employeeId = CustomerApp.page.elements.employeeNameCreate.find(":selected").val();
         customer.description = CustomerApp.getValue(CustomerApp.page.elements.descriptionCreate);
         // customer.tags = CustomerApp.getValue(CustomerApp.page.elements.tagCreate);
@@ -786,6 +789,16 @@
                 console.log(jqXHR);
 
                 CustomerApp.IziToast.showErrorAlert(CustomerApp.AlertMessageVi.ERROR_400)
+                let errors = jqXHR.responseJSON.errors;
+                errors.fullName ? CustomerApp.showErrorValidate($(".nameCreate-error.error"), errors.fullName) : '';
+                errors.customerCode ? CustomerApp.showErrorValidate($(".codeCreate-error.error"), errors.customerCode) : '';
+                errors.phoneNumber ? CustomerApp.showErrorValidate($(".phoneCreate-error.error"), errors.phoneNumber) : '';
+                errors.email ? CustomerApp.showErrorValidate($(".emailCreate-error.error"), errors.email) : '';
+                errors.line1 ? CustomerApp.showErrorValidate($(".addressCreate-error.error"), errors.line1) : '';
+                errors.fax ? CustomerApp.showErrorValidate($(".faxCreate-error.error"), errors.fax) : '';
+                errors.taxCode ? CustomerApp.showErrorValidate($(".taxCodeCreate-error.error"), errors.taxCode) : '';
+                errors.website ? CustomerApp.showErrorValidate($(".websiteCreate-error.error"), errors.website) : '';
+                errors.description ? CustomerApp.showErrorValidate($(".descriptionCreate-error.error"), errors.description) : '';
             })
     }
 
@@ -1018,17 +1031,19 @@
             websiteCreate: {
                 maxlength: 255
             },
-            debtTotal: {
-                digits: true,
-                range: [0, 99999999999]
-            },
-            spendTotal: {
-                digits: true,
-                range: [0, 99999999999]
-            },
             descriptionCreate: {
-                maxlength: 500
-            }
+                required: function() {
+                    return $("#descriptionCreate").val().trim().length >= 500;
+                },
+            },
+            // debtTotal: {
+            //     digits: true,
+            //     range: [0, 99999999999]
+            // },
+            // spendTotal: {
+            //     digits: true,
+            //     range: [0, 99999999999]
+            // },
         },
         messages: {
             nameCreate: {
@@ -1048,14 +1063,14 @@
             websiteCreate: {
                 maxlength: 'Website không được vượt quá 255 ký tự'
             },
-            debtTotal: {
-                digits: "Chỉ được nhập số",
-                range: 'Công nợ từ 0 đến 99,999,999,999 đồng'
-            },
-            spendTotal: {
-                digits: "Chỉ được nhập số",
-                range: 'Tổng chi tiêu từ 0 đến 99,999,999,999 đồng'
-            },
+            // debtTotal: {
+            //     digits: "Chỉ được nhập số",
+            //     range: 'Công nợ từ 0 đến 99,999,999,999 đồng'
+            // },
+            // spendTotal: {
+            //     digits: "Chỉ được nhập số",
+            //     range: 'Tổng chi tiêu từ 0 đến 99,999,999,999 đồng'
+            // },
             descriptionCreate: {
                 maxlength: 'Mô tả không được vượt quá 500 ký tự'
             }

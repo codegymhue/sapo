@@ -267,8 +267,11 @@ public class CustomerExcelExporter {
                         createCell(row, columnCount++, "", style);
                     if(listColumnExist.contains("ward"))
                         createCell(row, columnCount++, "", style);
-                }else {
+
+                }else{
+                    int a = 0;
                     for (AddressResult ar : customer.getAddresses()) {
+                        a++;
                         if(listColumnExist.contains("contact")) {
                             createCell(row, columnCount++, ar.getFullName() != null ? ar.getFullName() : "", style);
                         }
@@ -294,11 +297,11 @@ public class CustomerExcelExporter {
                             createCell(row, columnCount++, ar.getWardName() != null ? ar.getWardName() : "", style);
                         }
                         columnCount-=i;
-                        if(i!=0){
+                        if(customer.getAddresses().size() > 1 && a<customer.getAddresses().size()&&i!=0){
                             row = sheet.createRow(rowCount++);
                         }
                     }
-                    row = sheet.createRow(rowCount--);
+//                    row = sheet.createRow(rowCount--);
                 }
 
         }

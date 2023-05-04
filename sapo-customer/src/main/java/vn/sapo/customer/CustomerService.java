@@ -6,6 +6,8 @@ import org.springframework.web.multipart.MultipartFile;
 import vn.sapo.contact.dto.ContactResult;
 import vn.sapo.contact.dto.UpdateContactParam;
 import vn.sapo.customer.dto.*;
+import vn.sapo.customerGroup.dto.DataTablesInput;
+import vn.sapo.customerGroup.dto.DataTablesOutput;
 import vn.sapo.customers.dto.CreateAddressParam;
 import vn.sapo.entities.customer.Customer;
 
@@ -40,4 +42,6 @@ public interface CustomerService {
     List<CustomerResult> findAllByGroupListId(List<Integer> groupIds);
     Page<CustomerResult> findAllByFilters(CustomerFilter filters, Pageable pageable);
     void createSeriesCustomer(CreateSeriesCustomerParam createSeriesCustomerParam);
+
+    DataTablesOutput<ContactResult> getContactsPagination(Integer id, DataTablesInput input);
 }
