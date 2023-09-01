@@ -615,6 +615,7 @@
                         }</td>`;
                     }
                 },
+                ...removeSort()
                 ],
             });
             let theadFirst = $("#tbCustomer thead tr th");
@@ -624,6 +625,9 @@
                     try{
                         listThead = $("#tbCustomer thead tr th");
                         $(theadFirst[0]).removeClass('sorting_asc');
+                        for(let i=0; i<theadFirst.length; i++){
+                            $(theadFirst[i]).removeClass('sorting_asc');
+                        }
                         tHeadTr = $("#tbCustomer thead tr th");
                         optimizeWidthColumn(); 
                         clearInterval(updateAfterDatatable);
@@ -651,6 +655,22 @@
                 });
                 $(".close").click();
                 $(".modal-backdrop").remove();
+        }
+        function removeSort(){
+            let arr = ["customerCode", "status", "birthday"];
+            let result = [];
+            for(let i=0; i<thead.length; i++){
+                for(let j=0; j<arr.length; j++){
+                    if(thead[i] != arr[j]){
+                        let obj = { 
+                            targets: thead.indexOf(thead[i])+2,
+                            "orderable": false,
+                        };
+                        result.push(obj);
+                    }
+                }
+            }
+            return result;
         }
         function reset(){
                 thead = [

@@ -12,11 +12,10 @@ import vn.sapo.customerGroup.dto.*;
 import vn.sapo.shared.controllers.BaseController;
 
 import javax.validation.Valid;
-import java.util.LinkedHashMap;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/customer_groups")
+@CrossOrigin("*")
 public class CustomerGroupAPI extends BaseController {
     @Autowired
     CustomerGroupService customerGroupService;
@@ -28,10 +27,6 @@ public class CustomerGroupAPI extends BaseController {
     public ResponseEntity<?> getAllCustomerGroup() {
         return new ResponseEntity<>(customerGroupService.findAll(), HttpStatus.OK);
     }
-//    @GetMapping("/sortGroup")
-//    public ResponseEntity<?> sortByGroup() {
-//        return new ResponseEntity<>(customerGroupService.sortByGroup(), HttpStatus.OK);
-//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
@@ -40,28 +35,15 @@ public class CustomerGroupAPI extends BaseController {
     }
 
     @PostMapping("/pagination")
-    private ResponseEntity<?> test(@Valid @RequestBody DataTablesInput input) {
-        int draw = input.getDraw();
-        int start = input.getStart();
-        int length = input.getLength();
-        int page = start / length + 1;
+    private ResponseEntity<?> getAllCustomerGroupsPagination(@Valid @RequestBody DataTablesInput input) {
 
-        Object sort = input.getOrder().get(0);
-        LinkedHashMap<String, String> linkedHashMap = (LinkedHashMap<String, String>) sort;
-        String order = linkedHashMap.get("dir").toUpperCase();
+        Page<ICustomerGroupResult> pageableCustomerGroups = customerGroupService.getAllCustomerGroupsPagination(input);
 
-        Sort s = Sort.by(Sort.Direction.valueOf(order), "title");
-
-        Pageable pageable = PageRequest.of(page - 1, length, s);
-
-        Page<ICustomerGroupResult> pageableCustomerGroups =
-                customerGroupService.findAllCustomerGroupPageable(pageable);
-
-        DataTablesOutput<ICustomerGroupResult> output = new DataTablesOutput<>();
-        output.setDraw(draw);
-        output.setRecordsTotal(pageableCustomerGroups.getTotalElements());
-        output.setRecordsFiltered(pageableCustomerGroups.getTotalElements());
-        output.setData(pageableCustomerGroups.getContent());
+        DataTablesOutput<ICustomerGroupResult> output = new DataTablesOutput<ICustomerGroupResult>()
+                .setDraw(input.getDraw())
+                .setRecordsTotal(pageableCustomerGroups.getTotalElements())
+                .setRecordsFiltered(pageableCustomerGroups.getTotalElements())
+                .setData(pageableCustomerGroups.getContent());
 
         return new ResponseEntity<>(output, HttpStatus.OK);
     }

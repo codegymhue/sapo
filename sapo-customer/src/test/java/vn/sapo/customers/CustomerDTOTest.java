@@ -165,7 +165,8 @@ public class CustomerDTOTest {
                 .setEmployeeId(1)
                 .setDebtTotal(new BigDecimal(1000))
                 .setSpendTotal(new BigDecimal(1000))
-                .setStatus(vn.sapo.customer.dto.CustomerStatus.AVAILABLE);
+//                .setStatus(vn.sapo.customer.dto.CustomerStatus.AVAILABLE)
+                ;
     }
 
     public static CreateAddressParam getCreateAddressParam() {

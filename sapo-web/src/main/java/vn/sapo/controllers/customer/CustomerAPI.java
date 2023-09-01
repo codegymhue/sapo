@@ -211,20 +211,8 @@ public class CustomerAPI extends BaseController {
     @PostMapping("/{id}/contacts/pagination")
     private ResponseEntity<?> getContactsPagination(@PathVariable Integer id,
                                                     @RequestBody @Validated DataTablesInput input) {
-        int draw = input.getDraw();
-        int start = input.getStart();
-        int length = input.getLength();
-        int page = start / length + 1;
-        Pageable pageable = PageRequest.of(page - 1, length);
 
-        Page<ContactResult> dtoPage =
-                contactCustomerService.findAllContact(pageable, id);
-
-        DataTablesOutput<ContactResult> output = new DataTablesOutput<ContactResult>()
-                .setDraw(draw)
-                .setRecordsTotal(dtoPage.getTotalElements())
-                .setRecordsFiltered(dtoPage.getTotalElements())
-                .setData(dtoPage.getContent());
+        DataTablesOutput<ContactResult> output = customerService.getContactsPagination(id, input);
 
         return new ResponseEntity<>(output, HttpStatus.OK);
     }

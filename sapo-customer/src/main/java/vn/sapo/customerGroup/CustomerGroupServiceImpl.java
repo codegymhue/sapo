@@ -1,9 +1,7 @@
 package vn.sapo.customerGroup;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.customer.CustomerService;
@@ -11,11 +9,11 @@ import vn.sapo.customer.dto.CustomerResult;
 import vn.sapo.customerGroup.dto.*;
 import vn.sapo.entities.customer.Customer;
 import vn.sapo.entities.customer.CustomerGroup;
-import vn.sapo.entities.customer.CustomerGroupType;
 import vn.sapo.shared.configurations.CodePrefix;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +28,23 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
 
     @Autowired
     private CustomerService customerService;
+
+    @Override
+    public Page<ICustomerGroupResult> getAllCustomerGroupsPagination(DataTablesInput input) {
+        int start = input.getStart();
+        int length = input.getLength();
+        int page = start / length + 1;
+
+        Object sort = input.getOrder().get(0);
+        LinkedHashMap<String, String> linkedHashMap = (LinkedHashMap<String, String>) sort;
+        String order = linkedHashMap.get("dir").toUpperCase();
+
+        Sort s = Sort.by(Sort.Direction.valueOf(order), "title");
+
+        Pageable pageable = PageRequest.of(page - 1, length, s);
+
+        return findAllCustomerGroupPageable(pageable);
+    }
 
     @Override
     public CustomerGroupResult findCustomerGroupByCustomerId(Integer id) {
@@ -125,7 +140,7 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
         customerGroupRepository.delete(customerGroup);
     }
 
-    private void validationByTitle(String title) {
+    public void validationByTitle(String title) {
         if (customerGroupRepository.existsByTitle(title)) {
             throw new ValidationException("title", "customer_group.validation.title.existed");
         }
@@ -140,7 +155,7 @@ public class CustomerGroupServiceImpl implements CustomerGroupService {
         }
     }
 
-    private CustomerGroup findCustomerGroupById(Integer id) {
+    public CustomerGroup findCustomerGroupById(Integer id) {
         return customerGroupRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("customer_group.exception.notFound"));
     }
