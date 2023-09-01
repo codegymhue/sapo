@@ -17,10 +17,4 @@ public class PricingPolicyResult {
     private String pricingPolicyCode;
 
     private String title;
-
-    @Override
-    public String toString() {
-        return  title;
-    }
-
 }

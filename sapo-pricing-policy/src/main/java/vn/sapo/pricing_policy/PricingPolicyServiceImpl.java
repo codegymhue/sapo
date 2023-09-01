@@ -5,8 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import vn.sapo.entities.product.pricing_policy.PricingPolicy;
 import vn.sapo.entities.product.pricing_policy.PricingPolicyType;
-import vn.sapo.pricing_policy.dto.PricingPolicyParam;
+import vn.sapo.pricing_policy.dto.PricingPolicyCreationParam;
 import vn.sapo.pricing_policy.dto.PricingPolicyResult;
+import vn.sapo.pricing_policy.dto.PricingPolicyUpdateParam;
 import vn.sapo.shared.exceptions.NotFoundException;
 import vn.sapo.shared.exceptions.ValidationException;
 
@@ -25,20 +26,22 @@ public class PricingPolicyServiceImpl implements PricingPolicyService {
     private PricingPolicyRepository pricingPolicyRepository;
 
     @Override
-    public PricingPolicyResult create(PricingPolicyParam pricingPolicyParam) {
-        validateByPricingPolicyCode(pricingPolicyParam.getPricingPolicyCode());
-        PricingPolicy pricingPolicy = pricingPolicyMapper.toModel(pricingPolicyParam);
+    public PricingPolicyResult create(PricingPolicyCreationParam param) {
+        validateByPricingPolicyCode(param.getPricingPolicyCode());
+        PricingPolicy pricingPolicy = pricingPolicyMapper.toEntity(param);
         pricingPolicyRepository.save(pricingPolicy);
         return pricingPolicyMapper.toDTO(pricingPolicy);
     }
 
     @Override
+    public PricingPolicyResult update(PricingPolicyUpdateParam pricingPolicy) {
+        return null;
+    }
+
+    @Override
     @Transactional
     public List<PricingPolicyResult> findAll() {
-        return pricingPolicyRepository.findAll()
-                .stream()
-                .map(pricingPolicyMapper::toDTO)
-                .collect(Collectors.toList());
+        return pricingPolicyMapper.toDTOList(pricingPolicyRepository.findAll());
     }
 
     @Override
@@ -74,7 +77,7 @@ public class PricingPolicyServiceImpl implements PricingPolicyService {
     public Map<String, Integer> findByTitles(Set<String> titles) {
         return pricingPolicyRepository.findByTitleIn(titles)
                 .stream()
-                .collect(Collectors.toMap(PricingPolicy::getTitle, PricingPolicy::getId));
+                .collect(Collectors.toMap(PricingPolicy::getTitle,PricingPolicy::getId));
     }
 
     @Override

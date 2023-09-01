@@ -29,12 +29,14 @@ allprojects { proj ->
 
     dependencies {
         switch (proj.name) {
+            case 'web-utils-springboot': break
             case 'sapo-shared': break
             case 'sapo-entity': break
             default: {
                 if (proj.name != 'sapo-web')
                     implementation project(':sapo-entity')
                 implementation project(':sapo-shared')
+                implementation project(':web-utils-springboot')
                 break
             }
         }

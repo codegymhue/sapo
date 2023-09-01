@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @Accessors(chain = true)
-public class PricingPolicyParam {
+public class BasePricingPolicy {
 
     @NotBlank(message = "{pricing_policy.validation.title.notBlank}")
     @Length(max = 255, message = "{pricing_policy.validation.title.length}")

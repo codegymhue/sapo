@@ -25,7 +25,7 @@ public class AddressAPI {
 
     @GetMapping("/findByCustomerId/{customerId}")
     public ResponseEntity<?> findByCustomerId(@PathVariable Integer customerId) {
-        List<AddressResult> addresses = addressService.findByCustomerId(customerId);
+        List<?> addresses = addressService.findByCustomerId(customerId);
         return new ResponseEntity<>(addresses, HttpStatus.OK);
     }
 
@@ -87,7 +87,7 @@ public class AddressAPI {
         Page<IAddressResult> dtoPage =
                 addressService.findAllAddresses(pageable, id);
 
-        DataTablesOutput<IAddressResult> output = new DataTablesOutput<IAddressResult>()
+        DataTablesOutput<?> output = new DataTablesOutput<IAddressResult>()
                 .setDraw(draw)
                 .setRecordsTotal(dtoPage.getTotalElements())
                 .setRecordsFiltered(dtoPage.getTotalElements())

@@ -5,9 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import vn.sapo.mail.EMailSender;
 import vn.sapo.pricing_policy.PricingPolicyService;
-import vn.sapo.pricing_policy.dto.PricingPolicyParam;
+import vn.sapo.pricing_policy.dto.PricingPolicy;
 import vn.sapo.pricing_policy.dto.PricingPolicyResult;
 
 import java.util.Set;
@@ -36,7 +35,7 @@ public class PricingPolicyAPI extends Thread {
     }
 
     @PostMapping
-    private ResponseEntity<?> create(@RequestBody @Validated PricingPolicyParam param) {
+    private ResponseEntity<?> create(@RequestBody @Validated PricingPolicy param) {
         PricingPolicyResult result = pricingPolicyService.create(param);
 
         return new ResponseEntity<>(result, HttpStatus.CREATED);

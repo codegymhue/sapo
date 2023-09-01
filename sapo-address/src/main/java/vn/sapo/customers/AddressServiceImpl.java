@@ -188,14 +188,14 @@ public class AddressServiceImpl implements AddressService {
     @Override
     @Transactional
     public AddressResult create(CreateAddressParam createAddressParam) {
-        Address address = addressRepository.save(addressMapper.toModel(createAddressParam));
+        Address address = addressRepository.save(addressMapper.toEntity(createAddressParam));
         return addressMapper.toDTO(address);
     }
 
     @Override
     @Transactional
     public void create(List<CreateAddressParam> createAddressParamList) {
-        List<Address> addresses = createAddressParamList.stream().map(addressMapper::toModel).collect(Collectors.toList());
+        List<Address> addresses = createAddressParamList.stream().map(addressMapper::toEntity).collect(Collectors.toList());
         addressRepository.saveAll(addresses);
     }
 
